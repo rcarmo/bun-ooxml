@@ -21,6 +21,13 @@
 supply additional licensed runtime code or validated Office output goldens. Keep
 the same private-development redistribution restriction as the MCP reference.
 
+`docs/contracts/shared-v2/pack/` contains four deterministic fixtures derived from
+committed MCP templates, eight planned workflow contracts, validation evidence and
+preparation scripts. Origin and per-member hashes are recorded in the fixture
+manifest; `pack/notices/` retains the original template/library notices. These
+files share the private-development restriction until redistribution is reviewed.
+Preparation scripts are not executed by Bun tests or runtime operations.
+
 Frozen Python source/test files are reference inputs. Runtime exports include only
 TypeScript under `src/`. Gherkin, messages and TypeScript packages are development
 dependencies with their own bundled licence notices.

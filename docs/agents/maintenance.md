@@ -39,12 +39,13 @@ requires no planned features. Do not reduce the denominator to improve a percent
 
 ## Shared Python audit contracts
 
-Read `docs/contracts/office-mutation/README.md` before binding shared mutation
-workflows. The six `@id-office-*` scenarios and extra Bun obligations stay planned
-until every outcome passes. Historical defect observations are diagnostics, never
-golden outputs. Preserve native-runner versus MCP-transport identity and record
-actual generated input hashes at execution time. `make check` verifies the separate
-audit manifest and ID migrations; it does not execute Python scripts.
+Read `docs/contracts/shared-v2/README.md` before binding shared mutation workflows.
+The eight format-specific scenarios expand to 19 planned cases with four pinned
+derived inputs. Historical `@id-office-*` IDs are archived aliases, never extra
+coverage. Historical defect observations are diagnostics, never golden outputs.
+Preserve native-runner versus MCP-transport identity, stable case keys, typed JSON
+values and actual input hashes. `make check` verifies the separate pack/audit
+manifests and ID migrations; it does not execute Python scripts.
 
 ## Implementation invariants
 

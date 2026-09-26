@@ -1,71 +1,149 @@
 @planned
-Feature: Office edits report the state of the saved document accurately
-  The source file remains intact until a validated mutation commits.
-  These scenarios are proposed acceptance contracts, not implemented tests.
+Feature: Shared OOXML mutation safety
+  Acceptance adapters translate these document operations to native APIs or MCP tools.
+  Planned scenarios are inventory only and cannot count as executed passes.
 
-  @id-office-pptx-dry-run
-  Scenario: Previewing a PowerPoint title change writes nothing
-    Given a presentation with the title "Original title"
-    And the source file hash and directory contents have been recorded
-    When office_patch previews the title "Changed by dry run" in dry_run mode
-    Then the reported number of committed changes is 0
-    And the source file hash and directory contents are unchanged
-    And the reopened presentation title is "Original title"
+  @id-pptx-dry-run-no-mutation
+  Scenario Outline: Previewing a slide edit with <destination> leaves files unchanged
+    Given fixture "title-and-subtitle.pptx" verified against the fixture manifest
+    And destination state is "<destination>"
+    And source bytes, destination bytes and document-directory entries are recorded
+    When previewing this batch without committing:
+      | target        | value_json             |
+      | slide:1/title | "Changed by dry run"   |
+    Then committed change count is 0
+    And source bytes, destination bytes and document-directory entries equal the recorded state
+    And the reopened source slide 1 title is "Original title"
+    Examples:
+      | destination       |
+      | source            |
+      | distinct-absent   |
+      | distinct-existing |
 
-  @id-office-xlsx-strict-rollback
-  Scenario: An unmatched Excel target prevents the entire strict batch
-    Given a workbook whose active sheet cell A1 contains "before"
-    And the workbook has no worksheet named "Missing"
-    And the source file hash has been recorded
-    When office_patch runs in strict mode with these changes:
-      | target     | value |
-      | A1         | after |
-      | Missing!B1 | 123   |
-    Then the result identifies "Missing!B1" as unmatched
-    And the reported number of committed changes is 0
-    And the source file hash is unchanged
-    And the reopened active sheet cell A1 contains "before"
+  @id-docx-dry-run-no-mutation
+  Scenario Outline: Previewing a Word replacement with <destination> leaves files unchanged
+    Given fixture "present-placeholder.docx" verified against the fixture manifest
+    And destination state is "<destination>"
+    And source bytes, destination bytes and document-directory entries are recorded
+    When previewing this batch without committing:
+      | target    | value_json |
+      | <Present> | "changed"  |
+    Then committed change count is 0
+    And source bytes, destination bytes and document-directory entries equal the recorded state
+    And the reopened source current body text is "<Present>"
+    Examples:
+      | destination       |
+      | source            |
+      | distinct-absent   |
+      | distinct-existing |
 
-  @id-office-pptx-batch-output
-  Scenario: A distinct output contains every successful PowerPoint edit
-    Given a presentation with the title "Original title" and subtitle "Original subtitle"
-    And a distinct output path has been selected
-    When office_patch runs in safe mode with these changes:
-      | target           | value            |
-      | slide:1/title    | Changed title    |
-      | slide:1/subtitle | Changed subtitle |
-    Then the source file hash is unchanged
-    And the output presentation title is "Changed title"
-    And the output presentation subtitle is "Changed subtitle"
-    And the reported number of committed changes is 2
+  @id-xlsx-dry-run-no-mutation
+  Scenario Outline: Previewing a cell edit with <destination> leaves files unchanged
+    Given fixture "default-style.xlsx" verified against the fixture manifest
+    And destination state is "<destination>"
+    And source bytes, destination bytes and document-directory entries are recorded
+    When previewing this batch without committing:
+      | target | value_json |
+      | A1     | "after"    |
+    Then committed change count is 0
+    And source bytes, destination bytes and document-directory entries equal the recorded state
+    And the reopened source active sheet cell A1 is "before"
+    Examples:
+      | destination       |
+      | source            |
+      | distinct-absent   |
+      | distinct-existing |
 
-  @id-office-docx-per-target-results
-  Scenario: One matched Word placeholder cannot conceal another missing placeholder
-    Given a Word document containing "<Present>" but not "<Missing>"
-    When office_patch runs in strict mode with these changes:
-      | target    | value          |
-      | <Present> | changed        |
-      | <Missing> | never inserted |
-    Then the result identifies "<Missing>" as unmatched
-    And the result does not report "<Missing>" as applied
-    And the source file hash is unchanged
+  @id-xlsx-strict-batch-atomicity
+  Scenario Outline: A missing worksheet prevents the strict batch with <destination>
+    Given fixture "default-style.xlsx" verified against the fixture manifest
+    And destination state is "<destination>"
+    And source bytes, destination bytes and document-directory entries are recorded
+    When committing this batch with all-targets-required policy:
+      | target     | value_json |
+      | A1         | "after"    |
+      | Missing!B1 | 123        |
+    Then the operation is refused for unmatched target "Missing!B1"
+    And committed change count is 0
+    And source bytes, destination bytes and document-directory entries equal the recorded state
+    And the reopened source active sheet cell A1 is "before"
+    Examples:
+      | destination       |
+      | source            |
+      | distinct-absent   |
+      | distinct-existing |
 
-  @id-office-xlsx-style-closure
+  @id-docx-strict-batch-per-target-results
+  Scenario Outline: A matched placeholder cannot conceal an unmatched placeholder with <destination>
+    Given fixture "present-placeholder.docx" verified against the fixture manifest
+    And destination state is "<destination>"
+    And source bytes, destination bytes and document-directory entries are recorded
+    When committing this batch with all-targets-required policy:
+      | target    | value_json       |
+      | <Present> | "changed"        |
+      | <Missing> | "never inserted" |
+    Then the operation is refused for unmatched target "<Missing>"
+    And "<Missing>" is never reported applied
+    And committed change count is 0
+    And source bytes, destination bytes and document-directory entries equal the recorded state
+    And the reopened source current body text is "<Present>"
+    Examples:
+      | destination       |
+      | source            |
+      | distinct-absent   |
+      | distinct-existing |
+
+  @id-pptx-batch-output-accumulates
+  Scenario Outline: The committed <destination> contains every slide edit
+    Given fixture "title-and-subtitle.pptx" verified against the fixture manifest
+    And destination state is "<destination>"
+    And source bytes are recorded
+    When committing this batch to the distinct destination:
+      | target           | value_json         |
+      | slide:1/title    | "Changed title"    |
+      | slide:1/subtitle | "Changed subtitle" |
+    Then committed change count is 2
+    And source bytes equal the recorded state
+    And the reopened destination slide 1 title is "Changed title"
+    And the reopened destination slide 1 subtitle is "Changed subtitle"
+    And all destination relationship and content-type references resolve
+    And destination member payloads outside the manifest change allowance are byte-identical
+    Examples:
+      | destination       |
+      | distinct-absent   |
+      | distinct-existing |
+
+  @id-xlsx-style-dependency-closure
   Scenario: A multiline cell edit includes its required style definition
-    Given a workbook whose only cell style is the default style
-    And cell A1 contains "before"
-    When office_patch writes a two-line string to A1 using a distinct output path
-    Then the output contains the requested two-line string
-    And every worksheet cell style index resolves in the output style table
-    And the output reopens successfully
-    And unrelated package member payloads are unchanged
+    Given fixture "default-style.xlsx" verified against the fixture manifest
+    And destination state is "distinct-absent"
+    And source bytes are recorded
+    When committing this batch with multiline wrap enabled:
+      | target | value_json       |
+      | A1     | "first\\nsecond" |
+    Then committed change count is 1
+    And source bytes equal the recorded state
+    And the reopened destination active sheet cell A1 has value_json "first\nsecond"
+    And that cell resolves to a style with wrapText enabled
+    And every cell style index is below the output cellXfs count
+    And all destination relationship and content-type references resolve
+    And destination member payloads outside the manifest change allowance are byte-identical
 
-  @id-office-xlsx-dependent-cache
-  Scenario: An edited input cannot leave a stale cached answer on another sheet
-    Given Input!A1 contains 1
-    And Calc!A1 has the formula "=Input!A1*2" and cached value 2
-    When office_patch changes Input!A1 to 10 without a calculation engine
-    Then Calc!A1 retains the formula "=Input!A1*2"
-    And Calc!A1 has no cached value
-    And the receipt reports that recalculation is required
-    And office_read does not report the old cached value 2 as current
+  @id-xlsx-cross-sheet-cache-invalidation
+  Scenario: An input edit invalidates a cached answer on another sheet
+    Given fixture "cross-sheet-cache.xlsx" verified against the fixture manifest
+    And destination state is "distinct-absent"
+    And source bytes are recorded
+    And calculation policy is "invalidate-without-recalculation"
+    When committing this batch to the distinct destination:
+      | target   | value_json |
+      | Input!A1 | 10         |
+    Then committed change count is 1
+    And source bytes equal the recorded state
+    And the reopened destination Input!A1 is numeric 10
+    And the reopened destination Calc!A1 formula is "=Input!A1*2"
+    And the destination Calc!A1 cached value is absent or empty
+    And calculation state is "recalculation-required"
+    And a data-only read never returns the old cached value 2 as current
+    And all destination relationship and content-type references resolve
+    And destination member payloads outside the manifest change allowance are byte-identical

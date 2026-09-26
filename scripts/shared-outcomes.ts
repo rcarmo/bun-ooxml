@@ -1,6 +1,7 @@
 import { isDeepStrictEqual } from "node:util";
 import { PickleStepType } from "@cucumber/messages";
 import type { AcceptanceFeature, AcceptanceCase, StepArgumentView } from "./gherkin.ts";
+import { stableCaseKey } from "./shared-pack.ts";
 
 /** Cross-language evidence envelope. Native runners produce records independently.
  * Validation checks identity and assertion consistency, never Office semantics.
@@ -8,10 +9,11 @@ import type { AcceptanceFeature, AcceptanceCase, StepArgumentView } from "./gher
  */
 export type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
 export type SharedOutcome = {
-  version: 1;
+  version: 2;
   runId: string;
   scenarioId: string;
   caseId: string;
+  stableCaseKey: string;
   featureSha256: string;
   subject: {
     project: string; commit: string; dirty: boolean; dirtyManifestSha256?: string;
@@ -36,12 +38,13 @@ export type SharedOutcome = {
  * Then/And outcome steps need substantive expected/actual assertions to pass.
  */
 export function validateSharedOutcome(record: SharedOutcome, feature: AcceptanceFeature, definition: AcceptanceCase, expectedRunId: string): void {
-  requireValue(record.version===1,"Unsupported outcome version");
+  requireValue(record.version===2,"Unsupported outcome version");
   requireValue(feature.lifecycle==="implemented","Planned contracts cannot claim executed outcomes");
   requireValue(!!expectedRunId && record.runId===expectedRunId,"Stale outcome run");
   requireValue(record.featureSha256===feature.sourceSha256,"Stale feature hash");
   const scenario=feature.scenarios.find(s=>s.cases.some(c=>c.identityKey===definition.identityKey));
   requireValue(!!scenario && record.scenarioId===scenario.scenarioId && record.caseId===definition.caseId,"Wrong scenario/case identity");
+  requireValue(record.stableCaseKey===stableCaseKey(record.scenarioId,definition.example?.values??{}),"Wrong stable example identity");
   const subject=record.subject;
   requireValue(!!subject.project && !!subject.runtime && !!subject.version && /^[0-9a-f]{40,64}$/.test(subject.commit),"Missing subject provenance");
   requireValue(typeof subject.dirty==="boolean","Missing dirty state");
