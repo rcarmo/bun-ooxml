@@ -13,6 +13,8 @@ test('mutated seals and wrong tag or revision refuse in an isolated reference cl
   const pin=await Bun.file(join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');
   for(const change of [{manifestSha256:'0'.repeat(64)},{sharedPackManifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}
   await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(518);
+  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();
+  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);
   await Bun.write(join(tmp,'references/fixtures-ooxml/fixtures/go-ooxml/testdata/default.docx'),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');
  }finally{await rm(tmp,{recursive:true,force:true});}
 });

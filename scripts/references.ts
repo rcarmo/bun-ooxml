@@ -14,5 +14,6 @@ export async function verifyReferences(root:string):Promise<number>{
  const manifest=JSON.parse(new TextDecoder().decode(manifestBytes)),known=new Set<string>();
  if(manifest.schemaVersion!==1||!Array.isArray(manifest.files)||!manifest.files.length)throw Error('Invalid shared manifest');
  for(const f of manifest.files){if(!safe(f.path)||known.has(f.path)||!Number.isSafeInteger(f.bytes)||f.bytes<0||!/^[a-f0-9]{64}$/.test(f.sha256))throw Error('Invalid reference path or hash');known.add(f.path);const bytes=await Bun.file(join(refs,f.path)).bytes();if(bytes.length!==f.bytes||digest(bytes)!==f.sha256)throw Error('Reference drift: '+f.path);}
+ if(git('status','--porcelain','--untracked-files=all'))throw Error('Shared reference worktree is dirty');
  return known.size;
 }
