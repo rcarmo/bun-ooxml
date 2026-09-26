@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 463,
-  "files": 48,
+  "count": 477,
+  "files": 49,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -148,6 +148,12 @@
       "path": "tests/unit/pptx-create.test.ts",
       "sha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68",
       "declarations": 6,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "declarations": 14,
       "issues": []
     },
     {
@@ -341,6 +347,10 @@
       "sha256": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f"
     },
     {
+      "path": "tests/acceptance/notes-editing.ts",
+      "sha256": "6aa7fc9551125669bdceac320a9713d2e4a9f6719704f44ab8af4f1036d26257"
+    },
+    {
       "path": "tests/acceptance/package-admission.ts",
       "sha256": "a702f05cd22cd1139a118b6d8b57a801236c7ac5a521699cdcd29bb1d0485b60"
     },
@@ -382,7 +392,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "0c7a8bfc8d7316cdb15097727fd8d0714cccaff65a1e162c0546c6adf439f788"
+      "sha256": "c346b1e25954fbd2b40e0b90813a2a6392f7a1b85bb439dc121ec3a554f56436"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -495,6 +505,13 @@
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
+    "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
+    "bun:tests/unit/pptx-notes-edit.test.ts:foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
+    "bun:tests/unit/pptx-notes-edit.test.ts:direct notes mutation and relationship mutation invalidate captured targets",
+    "bun:tests/unit/pptx-notes-edit.test.ts:multiline copies selected paragraph and first-run property fragments",
+    "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
+    "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
+    "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -604,6 +621,13 @@
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
+    "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
+    "bun:tests/unit/pptx-notes-edit.test.ts:foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
+    "bun:tests/unit/pptx-notes-edit.test.ts:direct notes mutation and relationship mutation invalidate captured targets",
+    "bun:tests/unit/pptx-notes-edit.test.ts:multiline copies selected paragraph and first-run property fragments",
+    "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
+    "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
+    "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -9679,6 +9703,547 @@
         "shapes.map"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 8,
+      "title": "existing notes replacement changes only its notes payload and reopens exact text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(target.text).toBe('Remember to emphasize the Gothic elements')",
+        "expect(s.replaceNotesAt(target,'Updated speaker notes')).toEqual({changedParts:[notes]})",
+        "expect(p.package.text(notes)).toBe(before.replace('Remember to emphasize the Gothic elements','Updated speaker notes'))",
+        "expect(after.names()).toEqual(original.names())",
+        "expect(after.get(name)).toEqual(original.get(name))",
+        "expect((await Presentation.open(saved)).slides[0]!.inspectNotesText().text).toBe('Updated speaker notes')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const name of original.names())if(name!==notes)expect(after.get(name)).toEqual(original.get(name));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const bytes=await source(),p=await Presentation.open(bytes),s=p.slides[0]!,target=s.inspectNotesText();expect(target.text).toBe('Remember to emphasize the Gothic elements');\n const before=p.package.text(notes);expect(s.replaceNotesAt(target,'Updated speaker notes')).toEqual({changedParts:[notes]});expect(p.package.text(notes)).toBe(before.replace('Remember to emphasize the Gothic elements','Updated speaker notes'));\n const saved=p.package.toBytes(),after=await OpcPackage.open(saved),original=await OpcPackage.open(bytes);expect(after.names()).toEqual(original.names());for(const name of original.names())if(name!==notes)expect(after.get(name)).toEqual(original.get(name));expect((await Presentation.open(saved)).slides[0]!.inspectNotesText().text).toBe('Updated speaker notes');\n}",
+      "calls": [
+        ".slides.0.inspectNotesText",
+        "OpcPackage.open",
+        "Presentation.open",
+        "after.get",
+        "after.names",
+        "before.replace",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "original.get",
+        "original.names",
+        "p.package.text",
+        "p.package.toBytes",
+        "s.inspectNotesText",
+        "s.replaceNotesAt",
+        "source"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 13,
+      "title": "foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>other.slides[0]!.replaceNotesAt(target,'foreign')).toThrow()",
+        "expect(()=>s.replaceNotesAt({...target},'forged')).toThrow()",
+        "expect(()=>s.replaceNotesAt(target,text)).toThrow()",
+        "expect(p.package.toBytes()).toEqual(bytes)",
+        "expect(s.replaceNotesAt(target,target.text)).toEqual({changedParts:[]})",
+        "expect(s.inspectNotesText().text).toBe('fresh')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 16,
+          "expression": "for(const text of ['bad\\0','two\\tcolumns','bad\\rline','\\ud800'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const bytes=await source(),p=await Presentation.open(bytes),other=await Presentation.open(bytes),s=p.slides[0]!,target=s.inspectNotesText();\n expect(()=>other.slides[0]!.replaceNotesAt(target,'foreign')).toThrow();expect(()=>s.replaceNotesAt({...target},'forged')).toThrow();\n for(const text of ['bad\\0','two\\tcolumns','bad\\rline','\\ud800']){expect(()=>s.replaceNotesAt(target,text)).toThrow();expect(p.package.toBytes()).toEqual(bytes);}\n expect(s.replaceNotesAt(target,target.text)).toEqual({changedParts:[]});expect(p.package.toBytes()).toEqual(bytes);s.replaceNotesAt(target,'fresh');expect(s.inspectNotesText().text).toBe('fresh');\n}",
+      "calls": [
+        "Presentation.open",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "other.slides.0.replaceNotesAt",
+        "p.package.toBytes",
+        "s.inspectNotesText",
+        "s.replaceNotesAt",
+        "source"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:changed notes stale other held targets and empty text can be refilled",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 19,
+      "title": "changed notes stale other held targets and empty text can be refilled",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesAt(second,'stale')).toThrow('stale')",
+        "expect(s.inspectNotesText().text).toBe('')",
+        "expect(s.inspectNotesText().text).toBe('refilled')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const p=await deck(),s=p.slides[0]!,first=s.inspectNotesText(),second=s.inspectNotesText();s.replaceNotesAt(first,'');expect(()=>s.replaceNotesAt(second,'stale')).toThrow('stale');expect(s.inspectNotesText().text).toBe('');s.replaceNotesAt(s.inspectNotesText(),'refilled');expect(s.inspectNotesText().text).toBe('refilled');\n}",
+      "calls": [
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "s.inspectNotesText",
+        "s.replaceNotesAt"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:direct notes mutation and relationship mutation invalidate captured targets",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 22,
+      "title": "direct notes mutation and relationship mutation invalidate captured targets",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesAt(t,'stale')).toThrow('stale')",
+        "expect(p.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 23,
+          "expression": "for(const path of [notes,'ppt/slides/_rels/slide1.xml.rels'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n for(const path of [notes,'ppt/slides/_rels/slide1.xml.rels']){const p=await deck(),s=p.slides[0]!,t=s.inspectNotesText();p.package.set(path,p.package.text(path)+' ');const before=p.package.toBytes();expect(()=>s.replaceNotesAt(t,'stale')).toThrow('stale');expect(p.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "p.package.set",
+        "p.package.text",
+        "p.package.toBytes",
+        "s.inspectNotesText",
+        "s.replaceNotesAt"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:self-closing leaf expands and edge whitespace writes XML space preserve",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 25,
+      "title": "self-closing leaf expands and edge whitespace writes XML space preserve",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.inspectNotesText().text).toBe('filled')",
+        "expect(p.package.text(notes)).toContain('<a:rPr b=\"1\"/>')",
+        "expect(attribute(leaf,'space','http://www.w3.org/XML/1998/namespace')).toBe('preserve')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const p=await deck('<a:p><a:r><a:rPr b=\"1\"/><a:t/></a:r></a:p>'),s=p.slides[0]!;s.replaceNotesAt(s.inspectNotesText(),'filled');expect(s.inspectNotesText().text).toBe('filled');expect(p.package.text(notes)).toContain('<a:rPr b=\"1\"/>');\n const spaced=await deck('<a:p><a:r><a:t xml:space=\"default\">old</a:t></a:r></a:p>');spaced.slides[0]!.replaceNotesAt(spaced.slides[0]!.inspectNotesText(),' leading ');const leaf=elements(parseXml(spaced.package.text(notes)),'t','http://schemas.openxmlformats.org/drawingml/2006/main').find(n=>n.text===' leading ')!;expect(attribute(leaf,'space','http://www.w3.org/XML/1998/namespace')).toBe('preserve');\n}",
+      "calls": [
+        "attribute",
+        "deck",
+        "elements",
+        "elements().find",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "p.package.text",
+        "parseXml",
+        "s.inspectNotesText",
+        "s.replaceNotesAt",
+        "spaced.package.text",
+        "spaced.slides.0.inspectNotesText",
+        "spaced.slides.0.replaceNotesAt"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:multiline uses only first-run template and preserves boundary empty paragraphs",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 29,
+      "title": "multiline uses only first-run template and preserves boundary empty paragraphs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.replaceNotesAt(t,t.text)).toEqual({changedParts:[]})",
+        "expect(p.package.get(notes)).toEqual(before)",
+        "expect(s.inspectNotesText().text).toBe('\\n A&B \\n雪\\n')",
+        "expect(p.package.text(notes)).not.toContain('b=\"1\"')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const p=await deck('<a:p><a:pPr algn=\"ctr\"/><a:r><a:t>one</a:t></a:r><a:r><a:rPr b=\"1\"/><a:t>two</a:t></a:r></a:p>'),s=p.slides[0]!,t=s.inspectNotesText(),before=p.package.get(notes);expect(s.replaceNotesAt(t,t.text)).toEqual({changedParts:[]});expect(p.package.get(notes)).toEqual(before);s.replaceNotesAt(t,'\\n A&B \\n雪\\n');expect(s.inspectNotesText().text).toBe('\\n A&B \\n雪\\n');expect(p.package.text(notes)).not.toContain('b=\"1\"');\n}",
+      "calls": [
+        "deck",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toEqual",
+        "p.package.get",
+        "p.package.text",
+        "s.inspectNotesText",
+        "s.replaceNotesAt"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:multiline copies selected paragraph and first-run property fragments",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 32,
+      "title": "multiline copies selected paragraph and first-run property fragments",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.package.text(notes).split(token).length-1).toBe(2)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for(const token of ['val=\"112233\"','typeface=\"F&amp;F\"','lang=\"en-US\"','char=\"•\"'])expect(p.package.text(notes).split(token).length-1).toBe(2);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const p=await deck('<a:p><a:pPr algn=\"ctr\"><a:buChar char=\"•\"/><a:defRPr sz=\"1200\"/></a:pPr><a:r><a:rPr b=\"1\"><a:solidFill><a:srgbClr val=\"112233\"/></a:solidFill><a:latin typeface=\"F&amp;F\"/></a:rPr><a:t>old</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p>'),s=p.slides[0]!;s.replaceNotesAt(s.inspectNotesText(),'a\\nb');for(const token of ['val=\"112233\"','typeface=\"F&amp;F\"','lang=\"en-US\"','char=\"•\"'])expect(p.package.text(notes).split(token).length-1).toBe(2);\n}",
+      "calls": [
+        "deck",
+        "expect",
+        "expect().toBe",
+        "p.package.text",
+        "p.package.text().split",
+        "s.inspectNotesText",
+        "s.replaceNotesAt"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:missing notes and unsupported field topology refuse without creating or rewriting parts",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 35,
+      "title": "missing notes and unsupported field topology refuse without creating or rewriting parts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>minimal.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(minimal.package.toBytes()).toEqual(bytes)",
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const minimal=await Presentation.open(fixturePath(F.goSlides.minimal)),bytes=minimal.package.toBytes();expect(()=>minimal.slides[0]!.inspectNotesText()).toThrow();expect(minimal.package.toBytes()).toEqual(bytes);\n const p=await deck('<a:p><a:fld id=\"x\" type=\"slidenum\"><a:t>1</a:t></a:fld></a:p>'),before=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "Presentation.open",
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixturePath",
+        "minimal.package.toBytes",
+        "minimal.slides.0.inspectNotesText",
+        "p.package.toBytes",
+        "p.slides.0.inspectNotesText"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 40,
+      "title": "notes edits refuse text locks, extended properties and ambiguous graph ownership",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 41,
+          "expression": "for(const variant of ['lock','extension','shared','fragment','protection','wrong-type','body-duplicate'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n for(const variant of ['lock','extension','shared','fragment','protection','wrong-type','body-duplicate']){\n  const p=await deck();if(variant==='lock')p.package.set(notes,p.package.text(notes).replaceAll('<a:spLocks noGrp=\"1\"/>','<a:spLocks noTextEdit=\"1\"/>'));\n  if(variant==='extension')p.package.set(notes,p.package.text(notes).replace('<a:p><a:r>','<a:p><a:pPr><a:extLst/></a:pPr><a:r>'));\n  if(variant==='shared'){const rp='ppt/slides/_rels/slide2.xml.rels';p.package.set(rp,p.package.text(rp).replace('notesSlide2.xml','notesSlide1.xml'));}\n  if(variant==='fragment'){const rp='ppt/slides/_rels/slide1.xml.rels';p.package.set(rp,p.package.text(rp).replace('notesSlide1.xml','notesSlide1.xml#fragment'));}\n  if(variant==='protection'){const main=p.package.mainPart();p.package.set(main,p.package.text(main).replace('</p:presentation>','<p:modifyVerifier/></p:presentation>'));}\n  if(variant==='wrong-type')p.package.set('[Content_Types].xml',p.package.text('[Content_Types].xml').replaceAll('application/vnd.openxmlformats-officedocument.presentationml.notesSlide+xml','application/xml'));\n  if(variant==='body-duplicate')p.package.set(notes,p.package.text(notes).replace('type=\"sldNum\"','type=\"body\"'));\n  const before=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(before);\n }\n}",
+      "calls": [
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "p.package.mainPart",
+        "p.package.set",
+        "p.package.text",
+        "p.package.text().replace",
+        "p.package.text().replaceAll",
+        "p.package.toBytes",
+        "p.slides.0.inspectNotesText"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:serialization failure rolls back notes and retains a usable target",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 52,
+      "title": "serialization failure rolls back notes and retains a usable target",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesAt(target,'changed')).toThrow('serialize failed')",
+        "expect(p.package.toBytes()).toEqual(before)",
+        "expect(s.inspectNotesText().text).toBe('retry')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const p=await deck(),s=p.slides[0]!,target=s.inspectNotesText(),before=p.package.toBytes(),original=p.package.toBytes.bind(p.package);p.package.toBytes=()=>{throw Error('serialize failed');};try{expect(()=>s.replaceNotesAt(target,'changed')).toThrow('serialize failed');}finally{p.package.toBytes=original;}expect(p.package.toBytes()).toEqual(before);s.replaceNotesAt(target,'retry');expect(s.inspectNotesText().text).toBe('retry');\n}",
+      "calls": [
+        "Error",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "p.package.toBytes",
+        "p.package.toBytes.bind",
+        "s.inspectNotesText",
+        "s.replaceNotesAt"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:seven compatible canonical existing-notes scenarios execute saved and in-memory predicates",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 56,
+      "title": "seven compatible canonical existing-notes scenarios execute saved and in-memory predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(7)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,scenarioIds}=await import('../acceptance/notes-editing.ts');\n const path='workflows/native/pptx-text.feature',selected=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),scenarioIds),feature={...selected,scenarios:selected.scenarios.filter(s=>s.lifecycle==='implemented')},count=(n:number)=>({implemented:n,planned:0,total:n});\n const cases=feature.scenarios.flatMap(s=>s.cases),result=await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(7),cases:count(7),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'notes-edit-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(7);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "cases.reduce",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "feature.scenarios.flatMap",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios",
+        "selected.scenarios.filter"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 62,
+      "title": "notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(reopened.slides[0]!.inspectNotesText().text).toBe('first\\n second ')",
+        "expect([...reopened.package.get(notes)!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.text(notes)).toContain(fragment)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 66,
+          "expression": "for(const fragment of unchanged)expect(reopened.package.text(notes)).toContain(fragment);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const {utf16}=await import('../fixtures/admission.ts');const p=await deck();p.package.set(notes,utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?>'+p.package.text(notes).replace(/^<\\?xml[^?]*\\?>/,'').replaceAll('a:','d:').replace('xmlns:a=','xmlns:d=')));\n const bytes=p.package.toBytes(),fresh=await Presentation.open(bytes),s=fresh.slides[0]!,text=fresh.package.text(notes),doc=parseXml(text),P='http://schemas.openxmlformats.org/presentationml/2006/main';\n const unchanged=elements(doc,'sp',P).filter(n=>!elements(n,'ph',P).some(ph=>attribute(ph,'type')==='body')).map(n=>text.slice(n.start,n.end));\n s.replaceNotesAt(s.inspectNotesText(),'first\\n second ');const saved=fresh.package.toBytes(),reopened=await Presentation.open(saved);expect(reopened.slides[0]!.inspectNotesText().text).toBe('first\\n second ');expect([...reopened.package.get(notes)!.slice(0,2)]).toEqual([255,254]);for(const fragment of unchanged)expect(reopened.package.text(notes)).toContain(fragment);\n}",
+      "calls": [
+        "Presentation.open",
+        "attribute",
+        "deck",
+        "elements",
+        "elements().filter",
+        "elements().filter().map",
+        "elements().some",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "fresh.package.text",
+        "fresh.package.toBytes",
+        "p.package.set",
+        "p.package.text",
+        "p.package.text().replace",
+        "p.package.text().replace().replaceAll",
+        "p.package.text().replace().replaceAll().replace",
+        "p.package.toBytes",
+        "parseXml",
+        "reopened.package.get",
+        "reopened.package.get().slice",
+        "reopened.package.text",
+        "reopened.slides.0.inspectNotesText",
+        "s.inspectNotesText",
+        "s.replaceNotesAt",
+        "text.slice",
+        "utf16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:unknown notes extensions and removed slide enrollment refuse rather than editing hidden contexts",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 68,
+      "title": "unknown notes extensions and removed slide enrollment refuse rather than editing hidden contexts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(before)",
+        "expect(()=>q.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(q.package.toBytes()).toEqual(removed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n const p=await deck();p.package.set(notes,p.package.text(notes).replace('</p:notes>','<p:extLst/></p:notes>'));const before=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(before);\n const q=await deck(),main=q.package.mainPart();q.package.set(main,q.package.text(main).replace(/<p:sldId\\b[^>]*\\/>/,''));const removed=q.package.toBytes();expect(()=>q.slides[0]!.inspectNotesText()).toThrow();expect(q.package.toBytes()).toEqual(removed);\n}",
+      "calls": [
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "p.package.set",
+        "p.package.text",
+        "p.package.text().replace",
+        "p.package.toBytes",
+        "p.slides.0.inspectNotesText",
+        "q.package.mainPart",
+        "q.package.set",
+        "q.package.text",
+        "q.package.text().replace",
+        "q.package.toBytes",
+        "q.slides.0.inspectNotesText"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "line": 73,
+      "title": "notes body properties and root structure reject unknown nested policy surfaces",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(bytes)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 74,
+          "expression": "for(const [from,to]of [['<a:bodyPr/>','<a:bodyPr><a:scene3d/></a:bodyPr>'],['<a:lstStyle/>','<a:lstStyle><a:lvl1pPr/></a:lstStyle>'],['</p:notes>','<p:unknown/></p:notes>'],['<a:bodyPr/>','<a:bodyPr unknown=\"yes\"/>']])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "body": "{\n for(const [from,to]of [['<a:bodyPr/>','<a:bodyPr><a:scene3d/></a:bodyPr>'],['<a:lstStyle/>','<a:lstStyle><a:lvl1pPr/></a:lstStyle>'],['</p:notes>','<p:unknown/></p:notes>'],['<a:bodyPr/>','<a:bodyPr unknown=\"yes\"/>']]){\n  const p=await deck();p.package.set(notes,p.package.text(notes).replace(from!,to!));const bytes=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(bytes);\n }\n}",
+      "calls": [
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "p.package.set",
+        "p.package.text",
+        "p.package.text().replace",
+        "p.package.toBytes",
+        "p.slides.0.inspectNotesText"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {

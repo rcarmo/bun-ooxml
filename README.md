@@ -11,7 +11,8 @@ with explicit geometry and optional direct bold/italic flags.
 a bounded paragraph-style cascade with provenance and explicit unsupported contexts.
 [Slide reordering](docs/contracts/slide-order.md) preserves slide identities and
 package parts. Existing-file edits include guarded cross-run replacement, slide
-text/notes and cell edits with bounded formula-cache invalidation. Existing XLSX
+text, [existing speaker notes](docs/contracts/notes-editing.md) and cell edits
+with bounded formula-cache invalidation. Existing XLSX
 [cell-style selection](docs/contracts/cell-style.md) preserves values, formulas and caches. Word paragraph
 runs support direct bold/italic overrides, [half-point font sizes](docs/contracts/font-size.md)
 and existing paragraph-style selection without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)

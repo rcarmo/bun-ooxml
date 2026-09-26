@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 463,
+  "nativeDeclarations": 477,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 236,
+  "withoutStagingCount": 250,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2925,6 +2925,76 @@
       "id": "bun:tests/unit/pptx-create.test.ts:authored title layout gives title and subtitle explicit nonoverlapping slide-space bounds",
       "path": "tests/unit/pptx-create.test.ts",
       "sourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:changed notes stale other held targets and empty text can be refilled",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:direct notes mutation and relationship mutation invalidate captured targets",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:self-closing leaf expands and edge whitespace writes XML space preserve",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:multiline uses only first-run template and preserves boundary empty paragraphs",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:multiline copies selected paragraph and first-run property fragments",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:missing notes and unsupported field topology refuse without creating or rewriting parts",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:serialization failure rolls back notes and retains a usable target",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:seven compatible canonical existing-notes scenarios execute saved and in-memory predicates",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:unknown notes extensions and removed slide enrollment refuse rather than editing hidden contexts",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
+      "path": "tests/unit/pptx-notes-edit.test.ts",
+      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b"
     },
     {
       "id": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",

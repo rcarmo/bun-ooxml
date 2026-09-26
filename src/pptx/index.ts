@@ -1,6 +1,8 @@
 import { posix } from "node:path";
 
 import { OoxmlError } from "../errors.ts";
+import {inspectNotes,replaceNotes,type NotesAnchor} from './notes.ts';
+export type {NotesAnchor} from './notes.ts';
 import {appendTextBox,textBoxRequest,type TextBoxGeometry,type TextBoxOptions,type TextBoxReceipt} from './text-box.ts';
 export type {TextBoxGeometry,TextBoxOptions,TextBoxReceipt} from './text-box.ts';
 import { addPart, addRelationship, nextPartName } from "../opc/graph.ts";
@@ -402,6 +404,23 @@ export class Slide {
    * Invariant: this method never creates missing notes members. Absence is a refusal with the
    * stable machine code `PPTX_NOTES_MISSING`.
    */
+  /** Capture an existing body-notes target without creating any notes parts. */
+  inspectNotesText(): NotesAnchor {
+    this.assertNotesSlide();
+    return inspectNotes(this.presentation.package,this.partName);
+  }
+
+  /** Replace through a fresh target; unrelated package payloads stay unchanged. */
+  replaceNotesAt(anchor:NotesAnchor,text:string):{changedParts:string[]} {
+    this.assertNotesSlide();
+    return replaceNotes(this.presentation.package,this.partName,anchor,text);
+  }
+
+  private assertNotesSlide():void {
+    const pkg=this.presentation.package,index=this.presentation.currentSlideIndex(this);
+    if(resolveSlideParts(pkg,pkg.mainPart())[index]!==this.partName)throw new OoxmlError('PPTX_STALE_SLIDE','Slide enrollment changed outside this handle');
+  }
+
   readNotesText(): string {
     const notesPart = this.presentation.package.related(this.partName, "notesSlide");
     if (!notesPart) {

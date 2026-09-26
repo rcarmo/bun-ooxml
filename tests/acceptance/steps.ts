@@ -28,6 +28,7 @@ import { bindings as createXlsxBindings } from "./create-xlsx.ts";
 import { bindings as tableDocxBindings } from "./tables-docx.ts";
 import { bindings as tablePptxBindings } from "./tables-pptx.ts";
 import { bindings as pptxBindings } from "./pptx.ts";
+import { bindings as notesEditingBindings } from './notes-editing.ts';
 import { bindings as xlsxBindings } from "./xlsx.ts";
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
@@ -63,6 +64,7 @@ export const bindings: StepBinding[] = [
   ...tableDocxBindings,
   ...tablePptxBindings,
   ...pptxBindings,
+  ...notesEditingBindings,
   ...xlsxBindings,
   ...cacheBoundaryBindings,
   ...workflowBindings,
