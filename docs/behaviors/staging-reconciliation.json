@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 389,
+  "nativeDeclarations": 401,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 162,
+  "withoutStagingCount": 174,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -1063,7 +1063,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
+      "currentSourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1072,7 +1072,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
+      "currentSourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1083,7 +1083,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
+      "currentSourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -2282,6 +2282,66 @@
       "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
     },
     {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:effective run formatting executes 25 saved outcomes and read-only refusals",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:defaults combine with style toggles and provenance records every transition",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:an explicit style chain does not also apply the default paragraph style",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:inspection returns detached results and never invalidates a captured text span",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:style definitions are read live while raw main-document edits make handles stale",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:UTF16 LE and BE preserve encoding/BOM and inspect reopened style definitions",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:selected ancestry refuses missing bases, links, wrong namespaces and duplicate property containers",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:unselected style ancestry is not evaluated but registry IDs remain unambiguous",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:protected documents remain readable without changing settings or paragraph handles",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:disk save and reopen produce identical effective run formatting",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:complex-script text and unsupported property contexts refuse rather than guess flags",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-effective-formatting.test.ts:raw root relationship changes cannot repoint the document behind a formatting handle",
+      "path": "tests/unit/docx-effective-formatting.test.ts",
+      "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
       "id": "bun:tests/unit/docx-formatting.test.ts:direct run formatting executes15 saved outcome and refusal cases",
       "path": "tests/unit/docx-formatting.test.ts",
       "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
@@ -2799,7 +2859,7 @@
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
       "path": "tests/unit/references.test.ts",
-      "sourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5"
+      "sourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b"
     },
     {
       "id": "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",

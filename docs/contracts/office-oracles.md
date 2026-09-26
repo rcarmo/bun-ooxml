@@ -29,6 +29,11 @@ make office-oracles
   792×612-point landscape page dimensions. These checks detected
   missing title text; they do not measure clipping in general, compare pixels,
   measure all bounds or establish font/layout equivalence with Microsoft Office.
+* Four Latin DOCX markers compare native bold/italic with Poppler PDF markup.
+  LibreOffice 24.2.7 agrees on three; it keeps bold after two true paragraph-style
+  toggles where OOXML evaluation returns false. This known difference is recorded
+  separately; unexpected marker differences fail. Microsoft Word and general
+  font/script agreement remain unverified.
 * The XLSX sample starts with a deliberately stale `SUM(A1:A2)` cache. A native
   Bun edit changes A1 from 20 to 21 and removes the cached answer. LibreOffice must
   render and save the formula result 43 from 21+22. Bun then reads that result from

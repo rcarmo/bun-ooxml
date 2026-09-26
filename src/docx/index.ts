@@ -1,4 +1,6 @@
 import { OoxmlError } from "../errors.ts";
+import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
+export type {EffectiveRunFormatting,EffectiveFlag,FormattingContribution} from './effective-formatting.ts';
 import {formatRunProperties} from './run-formatting.ts';
 import {readPageLayout,replacePageLayout,normalizePageLayout,type PageLayout} from './page-layout.ts';
 export type {PageLayout} from './page-layout.ts';
@@ -215,6 +217,12 @@ export class Paragraph {
       "docx-unsupported-topology",
       `Paragraph ${this.snapshot.index + 1} uses unsupported DOCX topology ${this.snapshot.unsupported ?? "later-slice-content"}`,
     );
+  }
+
+  /** Bounded bold/italic cascade with provenance; unsupported contexts refuse. */
+  effectiveRunFormatting(): EffectiveRunFormatting[] {
+    this.ensureFresh();
+    return this.documentRef.inspectParagraphFormatting(this.snapshot);
   }
 
   /** Direct paragraph style ID, without evaluating inheritance. */
@@ -669,6 +677,11 @@ export class Document {
     this.version = nextVersion;
     this.xmlDocument = nextDocument;
     this.applyDocumentCollections(nextCollections);
+  }
+
+  inspectParagraphFormatting(snapshot: ParagraphSnapshot): EffectiveRunFormatting[] {
+    this.assertParagraphSnapshot(snapshot);
+    return inspectEffectiveFormatting(this.opcPackage,DOCUMENT_PART,snapshot.element);
   }
 
   paragraphStyle(snapshot: ParagraphSnapshot): string | undefined {

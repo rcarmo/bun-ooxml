@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "scope": "Read-only Latin-text bold/italic cascade; no general style, script, font or renderer equivalence",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.15.0",
+    "commit": "977ebe92522325a8bbc14999fed17e0a5e9626da",
+    "manifestSha256": "139a684eb23534468018235af5498f6f65bbdb740aa26731d32d3661edfe6311",
+    "annotatedTagObject": "0cace4fa5d76b3280ce587fbd7c41cadfb7715bb"
+  },
+  "checks": {
+    "candidate": {
+      "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+      "runId": "3b43bc0b-61c5-491f-87ab-1adf6a9a79dd",
+      "unitTests": 401,
+      "assertions": 5036,
+      "acceptanceCases": 321,
+      "log": "/workspace/tmp/bun-effective-formatting-candidate.log"
+    },
+    "released": {
+      "command": "make check",
+      "mode": "default-no-overrides",
+      "runId": "57dc74b4-a34d-44fb-a8cd-26f474c34ac5",
+      "unitTests": 401,
+      "assertions": 5036,
+      "acceptanceCases": 321,
+      "effectiveFormattingCases": 25,
+      "examples": 3,
+      "log": "/workspace/tmp/bun-effective-formatting-release.log"
+    }
+  },
+  "sourceSha256": {
+    "src/docx/index.ts": "4e45c953f475a0708cdd47f0dcf9eacff4ea0ac82c8994c7e2bcf7dcb8dd1107",
+    "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
+    "tests/acceptance/effective-formatting.ts": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f",
+    "tests/unit/docx-effective-formatting.test.ts": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
+    "scripts/office-oracles.ts": "fa3ef4628062ae9050cfc2885a96cc990dfc7d0ecdfb7d96b5de6a54c2b46a34"
+  },
+  "caseOutcomes": [
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"implicit\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"defaults\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"default-style\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"inherited\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"toggle-chain\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"style-false\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"direct-off\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"aliased\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting",
+      "caseKey": "@id-docx-effective-run-formatting|{\"kind\":\"multiple-runs\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"missing-style\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"cycle\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"duplicate-id\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"duplicate-default\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"wrong-type\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"malformed-flag\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"duplicate-flag\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"character-style\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"numbering\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"table-context\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"revision\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"complex-script\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"external-styles\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"wrong-mime\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"styles-effects\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-docx-effective-run-formatting-refusal",
+      "caseKey": "@id-docx-effective-run-formatting-refusal|{\"kind\":\"stale-paragraph\"}",
+      "status": "passed",
+      "steps": 3
+    }
+  ],
+  "independent": {
+    "versions": {
+      "dotnet": "10.0.400",
+      "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+      "poppler": "pdftotext version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "sourceSha256": {
+      "scripts/office-oracles.ts": "fa3ef4628062ae9050cfc2885a96cc990dfc7d0ecdfb7d96b5de6a54c2b46a34",
+      "scripts/oracle-process.ts": "162ffeee57acf45fe794c3d778960f670548358cad63ea4f2df153a4a0cf7084",
+      "tests/oracles/schema/Program.cs": "6f73c79c8bf5edf71afe1076991032ffc9515ed476a8836c908eb19a5e997ef5",
+      "tests/oracles/schema/SchemaCheck.csproj": "61f37badb8a83b06af9785fd2a7446c9cdf16ac7485f052ecf93a2dcccbb0a22",
+      "tests/oracles/schema/packages.lock.json": "1ad2e65b1c4329e88a7fe77b759fe850443f16bc1fecabb718ad4f54ff381213",
+      "src/docx/index.ts": "4e45c953f475a0708cdd47f0dcf9eacff4ea0ac82c8994c7e2bcf7dcb8dd1107",
+      "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+      "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
+      "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
+      "src/pptx/index.ts": "2ac2b87c1507e74742ba7c2d6501036574530ffb8b16d5102a9bfd392058688d",
+      "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+      "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
+      "src/xlsx/index.ts": "5d817686f0a2107a725525b0115b7aa7846a3760390476179aff356eaafa4f73",
+      "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e"
+    },
+    "inputs": [
+      {
+        "file": "word.docx",
+        "sha256": "45213734b4eaaf60f663a8875aa93a65ff98eab20bb412389deed44cf6716d8e"
+      },
+      {
+        "file": "deck.pptx",
+        "sha256": "d8efd56f9953c350456ff8949c3fa2520a44a34bfdc4d7a540e21ab7a1af8471"
+      },
+      {
+        "file": "book.xlsx",
+        "sha256": "fc1234a42a14a4ab9783b820b80558b9a1280cc8634ef73a272aaec661f0e3cb"
+      }
+    ],
+    "schema": {
+      "schemaVersion": 1,
+      "validator": "DocumentFormat.OpenXml",
+      "version": "3.5.1+Branch.main.Sha.3139fdfd27414548a41555f7848d5728f6e71a42.3139fdfd27414548a41555f7848d5728f6e71a42",
+      "profile": "Office2019",
+      "status": "passed",
+      "results": [
+        {
+          "file": "word.docx",
+          "sha256": "45213734b4eaaf60f663a8875aa93a65ff98eab20bb412389deed44cf6716d8e",
+          "errors": [],
+          "truncated": false
+        },
+        {
+          "file": "deck.pptx",
+          "sha256": "d8efd56f9953c350456ff8949c3fa2520a44a34bfdc4d7a540e21ab7a1af8471",
+          "errors": [],
+          "truncated": false
+        },
+        {
+          "file": "book.xlsx",
+          "sha256": "fc1234a42a14a4ab9783b820b80558b9a1280cc8634ef73a272aaec661f0e3cb",
+          "errors": [],
+          "truncated": false
+        }
+      ]
+    },
+    "wordRendering": {
+      "file": "word.pdf",
+      "sha256": "724027ea0ce0074a97800a2899d7f14fae52c053444b48c56309283f31207dd9",
+      "pages": 1,
+      "pageSizePoints": [
+        792,
+        612
+      ],
+      "expectedText": [
+        "Native Word oracle",
+        "A second paragraph.",
+        "Answer",
+        "42",
+        "BOLDMARK",
+        "TOGGLEMARK",
+        "PLAINMARK",
+        "BOTHMARK"
+      ],
+      "textSha256": "0b9459dbccf1236bcce8f251bd12701fbdb5d7acfcd9f8241951952c456c4854",
+      "status": "passed",
+      "visualComparison": "not performed"
+    },
+    "effectiveFormatting": {
+      "expected": [
+        {
+          "text": "BOLDMARK",
+          "bold": true,
+          "italic": false
+        },
+        {
+          "text": "TOGGLEMARK",
+          "bold": false,
+          "italic": true
+        },
+        {
+          "text": "PLAINMARK",
+          "bold": false,
+          "italic": false
+        },
+        {
+          "text": "BOTHMARK",
+          "bold": true,
+          "italic": true
+        }
+      ],
+      "observed": [
+        {
+          "text": "BOLDMARK",
+          "bold": true,
+          "italic": false
+        },
+        {
+          "text": "TOGGLEMARK",
+          "bold": true,
+          "italic": true
+        },
+        {
+          "text": "PLAINMARK",
+          "bold": false,
+          "italic": false
+        },
+        {
+          "text": "BOTHMARK",
+          "bold": true,
+          "italic": true
+        }
+      ],
+      "producer": "LibreOffice 24.2.7.2 420(Build:2)",
+      "extraction": "Poppler pdftohtml bold/italic tags",
+      "matching": 3,
+      "total": 4,
+      "knownDifference": "LibreOffice keeps bold across two paragraph-style true toggles; OOXML toggle evaluation returns false",
+      "scope": "Four Latin markers; no Microsoft Word or general font/script/layout equivalence"
+    },
+    "scope": "Three authored-file schema/PDF checks; four Latin font markers compare3of4; known LibreOffice double-toggle disagreement is not parity"
+  },
+  "review": {
+    "scope": "Bounded read-only Python sibling source review",
+    "finding": "stylesWithEffects refusal and fixture used nonstandard relationship URI",
+    "ownerCorrection": "Changed fixture to real Office2007 relationship URI; observed failure before guard fix, retained both URI refusals",
+    "independentRetest": false,
+    "delegateReview": "Timed out; no credit"
+  },
+  "siblingReferenceGates": {
+    "go": {
+      "sourceCommit": "f510bab7c98a01408499f1df96e4ba8ba22354a0",
+      "batch": 134,
+      "acceptanceCases": 291,
+      "priorAssetsUnchanged": 146,
+      "cascadeExecutionCredit": false
+    },
+    "python": {
+      "sourceCommit": "fc8d47cfa989d9978cf2189e20660b7d532c3a20",
+      "scopedChecks": 82,
+      "mutation": {
+        "cases": 19,
+        "steps": 159
+      },
+      "xml": {
+        "cases": 10,
+        "steps": 40
+      },
+      "package": {
+        "cases": 14,
+        "steps": 47
+      },
+      "priorAssetsUnchanged": 146,
+      "log": "/workspace/tmp/python-v015-candidate.log",
+      "cascadeExecutionCredit": false
+    }
+  },
+  "limits": [
+    "Latin/direct-body paragraphs only",
+    "No character/table/numbering/theme/complex-script cascades",
+    "Source styles resolved live; unsupported contexts refuse",
+    "LibreOffice double-toggle mismatch retained; MicrosoftWord unvalidated"
+  ]
+}

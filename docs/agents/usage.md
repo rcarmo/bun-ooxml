@@ -208,6 +208,22 @@ handles after a real change. Mirrored/book-fold layouts and ambiguous geometry
 refuse. See [page geometry](../contracts/page-layout.md) for bounds and independent
 validation scope.
 
+## Effective bold/italic inspection
+
+```ts
+const formatting = document.paragraphs[0]!.effectiveRunFormatting();
+for (const run of formatting) {
+  console.log(run.text, run.bold.value, run.italic.value);
+  console.log(run.bold.contributions);
+}
+```
+
+This read-only Latin-text slice resolves document defaults, paragraph-style
+ancestry and direct run flags. Unknown contexts refuse, including character,
+numbering, table and complex-script formatting. See the
+[effective-formatting contract](../contracts/effective-formatting.md) for toggle
+semantics and the recorded LibreOffice double-toggle disagreement.
+
 ## Direct paragraph formatting
 
 ```ts

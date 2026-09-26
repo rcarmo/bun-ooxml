@@ -1,7 +1,7 @@
 /** Bun-native OOXML entry points. See docs/agents/usage.md for safe edit workflows. */
 export { OoxmlError } from "./errors.ts";
 export { OpcPackage, type PackageDiff, type Relationship } from "./opc/package.ts";
-export { Document, Span, type RunFormattingPatch, type RunFormattingReceipt, type AddParagraphStyleOptions, type ParagraphStyleDefinitionReceipt, type PageLayout } from "./docx/index.ts";
+export { Document, Span, type RunFormattingPatch, type RunFormattingReceipt, type EffectiveRunFormatting, type EffectiveFlag, type FormattingContribution, type AddParagraphStyleOptions, type ParagraphStyleDefinitionReceipt, type PageLayout } from "./docx/index.ts";
 export { inspectStories, storyParts, type RevisionView, type StoryInspection } from "./docx/story.ts";
 export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding } from "./docx/revisions.ts";
 export { trackedReplace } from "./docx/redline.ts";
