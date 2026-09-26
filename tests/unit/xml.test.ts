@@ -99,7 +99,8 @@ describe("parseXml", () => {
     const doc = parseXml('<r xml:lang="en"/>');
     expect(doc.root.attributes).toEqual({ "xml:lang": "en" });
     expect(doc.root.namespaceURI).toBe("");
-    expect(XML_NS).toBe("http://www.w3.org/XML/1998/namespace");
+    expect(doc.root.attributeNamespaces['xml:lang']).toBe(XML_NS);
+    expect(attribute(doc.root, 'lang', XML_NS)).toBe('en');
   });
 
   test("stores attributes in null-prototype maps", () => {

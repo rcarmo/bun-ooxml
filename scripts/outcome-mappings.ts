@@ -83,13 +83,14 @@ export async function outcomeMappingReport(){
  const registrations=[
   {name:'slide-order',test:'tests/unit/pptx-slide-order.test.ts',canonical:'workflows/pptx/slide-order.feature',sources:['tests/acceptance/slide-order.ts','src/pptx/index.ts','src/pptx/slide-order.ts']},
   {name:'effective-formatting',test:'tests/unit/docx-effective-formatting.test.ts',canonical:'workflows/docx/effective-formatting.feature',sources:['tests/acceptance/effective-formatting.ts','src/docx/index.ts','src/docx/effective-formatting.ts']},
+  {name:'xml-values',test:'tests/unit/xml.test.ts',canonical:'workflows/xml/parsing.feature',sources:['tests/acceptance/core.ts','tests/acceptance/xml-values.ts','src/xml/index.ts','src/errors.ts']},
  ];
  const sets:OutcomeMappingSet[]=[];
  for(const registration of registrations){
   const ledger=await Bun.file(join(root,`docs/behaviors/${registration.name}-mappings.json`)).json() as OutcomeMappingLedger;
   const sources:Record<string,string>={};for(const path of [registration.test,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
   sources[registration.canonical]=await Bun.file(join(fixturesRoot(),registration.canonical)).text();
-  sets.push({name:registration.name,expectedScopePaths:[registration.test],ledger,features:[parseFeature(registration.canonical,sources[registration.canonical]!)],sources});
+  sets.push({name:registration.name,expectedScopePaths:[registration.test],ledger,features:[parseFeature(registration.canonical,sources[registration.canonical]!,{allowDuplicateCaseNames:true})],sources});
  }
  return reconcileOutcomeMappingSets(await inventoryNativeTests(root),sets);
 }

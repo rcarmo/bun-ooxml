@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/xml.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/xml.test.ts": "ed4aa6c8d7fee17f424c9d60d1a0f5f2e642ef4849c49e55cfdd7875879fa217",
+    "tests/acceptance/core.ts": "98b0f53d5da7ac474087eb0195ab077329f3f20fa751264e7270c2f1e46d2448",
+    "tests/acceptance/xml-values.ts": "bcad16fc6f9bf2a11fe45ccf0cab19f188540a4433b948bed294acbce5393b48",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/gherkin.ts": "0838cdb5684d9befe14aaedb36ebdea2843e872505a223542188e18ec95f8f46",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/xml/parsing.feature": "4a8735740a06e91e0e7b881daec1c192a2d53db33606f7b617886c0ed20fe768"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / parses namespaces, mixed content and UTF-16 offsets",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-parse-offsets"
+      ],
+      "caseKeys": [
+        "@id-xml-parse-offsets"
+      ],
+      "assertions": [
+        "expect(doc.elements).toHaveLength(2)",
+        "expect(root.name).toBe(\"ns:root\")",
+        "expect(root.localName).toBe(\"root\")",
+        "expect(root.namespaceURI).toBe(\"urn:ns\")",
+        "expect(root.attributes).toEqual({\n      xmlns: \"urn:default\",\n      \"xmlns:ns\": \"urn:ns\",\n      \"xmlns:x\": \"urn:x\",\n      a: \"1 & 2\",\n    })",
+        "expect(root.text).toBe(\"premid<tail>\")",
+        "expect(root.start).toBe(xml.indexOf(\"<ns:root\"))",
+        "expect(root.openEnd).toBe(xml.indexOf(\">\", root.start) + 1)",
+        "expect(root.closeStart).toBe(xml.lastIndexOf(\"</ns:root>\"))",
+        "expect(root.end).toBe(root.closeStart + \"</ns:root>\".length)",
+        "expect(root.selfClosing).toBeFalse()",
+        "expect(root.parent).toBeUndefined()",
+        "expect(root.root).toBe(root)",
+        "expect(child).toBeDefined()",
+        "expect(child?.name).toBe(\"x:child\")",
+        "expect(child?.localName).toBe(\"child\")",
+        "expect(child?.namespaceURI).toBe(\"urn:x\")",
+        "expect(child?.attributes).toEqual({ \"x:b\": \"v\" })",
+        "expect(child?.text).toBe(\"\")",
+        "expect(child?.parent).toBe(root)",
+        "expect(child?.root).toBe(root)",
+        "expect(child?.selfClosing).toBeTrue()",
+        "expect(child?.start).toBe(xml.indexOf(\"<x:child\"))",
+        "expect(child?.openEnd).toBe(xml.indexOf(\"/>\", child!.start) + 2)",
+        "expect(child?.closeStart).toBe(child?.openEnd)",
+        "expect(child?.end).toBe(child?.openEnd)",
+        "expect(elements(doc, \"child\", \"urn:x\")).toEqual([child!])",
+        "expect(elements(root, \"root\", \"urn:ns\")).toEqual([root])"
+      ],
+      "outcomes": [
+        "One root and one self-closing child retain decoded values, namespace identities, UTF-16 offsets, links and self-closing state; element lookup returns the same handles."
+      ],
+      "gaps": [
+        "Only this two-element fixture is asserted; declaration, comment and PI source bytes are not independently compared."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / accepts predefined and numeric entities",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-entity-values"
+      ],
+      "caseKeys": [
+        "@id-xml-entity-values"
+      ],
+      "assertions": [
+        "expect(doc.root.attributes).toEqual({ a: '\"\\'' })",
+        "expect(doc.root.text).toBe(\"AA&<>\")"
+      ],
+      "outcomes": [
+        "The canonical XML input decodes quote/apostrophe attributes and hexadecimal/decimal/predefined text entities to the exact expected strings."
+      ],
+      "gaps": [
+        "One positive input does not test all numeric ranges, malformed references or resource boundaries."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / accepts xml-stylesheet processing instructions before the root element",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-stylesheet-processing-instruction"
+      ],
+      "caseKeys": [
+        "@id-xml-stylesheet-processing-instruction"
+      ],
+      "assertions": [
+        "expect(doc.root.name).toBe(\"r\")"
+      ],
+      "outcomes": [
+        "The canonical stylesheet-PI input parses with root qualified name r."
+      ],
+      "gaps": [
+        "Only root name is asserted; PI data preservation and stylesheet interpretation are untested."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / normalises literal XML whitespace but preserves character references and original offsets",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-normalise-line-endings",
+        "@id-xml-escaping-whitespace-roundtrip"
+      ],
+      "caseKeys": [
+        "@id-xml-normalise-line-endings",
+        "@id-xml-escaping-whitespace-roundtrip"
+      ],
+      "assertions": [
+        "expect(doc.root.text).toBe('u\\nv\\nw\\rc\\nd')",
+        "expect(doc.root.attributes.a).toBe('x y z\\r\\n\\t')",
+        "expect(parseXml(`<r a=\"${escapeAttribute(value)}\">${escapeText(value)}</r>`).root.attributes.a).toBe(value)",
+        "expect(parseXml(`<r>${escapeText(value)}</r>`).root.text).toBe(value)",
+        "expect(source.slice(child.start,child.end)).toBe('<s/>')"
+      ],
+      "outcomes": [
+        "Raw CRLF/CR and literal attribute whitespace normalise while character-reference whitespace remains distinct. Escaped text and attributes round-trip x CR LF TAB y, and the child slice remains <s/>."
+      ],
+      "gaps": [
+        "One fixture and one escaping value are checked; complete offset coverage and byte encodings are not established."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / expanded attribute lookup honours aliases, local rebinding and unqualified attributes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-expanded-attribute-lookup",
+        "@id-xml-immutable-namespace-metadata"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(attribute(d.root,'id')).toBe('plain')",
+        "expect(attribute(d.root,'id','urn:default')).toBeUndefined()",
+        "expect(attribute(d.root,'id','urn:a')).toBe('outer')",
+        "expect(attribute(d.root.children[0]!,'id','urn:b')).toBe('inner')",
+        "expect(attribute(d.root.children[0]!,'id','urn:a')).toBeUndefined()",
+        "expect(attribute(d.root.children[1]!,'id','urn:a')).toBe('sibling')",
+        "expect(attribute(d.root.children[0]!,'lang',XML_NS)).toBe('en')",
+        "expect(d.root.attributeNamespaces['a:id']).toBe('urn:a')",
+        "expect(Object.isFrozen(d.root.attributeNamespaces)).toBe(true)",
+        "expect(Object.getPrototypeOf(d.root.attributeNamespaces)).toBeNull()"
+      ],
+      "outcomes": [
+        "Seven expanded lookups distinguish root/unqualified, default namespace, alias rebinding, sibling scope and implicit xml:lang. The root a:id namespace is urn:a and its metadata map is frozen with null prototype."
+      ],
+      "gaps": [
+        "The metadata assertions use the larger lookup fixture, not the dedicated canonical metadata input; links remain scenario-only."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / keeps the xml prefix bound implicitly",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-implicit-xml-prefix"
+      ],
+      "caseKeys": [
+        "@id-xml-implicit-xml-prefix"
+      ],
+      "assertions": [
+        "expect(doc.root.attributes).toEqual({ \"xml:lang\": \"en\" })",
+        "expect(doc.root.namespaceURI).toBe(\"\")",
+        "expect(doc.root.attributeNamespaces['xml:lang']).toBe(XML_NS)",
+        "expect(attribute(doc.root, 'lang', XML_NS)).toBe('en')"
+      ],
+      "outcomes": [
+        "The canonical input exposes xml:lang=en with empty root namespace; parsed attribute namespace metadata equals the XML namespace and expanded lookup returns en."
+      ],
+      "gaps": [
+        "Checks one implicit xml attribute; explicit rebinding refusals and other xml attributes are outside this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / stores attributes in null-prototype maps",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-prototype-safe-attributes"
+      ],
+      "caseKeys": [
+        "@id-xml-prototype-safe-attributes"
+      ],
+      "assertions": [
+        "expect(Object.getPrototypeOf(doc.root.attributes)).toBeNull()",
+        "expect(Object.prototype.hasOwnProperty.call(doc.root.attributes, \"__proto__\")).toBeTrue()",
+        "expect(doc.root.attributes[\"__proto__\"]).toBe(\"polluted\")",
+        "expect(doc.root.attributes[\"constructor\"]).toBe(\"safe\")"
+      ],
+      "outcomes": [
+        "The canonical attribute map has a null prototype, an own __proto__ key with polluted value, and constructor value safe."
+      ],
+      "gaps": [
+        "Native constructor lookup does not separately call hasOwnProperty; the acceptance binding checks ownership independently."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / rejects malformed or unsafe XML",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-parse-refusals"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(() => parseXml(xml)).toThrow(\n        expect.objectContaining({\n          code,\n        }),\n      )"
+      ],
+      "outcomes": [
+        "Fifteen fixed malformed/unsafe input rows throw the corresponding exact XML error code, covering declarations, PI, DTD/entity, duplicate/unspaced attributes, namespaces, mismatched tags, characters and comments."
+      ],
+      "gaps": [
+        "One loop declaration is not fifteen canonical cases. Shared prose groups categories without a row-for-row mapping; absent partial output is not independently inspected."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / refuses excessive depth, node count and input length",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-parse-bounds"
+      ],
+      "caseKeys": [
+        "@id-xml-parse-bounds"
+      ],
+      "assertions": [
+        "expect(() => parseXml(deep)).toThrow(\n      expect.objectContaining({ code: \"XML_DEPTH_LIMIT\" }),\n    )",
+        "expect(() => parseXml(wide)).toThrow(\n      expect.objectContaining({ code: \"XML_NODE_LIMIT\" }),\n    )",
+        "expect(() => parseXml(huge)).toThrow(\n      expect.objectContaining({ code: \"XML_INPUT_TOO_LARGE\" }),\n    )"
+      ],
+      "outcomes": [
+        "Depth 257, root plus 100000 children, and an input over 8Mi UTF-16 units each throw the respective limit code."
+      ],
+      "gaps": [
+        "Only over-limit examples are asserted; thresholds and peak memory are not measured, and absent partial output is implicit in throwing."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:escaping helpers / escape text and attribute values",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-escaping-values",
+        "@id-xml-escaping-invalid-character"
+      ],
+      "caseKeys": [
+        "@id-xml-escaping-values|{\"context\":\"text\",\"input_json\":\"\\\"5 < 7 & 9 > 4\\\"\",\"escaped_json\":\"\\\"5 &lt; 7 &amp; 9 &gt; 4\\\"\"}",
+        "@id-xml-escaping-values|{\"context\":\"attribute\",\"input_json\":\"\\\"'\\\\\\\"<&>\\\"\",\"escaped_json\":\"\\\"&apos;&quot;&lt;&amp;&gt;\\\"\"}",
+        "@id-xml-escaping-invalid-character"
+      ],
+      "assertions": [
+        "expect(escapeText(`5 < 7 & 9 > 4`)).toBe(\"5 &lt; 7 &amp; 9 &gt; 4\")",
+        "expect(escapeAttribute(`'\\\"<&>`)).toBe(\"&apos;&quot;&lt;&amp;&gt;\")",
+        "expect(() => escapeText(\"\\u0001\")).toThrow(\n      expect.objectContaining({ code: \"XML_INVALID_CHAR\" }),\n    )"
+      ],
+      "outcomes": [
+        "Text and attribute escaping match both exact canonical example strings; U+0001 throws XML_INVALID_CHAR."
+      ],
+      "gaps": [
+        "The invalid-character check covers text only; this declaration does not check round-trip decoding or every invalid XML character."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / applies sorted disjoint edits with escaped text and XML fragments",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-apply-edits"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result).toBe(\"<r>1 &lt; 2 <x/></r>\")",
+        "expect(doc.root.text).toBe(\"1 < 2 \")",
+        "expect(doc.root.children.map((child) => child.name)).toEqual([\"x\"])"
+      ],
+      "outcomes": [
+        "Unsorted disjoint replacements yield exact <r>1 &lt; 2 <x/></r>; reparsing yields text 1 < 2 and child x."
+      ],
+      "gaps": [
+        "Only positive edits are checked in this declaration; the canonical refusal outcomes are asserted separately."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / refuses overlapping bounds and unsafe resulting XML",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-apply-edits"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(() =>\n      applyEdits(xml, [\n        { start: 3, end: 5, value: \"a\" },\n        { start: 4, end: 6, value: \"b\" },\n      ]),\n    ).toThrow(expect.objectContaining({ code: \"XML_EDIT_OVERLAP\" }))",
+        "expect(() =>\n      applyEdits(xml, [\n        { start: xml.indexOf(\"text\"), end: xml.indexOf(\"text\") + 4, value: \"<!DOCTYPE x><x/>\" },\n      ]),\n    ).toThrow(expect.objectContaining({ code: \"XML_EDIT_UNSAFE\" }))"
+      ],
+      "outcomes": [
+        "Overlapping source ranges throw XML_EDIT_OVERLAP and DTD-bearing replacement output throws XML_EDIT_UNSAFE."
+      ],
+      "gaps": [
+        "No separate malformed non-DTD output or out-of-bounds edit assertion; this declaration does not cover the canonical positive outcome."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / returns OoxmlError instances",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-typed-parse-error"
+      ],
+      "caseKeys": [
+        "@id-xml-typed-parse-error"
+      ],
+      "assertions": [
+        "expect(() => parseXml(\"<a></b>\")).toThrow(OoxmlError)"
+      ],
+      "outcomes": [
+        "The canonical mismatched-tag input throws an OoxmlError instance."
+      ],
+      "gaps": [
+        "This check asserts class only, without exact code or message."
+      ]
+    }
+  ]
+}

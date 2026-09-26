@@ -27,7 +27,17 @@
         "@id-xml-parse-bounds",
         "@id-xml-apply-edits",
         "@id-xml-go-element-removal-custody",
-        "@id-xml-go-element-removal-refusal"
+        "@id-xml-go-element-removal-refusal",
+        "@id-xml-entity-values",
+        "@id-xml-stylesheet-processing-instruction",
+        "@id-xml-expanded-attribute-lookup",
+        "@id-xml-implicit-xml-prefix",
+        "@id-xml-prototype-safe-attributes",
+        "@id-xml-immutable-namespace-metadata",
+        "@id-xml-escaping-values",
+        "@id-xml-escaping-invalid-character",
+        "@id-xml-escaping-whitespace-roundtrip",
+        "@id-xml-typed-parse-error"
       ]
     },
     {

@@ -42,7 +42,7 @@ The shared reference contains **200 assets**. The table lists available tests; a
 | references/fixtures-ooxml/workflows/xlsx/formula-references.feature | mixed | 9 | 45 | 13 | 32 | 152 |
 | references/fixtures-ooxml/workflows/xml/comparison.feature | implemented | 5 | 10 | 10 | 0 | 40 |
 | references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 6 | 0 | 19 |
-| references/fixtures-ooxml/workflows/xml/parsing.feature | mixed | 25 | 31 | 8 | 23 | 116 |
+| references/fixtures-ooxml/workflows/xml/parsing.feature | mixed | 25 | 31 | 19 | 12 | 116 |
 
 Specifications and shared tests are in `references/fixtures-ooxml`.
 Run `make check` to execute implemented scenarios. Planned scenarios are not run.

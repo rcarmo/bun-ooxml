@@ -55,12 +55,12 @@ test('mapping gate rejects fabricated execution credit and preserves dynamic rev
  expect(r.mappings[0].reviewReasons).toEqual(['body-loop']);expect(r.runtimeLeafCount).toBe(null);
 });
 
-test('committed ledgers enumerate slide-order and effective-formatting assertions with known gaps',async()=>{
+test('committed ledgers enumerate slide-order, effective-formatting and XML assertions with known gaps',async()=>{
  const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');
  const report=await outcomeMappingReport();
- expect(report.mappedDeclarations).toBe(25);
- expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-25);
- expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12]]);
+ expect(report.mappedDeclarations).toBe(38);
+ expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-38);
+ expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13]]);
  expect(report.mappings[0]!.caseKeys).toHaveLength(21);
  expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);
  expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);
@@ -138,4 +138,20 @@ test('outcome reconciliation refuses unresolved registrations even outside mappe
 test('standalone mapping validation refuses unresolved declaration records',()=>{
  const a=sample();a.inventory.cases[0]!.unresolved.push('unsupported registration');
  expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved');
+});
+
+test('XML ledger retains partial links for different fixtures and split edit predicates', async () => {
+ const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');
+ const report=await outcomeMappingReport(),xml=report.mappings.filter(m=>m.ledger==='xml-values');
+ expect(xml).toHaveLength(13);
+ const lookup=xml.find(m=>m.testId.endsWith('expanded attribute lookup honours aliases, local rebinding and unqualified attributes'))!;
+ expect(lookup.scenarioIds).toEqual(['@id-xml-expanded-attribute-lookup','@id-xml-immutable-namespace-metadata']);
+ expect(lookup.caseKeys).toEqual([]);expect(lookup.gaps.join(' ')).toContain('not the dedicated canonical metadata input');
+ const edits=xml.filter(m=>m.scenarioIds.includes('@id-xml-apply-edits'));
+ expect(edits).toHaveLength(2);expect(edits.every(m=>m.caseKeys.length===0&&m.status==='partial')).toBe(true);
+ const implicit=xml.find(m=>m.scenarioIds.includes('@id-xml-implicit-xml-prefix'))!;
+ expect(implicit.assertions).toContain("expect(doc.root.attributeNamespaces['xml:lang']).toBe(XML_NS)");
+ expect(implicit.assertions).toContain("expect(attribute(doc.root, 'lang', XML_NS)).toBe('en')");
+ expect(implicit.assertions.some(a=>a.startsWith('expect(XML_NS)'))).toBe(false);
+ expect(xml.every(m=>m.executionCredit===false&&m.gaps.length>0)).toBe(true);
 });

@@ -39,10 +39,17 @@ reports.
 
 ## Requirement mappings
 
-The slide-order and effective-formatting reports associate literal assertions
-with shared scenarios. They also list gaps, such as an untested result field or
+The slide-order, effective-formatting and XML-value reports associate literal
+assertions with shared scenarios. They also list gaps, such as an untested result field or
 an input variant missing from the scenario. Each report has its own source hashes
 and required files; one cannot supply a missing reference for another.
+
+The XML ledger covers `tests/unit/xml.test.ts`, including parser, escaping and
+edit predicates. Its metadata-map link uses a different fixture from the shared
+scenario, so it stays scenario-only. Positive and negative edit declarations
+also map separately. `tests/acceptance/xml-values.ts` executes the shared value
+inputs and checks each result; negative controls corrupt values and metadata to
+check that these assertions fail. The ledger itself does not execute tests.
 
 Unresolved registrations, missing assertions or conflicting source records fail
 validation. The descriptions still need human review: matching an assertion's
