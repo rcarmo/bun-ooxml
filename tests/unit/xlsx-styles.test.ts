@@ -1,19 +1,19 @@
 import { describe, expect, test } from "bun:test";
-import { join } from "node:path";
 
 import { OoxmlError } from "../../src/errors.ts";
 import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
 import { Workbook } from "../../src/xlsx/index.ts";
 import { setCellWrapText } from "../../src/xlsx/styles.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
 const encoder = new TextEncoder();
 
 describe("setCellWrapText", () => {
   test("creates a wrapped style closure for the shared default-style fixture and survives reopen", async () => {
-    const fixturePath = join(import.meta.dir, "../../docs/contracts/shared-v2/pack/fixtures/default-style.xlsx");
-    const originalBytes = new Uint8Array(await Bun.file(fixturePath).arrayBuffer());
+    const path = fixturePath(F.shared.defaultStyle);
+    const originalBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
     const originalParts = readZip(originalBytes);
     const workbook = await Workbook.open(originalBytes);
 

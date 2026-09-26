@@ -1,3 +1,4 @@
+import {fixturePath,fixturePaths,F,CORPUS74_PACKAGE_IDS} from "../../scripts/fixture-inputs.ts";
 import { afterEach, describe, expect, test } from "bun:test";
 import { readdirSync, statSync } from "node:fs";
 import { mkdtemp, rm, symlink } from "node:fs/promises";
@@ -14,10 +15,6 @@ const OFFICE_DOCUMENT_REL = "http://schemas.openxmlformats.org/officeDocument/20
 const MAIN_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml";
 const DOCUMENT_PART = "word/document.xml";
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const FIXTURE_ROOTS = [
-  join(PROJECT_ROOT, "fixtures/go-ooxml/testdata"),
-  join(PROJECT_ROOT, "fixtures/python-office-mcp-server/tests/_templates"),
-] as const;
 const EXPECTED_FIXTURE_ARCHIVE_COUNT = 74;
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 const UTF16LE_DECODER = new TextDecoder("utf-16le", { fatal: true });
@@ -216,28 +213,7 @@ function encodeUtf16Le(text: string): Uint8Array {
   return bytes;
 }
 
-function fixtureArchives(): string[] {
-  return FIXTURE_ROOTS.flatMap(collectFixtureArchives).sort();
-}
-
-function collectFixtureArchives(root: string): string[] {
-  if (!statSync(root).isDirectory()) throw new Error(`Missing fixture root: ${root}`);
-
-  const result: string[] = [];
-  const visit = (dir: string): void => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const next = join(dir, entry.name);
-      if (entry.isDirectory()) {
-        visit(next);
-        continue;
-      }
-      if (/\.(zip|docx|pptx|xlsx)$/i.test(entry.name)) result.push(next);
-    }
-  };
-
-  visit(root);
-  return result;
-}
+function fixtureArchives(): string[] { return fixturePaths(CORPUS74_PACKAGE_IDS); }
 
 function expectOpcErrorSync(action: () => unknown, code: string, messageFragment: string): void {
   try {

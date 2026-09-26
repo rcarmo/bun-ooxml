@@ -1,13 +1,13 @@
+import {fixturesRoot,fixturePath,SHARED_FIXTURE_IDS} from "../../scripts/fixture-inputs.ts";
 import {afterAll,describe,expect,test} from "bun:test";
 import {mkdtemp,rm,readdir,link,symlink} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join} from "node:path";
 import {patchOffice} from "../../src/workflow/index.ts";
 import {Document,Workbook,Presentation} from "../../src/index.ts";
-const fixtureRoot=join(import.meta.dir,"../../docs/contracts/shared-v2/pack/fixtures");
 const roots:string[]=[];
 afterAll(async()=>{await Promise.all(roots.map(p=>rm(p,{recursive:true,force:true})));});
-async function setup(name:string){const root=await mkdtemp(join(tmpdir(),"bun-patch-"));roots.push(root);const source=join(root,name);await Bun.write(source,Bun.file(join(fixtureRoot,name)));return {root,source,output:join(root,'output.'+name.split('.').at(-1))};}
+async function setup(name:string){const root=await mkdtemp(join(tmpdir(),"bun-patch-"));roots.push(root);const source=join(root,name);await Bun.write(source,Bun.file(fixturePath(SHARED_FIXTURE_IDS[name as keyof typeof SHARED_FIXTURE_IDS])));return {root,source,output:join(root,'output.'+name.split('.').at(-1))};}
 const hash=(b:Uint8Array)=>new Bun.CryptoHasher('sha256').update(b).digest('hex');
 describe('native staged workflow',()=>{
  test('previews report matched targets but never write source or an existing destination',async()=>{

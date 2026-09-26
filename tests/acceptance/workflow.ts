@@ -1,3 +1,4 @@
+import {fixturePath,fixturesRoot} from "../../scripts/fixture-inputs.ts";
 import { expect } from "bun:test";
 import { lstat, mkdtemp, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -12,7 +13,7 @@ import { patchOffice, type PatchReceipt } from "../../src/workflow/index.ts";
 import { elements, parseXml } from "../../src/xml/index.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const PACK_ROOT = join(PROJECT_ROOT, "docs/contracts/shared-v2/pack");
+const PACK_ROOT = join(fixturesRoot(), "shared/v2/pack");
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
 const encoder = new TextEncoder();
 const tempRoots: string[] = [];
@@ -44,7 +45,7 @@ export const bindings: StepBinding[] = [
     run: async (context, id) => {
       const state = workflowState(context);
       const fixture = await fixtureById(id);
-      const bytes = await Bun.file(join(PACK_ROOT, fixture.path)).bytes();
+      const bytes = await Bun.file(fixturePath(fixture.assetId)).bytes();
       await verifyFixture(bytes, fixture);
       const tempRoot = await mkdtemp(join(tmpdir(), "bun-ooxml-workflow-"));
       tempRoots.push(tempRoot);

@@ -6,6 +6,7 @@ import { dirname, join } from "node:path";
 import { runAcceptance } from "../../scripts/acceptance.ts";
 import { readZip } from "../../src/opc/zip.ts";
 import { Presentation } from "../../src/pptx/index.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 import {
   bindings,
   runCrossRunReplacementScenario,
@@ -106,10 +107,7 @@ describe("pptx slice", () => {
   });
 
   test("opens from path and bytes and saves a no-op deck byte-identically", async () => {
-    const sourcePath = join(
-      import.meta.dir,
-      "../../fixtures/python-office-mcp-server/tests/_templates/testdata/pptx/title_slide.pptx",
-    );
+    const sourcePath = fixturePath(F.officeSlides.titleSlide);
     const sourceBytes = Uint8Array.from(await Bun.file(sourcePath).bytes());
 
     const fromPath = await Presentation.open(sourcePath);

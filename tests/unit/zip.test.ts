@@ -1,3 +1,4 @@
+import {fixturePaths,CORPUS74_PACKAGE_IDS} from "../../scripts/fixture-inputs.ts";
 import { describe, expect, test } from "bun:test";
 import { deflateRawSync } from "node:zlib";
 import { readdirSync, readFileSync, statSync } from "node:fs";
@@ -9,10 +10,6 @@ import { crc32, readZip, writeZip } from "../../src/opc/zip.ts";
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const FIXTURE_ROOTS = [
-  join(PROJECT_ROOT, "fixtures/go-ooxml/testdata"),
-  join(PROJECT_ROOT, "fixtures/python-office-mcp-server/tests/_templates"),
-] as const;
 const EXPECTED_FIXTURE_ARCHIVE_COUNT = 74;
 
 const LOCAL_SIGNATURE = 0x04034b50;
@@ -299,28 +296,7 @@ function expectZipError(action: () => unknown, code: string, messageFragment: st
   }
 }
 
-function fixtureArchives(): string[] {
-  return FIXTURE_ROOTS.flatMap(collectFixtureArchives).sort();
-}
-
-function collectFixtureArchives(root: string): string[] {
-  if (!statSync(root).isDirectory()) throw new Error(`Missing fixture root: ${root}`);
-
-  const result: string[] = [];
-  const visit = (dir: string): void => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const next = join(dir, entry.name);
-      if (entry.isDirectory()) {
-        visit(next);
-        continue;
-      }
-      if (/\.(zip|docx|pptx|xlsx)$/i.test(entry.name)) result.push(next);
-    }
-  };
-
-  visit(root);
-  return result;
-}
+function fixtureArchives(): string[] { return fixturePaths(CORPUS74_PACKAGE_IDS); }
 
 function buildZip(members: ZipMemberSpec[], options: ZipBuildOptions = {}): Uint8Array {
   const bodyChunks: Uint8Array[] = [];

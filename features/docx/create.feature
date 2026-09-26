@@ -16,7 +16,7 @@ Feature: DOCX native paragraph authoring
 
   @id-docx-create-style-validation
   Scenario: DOCX create appends a paragraph using a known paragraph style id
-    Given DOCX create source "fixtures/python-office-mcp-server/tests/_templates/testdata/word/styles.docx" is prepared
+    Given DOCX create source "fixture-9548a1ce68caae9df12bc85732f1c19a098658c5dce3d79488814e4145299e5e" is prepared
     When DOCX create styled paragraph "Created heading" with style "Heading1" is appended
     And DOCX create document is saved and reopened
     Then DOCX create paragraph 5 text equals "Created heading"
@@ -24,7 +24,7 @@ Feature: DOCX native paragraph authoring
 
   @id-docx-create-stale-opaque
   Scenario: DOCX create preserves opaque parts and invalidates earlier spans after append
-    Given DOCX create source "fixtures/python-office-mcp-server/tests/_templates/testdata/word/styles.docx" is prepared
+    Given DOCX create source "fixture-9548a1ce68caae9df12bc85732f1c19a098658c5dce3d79488814e4145299e5e" is prepared
     And DOCX create paragraph 2 exact text "Genevese" span is remembered
     And DOCX create opaque part "docProps/core.xml" bytes are remembered
     When DOCX create plain paragraph "Appendix line" is appended
@@ -48,4 +48,4 @@ Feature: DOCX native paragraph authoring
       | new-document                                                                 | options-string            | docx-invalid-argument  |
       | new-document                                                                 | bold-string               | docx-invalid-argument  |
       | new-document                                                                 | style-without-styles-part | docx-style-unsupported |
-      | fixtures/python-office-mcp-server/tests/_templates/testdata/word/styles.docx | unknown-style             | docx-style-missing     |
+      | fixture-9548a1ce68caae9df12bc85732f1c19a098658c5dce3d79488814e4145299e5e | unknown-style             | docx-style-missing     |

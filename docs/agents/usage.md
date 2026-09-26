@@ -3,6 +3,11 @@
 Use the exported classes in `src/index.ts`. Runtime operations run inside Bun.
 There is no Python executable, LibreOffice installation or network dependency.
 
+Development examples use the pinned shared fixture checkout. Initialise recursive
+submodules first; fixtures resolve by ID through `scripts/fixture-inputs.ts` and
+must never be edited in place. Grouped fixture storage and candidate testing are
+documented in [fixture references](../contracts/fixture-references.md).
+
 ## Decide before editing
 
 1. Keep an immutable input and choose a different output path.

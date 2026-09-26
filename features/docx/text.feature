@@ -6,7 +6,7 @@ Feature: DOCX slice paragraph text search and run-safe replacement
 
   @id-docx-format-preserve
   Scenario: DOCX slice preserves formatting across a cross-run replacement after save and reopen
-    Given DOCX slice fixture "fixtures/python-office-mcp-server/tests/_templates/testdata/word/formatted_text.docx" is opened
+    Given DOCX slice fixture "fixture-12183fb28e49ea1c1ac63de2252b011580c4cfed0a7cfd35efc1ffb20c94653e" is opened
     When DOCX slice paragraph 1 exact text "text and italic text" is replaced with "Tone and tilted text"
     And DOCX slice document is saved and reopened
     Then DOCX slice paragraph 1 text equals "Bold Tone and tilted text and underlined text and colored text and large text"
@@ -22,7 +22,7 @@ Feature: DOCX slice paragraph text search and run-safe replacement
 
   @id-docx-table-paragraph
   Scenario: DOCX slice includes table-cell paragraphs in document order for exact replacement
-    Given DOCX slice fixture "fixtures/python-office-mcp-server/tests/_templates/testdata/word/simple_table.docx" is opened
+    Given DOCX slice fixture "fixture-8192955ef935f09eb61a9fe6805d4996c811efcf54c0c966f52d983e38e0a79c" is opened
     When DOCX slice paragraph 5 exact text "Galvanic battery" is replaced with "Voltaic battery"
     And DOCX slice document is saved and reopened
     Then DOCX slice paragraph 1 text equals "Research Materials Inventory"
@@ -32,7 +32,7 @@ Feature: DOCX slice paragraph text search and run-safe replacement
 
   @id-docx-stale-span
   Scenario: DOCX slice refuses a stale span without mutating the package
-    Given DOCX slice fixture "fixtures/python-office-mcp-server/tests/_templates/testdata/word/formatted_text.docx" is opened
+    Given DOCX slice fixture "fixture-12183fb28e49ea1c1ac63de2252b011580c4cfed0a7cfd35efc1ffb20c94653e" is opened
     And DOCX slice paragraph 1 span "text and italic text" is remembered
     And DOCX slice paragraph 1 exact text "colored text" is replaced with "scarlet text"
     And DOCX slice current saved bytes are remembered
@@ -48,6 +48,6 @@ Feature: DOCX slice paragraph text search and run-safe replacement
 
     Examples:
       | fixture                                                                                | paragraph | query              |
-      | fixtures/python-office-mcp-server/tests/_templates/testdata/word/track_changes.docx   | 1         | amazing            |
-      | fixtures/python-office-mcp-server/tests/_templates/testdata/word/sdt_content_controls.docx | 2         | [Enter Title Here] |
+      | fixture-e3c5159fbf254f4d5423354773ae83a5535cb3cef8f603f1adca6d18adab11f2   | 1         | amazing            |
+      | fixture-e4f051ec2eb5f48b9b8299e931abb2bca1fa86ca5007865b3b2f9b83ba16676f | 2         | [Enter Title Here] |
       | synthetic-field                                                                        | 1         | 2026-01-01         |

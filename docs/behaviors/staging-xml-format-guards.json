@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "reviewState": "candidate-needs-parent-review",
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / parses namespaces, mixed content and UTF-16 offsets",
+      "title": "parses namespaces, mixed content and UTF-16 offsets",
+      "given": [
+        "The source XML starts with an XML declaration, a leading comment, and a processing instruction, then a namespaced root ns:root with default, ns, and x namespace declarations and an attribute a=\"1 &amp; 2\".",
+        "Inside that root, literal text pre and mid surrounds a self-closing x:child element with x:b=\"v\", followed by a CDATA section whose payload is <tail>, and the document ends with a trailing comment."
+      ],
+      "when": [
+        "parseXml reads the document, the root and first child elements are inspected, and elements(...) is queried for the expanded names child/urn:x and root/urn:ns."
+      ],
+      "then": [
+        "The parsed document exposes exactly two elements: the ns:root element and the nested x:child element.",
+        "The root reports name ns:root, localName root, namespaceURI urn:ns, attributes xmlns, xmlns:ns, xmlns:x, and a decoded to 1 & 2, with aggregate text premid<tail>.",
+        "The root keeps exact source offsets for its start tag, open-end, close-start, and end, is not self-closing, has no parent, and points its root reference back to itself.",
+        "The child reports name x:child, localName child, namespaceURI urn:x, attributes {\"x:b\":\"v\"}, empty text, parent/root references back to the root, selfClosing true, and open/close offsets that collapse onto the same self-closing token.",
+        "elements(...) returns the exact child element for child/urn:x and the exact root element for root/urn:ns."
+      ],
+      "examples": [
+        "Offset custody: root.start and child.start are compared against the original string indices rather than reconstructed positions.",
+        "Namespace expansion: the default namespace applies to unprefixed element names, while x:child resolves specifically to urn:x."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / accepts predefined and numeric entities",
+      "title": "accepts predefined and numeric entities",
+      "given": [
+        "The XML input is <r a=\"&quot;&apos;\">&#x41;&#65;&amp;&lt;&gt;</r>."
+      ],
+      "when": [
+        "parseXml parses the attribute and text content."
+      ],
+      "then": [
+        "The attribute a decodes to the two-character string consisting of a double quote followed by an apostrophe.",
+        "The root text decodes the hexadecimal entity, decimal entity, and predefined entities to AA&<>."
+      ],
+      "examples": [
+        "Numeric entity variants reviewed: &#x41; and &#65; both become A.",
+        "Predefined entity variants reviewed: &amp;, &lt;, &gt;, &quot;, and &apos;."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / accepts xml-stylesheet processing instructions before the root element",
+      "title": "accepts xml-stylesheet processing instructions before the root element",
+      "given": [
+        "The source starts with a pre-root xml-stylesheet processing instruction and then a self-closing <r/> root element."
+      ],
+      "when": [
+        "parseXml parses that document."
+      ],
+      "then": [
+        "Parsing succeeds and the root element name is r."
+      ],
+      "examples": [
+        "The accepted pre-root processing instruction variant is xml-stylesheet href=\"style.xsl\"."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / normalises literal XML whitespace but preserves character references and original offsets",
+      "title": "normalises literal XML whitespace but preserves character references and original offsets",
+      "given": [
+        "The source root has an attribute a whose raw value mixes literal CRLF, a tab, and numeric character references for carriage return, line feed, and tab.",
+        "The root text mixes literal CRLF and CR line endings, a numeric carriage-return reference, a CDATA section containing c followed by CRLF then d, and a self-closing <s/> child element.",
+        "A separate raw value x followed by CRLF, tab, and y is also exercised through escapeAttribute(...) and escapeText(...)."
+      ],
+      "when": [
+        "parseXml parses the source, the escaped attribute and text round-trip are reparsed, and the child element is sliced back out of the original source by its recorded offsets."
+      ],
+      "then": [
+        "The root text normalises literal XML line endings to u\nv\nw\rc\nd, preserving the numeric carriage-return reference as \r and normalising the CDATA line ending to \n.",
+        "The attribute value becomes x y z\r\n\t: literal XML whitespace is normalised first, while the numeric references survive as carriage return, line feed, and tab characters.",
+        "Escaping and reparsing the separate value reproduces the original x\r\n\ty string in both attribute and text contexts.",
+        "The recorded child offsets still address the exact original substring <s/>."
+      ],
+      "examples": [
+        "Literal CRLF in element text becomes a single line feed.",
+        "Character references &#xD;, &#xA;, and &#x9; are preserved as data, not re-normalised away."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / expanded attribute lookup honours aliases, local rebinding and unqualified attributes",
+      "title": "expanded attribute lookup honours aliases, local rebinding and unqualified attributes",
+      "given": [
+        "The root element binds the default namespace to urn:default, binds both a and r to urn:a, carries an unqualified id=\"plain\", and carries a:id=\"outer\".",
+        "Its first child locally rebinds r to urn:b and carries r:id=\"inner\" plus xml:lang=\"en\".",
+        "Its second child inherits the outer r binding and carries r:id=\"sibling\"."
+      ],
+      "when": [
+        "parseXml parses the tree and attribute(...) lookups are performed with and without explicit namespace URIs; the attributeNamespaces map is also inspected directly."
+      ],
+      "then": [
+        "attribute(root,\"id\") returns plain, while attribute(root,\"id\",\"urn:default\") is undefined because unqualified attributes are not default-namespaced.",
+        "attribute(root,\"id\",\"urn:a\") returns outer from the aliased a:id attribute.",
+        "On the locally rebound child, attribute(child,\"id\",\"urn:b\") returns inner and attribute(child,\"id\",\"urn:a\") is undefined, proving the local r binding wins over the parent one.",
+        "On the sibling child, attribute(other,\"id\",\"urn:a\") returns sibling through the inherited outer r binding.",
+        "attribute(child,\"lang\",XML_NS) returns en, attributeNamespaces[\"a:id\"] is urn:a, and the attributeNamespaces map is both frozen and null-prototype."
+      ],
+      "examples": [
+        "Alias variant reviewed: both a:id and r:id on the root denote the same expanded namespace URI urn:a.",
+        "Local rebinding variant reviewed: child-level xmlns:r=\"urn:b\" overrides the parent mapping only within that child."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / keeps the xml prefix bound implicitly",
+      "title": "keeps the xml prefix bound implicitly",
+      "given": [
+        "The source is a root element <r xml:lang=\"en\"/> with no explicit xmlns:xml declaration."
+      ],
+      "when": [
+        "parseXml parses the document."
+      ],
+      "then": [
+        "The root attributes map preserves xml:lang with value en.",
+        "The root element itself stays unnamespaced, and the xml prefix is treated as implicitly bound to http://www.w3.org/XML/1998/namespace."
+      ],
+      "examples": [
+        "The test checks both the parsed attribute map and the hard-coded XML namespace URI constant."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / stores attributes in null-prototype maps",
+      "title": "stores attributes in null-prototype maps",
+      "given": [
+        "The source root carries attributes named __proto__ and constructor with literal values polluted and safe."
+      ],
+      "when": [
+        "parseXml parses the element and the resulting attributes object is inspected structurally."
+      ],
+      "then": [
+        "The attributes map has a null prototype rather than inheriting from Object.prototype.",
+        "The literal __proto__ attribute exists as ordinary data, hasOwnProperty reports it present, and its stored value is polluted.",
+        "The constructor attribute also survives as ordinary data with value safe."
+      ],
+      "examples": [
+        "Prototype-pollution lookalikes reviewed: __proto__ and constructor."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / rejects malformed or unsafe XML",
+      "title": "rejects malformed or unsafe XML",
+      "given": [
+        "A refusal loop exercises malformed XML declaration variants, malformed processing instructions and comments, forbidden DTDs and custom entities, duplicate attributes by spelling and by expanded name, reserved-name misuse, an unbound prefix, mismatched tags, and an illegal control character."
+      ],
+      "when": [
+        "Each source string is passed to parseXml inside an exception assertion that also checks the reported error code."
+      ],
+      "then": [
+        "Malformed declaration or syntax cases throw XML_MALFORMED.",
+        "A DOCTYPE declaration throws XML_DTD_FORBIDDEN, and a custom entity reference throws XML_ENTITY_FORBIDDEN.",
+        "Duplicate attributes by raw name or expanded name throw XML_DUPLICATE_ATTRIBUTE.",
+        "An unbound prefix throws XML_UNBOUND_PREFIX, mismatched closing tags throw XML_MISMATCHED_TAG, and U+0001 inside text throws XML_INVALID_CHAR."
+      ],
+      "examples": [
+        "Malformed declaration cases: <?xml version=\"1.0\" extra=\"x\"?><r/>, <?xml version=\"1.0\" standalone=\"maybe\"?><r/>, and <r a=\"1\"b=\"2\"/>.",
+        "Malformed markup cases: <?pi/?>, <xmlns:r/>, <r><!-- bad -- --></r>, and <r><!--bad---></r>.",
+        "Security or namespace cases: <!DOCTYPE r><r/>, <r>&custom;</r>, <x:r/>, and <r xmlns=\"http://www.w3.org/XML/1998/namespace\"/>.",
+        "Duplicate-name cases: <r a=\"1\" a=\"2\"/> and <r xmlns:x=\"u\" xmlns:y=\"u\" x:a=\"1\" y:a=\"2\"/>.",
+        "Tree and character integrity cases: <a></b> and <r>\u0001</r>."
+      ],
+      "limitations": [
+        "Fifteen refusal inputs are aggregated under one declaration; this mapping records the reviewed variants but does not split them into separate artifacts."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / refuses excessive depth, node count and input length",
+      "title": "refuses excessive depth, node count and input length",
+      "given": [
+        "One synthetic document nests <n> elements 257 levels deep.",
+        "A second synthetic document places 100000 self-closing <n/> nodes under a single <r> root.",
+        "A third synthetic document places 8 MiB of literal a characters inside a single <r> root."
+      ],
+      "when": [
+        "parseXml is called on each generated input."
+      ],
+      "then": [
+        "The deep input is refused with XML_DEPTH_LIMIT.",
+        "The wide input is refused with XML_NODE_LIMIT.",
+        "The huge input is refused with XML_INPUT_TOO_LARGE."
+      ],
+      "examples": [
+        "Depth limit variant: 257 nested start and end tags.",
+        "Node limit variant: 100000 sibling/self-closing nodes.",
+        "Input-size variant: 8 * 1024 * 1024 characters of text content."
+      ],
+      "limitations": [
+        "Three generator-driven refusal shapes are covered together rather than as separate mappings."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:escaping helpers / escape text and attribute values",
+      "title": "escape text and attribute values",
+      "given": [
+        "The helper inputs are text 5 < 7 & 9 > 4, attribute value '\"<&>, and the invalid control character U+0001."
+      ],
+      "when": [
+        "escapeText and escapeAttribute are applied, and escapeText is also asked to escape the invalid character."
+      ],
+      "then": [
+        "escapeText returns 5 &lt; 7 &amp; 9 &gt; 4.",
+        "escapeAttribute returns &apos;&quot;&lt;&amp;&gt;.",
+        "Escaping U+0001 is refused with an XML_INVALID_CHAR OoxmlError."
+      ],
+      "examples": [
+        "Reviewed entity coverage: apostrophe, quotation mark, less-than, ampersand, and greater-than."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / applies sorted disjoint edits with escaped text and XML fragments",
+      "title": "applies sorted disjoint edits with escaped text and XML fragments",
+      "given": [
+        "The input XML is <r>one two</r>.",
+        "One edit replaces the substring two with the literal XML fragment <x/>.",
+        "Another edit replaces the substring one with the escaped text form of 1 < 2."
+      ],
+      "when": [
+        "applyEdits performs both disjoint replacements and the result is reparsed with parseXml."
+      ],
+      "then": [
+        "The resulting XML string is <r>1 &lt; 2 <x/></r>.",
+        "Reparsing shows root text 1 < 2 followed by a trailing space, and the only child element name is x."
+      ],
+      "examples": [
+        "The helper accepts edits presented out of lexical order and still applies them safely by source position.",
+        "The text replacement is pre-escaped while the fragment replacement remains structural XML."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / refuses overlapping bounds and unsafe resulting XML",
+      "title": "refuses overlapping bounds and unsafe resulting XML",
+      "given": [
+        "The base XML is <r>text</r>.",
+        "One refusal case uses overlapping edits over byte ranges 3..5 and 4..6.",
+        "A second refusal case replaces the text node with <!DOCTYPE x><x/>, which would make the resulting XML unsafe."
+      ],
+      "when": [
+        "applyEdits is called for each refusal shape."
+      ],
+      "then": [
+        "Overlapping edit bounds are refused with XML_EDIT_OVERLAP.",
+        "Producing unsafe XML is refused with XML_EDIT_UNSAFE."
+      ],
+      "examples": [
+        "Overlap variant: two edits claim intersecting source spans.",
+        "Unsafe-output variant: the edit would inject a DOCTYPE declaration."
+      ],
+      "limitations": [
+        "Two refusal variants are aggregated under this one declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / returns OoxmlError instances",
+      "title": "returns OoxmlError instances",
+      "given": [
+        "The source XML is the mismatched-tag string <a></b>."
+      ],
+      "when": [
+        "parseXml is invoked inside an exception type assertion."
+      ],
+      "then": [
+        "The thrown value is an OoxmlError instance rather than an arbitrary Error object."
+      ],
+      "examples": [
+        "The exercised structural failure is a mismatched closing tag."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
+      "title": "rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
+      "given": [
+        "A refusal loop covers element local names starting with 1, -, ., and a combining acute accent; an attribute local name p:1; declared prefixes 1 and -p; and a malformed namespace declaration name xmlns:p:q."
+      ],
+      "when": [
+        "Each XML sample is passed to parseXml."
+      ],
+      "then": [
+        "Every sample is rejected rather than being accepted as a QName or namespace declaration."
+      ],
+      "examples": [
+        "Element-name cases: <p:1 xmlns:p=\"urn:p\"/>, <p:-x xmlns:p=\"urn:p\"/>, <p:.x xmlns:p=\"urn:p\"/>, and <p:́x xmlns:p=\"urn:p\"/>.",
+        "Attribute and declaration cases: <r xmlns:p=\"urn:p\" p:1=\"x\"/>, <r xmlns:1=\"urn:p\"/>, <r xmlns:-p=\"urn:p\"/>, and <r xmlns:p:q=\"urn:p\"/>."
+      ],
+      "limitations": [
+        "The loop asserts refusal generically with toThrow() and does not record per-input error codes in this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
+      "title": "retains legal Unicode NCNames and exact source offsets",
+      "given": [
+        "Nine local-name variants are exercised inside the same namespaced template <π:name xmlns:π=\"urn:n\" π:name=\"yes\"/>: π, 名, é, 𐐀, a1, _x, a-b, a.b, and a plus a combining acute accent."
+      ],
+      "when": [
+        "Each generated XML string is parsed and the root local name, expanded attribute lookup, and recorded source span are inspected."
+      ],
+      "then": [
+        "For every variant, root.localName equals the original Unicode source spelling.",
+        "For every variant, attribute(root,name,\"urn:n\") returns yes.",
+        "For every variant, slicing the original XML from root.start to root.end reproduces the entire original element text exactly."
+      ],
+      "examples": [
+        "Reviewed legal starts include non-Latin letters π, 名, é, and 𐐀.",
+        "Reviewed legal continuations include digits, underscore, hyphen, period, and a combining mark after the initial character."
+      ],
+      "limitations": [
+        "Nine accepted NCName variants are summarized under one loop-driven declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
+      "title": "outside-root XML whitespace is lexical and NBSP is never whitespace",
+      "given": [
+        "Four refusal sources place a non-breaking space or a numeric space character reference outside the root element, both before and after <r/>.",
+        "A separate acceptance source places only literal XML whitespace characters around <r/>."
+      ],
+      "when": [
+        "parseXml is run on the four refusal sources and on the literal-whitespace source."
+      ],
+      "then": [
+        "All four outside-root non-literal variants are rejected.",
+        "Literal XML whitespace around the root is accepted and still yields a root localName of r."
+      ],
+      "examples": [
+        "Rejected before-root variants: NBSP before <r/> and &#32; before <r/>.",
+        "Rejected after-root variants: NBSP after <r/> and &#x20; after <r/>.",
+        "Accepted lexical-whitespace variant: space, CRLF, and tab around the root."
+      ],
+      "limitations": [
+        "This declaration combines four refusal examples and one acceptance check."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / literal whitespace normalises before character reference decoding",
+      "title": "literal whitespace normalises before character reference decoding",
+      "given": [
+        "The source root has an attribute a=\"x CRLF y TAB z &#9; &#10; &#13;\" and text content a CRLF b CR c followed by a CDATA section d CRLF e CR f."
+      ],
+      "when": [
+        "parseXml parses that document and the decoded attribute and text are inspected."
+      ],
+      "then": [
+        "The attribute becomes x y z followed by tab, line feed, and carriage return, proving literal whitespace was normalised before the numeric references were decoded.",
+        "The text becomes a\nb\ncd\ne\nf, so literal CRLF and CR become line feeds while the CDATA carriage returns are reflected in the final text stream as normalised line feeds."
+      ],
+      "examples": [
+        "Attribute-ordering evidence: the literal tab between y and z becomes a space, while the later &#9; remains a tab character.",
+        "Text-ordering evidence: literal CRLF before b becomes \n, but the CDATA payload still contributes its own characters after parsing."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / executes the six QName/whitespace acceptance cases",
+      "title": "executes the six QName/whitespace acceptance cases",
+      "given": [
+        "The acceptance runner parses features/opc/xml-names.feature into one feature containing three scenarios and six executable cases.",
+        "Those six cases are the three invalid numeric-leading QName-component examples, the one Unicode-valid QName scenario, and the two non-breaking-space position examples."
+      ],
+      "when": [
+        "executeAcceptance runs the computed inventory with the xml-names step bindings and a fresh acceptance run id."
+      ],
+      "then": [
+        "The execution reports no failures.",
+        "The runner reports exactly six passed cases."
+      ],
+      "examples": [
+        "Case: invalid element-local QName component refuses.",
+        "Case: invalid attribute-local QName component refuses.",
+        "Case: invalid declared-prefix QName component refuses.",
+        "Case: Unicode prefix/local names remain valid and preserve offsets.",
+        "Case: non-breaking space before the root refuses.",
+        "Case: non-breaking space after the root refuses."
+      ],
+      "limitations": [
+        "This declaration verifies acceptance inventory execution and counts; the detailed XML outcomes are asserted in the direct unit cases and step bindings."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
+      "title": "PPTX accepts a renamed relationship prefix and preserves it on save",
+      "given": [
+        "namespaceFixture(\"pptx\",\"alias\") starts from the shared title-and-subtitle PPTX fixture, rewrites the main presentation part so xmlns:r becomes xmlns:link, and rewrites every r:id attribute spelling to link:id while leaving the relationship namespace URI unchanged."
+      ],
+      "when": [
+        "Presentation.open reads the rewritten bytes, the slide count and main part XML are inspected, and the package is serialized again without further edits."
+      ],
+      "then": [
+        "The rewritten deck still opens successfully with exactly one slide.",
+        "The main presentation part still contains link:id rather than being rewritten back to r:id.",
+        "Serializing the opened deck produces bytes identical to the alias fixture bytes, proving the renamed Office relationship prefix is preserved byte-for-byte."
+      ],
+      "examples": [
+        "Positive alias variant: a non-standard link prefix is accepted as long as it still names the Office relationship namespace."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / XLSX accepts a locally scoped prefix alias through value and style edits",
+      "title": "XLSX accepts a locally scoped prefix alias through value and style edits",
+      "given": [
+        "namespaceFixture(\"xlsx\",\"alias\") starts from the shared default-style.xlsx fixture, rewrites the workbook part from xmlns:r and r:id to xmlns:link and link:id, and leaves the rest of the archive intact.",
+        "The shared fixture manifest for default-style.xlsx is loaded so preserved-output checks can verify allowed payload drift and required preserved members."
+      ],
+      "when": [
+        "Workbook.open reads the alias fixture, Sheet!A1 is changed to wrapped newline value, setCellWrapText enables wrapping on that cell, the workbook bytes are serialized and reopened, and assertPreservedOutput validates the produced archive against the shared-fixture manifest."
+      ],
+      "then": [
+        "After reopen, Sheet!A1 contains the exact string wrapped followed by a line feed then value.",
+        "The reopened workbook main part still contains link:id, showing the Office relationship attribute spelling was preserved through edit and save.",
+        "assertPreservedOutput succeeds, which means the archive member set is unchanged, only manifest-approved parts may differ, required preserved payloads keep their pinned bytes, and the resulting workbook still satisfies shared-fixture package preconditions."
+      ],
+      "examples": [
+        "Edit variant: a value write and a style write both succeed against the alias fixture.",
+        "Custody variant: default-style.xlsx preservation rules are enforced after save rather than only after open."
+      ],
+      "limitations": [
+        "The test relies on assertPreservedOutput for detailed byte-custody checks instead of enumerating every permitted and preserved part inline."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
+      "title": "wrong URI and unqualified id refuse even with the familiar r spelling",
+      "given": [
+        "For both pptx and xlsx fixtures, namespaceFixture(...,\"wrong\") keeps the familiar r prefix spelling but rebinds it from the Office relationship namespace URI to the package relationships URI.",
+        "For both pptx and xlsx fixtures, namespaceFixture(...,\"unqualified\") removes the namespace qualification entirely by rewriting r:id to plain id."
+      ],
+      "when": [
+        "The corresponding Presentation.open or Workbook.open call attempts to load each of the four rewritten archives."
+      ],
+      "then": [
+        "All four open attempts reject with OoxmlError rather than silently accepting the lookalike attribute spellings."
+      ],
+      "examples": [
+        "Refusal variant: pptx with r bound to the package-relationships URI.",
+        "Refusal variant: xlsx with r bound to the package-relationships URI.",
+        "Refusal variant: pptx with an unqualified id attribute.",
+        "Refusal variant: xlsx with an unqualified id attribute."
+      ],
+      "limitations": [
+        "This declaration asserts only that the failures are OoxmlError instances; it does not pin distinct error codes for the four variants."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / worksheet relationship type must use the exact officeDocument URI, not merely its suffix",
+      "title": "worksheet relationship type must use the exact officeDocument URI, not merely its suffix",
+      "given": [
+        "The original shared XLSX namespace fixture is opened as an OPC package.",
+        "Its xl/_rels/workbook.xml.rels part is rewritten so the worksheet relationship Type is changed from the exact Office URI .../relationships/worksheet to the foreign lookalike urn:foreign/worksheet."
+      ],
+      "when": [
+        "Workbook.open attempts to read the rewritten package bytes."
+      ],
+      "then": [
+        "Opening is refused with OoxmlError instead of accepting the relationship because its suffix happens to end in worksheet."
+      ],
+      "examples": [
+        "The tested lookalike preserves the worksheet suffix but changes the namespace authority completely."
+      ],
+      "limitations": [
+        "The test pins refusal but not a specific error code."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / locally rebound r takes precedence over its parent declaration",
+      "title": "locally rebound r takes precedence over its parent declaration",
+      "given": [
+        "The original shared PPTX namespace fixture is opened as an OPC package.",
+        "Its main presentation part is rewritten so the <p:sldId> element locally declares xmlns:r as the package-relationships namespace URI, shadowing the valid outer Office relationship binding."
+      ],
+      "when": [
+        "Presentation.open attempts to load the rewritten package bytes."
+      ],
+      "then": [
+        "Opening is refused with an error whose message says the slide id does not resolve to an internal slide relationship, proving the local xmlns:r shadowing is honored instead of ignored."
+      ],
+      "examples": [
+        "The parent document still carries the valid Office relationship binding; only the local rebinding changes the outcome."
+      ],
+      "limitations": [
+        "The refusal is matched by message content rather than by an explicit error code."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
+      "title": "foreign lookalike id cannot override the real relationship alias",
+      "given": [
+        "For both pptx and xlsx alias fixtures, the true Office relationship attribute is already spelled link:id.",
+        "Each main part is further rewritten to inject xmlns:r bound to the package-relationships namespace together with a bogus r:id value, while keeping the original link:id target in place."
+      ],
+      "when": [
+        "Presentation.open or Workbook.open loads the mutated bytes."
+      ],
+      "then": [
+        "The PPTX still opens with one slide, and the XLSX still opens with exactly the sheet name Sheet.",
+        "The injected package-namespace r:id does not override or shadow the genuine Office-namespace link:id attribute."
+      ],
+      "examples": [
+        "PPTX variant: bogus package-namespace r:id is ignored and slide resolution still succeeds.",
+        "XLSX variant: bogus package-namespace r:id is ignored and workbook sheet resolution still succeeds."
+      ],
+      "limitations": [
+        "This test verifies successful reopening only; it does not save the packages again or diff serialized output."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / shared namespace Gherkin executes all four cases with real outcomes",
+      "title": "shared namespace Gherkin executes all four cases with real outcomes",
+      "given": [
+        "features/opc/relationship-namespaces.feature is parsed as one implemented feature with two scenarios, four executable cases, and sixteen implemented steps.",
+        "The four executable cases are PPTX alias acceptance, XLSX alias acceptance, PPTX wrong-URI refusal, and XLSX wrong-URI refusal."
+      ],
+      "when": [
+        "executeAcceptance runs that inventory with the dedicated relationship-namespace bindings and a fresh acceptance run id."
+      ],
+      "then": [
+        "The acceptance run reports no failures.",
+        "The runner reports exactly four passed cases."
+      ],
+      "examples": [
+        "Case: shared pptx fixture with link:id opens, edits, saves, reopens, and preserves link:id spelling.",
+        "Case: shared xlsx fixture with link:id survives value and style edits and preserves link:id spelling.",
+        "Case: pptx with r rebound to the package namespace refuses.",
+        "Case: xlsx with r rebound to the package namespace refuses."
+      ],
+      "limitations": [
+        "This declaration checks acceptance execution totals and failures, while the concrete package mutations are asserted in the direct unit cases and acceptance bindings."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / finds shared title and subtitle without mutating the package",
+      "title": "finds shared title and subtitle without mutating the package",
+      "given": [
+        "The shared fixture is fixture ID fixture-2aec94471f93c300d56ca4789106a974411085d1588f3424155362a06dd043f3, opened through the native Presentation API, and slide 1 is required to exist."
+      ],
+      "when": [
+        "findPlaceholderText resolves the slide title and subtitle, their anchors and package diff are inspected, then the title is replaced with Changed title, the subtitle is resolved again from the mutated slide, and that refreshed subtitle anchor is used to replace the subtitle with Changed subtitle."
+      ],
+      "then": [
+        "The initial title text is Original title and the initial subtitle text is Original subtitle.",
+        "The title anchor paragraphIndex is 0 and the subtitle anchor paragraphIndex is 1.",
+        "Before any mutation, the presentation package diff is empty: no parts are added, changed, or removed.",
+        "After using the title anchor and a freshly resolved subtitle anchor, slide.inspectText(...) reports the paragraph texts [Changed title, Changed subtitle]."
+      ],
+      "examples": [
+        "Positive lookup: shared title placeholder resolves before any slide rewrite.",
+        "Positive lookup: shared subtitle placeholder resolves again after the title replacement and still updates the intended paragraph."
+      ],
+      "limitations": [
+        "The test only exercises the first slide of the shared fixture."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / accepts p:ph type=title as a title placeholder",
+      "title": "accepts p:ph type=title as a title placeholder",
+      "given": [
+        "The shared slide XML is rewritten so the original title placeholder type changes from ctrTitle to title before the package is reopened."
+      ],
+      "when": [
+        "findPlaceholderText resolves the title placeholder and the returned anchor is used to replace the title text with Typed title."
+      ],
+      "then": [
+        "The resolved title text is still Original title despite the placeholder type spelling change.",
+        "After replacement, slide.inspectText(...) reports [Typed title, Original subtitle], so the title slot changes and the subtitle paragraph is left untouched."
+      ],
+      "examples": [
+        "Accepted variant: p:ph type=\"title\" is treated as a valid title placeholder alongside the shared fixture's original ctrTitle form."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / uses the direct placeholder shape rather than the first text paragraph",
+      "title": "uses the direct placeholder shape rather than the first text paragraph",
+      "given": [
+        "The shared slide XML is rewritten to insert a plain non-placeholder text shape containing Lead in ahead of the original title shape."
+      ],
+      "when": [
+        "findPlaceholderText resolves the title placeholder and its anchor is used to replace Original title with Resolved title."
+      ],
+      "then": [
+        "The resolved placeholder text is Original title rather than the earlier Lead in paragraph.",
+        "The returned title anchor points at paragraphIndex 1, not the first paragraph in reading order.",
+        "After replacement, slide.inspectText(...) reports [Lead in, Resolved title, Original subtitle]."
+      ],
+      "examples": [
+        "Disambiguation variant: visible leading text without p:ph markup is ignored for title resolution."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / does not resolve nested group placeholders as slide titles",
+      "title": "does not resolve nested group placeholders as slide titles",
+      "given": [
+        "The shared slide XML is rewritten twice: the original direct title shape loses its p:ph type=\"ctrTitle\" marker, and a nested group shape is inserted that contains an inner shape with p:ph type=\"title\" and text Nested title."
+      ],
+      "when": [
+        "findPlaceholderText(slide,\"title\") is called and its failure is captured through the helper that only accepts OoxmlError."
+      ],
+      "then": [
+        "Resolution fails with OoxmlError code PPTX_PLACEHOLDER_NOT_FOUND.",
+        "A nested group placeholder is not promoted to a slide title when no direct title placeholder remains."
+      ],
+      "examples": [
+        "Negative variant: the inserted nested shape looks like a title placeholder but is inside p:grpSp and is therefore ignored."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses duplicate direct placeholder shapes",
+      "title": "refuses duplicate direct placeholder shapes",
+      "given": [
+        "A second direct title shape is cloned from the original title shape with a different id, a different nonvisual name, and text Duplicate title, and then appended alongside the original direct title shape."
+      ],
+      "when": [
+        "findPlaceholderText(slide,\"title\") is invoked and the failure is captured as an OoxmlError."
+      ],
+      "then": [
+        "Resolution is refused with code PPTX_PLACEHOLDER_AMBIGUOUS instead of arbitrarily choosing one of the competing direct title shapes."
+      ],
+      "examples": [
+        "The two direct candidate titles are Original title and Duplicate title."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses multi-paragraph subtitle placeholders",
+      "title": "refuses multi-paragraph subtitle placeholders",
+      "given": [
+        "The subtitle placeholder shape is rewritten so its text body contains the original subtitle paragraph plus a second paragraph with text Second paragraph."
+      ],
+      "when": [
+        "findPlaceholderText(slide,\"subtitle\") is invoked and the failure is captured as an OoxmlError."
+      ],
+      "then": [
+        "Resolution is refused with code PPTX_UNSUPPORTED_TEXT_TOPOLOGY rather than flattening or guessing across multiple subtitle paragraphs."
+      ],
+      "examples": [
+        "Negative variant: a direct subtitle placeholder becomes unsupported solely because it spans two paragraphs."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses placeholder paragraphs with break and field topology",
+      "title": "refuses placeholder paragraphs with break and field topology",
+      "given": [
+        "The title placeholder paragraph is rewritten to contain a bold run Chapter, an explicit line break, a slide-number field producing 7, and a final underlined run containing space-plus-Notes."
+      ],
+      "when": [
+        "findPlaceholderText(slide,\"title\") is invoked and the failure is captured as an OoxmlError."
+      ],
+      "then": [
+        "Resolution is refused with code PPTX_UNSUPPORTED_TEXT_TOPOLOGY instead of pretending that a break-and-field paragraph is plain replaceable placeholder text."
+      ],
+      "examples": [
+        "Unsupported topology elements reviewed together: a:br and a:fld within the placeholder paragraph."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses empty title placeholders until empty replacement is supported",
+      "title": "refuses empty title placeholders until empty replacement is supported",
+      "given": [
+        "The title placeholder paragraph is rewritten to an empty <a:p></a:p> paragraph before the slide is reopened."
+      ],
+      "when": [
+        "findPlaceholderText(slide,\"title\") is invoked and the failure is captured as an OoxmlError."
+      ],
+      "then": [
+        "Resolution is refused with code PPTX_UNSUPPORTED_TEXT_TOPOLOGY.",
+        "An empty title placeholder is not yet treated as a replaceable empty-string anchor."
+      ],
+      "examples": [
+        "Negative variant: a structurally present placeholder with no runs or text still refuses."
+      ],
+      "limitations": [
+        "The title explicitly notes that empty replacement support is not yet implemented; no alternate empty-placeholder behavior was reviewed here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / creates a wrapped style closure for the shared default-style fixture and survives reopen",
+      "title": "creates a wrapped style closure for the shared default-style fixture and survives reopen",
+      "given": [
+        "The workbook fixture is fixture ID fixture-38c2ed936696179d3b2359e9107ad2b8d62d71d69296f8f60bdfe1fe8f7f2439, with a snapshot of its original ZIP parts taken before mutation."
+      ],
+      "when": [
+        "Workbook.open loads the fixture, Sheet!A1 is changed to first line-feed second, setCellWrapText is called on A1 twice, the workbook is serialized and reopened, and xl/styles.xml plus xl/worksheets/sheet1.xml are parsed for structural inspection."
+      ],
+      "then": [
+        "After reopen, Sheet!A1 is a string cell whose value is first line-feed second and whose styleId is 1.",
+        "The worksheet XML marks A1 with s=\"1\".",
+        "styles.xml now has exactly two cellXfs entries, and the appended xf at index 1 preserves fontId 0, fillId 0, borderId 0, xfId 0, and carries an alignment child with wrapText=\"1\".",
+        "The package keeps [Content_Types].xml, xl/_rels/workbook.xml.rels, xl/theme/theme1.xml, and xl/workbook.xml byte-identical to the original fixture snapshot.",
+        "The package diff reports only xl/styles.xml and xl/worksheets/sheet1.xml as changed, with no added or removed parts."
+      ],
+      "examples": [
+        "Idempotence variant: calling setCellWrapText on the same cell twice does not append a second wrapped xf.",
+        "Custody variant: workbook structure and theme parts remain untouched while only the sheet and styles parts change."
+      ],
+      "limitations": [
+        "This scenario is anchored to the shared default-style fixture and does not review non-default base style graphs."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / preserves namespace prefixes, reuses the appended equivalent xf and leaves formula caches intact",
+      "title": "preserves namespace prefixes, reuses the appended equivalent xf and leaves formula caches intact",
+      "given": [
+        "A synthetic workbook is built with x:-prefixed workbook, worksheet, and style XML.",
+        "The lone worksheet named Prefixed contains A1 inlineStr first, B1 inlineStr second, and C1 as a formula cell with formula A1 and cached value 1.",
+        "styles.xml starts with exactly one cellXf."
+      ],
+      "when": [
+        "Workbook.open loads the synthetic archive, setCellWrapText wraps A1 once and B1 twice, the workbook is serialized, and the saved styles and sheet XML are reparsed."
+      ],
+      "then": [
+        "styles.xml still serializes the collection as <x:cellXfs count=\"2\">, and the appended xf plus its alignment child retain the x: prefix spellings.",
+        "The appended alignment has wrapText=\"1\" and there are exactly two xf entries, so the second wrap request on B1 reused the already-appended equivalent xf.",
+        "Both A1 and B1 reference style index 1 in the worksheet XML.",
+        "The formula/cache cell for C1 remains present as <x:c r=\"C1\"><x:f>A1</x:f><x:v>1</x:v></x:c>, showing formula text and cached value were left intact.",
+        "xl/workbook.xml stays byte-identical to the original synthetic part, and the package diff again reports only xl/styles.xml and xl/worksheets/sheet1.xml as changed."
+      ],
+      "examples": [
+        "Prefix-custody variant: appended style nodes are named x:xf and x:alignment rather than being rewritten into default-namespace forms.",
+        "Reuse variant: A1 and B1 converge on the same appended wrapped style index 1."
+      ],
+      "limitations": [
+        "The test exercises reuse only for an equivalent appended xf created within one save cycle; broader xf canonicalization cases were not reviewed here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / refuses a missing target cell",
+      "title": "refuses a missing target cell",
+      "given": [
+        "The synthetic Prefixed workbook contains only cells A1, B1, and C1 on its single worksheet."
+      ],
+      "when": [
+        "setCellWrapText(workbook,\"Prefixed\",\"Z9\",true) is requested."
+      ],
+      "then": [
+        "The request is refused with OoxmlError code xlsx-cell-missing.",
+        "The workbook package diff remains empty, so no parts were mutated before refusal."
+      ],
+      "examples": [
+        "Negative variant: the missing coordinate is Z9 on worksheet Prefixed."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / rolls back before mutation when the cell style index is out of range",
+      "title": "rolls back before mutation when the cell style index is out of range",
+      "given": [
+        "A synthetic workbook named Broken contains cell A1 with s=\"7\", while styles.xml declares only one cellXf."
+      ],
+      "when": [
+        "setCellWrapText(workbook,\"Broken\",\"A1\",true) is requested."
+      ],
+      "then": [
+        "The request is refused with OoxmlError code xlsx-style-index-invalid.",
+        "The package diff remains empty.",
+        "Serializing the workbook after refusal reproduces the original bytes exactly."
+      ],
+      "examples": [
+        "Negative variant: the failure occurs before any style or worksheet part is rewritten."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / rolls back before mutation when xf dependencies reference missing style collections",
+      "title": "rolls back before mutation when xf dependencies reference missing style collections",
+      "given": [
+        "A synthetic workbook named Broken contains cell A1 styled by the default xf, but that xf references fontId=\"9\" even though the fonts collection contains only one font."
+      ],
+      "when": [
+        "setCellWrapText(workbook,\"Broken\",\"A1\",true) is requested."
+      ],
+      "then": [
+        "The request is refused with OoxmlError code xlsx-style-dependency-invalid.",
+        "The package diff remains empty.",
+        "Serializing the workbook after refusal reproduces the original bytes exactly."
+      ],
+      "examples": [
+        "Negative variant: a missing dependent font entry blocks wrap-style authoring before any mutation is committed."
+      ],
+      "limitations": []
+    }
+  ],
+  "inputPolicy": "Fixtures are resolved by stable IDs through the central manifest; no producer-specific storage roots."
+}

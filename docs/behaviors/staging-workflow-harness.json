@@ -1,0 +1,873 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "reviewState": "candidate-needs-parent-review",
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / loaded binding cleanup runs after failed outcomes and cleanup failure cannot pass",
+      "title": "loaded binding cleanup runs after failed outcomes and cleanup failure cannot pass",
+      "given": [
+        "A temporary acceptance project contains features/opc/cleanup.feature tagged @implemented @bun with one scenario @id-cleanup whose only step is Then fail the operation.",
+        "tests/acceptance/steps.ts exports a binding for that step which throws Error('test failure') and a cleanup() function that writes tests/acceptance/cleaned with the text yes.",
+        "A second steps module fail-cleanup.ts exports a no-op binding for the same step and a cleanup() function that throws Error('cleanup refusal')."
+      ],
+      "when": [
+        "runAcceptance(undefined, { root }) is executed so bindings are loaded from tests/acceptance/steps.ts.",
+        "runAcceptance(undefined, { root, stepsModulePath: fail-cleanup.ts }) is then executed against the alternate module."
+      ],
+      "then": [
+        "The first run rejects with the original step failure message test failure.",
+        "Even after that failed outcome, cleanup still runs and tests/acceptance/cleaned contains exactly yes.",
+        "The second run rejects with Acceptance cleanup failed rather than treating cleanup failure as success.",
+        "After the cleanup failure, artifacts/acceptance.json records status failed."
+      ],
+      "examples": [
+        "Failure path 1: step throws test failure, but cleanup still leaves a cleaned sentinel file.",
+        "Failure path 2: the scenario body succeeds, cleanup throws cleanup refusal, and the acceptance artifact remains failed."
+      ],
+      "limitations": [
+        "Two concrete failure phases are exercised inside one declaration instead of separate leaf tests."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / full gate refuses planned work despite implemented cases passing",
+      "title": "full gate refuses planned work despite implemented cases passing",
+      "given": [
+        "A temporary project contains features/opc/ready.feature tagged @implemented @bun with scenario @id-ready and features/planned/gap.feature tagged @planned with scenario @id-gap.",
+        "The only provided binding matches a real assertion step and checks that 2 + 2 equals 4."
+      ],
+      "when": [
+        "runAcceptance is invoked with that binding set and { root, full: true }."
+      ],
+      "then": [
+        "The run rejects with the full-gate refusal message Full acceptance rejects planned features.",
+        "artifacts/acceptance.json records status failed.",
+        "The execution counts still show the implemented case passed once and one planned case remained planned: execution.cases.passed = 1 and execution.cases.planned = 1."
+      ],
+      "examples": [
+        "An implemented case can succeed and still be blocked by full mode because a planned feature remains in inventory."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / parses backgrounds and scenario outlines into exact expanded cases",
+      "title": "parses backgrounds and scenario outlines into exact expanded cases",
+      "given": [
+        "An in-memory feature tagged @implemented @bun declares a Background step Given a package exists and one scenario outline @id-add-part named append <part>.",
+        "The outline has steps When I append <part> and Then the package contains <part>, with exactly two example rows: /a.xml and /b.xml."
+      ],
+      "when": [
+        "parseFeature is called for features/opc/outline.feature."
+      ],
+      "then": [
+        "The parsed feature lifecycle is implemented, runner is bun, and there is exactly one scenario with scenarioId @id-add-part.",
+        "That scenario expands to exactly two executable cases.",
+        "The first case id includes @id-add-part -- part=\"/a.xml\".",
+        "The first case step texts are exactly a package exists, I append /a.xml, and the package contains /a.xml.",
+        "The fromBackground flags are [true, false, false], the Then step is typed as OUTCOME, the example location is preserved on the substituted When step, and the background step source hash equals the feature source hash."
+      ],
+      "examples": [
+        "Expanded case 1 substitutes /a.xml into both When and Then.",
+        "Expanded case 2 substitutes /b.xml into both When and Then."
+      ],
+      "limitations": [
+        "Only the first expanded case is inspected field-by-field; the second is covered by the asserted case count."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rejects tag contract violations",
+      "title": "rejects tag contract violations",
+      "given": [
+        "One in-memory feature is tagged @implemented @bun but its scenario has no @id-* tag.",
+        "A separate temporary project contains two feature files whose scenarios both declare @id-dup, one under @implemented @bun and one under @planned."
+      ],
+      "when": [
+        "parseFeature is called on the missing-id feature text.",
+        "inventoryFeatures is called on the project containing the duplicate @id-dup scenarios."
+      ],
+      "then": [
+        "The parse-time contract check throws because a scenario must declare exactly one @id-* tag.",
+        "The inventory build throws because scenario id @id-dup is duplicated across feature files."
+      ],
+      "examples": [
+        "Negative variant: a scenario with no @id-* tag is refused immediately.",
+        "Negative variant: two different features cannot reuse the same scenario id."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / fails undefined bindings without silent pass",
+      "title": "fails undefined bindings without silent pass",
+      "given": [
+        "A temporary feature file tagged @implemented @bun defines scenario @id-undefined with steps Given a package exists and Then the package contains /a.xml.",
+        "The acceptance run is supplied an empty bindings array."
+      ],
+      "when": [
+        "runAcceptance([], { root }) is executed."
+      ],
+      "then": [
+        "The run rejects with Undefined step: a package exists.",
+        "artifacts/acceptance.json records status failed.",
+        "The execution step counts record one undefined step and one skipped step, proving the Then step is not silently treated as passed after the undefined Given."
+      ],
+      "examples": [
+        "The first Given is undefined, so the later Then is counted as skipped rather than executed."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / fails ambiguous bindings",
+      "title": "fails ambiguous bindings",
+      "given": [
+        "A temporary feature file tagged @implemented @bun defines scenario @id-ambiguous with one step Then I see 1 part.",
+        "Two bindings use the same regular expression /I see (\\d+) part/, so exact matching finds more than one candidate for the same step text."
+      ],
+      "when": [
+        "runAcceptance is executed with those two bindings."
+      ],
+      "then": [
+        "The run rejects with Ambiguous step: I see 1 part.",
+        "artifacts/acceptance.json records execution.steps.ambiguous = 1."
+      ],
+      "examples": [
+        "The same unanchored regex duplicated twice is still ambiguous because the harness requires exactly one full-text match."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rejects scenarios without Then and reports failing Then assertions",
+      "title": "rejects scenarios without Then and reports failing Then assertions",
+      "given": [
+        "One in-memory feature tagged @implemented @bun defines scenario @id-no-then with only Given and When steps.",
+        "A second temporary feature file tagged @implemented @bun defines scenario @id-failing-then with Given a package exists and Then the package contains /missing.xml.",
+        "Its bindings make the Given step succeed by storing state and make the Then step throw Error('missing /missing.xml')."
+      ],
+      "when": [
+        "parseFeature is called on the scenario that has no Then step.",
+        "runAcceptance is executed against the feature whose Then binding throws."
+      ],
+      "then": [
+        "The parse-time check refuses the no-Then scenario with a message requiring at least one Then step.",
+        "The runtime acceptance run rejects with missing /missing.xml.",
+        "artifacts/acceptance.json records one failed case and one failed step for the throwing Then assertion."
+      ],
+      "examples": [
+        "Negative variant: setup-only scenarios cannot enter inventory.",
+        "Negative variant: a failing Then becomes a failed case and a failed step in the acceptance artifact."
+      ],
+      "limitations": [
+        "The parse-time no-Then refusal and the runtime failing-Then report are combined in one declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rewrites stale acceptance artifacts before a failing run",
+      "title": "rewrites stale acceptance artifacts before a failing run",
+      "given": [
+        "A temporary project contains an implemented feature with scenario @id-stale and a preexisting artifacts/acceptance.json containing runId stale-run, status passed, and an empty failures list.",
+        "The only binding for Then I fail now throws Error('boom')."
+      ],
+      "when": [
+        "runAcceptance is executed for that project."
+      ],
+      "then": [
+        "The run rejects with boom.",
+        "The rewritten artifact no longer carries runId stale-run.",
+        "The final artifact status is failed and its first recorded failure contains boom."
+      ],
+      "examples": [
+        "A stale passed artifact is overwritten before and after the failing run instead of being left as a false positive."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / refuses an acceptance run with only planned cases rather than passing vacuously",
+      "title": "refuses an acceptance run with only planned cases rather than passing vacuously",
+      "given": [
+        "A temporary project contains only features/planned/deferred.feature tagged @planned with scenario @id-planned.",
+        "There are zero implemented cases in the inventory, so no bindings are loaded or executed."
+      ],
+      "when": [
+        "runAcceptance(undefined, { root }) is executed."
+      ],
+      "then": [
+        "The run rejects with No implemented cases executed.",
+        "artifacts/acceptance.json records status failed.",
+        "The inventory reports one planned feature and the execution reports one planned feature, showing the runner treated the feature as planned rather than as a vacuous pass."
+      ],
+      "examples": [
+        "Inventory-only planned work cannot satisfy the harness by itself."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/references.test.ts:shared manifest, annotated tag and exact submodule commit match required pin",
+      "title": "shared manifest, annotated tag and exact submodule commit match required pin",
+      "given": [
+        "The real project root contains references/fixtures-ooxml.pin.json pointing at repository https://github.com/rcarmo/fixtures-ooxml, tag v0.1.1, commit 13b34b40f9d4b79de9378b5253bb21b5ca2e2742, and pinned manifest hashes.",
+        "verifyReferences checks the submodule HEAD, the tag's peeled commit, the fact that refs/tags/v0.1.1 is an annotated tag object, the sealed manifest hashes, every listed file hash and size, and a clean git status."
+      ],
+      "when": [
+        "verifyReferences(root) is executed against the repository checkout."
+      ],
+      "then": [
+        "The verification succeeds and returns 123, the number of files listed in the pinned shared reference manifest.",
+        "Success means the tag, commit, manifest seal, shared-pack seal, per-file hashes, safe relative paths, and clean worktree all matched the pin exactly."
+      ],
+      "examples": [
+        "The pinned annotated tag v0.1.1 must resolve to the exact pinned commit 13b34b40f9d4b79de9378b5253bb21b5ca2e2742."
+      ],
+      "limitations": [
+        "The returned file count is specific to the currently pinned reference manifest."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
+      "title": "missing pin refuses rather than using an implicit or generated fixture corpus",
+      "given": [
+        "A fresh temporary root has no references/fixtures-ooxml.pin.json file."
+      ],
+      "when": [
+        "verifyReferences is called for that empty root."
+      ],
+      "then": [
+        "The call rejects with Missing required shared reference pin instead of guessing a corpus location or generating fixtures."
+      ],
+      "examples": [
+        "An empty temporary directory is refused immediately before any git or manifest checks are attempted."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/references.test.ts:mutated seals and wrong tag or revision refuse in an isolated reference clone",
+      "title": "mutated seals and wrong tag or revision refuse in an isolated reference clone",
+      "given": [
+        "A temporary references root is created and the real references/fixtures-ooxml submodule is cloned into it with --no-hardlinks so later mutations are isolated from the project checkout.",
+        "The original pin file is copied into that temporary root before deliberate drift is introduced."
+      ],
+      "when": [
+        "The copied pin file is mutated in turn to use an all-zero manifestSha256, an all-zero sharedPackManifestSha256, an all-zero commit, and tag v99.0.0, with verifyReferences executed after each change.",
+        "The original pin is then restored and verifyReferences is run again.",
+        "facts/constants.json is modified by appending a space, and later a fixture file is overwritten with the literal text tampered."
+      ],
+      "then": [
+        "Each pin drift variant is refused.",
+        "Once the original pin is restored, verification succeeds again and returns 123.",
+        "A dirty worktree caused by the whitespace change is refused with Shared reference worktree is dirty.",
+        "Overwriting the fixture archive is refused with Reference drift."
+      ],
+      "examples": [
+        "Negative variant: wrong manifest seal.",
+        "Negative variant: wrong shared-pack seal.",
+        "Negative variant: wrong commit.",
+        "Negative variant: wrong tag.",
+        "Negative variant: clean pin but dirty worktree.",
+        "Negative variant: clean git state but mutated fixture payload."
+      ],
+      "limitations": [
+        "Four pin-drift variants are exercised inside one looped declaration rather than as separate leaf tests."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
+      "title": "verifies the four pinned shared fixtures and their readback preconditions",
+      "given": [
+        "references/fixtures-ooxml/shared/v2/pack/fixture-manifest.json lists exactly four pinned fixtures: cross-sheet-cache.xlsx, default-style.xlsx, present-placeholder.docx, and title-and-subtitle.pptx.",
+        "verifyFixture checks whole-archive sha256 and byte length, exact ZIP member set, zero payload drift outside the manifest, the preservation sentinel part and root relationship, and format-specific native readback facts."
+      ],
+      "when": [
+        "Each listed fixture archive is read from the shared pack and passed to verifyFixture."
+      ],
+      "then": [
+        "The sorted fixture ids match those four expected names exactly.",
+        "present-placeholder.docx must reopen with body text <Present> and no native match for <Missing>.",
+        "title-and-subtitle.pptx must reopen with one slide whose title and subtitle read Original title and Original subtitle.",
+        "default-style.xlsx must reopen with first-sheet A1 equal to before, no worksheet named Missing, and one cellXfs entry resolving all sheet style references.",
+        "cross-sheet-cache.xlsx must reopen with Input!A1 = 1, Calc!A1 as formula Input!A1*2 with cached value 2, and no calcChain part."
+      ],
+      "examples": [
+        "DOCX readback fact: bodyText = <Present> and absentText = <Missing>.",
+        "PPTX readback fact: slide1 title/subtitle = Original title / Original subtitle.",
+        "XLSX readback fact: default-style.xlsx keeps A1 = before and cellXfsCount = 1.",
+        "XLSX readback fact: cross-sheet-cache.xlsx keeps a cached formula answer of 2 before any mutation."
+      ],
+      "limitations": [
+        "This is an integrity and native readback check for pinned fixtures; it is not proof of arbitrary edit interoperability beyond those declared facts."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifyFixture rejects a wrong whole-archive hash before edit semantics",
+      "title": "verifyFixture rejects a wrong whole-archive hash before edit semantics",
+      "given": [
+        "present-placeholder.docx is loaded from the shared pack and word/document.xml is rewritten so &lt;Present&gt; becomes &lt;Changed&gt;.",
+        "The fixture metadata is left unchanged, so the whole-archive sha256 no longer matches."
+      ],
+      "when": [
+        "verifyFixture is called on the mutated bytes and the original fixture record."
+      ],
+      "then": [
+        "Verification rejects with an archive sha256 drift error before any later readback or edit-allowance semantics can make the mutation look acceptable."
+      ],
+      "examples": [
+        "A single change inside word/document.xml is enough to fail the whole-archive seal immediately."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects opaque member drift outside the allowed parts",
+      "title": "assertPreservedOutput rejects opaque member drift outside the allowed parts",
+      "given": [
+        "title-and-subtitle.pptx is loaded from the shared pack.",
+        "Its opaque member docProps/app.xml is rewritten to add a data-test=changed attribute inside the Application element.",
+        "That part is not included in the fixture's allowedChangedPartsForSuccess list."
+      ],
+      "when": [
+        "assertPreservedOutput is called on the mutated archive bytes."
+      ],
+      "then": [
+        "The preservation check rejects with an unexpected payload drift error for the non-allowed member."
+      ],
+      "examples": [
+        "A metadata part can fail preservation even though the editable slide XML was untouched."
+      ],
+      "limitations": [
+        "This is a custody check on pinned opaque members, not a content-edit success case."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects a detached sentinel even if the root rel bytes are re-pinned",
+      "title": "assertPreservedOutput rejects a detached sentinel even if the root rel bytes are re-pinned",
+      "given": [
+        "default-style.xlsx is loaded from the shared pack.",
+        "_rels/.rels is rewritten so the sentinel relationship target customXml/preservation-sentinel.xml is retargeted to docProps/app.xml.",
+        "The fixture record is cloned and the mutated _rels/.rels member hash is deliberately re-pinned to show that a matching part hash alone is insufficient."
+      ],
+      "when": [
+        "assertPreservedOutput is called on the mutated workbook bytes together with the retargeted fixture metadata."
+      ],
+      "then": [
+        "The preservation check still rejects because the required sentinel root relationship no longer resolves to the sentinel part."
+      ],
+      "examples": [
+        "Changing the relationship target breaks preservation even when the relationship part's own bytes are accepted by the supplied metadata clone."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects invalid XLSX style indices in allowed changed worksheet parts",
+      "title": "assertPreservedOutput rejects invalid XLSX style indices in allowed changed worksheet parts",
+      "given": [
+        "default-style.xlsx is loaded from the shared pack.",
+        "xl/worksheets/sheet1.xml is rewritten so cell A1 carries style index s=99.",
+        "Worksheet XML is an allowed changed part, so the refusal must come from style-resolution validation rather than from a blanket changed-part ban."
+      ],
+      "when": [
+        "assertPreservedOutput is called on the mutated workbook."
+      ],
+      "then": [
+        "The check rejects with a style index error because the workbook's styles part does not provide xf 99."
+      ],
+      "examples": [
+        "An allowed worksheet edit still fails if it leaves a cell pointing past the available cellXfs array."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / implicit style zero still requires a cellXfs definition",
+      "title": "implicit style zero still requires a cellXfs definition",
+      "given": [
+        "default-style.xlsx is loaded from the shared pack.",
+        "xl/styles.xml is rewritten so the cellXfs collection becomes <cellXfs count=\"0\"/>.",
+        "Cells that omit an explicit s attribute still resolve to style index 0 under the validator."
+      ],
+      "when": [
+        "assertPreservedOutput is called on that mutated workbook."
+      ],
+      "then": [
+        "The check rejects with a style index error because implicit style zero no longer has a backing xf entry."
+      ],
+      "examples": [
+        "Dropping the default xf is refused even when the worksheet never writes an explicit s attribute."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects unexpected added members",
+      "title": "assertPreservedOutput rejects unexpected added members",
+      "given": [
+        "cross-sheet-cache.xlsx is loaded from the shared pack and its ZIP member map is modified to add customXml/unexpected.xml with payload <unexpected/>."
+      ],
+      "when": [
+        "assertPreservedOutput is called on the rewritten archive."
+      ],
+      "then": [
+        "The check rejects with an unexpected added parts error naming the new member set drift."
+      ],
+      "examples": [
+        "Adding a customXml member that was never pinned is refused even if all original members still match."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects unexpected deleted members",
+      "title": "assertPreservedOutput rejects unexpected deleted members",
+      "given": [
+        "present-placeholder.docx is loaded from the shared pack and customXml/preservation-sentinel.xml is removed from its ZIP members."
+      ],
+      "when": [
+        "assertPreservedOutput is called on the archive missing that member."
+      ],
+      "then": [
+        "The check rejects with an unexpected deleted parts error."
+      ],
+      "examples": [
+        "Deleting the sentinel payload part fails member-set custody before any edit semantics are considered."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / DOCX edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "title": "DOCX edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "given": [
+        "present-placeholder.docx is opened natively from shared-pack bytes and the first live match for <Present> is selected.",
+        "A temporary output path is prepared for saving the edited document."
+      ],
+      "when": [
+        "That live match is replaced with <Present now>, the document is saved to the temporary output path, the saved bytes are reopened, and assertPreservedOutput is run against the output bytes and fixture record."
+      ],
+      "then": [
+        "The reopened document body contains exactly one paragraph with text <Present now>.",
+        "The saved archive still satisfies the shared-fixture preservation rules: exact member set, sentinel intact, and no payload drift outside the fixture's allowed DOCX changed parts."
+      ],
+      "examples": [
+        "The supported native DOCX edit path updates word/document.xml while preserving all pinned opaque members."
+      ],
+      "limitations": [
+        "This unit-only case demonstrates one supported edit plus invariant preservation; it is not broader proof of arbitrary DOCX editing behavior."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / PPTX edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "title": "PPTX edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "given": [
+        "title-and-subtitle.pptx is opened natively from shared-pack bytes and the first slide title paragraph is inspected.",
+        "A temporary output path is prepared for saving the edited presentation."
+      ],
+      "when": [
+        "replaceTextAt rewrites Original title to Updated title, the presentation is saved and reopened, and assertPreservedOutput is run on the saved bytes."
+      ],
+      "then": [
+        "The reopened first slide text reads Updated title for the title and Original subtitle for the subtitle.",
+        "The saved archive still satisfies the shared-fixture preservation rules for the PPTX fixture."
+      ],
+      "examples": [
+        "Only the editable slide text changes; the subtitle and pinned non-editable payloads remain as declared."
+      ],
+      "limitations": [
+        "This unit-only case covers one supported title replacement path, not every possible slide edit topology."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / XLSX cache edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "title": "XLSX cache edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "given": [
+        "cross-sheet-cache.xlsx is opened natively from shared-pack bytes and a temporary output path is prepared.",
+        "The workbook begins with Input!A1 = 1 and Calc!A1 as the formula Input!A1*2 with cached value 2."
+      ],
+      "when": [
+        "Workbook.worksheet('Input').setCellValue('A1', 10) is applied, the workbook is saved and reopened, and assertPreservedOutput is run on the saved bytes."
+      ],
+      "then": [
+        "The reopened Input!A1 cell is a numeric cell with value 10.",
+        "The reopened Calc!A1 cell remains a formula cell with formula Input!A1*2 and cached value null.",
+        "The saved archive still satisfies the shared-fixture preservation rules for the workbook fixture."
+      ],
+      "examples": [
+        "A supported cache-invalidating edit clears the stale cached answer without disturbing pinned opaque members."
+      ],
+      "limitations": [
+        "This unit-only case demonstrates one supported workbook edit and preservation check, not arbitrary spreadsheet recomputation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
+      "title": "checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
+      "given": [
+        "verifySharedPack reads docs/contracts/shared-v2/manifest.json, references/fixtures-ooxml/shared/v2/pack/pack-manifest.json, the planned shared feature, expanded-contracts.json, fixture-manifest.json, features/shared.json, and the pinned references corpus.",
+        "The shared-pack contract declares workflowLayer = true, libraryParityCredit = false, contractRevision ooxml-shared-contracts-v2, 8 scenarios, 19 expanded cases, 4 fixtures, and 3 pinned workflow metadata files.",
+        "The helper also validates that the execution copy policy rewrites only @planned to @implemented @bun and that each shared scenario executes exactly once in the active inventory."
+      ],
+      "when": [
+        "verifySharedPack(root) is executed."
+      ],
+      "then": [
+        "The helper returns { scenarios: 8, cases: 19, fixtures: 4, files: 3 }.",
+        "Returning those counts means the pack-manifest seal matched, every pinned file hash matched, the compiled planned inventory matched expanded-contracts.json exactly, the four fixture records verified against the pinned source revision, and typed mutation tables parsed successfully where present.",
+        "No workflow execution receipt is fabricated or counted as a pass by this helper."
+      ],
+      "examples": [
+        "The four pinned fixtures are present-placeholder.docx, title-and-subtitle.pptx, default-style.xlsx, and cross-sheet-cache.xlsx.",
+        "The shared scenarios include dry-run custody, strict-batch atomicity, PPTX accumulation, XLSX style closure, and cross-sheet cache invalidation."
+      ],
+      "limitations": [
+        "This declaration is an inventory/provenance verifier by design; it does not run patchOffice or claim workflow success."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / stable identity excludes path, UUID and example insertion order",
+      "title": "stable identity excludes path, UUID and example insertion order",
+      "given": [
+        "The scenario id under test is @id-example.",
+        "Two example maps contain the same string pairs but in opposite insertion orders: { z: '2', a: '1' } and { a: '1', z: '2' }.",
+        "A third call omits examples entirely."
+      ],
+      "when": [
+        "stableCaseKey is called for each variant."
+      ],
+      "then": [
+        "The canonical key for the populated examples is exactly @id-example:{\"a\":\"1\",\"z\":\"2\"}.",
+        "Calling stableCaseKey with no examples yields @id-example:{}.",
+        "The key is identical regardless of example insertion order, showing that path and compiler UUID differences are excluded from the stable identity."
+      ],
+      "examples": [
+        "Order-insensitive identity: {z:'2',a:'1'} and {a:'1',z:'2'} collapse to the same stable key."
+      ],
+      "limitations": [
+        "This declaration does not separately exercise the helper's invalid-id or non-string example guards."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / typed mutation inputs preserve strings, numeric values and significant whitespace",
+      "title": "typed mutation inputs preserve strings, numeric values and significant whitespace",
+      "given": [
+        "A valid mutation table has header [target, value_json] and rows Input!A1 => 10, A2 => \"10\", A3 => \"first\\nsecond\", and A4 => null.",
+        "Invalid candidate tables include an empty table, header-only table, wrong header [target, value], invalid JSON text not-json, unsupported JSON object {}, and non-finite numeric JSON 1e999."
+      ],
+      "when": [
+        "parseBatchTable is run on the valid table and on each invalid table variant."
+      ],
+      "then": [
+        "The valid table decodes to target/value pairs with preserved types: number 10, string 10, a string containing a real newline between first and second, and null.",
+        "Every invalid table variant throws before any workflow mutation could begin."
+      ],
+      "examples": [
+        "Typed value 10 remains numeric rather than the string '10'.",
+        "JSON string \"10\" remains a string, not a number.",
+        "JSON string \"first\\nsecond\" becomes a two-line string with significant whitespace preserved.",
+        "Refusal variants: wrong header, malformed JSON, unsupported object, and non-finite numeric value."
+      ],
+      "limitations": [
+        "Six refusal variants are looped inside one declaration rather than split into separate tests."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / Gherkin escaping must preserve JSON newline escapes before typed decoding",
+      "title": "Gherkin escaping must preserve JSON newline escapes before typed decoding",
+      "given": [
+        "A planned feature is compiled in memory with a data-table cell under value_json.",
+        "One compiled variant inserts the source text \"first\\nsecond\" into that Gherkin table cell.",
+        "The other compiled variant inserts the doubly escaped source text \"first\\\\nsecond\"."
+      ],
+      "when": [
+        "parseFeature compiles the feature text and parseBatchTable decodes the resulting data table for each variant."
+      ],
+      "then": [
+        "The singly escaped variant is refused because Gherkin has already consumed the backslash sequence before JSON decoding, leaving invalid JSON string content for parseBatchTable.",
+        "The doubly escaped variant survives compilation and decodes to one mutation with target A1 and a string containing a real newline between first and second."
+      ],
+      "examples": [
+        "Refusal variant: feature cell text \"first\\nsecond\" is not escaped enough for the Gherkin compiler boundary.",
+        "Accepted variant: feature cell text \"first\\\\nsecond\" reaches JSON decoding intact and becomes a newline-bearing string."
+      ],
+      "limitations": [
+        "Only the newline-escape boundary is exercised here; other Gherkin escape forms are not reviewed in this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",
+      "title": "rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",
+      "given": [
+        "A temporary copy is made of the project's features tree, docs/contracts/shared-v2 tree, and references/fixtures-ooxml tree so mutations do not touch the checked-in originals.",
+        "Three copied shared-pack artifacts are selected for tampering: pack/features/mutation-safety.feature, pack/fixtures/default-style.xlsx, and pack/expanded-contracts.json."
+      ],
+      "when": [
+        "For each selected artifact, one extra trailing space byte is appended, verifySharedPack(temp) is run and expected to fail, and the original bytes are restored before moving to the next artifact.",
+        "After all restorations, verifySharedPack(temp) is run one final time."
+      ],
+      "then": [
+        "Each tampered artifact is refused with Shared pack artifact drift.",
+        "After restoration, the copied pack verifies successfully again as { scenarios: 8, cases: 19, fixtures: 4, files: 3 }.",
+        "Because all edits happened inside the temp copy, the original project fixtures and manifests remain untouched."
+      ],
+      "examples": [
+        "Tamper point: the frozen feature file itself.",
+        "Tamper point: the pinned workbook fixture default-style.xlsx.",
+        "Tamper point: the compiled expanded-contracts inventory."
+      ],
+      "limitations": [
+        "Three concrete drift locations are looped through one declaration rather than split into separate tests."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow-acceptance.test.ts:workflow shared acceptance / executes the frozen shared workflow feature as 19 implemented Bun cases",
+      "title": "executes the frozen shared workflow feature as 19 implemented Bun cases",
+      "given": [
+        "The frozen shared feature text is read from references/fixtures-ooxml/shared/v2/pack/features/mutation-safety.feature and transformed in memory by replacing @planned with @implemented @bun.",
+        "That transformed text is parsed under the native path features/native/workflow-mutation-safety.feature, so the execution copy is marked implemented and its parsed path does not contain /planned/.",
+        "The workflow acceptance bindings come from tests/acceptance/workflow.ts and drive real fixture setup, patchOffice calls, reopen checks, count checks, and preserved-output checks."
+      ],
+      "when": [
+        "executeAcceptance runs the generated inventory with a fresh acceptance run id."
+      ],
+      "then": [
+        "The parsed execution feature reports lifecycle implemented, runner bun, path features/native/workflow-mutation-safety.feature, 8 scenarios, and 19 expanded cases.",
+        "The acceptance execution reports no failures.",
+        "Feature counts are { passed: 1, failed: 0, planned: 0, total: 1 } and scenario counts are { passed: 8, failed: 0, planned: 0, total: 8 }.",
+        "Case counts are 19 passed, 0 failed, 0 planned, total 19.",
+        "The number of passed OUTCOME steps exactly matches the number of compiled OUTCOME steps in the feature, and failed, undefined, and ambiguous step counts are all zero."
+      ],
+      "examples": [
+        "3 dry-run PPTX custody cases, 3 dry-run DOCX custody cases, and 3 dry-run XLSX custody cases.",
+        "3 strict XLSX atomic-refusal cases and 3 strict DOCX atomic-refusal cases.",
+        "2 committed PPTX distinct-destination cases, 1 multiline XLSX style-closure case, and 1 cross-sheet cache-invalidation case."
+      ],
+      "limitations": [
+        "This declaration proves shared-feature execution coverage and count/status integrity; the per-case file-custody assertions live inside the step bindings rather than as separate direct assertions here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / previews report matched targets but never write source or an existing destination",
+      "title": "previews report matched targets but never write source or an existing destination",
+      "given": [
+        "A temporary source file is created from present-placeholder.docx and a distinct output file already exists with literal text existing.",
+        "The original source bytes are recorded before the workflow call."
+      ],
+      "when": [
+        "patchOffice runs in dry_run mode with one DOCX change targeting <Present> and replacement changed."
+      ],
+      "then": [
+        "The receipt status is preview and committedChanges is 0.",
+        "The only per-target result reports target <Present>, value changed, matched = 1, and status matched.",
+        "The source bytes remain byte-identical to the pre-run baseline.",
+        "The existing output file still contains the literal text existing.",
+        "The working directory still contains only the original source file and the preexisting output file; no extra staging artifacts remain beside them."
+      ],
+      "examples": [
+        "A preview can resolve a unique DOCX target and still make no write to either source or destination."
+      ],
+      "limitations": [
+        "This declaration exercises a one-target DOCX preview path only."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / strict batches reject a later missing target before saving an earlier match",
+      "title": "strict batches reject a later missing target before saving an earlier match",
+      "given": [
+        "A temporary source file is created from default-style.xlsx and a distinct output file already exists with literal text existing.",
+        "The original source bytes are recorded before the workflow call.",
+        "The requested strict batch has two changes: A1 => after and Missing!B1 => 123."
+      ],
+      "when": [
+        "patchOffice runs in strict mode against that source/output pair."
+      ],
+      "then": [
+        "The receipt status is refused and committedChanges is 0.",
+        "The second per-target result reports target Missing!B1, matched = 0, and status unmatched.",
+        "The earlier valid A1 match is not saved anywhere: source bytes remain unchanged and the preexisting output file still contains existing."
+      ],
+      "examples": [
+        "A later missing worksheet target blocks an earlier valid cell edit from being committed."
+      ],
+      "limitations": [
+        "Only the unmatched-missing-worksheet strict refusal shape is exercised here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / distinct output accumulates two PPTX edits and counts actual commits",
+      "title": "distinct output accumulates two PPTX edits and counts actual commits",
+      "given": [
+        "A temporary source file is created from title-and-subtitle.pptx and its original bytes are recorded.",
+        "The requested safe batch targets slide:1/title => New title and slide:1/subtitle => New subtitle."
+      ],
+      "when": [
+        "patchOffice runs in safe mode with a distinct output path."
+      ],
+      "then": [
+        "The receipt status is committed and committedChanges is 2.",
+        "Every per-target result is reported as committed.",
+        "Reopening the output presentation yields slide text [New title, New subtitle] on slide 1.",
+        "The source bytes remain byte-identical to the original source file."
+      ],
+      "examples": [
+        "Two different PPTX placeholders on the same slide are accumulated into one committed output receipt."
+      ],
+      "limitations": [
+        "This declaration covers a distinct-destination safe commit, not in-place PPTX mutation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / source fingerprints and safe path aliases refuse without writes",
+      "title": "source fingerprints and safe path aliases refuse without writes",
+      "given": [
+        "A temporary source file is created from present-placeholder.docx and its original bytes are recorded.",
+        "One requested change targets <Present> => changed.",
+        "Three refusal setups are prepared: an impossible expectedSourceSha256 of 64 zeroes, an explicit safe-mode output equal to the source path, and a safe-mode output created as a hardlink alias to the source file."
+      ],
+      "when": [
+        "patchOffice is run once for each refusal setup."
+      ],
+      "then": [
+        "The stale fingerprint request is refused with error code workflow-stale-source.",
+        "The same-path safe-mode request is refused with error code workflow-output-alias.",
+        "The hardlink-alias request is also refused with error code workflow-output-alias.",
+        "Across all three refusal paths, the source bytes remain unchanged and no write succeeds."
+      ],
+      "examples": [
+        "Refusal variant: wrong source fingerprint.",
+        "Refusal variant: safe mode with output equal to source.",
+        "Refusal variant: safe mode with output as a hardlink alias of source."
+      ],
+      "limitations": [
+        "Three concrete refusal variants are aggregated inside one declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / destination fingerprint and symlink protections leave existing bytes untouched",
+      "title": "destination fingerprint and symlink protections leave existing bytes untouched",
+      "given": [
+        "A temporary source file is created from present-placeholder.docx.",
+        "A distinct output file already exists with the literal text old.",
+        "One change targets <Present> => new, and a second path alias is created as a symlink pointing to that existing output file."
+      ],
+      "when": [
+        "patchOffice runs once in safe mode with expectedDestinationSha256 = null against the existing output, and once in safe mode with output set to the symlink path."
+      ],
+      "then": [
+        "The stale-destination request is refused with error code workflow-stale-destination because the destination already exists when null was expected.",
+        "The symlink request is refused with error code workflow-symlink.",
+        "The real existing output file still contains the literal text old after both refusal paths."
+      ],
+      "examples": [
+        "Refusal variant: existing destination does not satisfy expectedDestinationSha256 = null.",
+        "Refusal variant: leaf symlink output paths are rejected outright."
+      ],
+      "limitations": [
+        "This declaration combines two distinct destination-custody checks."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / XLSX style closure and cache receipts reflect staged output, not guessed input count",
+      "title": "XLSX style closure and cache receipts reflect staged output, not guessed input count",
+      "given": [
+        "One temporary source workbook is default-style.xlsx with initial A1 text before.",
+        "A second temporary source workbook is cross-sheet-cache.xlsx with Input!A1 = 1 and Calc!A1 formula Input!A1*2 cached as 2.",
+        "The first workflow request uses multilineWrap = true and A1 => first line / second line; the second uses calculationPolicy invalidate-without-recalculation and Input!A1 => 10."
+      ],
+      "when": [
+        "patchOffice runs in safe mode for the multiline-wrap workbook and then for the cross-sheet-cache workbook."
+      ],
+      "then": [
+        "For default-style.xlsx, the receipt status is committed, committedChanges is 1, changedParts includes xl/styles.xml, and reopening the output shows A1 as the two-line string value.",
+        "For cross-sheet-cache.xlsx, the receipt status is committed, calculationState is recalculation-required, and reopening the output shows Calc!A1 still as formula Input!A1*2 but with cached value null."
+      ],
+      "examples": [
+        "Positive variant: a multiline string edit adds the required style closure so wrapText lives in xl/styles.xml.",
+        "Positive variant: an input-sheet edit clears the dependent cached answer on another sheet without pretending a recalculated value exists."
+      ],
+      "limitations": [
+        "Two different XLSX behaviors are bundled into one declaration rather than split into separate tests."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / invalid XML replacements refuse asynchronously without touching either file",
+      "title": "invalid XML replacements refuse asynchronously without touching either file",
+      "given": [
+        "A temporary source file is created from present-placeholder.docx and a distinct output file already exists with literal text keep.",
+        "The original source bytes are recorded.",
+        "The requested replacement value contains the invalid XML control character U+0001 inside bad text."
+      ],
+      "when": [
+        "patchOffice runs in safe mode with target <Present> and that invalid replacement string."
+      ],
+      "then": [
+        "The receipt status is refused and committedChanges is 0.",
+        "The source bytes remain byte-identical to the baseline.",
+        "The distinct output file still contains the literal text keep."
+      ],
+      "examples": [
+        "A replacement that cannot be serialized into valid XML is refused without damaging either file."
+      ],
+      "limitations": [
+        "The declaration asserts refusal and file custody, but it does not pin a specific refusal code."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / concurrent guarded writers serialize and only one source revision can commit",
+      "title": "concurrent guarded writers serialize and only one source revision can commit",
+      "given": [
+        "A temporary source file is created from present-placeholder.docx.",
+        "Its current sha256 is recorded and supplied as expectedSourceSha256 to two concurrent strict in-place workflow requests.",
+        "The competing replacement values are one and two."
+      ],
+      "when": [
+        "Both patchOffice calls are started with Promise.all against the same source path."
+      ],
+      "then": [
+        "Exactly one receipt is committed and the other is refused.",
+        "The refused receipt carries error code workflow-stale-source, proving that the second writer detected the first committed source revision after serialization."
+      ],
+      "examples": [
+        "Either writer may win the race, but only one can commit against the recorded source fingerprint."
+      ],
+      "limitations": [
+        "The test does not assert which replacement value wins, only that the two outcomes are one commit and one stale-source refusal."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / DOCX overlapping text ranges refuse even when neither target contains the other",
+      "title": "DOCX overlapping text ranges refuse even when neither target contains the other",
+      "given": [
+        "A temporary source file is created from present-placeholder.docx and its original bytes are recorded.",
+        "The distinct output path does not yet exist.",
+        "The requested DOCX replacements target the overlapping slices <Pre and resent> within the single visible token <Present>."
+      ],
+      "when": [
+        "patchOffice runs in safe mode with those two changes."
+      ],
+      "then": [
+        "The receipt status is refused and error.code is workflow-overlapping-targets.",
+        "No output file is created at the destination path.",
+        "The source bytes remain byte-identical to the original baseline."
+      ],
+      "examples": [
+        "The overlap is detected even though neither requested target fully contains the other."
+      ],
+      "limitations": [
+        "Only one DOCX overlap pattern is exercised here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / no-op and duplicate targets cannot inflate committed count",
+      "title": "no-op and duplicate targets cannot inflate committed count",
+      "given": [
+        "A temporary source file is created from present-placeholder.docx and its original bytes are recorded.",
+        "The candidate change target is <Present> and the first replacement value is also <Present>, making the edit a semantic no-op.",
+        "A second batch duplicates that exact target/value pair twice."
+      ],
+      "when": [
+        "patchOffice first runs in safe mode with the single no-op change and then runs again in safe mode with the duplicated change list."
+      ],
+      "then": [
+        "For the single no-op batch, the receipt status is committed, committedChanges is 0, the per-target result status is unchanged, and the output archive hash matches the original source hash exactly.",
+        "For the duplicated batch, the receipt is refused with error code workflow-overlapping-targets, so repeated targets cannot be used to inflate the committed count."
+      ],
+      "examples": [
+        "Positive custody variant: a no-op save can succeed but still reports zero committed changes.",
+        "Negative variant: repeating the same target twice is refused as an overlapping target set."
+      ],
+      "limitations": [
+        "The no-op success path and duplicate-target refusal are combined in one declaration."
+      ]
+    }
+  ],
+  "inputPolicy": "Fixtures are resolved by stable IDs through the central manifest; no producer-specific storage roots."
+}

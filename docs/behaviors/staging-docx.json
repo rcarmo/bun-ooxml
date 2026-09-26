@@ -1,0 +1,1049 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "reviewState": "candidate-needs-parent-review",
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / creates a minimal package and appends escaped bold italic text before sectPr",
+      "title": "creates a minimal package and appends escaped bold italic text before sectPr",
+      "given": [
+        "A brand-new DOCX is created with only [Content_Types].xml, _rels/.rels, and word/document.xml and no paragraphs.",
+        "The text to append is exactly two leading spaces, <Frankenstein & friend>, and two trailing spaces."
+      ],
+      "when": [
+        "A paragraph containing that text is appended with bold and italic formatting, then the document is saved and reopened."
+      ],
+      "then": [
+        "The appended paragraph text remains exactly \"  <Frankenstein & friend>  \" before and after reopen.",
+        "The package diff reports only word/document.xml as changed.",
+        "The serialized paragraph XML contains <w:t xml:space=\"preserve\">  &lt;Frankenstein &amp; friend&gt;  </w:t>.",
+        "The first run has both w:b and w:i in its run properties.",
+        "In w:body, the authored paragraph is immediately followed by w:sectPr."
+      ],
+      "examples": [
+        "Leading and trailing spaces are preserved instead of trimmed.",
+        "Literal < and & characters are escaped in XML while the paragraph text remains unescaped when reopened."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / permits empty text and keeps the authored paragraph before sectPr after reopen",
+      "title": "permits empty text and keeps the authored paragraph before sectPr after reopen",
+      "given": [
+        "A brand-new DOCX is created."
+      ],
+      "when": [
+        "addParagraph() is called with no text argument and the document is saved and reopened."
+      ],
+      "then": [
+        "The returned paragraph text is an empty string.",
+        "After reopen, the document has exactly one paragraph whose text is still empty.",
+        "The body child order is paragraph first and section properties second."
+      ],
+      "examples": [
+        "An empty authored paragraph is retained instead of being dropped as blank structure."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / validates known paragraph styles and preserves opaque parts on append",
+      "title": "validates known paragraph styles and preserves opaque parts on append",
+      "given": [
+        "The fixture fixture ID fixture-9548a1ce68caae9df12bc85732f1c19a098658c5dce3d79488814e4145299e5e is opened.",
+        "The original bytes of docProps/core.xml and word/styles.xml are remembered from that package."
+      ],
+      "when": [
+        "A paragraph with text \"Created heading\" is appended using paragraph style Heading1, then the document is saved and reopened."
+      ],
+      "then": [
+        "The appended paragraph text is \"Created heading\" and appears as paragraph 5 after reopen.",
+        "Paragraph 5 contains a w:pStyle whose w:val is Heading1.",
+        "docProps/core.xml and word/styles.xml remain byte-identical to their original values.",
+        "The package diff reports only word/document.xml as changed."
+      ],
+      "examples": [
+        "A known style id from the existing styles part is accepted and serialized as the paragraph style."
+      ],
+      "limitations": [
+        "The behavior is demonstrated against the fixture's existing Heading1 definition and does not independently validate how an external editor renders that style."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / refuses invalid arguments and unsupported or unknown styles atomically",
+      "title": "refuses invalid arguments and unsupported or unknown styles atomically",
+      "given": [
+        "One case uses a brand-new DOCX with its saved baseline bytes remembered.",
+        "A second case uses styles.docx with its saved baseline bytes remembered."
+      ],
+      "when": [
+        "Paragraph append attempts are made with a numeric text argument, a string options value, a non-boolean bold value, style Heading1 in a document with no styles part, and style MissingStyle in a styled document."
+      ],
+      "then": [
+        "The numeric text, string options, and bold-string attempts each throw an OoxmlError with code docx-invalid-argument.",
+        "Using style Heading1 without a styles part throws docx-style-unsupported.",
+        "Using style MissingStyle in the styled fixture throws docx-style-missing.",
+        "After the brand-new document refusal cases, save() still returns the original baseline bytes.",
+        "After the unknown-style refusal on the styled fixture, save() still returns that fixture's original baseline bytes."
+      ],
+      "examples": [
+        "Negative variant: text-number => docx-invalid-argument.",
+        "Negative variant: options-string => docx-invalid-argument.",
+        "Negative variant: bold-string => docx-invalid-argument.",
+        "Negative variant: style-without-styles-part => docx-style-unsupported.",
+        "Negative variant: unknown-style => docx-style-missing."
+      ],
+      "limitations": [
+        "Five refusal variants are exercised inside one declaration rather than as separate leaf tests."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / invalidates earlier spans after append without disturbing preserved parts",
+      "title": "invalidates earlier spans after append without disturbing preserved parts",
+      "given": [
+        "The styles.docx fixture is opened.",
+        "A span matching the exact text \"Genevese\" is remembered from paragraph 2.",
+        "The original bytes of docProps/core.xml are remembered."
+      ],
+      "when": [
+        "A plain paragraph \"Appendix line\" is appended and the post-append saved bytes are remembered.",
+        "The previously remembered span is then asked to replace its text with \"Citizen\"."
+      ],
+      "then": [
+        "The stale replacement throws an OoxmlError with code docx-stale-span.",
+        "A later save() returns exactly the bytes that were produced immediately after the append.",
+        "docProps/core.xml remains byte-identical to its original value."
+      ],
+      "examples": [
+        "A span obtained before a structural append becomes unusable even though the document itself remains saveable."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
+      "title": "executes the DOCX create feature with dedicated bindings and optional parent aggregation",
+      "given": [
+        "features/docx/create.feature is parsed into an acceptance inventory.",
+        "The feature is executed twice: once with the dedicated create bindings and once with the parent aggregated bindings."
+      ],
+      "when": [
+        "executeAcceptance runs the DOCX native paragraph authoring feature for both binding sets."
+      ],
+      "then": [
+        "Both executions report no failures.",
+        "For each execution, feature counts are { passed: 1, failed: 0, planned: 0, total: 1 }.",
+        "For each execution, scenario counts are { passed: 4, failed: 0, planned: 0, total: 4 }.",
+        "For each execution, case counts are { passed: 8, failed: 0, planned: 0, total: 8 }.",
+        "For each execution, step counts record failed = 0, undefined = 0, and ambiguous = 0.",
+        "The passing cases cover minimal package authoring, styled paragraph append, stale span invalidation after append, and five atomic refusal cases."
+      ],
+      "examples": [
+        "Case: new-document + bold/italic escaped paragraph before sectPr.",
+        "Case: styles.docx + Heading1 paragraph append.",
+        "Case: styles.docx + remembered Genevese span becomes stale after appending Appendix line.",
+        "Negative cases: text-number, options-string, bold-string, style-without-styles-part, and unknown-style all refuse with their declared codes."
+      ],
+      "limitations": [
+        "The test asserts aggregate feature, scenario, case, and failure/undefined/ambiguous step counts; it does not assert a separate passed-step total."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:tracked replacement emits distinct IDs and native author/date with accept/reject algebra",
+      "title": "tracked replacement emits distinct IDs and native author/date with accept/reject algebra",
+      "given": [
+        "A synthetic DOCX package contains one paragraph whose text is split across a bold run \"Payment within \" and a plain run \"thirty days.\".",
+        "The tracked replacement options are author \"A & B\" and date \"2026-09-26T12:00:00Z\"."
+      ],
+      "when": [
+        "trackedReplace rewrites the exact phrase \"within thirty\" to \"within sixty\" in word/document.xml.",
+        "Separate package clones are then resolved by accepting revisions and rejecting revisions."
+      ],
+      "then": [
+        "The tracked replacement reports two revision ids and the two ids are distinct.",
+        "Every discovered revision records author \"A & B\" and the supplied timestamp.",
+        "Accepting revisions produces visible paragraph text \"Payment within sixty days.\".",
+        "Rejecting revisions restores visible paragraph text \"Payment within thirty days.\"."
+      ],
+      "examples": [
+        "Positive outcome: accept shows the revised phrase.",
+        "Positive outcome: reject restores the original phrase while keeping the tracked-change structure reversible."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:pure deletion and exact no-op preserve their declared outcomes",
+      "title": "pure deletion and exact no-op preserve their declared outcomes",
+      "given": [
+        "One synthetic redline fixture is kept as a no-op baseline.",
+        "A second synthetic redline fixture starts with the visible text \"Payment within thirty days.\"."
+      ],
+      "when": [
+        "The first fixture replaces \"thirty\" with the identical text \"thirty\".",
+        "The second fixture replaces \"thirty\" with the empty string and its revisions are accepted."
+      ],
+      "then": [
+        "The exact no-op replacement returns no revision ids and leaves the archive bytes unchanged.",
+        "The pure deletion replacement returns exactly one revision id.",
+        "After accepting the deletion, the visible paragraph text is \"Payment within  days.\" with the double space preserved."
+      ],
+      "examples": [
+        "Positive variant: identical source and replacement text causes no tracked edit at all.",
+        "Positive variant: an empty replacement becomes a deletion-only tracked edit."
+      ],
+      "limitations": [
+        "The test asserts the accepted deletion outcome but does not separately assert the rejected view for the deletion-only case."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:invalid calendar dates and formatting-only run barriers refuse without mutation",
+      "title": "invalid calendar dates and formatting-only run barriers refuse without mutation",
+      "given": [
+        "A synthetic redline fixture is available with its original bytes remembered.",
+        "A second fixture is modified to insert an empty italic-only run between the runs surrounding the target phrase."
+      ],
+      "when": [
+        "trackedReplace is called once with the impossible date 2026-02-30T12:00:00Z and once across the inserted formatting-only barrier."
+      ],
+      "then": [
+        "The invalid-date replacement throws and the package bytes stay equal to the pre-call baseline.",
+        "The formatting-only barrier replacement also throws and the package bytes stay equal to the barrier-state baseline."
+      ],
+      "examples": [
+        "Negative variant: a non-existent calendar day is rejected.",
+        "Negative variant: an empty run containing only w:rPr with w:i acts as a barrier instead of being skipped."
+      ],
+      "limitations": [
+        "The thrown error type is asserted only as a throw; no specific refusal code is checked in this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:XML comments and literal inter-run content are barriers rather than discarded during redlining",
+      "title": "XML comments and literal inter-run content are barriers rather than discarded during redlining",
+      "given": [
+        "Each trial starts from a fresh synthetic redline fixture.",
+        "Between the two runs around the target phrase, the test injects one of three raw gaps: <!--keep-->, literal text UNOWNED, or the processing instruction <?review keep?>."
+      ],
+      "when": [
+        "trackedReplace tries to replace \"within thirty\" with \"within sixty\" across the injected gap."
+      ],
+      "then": [
+        "Each injected gap causes the tracked replacement to throw.",
+        "For every gap variant, the package bytes remain exactly equal to the pre-call bytes."
+      ],
+      "examples": [
+        "Negative variant: XML comment barrier <!--keep-->.",
+        "Negative variant: literal inter-run character data UNOWNED.",
+        "Negative variant: processing instruction <?review keep?>."
+      ],
+      "limitations": [
+        "Three barrier variants are looped internally rather than emitted as separate declarations."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
+      "title": "text boxes and content controls refuse rather than redlining hidden unsupported stories",
+      "given": [
+        "Each trial starts from a fresh synthetic redline fixture.",
+        "The paragraph is wrapped either in w:txbxContent or in w:sdt before replacement is attempted."
+      ],
+      "when": [
+        "trackedReplace tries to replace \"thirty\" with \"sixty\" inside the wrapped content."
+      ],
+      "then": [
+        "The text-box wrapper variant throws without changing the archive bytes.",
+        "The content-control wrapper variant also throws without changing the archive bytes."
+      ],
+      "examples": [
+        "Negative variant: wrapper txbxContent.",
+        "Negative variant: wrapper sdt."
+      ],
+      "limitations": [
+        "The test asserts refusal and byte preservation but does not pin a specific refusal code for these two wrapper cases."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:overlapping literal occurrences refuse an ambiguous tracked target",
+      "title": "overlapping literal occurrences refuse an ambiguous tracked target",
+      "given": [
+        "A synthetic redline fixture is modified so the terminal text segment becomes \"aaa\" instead of \"thirty days.\".",
+        "That change creates overlapping occurrences of the query \"aa\"."
+      ],
+      "when": [
+        "trackedReplace tries to replace \"aa\" with \"x\" in word/document.xml."
+      ],
+      "then": [
+        "The replacement throws because the literal target is ambiguous.",
+        "The package bytes remain exactly equal to the pre-call bytes."
+      ],
+      "examples": [
+        "Negative variant: the query \"aa\" matches positions 1-2 and 2-3 inside \"aaa\"."
+      ],
+      "limitations": [
+        "The declaration asserts refusal and byte preservation, not a separate concrete error code."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:executes all saved-outcome redline feature cases",
+      "title": "executes all saved-outcome redline feature cases",
+      "given": [
+        "features/docx/redline.feature is parsed into an acceptance inventory and executed with the redline DOCX bindings."
+      ],
+      "when": [
+        "executeAcceptance runs the tracked-replacement feature cases."
+      ],
+      "then": [
+        "The acceptance execution reports no failures.",
+        "The passed case count is 6.",
+        "The passing cases cover one tracked replacement round-trip and five refusal cases named ambiguous, drawing, existing, protected, and bad-date.",
+        "In the round-trip case, the step bindings assert current/original review views, two discovered revisions, accept => \"Payment within sixty days.\", reject => \"Payment within thirty days.\", preservation of at least one bold run, and byte-preservation of every non-document part such as custom/redline-sentinel.bin.",
+        "In every refusal case, the step bindings assert a typed error and byte-for-byte preservation of the original archive."
+      ],
+      "examples": [
+        "Positive case: a bold fragmented payment phrase becomes tracked insertion and deletion revisions with explicit author/date metadata.",
+        "Negative case: ambiguous literal targeting refuses and preserves bytes.",
+        "Negative case: an inserted w:drawing barrier refuses and preserves bytes.",
+        "Negative case: pre-existing tracked edits refuse and preserve bytes.",
+        "Negative case: document protection refuses and preserves bytes.",
+        "Negative case: a bad date string refuses and preserves bytes."
+      ],
+      "limitations": [
+        "This declaration asserts that all six cases pass and no failure entries are reported, but it does not pin explicit scenario or step-count totals."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / discovers reachable nested story parts for inspection and selected resolution",
+      "title": "discovers reachable nested story parts for inspection and selected resolution",
+      "given": [
+        "The synthetic all-stories revision fixture contains tracked insertions and deletions in word/document.xml, word/header1.xml, word/footer1.xml, word/footer2.xml, word/footnotes.xml, word/endnotes.xml, and word/comments.xml.",
+        "word/footer2.xml is reachable through a relationship from the header, not directly from the main document."
+      ],
+      "when": [
+        "inspectRevisions is run over the package.",
+        "resolveRevisions accepts revisions only for part word/footer2.xml."
+      ],
+      "then": [
+        "The distinct revision-bearing parts are exactly word/document.xml, word/header1.xml, word/footer1.xml, word/footer2.xml, word/footnotes.xml, word/endnotes.xml, and word/comments.xml.",
+        "Resolving only word/footer2.xml returns { resolved: 2, changedParts: [\"word/footer2.xml\"] }.",
+        "Reading the footer2 story text in all-view after resolution yields \"Nested footer modernized.\".",
+        "After the selected resolution, inspectRevisions reports no remaining revisions in word/footer2.xml."
+      ],
+      "examples": [
+        "A nested footer reached through a header relationship is inspected and resolved as part of the reachable story graph."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / preserves namespaced run properties when unwrapping and renames delText on reject",
+      "title": "preserves namespaced run properties when unwrapping and renames delText on reject",
+      "given": [
+        "Two copies of the all-stories revision fixture are opened.",
+        "The footer2 revisions carry w14:glow run properties declared in the Microsoft Word 2010 namespace."
+      ],
+      "when": [
+        "One copy accepts footer2 revisions and the other copy rejects footer2 revisions."
+      ],
+      "then": [
+        "The accepted footer2 XML contains a plain w:r with xmlns:w14, preserved w14:glow run properties, and text Nested footer modernized.",
+        "The accepted footer2 XML no longer contains w:ins wrappers or any w:delText element.",
+        "The rejected footer2 XML contains a plain w:r with the same xmlns:w14 and w14:glow run properties but with text Nested footer historic.",
+        "The rejected footer2 XML no longer contains w:del wrappers or the lexical name w:delText."
+      ],
+      "examples": [
+        "Accept unwraps inserted text into a normal run without losing the w14 glow property.",
+        "Reject converts deleted text back into normal w:t content instead of leaving w:delText behind."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
+      "title": "invalid revision IDs and lexical text between run children refuse atomically",
+      "given": [
+        "Each trial starts from a fresh copy of the all-stories revision fixture.",
+        "One variant rewrites a revision id attribute to w:id=\"not-an-id\" and another injects literal text UNOWNED directly inside a w:ins wrapper."
+      ],
+      "when": [
+        "resolveRevisions(pkg, \"accept\") is attempted on each malformed package."
+      ],
+      "then": [
+        "Both malformed variants throw instead of partially resolving revisions.",
+        "For each malformed variant, the package bytes remain exactly equal to the pre-call bytes."
+      ],
+      "examples": [
+        "Negative variant: invalid numeric revision id syntax.",
+        "Negative variant: lexical text content appears between revision wrapper and run children."
+      ],
+      "limitations": [
+        "Two malformed variants are looped internally, and the specific refusal code is not separately asserted."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / rejects unsafe namespace lifts atomically",
+      "title": "rejects unsafe namespace lifts atomically",
+      "given": [
+        "The unsafe-lift fixture contains a deleted run whose outer wrapper declares the real w14 namespace but whose nested run redeclares prefix w14 to urn:test:conflict."
+      ],
+      "when": [
+        "resolveRevisions(pkg, \"reject\") is attempted."
+      ],
+      "then": [
+        "The call throws an OoxmlError with code docx-revisions-unsupported.",
+        "The refusal message includes the fragment \"cannot safely lift xmlns:w14\".",
+        "The package bytes remain exactly equal to the pre-call bytes."
+      ],
+      "examples": [
+        "Negative variant: rejecting a revision would require lifting a namespace declaration through a conflicting redeclaration."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / preflights unsupported nested stories and protected packages before mutating bytes",
+      "title": "preflights unsupported nested stories and protected packages before mutating bytes",
+      "given": [
+        "The rollback-unsupported fixture has a supported body revision and a reachable nested footer containing a format-change revision (w:rPrChange).",
+        "The protected fixture has tracked revisions plus word/settings.xml declaring documentProtection with edit=trackedChanges and enforcement=1."
+      ],
+      "when": [
+        "inspectRevisions examines the rollback-unsupported package and resolveRevisions tries to accept parts word/document.xml and word/footer2.xml together.",
+        "resolveRevisions also tries to accept all revisions in the protected package."
+      ],
+      "then": [
+        "inspectRevisions(rollback-unsupported) reports exactly 2 revisions and an unsupported entry { part: \"word/footer2.xml\", kind: \"format\", reason: \"format revisions are not supported\" }.",
+        "Accepting the selected body+footer parts throws docx-revisions-unsupported and leaves the rollback-unsupported bytes unchanged.",
+        "Accepting the protected package throws docx-revisions-protected and leaves the protected package bytes unchanged."
+      ],
+      "examples": [
+        "Negative variant: a later unsupported nested story rolls the whole selected-resolution attempt back.",
+        "Negative variant: documentProtection blocks revision resolution even before any bytes are rewritten."
+      ],
+      "limitations": [
+        "This declaration bundles two refusal families: unsupported nested format revisions and protected-package refusal."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+      "title": "missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+      "given": [
+        "Each trial starts from a fresh protected revision fixture.",
+        "The settings part's single w:documentProtection element is replaced with one of three alternatives: enforcement only, edit only, or a pair of duplicate declarations where the second one enforces readOnly protection."
+      ],
+      "when": [
+        "resolveRevisions(pkg, \"accept\") is attempted after each settings rewrite."
+      ],
+      "then": [
+        "Every rewritten settings variant still throws an OoxmlError with code docx-revisions-protected.",
+        "For each variant, the package bytes remain exactly equal to the pre-call bytes."
+      ],
+      "examples": [
+        "Negative variant: <w:documentProtection w:enforcement=\"1\"/> without edit.",
+        "Negative variant: <w:documentProtection w:edit=\"readOnly\"/> without enforcement.",
+        "Negative variant: duplicate declarations where only the second node is enforcing readOnly."
+      ],
+      "limitations": [
+        "Three malformed or incomplete settings declarations share one declaration, and the exact refusal message text is not pinned beyond the error code."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / passes the DOCX revisions acceptance feature with dedicated bindings",
+      "title": "passes the DOCX revisions acceptance feature with dedicated bindings",
+      "given": [
+        "A temporary acceptance root is created containing features/docx/revisions.feature.",
+        "runAcceptance is executed with the dedicated DOCX revision bindings."
+      ],
+      "when": [
+        "The DOCX bounded revisions feature is run end to end."
+      ],
+      "then": [
+        "The acceptance report status is passed.",
+        "The inventory reports 1 implemented feature and 4 implemented scenarios.",
+        "The execution report records 4 passed cases.",
+        "The execution report records 0 failed steps.",
+        "The report contains no failures.",
+        "The passing cases cover: accepting all reachable supported stories, rolling back a mixed supported+unsupported part selection, rejecting an empty deletion to well-formed saved XML, and refusing to resolve a protected document without mutating bytes."
+      ],
+      "examples": [
+        "Case: all-stories => current/original texts across seven parts, then accept all revisions and end with zero remaining revisions.",
+        "Case: rollback-unsupported => refusal mentions word/footer2.xml and format and preserves remembered bytes.",
+        "Case: empty-deletion => rejecting revisions saves and reopens as an empty visible text node with zero remaining revisions.",
+        "Case: protected => refusal mentions documentProtection and leaves two revisions unresolved."
+      ],
+      "limitations": [
+        "The test asserts passed status, implemented feature/scenario counts, passed case count, and zero failed steps; it does not separately pin undefined or ambiguous step totals."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / lists linked native story parts in deterministic order",
+      "title": "lists linked native story parts in deterministic order",
+      "given": [
+        "The synthetic story fixture contains a main document, one header, two footers, footnotes, endnotes, and comments.",
+        "word/footer2.xml is linked from the header, and the main document also has a duplicate relationship to header1."
+      ],
+      "when": [
+        "storyParts(pkg) is called."
+      ],
+      "then": [
+        "The returned reachable parts are exactly [{ part: \"word/document.xml\", kind: \"body\" }, { part: \"word/header1.xml\", kind: \"header\" }, { part: \"word/footer1.xml\", kind: \"footer\" }, { part: \"word/footer2.xml\", kind: \"footer\" }, { part: \"word/footnotes.xml\", kind: \"footnotes\" }, { part: \"word/endnotes.xml\", kind: \"endnotes\" }, { part: \"word/comments.xml\", kind: \"comments\" }]."
+      ],
+      "examples": [
+        "A nested footer reachable only through a header relationship is listed once in stable order.",
+        "A duplicate header relationship does not cause duplicate story-part entries."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / reads owned document headers/comments and native notes without inferring from filenames",
+      "title": "reads owned document headers/comments and native notes without inferring from filenames",
+      "given": [
+        "A real headers_footers.docx fixture is opened for headers and footers.",
+        "The synthetic revision fixture is opened for body text, footnotes, and endnotes.",
+        "A real comments.docx fixture is opened for comment text."
+      ],
+      "when": [
+        "inspectStories is run over each package."
+      ],
+      "then": [
+        "The header/footer fixture yields header1 text [\"FRANKENSTEIN - by Mary Shelley\"], header2 text [\"FRANKENSTEIN - First Page\"], and footer1 text [\"Prepared by Test Author\"].",
+        "The synthetic notes fixture yields document text [\"Body intro\", \"Table\\tCell\\nLine2\", \"Inserted body paragraph\", \"Body kept\"], footnotes text [\" Footnote new text\"], and endnotes text [\" Endnote text\"].",
+        "The comments fixture yields comments text [\"This is a great opening\", \"Classical hubris\", \"(this is a threaded reply)\"]."
+      ],
+      "examples": [
+        "Owned headers and comments are read from relationship ownership rather than guessed from filenames alone.",
+        "Concrete fixture text includes a threaded comment reply and note stories with leading spaces."
+      ],
+      "limitations": [
+        "The declaration records the text exposed by the checked-in fixtures and does not claim broader editorial semantics beyond those fixtures."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / inspects current, original and all views across synthetic body/header/footer/note stories with renamed prefixes",
+      "title": "inspects current, original and all views across synthetic body/header/footer/note stories with renamed prefixes",
+      "given": [
+        "The synthetic revision fixture uses renamed XML prefixes such as wx, wf, fn, en, and cm while still using WordprocessingML namespaces.",
+        "The fixture contains revisions in body, header, footer, footnotes, and comments plus a table paragraph containing a tab and line break."
+      ],
+      "when": [
+        "inspectStories is called three times with views current, original, and all."
+      ],
+      "then": [
+        "In current view, the stories are returned in stable part order and expose body paragraphs [Body intro, Table\\tCell\\nLine2, Inserted body paragraph, Body kept], header1 [Header new text], footer1 [Footer current], footer2 [Footer via header relationship], footnotes [ Footnote new text], endnotes [ Endnote text], and comments [Comment current].",
+        "In original view, the same part order exposes body paragraphs [Body intro, Table\\tCell\\nLine2, Deleted body paragraph, Body kept], header1 [Header old text], footer1 [Footer original], footer2 [Footer via header relationship], footnotes [ Footnote old text], endnotes [ Endnote text], and comments [Comment original].",
+        "In all view, inserted and deleted text are both surfaced, yielding body [Body intro, Table\\tCell\\nLine2, Inserted body paragraph, Deleted body paragraph, Body kept], header1 [Header newold text], footer1 [Footer currentoriginal], footer2 [Footer via header relationship], footnotes [ Footnote newold text], endnotes [ Endnote text], and comments [Comment currentoriginal]."
+      ],
+      "examples": [
+        "Current view prefers inserted text over deleted text.",
+        "Original view prefers deleted text over inserted text.",
+        "All view concatenates inserted and deleted fragments in document order, producing strings such as Header newold text and Footer currentoriginal."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / counts blind regions for native text boxes fields alternate content unknown namespaces orphans and external story rels",
+      "title": "counts blind regions for native text boxes fields alternate content unknown namespaces orphans and external story rels",
+      "given": [
+        "textboxDocument() creates a body paragraph outside a text box and inserts \"Text living inside the text box.\" inside a drawing text box.",
+        "createSyntheticBlindFixture() creates body content containing a fldSimple date field, a complex PAGE field, an unknown-namespace wrapper with \"Opaque text\", AlternateContent with Choice and Fallback branches, an embedded text box, an external header relationship, and an orphan header part word/header9.xml."
+      ],
+      "when": [
+        "inspectStories runs on the text-box fixture and on the synthetic blind fixture."
+      ],
+      "then": [
+        "For the text-box fixture, the visible document story does not include \"Text living inside the text box.\" and blindRegions includes { part: \"word/document.xml\", kind: \"textbox\", count: 1 }.",
+        "For the synthetic blind fixture, blindRegions are exactly alternate-content=1, field=2, textbox=1, unknown-namespace=1, external-story-relationship=1, and orphan-story-part=1 on the asserted parts.",
+        "For the synthetic blind fixture, the visible document paragraphs are [\"Field 2026-01-01\", \"7\", \"Opaque text\", \"Choice text\", \"Outside\"]."
+      ],
+      "examples": [
+        "Blind-region kind: textbox hides the nested text-box story text.",
+        "Blind-region kind: field counts both fldSimple and begin/separate/end field topology.",
+        "Blind-region kind: alternate-content reports one opaque compatibility choice.",
+        "Blind-region kind: unknown-namespace reports the ux:opaque wrapper.",
+        "Blind-region kind: external-story-relationship reports the external header target.",
+        "Blind-region kind: orphan-story-part reports word/header9.xml."
+      ],
+      "limitations": [
+        "The assertion is limited to the blind-region kinds and counts exercised by the synthetic fixtures."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / inspection never mutates package bytes",
+      "title": "inspection never mutates package bytes",
+      "given": [
+        "The bytes of the real header-footer-sections fixture are loaded and opened as an OPC package."
+      ],
+      "when": [
+        "inspectStories(pkg, { view: \"all\" }) is called."
+      ],
+      "then": [
+        "pkg.toBytes() remains byte-for-byte identical to the original source bytes."
+      ],
+      "examples": [
+        "Story inspection is read-only even when it traverses alternate views."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / passes the DOCX story acceptance feature with dedicated bindings",
+      "title": "passes the DOCX story acceptance feature with dedicated bindings",
+      "given": [
+        "A temporary acceptance root is created containing features/docx/story.feature.",
+        "runAcceptance is executed with the dedicated story bindings."
+      ],
+      "when": [
+        "The DOCX story inspection feature is run end to end."
+      ],
+      "then": [
+        "The acceptance report status is passed.",
+        "The inventory reports 1 implemented feature and 3 implemented scenarios.",
+        "The execution report records 3 passed cases.",
+        "The execution report records 0 failed steps.",
+        "The report contains no failures.",
+        "The passing cases cover reachable story-part listing, multi-view story inspection, and honest blind-region reporting with byte preservation."
+      ],
+      "examples": [
+        "Case: synthetic-revisions => ordered story parts body/header/footer/footer/footnotes/endnotes/comments.",
+        "Case: synthetic-revisions => current, original, and all views preserve order and run-break text like Table\\tCell\\nLine2.",
+        "Case: synthetic-blind => blind-region table matches six asserted rows and the package bytes equal the remembered baseline."
+      ],
+      "limitations": [
+        "The test asserts passed status, implemented feature/scenario counts, passed case count, and zero failed steps; it does not separately pin undefined or ambiguous step totals."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / authoring into a body with w rebound never silently writes foreign elements",
+      "title": "authoring into a body with w rebound never silently writes foreign elements",
+      "given": [
+        "A new document with one paragraph \"source\" is saved, reopened as a raw package, and every Word prefix binding is renamed from w: to z:.",
+        "The z:body element is also given a foreign xmlns:w=\"urn:foreign\" declaration so the familiar prefix w refers to the wrong namespace."
+      ],
+      "when": [
+        "The mutated package is reopened as a Document, a 1x1 table is added, cell (0,0) is set to \"correct\", a paragraph \"after\" is appended, and the document is saved and reopened again."
+      ],
+      "then": [
+        "The reopened document has exactly one table.",
+        "That table's cell (0,0) text is \"correct\".",
+        "The reopened document also contains a paragraph whose text is \"after\"."
+      ],
+      "examples": [
+        "A foreign xmlns:w binding on the body does not cause later authoring to target the wrong namespace silently."
+      ],
+      "limitations": [
+        "The test proves behavior by successful reopen and content inspection; it does not assert the exact serialized namespace prefixes chosen in the saved XML."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / run-level namespace declarations survive copied table-cell run properties",
+      "title": "run-level namespace declarations survive copied table-cell run properties",
+      "given": [
+        "A newly created 1x1 table is saved and then its only run is rewritten to <w:r xmlns:f=\"urn:format\"><w:rPr><f:flag/></w:rPr><w:t>before</w:t></w:r>."
+      ],
+      "when": [
+        "The modified package is reopened and the cell text is changed from \"before\" to \"after\"."
+      ],
+      "then": [
+        "Parsing the saved document XML still finds exactly one element named flag in namespace urn:format.",
+        "The live cell text after the write is \"after\"."
+      ],
+      "examples": [
+        "A run-level foreign namespace declaration on copied run properties survives a cell-text rewrite."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / adds a rectangular table before sectPr and round-trips escaped text, spaces, and normalized newlines",
+      "title": "adds a rectangular table before sectPr and round-trips escaped text, spaces, and normalized newlines",
+      "given": [
+        "A brand-new DOCX is created."
+      ],
+      "when": [
+        "A 2x2 table is appended.",
+        "Cell (0,0) is set to \"  <Alpha & Beta>  \" and cell (1,1) is set to \"line 1\\r\\nline 2\".",
+        "The document is saved and reopened."
+      ],
+      "then": [
+        "The in-memory table and reopened table both report 2 rows and 2 columns, and the reopened document has exactly one table.",
+        "Reopened cell (0,0) text is exactly \"  <Alpha & Beta>  \".",
+        "Reopened cell (1,1) text is normalized to \"line 1\\nline 2\".",
+        "At the body level, the authored table appears immediately before w:sectPr.",
+        "The serialized XML for cell (0,0) contains <w:t xml:space=\"preserve\">  &lt;Alpha &amp; Beta&gt;  </w:t>.",
+        "The reopened second cell contains two paragraphs, showing that the newline split into paragraph structure."
+      ],
+      "examples": [
+        "Escaped special characters survive round-trip without losing literal text meaning.",
+        "CRLF input is normalized to LF text after reopen."
+      ],
+      "limitations": [
+        "The test asserts the multi-paragraph result for the cell containing a newline, but it does not expand every empty-cell serialization detail."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / updates existing simple table cells while preserving opaque package parts",
+      "title": "updates existing simple table cells while preserving opaque package parts",
+      "given": [
+        "The fixture fixture ID fixture-8192955ef935f09eb61a9fe6805d4996c811efcf54c0c966f52d983e38e0a79c is opened.",
+        "The original bytes of docProps/core.xml are remembered."
+      ],
+      "when": [
+        "Table 1 cell (1,0) is changed to \"Voltaic battery\" and the document is saved and reopened."
+      ],
+      "then": [
+        "After reopen, table 1 cell (1,0) text is \"Voltaic battery\".",
+        "docProps/core.xml remains byte-identical to the original bytes.",
+        "The package diff reports only word/document.xml as changed."
+      ],
+      "examples": [
+        "A single cell value update in an existing rectangular table leaves opaque non-document parts untouched."
+      ],
+      "limitations": [
+        "The concrete row and column layout comes from the simple_table.docx fixture."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / preserves tcPr, first paragraph properties, and first run formatting when replacing a simple cell",
+      "title": "preserves tcPr, first paragraph properties, and first run formatting when replacing a simple cell",
+      "given": [
+        "A synthetic styled-cell fixture is built from simple_table.docx.",
+        "Its target cell contains w:tcPr with w:shd w:fill=\"FFFF00\", a first paragraph with w:jc w:val=\"right\", and a first run with w:b formatting."
+      ],
+      "when": [
+        "The target cell text is replaced with \"updated value\" and the document is saved and reopened."
+      ],
+      "then": [
+        "The reopened cell still contains w:tcPr and its shading fill attribute remains FFFF00.",
+        "The reopened first paragraph still contains justification w:val=\"right\".",
+        "The reopened first run still has a w:rPr containing w:b.",
+        "The visible cell text is \"updated value\"."
+      ],
+      "examples": [
+        "Cell-level properties, first-paragraph properties, and first-run formatting all survive a text rewrite."
+      ],
+      "limitations": [
+        "The declaration checks the first paragraph and first run only; it does not expand assertions for every later child run or paragraph that could exist in other fixtures."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / refuses bad indices, merged cells, nested cell topology, and bizarre grids atomically",
+      "title": "refuses bad indices, merged cells, nested cell topology, and bizarre grids atomically",
+      "given": [
+        "A simple_table.docx baseline is saved for out-of-bounds testing.",
+        "A mergedNestedTableDocument() baseline is saved for merged-cell and nested-table topology testing.",
+        "A synthetic-grid-before baseline is saved after deleting the first row's first cell and inserting w:gridBefore w:val=\"1\"."
+      ],
+      "when": [
+        "The test requests cell (9,0) from the simple table, cell (0,0) from the merged table, writes \"updated\" into merged table cell (2,0), and requests cell (0,0) from the bizarre grid fixture."
+      ],
+      "then": [
+        "The out-of-bounds request throws RangeError and the simple-table bytes remain unchanged.",
+        "The merged fixture still reports 3 rows and 3 columns, but accessing cell (0,0) throws OoxmlError code docx-table-merged-cell and leaves bytes unchanged.",
+        "Writing through cell (2,0) in the merged fixture throws OoxmlError code docx-table-cell-unsupported and leaves bytes unchanged.",
+        "Accessing the bizarre grid fixture throws OoxmlError code docx-table-unsupported and leaves bytes unchanged."
+      ],
+      "examples": [
+        "Negative variant: row-oob => RangeError.",
+        "Negative variant: merged-cell => docx-table-merged-cell.",
+        "Negative variant: nested-cell => docx-table-cell-unsupported.",
+        "Negative variant: bizarre => docx-table-unsupported."
+      ],
+      "limitations": [
+        "Four refusal variants across three fixtures are bundled into one declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / stale table and cell handles refuse after document mutation while fresh handles stay live",
+      "title": "stale table and cell handles refuse after document mutation while fresh handles stay live",
+      "given": [
+        "A new document contains one 1x1 table, and both the table handle and its only cell handle are remembered."
+      ],
+      "when": [
+        "A paragraph \"after table\" is appended to mutate the document, and the post-edit bytes are remembered.",
+        "The stale table's rows getter and the stale cell's text setter are used after the mutation.",
+        "A fresh cell handle is reacquired from the current document and written with \"live write\"."
+      ],
+      "then": [
+        "Reading rows from the stale table throws OoxmlError code docx-stale-table.",
+        "Writing through the stale cell throws OoxmlError code docx-stale-table-cell.",
+        "After those stale-handle refusals, save() still returns the remembered post-edit bytes.",
+        "The fresh cell handle remains usable, and after reopen the cell text is \"live write\"."
+      ],
+      "examples": [
+        "Negative variant: any structural document mutation makes prior table and cell handles stale.",
+        "Positive variant: a freshly reacquired handle can still update the table."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / validates table dimensions with bounded rectangular authoring",
+      "title": "validates table dimensions with bounded rectangular authoring",
+      "given": [
+        "A brand-new DOCX is created and its baseline bytes are remembered."
+      ],
+      "when": [
+        "addTable is called with dimensions 0x1, 1x0, and 101x100."
+      ],
+      "then": [
+        "Each invalid dimension request throws RangeError.",
+        "After all three invalid calls, save() still returns the original baseline bytes."
+      ],
+      "examples": [
+        "Negative variant: zero rows are rejected.",
+        "Negative variant: zero columns are rejected.",
+        "Negative variant: an oversized 101x100 rectangle is rejected."
+      ],
+      "limitations": [
+        "The declaration asserts the rejected boundary examples exercised by the test, not a complete mathematical description of all valid table-size bounds."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / passes the DOCX table acceptance feature with dedicated bindings",
+      "title": "passes the DOCX table acceptance feature with dedicated bindings",
+      "given": [
+        "A temporary acceptance root is created containing features/docx/tables.feature.",
+        "runAcceptance is executed with the dedicated DOCX table bindings."
+      ],
+      "when": [
+        "The DOCX native rectangular tables feature is run end to end."
+      ],
+      "then": [
+        "The acceptance report status is passed.",
+        "The inventory reports 1 implemented feature and 4 implemented scenarios.",
+        "The execution report records 7 passed cases.",
+        "The execution report records 0 failed steps.",
+        "The report contains no failures.",
+        "The passing cases cover table creation round-trip, opaque-part preservation on an existing table edit, stale remembered-cell refusal after a later append, and four atomic refusal cases."
+      ],
+      "examples": [
+        "Case: new-document => append 2x2 table, preserve escaped text and newline normalization, and store the table before sectPr.",
+        "Case: simple_table.docx => update cell (1,0) to Voltaic battery while keeping docProps/core.xml unchanged.",
+        "Case: new-document => remembered cell becomes stale after appending another 1x1 table and refuses with docx-stale-table-cell while bytes stay unchanged.",
+        "Negative cases: row-oob, merged-cell, nested-cell, and bizarre each refuse with their declared codes."
+      ],
+      "limitations": [
+        "The test asserts passed status, implemented feature/scenario counts, passed case count, and zero failed steps; it does not separately pin undefined or ambiguous step totals."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / opens from a path or bytes and save() never rewrites the opened source path implicitly",
+      "title": "opens from a path or bytes and save() never rewrites the opened source path implicitly",
+      "given": [
+        "A temporary copy of fixture ID fixture-dfca453a4b60629ec859b7e224040148b1e2fb92aa3a32b28a6ad9c6f4cc3526 is created.",
+        "Its original bytes are remembered.",
+        "The expected visible paragraph text is \"I am by birth a Genevese, and my family is one of the most distinguished of that republic.\"."
+      ],
+      "when": [
+        "The document is opened once from the temporary path and once from the remembered bytes.",
+        "Both document objects are saved, and the bytes-opened document is also saved explicitly to a new path named saved.docx."
+      ],
+      "then": [
+        "The path-opened package contains word/document.xml.",
+        "The path-opened document has exactly one paragraph whose text is the expected Genevese sentence.",
+        "The bytes-opened document exposes the same paragraph text.",
+        "Saving the path-opened document returns the original bytes and does not rewrite the source file on disk implicitly.",
+        "Saving the bytes-opened document returns the original bytes.",
+        "Saving the bytes-opened document to an explicit path writes those original bytes to saved.docx."
+      ],
+      "examples": [
+        "Positive variant: open from filesystem path.",
+        "Positive variant: open from raw bytes.",
+        "Positive variant: explicit save path writes a new file without mutating the original source file implicitly."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
+      "title": "preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
+      "given": [
+        "Every checked-in .docx file under the 37 canonical IDs selected by the Go-origin corpus membership/word and the 37 canonical IDs selected by the Office corpus membership/testdata/word is enumerated at runtime.",
+        "Each fixture's original bytes are remembered before opening."
+      ],
+      "when": [
+        "Each fixture is opened from bytes, saved once, reopened from those saved bytes, and saved a second time."
+      ],
+      "then": [
+        "For every enumerated fixture, the first save output is byte-for-byte identical to the original fixture bytes.",
+        "For every enumerated fixture, saving the reopened document is also byte-for-byte identical to the original fixture bytes."
+      ],
+      "examples": [
+        "Corpus coverage includes both the go-ooxml word fixtures and the python-office-mcp-server word fixtures."
+      ],
+      "limitations": [
+        "The declaration iterates a directory walk at runtime; individual fixture filenames are not expanded into separate mapping entries here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / replaces exact cross-run text without reconstructing unaffected runs or formatting",
+      "title": "replaces exact cross-run text without reconstructing unaffected runs or formatting",
+      "given": [
+        "A temporary copy of formatted_text.docx is created and its original bytes are remembered.",
+        "Paragraph 1 contains a single exact match for \"text and italic text\" spanning multiple runs."
+      ],
+      "when": [
+        "That span is replaced with \"Tone and tilted text\" and the document is saved and reopened."
+      ],
+      "then": [
+        "The source fixture file on disk remains byte-for-byte equal to its original bytes.",
+        "After reopen, paragraph 1 text is \"Bold Tone and tilted text and underlined text and colored text and large text\".",
+        "After reopen, paragraph 2 text is \"I saw the dull yellow eye of the creature open; it breathed hard, and a convulsive motion agitated its limbs.\".",
+        "The run snapshot for paragraph 1 is exactly [{ text: \"Bold Tone\", styles: [\"b\"] }, { text: \" and \", styles: [] }, { text: \"tilted text\", styles: [\"i\"] }, { text: \" and \", styles: [] }, { text: \"underlined text\", styles: [\"u\"] }, { text: \" and \", styles: [] }, { text: \"colored text\", styles: [\"color\"] }, { text: \" and \", styles: [] }, { text: \"large text\", styles: [\"sz\"] }]."
+      ],
+      "examples": [
+        "The replacement rewrites only the matched cross-run phrase while keeping bold, italic, underline, color, and size formatting on unaffected runs."
+      ],
+      "limitations": [
+        "The assertion is specific to one exact span match in the formatted_text.docx fixture."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / preserves boundary whitespace with xml:space on touched text nodes",
+      "title": "preserves boundary whitespace with xml:space on touched text nodes",
+      "given": [
+        "A synthetic fixture is built from single_paragraph.docx whose first paragraph contains runs A, lpha, and Beta as separate w:t nodes."
+      ],
+      "when": [
+        "The exact span \"phaBe\" is replaced with \"pha Be\" and the document is saved and reopened."
+      ],
+      "then": [
+        "After reopen, the visible paragraph text is \"Alpha Beta\".",
+        "The text-node snapshot is exactly [{ text: \"A\", preserve: undefined }, { text: \"lpha\", preserve: undefined }, { text: \" Beta\", preserve: \"preserve\" }]."
+      ],
+      "examples": [
+        "Introducing a boundary space causes the trailing text node to gain xml:space=preserve instead of losing the space at reopen time."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML",
+      "title": "includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML",
+      "given": [
+        "simple_table.docx is loaded and its original word/document.xml text is remembered.",
+        "The document contains body paragraphs, table-cell paragraphs, and a final empty paragraph."
+      ],
+      "when": [
+        "The exact match \"Galvanic battery\" is replaced with \"Voltaic battery\", then the document is saved and reopened."
+      ],
+      "then": [
+        "Before replacement, doc.paragraphs expose document order [\"Research Materials Inventory\", \"Item\", \"Quantity\", \"Source\", \"Galvanic battery\", \"3\", \"Germany\", \"Chemical reagents\", \"12 vials\", \"Switzerland\", \"Anatomical charts\", \"7\", \"University library\", \"\"].",
+        "The saved word/document.xml is exactly the original XML with only >Galvanic battery< changed to >Voltaic battery<.",
+        "After reopen, the paragraph order is the same except paragraph 5 is now \"Voltaic battery\"."
+      ],
+      "examples": [
+        "Table-cell paragraphs participate in exact-text search in the same document-order stream as body paragraphs."
+      ],
+      "limitations": [
+        "The XML preservation assertion is tied to the fixture's single literal occurrence of Galvanic battery."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / does not descend into text boxes and refuses the blind region when no supported match exists",
+      "title": "does not descend into text boxes and refuses the blind region when no supported match exists",
+      "given": [
+        "textboxDocument() produces a document with one visible body paragraph \"Outside the text box.\" and one nested text box paragraph \"Text living inside the text box.\"."
+      ],
+      "when": [
+        "The document is searched for the outside text and for the text-box text."
+      ],
+      "then": [
+        "Searching for \"Outside the text box.\" returns exactly one match.",
+        "Searching for \"Text living inside the text box.\" throws an OoxmlError with code docx-unsupported-topology."
+      ],
+      "examples": [
+        "Positive variant: supported body text remains searchable.",
+        "Negative variant: hidden text-box content is treated as unsupported topology instead of being searched implicitly."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / detects stale spans before mutation and leaves the package unchanged",
+      "title": "detects stale spans before mutation and leaves the package unchanged",
+      "given": [
+        "formatted_text.docx is opened.",
+        "A span for \"text and italic text\" is remembered from paragraph 1.",
+        "Another span for \"colored text\" is replaced with \"scarlet text\" and the post-edit save bytes are remembered."
+      ],
+      "when": [
+        "The previously remembered stale span is asked to replace its text with \"Tone and tilted text\"."
+      ],
+      "then": [
+        "The stale replacement throws an OoxmlError with code docx-stale-span.",
+        "A later save() returns exactly the remembered post-edit bytes."
+      ],
+      "examples": [
+        "A successful earlier replacement invalidates an older span handle from the same paragraph."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / keeps repeated exact occurrences correct across replacements",
+      "title": "keeps repeated exact occurrences correct across replacements",
+      "given": [
+        "A synthetic repeated fixture is built so paragraph 1 reads \"Alpha Beta Alpha Beta\" across four runs with preserved spaces.",
+        "Paragraph 1 initially contains two exact matches for \"Alpha Beta\"."
+      ],
+      "when": [
+        "The first match is replaced with \"Gamma Delta\".",
+        "The paragraph is searched again for the remaining \"Alpha Beta\" occurrence, and that refreshed match is also replaced with \"Gamma Delta\".",
+        "The document is saved and reopened."
+      ],
+      "then": [
+        "The initial exact-search result length is 2.",
+        "After the first replacement, the refreshed exact-search result length is 1.",
+        "After reopen, paragraph 1 text is \"Gamma Delta Gamma Delta\"."
+      ],
+      "examples": [
+        "Sequential replacements against repeated exact text stay aligned when the second search is refreshed after the first mutation."
+      ],
+      "limitations": [
+        "The declaration asserts the visible repeated-text outcome but does not separately pin the final run segmentation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / refuses fields, tracked revisions and content controls with a stable code",
+      "title": "refuses fields, tracked revisions and content controls with a stable code",
+      "given": [
+        "A synthetic field fixture contains a fldSimple DATE field showing 2026-01-01 between visible text runs.",
+        "The real fixtures track_changes.docx and sdt_content_controls.docx are opened for tracked-revision and content-control coverage."
+      ],
+      "when": [
+        "The first paragraph of the field fixture is searched for \"2026-01-01\".",
+        "The first paragraph of track_changes.docx is searched for \"amazing\".",
+        "The second paragraph of sdt_content_controls.docx is searched for \"[Enter Title Here]\"."
+      ],
+      "then": [
+        "All three searches throw OoxmlError with code docx-unsupported-topology."
+      ],
+      "examples": [
+        "Negative variant: fldSimple field content is unsupported topology.",
+        "Negative variant: tracked-revision content is unsupported topology for exact search.",
+        "Negative variant: structured document tag content is unsupported topology for exact search."
+      ],
+      "limitations": [
+        "The declaration asserts stable refusal codes for search; it does not separately assert archive byte preservation because no write is attempted."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / passes the DOCX acceptance feature with exported bindings",
+      "title": "passes the DOCX acceptance feature with exported bindings",
+      "given": [
+        "A temporary acceptance root is created containing features/docx/text.feature.",
+        "runAcceptance is executed with the exported DOCX slice bindings."
+      ],
+      "when": [
+        "The DOCX slice paragraph text search and run-safe replacement feature is run end to end."
+      ],
+      "then": [
+        "The acceptance report status is passed.",
+        "The inventory reports 1 implemented feature and 5 implemented scenarios.",
+        "The execution report records 7 passed cases.",
+        "The execution report records 0 failed steps.",
+        "The report contains no failures.",
+        "The passing cases cover formatting-preserving cross-run replacement, boundary-whitespace preservation, table-cell paragraph replacement, stale-span refusal with byte preservation, and three unsupported-topology refusal cases."
+      ],
+      "examples": [
+        "Case: formatted_text.docx => replace \"text and italic text\" with \"Tone and tilted text\" and preserve the surrounding run styles snapshot.",
+        "Case: synthetic-whitespace => replace \"phaBe\" with \"pha Be\" and reopen with xml:space preserved on the trailing text node.",
+        "Case: simple_table.docx => replace paragraph 5 \"Galvanic battery\" with \"Voltaic battery\" while table-cell paragraphs stay in document order.",
+        "Case: formatted_text.docx => remembered span becomes stale after replacing \"colored text\" with \"scarlet text\" and saved bytes stay equal to the remembered post-edit bytes.",
+        "Negative cases: track_changes.docx paragraph 1 query amazing, sdt_content_controls.docx paragraph 2 query [Enter Title Here], and synthetic-field paragraph 1 query 2026-01-01 all refuse with docx-unsupported-topology."
+      ],
+      "limitations": [
+        "The test asserts passed status, implemented feature/scenario counts, passed case count, and zero failed steps; it does not separately pin undefined or ambiguous step totals."
+      ]
+    }
+  ],
+  "inputPolicy": "Fixtures are resolved by stable IDs through the central manifest; no producer-specific storage roots."
+}

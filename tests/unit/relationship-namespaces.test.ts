@@ -1,3 +1,4 @@
+import {fixturesRoot} from "../../scripts/fixture-inputs.ts";
 import {describe,expect,test} from "bun:test";
 import {join} from "node:path";
 import {OpcPackage} from "../../src/opc/package.ts";
@@ -19,7 +20,7 @@ describe('expanded Office relationship attribute identity',()=>{
   const bytes=await namespaceFixture('xlsx','alias');const book=await Workbook.open(bytes);
   book.worksheet('Sheet').setCellValue('A1','wrapped\nvalue');setCellWrapText(book,'Sheet','A1',true);
   const reopened=await Workbook.open(book.package.toBytes());expect(reopened.worksheet('Sheet').getCell('A1')?.value).toBe('wrapped\nvalue');expect(reopened.package.text(reopened.package.mainPart())).toContain('link:id=');
-  const manifest=await Bun.file(join(import.meta.dir,'../../docs/contracts/shared-v2/pack/fixture-manifest.json')).json() as FixtureManifest;
+  const manifest=await Bun.file(join(fixturesRoot(),'shared/v2/pack/fixture-manifest.json')).json() as FixtureManifest;
   await expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined();
  });
  test('wrong URI and unqualified id refuse even with the familiar r spelling',async()=>{

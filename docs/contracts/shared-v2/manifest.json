@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "pack": "docs/contracts/shared-v2/pack",
-  "packManifestSha256": "cf359dea9df753592b9b8ecfd0d25feafa74a4a57a6033a25ca97764816a2032",
+  "pack": "references/fixtures-ooxml/shared/v2/pack",
+  "packManifestSha256": "a718444dfd2c88c03f10e07d0f0c18dcb8234425535f563ac125916ddce50848",
   "featurePath": "references/fixtures-ooxml/shared/v2/pack/features/mutation-safety.feature",
   "contractRevision": "ooxml-shared-contracts-v2",
   "sourceCommit": "36ac406ad9d4bd3e7538b4bcc7aa2fb0e51cc943",
@@ -23,6 +23,6 @@
     "executionTag": "@implemented @bun",
     "note": "Only lifecycle tag is transformed; frozen shared pack remains planned."
   },
-  "distributionRevision": "fixtures-ooxml-v0.1.0",
+  "distributionRevision": "fixtures-ooxml-v0.2.0",
   "libraryParityCredit": false
 }

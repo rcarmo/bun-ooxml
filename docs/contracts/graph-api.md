@@ -1,4 +1,4 @@
-# OPC graph edit batch
+# OPC graph editing
 
 `src/opc/graph.ts` exports:
 
@@ -28,8 +28,7 @@ relationship URI rewriting in this slice.
 * `removePartContentType(pkg, name): void` removes only matching Override.
 These helpers are synchronous within a graph transaction; no disk writes. Default
 extensions remain untouched because other parts may depend on them. Root and
-child namespaces must be validated; MIME values must have token/token plus optional
-parameters or refuse (conservative exact type/subtype sufficient initially).
+child namespaces are validated; malformed MIME tokens or parameter syntax refuse.
 
 `src/opc/diff.ts` exports:
 * `diffPackages(before: OpcPackage, after: OpcPackage): PackageDiffReport`

@@ -10,6 +10,7 @@ import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { Presentation } from "../../src/pptx/index.ts";
 import { findPlaceholderText } from "../../src/pptx/placeholders.ts";
 import { parseXml } from "../../src/xml/index.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 
 const OFFICE_REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
 const PACKAGE_REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships";
@@ -24,10 +25,7 @@ const VIEW_PROPS_RELATIONSHIP = `${OFFICE_REL_NS}/viewProps`;
 const PRES_PROPS_RELATIONSHIP = `${OFFICE_REL_NS}/presProps`;
 const TABLE_STYLES_RELATIONSHIP = `${OFFICE_REL_NS}/tableStyles`;
 
-const SHARED_TITLE_FIXTURE = join(
-  import.meta.dir,
-  "../../docs/contracts/shared-v2/pack/fixtures/title-and-subtitle.pptx",
-);
+const SHARED_TITLE_FIXTURE = fixturePath(F.shared.titleAndSubtitle);
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 

@@ -1,0 +1,1224 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "reviewState": "candidate-needs-parent-review",
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/zip.test.ts:crc32 / matches the standard test vector",
+      "title": "matches the standard test vector",
+      "given": [
+        "The input bytes are the ASCII string 123456789."
+      ],
+      "when": [
+        "The CRC32 checksum is computed for that byte sequence."
+      ],
+      "then": [
+        "The checksum is 0xcbf43926."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / writes deterministic UTF-8 ZIP32 output that readZip can reopen",
+      "title": "writes deterministic UTF-8 ZIP32 output that readZip can reopen",
+      "given": [
+        "A parts map contains an empty directory entry word/, word/document.xml with <w:document/>, [Content_Types].xml with <Types/>, and docProps/core.xml with <core/>."
+      ],
+      "when": [
+        "The same parts map is written to ZIP twice with writeZip.",
+        "The first archive is reopened with readZip."
+      ],
+      "then": [
+        "The first and second ZIP outputs are byte-for-byte identical.",
+        "Reopening returns the part names [Content_Types].xml, docProps/core.xml, and word/document.xml in that order.",
+        "The reopened word/document.xml text is <w:document/>.",
+        "The reopened [Content_Types].xml text is <Types/>.",
+        "The empty directory entry is not surfaced as a returned part."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / refuses ASCII case-colliding output names",
+      "title": "refuses ASCII case-colliding output names",
+      "given": [
+        "A parts map contains both word/document.xml and WORD/document.xml as separate entries."
+      ],
+      "when": [
+        "writeZip is called for that map."
+      ],
+      "then": [
+        "The write is refused with code zip-case-collision.",
+        "The refusal message says the names ASCII case-collide."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / refuses non-empty directory entries",
+      "title": "refuses non-empty directory entries",
+      "given": [
+        "A parts map contains a directory entry word/ whose payload is the non-empty text not empty."
+      ],
+      "when": [
+        "writeZip is called for that map."
+      ],
+      "then": [
+        "The write is refused with code zip-directory-entry-invalid.",
+        "The refusal message says directory entries must be empty."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment",
+      "title": "reads a valid archive with a directory entry, data descriptor, and declared comment",
+      "given": [
+        "A handcrafted ZIP archive contains an empty stored directory entry word/, a stored [Content_Types].xml part with <Types/>, and a deflated word/document.xml part with <w:document/>.",
+        "The deflated part uses the UTF-8 and data-descriptor flags and includes a signed data descriptor.",
+        "The archive also declares the ZIP comment kept as declared ZIP comment."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "The returned parts are [Content_Types].xml and word/document.xml.",
+        "The decoded [Content_Types].xml payload is <Types/>.",
+        "The decoded word/document.xml payload is <w:document/>.",
+        "The directory entry and archive comment do not prevent successful reading."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses duplicate member names",
+      "title": "refuses duplicate member names",
+      "given": [
+        "A ZIP archive contains two members with the same name word/document.xml but different payloads."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-duplicate-entry.",
+        "The refusal message mentions a duplicate ZIP member."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses ASCII case-colliding member names",
+      "title": "refuses ASCII case-colliding member names",
+      "given": [
+        "A ZIP archive contains members named word/document.xml and WORD/document.xml."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-case-collision.",
+        "The refusal message says the member names ASCII case-collide."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses noncanonical part paths",
+      "title": "refuses noncanonical part paths",
+      "given": [
+        "A ZIP archive contains a member named ../word/document.xml."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-name-invalid.",
+        "The refusal message says the part name is noncanonical."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses encrypted members",
+      "title": "refuses encrypted members",
+      "given": [
+        "A ZIP archive contains word/document.xml marked with the encryption flag."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-encryption-unsupported.",
+        "The refusal message mentions encrypted members."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses unsupported compression methods",
+      "title": "refuses unsupported compression methods",
+      "given": [
+        "A ZIP archive contains word/document.xml compressed with method 12."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-method-unsupported.",
+        "The refusal message mentions the compression method."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses multi-disk archives",
+      "title": "refuses multi-disk archives",
+      "given": [
+        "A ZIP archive declares diskNumber = 1 instead of a single-disk layout."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-multi-disk-unsupported.",
+        "The refusal message mentions multi-disk archives."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses malformed ZIP64 sentinels without ZIP64 directory records",
+      "title": "refuses malformed ZIP64 sentinels without ZIP64 directory records",
+      "given": [
+        "A ZIP archive sets the end-of-central-directory totalEntries and diskEntries fields to the ZIP64 sentinel value 0xffff.",
+        "The archive does not include the matching ZIP64 directory records."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-structure-invalid.",
+        "The refusal message identifies the missing ZIP64 structure."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses local and central metadata mismatches",
+      "title": "refuses local and central metadata mismatches",
+      "given": [
+        "A ZIP archive has a central directory entry named word/document.xml whose local header name is word/other.xml."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-local-metadata-mismatch.",
+        "The refusal message says local and central metadata disagree."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses CRC mismatches",
+      "title": "refuses CRC mismatches",
+      "given": [
+        "A ZIP archive contains word/document.xml with payload payload but a declared CRC of 0xdeadbeef."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-crc-mismatch.",
+        "The refusal message mentions the CRC check."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses declared size mismatches",
+      "title": "refuses declared size mismatches",
+      "given": [
+        "A stored ZIP member word/document.xml contains the payload payload.",
+        "Its local and central compressed and uncompressed sizes are all declared as 99 instead of the real length."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-size-mismatch.",
+        "The refusal message mentions the declared size."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses deflated members that inflate past their declared size bound",
+      "title": "refuses deflated members that inflate past their declared size bound",
+      "given": [
+        "A deflated ZIP member word/document.xml expands to 4096 A characters.",
+        "Its declared uncompressed size bound in the local and central metadata is only 32 bytes."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-size-mismatch.",
+        "The refusal message mentions the declared size bound."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses undeclared trailing bytes after the archive",
+      "title": "refuses undeclared trailing bytes after the archive",
+      "given": [
+        "An otherwise valid ZIP archive has one trailing newline byte appended after the archive end."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-end-record-missing.",
+        "The refusal message mentions the end-of-central-directory record."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / enforces configured archive, count, entry, total, and ratio bounds",
+      "title": "enforces configured archive, count, entry, total, and ratio bounds",
+      "given": [
+        "A ZIP archive contains a.bin with 4096 repeated A bytes and b.bin with the text bb.",
+        "The same archive is read repeatedly under progressively tighter safety bounds."
+      ],
+      "when": [
+        "readZip is called with maxArchiveBytes one byte below the archive length.",
+        "readZip is called with maxEntries = 1.",
+        "readZip is called with maxEntryBytes = 8.",
+        "readZip is called with maxTotalBytes = 8.",
+        "readZip is called with maxCompressionRatio = 2."
+      ],
+      "then": [
+        "The archive-bytes limit is refused with code zip-archive-too-large.",
+        "The entry-count limit is refused with code zip-too-many-entries.",
+        "The per-entry size limit is refused with code zip-entry-too-large.",
+        "The total expanded size limit is refused with code zip-total-too-large.",
+        "The compression-ratio limit is refused with code zip-compression-ratio-exceeded."
+      ],
+      "examples": [
+        "archive bytes bound: maxArchiveBytes = archive.length - 1",
+        "entry count bound: maxEntries = 1",
+        "single entry size bound: maxEntryBytes = 8",
+        "total expanded size bound: maxTotalBytes = 8",
+        "compression ratio bound: maxCompressionRatio = 2"
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
+      "title": "reads every checked-in rcarmo fixture archive under default bounds",
+      "given": [
+        "The fixture roots are the 37 canonical IDs selected by the Go-origin corpus membership and the 37 canonical IDs selected by the Office corpus membership.",
+        "All checked-in .zip, .docx, .pptx, and .xlsx files under those roots are collected and sorted.",
+        "The expected fixture archive count is 74."
+      ],
+      "when": [
+        "Each fixture file is read from disk and passed to readZip with default bounds."
+      ],
+      "then": [
+        "Exactly 74 fixture archives are discovered.",
+        "Every discovered fixture archive is accepted by readZip without throwing."
+      ],
+      "examples": [],
+      "limitations": [
+        "The individual fixture paths are discovered at runtime and are not expanded here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses an undeclared gap before the ZIP64 end record",
+      "title": "refuses an undeclared gap before the ZIP64 end record",
+      "given": [
+        "A ZIP64 archive is first written from a single a.xml part with forceZip64: true.",
+        "One extra byte is inserted immediately before the ZIP64 end-of-central-directory record and the locator offset is adjusted to point at the shifted ZIP64 end record."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-structure-invalid.",
+        "The refusal message points to invalid central-directory structure."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads an empty deflate payload under a nonzero native inflate cap",
+      "title": "reads an empty deflate payload under a nonzero native inflate cap",
+      "given": [
+        "A handcrafted ZIP64 archive contains empty.xml encoded with deflate and an empty payload."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "The returned payload for empty.xml is an empty Uint8Array."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads ZIP64 members that use per-entry extras and 64-bit data descriptors",
+      "title": "reads ZIP64 members that use per-entry extras and 64-bit data descriptors",
+      "given": [
+        "A ZIP64 archive contains [Content_Types].xml with <Types/> and word/document.xml with <w:document/>.",
+        "Both members use per-entry ZIP64 extras and signed 64-bit data descriptors."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "The returned part names are [Content_Types].xml and word/document.xml.",
+        "The reopened [Content_Types].xml text is <Types/>.",
+        "The reopened word/document.xml text is <w:document/>."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses malformed ZIP64 locators",
+      "title": "refuses malformed ZIP64 locators",
+      "given": [
+        "A valid ZIP64 archive is mutated so the ZIP64 locator signature is overwritten with 0."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-structure-invalid.",
+        "The refusal message mentions the ZIP64 locator."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 central counts that cannot fit the declared central span",
+      "title": "refuses ZIP64 central counts that cannot fit the declared central span",
+      "given": [
+        "A valid ZIP64 archive is mutated so the ZIP64 end-of-central-directory record declares 10,001 entries on disk and 10,001 entries total.",
+        "The read is allowed up to maxEntries = 20,000 so the failure comes from structure, not the caller bound."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-structure-invalid.",
+        "The refusal message says the declared central-directory count exceeds what the declared span can hold."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 offsets beyond Number.MAX_SAFE_INTEGER",
+      "title": "refuses ZIP64 offsets beyond Number.MAX_SAFE_INTEGER",
+      "given": [
+        "A valid ZIP64 archive is mutated so the ZIP64 locator points to an offset of Number.MAX_SAFE_INTEGER + 1."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-zip64-unsupported.",
+        "The refusal message mentions safe integer limits."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses unsupported ZIP64 extensible data sectors",
+      "title": "refuses unsupported ZIP64 extensible data sectors",
+      "given": [
+        "A ZIP64 archive is built with an extensible data sector containing the bytes ext."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-zip64-unsupported.",
+        "The refusal message mentions the extensible ZIP64 data sector."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses missing central ZIP64 extras for sentinel fields",
+      "title": "refuses missing central ZIP64 extras for sentinel fields",
+      "given": [
+        "A ZIP64 archive is mutated so the first central extra tag no longer identifies the ZIP64 extra block even though sentinel fields require it."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-structure-invalid.",
+        "The refusal message says a required ZIP64 extra is missing."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses duplicate central ZIP64 extras rather than guessing",
+      "title": "refuses duplicate central ZIP64 extras rather than guessing",
+      "given": [
+        "A ZIP64 archive contains a central directory entry with duplicate ZIP64 extra records."
+      ],
+      "when": [
+        "The archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-zip64-unsupported.",
+        "The refusal message mentions duplicate ZIP64 extras."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses truncated central ZIP64 extras",
+      "title": "refuses truncated central ZIP64 extras",
+      "given": [
+        "A ZIP64 archive is mutated so a central ZIP64 extra record declares a length of 8 bytes, which is too short for the required fields."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-structure-invalid.",
+        "The refusal message mentions a truncated ZIP64 extra."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 local and central size mismatches",
+      "title": "refuses ZIP64 local and central size mismatches",
+      "given": [
+        "A ZIP64 archive for word/document.xml with payload payload is mutated so the local ZIP64 extra declares a file size of 99 while the central metadata keeps the real size."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-local-metadata-mismatch.",
+        "The refusal message says local and central metadata disagree."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 data descriptor mismatches",
+      "title": "refuses ZIP64 data descriptor mismatches",
+      "given": [
+        "A ZIP64 archive for word/document.xml uses a signed 64-bit data descriptor.",
+        "The descriptor is mutated so it declares a file size of 99 instead of the real size."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-local-metadata-mismatch.",
+        "The refusal message says local and central metadata disagree."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses CRC mismatches in ZIP64 archives",
+      "title": "refuses CRC mismatches in ZIP64 archives",
+      "given": [
+        "A ZIP64 archive contains word/document.xml with payload payload.",
+        "One byte in the stored compressed data is flipped after the archive is built."
+      ],
+      "when": [
+        "The mutated archive is read with readZip."
+      ],
+      "then": [
+        "Reading is refused with code zip-crc-mismatch.",
+        "The refusal message mentions the CRC check."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / writes forced tiny ZIP64 output that readZip can reopen",
+      "title": "writes forced tiny ZIP64 output that readZip can reopen",
+      "given": [
+        "A parts map contains word/document.xml with <w:document/> and [Content_Types].xml with <Types/>."
+      ],
+      "when": [
+        "The map is written with writeZip using forceZip64: true.",
+        "The archive layout is inspected and the archive is reopened with readZip."
+      ],
+      "then": [
+        "The inspected layout reports isZip64 = true.",
+        "The inspected layout reports totalEntries = 2.",
+        "The reopened word/document.xml text is <w:document/>.",
+        "The reopened [Content_Types].xml text is <Types/>."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / automatically emits ZIP64 EOCD records for 65535 tiny entries",
+      "title": "automatically emits ZIP64 EOCD records for 65535 tiny entries",
+      "given": [
+        "A parts map is populated with 65,535 empty files named tiny/0000.bin through the base-36 padded name for the last index.",
+        "The later read raises maxEntries, maxTotalBytes, and maxArchiveBytes high enough to admit that archive size."
+      ],
+      "when": [
+        "The map is written with writeZip without forcing ZIP64 explicitly.",
+        "The layout is inspected and the archive is reopened with readZip under the raised bounds."
+      ],
+      "then": [
+        "The inspected layout reports isZip64 = true.",
+        "The inspected layout reports totalEntries = 65,535.",
+        "The reopened archive contains 65,535 entries.",
+        "tiny/0000.bin reopens as an empty Uint8Array.",
+        "The last generated tiny entry also reopens as an empty Uint8Array."
+      ],
+      "examples": [],
+      "limitations": [
+        "The full generated entry list is not expanded here; only the total count and representative first and last names are observed."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / conservatively refuses percent-encoded internal names and relationship targets",
+      "title": "conservatively refuses percent-encoded internal names and relationship targets",
+      "given": [
+        "One package names its document part word/%66oo.xml.",
+        "A second package keeps the normal document part but points the root relationship target at word/%66oo.xml."
+      ],
+      "when": [
+        "Each package is opened with OpcPackage.open."
+      ],
+      "then": [
+        "The percent-encoded internal part name is refused with code opc-part-name-invalid.",
+        "That refusal message says the part name is noncanonical.",
+        "The percent-encoded relationship target is refused with code opc-target-invalid.",
+        "That refusal message mentions percent-encoding."
+      ],
+      "examples": [
+        "internal part name: word/%66oo.xml",
+        "relationship target: word/%66oo.xml"
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
+      "title": "validates content-type metadata",
+      "given": [
+        "A package has a [Content_Types].xml part that declares the rels default extension twice with different content types."
+      ],
+      "when": [
+        "The package is opened with OpcPackage.open."
+      ],
+      "then": [
+        "Opening is refused with code opc-content-types-invalid.",
+        "The refusal message says a default extension is duplicate or missing."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
+      "title": "rejects missing and duplicate OPC relationship references",
+      "given": [
+        "One package has a root relationship that targets word/missing.xml, which is absent.",
+        "Another package has root relationships XML that declares Id=rId1 twice for the office document relationship."
+      ],
+      "when": [
+        "Each package is opened with OpcPackage.open."
+      ],
+      "then": [
+        "The missing target package is refused with code opc-relationship-target-missing.",
+        "The missing target refusal message mentions the missing target.",
+        "The duplicate relationship-id package is refused with code opc-relationship-duplicate.",
+        "The duplicate-id refusal message mentions the duplicate relationship id."
+      ],
+      "examples": [
+        "missing target: word/missing.xml",
+        "duplicate root relationship id: rId1"
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / returns detached copies and keeps custody of opened source bytes",
+      "title": "returns detached copies and keeps custody of opened source bytes",
+      "given": [
+        "A valid package byte array is opened and a separate clone of the original bytes is kept for comparison."
+      ],
+      "when": [
+        "The caller zeroes the original source buffer after opening the package.",
+        "The caller retrieves word/document.xml from the package and zeroes that returned buffer too."
+      ],
+      "then": [
+        "A fresh pkg.get(word/document.xml) still decodes to XML containing Alpha.",
+        "pkg.toBytes() remains exactly equal to the original cloned source bytes."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / preserves UTF-16 XML encoding when string edits are written back",
+      "title": "preserves UTF-16 XML encoding when string edits are written back",
+      "given": [
+        "word/document.xml is stored as UTF-16LE XML with a BOM, an XML declaration encoding=\"UTF-16\", and document text Alpha."
+      ],
+      "when": [
+        "The package is opened, pkg.text(word/document.xml) is edited from Alpha to Beta, and the package is serialized again."
+      ],
+      "then": [
+        "The saved word/document.xml bytes still start with the UTF-16LE BOM 0xff 0xfe.",
+        "Decoding the saved bytes as UTF-16LE yields text containing Beta.",
+        "The saved XML declaration still contains encoding=\"UTF-16\"."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / rejects async transaction callbacks before they run and does not special-case thenables",
+      "title": "rejects async transaction callbacks before they run and does not special-case thenables",
+      "given": [
+        "A package contains document text Alpha and a local ran flag starts as false.",
+        "A thenable object exists whose then method would throw if anything tried to await it."
+      ],
+      "when": [
+        "pkg.transaction is called with an async callback that would set ran = true and replace Alpha with Beta.",
+        "pkg.transaction is then called with a synchronous callback that replaces Alpha with Beta and returns the thenable object."
+      ],
+      "then": [
+        "The async transaction call is refused with code opc-async-transaction before the callback body runs.",
+        "The ran flag stays false after that refusal.",
+        "The document text still contains Alpha after the refused async transaction.",
+        "The synchronous transaction returns the exact thenable object unchanged.",
+        "After the synchronous transaction, the document text contains Beta."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / save refuses invalid packages without touching an existing target",
+      "title": "save refuses invalid packages without touching an existing target",
+      "given": [
+        "A valid package is written to an existing file existing.docx.",
+        "A package opened from the same bytes has its word/document.xml part deleted, leaving the package invalid because the root relationship target no longer exists."
+      ],
+      "when": [
+        "pkg.save(existing.docx) is attempted."
+      ],
+      "then": [
+        "The save is refused with code opc-relationship-target-missing.",
+        "The refusal message mentions the missing target.",
+        "The existing destination file stays byte-for-byte equal to its original content."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / refuses symlink save destinations",
+      "title": "refuses symlink save destinations",
+      "given": [
+        "A valid package exists on disk as target.docx.",
+        "A symlink target-link.docx points at target.docx.",
+        "A package opened from the valid bytes is ready to save."
+      ],
+      "when": [
+        "pkg.save(target-link.docx) is attempted."
+      ],
+      "then": [
+        "The save is refused with code opc-symlink-destination.",
+        "The refusal message mentions a symlink destination.",
+        "The real target.docx file remains byte-for-byte unchanged."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
+      "title": "preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
+      "given": [
+        "The fixture roots are the 37 canonical IDs selected by the Go-origin corpus membership and the 37 canonical IDs selected by the Office corpus membership.",
+        "All checked-in .zip, .docx, .pptx, and .xlsx files under those roots are collected and sorted.",
+        "The expected fixture archive count is 74."
+      ],
+      "when": [
+        "Each fixture archive is opened as an OpcPackage and immediately serialized again without edits."
+      ],
+      "then": [
+        "Exactly 74 fixture archives are discovered.",
+        "Each reopened package serializes back to exactly its original bytes."
+      ],
+      "examples": [],
+      "limitations": [
+        "The individual fixture paths are discovered at runtime and are not expanded here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / opaque parts and content types survive related save/reopen",
+      "title": "opaque parts and content types survive related save/reopen",
+      "given": [
+        "The package fixture ID fixture-535910216e3531e4f70959cccf83038f1c51febbf4a149f9f46abfbfa8667d90 is opened as an OpcPackage.",
+        "The original bytes of word/document.xml are saved for comparison."
+      ],
+      "when": [
+        "An opaque part custom/data.bin with bytes [1,2,3] and content type application/octet-stream is added.",
+        "A root relationship of type urn:test/data is added to target custom/data.bin.",
+        "The package is serialized and reopened."
+      ],
+      "then": [
+        "The reopened relationship with the returned id resolves to custom/data.bin.",
+        "getContentType on custom/data.bin returns application/octet-stream after reopen.",
+        "The reopened word/document.xml bytes are identical to the original bytes saved before the edit."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / collision and missing relationship targets leave package byte-identical",
+      "title": "collision and missing relationship targets leave package byte-identical",
+      "given": [
+        "The present-placeholder fixture package is opened and its baseline bytes are recorded."
+      ],
+      "when": [
+        "An addPart call tries to create WORD/document.xml with application/xml, colliding with the existing word/document.xml by ASCII case.",
+        "An addRelationship call then tries to add a root relationship to absent.xml."
+      ],
+      "then": [
+        "The case-colliding addPart call is refused.",
+        "After that refusal, the package bytes are still exactly the recorded baseline.",
+        "The relationship to absent.xml is refused.",
+        "After that refusal, the package bytes are still exactly the recorded baseline."
+      ],
+      "examples": [
+        "case-colliding part name: WORD/document.xml",
+        "missing relationship target: absent.xml"
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship deduplication and smallest available IDs avoid unnecessary edits",
+      "title": "relationship deduplication and smallest available IDs avoid unnecessary edits",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "A new part custom/a.xml with <a/> and content type application/xml is added.",
+        "A first root relationship of type urn:test/a to custom/a.xml is added and its id is recorded.",
+        "The package bytes are recorded after that first relationship exists."
+      ],
+      "when": [
+        "An equivalent root relationship is added again using the target spelling /custom/a.xml.",
+        "The original relationship is removed.",
+        "The same logical relationship is added once more."
+      ],
+      "then": [
+        "The equivalent add returns the same relationship id as the first add instead of creating a duplicate.",
+        "The package bytes stay exactly equal to the recorded bytes after the deduplicated add.",
+        "After the relationship is removed, adding it again reuses the smallest available id, which is the original id."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / equivalent relationship leaves existing overrides and XML encoding byte-identical",
+      "title": "equivalent relationship leaves existing overrides and XML encoding byte-identical",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "A new part custom/a.xml with <a/> and content type application/xml is added.",
+        "An external relationship from custom/a.xml to https://example.invalid/ is added and its id is recorded.",
+        "[Content_Types].xml is manually edited to include an explicit override for /custom/_rels/a.xml.rels, and that override is confirmed to be present.",
+        "The package bytes are then recorded as the baseline."
+      ],
+      "when": [
+        "The same external relationship is added again from custom/a.xml to https://example.invalid/."
+      ],
+      "then": [
+        "The returned relationship id matches the first relationship id.",
+        "The package bytes remain exactly equal to the recorded baseline.",
+        "The pre-existing explicit override for /custom/_rels/a.xml.rels is preserved unchanged."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / dollar replacement tokens in external targets are literal bytes, not JS replacement directives",
+      "title": "dollar replacement tokens in external targets are literal bytes, not JS replacement directives",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "A new part custom/a.xml with <a/> and content type application/xml is added."
+      ],
+      "when": [
+        "An external relationship is added from custom/a.xml to the target https://example.invalid/$&."
+      ],
+      "then": [
+        "The stored relationship target is exactly https://example.invalid/$&."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / referenced parts refuse until explicitly detached, then only owned metadata is removed",
+      "title": "referenced parts refuse until explicitly detached, then only owned metadata is removed",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "An opaque part custom/a.bin with byte [7] and content type application/octet-stream is added.",
+        "A root relationship points to custom/a.bin, and the package bytes are recorded while that relationship still exists."
+      ],
+      "when": [
+        "removePart is called for custom/a.bin while it is still referenced.",
+        "The relationship is then removed explicitly, custom/a.bin is removed, and the package is serialized and reopened."
+      ],
+      "then": [
+        "The first removePart call is refused because the part is referenced.",
+        "After that refusal, the package bytes are still exactly the recorded baseline.",
+        "After explicit detachment, custom/a.bin is absent from the reopened package.",
+        "After explicit detachment, [Content_Types].xml in the reopened package no longer contains /custom/a.bin."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship referenced from owner XML cannot be removed; unknown binary owners refuse",
+      "title": "relationship referenced from owner XML cannot be removed; unknown binary owners refuse",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "A new part custom/b.xml with <b/> and content type application/xml is added.",
+        "A relationship from word/document.xml to ../custom/b.xml is added, and word/document.xml is edited to contain a q:embed attribute that references that relationship id.",
+        "The package bytes are recorded while the XML owner still points at that relationship.",
+        "A binary owner part custom/owner.bin is then added with its own relationship to b.xml, and a second baseline is recorded."
+      ],
+      "when": [
+        "removeRelationship is called for the relationship owned by word/document.xml while the owner XML still references it.",
+        "removeRelationship is then called for the relationship owned by custom/owner.bin."
+      ],
+      "then": [
+        "The XML-owned relationship removal is refused because the owner XML still references that id.",
+        "After that refusal, the package bytes still equal the first recorded baseline.",
+        "The binary-owner relationship removal is refused because the owner is binary and cannot be safely analyzed.",
+        "After that refusal, the package bytes still equal the second recorded baseline."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
+      "title": "cycle-safe traversal excludes external targets and preserves orphan parts",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "Three new parts custom/a.xml, custom/b.xml, and custom/orphan.xml are added.",
+        "Relationships create a root -> a edge, an a -> b edge, a b -> a cycle, and an external a -> https://example.invalid/ edge."
+      ],
+      "when": [
+        "walkParts is used to enumerate reachable package parts."
+      ],
+      "then": [
+        "custom/a.xml appears exactly once in the traversal result even though the graph contains a cycle.",
+        "custom/b.xml appears in the traversal result.",
+        "custom/orphan.xml does not appear in the traversal result.",
+        "custom/orphan.xml still exists in package storage after traversal."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / part name allocation considers orphan and case-colliding names",
+      "title": "part name allocation considers orphan and case-colliding names",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "word/header1.xml and the case-colliding name WORD/header2.xml are both added to the package."
+      ],
+      "when": [
+        "nextPartName is requested with the template word/header%d.xml.",
+        "nextPartName is requested with the invalid template missing-template."
+      ],
+      "then": [
+        "The next allocated name is word/header3.xml.",
+        "The invalid template request is refused."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / removing a part removes its own rels but never cascades into targets",
+      "title": "removing a part removes its own rels but never cascades into targets",
+      "given": [
+        "The present-placeholder fixture package is opened.",
+        "custom/a.xml and custom/b.xml are added as application/xml parts.",
+        "A relationship owned by custom/a.xml targets b.xml."
+      ],
+      "when": [
+        "removePart is called for custom/a.xml and the package is serialized and reopened."
+      ],
+      "then": [
+        "custom/_rels/a.xml.rels is removed along with the owning part.",
+        "custom/b.xml remains present.",
+        "The resulting package still reopens successfully as an OpcPackage."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / getContentType resolves defaults and overrides across namespace prefixes",
+      "title": "getContentType resolves defaults and overrides across namespace prefixes",
+      "given": [
+        "A package has [Content_Types].xml rooted at ct:Types, with ct and alt prefixes both bound to the OPC content-types namespace.",
+        "That part declares a rels default through alt:Default, an xml default through ct:Default, an office document override through alt:Override, and a custom/data.xml override through ct:Override."
+      ],
+      "when": [
+        "getContentType is called for word/document.xml, word/other.xml, and custom/data.xml."
+      ],
+      "then": [
+        "word/document.xml resolves to the main office document content type.",
+        "word/other.xml resolves through the xml default to application/xml.",
+        "custom/data.xml resolves through its explicit override to application/custom+xml."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / setPartContentType is an exact no-op when a default already yields the requested type",
+      "title": "setPartContentType is an exact no-op when a default already yields the requested type",
+      "given": [
+        "A baseline package already has the default xml content type application/xml.",
+        "The original package bytes are recorded."
+      ],
+      "when": [
+        "setPartContentType is called for word/other.xml with application/xml and removePartContentType is then called for the same part."
+      ],
+      "then": [
+        "The serialized package bytes remain exactly equal to the recorded original bytes."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / adds an override to a self-closing prefixed root without rewriting names",
+      "title": "adds an override to a self-closing prefixed root without rewriting names",
+      "given": [
+        "A package is rewritten so [Content_Types].xml is exactly a self-closing ct:Types element in the correct namespace."
+      ],
+      "when": [
+        "setPartContentType is called for custom/data.bin with application/octet-stream."
+      ],
+      "then": [
+        "[Content_Types].xml becomes the same ct:Types root expanded with one ct:Override for /custom/data.bin.",
+        "The ct prefix spelling is preserved rather than rewritten to another form.",
+        "getContentType(custom/data.bin) returns application/octet-stream."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / updates an existing override in place and preserves surrounding raw XML",
+      "title": "updates an existing override in place and preserves surrounding raw XML",
+      "given": [
+        "A package has a prefixed [Content_Types].xml part with an existing ct:Override for /word/document.xml whose attributes include preserved spacing and whose ContentType is application/old+xml."
+      ],
+      "when": [
+        "setPartContentType is called for word/document.xml with the main office document content type."
+      ],
+      "then": [
+        "The resulting [Content_Types].xml text keeps the original root, prefix, surrounding entries, and attribute spacing.",
+        "Only the override ContentType for /word/document.xml changes to the requested main office document content type."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / removePartContentType removes only the matching override and never rewrites defaults",
+      "title": "removePartContentType removes only the matching override and never rewrites defaults",
+      "given": [
+        "A package has [Content_Types].xml with rels and xml defaults, the main document override, and a second override for /custom/data.bin."
+      ],
+      "when": [
+        "removePartContentType is called for custom/data.bin."
+      ],
+      "then": [
+        "The resulting [Content_Types].xml text removes only the /custom/data.bin override.",
+        "The rels and xml defaults remain byte-for-byte in place.",
+        "getContentType(custom/data.bin) becomes undefined.",
+        "getContentType(word/other.xml) still resolves to application/xml."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / detached overrides remain queryable for parts that do not yet exist",
+      "title": "detached overrides remain queryable for parts that do not yet exist",
+      "given": [
+        "A baseline package does not contain a physical custom/future.bin part."
+      ],
+      "when": [
+        "setPartContentType is called for custom/future.bin with application/octet-stream.",
+        "getContentType is queried for custom/future.bin and word/other.xml, and the package is serialized."
+      ],
+      "then": [
+        "custom/future.bin resolves to application/octet-stream even though that part has not been added.",
+        "word/other.xml still resolves to application/xml through the default mapping.",
+        "Serializing the package does not throw."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / invalid inputs and malformed current content types leave bytes untouched",
+      "title": "invalid inputs and malformed current content types leave bytes untouched",
+      "given": [
+        "A valid package is opened and the original [Content_Types].xml bytes are recorded.",
+        "The test later overwrites [Content_Types].xml once with duplicate overrides for /word/document.xml and once with a wrong-namespace bad:Override element."
+      ],
+      "when": [
+        "setPartContentType is called with the noncanonical part name ../bad.xml.",
+        "setPartContentType is called with word/bad.xml and the invalid MIME string not a mime.",
+        "getContentType is called for word/document.xml after duplicate overrides are authored.",
+        "removePartContentType is called for word/document.xml after the wrong-namespace override is authored."
+      ],
+      "then": [
+        "The noncanonical part name is refused with code opc-part-name-invalid and a noncanonical-part-name message.",
+        "The invalid MIME string is refused with code opc-content-type-invalid and an invalid-content-type message.",
+        "After those two input refusals, [Content_Types].xml still matches the original recorded bytes.",
+        "The duplicate-override lookup is refused with code opc-content-types-invalid and a duplicate-or-missing-part-override message.",
+        "After that duplicate-override refusal, [Content_Types].xml still matches the duplicate-bytes snapshot taken immediately before the lookup.",
+        "The wrong-namespace removal is refused with code opc-content-types-invalid and a malformed-content-type message.",
+        "After that malformed-content-types refusal, [Content_Types].xml still matches the wrong-namespace snapshot taken immediately before the removal."
+      ],
+      "examples": [
+        "bad part name: ../bad.xml",
+        "bad content type: not a mime",
+        "duplicate override: two overrides for /word/document.xml",
+        "wrong namespace: bad:Override in urn:not-content-types"
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / raw fixture no-op diffs are empty, preserve exact source bytes, and return detached reports",
+      "title": "raw fixture no-op diffs are empty, preserve exact source bytes, and return detached reports",
+      "given": [
+        "The bytes of fixture ID fixture-535910216e3531e4f70959cccf83038f1c51febbf4a149f9f46abfbfa8667d90 are read from disk.",
+        "A before package is opened from those original bytes and an after package is opened from a cloned copy of the same bytes."
+      ],
+      "when": [
+        "diffPackages(before, after) is called.",
+        "The returned report object is mutated in memory by editing its unchanged and parts arrays.",
+        "diffPackages(before, after) is called again."
+      ],
+      "then": [
+        "The initial report has added = [], removed = [], changed = [], unchanged = before.names(), and parts = [].",
+        "Mutating the returned report does not mutate either package.",
+        "before.toBytes() still equals the exact original fixture bytes.",
+        "after.toBytes() still equals the exact original fixture bytes.",
+        "A fresh diff after mutating the prior report is still the same empty report."
+      ],
+      "examples": [
+        "mutated report fields: unchanged.pop() and parts.push({ name: invented, kind: added })"
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / ignores ZIP metadata-only changes",
+      "title": "ignores ZIP metadata-only changes",
+      "given": [
+        "A valid OPC package is created as baseline bytes.",
+        "A second byte stream differs only by a ZIP archive comment of metadata-only.",
+        "The before package is opened from the baseline bytes and the after package is opened from the metadata-only bytes."
+      ],
+      "when": [
+        "diffPackages(before, after) is called."
+      ],
+      "then": [
+        "The metadata-only ZIP bytes are not byte-for-byte equal to the baseline bytes.",
+        "The diff report has added = [], removed = [], changed = [], unchanged = before.names(), and parts = [].",
+        "before.toBytes() still equals the baseline bytes.",
+        "after.toBytes() still equals the metadata-only ZIP bytes."
+      ],
+      "examples": [],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / reports opaque payload edits with hashes, lengths, content types, and detached part records",
+      "title": "reports opaque payload edits with hashes, lengths, content types, and detached part records",
+      "given": [
+        "A package contains custom/data.bin with bytes [1,2,3] and override content type application/vnd.example.opaque.",
+        "before and after packages are opened from the same starting bytes.",
+        "A replacement payload [3,2,1,0] is prepared."
+      ],
+      "when": [
+        "after.set(custom/data.bin, replacement) is applied and diffPackages(before, after) is called.",
+        "The returned report is then mutated in memory by changing report.changed[0] and report.parts[0].afterSha256.",
+        "diffPackages(before, after) is called again."
+      ],
+      "then": [
+        "The diff report has added = [] and removed = [].",
+        "The diff report marks custom/data.bin as the only changed part.",
+        "The unchanged list contains [Content_Types].xml, _rels/.rels, and word/document.xml.",
+        "The part record for custom/data.bin reports beforeBytes = 3, afterBytes = 4, the same opaque content type on both sides, and before and after SHA-256 values for the old and replacement payloads.",
+        "Mutating the returned report does not change the stored replacement payload in the after package.",
+        "Mutating the returned report does not change before.toBytes().",
+        "A fresh diff rebuilds the original hashes and change metadata."
+      ],
+      "examples": [],
+      "limitations": [
+        "The concrete SHA-256 hex strings are computed at runtime and are not expanded here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / reports added and removed parts with content-type updates via package.set",
+      "title": "reports added and removed parts with content-type updates via package.set",
+      "given": [
+        "A package contains custom/existing.bin with bytes [9,9] and custom/obsolete.xml with XML payload <obsolete>before</obsolete>.",
+        "Overrides declare application/vnd.example.existing for custom/existing.bin and application/vnd.example.obsolete+xml for custom/obsolete.xml.",
+        "before and after packages are opened from the same starting bytes, and an after payload <fresh>after</fresh> is prepared for a new part."
+      ],
+      "when": [
+        "custom/obsolete.xml is deleted from after.",
+        "custom/fresh.xml is added to after with the fresh XML payload.",
+        "[Content_Types].xml in after is rewritten to remove the obsolete override and add an override for custom/fresh.xml with application/vnd.example.fresh+xml.",
+        "diffPackages(before, after) is called."
+      ],
+      "then": [
+        "The diff report lists custom/fresh.xml in added.",
+        "The diff report lists custom/obsolete.xml in removed.",
+        "The diff report lists [Content_Types].xml in changed.",
+        "The unchanged list is [_rels/.rels, custom/existing.bin, word/document.xml].",
+        "The part record for [Content_Types].xml reports before and after hashes, byte lengths, and application/xml on both sides.",
+        "The added-part record for custom/fresh.xml reports its hash, byte length, and application/vnd.example.fresh+xml content type.",
+        "The removed-part record for custom/obsolete.xml reports its hash, byte length, and application/vnd.example.obsolete+xml content type."
+      ],
+      "examples": [],
+      "limitations": [
+        "The concrete SHA-256 hex strings and serialized [Content_Types].xml byte lengths are computed at runtime and are not expanded here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / marks content-type-only changes as changed even when payload bytes are identical",
+      "title": "marks content-type-only changes as changed even when payload bytes are identical",
+      "given": [
+        "A package contains custom/payload.bin with bytes [7,8,9] and override content type application/vnd.example.before.",
+        "before and after packages are opened from the same starting bytes."
+      ],
+      "when": [
+        "[Content_Types].xml in after is rewritten so the custom/payload.bin override changes from application/vnd.example.before to application/vnd.example.after.",
+        "diffPackages(before, after) is called."
+      ],
+      "then": [
+        "The diff report has added = [] and removed = [].",
+        "The changed list contains [Content_Types].xml and custom/payload.bin.",
+        "The unchanged list is [_rels/.rels, word/document.xml].",
+        "The [Content_Types].xml part record reports before and after hashes, byte lengths, and application/xml on both sides.",
+        "The custom/payload.bin part record reports the same before and after payload hash and the same before and after byte count, but different before and after content types."
+      ],
+      "examples": [],
+      "limitations": [
+        "The concrete SHA-256 hex strings and serialized [Content_Types].xml byte lengths are computed at runtime and are not expanded here."
+      ]
+    }
+  ],
+  "inputPolicy": "Fixtures are resolved by stable IDs through the central manifest; no producer-specific storage roots."
+}

@@ -38,6 +38,18 @@ batches. Read [agent usage](docs/agents/usage.md) before editing unfamiliar file
 refusals, target lifetimes and save/reopen checks. [Agent maintenance](docs/agents/maintenance.md)
 explains reference pins and the Gherkin-to-test-to-outcome workflow.
 
+## Shared reference
+
+Fixtures, MIME types, namespace and relationship facts, workflow Gherkin and
+consumer mappings come from one tagged [`fixtures-ooxml` checkout][fixtures].
+Fixtures are stored once under `fixtures/<format>/<scenario-group>/` there;
+Bun tests resolve stable manifest IDs instead of copying files or rebuilding
+producer-specific folders. See the [reference contract](docs/contracts/fixture-references.md).
+
+The native test inventory and candidate behaviour mappings in `docs/behaviors/`
+are review inputs for the common catalogue. They do not count as implemented
+Gherkin or complete format coverage.
+
 ## Development
 
 Requires Bun 1.4.1 or newer. `make install` installs development tools; `make check`
@@ -49,4 +61,6 @@ Tests use the tagged shared reference submodule. Clone with --recurse-submodules
 or run git submodule update --init --recursive. Fixtures are read-only; missing
 inputs fail rather than generating fallbacks.
 
-MIT. See [third-party notices](THIRD_PARTY_NOTICES.md) for source and fixture provenance.
+MIT. See [third-party notices](THIRD_PARTY_NOTICES.md) for licences and fixture provenance.
+
+[fixtures]: https://github.com/rcarmo/fixtures-ooxml

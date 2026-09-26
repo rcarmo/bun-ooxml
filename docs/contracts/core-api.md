@@ -1,4 +1,4 @@
-# Shared API for parallel implementation
+# Package and XML APIs
 
 `src/errors.ts`: `OoxmlError` extends Error, readonly `code: string`, constructor
 `(code: string, message: string)`. Errors use stable codes.
@@ -36,5 +36,5 @@
 * `applyEdits(xml: string, edits: {start: number; end: number; value: string}[]): string`
   refuses invalid/overlapping offsets before returning any changed text.
 
-All getters return detached bytes so caller mutation cannot bypass dirty tracking.
+Package byte getters return detached copies so caller mutation cannot bypass dirty tracking.
 No-op package serialization returns the original whole archive bytes.

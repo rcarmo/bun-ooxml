@@ -1,15 +1,15 @@
-# Word story and review slice (batch 15)
+# Word stories and tracked revisions
 
 Standalone package APIs avoid mutating Document caches behind live handles. Users
 open an OpcPackage, inspect/edit/resolve, save, then reopen Document. Every module
-uses Bun-native XML/package primitives, no Python process or producer dependency.
+uses Bun-native XML/package primitives without an external producer.
 
 `src/docx/story.ts`:
 * `type RevisionView = 'current'|'original'|'all'`
 * `inspectStories(pkg:OpcPackage, options?:{view?:RevisionView}): StoryInspection`
 * `StoryInspection = {stories:Story[],blindRegions:{part:string;kind:string;count:number}[]}`
 * `Story = {part:string;kind:'body'|'header'|'footer'|'footnotes'|'endnotes'|'comments'; paragraphs:{index:number;text:string}[]}`
-* `storyParts(pkg): {part:string;kind:Story['kind']}[]` exported internal helper.
+* `storyParts(pkg): {part:string;kind:Story['kind']}[]` lists linked story parts.
 Order body then headers/footers/notes/comments, deterministic by relationship order
 then part name. Discover exact officeDocument relationship types from main part
 (and referenced story parts) without URL fetch. Report orphan/unsupported story
@@ -42,8 +42,8 @@ untouched runs/properties; generate w:del/w:delText and w:ins with author/date/i
 first matched run formatting for insertion. Deletion preserves each matched run's
 formatting. Snapshot source XML for stale-scope assumptions only synchronous API.
 Before returning, resolve copies accept/reject and assert semantic text matches
-replacement/original. Tests check formatting and opaque-part preservation. Full Word Compare
-and paragraph/table change algebra remain unported; don't claim general compare.
+replacement/original. Tests check formatting and opaque-part preservation. General
+document comparison and paragraph/table change algebra are not implemented.
 
 The root and ./docx entrypoints export these APIs. Tests/features are named
 story/revisions/redline. Shared fixtures are unchanged. Author filtering,

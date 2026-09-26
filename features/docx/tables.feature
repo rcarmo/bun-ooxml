@@ -18,7 +18,7 @@ Feature: DOCX native rectangular tables
 
   @id-docx-table-opaque-preserve
   Scenario: DOCX table cell updates preserve opaque package parts after save and reopen
-    Given DOCX table source "fixtures/python-office-mcp-server/tests/_templates/testdata/word/simple_table.docx" is prepared
+    Given DOCX table source "fixture-8192955ef935f09eb61a9fe6805d4996c811efcf54c0c966f52d983e38e0a79c" is prepared
     And DOCX table opaque part "docProps/core.xml" bytes are remembered
     When DOCX table 1 cell (1,0) text is set to "Voltaic battery"
     And DOCX table document is saved and reopened
@@ -47,7 +47,7 @@ Feature: DOCX native rectangular tables
 
     Examples:
       | source                                                                                         | case        | code                         |
-      | fixtures/python-office-mcp-server/tests/_templates/testdata/word/simple_table.docx            | row-oob     | range                        |
+      | fixture-8192955ef935f09eb61a9fe6805d4996c811efcf54c0c966f52d983e38e0a79c            | row-oob     | range                        |
       | native-merged-nested  | merged-cell | docx-table-merged-cell       |
       | native-merged-nested  | nested-cell | docx-table-cell-unsupported  |
       | synthetic-grid-before                                                                          | bizarre     | docx-table-unsupported       |

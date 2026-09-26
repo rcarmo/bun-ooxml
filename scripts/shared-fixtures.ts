@@ -18,6 +18,7 @@ export interface FixtureOrigin {
 
 export interface FixtureRecord {
   id: string;
+  assetId: string;
   path: string;
   sha256: string;
   bytes: number;
@@ -31,6 +32,7 @@ export interface FixtureRecord {
 
 export interface FixtureManifest {
   schemaVersion: number;
+  pathBase: string;
   contractRevision: string;
   generator: {
     path: string;

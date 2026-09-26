@@ -1,3 +1,4 @@
+import {fixturePath,fixturePaths,F} from "../../scripts/fixture-inputs.ts";
 import { expect } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -7,10 +8,6 @@ import { addPart, addRelationship, type OpcPackage } from "../../src/opc/index.t
 import { inspectStories, storyParts, type RevisionView, type StoryInspection } from "../../src/docx/story.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const PYTHON_WORD_ROOT = join(
-  PROJECT_ROOT,
-  "fixtures/python-office-mcp-server/tests/_templates/testdata/word",
-);
 const W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 const R_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
 const MC_NS = "http://schemas.openxmlformats.org/markup-compatibility/2006";
@@ -100,15 +97,15 @@ export async function openStoryFixture(name: string): Promise<OpcPackage> {
 
 export function resolveStoryFixturePath(name: string): string {
   const real = new Map<string, string>([
-    ["header-footer-sections", join(PYTHON_WORD_ROOT, "headers_footers.docx")],
-    ["comments", join(PYTHON_WORD_ROOT, "comments.docx")],
+    ["header-footer-sections", fixturePath(F.officeWord.headersFooters)],
+    ["comments", fixturePath(F.officeWord.comments)],
   ]);
   return required(real.get(name), `unknown DOCX story fixture ${name}`);
 }
 
 export async function createSyntheticRevisionFixture(): Promise<OpcPackage> {
   const { OpcPackage } = await import("../../src/opc/index.ts");
-  const pkg = await OpcPackage.open(new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "single_paragraph.docx"))));
+  const pkg = await OpcPackage.open(new Uint8Array(readFileSync(fixturePath(F.officeWord.singleParagraph))));
   const main = pkg.mainPart();
 
   pkg.set(main, [
@@ -201,7 +198,7 @@ export async function createSyntheticRevisionFixture(): Promise<OpcPackage> {
 
 export async function createSyntheticBlindFixture(): Promise<OpcPackage> {
   const { OpcPackage } = await import("../../src/opc/index.ts");
-  const pkg = await OpcPackage.open(new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "single_paragraph.docx"))));
+  const pkg = await OpcPackage.open(new Uint8Array(readFileSync(fixturePath(F.officeWord.singleParagraph))));
   const main = pkg.mainPart();
 
   pkg.set(main, [

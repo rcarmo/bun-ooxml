@@ -1,3 +1,4 @@
+import {fixturePaths,GO_TESTDATA_PACKAGE_IDS,PYTHON_TESTDATA_PACKAGE_IDS} from "../../scripts/fixture-inputs.ts";
 import assert from "node:assert/strict";
 import { readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -10,11 +11,6 @@ import { crc32, readZip, writeZip } from "../../src/opc/zip.ts";
 import { applyEdits, escapeText, parseXml, type XmlDocument, type XmlElement } from "../../src/xml/index.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const GO_CORPUS_ROOT = join(PROJECT_ROOT, "fixtures/go-ooxml/testdata");
-const PYTHON_CORPUS_ROOT = join(
-  PROJECT_ROOT,
-  "fixtures/python-office-mcp-server/tests/_templates/testdata",
-);
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder("utf-8", { fatal: true });
@@ -867,8 +863,8 @@ export const bindings: StepBinding[] = [
       const state = coreState(context);
       state.opc = {
         corpora: [
-          enumerateCorpus("go-ooxml", GO_CORPUS_ROOT),
-          enumerateCorpus("python-office-mcp-server", PYTHON_CORPUS_ROOT),
+          enumerateCorpus("go-ooxml", GO_TESTDATA_PACKAGE_IDS),
+          enumerateCorpus("python-office-mcp-server", PYTHON_TESTDATA_PACKAGE_IDS),
         ],
       };
     },
@@ -915,7 +911,7 @@ export const bindings: StepBinding[] = [
       const corpora = requireDefined(opc.corpora, "Missing fixture corpora");
       const go = requireDefined(corpora.find((corpus) => corpus.name === "go-ooxml"));
       const python = requireDefined(corpora.find((corpus) => corpus.name === "python-office-mcp-server"));
-      assert.equal(go.allFiles.length, 39);
+      assert.equal(go.allFiles.length, 37);
       assert.equal(go.packageFiles.length, 37);
       assert.equal(python.allFiles.length, 35);
       assert.equal(python.packageFiles.length, 35);
@@ -923,7 +919,7 @@ export const bindings: StepBinding[] = [
       assert.ok(go.packageFiles.length > 0);
       assert.ok(python.allFiles.length > 0);
       assert.ok(python.packageFiles.length > 0);
-      assert.equal(go.allFiles.length + python.allFiles.length, 74);
+      assert.equal(go.allFiles.length + python.allFiles.length, 72);
       assert.equal(go.packageFiles.length + python.packageFiles.length, 72);
     },
   },
@@ -1092,32 +1088,7 @@ function requireChildByLocalName(element: XmlElement, localName: string): XmlEle
   );
 }
 
-function enumerateCorpus(name: string, root: string): CorpusInfo {
-  const allFiles = listFiles(root);
-  const packageFiles = allFiles.filter((path) => /\.(docx|pptx|xlsx)$/i.test(path));
-  return {
-    name,
-    root,
-    allFiles,
-    packageFiles,
-  };
-}
-
-function listFiles(root: string): string[] {
-  const files: string[] = [];
-  const visit = (dir: string): void => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const next = join(dir, entry.name);
-      if (entry.isDirectory()) {
-        visit(next);
-      } else {
-        files.push(next);
-      }
-    }
-  };
-  visit(root);
-  return files.sort();
-}
+function enumerateCorpus(name: CorpusInfo["name"], ids: readonly string[]): CorpusInfo { const paths=fixturePaths(ids); return { name, root: "canonical fixture IDs", allFiles: paths, packageFiles: paths }; }
 
 function buildSyntheticOpcPackage(): Uint8Array {
   return writeZip(

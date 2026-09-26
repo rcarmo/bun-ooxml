@@ -1,4 +1,6 @@
 import { afterAll, describe, expect, test } from "bun:test";
+import {join} from 'node:path';
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import { PickleStepType } from "@cucumber/messages";
 
 import { executeAcceptance, newAcceptanceRunId, parseFeature, type AcceptanceFeature, type AcceptanceInventory } from "../../scripts/gherkin.ts";
@@ -6,7 +8,7 @@ import { bindings, cleanupWorkflowFixtures } from "../acceptance/workflow.ts";
 
 const PROJECT_ROOT = new URL("../..", import.meta.url).pathname;
 const FEATURE_PATH = "features/native/workflow-mutation-safety.feature";
-const FROZEN_FEATURE = new URL("../../docs/contracts/shared-v2/pack/features/mutation-safety.feature", import.meta.url);
+const FROZEN_FEATURE = join(fixturesRoot(),'shared/v2/pack/features/mutation-safety.feature');
 
 afterAll(async () => {
   await cleanupWorkflowFixtures();

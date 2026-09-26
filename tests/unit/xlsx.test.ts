@@ -9,6 +9,7 @@ import { OoxmlError } from "../../src/errors.ts";
 import { readZip } from "../../src/opc/zip.ts";
 import { elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
 import { Workbook } from "../../src/xlsx/index.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 import {
   bindings,
   createCrossSheetCachedFormulaWorkbook,
@@ -54,10 +55,7 @@ describe("Workbook.open", () => {
   });
 
   test("reads real go-ooxml inline, numeric and boolean cells through workbook relationships", async () => {
-    const path = join(
-      import.meta.dir,
-      "../../fixtures/go-ooxml/testdata/excel/multiple_sheets.xlsx",
-    );
+    const path = fixturePath(F.goSheets.multipleSheets);
     const workbook = await Workbook.open(path);
 
     expect(workbook.sheetnames).toEqual(["Characters", "Experiments", "Summary"]);
@@ -70,10 +68,7 @@ describe("Workbook.open", () => {
   });
 
   test("reads real python-office shared strings from bytes", async () => {
-    const path = join(
-      import.meta.dir,
-      "../../fixtures/python-office-mcp-server/tests/_templates/testdata/excel/comments.xlsx",
-    );
+    const path = fixturePath(F.officeSheets.comments);
     const bytes = new Uint8Array(await Bun.file(path).arrayBuffer());
     const workbook = await Workbook.open(bytes);
 
@@ -101,7 +96,7 @@ describe("Workbook.open", () => {
 
 describe("Worksheet.setCellValue", () => {
   test("preserves style attributes and unrelated parts after save and reopen", async () => {
-    const path = join(import.meta.dir, "../../fixtures/go-ooxml/testdata/excel/formatting.xlsx");
+    const path = fixturePath(F.goSheets.formatting);
     const originalBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
     const originalParts = readZip(originalBytes);
     const workbook = await Workbook.open(path);

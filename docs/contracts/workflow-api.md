@@ -1,4 +1,4 @@
-# Native workflow API (batch 7)
+# Native batch workflow API
 
 `src/workflow/index.ts` exports `patchOffice(request): Promise<PatchReceipt>`.
 A request is `{ source: string, output?: string, format?: 'docx'|'pptx'|'xlsx',
@@ -6,7 +6,7 @@ mode: 'dry_run'|'strict'|'safe', changes: {target: string, value: string|number|
 multilineWrap?: boolean, calculationPolicy?: 'invalidate-without-recalculation',
 expectedSourceSha256?: string, expectedDestinationSha256?: string|null }`.
 
-All modes resolve targets against one private source snapshot. This first workflow
+All modes resolve targets against one private source snapshot. The workflow
 requires all targets to be unique, supported and non-overlapping. It refuses the
 entire batch otherwise, including safe mode; best-effort is not implemented.
 Dry run may stage in memory but never writes. Safe requires a distinct destination;
@@ -20,7 +20,7 @@ Preview reports zero committed operations, actual per-target matches and request
 values. Committed counts come from changed staged operations after successful
 atomic save, never from input length. Refusal has zero and no committed results.
 
-Targets: DOCX exact literal body/table text; one match only in this first workflow.
+Targets: DOCX exact literal body/table text with one match.
 PPTX `slide:N/title` or `slide:N/subtitle`, 1-based slide number, unique real placeholder
 shape and one supported paragraph. XLSX `Sheet!A1` or `A1` on the first sheet, existing
 cell only. Null clearing and formula-cell overwrites refuse. No formula assignment
@@ -45,6 +45,7 @@ writers by canonical source/output path. It does not claim isolation against an
 external filesystem writer between final check and rename. Final symlinks and
 safe-output hardlink aliases refuse. Caller directories must be trusted.
 
-Contract tests bind the frozen shared v2 feature with only lifecycle-tag changes;
-source text, scenario IDs, expanded examples and arguments remain pinned. Native
+Contract tests read the shared v2 feature from the pinned reference checkout and
+apply lifecycle tags in memory. Source text, scenario IDs, expanded examples and
+arguments remain pinned; fixture bytes resolve through canonical manifest IDs. Native
 library support and workflow coverage are separate from full format behaviour coverage.

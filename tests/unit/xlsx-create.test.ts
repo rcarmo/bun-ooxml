@@ -9,6 +9,7 @@ import { OoxmlError } from "../../src/errors.ts";
 import { readZip } from "../../src/opc/zip.ts";
 import { elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
 import { Workbook } from "../../src/xlsx/index.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 import {
   bindings,
   createPrefixedWorkbookWithMissingB2,
@@ -216,7 +217,7 @@ describe("Worksheet.setCellValue missing-cell authoring", () => {
   });
 
   test("appends a missing cell to an existing worksheet while preserving surrounding nodes and unrelated parts", async () => {
-    const path = join(import.meta.dir, "../../fixtures/go-ooxml/testdata/excel/formatting.xlsx");
+    const path = fixturePath(F.goSheets.formatting);
     const originalBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
     const originalParts = readZip(originalBytes);
     const originalSheetXml = decodePart(originalParts, "xl/worksheets/sheet1.xml");

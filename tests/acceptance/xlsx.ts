@@ -9,6 +9,7 @@ import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { OoxmlError } from "../../src/errors.ts";
 import { elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
 import { Workbook, type Cell } from "../../src/xlsx/index.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 
 type ScenarioState = {
   sourceBytes?: Uint8Array;
@@ -24,7 +25,6 @@ type ScenarioState = {
 
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
 const encoder = new TextEncoder();
-const projectRoot = join(import.meta.dir, "..", "..");
 
 export function createRelLinkedSharedStringsWorkbook(): Uint8Array {
   return writeZip(
@@ -316,7 +316,7 @@ export const bindings: StepBinding[] = [
     pattern: /^the go-ooxml formatting workbook fixture$/,
     run: async (context) => {
       const state = scenarioState(context);
-      const path = projectPath("fixtures/go-ooxml/testdata/excel/formatting.xlsx");
+      const path = fixturePath(F.goSheets.formatting);
       state.sourceBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
       state.originalParts = readZip(state.sourceBytes);
       state.workbook = await Workbook.open(path);
@@ -666,7 +666,7 @@ function xml(source: string): Uint8Array {
 }
 
 function projectPath(relativePath: string): string {
-  return join(projectRoot, relativePath);
+  return join(import.meta.dir, '../..', relativePath);
 }
 
 async function tempWorkbookPath(name: string): Promise<string> {

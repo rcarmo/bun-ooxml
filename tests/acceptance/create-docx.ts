@@ -1,3 +1,4 @@
+import {fixturePath} from "../../scripts/fixture-inputs.ts";
 import { expect } from "bun:test";
 import { join, resolve } from "node:path";
 
@@ -30,7 +31,7 @@ export const bindings: StepBinding[] = [
       state.rememberedOpaquePart = undefined;
       state.document = source === "new-document"
         ? Document.create()
-        : await Document.open(join(PROJECT_ROOT, source));
+        : await Document.open(fixturePath(source));
     },
   },
   {

@@ -9,22 +9,14 @@ import { OoxmlError } from "../../src/errors.ts";
 import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { Presentation } from "../../src/pptx/index.ts";
 import { parseXml } from "../../src/xml/index.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
-const GO_NOTES_FIXTURE = join(
-  import.meta.dir,
-  "../../fixtures/go-ooxml/testdata/pptx/notes.pptx",
-);
-const GO_MINIMAL_FIXTURE = join(
-  import.meta.dir,
-  "../../fixtures/go-ooxml/testdata/pptx/minimal.pptx",
-);
-const PYTHON_TITLE_FIXTURE = join(
-  import.meta.dir,
-  "../../fixtures/python-office-mcp-server/tests/_templates/testdata/pptx/title_slide.pptx",
-);
+const GO_NOTES_FIXTURE = fixturePath(F.goSlides.notes);
+const GO_MINIMAL_FIXTURE = fixturePath(F.goSlides.minimal);
+const PYTHON_TITLE_FIXTURE = fixturePath(F.officeSlides.titleSlide);
 
 const FRAGMENTED_TITLE_PARAGRAPH = [
   "<a:p>",

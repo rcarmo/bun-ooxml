@@ -1,3 +1,4 @@
+import {fixturesRoot,fixturePath,SHARED_FIXTURE_IDS} from "../../scripts/fixture-inputs.ts";
 import {expect} from 'bun:test';
 import {join} from 'node:path';
 import {OpcPackage} from '../../src/opc/package.ts';
@@ -10,7 +11,7 @@ const office='http://schemas.openxmlformats.org/officeDocument/2006/relationship
 const packageUri='http://schemas.openxmlformats.org/package/2006/relationships';
 export async function namespaceFixture(format:'pptx'|'xlsx',variant:'original'|'alias'|'wrong'|'unqualified'):Promise<Uint8Array>{
  const name=format==='pptx'?'title-and-subtitle.pptx':'default-style.xlsx';
- const p=await OpcPackage.open(join(import.meta.dir,'../../docs/contracts/shared-v2/pack/fixtures',name));const part=p.mainPart();let xml=p.text(part);
+ const p=await OpcPackage.open(fixturePath(SHARED_FIXTURE_IDS[name]));const part=p.mainPart();let xml=p.text(part);
  if(variant==='alias')xml=xml.replaceAll('xmlns:r=','xmlns:link=').replaceAll('r:id=','link:id=');
  if(variant==='wrong')xml=xml.replaceAll(office,packageUri);
  if(variant==='unqualified')xml=xml.replaceAll('r:id=','id=');

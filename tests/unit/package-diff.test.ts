@@ -1,16 +1,16 @@
 import { describe, expect, test } from "bun:test";
-import { join, resolve } from "node:path";
 
 import { diffPackages } from "../../src/opc/diff.ts";
 import { OpcPackage } from "../../src/opc/package.ts";
 import { writeZip } from "../../src/opc/zip.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 
 const CONTENT_TYPES_NS = "http://schemas.openxmlformats.org/package/2006/content-types";
 const RELATIONSHIPS_NS = "http://schemas.openxmlformats.org/package/2006/relationships";
 const OFFICE_DOCUMENT_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument";
 const MAIN_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml";
 const RELATIONSHIPS_CONTENT_TYPE = "application/vnd.openxmlformats-package.relationships+xml";
-const FIXTURE_PATH = join(resolve(import.meta.dir, "../.."), "docs/contracts/shared-v2/pack/fixtures/present-placeholder.docx");
+const FIXTURE_PATH = fixturePath(F.shared.presentPlaceholder);
 const encoder = new TextEncoder();
 
 

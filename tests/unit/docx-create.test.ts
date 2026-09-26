@@ -1,3 +1,4 @@
+import {fixturePath,F} from "../../scripts/fixture-inputs.ts";
 import { describe, expect, test } from "bun:test";
 import { join, resolve } from "node:path";
 
@@ -17,10 +18,7 @@ import { attribute, parseXml, type XmlElement } from "../../src/xml/index.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
 const DOCUMENT_PART = "word/document.xml";
-const STYLES_FIXTURE = join(
-  PROJECT_ROOT,
-  "fixtures/python-office-mcp-server/tests/_templates/testdata/word/styles.docx",
-);
+const STYLES_FIXTURE = fixturePath(F.officeWord.styles);
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 
 describe("Document.create and addParagraph", () => {

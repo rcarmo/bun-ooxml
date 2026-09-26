@@ -1,10 +1,10 @@
 import {describe,expect,test} from 'bun:test';
-import {join} from 'node:path';
+import { fixturePath, F } from '../../scripts/fixture-inputs.ts';
 import {OpcPackage} from '../../src/opc/package.ts';
 import {addPart,removePart,addRelationship,removeRelationship,nextPartName,walkParts} from '../../src/opc/graph.ts';
 import {getContentType} from '../../src/opc/content-types.ts';
 import {parseXml,applyEdits} from '../../src/xml/index.ts';
-const fixture=join(import.meta.dir,'../../docs/contracts/shared-v2/pack/fixtures/present-placeholder.docx');
+const fixture=fixturePath(F.shared.presentPlaceholder);
 const open=()=>OpcPackage.open(fixture);
 describe('guarded OPC graph edits',()=>{
  test('opaque parts and content types survive related save/reopen',async()=>{

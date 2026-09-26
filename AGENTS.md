@@ -7,7 +7,13 @@ in the tagged references/fixtures-ooxml submodule. All planned behaviour remains
 - Save/reopen outputs and assert atomic refusals and unrelated-part custody.
 - Run make check before commits. A passing subset does not establish full coverage.
 - Runtime operations use TypeScript and Bun builtins only; no foreign processes.
-- Never modify shared fixtures or generate fallback inputs in the submodule.
-- Required licence and provenance data lives in the shared reference repository.
+- Resolve fixtures by stable manifest ID; the only physical inputs are grouped
+  under fixtures/<format>/<scenario-group>/ in the reference submodule. Do not
+  recreate origin-based roots or compatibility symlinks. Never modify shared
+  fixtures or generate fallback inputs in the submodule.
+- Required fixture licence and provenance data lives in the shared reference
+  repository; runtime/development dependencies retain their own required notices.
+- Catalogue staging is not canonical Gherkin or execution credit. Reconcile shared
+  behaviour IDs centrally and retain explicit unreviewed cases and gaps.
 - Commit as Rui Carmo <rcarmo@users.noreply.github.com>; set local/global identity.
 - Never rebase; coordinate approved history cleanups explicitly.

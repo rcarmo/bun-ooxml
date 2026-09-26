@@ -41,7 +41,8 @@ export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;case
   const metadata=await Bun.file(join(root,PATH,"manifest.json")).json();
   check(metadata.version===1&&metadata.workflowLayer===true&&metadata.libraryParityCredit===false,"Workflow/library parity scope changed");
   check(safe(metadata.pack)&&safe(metadata.featurePath),"Unsafe shared pack path");
-  const pack=join(root,metadata.pack);
+  const referenceRoot=root===ROOT ? (process.env.OOXML_FIXTURES_ROOT??join(root,'references/fixtures-ooxml')) : join(root,'references/fixtures-ooxml');
+  const pack=join(referenceRoot,'shared/v2/pack');
   const manifestBytes=await Bun.file(join(pack,"pack-manifest.json")).bytes();
   check(digest(manifestBytes)===metadata.packManifestSha256,"Shared pack manifest drift");
   const manifest=JSON.parse(new TextDecoder().decode(manifestBytes));
@@ -64,16 +65,18 @@ export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;case
   check(feature.lifecycle==="planned"&&feature.scenarios.length===8,"Shared workflow coverage not planned");
   check(isDeepStrictEqual(feature.scenarios.map(s=>s.scenarioId),metadata.scenarios),"Shared scenario IDs changed");
   const fixtureManifest=await Bun.file(join(pack,"fixture-manifest.json")).json() as FixtureManifest;
-  check(fixtureManifest.schemaVersion===1&&fixtureManifest.contractRevision===metadata.contractRevision&&fixtureManifest.fixtures.length===4,"Fixture inventory changed");
+  check(fixtureManifest.schemaVersion===2&&fixtureManifest.pathBase==='repository-root'&&fixtureManifest.contractRevision===metadata.contractRevision&&fixtureManifest.fixtures.length===4,"Fixture inventory changed");
   check(manifest.distributionRevision===metadata.distributionRevision,'Shared distribution identity changed');
-  const source=await Bun.file(join(root,'references/fixtures-ooxml/manifest.json')).json();
+  const source=await Bun.file(join(referenceRoot,'manifest.json')).json();
   const fixtures=new Map<string,FixtureManifest["fixtures"][number]>();
   for(const fixture of fixtureManifest.fixtures) {
     check(safe(fixture.path)&&!fixtures.has(fixture.id),"Duplicate/unsafe fixture identity");fixtures.set(fixture.id,fixture);
     check(fixture.origin.revision===metadata.sourceCommit,"Fixture source revision drift");
-    const original=source.files.find((f:any)=>f.origin.repository===fixture.origin.repository&&f.origin.revision===fixture.origin.revision&&f.origin.path===fixture.origin.path);
+    const original=source.files.find((f:any)=>f.origins.some((o:any)=>o.repository===fixture.origin.repository&&o.revision===fixture.origin.revision&&o.path===fixture.origin.path));
     check(original&&original.sha256===fixture.origin.sha256,"Fixture origin not in pinned corpus");
-    const fixtureBytes=await Bun.file(join(pack,fixture.path)).bytes();
+    const canonical=source.files.find((f:any)=>f.id===fixture.assetId);
+    check(canonical&&canonical.path===fixture.path&&canonical.sha256===fixture.sha256,'Fixture does not address canonical asset');
+    const fixtureBytes=await Bun.file(join(referenceRoot,fixture.path)).bytes();
     await verifyFixture(fixtureBytes,fixture);
     const allowed=new Set(fixture.allowedChangedPartsForSuccess);
     check(allowed.size===fixture.allowedChangedPartsForSuccess.length&&[...allowed].every(n=>Object.hasOwn(fixture.memberSha256,n)),"Invalid change allowance");

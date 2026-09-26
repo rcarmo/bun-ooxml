@@ -7,10 +7,10 @@ import type { StepBinding } from "../../scripts/gherkin.ts";
 import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
 import { Workbook } from "../../src/xlsx/index.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
 const encoder = new TextEncoder();
-const projectRoot = join(import.meta.dir, "..", "..");
 
 type ScenarioState = {
   sourceBytes?: Uint8Array;
@@ -140,7 +140,7 @@ export const bindings: StepBinding[] = [
     pattern: /^the go-ooxml formatting workbook fixture for append$/,
     run: async (context) => {
       const state = scenarioState(context);
-      const path = join(projectRoot, "fixtures/go-ooxml/testdata/excel/formatting.xlsx");
+      const path = fixturePath(F.goSheets.formatting);
       state.sourceBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
       state.originalParts = readZip(state.sourceBytes);
       state.appendOriginalSheetXml = decode(required(state.originalParts.get("xl/worksheets/sheet1.xml"), "sheet1.xml"));

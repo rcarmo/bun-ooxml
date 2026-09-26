@@ -1,3 +1,4 @@
+import {fixturePath,F} from "../../scripts/fixture-inputs.ts";
 import { afterEach, describe, expect, test } from "bun:test";
 import {mergedNestedTableDocument} from '../fixtures/native-edge-cases.ts';
 import { readFileSync } from "node:fs";
@@ -14,10 +15,6 @@ import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { applyEdits, attribute, elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const PYTHON_WORD_ROOT = join(
-  PROJECT_ROOT,
-  "fixtures/python-office-mcp-server/tests/_templates/testdata/word",
-);
 const DOCUMENT_PART = "word/document.xml";
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 const UTF8_ENCODER = new TextEncoder();
@@ -69,7 +66,7 @@ describe("docx Document tables", () => {
   });
 
   test("updates existing simple table cells while preserving opaque package parts", async () => {
-    const doc = await Document.open(join(PYTHON_WORD_ROOT, "simple_table.docx"));
+    const doc = await Document.open(fixturePath(F.officeWord.simpleTable));
     const originalCore = requireDefined(doc.package.get("docProps/core.xml"), "Missing docProps/core.xml");
 
     const table = requireTable(doc, 0);
@@ -108,7 +105,7 @@ describe("docx Document tables", () => {
   });
 
   test("refuses bad indices, merged cells, nested cell topology, and bizarre grids atomically", async () => {
-    const simple = await Document.open(join(PYTHON_WORD_ROOT, "simple_table.docx"));
+    const simple = await Document.open(fixturePath(F.officeWord.simpleTable));
     const simpleBaseline = await simple.save();
     expect(() => requireTable(simple, 0).cell(9, 0)).toThrow(RangeError);
     expect(await simple.save()).toEqual(simpleBaseline);
@@ -179,7 +176,7 @@ describe("docx Document tables", () => {
 });
 
 function buildStyledCellFixture(): Uint8Array {
-  const source = new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "simple_table.docx")));
+  const source = new Uint8Array(readFileSync(fixturePath(F.officeWord.simpleTable)));
   const parts = readZip(source);
   const xml = UTF8_DECODER.decode(requireDefined(parts.get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`));
   const cell = findTopLevelCell(parseXml(xml), 0, 1, 0);
@@ -198,7 +195,7 @@ function buildStyledCellFixture(): Uint8Array {
 }
 
 function buildGridBeforeFixture(): Uint8Array {
-  const source = new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "simple_table.docx")));
+  const source = new Uint8Array(readFileSync(fixturePath(F.officeWord.simpleTable)));
   const parts = readZip(source);
   const xml = UTF8_DECODER.decode(requireDefined(parts.get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`));
   const parsed = parseXml(xml);

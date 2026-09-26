@@ -1,18 +1,15 @@
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
 
 import { OoxmlError } from "../../src/errors.ts";
 import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { Presentation } from "../../src/pptx/index.ts";
 import { findPlaceholderText } from "../../src/pptx/placeholders.ts";
+import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
 
 const decoder = new TextDecoder();
 const encoder = new TextEncoder();
-const SHARED_FIXTURE = join(
-  import.meta.dir,
-  "../../docs/contracts/shared-v2/pack/fixtures/title-and-subtitle.pptx",
-);
+const SHARED_FIXTURE = fixturePath(F.shared.titleAndSubtitle);
 const SLIDE_PART = "ppt/slides/slide1.xml";
 
 const TITLE_PARAGRAPH = '<a:p><a:r><a:t>Original title</a:t></a:r></a:p>';

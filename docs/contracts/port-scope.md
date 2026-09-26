@@ -7,7 +7,8 @@ calculation. Current bounded slices do not close this scope.
 Shared workflow contracts, expected outcomes, facts and fixture provenance are in
 references/fixtures-ooxml. Consumer-only regression Gherkin and bindings stay local.
 All planned contracts remain gaps; replacing external-source inventories does not
-turn unimplemented behaviour into completed work.
+turn unimplemented behaviour into completed work. The complete native test
+catalogue is being captured and reconciled; staging mappings are not coverage.
 
 Production runs inside Bun. External Office applications may be independent test
 oracles only. XML readback does not establish rendering or calculation fidelity.

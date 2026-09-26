@@ -1,31 +1,38 @@
-# Native creation slice
+# Native package creation
 
-All packages are built from TypeScript XML/OPC primitives, not copied fixtures or
-external producer subprocesses. Generated files must reopen through native readers
-and pass relationship/content-type checks. Visual/Office rendering remains unverified.
+The creation APIs build packages from TypeScript XML/OPC primitives. They do not
+copy templates or invoke an external producer. Saved packages reopen through the
+native readers and pass relationship/content-type validation; Office rendering
+has not been independently checked.
 
-Parallel API contracts:
+## Word
 
-* DOCX `Document.create(): Document` and `addParagraph(text = '', options?: {bold?:boolean; italic?:boolean; style?:string}): Paragraph`.
-  New package has main document and root relationship, body and section properties.
-  Adds paragraph before sectPr; XML-escaped text and simple rPr bold/italic. Unknown
-  style IDs refuse unless existing styles resolve (omit style support if unimplemented).
-  Existing documents keep opaque parts, cache handles refreshed/stale on add.
-* PPTX `Presentation.create(): Presentation` and `addTextSlide(title:string, subtitle?:string): Slide`.
-  Author minimal valid presentation/master/layout/theme if needed; native title and
-  subtitle placeholders, independent ID/relationship allocation. Existing decks
-  without a compatible safe layout refuse rather than corrupt inheritance. Root
-  fields slideId, dimensions etc valid. Document exact limitations.
-* XLSX `Workbook.create(): Workbook`, `addWorksheet(name:string): Worksheet`,
-  `Worksheet.setCellValue` extends to missing cells on created/existing supported
-  plain sheets only with sorted rows/cells and dimension maintenance. Existing
-  formulas/cache guards continue to apply; shared strings/styles/opaque content
-  stay unchanged. New default Sheet1. Names: uniqueness case-insensitive, max31,
-  forbidden characters and empty/apostrophe boundary names refuse. Writes bounded
-  to Excel row/column maxima. Correct explicit inline strings, numeric/bool values.
+`Document.create()` returns an empty document. `addParagraph(text = '', options?)`
+accepts `bold`, `italic` and an existing paragraph `style` ID. Text is escaped and
+paragraphs are inserted before section properties. Unknown style IDs refuse.
+Existing opaque parts are preserved; structural edits invalidate table/span
+handles according to their documented lifetimes.
 
-Each format has src/*/index.ts ownership; supporting helper modules inside own
-format directory allowed. Tests and features authoring first before code; bindings
-exported tests/acceptance/create-{format}.ts, parent combines. No borrowed python
-template binary, no font/render/runtime dependency. This does not cover all
-creation/style/theme/table/chart API parity.
+## PowerPoint
+
+`Presentation.create()` creates an empty presentation with an owned
+layout/master/theme graph. `addTextSlide(title, subtitle?)` adds title/subtitle
+placeholders with independent slide and relationship IDs. Appending to an
+existing deck requires a safe compatible layout; ambiguous or unsupported layout
+inheritance refuses before mutation.
+
+## Excel
+
+`Workbook.create()` supplies `Sheet1` and default styles. `addWorksheet(name)`
+adds a sheet while preserving existing relationships and opaque members.
+`Worksheet.setCellValue()` can insert missing ordinary cells with sorted row/cell
+order and updated dimension metadata. Formula-cache and unsupported-topology
+checks still apply.
+
+Sheet names are case-insensitively unique, no longer than 31 characters, and must
+not be empty or contain forbidden characters or boundary apostrophes. Coordinates
+stay within Excel row/column limits. Inline strings, numeric and boolean values
+are written explicitly; formula assignment is outside this API.
+
+`examples/create-office.ts` exercises all three save/reopen paths. Formatting,
+media, charts and structural authoring beyond these bounded APIs remain gaps.

@@ -1,3 +1,4 @@
+import {fixturePath,fixturesRoot} from "../../scripts/fixture-inputs.ts";
 import { afterEach, describe, expect, test } from "bun:test";
 import { existsSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
@@ -191,11 +192,11 @@ async function fixtureById(id: string): Promise<FixtureRecord> {
 }
 
 async function readFixtureBytes(fixture: FixtureRecord): Promise<Uint8Array> {
-  return Uint8Array.from(await Bun.file(join(PACK_ROOT, fixture.path)).bytes());
+  return Uint8Array.from(await Bun.file(fixturePath(fixture.assetId)).bytes());
 }
 
 function resolveSharedPackRoot(): string {
-  const preferred = join(PROJECT_ROOT, "docs/contracts/shared-v2/pack");
+  const preferred = join(fixturesRoot(), "shared/v2/pack");
   if (!existsSync(join(preferred, "fixture-manifest.json"))) throw new Error("Missing pinned shared fixture pack");
   return preferred;
 }

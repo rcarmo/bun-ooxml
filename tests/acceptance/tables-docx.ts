@@ -1,3 +1,4 @@
+import {fixturePath,fixturePaths,F} from "../../scripts/fixture-inputs.ts";
 import { expect } from "bun:test";
 import {mergedNestedTableDocument} from '../fixtures/native-edge-cases.ts';
 import { readFileSync } from "node:fs";
@@ -10,10 +11,6 @@ import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { applyEdits, parseXml, type XmlElement } from "../../src/xml/index.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const PYTHON_WORD_ROOT = join(
-  PROJECT_ROOT,
-  "fixtures/python-office-mcp-server/tests/_templates/testdata/word",
-);
 const DOCUMENT_PART = "word/document.xml";
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 const UTF8_ENCODER = new TextEncoder();
@@ -224,11 +221,11 @@ function resolveFixture(fixture: string): string | Uint8Array {
   if (fixture === "synthetic-grid-before") {
     return buildSyntheticGridBeforeFixture();
   }
-  return join(PROJECT_ROOT, fixture);
+  return fixturePath(fixture);
 }
 
 function buildSyntheticGridBeforeFixture(): Uint8Array {
-  const source = new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "simple_table.docx")));
+  const source = new Uint8Array(readFileSync(fixturePath(F.officeWord.simpleTable)));
   const parts = readZip(source);
   const xml = UTF8_DECODER.decode(requireDefined(parts.get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`));
   const parsed = parseXml(xml);

@@ -1,5 +1,5 @@
 import{join}from'node:path';import{inventoryFeatures}from'./gherkin.ts';
-const root=join(import.meta.dir,'..'),inv=await inventoryFeatures(root),m=await Bun.file(join(root,'references/fixtures-ooxml/manifest.json')).json();
+const root=join(import.meta.dir,'..'),inv=await inventoryFeatures(root),m=await Bun.file(join(process.env.OOXML_FIXTURES_ROOT??join(root,'references/fixtures-ooxml'),'manifest.json')).json();
 const lines=['# Behaviour coverage','',`Shared reference manifest: **${m.files.length} assets**. Implementation evidence remains consumer-local.`,'','| Feature | Lifecycle | Scenarios | Expanded cases | Steps |','|---|---|---:|---:|---:|'];
 for(const f of inv.features)lines.push(`| ${f.path} | ${f.lifecycle} | ${f.scenarios.length} | ${f.scenarios.reduce((n,s)=>n+s.cases.length,0)} | ${f.scenarios.reduce((n,s)=>n+s.cases.reduce((a,c)=>a+c.steps.length,0),0)} |`);
 lines.push('','Shared workflow IDs and facts are pinned by `references/fixtures-ooxml`.', 'Counts are contract inventory, not execution evidence. Run `make check` for outcomes.', 'All planned cases remain gaps. Removing external source inventories does not close behavioural gaps.','');

@@ -1,3 +1,4 @@
+import {fixturePath,fixturePaths,F} from "../../scripts/fixture-inputs.ts";
 import { afterEach, describe, expect, test } from "bun:test";
 import {textboxDocument} from '../fixtures/native-edge-cases.ts';
 import { readFileSync, readdirSync } from "node:fs";
@@ -13,11 +14,6 @@ import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { applyEdits, parseXml, type XmlElement } from "../../src/xml/index.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const GO_WORD_ROOT = join(PROJECT_ROOT, "fixtures/go-ooxml/testdata/word");
-const PYTHON_WORD_ROOT = join(
-  PROJECT_ROOT,
-  "fixtures/python-office-mcp-server/tests/_templates/testdata/word",
-);
 const DOCUMENT_PART = "word/document.xml";
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 const UTF8_ENCODER = new TextEncoder();
@@ -29,7 +25,7 @@ afterEach(async () => {
 
 describe("docx Document", () => {
   test("opens from a path or bytes and save() never rewrites the opened source path implicitly", async () => {
-    const tempPath = await copyFixture(join(PYTHON_WORD_ROOT, "single_paragraph.docx"));
+    const tempPath = await copyFixture(fixturePath(F.officeWord.singleParagraph));
     const original = new Uint8Array(readFileSync(tempPath));
 
     const fromPath = await Document.open(tempPath);
@@ -64,7 +60,7 @@ describe("docx Document", () => {
   });
 
   test("replaces exact cross-run text without reconstructing unaffected runs or formatting", async () => {
-    const tempPath = await copyFixture(join(PYTHON_WORD_ROOT, "formatted_text.docx"));
+    const tempPath = await copyFixture(fixturePath(F.officeWord.formattedText));
     const original = new Uint8Array(readFileSync(tempPath));
     const doc = await Document.open(tempPath);
 
@@ -113,7 +109,7 @@ describe("docx Document", () => {
   });
 
   test("includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML", async () => {
-    const original = new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "simple_table.docx")));
+    const original = new Uint8Array(readFileSync(fixturePath(F.officeWord.simpleTable)));
     const originalXml = UTF8_DECODER.decode(
       requireDefined(readZip(original).get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`),
     );
@@ -174,7 +170,7 @@ describe("docx Document", () => {
   });
 
   test("detects stale spans before mutation and leaves the package unchanged", async () => {
-    const doc = await Document.open(join(PYTHON_WORD_ROOT, "formatted_text.docx"));
+    const doc = await Document.open(fixturePath(F.officeWord.formattedText));
 
     const first = requireParagraph(doc, 0);
     const stale = requireSingleSpan(first.find("text and italic text"), "text and italic text");
@@ -213,8 +209,8 @@ describe("docx Document", () => {
 
   test("refuses fields, tracked revisions and content controls with a stable code", async () => {
     const fieldDoc = await Document.open(buildFieldFixture());
-    const trackedDoc = await Document.open(join(PYTHON_WORD_ROOT, "track_changes.docx"));
-    const controlsDoc = await Document.open(join(PYTHON_WORD_ROOT, "sdt_content_controls.docx"));
+    const trackedDoc = await Document.open(fixturePath(F.officeWord.trackChanges));
+    const controlsDoc = await Document.open(fixturePath(F.officeWord.sdtContentControls));
 
     expect(() => requireParagraph(fieldDoc, 0).find("2026-01-01")).toThrow(
       expect.objectContaining({ code: "docx-unsupported-topology" }),
@@ -240,30 +236,7 @@ describe("docx Document", () => {
   });
 });
 
-function wordFixtures(): string[] {
-  return [
-    ...collectDocxFiles(GO_WORD_ROOT),
-    ...collectDocxFiles(PYTHON_WORD_ROOT),
-  ].sort();
-}
-
-function collectDocxFiles(root: string): string[] {
-  const result: string[] = [];
-  const visit = (dir: string): void => {
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
-      const next = join(dir, entry.name);
-      if (entry.isDirectory()) {
-        visit(next);
-        continue;
-      }
-      if (/\.docx$/i.test(entry.name)) {
-        result.push(next);
-      }
-    }
-  };
-  visit(root);
-  return result;
-}
+function wordFixtures(): string[] { return fixturePaths([...Object.values(F.goWord),...Object.values(F.officeWord)].filter(id=>id!==F.goWord.default&&id!==F.officeWord.default)); }
 
 function paragraphRunSnapshot(doc: Document, index: number): Array<{ text: string; styles: string[] }> {
   const paragraph = readParagraphElement(doc, index);
@@ -325,7 +298,7 @@ function buildFieldFixture(): Uint8Array {
 }
 
 function replaceFirstParagraph(innerXml: string): Uint8Array {
-  const source = new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "single_paragraph.docx")));
+  const source = new Uint8Array(readFileSync(fixturePath(F.officeWord.singleParagraph)));
   const parts = readZip(source);
   const xmlBytes = requireDefined(parts.get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`);
   const xml = UTF8_DECODER.decode(xmlBytes);

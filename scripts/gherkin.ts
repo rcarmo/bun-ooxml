@@ -21,7 +21,7 @@ import {
   type Tag,
 } from "@cucumber/messages";
 import { createHash, randomUUID } from "node:crypto";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 
 export type StepBinding = {
   pattern: RegExp;
@@ -324,7 +324,9 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
     const shared = await sharedConfig.json();
     for (const entry of shared.features) {
       if (typeof entry.path !== 'string' || !entry.path.startsWith('references/fixtures-ooxml/') || entry.path.split('/').includes('..') || entry.lifecycle !== 'implemented' || entry.runner !== 'bun') throw new Error('Invalid shared feature mapping');
-      const text = await Bun.file(join(root, entry.path)).text();
+      const input = process.env.OOXML_FIXTURES_ROOT && root === resolve(import.meta.dir, '..')
+        ? join(process.env.OOXML_FIXTURES_ROOT, entry.path.slice('references/fixtures-ooxml/'.length)) : join(root, entry.path);
+      const text = await Bun.file(input).text();
       features.push(parseFeature(entry.path, text.replace(/^@planned/m, '@implemented @bun')));
     }
   }

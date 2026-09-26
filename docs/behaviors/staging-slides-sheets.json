@@ -1,0 +1,906 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "reviewState": "candidate-needs-parent-review",
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+      "title": "array and data-table inputs refuse without changing cached followers or earlier parts",
+      "given": [
+        "A synthetic two-sheet workbook starts with Model!A1 = 1 and Model!A2 = 2, plus cached worksheet formulas Model!B1 = A1+A2 with cached 3 and Model!B2 = B1*2 with cached 6.",
+        "The second sheet is rewritten into either an array formula or a data-table formula over A1:A2, with cached follower values still serialized in that range."
+      ],
+      "when": [
+        "The workbook is opened natively and an ordinary input edit attempts to set Model!A1 to 10."
+      ],
+      "then": [
+        "The edit is refused with a message containing Cannot invalidate, because the cached follower range is not safely invalidatable.",
+        "Serializing the workbook after refusal returns bytes identical to the original archive for both supported topology variants."
+      ],
+      "examples": [
+        "Positive coverage: topology=array refuses and preserves every workbook member byte-for-byte.",
+        "Positive coverage: topology=dataTable refuses and preserves every workbook member byte-for-byte.",
+        "Negative variant: no earlier worksheet formula caches are cleared and no follower cells are recomputed."
+      ],
+      "limitations": [
+        "The inventory records both topology variants under one looped declaration; they are listed here as examples rather than separate mappings."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / workflow refuses and preserves an existing output when the workbook has array followers",
+      "title": "workflow refuses and preserves an existing output when the workbook has array followers",
+      "given": [
+        "A temporary source.xlsx is written with the array-topology cache-boundary fixture.",
+        "A separate output.xlsx already exists and contains the literal text old output rather than workbook bytes.",
+        "The workflow request is safe-mode patchOffice with one requested change: target Model!A1, value 10."
+      ],
+      "when": [
+        "patchOffice is executed against that source/output pair."
+      ],
+      "then": [
+        "The workflow result status is refused.",
+        "committedChanges is 0 and error.code is xlsx-cache-topology-unsupported.",
+        "The source workbook bytes on disk are unchanged from the original fixture.",
+        "The preexisting output file is not replaced or truncated; its text remains exactly old output."
+      ],
+      "examples": [
+        "Negative variant: a refusal leaves both the input workbook and a stale preexisting output artifact untouched."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / executes every cache boundary Given/When/Then",
+      "title": "executes every cache boundary Given/When/Then",
+      "given": [
+        "The acceptance runner parses features/xlsx/cache-boundaries.feature and builds an inventory from that one feature file.",
+        "That feature contains two scenarios which expand to three executable cases: array refusal, dataTable refusal, and opaque-cache preservation."
+      ],
+      "when": [
+        "executeAcceptance runs the feature with the cache-boundary step bindings and a fresh acceptance run id."
+      ],
+      "then": [
+        "The execution reports no failures at all.",
+        "The runner reports 3 passed cases for the cache-boundary feature execution."
+      ],
+      "examples": [
+        "Executed case: the array outline example refuses an unsafe input edit.",
+        "Executed case: the dataTable outline example refuses an unsafe input edit.",
+        "Executed case: Worksheet invalidation clears worksheet formula caches while leaving opaque chart and external-link cache payloads unchanged."
+      ],
+      "limitations": [
+        "This declaration checks acceptance-runner aggregation only; per-case XML and byte outcomes are covered by the direct unit scenarios and the feature bindings."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / authors a minimal presentation whose master, layout and theme links reopen through the native reader",
+      "title": "authors a minimal presentation whose master, layout and theme links reopen through the native reader",
+      "given": [
+        "A brand-new native Presentation is created from scratch.",
+        "Two text slides are authored with title/subtitle pairs Created title 1 / Created subtitle 1 and Created title 2 / Created subtitle 2."
+      ],
+      "when": [
+        "The presentation is saved, reopened through the native reader, and its package relationships and content-type overrides are inspected."
+      ],
+      "then": [
+        "The reopened deck exposes 2 slides, 1 slide master, and 1 slide layout, and its main part is ppt/presentation.xml reached from the root officeDocument relationship.",
+        "The reopened placeholder text is exactly [[Created title 1, Created subtitle 1], [Created title 2, Created subtitle 2]].",
+        "The saved package contains only the minimal authored part set: [Content_Types].xml, _rels/.rels, ppt/presentation.xml, ppt/_rels/presentation.xml.rels, ppt/presProps.xml, ppt/viewProps.xml, ppt/tableStyles.xml, ppt/theme/theme1.xml, ppt/slideMasters/slideMaster1.xml, ppt/slideMasters/_rels/slideMaster1.xml.rels, ppt/slideLayouts/slideLayout1.xml, ppt/slideLayouts/_rels/slideLayout1.xml.rels, ppt/slides/slide1.xml, ppt/slides/_rels/slide1.xml.rels, ppt/slides/slide2.xml, and ppt/slides/_rels/slide2.xml.rels.",
+        "Content-type overrides exist exactly for /ppt/presProps.xml, /ppt/presentation.xml, /ppt/slideLayouts/slideLayout1.xml, /ppt/slideMasters/slideMaster1.xml, /ppt/slides/slide1.xml, /ppt/slides/slide2.xml, /ppt/tableStyles.xml, /ppt/theme/theme1.xml, and /ppt/viewProps.xml.",
+        "Presentation relationships include only presProps, slideMaster, two slide links, tableStyles, theme, and viewProps; both slides resolve to the one title layout; the layout links back only to slideMaster1.xml; and the master links only to slideLayout1.xml and theme1.xml.",
+        "Reopening the saved deck is read-only at the package level, so the reopened diff is {added:[], changed:[], removed:[]}."
+      ],
+      "examples": [
+        "Slide 1 round-trips title/subtitle text in authored order.",
+        "Slide 2 round-trips title/subtitle text in authored order.",
+        "Negative variant: no extra media, notes, or auxiliary parts are introduced beyond the minimal relationship graph listed above."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / appends to a compatible deck without disturbing first-slide bytes until the earlier anchor edits them",
+      "title": "appends to a compatible deck without disturbing first-slide bytes until the earlier anchor edits them",
+      "given": [
+        "The source deck is the shared title-and-subtitle PPTX fixture, with an existing first-slide title anchor captured before any append.",
+        "A new text slide is appended with Appended title / Appended subtitle, then the original first-slide title is edited through the earlier anchor to Edited original title."
+      ],
+      "when": [
+        "The deck is inspected immediately after append, then saved and reopened after the anchored first-slide edit."
+      ],
+      "then": [
+        "The reopened slides read [[Edited original title, Original subtitle], [Appended title, Appended subtitle]].",
+        "Appending the second slide does not invalidate the earlier title anchor: the anchor version and paragraph index are unchanged before and after append.",
+        "The first slide XML is byte-identical to its original bytes immediately after append and changes only after the explicit anchored title edit.",
+        "The final first-slide XML equals the original slide1.xml with only the original title text replaced by Edited original title.",
+        "slide1.xml.rels stays byte-identical to the original first-slide relationships part.",
+        "The saved deck keeps independent relationship parts for both slide1 and slide2, keeps presentation slide targets ordered as [ppt/slides/slide1.xml, ppt/slides/slide2.xml], and resolves both slides to the same safe title layout.",
+        "The package diff is exactly added [ppt/slides/_rels/slide2.xml.rels, ppt/slides/slide2.xml], changed [[Content_Types].xml, ppt/_rels/presentation.xml.rels, ppt/presentation.xml, ppt/slides/slide1.xml], removed []."
+      ],
+      "examples": [
+        "Positive coverage: appending a later slide leaves the original slide bytes untouched until that slide is explicitly edited.",
+        "Negative variant: the old first-slide relationships part is not regenerated or reordered."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / refuses invalid arguments and unsafe title-layout selection atomically",
+      "title": "refuses invalid arguments and unsafe title-layout selection atomically",
+      "given": [
+        "One candidate deck is a fresh Presentation.create() baseline with no prior mutation.",
+        "A second candidate deck is a shared title-slide fixture whose layout placeholder type for the subtitle slot has been rewritten from subTitle to body, making the existing layout unsafe for native title-slide authoring."
+      ],
+      "when": [
+        "The first deck receives an invalid addTextSlide call with a numeric title argument 7 and subtitle Bad subtitle.",
+        "The unsafe-layout deck receives addTextSlide with Unsafe next title / Unsafe next subtitle."
+      ],
+      "then": [
+        "The invalid-argument request is refused with code PPTX_ARGUMENT_INVALID, the package bytes remain identical to the pre-call baseline, and the diff stays empty.",
+        "The unsafe-layout request is refused with code PPTX_LAYOUT_UNSAFE, the package bytes remain identical to the unsafe fixture baseline, and the diff stays empty."
+      ],
+      "examples": [
+        "Negative variant: type-invalid slide creation does not partially author any slide parts.",
+        "Negative variant: an existing deck with an unsafe title layout is rolled back atomically instead of being appended opportunistically."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
+      "title": "executes the PPTX create feature with dedicated bindings and optional parent aggregation",
+      "given": [
+        "The acceptance runner parses features/pptx/create.feature, which defines 3 PPTX creation scenarios and therefore 3 executable cases.",
+        "The same feature is executed twice: once with the dedicated PPTX create bindings and once with the parent step aggregation bindings."
+      ],
+      "when": [
+        "executeAcceptance runs the feature for each binding set with a fresh acceptance run id."
+      ],
+      "then": [
+        "For both binding sets, failures is an empty array.",
+        "For both binding sets, feature counts are {passed:1, failed:0, planned:0, total:1}.",
+        "For both binding sets, scenario counts are {passed:3, failed:0, planned:0, total:3}.",
+        "For both binding sets, case counts are {passed:3, failed:0, planned:0, total:3}.",
+        "For both binding sets, failed, undefined, and ambiguous step counts are all 0."
+      ],
+      "examples": [
+        "Executed scenario: Create a minimal presentation and reopen two authored text slides in order.",
+        "Executed scenario: Append to a compatible existing deck without invalidating untouched slide anchors.",
+        "Executed scenario: Refuse invalid arguments and unsafe existing layouts without mutation.",
+        "Binding variant: dedicated createBindings.",
+        "Binding variant: parentBindings aggregation."
+      ],
+      "limitations": [
+        "This mapping summarizes runner parity across two binding sets; it does not duplicate every per-step XML assertion already covered by the direct scenario helpers."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / round-trips saved table geometry sums and text after reopen",
+      "title": "round-trips saved table geometry sums and text after reopen",
+      "given": [
+        "A new native presentation contains one text slide titled Tables.",
+        "That slide authors a 2x3 table at x=120, y=240, width=1001, height=1003, and cell(0,0) is set to the literal text \"  <Alpha & Beta>  \"."
+      ],
+      "when": [
+        "The presentation is saved, reopened, and the first table geometry is parsed back from slide1.xml."
+      ],
+      "then": [
+        "The reopened table has 2 rows and 3 columns.",
+        "The reopened text of cell(0,0) is exactly \"  <Alpha & Beta>  \", preserving spaces and XML-sensitive characters as user text.",
+        "The stored geometry is x=120, y=240, width=1001, height=1003, with column widths [333,333,335] and row heights [501,502].",
+        "A second reopen from the saved bytes still reads the first table cell text as the same literal value."
+      ],
+      "examples": [
+        "Positive coverage: column widths sum to the authored width 1001.",
+        "Positive coverage: row heights sum to the authored height 1003."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / preserves simple table cell formatting when replacing text and reopening",
+      "title": "preserves simple table cell formatting when replacing text and reopening",
+      "given": [
+        "A one-cell PPTX table fixture is rewritten so the first cell already contains bodyPr wrap=square, paragraph alignment algn=r, run formatting b=1 and sz=1800, endParaRPr lang=en-US, tcPr marL=111, and a solid fill color FFFF00.",
+        "The original styled cell text is replaced with updated value."
+      ],
+      "when": [
+        "The presentation is saved and reopened after the text replacement."
+      ],
+      "then": [
+        "The reopened cell text is exactly updated value.",
+        "The preserved formatting record is exactly {bodyPrAttrs:{wrap:\"square\"}, tcPrAttrs:{marL:\"111\"}, fillColor:\"FFFF00\", paragraphAttrs:{algn:\"r\"}, firstRunAttrs:{b:\"1\", sz:\"1800\"}, endParaRPrAttrs:{lang:\"en-US\"}}."
+      ],
+      "examples": [
+        "Positive coverage: changing text does not strip cell fill, margins, paragraph alignment, run styling, or end-paragraph language attributes."
+      ],
+      "limitations": [
+        "Only the simple single-cell formatting shape used by this fixture is asserted here; more complex multi-run or merged-cell styling is covered elsewhere or refused."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / stale table cell handles refuse atomically after slide mutation",
+      "title": "stale table cell handles refuse atomically after slide mutation",
+      "given": [
+        "A new presentation creates one slide with a first 1x1 table at geometry 100,100,900,600 and holds a handle to that first cell.",
+        "The same slide is then mutated by adding a second 1x1 table at geometry 1200,100,900,600 before the stale handle is reused."
+      ],
+      "when": [
+        "The test writes through the stale first-cell handle after the slide has been structurally mutated."
+      ],
+      "then": [
+        "The write is refused with code PPTX_STALE_TABLE_HANDLE.",
+        "The package bytes after refusal are identical to the bytes immediately after the valid slide mutation, so the refusal is atomic."
+      ],
+      "examples": [
+        "Negative variant: a previously obtained cell handle cannot outlive later table insertions on the same slide."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / refuses merged and malformed table topologies atomically",
+      "title": "refuses merged and malformed table topologies atomically",
+      "given": [
+        "One refusal fixture rewrites the first table cell to carry gridSpan=\"2\", representing a merged-cell topology.",
+        "A second refusal fixture rewrites the first table cell to carry hMerge=\"maybe\", representing malformed merge metadata."
+      ],
+      "when": [
+        "The merged fixture attempts a cell text write to cell(0,0).",
+        "The malformed fixture forces table materialization by reading slide.tables[0]."
+      ],
+      "then": [
+        "The merged-cell edit is refused with code PPTX_TABLE_MERGE_UNSUPPORTED, leaves package bytes identical to the source fixture, and leaves the diff empty.",
+        "The malformed-merge load/edit path is refused with code PPTX_TABLE_STRUCTURE_UNSUPPORTED, leaves package bytes identical to the source fixture, and leaves the diff empty."
+      ],
+      "examples": [
+        "Negative variant: merged-cell topology is explicitly unsupported rather than partially flattened.",
+        "Negative variant: malformed merge metadata is rejected before any repair or rewrite attempt."
+      ],
+      "limitations": [
+        "The two refusal shapes come from a single scenario-outline-style declaration and are summarized here together."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / passes the PPTX table acceptance feature with dedicated bindings",
+      "title": "passes the PPTX table acceptance feature with dedicated bindings",
+      "given": [
+        "features/pptx/tables.feature is copied into a temporary acceptance root.",
+        "That feature defines 4 scenarios and 5 executable cases because the unsupported-topology scenario is an outline with two examples."
+      ],
+      "when": [
+        "runAcceptance executes the feature with the dedicated PPTX table bindings."
+      ],
+      "then": [
+        "report.status is passed.",
+        "The inventory reports 1 implemented feature, 4 implemented scenarios, and 5 implemented cases.",
+        "The execution reports 5 passed cases, 0 failed steps, and an empty failures array."
+      ],
+      "examples": [
+        "Executed case: geometry round-trip.",
+        "Executed case: formatting preservation.",
+        "Executed case: stale table handle refusal.",
+        "Executed case: merged-cell refusal.",
+        "Executed case: malformed-merge refusal."
+      ],
+      "limitations": [
+        "This declaration verifies acceptance-runner coverage and status, not every per-case XML byte assertion individually."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings",
+      "title": "acceptance feature passes with the dedicated PPTX bindings",
+      "given": [
+        "A temporary project root is created containing only features/pptx/text.feature.",
+        "That feature declares the PPTX slice scenarios for ordered notes, unsupported readable topology, cross-run replacement, and stale-anchor refusal."
+      ],
+      "when": [
+        "runAcceptance executes that feature with the dedicated PPTX step bindings."
+      ],
+      "then": [
+        "report.status is passed.",
+        "The inventory reports 1 implemented feature.",
+        "The execution reports 4 passed cases."
+      ],
+      "examples": [
+        "Executed case: Follow presentation relationships and keep notes reads non-mutating.",
+        "Executed case: Read line breaks and field text faithfully but refuse editing that topology.",
+        "Executed case: Replace exact anchored text across runs and preserve unrelated members after reopen.",
+        "Executed case: Refuse a stale anchored replacement without mutation."
+      ],
+      "limitations": [
+        "The test asserts feature status and passed-case count only; it does not separately assert scenario or step totals."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
+      "title": "follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
+      "given": [
+        "A go-ooxml notes fixture is rewritten so ppt/presentation.xml orders slide ids as 5,1,4,2,3 instead of filename order.",
+        "notesSlide5.xml is rewritten from a single paragraph into three logical paragraphs: Key themes:, a line break followed by creation, responsibility, isolation; then a blank paragraph; then Visible date: plus a visible datetime field 2026-03-12.",
+        "A separate minimal PPTX fixture without notes parts is also opened for the missing-notes refusal path."
+      ],
+      "when": [
+        "The reordered fixture is opened, slide titles are read in presentation relationship order, and notes text is read from the first and last logical slides.",
+        "The minimal fixture is opened and readNotesText is attempted on its first slide."
+      ],
+      "then": [
+        "The slide titles come back in relationship order as [Chapter 5, Frankenstein Lecture Series, Chapter 4, Chapter 2, Chapter 3].",
+        "The notes text preserves visible line breaks and the intentionally blank paragraph, producing [\"Key themes:\ncreation, responsibility, isolation\n\nVisible date: 2026-03-12\", \"Compare to Prometheus myth\"].",
+        "Reading existing notes is non-mutating: the package diff is empty and the deck bytes after the read equal the original reordered fixture bytes.",
+        "Reading notes from the minimal deck is refused with code PPTX_NOTES_MISSING.",
+        "That refusal is also non-mutating: the minimal deck bytes are unchanged and no package member name beginning with ppt/notesSlides/ is created."
+      ],
+      "examples": [
+        "Positive coverage: slide traversal follows presentation relationships rather than slide filename order.",
+        "Negative variant: probing notes on a slide with no notes part refuses instead of synthesizing one."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / exposes line breaks and field text in inspectText and refuses editing that topology atomically",
+      "title": "exposes line breaks and field text in inspectText and refuses editing that topology atomically",
+      "given": [
+        "A real title-slide fixture is rewritten so its title paragraph contains four readable fragments: bold Chapter, a line break carrying lang=en-US on its break run properties, a slidenum field whose visible text is 7 with italic formatting, and an underlined run containing leading-space Notes."
+      ],
+      "when": [
+        "The slide is opened, the title paragraph is read through inspectText, and an anchored replacement attempts to change Chapter to Section."
+      ],
+      "then": [
+        "inspectText exposes the readable paragraph text exactly as Chapter newline 7 Notes.",
+        "inspectText exposes the ordered runs exactly as [{text:\"Chapter\",attrs:{b:\"1\"}}, {text:\"\\n\",attrs:{lang:\"en-US\"}}, {text:\"7\",attrs:{i:\"1\"}}, {text:\" Notes\",attrs:{u:\"sng\"}}].",
+        "The anchored edit is refused with code PPTX_UNSUPPORTED_TEXT_TOPOLOGY.",
+        "The refusal is atomic: package diff stays empty and the package bytes remain identical to the source fixture."
+      ],
+      "examples": [
+        "Negative variant: readable paragraphs containing breaks and fields can be inspected but not edited as plain anchored text."
+      ],
+      "limitations": [
+        "This test covers one unsupported text topology that mixes a break and a field; other unsupported combinations are not expanded here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / replaces exact anchored text across runs and preserves untouched members",
+      "title": "replaces exact anchored text across runs and preserves untouched members",
+      "given": [
+        "A real title-slide fixture is rewritten so the title Frankenstein is split across three runs: Fran with bold, ken with italic, and stein with underline.",
+        "An unrelated ZIP member custom/data.bin with payload keep-me-safe is added, and [Content_Types].xml is extended with a default content type for .bin if one was not already present."
+      ],
+      "when": [
+        "The first slide title paragraph is found by readable text, the substring anken is replaced with iend through its anchor, and the package is saved and reopened."
+      ],
+      "then": [
+        "The reopened title text is Friendstein.",
+        "Only ppt/slides/slide1.xml is reported as changed; no parts are added or removed by the text replacement itself.",
+        "custom/data.bin survives byte-for-byte as keep-me-safe.",
+        "docProps/app.xml bytes in the saved deck exactly match the original source fixture bytes.",
+        "The saved title run breakdown is exactly [{text:\"Fr\",attrs:{b:\"1\"}}, {text:\"iend\",attrs:{b:\"1\"}}, {text:\"stein\",attrs:{u:\"sng\"}}], showing that the replacement keeps the leading run formatting and preserves the unaffected underlined tail run."
+      ],
+      "examples": [
+        "Positive coverage: one anchored replacement spans a run boundary and reuses the starting run formatting for the replacement text.",
+        "Negative variant: unrelated ZIP members and document properties are untouched."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / refuses stale anchors atomically",
+      "title": "refuses stale anchors atomically",
+      "given": [
+        "A real title-slide deck is opened and a live anchor is captured for the title paragraph text Frankenstein.",
+        "That anchor is first used successfully to replace Frankenstein with Creature."
+      ],
+      "when": [
+        "The same now-stale anchor is reused for a second replacement attempt from Frankenstein to Monster."
+      ],
+      "then": [
+        "The second write is refused with code PPTX_STALE_ANCHOR.",
+        "After refusal, reopening the deck still shows the title Creature, meaning only the first successful edit survived.",
+        "The bytes after refusal are identical to the bytes immediately after the first successful edit."
+      ],
+      "examples": [
+        "Negative variant: stale anchors do not reapply, partially apply, or roll back the already-committed earlier edit."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / opens from path and bytes and saves a no-op deck byte-identically",
+      "title": "opens from path and bytes and saves a no-op deck byte-identically",
+      "given": [
+        "The source deck is fixture ID fixture-1b848867cffb781112dc5778fa8cc7b9c9bd472c3636a348ec5d50005f05489e read both as a filesystem path and as raw bytes."
+      ],
+      "when": [
+        "The deck is opened once from the path, once from the byte array, and the path-opened instance is saved to a new output file without any edits."
+      ],
+      "then": [
+        "The path-opened deck exposes Frankenstein as the first readable text paragraph on slide 1.",
+        "Opening directly from bytes is a byte-for-byte no-op at the package level: package.toBytes() equals the original source bytes.",
+        "Saving the unmodified path-opened deck writes an output file whose bytes are identical to the original source deck."
+      ],
+      "examples": [
+        "Input variant: open from filesystem path.",
+        "Input variant: open from in-memory bytes.",
+        "Negative variant: no-op save does not normalize or rewrite the archive."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:adding a worksheet works when the existing r alias is scoped to only the first sheet",
+      "title": "adding a worksheet works when the existing r alias is scoped to only the first sheet",
+      "given": [
+        "The workbook comes from the shared-v2 XLSX fixture rewritten so the workbook part uses link:id instead of r:id for its sheet relationship attribute spelling.",
+        "The original xl/worksheets/sheet1.xml bytes are captured before mutation."
+      ],
+      "when": [
+        "A second worksheet named Second is added, Second!A1 is set to new, and the workbook is reopened from its serialized bytes."
+      ],
+      "then": [
+        "The reopened sheet order is [Sheet, Second].",
+        "The new worksheet reads A1 as new.",
+        "The original sheet1.xml bytes are unchanged after adding the second sheet, so the alias-scoped workbook edit does not rewrite the first worksheet part."
+      ],
+      "examples": [
+        "Positive coverage: an existing relationship prefix alias on the workbook part does not block worksheet creation.",
+        "Negative variant: adding the second sheet does not disturb the preexisting first-sheet XML bytes."
+      ],
+      "limitations": [
+        "This test does not itself reassert the workbook-part attribute spelling after save; sibling relationship-namespace tests cover that explicitly."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:dimension stays before sheetViews and cols when a missing cell is authored",
+      "title": "dimension stays before sheetViews and cols when a missing cell is authored",
+      "given": [
+        "A freshly created workbook has sheet1.xml manually rewritten to remove its dimension element and to insert sheetViews plus cols before sheetData."
+      ],
+      "when": [
+        "The rewritten workbook is reopened and a previously missing cell C3 is authored with numeric value 7."
+      ],
+      "then": [
+        "In the resulting worksheet root child order, dimension appears before sheetViews.",
+        "In the same child order, dimension also appears before cols."
+      ],
+      "examples": [
+        "Negative variant: adding a missing cell does not push dimension behind preexisting sheetViews or cols."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / authors a minimal workbook with styles that saves and reopens through the native reader",
+      "title": "authors a minimal workbook with styles that saves and reopens through the native reader",
+      "given": [
+        "A new native Workbook.create() instance writes Alpha to A1, 7 to B2, and true to C3 on Sheet1."
+      ],
+      "when": [
+        "The workbook is saved to disk, reopened from the saved bytes, and sheet1.xml is parsed for its dimension."
+      ],
+      "then": [
+        "Both the in-memory workbook and reopened workbook report sheetnames [Sheet1].",
+        "The reopened cells read as string Alpha at A1, number 7 at B2, and boolean true at C3.",
+        "The worksheet dimension is A1:C3.",
+        "The saved archive contains exactly [Content_Types].xml, _rels/.rels, xl/_rels/workbook.xml.rels, xl/styles.xml, xl/workbook.xml, and xl/worksheets/sheet1.xml.",
+        "xl/styles.xml is present in the minimal package."
+      ],
+      "examples": [
+        "Cell variant: string value.",
+        "Cell variant: numeric value.",
+        "Cell variant: boolean value."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / adds worksheets with independent ids, relationship closure and working returned handles",
+      "title": "adds worksheets with independent ids, relationship closure and working returned handles",
+      "given": [
+        "A new native workbook adds worksheets named Data and Summary through addWorksheet, and uses the returned handles immediately to write Data!A1=5 and Summary!B2=done."
+      ],
+      "when": [
+        "The workbook is serialized, workbook.xml and xl/_rels/workbook.xml.rels are parsed, and the workbook is reopened."
+      ],
+      "then": [
+        "The reopened workbook reports sheetnames [Sheet1, Data, Summary] and the newly written cell values 5 and done.",
+        "The workbook sheet elements retain names [Sheet1, Data, Summary] with sheetId values [1, 2, 3].",
+        "The sheet relationship ids are [rId1, rId3, rId4], and the worksheet relationship entries use those same ids targeting worksheets/sheet1.xml, worksheets/sheet2.xml, and worksheets/sheet3.xml.",
+        "The package diff records added worksheet parts xl/worksheets/sheet2.xml and xl/worksheets/sheet3.xml, changed [Content_Types].xml, xl/_rels/workbook.xml.rels, and xl/workbook.xml, and no removals."
+      ],
+      "examples": [
+        "Positive coverage: the returned worksheet handles are live and writable immediately after creation.",
+        "Negative variant: adding sheets does not renumber the original Sheet1 away from sheetId 1 or rId1."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
+      "title": "refuses invalid worksheet names atomically with case-insensitive duplicate checks",
+      "given": [
+        "A new workbook baseline is captured before any addWorksheet attempt.",
+        "The attempted worksheet names are: empty string, Sheet1, sheet1, leading-quote Quoted, trailing-quote Quoted, bad/name, and a 32-character x-filled name."
+      ],
+      "when": [
+        "Each candidate name is passed to addWorksheet in turn."
+      ],
+      "then": [
+        "The empty name, leading-quote name, trailing-quote name, slash-containing name, and 32-character name are each refused with code xlsx-worksheet-name-invalid.",
+        "Sheet1 and sheet1 are each refused with code xlsx-worksheet-duplicate, proving case-insensitive duplicate detection.",
+        "After every refusal, the serialized workbook bytes still match the original baseline and sheetnames remains exactly [Sheet1]."
+      ],
+      "examples": [
+        "Negative case: empty worksheet name.",
+        "Negative case: exact duplicate Sheet1.",
+        "Negative case: case-folded duplicate sheet1.",
+        "Negative case: leading apostrophe.",
+        "Negative case: trailing apostrophe.",
+        "Negative case: slash in sheet name.",
+        "Negative case: 32-character overlength name."
+      ],
+      "limitations": [
+        "These seven invalid names are exercised under one looped declaration and are listed individually here rather than split into separate mappings."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / creates qualified dimension row cell and text nodes in a prefixed worksheet",
+      "title": "creates qualified dimension row cell and text nodes in a prefixed worksheet",
+      "given": [
+        "The workbook fixture uses the spreadsheet namespace with prefix x and contains row 2 without any B2 cell, plus a linked styles part."
+      ],
+      "when": [
+        "Prefixed!B2 is authored with the string Prefixed, the workbook is serialized, and the worksheet XML is parsed before reopen."
+      ],
+      "then": [
+        "The new dimension element is x:dimension with ref B2:B2.",
+        "The authored row is x:row, the cell is x:c, the inline string container is x:is, and the text node is x:t with text Prefixed.",
+        "After reopen, Prefixed!B2 reads back as Prefixed."
+      ],
+      "examples": [
+        "Positive coverage: missing-cell authoring preserves the existing namespace prefix instead of inserting unqualified spreadsheet nodes."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / accepts the maximum worksheet coordinate and keeps rows and cells sorted as they are added",
+      "title": "accepts the maximum worksheet coordinate and keeps rows and cells sorted as they are added",
+      "given": [
+        "A new workbook receives writes in deliberately unsorted order: XFD1048576=1, C3=3, A1=1, B1=2, and A2=4."
+      ],
+      "when": [
+        "The workbook is serialized, sheet1.xml is parsed for row/cell order, and the workbook is reopened."
+      ],
+      "then": [
+        "The reopened workbook reads XFD1048576 as numeric 1.",
+        "The worksheet dimension expands to A1:XFD1048576.",
+        "Row elements are stored in ascending order [1,2,3,1048576].",
+        "Cell references within those rows are stored in ascending order as [[A1,B1],[A2],[C3],[XFD1048576]]."
+      ],
+      "examples": [
+        "Boundary case: the maximum legal coordinate XFD1048576 is accepted.",
+        "Ordering case: rows and cells are sorted numerically even though writes were issued out of order."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
+      "title": "refuses invalid coordinates without mutating the workbook",
+      "given": [
+        "A new workbook baseline is captured before any invalid cell authoring attempt.",
+        "The attempted coordinates are A0, XFE1, and A1048577."
+      ],
+      "when": [
+        "Each invalid coordinate is passed to Sheet1.setCellValue with numeric value 1."
+      ],
+      "then": [
+        "Every attempt is refused with code xlsx-cell-reference-invalid.",
+        "After each refusal, the serialized workbook bytes remain identical to the baseline and package.diff() stays {added:[], changed:[], removed:[]}."
+      ],
+      "examples": [
+        "Negative case: row 0 is below the legal worksheet range.",
+        "Negative case: column XFE is beyond XFD.",
+        "Negative case: row 1048577 is beyond the maximum worksheet row."
+      ],
+      "limitations": [
+        "These coordinate failures are exercised under one looped declaration and are expanded here only as examples."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses unsafe existing row ordering before mutation",
+      "title": "refuses unsafe existing row ordering before mutation",
+      "given": [
+        "The source workbook has worksheet rows serialized in unsafe order, with row 2 before row 1."
+      ],
+      "when": [
+        "The workbook is opened and Unsafe!B1 is set to 9."
+      ],
+      "then": [
+        "The edit is refused with code xlsx-worksheet-structure-unsupported.",
+        "The serialized workbook bytes remain identical to the original source bytes.",
+        "package.diff() remains {added:[], changed:[], removed:[]}."
+      ],
+      "examples": [
+        "Negative variant: structurally unsafe worksheets are rejected before any row-reordering repair attempt."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / appends a missing cell to an existing worksheet while preserving surrounding nodes and unrelated parts",
+      "title": "appends a missing cell to an existing worksheet while preserving surrounding nodes and unrelated parts",
+      "given": [
+        "The source workbook is the go-ooxml formatting.xlsx fixture, with original archive bytes and original sheet1.xml captured before mutation."
+      ],
+      "when": [
+        "Formatted!E7 is authored with the string tail, the workbook is saved, and the result is reopened."
+      ],
+      "then": [
+        "The reopened E7 cell is a string cell with value tail and no styleId.",
+        "The saved sheet XML still contains the original cols block for columns 1-4 at width 20 and the original pageMargins element, while dimension expands to A1:E7.",
+        "The original sheet XML had a sheetData section, proving the test extends an existing worksheet rather than authoring from empty.",
+        "The bytes for [Content_Types].xml, docProps/core.xml, xl/styles.xml, xl/theme/theme1.xml, and xl/workbook.xml remain identical to the original fixture.",
+        "The package diff reports only xl/worksheets/sheet1.xml as changed, with no added or removed parts."
+      ],
+      "examples": [
+        "Positive coverage: a late tail cell can be appended to an existing formatted worksheet.",
+        "Negative variant: unrelated XML scaffolding and unrelated package members are not rewritten."
+      ],
+      "limitations": [
+        "The exact insertion point inside sheet1.xml is not fully expanded here beyond the preserved cols, pageMargins, and dimension observations."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:xlsx create acceptance feature / executes the implemented xlsx creation scenarios with exported bindings",
+      "title": "executes the implemented xlsx creation scenarios with exported bindings",
+      "given": [
+        "features/xlsx/create.feature is copied into a temporary acceptance root.",
+        "The acceptance inventory for that feature reports 7 implemented scenarios."
+      ],
+      "when": [
+        "runAcceptance executes the XLSX creation feature with the exported create-xlsx bindings."
+      ],
+      "then": [
+        "report.status is passed.",
+        "The inventory reports 1 implemented feature and 7 implemented scenarios.",
+        "The execution reports 0 failed cases and 0 undefined steps."
+      ],
+      "examples": [
+        "Executed scenario: Create a minimal native workbook and reopen saved values.",
+        "Executed scenario: Add worksheets with independent ids and reopen them.",
+        "Executed scenario: Extend a prefixed worksheet with a missing cell without unqualified spreadsheet nodes.",
+        "Executed scenario: Write the maximum worksheet coordinate.",
+        "Executed scenario: Missing rows and cells are inserted in numeric order.",
+        "Executed scenario: Invalid coordinates and sheet names refuse before mutation.",
+        "Executed scenario: Append a missing cell to an existing worksheet without disturbing unrelated parts."
+      ],
+      "limitations": [
+        "This test asserts acceptance status plus selected inventory counts, not every passed-case total or each per-step XML assertion."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads rel-linked shared strings, numerics, booleans and cached formulas across worksheets",
+      "title": "reads rel-linked shared strings, numerics, booleans and cached formulas across worksheets",
+      "given": [
+        "A synthetic workbook declares two sheets named Alpha and Beta whose workbook relationship ids intentionally point at opposite physical worksheet parts.",
+        "The physical parts store shared strings beta shared and alpha shared, numeric values 42 and 7, booleans true and false, and cached formulas B1*2=84 and B1+1=8."
+      ],
+      "when": [
+        "The workbook is opened through the native XLSX reader."
+      ],
+      "then": [
+        "sheetnames is [Alpha, Beta], showing logical workbook order rather than physical part-name order.",
+        "Alpha resolves through relationships to the worksheet containing A1=alpha shared, B1=7, C1=false, and D1 as formula B1+1 with cached 8.",
+        "Beta resolves through relationships to the worksheet containing A1=beta shared."
+      ],
+      "examples": [
+        "Positive coverage: workbook relationships, not part filenames, determine which cells belong to Alpha versus Beta.",
+        "Cell-type coverage: shared strings, numerics, booleans, and cached formulas are all read from the same synthetic workbook."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real go-ooxml inline, numeric and boolean cells through workbook relationships",
+      "title": "reads real go-ooxml inline, numeric and boolean cells through workbook relationships",
+      "given": [
+        "The source workbook is fixture ID fixture-a88d1e934bea9d3483325937f29a5d0880065bd54f95bbeceb612f7d4b5575f6 opened from disk."
+      ],
+      "when": [
+        "The workbook is opened natively from its filesystem path."
+      ],
+      "then": [
+        "The reopened sheetnames are [Characters, Experiments, Summary].",
+        "Characters!A2 is Victor Frankenstein and Characters!D2 is 25.",
+        "Experiments!A2 is Galvanic Tests, Experiments!C2 is 47.5, and Experiments!D2 is true.",
+        "Summary!A1 is Frankenstein Research Summary."
+      ],
+      "examples": [
+        "Positive coverage: real fixture reads include inline text, numerics, and booleans across multiple worksheets."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real python-office shared strings from bytes",
+      "title": "reads real python-office shared strings from bytes",
+      "given": [
+        "The source workbook is fixture ID fixture-c03ad65508025275563db84b36340934b426560ae259dd572f551a174c443dca loaded fully into memory as raw bytes."
+      ],
+      "when": [
+        "Workbook.open is called with those bytes instead of a filesystem path."
+      ],
+      "then": [
+        "The workbook exposes a single sheet named Annotated.",
+        "Annotated!A1 is Character, Annotated!B1 is Notes, Annotated!A2 is Victor Frankenstein, and Annotated!B3 is The creation."
+      ],
+      "examples": [
+        "Input variant: open from raw bytes.",
+        "Positive coverage: shared-string content is read correctly from a real python-office fixture."
+      ],
+      "limitations": [
+        "The fixture filename suggests comments, but this test only asserts worksheet cell values, not comment payloads."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / excludes phonetic guides while retaining shared and inline rich text runs",
+      "title": "excludes phonetic guides while retaining shared and inline rich text runs",
+      "given": [
+        "A synthetic workbook stores A1 as a shared string with runs Alpha + phonetic guide Guide + Beta, and B1 as an inline string with runs Gamma + phonetic guide Guide + Delta."
+      ],
+      "when": [
+        "The workbook is opened natively."
+      ],
+      "then": [
+        "The workbook exposes sheetnames [Phonetics].",
+        "A1 reads as Alpha Beta and B1 reads as Gamma Delta, proving phonetic guide text is excluded from the user-visible string value in both shared and inline rich text."
+      ],
+      "examples": [
+        "Positive coverage: phonetic guides are dropped from shared strings.",
+        "Positive coverage: phonetic guides are dropped from inline rich strings."
+      ],
+      "limitations": [
+        "The test asserts flattened user-visible text only; it does not expose individual retained rich-text run formatting."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / preserves style attributes and unrelated parts after save and reopen",
+      "title": "preserves style attributes and unrelated parts after save and reopen",
+      "given": [
+        "The source workbook is the real go-ooxml formatting.xlsx fixture, and original ZIP members are captured before editing."
+      ],
+      "when": [
+        "Formatted!A2 is changed to Elizabeth Lavenza, the workbook is saved, and the result is reopened."
+      ],
+      "then": [
+        "The reopened A2 cell reads value Elizabeth Lavenza with styleId 2.",
+        "The untouched D2 cell still reads as number 25 with styleId 2.",
+        "xl/worksheets/sheet1.xml bytes change, but xl/styles.xml, xl/theme/theme1.xml, and docProps/core.xml stay byte-identical to the original fixture.",
+        "The package diff reports only xl/worksheets/sheet1.xml as changed."
+      ],
+      "examples": [
+        "Positive coverage: editing a styled existing cell preserves its style id.",
+        "Negative variant: unrelated theme, styles, and core-properties parts are not rewritten."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / conservatively invalidates cached formulas across worksheets and sets workbook calc flags",
+      "title": "conservatively invalidates cached formulas across worksheets and sets workbook calc flags",
+      "given": [
+        "A synthetic two-sheet workbook starts with Model!A1=1, Model!A2=2, Model!B1 as formula A1+A2 cached 3, Model!B2 as formula B1*2 cached 6, and Summary!A1 as formula Model!B1*3 cached 9."
+      ],
+      "when": [
+        "Model!A1 is changed to 10 and the workbook is serialized and reopened."
+      ],
+      "then": [
+        "xl/workbook.xml contains one calcPr element in the spreadsheet namespace with calcMode=auto, fullCalcOnLoad=1, and forceFullCalc=1.",
+        "sheet1.xml keeps the formula text A1+A2 and B1*2 but removes cached value elements 3 and 6.",
+        "sheet2.xml keeps the formula text Model!B1*3 but removes cached value 9.",
+        "After reopen, Model!B1.cached, Model!B2.cached, and Summary!A1.cached are all null.",
+        "The package diff reports exactly xl/workbook.xml, xl/worksheets/sheet1.xml, and xl/worksheets/sheet2.xml as changed."
+      ],
+      "examples": [
+        "Positive coverage: worksheet formula caches across sheets are cleared conservatively after an input edit.",
+        "Negative variant: the test does not expect recalculated numeric results; it expects cache removal plus recalculation flags only."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / qualifies inserted spreadsheet nodes in prefixed workbook and worksheet edits without duplicating calcPr",
+      "title": "qualifies inserted spreadsheet nodes in prefixed workbook and worksheet edits without duplicating calcPr",
+      "given": [
+        "A synthetic workbook uses the spreadsheet namespace under prefix x, with blank styled cells A1 (style 1) and B1 (style 2) and a formula cell C1 containing 1+1 with cached 2."
+      ],
+      "when": [
+        "Prefixed!A1 is changed to Alpha and Prefixed!B1 is changed to 7, then the workbook is serialized and reopened."
+      ],
+      "then": [
+        "A single calcPr element is present and it is qualified as x:calcPr in the spreadsheet namespace with calcMode=auto, fullCalcOnLoad=1, and forceFullCalc=1.",
+        "The newly authored string nodes are qualified as x:is and x:t containing Alpha, and the numeric value node for B1 is qualified as x:v containing 7.",
+        "After reopen, A1 reads Alpha with styleId 1 and B1 reads 7 with styleId 2."
+      ],
+      "examples": [
+        "Positive coverage: inserted workbook and worksheet nodes preserve the existing namespace prefix.",
+        "Negative variant: no duplicate calcPr is introduced."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / reads styled blank cells as null and preserves their style when edited",
+      "title": "reads styled blank cells as null and preserves their style when edited",
+      "given": [
+        "A synthetic workbook contains A1 as a blank cell serialized only with styleId 1 and no value, plus B1 as a styled numeric cell."
+      ],
+      "when": [
+        "The workbook is opened, A1 is observed, A1 is changed to filled, and the workbook is reopened from its serialized bytes."
+      ],
+      "then": [
+        "Before editing, A1 reads as kind blank with value null and styleId 1.",
+        "After reopen, A1 reads as kind string with value filled and still carries styleId 1."
+      ],
+      "examples": [
+        "Positive coverage: a styled blank cell is readable before edit and remains styled after becoming a string cell."
+      ],
+      "limitations": []
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported shared formula edits without mutating the package",
+      "title": "refuses unsupported shared formula edits without mutating the package",
+      "given": [
+        "The sharedFormulaWorkbook fixture contains sheet Calc with a shared-formula master at B2 (formula A2*2, si=0, ref B2:B3, cached 2) and a follower at B3 with cached 4.",
+        "The same fixture also contains an unrelated array-formula range at D2:D3, but this test targets the shared-formula path."
+      ],
+      "when": [
+        "Calc!B2 is overwritten with numeric value 99."
+      ],
+      "then": [
+        "The overwrite is refused with code xlsx-shared-formula-edit-unsupported.",
+        "package.diff() remains {added:[], changed:[], removed:[]}.",
+        "Serializing the workbook after refusal returns bytes identical to the original fixture."
+      ],
+      "examples": [
+        "Negative variant: the shared-formula master cannot be destructively overwritten."
+      ],
+      "limitations": [
+        "This declaration covers only the B2 shared-formula master write; follower-cell or other shared-formula shapes are not expanded here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported array formula edits without mutating the package",
+      "title": "refuses unsupported array formula edits without mutating the package",
+      "given": [
+        "The sharedFormulaWorkbook fixture contains sheet Calc with an array-formula master at D2 over ref D2:D3 and cached follower value 4 at D3.",
+        "The same fixture also carries a shared-formula pair at B2:B3, but this test targets the array-formula path."
+      ],
+      "when": [
+        "Calc!D2 is overwritten with numeric value 99."
+      ],
+      "then": [
+        "The overwrite is refused with code xlsx-array-formula-edit-unsupported.",
+        "package.diff() remains {added:[], changed:[], removed:[]}.",
+        "Serializing the workbook after refusal returns bytes identical to the original fixture."
+      ],
+      "examples": [
+        "Negative variant: the array-formula master cannot be destructively overwritten."
+      ],
+      "limitations": [
+        "This declaration covers only the D2 array-formula master write; other array shapes are not expanded here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:xlsx acceptance feature / executes the implemented xlsx scenarios with exported bindings",
+      "title": "executes the implemented xlsx scenarios with exported bindings",
+      "given": [
+        "features/xlsx/cells.feature is copied into a temporary acceptance root.",
+        "The feature inventory reports 1 implemented feature and 8 implemented scenarios."
+      ],
+      "when": [
+        "runAcceptance executes the XLSX cell feature with the exported xlsx step bindings."
+      ],
+      "then": [
+        "report.status is passed.",
+        "The inventory reports 1 implemented feature and 8 implemented scenarios.",
+        "The execution reports 0 failed cases and 0 undefined steps."
+      ],
+      "examples": [
+        "Executed scenario: Read rel-linked shared strings, numbers, booleans and cached formulas across worksheets.",
+        "Executed scenario: Edit a styled existing cell without disturbing unrelated package parts.",
+        "Executed scenario: Editing an input cell clears formula caches across worksheets and enables recalculation.",
+        "Executed scenario: Edit prefixed workbook and worksheet parts without creating unqualified spreadsheet nodes.",
+        "Executed scenario: Read rich strings while excluding phonetic guides.",
+        "Executed scenario: Read and edit a styled blank cell without losing its style.",
+        "Executed scenario: Refuse destructive edits to an unsupported shared formula without mutating the workbook.",
+        "Executed scenario: Refuse destructive edits to an unsupported array formula without mutating the workbook."
+      ],
+      "limitations": [
+        "This test asserts acceptance status plus selected inventory counts; it does not assert total passed-case count or every step total."
+      ]
+    }
+  ],
+  "inputPolicy": "Fixtures are resolved by stable IDs through the central manifest; no producer-specific storage roots."
+}

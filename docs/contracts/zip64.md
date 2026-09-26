@@ -46,9 +46,9 @@ Rules:
 * member names still must fit the ZIP 16-bit name length field; overlong names fail as `zip-zip64-unsupported`
 * archives that cannot be materialized with safe integer offsets/lengths fail as `zip-zip64-unsupported`
 
-The writer materialises the entire archive in memory. Forced tiny archives and
-65,535-entry archives are tested; multi-gigabyte writes and independent native
-resource/preflight validation; broader format behaviours remain gaps.
+The writer materialises the entire archive in memory. Forced tiny archives,
+65,535-entry archives and resource/preflight refusals are tested. Multi-gigabyte
+writes and independent Office producer/consumer checks have not been run.
 
 ## Error-code summary
 

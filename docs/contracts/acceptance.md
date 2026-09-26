@@ -12,7 +12,15 @@ rows.
 
 ## Source contract
 
-Feature files are loaded from `features/**/*.feature`.
+Local regression features are loaded from `features/**/*.feature`.
+`features/shared.json` additionally selects central features from the pinned
+`references/fixtures-ooxml` checkout. Their lifecycle overlay is applied in memory;
+no shared feature copy is written. Duplicate IDs across local and shared features
+are rejected by the combined inventory.
+
+The shared catalogue defines common expected behaviour. Native bindings and
+per-consumer execution reports are local. Candidate mappings in `docs/behaviors/`
+are not part of the execution inventory until reviewed, reconciled and bound.
 
 Feature tags are strict:
 
