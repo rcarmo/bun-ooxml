@@ -3,7 +3,7 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 401,
+  "count": 409,
   "files": 43,
   "sources": [
     {
@@ -110,8 +110,8 @@
     },
     {
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
-      "declarations": 9,
+      "sha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "declarations": 17,
       "issues": []
     },
     {
@@ -7001,7 +7001,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const {inventory,features,sources,ledger}=sample();\n inventory.cases.push({...inventory.cases[0]!,id:'bun:elsewhere:unmapped',path:'tests/unit/other.test.ts'});\n const r=reconcileOutcomeMappings(inventory,ledger,features,sources) as any;\n expect(r.mappedDeclarations).toBe(2);expect(r.totalDeclarations).toBe(3);expect(r.unmappedTestIds).toEqual(['bun:elsewhere:unmapped']);expect(r.executionCredit).toBe(false);expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "expect",
@@ -7030,7 +7030,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const {inventory,features,sources,ledger}=sample();ledger.mappings.pop();expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Missing');\n ledger.mappings.push(ledger.mappings[0]!);expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Duplicate');\n}",
       "calls": [
         "expect",
@@ -7058,7 +7058,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const a=sample();a.sources['tests/unit/sample.test.ts']+=' ';expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('source');\n const b=sample();b.ledger.mappings[0]!.assertions=['expect(1).toBe(99)'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('assertion');\n}",
       "calls": [
         "expect",
@@ -7085,7 +7085,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const a=sample();a.ledger.mappings[0]!.scenarioIds=['@id-absent'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('scenario');\n const b=sample();b.ledger.mappings[0]!.caseKeys=['@id-pptx-mapping-test|{\"kind\":\"absent\"}'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('case');\n const c=sample();c.features.push(c.features[0]!);expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('Duplicate');\n}",
       "calls": [
         "c.features.push",
@@ -7114,7 +7114,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const a=sample();delete a.ledger.sourceSha256['workflows/pptx/sample.feature'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('pin');\n const b=sample();b.ledger.scopePaths.push('tests/unit/missing.test.ts');expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('scope');\n const c=sample();c.ledger.mappings[0]!.outcomes=[];expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('outcome');\n const d=sample();d.ledger.mappings[0]!.gaps=[];expect(()=>reconcileOutcomeMappings(d.inventory,d.ledger,d.features,d.sources)).toThrow('gap');\n}",
       "calls": [
         "b.ledger.scopePaths.push",
@@ -7142,7 +7142,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const a=sample();(a.ledger as any).executionCredit=true;expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('credit');\n const b=sample();b.inventory.cases[0]!.reviewReasons.push('body-loop');\n const r=reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources) as any;\n expect(r.mappings[0].reviewReasons).toEqual(['body-loop']);expect(r.runtimeLeafCount).toBe(null);\n}",
       "calls": [
         "b.inventory.cases.0.reviewReasons.push",
@@ -7157,30 +7157,35 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/outcome-mappings.test.ts:committed mappings enumerate every slide-order test, assertions and known gaps",
+      "id": "bun:tests/unit/outcome-mappings.test.ts:committed ledgers enumerate slide-order and effective-formatting assertions with known gaps",
       "path": "tests/unit/outcome-mappings.test.ts",
       "line": 58,
-      "title": "committed mappings enumerate every slide-order test, assertions and known gaps",
+      "title": "committed ledgers enumerate slide-order and effective-formatting assertions with known gaps",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(report.mappedDeclarations).toBe(13)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-13)",
+        "expect(report.mappedDeclarations).toBe(25)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-25)",
+        "expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12]])",
         "expect(report.mappings[0]!.caseKeys).toHaveLength(21)",
+        "expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25)",
         "expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
-      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport();\n expect(report.mappedDeclarations).toBe(13);\n expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-13);\n expect(report.mappings[0]!.caseKeys).toHaveLength(21);\n expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);\n}",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport();\n expect(report.mappedDeclarations).toBe(25);\n expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-25);\n expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12]]);\n expect(report.mappings[0]!.caseKeys).toHaveLength(21);\n expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);\n expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);\n}",
       "calls": [
         "expect",
         "expect().toBe",
+        "expect().toEqual",
         "expect().toHaveLength",
         "outcomeMappingReport",
-        "report.mappings.every"
+        "report.ledgers.map",
+        "report.mappings.every",
+        "report.mappings.find"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -7188,7 +7193,7 @@
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "line": 67,
+      "line": 69,
       "title": "mapping gate refuses silently omitted native assertions",
       "suites": [],
       "kind": "test",
@@ -7199,7 +7204,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const a=sample();a.inventory.cases[0]!.assertions.push('expect(3).toBe(3)');\n expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('assertion');\n}",
       "calls": [
         "a.inventory.cases.0.assertions.push",
@@ -7214,7 +7219,7 @@
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "line": 71,
+      "line": 73,
       "title": "scenario-only links remain explicitly distinct from case-key links",
       "suites": [],
       "kind": "test",
@@ -7227,12 +7232,262 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "body": "{\n const a=sample();a.ledger.mappings[1]!.caseKeys=[a.features[0]!.scenarios[0]!.cases[0]!.identityKey];\n const r=reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources) as any;\n expect(r.mappings[0].linkGranularity).toBe('scenario-only');\n expect(r.mappings[1].linkGranularity).toBe('explicit-case-keys');\n expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "expect",
         "expect().toBe",
         "r.mappings.every",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers share one denominator without execution credit or dropped mappings",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 91,
+      "title": "independent ledgers share one denominator without execution credit or dropped mappings",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.mappedDeclarations).toBe(4)",
+        "expect(r.totalDeclarations).toBe(5)",
+        "expect(r.unmappedTestIds).toEqual(['bun:outside'])",
+        "expect(r.ledgers.map((l:any)=>[l.name,l.mappedDeclarations])).toEqual([['first',2],['second',2]])",
+        "expect(r.mappings.map((m:any)=>m.ledger)).toEqual(['first','first','second','second'])",
+        "expect(r.executionCredit).toBe(false)",
+        "expect(r.runtimeLeafCount).toBe(null)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const {inventory,sets}=twoSets();inventory.cases.push({...inventory.cases[0]!,id:'bun:outside',path:'tests/unit/outside.test.ts'});\n const r=reconcileOutcomeMappingSets(inventory,sets) as any;\n expect(r.mappedDeclarations).toBe(4);expect(r.totalDeclarations).toBe(5);expect(r.unmappedTestIds).toEqual(['bun:outside']);\n expect(r.ledgers.map((l:any)=>[l.name,l.mappedDeclarations])).toEqual([['first',2],['second',2]]);\n expect(r.mappings.map((m:any)=>m.ledger)).toEqual(['first','first','second','second']);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBe(null);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "inventory.cases.push",
+        "r.ledgers.map",
+        "r.mappings.map",
+        "reconcileOutcomeMappingSets",
+        "twoSets"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers cannot borrow sibling scenarios or source pins",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 98,
+      "title": "independent ledgers cannot borrow sibling scenarios or source pins",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scenario')",
+        "expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const a=twoSets();a.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-docx-second-test'];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scenario');\n const b=twoSets();delete b.sets[0]!.ledger.sourceSha256['workflows/pptx/sample.feature'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n}",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappingSets",
+        "twoSets"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers reject duplicate names, scopes and canonical scenarios",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 102,
+      "title": "independent ledgers reject duplicate names, scopes and canonical scenarios",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('name')",
+        "expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scope')",
+        "expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('scenario')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const a=twoSets();a.sets[1]!.name='first';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('name');\n const b=twoSets();b.sets[1]={...b.sets[0]!,name:'second'};expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scope');\n const c=twoSets();c.sets[1]!.features=c.sets[0]!.features;c.sets[1]!.sources['workflows/pptx/sample.feature']=feature;c.sets[1]!.ledger.sourceSha256['workflows/pptx/sample.feature']=createHash('sha256').update(feature).digest('hex');c.sets[1]!.ledger.mappings.forEach(m=>m.scenarioIds=['@id-pptx-mapping-test']);expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('scenario');\n}",
+      "calls": [
+        "c.sets.1.ledger.mappings.forEach",
+        "createHash",
+        "createHash().update",
+        "createHash().update().digest",
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappingSets",
+        "twoSets"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers refuse vacuous inputs, scope shrinkage and altered shared sources",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 107,
+      "title": "independent ledgers refuse vacuous inputs, scope shrinkage and altered shared sources",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,[])).toThrow('ledger')",
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope')",
+        "expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('source')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const a=twoSets();expect(()=>reconcileOutcomeMappingSets(a.inventory,[])).toThrow('ledger');\n a.sets[0]!.expectedScopePaths.push('tests/unit/required.test.ts');expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n const b=twoSets();b.sets.forEach((s,i)=>{s.sources['shared.ts']=String(i);s.ledger.sourceSha256['shared.ts']=createHash('sha256').update(String(i)).digest('hex');});expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('source');\n}",
+      "calls": [
+        "String",
+        "a.sets.0.expectedScopePaths.push",
+        "b.sets.forEach",
+        "createHash",
+        "createHash().update",
+        "createHash().update().digest",
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappingSets",
+        "twoSets"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:equal shared source pins preserve each independently validated mapping",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 113,
+      "title": "equal shared source pins preserve each independently validated mapping",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(report.sourceSha256['shared.ts']).toBe(sets[0]!.ledger.sourceSha256['shared.ts']!)",
+        "expect(report.mappings.filter(m=>m.ledger==='first').map(({ledger,...row})=>row)).toEqual(first.mappings)",
+        "expect(JSON.stringify(sets)).toBe(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const {inventory,sets}=twoSets();\n sets.forEach(s=>{s.sources['shared.ts']='shared';s.ledger.sourceSha256['shared.ts']=createHash('sha256').update('shared').digest('hex');});\n const before=JSON.stringify(sets),first=reconcileOutcomeMappings(inventory,sets[0]!.ledger,sets[0]!.features,sets[0]!.sources),report=reconcileOutcomeMappingSets(inventory,sets);\n expect(report.sourceSha256['shared.ts']).toBe(sets[0]!.ledger.sourceSha256['shared.ts']!);\n expect(report.mappings.filter(m=>m.ledger==='first').map(({ledger,...row})=>row)).toEqual(first.mappings);\n expect(JSON.stringify(sets)).toBe(before);\n}",
+      "calls": [
+        "JSON.stringify",
+        "createHash",
+        "createHash().update",
+        "createHash().update().digest",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "reconcileOutcomeMappingSets",
+        "reconcileOutcomeMappings",
+        "report.mappings.filter",
+        "report.mappings.filter().map",
+        "sets.forEach",
+        "twoSets"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:cross-ledger case keys cannot bypass local scenario ownership",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 121,
+      "title": "cross-ledger case keys cannot bypass local scenario ownership",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappingSets(inventory,sets)).toThrow('case')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const {inventory,sets}=twoSets();sets[0]!.ledger.mappings[0]!.caseKeys=[sets[1]!.features[0]!.scenarios[0]!.cases[0]!.identityKey];\n expect(()=>reconcileOutcomeMappingSets(inventory,sets)).toThrow('case');\n}",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappingSets",
+        "twoSets"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:outcome reconciliation refuses unresolved registrations even outside mapped scopes",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 126,
+      "title": "outcome reconciliation refuses unresolved registrations even outside mapped scopes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(native.unresolved.length).toBeGreaterThan(0)",
+        "expect(native.cases).toHaveLength(0)",
+        "expect(()=>reconcileOutcomeMappings(inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved')",
+        "expect(()=>reconcileOutcomeMappingSets(inventory,[{name:'valid',expectedScopePaths:a.ledger.scopePaths,ledger:a.ledger,features:a.features,sources:a.sources}])).toThrow('Unresolved')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const {mkdtemp,rm,mkdir,writeFile}=await import('node:fs/promises'),{tmpdir}=await import('node:os'),{join}=await import('node:path'),{inventoryNativeTests}=await import('../../scripts/test-inventory.ts');\n const root=await mkdtemp(join(tmpdir(),'bun-unresolved-outcomes-'));\n try{\n  await mkdir(join(root,'tests/unit'),{recursive:true});\n  await writeFile(join(root,'tests/unit/hidden.test.ts'),`import {describe} from 'bun:test'; const register=()=>{}; describe('hidden',register);`);\n  const native=await inventoryNativeTests(root);expect(native.unresolved.length).toBeGreaterThan(0);expect(native.cases).toHaveLength(0);\n  const a=sample(),inventory={cases:a.inventory.cases,unresolved:native.unresolved};\n  expect(()=>reconcileOutcomeMappings(inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved');\n  expect(()=>reconcileOutcomeMappingSets(inventory,[{name:'valid',expectedScopePaths:a.ledger.scopePaths,ledger:a.ledger,features:a.features,sources:a.sources}])).toThrow('Unresolved');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "expect",
+        "expect().toBeGreaterThan",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "inventoryNativeTests",
+        "join",
+        "mkdir",
+        "mkdtemp",
+        "reconcileOutcomeMappingSets",
+        "reconcileOutcomeMappings",
+        "rm",
+        "sample",
+        "tmpdir",
+        "writeFile"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:standalone mapping validation refuses unresolved declaration records",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 138,
+      "title": "standalone mapping validation refuses unresolved declaration records",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+      "body": "{\n const a=sample();a.inventory.cases[0]!.unresolved.push('unsupported registration');\n expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved');\n}",
+      "calls": [
+        "a.inventory.cases.0.unresolved.push",
+        "expect",
+        "expect().toThrow",
         "reconcileOutcomeMappings",
         "sample"
       ],

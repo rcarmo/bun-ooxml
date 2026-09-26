@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "consumer": "bun",
   "executionCredit": false,
   "runtimeLeafCount": null,
-  "scope": "Source-pinned assertion mappings; semantic outcomes and gaps require human review; no test execution is inferred",
-  "totalDeclarations": 401,
-  "mappedDeclarations": 13,
+  "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
+  "totalDeclarations": 409,
+  "mappedDeclarations": 25,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
@@ -13,8 +13,47 @@
     "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
     "scripts/gherkin.ts": "4f8c38ec3b8cada3a38366a97b76ed3052aef606545cc98dfb3c202df09d70bf",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e"
+    "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e",
+    "tests/unit/docx-effective-formatting.test.ts": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
+    "tests/acceptance/effective-formatting.ts": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f",
+    "src/docx/index.ts": "4e45c953f475a0708cdd47f0dcf9eacff4ea0ac82c8994c7e2bcf7dcb8dd1107",
+    "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
+    "workflows/docx/effective-formatting.feature": "8f1f31180b9e31dfff4e30ecfd9c9c4596edfaff85561cd53e775135cf748b90"
   },
+  "ledgers": [
+    {
+      "name": "slide-order",
+      "scopePaths": [
+        "tests/unit/pptx-slide-order.test.ts"
+      ],
+      "mappedDeclarations": 13,
+      "sourceSha256": {
+        "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+        "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
+        "src/pptx/index.ts": "2ac2b87c1507e74742ba7c2d6501036574530ffb8b16d5102a9bfd392058688d",
+        "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
+        "scripts/gherkin.ts": "4f8c38ec3b8cada3a38366a97b76ed3052aef606545cc98dfb3c202df09d70bf",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e"
+      }
+    },
+    {
+      "name": "effective-formatting",
+      "scopePaths": [
+        "tests/unit/docx-effective-formatting.test.ts"
+      ],
+      "mappedDeclarations": 12,
+      "sourceSha256": {
+        "tests/unit/docx-effective-formatting.test.ts": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
+        "tests/acceptance/effective-formatting.ts": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f",
+        "src/docx/index.ts": "4e45c953f475a0708cdd47f0dcf9eacff4ea0ac82c8994c7e2bcf7dcb8dd1107",
+        "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
+        "scripts/gherkin.ts": "4f8c38ec3b8cada3a38366a97b76ed3052aef606545cc98dfb3c202df09d70bf",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/effective-formatting.feature": "8f1f31180b9e31dfff4e30ecfd9c9c4596edfaff85561cd53e775135cf748b90"
+      }
+    }
+  ],
   "unmappedTestIds": [
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / workflow refuses and preserves an existing output when the workbook has array followers",
@@ -51,18 +90,6 @@
     "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / refuses invalid arguments and unsupported or unknown styles atomically",
     "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / invalidates earlier spans after append without disturbing preserved parts",
     "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
-    "bun:tests/unit/docx-effective-formatting.test.ts:effective run formatting executes 25 saved outcomes and read-only refusals",
-    "bun:tests/unit/docx-effective-formatting.test.ts:defaults combine with style toggles and provenance records every transition",
-    "bun:tests/unit/docx-effective-formatting.test.ts:an explicit style chain does not also apply the default paragraph style",
-    "bun:tests/unit/docx-effective-formatting.test.ts:inspection returns detached results and never invalidates a captured text span",
-    "bun:tests/unit/docx-effective-formatting.test.ts:style definitions are read live while raw main-document edits make handles stale",
-    "bun:tests/unit/docx-effective-formatting.test.ts:UTF16 LE and BE preserve encoding/BOM and inspect reopened style definitions",
-    "bun:tests/unit/docx-effective-formatting.test.ts:selected ancestry refuses missing bases, links, wrong namespaces and duplicate property containers",
-    "bun:tests/unit/docx-effective-formatting.test.ts:unselected style ancestry is not evaluated but registry IDs remain unambiguous",
-    "bun:tests/unit/docx-effective-formatting.test.ts:protected documents remain readable without changing settings or paragraph handles",
-    "bun:tests/unit/docx-effective-formatting.test.ts:disk save and reopen produce identical effective run formatting",
-    "bun:tests/unit/docx-effective-formatting.test.ts:complex-script text and unsupported property contexts refuse rather than guess flags",
-    "bun:tests/unit/docx-effective-formatting.test.ts:raw root relationship changes cannot repoint the document behind a formatting handle",
     "bun:tests/unit/docx-formatting.test.ts:direct run formatting executes15 saved outcome and refusal cases",
     "bun:tests/unit/docx-formatting.test.ts:changed formatting stales spans and paragraphs but no-op preserves handles",
     "bun:tests/unit/docx-formatting.test.ts:explicit false writes off properties while null removes direct overrides",
@@ -189,9 +216,17 @@
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects fabricated execution credit and preserves dynamic review flags",
-    "bun:tests/unit/outcome-mappings.test.ts:committed mappings enumerate every slide-order test, assertions and known gaps",
+    "bun:tests/unit/outcome-mappings.test.ts:committed ledgers enumerate slide-order and effective-formatting assertions with known gaps",
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
     "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
+    "bun:tests/unit/outcome-mappings.test.ts:independent ledgers share one denominator without execution credit or dropped mappings",
+    "bun:tests/unit/outcome-mappings.test.ts:independent ledgers cannot borrow sibling scenarios or source pins",
+    "bun:tests/unit/outcome-mappings.test.ts:independent ledgers reject duplicate names, scopes and canonical scenarios",
+    "bun:tests/unit/outcome-mappings.test.ts:independent ledgers refuse vacuous inputs, scope shrinkage and altered shared sources",
+    "bun:tests/unit/outcome-mappings.test.ts:equal shared source pins preserve each independently validated mapping",
+    "bun:tests/unit/outcome-mappings.test.ts:cross-ledger case keys cannot bypass local scenario ownership",
+    "bun:tests/unit/outcome-mappings.test.ts:outcome reconciliation refuses unresolved registrations even outside mapped scopes",
+    "bun:tests/unit/outcome-mappings.test.ts:standalone mapping validation refuses unresolved declaration records",
     "bun:tests/unit/package-diff.test.ts:diffPackages / raw fixture no-op diffs are empty, preserve exact source bytes, and return detached reports",
     "bun:tests/unit/package-diff.test.ts:diffPackages / ignores ZIP metadata-only changes",
     "bun:tests/unit/package-diff.test.ts:diffPackages / reports opaque payload edits with hashes, lengths, content types, and detached part records",
@@ -452,7 +487,8 @@
       "reviewReasons": [],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:reorder preserves captured slide anchors and table cells while indexes follow order",
@@ -480,7 +516,8 @@
       "reviewReasons": [],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:a text anchor captured before reorder can still edit its original slide",
@@ -502,7 +539,8 @@
       "reviewReasons": [],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide arrays are detached and repeated reorder plus append maintain indexes",
@@ -530,7 +568,8 @@
       "reviewReasons": [],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:serialization rollback preserves earlier edits, handle identities and order snapshot",
@@ -559,7 +598,8 @@
       "reviewReasons": [],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
@@ -587,7 +627,8 @@
       ],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
@@ -614,7 +655,8 @@
       ],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -641,7 +683,8 @@
       ],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:same-order requests still validate protection, IDs and stale metadata",
@@ -670,7 +713,8 @@
       ],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:invalid lexical slide IDs refuse before archive changes",
@@ -696,7 +740,8 @@
       ],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:disk saved slide order and linked notes follow logical handles",
@@ -719,7 +764,8 @@
       "reviewReasons": [],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
@@ -746,7 +792,8 @@
       ],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
     },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:public three-argument Slide constructor retains identity across reorders",
@@ -772,7 +819,350 @@
       "reviewReasons": [],
       "deferredAssertions": [],
       "unresolved": [],
-      "executionCredit": false
+      "executionCredit": false,
+      "ledger": "slide-order"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:effective run formatting executes 25 saved outcomes and read-only refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting",
+        "@id-docx-effective-run-formatting-refusal"
+      ],
+      "caseKeys": [
+        "@id-docx-effective-run-formatting|{\"kind\":\"implicit\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"defaults\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"default-style\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"inherited\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"toggle-chain\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"style-false\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"direct-off\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"aliased\"}",
+        "@id-docx-effective-run-formatting|{\"kind\":\"multiple-runs\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"missing-style\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"cycle\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"duplicate-id\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"duplicate-default\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"wrong-type\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"malformed-flag\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"duplicate-flag\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"character-style\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"numbering\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"table-context\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"revision\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"complex-script\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"external-styles\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"wrong-mime\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"styles-effects\"}",
+        "@id-docx-effective-run-formatting-refusal|{\"kind\":\"stale-paragraph\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(25)"
+      ],
+      "outcomes": [
+        "The wrapper asserts no acceptance failures and exactly 25 passed cases.",
+        "The pinned helper checks effective flag pairs, text, first-run style chains and implicit bold provenance, complete bold transitions for toggle-chain, the last bold contribution for direct-off, and result equality after reopen.",
+        "The helper checks unchanged archive bytes, paragraph identity and document version for positive rows; refusal rows check a DOCX error and unchanged archive bytes."
+      ],
+      "gaps": [
+        "The wrapper aggregates helper outcomes; not every property or contribution is independently asserted for every row.",
+        "Reopen result equality alone is not an independent expected-value oracle; italic contribution details and runIndex values lack explicit expected assertions here.",
+        "Runtime leaf expansion is not measured; no rendering agreement is implied."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:defaults combine with style toggles and provenance records every transition",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([row.bold.value,row.italic.value]).toEqual([true,false])",
+        "expect(row.bold.contributions).toEqual([{source:'implicit',operation:'set',value:false,result:false},{source:'document-default',partName:'word/styles.xml',operation:'set',value:true,result:true},{source:'paragraph-style',partName:'word/styles.xml',styleId:'Base',operation:'toggle',value:true,result:false},{source:'paragraph-style',partName:'word/styles.xml',styleId:'Child',operation:'toggle',value:true,result:true}])"
+      ],
+      "outcomes": [
+        "Both effective flag values are asserted as true/false and the full bold contribution list checks implicit, document-default, Base and Child transitions."
+      ],
+      "gaps": [
+        "The canonical defaults and toggle-chain rows are separate; no exact row combines them.",
+        "Full italic provenance, byte custody and post-inspection save/reopen are not asserted in this declaration."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:an explicit style chain does not also apply the default paragraph style",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.paragraphStyleChain).toEqual(['Base','Child'])",
+        "expect([r.bold.value,r.italic.value]).toEqual([true,true])"
+      ],
+      "outcomes": [
+        "An explicit Child chain remains Base/Child with true/true flags despite a default paragraph style supplying italic."
+      ],
+      "gaps": [
+        "Canonical rows do not combine an explicit style and a separately defined default style.",
+        "This declaration checks values and chain only, not complete contributions or post-inspection save/reopen."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:inspection returns detached results and never invalidates a captured text span",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(fresh[0]!.bold.value).toBe(true)",
+        "expect(fresh[0]!.paragraphStyleChain).toEqual(['Base','Child'])",
+        "expect(d.currentVersion()).toBe(version)",
+        "expect(q.paragraphs[0]!.effectiveRunFormatting()[0]!.text).toBe('Changed')"
+      ],
+      "outcomes": [
+        "Mutating returned bold and chain data does not affect a fresh bold value or chain; the document version remains unchanged.",
+        "A span captured before inspection remains usable to replace text, which reopens as Changed."
+      ],
+      "gaps": [
+        "No canonical row mutates result objects or replaces a pre-inspection captured span.",
+        "Although the test mutates an italic contribution, it does not assert that the next italic contribution is detached; no complete nested-result isolation claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:style definitions are read live while raw main-document edits make handles stale",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting",
+        "@id-docx-effective-run-formatting-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.effectiveRunFormatting()[0]!.bold.value).toBe(false)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>p.effectiveRunFormatting()).toThrow('stale')",
+        "expect(d.package.toBytes()).toEqual(raw)"
+      ],
+      "outcomes": [
+        "A raw live style change produces false bold without further archive changes.",
+        "After raw main-document alteration, the retained paragraph inspection throws a stale error and preserves the altered archive."
+      ],
+      "gaps": [
+        "The canonical stale-paragraph row uses wrapper mutation rather than raw package changes; live style refresh lacks a row.",
+        "The declaration does not save/reopen after either raw mutation."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:UTF16 LE and BE preserve encoding/BOM and inspect reopened style definitions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.effectiveRunFormatting()[0]!.bold.value).toBe(true)",
+        "expect(q.package.toBytes()).toEqual(before)",
+        "expect([...q.package.get(name)!.slice(0,2)]).toEqual(le?[255,254]:[254,255])"
+      ],
+      "outcomes": [
+        "For both byte orders the reopened result is bold, inspection preserves archive bytes, and document/style parts retain the expected BOM."
+      ],
+      "gaps": [
+        "Canonical rows lack UTF-16 variants; nested body loops remain unexpanded into measured runtime leaves.",
+        "The XML declaration is constructed but not separately asserted after inspection; italic and full provenance are not asserted here."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:selected ancestry refuses missing bases, links, wrong namespaces and duplicate property containers",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.effectiveRunFormatting()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Six source-defined mutations of selected ancestry or properties throw and preserve exact archive bytes."
+      ],
+      "gaps": [
+        "Canonical rows do not enumerate these missing-base, linked-style, namespace, property-container and uppercase-on/off variants exactly.",
+        "The dynamic callback loop is not a measured leaf inventory; generic toThrow does not establish a specific refusal code for each variant."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:unselected style ancestry is not evaluated but registry IDs remain unambiguous",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.paragraphs[0]!.effectiveRunFormatting()[0]!.paragraphStyleChain).toEqual(['Base','Child'])"
+      ],
+      "outcomes": [
+        "An unrelated cyclic style with a malformed bold value does not prevent resolving the selected Base/Child chain."
+      ],
+      "gaps": [
+        "The title mentions registry uniqueness, but this declaration does not create duplicate IDs or assert ambiguity rejection.",
+        "Unused ancestry has no canonical row; flags, contributions and byte custody are not independently asserted here."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:protected documents remain readable without changing settings or paragraph handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.effectiveRunFormatting()[0]!.bold.value).toBe(true)",
+        "expect(q.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A protected document still resolves bold true and inspection preserves the complete archive including settings."
+      ],
+      "gaps": [
+        "The declaration does not capture and compare paragraph handle identity despite its title.",
+        "Canonical rows lack protected read-only inspection; no broad protection capability or save equivalence is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:disk save and reopen produce identical effective run formatting",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.effectiveRunFormatting()).toEqual(expected)"
+      ],
+      "outcomes": [
+        "A multiple-run document saved to disk and reopened returns the same complete inspection array as before saving."
+      ],
+      "gaps": [
+        "The expected array is produced by the same inspector, so equality is preservation evidence rather than an independent cascade oracle.",
+        "Canonical multiple-runs reopens archive bytes, not a disk path; no exact transport row exists."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:complex-script text and unsupported property contexts refuse rather than guess flags",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.effectiveRunFormatting()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Hebrew text, rtl, bidi and bCs source mutations each throw with archive bytes unchanged."
+      ],
+      "gaps": [
+        "The canonical complex-script row uses cs rather than these four inputs.",
+        "Body-loop leaves and specific refusal codes are not measured/asserted; this is not exhaustive script coverage."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
+    },
+    {
+      "testId": "bun:tests/unit/docx-effective-formatting.test.ts:raw root relationship changes cannot repoint the document behind a formatting handle",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.effectiveRunFormatting()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Repointing the office-document relationship behind a retained paragraph causes inspection to throw without further archive changes."
+      ],
+      "gaps": [
+        "Canonical stale-paragraph refers to wrapper mutation, not raw root relationship retargeting.",
+        "The test does not assert an exact refusal code or post-refusal handle usability."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "effective-formatting"
     }
   ]
 }

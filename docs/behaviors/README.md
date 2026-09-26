@@ -1,7 +1,7 @@
 # Native behaviour catalogue
 
 `native-test-inventory.json` records the current Bun test declarations from
-`tests/unit/**/*.test.ts`. Schema 2 contains 401 declarations in 43 files. This is an
+`tests/unit/**/*.test.ts`. Schema 2 contains 409 declarations in 43 files. This is an
 AST denominator, not a runtime-expanded case count or proof of semantic coverage.
 It records whole-file hashes, declaration locations, suite/title identities,
 inline bodies, direct matcher expressions, call names and review reasons.
@@ -44,7 +44,7 @@ No inventory row grants execution credit.
 
 The five `staging-*.json` candidate groups retain 227 earlier declaration IDs.
 `staging-reconciliation.json` finds all 227 identities in the current source and
-lists 174 newer declarations without historical staging. The report itself is
+lists 182 newer declarations without historical staging. The report itself is
 excluded from candidate discovery. These counts describe only those five files,
 not the separate canonical consumer mappings.
 
@@ -69,19 +69,37 @@ keys; other declarations retain scenario-level partial mappings because their
 anchor, encoding, constructor, rollback and invalid-input variants lack exact
 canonical rows.
 
-[`outcome-reconciliation.json`](outcome-reconciliation.json) retains the full
-401-declaration denominator: 13 have bounded mappings and 388 are unmapped by
-this ledger. All mappings remain partial and carry `executionCredit: false`.
+[`effective-formatting-mappings.json`](effective-formatting-mappings.json) adds
+12 DOCX inspection declarations. The wrapper links 25 canonical case keys;
+additional defaults/toggle combinations, result isolation, live styles, UTF-16,
+protected reads and raw relationship changes remain scenario-level mappings.
+Gaps distinguish asserted outcomes from test titles: the protected-read test does
+not compare handle identity, and the unused-ancestry test does not create duplicate
+IDs. Changing an italic result contribution is not followed by an isolation
+assertion. No renderer agreement is inferred; the independent 3/4 marker result
+and known LibreOffice difference remain in the runtime release evidence.
+
+[`outcome-reconciliation.json`](outcome-reconciliation.json), schema 2, retains the
+full 409-declaration denominator: 25 have bounded mappings and 384 are unmapped by
+these two ledgers. All mappings remain partial and carry `executionCredit: false`.
 Each row records `scenario-only` or `explicit-case-keys` link granularity.
 Body-loop review flags remain present, and the runtime leaf count is unknown.
 The 321 acceptance cases still supply the separately recorded execution result.
 
-`bun scripts/outcome-mappings.ts --check` fails on stale reviewed source hashes,
+Standalone generation and `bun scripts/outcome-mappings.ts --check` reject
+unresolved native registrations, including source-level issues outside the mapped
+scopes. They also fail on stale reviewed source hashes,
 missing scoped declarations, duplicate or unknown IDs, missing or extra direct
-literal assertions,
-and missing outcome/gap descriptions. The reviewed source set includes the
-native test, acceptance helper, PPTX implementation, canonical feature, Gherkin
-runner and inventory parser. It is not a transitive dependency closure. The gate
+literal assertions, and missing outcome/gap descriptions. Each ledger is checked
+against its own reviewed source set and canonical feature. Fixed registrations
+require both ledgers and their complete scope paths. Duplicate ledger names,
+overlapping test scopes, duplicate canonical scenarios and conflicting shared
+source hashes refuse. A sibling ledger cannot supply a missing source pin or
+scenario link. The report retains each row's ledger identity and counts the native
+denominator once.
+
+Each reviewed source set includes the native test, acceptance helper, relevant
+format implementation, canonical feature, Gherkin runner and inventory parser. It is not a transitive dependency closure. The gate
 checks integrity; it cannot determine whether prose accurately describes an
 assertion. Review source changes before updating pins. `make check` runs this
 gate without awarding additional execution credit.
@@ -99,5 +117,5 @@ operation differences between consumers. Shared Gherkin and facts live centrally
 local mappings, inventories and native results remain consumer-specific.
 
 Current acceptance executes 321 implemented cases selected from the shared
-reference. Neither 401 declarations nor 227 candidate IDs increases that result or
+reference. Neither 409 declarations nor 227 candidate IDs increases that result or
 closes the full-format backlog.

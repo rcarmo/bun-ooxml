@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "ad4f5fc177e40a747747f41db420f22f0be9f211",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.15.0",
+    "commit": "977ebe92522325a8bbc14999fed17e0a5e9626da",
+    "manifestSha256": "139a684eb23534468018235af5498f6f65bbdb740aa26731d32d3661edfe6311"
+  },
+  "sourceSha256": {
+    "scripts/outcome-mappings.ts": "fa3631cf0fec225c836f1cc7ebd621e49eaf7c1c52c40ec5aa72b01e58de4230",
+    "tests/unit/outcome-mappings.test.ts": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
+    "docs/behaviors/effective-formatting-mappings.json": "ae0aa0aba7b4b9f95acdf3048bf45b5cbea2b006b6b74bc44429107b5dc0b511",
+    "docs/behaviors/slide-order-mappings.json": "a25c182fe51e9caeda42cdad438b59fd5ccd3a39f40da85f08088c6153f7a89b"
+  },
+  "checks": {
+    "command": "make check",
+    "unitTests": 409,
+    "assertions": 5062,
+    "acceptanceCases": 321,
+    "acceptanceRunId": "02b80d43-95ee-4c01-bfb1-675c29dd2d8a",
+    "targeted": {
+      "tests": 17,
+      "assertions": 53
+    },
+    "log": "/workspace/tmp/bun-mapping-sets-check.log"
+  },
+  "mappings": {
+    "totalDeclarations": 409,
+    "mapped": 25,
+    "unmapped": 384,
+    "ledgers": [
+      {
+        "name": "slide-order",
+        "mapped": 13
+      },
+      {
+        "name": "effective-formatting",
+        "mapped": 12
+      }
+    ],
+    "runtimeLeafCount": null,
+    "executionCredit": false
+  },
+  "review": {
+    "scope": "Bounded sibling read-only gate and outcome-text review",
+    "finding": "Standalone mapping generation omitted native source-level unresolved registration checks",
+    "correction": "Real non-inline describe fixture reproduced missing refusal; global unresolved inventory and declaration issues now refuse before reconciliation",
+    "independentRetest": false,
+    "delegate": "Timed out; no credit"
+  },
+  "limits": [
+    "Partial literal-assertion/source mappings only; prose requires review",
+    "No new runtime/cascade/rendering coverage; acceptance unchanged",
+    "Reviewed source sets are not transitive dependency closures",
+    "Independent LibreOffice3of4 marker result and mismatch belong to prior runtime release"
+  ]
+}

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 401,
+  "nativeDeclarations": 409,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 174,
+  "withoutStagingCount": 182,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2654,47 +2654,87 @@
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:outcome mappings validate source pins and preserve the unmapped denominator without execution credit",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses missing or duplicated test declarations",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses stale source or nonexistent native assertions",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects fabricated execution credit and preserves dynamic review flags",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
-      "id": "bun:tests/unit/outcome-mappings.test.ts:committed mappings enumerate every slide-order test, assertions and known gaps",
+      "id": "bun:tests/unit/outcome-mappings.test.ts:committed ledgers enumerate slide-order and effective-formatting assertions with known gaps",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers share one denominator without execution credit or dropped mappings",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers cannot borrow sibling scenarios or source pins",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers reject duplicate names, scopes and canonical scenarios",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers refuse vacuous inputs, scope shrinkage and altered shared sources",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:equal shared source pins preserve each independently validated mapping",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:cross-ledger case keys cannot bypass local scenario ownership",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:outcome reconciliation refuses unresolved registrations even outside mapped scopes",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:standalone mapping validation refuses unresolved declaration records",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",

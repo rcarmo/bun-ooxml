@@ -2,7 +2,7 @@
 import {createHash} from 'node:crypto';
 import {join} from 'node:path';
 import {inventoryNativeTests,type TestCaseRecord} from './test-inventory.ts';
-type NativeTestInventory={cases:TestCaseRecord[]};
+type NativeTestInventory={cases:TestCaseRecord[];unresolved:readonly unknown[]};
 import {parseFeature,type AcceptanceFeature} from './gherkin.ts';
 import {fixturesRoot} from './fixture-inputs.ts';
 export interface OutcomeMappingLedger {
@@ -13,6 +13,7 @@ export interface OutcomeMappingLedger {
 const sha=(text:string)=>createHash('sha256').update(text).digest('hex');
 const nonempty=(values:string[])=>Array.isArray(values)&&values.length>0&&values.every(v=>typeof v==='string'&&v.trim().length>0)&&new Set(values).size===values.length;
 export function reconcileOutcomeMappings(inventory:NativeTestInventory,ledger:OutcomeMappingLedger,features:AcceptanceFeature[],sources:Record<string,string>){
+ if(!Array.isArray(inventory.unresolved)||inventory.unresolved.length||inventory.cases.some(c=>!Array.isArray(c.unresolved)||c.unresolved.length))throw Error('Unresolved native registrations prevent outcome reconciliation');
  if(ledger.schemaVersion!==1||ledger.consumer!=='bun'||ledger.executionCredit!==false)throw Error('Invalid mapping schema or execution credit');
  if(!nonempty(ledger.scopePaths))throw Error('Invalid mapping scope');
  const byId=new Map(inventory.cases.map(c=>[c.id,c]));
@@ -49,14 +50,48 @@ export function reconcileOutcomeMappings(inventory:NativeTestInventory,ledger:Ou
   totalDeclarations:inventory.cases.length,mappedDeclarations:mappings.length,sourceSha256:ledger.sourceSha256,
   unmappedTestIds:inventory.cases.filter(c=>!seen.has(c.id)).map(c=>c.id),mappings};
 }
+export type OutcomeMappingSet={name:string;expectedScopePaths:string[];ledger:OutcomeMappingLedger;features:AcceptanceFeature[];sources:Record<string,string>};
+export function reconcileOutcomeMappingSets(inventory:NativeTestInventory,sets:OutcomeMappingSet[]) {
+ if(!sets.length)throw Error('At least one mapping ledger is required');
+ const names=new Set<string>(),scopes=new Set<string>(),scenarios=new Set<string>();
+ const sourceSha256:Record<string,string>={};
+ const reports=sets.map(set=>{
+  if(!set.name.trim()||names.has(set.name))throw Error('Duplicate or empty ledger name');names.add(set.name);
+  if(!nonempty(set.expectedScopePaths)||set.ledger.scopePaths.length!==set.expectedScopePaths.length||set.expectedScopePaths.some(p=>!set.ledger.scopePaths.includes(p)))throw Error('Unexpected ledger scope');
+  for(const path of set.ledger.scopePaths){if(scopes.has(path))throw Error('Duplicate ledger scope: '+path);scopes.add(path);}
+  // Each ledger validates only against its own canonical features and source pins.
+  const report=reconcileOutcomeMappings(inventory,set.ledger,set.features,set.sources);
+  for(const feature of set.features)for(const scenario of feature.scenarios){
+   if(scenarios.has(scenario.scenarioId))throw Error('Duplicate cross-ledger scenario: '+scenario.scenarioId);scenarios.add(scenario.scenarioId);
+  }
+  for(const [path,hash]of Object.entries(report.sourceSha256)){
+   if(Object.hasOwn(sourceSha256,path)&&sourceSha256[path]!==hash)throw Error('Conflicting shared source: '+path);sourceSha256[path]=hash;
+  }
+  return {name:set.name,report};
+ });
+ const mappings=reports.flatMap(({name,report})=>report.mappings.map(mapping=>({...mapping,ledger:name}))),seen=new Set(mappings.map(m=>m.testId));
+ if(seen.size!==mappings.length)throw Error('Duplicate cross-ledger declaration');
+ return {schemaVersion:2,consumer:'bun',executionCredit:false,runtimeLeafCount:null,
+  scope:'Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred',
+  totalDeclarations:inventory.cases.length,mappedDeclarations:mappings.length,sourceSha256,
+  ledgers:reports.map(({name,report})=>({name,scopePaths:sets.find(s=>s.name===name)!.ledger.scopePaths,mappedDeclarations:report.mappedDeclarations,sourceSha256:report.sourceSha256})),
+  unmappedTestIds:inventory.cases.filter(c=>!seen.has(c.id)).map(c=>c.id),mappings};
+}
 export async function outcomeMappingReport(){
  const root=process.cwd();
- const ledger=await Bun.file(join(root,'docs/behaviors/slide-order-mappings.json')).json() as OutcomeMappingLedger;
- const canonicalPath='workflows/pptx/slide-order.feature';
- const paths=['tests/unit/pptx-slide-order.test.ts','tests/acceptance/slide-order.ts','src/pptx/index.ts','src/pptx/slide-order.ts','scripts/gherkin.ts','scripts/test-inventory.ts'];
- const sources:Record<string,string>={};for(const path of paths)sources[path]=await Bun.file(join(root,path)).text();
- sources[canonicalPath]=await Bun.file(join(fixturesRoot(),canonicalPath)).text();
- return reconcileOutcomeMappings(await inventoryNativeTests(root),ledger,[parseFeature(canonicalPath,sources[canonicalPath])],sources);
+ // Fixed registrations prevent removing a ledger or shrinking its scope in JSON.
+ const registrations=[
+  {name:'slide-order',test:'tests/unit/pptx-slide-order.test.ts',canonical:'workflows/pptx/slide-order.feature',sources:['tests/acceptance/slide-order.ts','src/pptx/index.ts','src/pptx/slide-order.ts']},
+  {name:'effective-formatting',test:'tests/unit/docx-effective-formatting.test.ts',canonical:'workflows/docx/effective-formatting.feature',sources:['tests/acceptance/effective-formatting.ts','src/docx/index.ts','src/docx/effective-formatting.ts']},
+ ];
+ const sets:OutcomeMappingSet[]=[];
+ for(const registration of registrations){
+  const ledger=await Bun.file(join(root,`docs/behaviors/${registration.name}-mappings.json`)).json() as OutcomeMappingLedger;
+  const sources:Record<string,string>={};for(const path of [registration.test,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
+  sources[registration.canonical]=await Bun.file(join(fixturesRoot(),registration.canonical)).text();
+  sets.push({name:registration.name,expectedScopePaths:[registration.test],ledger,features:[parseFeature(registration.canonical,sources[registration.canonical]!)],sources});
+ }
+ return reconcileOutcomeMappingSets(await inventoryNativeTests(root),sets);
 }
 if(import.meta.main){
  const output=JSON.stringify(await outcomeMappingReport(),null,2)+'\n',path='docs/behaviors/outcome-reconciliation.json';
