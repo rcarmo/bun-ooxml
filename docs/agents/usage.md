@@ -121,8 +121,39 @@ non-overlapping. `docx-stale-span` means the captured paragraph content changed;
 
 `Document.find()` can find supported paragraphs while other paragraphs refuse
 inspection; absence of matches is not proof that all document stories were searched.
-Use paragraph-specific inspection when complete scope matters. Headers, footers,
-footnotes and full story coverage are planned.
+Use `inspectStories()` for linked body/header/footer/note/comment text and examine
+its `blindRegions` before relying on coverage. Story-aware search/handles are not
+part of `Document.find()`.
+
+## Word review on package snapshots
+
+```ts
+import { OpcPackage, inspectStories, trackedReplace, resolveRevisions } from "bun-ooxml";
+const pkg = await OpcPackage.open(input);
+const inspection = inspectStories(pkg, { view: "current" });
+if (inspection.blindRegions.length) throw new Error("Review blind regions first");
+trackedReplace(pkg, pkg.mainPart(), "thirty days", "sixty days", {
+  author: "Reviewer", date: "2026-09-26T12:00:00Z",
+});
+await pkg.save(output); // retains native Word insertion/deletion revisions
+const accepted = await OpcPackage.open(pkg.toBytes());
+resolveRevisions(accepted, "accept", { parts: [accepted.mainPart()] });
+```
+
+Review calls operate on `OpcPackage`, not live `Document` caches. Save and reopen
+any format readers afterward. `inspectRevisions` reports supported revisions and
+unsupported findings without mutation. Resolution preflights every selected story
+and refuses unsupported move/format/table/nested markup, protection and unsafe
+namespace lifting atomically. It does not filter by author or individual ID.
+
+`trackedReplace` requires exactly one occurrence, including overlapping matches,
+within plain direct runs. It rejects unsupported story topology, existing target
+revisions, fields, controls, drawings and inter-run barriers. Supply a nonblank
+author and valid UTC date. Inserted text uses the first matched run's formatting;
+deleted fragments retain their original run properties. Accept/reject text is
+verified on private copies before committing. General Word Compare and comment
+editing are not implemented. See `docs/contracts/review-api.md` and the executable
+`examples/review-word.ts`.
 
 ## PPTX
 

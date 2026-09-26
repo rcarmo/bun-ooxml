@@ -24,6 +24,14 @@ cell values/styles/caches, untouched payload hashes, or typed refusal plus uncha
 bytes. Counting scenarios or finding an assertion in a file cannot prove semantics.
 Human/independent agent review checks whether each Then is actually established.
 
+## Published history
+
+Use `Rui Carmo <rcarmo@users.noreply.github.com>` for author and committer, as
+requested by the owner. Configure local and global Git identity before committing.
+`docs/testing/public-identity-map.json` maps the fourteen original local checkpoint
+IDs to their metadata-only replacements. Preserve the remote's initial GitHub web
+commit; merge independent history without rebasing or force-pushing.
+
 ## Source custody
 
 `references/manifest.json` pins revisions and every imported file SHA256. Both rcarmo

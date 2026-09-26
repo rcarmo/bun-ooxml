@@ -6,10 +6,10 @@ current per-step results in `artifacts/acceptance.json`.
 
 | Inventory | Implemented | Planned | Total |
 |---|---:|---:|---:|
-| features | 17 | 3 | 20 |
-| scenarios | 74 | 12 | 86 |
-| cases | 101 | 14 | 115 |
-| steps | 513 | 57 | 570 |
+| features | 20 | 3 | 23 |
+| scenarios | 83 | 12 | 95 |
+| cases | 114 | 14 | 128 |
+| steps | 586 | 57 | 643 |
 
 ## Source/test mappings
 
@@ -27,6 +27,9 @@ refinement and reviewed Gherkin step mappings before receiving parity credit.
 ## Feature files
 
 * `features/docx/create.feature`: implemented, 4 scenario(s), 8 expanded case(s).
+* `features/docx/redline.feature`: implemented, 2 scenario(s), 6 expanded case(s).
+* `features/docx/revisions.feature`: implemented, 4 scenario(s), 4 expanded case(s).
+* `features/docx/story.feature`: implemented, 3 scenario(s), 3 expanded case(s).
 * `features/docx/tables.feature`: implemented, 4 scenario(s), 7 expanded case(s).
 * `features/docx/text.feature`: implemented, 5 scenario(s), 7 expanded case(s).
 * `features/opc/graph.feature`: implemented, 4 scenario(s), 4 expanded case(s).

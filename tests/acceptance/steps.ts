@@ -5,6 +5,9 @@ import { bindings as graphBindings } from "./graph.ts";
 import { bindings as zip64Bindings } from "./zip64.ts";
 import { bindings as namespaceBindings } from "./relationship-namespaces.ts";
 import { bindings as docxBindings } from "./docx.ts";
+import { bindings as storyBindings } from "./story-docx.ts";
+import { bindings as revisionBindings } from "./revisions-docx.ts";
+import { bindings as redlineBindings } from "./redline-docx.ts";
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
@@ -23,6 +26,9 @@ export const bindings: StepBinding[] = [
   ...zip64Bindings,
   ...namespaceBindings,
   ...docxBindings,
+  ...storyBindings,
+  ...revisionBindings,
+  ...redlineBindings,
   ...createDocxBindings,
   ...createPptxBindings,
   ...createXlsxBindings,

@@ -1308,3 +1308,8 @@ function cloneBytes(bytes: Uint8Array): Uint8Array {
 function fail(code: string, message: string): never {
   throw new OoxmlError(code, message);
 }
+
+export { inspectStories, storyParts, type RevisionView, type Story, type StoryInspection, type StoryKind } from "./story.ts";
+export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding } from "./revisions.ts";
+// Review mutations operate on OpcPackage snapshots; reopen Document afterward.
+export { trackedReplace } from "./redline.ts";

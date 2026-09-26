@@ -25,4 +25,5 @@ unfinished behaviours stay explicitly planned in the ledger.
 * Preserve original bytes for untouched parts. Refuse ambiguous or unsafe edits
   before mutation. Bound untrusted input resources. Test failed edits for rollback.
 * Work only in assigned files when tasks run in parallel. No rebase.
-* Commit as Rui Carmo <rui.carmo@gmail.com>; configure local and global identity.
+* Commit as Rui Carmo <rcarmo@users.noreply.github.com>; configure local and global
+  identity. The owner requested the public rcarmo identity for all published history.

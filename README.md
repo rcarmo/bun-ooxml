@@ -10,13 +10,16 @@ text/notes and cell edits with bounded formula-cache invalidation. `patchOffice(
 read-only previews, all-targets-required batches, guarded saves and per-target
 receipts. Its native bindings pass the 19 shared mutation cases. Guarded OPC graph
 helpers add/detach parts and relationships; package diffs identify payload and
-content-type changes. ZIP, XML and OPC code
+content-type changes. Package-level Word review APIs inspect linked stories,
+resolve supported run-level revisions and author bounded tracked replacements.
+ZIP, XML and OPC code
 use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 
 Full ports of OOXML DOCX, OOXML PPTX and OOXML XLSX, including their inherited
 APIs, are in progress. Creation is limited to those initial paragraph/slide/cell surfaces. This version
-does not implement tracked revisions, slide imports, merged-table restructuring or chart authoring,
+does not implement general Word Compare, move/format/table revisions, comment threads,
+slide imports, merged-table restructuring or chart authoring,
 structural spreadsheet edits or calculation.
 The [scope and closure criteria](docs/contracts/port-scope.md) and
 [behaviour ledger](docs/contracts/parity-ledger.json) track that work.

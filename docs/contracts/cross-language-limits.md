@@ -13,10 +13,12 @@ was reported unused. These observations are requirements to investigate in a ful
 port, not compatibility behaviours to reproduce silently.
 
 Bun's current workflow performs direct text replacements in its supported body and
-table paragraphs. It has no track-changes switch, accept/reject engine or multi-story
-review guarantee. The full port requires per-story traversal and accept/reject
-outcomes before those APIs can be marked mapped. Do not imply that a similarly
-named Python operation supplies those guarantees.
+table paragraphs. It has no track-changes dispatch switch. Separate package APIs
+now inspect linked stories and resolve bounded run-level insertions/deletions
+across selected body/header/footer/note/comment parts. `trackedReplace` authors one
+exact plain-text change and verifies accept/reject copies. See [review-api.md](review-api.md).
+Move, format, table-row and nested revisions, full comparison and comment threads
+still need their own implementation and saved-outcome evidence.
 
 ## Spreadsheet derived values
 
