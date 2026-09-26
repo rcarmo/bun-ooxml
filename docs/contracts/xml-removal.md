@@ -32,4 +32,5 @@ The API accepts JavaScript strings. It does not decode or save package members,
 validate an OOXML schema, update relationships or resolve references to deleted
 content. Use the format-level editors when those checks are needed. Parse a new
 snapshot to edit the returned string further; original handles remain tied to
-the original source.
+the original source. The same handles also support
+[source-preserving attribute updates](xml-attributes.md).

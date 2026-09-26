@@ -324,7 +324,8 @@ export function selectSharedScenarios(path: string, text: string, scenarioIds: u
   const known = new Set(feature.scenarios.map(s => s.scenarioId));
   for (const id of scenarioIds) if (typeof id !== 'string' || !known.has(id)) throw new Error('Unknown shared scenario: ' + String(id));
   const selected = new Set(scenarioIds);
-  for (const scenario of feature.scenarios) if (selected.has(scenario.scenarioId) && new Set(scenario.cases.map(c=>c.name)).size !== scenario.cases.length) throw new Error('Duplicate implemented case name: '+scenario.scenarioId);
+  // Shared outline display names are descriptive, not identities. parseFeature
+  // rejects duplicate identity keys; executeAcceptance reports each row separately.
   return {...feature, lifecycle: 'implemented', runner: 'bun', scenarios: feature.scenarios.map(s => ({...s, lifecycle: selected.has(s.scenarioId) ? 'implemented' : 'planned'}))};
 }
 

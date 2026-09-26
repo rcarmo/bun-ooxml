@@ -8,6 +8,7 @@ import { bindings as xmlNameBindings } from "./xml-names.ts";
 import { bindings as xmlComparisonBindings } from './xml-comparison.ts';
 import { bindings as xmlRemovalBindings } from './xml-removal.ts';
 import { bindings as xmlValuesBindings } from './xml-values.ts';
+import { bindings as xmlAttributeBindings } from './xml-attributes.ts';
 import { bindings as graphBindings } from "./graph.ts";
 import { bindings as zip64Bindings } from "./zip64.ts";
 import { bindings as zip32Bindings } from './zip32.ts';
@@ -50,6 +51,7 @@ export const bindings: StepBinding[] = [
   ...xmlComparisonBindings,
   ...xmlRemovalBindings,
   ...xmlValuesBindings,
+  ...xmlAttributeBindings,
   ...graphBindings,
   ...zip64Bindings,
   ...zip32Bindings,

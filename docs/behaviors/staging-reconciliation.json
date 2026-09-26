@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 513,
+  "nativeDeclarations": 527,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 286,
+  "withoutStagingCount": 300,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3189,22 +3189,22 @@
     {
       "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
       "path": "tests/unit/shared-selection.test.ts",
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:selection rejects implicit whole-file implementation, unknown IDs, duplicates and empty selections",
       "path": "tests/unit/shared-selection.test.ts",
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:full acceptance rejects planned scenarios inside an otherwise implemented feature",
       "path": "tests/unit/shared-selection.test.ts",
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166"
     },
     {
-      "id": "bun:tests/unit/shared-selection.test.ts:unbound outline rows may share display names without hiding their distinct identities",
+      "id": "bun:tests/unit/shared-selection.test.ts:outline rows with shared display names execute and report every distinct identity",
       "path": "tests/unit/shared-selection.test.ts",
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166"
     },
     {
       "id": "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",
@@ -3450,6 +3450,76 @@
       "id": "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
       "path": "tests/unit/xlsx-range.test.ts",
       "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute replacement preserves original quote, whitespace and unrelated source",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:same decoded attribute value is a lexical no-op and edits never consume the snapshot",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute names resolve in target scope, aliases edit existing lexical name and default namespaces do not apply",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:duplicate expanded attributes refuse atomically even for same values or different prefixes",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:namespace declarations, unbound prefixes and malformed attribute QNames refuse",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:escaping preserves attribute values including both quotes, XML metacharacters and referenced whitespace",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:root and descendant attribute edits preserve astral text, comments, PI, CRLF and attribute delimiters",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute patch input ignores caller iterators and refuses output or batch resource overflow",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute span scanning uses XML whitespace, not Unicode JavaScript whitespace",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:many independent attribute edits retain order and avoid rescanning every attribute per patch",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:four canonical attribute cases execute and incorrect output bytes fail predicates",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
     },
     {
       "id": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",

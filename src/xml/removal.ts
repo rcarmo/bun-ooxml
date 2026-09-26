@@ -1,5 +1,7 @@
 import { OoxmlError } from '../errors.ts';
 import { inspectXmlEvents, validateXml, type XmlElement } from './index.ts';
+import { setSnapshotAttributes, type AttributeSource, type XmlAttributePatch } from './attributes.ts';
+export type { XmlAttributePatch } from './attributes.ts';
 
 /** Immutable UTF-16 source offsets. Only the issuing snapshot accepts this handle. */
 export interface XmlRemovalTarget {
@@ -15,6 +17,7 @@ export class XmlSnapshot {
   readonly elements: readonly XmlRemovalTarget[];
   readonly #source: string;
   readonly #owned = new WeakSet<XmlRemovalTarget>();
+  readonly #attributeSources = new WeakMap<XmlRemovalTarget, AttributeSource>();
 
   private constructor(source: string) {
     if (typeof source !== 'string') fail('XML_REMOVAL_SOURCE', 'Expected an XML source string');
@@ -25,15 +28,26 @@ export class XmlSnapshot {
     inspectXmlEvents(source, {
       start(node) { nodes.push(node); }, end() {}, text() {}, comment() {}, instruction() {},
     });
-    this.elements = Object.freeze(nodes.map(({ name, localName, namespaceURI, start, end }) => {
+    const metadata = new Map<XmlElement, AttributeSource>();
+    this.elements = Object.freeze(nodes.map(node => {
+      const { name, localName, namespaceURI, start, end } = node;
       const target = Object.freeze({ name, localName, namespaceURI, start, end });
+      const attributes: AttributeSource = { start, openEnd: node.openEnd, selfClosing: node.selfClosing,
+        attributes: node.attributes, namespaces: node.attributeNamespaces, parent: node.parent ? metadata.get(node.parent) : undefined };
+      metadata.set(node, attributes);
       this.#owned.add(target);
+      this.#attributeSources.set(target, attributes);
       return target;
     }));
     Object.freeze(this);
   }
 
   static parse(source: string): XmlSnapshot { return new XmlSnapshot(source); }
+
+  /** Set existing or new attributes in the original snapshot's namespace scope. */
+  setAttributes(patches: readonly XmlAttributePatch[]): string {
+    return setSnapshotAttributes(this.#source, patches, this.#attributeSources);
+  }
 
   /** Return a new string; the original snapshot and all of its handles stay valid. */
   remove(targets: readonly XmlRemovalTarget[]): string {

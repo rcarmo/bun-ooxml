@@ -33,9 +33,18 @@ test('full acceptance rejects planned scenarios inside an otherwise implemented 
  }finally{await rm(root,{recursive:true,force:true});}
 });
 
-test('unbound outline rows may share display names without hiding their distinct identities',()=>{
+test('outline rows with shared display names execute and report every distinct identity',async()=>{
  const outlines=text+' @id-outline\n Scenario Outline: Shared display name\n  Given input <value>\n  Then output <value>\n  Examples:\n   | value |\n   | one |\n   | two |\n';
  const f=selectSharedScenarios(path,outlines,['@id-bound']);const rows=f.scenarios.find(s=>s.scenarioId==='@id-outline')!.cases;
  expect(rows).toHaveLength(2);expect(new Set(rows.map(c=>c.identityKey)).size).toBe(2);
- expect(()=>selectSharedScenarios(path,outlines,['@id-outline'])).toThrow('Duplicate implemented');
+ const selected=selectSharedScenarios(path,outlines,['@id-outline']);
+ const count=(n:number)=>({implemented:n,planned:0,total:n});const seen:string[]=[];
+ const result=await executeAcceptance({root:'.',features:[selected],counts:{features:count(1),scenarios:count(1),cases:count(2),steps:count(4)}},[
+  {pattern:/^input (one|two)$/,run:(_c,value)=>{seen.push(value!);}},
+  {pattern:/^output (one|two)$/,run:(_c,value)=>{if(value==='two')throw Error('second row predicate');}},
+ ],'same-display');
+ expect(seen).toEqual(['one','two']);expect(result.counts.cases.passed).toBe(1);expect(result.counts.cases.failed).toBe(1);expect(result.counts.cases.planned).toBe(2);
+ const reports=result.features[0]!.scenarios.find(s=>s.scenarioId==='@id-outline')!.cases;
+ expect(reports.map(c=>c.identityKey)).toEqual(rows.map(c=>c.identityKey));expect(new Set(reports.map(c=>c.caseId)).size).toBe(2);
+ expect(()=>selectSharedScenarios(path,outlines.replace('| two |','| one |'),['@id-outline'])).toThrow('Duplicate expanded case identity');
 });

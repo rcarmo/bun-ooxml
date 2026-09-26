@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 513,
-  "files": 54,
+  "count": 527,
+  "files": 55,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -224,7 +224,7 @@
     },
     {
       "path": "tests/unit/shared-selection.test.ts",
-      "sha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "sha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166",
       "declarations": 4,
       "issues": []
     },
@@ -280,6 +280,12 @@
       "path": "tests/unit/xlsx.test.ts",
       "sha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
       "declarations": 11,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/xml-attributes.test.ts",
+      "sha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "declarations": 14,
       "issues": []
     },
     {
@@ -430,7 +436,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "1b533eedcf97836eebe1700b66ba9802ee7515b567cfe5873c147a9e7d4c5292"
+      "sha256": "e4b6c43682fdf8d00a80ba71a0eb15171e08a80ff6468a1f217312f7db450536"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -467,6 +473,10 @@
     {
       "path": "tests/acceptance/xlsx.ts",
       "sha256": "2d24d4de5172b9a4a038fbb1e137a1926cdd1568f0da9bb9b30cce4d6cc75629"
+    },
+    {
+      "path": "tests/acceptance/xml-attributes.ts",
+      "sha256": "f393d944a59c9f2c77ee355011365e3fe64e2f57f38de53a3b0355591208c29f"
     },
     {
       "path": "tests/acceptance/xml-comparison.ts",
@@ -618,6 +628,11 @@
     "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
     "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
     "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
+    "bun:tests/unit/xml-attributes.test.ts:duplicate expanded attributes refuse atomically even for same values or different prefixes",
+    "bun:tests/unit/xml-attributes.test.ts:namespace declarations, unbound prefixes and malformed attribute QNames refuse",
+    "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
+    "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
+    "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -755,6 +770,11 @@
     "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
     "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
     "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
+    "bun:tests/unit/xml-attributes.test.ts:duplicate expanded attributes refuse atomically even for same values or different prefixes",
+    "bun:tests/unit/xml-attributes.test.ts:namespace declarations, unbound prefixes and malformed attribute QNames refuse",
+    "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
+    "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
+    "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -13461,7 +13481,7 @@
       ],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166",
       "body": "{\n const root=await project({schemaVersion:2,features:[entry]});try{\n  const inventory=await inventoryFeatures(root);expect(inventory.counts.scenarios).toEqual({implemented:1,planned:1,total:2});expect(inventory.counts.cases).toEqual({implemented:1,planned:1,total:2});\n  const feature=inventory.features[0]!;expect(feature.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(text).digest('hex'));\n  let calls=0;const result=await executeAcceptance(inventory,[{pattern:/^a bound (input|outcome)$/,run:(context)=>{calls++;expect((context.scenario as {lifecycle:string}).lifecycle).toBe('implemented');expect((context.case as {lifecycle:string}).lifecycle).toBe('implemented');expect((context.feature as {tags:string[]}).tags).toEqual(['@planned']);}}],'selection-test');\n  expect(calls).toBe(2);expect(result.failures).toEqual([]);expect(result.counts.features).toEqual({passed:1,failed:0,planned:0,total:1});expect(result.counts.cases).toEqual({passed:1,failed:0,planned:1,total:2});\n  expect(result.features[0]!.scenarios[1]!.cases[0]!.steps.every(s=>s.status==='planned')).toBe(true);\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         ".update",
@@ -13503,7 +13523,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166",
       "body": "{\n expect(()=>selectSharedScenarios(path,text,['@id-missing'])).toThrow('Unknown');\n expect(()=>selectSharedScenarios(path,text,['@id-bound','@id-bound'])).toThrow('Duplicate');\n expect(()=>selectSharedScenarios(path,text,[])).toThrow('empty');\n expect(()=>selectSharedScenarios(path,text.replace('@planned','@implemented @bun'),['@id-bound'])).toThrow('planned');\n for(const config of [{schemaVersion:1,features:[entry]},{schemaVersion:2,features:[{path,lifecycle:'implemented',runner:'bun'}]}]){\n  const root=await project(config);try{await expect(inventoryFeatures(root)).rejects.toThrow('shared');}finally{await rm(root,{recursive:true,force:true});}\n }\n}",
       "calls": [
         "expect",
@@ -13536,7 +13556,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166",
       "body": "{\n const root=await project({schemaVersion:2,features:[entry]});try{\n  await expect(runAcceptance([{pattern:/^a bound (input|outcome)$/,run:()=>{}}],{root,full:true})).rejects.toThrow('planned');\n  const report=await Bun.file(join(root,'artifacts/acceptance.json')).json();expect(report.execution.cases.passed).toBe(1);expect(report.execution.cases.planned).toBe(1);\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.file",
@@ -13553,30 +13573,44 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/shared-selection.test.ts:unbound outline rows may share display names without hiding their distinct identities",
+      "id": "bun:tests/unit/shared-selection.test.ts:outline rows with shared display names execute and report every distinct identity",
       "path": "tests/unit/shared-selection.test.ts",
       "line": 36,
-      "title": "unbound outline rows may share display names without hiding their distinct identities",
+      "title": "outline rows with shared display names execute and report every distinct identity",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
         "expect(rows).toHaveLength(2)",
         "expect(new Set(rows.map(c=>c.identityKey)).size).toBe(2)",
-        "expect(()=>selectSharedScenarios(path,outlines,['@id-outline'])).toThrow('Duplicate implemented')"
+        "expect(seen).toEqual(['one','two'])",
+        "expect(result.counts.cases.passed).toBe(1)",
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.cases.planned).toBe(2)",
+        "expect(reports.map(c=>c.identityKey)).toEqual(rows.map(c=>c.identityKey))",
+        "expect(new Set(reports.map(c=>c.caseId)).size).toBe(2)",
+        "expect(()=>selectSharedScenarios(path,outlines.replace('| two |','| one |'),['@id-outline'])).toThrow('Duplicate expanded case identity')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
-      "body": "{\n const outlines=text+' @id-outline\\n Scenario Outline: Shared display name\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | one |\\n   | two |\\n';\n const f=selectSharedScenarios(path,outlines,['@id-bound']);const rows=f.scenarios.find(s=>s.scenarioId==='@id-outline')!.cases;\n expect(rows).toHaveLength(2);expect(new Set(rows.map(c=>c.identityKey)).size).toBe(2);\n expect(()=>selectSharedScenarios(path,outlines,['@id-outline'])).toThrow('Duplicate implemented');\n}",
+      "sourceSha256": "ec5f2e20e31c9e47ce28b57f31097d37a9cdecb309b896fe5eb7c84b30a98166",
+      "body": "{\n const outlines=text+' @id-outline\\n Scenario Outline: Shared display name\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | one |\\n   | two |\\n';\n const f=selectSharedScenarios(path,outlines,['@id-bound']);const rows=f.scenarios.find(s=>s.scenarioId==='@id-outline')!.cases;\n expect(rows).toHaveLength(2);expect(new Set(rows.map(c=>c.identityKey)).size).toBe(2);\n const selected=selectSharedScenarios(path,outlines,['@id-outline']);\n const count=(n:number)=>({implemented:n,planned:0,total:n});const seen:string[]=[];\n const result=await executeAcceptance({root:'.',features:[selected],counts:{features:count(1),scenarios:count(1),cases:count(2),steps:count(4)}},[\n  {pattern:/^input (one|two)$/,run:(_c,value)=>{seen.push(value!);}},\n  {pattern:/^output (one|two)$/,run:(_c,value)=>{if(value==='two')throw Error('second row predicate');}},\n ],'same-display');\n expect(seen).toEqual(['one','two']);expect(result.counts.cases.passed).toBe(1);expect(result.counts.cases.failed).toBe(1);expect(result.counts.cases.planned).toBe(2);\n const reports=result.features[0]!.scenarios.find(s=>s.scenarioId==='@id-outline')!.cases;\n expect(reports.map(c=>c.identityKey)).toEqual(rows.map(c=>c.identityKey));expect(new Set(reports.map(c=>c.caseId)).size).toBe(2);\n expect(()=>selectSharedScenarios(path,outlines.replace('| two |','| one |'),['@id-outline'])).toThrow('Duplicate expanded case identity');\n}",
       "calls": [
+        "Error",
+        "count",
+        "executeAcceptance",
         "expect",
         "expect().toBe",
+        "expect().toEqual",
         "expect().toHaveLength",
         "expect().toThrow",
         "f.scenarios.find",
+        "outlines.replace",
+        "reports.map",
+        "result.features.0.scenarios.find",
         "rows.map",
+        "seen.push",
         "selectSharedScenarios"
       ],
       "reviewReasons": [],
@@ -16921,6 +16955,465 @@
         "tempRoot"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute replacement preserves original quote, whitespace and unrelated source",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 7,
+      "title": "attribute replacement preserves original quote, whitespace and unrelated source",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.setAttributes([{ target, name: 'a', value: \"x'y&z\" }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'x&#39;y&amp;z\\' p:n=\"old\"/><t>text</t></r>')",
+        "expect(s.setAttributes([{ target, name: 'p:n', value: 'new' }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'a&amp;b\\' p:n=\"new\"/><t>text</t></r>')",
+        "expect(s.setAttributes([{ target, name: 'fresh', value: 'value' }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'a&amp;b\\' p:n=\"old\" fresh=\"value\"/><t>text</t></r>')",
+        "expect(s.setAttributes([])).toBe(source)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const s = XmlSnapshot.parse(source), target = s.elements[1]!;\n  expect(s.setAttributes([{ target, name: 'a', value: \"x'y&z\" }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'x&#39;y&amp;z\\' p:n=\"old\"/><t>text</t></r>');\n  expect(s.setAttributes([{ target, name: 'p:n', value: 'new' }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'a&amp;b\\' p:n=\"new\"/><t>text</t></r>');\n  expect(s.setAttributes([{ target, name: 'fresh', value: 'value' }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'a&amp;b\\' p:n=\"old\" fresh=\"value\"/><t>text</t></r>');\n  expect(s.setAttributes([])).toBe(source);\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:same decoded attribute value is a lexical no-op and edits never consume the snapshot",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 15,
+      "title": "same decoded attribute value is a lexical no-op and edits never consume the snapshot",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.setAttributes([{ target, name: 'a', value: \"A'\" }])).toBe('<r a=\"&#65;&apos;\"/>')",
+        "expect(s.setAttributes([{ target, name: 'a', value: 'next' }])).toBe('<r a=\"next\"/>')",
+        "expect(s.setAttributes([])).toBe('<r a=\"&#65;&apos;\"/>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const s = XmlSnapshot.parse('<r a=\"&#65;&apos;\"/>'), target = s.elements[0]!;\n  expect(s.setAttributes([{ target, name: 'a', value: \"A'\" }])).toBe('<r a=\"&#65;&apos;\"/>');\n  expect(s.setAttributes([{ target, name: 'a', value: 'next' }])).toBe('<r a=\"next\"/>');\n  expect(s.setAttributes([])).toBe('<r a=\"&#65;&apos;\"/>');\n  expect(s.setAttributes([{ target, name: 'a', value: 'next' }])).toBe('<r a=\"next\"/>');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute names resolve in target scope, aliases edit existing lexical name and default namespaces do not apply",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 23,
+      "title": "attribute names resolve in target scope, aliases edit existing lexical name and default namespaces do not apply",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(output).toBe('<r xmlns=\"u\" xmlns:p=\"v\" xmlns:q=\"v\"><c q:a=\"changed\" a=\"new\" xml:lang=\"en\"/><d xmlns:p=\"w\" p:a=\"local\"/></r>')",
+        "expect(attribute(doc.root.children[0]!, 'a', 'v')).toBe('changed')",
+        "expect(attribute(doc.root.children[0]!, 'a')).toBe('new')",
+        "expect(attribute(doc.root.children[1]!, 'a', 'w')).toBe('local')",
+        "expect(attribute(doc.root.children[0]!, 'lang', 'http://www.w3.org/XML/1998/namespace')).toBe('en')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const xml = '<r xmlns=\"u\" xmlns:p=\"v\" xmlns:q=\"v\"><c q:a=\"old\" a=\"plain\"/><d xmlns:p=\"w\" p:a=\"inner\"/></r>';\n  const s = XmlSnapshot.parse(xml), c = s.elements[1]!, d = s.elements[2]!;\n  const output = s.setAttributes([{ target: c, name: 'p:a', value: 'changed' }, { target: c, name: 'a', value: 'new' }, { target: d, name: 'p:a', value: 'local' }, { target: c, name: 'xml:lang', value: 'en' }]);\n  expect(output).toBe('<r xmlns=\"u\" xmlns:p=\"v\" xmlns:q=\"v\"><c q:a=\"changed\" a=\"new\" xml:lang=\"en\"/><d xmlns:p=\"w\" p:a=\"local\"/></r>');\n  const doc = parseXml(output); expect(attribute(doc.root.children[0]!, 'a', 'v')).toBe('changed');\n  expect(attribute(doc.root.children[0]!, 'a')).toBe('new'); expect(attribute(doc.root.children[1]!, 'a', 'w')).toBe('local');\n  expect(attribute(doc.root.children[0]!, 'lang', 'http://www.w3.org/XML/1998/namespace')).toBe('en');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "attribute",
+        "expect",
+        "expect().toBe",
+        "parseXml",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:duplicate expanded attributes refuse atomically even for same values or different prefixes",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 33,
+      "title": "duplicate expanded attributes refuse atomically even for same values or different prefixes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => s.setAttributes(names.map(name => ({ target, name, value: 'new' })))).toThrow(code('XML_ATTRIBUTE_DUPLICATE'))",
+        "expect(s.setAttributes([])).toBe(xml)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 35,
+          "expression": "for (const names of [['a', 'a'], ['p:new', 'q:new']])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const xml = '<r xmlns:p=\"u\" xmlns:q=\"u\"><t a=\"old\"/></r>', s = XmlSnapshot.parse(xml), target = s.elements[1]!;\n  for (const names of [['a', 'a'], ['p:new', 'q:new']]) {\n    expect(() => s.setAttributes(names.map(name => ({ target, name, value: 'new' })))).toThrow(code('XML_ATTRIBUTE_DUPLICATE'));\n    expect(s.setAttributes([])).toBe(xml);\n  }\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "code",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "names.map",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:namespace declarations, unbound prefixes and malformed attribute QNames refuse",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 41,
+      "title": "namespace declarations, unbound prefixes and malformed attribute QNames refuse",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => s.setAttributes([{ target, name, value: 'v' }])).toThrow(code('XML_ATTRIBUTE_NAME'))",
+        "expect(s.setAttributes([{ target, name: '雪', value: 'v' }])).toBe('<r 雪=\"v\"/>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 43,
+          "expression": "for (const name of ['xmlns', 'xmlns:p', 'unbound:a', ':a', 'a:', 'a:b:c', '1name', 'a b', 'a=\"x\"', '', 'a\\u0000b'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const s = XmlSnapshot.parse('<r/>'), target = s.elements[0]!;\n  for (const name of ['xmlns', 'xmlns:p', 'unbound:a', ':a', 'a:', 'a:b:c', '1name', 'a b', 'a=\"x\"', '', 'a\\u0000b']) {\n    expect(() => s.setAttributes([{ target, name, value: 'v' }])).toThrow(code('XML_ATTRIBUTE_NAME'));\n  }\n  expect(s.setAttributes([{ target, name: '雪', value: 'v' }])).toBe('<r 雪=\"v\"/>');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "code",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:escaping preserves attribute values including both quotes, XML metacharacters and referenced whitespace",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 49,
+      "title": "escaping preserves attribute values including both quotes, XML metacharacters and referenced whitespace",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(root.attributes.a).toBe(value)",
+        "expect(root.attributes.b).toBe(value)",
+        "expect(root.attributes.c).toBe(value)",
+        "expect(output).toContain(\"a='&#39;\\\"&lt;&amp;&gt;&#x9;&#xD;&#xA;😀'\")",
+        "expect(output).toContain('b=\"\\'&quot;&lt;&amp;&gt;&#x9;&#xD;&#xA;😀\"')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const s = XmlSnapshot.parse('<r a=\\'old\\' b=\"old\"/>'), target = s.elements[0]!;\n  const value = '\\'\"<&>\\t\\r\\n😀';\n  const output = s.setAttributes([{ target, name: 'a', value }, { target, name: 'b', value }, { target, name: 'c', value }]);\n  const root = parseXml(output).root;\n  expect(root.attributes.a).toBe(value); expect(root.attributes.b).toBe(value); expect(root.attributes.c).toBe(value);\n  expect(output).toContain(\"a='&#39;\\\"&lt;&amp;&gt;&#x9;&#xD;&#xA;😀'\");\n  expect(output).toContain('b=\"\\'&quot;&lt;&amp;&gt;&#x9;&#xD;&#xA;😀\"');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "parseXml",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 59,
+      "title": "foreign, forged and stale targets refuse without changing snapshot or patch inputs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => s.setAttributes([{ target: bad as typeof target, name: 'a', value: 'x' }])).toThrow(code('XML_ATTRIBUTE_TARGET'))",
+        "expect(patches[0]!.value).toBe('next')",
+        "expect(() => XmlSnapshot.parse(output).setAttributes(patches)).toThrow(code('XML_ATTRIBUTE_TARGET'))",
+        "expect(s.setAttributes([])).toBe(source)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 61,
+          "expression": "for (const bad of [other.elements[1],"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const s = XmlSnapshot.parse(source), other = XmlSnapshot.parse(source), target = s.elements[1]!;\n  for (const bad of [other.elements[1], { ...target }, null, undefined]) {\n    expect(() => s.setAttributes([{ target: bad as typeof target, name: 'a', value: 'x' }])).toThrow(code('XML_ATTRIBUTE_TARGET'));\n  }\n  const patches = Object.freeze([Object.freeze({ target, name: 'a', value: 'next' })]);\n  const output = s.setAttributes(patches); expect(patches[0]!.value).toBe('next');\n  expect(() => XmlSnapshot.parse(output).setAttributes(patches)).toThrow(code('XML_ATTRIBUTE_TARGET'));\n  expect(s.setAttributes([])).toBe(source);\n}",
+      "calls": [
+        "Object.freeze",
+        "XmlSnapshot.parse",
+        "XmlSnapshot.parse().setAttributes",
+        "code",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 70,
+      "title": "invalid values and late invalid patches refuse with no partial output",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => { output = s.setAttributes([{ target, name: 'fresh', value: 'good' }, { target, name: 'a', value: value as string }]); }).toThrow(OoxmlError)",
+        "expect(output).toBeUndefined()",
+        "expect(s.setAttributes([])).toBe(source)",
+        "expect(() => s.setAttributes(null as never)).toThrow(code('XML_ATTRIBUTE_PATCH'))",
+        "expect(() => s.setAttributes([null] as never)).toThrow(code('XML_ATTRIBUTE_PATCH'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 72,
+          "expression": "for (const value of ['\\u0000', '\\ud800', null, 123])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const s = XmlSnapshot.parse(source), target = s.elements[1]!;\n  for (const value of ['\\u0000', '\\ud800', null, 123]) {\n    let output: string | undefined;\n    expect(() => { output = s.setAttributes([{ target, name: 'fresh', value: 'good' }, { target, name: 'a', value: value as string }]); }).toThrow(OoxmlError);\n    expect(output).toBeUndefined(); expect(s.setAttributes([])).toBe(source);\n  }\n  expect(() => s.setAttributes(null as never)).toThrow(code('XML_ATTRIBUTE_PATCH'));\n  expect(() => s.setAttributes([null] as never)).toThrow(code('XML_ATTRIBUTE_PATCH'));\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "code",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toThrow",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:root and descendant attribute edits preserve astral text, comments, PI, CRLF and attribute delimiters",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 81,
+      "title": "root and descendant attribute edits preserve astral text, comments, PI, CRLF and attribute delimiters",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.setAttributes([{ target: s.elements[1]!, name: 'a', value: '雪' }, { target: s.elements[0]!, name: 'a', value: 'new>text' }])).toBe(xml.replace('old>text', 'new&gt;text').replace(\"a='old'\", \"a='雪'\"))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const xml = '<?xml version=\"1.0\"?>\\r\\n<?pi keep?><r a=\"old>text\">😀<!--keep--><c a=\\'old\\' /> tail\\r\\n</r>';\n  const s = XmlSnapshot.parse(xml);\n  expect(s.setAttributes([{ target: s.elements[1]!, name: 'a', value: '雪' }, { target: s.elements[0]!, name: 'a', value: 'new>text' }])).toBe(xml.replace('old>text', 'new&gt;text').replace(\"a='old'\", \"a='雪'\"));\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "s.setAttributes",
+        "xml.replace",
+        "xml.replace().replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute patch input ignores caller iterators and refuses output or batch resource overflow",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 87,
+      "title": "attribute patch input ignores caller iterators and refuses output or batch resource overflow",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.setAttributes(patches)).toBe('<r a=\"v\"/>')",
+        "expect(() => s.setAttributes([{ target, name: 'a', value: '&'.repeat(2 * 1024 * 1024) }])).toThrow(code('XML_ATTRIBUTE_LIMIT'))",
+        "expect(() => s.setAttributes(new Array(100001).fill(patches[0]))).toThrow(code('XML_ATTRIBUTE_LIMIT'))",
+        "expect(s.setAttributes([])).toBe('<r/>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const s = XmlSnapshot.parse('<r/>'), target = s.elements[0]!;\n  const patches = [{ target, name: 'a', value: 'v' }];\n  patches[Symbol.iterator] = function* () { throw new Error('do not iterate'); };\n  expect(s.setAttributes(patches)).toBe('<r a=\"v\"/>');\n  expect(() => s.setAttributes([{ target, name: 'a', value: '&'.repeat(2 * 1024 * 1024) }])).toThrow(code('XML_ATTRIBUTE_LIMIT'));\n  expect(() => s.setAttributes(new Array(100001).fill(patches[0]))).toThrow(code('XML_ATTRIBUTE_LIMIT'));\n  expect(s.setAttributes([])).toBe('<r/>');\n}",
+      "calls": [
+        ".fill",
+        ".repeat",
+        "XmlSnapshot.parse",
+        "code",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute span scanning uses XML whitespace, not Unicode JavaScript whitespace",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 97,
+      "title": "attribute span scanning uses XML whitespace, not Unicode JavaScript whitespace",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.setAttributes([{ target: s.elements[0]!, name, value: 'new' }])).toBe(`<r ${name} = 'new' tail=\"keep\"/>`)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const name = '\\ufeffname', xml = `<r ${name} = 'old' tail=\"keep\"/>`, s = XmlSnapshot.parse(xml);\n  expect(s.setAttributes([{ target: s.elements[0]!, name, value: 'new' }])).toBe(`<r ${name} = 'new' tail=\"keep\"/>`);\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:many independent attribute edits retain order and avoid rescanning every attribute per patch",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 102,
+      "title": "many independent attribute edits retain order and avoid rescanning every attribute per patch",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(output).toBe('<r ' + Array.from({ length: 1500 }, (_, i) => `a${i}=\"new${i}\"`).join(' ') + '/>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const xml = '<r ' + Array.from({ length: 1500 }, (_, i) => `a${i}=\"old\"`).join(' ') + '/>';\n  const s = XmlSnapshot.parse(xml), target = s.elements[0]!;\n  const output = s.setAttributes(Array.from({ length: 1500 }, (_, i) => ({ target, name: `a${i}`, value: `new${i}` })));\n  expect(output).toBe('<r ' + Array.from({ length: 1500 }, (_, i) => `a${i}=\"new${i}\"`).join(' ') + '/>');\n}",
+      "calls": [
+        "Array.from",
+        "Array.from().join",
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:four canonical attribute cases execute and incorrect output bytes fail predicates",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 109,
+      "title": "four canonical attribute cases execute and incorrect output bytes fail predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(4)",
+        "expect(good.counts.cases.planned).toBe(27)",
+        "expect(bad.counts.cases.failed).toBe(3)",
+        "expect(bad.counts.steps.failed).toBe(3)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-attributes.ts');\n  const path = 'workflows/xml/parsing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  const run = (source: string) => executeAcceptance({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(2), cases: count(4), steps: count(12) } }, bindings, 'xml-attributes-unit');\n  const good = await run(text); expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(4); expect(good.counts.cases.planned).toBe(27);\n  const bad = await run(text.replace('Then the complete output bytes equal <output>', 'Then the complete output bytes equal wrong'));\n  expect(bad.counts.cases.failed).toBe(3); expect(bad.counts.steps.failed).toBe(3); expect(bad.counts.steps.undefined).toBe(0); expect(bad.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "run",
+        "selectSharedScenarios",
+        "text.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
+      "path": "tests/unit/xml-attributes.test.ts",
+      "line": 121,
+      "title": "attribute duplicate refusal binding rejects fabricated success and untyped errors",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 128,
+          "expression": "for (const success of [true, false])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
+      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts');\n  const path = 'workflows/xml/parsing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const feature = selectSharedScenarios(path, text, ['@id-xml-go-attribute-batch-refusal']);\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  for (const success of [true, false]) {\n    const corrupted = bindings.map(b => b.pattern.test('one Go lexical edit batch sets a of the first t element to x and to y') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); const s = c.state as { output?: string; error?: unknown };\n      s.error = success ? undefined : new Error('untyped'); if (success) s.output = '<r/>';\n    } } : b);\n    const result = await executeAcceptance({ root: '.', features: [feature], counts: { features: count(1), scenarios: count(1), cases: count(1), steps: count(3) } }, corrupted, 'xml-attribute-refusal-control');\n    expect(result.counts.cases.failed).toBe(1); expect(result.counts.steps.failed).toBe(1); expect(result.counts.steps.undefined).toBe(0); expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {
