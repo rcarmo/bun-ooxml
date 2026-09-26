@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "scope": "AllimplementedBunfeaturesselectedfromonecanonicalreference; no runtime changes",
+  "consumerBaseCommit": "13ead381f22f19a000dfd557514369cf1b646454",
+  "candidate": {
+    "commit": "dc8fdccd5a7e14c9154bb71e68e10c7404fe4fa0",
+    "manifestSha256": "28976c7c9ec6acec15383549087adb09a2b2ee476ffd81c4396c37a30a4ebc92"
+  },
+  "equivalence": "Tenfeaturebodies and allscenarioIDs/examples/steps identical to13ead38 except lifecycle tag",
+  "run": {
+    "command": "OOXML_FIXTURES_ROOT=<clean candidate> OOXML_REFERENCE_PIN=<candidate pin> make check",
+    "runId": "56cb48f9-67f9-426f-ba6d-6b6ded6d6bbe",
+    "startedAt": "2026-09-26T15:34:14.714Z",
+    "finishedAt": "2026-09-26T15:34:16.290Z",
+    "unitTests": 246,
+    "acceptanceCases": 128,
+    "sharedFeatures": 21,
+    "newlyCentralizedFeatures": 10,
+    "newlyCentralizedCases": 62,
+    "examples": 3
+  },
+  "features": [
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/comments.feature",
+      "compiledSourceSha256": "eb864bc834d6ed17a56015a914a5405bf8bdbde181ea48ee0faa6b246e9dc516",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-docx-comments-inspection",
+          "cases": [
+            {
+              "id": "@id-docx-comments-inspection",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-comments-resolution",
+          "cases": [
+            {
+              "id": "@id-docx-comments-resolution",
+              "result": "passed",
+              "steps": 6
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-comments-noop",
+          "cases": [
+            {
+              "id": "@id-docx-comments-noop",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-comments-refusal",
+          "cases": [
+            {
+              "id": "@id-docx-comments-refusal -- case=\"missing-extension\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"duplicate-id\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"duplicate-para\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"missing-parent\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"cycle\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"invalid-done\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"wrong-mime\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"external-link\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"protected\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"revision-body\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-comments-refusal -- case=\"orphan-entry\"",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/creation.feature",
+      "compiledSourceSha256": "20ddc99837fc7a2f9efdefc3aed3af6f97591535f564a50aad6f433b0eaa494b",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-docx-create-minimal-package",
+          "cases": [
+            {
+              "id": "@id-docx-create-minimal-package",
+              "result": "passed",
+              "steps": 8
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-create-style-validation",
+          "cases": [
+            {
+              "id": "@id-docx-create-style-validation",
+              "result": "passed",
+              "steps": 5
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-create-stale-opaque",
+          "cases": [
+            {
+              "id": "@id-docx-create-stale-opaque",
+              "result": "passed",
+              "steps": 9
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-create-atomic-refusals",
+          "cases": [
+            {
+              "id": "@id-docx-create-atomic-refusals -- source=\"new-document\", case=\"text-number\", code=\"docx-invalid-argument\"",
+              "result": "passed",
+              "steps": 5
+            },
+            {
+              "id": "@id-docx-create-atomic-refusals -- source=\"new-document\", case=\"options-string\", code=\"docx-invalid-argument\"",
+              "result": "passed",
+              "steps": 5
+            },
+            {
+              "id": "@id-docx-create-atomic-refusals -- source=\"new-document\", case=\"bold-string\", code=\"docx-invalid-argument\"",
+              "result": "passed",
+              "steps": 5
+            },
+            {
+              "id": "@id-docx-create-atomic-refusals -- source=\"new-document\", case=\"style-without-styles-part\", code=\"docx-style-unsupported\"",
+              "result": "passed",
+              "steps": 5
+            },
+            {
+              "id": "@id-docx-create-atomic-refusals -- source=\"fixture-9548a1ce68caae9df12bc85732f1c19a098658c5dce3d79488814e4145299e5e\", case=\"unknown-style\", code=\"docx-style-missing\"",
+              "result": "passed",
+              "steps": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/tables.feature",
+      "compiledSourceSha256": "d0d028e577e09e56d87878c0edbcfa8567bf8ab753da44e152b0f32f4e291c76",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-docx-table-create-roundtrip",
+          "cases": [
+            {
+              "id": "@id-docx-table-create-roundtrip",
+              "result": "passed",
+              "steps": 10
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-table-opaque-preserve",
+          "cases": [
+            {
+              "id": "@id-docx-table-opaque-preserve",
+              "result": "passed",
+              "steps": 7
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-table-stale-cell",
+          "cases": [
+            {
+              "id": "@id-docx-table-stale-cell",
+              "result": "passed",
+              "steps": 8
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-table-atomic-refusals",
+          "cases": [
+            {
+              "id": "@id-docx-table-atomic-refusals -- source=\"fixture-8192955ef935f09eb61a9fe6805d4996c811efcf54c0c966f52d983e38e0a79c\", case=\"row-oob\", code=\"range\"",
+              "result": "passed",
+              "steps": 5
+            },
+            {
+              "id": "@id-docx-table-atomic-refusals -- source=\"native-merged-nested\", case=\"merged-cell\", code=\"docx-table-merged-cell\"",
+              "result": "passed",
+              "steps": 5
+            },
+            {
+              "id": "@id-docx-table-atomic-refusals -- source=\"native-merged-nested\", case=\"nested-cell\", code=\"docx-table-cell-unsupported\"",
+              "result": "passed",
+              "steps": 5
+            },
+            {
+              "id": "@id-docx-table-atomic-refusals -- source=\"synthetic-grid-before\", case=\"bizarre\", code=\"docx-table-unsupported\"",
+              "result": "passed",
+              "steps": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/text.feature",
+      "compiledSourceSha256": "3a71eb53dc28ff6d96a6064491d0308b5644828923e50a82b1d5c9279fa6ec6b",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-docx-format-preserve",
+          "cases": [
+            {
+              "id": "@id-docx-format-preserve",
+              "result": "passed",
+              "steps": 5
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-xml-space",
+          "cases": [
+            {
+              "id": "@id-docx-xml-space",
+              "result": "passed",
+              "steps": 5
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-table-paragraph",
+          "cases": [
+            {
+              "id": "@id-docx-table-paragraph",
+              "result": "passed",
+              "steps": 7
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-stale-span",
+          "cases": [
+            {
+              "id": "@id-docx-stale-span",
+              "result": "passed",
+              "steps": 7
+            }
+          ]
+        },
+        {
+          "id": "@id-docx-refuse-topology",
+          "cases": [
+            {
+              "id": "@id-docx-refuse-topology -- fixture=\"fixture-e3c5159fbf254f4d5423354773ae83a5535cb3cef8f603f1adca6d18adab11f2\", paragraph=\"1\", query=\"amazing\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-refuse-topology -- fixture=\"fixture-e4f051ec2eb5f48b9b8299e931abb2bca1fa86ca5007865b3b2f9b83ba16676f\", paragraph=\"2\", query=\"[Enter Title Here]\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-docx-refuse-topology -- fixture=\"synthetic-field\", paragraph=\"1\", query=\"2026-01-01\"",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/preservation.feature",
+      "compiledSourceSha256": "dc975d5be3e68190ba7fdacfe3aa2add9e45df33f0bc631778b8493bff024343",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-opc-package-corpus-noop",
+          "cases": [
+            {
+              "id": "@id-opc-package-corpus-noop",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-opc-package-transaction-rollback",
+          "cases": [
+            {
+              "id": "@id-opc-package-transaction-rollback",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-opc-package-preserve-unrelated",
+          "cases": [
+            {
+              "id": "@id-opc-package-preserve-unrelated",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/relationship-namespaces.feature",
+      "compiledSourceSha256": "5edba88811b7e593b1bc9ac3a21d0ca802bf933c64f23edf78b84e29848734f5",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-office-relationship-prefix-alias",
+          "cases": [
+            {
+              "id": "@id-office-relationship-prefix-alias -- format=\"pptx\"",
+              "result": "passed",
+              "steps": 4
+            },
+            {
+              "id": "@id-office-relationship-prefix-alias -- format=\"xlsx\"",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-office-relationship-wrong-uri",
+          "cases": [
+            {
+              "id": "@id-office-relationship-wrong-uri -- format=\"pptx\"",
+              "result": "passed",
+              "steps": 4
+            },
+            {
+              "id": "@id-office-relationship-wrong-uri -- format=\"xlsx\"",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/zip32.feature",
+      "compiledSourceSha256": "8ee1dc94a116ef082d393d48a086854007b8977b1aa963e012ecd43884a8b457",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-zip-read-valid",
+          "cases": [
+            {
+              "id": "@id-zip-read-valid",
+              "result": "passed",
+              "steps": 7
+            }
+          ]
+        },
+        {
+          "id": "@id-zip-refuse-unsafe",
+          "cases": [
+            {
+              "id": "@id-zip-refuse-unsafe",
+              "result": "passed",
+              "steps": 9
+            }
+          ]
+        },
+        {
+          "id": "@id-zip-bounds",
+          "cases": [
+            {
+              "id": "@id-zip-bounds",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-zip-write-deterministic",
+          "cases": [
+            {
+              "id": "@id-zip-write-deterministic",
+              "result": "passed",
+              "steps": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/pptx/creation.feature",
+      "compiledSourceSha256": "5f13d4ea4fcaae0c66a6a74daefe5dac3f0f4781b2959451783c95b9fc2f7acc",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-pptx-create-new-minimal",
+          "cases": [
+            {
+              "id": "@id-pptx-create-new-minimal",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-pptx-create-anchor-preservation",
+          "cases": [
+            {
+              "id": "@id-pptx-create-anchor-preservation",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-pptx-create-refusals",
+          "cases": [
+            {
+              "id": "@id-pptx-create-refusals",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/pptx/tables.feature",
+      "compiledSourceSha256": "8ab07cec45f5b6e6c6efacda916e4b2bd624253cdbce926151e57d033801afa6",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-pptx-table-roundtrip-geometry",
+          "cases": [
+            {
+              "id": "@id-pptx-table-roundtrip-geometry",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-pptx-table-formatting",
+          "cases": [
+            {
+              "id": "@id-pptx-table-formatting",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-pptx-table-stale-handle",
+          "cases": [
+            {
+              "id": "@id-pptx-table-stale-handle",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        },
+        {
+          "id": "@id-pptx-table-atomic-refusals",
+          "cases": [
+            {
+              "id": "@id-pptx-table-atomic-refusals -- case=\"merged-cell\", code=\"PPTX_TABLE_MERGE_UNSUPPORTED\"",
+              "result": "passed",
+              "steps": 3
+            },
+            {
+              "id": "@id-pptx-table-atomic-refusals -- case=\"malformed-merge\", code=\"PPTX_TABLE_STRUCTURE_UNSUPPORTED\"",
+              "result": "passed",
+              "steps": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/creation.feature",
+      "compiledSourceSha256": "76656e7d6e923f39161331f05171964520b29e7c37edda1a0cea1a0f748c934a",
+      "result": "passed",
+      "scenarios": [
+        {
+          "id": "@id-xlsx-create-native-default",
+          "cases": [
+            {
+              "id": "@id-xlsx-create-native-default",
+              "result": "passed",
+              "steps": 5
+            }
+          ]
+        },
+        {
+          "id": "@id-xlsx-create-add-worksheet",
+          "cases": [
+            {
+              "id": "@id-xlsx-create-add-worksheet",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-xlsx-create-prefixed-missing-cell",
+          "cases": [
+            {
+              "id": "@id-xlsx-create-prefixed-missing-cell",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-xlsx-create-coordinate-boundary",
+          "cases": [
+            {
+              "id": "@id-xlsx-create-coordinate-boundary",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-xlsx-create-row-ordering",
+          "cases": [
+            {
+              "id": "@id-xlsx-create-row-ordering",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-xlsx-create-invalid-params-atomic",
+          "cases": [
+            {
+              "id": "@id-xlsx-create-invalid-params-atomic",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        },
+        {
+          "id": "@id-xlsx-create-existing-fixture-append",
+          "cases": [
+            {
+              "id": "@id-xlsx-create-existing-fixture-append",
+              "result": "passed",
+              "steps": 4
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "ConsumerexecutionBunonly; no Go/Pythonassertioncredit",
+    "Native declaration semantic review remains incomplete",
+    "Planned local backlog remains unimplemented"
+  ],
+  "releaseRun": {
+    "referenceTag": "v0.6.0",
+    "referenceCommit": "dc8fdccd5a7e14c9154bb71e68e10c7404fe4fa0",
+    "command": "make check",
+    "mode": "default-no-overrides",
+    "runId": "8dd58203-21e2-46c1-8122-c9a643569eb8",
+    "startedAt": "2026-09-26T15:36:55.945Z",
+    "finishedAt": "2026-09-26T15:36:57.521Z",
+    "unitTests": 246,
+    "acceptanceCases": 128,
+    "sharedFeatures": 21,
+    "examples": 3
+  }
+}

@@ -13,6 +13,7 @@ describe("shared mutation inventory and custody",()=>{
     const canonical=ledger.features.filter((path:string)=>path.startsWith('workflows/native/'));
     expect(canonical).toHaveLength(8);
     const inventory=await inventoryFeatures(root);
+    expect(inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'))).toEqual([]);
     for(const path of canonical){
       const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);
       expect(shared).toHaveLength(1);

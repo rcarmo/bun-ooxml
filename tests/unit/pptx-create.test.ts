@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import { describe, expect, test } from "bun:test";
 import { join, resolve } from "node:path";
 
@@ -143,8 +144,8 @@ describe("Presentation.create and addTextSlide", () => {
   });
 
   test("executes the PPTX create feature with dedicated bindings and optional parent aggregation", async () => {
-    const featurePath = "features/pptx/create.feature";
-    const feature = parseFeature(featurePath, await Bun.file(join(PROJECT_ROOT, featurePath)).text());
+    const featurePath = "references/fixtures-ooxml/workflows/pptx/creation.feature";
+    const feature = parseFeature(featurePath, (await Bun.file(join(fixturesRoot(), "workflows/pptx/creation.feature")).text()).replace(/^@planned/m, '@implemented @bun'));
     const inventory = inventoryFor(feature);
 
     for (const bindings of [createBindings, parentBindings]) {

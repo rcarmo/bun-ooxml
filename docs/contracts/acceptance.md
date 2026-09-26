@@ -12,19 +12,19 @@ rows.
 
 ## Source contract
 
-Local regression features are loaded from `features/**/*.feature`.
-`features/shared.json` additionally selects central features from the pinned
-`references/fixtures-ooxml` checkout. Their lifecycle overlay is applied in memory;
-no shared feature copy is written. Duplicate IDs across local and shared features
+`features/shared.json` selects every implemented feature from the pinned
+`references/fixtures-ooxml` checkout. Only planned backlog features remain under
+`features/**/*.feature`. Shared lifecycle overlays are applied in memory;
+no shared feature copy is stored in the consumer. Duplicate IDs across local and shared features
 are rejected by the combined inventory.
 
 The shared catalogue defines common expected behaviour. Native bindings and
 per-consumer execution reports are local. Candidate mappings in `docs/behaviors/`
 are not part of the execution inventory until reviewed, reconciled and bound.
 
-The shared selections include mutation safety, XML parsing/QName checks and eight
-native profiles (OPC graph/ZIP64, Word stories/revisions/redlines, slide text,
-spreadsheet cells and cache boundaries). Their local feature copies are removed.
+The 21 shared selections cover mutation safety, XML, core package admission,
+graph/ZIP64, text, creation, rectangular tables, Word reviews/comments and
+spreadsheet cache boundaries. Their local feature copies are removed.
 Bindings and unit assertions are unchanged; isolated runner tests may materialise
 the canonical text with a lifecycle overlay in a temporary directory.
 

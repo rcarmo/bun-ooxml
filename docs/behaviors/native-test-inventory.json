@@ -222,7 +222,7 @@
     {
       "id": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 8,
+      "line": 9,
       "title": "all existing comment Gherkin cases assert saved outcomes",
       "suites": [],
       "kind": "test",
@@ -231,13 +231,13 @@
         "expect(result.counts.cases.passed).toBe(14)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
-      "body": "{\n const path='features/docx/comments.feature',f=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(14);\n}"
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "body": "{\n const path='references/fixtures-ooxml/workflows/docx/comments.feature',f=parseFeature(path,(await Bun.file(join(fixturesRoot(), \"workflows/docx/comments.feature\")).text()).replace(/^@planned/m, '@implemented @bun'));const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(14);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 14,
+      "line": 15,
       "title": "renamed extension prefixes and multiline comments preserve exact unrelated bytes",
       "suites": [],
       "kind": "test",
@@ -246,13 +246,13 @@
         "expect(inspectComments(reopened).comments[1]!.resolved).toBe(true)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),ex='word/commentsExtended.xml';p.set(ex,p.text(ex).replaceAll('xmlns:w15=','xmlns:thread=').replaceAll('w15:','thread:'));\n const before=p.text(ex);setCommentResolved(p,'1',true);expect(p.text(ex)).toBe(before.replace('thread:paraId=\"3395B541\" thread:done=\"0\"','thread:paraId=\"3395B541\" thread:done=\"1\"'));\n const reopened=await OpcPackage.open(p.toBytes());expect(inspectComments(reopened).comments[1]!.resolved).toBe(true);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 20,
+      "line": 21,
       "title": "unsupported comment body is reported read-only and no resolution mutates it",
       "suites": [],
       "kind": "test",
@@ -262,13 +262,13 @@
         "expect(()=>setCommentResolved(p,'1',true)).toThrow()"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture('revision-body'),before=p.toBytes();expect(inspectComments(p).unsupported.length).toBeGreaterThan(0);expect(p.toBytes()).toEqual(before);expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 24,
+      "line": 25,
       "title": "unknown IDs and runtime nonboolean arguments leave package unchanged",
       "suites": [],
       "kind": "test",
@@ -279,17 +279,17 @@
       ],
       "loops": [
         {
-          "line": 25,
+          "line": 26,
           "expression": "for(const id of ['missing','-1','999'])expect(()=>setCommentResolved(p,id,true)).toThrow();"
         }
       ],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),before=p.toBytes();for(const id of ['missing','-1','999'])expect(()=>setCommentResolved(p,id,true)).toThrow();\n expect(()=>setCommentResolved(p,'1','false' as unknown as boolean)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 29,
+      "line": 30,
       "title": "attribute edits preserve quote style, spacing, entities and unrelated attribute text",
       "suites": [],
       "kind": "test",
@@ -301,17 +301,17 @@
       ],
       "loops": [
         {
-          "line": 36,
+          "line": 37,
           "expression": "for(const name of p.names())if(name!==part)expect(p.get(name)).toEqual(original.get(name));"
         }
       ],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n const xml=p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"',`w15:paraId=\"3395B541\" note=\"literal w15:done='0'\" w15:done = '&#48;'`);\n p.set(part,xml);const before=p.toBytes();\n expect(setCommentResolved(p,'1',true)).toEqual({changed:1,changedParts:[part]});\n expect(p.text(part)).toBe(xml.replace(\"w15:done = '&#48;'\",\"w15:done = '1'\"));\n const reopened=await OpcPackage.open(p.toBytes());expect(inspectComments(reopened).comments.find(c=>c.id==='1')?.resolved).toBe(true);\n const original=await OpcPackage.open(before);for(const name of p.names())if(name!==part)expect(p.get(name)).toEqual(original.get(name));\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:missing done flag uses an attribute prefix under a default element namespace",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 38,
+      "line": 39,
       "title": "missing done flag uses an attribute prefix under a default element namespace",
       "suites": [],
       "kind": "test",
@@ -323,13 +323,13 @@
         "expect(inspectComments(await OpcPackage.open(p.toBytes())).comments.find(c=>c.id==='1')?.resolved).toBe(true)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n const xml=p.text(part).replaceAll('w15:commentsEx','commentsEx').replaceAll('w15:commentEx','commentEx').replace('xmlns:w15=','xmlns=').replaceAll('w15:','q:').replace('<commentsEx ', '<commentsEx xmlns:q=\"http://schemas.microsoft.com/office/word/2012/wordml\" ').replace('q:paraId=\"3395B541\" q:done=\"0\"','q:paraId=\"3395B541\"');\n p.set(part,xml);const before=p.toBytes();expect(setCommentResolved(p,'1',false).changed).toBe(0);expect(p.toBytes()).toEqual(before);\n expect(setCommentResolved(p,'1',true).changed).toBe(1);expect(p.text(part)).toBe(xml.replace('q:paraId=\"3395B541\"/>','q:paraId=\"3395B541\" q:done=\"1\"/>'));\n expect(inspectComments(await OpcPackage.open(p.toBytes())).comments.find(c=>c.id==='1')?.resolved).toBe(true);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 45,
+      "line": 46,
       "title": "same boolean state retains on/off spelling and exact archive bytes",
       "suites": [],
       "kind": "test",
@@ -339,17 +339,17 @@
       ],
       "loops": [
         {
-          "line": 46,
+          "line": 47,
           "expression": "for(const [word,state]of [['on',true],['true',true],['off',false],['false',false]] as const)"
         }
       ],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n for(const [word,state]of [['on',true],['true',true],['off',false],['false',false]] as const){\n  const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"',`w15:paraId=\"3395B541\" w15:done=\"${word}\"`));const before=p.toBytes();\n  expect(setCommentResolved(p,'1',state)).toEqual({changed:0,changedParts:[]});expect(p.toBytes()).toEqual(before);\n }\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:serialization failure rolls back the done flag while retaining earlier edits",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 51,
+      "line": 52,
       "title": "serialization failure rolls back the done flag while retaining earlier edits",
       "suites": [],
       "kind": "test",
@@ -359,13 +359,13 @@
         "expect(p.toBytes()).toEqual(before)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n p.set('word/document.xml',p.text('word/document.xml').replace('</w:body>','<!--prior edit--></w:body>'));const before=p.toBytes(),xml=p.text(part);\n const serialize=p.toBytes;p.toBytes=()=>{throw new Error('injected serialization failure');};\n try{expect(()=>setCommentResolved(p,'1',true)).toThrow('injected serialization failure');expect(p.text(part)).toBe(xml);}finally{p.toBytes=serialize;}\n expect(p.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 58,
+      "line": 59,
       "title": "misqualified done or parent metadata refuses instead of being ignored",
       "suites": [],
       "kind": "test",
@@ -375,17 +375,17 @@
       ],
       "loops": [
         {
-          "line": 59,
+          "line": 60,
           "expression": "for(const key of ['done','paraIdParent'])"
         }
       ],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n for(const key of ['done','paraIdParent']){\n  const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace(`w15:${key}=`,`bogus:${key}=`).replace('<w15:commentsEx ','<w15:commentsEx xmlns:bogus=\"urn:wrong\" '));const before=p.toBytes();\n  expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n }\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 65,
+      "line": 66,
       "title": "resolution refuses every enforcing settings part and accepts only explicit disabled protection",
       "suites": [],
       "kind": "test",
@@ -397,17 +397,17 @@
       ],
       "loops": [
         {
-          "line": 67,
+          "line": 68,
           "expression": "for(const enforcement of [undefined,'','1','true','on','unexpected','false','0','OFF'])"
         }
       ],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';\n for(const enforcement of [undefined,'','1','true','on','unexpected','false','0','OFF']){\n  const p=await commentFixture(),settings=p.related(p.mainPart(),'settings')!;\n  expect(settings).toBeDefined();\n  p.set(settings,`<s:settings xmlns:s=\"${W}\"><s:documentProtection${enforcement===undefined?'':` s:enforcement=\"${enforcement}\"`}/></s:settings>`);\n  const before=p.toBytes();\n  if(['false','0','OFF'].includes(enforcement??'')){expect(setCommentResolved(p,'1',true).changed).toBe(1);}else{expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);}\n }\n const p=await commentFixture(),settings=p.related(p.mainPart(),'settings')!;\n p.set(settings,`<s:settings xmlns:s=\"${W}\"><s:documentProtection s:enforcement=\"0\"/><s:documentProtection s:enforcement=\"1\"/></s:settings>`);const before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:inspection results are detached and cannot bypass package custody",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 77,
+      "line": 78,
       "title": "inspection results are detached and cannot bypass package custody",
       "suites": [],
       "kind": "test",
@@ -419,13 +419,13 @@
         "expect(p.toBytes()).toEqual(before)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),before=p.toBytes(),first=inspectComments(p);first.comments[1]!.resolved=true;first.comments[2]!.parentId='999';first.comments[0]!.text='mutated';first.unsupported.push({part:'word/comments.xml',kind:'invented'});\n const second=inspectComments(p);expect(second.comments[1]!.resolved).toBe(false);expect(second.comments[2]!.parentId).toBe('1');expect(second.comments[0]!.text).toBe('This is a great opening');expect(second.unsupported).toEqual([]);expect(p.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:comment paragraph newlines and tabs are read without rewriting bodies",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 81,
+      "line": 82,
       "title": "comment paragraph newlines and tabs are read without rewriting bodies",
       "suites": [],
       "kind": "test",
@@ -436,13 +436,13 @@
         "expect((await OpcPackage.open(p.toBytes())).text(part)).toBe(xml)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),part='word/comments.xml';const xml=p.text(part).replace('This is a great opening','This is a great opening</w:t><w:tab/><w:t>tab</w:t><w:br/><w:t>line');p.set(part,xml);const before=p.toBytes();\n expect(inspectComments(p).comments[0]!.text).toBe('This is a great opening\\ttab\\nline');expect(p.toBytes()).toEqual(before);\n setCommentResolved(p,'1',true);expect(p.text(part)).toBe(xml);expect((await OpcPackage.open(p.toBytes())).text(part)).toBe(xml);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:non-self-closing entries retain boundary whitespace exactly",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 86,
+      "line": 87,
       "title": "non-self-closing entries retain boundary whitespace exactly",
       "suites": [],
       "kind": "test",
@@ -451,13 +451,13 @@
         "expect(inspectComments(p).comments[1]!.resolved).toBe(true)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';const xml=p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"/>','w15:paraId=\"3395B541\" \\n > \\r\\n </w15:commentEx>');p.set(part,xml);\n setCommentResolved(p,'1',true);expect(p.text(part)).toBe(xml.replace('w15:paraId=\"3395B541\" \\n >','w15:paraId=\"3395B541\" w15:done=\"1\" \\n >'));expect(inspectComments(p).comments[1]!.resolved).toBe(true);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:multiple comments settings and external settings refuse before mutation",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 90,
+      "line": 91,
       "title": "multiple comments settings and external settings refuse before mutation",
       "suites": [],
       "kind": "test",
@@ -468,13 +468,13 @@
         "expect(q.toBytes()).toEqual(before)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const {addPart,addRelationship}=await import('../../src/opc/index.ts');const p=await commentFixture(),W='http://schemas.openxmlformats.org/wordprocessingml/2006/main',R='http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings';\n addPart(p,'word/extra-settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"true\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),R,'extra-settings.xml');let before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n const q=await commentFixture();addRelationship(q,q.mainPart(),R,'https://example.invalid/settings.xml',{external:true});before=q.toBytes();expect(()=>setCommentResolved(q,'1',true)).toThrow();expect(q.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 96,
+      "line": 97,
       "title": "UTF-16 extension encoding and BOM survive a done-only edit",
       "suites": [],
       "kind": "test",
@@ -484,17 +484,17 @@
       ],
       "loops": [
         {
-          "line": 98,
+          "line": 99,
           "expression": "for(let i=0;i<value.length;i++)view.setUint16(2+i*2,value.charCodeAt(i),true);"
         }
       ],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml',xml=p.text(part).replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"');\n const encode=(value:string)=>{const out=new Uint8Array(2+value.length*2),view=new DataView(out.buffer);view.setUint16(0,0xfeff,true);for(let i=0;i<value.length;i++)view.setUint16(2+i*2,value.charCodeAt(i),true);return out;};\n p.set(part,encode(xml));setCommentResolved(p,'1',true);expect(p.get(part)).toEqual(encode(xml.replace('w15:paraId=\"3395B541\" w15:done=\"0\"','w15:paraId=\"3395B541\" w15:done=\"1\"')));\n expect(inspectComments(await OpcPackage.open(p.toBytes())).comments[1]!.resolved).toBe(true);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 102,
+      "line": 103,
       "title": "misqualified comment IDs and paragraph metadata refuse the whole resolution",
       "suites": [],
       "kind": "test",
@@ -504,17 +504,17 @@
       ],
       "loops": [
         {
-          "line": 103,
+          "line": 104,
           "expression": "for(const [from,to]of [['w:id=\"1\"','id=\"1\"'],['w14:paraId=\"3395B541\"','paraId=\"3395B541\"']] as const)"
         }
       ],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n for(const [from,to]of [['w:id=\"1\"','id=\"1\"'],['w14:paraId=\"3395B541\"','paraId=\"3395B541\"']] as const){\n  const p=await commentFixture(),part='word/comments.xml';p.set(part,p.text(part).replace(from,to));const before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n }\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:incomplete extended metadata remains inspectable but absent targets cannot be resolved",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 107,
+      "line": 108,
       "title": "incomplete extended metadata remains inspectable but absent targets cannot be resolved",
       "suites": [],
       "kind": "test",
@@ -525,13 +525,13 @@
         "expect(setCommentResolved(p,'1',true).changed).toBe(1)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace(/<w15:commentEx w15:paraId=\"103008CD\"[^>]*\\/>/,''));\n const before=p.toBytes();expect(inspectComments(p).comments).toHaveLength(3);expect(()=>setCommentResolved(p,'0',true)).toThrow();expect(p.toBytes()).toEqual(before);\n expect(setCommentResolved(p,'1',true).changed).toBe(1);\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:public entrypoints save and reopen the resolved flag without changing comment bodies",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 113,
+      "line": 114,
       "title": "public entrypoints save and reopen the resolved flag without changing comment bodies",
       "suites": [],
       "kind": "test",
@@ -542,13 +542,13 @@
         "expect(q.get('word/comments.xml')).toEqual(comments)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const {mkdtemp,rm}=await import('node:fs/promises'),{tmpdir}=await import('node:os');\n const api=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');\n expect(api.inspectComments).toBe(docx.inspectComments);expect(api.setCommentResolved).toBe(docx.setCommentResolved);\n const root=await mkdtemp(join(tmpdir(),'bun-comment-save-'));\n try{const p=await commentFixture(),comments=p.get('word/comments.xml')!,path=join(root,'resolved.docx');api.setCommentResolved(p,'1',true);await p.save(path);const q=await OpcPackage.open(path);expect(api.inspectComments(q).comments[1]!.resolved).toBe(true);expect(q.get('word/comments.xml')).toEqual(comments);}finally{await rm(root,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused",
       "path": "tests/unit/docx-comments.test.ts",
-      "line": 120,
+      "line": 121,
       "title": "a document without comment parts remains unchanged when inspected or refused",
       "suites": [],
       "kind": "test",
@@ -558,13 +558,13 @@
         "expect(p.toBytes()).toEqual(before)"
       ],
       "loops": [],
-      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
       "body": "{\n const {Document}=await import('../../src/docx/index.ts'),p=await OpcPackage.open(await Document.create().save()),before=p.toBytes();\n expect(inspectComments(p)).toEqual({comments:[],unsupported:[]});expect(()=>setCommentResolved(p,'0',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / creates a minimal package and appends escaped bold italic text before sectPr",
       "path": "tests/unit/docx-create.test.ts",
-      "line": 25,
+      "line": 26,
       "title": "creates a minimal package and appends escaped bold italic text before sectPr",
       "suites": [
         "Document.create and addParagraph"
@@ -583,13 +583,13 @@
         "expect(bodyChildren.map((child) => child.localName)).toEqual([\"p\", \"sectPr\"])"
       ],
       "loops": [],
-      "sourceSha256": "4b75f02e8f906a59b713f68156c3ca3e60baba7207ce2e937a690e2e976f5abf",
+      "sourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
       "body": "{\n    const doc = Document.create();\n\n    expect([...doc.package.parts.keys()]).toEqual([\n      \"[Content_Types].xml\",\n      \"_rels/.rels\",\n      \"word/document.xml\",\n    ]);\n    expect(doc.paragraphs).toHaveLength(0);\n\n    const paragraph = doc.addParagraph(\"  <Frankenstein & friend>  \", { bold: true, italic: true });\n    const saved = await doc.save();\n    const reopened = await Document.open(saved);\n\n    expect(paragraph.text).toBe(\"  <Frankenstein & friend>  \");\n    expect(reopened.paragraphs).toHaveLength(1);\n    expect(reopened.paragraphs[0]?.text).toBe(\"  <Frankenstein & friend>  \");\n    expect(doc.package.diff()).toEqual({\n      added: [],\n      changed: [DOCUMENT_PART],\n      removed: [],\n    });\n\n    const rawXml = readDocumentXml(reopened);\n    expect(rawXml).toContain('<w:t xml:space=\"preserve\">  &lt;Frankenstein &amp; friend&gt;  </w:t>');\n    const runProperties = requireDefined(\n      readParagraphElement(reopened, 0).children.find((child) => isWord(child, \"r\"))\n        ?.children.find((child) => isWord(child, \"rPr\")),\n      \"Missing run properties\",\n    );\n    expect(runProperties.children.some((child) => isWord(child, \"b\"))).toBeTrue();\n    expect(runProperties.children.some((child) => isWord(child, \"i\"))).toBeTrue();\n\n    const bodyChildren = readBody(reopened).children.filter((child) => isWord(child, \"p\") || isWord(child, \"sectPr\"));\n    expect(bodyChildren.map((child) => child.localName)).toEqual([\"p\", \"sectPr\"]);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / permits empty text and keeps the authored paragraph before sectPr after reopen",
       "path": "tests/unit/docx-create.test.ts",
-      "line": 62,
+      "line": 63,
       "title": "permits empty text and keeps the authored paragraph before sectPr after reopen",
       "suites": [
         "Document.create and addParagraph"
@@ -602,13 +602,13 @@
         "expect(readBody(reopened).children.filter((child) => isWord(child, \"p\") || isWord(child, \"sectPr\"))\n      .map((child) => child.localName)).toEqual([\"p\", \"sectPr\"])"
       ],
       "loops": [],
-      "sourceSha256": "4b75f02e8f906a59b713f68156c3ca3e60baba7207ce2e937a690e2e976f5abf",
+      "sourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
       "body": "{\n    const doc = Document.create();\n    const paragraph = doc.addParagraph();\n    const reopened = await Document.open(await doc.save());\n\n    expect(paragraph.text).toBe(\"\");\n    expect(reopened.paragraphs).toHaveLength(1);\n    expect(reopened.paragraphs[0]?.text).toBe(\"\");\n    expect(readBody(reopened).children.filter((child) => isWord(child, \"p\") || isWord(child, \"sectPr\"))\n      .map((child) => child.localName)).toEqual([\"p\", \"sectPr\"]);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / validates known paragraph styles and preserves opaque parts on append",
       "path": "tests/unit/docx-create.test.ts",
-      "line": 74,
+      "line": 75,
       "title": "validates known paragraph styles and preserves opaque parts on append",
       "suites": [
         "Document.create and addParagraph"
@@ -624,13 +624,13 @@
         "expect(doc.package.diff()).toEqual({\n      added: [],\n      changed: [DOCUMENT_PART],\n      removed: [],\n    })"
       ],
       "loops": [],
-      "sourceSha256": "4b75f02e8f906a59b713f68156c3ca3e60baba7207ce2e937a690e2e976f5abf",
+      "sourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
       "body": "{\n    const doc = await Document.open(STYLES_FIXTURE);\n    const originalCore = requireDefined(doc.package.get(\"docProps/core.xml\"), \"Missing docProps/core.xml\");\n    const originalStyles = requireDefined(doc.package.get(\"word/styles.xml\"), \"Missing word/styles.xml\");\n\n    const paragraph = doc.addParagraph(\"Created heading\", { style: \"Heading1\" });\n    const reopened = await Document.open(await doc.save());\n\n    expect(paragraph.text).toBe(\"Created heading\");\n    expect(reopened.paragraphs).toHaveLength(5);\n    expect(reopened.paragraphs[4]?.text).toBe(\"Created heading\");\n    expect(attribute(\n      requireDefined(\n        readParagraphElement(reopened, 4).children.find((child) => isWord(child, \"pPr\"))\n          ?.children.find((child) => isWord(child, \"pStyle\")),\n        \"Missing paragraph style element\",\n      ),\n      \"val\",\n      W_NS,\n    )).toBe(\"Heading1\");\n    expect(doc.package.get(\"docProps/core.xml\")).toEqual(originalCore);\n    expect(doc.package.get(\"word/styles.xml\")).toEqual(originalStyles);\n    expect(doc.package.diff()).toEqual({\n      added: [],\n      changed: [DOCUMENT_PART],\n      removed: [],\n    });\n  }"
     },
     {
       "id": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / refuses invalid arguments and unsupported or unknown styles atomically",
       "path": "tests/unit/docx-create.test.ts",
-      "line": 103,
+      "line": 104,
       "title": "refuses invalid arguments and unsupported or unknown styles atomically",
       "suites": [
         "Document.create and addParagraph"
@@ -646,13 +646,13 @@
         "expect(await styledDocument.save()).toEqual(styledBaseline)"
       ],
       "loops": [],
-      "sourceSha256": "4b75f02e8f906a59b713f68156c3ca3e60baba7207ce2e937a690e2e976f5abf",
+      "sourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
       "body": "{\n    const newDocument = Document.create();\n    const newBaseline = await newDocument.save();\n\n    expect(() => (newDocument.addParagraph as (text: unknown) => unknown)(7)).toThrow(\n      expect.objectContaining({ code: \"docx-invalid-argument\" }),\n    );\n    expect(() => (newDocument.addParagraph as (text: string, options: unknown) => unknown)(\"text\", \"bad\")).toThrow(\n      expect.objectContaining({ code: \"docx-invalid-argument\" }),\n    );\n    expect(() => (newDocument.addParagraph as (text: string, options: unknown) => unknown)(\"text\", { bold: \"yes\" })).toThrow(\n      expect.objectContaining({ code: \"docx-invalid-argument\" }),\n    );\n    expect(() => newDocument.addParagraph(\"Heading\", { style: \"Heading1\" })).toThrow(\n      expect.objectContaining({ code: \"docx-style-unsupported\" }),\n    );\n    expect(await newDocument.save()).toEqual(newBaseline);\n\n    const styledDocument = await Document.open(STYLES_FIXTURE);\n    const styledBaseline = await styledDocument.save();\n    expect(() => styledDocument.addParagraph(\"Heading\", { style: \"MissingStyle\" })).toThrow(\n      expect.objectContaining({ code: \"docx-style-missing\" }),\n    );\n    expect(await styledDocument.save()).toEqual(styledBaseline);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / invalidates earlier spans after append without disturbing preserved parts",
       "path": "tests/unit/docx-create.test.ts",
-      "line": 129,
+      "line": 130,
       "title": "invalidates earlier spans after append without disturbing preserved parts",
       "suites": [
         "Document.create and addParagraph"
@@ -665,13 +665,13 @@
         "expect(doc.package.get(\"docProps/core.xml\")).toEqual(originalCore)"
       ],
       "loops": [],
-      "sourceSha256": "4b75f02e8f906a59b713f68156c3ca3e60baba7207ce2e937a690e2e976f5abf",
+      "sourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
       "body": "{\n    const doc = await Document.open(STYLES_FIXTURE);\n    const stale = requireSingleSpan(requireDefined(doc.paragraphs[1], \"Missing paragraph 2\").find(\"Genevese\"), \"Genevese\");\n    const originalCore = requireDefined(doc.package.get(\"docProps/core.xml\"), \"Missing docProps/core.xml\");\n\n    doc.addParagraph(\"Appendix line\");\n    const bytesAfterAppend = await doc.save();\n\n    let refusal: unknown;\n    try {\n      await stale.replace(\"Citizen\");\n    } catch (error) {\n      refusal = error;\n    }\n\n    expect(refusal).toBeInstanceOf(OoxmlError);\n    expect((refusal as OoxmlError).code).toBe(\"docx-stale-span\");\n    expect(await doc.save()).toEqual(bytesAfterAppend);\n    expect(doc.package.get(\"docProps/core.xml\")).toEqual(originalCore);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
       "path": "tests/unit/docx-create.test.ts",
-      "line": 150,
+      "line": 151,
       "title": "executes the DOCX create feature with dedicated bindings and optional parent aggregation",
       "suites": [
         "Document.create and addParagraph"
@@ -688,12 +688,12 @@
       ],
       "loops": [
         {
-          "line": 155,
+          "line": 156,
           "expression": "for (const bindings of [createBindings, parentBindings])"
         }
       ],
-      "sourceSha256": "4b75f02e8f906a59b713f68156c3ca3e60baba7207ce2e937a690e2e976f5abf",
-      "body": "{\n    const featurePath = \"features/docx/create.feature\";\n    const feature = parseFeature(featurePath, await Bun.file(join(PROJECT_ROOT, featurePath)).text());\n    const inventory = inventoryFor(feature);\n\n    for (const bindings of [createBindings, parentBindings]) {\n      const execution = await executeAcceptance(inventory, bindings, newAcceptanceRunId());\n      expect(execution.failures).toEqual([]);\n      expect(execution.counts.features).toEqual({ passed: 1, failed: 0, planned: 0, total: 1 });\n      expect(execution.counts.scenarios).toEqual({ passed: 4, failed: 0, planned: 0, total: 4 });\n      expect(execution.counts.cases).toEqual({ passed: 8, failed: 0, planned: 0, total: 8 });\n      expect(execution.counts.steps.failed).toBe(0);\n      expect(execution.counts.steps.undefined).toBe(0);\n      expect(execution.counts.steps.ambiguous).toBe(0);\n    }\n  }"
+      "sourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
+      "body": "{\n    const featurePath = \"references/fixtures-ooxml/workflows/docx/creation.feature\";\n    const feature = parseFeature(featurePath, (await Bun.file(join(fixturesRoot(), \"workflows/docx/creation.feature\")).text()).replace(/^@planned/m, '@implemented @bun'));\n    const inventory = inventoryFor(feature);\n\n    for (const bindings of [createBindings, parentBindings]) {\n      const execution = await executeAcceptance(inventory, bindings, newAcceptanceRunId());\n      expect(execution.failures).toEqual([]);\n      expect(execution.counts.features).toEqual({ passed: 1, failed: 0, planned: 0, total: 1 });\n      expect(execution.counts.scenarios).toEqual({ passed: 4, failed: 0, planned: 0, total: 4 });\n      expect(execution.counts.cases).toEqual({ passed: 8, failed: 0, planned: 0, total: 8 });\n      expect(execution.counts.steps.failed).toBe(0);\n      expect(execution.counts.steps.undefined).toBe(0);\n      expect(execution.counts.steps.ambiguous).toBe(0);\n    }\n  }"
     },
     {
       "id": "bun:tests/unit/docx-redline.test.ts:tracked replacement emits distinct IDs and native author/date with accept/reject algebra",
@@ -1079,7 +1079,7 @@
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / authoring into a body with w rebound never silently writes foreign elements",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 28,
+      "line": 29,
       "title": "authoring into a body with w rebound never silently writes foreign elements",
       "suites": [
         "docx Document tables"
@@ -1091,13 +1091,13 @@
         "expect(after.paragraphs.some(p=>p.text==='after')).toBe(true)"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const created=Document.create();created.addParagraph('source');const p=await OpcPackage.open(await created.save());\n    let xml=p.text('word/document.xml').replaceAll('xmlns:w=','xmlns:z=').replaceAll('w:','z:');xml=xml.replace('<z:body>', '<z:body xmlns:w=\"urn:foreign\">');p.set('word/document.xml',xml);\n    const doc=await Document.open(p.toBytes());const table=doc.addTable(1,1);table.cell(0,0).text='correct';doc.addParagraph('after');\n    const after=await Document.open(await doc.save());expect(after.tables.length).toBe(1);expect(after.tables[0]!.cell(0,0).text).toBe('correct');expect(after.paragraphs.some(p=>p.text==='after')).toBe(true);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / run-level namespace declarations survive copied table-cell run properties",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 34,
+      "line": 35,
       "title": "run-level namespace declarations survive copied table-cell run properties",
       "suites": [
         "docx Document tables"
@@ -1108,13 +1108,13 @@
         "expect(loaded.tables[0]!.cell(0,0).text).toBe('after')"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const doc=Document.create();doc.addTable(1,1).cell(0,0).text='before';const p=await OpcPackage.open(await doc.save());\n    p.set('word/document.xml',p.text('word/document.xml').replace(/<w:r(?:\\s[^>]*)?><w:t>before<\\/w:t><\\/w:r>/,'<w:r xmlns:f=\"urn:format\"><w:rPr><f:flag/></w:rPr><w:t>before</w:t></w:r>'));\n    const loaded=await Document.open(p.toBytes());loaded.tables[0]!.cell(0,0).text='after';const xml=parseXml(new TextDecoder().decode(loaded.package.get('word/document.xml')!));\n    expect(elements(xml,'flag','urn:format').length).toBe(1);expect(loaded.tables[0]!.cell(0,0).text).toBe('after');\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / adds a rectangular table before sectPr and round-trips escaped text, spaces, and normalized newlines",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 40,
+      "line": 41,
       "title": "adds a rectangular table before sectPr and round-trips escaped text, spaces, and normalized newlines",
       "suites": [
         "docx Document tables"
@@ -1133,13 +1133,13 @@
         "expect(secondCell.children.filter((child) => isWord(child, \"p\"))).toHaveLength(2)"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const doc = Document.create();\n\n    const table = doc.addTable(2, 2);\n    table.cell(0, 0).text = \"  <Alpha & Beta>  \";\n    table.cell(1, 1).text = \"line 1\\r\\nline 2\";\n\n    const reopened = await Document.open(await doc.save());\n    const reopenedTable = requireTable(reopened, 0);\n\n    expect(table.rows).toBe(2);\n    expect(table.columns).toBe(2);\n    expect(reopened.tables).toHaveLength(1);\n    expect(reopenedTable.rows).toBe(2);\n    expect(reopenedTable.columns).toBe(2);\n    expect(reopenedTable.cell(0, 0).text).toBe(\"  <Alpha & Beta>  \");\n    expect(reopenedTable.cell(1, 1).text).toBe(\"line 1\\nline 2\");\n\n    const bodyChildren = readBody(reopened).children.filter((child) => isWord(child, \"tbl\") || isWord(child, \"sectPr\"));\n    expect(bodyChildren.map((child) => child.localName)).toEqual([\"tbl\", \"sectPr\"]);\n\n    const firstCellXml = rawTopLevelCellXml(reopened, 0, 0, 0);\n    expect(firstCellXml).toContain('<w:t xml:space=\"preserve\">  &lt;Alpha &amp; Beta&gt;  </w:t>');\n\n    const secondCell = readTopLevelCellElement(reopened, 0, 1, 1);\n    expect(secondCell.children.filter((child) => isWord(child, \"p\"))).toHaveLength(2);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / updates existing simple table cells while preserving opaque package parts",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 68,
+      "line": 69,
       "title": "updates existing simple table cells while preserving opaque package parts",
       "suites": [
         "docx Document tables"
@@ -1151,13 +1151,13 @@
         "expect(doc.package.diff()).toEqual({\n      added: [],\n      changed: [DOCUMENT_PART],\n      removed: [],\n    })"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const doc = await Document.open(fixturePath(F.officeWord.simpleTable));\n    const originalCore = requireDefined(doc.package.get(\"docProps/core.xml\"), \"Missing docProps/core.xml\");\n\n    const table = requireTable(doc, 0);\n    table.cell(1, 0).text = \"Voltaic battery\";\n\n    const reopened = await Document.open(await doc.save());\n    expect(requireTable(reopened, 0).cell(1, 0).text).toBe(\"Voltaic battery\");\n    expect(doc.package.get(\"docProps/core.xml\")).toEqual(originalCore);\n    expect(doc.package.diff()).toEqual({\n      added: [],\n      changed: [DOCUMENT_PART],\n      removed: [],\n    });\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / preserves tcPr, first paragraph properties, and first run formatting when replacing a simple cell",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 85,
+      "line": 86,
       "title": "preserves tcPr, first paragraph properties, and first run formatting when replacing a simple cell",
       "suites": [
         "docx Document tables"
@@ -1170,13 +1170,13 @@
         "expect(requireTable(reopened, 0).cell(1, 0).text).toBe(\"updated value\")"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const doc = await Document.open(buildStyledCellFixture());\n\n    const cell = requireTable(doc, 0).cell(1, 0);\n    cell.text = \"updated value\";\n\n    const reopened = await Document.open(await doc.save());\n    const reopenedCell = readTopLevelCellElement(reopened, 0, 1, 0);\n    const tcPr = requireDefined(reopenedCell.children.find((child) => isWord(child, \"tcPr\")), \"Missing w:tcPr\");\n    const shading = requireDefined(tcPr.children.find((child) => isWord(child, \"shd\")), \"Missing w:shd\");\n    expect(attribute(shading, \"fill\", W_NS)).toBe(\"FFFF00\");\n\n    const firstParagraph = requireDefined(reopenedCell.children.find((child) => isWord(child, \"p\")), \"Missing first w:p\");\n    const paragraphProperties = requireDefined(firstParagraph.children.find((child) => isWord(child, \"pPr\")), \"Missing w:pPr\");\n    const justification = requireDefined(paragraphProperties.children.find((child) => isWord(child, \"jc\")), \"Missing w:jc\");\n    expect(attribute(justification, \"val\", W_NS)).toBe(\"right\");\n    const run = requireDefined(firstParagraph.children.find((child) => isWord(child, \"r\")), \"Missing first w:r\");\n    const runProperties = requireDefined(run.children.find((child) => isWord(child, \"rPr\")), \"Missing w:rPr\");\n    expect(runProperties.children.some((child) => isWord(child, \"b\"))).toBeTrue();\n    expect(requireTable(reopened, 0).cell(1, 0).text).toBe(\"updated value\");\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / refuses bad indices, merged cells, nested cell topology, and bizarre grids atomically",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 107,
+      "line": 108,
       "title": "refuses bad indices, merged cells, nested cell topology, and bizarre grids atomically",
       "suites": [
         "docx Document tables"
@@ -1194,13 +1194,13 @@
         "expect(await bizarre.save()).toEqual(bizarreBaseline)"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const simple = await Document.open(fixturePath(F.officeWord.simpleTable));\n    const simpleBaseline = await simple.save();\n    expect(() => requireTable(simple, 0).cell(9, 0)).toThrow(RangeError);\n    expect(await simple.save()).toEqual(simpleBaseline);\n\n    const merged = await Document.open(await mergedNestedTableDocument());\n    const mergedBaseline = await merged.save();\n    const mergedTable = requireTable(merged, 0);\n    expect(mergedTable.rows).toBe(3);\n    expect(mergedTable.columns).toBe(3);\n    expect(() => mergedTable.cell(0, 0)).toThrow(expect.objectContaining({ code: \"docx-table-merged-cell\" }));\n    expect(await merged.save()).toEqual(mergedBaseline);\n\n    const nestedCell = mergedTable.cell(2, 0);\n    expect(() => {\n      nestedCell.text = \"updated\";\n    }).toThrow(expect.objectContaining({ code: \"docx-table-cell-unsupported\" }));\n    expect(await merged.save()).toEqual(mergedBaseline);\n\n    const bizarre = await Document.open(buildGridBeforeFixture());\n    const bizarreBaseline = await bizarre.save();\n    expect(() => requireTable(bizarre, 0).cell(0, 0)).toThrow(\n      expect.objectContaining({ code: \"docx-table-unsupported\" }),\n    );\n    expect(await bizarre.save()).toEqual(bizarreBaseline);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / stale table and cell handles refuse after document mutation while fresh handles stay live",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 135,
+      "line": 136,
       "title": "stale table and cell handles refuse after document mutation while fresh handles stay live",
       "suites": [
         "docx Document tables"
@@ -1213,13 +1213,13 @@
         "expect(requireTable(reopened, 0).cell(0, 0).text).toBe(\"live write\")"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const doc = Document.create();\n    const table = doc.addTable(1, 1);\n    const staleCell = table.cell(0, 0);\n\n    doc.addParagraph(\"after table\");\n    const bytesAfterEdit = await doc.save();\n\n    expect(() => table.rows).toThrow(expect.objectContaining({ code: \"docx-stale-table\" }));\n    expect(() => {\n      staleCell.text = \"stale write\";\n    }).toThrow(expect.objectContaining({ code: \"docx-stale-table-cell\" }));\n    expect(await doc.save()).toEqual(bytesAfterEdit);\n\n    const freshCell = requireTable(doc, 0).cell(0, 0);\n    freshCell.text = \"live write\";\n    const reopened = await Document.open(await doc.save());\n    expect(requireTable(reopened, 0).cell(0, 0).text).toBe(\"live write\");\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / validates table dimensions with bounded rectangular authoring",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 155,
+      "line": 156,
       "title": "validates table dimensions with bounded rectangular authoring",
       "suites": [
         "docx Document tables"
@@ -1232,13 +1232,13 @@
         "expect(await doc.save()).toEqual(baseline)"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const doc = Document.create();\n    const baseline = await doc.save();\n\n    expect(() => doc.addTable(0, 1)).toThrow(RangeError);\n    expect(() => doc.addTable(1, 0)).toThrow(RangeError);\n    expect(() => doc.addTable(101, 100)).toThrow(RangeError);\n    expect(await doc.save()).toEqual(baseline);\n  }"
     },
     {
       "id": "bun:tests/unit/docx-tables.test.ts:docx Document tables / passes the DOCX table acceptance feature with dedicated bindings",
       "path": "tests/unit/docx-tables.test.ts",
-      "line": 165,
+      "line": 166,
       "title": "passes the DOCX table acceptance feature with dedicated bindings",
       "suites": [
         "docx Document tables"
@@ -1253,13 +1253,13 @@
         "expect(report.failures).toEqual([])"
       ],
       "loops": [],
-      "sourceSha256": "20b0f0ab41692a0c3763ba7ec40acd2b7e5d52c95890274f2fc0621fa0bb31c4",
+      "sourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
       "body": "{\n    const root = await makeAcceptanceRoot();\n    const report = await runAcceptance(tableBindings, { root });\n\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(1);\n    expect(report.inventory.scenarios.implemented).toBe(4);\n    expect(report.execution.cases.passed).toBe(7);\n    expect(report.execution.steps.failed).toBe(0);\n    expect(report.failures).toEqual([]);\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / opens from a path or bytes and save() never rewrites the opened source path implicitly",
       "path": "tests/unit/docx.test.ts",
-      "line": 27,
+      "line": 28,
       "title": "opens from a path or bytes and save() never rewrites the opened source path implicitly",
       "suites": [
         "docx Document"
@@ -1277,13 +1277,13 @@
         "expect(new Uint8Array(readFileSync(explicitPath))).toEqual(original)"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const tempPath = await copyFixture(fixturePath(F.officeWord.singleParagraph));\n    const original = new Uint8Array(readFileSync(tempPath));\n\n    const fromPath = await Document.open(tempPath);\n    const fromBytes = await Document.open(original);\n\n    const expected =\n      \"I am by birth a Genevese, and my family is one of the most distinguished of that republic.\";\n\n    expect(fromPath.package.get(DOCUMENT_PART)).toBeDefined();\n    expect(fromPath.paragraphs).toHaveLength(1);\n    expect(requireParagraph(fromPath, 0).text).toBe(expected);\n    expect(requireParagraph(fromBytes, 0).text).toBe(expected);\n    expect(await fromPath.save()).toEqual(original);\n    expect(new Uint8Array(readFileSync(tempPath))).toEqual(original);\n    expect(await fromBytes.save()).toEqual(original);\n\n    const explicitPath = join(dirname(tempPath), \"saved.docx\");\n    expect(await fromBytes.save(explicitPath)).toEqual(original);\n    expect(new Uint8Array(readFileSync(explicitPath))).toEqual(original);\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
       "path": "tests/unit/docx.test.ts",
-      "line": 50,
+      "line": 51,
       "title": "preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
       "suites": [
         "docx Document"
@@ -1295,17 +1295,17 @@
       ],
       "loops": [
         {
-          "line": 51,
+          "line": 52,
           "expression": "for (const path of wordFixtures())"
         }
       ],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    for (const path of wordFixtures()) {\n      const original = new Uint8Array(readFileSync(path));\n      const doc = await Document.open(original);\n      const saved = await doc.save();\n      expect(saved).toEqual(original);\n\n      const reopened = await Document.open(saved);\n      expect(await reopened.save()).toEqual(original);\n    }\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / replaces exact cross-run text without reconstructing unaffected runs or formatting",
       "path": "tests/unit/docx.test.ts",
-      "line": 62,
+      "line": 63,
       "title": "replaces exact cross-run text without reconstructing unaffected runs or formatting",
       "suites": [
         "docx Document"
@@ -1318,13 +1318,13 @@
         "expect(paragraphRunSnapshot(reopened, 0)).toEqual([\n      { text: \"Bold Tone\", styles: [\"b\"] },\n      { text: \" and \", styles: [] },\n      { text: \"tilted text\", styles: [\"i\"] },\n      { text: \" and \", styles: [] },\n      { text: \"underlined text\", styles: [\"u\"] },\n      { text: \" and \", styles: [] },\n      { text: \"colored text\", styles: [\"color\"] },\n      { text: \" and \", styles: [] },\n      { text: \"large text\", styles: [\"sz\"] },\n    ])"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const tempPath = await copyFixture(fixturePath(F.officeWord.formattedText));\n    const original = new Uint8Array(readFileSync(tempPath));\n    const doc = await Document.open(tempPath);\n\n    const first = requireParagraph(doc, 0);\n    const span = requireSingleSpan(first.find(\"text and italic text\"), \"text and italic text\");\n\n    await span.replace(\"Tone and tilted text\");\n\n    const saved = await doc.save();\n    expect(new Uint8Array(readFileSync(tempPath))).toEqual(original);\n\n    const reopened = await Document.open(saved);\n    expect(requireParagraph(reopened, 0).text).toBe(\n      \"Bold Tone and tilted text and underlined text and colored text and large text\",\n    );\n    expect(requireParagraph(reopened, 1).text).toBe(\n      \"I saw the dull yellow eye of the creature open; it breathed hard, and a convulsive motion agitated its limbs.\",\n    );\n\n    expect(paragraphRunSnapshot(reopened, 0)).toEqual([\n      { text: \"Bold Tone\", styles: [\"b\"] },\n      { text: \" and \", styles: [] },\n      { text: \"tilted text\", styles: [\"i\"] },\n      { text: \" and \", styles: [] },\n      { text: \"underlined text\", styles: [\"u\"] },\n      { text: \" and \", styles: [] },\n      { text: \"colored text\", styles: [\"color\"] },\n      { text: \" and \", styles: [] },\n      { text: \"large text\", styles: [\"sz\"] },\n    ]);\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / preserves boundary whitespace with xml:space on touched text nodes",
       "path": "tests/unit/docx.test.ts",
-      "line": 96,
+      "line": 97,
       "title": "preserves boundary whitespace with xml:space on touched text nodes",
       "suites": [
         "docx Document"
@@ -1335,13 +1335,13 @@
         "expect(paragraphTextSnapshot(reopened, 0)).toEqual([\n      { text: \"A\", preserve: undefined },\n      { text: \"lpha\", preserve: undefined },\n      { text: \" Beta\", preserve: \"preserve\" },\n    ])"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const doc = await Document.open(buildWhitespaceFixture());\n    const span = requireSingleSpan(requireParagraph(doc, 0).find(\"phaBe\"), \"phaBe\");\n\n    await span.replace(\"pha Be\");\n\n    const reopened = await Document.open(await doc.save());\n    expect(requireParagraph(reopened, 0).text).toBe(\"Alpha Beta\");\n    expect(paragraphTextSnapshot(reopened, 0)).toEqual([\n      { text: \"A\", preserve: undefined },\n      { text: \"lpha\", preserve: undefined },\n      { text: \" Beta\", preserve: \"preserve\" },\n    ]);\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML",
       "path": "tests/unit/docx.test.ts",
-      "line": 111,
+      "line": 112,
       "title": "includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML",
       "suites": [
         "docx Document"
@@ -1353,13 +1353,13 @@
         "expect(reopened.paragraphs.map((paragraph) => paragraph.text)).toEqual([\n      \"Research Materials Inventory\",\n      \"Item\",\n      \"Quantity\",\n      \"Source\",\n      \"Voltaic battery\",\n      \"3\",\n      \"Germany\",\n      \"Chemical reagents\",\n      \"12 vials\",\n      \"Switzerland\",\n      \"Anatomical charts\",\n      \"7\",\n      \"University library\",\n      \"\",\n    ])"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const original = new Uint8Array(readFileSync(fixturePath(F.officeWord.simpleTable)));\n    const originalXml = UTF8_DECODER.decode(\n      requireDefined(readZip(original).get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`),\n    );\n    const doc = await Document.open(original);\n\n    expect(doc.paragraphs.map((paragraph) => paragraph.text)).toEqual([\n      \"Research Materials Inventory\",\n      \"Item\",\n      \"Quantity\",\n      \"Source\",\n      \"Galvanic battery\",\n      \"3\",\n      \"Germany\",\n      \"Chemical reagents\",\n      \"12 vials\",\n      \"Switzerland\",\n      \"Anatomical charts\",\n      \"7\",\n      \"University library\",\n      \"\",\n    ]);\n\n    const span = requireSingleSpan(doc.find(\"Galvanic battery\"), \"Galvanic battery\");\n    await span.replace(\"Voltaic battery\");\n\n    const saved = await doc.save();\n    const savedXml = UTF8_DECODER.decode(\n      requireDefined(readZip(saved).get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`),\n    );\n    expect(savedXml).toBe(originalXml.replace(\">Galvanic battery<\", \">Voltaic battery<\"));\n\n    const reopened = await Document.open(saved);\n    expect(reopened.paragraphs.map((paragraph) => paragraph.text)).toEqual([\n      \"Research Materials Inventory\",\n      \"Item\",\n      \"Quantity\",\n      \"Source\",\n      \"Voltaic battery\",\n      \"3\",\n      \"Germany\",\n      \"Chemical reagents\",\n      \"12 vials\",\n      \"Switzerland\",\n      \"Anatomical charts\",\n      \"7\",\n      \"University library\",\n      \"\",\n    ]);\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / does not descend into text boxes and refuses the blind region when no supported match exists",
       "path": "tests/unit/docx.test.ts",
-      "line": 163,
+      "line": 164,
       "title": "does not descend into text boxes and refuses the blind region when no supported match exists",
       "suites": [
         "docx Document"
@@ -1370,13 +1370,13 @@
         "expect(() => doc.find(\"Text living inside the text box.\")).toThrow(\n      expect.objectContaining({ code: \"docx-unsupported-topology\" }),\n    )"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const doc = await Document.open(await textboxDocument());\n\n    expect(doc.find(\"Outside the text box.\")).toHaveLength(1);\n    expect(() => doc.find(\"Text living inside the text box.\")).toThrow(\n      expect.objectContaining({ code: \"docx-unsupported-topology\" }),\n    );\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / detects stale spans before mutation and leaves the package unchanged",
       "path": "tests/unit/docx.test.ts",
-      "line": 172,
+      "line": 173,
       "title": "detects stale spans before mutation and leaves the package unchanged",
       "suites": [
         "docx Document"
@@ -1388,13 +1388,13 @@
         "expect(await doc.save()).toEqual(baseline)"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const doc = await Document.open(fixturePath(F.officeWord.formattedText));\n\n    const first = requireParagraph(doc, 0);\n    const stale = requireSingleSpan(first.find(\"text and italic text\"), \"text and italic text\");\n    const colored = requireSingleSpan(first.find(\"colored text\"), \"colored text\");\n    await colored.replace(\"scarlet text\");\n    const baseline = await doc.save();\n\n    let refusal: unknown;\n    try {\n      await stale.replace(\"Tone and tilted text\");\n    } catch (error) {\n      refusal = error;\n    }\n\n    expect(refusal).toBeInstanceOf(OoxmlError);\n    expect((refusal as OoxmlError).code).toBe(\"docx-stale-span\");\n    expect(await doc.save()).toEqual(baseline);\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / keeps repeated exact occurrences correct across replacements",
       "path": "tests/unit/docx.test.ts",
-      "line": 193,
+      "line": 194,
       "title": "keeps repeated exact occurrences correct across replacements",
       "suites": [
         "docx Document"
@@ -1406,13 +1406,13 @@
         "expect(requireParagraph(reopened, 0).text).toBe(\"Gamma Delta Gamma Delta\")"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const doc = await Document.open(buildRepeatedFixture());\n    const paragraph = requireParagraph(doc, 0);\n\n    const matches = paragraph.find(\"Alpha Beta\");\n    expect(matches).toHaveLength(2);\n\n    await requireDefined(matches[0], \"Missing first repeated DOCX span\").replace(\"Gamma Delta\");\n\n    const refreshed = requireParagraph(doc, 0).find(\"Alpha Beta\");\n    expect(refreshed).toHaveLength(1);\n    await requireDefined(refreshed[0], \"Missing second repeated DOCX span\").replace(\"Gamma Delta\");\n\n    const reopened = await Document.open(await doc.save());\n    expect(requireParagraph(reopened, 0).text).toBe(\"Gamma Delta Gamma Delta\");\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / refuses fields, tracked revisions and content controls with a stable code",
       "path": "tests/unit/docx.test.ts",
-      "line": 210,
+      "line": 211,
       "title": "refuses fields, tracked revisions and content controls with a stable code",
       "suites": [
         "docx Document"
@@ -1424,13 +1424,13 @@
         "expect(() => requireParagraph(controlsDoc, 1).find(\"[Enter Title Here]\")).toThrow(\n      expect.objectContaining({ code: \"docx-unsupported-topology\" }),\n    )"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const fieldDoc = await Document.open(buildFieldFixture());\n    const trackedDoc = await Document.open(fixturePath(F.officeWord.trackChanges));\n    const controlsDoc = await Document.open(fixturePath(F.officeWord.sdtContentControls));\n\n    expect(() => requireParagraph(fieldDoc, 0).find(\"2026-01-01\")).toThrow(\n      expect.objectContaining({ code: \"docx-unsupported-topology\" }),\n    );\n    expect(() => requireParagraph(trackedDoc, 0).find(\"amazing\")).toThrow(\n      expect.objectContaining({ code: \"docx-unsupported-topology\" }),\n    );\n    expect(() => requireParagraph(controlsDoc, 1).find(\"[Enter Title Here]\")).toThrow(\n      expect.objectContaining({ code: \"docx-unsupported-topology\" }),\n    );\n  }"
     },
     {
       "id": "bun:tests/unit/docx.test.ts:docx Document / passes the DOCX acceptance feature with exported bindings",
       "path": "tests/unit/docx.test.ts",
-      "line": 226,
+      "line": 227,
       "title": "passes the DOCX acceptance feature with exported bindings",
       "suites": [
         "docx Document"
@@ -1445,7 +1445,7 @@
         "expect(report.failures).toEqual([])"
       ],
       "loops": [],
-      "sourceSha256": "abcbf07206fb94bb17febee942c77126c60d36c84078816ac3ebc68eb0ec3583",
+      "sourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "body": "{\n    const root = await makeAcceptanceRoot();\n    const report = await runAcceptance(docxBindings, { root });\n\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(1);\n    expect(report.inventory.scenarios.implemented).toBe(5);\n    expect(report.execution.cases.passed).toBe(7);\n    expect(report.execution.steps.failed).toBe(0);\n    expect(report.failures).toEqual([]);\n  }"
     },
     {
@@ -2062,7 +2062,7 @@
     {
       "id": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / authors a minimal presentation whose master, layout and theme links reopen through the native reader",
       "path": "tests/unit/pptx-create.test.ts",
-      "line": 43,
+      "line": 44,
       "title": "authors a minimal presentation whose master, layout and theme links reopen through the native reader",
       "suites": [
         "Presentation.create and addTextSlide"
@@ -2093,13 +2093,13 @@
         "expect(result.reopenedDiff).toEqual({ added: [], changed: [], removed: [] })"
       ],
       "loops": [],
-      "sourceSha256": "77060340f6843bd432852069ba23bfca7a92a20df7ccd017292661f58dd6b8fc",
+      "sourceSha256": "4578545429f4b963cdec5ec42efd57fe24c4aee94a52f72afa60f39cf7fe5a40",
       "body": "{\n    const result = await runCreateMinimalScenario();\n\n    expect(result.slideCount).toBe(2);\n    expect(result.slideMasterCount).toBe(1);\n    expect(result.slideLayoutCount).toBe(1);\n    expect(result.mainPartName).toBe(PRESENTATION_PART);\n    expect(result.rootOfficeDocumentTarget).toBe(PRESENTATION_PART);\n    expect(result.reopenedTexts).toEqual([\n      [\"Created title 1\", \"Created subtitle 1\"],\n      [\"Created title 2\", \"Created subtitle 2\"],\n    ]);\n    expect(result.savedPartNames).toEqual([\n      CONTENT_TYPES_PART,\n      ROOT_RELS_PART,\n      PRESENTATION_RELS_PART,\n      PRES_PROPS_PART,\n      PRESENTATION_PART,\n      SLIDE_LAYOUT_RELS_PART,\n      SLIDE_LAYOUT_PART,\n      SLIDE_MASTER_RELS_PART,\n      SLIDE_MASTER_PART,\n      SLIDE1_RELS_PART,\n      SLIDE2_RELS_PART,\n      SLIDE1_PART,\n      SLIDE2_PART,\n      TABLE_STYLES_PART,\n      THEME_PART,\n      VIEW_PROPS_PART,\n    ].sort());\n    expect(result.contentTypeOverrides).toEqual([\n      \"/ppt/presProps.xml\",\n      \"/ppt/presentation.xml\",\n      \"/ppt/slideLayouts/slideLayout1.xml\",\n      \"/ppt/slideMasters/slideMaster1.xml\",\n      \"/ppt/slides/slide1.xml\",\n      \"/ppt/slides/slide2.xml\",\n      \"/ppt/tableStyles.xml\",\n      \"/ppt/theme/theme1.xml\",\n      \"/ppt/viewProps.xml\",\n    ]);\n    expect(result.presentationRelationshipTypes.sort()).toEqual([\n      PRES_PROPS_RELATIONSHIP,\n      SLIDE_MASTER_RELATIONSHIP,\n      SLIDE_RELATIONSHIP,\n      SLIDE_RELATIONSHIP,\n      TABLE_STYLES_RELATIONSHIP,\n      THEME_RELATIONSHIP,\n      VIEW_PROPS_RELATIONSHIP,\n    ].sort());\n    expect(result.presentationSlideMasterTarget).toBe(SLIDE_MASTER_PART);\n    expect(result.presentationThemeTarget).toBe(THEME_PART);\n    expect(result.presentationPresPropsTarget).toBe(PRES_PROPS_PART);\n    expect(result.presentationViewPropsTarget).toBe(VIEW_PROPS_PART);\n    expect(result.presentationTableStylesTarget).toBe(TABLE_STYLES_PART);\n    expect(result.presentationSlideTargets).toEqual([SLIDE1_PART, SLIDE2_PART]);\n    expect(result.slideLayoutTargets).toEqual([SLIDE_LAYOUT_PART, SLIDE_LAYOUT_PART]);\n    expect(result.masterRelationshipTypes.sort()).toEqual([\n      SLIDE_LAYOUT_RELATIONSHIP,\n      THEME_RELATIONSHIP,\n    ].sort());\n    expect(result.masterLayoutTargets).toEqual([SLIDE_LAYOUT_PART]);\n    expect(result.masterThemeTarget).toBe(THEME_PART);\n    expect(result.layoutRelationshipTypes).toEqual([SLIDE_MASTER_RELATIONSHIP]);\n    expect(result.layoutMasterTarget).toBe(SLIDE_MASTER_PART);\n    expect(result.reopenedDiff).toEqual({ added: [], changed: [], removed: [] });\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / appends to a compatible deck without disturbing first-slide bytes until the earlier anchor edits them",
       "path": "tests/unit/pptx-create.test.ts",
-      "line": 111,
+      "line": 112,
       "title": "appends to a compatible deck without disturbing first-slide bytes until the earlier anchor edits them",
       "suites": [
         "Presentation.create and addTextSlide"
@@ -2119,13 +2119,13 @@
         "expect(result.diff).toEqual({\n      added: [SLIDE2_RELS_PART, SLIDE2_PART],\n      changed: [CONTENT_TYPES_PART, PRESENTATION_RELS_PART, PRESENTATION_PART, SLIDE1_PART],\n      removed: [],\n    })"
       ],
       "loops": [],
-      "sourceSha256": "77060340f6843bd432852069ba23bfca7a92a20df7ccd017292661f58dd6b8fc",
+      "sourceSha256": "4578545429f4b963cdec5ec42efd57fe24c4aee94a52f72afa60f39cf7fe5a40",
       "body": "{\n    const result = await runAppendPreservationScenario();\n\n    expect(result.reopenedTexts).toEqual([\n      [\"Edited original title\", \"Original subtitle\"],\n      [\"Appended title\", \"Appended subtitle\"],\n    ]);\n    expect(result.originalTitleAnchorVersion).toBe(result.afterAppendTitleAnchorVersion);\n    expect(result.originalTitleAnchorParagraphIndex).toBe(result.afterAppendTitleAnchorParagraphIndex);\n    expect(result.slide1XmlAfterAppend).toBe(result.originalSlide1Xml);\n    expect(result.finalSlide1Xml).toBe(result.expectedSlide1Xml);\n    expect(result.finalSlide1Rels).toEqual(result.originalSlide1Rels);\n    expect(result.savedPartNames).toContain(SLIDE1_RELS_PART);\n    expect(result.savedPartNames).toContain(SLIDE2_RELS_PART);\n    expect(result.presentationSlideTargets).toEqual([SLIDE1_PART, SLIDE2_PART]);\n    expect(result.slideLayoutTargets).toEqual([SLIDE_LAYOUT_PART, SLIDE_LAYOUT_PART]);\n    expect(result.diff).toEqual({\n      added: [SLIDE2_RELS_PART, SLIDE2_PART],\n      changed: [CONTENT_TYPES_PART, PRESENTATION_RELS_PART, PRESENTATION_PART, SLIDE1_PART],\n      removed: [],\n    });\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / refuses invalid arguments and unsafe title-layout selection atomically",
       "path": "tests/unit/pptx-create.test.ts",
-      "line": 134,
+      "line": 135,
       "title": "refuses invalid arguments and unsafe title-layout selection atomically",
       "suites": [
         "Presentation.create and addTextSlide"
@@ -2140,13 +2140,13 @@
         "expect(result.unsafeDiff).toEqual({ added: [], changed: [], removed: [] })"
       ],
       "loops": [],
-      "sourceSha256": "77060340f6843bd432852069ba23bfca7a92a20df7ccd017292661f58dd6b8fc",
+      "sourceSha256": "4578545429f4b963cdec5ec42efd57fe24c4aee94a52f72afa60f39cf7fe5a40",
       "body": "{\n    const result = await runCreateRefusalScenario();\n\n    expect(result.invalidError.code).toBe(\"PPTX_ARGUMENT_INVALID\");\n    expect(result.invalidAfter).toEqual(result.invalidBefore);\n    expect(result.invalidDiff).toEqual({ added: [], changed: [], removed: [] });\n    expect(result.unsafeError.code).toBe(\"PPTX_LAYOUT_UNSAFE\");\n    expect(result.unsafeAfter).toEqual(result.unsafeBefore);\n    expect(result.unsafeDiff).toEqual({ added: [], changed: [], removed: [] });\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
       "path": "tests/unit/pptx-create.test.ts",
-      "line": 145,
+      "line": 146,
       "title": "executes the PPTX create feature with dedicated bindings and optional parent aggregation",
       "suites": [
         "Presentation.create and addTextSlide"
@@ -2163,12 +2163,12 @@
       ],
       "loops": [
         {
-          "line": 150,
+          "line": 151,
           "expression": "for (const bindings of [createBindings, parentBindings])"
         }
       ],
-      "sourceSha256": "77060340f6843bd432852069ba23bfca7a92a20df7ccd017292661f58dd6b8fc",
-      "body": "{\n    const featurePath = \"features/pptx/create.feature\";\n    const feature = parseFeature(featurePath, await Bun.file(join(PROJECT_ROOT, featurePath)).text());\n    const inventory = inventoryFor(feature);\n\n    for (const bindings of [createBindings, parentBindings]) {\n      const execution = await executeAcceptance(inventory, bindings, newAcceptanceRunId());\n      expect(execution.failures).toEqual([]);\n      expect(execution.counts.features).toEqual({ passed: 1, failed: 0, planned: 0, total: 1 });\n      expect(execution.counts.scenarios).toEqual({ passed: 3, failed: 0, planned: 0, total: 3 });\n      expect(execution.counts.cases).toEqual({ passed: 3, failed: 0, planned: 0, total: 3 });\n      expect(execution.counts.steps.failed).toBe(0);\n      expect(execution.counts.steps.undefined).toBe(0);\n      expect(execution.counts.steps.ambiguous).toBe(0);\n    }\n  }"
+      "sourceSha256": "4578545429f4b963cdec5ec42efd57fe24c4aee94a52f72afa60f39cf7fe5a40",
+      "body": "{\n    const featurePath = \"references/fixtures-ooxml/workflows/pptx/creation.feature\";\n    const feature = parseFeature(featurePath, (await Bun.file(join(fixturesRoot(), \"workflows/pptx/creation.feature\")).text()).replace(/^@planned/m, '@implemented @bun'));\n    const inventory = inventoryFor(feature);\n\n    for (const bindings of [createBindings, parentBindings]) {\n      const execution = await executeAcceptance(inventory, bindings, newAcceptanceRunId());\n      expect(execution.failures).toEqual([]);\n      expect(execution.counts.features).toEqual({ passed: 1, failed: 0, planned: 0, total: 1 });\n      expect(execution.counts.scenarios).toEqual({ passed: 3, failed: 0, planned: 0, total: 3 });\n      expect(execution.counts.cases).toEqual({ passed: 3, failed: 0, planned: 0, total: 3 });\n      expect(execution.counts.steps.failed).toBe(0);\n      expect(execution.counts.steps.undefined).toBe(0);\n      expect(execution.counts.steps.ambiguous).toBe(0);\n    }\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / finds shared title and subtitle without mutating the package",
@@ -2309,7 +2309,7 @@
     {
       "id": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / round-trips saved table geometry sums and text after reopen",
       "path": "tests/unit/pptx-tables.test.ts",
-      "line": 24,
+      "line": 25,
       "title": "round-trips saved table geometry sums and text after reopen",
       "suites": [
         "pptx Presentation tables"
@@ -2323,13 +2323,13 @@
         "expect(reopened.slides[0]?.tables[0]?.cell(0, 0).text).toBe(\"  <Alpha & Beta>  \")"
       ],
       "loops": [],
-      "sourceSha256": "17b8b9fa8132714acd4c0240f5cf9c1c9c84a22a7aa7261814b77039b561c56e",
+      "sourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
       "body": "{\n    const result = await runGeometryRoundTripScenario();\n\n    expect(result.reopenedRows).toBe(2);\n    expect(result.reopenedColumns).toBe(3);\n    expect(result.reopenedText).toBe(\"  <Alpha & Beta>  \");\n    expect(result.metrics).toEqual({\n      x: 120,\n      y: 240,\n      width: 1001,\n      height: 1003,\n      columnWidths: [333, 333, 335],\n      rowHeights: [501, 502],\n    });\n\n    const reopened = await Presentation.open(result.savedBytes);\n    expect(reopened.slides[0]?.tables[0]?.cell(0, 0).text).toBe(\"  <Alpha & Beta>  \");\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / preserves simple table cell formatting when replacing text and reopening",
       "path": "tests/unit/pptx-tables.test.ts",
-      "line": 43,
+      "line": 44,
       "title": "preserves simple table cell formatting when replacing text and reopening",
       "suites": [
         "pptx Presentation tables"
@@ -2340,13 +2340,13 @@
         "expect(result.formatting).toEqual({\n      bodyPrAttrs: { wrap: \"square\" },\n      tcPrAttrs: { marL: \"111\" },\n      fillColor: \"FFFF00\",\n      paragraphAttrs: { algn: \"r\" },\n      firstRunAttrs: { b: \"1\", sz: \"1800\" },\n      endParaRPrAttrs: { lang: \"en-US\" },\n    })"
       ],
       "loops": [],
-      "sourceSha256": "17b8b9fa8132714acd4c0240f5cf9c1c9c84a22a7aa7261814b77039b561c56e",
+      "sourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
       "body": "{\n    const result = await runFormattingPreservationScenario();\n\n    expect(result.reopenedText).toBe(\"updated value\");\n    expect(result.formatting).toEqual({\n      bodyPrAttrs: { wrap: \"square\" },\n      tcPrAttrs: { marL: \"111\" },\n      fillColor: \"FFFF00\",\n      paragraphAttrs: { algn: \"r\" },\n      firstRunAttrs: { b: \"1\", sz: \"1800\" },\n      endParaRPrAttrs: { lang: \"en-US\" },\n    });\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / stale table cell handles refuse atomically after slide mutation",
       "path": "tests/unit/pptx-tables.test.ts",
-      "line": 57,
+      "line": 58,
       "title": "stale table cell handles refuse atomically after slide mutation",
       "suites": [
         "pptx Presentation tables"
@@ -2357,13 +2357,13 @@
         "expect(result.bytesAfterRefusal).toEqual(result.bytesAfterMutation)"
       ],
       "loops": [],
-      "sourceSha256": "17b8b9fa8132714acd4c0240f5cf9c1c9c84a22a7aa7261814b77039b561c56e",
+      "sourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
       "body": "{\n    const result = await runStaleTableHandleScenario();\n\n    expect(result.error.code).toBe(\"PPTX_STALE_TABLE_HANDLE\");\n    expect(result.bytesAfterRefusal).toEqual(result.bytesAfterMutation);\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / refuses merged and malformed table topologies atomically",
       "path": "tests/unit/pptx-tables.test.ts",
-      "line": 64,
+      "line": 65,
       "title": "refuses merged and malformed table topologies atomically",
       "suites": [
         "pptx Presentation tables"
@@ -2378,13 +2378,13 @@
         "expect(malformed.diffAfterRefusal).toEqual({ added: [], changed: [], removed: [] })"
       ],
       "loops": [],
-      "sourceSha256": "17b8b9fa8132714acd4c0240f5cf9c1c9c84a22a7aa7261814b77039b561c56e",
+      "sourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
       "body": "{\n    const merged = await runAtomicRefusalScenario(\"merged-cell\");\n    expect(merged.error.code).toBe(\"PPTX_TABLE_MERGE_UNSUPPORTED\");\n    expect(merged.bytesAfterRefusal).toEqual(merged.sourceBytes);\n    expect(merged.diffAfterRefusal).toEqual({ added: [], changed: [], removed: [] });\n\n    const malformed = await runAtomicRefusalScenario(\"malformed-merge\");\n    expect(malformed.error.code).toBe(\"PPTX_TABLE_STRUCTURE_UNSUPPORTED\");\n    expect(malformed.bytesAfterRefusal).toEqual(malformed.sourceBytes);\n    expect(malformed.diffAfterRefusal).toEqual({ added: [], changed: [], removed: [] });\n  }"
     },
     {
       "id": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / passes the PPTX table acceptance feature with dedicated bindings",
       "path": "tests/unit/pptx-tables.test.ts",
-      "line": 76,
+      "line": 77,
       "title": "passes the PPTX table acceptance feature with dedicated bindings",
       "suites": [
         "pptx Presentation tables"
@@ -2400,7 +2400,7 @@
         "expect(report.failures).toEqual([])"
       ],
       "loops": [],
-      "sourceSha256": "17b8b9fa8132714acd4c0240f5cf9c1c9c84a22a7aa7261814b77039b561c56e",
+      "sourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
       "body": "{\n    const root = await makeAcceptanceRoot();\n    const report = await runAcceptance(bindings, { root });\n\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(1);\n    expect(report.inventory.scenarios.implemented).toBe(4);\n    expect(report.inventory.cases.implemented).toBe(5);\n    expect(report.execution.cases.passed).toBe(5);\n    expect(report.execution.steps.failed).toBe(0);\n    expect(report.failures).toEqual([]);\n  }"
     },
     {
@@ -2527,11 +2527,11 @@
       "suites": [],
       "kind": "test",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(128)"
+        "expect(await verifyReferences(root)).toBe(138)"
       ],
       "loops": [],
-      "sourceSha256": "5e2525af3c6994d9c3185c1bb9e8053642eb49bbd47d231f639b6b6abd0363da",
-      "body": "{expect(await verifyReferences(root)).toBe(128);}"
+      "sourceSha256": "f8d7973cfdf59346c57f7042145f04c4aa1d2c30a98ef5c6fe89cb7e0761340e",
+      "body": "{expect(await verifyReferences(root)).toBe(138);}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
@@ -2544,7 +2544,7 @@
         "expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin')"
       ],
       "loops": [],
-      "sourceSha256": "5e2525af3c6994d9c3185c1bb9e8053642eb49bbd47d231f639b6b6abd0363da",
+      "sourceSha256": "f8d7973cfdf59346c57f7042145f04c4aa1d2c30a98ef5c6fe89cb7e0761340e",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}"
     },
     {
@@ -2557,7 +2557,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(128)",
+        "expect(await verifyReferences(tmp)).toBe(138)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -2567,8 +2567,8 @@
           "expression": "for(const change of ["
         }
       ],
-      "sourceSha256": "5e2525af3c6994d9c3185c1bb9e8053642eb49bbd47d231f639b6b6abd0363da",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(128);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "f8d7973cfdf59346c57f7042145f04c4aa1d2c30a98ef5c6fe89cb7e0761340e",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(138);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
@@ -2585,7 +2585,7 @@
         "expect(deck.package.toBytes()).toEqual(bytes)"
       ],
       "loops": [],
-      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
+      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
       "body": "{\n  const bytes=await namespaceFixture('pptx','alias');const deck=await Presentation.open(bytes);\n  expect(deck.slides.length).toBe(1);expect(deck.package.text(deck.package.mainPart())).toContain('link:id=');\n  expect(deck.package.toBytes()).toEqual(bytes);\n }"
     },
     {
@@ -2603,7 +2603,7 @@
         "expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined()"
       ],
       "loops": [],
-      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
+      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
       "body": "{\n  const bytes=await namespaceFixture('xlsx','alias');const book=await Workbook.open(bytes);\n  book.worksheet('Sheet').setCellValue('A1','wrapped\\nvalue');setCellWrapText(book,'Sheet','A1',true);\n  const reopened=await Workbook.open(book.package.toBytes());expect(reopened.worksheet('Sheet').getCell('A1')?.value).toBe('wrapped\\nvalue');expect(reopened.package.text(reopened.package.mainPart())).toContain('link:id=');\n  const manifest=await loadMutationFixtures();\n  await expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined();\n }"
     },
     {
@@ -2628,7 +2628,7 @@
           "expression": "for(const variant of ['wrong','unqualified'] as const)"
         }
       ],
-      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
+      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
       "body": "{\n  for(const format of ['pptx','xlsx'] as const)for(const variant of ['wrong','unqualified'] as const){\n   const bytes=await namespaceFixture(format,variant);\n   await expect(format==='pptx'?Presentation.open(bytes):Workbook.open(bytes)).rejects.toBeInstanceOf(OoxmlError);\n  }\n }"
     },
     {
@@ -2644,7 +2644,7 @@
         "expect(Workbook.open(p.toBytes())).rejects.toBeInstanceOf(OoxmlError)"
       ],
       "loops": [],
-      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
+      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
       "body": "{\n  const bytes=await namespaceFixture('xlsx','original');const p=await OpcPackage.open(bytes);\n  const path='xl/_rels/workbook.xml.rels';p.set(path,p.text(path).replace('http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet','urn:foreign/worksheet'));\n  await expect(Workbook.open(p.toBytes())).rejects.toBeInstanceOf(OoxmlError);\n }"
     },
     {
@@ -2660,7 +2660,7 @@
         "expect(Presentation.open(package_.toBytes())).rejects.toThrow('does not resolve to an internal slide relationship')"
       ],
       "loops": [],
-      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
+      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
       "body": "{\n  const original=await namespaceFixture('pptx','original');const package_=await OpcPackage.open(original);const part=package_.mainPart();\n  package_.set(part,package_.text(part).replace('<p:sldId ',`<p:sldId xmlns:r=\"${pkg}\" `));\n  await expect(Presentation.open(package_.toBytes())).rejects.toThrow('does not resolve to an internal slide relationship');\n }"
     },
     {
@@ -2682,7 +2682,7 @@
           "expression": "for(const format of ['pptx','xlsx'] as const)"
         }
       ],
-      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
+      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
       "body": "{\n  for(const format of ['pptx','xlsx'] as const){\n   const bytes=await namespaceFixture(format,'alias');const p=await OpcPackage.open(bytes);const main=p.mainPart();\n   p.set(main,p.text(main).replace(/link:id=\"([^\"]+)\"/,`xmlns:r=\"${pkg}\" r:id=\"bogus\" link:id=\"$1\"`));\n   if(format==='pptx')expect((await Presentation.open(p.toBytes())).slides.length).toBe(1);\n   else expect((await Workbook.open(p.toBytes())).sheetnames).toEqual(['Sheet']);\n  }\n }"
     },
     {
@@ -2699,8 +2699,8 @@
         "expect(result.counts.cases.passed).toBe(4)"
       ],
       "loops": [],
-      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
-      "body": "{\n  const path='features/opc/relationship-namespaces.feature';const feature=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());\n  const inventory:AcceptanceInventory={root:'.',features:[feature],counts:{features:{implemented:1,planned:0,total:1},scenarios:{implemented:2,planned:0,total:2},cases:{implemented:4,planned:0,total:4},steps:{implemented:16,planned:0,total:16}}};\n  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(4);\n }"
+      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "body": "{\n  const path='references/fixtures-ooxml/workflows/package/relationship-namespaces.feature';const feature=parseFeature(path,(await Bun.file(join(fixturesRoot(), \"workflows/package/relationship-namespaces.feature\")).text()).replace(/^@planned/m, '@implemented @bun'));\n  const inventory:AcceptanceInventory={root:'.',features:[feature],counts:{features:{implemented:1,planned:0,total:1},scenarios:{implemented:2,planned:0,total:2},cases:{implemented:4,planned:0,total:4},steps:{implemented:16,planned:0,total:16}}};\n  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(4);\n }"
     },
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
@@ -2714,27 +2714,28 @@
       "assertions": [
         "expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2})",
         "expect(canonical).toHaveLength(8)",
+        "expect(inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'))).toEqual([])",
         "expect(shared).toHaveLength(1)",
         "expect(shared[0]!.lifecycle).toBe('implemented')",
         "expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1)"
       ],
       "loops": [
         {
-          "line": 16,
+          "line": 17,
           "expression": "for(const path of canonical)"
         },
         {
-          "line": 21,
+          "line": 22,
           "expression": "for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);"
         }
       ],
-      "sourceSha256": "2c2f611e29c378e5bca8f0e44d3a9a0ad88134f9932486e2c00a6c4f43d30319",
-      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>path.startsWith('workflows/native/'));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }"
+      "sourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
+      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>path.startsWith('workflows/native/'));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    expect(inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'))).toEqual([]);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }"
     },
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 24,
+      "line": 25,
       "title": "stable identity excludes path, UUID and example insertion order",
       "suites": [
         "shared mutation inventory and custody"
@@ -2746,13 +2747,13 @@
         "expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}))"
       ],
       "loops": [],
-      "sourceSha256": "2c2f611e29c378e5bca8f0e44d3a9a0ad88134f9932486e2c00a6c4f43d30319",
+      "sourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
       "body": "{\n    expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}');\n    expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}');\n    expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}));\n  }"
     },
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 29,
+      "line": 30,
       "title": "typed mutation inputs preserve strings, numeric values and significant whitespace",
       "suites": [
         "shared mutation inventory and custody"
@@ -2764,17 +2765,17 @@
       ],
       "loops": [
         {
-          "line": 33,
+          "line": 34,
           "expression": "for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\""
         }
       ],
-      "sourceSha256": "2c2f611e29c378e5bca8f0e44d3a9a0ad88134f9932486e2c00a6c4f43d30319",
+      "sourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
       "body": "{\n    expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ]);\n    for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\"{}\"]],[[\"target\",\"value_json\"],[\"A1\",\"1e999\"]]])expect(()=>parseBatchTable(table)).toThrow();\n  }"
     },
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 35,
+      "line": 36,
       "title": "Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "suites": [
         "shared mutation inventory and custody"
@@ -2785,13 +2786,13 @@
         "expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}])"
       ],
       "loops": [],
-      "sourceSha256": "2c2f611e29c378e5bca8f0e44d3a9a0ad88134f9932486e2c00a6c4f43d30319",
+      "sourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
       "body": "{\n    const compile=(value:string)=>parseFeature('features/planned/example.feature',`@planned\nFeature: JSON escaping\n  @id-json-escaping\n  Scenario: Typed newline\n    When a batch is prepared:\n      | target | value_json |\n      | A1 | ${value} |\n    Then the typed value contains a newline\n`).scenarios[0]!.cases[0]!.steps[0]!.argument!.dataTable!;\n    expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow();\n    expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}]);\n  }"
     },
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 49,
+      "line": 50,
       "title": "rejects feature, fixture and policy tampering while leaving original fixtures untouched",
       "suites": [
         "shared mutation inventory and custody"
@@ -2803,11 +2804,11 @@
       ],
       "loops": [
         {
-          "line": 57,
+          "line": 58,
           "expression": "for(const [file,expectedError] of [\n        [\"references/fixtures-ooxml/workflows/mutation-safety.feature\",\"Shared contract artifact drift\"],\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ])"
         }
       ],
-      "sourceSha256": "2c2f611e29c378e5bca8f0e44d3a9a0ad88134f9932486e2c00a6c4f43d30319",
+      "sourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
       "body": "{\n    const temp=await mkdtemp(join(tmpdir(),\"bun-shared-contracts-\"));\n    try {\n      await cp(join(root,\"features\"),join(temp,\"features\"),{recursive:true});\n      await cp(fixturesRoot(),join(temp,\"references/fixtures-ooxml\"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});\n      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/manifest.json')).json();\n      const contract=await Bun.file(join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json')).json();\n      const fixture=manifest.files.find((f:any)=>f.id===contract.fixtures[0].assetId);\n      for(const [file,expectedError] of [\n        [\"references/fixtures-ooxml/workflows/mutation-safety.feature\",\"Shared contract artifact drift\"],\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ]) {\n        const path=join(temp,file!);const original=await Bun.file(path).bytes();\n        const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;\n        await Bun.write(path,modified);await expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);\n      }\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});\n    } finally {await rm(temp,{recursive:true,force:true});}\n  }"
     },
     {
@@ -3227,7 +3228,7 @@
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:adding a worksheet works when the existing r alias is scoped to only the first sheet",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 19,
+      "line": 20,
       "title": "adding a worksheet works when the existing r alias is scoped to only the first sheet",
       "suites": [],
       "kind": "test",
@@ -3237,13 +3238,13 @@
         "expect(reopened.package.get('xl/worksheets/sheet1.xml')).toEqual(before)"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n const workbook=await Workbook.open(await namespaceFixture('xlsx','alias'));const before=workbook.package.get('xl/worksheets/sheet1.xml')!;\n const added=workbook.addWorksheet('Second');added.setCellValue('A1','new');const reopened=await Workbook.open(workbook.toBytes());\n expect(reopened.sheetnames).toEqual(['Sheet','Second']);expect(reopened.worksheet('Second').getCell('A1')?.value).toBe('new');expect(reopened.package.get('xl/worksheets/sheet1.xml')).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:dimension stays before sheetViews and cols when a missing cell is authored",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 25,
+      "line": 26,
       "title": "dimension stays before sheetViews and cols when a missing cell is authored",
       "suites": [],
       "kind": "test",
@@ -3252,13 +3253,13 @@
         "expect(names.indexOf('dimension')).toBeLessThan(names.indexOf('cols'))"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n const w=Workbook.create(),part='xl/worksheets/sheet1.xml';\n let xml=w.package.text(part).replace(/<dimension[^>]*\\/>/,'');xml=xml.replace('<sheetData', '<sheetViews><sheetView workbookViewId=\"0\"/></sheetViews><cols><col min=\"1\" max=\"1\" width=\"12\"/></cols><sheetData');w.package.set(part,xml);\n const loaded=await Workbook.open(w.toBytes());loaded.worksheet('Sheet1').setCellValue('C3',7);\n const names=parseXml(loaded.package.text(part)).root.children.map(n=>n.localName);\n expect(names.indexOf('dimension')).toBeLessThan(names.indexOf('sheetViews'));expect(names.indexOf('dimension')).toBeLessThan(names.indexOf('cols'));\n}"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / authors a minimal workbook with styles that saves and reopens through the native reader",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 41,
+      "line": 42,
       "title": "authors a minimal workbook with styles that saves and reopens through the native reader",
       "suites": [
         "Workbook.create"
@@ -3275,13 +3276,13 @@
         "expect(savedParts.get(\"xl/styles.xml\")).toBeDefined()"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const workbook = Workbook.create();\n    const sheet = workbook.worksheet(\"Sheet1\");\n\n    sheet.setCellValue(\"A1\", \"Alpha\");\n    sheet.setCellValue(\"B2\", 7);\n    sheet.setCellValue(\"C3\", true);\n\n    const outPath = join(await tempRoot(), \"created.xlsx\");\n    await workbook.save(outPath);\n    const savedBytes = new Uint8Array(await Bun.file(outPath).arrayBuffer());\n    const savedParts = readZip(savedBytes);\n    const reopened = await Workbook.open(savedBytes);\n    const worksheetDocument = parseXml(decodePart(savedParts, \"xl/worksheets/sheet1.xml\"));\n    const dimension = onlySpreadsheetElement(worksheetDocument.root, \"dimension\");\n\n    expect(workbook.sheetnames).toEqual([\"Sheet1\"]);\n    expect(reopened.sheetnames).toEqual([\"Sheet1\"]);\n    expect(reopened.worksheet(\"Sheet1\").getCell(\"A1\")).toMatchObject({ kind: \"string\", value: \"Alpha\" });\n    expect(reopened.worksheet(\"Sheet1\").getCell(\"B2\")).toMatchObject({ kind: \"number\", value: 7 });\n    expect(reopened.worksheet(\"Sheet1\").getCell(\"C3\")).toMatchObject({ kind: \"boolean\", value: true });\n    expect(dimension.attributes.ref).toBe(\"A1:C3\");\n    expect([...savedParts.keys()].sort()).toEqual([\n      \"[Content_Types].xml\",\n      \"_rels/.rels\",\n      \"xl/_rels/workbook.xml.rels\",\n      \"xl/styles.xml\",\n      \"xl/workbook.xml\",\n      \"xl/worksheets/sheet1.xml\",\n    ]);\n    expect(savedParts.get(\"xl/styles.xml\")).toBeDefined();\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / adds worksheets with independent ids, relationship closure and working returned handles",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 74,
+      "line": 75,
       "title": "adds worksheets with independent ids, relationship closure and working returned handles",
       "suites": [
         "Workbook.create"
@@ -3299,13 +3300,13 @@
         "expect(workbook.package.diff()).toEqual({\n      added: [\"xl/worksheets/sheet2.xml\", \"xl/worksheets/sheet3.xml\"],\n      changed: [\"[Content_Types].xml\", \"xl/_rels/workbook.xml.rels\", \"xl/workbook.xml\"],\n      removed: [],\n    })"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const workbook = Workbook.create();\n    const data = workbook.addWorksheet(\"Data\");\n    const summary = workbook.addWorksheet(\"Summary\");\n\n    data.setCellValue(\"A1\", 5);\n    summary.setCellValue(\"B2\", \"done\");\n\n    const bytes = workbook.toBytes();\n    const parts = readZip(bytes);\n    const workbookDocument = parseXml(decodePart(parts, \"xl/workbook.xml\"));\n    const workbookRelationships = parseXml(decodePart(parts, \"xl/_rels/workbook.xml.rels\"));\n    const reopened = await Workbook.open(bytes);\n    const sheets = onlySpreadsheetElement(workbookDocument.root, \"sheets\").children\n      .filter((child) => child.localName === \"sheet\" && child.namespaceURI === S_NS);\n    const worksheetRelationships = workbookRelationships.root.children.filter((child) =>\n      child.localName === \"Relationship\"\n      && child.attributes.Type === \"http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet\"\n    );\n\n    expect(reopened.sheetnames).toEqual([\"Sheet1\", \"Data\", \"Summary\"]);\n    expect(reopened.worksheet(\"Data\").getCell(\"A1\")?.value).toBe(5);\n    expect(reopened.worksheet(\"Summary\").getCell(\"B2\")?.value).toBe(\"done\");\n    expect(sheets.map((sheet) => sheet.attributes.name)).toEqual([\"Sheet1\", \"Data\", \"Summary\"]);\n    expect(sheets.map((sheet) => sheet.attributes.sheetId)).toEqual([\"1\", \"2\", \"3\"]);\n    expect(sheets.map((sheet) => relationshipId(sheet))).toEqual([\"rId1\", \"rId3\", \"rId4\"]);\n    expect(worksheetRelationships.map((relationship) => relationship.attributes.Id)).toEqual([\"rId1\", \"rId3\", \"rId4\"]);\n    expect(worksheetRelationships.map((relationship) => relationship.attributes.Target)).toEqual([\n      \"worksheets/sheet1.xml\",\n      \"worksheets/sheet2.xml\",\n      \"worksheets/sheet3.xml\",\n    ]);\n    expect(workbook.package.diff()).toEqual({\n      added: [\"xl/worksheets/sheet2.xml\", \"xl/worksheets/sheet3.xml\"],\n      changed: [\"[Content_Types].xml\", \"xl/_rels/workbook.xml.rels\", \"xl/workbook.xml\"],\n      removed: [],\n    });\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 113,
+      "line": 114,
       "title": "refuses invalid worksheet names atomically with case-insensitive duplicate checks",
       "suites": [
         "Workbook.create"
@@ -3318,17 +3319,17 @@
       ],
       "loops": [
         {
-          "line": 127,
+          "line": 128,
           "expression": "for (const [name, code] of cases)"
         }
       ],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const workbook = Workbook.create();\n    const before = workbook.toBytes();\n\n    const cases = [\n      [\"\", \"xlsx-worksheet-name-invalid\"],\n      [\"Sheet1\", \"xlsx-worksheet-duplicate\"],\n      [\"sheet1\", \"xlsx-worksheet-duplicate\"],\n      [\"'Quoted\", \"xlsx-worksheet-name-invalid\"],\n      [\"Quoted'\", \"xlsx-worksheet-name-invalid\"],\n      [\"bad/name\", \"xlsx-worksheet-name-invalid\"],\n      [\"x\".repeat(32), \"xlsx-worksheet-name-invalid\"],\n    ] as const;\n\n    for (const [name, code] of cases) {\n      expect(() => workbook.addWorksheet(name)).toThrow(\n        expect.objectContaining({ code } satisfies Partial<OoxmlError>),\n      );\n      expect(workbook.toBytes()).toEqual(before);\n      expect(workbook.sheetnames).toEqual([\"Sheet1\"]);\n    }\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / creates qualified dimension row cell and text nodes in a prefixed worksheet",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 138,
+      "line": 139,
       "title": "creates qualified dimension row cell and text nodes in a prefixed worksheet",
       "suites": [
         "Worksheet.setCellValue missing-cell authoring"
@@ -3345,13 +3346,13 @@
         "expect(reopened.worksheet(\"Prefixed\").getCell(\"B2\")?.value).toBe(\"Prefixed\")"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const workbook = await Workbook.open(createPrefixedWorkbookWithMissingB2());\n\n    workbook.worksheet(\"Prefixed\").setCellValue(\"B2\", \"Prefixed\");\n\n    const bytes = workbook.toBytes();\n    const parts = readZip(bytes);\n    const worksheetDocument = parseXml(decodePart(parts, \"xl/worksheets/sheet1.xml\"));\n    const dimension = onlySpreadsheetElement(worksheetDocument.root, \"dimension\");\n    const row = findRow(worksheetDocument.root, 2);\n    const cell = findCell(worksheetDocument.root, \"B2\");\n    const inline = onlyDirectSpreadsheetChild(cell, \"is\");\n    const text = onlyDirectSpreadsheetChild(inline, \"t\");\n    const reopened = await Workbook.open(bytes);\n\n    expect(dimension.name).toBe(\"x:dimension\");\n    expect(dimension.attributes.ref).toBe(\"B2:B2\");\n    expect(row.name).toBe(\"x:row\");\n    expect(cell.name).toBe(\"x:c\");\n    expect(inline.name).toBe(\"x:is\");\n    expect(text.name).toBe(\"x:t\");\n    expect(text.text).toBe(\"Prefixed\");\n    expect(reopened.worksheet(\"Prefixed\").getCell(\"B2\")?.value).toBe(\"Prefixed\");\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / accepts the maximum worksheet coordinate and keeps rows and cells sorted as they are added",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 163,
+      "line": 164,
       "title": "accepts the maximum worksheet coordinate and keeps rows and cells sorted as they are added",
       "suites": [
         "Worksheet.setCellValue missing-cell authoring"
@@ -3364,13 +3365,13 @@
         "expect(rows.map((row) => directSpreadsheetChildren(row, \"c\").map((cell) => cell.attributes.r))).toEqual([\n      [\"A1\", \"B1\"],\n      [\"A2\"],\n      [\"C3\"],\n      [\"XFD1048576\"],\n    ])"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const workbook = Workbook.create();\n    const sheet = workbook.worksheet(\"Sheet1\");\n\n    sheet.setCellValue(\"XFD1048576\", 1);\n    sheet.setCellValue(\"C3\", 3);\n    sheet.setCellValue(\"A1\", 1);\n    sheet.setCellValue(\"B1\", 2);\n    sheet.setCellValue(\"A2\", 4);\n\n    const bytes = workbook.toBytes();\n    const parts = readZip(bytes);\n    const worksheetDocument = parseXml(decodePart(parts, \"xl/worksheets/sheet1.xml\"));\n    const sheetData = onlySpreadsheetElement(worksheetDocument.root, \"sheetData\");\n    const rows = sheetData.children.filter((child) => child.localName === \"row\" && child.namespaceURI === S_NS);\n    const reopened = await Workbook.open(bytes);\n\n    expect(reopened.worksheet(\"Sheet1\").getCell(\"XFD1048576\")?.value).toBe(1);\n    expect(onlySpreadsheetElement(worksheetDocument.root, \"dimension\").attributes.ref).toBe(\"A1:XFD1048576\");\n    expect(rows.map((row) => row.attributes.r)).toEqual([\"1\", \"2\", \"3\", \"1048576\"]);\n    expect(rows.map((row) => directSpreadsheetChildren(row, \"c\").map((cell) => cell.attributes.r))).toEqual([\n      [\"A1\", \"B1\"],\n      [\"A2\"],\n      [\"C3\"],\n      [\"XFD1048576\"],\n    ]);\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 191,
+      "line": 192,
       "title": "refuses invalid coordinates without mutating the workbook",
       "suites": [
         "Worksheet.setCellValue missing-cell authoring"
@@ -3383,17 +3384,17 @@
       ],
       "loops": [
         {
-          "line": 195,
+          "line": 196,
           "expression": "for (const coordinate of [\"A0\", \"XFE1\", \"A1048577\"])"
         }
       ],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const workbook = Workbook.create();\n    const before = workbook.toBytes();\n\n    for (const coordinate of [\"A0\", \"XFE1\", \"A1048577\"]) {\n      expect(() => workbook.worksheet(\"Sheet1\").setCellValue(coordinate, 1)).toThrow(\n        expect.objectContaining({\n          code: \"xlsx-cell-reference-invalid\",\n        } satisfies Partial<OoxmlError>),\n      );\n      expect(workbook.toBytes()).toEqual(before);\n      expect(workbook.package.diff()).toEqual({ added: [], changed: [], removed: [] });\n    }\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses unsafe existing row ordering before mutation",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 206,
+      "line": 207,
       "title": "refuses unsafe existing row ordering before mutation",
       "suites": [
         "Worksheet.setCellValue missing-cell authoring"
@@ -3405,13 +3406,13 @@
         "expect(workbook.package.diff()).toEqual({ added: [], changed: [], removed: [] })"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const originalBytes = createUnsafeWorksheetWorkbook();\n    const workbook = await Workbook.open(originalBytes);\n\n    expect(() => workbook.worksheet(\"Unsafe\").setCellValue(\"B1\", 9)).toThrow(\n      expect.objectContaining({\n        code: \"xlsx-worksheet-structure-unsupported\",\n      } satisfies Partial<OoxmlError>),\n    );\n    expect(workbook.toBytes()).toEqual(originalBytes);\n    expect(workbook.package.diff()).toEqual({ added: [], changed: [], removed: [] });\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / appends a missing cell to an existing worksheet while preserving surrounding nodes and unrelated parts",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 219,
+      "line": 220,
       "title": "appends a missing cell to an existing worksheet while preserving surrounding nodes and unrelated parts",
       "suites": [
         "Worksheet.setCellValue missing-cell authoring"
@@ -3431,13 +3432,13 @@
         "expect(workbook.package.diff()).toEqual({\n      added: [],\n      changed: [\"xl/worksheets/sheet1.xml\"],\n      removed: [],\n    })"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "body": "{\n    const path = fixturePath(F.goSheets.formatting);\n    const originalBytes = new Uint8Array(await Bun.file(path).arrayBuffer());\n    const originalParts = readZip(originalBytes);\n    const originalSheetXml = decodePart(originalParts, \"xl/worksheets/sheet1.xml\");\n    const workbook = await Workbook.open(path);\n\n    workbook.worksheet(\"Formatted\").setCellValue(\"E7\", \"tail\");\n\n    const outPath = join(await tempRoot(), \"append-existing.xlsx\");\n    await workbook.save(outPath);\n    const savedBytes = new Uint8Array(await Bun.file(outPath).arrayBuffer());\n    const savedParts = readZip(savedBytes);\n    const savedSheetXml = decodePart(savedParts, \"xl/worksheets/sheet1.xml\");\n    const reopened = await Workbook.open(savedBytes);\n\n    expect(reopened.worksheet(\"Formatted\").getCell(\"E7\")).toMatchObject({\n      kind: \"string\",\n      value: \"tail\",\n      styleId: undefined,\n    });\n    expect(savedSheetXml).toContain(\"<cols><col width=\\\"20\\\" customWidth=\\\"1\\\" min=\\\"1\\\" max=\\\"1\\\"/><col width=\\\"20\\\" customWidth=\\\"1\\\" min=\\\"2\\\" max=\\\"2\\\"/><col width=\\\"20\\\" customWidth=\\\"1\\\" min=\\\"3\\\" max=\\\"3\\\"/><col width=\\\"20\\\" customWidth=\\\"1\\\" min=\\\"4\\\" max=\\\"4\\\"/></cols>\");\n    expect(savedSheetXml).toContain(\"<pageMargins left=\\\"0.75\\\" right=\\\"0.75\\\" top=\\\"1\\\" bottom=\\\"1\\\" header=\\\"0.5\\\" footer=\\\"0.5\\\"/>\");\n    expect(savedSheetXml).toContain(\"<dimension ref=\\\"A1:E7\\\"/>\");\n    expect(originalSheetXml).toContain(\"<sheetData>\");\n    expect(savedParts.get(\"[Content_Types].xml\")).toEqual(originalParts.get(\"[Content_Types].xml\"));\n    expect(savedParts.get(\"docProps/core.xml\")).toEqual(originalParts.get(\"docProps/core.xml\"));\n    expect(savedParts.get(\"xl/styles.xml\")).toEqual(originalParts.get(\"xl/styles.xml\"));\n    expect(savedParts.get(\"xl/theme/theme1.xml\")).toEqual(originalParts.get(\"xl/theme/theme1.xml\"));\n    expect(savedParts.get(\"xl/workbook.xml\")).toEqual(originalParts.get(\"xl/workbook.xml\"));\n    expect(workbook.package.diff()).toEqual({\n      added: [],\n      changed: [\"xl/worksheets/sheet1.xml\"],\n      removed: [],\n    });\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-create.test.ts:xlsx create acceptance feature / executes the implemented xlsx creation scenarios with exported bindings",
       "path": "tests/unit/xlsx-create.test.ts",
-      "line": 258,
+      "line": 259,
       "title": "executes the implemented xlsx creation scenarios with exported bindings",
       "suites": [
         "xlsx create acceptance feature"
@@ -3451,8 +3452,8 @@
         "expect(report.execution.steps.undefined).toBe(0)"
       ],
       "loops": [],
-      "sourceSha256": "6722b195d94fc89b46acdab6e23c4447b16be11ef868c0a0827b62131d00aa7e",
-      "body": "{\n    const root = await tempRoot();\n    const featureText = await Bun.file(join(import.meta.dir, \"../../features/xlsx/create.feature\")).text();\n    await mkdir(join(root, \"features\", \"xlsx\"), { recursive: true });\n    await Bun.write(join(root, \"features/xlsx/create.feature\"), featureText);\n\n    const report = await runAcceptance(bindings, { root });\n\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(1);\n    expect(report.inventory.scenarios.implemented).toBe(7);\n    expect(report.execution.cases.failed).toBe(0);\n    expect(report.execution.steps.undefined).toBe(0);\n  }"
+      "sourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "body": "{\n    const root = await tempRoot();\n    const featureText = (await Bun.file(join(fixturesRoot(), \"workflows/xlsx/creation.feature\")).text()).replace(/^@planned/m, '@implemented @bun');\n    await mkdir(join(root, \"features\", \"xlsx\"), { recursive: true });\n    await Bun.write(join(root, \"features/xlsx/create.feature\"), featureText);\n\n    const report = await runAcceptance(bindings, { root });\n\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(1);\n    expect(report.inventory.scenarios.implemented).toBe(7);\n    expect(report.execution.cases.failed).toBe(0);\n    expect(report.execution.steps.undefined).toBe(0);\n  }"
     },
     {
       "id": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / creates a wrapped style closure for the shared default-style fixture and survives reopen",

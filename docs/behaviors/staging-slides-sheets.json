@@ -146,7 +146,7 @@
       "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
       "title": "executes the PPTX create feature with dedicated bindings and optional parent aggregation",
       "given": [
-        "The acceptance runner parses features/pptx/create.feature, which defines 3 PPTX creation scenarios and therefore 3 executable cases.",
+        "The acceptance runner parses references/fixtures-ooxml/workflows/pptx/creation.feature, which defines 3 PPTX creation scenarios and therefore 3 executable cases.",
         "The same feature is executed twice: once with the dedicated PPTX create bindings and once with the parent step aggregation bindings."
       ],
       "when": [
@@ -259,7 +259,7 @@
       "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / passes the PPTX table acceptance feature with dedicated bindings",
       "title": "passes the PPTX table acceptance feature with dedicated bindings",
       "given": [
-        "features/pptx/tables.feature is copied into a temporary acceptance root.",
+        "references/fixtures-ooxml/workflows/pptx/tables.feature is copied into a temporary acceptance root.",
         "That feature defines 4 scenarios and 5 executable cases because the unsupported-topology scenario is an outline with two examples."
       ],
       "when": [
@@ -640,7 +640,7 @@
       "testId": "bun:tests/unit/xlsx-create.test.ts:xlsx create acceptance feature / executes the implemented xlsx creation scenarios with exported bindings",
       "title": "executes the implemented xlsx creation scenarios with exported bindings",
       "given": [
-        "features/xlsx/create.feature is copied into a temporary acceptance root.",
+        "references/fixtures-ooxml/workflows/xlsx/creation.feature is copied into a temporary acceptance root.",
         "The acceptance inventory for that feature reports 7 implemented scenarios."
       ],
       "when": [

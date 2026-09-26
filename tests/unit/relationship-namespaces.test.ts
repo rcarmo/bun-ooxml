@@ -48,7 +48,7 @@ describe('expanded Office relationship attribute identity',()=>{
   }
  });
  test('shared namespace Gherkin executes all four cases with real outcomes',async()=>{
-  const path='features/opc/relationship-namespaces.feature';const feature=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());
+  const path='references/fixtures-ooxml/workflows/package/relationship-namespaces.feature';const feature=parseFeature(path,(await Bun.file(join(fixturesRoot(), "workflows/package/relationship-namespaces.feature")).text()).replace(/^@planned/m, '@implemented @bun'));
   const inventory:AcceptanceInventory={root:'.',features:[feature],counts:{features:{implemented:1,planned:0,total:1},scenarios:{implemented:2,planned:0,total:2},cases:{implemented:4,planned:0,total:4},steps:{implemented:16,planned:0,total:16}}};
   const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(4);
  });

@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {fixturePath,F} from "../../scripts/fixture-inputs.ts";
 import { afterEach, describe, expect, test } from "bun:test";
 import {mergedNestedTableDocument} from '../fixtures/native-edge-cases.ts';
@@ -266,7 +267,7 @@ function isWord(element: XmlElement, localName: string): boolean {
 async function makeAcceptanceRoot(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "bun-ooxml-docx-table-acceptance-"));
   tempRoots.push(root);
-  const featureText = await Bun.file(join(PROJECT_ROOT, "features/docx/tables.feature")).text();
+  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/docx/tables.feature")).text()).replace(/^@planned/m, '@implemented @bun');
   const path = join(root, "features", "docx", "tables.feature");
   await mkdir(dirname(path), { recursive: true });
   await Bun.write(path, featureText);

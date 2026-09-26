@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {fixturePath,F} from "../../scripts/fixture-inputs.ts";
 import { describe, expect, test } from "bun:test";
 import { join, resolve } from "node:path";
@@ -148,8 +149,8 @@ describe("Document.create and addParagraph", () => {
   });
 
   test("executes the DOCX create feature with dedicated bindings and optional parent aggregation", async () => {
-    const featurePath = "features/docx/create.feature";
-    const feature = parseFeature(featurePath, await Bun.file(join(PROJECT_ROOT, featurePath)).text());
+    const featurePath = "references/fixtures-ooxml/workflows/docx/creation.feature";
+    const feature = parseFeature(featurePath, (await Bun.file(join(fixturesRoot(), "workflows/docx/creation.feature")).text()).replace(/^@planned/m, '@implemented @bun'));
     const inventory = inventoryFor(feature);
 
     for (const bindings of [createBindings, parentBindings]) {

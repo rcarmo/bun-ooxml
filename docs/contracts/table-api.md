@@ -26,4 +26,5 @@ Both: zero-based indices, typed range errors, unchanged saved bytes on refusal;
 XML escaping and boundary whitespace; saved/reopened table content and opaque
 parts verified. Reacquire stale handles after edits; they are checked against
 fingerprints or revision counters. Executable table contracts live in
-`features/docx/tables.feature` and `features/pptx/tables.feature`.
+`references/fixtures-ooxml/workflows/docx/tables.feature` and
+`references/fixtures-ooxml/workflows/pptx/tables.feature`.

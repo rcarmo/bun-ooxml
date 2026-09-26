@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {test,expect} from 'bun:test';
 import {join} from 'node:path';
 import {parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from '../../scripts/gherkin.ts';
@@ -6,7 +7,7 @@ import {OpcPackage} from '../../src/opc/package.ts';
 import {bindings,commentFixture} from '../acceptance/comments-docx.ts';
 
 test('all existing comment Gherkin cases assert saved outcomes',async()=>{
- const path='features/docx/comments.feature',f=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const path='references/fixtures-ooxml/workflows/docx/comments.feature',f=parseFeature(path,(await Bun.file(join(fixturesRoot(), "workflows/docx/comments.feature")).text()).replace(/^@planned/m, '@implemented @bun'));const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
  const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};
  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(14);
 });

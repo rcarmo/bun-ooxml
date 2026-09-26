@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import { afterEach, describe, expect, test } from "bun:test";
 import { namespaceFixture } from '../acceptance/relationship-namespaces.ts';
 import { mkdtemp, mkdir, rm } from "node:fs/promises";
@@ -257,7 +258,7 @@ describe("Worksheet.setCellValue missing-cell authoring", () => {
 describe("xlsx create acceptance feature", () => {
   test("executes the implemented xlsx creation scenarios with exported bindings", async () => {
     const root = await tempRoot();
-    const featureText = await Bun.file(join(import.meta.dir, "../../features/xlsx/create.feature")).text();
+    const featureText = (await Bun.file(join(fixturesRoot(), "workflows/xlsx/creation.feature")).text()).replace(/^@planned/m, '@implemented @bun');
     await mkdir(join(root, "features", "xlsx"), { recursive: true });
     await Bun.write(join(root, "features/xlsx/create.feature"), featureText);
 

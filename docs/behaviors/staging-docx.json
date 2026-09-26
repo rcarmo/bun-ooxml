@@ -122,7 +122,7 @@
       "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
       "title": "executes the DOCX create feature with dedicated bindings and optional parent aggregation",
       "given": [
-        "features/docx/create.feature is parsed into an acceptance inventory.",
+        "references/fixtures-ooxml/workflows/docx/creation.feature is parsed into an acceptance inventory.",
         "The feature is executed twice: once with the dedicated create bindings and once with the parent aggregated bindings."
       ],
       "when": [
@@ -793,7 +793,7 @@
       "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / passes the DOCX table acceptance feature with dedicated bindings",
       "title": "passes the DOCX table acceptance feature with dedicated bindings",
       "given": [
-        "A temporary acceptance root is created containing features/docx/tables.feature.",
+        "A temporary acceptance root is created containing references/fixtures-ooxml/workflows/docx/tables.feature.",
         "runAcceptance is executed with the dedicated DOCX table bindings."
       ],
       "when": [
@@ -1019,7 +1019,7 @@
       "testId": "bun:tests/unit/docx.test.ts:docx Document / passes the DOCX acceptance feature with exported bindings",
       "title": "passes the DOCX acceptance feature with exported bindings",
       "given": [
-        "A temporary acceptance root is created containing features/docx/text.feature.",
+        "A temporary acceptance root is created containing references/fixtures-ooxml/workflows/docx/text.feature.",
         "runAcceptance is executed with the exported DOCX slice bindings."
       ],
       "when": [

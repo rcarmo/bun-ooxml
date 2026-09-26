@@ -55,6 +55,56 @@
       "path": "references/fixtures-ooxml/workflows/native/xlsx-cache-boundaries.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/comments.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/text.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/creation.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/tables.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/pptx/creation.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/pptx/tables.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/creation.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/preservation.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/zip32.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/relationship-namespaces.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

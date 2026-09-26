@@ -518,7 +518,7 @@
       "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / shared namespace Gherkin executes all four cases with real outcomes",
       "title": "shared namespace Gherkin executes all four cases with real outcomes",
       "given": [
-        "features/opc/relationship-namespaces.feature is parsed as one implemented feature with two scenarios, four executable cases, and sixteen implemented steps.",
+        "references/fixtures-ooxml/workflows/package/relationship-namespaces.feature is parsed as one implemented feature with two scenarios, four executable cases, and sixteen implemented steps.",
         "The four executable cases are PPTX alias acceptance, XLSX alias acceptance, PPTX wrong-URI refusal, and XLSX wrong-URI refusal."
       ],
       "when": [

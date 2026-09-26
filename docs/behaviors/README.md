@@ -2,7 +2,8 @@
 
 The AST inventory contains 246 test declarations in 30 native test files. Five
 candidate mapping files cover the earlier 227 declaration IDs once each; the 19
-new comment declarations still need central semantic reconciliation. Semantic review
+new comment declarations have bounded central partial mappings, with remaining
+lexical/encoding/protection cases recorded as gaps. Semantic review
 and reconciliation into the shared Gherkin catalogue are unfinished. A bounded
 review of the 18 XML/QName declarations is recorded in the shared
 `ledgers/consumers/bun-xml.json`, with partial and unmapped assertions explicit.
@@ -43,8 +44,9 @@ outcomes need a separate scenario or an explicit issue, not contradictory copies
 Only reviewed functional Gherkin enters `fixtures-ooxml`. Per-language ledgers
 retain test-to-scenario mappings and execution results. Staging descriptions remain review inputs. The shared XML mapping supersedes
 XML-specific candidate prose here; remaining non-XML rows still need review.
-The 19 new comment declarations and their source hashes appear in the refreshed
-inventory. Their four local scenarios expand to 14 executed cases, recorded in
-`comment-binding-check.json`; they are not yet shared canonical mappings.
+The 19 comment declarations and their source hashes appear in the refreshed
+inventory and the shared `ledgers/consumers/bun-comments.json`. Their four shared
+scenarios expand to 14 cases; `comment-binding-check.json` records the initial
+local execution, and current acceptance reports record the canonical bindings.
 Acceptance now executes 128 Bun cases. Candidate mapping counts never increase
 that result.

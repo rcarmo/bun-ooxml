@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import { afterEach, describe, expect, test } from "bun:test";
 import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -90,7 +91,7 @@ describe("pptx Presentation tables", () => {
 async function makeAcceptanceRoot(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "bun-ooxml-pptx-table-acceptance-"));
   roots.push(root);
-  const featureText = await Bun.file(join(PROJECT_ROOT, "features/pptx/tables.feature")).text();
+  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/pptx/tables.feature")).text()).replace(/^@planned/m, '@implemented @bun');
   const path = join(root, "features", "pptx", "tables.feature");
   await mkdir(dirname(path), { recursive: true });
   await Bun.write(path, featureText);

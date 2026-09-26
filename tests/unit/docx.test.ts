@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {fixturePath,fixturePaths,F} from "../../scripts/fixture-inputs.ts";
 import { afterEach, describe, expect, test } from "bun:test";
 import {textboxDocument} from '../fixtures/native-edge-cases.ts';
@@ -354,7 +355,7 @@ function isWord(element: XmlElement, localName: string): boolean {
 async function makeAcceptanceRoot(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "bun-ooxml-docx-acceptance-"));
   tempRoots.push(root);
-  const featureText = await Bun.file(join(PROJECT_ROOT, "features/docx/text.feature")).text();
+  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/docx/text.feature")).text()).replace(/^@planned/m, '@implemented @bun');
   const path = join(root, "features", "docx", "text.feature");
   await mkdir(dirname(path), { recursive: true });
   await Bun.write(path, featureText);

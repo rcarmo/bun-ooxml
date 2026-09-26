@@ -65,8 +65,8 @@ readers afterward; it does not refresh a live `Document` cache.
 
 ## Checks and limits
 
-`features/docx/comments.feature` binds 14 observable cases using the canonical
-comments fixture. Native tests add namespace/lexical/encoding custody, absent flags,
+`references/fixtures-ooxml/workflows/docx/comments.feature` binds 14 observable
+cases using the canonical comments fixture. Native tests add namespace/lexical/encoding custody, absent flags,
 protected settings, detached inspection, disk save/reopen and injected rollback.
 No shared fixture is modified. CommentsExtended MIME uses the vendor-backed
 OpenXML value recorded in the shared fact registry; the disputed alias refuses.
