@@ -1,5 +1,7 @@
+import { posix } from "node:path";
+
 import { OoxmlError } from "../errors.ts";
-import { OpcPackage } from "../opc/package.ts";
+import { OpcPackage, relationshipPath } from "../opc/package.ts";
 import {
   attribute,
   applyEdits,
@@ -12,6 +14,18 @@ import {
 } from "../xml/index.ts";
 
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+const OFFICE_REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+const OPC_REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships";
+const CT_NS = "http://schemas.openxmlformats.org/package/2006/content-types";
+const WORKBOOK_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml";
+const WORKSHEET_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml";
+const STYLES_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml";
+const WORKBOOK_REL_TYPE = `${OFFICE_REL_NS}/officeDocument`;
+const WORKSHEET_REL_TYPE = `${OFFICE_REL_NS}/worksheet`;
+const STYLES_REL_TYPE = `${OFFICE_REL_NS}/styles`;
+const MAX_WORKSHEET_NAME_LENGTH = 31;
+const MAX_COLUMN_NUMBER = 16_384;
+const MAX_ROW_NUMBER = 1_048_576;
 const encoder = new TextEncoder();
 
 type OpenInput = string | Uint8Array | ArrayBuffer;
@@ -32,6 +46,30 @@ type WorksheetModel = {
   xml: string;
   document: XmlDocument;
   cells: Map<string, ParsedCell>;
+};
+
+type ParsedReference = {
+  ref: string;
+  columnName: string;
+  columnNumber: number;
+  rowNumber: number;
+};
+
+type WorksheetStructure = {
+  dimension?: XmlElement;
+  sheetData: XmlElement;
+  rows: WorksheetRowStructure[];
+};
+
+type WorksheetRowStructure = {
+  element: XmlElement;
+  rowNumber: number;
+  cells: WorksheetCellStructure[];
+};
+
+type WorksheetCellStructure = {
+  element: XmlElement;
+  reference: ParsedReference;
 };
 
 export type Cell = BlankCell | StringCell | NumberCell | BooleanCell | FormulaCell;
@@ -99,6 +137,10 @@ export class Workbook {
     this.reload();
   }
 
+  static create(): Workbook {
+    return new Workbook(OpcPackage.fromParts(createWorkbookParts()));
+  }
+
   static async open(input: OpenInput): Promise<Workbook> {
     if (typeof input === "string") {
       return new Workbook(await OpcPackage.open(input), input);
@@ -120,6 +162,61 @@ export class Workbook {
     return new Worksheet(this, name);
   }
 
+  addWorksheet(name: string): Worksheet {
+    validateWorksheetName(name, this.sheetOrder);
+
+    const sheetsElement = directChild(this.workbookDocument.root, "sheets");
+    if (!sheetsElement) {
+      throw new OoxmlError("xlsx-workbook-invalid", "Workbook is missing a sheets collection");
+    }
+
+    const workbookRelationshipsPart = relationshipPath(this.workbookPart);
+    const workbookRelationshipsXml = this.package.text(workbookRelationshipsPart);
+    const workbookRelationshipsDocument = parseXml(workbookRelationshipsXml);
+    const contentTypesXml = this.package.text("[Content_Types].xml");
+    const contentTypesDocument = parseXml(contentTypesXml);
+
+    const nextSheetId = String(nextWorksheetSheetId(this.workbookDocument));
+    const nextRelationshipId = nextWorksheetRelationshipId(this.package.relationships(this.workbookPart).map((relationship) => relationship.id));
+    const worksheetPart = nextWorksheetPartName(this.package.names(), this.workbookPart);
+    const worksheetTarget = posix.relative(posix.dirname(this.workbookPart), worksheetPart);
+    const relationshipAttribute = existingRelationshipAttributeName(elements(this.workbookDocument.root, "sheet", S_NS)[0]);
+    const relationshipPrefix=relationshipAttribute.split(':')[0]!;
+    const nextSheetXml = `<${qualifiedName(sheetsElement, "sheet")} xmlns:${relationshipPrefix}="${OFFICE_REL_NS}" name="${escapeAttribute(name)}" sheetId="${escapeAttribute(nextSheetId)}" ${relationshipAttribute}="${escapeAttribute(nextRelationshipId)}"/>`;
+    const nextWorkbookXml = sheetsElement.selfClosing
+      ? applyEdits(this.workbookXml, [{
+          start: sheetsElement.start,
+          end: sheetsElement.end,
+          value: `<${sheetsElement.name}${renderAttributes(sheetsElement.attributes)}>${nextSheetXml}</${sheetsElement.name}>`,
+        }])
+      : applyEdits(this.workbookXml, [{
+          start: sheetsElement.closeStart,
+          end: sheetsElement.closeStart,
+          value: nextSheetXml,
+        }]);
+    const nextWorkbookRelationshipsXml = applyEdits(workbookRelationshipsXml, [{
+      start: workbookRelationshipsDocument.root.closeStart,
+      end: workbookRelationshipsDocument.root.closeStart,
+      value: `<${qualifiedName(workbookRelationshipsDocument.root, "Relationship")} Id="${escapeAttribute(nextRelationshipId)}" Type="${escapeAttribute(WORKSHEET_REL_TYPE)}" Target="${escapeAttribute(worksheetTarget)}"/>`,
+    }]);
+    const nextContentTypesXml = applyEdits(contentTypesXml, [{
+      start: contentTypesDocument.root.closeStart,
+      end: contentTypesDocument.root.closeStart,
+      value: `<${qualifiedName(contentTypesDocument.root, "Override")} PartName="/${escapeAttribute(worksheetPart)}" ContentType="${escapeAttribute(WORKSHEET_CONTENT_TYPE)}"/>`,
+    }]);
+
+    this.package.transaction(() => {
+      this.package.set("[Content_Types].xml", encoder.encode(nextContentTypesXml));
+      this.package.set(workbookRelationshipsPart, encoder.encode(nextWorkbookRelationshipsXml));
+      this.package.set(this.workbookPart, encoder.encode(nextWorkbookXml));
+      this.package.set(worksheetPart, createWorksheetPart());
+      this.package.toBytes();
+    });
+
+    this.reload();
+    return this.worksheet(name);
+  }
+
   /** @internal Worksheet facade entrypoint. */
   readCell(sheetName: string, reference: string): Cell | undefined {
     const sheet = this.requireSheet(sheetName);
@@ -133,17 +230,14 @@ export class Workbook {
    * member changes, preserving byte identity for later saves.
    */
   writeCell(sheetName: string, reference: string, value: ScalarCellValue): void {
+    const normalizedReference = normalizeCellReference(reference);
     const sheet = this.requireSheet(sheetName);
-    const cell = sheet.cells.get(normalizeCellReference(reference));
-    if (!cell) {
-      throw new OoxmlError(
-        "xlsx-cell-missing",
-        `Missing cell ${reference.toUpperCase()} in worksheet ${sheetName}`,
-      );
-    }
+    const cell = sheet.cells.get(normalizedReference);
 
     // Validate the selected cell first to retain its specific formula refusal.
-    const valueEdits = buildValueEdits(cell, value);
+    const valueEdits = cell
+      ? buildValueEdits(cell, value)
+      : buildMissingCellEdits(sheet, normalizedReference, value);
     // Array/data-table followers may have cached values without their own <f>.
     // Clearing only anchors would silently leave those answers stale. Until the
     // range engine owns every result cell, refuse the whole value edit up front.
@@ -220,7 +314,7 @@ export class Workbook {
 
     for (const sheetElement of elements(this.workbookDocument.root, "sheet", S_NS)) {
       const name = sheetElement.attributes.name;
-      const relationshipId = attribute(sheetElement, "id", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+      const relationshipId = attribute(sheetElement, "id", OFFICE_REL_NS);
       if (!name || !relationshipId) {
         throw new OoxmlError("xlsx-workbook-invalid", "Workbook sheet entry is missing name or an officeDocument relationship id");
       }
@@ -229,7 +323,7 @@ export class Workbook {
       }
 
       const relationship = relationships.get(relationshipId);
-      if (!relationship?.resolved || relationship.type !== "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet") {
+      if (!relationship?.resolved || relationship.type !== WORKSHEET_REL_TYPE) {
         throw new OoxmlError(
           "xlsx-workbook-invalid",
           `Workbook sheet ${name} references missing worksheet relationship ${relationshipId}`,
@@ -512,6 +606,189 @@ function buildValueEdits(cell: ParsedCell, value: ScalarCellValue): CellEdit[] {
   ];
 }
 
+
+function buildMissingCellEdits(
+  sheet: WorksheetModel,
+  reference: string,
+  value: ScalarCellValue,
+): CellEdit[] {
+  const structure = inspectWorksheetStructure(sheet);
+  const parsedReference = parseCellReference(reference);
+  const edits = buildDimensionEdits(structure, dimensionRef(sheet, reference));
+  const row = structure.rows.find((candidate) => candidate.rowNumber === parsedReference.rowNumber);
+  const cellXml = renderMissingCellXml(row?.element ?? structure.sheetData, reference, value);
+
+  if (row) {
+    edits.push(...buildMissingRowCellEdits(row, parsedReference.columnNumber, cellXml));
+  } else {
+    edits.push(...buildMissingRowEdits(structure.sheetData, structure.rows, parsedReference.rowNumber, cellXml));
+  }
+
+  return edits;
+}
+
+function inspectWorksheetStructure(sheet: WorksheetModel): WorksheetStructure {
+  const sheetData = directChild(sheet.document.root, "sheetData");
+  if (!sheetData) {
+    throw unsupportedWorksheetStructure(sheet.name, "sheetData is missing");
+  }
+
+  const directDimensions = sheet.document.root.children.filter((child) =>
+    child.localName === "dimension" && child.namespaceURI === S_NS
+  );
+  if (directDimensions.length > 1) {
+    throw unsupportedWorksheetStructure(sheet.name, "multiple dimension elements are not supported");
+  }
+
+  const spreadsheetRows = sheetData.children.filter((child) => child.namespaceURI === S_NS);
+  if (spreadsheetRows.some((child) => child.localName !== "row")) {
+    throw unsupportedWorksheetStructure(sheet.name, "sheetData contains unsupported spreadsheet children");
+  }
+
+  const rows: WorksheetRowStructure[] = [];
+  let previousRowNumber = 0;
+
+  for (const rowElement of spreadsheetRows) {
+    const rowNumber = parseWorksheetRowNumber(rowElement.attributes.r, sheet.name);
+    if (rowNumber <= previousRowNumber) {
+      throw unsupportedWorksheetStructure(sheet.name, "rows must be stored in ascending numeric order");
+    }
+    previousRowNumber = rowNumber;
+
+    const spreadsheetCells = rowElement.children.filter((child) => child.namespaceURI === S_NS);
+    if (spreadsheetCells.some((child) => child.localName !== "c")) {
+      throw unsupportedWorksheetStructure(sheet.name, `row ${rowNumber} contains unsupported spreadsheet children`);
+    }
+
+    const cells: WorksheetCellStructure[] = [];
+    let previousColumnNumber = 0;
+    for (const cellElement of spreadsheetCells) {
+      const parsedReference = parseCellReference(cellElement.attributes.r ?? failCellReference());
+      if (parsedReference.rowNumber !== rowNumber) {
+        throw unsupportedWorksheetStructure(sheet.name, `cell ${parsedReference.ref} is in row ${rowNumber}`);
+      }
+      if (parsedReference.columnNumber <= previousColumnNumber) {
+        throw unsupportedWorksheetStructure(sheet.name, `row ${rowNumber} cells must be stored in ascending order`);
+      }
+      previousColumnNumber = parsedReference.columnNumber;
+      cells.push({ element: cellElement, reference: parsedReference });
+    }
+
+    rows.push({
+      element: rowElement,
+      rowNumber,
+      cells,
+    });
+  }
+
+  return {
+    dimension: directDimensions[0],
+    sheetData,
+    rows,
+  };
+}
+
+function buildDimensionEdits(structure: WorksheetStructure, ref: string): CellEdit[] {
+  if (structure.dimension) {
+    const attributes = {
+      ...structure.dimension.attributes,
+      ref,
+    };
+    return [{
+      start: structure.dimension.start,
+      end: structure.dimension.openEnd,
+      value: structure.dimension.selfClosing
+        ? `<${structure.dimension.name}${renderAttributes(attributes)}/>`
+        : `<${structure.dimension.name}${renderAttributes(attributes)}>`,
+    }];
+  }
+
+  return [{
+    start: dimensionInsertionPoint(structure.sheetData.root),
+    end: dimensionInsertionPoint(structure.sheetData.root),
+    value: `<${qualifiedName(structure.sheetData.root, "dimension")} ref="${escapeAttribute(ref)}"/>`,
+  }];
+}
+
+function dimensionInsertionPoint(root: XmlElement):number {
+  // CT_Worksheet order: optional sheetPr, dimension, sheetViews, sheetFormatPr,
+  // cols, sheetData... Inserting immediately before sheetData is too late.
+  return root.children.find(child=>!(child.namespaceURI===S_NS&&child.localName==='sheetPr'))?.start??root.closeStart;
+}
+
+function buildMissingRowEdits(
+  sheetData: XmlElement,
+  rows: WorksheetRowStructure[],
+  rowNumber: number,
+  cellXml: string,
+): CellEdit[] {
+  const rowXml = `<${qualifiedName(sheetData, "row")} r="${escapeAttribute(String(rowNumber))}">${cellXml}</${qualifiedName(sheetData, "row")}>`;
+  if (sheetData.selfClosing) {
+    return [{
+      start: sheetData.start,
+      end: sheetData.end,
+      value: `<${sheetData.name}${renderAttributes(sheetData.attributes)}>${rowXml}</${sheetData.name}>`,
+    }];
+  }
+
+  const nextRow = rows.find((candidate) => candidate.rowNumber > rowNumber);
+  const insertionPoint = nextRow ? nextRow.element.start : sheetData.closeStart;
+  return [{ start: insertionPoint, end: insertionPoint, value: rowXml }];
+}
+
+function buildMissingRowCellEdits(
+  row: WorksheetRowStructure,
+  columnNumber: number,
+  cellXml: string,
+): CellEdit[] {
+  if (row.element.selfClosing) {
+    return [{
+      start: row.element.start,
+      end: row.element.end,
+      value: `<${row.element.name}${renderAttributes(row.element.attributes)}>${cellXml}</${row.element.name}>`,
+    }];
+  }
+
+  const nextCell = row.cells.find((candidate) => candidate.reference.columnNumber > columnNumber);
+  const insertionPoint = nextCell ? nextCell.element.start : row.element.closeStart;
+  return [{ start: insertionPoint, end: insertionPoint, value: cellXml }];
+}
+
+function renderMissingCellXml(source: XmlElement, reference: string, value: ScalarCellValue): string {
+  const attributes: Record<string, string> = { r: reference };
+  let innerXml = "";
+
+  if (typeof value === "string") {
+    attributes.t = "inlineStr";
+    innerXml = renderInlineString(source, value);
+  } else if (typeof value === "number") {
+    if (!Number.isFinite(value)) {
+      throw new OoxmlError("xlsx-value-invalid", `Cell ${reference} cannot store a non-finite number`);
+    }
+    attributes.t = "n";
+    innerXml = renderValueElement(source, formatNumber(value));
+  } else {
+    attributes.t = "b";
+    innerXml = renderValueElement(source, value ? "1" : "0");
+  }
+
+  return `<${qualifiedName(source, "c")}${renderAttributes(attributes)}>${innerXml}</${qualifiedName(source, "c")}>`;
+}
+
+function dimensionRef(sheet: WorksheetModel, reference: string): string {
+  const references = [...sheet.cells.keys(), reference].map((value) => parseCellReference(value));
+  let minColumn=Infinity,maxColumn=0,minRow=Infinity,maxRow=0;
+  for(const value of references){minColumn=Math.min(minColumn,value.columnNumber);maxColumn=Math.max(maxColumn,value.columnNumber);minRow=Math.min(minRow,value.rowNumber);maxRow=Math.max(maxRow,value.rowNumber);}
+  return `${columnName(minColumn)}${minRow}:${columnName(maxColumn)}${maxRow}`;
+}
+
+function unsupportedWorksheetStructure(sheetName: string, detail: string): OoxmlError {
+  return new OoxmlError(
+    "xlsx-worksheet-structure-unsupported",
+    `Worksheet ${sheetName} cannot be extended safely: ${detail}`,
+  );
+}
+
 function buildFormulaCacheInvalidationEdits(sheet: WorksheetModel): CellEdit[] {
   const edits: CellEdit[] = [];
   for (const parsed of sheet.cells.values()) {
@@ -583,11 +860,182 @@ function extractStringText(element: XmlElement): string {
 }
 
 function normalizeCellReference(reference: string): string {
+  return parseCellReference(reference).ref;
+}
+
+function parseCellReference(reference: string): ParsedReference {
   const normalized = reference.trim().toUpperCase();
-  if (!/^[A-Z]+[1-9][0-9]*$/.test(normalized)) {
+  const match = /^([A-Z]+)([1-9][0-9]*)$/.exec(normalized);
+  if (!match) {
     throw new OoxmlError("xlsx-cell-reference-invalid", `Invalid cell reference ${reference}`);
   }
-  return normalized;
+
+  const columnNameValue = match[1]!;
+  const rowNumber = Number(match[2]);
+  const columnNumber = columnNumberFromName(columnNameValue);
+  if (rowNumber > MAX_ROW_NUMBER || columnNumber > MAX_COLUMN_NUMBER) {
+    throw new OoxmlError("xlsx-cell-reference-invalid", `Invalid cell reference ${reference}`);
+  }
+
+  return {
+    ref: `${columnNameValue}${rowNumber}`,
+    columnName: columnNameValue,
+    columnNumber,
+    rowNumber,
+  };
+}
+
+function parseWorksheetRowNumber(rawValue: string | undefined, sheetName: string): number {
+  if (!rawValue || !/^[1-9][0-9]*$/.test(rawValue)) {
+    throw unsupportedWorksheetStructure(sheetName, "row numbering is invalid");
+  }
+
+  const rowNumber = Number(rawValue);
+  if (rowNumber > MAX_ROW_NUMBER) {
+    throw unsupportedWorksheetStructure(sheetName, `row ${rawValue} exceeds worksheet bounds`);
+  }
+  return rowNumber;
+}
+
+function columnNumberFromName(name: string): number {
+  let value = 0;
+  for (const character of name) {
+    value = value * 26 + (character.charCodeAt(0) - 64);
+  }
+  return value;
+}
+
+function columnName(columnNumber: number): string {
+  let current = columnNumber;
+  let value = "";
+  while (current > 0) {
+    const offset = (current - 1) % 26;
+    value = String.fromCharCode(65 + offset) + value;
+    current = Math.floor((current - 1) / 26);
+  }
+  return value;
+}
+
+function validateWorksheetName(name: string, existingNames: string[]): void {
+  if (
+    name.length === 0 ||
+    name.length > MAX_WORKSHEET_NAME_LENGTH ||
+    /^'|'$/.test(name) ||
+    /[:\\/?*\[\]]/.test(name)
+  ) {
+    throw new OoxmlError("xlsx-worksheet-name-invalid", `Invalid worksheet name ${name}`);
+  }
+
+  const duplicate = existingNames.find((existingName) => existingName.toLowerCase() === name.toLowerCase());
+  if (duplicate) {
+    throw new OoxmlError("xlsx-worksheet-duplicate", `Duplicate worksheet name ${name}`);
+  }
+}
+
+function nextWorksheetSheetId(document: XmlDocument): number {
+  let maxSheetId = 0;
+  for (const sheet of elements(document.root, "sheet", S_NS)) {
+    const rawSheetId = sheet.attributes.sheetId;
+    if (!rawSheetId || !/^[1-9][0-9]*$/.test(rawSheetId)) {
+      throw new OoxmlError("xlsx-workbook-invalid", "Workbook sheet entry is missing a valid sheetId");
+    }
+    maxSheetId = Math.max(maxSheetId, Number(rawSheetId));
+  }
+  return maxSheetId + 1;
+}
+
+function nextWorksheetRelationshipId(existingIds: string[]): string {
+  const ids = new Set(existingIds);
+  for (let index = 1; ; index += 1) {
+    const candidate = `rId${index}`;
+    if (!ids.has(candidate)) {
+      return candidate;
+    }
+  }
+}
+
+function nextWorksheetPartName(existingNames: string[], workbookPart: string): string {
+  const existing = new Set(existingNames);
+  const workbookDirectory = posix.dirname(workbookPart);
+  const prefix = workbookDirectory === "." ? "" : `${workbookDirectory}/`;
+
+  for (let index = 1; ; index += 1) {
+    const candidate = `${prefix}worksheets/sheet${index}.xml`;
+    if (!existing.has(candidate)) {
+      return candidate;
+    }
+  }
+}
+
+function existingRelationshipAttributeName(sheetElement?: XmlElement): string {
+  if (!sheetElement) {
+    return "r:id";
+  }
+
+  for (const attributeName of Object.keys(sheetElement.attributes)) {
+    const localName = attributeName.includes(":")
+      ? attributeName.slice(attributeName.indexOf(":") + 1)
+      : attributeName;
+    if (localName === "id" && sheetElement.attributeNamespaces[attributeName] === OFFICE_REL_NS) {
+      return attributeName;
+    }
+  }
+
+  return "r:id";
+}
+
+function createWorkbookParts(): Map<string, Uint8Array> {
+  return new Map<string, Uint8Array>([
+    ["[Content_Types].xml", xml(`
+      <Types xmlns="${CT_NS}">
+        <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+        <Default Extension="xml" ContentType="application/xml"/>
+        <Override PartName="/xl/workbook.xml" ContentType="${WORKBOOK_CONTENT_TYPE}"/>
+        <Override PartName="/xl/worksheets/sheet1.xml" ContentType="${WORKSHEET_CONTENT_TYPE}"/>
+        <Override PartName="/xl/styles.xml" ContentType="${STYLES_CONTENT_TYPE}"/>
+      </Types>
+    `)],
+    ["_rels/.rels", xml(`
+      <Relationships xmlns="${OPC_REL_NS}">
+        <Relationship Id="rId1" Type="${WORKBOOK_REL_TYPE}" Target="xl/workbook.xml"/>
+      </Relationships>
+    `)],
+    ["xl/workbook.xml", xml(`
+      <workbook xmlns="${S_NS}" xmlns:r="${OFFICE_REL_NS}">
+        <sheets><sheet name="Sheet1" sheetId="1" r:id="rId1"/></sheets>
+      </workbook>
+    `)],
+    ["xl/_rels/workbook.xml.rels", xml(`
+      <Relationships xmlns="${OPC_REL_NS}">
+        <Relationship Id="rId1" Type="${WORKSHEET_REL_TYPE}" Target="worksheets/sheet1.xml"/>
+        <Relationship Id="rId2" Type="${STYLES_REL_TYPE}" Target="styles.xml"/>
+      </Relationships>
+    `)],
+    ["xl/styles.xml", xml(`
+      <styleSheet xmlns="${S_NS}">
+        <fonts count="1"><font/></fonts>
+        <fills count="1"><fill/></fills>
+        <borders count="1"><border/></borders>
+        <cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
+        <cellXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/></cellXfs>
+        <cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>
+      </styleSheet>
+    `)],
+    ["xl/worksheets/sheet1.xml", createWorksheetPart()],
+  ]);
+}
+
+function createWorksheetPart(): Uint8Array {
+  return xml(`
+    <worksheet xmlns="${S_NS}">
+      <sheetData></sheetData>
+    </worksheet>
+  `);
+}
+
+function xml(source: string): Uint8Array {
+  const body = source.replace(/^\s+|\s+$/g, "").replace(/>\s+</g, "><");
+  return encoder.encode(`<?xml version="1.0" encoding="UTF-8"?>${body}`);
 }
 
 function parseSharedStringIndex(rawValue: string, label: string): number {
@@ -615,17 +1063,17 @@ function parseNumericValue(rawValue: string, label: string): number {
   return numeric;
 }
 
-function renderInlineString(cellElement: XmlElement, value: string): string {
+function renderInlineString(source: XmlElement, value: string): string {
   const preserve = /^\s|\s$/.test(value);
-  const isName = qualifiedName(cellElement, "is");
-  const textName = qualifiedName(cellElement, "t");
+  const isName = qualifiedName(source, "is");
+  const textName = qualifiedName(source, "t");
   return preserve
     ? `<${isName}><${textName} xml:space="preserve">${escapeText(value)}</${textName}></${isName}>`
     : `<${isName}><${textName}>${escapeText(value)}</${textName}></${isName}>`;
 }
 
-function renderValueElement(cellElement: XmlElement, value: string): string {
-  const valueName = qualifiedName(cellElement, "v");
+function renderValueElement(source: XmlElement, value: string): string {
+  const valueName = qualifiedName(source, "v");
   return `<${valueName}>${escapeText(value)}</${valueName}>`;
 }
 

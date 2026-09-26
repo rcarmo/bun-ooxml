@@ -6,10 +6,10 @@ current per-step results in `artifacts/acceptance.json`.
 
 | Inventory | Implemented | Planned | Total |
 |---|---:|---:|---:|
-| features | 11 | 3 | 14 |
-| scenarios | 49 | 12 | 61 |
-| cases | 65 | 14 | 79 |
-| steps | 349 | 57 | 406 |
+| features | 14 | 3 | 17 |
+| scenarios | 63 | 12 | 75 |
+| cases | 83 | 14 | 97 |
+| steps | 434 | 57 | 491 |
 
 ## Source/test mappings
 
@@ -26,6 +26,7 @@ refinement and reviewed Gherkin step mappings before receiving parity credit.
 
 ## Feature files
 
+* `features/docx/create.feature`: implemented, 4 scenario(s), 8 expanded case(s).
 * `features/docx/text.feature`: implemented, 5 scenario(s), 7 expanded case(s).
 * `features/opc/graph.feature`: implemented, 4 scenario(s), 4 expanded case(s).
 * `features/opc/package.feature`: implemented, 3 scenario(s), 3 expanded case(s).
@@ -36,7 +37,9 @@ refinement and reviewed Gherkin step mappings before receiving parity credit.
 * `features/planned/cross-language-followups.feature`: planned, 4 scenario(s), 4 expanded case(s).
 * `features/planned/full-port.feature`: planned, 5 scenario(s), 7 expanded case(s).
 * `features/planned/office-mutation-additions.feature`: planned, 3 scenario(s), 3 expanded case(s).
+* `features/pptx/create.feature`: implemented, 3 scenario(s), 3 expanded case(s).
 * `features/pptx/text.feature`: implemented, 4 scenario(s), 4 expanded case(s).
 * `features/workflow/mutation-safety.feature`: implemented, 8 scenario(s), 19 expanded case(s).
 * `features/xlsx/cache-boundaries.feature`: implemented, 2 scenario(s), 3 expanded case(s).
 * `features/xlsx/cells.feature`: implemented, 8 scenario(s), 8 expanded case(s).
+* `features/xlsx/create.feature`: implemented, 7 scenario(s), 7 expanded case(s).

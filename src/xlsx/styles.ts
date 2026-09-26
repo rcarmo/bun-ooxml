@@ -505,10 +505,21 @@ function parseStyleIndex(rawValue: string, label: string): number {
 
 function normalizeCellReference(reference: string): string {
   const normalized = reference.trim().toUpperCase();
-  if (!/^[A-Z]+[1-9][0-9]*$/.test(normalized)) {
+  const match = /^([A-Z]+)([1-9][0-9]*)$/.exec(normalized);
+  if (!match) {
     throw new OoxmlError("xlsx-cell-reference-invalid", `Invalid cell reference ${reference}`);
   }
-  return normalized;
+
+  let columnNumber = 0;
+  for (const character of match[1]!) {
+    columnNumber = columnNumber * 26 + (character.charCodeAt(0) - 64);
+  }
+  const rowNumber = Number(match[2]);
+  if (columnNumber > 16_384 || rowNumber > 1_048_576) {
+    throw new OoxmlError("xlsx-cell-reference-invalid", `Invalid cell reference ${reference}`);
+  }
+
+  return `${match[1]!}${rowNumber}`;
 }
 
 function renderAttributes(attributes: Record<string, string>): string {

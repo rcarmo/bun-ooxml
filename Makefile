@@ -12,6 +12,7 @@ verify:
 	bun run verify
 examples:
 	bun run examples/agent-edit.ts
+	bun run examples/create-office.ts
 check:
 	bun run typecheck
 	bun run verify
@@ -22,6 +23,7 @@ check:
 	bun test tests/unit
 	bun run acceptance
 	bun run examples/agent-edit.ts
+	bun run examples/create-office.ts
 	bun run verify
 	bun run scripts/shared-pack.ts
 parity: check

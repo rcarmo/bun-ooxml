@@ -48,6 +48,32 @@ race the final fingerprint check and atomic rename. Choose trusted directories;
 leaf symlinks and safe-mode same-file/hardlink destinations refuse. See
 `docs/contracts/workflow-api.md` for the bounded target and receipt contract.
 
+## Native creation
+
+```ts
+const doc = Document.create();
+doc.addParagraph("Heading", { bold: true });
+await doc.save("new.docx");
+
+const deck = Presentation.create();
+deck.addTextSlide("Title", "Subtitle");
+await deck.save("new.pptx");
+
+const wb = Workbook.create(); // Sheet1 and default styles
+wb.worksheet("Sheet1").setCellValue("A1", "Value");
+wb.addWorksheet("Results").setCellValue("B3", 42);
+await wb.save("new.xlsx");
+```
+
+These APIs author minimal packages without copying fixtures or invoking Python.
+They are not the full upstream authoring surface. DOCX supports simple bold/italic
+runs and existing paragraph style IDs; unknown styles refuse. PPTX authors one
+owned title layout/master/theme; appending to an existing deck requires one safe,
+compatible layout. XLSX can add valid, case-distinct sheet names and missing cells
+within Excel bounds, keeping rows/cells sorted and dimension metadata ordered.
+Reopen saved files and assert expected content. Native Office rendering has not
+been independently verified. `examples/create-office.ts` is an executable example.
+
 ## DOCX
 
 ```ts
@@ -105,7 +131,8 @@ if (reopened.worksheet(wb.sheetnames[0]!).getCell("A2")?.value !== "Updated valu
 }
 ```
 
-Only existing supported simple cells can be written. Numeric, boolean, inline and
+Supported simple cells can be written or added to ordinary worksheets. Unsafe
+row/cell order and unsupported structures refuse insertion. Numeric, boolean, inline and
 shared-string values can be read; formulas expose stored cached values. The API
 preserves the target cell style index. Shared and array formula overwrites refuse.
 After an input edit, this slice clears `<v>` contents only on worksheet cells
@@ -168,4 +195,5 @@ hard inflate caps. Multi-disk archives, ambiguous extras and extensible ZIP64 en
 sectors refuse. The writer is in-memory, not a large-file streaming API. Unsupported
 formats must never be converted silently.
 
-See `examples/agent-edit.ts` for a runnable fixture-backed smoke example.
+See `examples/agent-edit.ts` for fixture-backed editing and `examples/create-office.ts`
+for authoring without fixture inputs.

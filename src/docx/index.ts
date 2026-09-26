@@ -1,12 +1,29 @@
 import { OoxmlError } from "../errors.ts";
 import { OpcPackage } from "../opc/index.ts";
-import { applyEdits, escapeText, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
+import { applyEdits, attribute, elements, escapeAttribute, escapeText, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
 export const W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 
+const CONTENT_TYPES_NS = "http://schemas.openxmlformats.org/package/2006/content-types";
+const REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships";
+const OFFICE_DOCUMENT_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument";
 const DOCUMENT_PART = "word/document.xml";
+const DOCUMENT_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml";
+const UTF8_ENCODER = new TextEncoder();
 
 type OpenInput = string | Uint8Array | ArrayBuffer;
+
+export type AddParagraphOptions = {
+  bold?: boolean;
+  italic?: boolean;
+  style?: string;
+};
+
+type NormalizedAddParagraphOptions = {
+  bold: boolean;
+  italic: boolean;
+  style?: string;
+};
 
 type TextSegment = {
   element: XmlElement;
@@ -61,6 +78,9 @@ export class DocxPackage {
   toBytes(): Uint8Array {
     return this.opcPackage.toBytes();
   }
+
+  /** Cumulative payload changes relative to the opened/created baseline. */
+  diff(): import("../opc/package.ts").PackageDiff { return this.opcPackage.diff(); }
 
   setPart(name: string, bytes: Uint8Array): void {
     this.opcPackage.set(name, bytes);
@@ -227,9 +247,61 @@ export class Document {
     return new Document(await OpcPackage.open(bytes));
   }
 
+  /** Creates a new minimal DOCX package without borrowed template bytes. */
+  static create(): Document {
+    return new Document(OpcPackage.fromParts(buildMinimalDocxParts()));
+  }
+
   /** Current paragraph snapshot handles in document order. */
   get paragraphs(): Paragraph[] {
     return [...this.paragraphHandles];
+  }
+
+
+  /**
+   * Appends a simple paragraph immediately before the body section properties.
+   *
+   * Supported creation surface for this slice:
+   * - plain text only, with XML-escaped text nodes;
+   * - optional bold/italic run properties on the single authored run;
+   * - optional paragraph style id when the existing styles part resolves and
+   *   contains that paragraph style.
+   *
+   * Any refusal happens before document or package mutation.
+   */
+  addParagraph(text: string = "", options?: AddParagraphOptions): Paragraph {
+    const normalizedOptions = normalizeAddParagraphOptions(options);
+    if (typeof text !== "string") {
+      fail("docx-invalid-argument", "DOCX paragraph text must be a string");
+    }
+    if (normalizedOptions.style) {
+      this.assertSupportedParagraphStyle(normalizedOptions.style);
+    }
+
+    const body = this.requireBody();
+    const sectionProperties = body.children.find((child) => isWord(child, "sectPr"));
+    const insertAt = sectionProperties?.start ?? body.closeStart;
+    const paragraphXml = buildParagraphXml(text, normalizedOptions);
+    const nextXml = applyEdits(this.xml, [{ start: insertAt, end: insertAt, value: paragraphXml }]);
+    const nextVersion = this.version + 1;
+    const nextDocument = parseXml(nextXml);
+    const nextCollection = collectParagraphs(nextDocument, nextVersion);
+    const nextIndex = this.paragraphSnapshots.length;
+
+    this.opcPackage.transaction(() => {
+      this.opcPackage.set(DOCUMENT_PART, nextXml);
+    });
+
+    this.xml = nextXml;
+    this.version = nextVersion;
+    this.xmlDocument = nextDocument;
+    this.applyParagraphCollection(nextCollection);
+
+    const paragraph = this.paragraphHandles[nextIndex];
+    if (!paragraph) {
+      fail("docx-document-invalid", "DOCX paragraph append did not materialise the authored paragraph");
+    }
+    return paragraph;
   }
 
   /**
@@ -382,17 +454,55 @@ export class Document {
 
   private reloadParagraphs(): void {
     this.xmlDocument = parseXml(this.xml);
-    const collection = collectParagraphs(this.xmlDocument, this.version);
+    this.applyParagraphCollection(collectParagraphs(this.xmlDocument, this.version));
+  }
+
+  private applyParagraphCollection(collection: ParagraphCollection): void {
     this.omittedTopologies = collection.omittedTopologies;
     this.paragraphSnapshots = collection.paragraphs;
     this.paragraphHandles = this.paragraphSnapshots.map(
       (snapshot) => new Paragraph(this, snapshot),
     );
   }
+
+  private requireBody(): XmlElement {
+    const body = this.xmlDocument.root.children.find((child) => isWord(child, "body"));
+    if (!body) {
+      fail("docx-document-invalid", "DOCX document XML is missing w:body");
+    }
+    return body;
+  }
+
+  private assertSupportedParagraphStyle(styleId: string): void {
+    const stylesPart = this.opcPackage.related(DOCUMENT_PART, "styles");
+    if (!stylesPart) {
+      fail(
+        "docx-style-unsupported",
+        `DOCX paragraph style ` + styleId + ` requires a resolved styles part`,
+      );
+    }
+
+    const stylesDocument = parseXml(this.opcPackage.text(stylesPart));
+    if (!isWord(stylesDocument.root, "styles")) {
+      fail("docx-style-part-invalid", `DOCX styles part ` + stylesPart + ` is invalid`);
+    }
+
+    const exists = elements(stylesDocument, "style", W_NS).some((style) =>
+      attribute(style, "type", W_NS) === "paragraph" &&
+      attribute(style, "styleId", W_NS) === styleId
+    );
+    if (!exists) {
+      fail("docx-style-missing", `Unknown DOCX paragraph style ` + styleId);
+    }
+  }
 }
 
 export async function open(input: OpenInput): Promise<Document> {
   return Document.open(input);
+}
+
+export function create(): Document {
+  return Document.create();
 }
 
 export async function save(document: Document, path?: string): Promise<Uint8Array> {
@@ -523,6 +633,99 @@ function analyzeParagraph(paragraph: XmlElement, index: number, version: number)
   };
 }
 
+function normalizeAddParagraphOptions(options: AddParagraphOptions | undefined): NormalizedAddParagraphOptions {
+  if (options === undefined) {
+    return { bold: false, italic: false };
+  }
+  if (options === null || typeof options !== "object" || Array.isArray(options)) {
+    fail("docx-invalid-argument", "DOCX paragraph options must be an object when provided");
+  }
+
+  const allowedKeys = new Set(["bold", "italic", "style"]);
+  for (const key of Object.keys(options)) {
+    if (!allowedKeys.has(key)) {
+      fail("docx-invalid-argument", `DOCX paragraph option ${key} is unsupported`);
+    }
+  }
+
+  if (options.bold !== undefined && typeof options.bold !== "boolean") {
+    fail("docx-invalid-argument", "DOCX paragraph bold option must be boolean");
+  }
+  if (options.italic !== undefined && typeof options.italic !== "boolean") {
+    fail("docx-invalid-argument", "DOCX paragraph italic option must be boolean");
+  }
+  if (options.style !== undefined && typeof options.style !== "string") {
+    fail("docx-invalid-argument", "DOCX paragraph style option must be a string");
+  }
+  if (options.style === "") {
+    fail("docx-invalid-argument", "DOCX paragraph style option must not be empty");
+  }
+
+  return {
+    bold: options.bold ?? false,
+    italic: options.italic ?? false,
+    style: options.style,
+  };
+}
+
+function buildParagraphXml(text: string, options: NormalizedAddParagraphOptions): string {
+  const paragraphProperties = options.style
+    ? `<w:pPr><w:pStyle w:val="${escapeAttribute(options.style)}"/></w:pPr>`
+    : "";
+  const runProperties = [
+    options.bold ? "<w:b/>" : "",
+    options.italic ? "<w:i/>" : "",
+  ].join("");
+  const textAttributes = needsPreserveSpace(text) ? " xml:space=\"preserve\"" : "";
+  const run = text.length > 0 || runProperties.length > 0
+    ? `<w:r>${runProperties ? `<w:rPr>${runProperties}</w:rPr>` : ""}<w:t${textAttributes}>${escapeText(text)}</w:t></w:r>`
+    : "";
+  return `<w:p>${paragraphProperties}${run}</w:p>`;
+}
+
+function buildMinimalDocxParts(): Map<string, Uint8Array> {
+  return new Map([
+    ["[Content_Types].xml", UTF8_ENCODER.encode(minimalContentTypesXml())],
+    ["_rels/.rels", UTF8_ENCODER.encode(minimalRootRelationshipsXml())],
+    [DOCUMENT_PART, UTF8_ENCODER.encode(minimalDocumentXml())],
+  ]);
+}
+
+function minimalContentTypesXml(): string {
+  return [
+    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>",
+    `<Types xmlns="${CONTENT_TYPES_NS}">`,
+    "<Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/>",
+    "<Default Extension=\"xml\" ContentType=\"application/xml\"/>",
+    `<Override PartName="/word/document.xml" ContentType="${DOCUMENT_CONTENT_TYPE}"/>`,
+    "</Types>",
+  ].join("");
+}
+
+function minimalRootRelationshipsXml(): string {
+  return [
+    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>",
+    `<Relationships xmlns="${REL_NS}">`,
+    `<Relationship Id="rId1" Type="${OFFICE_DOCUMENT_REL}" Target="word/document.xml"/>`,
+    "</Relationships>",
+  ].join("");
+}
+
+function minimalDocumentXml(): string {
+  return [
+    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>",
+    `<w:document xmlns:w="${W_NS}">`,
+    "<w:body>",
+    "<w:sectPr>",
+    "<w:pgSz w:w=\"12240\" w:h=\"15840\"/>",
+    "<w:pgMar w:top=\"1440\" w:right=\"1800\" w:bottom=\"1440\" w:left=\"1800\" w:header=\"720\" w:footer=\"720\" w:gutter=\"0\"/>",
+    "<w:cols w:space=\"720\"/>",
+    "<w:docGrid w:linePitch=\"360\"/>",
+    "</w:sectPr>",
+    "</w:body>",
+    "</w:document>",
+  ].join("");
+}
 function isSearchable(paragraph: Paragraph): boolean {
   try {
     void paragraph.text;

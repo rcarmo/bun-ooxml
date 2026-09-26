@@ -4,8 +4,9 @@ Bun-native TypeScript for editing existing Word documents, PowerPoint decks and
 Excel workbooks. I want document edits to stay inside the Bun process while
 preserving the Office package parts an edit did not touch.
 
-The first slice handles guarded cross-run text replacement, slide text and notes,
-and existing-cell edits with formula-cache invalidation. `patchOffice()` adds
+Initial authoring creates DOCX paragraphs, PPTX title slides and XLSX sheets/cells
+entirely in Bun. Existing-file edits include guarded cross-run replacement, slide
+text/notes and cell edits with bounded formula-cache invalidation. `patchOffice()` adds
 read-only previews, all-targets-required batches, guarded saves and per-target
 receipts. Its native bindings pass the 19 shared mutation cases. Guarded OPC graph
 helpers add/detach parts and relationships; package diffs identify payload and
@@ -14,8 +15,9 @@ use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 
 Full ports of OOXML DOCX, OOXML PPTX and OOXML XLSX, including their inherited
-APIs, are in progress. This version does not implement document creation,
-tracked revisions, slide imports, structural spreadsheet edits or calculation.
+APIs, are in progress. Creation is limited to those initial paragraph/slide/cell surfaces. This version
+does not implement tracked revisions, slide imports, general table/chart authoring,
+structural spreadsheet edits or calculation.
 The [scope and closure criteria](docs/contracts/port-scope.md) and
 [behaviour ledger](docs/contracts/parity-ledger.json) track that work.
 
