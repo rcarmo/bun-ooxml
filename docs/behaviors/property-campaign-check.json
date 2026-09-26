@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "scope": "Bounded seeded properties and local timing samples; no exhaustive fuzz or full parity claim",
+  "sourceBase": "339949ef13204911df6c2d9b78a022cd42c0fb77",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.12.0",
+    "commit": "89518aa62c9515a7ccbe05ed9afc1bbc89e1118a",
+    "manifestSha256": "deef358591495f89e853a5ac3371a52032e263238c20d43e5deaa738768f9b0e"
+  },
+  "native": {
+    "tests": 340,
+    "assertions": 4199,
+    "acceptanceCases": 253,
+    "runId": "81dd113d-c402-43eb-8812-cdfa72cbb98a"
+  },
+  "campaigns": [
+    {
+      "schemaVersion": 1,
+      "status": "passed",
+      "seed": 20260926,
+      "cases": 256,
+      "officeCases": 32,
+      "inputSha256": "8ce28f312073bf861e14aa37e78a1e3c72cfb3965c812878f2a06aa4465001c5",
+      "counts": {
+        "xmlValid": 256,
+        "xmlRefused": 768,
+        "zipValid": 512,
+        "zipMutations": 2048,
+        "zipAccepted": 233,
+        "zipRefused": 1815,
+        "docx": 32,
+        "pptx": 32,
+        "xlsx": 32,
+        "staleRefused": 64
+      },
+      "zipRefusalCodes": {
+        "zip-local-metadata-mismatch": 651,
+        "zip-crc-mismatch": 542,
+        "zip-structure-invalid": 186,
+        "zip-zip64-unsupported": 155,
+        "zip-size-mismatch": 52,
+        "zip-multi-disk-unsupported": 106,
+        "zip-method-unsupported": 22,
+        "zip-local-layout-invalid": 44,
+        "zip-data-invalid": 24,
+        "zip-end-record-missing": 22,
+        "zip-name-invalid": 8,
+        "zip-encryption-unsupported": 3
+      },
+      "durationsMs": {
+        "xml": 40.669879,
+        "zip": 197.834374,
+        "office": 513.5422490000001
+      },
+      "failures": [],
+      "limits": {
+        "xmlTextSymbols": 59,
+        "payloadBytes": 255,
+        "zipReader": {
+          "maxEntries": 64,
+          "maxEntryBytes": 65536,
+          "maxTotalBytes": 131072,
+          "maxArchiveBytes": 262144,
+          "maxCompressionRatio": 1000
+        },
+        "mutation": "four deterministic single-bit flips per ZIP32/ZIP64 archive",
+        "source": "synthetic; no shared fixtures modified",
+        "coverage": "sampled deterministic properties, not exhaustive fuzzing or schema validation"
+      },
+      "runId": "f068bbe5-3025-4f69-aeeb-eb5d0c674ecf",
+      "sourceSha256": "f5d1a71da7b316a1f8253a400830a9db1692695cd829d66a11480899964ffec6",
+      "runtimeSources": {
+        "src/index.ts": "27c77c2c88c691acfec0987c713962dcdc41f0d4ec2a07d385b3031465a9fc21",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+        "src/opc/index.ts": "1e78a157bbc070701e8acb3524eaf8fc7615a32846a0367e55e2d9bd70b522a3",
+        "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+        "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
+        "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+        "src/xml/index.ts": "9e6494d2b191e4219bd25b259bf0f068a1f4b9b7947736530a1bcbc9ddfc0504",
+        "src/pptx/placeholders.ts": "5d8ce23259df789c35e721bed4ed7a8ae4a1c968530d921dd5c05f17f5318732",
+        "src/pptx/index.ts": "5a916d91446944d541e59a4adb659b7e2041e948319b5bab8d1f8a97f8629977",
+        "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+        "src/workflow/index.ts": "e943cad7b77794b1d3747bc47ffb813d4793a8396312d1b5b3c38d072cc2145e",
+        "src/docx/redline.ts": "3d4a44a3dfaa3a2e0d7572c623827beec11cacda21a65b17e3aca53835a23760",
+        "src/docx/paragraph-style.ts": "089c26a38d759ddf2c262f0865f290c32901f49c96b6496895d60d8d4c5b25c3",
+        "src/docx/comments.ts": "eca35561548bf0bed07f01231bb4342066915b2523bc1252896428ea29706ab6",
+        "src/docx/revisions.ts": "b60d034a5ca96ca533cd9e04cd39c2a28a3893b0d875fa5e531cd4cbdf765add",
+        "src/docx/run-formatting.ts": "00b8c39211bc0507a7ed2ab516d3f3780038b23d2c3d9292bbce8129362897c0",
+        "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+        "src/docx/index.ts": "a8e9fa2235d6988c018b0e9b5495209bbe0e4c0135faa3cb7855b05a27ea7dc9",
+        "src/docx/story.ts": "35739c82a5fe8adea8750305a8cac18a670d35da9be435bed4f2913e98fe1d27",
+        "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e",
+        "src/xlsx/index.ts": "5d817686f0a2107a725525b0115b7aa7846a3760390476179aff356eaafa4f73",
+        "src/xlsx/styles.ts": "b682e6e7065792b2d71d10a51f683a009593a7c0541387b15d6158786d4414ec"
+      },
+      "versions": {
+        "bun": "1.4.1",
+        "platform": "linux",
+        "arch": "x64"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "status": "passed",
+      "seed": 8675309,
+      "cases": 256,
+      "officeCases": 32,
+      "inputSha256": "53f7bbf4bc9d11a60913ebacfcd8e840ab3fdcdf8c46b8f1e73466d22f32669c",
+      "counts": {
+        "xmlValid": 256,
+        "xmlRefused": 768,
+        "zipValid": 512,
+        "zipMutations": 2048,
+        "zipAccepted": 224,
+        "zipRefused": 1824,
+        "docx": 32,
+        "pptx": 32,
+        "xlsx": 32,
+        "staleRefused": 64
+      },
+      "zipRefusalCodes": {
+        "zip-name-invalid": 14,
+        "zip-crc-mismatch": 517,
+        "zip-zip64-unsupported": 131,
+        "zip-local-metadata-mismatch": 684,
+        "zip-multi-disk-unsupported": 96,
+        "zip-data-invalid": 24,
+        "zip-structure-invalid": 206,
+        "zip-encryption-unsupported": 3,
+        "zip-size-mismatch": 52,
+        "zip-end-record-missing": 26,
+        "zip-method-unsupported": 38,
+        "zip-local-layout-invalid": 33
+      },
+      "durationsMs": {
+        "xml": 21.976905999999996,
+        "zip": 106.701186,
+        "office": 513.44019
+      },
+      "failures": [],
+      "limits": {
+        "xmlTextSymbols": 59,
+        "payloadBytes": 255,
+        "zipReader": {
+          "maxEntries": 64,
+          "maxEntryBytes": 65536,
+          "maxTotalBytes": 131072,
+          "maxArchiveBytes": 262144,
+          "maxCompressionRatio": 1000
+        },
+        "mutation": "four deterministic single-bit flips per ZIP32/ZIP64 archive",
+        "source": "synthetic; no shared fixtures modified",
+        "coverage": "sampled deterministic properties, not exhaustive fuzzing or schema validation"
+      },
+      "runId": "90a843f3-8520-4e7e-b421-c059de3448e9",
+      "sourceSha256": "f5d1a71da7b316a1f8253a400830a9db1692695cd829d66a11480899964ffec6",
+      "runtimeSources": {
+        "src/index.ts": "27c77c2c88c691acfec0987c713962dcdc41f0d4ec2a07d385b3031465a9fc21",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+        "src/opc/index.ts": "1e78a157bbc070701e8acb3524eaf8fc7615a32846a0367e55e2d9bd70b522a3",
+        "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+        "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
+        "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+        "src/xml/index.ts": "9e6494d2b191e4219bd25b259bf0f068a1f4b9b7947736530a1bcbc9ddfc0504",
+        "src/pptx/placeholders.ts": "5d8ce23259df789c35e721bed4ed7a8ae4a1c968530d921dd5c05f17f5318732",
+        "src/pptx/index.ts": "5a916d91446944d541e59a4adb659b7e2041e948319b5bab8d1f8a97f8629977",
+        "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+        "src/workflow/index.ts": "e943cad7b77794b1d3747bc47ffb813d4793a8396312d1b5b3c38d072cc2145e",
+        "src/docx/redline.ts": "3d4a44a3dfaa3a2e0d7572c623827beec11cacda21a65b17e3aca53835a23760",
+        "src/docx/paragraph-style.ts": "089c26a38d759ddf2c262f0865f290c32901f49c96b6496895d60d8d4c5b25c3",
+        "src/docx/comments.ts": "eca35561548bf0bed07f01231bb4342066915b2523bc1252896428ea29706ab6",
+        "src/docx/revisions.ts": "b60d034a5ca96ca533cd9e04cd39c2a28a3893b0d875fa5e531cd4cbdf765add",
+        "src/docx/run-formatting.ts": "00b8c39211bc0507a7ed2ab516d3f3780038b23d2c3d9292bbce8129362897c0",
+        "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+        "src/docx/index.ts": "a8e9fa2235d6988c018b0e9b5495209bbe0e4c0135faa3cb7855b05a27ea7dc9",
+        "src/docx/story.ts": "35739c82a5fe8adea8750305a8cac18a670d35da9be435bed4f2913e98fe1d27",
+        "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e",
+        "src/xlsx/index.ts": "5d817686f0a2107a725525b0115b7aa7846a3760390476179aff356eaafa4f73",
+        "src/xlsx/styles.ts": "b682e6e7065792b2d71d10a51f683a009593a7c0541387b15d6158786d4414ec"
+      },
+      "versions": {
+        "bun": "1.4.1",
+        "platform": "linux",
+        "arch": "x64"
+      }
+    }
+  ],
+  "performance": {
+    "schemaVersion": 1,
+    "status": "passed",
+    "environment": {
+      "bun": "1.4.1",
+      "platform": "linux",
+      "arch": "x64",
+      "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+      "logicalCpus": 6
+    },
+    "method": {
+      "timing": "in-memory open/mutate/serialize/reopen and listed correctness checks included; input construction excluded",
+      "samples": 7,
+      "warmups": 1,
+      "p95": "nearest rank",
+      "concurrency": 1,
+      "gc": "not controlled",
+      "memory": "process RSS after all workloads; not peak or per-operation allocation",
+      "comparison": "none; no portable performance threshold"
+    },
+    "rssAfterBytes": 96038912,
+    "results": [
+      {
+        "id": "xml-parse-edit-reparse",
+        "inputBytes": 23787,
+        "inputSha256": "88f682e05363cb92dc147c47ab3fec1cfb0e6030a091e93fae2acb81b4c7d3aa",
+        "dimensions": {
+          "elements": 1001
+        },
+        "warmups": 1,
+        "samplesMs": [
+          3.8542770000000246,
+          3.9119360000000256,
+          3.944855000000018,
+          3.735351000000037,
+          3.847570000000019,
+          4.226089000000002,
+          14.351304000000027
+        ],
+        "medianMs": 3.9119360000000256,
+        "p95Ms": 14.351304000000027,
+        "minMs": 3.735351000000037,
+        "maxMs": 14.351304000000027,
+        "correctness": "passed"
+      },
+      {
+        "id": "zip64-read-write-read",
+        "inputBytes": 59746,
+        "inputSha256": "f5c14d635718f493667c2e66f243efd84b48f54fbffbb62ffb000eaa2471ce7a",
+        "dimensions": {
+          "members": 128,
+          "payloadBytes": 524288
+        },
+        "warmups": 1,
+        "samplesMs": [
+          19.450593999999967,
+          41.280821,
+          26.205273000000034,
+          21.127034999999978,
+          9.982066999999915,
+          6.03640299999995,
+          6.4368189999999
+        ],
+        "medianMs": 19.450593999999967,
+        "p95Ms": 41.280821,
+        "minMs": 6.03640299999995,
+        "maxMs": 41.280821,
+        "correctness": "passed"
+      },
+      {
+        "id": "docx-open-edit-save-reopen",
+        "inputBytes": 1321,
+        "inputSha256": "760ab7b7817f64817a5e728134062c90824c6d145221fbe266ae9bc80b37c8db",
+        "dimensions": {
+          "paragraphs": 50,
+          "edits": 1
+        },
+        "warmups": 1,
+        "samplesMs": [
+          1.7229170000000522,
+          1.0609949999999344,
+          1.0182000000000926,
+          0.9929690000000164,
+          0.9461300000000392,
+          0.9424870000000283,
+          3.3982590000000528
+        ],
+        "medianMs": 1.0182000000000926,
+        "p95Ms": 3.3982590000000528,
+        "minMs": 0.9424870000000283,
+        "maxMs": 3.3982590000000528,
+        "correctness": "passed"
+      },
+      {
+        "id": "pptx-open-append-box-save-reopen",
+        "inputBytes": 11695,
+        "inputSha256": "f41fe723d77645877c83f0a688fbef67fa24ae94fa52cbf6d94f2c9e39f0ee8b",
+        "dimensions": {
+          "slides": 8,
+          "boxesAdded": 1
+        },
+        "warmups": 1,
+        "samplesMs": [
+          6.714358999999945,
+          12.392774999999915,
+          6.647785999999996,
+          3.3733270000000175,
+          4.164546000000087,
+          3.2378810000000158,
+          5.218890999999985
+        ],
+        "medianMs": 5.218890999999985,
+        "p95Ms": 12.392774999999915,
+        "minMs": 3.2378810000000158,
+        "maxMs": 12.392774999999915,
+        "correctness": "passed"
+      },
+      {
+        "id": "xlsx-open-style-save-reopen",
+        "inputBytes": 2786,
+        "inputSha256": "15665ad912577fe49115eb800f3598d7e130e07697a9c7cde876b295746ae9c3",
+        "dimensions": {
+          "cells": 128,
+          "styleEdits": 1
+        },
+        "warmups": 1,
+        "samplesMs": [
+          3.5871439999999666,
+          2.6877719999999954,
+          3.6011819999999943,
+          2.6408199999999624,
+          3.4508280000000013,
+          2.609456000000023,
+          3.4121529999999893
+        ],
+        "medianMs": 3.4121529999999893,
+        "p95Ms": 3.6011819999999943,
+        "minMs": 2.609456000000023,
+        "maxMs": 3.6011819999999943,
+        "correctness": "passed"
+      }
+    ],
+    "runId": "18422514-f685-4832-a592-106a9d1b65ac",
+    "sourceSha256": "ac4a8d344fbe8beb12fc0666f5d74447d2cd433761da007cc4b45b6f81585eff"
+  },
+  "review": {
+    "type": "bounded read-only sibling review",
+    "ownerFixes": [
+      "mutant caller buffer verified on acceptance and typed refusal",
+      "performance/property stale report invalidated with run ID and running/failed states",
+      "DOCX member names exact; XLSX removal saved state checked"
+    ],
+    "independentRetest": false
+  },
+  "unclosed": [
+    "Coverage-guided fuzzing, shrinking and unbounded input spaces",
+    "Large archives/format graph stress",
+    "Portable performance comparisons and peak memory",
+    "Full format parity"
+  ]
+}

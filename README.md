@@ -71,6 +71,9 @@ It currently fails as expected.
 LibreOffice and Poppler. It catches schema errors, missing PDF text and one
 external calculation round trip. See [independent checks](docs/contracts/office-oracles.md)
 for prerequisites and limits; these tools are never production dependencies.
+`make property-campaign` runs fixed-seed XML/ZIP/Office properties and five bounded
+timing workloads. [Campaign scope](docs/contracts/property-campaign.md) describes
+replay inputs, refusal accounting and measurement limits.
 
 Tests use the tagged shared reference submodule. Clone with --recurse-submodules
 or run git submodule update --init --recursive. Fixtures are read-only; missing
