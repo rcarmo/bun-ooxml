@@ -125,6 +125,11 @@
       "path": "references/fixtures-ooxml/workflows/docx/style-authoring.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/pptx/text-box.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

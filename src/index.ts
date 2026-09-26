@@ -6,7 +6,7 @@ export { inspectStories, storyParts, type RevisionView, type StoryInspection } f
 export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding } from "./docx/revisions.ts";
 export { trackedReplace } from "./docx/redline.ts";
 export { inspectComments, setCommentResolved, type CommentInfo, type CommentFinding, type CommentInspection } from "./docx/comments.ts";
-export { Presentation } from "./pptx/index.ts";
+export { Presentation, type TextBoxGeometry, type TextBoxOptions, type TextBoxReceipt } from "./pptx/index.ts";
 export { Workbook } from "./xlsx/index.ts";
 export { patchOffice, type PatchRequest, type PatchReceipt, type TargetResult } from "./workflow/index.ts";
 export type { Story, StoryKind } from "./docx/story.ts";

@@ -1,6 +1,8 @@
 import { posix } from "node:path";
 
 import { OoxmlError } from "../errors.ts";
+import {appendTextBox,textBoxRequest,type TextBoxGeometry,type TextBoxOptions,type TextBoxReceipt} from './text-box.ts';
+export type {TextBoxGeometry,TextBoxOptions,TextBoxReceipt} from './text-box.ts';
 import { addPart, addRelationship, nextPartName } from "../opc/graph.ts";
 import { OpcPackage, type Relationship } from "../opc/package.ts";
 import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
@@ -241,6 +243,18 @@ export class Slide {
     const version = this.presentation.currentSlideVersion(this.partName);
     return collectSlideTables(this.presentation.package.text(this.partName), this.partName)
       .map((table, tableIndex) => new Table(this, tableIndex, version, table.shapeId));
+  }
+
+  /** Append a slide-space text box. Newline sequences become separate paragraphs. */
+  addTextBox(text: string, geometry: TextBoxGeometry, options: TextBoxOptions = {}): TextBoxReceipt {
+    const request=textBoxRequest(text,geometry,options),pkg=this.presentation.package;
+    const main=pkg.mainPart();
+    if(resolveSlideParts(pkg,main)[this.index]!==this.partName)throw new OoxmlError('PPTX_STALE_SLIDE','Slide order or identity changed outside this handle');
+    if(elements(parseXml(pkg.text(main)),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses text-box authoring');
+    const result=appendTextBox(pkg.text(this.partName),request);
+    pkg.transaction(()=>{pkg.set(this.partName,result.xml);pkg.toBytes();});
+    this.presentation.bumpSlideVersion(this.partName);
+    return {shapeId:result.shapeId,partName:this.partName,paragraphCount:result.paragraphCount};
   }
 
   addTable(rows: number, columns: number, geometry: TableGeometry): Table {

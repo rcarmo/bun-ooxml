@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "scope": "Positioned plain PPTX text-box append; no effective inheritance, fitting or Office rendering credit",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.11.0",
+    "commit": "48f1b3bebf65c29931383a0daab9ed95301c482b",
+    "manifestSha256": "be127155ccd0309c9b59c2cd9602e09e9a36ca61e5ba58356f9f5ca91590286f",
+    "annotatedTagObject": "2a83d412a05cdc3db3d07c441b372b5a9b8931c4"
+  },
+  "checks": {
+    "candidate": {
+      "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+      "runId": "edc87d67-9415-416b-8189-3432c5c05d5e",
+      "unitTests": 313,
+      "assertions": 3863,
+      "acceptanceCases": 226,
+      "log": "/workspace/tmp/bun-text-box-candidate.log"
+    },
+    "released": {
+      "command": "make check",
+      "mode": "default-no-overrides",
+      "runId": "69da1809-7554-47ba-a13c-1209c573c451",
+      "unitTests": 313,
+      "assertions": 3863,
+      "acceptanceCases": 226,
+      "textBoxCases": 23,
+      "examples": 3,
+      "log": "/workspace/tmp/bun-text-box-release.log"
+    }
+  },
+  "sourceSha256": {
+    "src/pptx/index.ts": "6933e5bfc674dd6adad77ec423c2e4d3b80beb30a0f531e344bb607b27a29581",
+    "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+    "src/index.ts": "27c77c2c88c691acfec0987c713962dcdc41f0d4ec2a07d385b3031465a9fc21",
+    "tests/acceptance/text-box.ts": "ec053673d9309fcc5dac36ddbac0ca5684f3bd19d99efaac8e0010f2b0d335a3",
+    "tests/unit/pptx-text-box.test.ts": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+  },
+  "caseOutcomes": [
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"plain\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"multiline\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"empty\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"formatted\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"alias\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"default-namespace\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"extension-tail\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-authoring -- kind=\"nested-id\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"negative-position\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"zero-extent\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"fractional-geometry\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"oversized-geometry\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"invalid-text\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"invalid-options\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"duplicate-id\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"malformed-id\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"exhausted-id\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"duplicate-tree\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"missing-prefix-properties\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"misplaced-extension\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"alternate-content\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"transformed-tree\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-pptx-text-box-refusal -- kind=\"protected-presentation\"",
+      "status": "passed",
+      "steps": 3
+    }
+  ],
+  "review": {
+    "python": "Bounded read-only source review found no confirmed runtime bug. Owner strengthened exact XML custody/order/multiplicity assertion and added nested descendant shape ID coverage; full owner gate rerun. No independent retest credit."
+  },
+  "siblingReferenceGates": {
+    "python": {
+      "sourceCommit": "0229c14",
+      "scopedChecks": 82,
+      "mutation": {
+        "cases": 19,
+        "steps": 159
+      },
+      "xml": {
+        "cases": 10,
+        "steps": 40
+      },
+      "package": {
+        "cases": 14,
+        "steps": 47
+      },
+      "priorAssetsUnchanged": 142,
+      "log": "/workspace/tmp/python-v011-candidate.log",
+      "textBoxExecutionCredit": false
+    },
+    "go": {
+      "sourceCommit": "6991843403bb313ceb6e3ba11c13e28fd9a27437",
+      "batch": 121,
+      "acceptanceCases": 291,
+      "priorAssetsUnchanged": 142,
+      "textBoxExecutionCredit": false
+    }
+  },
+  "limits": [
+    "No arbitrary-shape editing, deletion or cloning",
+    "No layout/theme inheritance calculation or text fitting",
+    "No independent PowerPoint/schema validation or complete format parity"
+  ]
+}

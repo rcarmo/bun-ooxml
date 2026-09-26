@@ -97,6 +97,23 @@ within Excel bounds, keeping rows/cells sorted and dimension metadata ordered.
 Reopen saved files and assert expected content. Native Office rendering has not
 been independently verified. `examples/create-office.ts` is an executable example.
 
+## Positioned slide text boxes
+
+```ts
+const slide = presentation.slides[0]!;
+const receipt = slide.addTextBox("First line\nSecond line", {
+  x: 914400, y: 914400, width: 5486400, height: 914400,
+}, {name: "Status", bold: true});
+await presentation.save(output);
+```
+
+Geometry uses integer EMUs. Newline sequences create paragraphs; empty lines
+survive. Reacquire text anchors and tables on the edited slide after appending.
+Existing shape XML and all other package parts stay unchanged. Unsupported tree
+structure, ambiguous shape IDs and protection refuse atomically. See the
+[text-box contract](../contracts/text-box.md) for limits; rendering and inherited
+formatting are not independently verified.
+
 ## Rectangular tables
 
 ```ts

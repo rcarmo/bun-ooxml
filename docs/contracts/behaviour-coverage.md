@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-Shared reference manifest: **142 assets**. Implementation evidence remains consumer-local.
+Shared reference manifest: **143 assets**. Implementation evidence remains consumer-local.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|
@@ -29,6 +29,7 @@ Shared reference manifest: **142 assets**. Implementation evidence remains consu
 | references/fixtures-ooxml/workflows/package/zip32.feature | implemented | 4 | 4 | 25 |
 | references/fixtures-ooxml/workflows/pptx/creation.feature | implemented | 3 | 3 | 9 |
 | references/fixtures-ooxml/workflows/pptx/tables.feature | implemented | 4 | 5 | 15 |
+| references/fixtures-ooxml/workflows/pptx/text-box.feature | implemented | 2 | 23 | 77 |
 | references/fixtures-ooxml/workflows/xlsx/creation.feature | implemented | 7 | 7 | 29 |
 | references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 19 |
 | references/fixtures-ooxml/workflows/xml/parsing.feature | implemented | 5 | 5 | 22 |

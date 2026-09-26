@@ -12,9 +12,10 @@ if(reopenedDoc.paragraphs[0]?.text!=='Bun authored this document.'||reopenedDoc.
 const deck=Presentation.create();deck.addTextSlide('Bun authored this slide','Native title/subtitle');const second=deck.addTextSlide('Second slide');
 second.addTable(2,2,{x:914400,y:1828800,width:5486400,height:1828800});
 second.tables[0]!.cell(0,0).text='Name';second.tables[0]!.cell(1,1).text='42';
+second.addTextBox('A positioned text box',{x:914400,y:4572000,width:5486400,height:914400},{bold:true});
 const pptPath=join(out,'created.pptx');await deck.save(pptPath);
 const reopenedDeck=await Presentation.open(pptPath);
-if(reopenedDeck.slides.length!==2||reopenedDeck.slides[1]?.tables[0]?.cell(1,1).text!=='42')throw Error('PPTX authoring lost');
+if(reopenedDeck.slides.length!==2||reopenedDeck.slides[1]?.tables[0]?.cell(1,1).text!=='42'||!reopenedDeck.slides[1]?.inspectText('created').some(p=>p.text==='A positioned text box'))throw Error('PPTX authoring lost');
 const workbook=Workbook.create();workbook.worksheet('Sheet1').setCellValue('A1','Bun authored this cell');const results=workbook.addWorksheet('Results');results.setCellValue('B3',42);
 const xlsPath=join(out,'created.xlsx');await workbook.save(xlsPath);
 if((await Workbook.open(xlsPath)).worksheet('Results').getCell('B3')?.value!==42)throw Error('XLSX authoring lost');
