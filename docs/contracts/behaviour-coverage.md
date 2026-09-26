@@ -6,10 +6,10 @@ current per-step results in `artifacts/acceptance.json`.
 
 | Inventory | Implemented | Planned | Total |
 |---|---:|---:|---:|
-| features | 16 | 3 | 19 |
-| scenarios | 71 | 12 | 83 |
-| cases | 95 | 14 | 109 |
-| steps | 494 | 57 | 551 |
+| features | 17 | 3 | 20 |
+| scenarios | 74 | 12 | 86 |
+| cases | 101 | 14 | 115 |
+| steps | 513 | 57 | 570 |
 
 ## Source/test mappings
 
@@ -32,6 +32,7 @@ refinement and reviewed Gherkin step mappings before receiving parity credit.
 * `features/opc/graph.feature`: implemented, 4 scenario(s), 4 expanded case(s).
 * `features/opc/package.feature`: implemented, 3 scenario(s), 3 expanded case(s).
 * `features/opc/relationship-namespaces.feature`: implemented, 2 scenario(s), 4 expanded case(s).
+* `features/opc/xml-names.feature`: implemented, 3 scenario(s), 6 expanded case(s).
 * `features/opc/xml.feature`: implemented, 5 scenario(s), 5 expanded case(s).
 * `features/opc/zip.feature`: implemented, 4 scenario(s), 4 expanded case(s).
 * `features/opc/zip64.feature`: implemented, 4 scenario(s), 4 expanded case(s).

@@ -60,7 +60,10 @@ manifests and ID migrations; it does not execute Python scripts.
 * Resolve attribute identity by `attribute(element, localName, namespaceURI)`.
   `r:id` uses the officeDocument relationship URI; relationship-file elements use
   the package relationship URI. Valid prefixes may be renamed or locally rebound.
-  Unprefixed attributes never inherit the default element namespace. Do not copy
+  Unprefixed attributes never inherit the default element namespace. Both QName
+  components must be valid NCNames, including declared prefixes; testing only the
+  whole XML Name can admit `p:1`. Outside the root, only literal XML whitespace is
+  allowed (NBSP and character-reference whitespace refuse). Do not copy
   a wrong namespace into a synthetic fixture to match an implementation bug.
 * A cell edit can invalidate caches on other sheets. A style index is valid only
   when its style-table dependency exists in the output.

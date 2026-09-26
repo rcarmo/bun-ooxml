@@ -254,14 +254,15 @@ export function parseXml(text: string): XmlDocument {
 
     // Normalise literal XML line endings before entity expansion. Character
     // references such as &#xD; retain their value; source offsets stay unchanged.
-    const decoded = decodeEntities(raw.replace(/\r\n?/g, "\n"));
     if (stack.length === 0) {
-      if (!isXmlWhitespace(decoded)) {
+      // XML prolog/epilog Misc permits literal S, comments and PIs only.
+      // A character reference remains content even when it decodes to a space.
+      if (!isXmlWhitespace(raw)) {
         fail("XML_MALFORMED", "Character data is only allowed inside the root element");
       }
       return;
     }
-
+    const decoded = decodeEntities(raw.replace(/\r\n?/g, "\n"));
     appendText(decoded);
   }
 
@@ -776,6 +777,18 @@ function resolveAttributeName(name: string, frame: Map<string, string>): Qualifi
   return { ...qualified, namespaceURI };
 }
 
+function isNcName(name: string): boolean {
+  if (!name) return false;
+  const first=name.codePointAt(0)!;
+  if(first===0x3a || !isNameStartCodePoint(first))return false;
+  for(let index=first>0xffff?2:1;index<name.length;){
+    const code=name.codePointAt(index)!;
+    if(code===0x3a || !isNameCharCodePoint(code))return false;
+    index+=code>0xffff?2:1;
+  }
+  return true;
+}
+
 function isNamespaceDeclaration(name: string): boolean {
   return name === "xmlns" || name.startsWith("xmlns:");
 }
@@ -783,10 +796,11 @@ function isNamespaceDeclaration(name: string): boolean {
 function splitQualifiedName(name: string): QualifiedName {
   const first = name.indexOf(":");
   if (first === -1) {
+    if (!isNcName(name)) fail("XML_MALFORMED", `Malformed qualified name '${name}'`);
     return { prefix: "", localName: name };
   }
 
-  if (first === 0 || first === name.length - 1 || name.indexOf(":", first + 1) !== -1) {
+  if (!isNcName(name.slice(0, first)) || !isNcName(name.slice(first + 1))) {
     fail("XML_MALFORMED", `Malformed qualified name '${name}'`);
   }
 

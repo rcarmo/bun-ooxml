@@ -1,5 +1,6 @@
 import type { StepBinding } from "../../scripts/gherkin.ts";
 import { bindings as coreBindings } from "./core.ts";
+import { bindings as xmlNameBindings } from "./xml-names.ts";
 import { bindings as graphBindings } from "./graph.ts";
 import { bindings as zip64Bindings } from "./zip64.ts";
 import { bindings as namespaceBindings } from "./relationship-namespaces.ts";
@@ -17,6 +18,7 @@ export const cleanup = cleanupWorkflowFixtures;
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
+  ...xmlNameBindings,
   ...graphBindings,
   ...zip64Bindings,
   ...namespaceBindings,
