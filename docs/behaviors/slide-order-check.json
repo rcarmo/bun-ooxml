@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "scope": "Exact existing-slide permutation; no clone/import/delete or full composition parity",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.14.0",
+    "commit": "083023c10bd8635f905a7ec614e47409d466dd50",
+    "manifestSha256": "fd17b765a3f66eb01aaca6b310703f57dcbe0c9971b209733eb72a160af50703",
+    "annotatedTagObject": "6cba531867d2f4df0b977cd2cf2db00e56395663"
+  },
+  "checks": {
+    "candidate": {
+      "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+      "runId": "4be557b9-2c7c-492a-829b-b5bd517bdd3d",
+      "unitTests": 379,
+      "assertions": 4826,
+      "acceptanceCases": 296,
+      "log": "/workspace/tmp/bun-slide-order-candidate.log"
+    },
+    "released": {
+      "command": "make check",
+      "mode": "default-no-overrides",
+      "runId": "d2feb793-a853-4aa4-aa29-dfbebe7a8301",
+      "unitTests": 380,
+      "assertions": 4830,
+      "acceptanceCases": 296,
+      "slideOrderCases": 21,
+      "examples": 3,
+      "log": "/workspace/tmp/bun-slide-order-release.log"
+    }
+  },
+  "sourceSha256": {
+    "src/pptx/index.ts": "2ac2b87c1507e74742ba7c2d6501036574530ffb8b16d5102a9bfd392058688d",
+    "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
+    "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
+    "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+    "scripts/office-oracles.ts": "8d0f7a616735c9037f821e38ad1380843407b85019def0a74ed3e7d5b2700a64"
+  },
+  "caseOutcomes": [
+    {
+      "id": "@id-pptx-slide-permutation",
+      "caseKey": "@id-pptx-slide-permutation|{\"kind\":\"reverse\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-pptx-slide-permutation",
+      "caseKey": "@id-pptx-slide-permutation|{\"kind\":\"rotate\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-pptx-slide-permutation",
+      "caseKey": "@id-pptx-slide-permutation|{\"kind\":\"same\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-pptx-slide-permutation",
+      "caseKey": "@id-pptx-slide-permutation|{\"kind\":\"empty\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-pptx-slide-permutation",
+      "caseKey": "@id-pptx-slide-permutation|{\"kind\":\"aliased\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-pptx-slide-permutation",
+      "caseKey": "@id-pptx-slide-permutation|{\"kind\":\"default-namespace\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-pptx-slide-permutation",
+      "caseKey": "@id-pptx-slide-permutation|{\"kind\":\"notes\"}",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-index\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"missing-index\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"out-of-range\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"fractional-index\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-id\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-target\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"wrong-mime\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-list\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"lexical-barrier\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"custom-show\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"extension-metadata\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"protected\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"stale-main\"}",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "id": "@id-pptx-slide-permutation-refusal",
+      "caseKey": "@id-pptx-slide-permutation-refusal|{\"kind\":\"stale-relationships\"}",
+      "status": "passed",
+      "steps": 3
+    }
+  ],
+  "independent": {
+    "versions": {
+      "dotnet": "10.0.400",
+      "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+      "poppler": "pdftotext version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "sourceSha256": {
+      "scripts/office-oracles.ts": "8d0f7a616735c9037f821e38ad1380843407b85019def0a74ed3e7d5b2700a64",
+      "scripts/oracle-process.ts": "162ffeee57acf45fe794c3d778960f670548358cad63ea4f2df153a4a0cf7084",
+      "tests/oracles/schema/Program.cs": "6f73c79c8bf5edf71afe1076991032ffc9515ed476a8836c908eb19a5e997ef5",
+      "tests/oracles/schema/SchemaCheck.csproj": "61f37badb8a83b06af9785fd2a7446c9cdf16ac7485f052ecf93a2dcccbb0a22",
+      "tests/oracles/schema/packages.lock.json": "1ad2e65b1c4329e88a7fe77b759fe850443f16bc1fecabb718ad4f54ff381213",
+      "src/docx/index.ts": "31ab5edc5f972cf29e1ff1a82d130962e2b42a0087dfbc5597b021a18248944b",
+      "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+      "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
+      "src/pptx/index.ts": "2ac2b87c1507e74742ba7c2d6501036574530ffb8b16d5102a9bfd392058688d",
+      "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+      "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
+      "src/xlsx/index.ts": "5d817686f0a2107a725525b0115b7aa7846a3760390476179aff356eaafa4f73",
+      "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e"
+    },
+    "inputs": [
+      {
+        "file": "word.docx",
+        "sha256": "a9d43745017e45adfcf5ab111e497cbaf1b8ee83360b0907f50ea80e17c551d9"
+      },
+      {
+        "file": "deck.pptx",
+        "sha256": "d8efd56f9953c350456ff8949c3fa2520a44a34bfdc4d7a540e21ab7a1af8471"
+      },
+      {
+        "file": "book.xlsx",
+        "sha256": "fc1234a42a14a4ab9783b820b80558b9a1280cc8634ef73a272aaec661f0e3cb"
+      }
+    ],
+    "schema": {
+      "schemaVersion": 1,
+      "validator": "DocumentFormat.OpenXml",
+      "version": "3.5.1+Branch.main.Sha.3139fdfd27414548a41555f7848d5728f6e71a42.3139fdfd27414548a41555f7848d5728f6e71a42",
+      "profile": "Office2019",
+      "status": "passed",
+      "results": [
+        {
+          "file": "word.docx",
+          "sha256": "a9d43745017e45adfcf5ab111e497cbaf1b8ee83360b0907f50ea80e17c551d9",
+          "errors": [],
+          "truncated": false
+        },
+        {
+          "file": "deck.pptx",
+          "sha256": "d8efd56f9953c350456ff8949c3fa2520a44a34bfdc4d7a540e21ab7a1af8471",
+          "errors": [],
+          "truncated": false
+        },
+        {
+          "file": "book.xlsx",
+          "sha256": "fc1234a42a14a4ab9783b820b80558b9a1280cc8634ef73a272aaec661f0e3cb",
+          "errors": [],
+          "truncated": false
+        }
+      ]
+    },
+    "deckRendering": {
+      "file": "deck.pdf",
+      "sha256": "ff0f4151f58e24629a9383174948e6cc7a6f1b0c472222342e92765e86a00acb",
+      "pages": 2,
+      "pageSizePoints": [
+        720,
+        540
+      ],
+      "expectedText": [
+        "Native slide oracle",
+        "Second slide oracle",
+        "Positioned oracle box",
+        "Answer",
+        "42"
+      ],
+      "textSha256": "9f621e4568c391e1b6155a87e4c778968f64abb35435812ac01647753fcce5b1",
+      "status": "passed",
+      "visualComparison": "not performed"
+    },
+    "scope": "Two authored slides reversed; expected title/body markers on new PDF pages, no general visual fidelity claim"
+  },
+  "review": {
+    "scope": "Bounded read-only sibling source review",
+    "finding": "Noncanonical numeric array own keys such as01 were accepted as extra data",
+    "ownerCorrection": "Reproduced behavioral red; canonical numeric key guard plus00/01/0002 data/getter regression; no getter invocation",
+    "independentRetest": false,
+    "ownerAdditionalRegression": "Restored public three-argument Slide constructor source compatibility; alias tracks unique part index through reorder and saved content edits",
+    "releaseReview": "Additional delegated read-only review timed out; no review credit"
+  },
+  "siblingReferenceGates": {
+    "go": {
+      "sourceCommit": "9ba1324e910468759b73f64b6eaa5cc7a8b97352",
+      "batch": 130,
+      "acceptanceCases": 291,
+      "priorAssetsUnchanged": 145,
+      "orderExecutionCredit": false
+    },
+    "python": {
+      "sourceCommit": "c890fd0caf070c191df0b172540ebeb895cdf2bb",
+      "scopedChecks": 82,
+      "mutation": {
+        "cases": 19,
+        "steps": 159
+      },
+      "xml": {
+        "cases": 10,
+        "steps": 40
+      },
+      "package": {
+        "cases": 14,
+        "steps": 47
+      },
+      "priorAssetsUnchanged": 145,
+      "log": "/workspace/tmp/python-v014-candidate.log",
+      "orderExecutionCredit": false
+    }
+  },
+  "limits": [
+    "Custom shows/extensions/protection/unknown order-dependent metadata refuse",
+    "No slide clone/import/delete/theme reconciliation",
+    "MicrosoftPowerPoint and general deck rendering not validated"
+  ]
+}

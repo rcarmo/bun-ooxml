@@ -6,7 +6,9 @@ preserving the Office package parts an edit did not touch.
 
 Initial authoring creates DOCX paragraphs/tables, PPTX title slides/tables and XLSX sheets/cells
 entirely in Bun. Slides also accept [positioned text boxes](docs/contracts/text-box.md)
-with explicit geometry and optional direct bold/italic flags. Existing-file edits include guarded cross-run replacement, slide
+with explicit geometry and optional direct bold/italic flags.
+[Slide reordering](docs/contracts/slide-order.md) preserves slide identities and
+package parts. Existing-file edits include guarded cross-run replacement, slide
 text/notes and cell edits with bounded formula-cache invalidation. Existing XLSX
 [cell-style selection](docs/contracts/cell-style.md) preserves values, formulas and caches. Word paragraph
 runs support direct bold/italic overrides and existing paragraph-style selection

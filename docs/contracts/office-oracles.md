@@ -24,7 +24,8 @@ make office-oracles
   read-only and checked for unchanged hashes.
 * LibreOffice exports each sample to an isolated PDF directory with a fresh
   temporary user profile. Poppler checks expected page counts (1, 2, 1), text
-  markers, the two slide titles on their expected pages, and the DOCX sample's
+  markers, the two slide titles on their expected pages after reversing slide
+  order, and the DOCX sample's
   792×612-point landscape page dimensions. These checks detected
   missing title text; they do not measure clipping in general, compare pixels,
   measure all bounds or establish font/layout equivalence with Microsoft Office.

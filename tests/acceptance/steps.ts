@@ -15,6 +15,7 @@ import { bindings as styleAuthoringBindings } from './style-authoring.ts';
 import { bindings as textBoxBindings } from './text-box.ts';
 import { bindings as cellStyleBindings } from './cell-style.ts';
 import { bindings as pageLayoutBindings } from './page-layout.ts';
+import { bindings as slideOrderBindings } from './slide-order.ts';
 import { bindings as trackedWorkflowBindings, cleanupTrackedWorkflowFixtures } from './tracked-workflow.ts';
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as createPptxBindings } from "./create-pptx.ts";
@@ -44,6 +45,7 @@ export const bindings: StepBinding[] = [
   ...textBoxBindings,
   ...cellStyleBindings,
   ...pageLayoutBindings,
+  ...slideOrderBindings,
   ...trackedWorkflowBindings,
   ...createDocxBindings,
   ...createPptxBindings,

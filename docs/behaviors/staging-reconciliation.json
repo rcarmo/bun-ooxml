@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 367,
+  "nativeDeclarations": 380,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 140,
+  "withoutStagingCount": 153,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -1063,7 +1063,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "currentSourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1072,7 +1072,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "currentSourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1083,7 +1083,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "currentSourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -2602,6 +2602,71 @@
       "sourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68"
     },
     {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:reorder preserves captured slide anchors and table cells while indexes follow order",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:a text anchor captured before reorder can still edit its original slide",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:slide arrays are detached and repeated reorder plus append maintain indexes",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:serialization rollback preserves earlier edits, handle identities and order snapshot",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:same-order requests still validate protection, IDs and stale metadata",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:invalid lexical slide IDs refuse before archive changes",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:disk saved slide order and linked notes follow logical handles",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:public three-argument Slide constructor retains identity across reorders",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79"
+    },
+    {
       "id": "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",
       "path": "tests/unit/pptx-text-box.test.ts",
       "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
@@ -2689,7 +2754,7 @@
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
       "path": "tests/unit/references.test.ts",
-      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4"
+      "sourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5"
     },
     {
       "id": "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",

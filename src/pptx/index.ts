@@ -4,7 +4,8 @@ import { OoxmlError } from "../errors.ts";
 import {appendTextBox,textBoxRequest,type TextBoxGeometry,type TextBoxOptions,type TextBoxReceipt} from './text-box.ts';
 export type {TextBoxGeometry,TextBoxOptions,TextBoxReceipt} from './text-box.ts';
 import { addPart, addRelationship, nextPartName } from "../opc/graph.ts";
-import { OpcPackage, type Relationship } from "../opc/package.ts";
+import { OpcPackage, relationshipPath, sameBytes, type Relationship } from "../opc/package.ts";
+import {permutation,reorderSlideList} from './slide-order.ts';
 import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
 
 const PRESENTATION_NS = "http://schemas.openxmlformats.org/presentationml/2006/main";
@@ -129,7 +130,9 @@ export type InspectedParagraph = {
  * several plausible layouts or attempt broader inheritance synthesis.
  */
 export class Presentation {
-  readonly slides: Slide[];
+  private slideHandles: Slide[];
+  private orderSnapshot = new Map<string,Uint8Array>();
+  get slides(): Slide[] { return [...this.slideHandles]; }
   readonly package: OpcPackage;
 
   private readonly slideVersions = new Map<string, number>();
@@ -142,7 +145,8 @@ export class Presentation {
     for (const part of slideParts) {
       this.slideVersions.set(part, 0);
     }
-    this.slides = slideParts.map((part, index) => new Slide(this, part, index));
+    this.slideHandles = slideParts.map((part) => new Slide(this, part));
+    this.captureOrderSnapshot();
   }
 
   static create(): Presentation {
@@ -154,6 +158,32 @@ export class Presentation {
       input instanceof ArrayBuffer ? new Uint8Array(input.slice(0)) : input,
     );
     return new Presentation(pkg);
+  }
+
+  /** Exact zero-based permutation, preserving slide identity and existing anchors. */
+  reorderSlides(order: readonly number[]):{changed:number} {
+    const indexes=permutation(order,this.slideHandles.length);this.assertOrderSnapshot();
+    const next=reorderSlideList(this.package,this.mainPartName,this.slideHandles.map(s=>s.partName),indexes);
+    if(next===this.package.text(this.mainPartName))return {changed:0};
+    this.package.transaction(()=>{this.package.set(this.mainPartName,next);this.package.toBytes();});
+    this.slideHandles=indexes.map(i=>this.slideHandles[i]!);this.captureOrderSnapshot();return {changed:1};
+  }
+
+  currentSlideIndex(slide: Slide): number {
+    const ownedIndex = this.slideHandles.indexOf(slide);
+    if (ownedIndex >= 0) return ownedIndex;
+    // Publicly constructed aliases retain their part identity, not a stale index hint.
+    const matches = this.slideHandles.filter(handle => handle.partName === slide.partName);
+    if (matches.length !== 1) {
+      throw new OoxmlError('PPTX_STALE_SLIDE', 'Slide handle is not in this presentation or is ambiguous');
+    }
+    return this.slideHandles.indexOf(matches[0]!);
+  }
+  private captureOrderSnapshot():void {
+    this.orderSnapshot=new Map(['_rels/.rels',this.mainPartName,relationshipPath(this.mainPartName)].map(n=>[n,this.package.get(n)!]));
+  }
+  private assertOrderSnapshot():void {
+    for(const [name,before]of this.orderSnapshot){const now=this.package.get(name);if(!now||!sameBytes(now,before))throw new OoxmlError('PPTX_STALE_PRESENTATION','Presentation metadata changed outside this wrapper');}
   }
 
   get slideCount(): number {
@@ -176,6 +206,7 @@ export class Presentation {
    * method refuses before mutating package bytes.
    */
   addTextSlide(title: string, subtitle?: string): Slide {
+    this.assertOrderSnapshot();
     validateTextSlideArgs(title, subtitle);
 
     let createdPartName = "";
@@ -207,9 +238,10 @@ export class Presentation {
       this.package.toBytes();
     });
 
-    const slide = new Slide(this, createdPartName, this.slides.length);
+    const slide = new Slide(this, createdPartName);
     this.slideVersions.set(createdPartName, 0);
-    this.slides.push(slide);
+    this.slideHandles.push(slide);
+    this.captureOrderSnapshot();
     return slide;
   }
 
@@ -236,8 +268,11 @@ export class Slide {
   constructor(
     private readonly presentation: Presentation,
     readonly partName: string,
-    readonly index: number,
+    // Retained for source compatibility; logical order now follows part identity.
+    _initialIndex?: number,
   ) {}
+
+  get index():number {return this.presentation.currentSlideIndex(this);}
 
   get tables(): Table[] {
     const version = this.presentation.currentSlideVersion(this.partName);

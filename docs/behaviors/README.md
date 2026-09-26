@@ -1,17 +1,17 @@
 # Native behaviour catalogue
 
 `native-test-inventory.json` records the current Bun test declarations from
-`tests/unit/**/*.test.ts`. Schema 2 contains 367 declarations in 40 files. This is an
+`tests/unit/**/*.test.ts`. Schema 2 contains 380 declarations in 41 files. This is an
 AST denominator, not a runtime-expanded case count or proof of semantic coverage.
 It records whole-file hashes, declaration locations, suite/title identities,
 inline bodies, direct matcher expressions, call names and review reasons.
 
-76 declarations have dynamic titles, parameterisation, loops, conditions or
-lifecycle modifiers requiring review. 107 declarations need some assertion or
+82 declarations have dynamic titles, parameterisation, loops, conditions or
+lifecycle modifiers requiring review. 113 declarations need some assertion or
 expansion review, including tests whose assertions are in helpers. These groups
 overlap. The inventory does not evaluate helper bodies or expand runtime tables.
 All source files in the discovery glob are hashed, including files with no tests.
-The snapshot also hashes 28 other TypeScript files under `tests/`, so test-helper
+The snapshot also hashes 29 other TypeScript files under `tests/`, so test-helper
 and acceptance-binding changes invalidate it. Dependencies outside `tests/` are not
 hashed by this inventory; runtime behaviour is covered by separate test runs.
 Three declarations contain deferred matcher syntax in nested functions; that
@@ -44,7 +44,7 @@ No inventory row grants execution credit.
 
 The five `staging-*.json` candidate groups retain 227 earlier declaration IDs.
 `staging-reconciliation.json` finds all 227 identities in the current source and
-lists 140 newer declarations without historical staging. The report itself is
+lists 153 newer declarations without historical staging. The report itself is
 excluded from candidate discovery. These counts describe only those five files,
 not the separate canonical consumer mappings.
 
@@ -68,6 +68,6 @@ Record the current file hashes and gaps when proposing shared IDs. Preserve
 operation differences between consumers. Shared Gherkin and facts live centrally;
 local mappings, inventories and native results remain consumer-specific.
 
-Current acceptance executes 275 implemented cases selected from the shared
-reference. Neither 367 declarations nor 227 candidate IDs increases that result or
+Current acceptance executes 296 implemented cases selected from the shared
+reference. Neither 380 declarations nor 227 candidate IDs increases that result or
 closes the full-format backlog.

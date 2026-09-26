@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 367,
-  "files": 40,
+  "count": 380,
+  "files": 41,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -127,6 +127,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "sha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "declarations": 13,
+      "issues": []
+    },
+    {
       "path": "tests/unit/pptx-tables.test.ts",
       "sha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
       "declarations": 5,
@@ -152,7 +158,7 @@
     },
     {
       "path": "tests/unit/references.test.ts",
-      "sha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "sha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
       "declarations": 4,
       "issues": []
     },
@@ -313,8 +319,12 @@
       "sha256": "019654d045f708ae5d7ba86cf08c35d13e69e28d5cc0b56f5eb604d7ff161255"
     },
     {
+      "path": "tests/acceptance/slide-order.ts",
+      "sha256": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b"
+    },
+    {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "93a6a300ee7e6fcad3fb35a96a289ae00d5880374671bdd77eb9c2a12bc1ce47"
+      "sha256": "0f6f0bb309fbb2a71f0c67c46e93619a5d14ab628dabb3e2d51955d7be0725ba"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -401,6 +411,12 @@
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
+    "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
+    "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
+    "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
+    "bun:tests/unit/pptx-slide-order.test.ts:same-order requests still validate protection, IDs and stale metadata",
+    "bun:tests/unit/pptx-slide-order.test.ts:invalid lexical slide IDs refuse before archive changes",
+    "bun:tests/unit/pptx-slide-order.test.ts:noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
     "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
     "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
     "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
@@ -483,6 +499,12 @@
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
+    "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
+    "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
+    "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
+    "bun:tests/unit/pptx-slide-order.test.ts:same-order requests still validate protection, IDs and stale metadata",
+    "bun:tests/unit/pptx-slide-order.test.ts:invalid lexical slide IDs refuse before archive changes",
+    "bun:tests/unit/pptx-slide-order.test.ts:noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
     "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
     "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
     "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
@@ -7529,6 +7551,540 @@
       "unresolved": []
     },
     {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 6,
+      "title": "slide permutations execute21 saved outcomes and atomic refusals",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(21)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const path='workflows/pptx/slide-order.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun')),rows=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inv:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(rows.length),steps:count(rows.reduce((n,c)=>n+c.steps.length,0))}};\n const r=await executeAcceptance(inv,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(21);\n}",
+      "calls": [
+        ".replace",
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "f.scenarios.flatMap",
+        "fixturesRoot",
+        "join",
+        "newAcceptanceRunId",
+        "parseFeature",
+        "rows.reduce"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:reorder preserves captured slide anchors and table cells while indexes follow order",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 17,
+      "title": "reorder preserves captured slide anchors and table cells while indexes follow order",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(a.index).toBe(2)",
+        "expect(b.index).toBe(1)",
+        "expect(d.currentSlideVersion(a.partName)).toBe(version)",
+        "expect(cell.text).toBe('before')",
+        "expect(()=>a.replaceTextAt(anchor,'Alpha','stale')).toThrow('stale')",
+        "expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Changed','after','same slide'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const d=await orderDeck(),a=d.slides[0]!,b=d.slides[1]!;a.addTable(1,1,{x:0,y:0,width:1000,height:1000});a.tables[0]!.cell(0,0).text='before';const table=a.tables[0]!,cell=table.cell(0,0),anchor=a.inspectText('old')[0]!.anchor,version=d.currentSlideVersion(a.partName);d.reorderSlides([2,1,0]);expect(a.index).toBe(2);expect(b.index).toBe(1);expect(d.currentSlideVersion(a.partName)).toBe(version);expect(cell.text).toBe('before');cell.text='after';const fresh=a.inspectText('fresh')[0]!.anchor;a.replaceTextAt(fresh,'Alpha','Changed');expect(()=>a.replaceTextAt(anchor,'Alpha','stale')).toThrow('stale');a.addTextBox('same slide',{x:0,y:0,width:1000,height:1000});const q=await Presentation.open(d.package.toBytes());expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Changed','after','same slide']);\n}",
+      "calls": [
+        "Presentation.open",
+        "a.addTable",
+        "a.addTextBox",
+        "a.inspectText",
+        "a.replaceTextAt",
+        "a.tables.0.cell",
+        "d.currentSlideVersion",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "orderDeck",
+        "q.slides.2.inspectText",
+        "q.slides.2.inspectText().map",
+        "table.cell"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:a text anchor captured before reorder can still edit its original slide",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 20,
+      "title": "a text anchor captured before reorder can still edit its original slide",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Updated'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const d=await orderDeck(),slide=d.slides[0]!,anchor=slide.inspectText('before')[0]!.anchor;d.reorderSlides([1,2,0]);slide.replaceTextAt(anchor,'Alpha','Updated');const q=await Presentation.open(d.package.toBytes());expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Updated']);\n}",
+      "calls": [
+        "Presentation.open",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toEqual",
+        "orderDeck",
+        "q.slides.map",
+        "s.inspectText",
+        "slide.inspectText",
+        "slide.replaceTextAt"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:slide arrays are detached and repeated reorder plus append maintain indexes",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 23,
+      "title": "slide arrays are detached and repeated reorder plus append maintain indexes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.slides[0]).toBe(a)",
+        "expect(d.slideCount).toBe(3)",
+        "expect(a.index).toBe(0)",
+        "expect(last.index).toBe(3)",
+        "expect(last.index).toBe(0)",
+        "expect((await Presentation.open(d.package.toBytes())).slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Delta','Alpha','Beta','Gamma'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const d=await orderDeck(),a=d.slides[0]!,snapshot=d.slides;snapshot.reverse();snapshot.pop();expect(d.slides[0]).toBe(a);expect(d.slideCount).toBe(3);d.reorderSlides([2,0,1]);d.reorderSlides([1,2,0]);expect(d.slides[0]).toBe(a);expect(a.index).toBe(0);const last=d.addTextSlide('Delta');expect(last.index).toBe(3);d.reorderSlides([3,0,1,2]);expect(last.index).toBe(0);expect((await Presentation.open(d.package.toBytes())).slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Delta','Alpha','Beta','Gamma']);\n}",
+      "calls": [
+        ".slides.map",
+        "Presentation.open",
+        "d.addTextSlide",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "orderDeck",
+        "s.inspectText",
+        "snapshot.pop",
+        "snapshot.reverse"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:serialization rollback preserves earlier edits, handle identities and order snapshot",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 26,
+      "title": "serialization rollback preserves earlier edits, handle identities and order snapshot",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.reorderSlides([2,1,0])).toThrow('injected order serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.slides).toEqual(handles)",
+        "expect(a.index).toBe(0)",
+        "expect(a.index).toBe(2)",
+        "expect(a.inspectText('after').at(-1)!.text).toBe('earlier')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const d=await orderDeck(),a=d.slides[0]!;a.addTextBox('earlier',{x:0,y:0,width:1000,height:1000});const before=d.package.toBytes(),handles=d.slides,serialize=OpcPackage.prototype.toBytes;OpcPackage.prototype.toBytes=function(){throw Error('injected order serialization');};try{expect(()=>d.reorderSlides([2,1,0])).toThrow('injected order serialization');}finally{OpcPackage.prototype.toBytes=serialize;}expect(d.package.toBytes()).toEqual(before);expect(d.slides).toEqual(handles);expect(a.index).toBe(0);d.reorderSlides([2,1,0]);expect(a.index).toBe(2);expect(a.inspectText('after').at(-1)!.text).toBe('earlier');\n}",
+      "calls": [
+        "Error",
+        "a.addTextBox",
+        "a.inspectText",
+        "a.inspectText().at",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "orderDeck"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 29,
+      "title": "UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...saved.package.get(main)!.slice(0,2)]).toEqual(le?[255,254]:[254,255])",
+        "expect(saved.package.text(main)).toContain('encoding=\"UTF-16\"')",
+        "expect(saved.package.get(n)).toEqual(b)",
+        "expect(saved.slides[0]!.inspectText('read')[0]!.text).toBe('Gamma')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "for(const le of [true,false])"
+        },
+        {
+          "line": 30,
+          "expression": "for(let i=0;i<xml.length;i++)view.setUint16(2+2*i,xml.charCodeAt(i),le);"
+        },
+        {
+          "line": 30,
+          "expression": "for(const [n,b]of old)if(n!==main)expect(saved.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n for(const le of [true,false]){const d=await orderDeck(),main=d.package.mainPart(),xml=d.package.text(main).replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"'),bytes=new Uint8Array(2+xml.length*2),view=new DataView(bytes.buffer);view.setUint16(0,0xfeff,le);for(let i=0;i<xml.length;i++)view.setUint16(2+2*i,xml.charCodeAt(i),le);d.package.set(main,bytes);const q=await Presentation.open(d.package.toBytes()),old=new Map(q.package.names().map(n=>[n,q.package.get(n)!]));q.reorderSlides([2,1,0]);const saved=await Presentation.open(q.package.toBytes());expect([...saved.package.get(main)!.slice(0,2)]).toEqual(le?[255,254]:[254,255]);expect(saved.package.text(main)).toContain('encoding=\"UTF-16\"');for(const [n,b]of old)if(n!==main)expect(saved.package.get(n)).toEqual(b);expect(saved.slides[0]!.inspectText('read')[0]!.text).toBe('Gamma');}\n}",
+      "calls": [
+        "Presentation.open",
+        "d.package.mainPart",
+        "d.package.set",
+        "d.package.text",
+        "d.package.text().replace",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "orderDeck",
+        "q.package.get",
+        "q.package.names",
+        "q.package.names().map",
+        "q.package.toBytes",
+        "q.reorderSlides",
+        "saved.package.get",
+        "saved.package.get().slice",
+        "saved.package.text",
+        "saved.slides.0.inspectText",
+        "view.setUint16",
+        "xml.charCodeAt"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 32,
+      "title": "slide entries retain exact quote spelling, local aliases and whitespace slots",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(list2.children.map(n=>actual.slice(n.start,n.end))).toEqual([entries[2]!,entries[0]!,entries[1]!])",
+        "expect(actual.slice(list2.openEnd,list2.closeStart)).toBe('\\n  '+entries[2]+'\\n  '+entries[0]+'\\n  '+entries[1])"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for(const n of [...nodes].reverse())"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const d=await orderDeck(),main=d.package.mainPart(),xml=d.package.text(main),nodes=elements(parseXml(xml),'sldId',P);let next=xml;for(const n of [...nodes].reverse()){const raw=xml.slice(n.start,n.end).replace('r:id=',`xmlns:z=\"${R}\" z:id=`).replace(/id=\"(\\d+)\"/,\"id = '$1'\");next=next.slice(0,n.start)+'\\n  '+raw+next.slice(n.end);}d.package.set(main,next);const q=await Presentation.open(d.package.toBytes()),list=elements(parseXml(next),'sldIdLst',P)[0]!,entries=list.children.map(n=>next.slice(n.start,n.end));q.reorderSlides([2,0,1]);const actual=q.package.text(main),list2=elements(parseXml(actual),'sldIdLst',P)[0]!;expect(list2.children.map(n=>actual.slice(n.start,n.end))).toEqual([entries[2]!,entries[0]!,entries[1]!]);expect(actual.slice(list2.openEnd,list2.closeStart)).toBe('\\n  '+entries[2]+'\\n  '+entries[0]+'\\n  '+entries[1]);\n}",
+      "calls": [
+        ".reverse",
+        "Presentation.open",
+        "actual.slice",
+        "d.package.mainPart",
+        "d.package.set",
+        "d.package.text",
+        "d.package.toBytes",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "list.children.map",
+        "list2.children.map",
+        "next.slice",
+        "orderDeck",
+        "parseXml",
+        "q.package.text",
+        "q.reorderSlides",
+        "xml.slice",
+        "xml.slice().replace",
+        "xml.slice().replace().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 35,
+      "title": "permutations reject sparse/getter/nonarray/extended data without invoking getters",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.reorderSlides(order as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 37,
+          "expression": "for(const order of [null,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const d=await orderDeck(),before=d.package.toBytes();let calls=0;const accessor=[0,1,2];Object.defineProperty(accessor,'1',{get(){calls++;return 1;}});const extra=[0,1,2];(extra as any).extra=1;\n for(const order of [null,{},[0,,2],accessor,extra,[0,1,'2'],[0,1,NaN],[0,1,Infinity],[-1,1,2],Object.assign([0,1,2],{[Symbol('extra')]:1})]){expect(()=>d.reorderSlides(order as any)).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(calls).toBe(0);\n}",
+      "calls": [
+        "Object.assign",
+        "Object.defineProperty",
+        "Symbol",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "orderDeck"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:same-order requests still validate protection, IDs and stale metadata",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 39,
+      "title": "same-order requests still validate protection, IDs and stale metadata",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.reorderSlides([0,1,2])).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.reorderSlides([0,1,2])).toThrow('outside')",
+        "expect(()=>d.addTextSlide('unsafe')).toThrow('outside')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const kind of ['protected','duplicate-id','wrong-mime','extension-metadata','custom-show'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n for(const kind of ['protected','duplicate-id','wrong-mime','extension-metadata','custom-show']){const d=await orderDeck(kind),before=d.package.toBytes();expect(()=>d.reorderSlides([0,1,2])).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const d=await orderDeck(),root='_rels/.rels';d.package.set(root,d.package.text(root)+' ');const before=d.package.toBytes();expect(()=>d.reorderSlides([0,1,2])).toThrow('outside');expect(()=>d.addTextSlide('unsafe')).toThrow('outside');expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "d.addTextSlide",
+        "d.package.set",
+        "d.package.text",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "orderDeck"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:invalid lexical slide IDs refuse before archive changes",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 43,
+      "title": "invalid lexical slide IDs refuse before archive changes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>q.reorderSlides([2,1,0])).toThrow()",
+        "expect(q.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 44,
+          "expression": "for(const id of ['255','2147483648','256junk','-256'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n for(const id of ['255','2147483648','256junk','-256']){const d=await orderDeck(),main=d.package.mainPart(),xml=d.package.text(main),node=elements(parseXml(xml),'sldId',P)[0]!;d.package.set(main,xml.slice(0,node.start)+xml.slice(node.start,node.end).replace(/id=\"\\d+\"/,`id=\"${id}\"`)+xml.slice(node.end));const q=await Presentation.open(d.package.toBytes()),before=q.package.toBytes();expect(()=>q.reorderSlides([2,1,0])).toThrow();expect(q.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Presentation.open",
+        "d.package.mainPart",
+        "d.package.set",
+        "d.package.text",
+        "d.package.toBytes",
+        "elements",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "orderDeck",
+        "parseXml",
+        "q.package.toBytes",
+        "q.reorderSlides",
+        "xml.slice",
+        "xml.slice().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:disk saved slide order and linked notes follow logical handles",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 46,
+      "title": "disk saved slide order and linked notes follow logical handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Alpha'])",
+        "expect(q.slides.map(s=>s.readNotesText())).toEqual(['Notes 1','Notes 2','Notes 0'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const {mkdtemp,rm}=await import('node:fs/promises'),{tmpdir}=await import('node:os'),{join}=await import('node:path'),root=await mkdtemp(join(tmpdir(),'bun-slide-order-'));try{const d=await orderDeck('notes');d.reorderSlides([1,2,0]);const path=join(root,'ordered.pptx');await d.save(path);const q=await Presentation.open(path);expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Alpha']);expect(q.slides.map(s=>s.readNotesText())).toEqual(['Notes 1','Notes 2','Notes 0']);}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Presentation.open",
+        "d.reorderSlides",
+        "d.save",
+        "expect",
+        "expect().toEqual",
+        "join",
+        "mkdtemp",
+        "orderDeck",
+        "q.slides.map",
+        "rm",
+        "s.inspectText",
+        "s.readNotesText",
+        "tmpdir"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 50,
+      "title": "noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.reorderSlides(order)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 51,
+          "expression": "for(const key of ['00','01','0002'])for(const accessor of [false,true])"
+        },
+        {
+          "line": 51,
+          "expression": "for(const accessor of [false,true])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const d=await orderDeck(),before=d.package.toBytes();let calls=0;for(const key of ['00','01','0002'])for(const accessor of [false,true]){const order=[2,1,0];Object.defineProperty(order,key,accessor?{get(){calls++;return 1;}}:{value:1});expect(()=>d.reorderSlides(order)).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(calls).toBe(0);\n}",
+      "calls": [
+        "Object.defineProperty",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "orderDeck"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-slide-order.test.ts:public three-argument Slide constructor retains identity across reorders",
+      "path": "tests/unit/pptx-slide-order.test.ts",
+      "line": 54,
+      "title": "public three-argument Slide constructor retains identity across reorders",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(alias.index).toBe(0)",
+        "expect(alias.index).toBe(2)",
+        "expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Alias','retained'])",
+        "expect(()=>new Slide(d,'ppt/slides/absent.xml').index).toThrow('not in this presentation')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+      "body": "{\n const {Slide}=await import('../../src/pptx/index.ts');\n const d=await orderDeck(),part=d.slides[0]!.partName;\n // The third constructor argument was public before reordering existed.\n const alias=new Slide(d,part,0);\n expect(alias.index).toBe(0);\n const anchor=alias.inspectText('constructor')[0]!.anchor;\n d.reorderSlides([2,1,0]);expect(alias.index).toBe(2);\n alias.replaceTextAt(anchor,'Alpha','Alias');\n alias.addTextBox('retained',{x:0,y:0,width:1000,height:1000});\n const q=await Presentation.open(d.package.toBytes());\n expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Alias','retained']);\n expect(()=>new Slide(d,'ppt/slides/absent.xml').index).toThrow('not in this presentation');\n}",
+      "calls": [
+        "Presentation.open",
+        "alias.addTextBox",
+        "alias.inspectText",
+        "alias.replaceTextAt",
+        "d.package.toBytes",
+        "d.reorderSlides",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "orderDeck",
+        "q.slides.2.inspectText",
+        "q.slides.2.inspectText().map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
       "id": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / round-trips saved table geometry sums and text after reopen",
       "path": "tests/unit/pptx-tables.test.ts",
       "line": 25,
@@ -8552,13 +9108,13 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(145)"
+        "expect(await verifyReferences(root)).toBe(146)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
-      "body": "{expect(await verifyReferences(root)).toBe(145);}",
+      "sourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
+      "body": "{expect(await verifyReferences(root)).toBe(146);}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -8581,7 +9137,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "sourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}",
       "calls": [
         "expect",
@@ -8606,7 +9162,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(145)",
+        "expect(await verifyReferences(tmp)).toBe(146)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -8618,8 +9174,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(145);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(146);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         ".repeat",
         "Bun.file",
@@ -8662,7 +9218,7 @@
         "expect(git('status','--porcelain')).toBe('')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular')",
-        "expect(await verifyReferences(tmp)).toBe(145)"
+        "expect(await verifyReferences(tmp)).toBe(146)"
       ],
       "deferredAssertions": [
         "expect(r.exitCode).toBe(0)"
@@ -8674,8 +9230,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(145);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "b75498ee1c77434d56214d9005033fd6270dec329088327ce7368c0bc01e97a5",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(146);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().bytes",

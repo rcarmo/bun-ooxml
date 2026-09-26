@@ -112,6 +112,20 @@ dependencies and refuses protected or stale cached inputs without mutation.
 It does not create cells or calculate effective formatting. See the
 [cell-style contract](../contracts/cell-style.md).
 
+## Slide order
+
+```ts
+const originalFirst = presentation.slides[0]!;
+presentation.reorderSlides([2, 0, 1]); // exactly three existing slides
+console.log(originalFirst.index); // now 1; the handle still names the same part
+await presentation.save(output);
+```
+
+The order must contain every current index exactly once. Existing slide content
+and relationships stay byte-identical, and existing text/table handles remain
+usable. Custom-show/extension/protected metadata and raw stale presentation
+changes refuse. See [slide ordering](../contracts/slide-order.md).
+
 ## Positioned slide text boxes
 
 ```ts

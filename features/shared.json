@@ -140,6 +140,11 @@
       "path": "references/fixtures-ooxml/workflows/docx/page-layout.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/pptx/slide-order.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

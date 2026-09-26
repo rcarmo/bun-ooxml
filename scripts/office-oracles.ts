@@ -21,7 +21,7 @@ async function command(args:string[],seconds=90){
 const check=(condition:unknown,message:string)=>{if(!condition)throw Error(message);};
 async function ok(args:string[],seconds=90){const r=await command(args,seconds);check(r.exit===0,`${args[0]} failed: ${r.stderr}`);return r;}
 try{
- for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/docx/style-authoring.ts','src/docx/page-layout.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
+ for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/docx/style-authoring.ts','src/docx/page-layout.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/pptx/slide-order.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
  report.versions.dotnet=(await ok(['dotnet','--version'])).stdout.trim();
  report.versions.libreoffice=(await ok(['libreoffice','--version'])).stdout.trim();
  const poppler=await ok(['pdftotext','-v']);report.versions.poppler=(poppler.stderr||poppler.stdout).trim();
@@ -29,7 +29,7 @@ try{
  await ok(['dotnet','restore',project,'--locked-mode']);await ok(['dotnet','build',project,'--no-restore','--configuration','Release']);
  const validator=join(root,'tests/oracles/schema/bin/Release/net10.0/SchemaCheck.dll');
  const doc=Document.create();doc.addParagraphStyle('Smoke',{name:'Oracle heading',bold:true});doc.addParagraph('Native Word oracle',{style:'Smoke'});doc.addParagraph('A second paragraph.');const table=doc.addTable(1,2);table.cell(0,0).text='Answer';table.cell(0,1).text='42';doc.setPageLayout({...doc.getPageLayout(),width:15840,height:12240,orientation:'landscape'});
- const deck=Presentation.create();deck.addTextSlide('Native slide oracle','First page');const slide=deck.addTextSlide('Second slide oracle');slide.addTextBox('Positioned oracle box',{x:914400,y:914400,width:5486400,height:914400},{bold:true});slide.addTable(1,2,{x:914400,y:2743200,width:5486400,height:914400});slide.tables[0]!.cell(0,0).text='Answer';slide.tables[0]!.cell(0,1).text='42';
+ const deck=Presentation.create();deck.addTextSlide('Native slide oracle','First page');const slide=deck.addTextSlide('Second slide oracle');slide.addTextBox('Positioned oracle box',{x:914400,y:914400,width:5486400,height:914400},{bold:true});slide.addTable(1,2,{x:914400,y:2743200,width:5486400,height:914400});slide.tables[0]!.cell(0,0).text='Answer';slide.tables[0]!.cell(0,1).text='42';deck.reorderSlides([1,0]);
  const book=Workbook.create();book.worksheet('Sheet1').setCellValue('A1',20);book.worksheet('Sheet1').setCellValue('A2',22);book.worksheet('Sheet1').setCellValue('A3',999);book.worksheet('Sheet1').setCellStyle('A1',0);
  // Explicit oracle fixture assembly via native OPC; there is no formula-authoring API claim.
  const sheet='xl/worksheets/sheet1.xml',xml=book.package.text(sheet),cell=elements(parseXml(xml),'c','http://schemas.openxmlformats.org/spreadsheetml/2006/main').find(c=>c.attributes.r==='A3')!;
@@ -52,7 +52,7 @@ try{
   if(i===0)check(pageSizePoints?.[0]===792&&pageSizePoints?.[1]===612,'Landscape DOCX PDF page size mismatch');
   const text=(await ok(['pdftotext','-layout',pdf,'-'])).stdout;await Bun.write(join(out,name+'.txt'),text);
   for(const marker of expected[i]!.text)check(i===2?text.split(/\s+/).includes(marker):text.includes(marker),'Missing rendered marker '+marker+' in '+name);if(i===2)check(!text.split(/\s+/).includes('999'),'Stale formula cache rendered');
-  if(i===1){const pages=text.split('\f');for(const marker of ['Native slide oracle','First page'])check(pages[0]?.includes(marker),'First-slide marker on wrong page');for(const marker of ['Second slide oracle','Positioned oracle box','Answer','42'])check(pages[1]?.includes(marker),'Second-slide marker on wrong page');}
+  if(i===1){const pages=text.split('\f');for(const marker of ['Native slide oracle','First page'])check(pages[1]?.includes(marker),'Reordered title-slide marker on wrong page');for(const marker of ['Second slide oracle','Positioned oracle box','Answer','42'])check(pages[0]?.includes(marker),'Reordered box/table slide marker on wrong page');}
   report.rendering.push({file:name,sha256:sha(bytes),pages:pageCount,pageSizePoints,expectedText:expected[i]!.text,textSha256:sha(new TextEncoder().encode(text)),status:'passed',visualComparison:'not performed'});
  }
  const roundtrip=join(sandbox,'roundtrip');await mkdir(roundtrip);await ok(['libreoffice',`-env:UserInstallation=file://${sandbox}/profile-calc`,'--headless','--convert-to','xlsx:Calc MS Excel 2007 XML','--outdir',roundtrip,paths[2]!]);
