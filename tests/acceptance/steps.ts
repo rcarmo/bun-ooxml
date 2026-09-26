@@ -7,6 +7,8 @@ import { bindings as docxBindings } from "./docx.ts";
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
+import { bindings as tableDocxBindings } from "./tables-docx.ts";
+import { bindings as tablePptxBindings } from "./tables-pptx.ts";
 import { bindings as pptxBindings } from "./pptx.ts";
 import { bindings as xlsxBindings } from "./xlsx.ts";
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
@@ -22,6 +24,8 @@ export const bindings: StepBinding[] = [
   ...createDocxBindings,
   ...createPptxBindings,
   ...createXlsxBindings,
+  ...tableDocxBindings,
+  ...tablePptxBindings,
   ...pptxBindings,
   ...xlsxBindings,
   ...cacheBoundaryBindings,

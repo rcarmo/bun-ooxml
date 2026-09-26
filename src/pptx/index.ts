@@ -7,6 +7,7 @@ import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml,
 
 const PRESENTATION_NS = "http://schemas.openxmlformats.org/presentationml/2006/main";
 const DRAWING_NS = "http://schemas.openxmlformats.org/drawingml/2006/main";
+const TABLE_GRAPHIC_DATA_URI = "http://schemas.openxmlformats.org/drawingml/2006/table";
 const OFFICE_REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
 const CONTENT_TYPES_NS = "http://schemas.openxmlformats.org/package/2006/content-types";
 
@@ -32,6 +33,9 @@ const DEFAULT_SLIDE_WIDTH = "9144000";
 const DEFAULT_SLIDE_HEIGHT = "6858000";
 const DEFAULT_NOTES_WIDTH = "6858000";
 const DEFAULT_NOTES_HEIGHT = "9144000";
+const DEFAULT_TABLE_STYLE_ID = "{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}";
+const MAX_PPTX_SHAPE_ID = 2147483647;
+const MAX_TABLE_CELLS = 10_000;
 const encoder = new TextEncoder();
 
 type OpenInput = string | Uint8Array | ArrayBuffer;
@@ -71,6 +75,22 @@ type SafeTextSlideLayout = {
   partName: string;
   title: PlaceholderDescriptor;
   subtitle?: PlaceholderDescriptor;
+};
+
+export type TableGeometry = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+type ResolvedSlideTable = {
+  shapeId: number;
+  table: XmlElement;
+  gridColumns: XmlElement[];
+  rows: XmlElement[];
+  cells: XmlElement[][];
+  merged: boolean;
 };
 
 /**
@@ -217,6 +237,42 @@ export class Slide {
     readonly index: number,
   ) {}
 
+  get tables(): Table[] {
+    const version = this.presentation.currentSlideVersion(this.partName);
+    return collectSlideTables(this.presentation.package.text(this.partName), this.partName)
+      .map((table, tableIndex) => new Table(this, tableIndex, version, table.shapeId));
+  }
+
+  addTable(rows: number, columns: number, geometry: TableGeometry): Table {
+    validateAddTableArgs(rows, columns, geometry);
+
+    let tableIndex = 0;
+    this.presentation.package.transaction(() => {
+      const xml = this.presentation.package.text(this.partName);
+      const document = parseXml(xml);
+      const spTree = requireSlideShapeTree(document, this.partName);
+      tableIndex = collectSlideTablesFromShapeTree(spTree, this.partName).length;
+      const shapeId = nextSlideShapeId(document, this.partName);
+      const nextXml = insertShapeTreeChild(
+        xml,
+        spTree,
+        buildTableGraphicFrameXml(shapeId, rows, columns, geometry),
+      );
+      this.presentation.package.set(this.partName, nextXml);
+      this.presentation.package.toBytes();
+    });
+
+    this.presentation.bumpSlideVersion(this.partName);
+    const table = this.tables[tableIndex];
+    if (!table) {
+      throw new OoxmlError(
+        "PPTX_SLIDE_INVALID",
+        `Authored table could not be resolved in ${this.partName}`,
+      );
+    }
+    return table;
+  }
+
   inspectText(_label: string): InspectedParagraph[] {
     const xml = this.presentation.package.text(this.partName);
     const paragraphs = collectStoryParagraphs(xml);
@@ -234,6 +290,61 @@ export class Slide {
         text: paragraph.text,
       },
     }));
+  }
+
+  resolveTableHandle(tableIndex: number, version: number, shapeId: number): ResolvedSlideTable {
+    if (version !== this.presentation.currentSlideVersion(this.partName)) {
+      throw staleTableHandle(this.partName, "table handle is stale after slide mutation");
+    }
+
+    const table = collectSlideTables(this.presentation.package.text(this.partName), this.partName)[tableIndex];
+    if (!table || table.shapeId !== shapeId) {
+      throw staleTableHandle(this.partName, "table identity has changed");
+    }
+    return table;
+  }
+
+  setTableCellText(
+    tableIndex: number,
+    version: number,
+    shapeId: number,
+    row: number,
+    column: number,
+    value: string,
+  ): void {
+    if (typeof value !== "string") {
+      throw new OoxmlError("PPTX_ARGUMENT_INVALID", "Table cell text must be a string");
+    }
+
+    let changed = false;
+    this.presentation.package.transaction(() => {
+      if (version !== this.presentation.currentSlideVersion(this.partName)) {
+        throw staleTableHandle(this.partName, "table handle is stale after slide mutation");
+      }
+
+      const xml = this.presentation.package.text(this.partName);
+      const table = collectSlideTables(xml, this.partName)[tableIndex];
+      if (!table || table.shapeId !== shapeId) {
+        throw staleTableHandle(this.partName, "table identity has changed");
+      }
+      if (table.merged) {
+        throw mergedTableUnsupported(this.partName, row, column);
+      }
+
+      const cell = table.cells[row]?.[column];
+      if (!cell) {
+        throw staleTableHandle(this.partName, "table grid has changed");
+      }
+
+      const nextXml = replaceTableCellText(xml, cell, this.partName, row, column, value);
+      this.presentation.package.set(this.partName, nextXml);
+      this.presentation.package.toBytes();
+      changed = nextXml !== xml;
+    });
+
+    if (changed) {
+      this.presentation.bumpSlideVersion(this.partName);
+    }
   }
 
   /**
@@ -305,6 +416,64 @@ export class Slide {
     if (changed) {
       this.presentation.bumpSlideVersion(this.partName);
     }
+  }
+}
+
+export class Table {
+  constructor(
+    private readonly slideRef: Slide,
+    private readonly tableIndex: number,
+    private readonly version: number,
+    private readonly shapeId: number,
+  ) {}
+
+  get rows(): number {
+    return this.resolve().rows.length;
+  }
+
+  get columns(): number {
+    return this.resolve().gridColumns.length;
+  }
+
+  cell(row: number, column: number): TableCell {
+    const table = this.resolve();
+    assertTableIndex(row, table.rows.length, "row");
+    assertTableIndex(column, table.gridColumns.length, "column");
+    return new TableCell(this, row, column);
+  }
+
+  getCellText(row: number, column: number): string {
+    const table = this.resolve();
+    assertTableIndex(row, table.rows.length, "row");
+    assertTableIndex(column, table.gridColumns.length, "column");
+    return readTableCellText(table.cells[row]![column]!, this.slideRef.partName, row, column);
+  }
+
+  setCellText(row: number, column: number, value: string): void {
+    const table = this.resolve();
+    assertTableIndex(row, table.rows.length, "row");
+    assertTableIndex(column, table.gridColumns.length, "column");
+    this.slideRef.setTableCellText(this.tableIndex, this.version, this.shapeId, row, column, value);
+  }
+
+  private resolve(): ResolvedSlideTable {
+    return this.slideRef.resolveTableHandle(this.tableIndex, this.version, this.shapeId);
+  }
+}
+
+export class TableCell {
+  constructor(
+    private readonly tableRef: Table,
+    readonly row: number,
+    readonly column: number,
+  ) {}
+
+  get text(): string {
+    return this.tableRef.getCellText(this.row, this.column);
+  }
+
+  set text(value: string) {
+    this.tableRef.setCellText(this.row, this.column, value);
   }
 }
 
@@ -399,7 +568,7 @@ function buildViewPropsXml(): string {
 function buildTableStylesXml(): string {
   return [
     xmlDeclaration(),
-    `<a:tblStyleLst xmlns:a="${DRAWING_NS}" def="{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}"/>`,
+    `<a:tblStyleLst xmlns:a="${DRAWING_NS}" def="${DEFAULT_TABLE_STYLE_ID}"/>`,
   ].join("");
 }
 
@@ -905,6 +1074,41 @@ function relativeTarget(owner: string, target: string): string {
   return posix.relative(posix.dirname(owner), target);
 }
 
+function validateAddTableArgs(rows: number, columns: number, geometry: TableGeometry): void {
+  if (!Number.isSafeInteger(rows) || rows <= 0) {
+    throw new OoxmlError("PPTX_ARGUMENT_INVALID", "Table rows must be a positive safe integer");
+  }
+  if (!Number.isSafeInteger(columns) || columns <= 0) {
+    throw new OoxmlError("PPTX_ARGUMENT_INVALID", "Table columns must be a positive safe integer");
+  }
+  if (rows * columns > MAX_TABLE_CELLS) {
+    throw new OoxmlError(
+      "PPTX_ARGUMENT_INVALID",
+      `Table size ${rows}x${columns} exceeds the ${MAX_TABLE_CELLS}-cell safety limit`,
+    );
+  }
+  if (!geometry || typeof geometry !== "object") {
+    throw new OoxmlError("PPTX_ARGUMENT_INVALID", "Table geometry is required");
+  }
+
+  validateGeometryInteger(geometry.x, "x", true);
+  validateGeometryInteger(geometry.y, "y", true);
+  validateGeometryInteger(geometry.width, "width", false);
+  validateGeometryInteger(geometry.height, "height", false);
+}
+
+function validateGeometryInteger(value: number, label: string, allowZero: boolean): void {
+  if (!Number.isSafeInteger(value)) {
+    throw new OoxmlError("PPTX_ARGUMENT_INVALID", `Table ${label} must be a safe integer EMU value`);
+  }
+  if (allowZero ? value < 0 : value <= 0) {
+    throw new OoxmlError(
+      "PPTX_ARGUMENT_INVALID",
+      `Table ${label} must be ${allowZero ? "zero or greater" : "greater than zero"}`,
+    );
+  }
+}
+
 function validateTextSlideArgs(title: string, subtitle: string | undefined): void {
   if (typeof title !== "string") {
     throw new OoxmlError("PPTX_ARGUMENT_INVALID", "Slide title must be a string");
@@ -924,6 +1128,329 @@ function directPlaceholder(shape: XmlElement): XmlElement | undefined {
   const nvSpPr = shape.children.find((child) => isElement(child, "nvSpPr", PRESENTATION_NS));
   const nvPr = nvSpPr?.children.find((child) => isElement(child, "nvPr", PRESENTATION_NS));
   return nvPr?.children.find((child) => isElement(child, "ph", PRESENTATION_NS));
+}
+
+function requireSlideShapeTree(document: ReturnType<typeof parseXml>, partName: string): XmlElement {
+  if (document.root.localName !== "sld" || document.root.namespaceURI !== PRESENTATION_NS) {
+    throw new OoxmlError("PPTX_SLIDE_INVALID", `Invalid slide root in ${partName}`);
+  }
+
+  const cSld = document.root.children.find((child) => isElement(child, "cSld", PRESENTATION_NS));
+  const spTree = cSld?.children.find((child) => isElement(child, "spTree", PRESENTATION_NS));
+  if (!spTree) {
+    throw new OoxmlError("PPTX_SLIDE_INVALID", `Slide ${partName} is missing p:cSld/p:spTree`);
+  }
+  return spTree;
+}
+
+function collectSlideTables(xml: string, partName: string): ResolvedSlideTable[] {
+  const document = parseXml(xml);
+  return collectSlideTablesFromShapeTree(requireSlideShapeTree(document, partName), partName);
+}
+
+function collectSlideTablesFromShapeTree(spTree: XmlElement, partName: string): ResolvedSlideTable[] {
+  const tables: ResolvedSlideTable[] = [];
+
+  for (const child of spTree.children) {
+    if (!isElement(child, "graphicFrame", PRESENTATION_NS)) {
+      continue;
+    }
+
+    const table = collectSlideTable(child, partName);
+    if (table) {
+      tables.push(table);
+    }
+  }
+
+  return tables;
+}
+
+function collectSlideTable(frame: XmlElement, partName: string): ResolvedSlideTable | undefined {
+  const graphic = frame.children.find((child) => isElement(child, "graphic", DRAWING_NS));
+  const graphicData = graphic?.children.find((child) => isElement(child, "graphicData", DRAWING_NS));
+  if (!graphicData) {
+    return undefined;
+  }
+  if (graphicData.attributes.uri !== TABLE_GRAPHIC_DATA_URI) {
+    return undefined;
+  }
+
+  const table = graphicData.children.find((child) => isElement(child, "tbl", DRAWING_NS));
+  if (!table) {
+    throw tableStructureUnsupported(partName, "graphicFrame table payload is missing a:tbl");
+  }
+
+  const grid = table.children.find((child) => isElement(child, "tblGrid", DRAWING_NS));
+  const gridColumns = grid?.children.filter((child) => isElement(child, "gridCol", DRAWING_NS)) ?? [];
+  const rows = table.children.filter((child) => isElement(child, "tr", DRAWING_NS));
+  if (gridColumns.length === 0 || rows.length === 0) {
+    throw tableStructureUnsupported(partName, "table grid must contain at least one row and one column");
+  }
+
+  const cells = rows.map((row, rowIndex) => {
+    const rowCells = row.children.filter((child) => isElement(child, "tc", DRAWING_NS));
+    if (rowCells.length !== gridColumns.length) {
+      throw tableStructureUnsupported(
+        partName,
+        `table row ${rowIndex + 1} has ${rowCells.length} cells for a ${gridColumns.length}-column grid`,
+      );
+    }
+    return rowCells;
+  });
+
+  const merged = cells.some((row) => row.some((cell) => hasMergeAttributes(cell, partName)));
+  return {
+    shapeId: parseGraphicFrameShapeId(frame, partName),
+    table,
+    gridColumns,
+    rows,
+    cells,
+    merged,
+  };
+}
+
+function parseGraphicFrameShapeId(frame: XmlElement, partName: string): number {
+  const nvGraphicFramePr = frame.children.find((child) => isElement(child, "nvGraphicFramePr", PRESENTATION_NS));
+  const cNvPr = nvGraphicFramePr?.children.find((child) => isElement(child, "cNvPr", PRESENTATION_NS));
+  const rawId = cNvPr?.attributes.id;
+  const shapeId = rawId ? Number.parseInt(rawId, 10) : Number.NaN;
+  if (!Number.isInteger(shapeId) || shapeId <= 0 || shapeId > MAX_PPTX_SHAPE_ID) {
+    throw new OoxmlError("PPTX_SLIDE_INVALID", `Invalid shape id ${JSON.stringify(rawId)} in ${partName}`);
+  }
+  return shapeId;
+}
+
+function nextSlideShapeId(document: ReturnType<typeof parseXml>, partName: string): number {
+  const ids = new Set<number>();
+  let maxId = 0;
+
+  for (const cNvPr of elements(document, "cNvPr", PRESENTATION_NS)) {
+    const rawId = cNvPr.attributes.id;
+    const shapeId = rawId ? Number.parseInt(rawId, 10) : Number.NaN;
+    if (!Number.isInteger(shapeId) || shapeId <= 0 || shapeId > MAX_PPTX_SHAPE_ID) {
+      throw new OoxmlError("PPTX_SLIDE_INVALID", `Invalid shape id ${JSON.stringify(rawId)} in ${partName}`);
+    }
+    if (ids.has(shapeId)) {
+      throw new OoxmlError("PPTX_SLIDE_INVALID", `Duplicate shape id ${shapeId} in ${partName}`);
+    }
+    ids.add(shapeId);
+    maxId = Math.max(maxId, shapeId);
+  }
+
+  if (maxId >= MAX_PPTX_SHAPE_ID) {
+    throw new OoxmlError("PPTX_ID_EXHAUSTED", `No valid shape id remains in ${partName}`);
+  }
+  return maxId + 1;
+}
+
+function insertShapeTreeChild(xml: string, spTree: XmlElement, childXml: string): string {
+  const extLst = spTree.children.find((child) => isElement(child, "extLst", PRESENTATION_NS));
+  return applyEdits(xml, [{
+    start: extLst?.start ?? spTree.closeStart,
+    end: extLst?.start ?? spTree.closeStart,
+    value: childXml,
+  }]);
+}
+
+function buildTableGraphicFrameXml(
+  shapeId: number,
+  rows: number,
+  columns: number,
+  geometry: TableGeometry,
+): string {
+  const name = `Table ${shapeId - 1}`;
+  return [
+    `<p:graphicFrame>`,
+    `<p:nvGraphicFramePr>`,
+    `<p:cNvPr id="${shapeId}" name="${escapeAttribute(name)}"/>`,
+    `<p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="1"/></p:cNvGraphicFramePr>`,
+    `<p:nvPr/>`,
+    `</p:nvGraphicFramePr>`,
+    `<p:xfrm><a:off x="${geometry.x}" y="${geometry.y}"/><a:ext cx="${geometry.width}" cy="${geometry.height}"/></p:xfrm>`,
+    `<a:graphic><a:graphicData uri="${TABLE_GRAPHIC_DATA_URI}">`,
+    buildTableXml(rows, columns, geometry.width, geometry.height),
+    `</a:graphicData></a:graphic>`,
+    `</p:graphicFrame>`,
+  ].join("");
+}
+
+function buildTableXml(rows: number, columns: number, width: number, height: number): string {
+  const columnWidths = distributeExtent(width, columns);
+  const rowHeights = distributeExtent(height, rows);
+  return [
+    `<a:tbl>`,
+    `<a:tblPr firstRow="1" bandRow="1"><a:tableStyleId>${DEFAULT_TABLE_STYLE_ID}</a:tableStyleId></a:tblPr>`,
+    `<a:tblGrid>${columnWidths.map((columnWidth) => `<a:gridCol w="${columnWidth}"/>`).join("")}</a:tblGrid>`,
+    rowHeights.map((rowHeight) => buildTableRowXml(rowHeight, columns)).join(""),
+    `</a:tbl>`,
+  ].join("");
+}
+
+function buildTableRowXml(height: number, columns: number): string {
+  return `<a:tr h="${height}">${Array.from({ length: columns }, () => buildEmptyTableCellXml()).join("")}</a:tr>`;
+}
+
+function buildEmptyTableCellXml(): string {
+  return `<a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p></a:p></a:txBody><a:tcPr/></a:tc>`;
+}
+
+function distributeExtent(total: number, count: number): number[] {
+  const base = Math.floor(total / count);
+  return Array.from({ length: count }, (_, index) => (
+    index === count - 1 ? total - (base * (count - 1)) : base
+  ));
+}
+
+function assertTableIndex(index: number, limit: number, label: string): void {
+  if (typeof index !== "number" || !Number.isInteger(index)) {
+    throw new TypeError(`Table ${label} index must be an integer`);
+  }
+  if (index < 0 || index >= limit) {
+    throw new RangeError(`Table ${label} index ${index} is out of range`);
+  }
+}
+
+function readTableCellText(cell: XmlElement, partName: string, row: number, column: number): string {
+  const paragraphs = tableCellParagraphs(cell, partName, row, column);
+  const unreadableIndex = paragraphs.findIndex((paragraph) => !paragraph.readable);
+  if (unreadableIndex !== -1) {
+    throw cellTextUnsupported(
+      partName,
+      row,
+      column,
+      `paragraph ${unreadableIndex + 1} cannot be read faithfully`,
+    );
+  }
+  return paragraphs.map((paragraph) => paragraph.text).join("\n");
+}
+
+function tableCellParagraphs(cell: XmlElement, partName: string, row: number, column: number): StoryParagraph[] {
+  const txBody = cell.children.find((child) => isElement(child, "txBody", DRAWING_NS));
+  if (!txBody) {
+    throw tableStructureUnsupported(partName, `${describeTableCell(row, column)} is missing a:txBody`);
+  }
+
+  const paragraphs = txBody.children.filter((child) => isElement(child, "p", DRAWING_NS));
+  const unsupported = txBody.children.find((child) => !isElement(child, "bodyPr", DRAWING_NS)
+    && !isElement(child, "lstStyle", DRAWING_NS)
+    && !isElement(child, "p", DRAWING_NS));
+  if (unsupported || paragraphs.length === 0) {
+    throw tableStructureUnsupported(partName, `${describeTableCell(row, column)} uses unsupported a:txBody topology`);
+  }
+
+  return paragraphs.map((paragraph) => analyzeParagraph(paragraph));
+}
+
+function replaceTableCellText(
+  xml: string,
+  cell: XmlElement,
+  partName: string,
+  row: number,
+  column: number,
+  replacement: string,
+): string {
+  const txBody = cell.children.find((child) => isElement(child, "txBody", DRAWING_NS));
+  if (!txBody) {
+    throw tableStructureUnsupported(partName, `${describeTableCell(row, column)} is missing a:txBody`);
+  }
+
+  const paragraphElements = txBody.children.filter((child) => isElement(child, "p", DRAWING_NS));
+  const unsupportedTxBodyChild = txBody.children.find((child) => !isElement(child, "bodyPr", DRAWING_NS)
+    && !isElement(child, "lstStyle", DRAWING_NS)
+    && !isElement(child, "p", DRAWING_NS));
+  if (unsupportedTxBodyChild) {
+    throw tableStructureUnsupported(partName, `${describeTableCell(row, column)} uses unsupported a:txBody topology`);
+  }
+  if (paragraphElements.length !== 1) {
+    throw cellTextUnsupported(partName, row, column, "cell must contain exactly one paragraph to edit safely");
+  }
+
+  const paragraphElement = paragraphElements[0]!;
+  const paragraph = analyzeParagraph(paragraphElement);
+  if (!paragraph.readable || !paragraph.replaceable) {
+    throw cellTextUnsupported(partName, row, column, "cell paragraph cannot be edited safely");
+  }
+
+  const paragraphAttributes = serializeAttributes(paragraphElement.attributes);
+  const pPrElement = paragraphElement.children.find((child) => isElement(child, "pPr", DRAWING_NS));
+  const endParaRPrElement = paragraphElement.children.find((child) => isElement(child, "endParaRPr", DRAWING_NS));
+  const pPrXml = pPrElement ? xml.slice(pPrElement.start, pPrElement.end) : "";
+  const endParaRPrXml = endParaRPrElement ? xml.slice(endParaRPrElement.start, endParaRPrElement.end) : "";
+  const replacementRunXml = replacement.length === 0
+    ? ""
+    : paragraph.editableRuns[0]
+      ? buildRunXml(xml, paragraph.editableRuns[0]!, replacement)
+      : buildBareDrawingRunXml(paragraphElement, replacement);
+
+  return applyEdits(xml, [{
+    start: paragraphElement.start,
+    end: paragraphElement.end,
+    value: `<${paragraphElement.name}${paragraphAttributes}>${pPrXml}${replacementRunXml}${endParaRPrXml}</${paragraphElement.name}>`,
+  }]);
+}
+
+function buildBareDrawingRunXml(paragraphElement: XmlElement, text: string): string {
+  const runName = qualifiedName(paragraphElement.name, "r");
+  const textName = qualifiedName(paragraphElement.name, "t");
+  const preserve = needsPreserveSpace(text) ? ' xml:space="preserve"' : "";
+  return `<${runName}><${textName}${preserve}>${escapeText(text)}</${textName}></${runName}>`;
+}
+
+function describeTableCell(row: number, column: number): string {
+  return `table cell (${row}, ${column})`;
+}
+
+function hasMergeAttributes(cell: XmlElement, partName: string): boolean {
+  const gridSpan = parsePositiveTableInt(cell.attributes.gridSpan, "gridSpan", partName);
+  const rowSpan = parsePositiveTableInt(cell.attributes.rowSpan, "rowSpan", partName);
+  const hMerge = parseTableBoolean(cell.attributes.hMerge, "hMerge", partName);
+  const vMerge = parseTableBoolean(cell.attributes.vMerge, "vMerge", partName);
+  return gridSpan > 1 || rowSpan > 1 || hMerge || vMerge;
+}
+
+function parsePositiveTableInt(raw: string | undefined, label: string, partName: string): number {
+  if (raw === undefined) {
+    return 1;
+  }
+  if (!/^[1-9][0-9]*$/.test(raw)) {
+    throw tableStructureUnsupported(partName, `Invalid ${label} value ${JSON.stringify(raw)}`);
+  }
+  return Number(raw);
+}
+
+function parseTableBoolean(raw: string | undefined, label: string, partName: string): boolean {
+  if (raw === undefined) {
+    return false;
+  }
+  if (raw === "1" || raw === "true") {
+    return true;
+  }
+  if (raw === "0" || raw === "false") {
+    return false;
+  }
+  throw tableStructureUnsupported(partName, `Invalid ${label} value ${JSON.stringify(raw)}`);
+}
+
+function tableStructureUnsupported(partName: string, detail: string): OoxmlError {
+  return new OoxmlError("PPTX_TABLE_STRUCTURE_UNSUPPORTED", `PPTX table structure in ${partName} is unsupported: ${detail}`);
+}
+
+function cellTextUnsupported(partName: string, row: number, column: number, detail: string): OoxmlError {
+  return new OoxmlError(
+    "PPTX_UNSUPPORTED_TEXT_TOPOLOGY",
+    `Table cell ${row + 1},${column + 1} in ${partName} cannot be edited safely: ${detail}`,
+  );
+}
+
+function mergedTableUnsupported(partName: string, row: number, column: number): OoxmlError {
+  return new OoxmlError(
+    "PPTX_TABLE_MERGE_UNSUPPORTED",
+    `Merged table editing is not supported for table cell ${row + 1},${column + 1} in ${partName}`,
+  );
+}
+
+function staleTableHandle(partName: string, detail: string): OoxmlError {
+  return new OoxmlError("PPTX_STALE_TABLE_HANDLE", `Stale PPTX table handle for ${partName}: ${detail}`);
 }
 
 function collectStoryParagraphs(xml: string): StoryParagraph[] {

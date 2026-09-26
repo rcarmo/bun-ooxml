@@ -74,6 +74,32 @@ within Excel bounds, keeping rows/cells sorted and dimension metadata ordered.
 Reopen saved files and assert expected content. Native Office rendering has not
 been independently verified. `examples/create-office.ts` is an executable example.
 
+## Rectangular tables
+
+```ts
+const table = doc.addTable(2, 2);
+table.cell(0, 0).text = "Name";
+table.cell(1, 1).text = "42";
+
+const slide = deck.slides[0]!;
+slide.addTable(2, 2, { x: 0, y: 914400, width: 5486400, height: 1828800 });
+slide.tables[0]!.cell(0, 0).text = "Name";
+slide.tables[0]!.cell(1, 1).text = "42";
+```
+
+Indices are zero-based. PPTX geometry is integer EMU and row heights/column widths
+sum to the requested size. Authoring is bounded to 10,000 cells. DOCX table handles
+stay usable across cell edits but become stale after structural document edits;
+cell handles always become stale after mutation. PPTX table/cell handles become
+stale on slide changes: reacquire them from `slide.tables` before the next edit.
+
+DOCX cell replacement retains cell properties and first paragraph/run formatting;
+newlines become paragraphs (CRLF/CR normalise to LF). PPTX edits require one plain
+supported paragraph and retain first-run formatting. Arbitrary multi-paragraph,
+nested table, merged grid, field/drawing or other unsafe topology refuses. There
+is no row/column insertion, merging or splitting in this slice. Reopen after save
+and assert cell values; visual Office fidelity is not independently verified.
+
 ## DOCX
 
 ```ts

@@ -10,6 +10,10 @@ const OFFICE_DOCUMENT_REL = "http://schemas.openxmlformats.org/officeDocument/20
 const DOCUMENT_PART = "word/document.xml";
 const DOCUMENT_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml";
 const UTF8_ENCODER = new TextEncoder();
+const MAX_TABLE_ROWS = 100;
+const MAX_TABLE_COLUMNS = 100;
+const MAX_TABLE_CELLS = 10_000;
+const DEFAULT_TABLE_WIDTH_DXA = 8_640;
 
 type OpenInput = string | Uint8Array | ArrayBuffer;
 
@@ -52,6 +56,45 @@ type SpanSnapshot = {
 type ParagraphCollection = {
   paragraphs: ParagraphSnapshot[];
   omittedTopologies: string[];
+};
+
+type TableParagraphSnapshot = {
+  text: string;
+  searchable: boolean;
+  unsupported?: string;
+};
+
+type TableCellSnapshot = {
+  version: number;
+  tableIndex: number;
+  row: number;
+  column: number;
+  element: XmlElement;
+  paragraphs: TableParagraphSnapshot[];
+  unsupported?: string;
+};
+
+type TableGridEntry =
+  | { kind: "cell"; cell: TableCellSnapshot }
+  | { kind: "merged" };
+
+type TableSnapshot = {
+  index: number;
+  version: number;
+  rows: number;
+  columns: number;
+  element: XmlElement;
+  cells: Array<Array<TableGridEntry | undefined>>;
+  unsupported?: string;
+};
+
+type TableCollection = {
+  tables: TableSnapshot[];
+};
+
+type DocumentCollections = {
+  paragraphs: ParagraphCollection;
+  tables: TableCollection;
 };
 
 /**
@@ -207,6 +250,91 @@ export class Span {
   }
 }
 
+/** Snapshot handle for a top-level DOCX table. */
+export class Table {
+  constructor(
+    private readonly documentRef: Document,
+    private readonly snapshot: TableSnapshot,
+  ) {}
+
+  get rows(): number {
+    const table = this.liveTable();
+    return table.rows;
+  }
+
+  get columns(): number {
+    const table = this.liveTable();
+    return table.columns;
+  }
+
+  cell(row: number, column: number): TableCell {
+    const table = this.liveTable();
+    assertTableCoordinate(table, row, column);
+    if (table.unsupported) {
+      fail("docx-table-unsupported", `DOCX table ${table.index + 1} uses unsupported topology ${table.unsupported}`);
+    }
+
+    const entry = table.cells[row]?.[column];
+    if (!entry) {
+      fail("docx-table-unsupported", `DOCX table ${this.snapshot.index + 1} cannot resolve cell (${row},${column}) safely`);
+    }
+    if (entry.kind === "merged") {
+      fail("docx-table-merged-cell", `DOCX table ${this.snapshot.index + 1} cell (${row},${column}) is merged`);
+    }
+
+    return new TableCell(this.documentRef, entry.cell);
+  }
+
+  private liveTable(): TableSnapshot {
+    this.ensureFresh();
+    return this.documentRef.resolveTable(this.snapshot);
+  }
+
+  private ensureFresh(): void {
+    if (this.documentRef.currentTableVersion() !== this.snapshot.version) {
+      fail("docx-stale-table", "DOCX table handle is stale after document mutation");
+    }
+  }
+}
+
+/** Snapshot handle for a simple editable table cell. */
+export class TableCell {
+  constructor(
+    private readonly documentRef: Document,
+    private readonly snapshot: TableCellSnapshot,
+  ) {}
+
+  get text(): string {
+    this.ensureFresh();
+    this.ensureSupported();
+    return this.snapshot.paragraphs.map((paragraph) => paragraph.text).join("\n");
+  }
+
+  set text(value: string) {
+    this.ensureFresh();
+    this.ensureSupported();
+    if (typeof value !== "string") {
+      fail("docx-invalid-argument", "DOCX table cell text must be a string");
+    }
+    this.documentRef.replaceTableCellText(this.snapshot, value);
+  }
+
+  private ensureFresh(): void {
+    if (this.documentRef.currentVersion() !== this.snapshot.version) {
+      fail("docx-stale-table-cell", "DOCX table cell handle is stale after document mutation");
+    }
+  }
+
+  private ensureSupported(): void {
+    if (this.snapshot.unsupported) {
+      fail(
+        "docx-table-cell-unsupported",
+        `DOCX table cell (${this.snapshot.row},${this.snapshot.column}) uses unsupported topology ${this.snapshot.unsupported}`,
+      );
+    }
+  }
+}
+
 /**
  * First DOCX text-editing slice.
  *
@@ -222,11 +350,14 @@ export class Span {
  */
 export class Document {
   private version = 0;
+  private tableVersion = 0;
   private xml = "";
   private xmlDocument!: XmlDocument;
   private paragraphSnapshots: ParagraphSnapshot[] = [];
   private paragraphHandles: Paragraph[] = [];
   private omittedTopologies: string[] = [];
+  private tableSnapshots: TableSnapshot[] = [];
+  private tableHandles: Table[] = [];
 
   readonly package: DocxPackage;
 
@@ -257,6 +388,10 @@ export class Document {
     return [...this.paragraphHandles];
   }
 
+  /** Current top-level table snapshot handles in document order. */
+  get tables(): Table[] {
+    return [...this.tableHandles];
+  }
 
   /**
    * Appends a simple paragraph immediately before the body section properties.
@@ -284,8 +419,9 @@ export class Document {
     const paragraphXml = buildParagraphXml(text, normalizedOptions);
     const nextXml = applyEdits(this.xml, [{ start: insertAt, end: insertAt, value: paragraphXml }]);
     const nextVersion = this.version + 1;
+    const nextTableVersion = this.tableVersion + 1;
     const nextDocument = parseXml(nextXml);
-    const nextCollection = collectParagraphs(nextDocument, nextVersion);
+    const nextCollections = collectDocumentCollections(nextDocument, nextVersion, nextTableVersion);
     const nextIndex = this.paragraphSnapshots.length;
 
     this.opcPackage.transaction(() => {
@@ -294,14 +430,52 @@ export class Document {
 
     this.xml = nextXml;
     this.version = nextVersion;
+    this.tableVersion = nextTableVersion;
     this.xmlDocument = nextDocument;
-    this.applyParagraphCollection(nextCollection);
+    this.applyDocumentCollections(nextCollections);
 
     const paragraph = this.paragraphHandles[nextIndex];
     if (!paragraph) {
       fail("docx-document-invalid", "DOCX paragraph append did not materialise the authored paragraph");
     }
     return paragraph;
+  }
+
+  /**
+   * Appends a simple rectangular top-level table before the body section properties.
+   *
+   * Authored tables are deliberately bounded and use a plain rectangular grid.
+   * Any refusal happens before document or package mutation.
+   */
+  addTable(rows: number, columns: number): Table {
+    assertTableDimensions(rows, columns);
+
+    const body = this.requireBody();
+    const sectionProperties = body.children.find((child) => isWord(child, "sectPr"));
+    const insertAt = sectionProperties?.start ?? body.closeStart;
+    const tableXml = buildTableXml(rows, columns);
+    const nextXml = applyEdits(this.xml, [{ start: insertAt, end: insertAt, value: tableXml }]);
+    const nextVersion = this.version + 1;
+    const nextTableVersion = this.tableVersion + 1;
+    const nextDocument = parseXml(nextXml);
+    const nextCollections = collectDocumentCollections(nextDocument, nextVersion, nextTableVersion);
+    const nextIndex = this.tableSnapshots.length;
+
+    this.opcPackage.transaction(() => {
+      this.opcPackage.set(DOCUMENT_PART, nextXml);
+    });
+
+    this.xml = nextXml;
+    this.version = nextVersion;
+    this.tableVersion = nextTableVersion;
+    this.xmlDocument = nextDocument;
+    this.applyDocumentCollections(nextCollections);
+
+    const table = this.tableHandles[nextIndex];
+    if (!table) {
+      fail("docx-document-invalid", "DOCX table append did not materialise the authored table");
+    }
+    return table;
   }
 
   /**
@@ -362,6 +536,10 @@ export class Document {
 
   currentVersion(): number {
     return this.version;
+  }
+
+  currentTableVersion(): number {
+    return this.tableVersion;
   }
 
   /**
@@ -431,10 +609,101 @@ export class Document {
       });
     }
 
-    this.xml = applyEdits(this.xml, edits);
-    this.opcPackage.set(DOCUMENT_PART, this.xml);
-    this.version += 1;
-    this.reloadParagraphs();
+    const nextXml = applyEdits(this.xml, edits);
+    const nextVersion = this.version + 1;
+    const nextDocument = parseXml(nextXml);
+    const nextCollections = collectDocumentCollections(nextDocument, nextVersion, this.tableVersion);
+
+    this.opcPackage.transaction(() => {
+      this.opcPackage.set(DOCUMENT_PART, nextXml);
+    });
+
+    this.xml = nextXml;
+    this.version = nextVersion;
+    this.xmlDocument = nextDocument;
+    this.applyDocumentCollections(nextCollections);
+  }
+
+  resolveTable(table: TableSnapshot): TableSnapshot {
+    if (this.tableVersion !== table.version) {
+      fail("docx-stale-table", "DOCX table handle is stale after document mutation");
+    }
+
+    const liveTable = this.tableSnapshots[table.index];
+    if (!liveTable) {
+      fail("docx-table-missing", `Missing DOCX table ${table.index + 1}`);
+    }
+    return liveTable;
+  }
+
+  replaceTableCellText(cell: TableCellSnapshot, text: string): void {
+    if (this.version !== cell.version) {
+      fail("docx-stale-table-cell", "DOCX table cell handle is stale after document mutation");
+    }
+    if (typeof text !== "string") {
+      fail("docx-invalid-argument", "DOCX table cell text must be a string");
+    }
+
+    const liveCell = this.resolveTableCell(cell);
+    if (liveCell.unsupported) {
+      fail(
+        "docx-table-cell-unsupported",
+        `DOCX table cell (${liveCell.row},${liveCell.column}) uses unsupported topology ${liveCell.unsupported}`,
+      );
+    }
+
+    const tcPr = liveCell.element.children.find((child) => isWord(child, "tcPr"));
+    const firstParagraph = liveCell.element.children.find((child) => isWord(child, "p"));
+    const firstParagraphProperties = firstParagraph?.children.find((child) => isWord(child, "pPr"));
+    const firstRun = firstParagraph?.children.find((child) => isWord(child, "r"));
+    const firstRunProperties = firstRun?.children.find((child) => isWord(child, "rPr"));
+    const replacement = [
+      tcPr ? rawXml(this.xml, tcPr) : "",
+      buildTableCellParagraphsXml(
+        normalizeCellText(text),
+        firstParagraphProperties ? rawXml(this.xml, firstParagraphProperties) : "",
+        firstRunProperties ? rawXml(this.xml, firstRunProperties) : "",
+        inheritedNamespaces(firstParagraph),
+        inheritedNamespaces(firstRun),
+      ),
+    ].join("");
+
+    const nextXml = applyEdits(this.xml, [{
+      start: liveCell.element.openEnd,
+      end: liveCell.element.closeStart,
+      value: replacement,
+    }]);
+    const nextVersion = this.version + 1;
+    const nextDocument = parseXml(nextXml);
+    const nextCollections = collectDocumentCollections(nextDocument, nextVersion, this.tableVersion);
+
+    this.opcPackage.transaction(() => {
+      this.opcPackage.set(DOCUMENT_PART, nextXml);
+    });
+
+    this.xml = nextXml;
+    this.version = nextVersion;
+    this.xmlDocument = nextDocument;
+    this.applyDocumentCollections(nextCollections);
+  }
+
+  private resolveTableCell(cell: TableCellSnapshot): TableCellSnapshot {
+    const table = this.tableSnapshots[cell.tableIndex];
+    if (!table) {
+      fail("docx-table-missing", `Missing DOCX table ${cell.tableIndex + 1}`);
+    }
+    if (table.unsupported) {
+      fail("docx-table-unsupported", `DOCX table ${cell.tableIndex + 1} uses unsupported topology ${table.unsupported}`);
+    }
+
+    const entry = table.cells[cell.row]?.[cell.column];
+    if (!entry) {
+      fail("docx-table-unsupported", `DOCX table ${cell.tableIndex + 1} cannot resolve cell (${cell.row},${cell.column}) safely`);
+    }
+    if (entry.kind === "merged") {
+      fail("docx-table-merged-cell", `DOCX table ${cell.tableIndex + 1} cell (${cell.row},${cell.column}) is merged`);
+    }
+    return entry.cell;
   }
 
   private reloadDocumentXml(): void {
@@ -449,12 +718,17 @@ export class Document {
       }
       throw error;
     }
-    this.reloadParagraphs();
+    this.reloadStructures();
   }
 
-  private reloadParagraphs(): void {
+  private reloadStructures(): void {
     this.xmlDocument = parseXml(this.xml);
-    this.applyParagraphCollection(collectParagraphs(this.xmlDocument, this.version));
+    this.applyDocumentCollections(collectDocumentCollections(this.xmlDocument, this.version, this.tableVersion));
+  }
+
+  private applyDocumentCollections(collections: DocumentCollections): void {
+    this.applyParagraphCollection(collections.paragraphs);
+    this.applyTableCollection(collections.tables);
   }
 
   private applyParagraphCollection(collection: ParagraphCollection): void {
@@ -462,6 +736,13 @@ export class Document {
     this.paragraphSnapshots = collection.paragraphs;
     this.paragraphHandles = this.paragraphSnapshots.map(
       (snapshot) => new Paragraph(this, snapshot),
+    );
+  }
+
+  private applyTableCollection(collection: TableCollection): void {
+    this.tableSnapshots = collection.tables;
+    this.tableHandles = this.tableSnapshots.map(
+      (snapshot) => new Table(this, snapshot),
     );
   }
 
@@ -507,6 +788,13 @@ export function create(): Document {
 
 export async function save(document: Document, path?: string): Promise<Uint8Array> {
   return document.save(path);
+}
+
+function collectDocumentCollections(document: XmlDocument, version: number, tableVersion: number): DocumentCollections {
+  return {
+    paragraphs: collectParagraphs(document, version),
+    tables: collectTables(document, tableVersion, version),
+  };
 }
 
 function collectParagraphs(document: XmlDocument, version: number): ParagraphCollection {
@@ -585,6 +873,141 @@ function collectParagraphs(document: XmlDocument, version: number): ParagraphCol
   }
 
   return { paragraphs, omittedTopologies };
+}
+
+function collectTables(document: XmlDocument, tableVersion: number, cellVersion: number): TableCollection {
+  const body = document.root.children.find((child) => isWord(child, "body"));
+  if (!body) {
+    fail("docx-document-invalid", "DOCX document XML is missing w:body");
+  }
+
+  const tables: TableSnapshot[] = [];
+  for (const child of body.children) {
+    if (isWord(child, "tbl")) {
+      tables.push(analyzeTopLevelTable(child, tables.length, tableVersion, cellVersion));
+    }
+  }
+
+  return { tables };
+}
+
+function analyzeTopLevelTable(table: XmlElement, index: number, tableVersion: number, cellVersion: number): TableSnapshot {
+  const rowElements = table.children.filter((child) => isWord(child, "tr"));
+  const columns = readTableColumnCount(table);
+  const cells: Array<Array<TableGridEntry | undefined>> = [];
+  let unsupported: string | undefined;
+
+  for (const child of table.children) {
+    if (isWord(child, "tblPr") || isWord(child, "tblGrid") || isWord(child, "tblPrEx") || isWord(child, "tr")) {
+      continue;
+    }
+    unsupported = unsupported ?? child.name;
+  }
+
+  for (const [rowIndex, row] of rowElements.entries()) {
+    const rowCells: Array<TableGridEntry | undefined> = Array.from({ length: columns }, () => undefined);
+    let cursor = 0;
+
+    for (const child of row.children) {
+      if (!isWord(child, "trPr") && !isWord(child, "tc")) {
+        unsupported = unsupported ?? child.name;
+      }
+    }
+
+    const rowProperties = row.children.find((child) => isWord(child, "trPr"));
+    const gridBefore = readOptionalVal(rowProperties, "gridBefore");
+    const gridAfter = readOptionalVal(rowProperties, "gridAfter");
+    if (gridBefore !== 0 || gridAfter !== 0) {
+      unsupported = unsupported ?? (gridBefore !== 0 ? "w:gridBefore" : "w:gridAfter");
+    }
+
+    for (const cell of row.children) {
+      if (!isWord(cell, "tc")) {
+        continue;
+      }
+
+      const tcPr = cell.children.find((child) => isWord(child, "tcPr"));
+      const gridSpan = readGridSpan(tcPr);
+      if (gridSpan < 1) {
+        unsupported = unsupported ?? "w:gridSpan";
+        continue;
+      }
+      if (cursor + gridSpan > columns) {
+        unsupported = unsupported ?? "row-width";
+        break;
+      }
+
+      const merged = gridSpan > 1 || hasWordChild(tcPr, "vMerge") || hasWordChild(tcPr, "hMerge");
+      if (merged) {
+        for (let offset = 0; offset < gridSpan; offset += 1) {
+          rowCells[cursor + offset] = { kind: "merged" };
+        }
+      } else {
+        rowCells[cursor] = { kind: "cell", cell: analyzeTableCell(cell, cellVersion, index, rowIndex, cursor) };
+      }
+      cursor += gridSpan;
+    }
+
+    if (cursor !== columns) {
+      unsupported = unsupported ?? "row-width";
+    }
+    cells.push(rowCells);
+  }
+
+  return {
+    index,
+    version: tableVersion,
+    rows: rowElements.length,
+    columns,
+    element: table,
+    cells,
+    unsupported,
+  };
+}
+
+function analyzeTableCell(
+  cell: XmlElement,
+  version: number,
+  tableIndex: number,
+  row: number,
+  column: number,
+): TableCellSnapshot {
+  const paragraphs: TableParagraphSnapshot[] = [];
+  let unsupported: string | undefined;
+
+  for (const child of cell.children) {
+    if (isWord(child, "tcPr")) {
+      continue;
+    }
+    if (isWord(child, "tbl")) {
+      unsupported = unsupported ?? child.name;
+      continue;
+    }
+    if (!isWord(child, "p")) {
+      unsupported = unsupported ?? child.name;
+      continue;
+    }
+
+    const paragraph = analyzeParagraph(child, 0, version);
+    paragraphs.push({
+      text: paragraph.text,
+      searchable: paragraph.searchable,
+      unsupported: paragraph.unsupported,
+    });
+    if (!paragraph.searchable) {
+      unsupported = unsupported ?? paragraph.unsupported;
+    }
+  }
+
+  return {
+    version,
+    tableIndex,
+    row,
+    column,
+    element: cell,
+    paragraphs,
+    unsupported,
+  };
 }
 
 function analyzeParagraph(paragraph: XmlElement, index: number, version: number): ParagraphSnapshot {
@@ -680,8 +1103,55 @@ function buildParagraphXml(text: string, options: NormalizedAddParagraphOptions)
   const run = text.length > 0 || runProperties.length > 0
     ? `<w:r>${runProperties ? `<w:rPr>${runProperties}</w:rPr>` : ""}<w:t${textAttributes}>${escapeText(text)}</w:t></w:r>`
     : "";
-  return `<w:p>${paragraphProperties}${run}</w:p>`;
+  return `<w:p xmlns:w="${W_NS}">${paragraphProperties}${run}</w:p>`;
 }
+
+function buildTableXml(rows: number, columns: number): string {
+  const cellWidth = Math.max(1, Math.floor(DEFAULT_TABLE_WIDTH_DXA / columns));
+  const gridColumns = Array.from({ length: columns }, () => `<w:gridCol w:w="${cellWidth}"/>`).join("");
+  const rowXml = `<w:tr>${Array.from({ length: columns }, () => (
+    `<w:tc><w:tcPr><w:tcW w:w="${cellWidth}" w:type="dxa"/></w:tcPr><w:p/></w:tc>`
+  )).join("")}</w:tr>`;
+
+  return [
+    `<w:tbl xmlns:w="${W_NS}">`,
+    "<w:tblPr><w:tblW w:w=\"0\" w:type=\"auto\"/></w:tblPr>",
+    `<w:tblGrid>${gridColumns}</w:tblGrid>`,
+    Array.from({ length: rows }, () => rowXml).join(""),
+    "</w:tbl>",
+  ].join("");
+}
+
+function buildTableCellParagraphsXml(text: string, firstParagraphPropertiesXml: string, firstRunPropertiesXml: string, paragraphNamespaces:Record<string,string>,runNamespaces:Record<string,string>): string {
+  return text.split("\n").map((line, index) =>
+    buildTableCellParagraphXml(
+      line,
+      index === 0 ? firstParagraphPropertiesXml : "",
+      index === 0 ? firstRunPropertiesXml : "",
+      paragraphNamespaces,
+      runNamespaces,
+    )
+  ).join("");
+}
+
+function buildTableCellParagraphXml(text: string, paragraphPropertiesXml: string, runPropertiesXml: string,paragraphNamespaces:Record<string,string>,runNamespaces:Record<string,string>): string {
+  const textAttributes = needsPreserveSpace(text) ? " xml:space=\"preserve\"" : "";
+  const run = text.length > 0 || runPropertiesXml.length > 0
+    ? `<w:r${namespaceAttributes(runNamespaces)}>${runPropertiesXml}<w:t${textAttributes}>${escapeText(text)}</w:t></w:r>`
+    : "";
+  return `<w:p${namespaceAttributes(paragraphNamespaces)}>${paragraphPropertiesXml}${run}</w:p>`;
+}
+
+function inheritedNamespaces(node:XmlElement|undefined):Record<string,string>{
+  const chain:XmlElement[]=[];for(let current=node;current;current=current.parent)chain.push(current);
+  const result:Record<string,string>=Object.create(null);
+  for(const ancestor of chain.reverse())for(const [name,value]of Object.entries(ancestor.attributes))if(name==='xmlns'||name.startsWith('xmlns:'))result[name]=value;
+  // Authored w elements must have the Word namespace. A conflicting lexical w
+  // in copied formatting cannot be reinterpreted safely; refuse before mutation.
+  if(result['xmlns:w']&&result['xmlns:w']!==W_NS)fail('docx-table-cell-unsupported','Conflicting w namespace in copied formatting');
+  result['xmlns:w']=W_NS;return result;
+}
+function namespaceAttributes(map:Record<string,string>):string{return Object.entries(map).map(([name,value])=>` ${name}="${escapeAttribute(value)}"`).join('');}
 
 function buildMinimalDocxParts(): Map<string, Uint8Array> {
   return new Map([
@@ -726,6 +1196,90 @@ function minimalDocumentXml(): string {
     "</w:document>",
   ].join("");
 }
+
+function assertTableDimensions(rows: number, columns: number): void {
+  if (!Number.isInteger(rows) || rows < 1 || rows > MAX_TABLE_ROWS) {
+    throw new RangeError(`DOCX table rows must be an integer between 1 and ${MAX_TABLE_ROWS}`);
+  }
+  if (!Number.isInteger(columns) || columns < 1 || columns > MAX_TABLE_COLUMNS) {
+    throw new RangeError(`DOCX table columns must be an integer between 1 and ${MAX_TABLE_COLUMNS}`);
+  }
+  if (rows * columns > MAX_TABLE_CELLS) {
+    throw new RangeError(`DOCX table area must not exceed ${MAX_TABLE_CELLS} cells`);
+  }
+}
+
+function assertTableCoordinate(table: TableSnapshot, row: number, column: number): void {
+  if (!Number.isInteger(row) || row < 0 || row >= table.rows) {
+    throw new RangeError(`DOCX table row ${row} is out of range`);
+  }
+  if (!Number.isInteger(column) || column < 0 || column >= table.columns) {
+    throw new RangeError(`DOCX table column ${column} is out of range`);
+  }
+}
+
+function readTableColumnCount(table: XmlElement): number {
+  const grid = table.children.find((child) => isWord(child, "tblGrid"));
+  if (grid) {
+    return grid.children.filter((child) => isWord(child, "gridCol")).length;
+  }
+
+  let columns = 0;
+  for (const row of table.children) {
+    if (!isWord(row, "tr")) {
+      continue;
+    }
+    let width = 0;
+    for (const child of row.children) {
+      if (!isWord(child, "tc")) {
+        continue;
+      }
+      const tcPr = child.children.find((grandchild) => isWord(grandchild, "tcPr"));
+      width += readGridSpan(tcPr);
+    }
+    columns = Math.max(columns, width);
+  }
+  return columns;
+}
+
+function readGridSpan(tcPr: XmlElement | undefined): number {
+  const gridSpan = tcPr?.children.find((child) => isWord(child, "gridSpan"));
+  if (!gridSpan) {
+    return 1;
+  }
+  const value = attribute(gridSpan, "val", W_NS);
+  if (value === undefined) {
+    return 0;
+  }
+  const parsed = Number.parseInt(value, 10);
+  return Number.isInteger(parsed) ? parsed : 0;
+}
+
+function readOptionalVal(container: XmlElement | undefined, childName: string): number {
+  const child = container?.children.find((candidate) => isWord(candidate, childName));
+  if (!child) {
+    return 0;
+  }
+  const value = attribute(child, "val", W_NS);
+  if (value === undefined) {
+    return 1;
+  }
+  const parsed = Number.parseInt(value, 10);
+  return Number.isInteger(parsed) ? parsed : 1;
+}
+
+function hasWordChild(container: XmlElement | undefined, localName: string): boolean {
+  return container?.children.some((child) => isWord(child, localName)) ?? false;
+}
+
+function rawXml(xml: string, element: XmlElement): string {
+  return xml.slice(element.start, element.end);
+}
+
+function normalizeCellText(text: string): string {
+  return text.replace(/\r\n?/g, "\n");
+}
+
 function isSearchable(paragraph: Paragraph): boolean {
   try {
     void paragraph.text;
