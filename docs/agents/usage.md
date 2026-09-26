@@ -97,6 +97,21 @@ within Excel bounds, keeping rows/cells sorted and dimension metadata ordered.
 Reopen saved files and assert expected content. Native Office rendering has not
 been independently verified. `examples/create-office.ts` is an executable example.
 
+## Existing cell styles
+
+```ts
+const sheet = workbook.worksheet("Sheet1");
+sheet.setCellStyle("A1", 1); // existing cellXfs index
+sheet.setCellStyle("B2", null); // remove direct index from an existing cell
+await workbook.save(output);
+```
+
+Style-only edits preserve values, formulas and caches. Explicit zero selects
+cellXf zero; null can expose row/column defaults. The API checks selected style
+dependencies and refuses protected or stale cached inputs without mutation.
+It does not create cells or calculate effective formatting. See the
+[cell-style contract](../contracts/cell-style.md).
+
 ## Positioned slide text boxes
 
 ```ts

@@ -130,6 +130,11 @@
       "path": "references/fixtures-ooxml/workflows/pptx/text-box.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/cell-style.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

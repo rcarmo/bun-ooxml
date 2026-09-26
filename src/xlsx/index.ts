@@ -1,7 +1,8 @@
 import { posix } from "node:path";
 
 import { OoxmlError } from "../errors.ts";
-import { OpcPackage, relationshipPath } from "../opc/package.ts";
+import { OpcPackage, relationshipPath, sameBytes } from "../opc/package.ts";
+import {selectCellStyle} from './cell-style.ts';
 import {
   attribute,
   applyEdits,
@@ -130,6 +131,7 @@ export class Workbook {
   private sharedStrings: string[] = [];
   private readonly sheetsByName = new Map<string, WorksheetModel>();
   private sheetOrder: string[] = [];
+  private styleSourceSnapshot = new Map<string,Uint8Array>();
 
   private constructor(pkg: OpcPackage, sourcePath?: string) {
     this.package = pkg;
@@ -215,6 +217,22 @@ export class Workbook {
 
     this.reload();
     return this.worksheet(name);
+  }
+
+  /** @internal Existing-cell direct style assignment. */
+  setCellStyle(sheetName:string, reference:string, styleIndex:number|null): {changed:number} {
+    for(const [part,bytes]of this.styleSourceSnapshot){const live=this.package.get(part);if(!live||!sameBytes(live,bytes))throw new OoxmlError('xlsx-stale-workbook','Workbook model changed outside its wrapper');}
+    if(typeof reference!=='string')throw new OoxmlError('xlsx-cell-invalid','Cell reference must be a string');
+    const sheet=this.requireSheet(sheetName),cell=sheet.cells.get(normalizeCellReference(reference));
+    if([...this.sheetsByName.values()].filter(s=>s.part===sheet.part).length!==1)throw new OoxmlError('xlsx-style-ambiguous','Several worksheets reference the selected part');
+    if(!cell)throw new OoxmlError('xlsx-cell-missing','Style assignment requires an existing cell');
+    const next=selectCellStyle(this.package,this.workbookPart,sheet.xml,cell.element,styleIndex);
+    if(next===sheet.xml)return {changed:0};
+    const document=parseXml(next),cells=parseWorksheetCells(document,this.sharedStrings);
+    this.package.transaction(()=>{this.package.set(sheet.part,next);this.package.toBytes();});
+    this.sheetsByName.set(sheetName,{...sheet,xml:next,document,cells});
+    this.styleSourceSnapshot.set(sheet.part,this.package.get(sheet.part)!);
+    return {changed:1};
   }
 
   /** @internal Worksheet facade entrypoint. */
@@ -342,6 +360,8 @@ export class Workbook {
         cells,
       });
     }
+    const names=['_rels/.rels',this.workbookPart,relationshipPath(this.workbookPart),...[...this.sheetsByName.values()].map(s=>s.part),...(this.sharedStringsPart?[this.sharedStringsPart]:[])];
+    this.styleSourceSnapshot=new Map(names.map(n=>[n,this.package.get(n)!]));
   }
 
   private requireSheet(name: string): WorksheetModel {
@@ -359,6 +379,11 @@ export class Worksheet {
     private readonly workbookRef: Workbook,
     readonly name: string,
   ) {}
+
+  /** Assign an existing cellXf index or remove the direct override. */
+  setCellStyle(reference:string, styleIndex:number|null): {changed:number} {
+    return this.workbookRef.setCellStyle(this.name,reference,styleIndex);
+  }
 
   getCell(reference: string): Cell | undefined {
     return this.workbookRef.readCell(this.name, reference);

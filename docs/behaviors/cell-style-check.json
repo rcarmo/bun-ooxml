@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "scope": "Existing-cell direct cellXf selection/removal; no effective formatting, style authoring or Excel rendering credit",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.12.0",
+    "commit": "89518aa62c9515a7ccbe05ed9afc1bbc89e1118a",
+    "manifestSha256": "deef358591495f89e853a5ac3371a52032e263238c20d43e5deaa738768f9b0e",
+    "annotatedTagObject": "39342758704c37cf76303d30f0457c4389522b9a"
+  },
+  "checks": {
+    "candidate": {
+      "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+      "runId": "215f397c-8e18-4419-b818-18153787a7f3",
+      "unitTests": 329,
+      "assertions": 4143,
+      "acceptanceCases": 253,
+      "log": "/workspace/tmp/bun-cell-style-candidate.log"
+    },
+    "released": {
+      "command": "make check",
+      "mode": "default-no-overrides",
+      "runId": "b19f61ef-276b-4cf2-88e0-e3ae8fe8ea5b",
+      "unitTests": 329,
+      "assertions": 4143,
+      "acceptanceCases": 253,
+      "cellStyleCases": 27,
+      "examples": 3,
+      "log": "/workspace/tmp/bun-cell-style-release.log"
+    }
+  },
+  "sourceSha256": {
+    "src/xlsx/index.ts": "5d817686f0a2107a725525b0115b7aa7846a3760390476179aff356eaafa4f73",
+    "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e",
+    "tests/acceptance/cell-style.ts": "6509b7a9876ec52a2df3d1405e3a6b085f999cd0a465140af1fcbb21b39a62a3",
+    "tests/unit/xlsx-cell-style.test.ts": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+  },
+  "caseOutcomes": [
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"assign\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"replace\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"explicit-zero\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"remove\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"no-op\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"absent-removal\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"formula\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"blank\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-selection -- kind=\"aliased\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"missing-cell\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"invalid-index\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"missing-index\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"duplicate-relationship\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"external-styles\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"wrong-mime\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"wrong-root\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"duplicate-cellxfs\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"incorrect-count\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"invalid-font\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"invalid-base\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"missing-number-format\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"protected-sheet\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"protected-workbook\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"stale-sheet\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"stale-relationship\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"malformed-old-index\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-xlsx-cell-style-refusal -- kind=\"worksheet-alias\"",
+      "status": "passed",
+      "steps": 3
+    }
+  ],
+  "review": {
+    "python": "Bounded read-only source review including alias-refusal patch found no confirmed runtime bug. Owner corrected UTF16 title and added protected-existing-s removal/same-index and untargeted-cell/row-column custody tests. No independent retest credit."
+  },
+  "siblingReferenceGates": {
+    "python": {
+      "sourceCommit": "eb99f092f33f592f8967aaaa29a630384140b408",
+      "scopedChecks": 82,
+      "mutation": {
+        "cases": 19,
+        "steps": 159
+      },
+      "xml": {
+        "cases": 10,
+        "steps": 40
+      },
+      "package": {
+        "cases": 14,
+        "steps": 47
+      },
+      "priorAssetsUnchanged": 143,
+      "log": "/workspace/tmp/python-v012-candidate.log",
+      "cellStyleExecutionCredit": false
+    },
+    "go": {
+      "sourceCommit": "66aab63bc3cd02129743e0d9e55e77b47e207e97",
+      "batch": 124,
+      "acceptanceCases": 291,
+      "priorAssetsUnchanged": 143,
+      "cellStyleExecutionCredit": false
+    }
+  },
+  "limits": [
+    "Existing cells and cellXfs only; no creation",
+    "Selected dependency validation is not full XF/schema validation",
+    "No effective style/conditional-format/number-format rendering or formula calculation",
+    "No independent Excel/schema validation or complete format parity"
+  ]
+}
