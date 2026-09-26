@@ -1,7 +1,7 @@
 import { open, rename, unlink, lstat } from "node:fs/promises";
 import { dirname, join, basename, posix } from "node:path";
 import { OoxmlError } from "../errors.ts";
-import { parseXml, elements } from "../xml/index.ts";
+import { parseXml } from "../xml/index.ts";
 import { readZip, writeZip, type ZipLimits } from "./zip.ts";
 
 const REL = "http://schemas.openxmlformats.org/package/2006/relationships";
@@ -51,7 +51,7 @@ export class OpcPackage {
     checkName(name);
     const collision = this.names().find(n => n !== name && asciiLower(n) === asciiLower(name));
     if (collision) throw new OoxmlError("zip-case-collision", `${name} collides with ${collision}`);
-    this.parts.set(name, typeof value === "string" ? encoder.encode(value) : value.slice());
+    this.parts.set(name, typeof value === "string" ? encodeTextValue(value, this.parts.get(name) ?? this.baseline.get(name)) : value.slice());
   }
   delete(name: string): void { checkName(name); this.parts.delete(name); }
 
@@ -91,16 +91,15 @@ export class OpcPackage {
       removed: [...this.baseline.keys()].filter(n => !this.parts.has(n)).sort(),
     };
   }
-  /** Transactions restore every part when a synchronous edit refuses. Async
-   * callbacks are refused: their delayed work cannot be rolled back reliably.
+  /** Transactions roll back only the mutations performed before the callback
+   * returns or throws. Async functions are refused before they run; delayed work
+   * scheduled by a synchronous callback is outside this rollback guarantee.
    */
   transaction<T>(operation: () => T): T {
     if (operation.constructor.name === "AsyncFunction") throw new OoxmlError("opc-async-transaction", "Transactions require synchronous edits");
     const before = cloneParts(this.parts);
     try {
-      const result = operation();
-      if (result && typeof (result as { then?: unknown }).then === "function") throw new OoxmlError("opc-async-transaction", "Transactions require synchronous edits");
-      return result;
+      return operation();
     } catch (error) { this.parts = before; throw error; }
   }
   toBytes(): Uint8Array {
@@ -176,15 +175,14 @@ function relationshipOwner(path: string): string {
 }
 function resolveTarget(part: string, target: string): string {
   if (/[\\\u0000-\u0020]/.test(target) || /^(?:[A-Za-z][\w+.-]*:|\/\/)/.test(target)) throw new OoxmlError("opc-target-invalid", `Invalid internal relationship target ${target}`);
-  let path: string;
-  try { path = decodeURIComponent(target.split("#")[0]!); } catch { throw new OoxmlError("opc-target-invalid", "Invalid relationship URI encoding"); }
-  if (/%2f|%5c/i.test(target) || path.includes("?")) throw new OoxmlError("opc-target-invalid", "Encoded separators/query in internal relationship");
-  path = path.startsWith("/") ? posix.normalize(path.slice(1)) : posix.normalize(posix.join(posix.dirname(part || "_"), path));
-  checkName(path);
-  return path;
+  const path = target.split("#")[0]!;
+  if (path.includes("%") || path.includes("?")) throw new OoxmlError("opc-target-invalid", "Percent-encoded/query internal relationship targets are not supported");
+  const normalized = path.startsWith("/") ? posix.normalize(path.slice(1)) : posix.normalize(posix.join(posix.dirname(part || "_"), path));
+  checkName(normalized);
+  return normalized;
 }
 function checkName(name: string): void {
-  if (!name || name.startsWith("/") || /[\\\u0000-\u001f?#]/.test(name) || name.split("/").some(p => !p || p === "." || p === "..")) throw new OoxmlError("opc-part-name-invalid", `Noncanonical part name: ${name}`);
+  if (!name || name.startsWith("/") || /[%\\\u0000-\u001f?#]/.test(name) || name.split("/").some(p => !p || p === "." || p === "..")) throw new OoxmlError("opc-part-name-invalid", `Noncanonical part name: ${name}`);
 }
 export function sameBytes(a: Uint8Array, b: Uint8Array): boolean { return a.length === b.length && a.every((v,i) => v === b[i]); }
 function cloneParts(parts: ReadonlyMap<string, Uint8Array>): Map<string, Uint8Array> { return new Map([...parts].map(([n,b]) => [n,b.slice()])); }
@@ -195,4 +193,60 @@ function decodeXml(bytes: Uint8Array): string {
     if (bytes[0] === 0xfe && bytes[1] === 0xff) return new TextDecoder("utf-16be", { fatal: true }).decode(bytes);
     return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
   } catch { throw new OoxmlError("opc-xml-encoding", "Invalid XML encoding"); }
+}
+
+function encodeTextValue(text: string, previous?: Uint8Array): Uint8Array {
+  const declared = declaredEncoding(text);
+  const existing = storedEncoding(previous);
+  const encoding = chooseEncoding(declared, existing);
+  if (encoding === "utf-8") return encoder.encode(text);
+  if (encoding === "utf-16le") return encodeUtf16(text, false);
+  return encodeUtf16(text, true);
+}
+
+function declaredEncoding(text: string): "utf-8" | "utf-16" | "utf-16le" | "utf-16be" | undefined {
+  const match = /^\ufeff?\s*<\?xml\b[^>]*\bencoding\s*=\s*(["'])([^"']+)\1/i.exec(text);
+  if (!match) return undefined;
+  const value = match[2]!.toLowerCase();
+  if (value === "utf-8") return "utf-8";
+  if (value === "utf-16") return "utf-16";
+  if (value === "utf-16le") return "utf-16le";
+  if (value === "utf-16be") return "utf-16be";
+  throw new OoxmlError("opc-xml-encoding", `Unsupported XML encoding declaration: ${match[2]}`);
+}
+
+function storedEncoding(bytes?: Uint8Array): "utf-8" | "utf-16le" | "utf-16be" | undefined {
+  if (!bytes || bytes.length < 2) return bytes ? "utf-8" : undefined;
+  if (bytes[0] === 0xff && bytes[1] === 0xfe) return "utf-16le";
+  if (bytes[0] === 0xfe && bytes[1] === 0xff) return "utf-16be";
+  return "utf-8";
+}
+
+function chooseEncoding(
+  declared: "utf-8" | "utf-16" | "utf-16le" | "utf-16be" | undefined,
+  existing: "utf-8" | "utf-16le" | "utf-16be" | undefined,
+): "utf-8" | "utf-16le" | "utf-16be" {
+  if (declared === "utf-8") return "utf-8";
+  if (declared === "utf-16le") return "utf-16le";
+  if (declared === "utf-16be") return "utf-16be";
+  if (declared === "utf-16") return existing === "utf-16be" ? "utf-16be" : "utf-16le";
+  return existing ?? "utf-8";
+}
+
+function encodeUtf16(text: string, bigEndian: boolean): Uint8Array {
+  const bytes = new Uint8Array(2 + text.length * 2);
+  bytes[0] = bigEndian ? 0xfe : 0xff;
+  bytes[1] = bigEndian ? 0xff : 0xfe;
+  for (let index = 0; index < text.length; index += 1) {
+    const code = text.charCodeAt(index);
+    const offset = 2 + index * 2;
+    if (bigEndian) {
+      bytes[offset] = code >>> 8;
+      bytes[offset + 1] = code & 0xff;
+    } else {
+      bytes[offset] = code & 0xff;
+      bytes[offset + 1] = code >>> 8;
+    }
+  }
+  return bytes;
 }

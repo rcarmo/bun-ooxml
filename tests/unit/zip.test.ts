@@ -8,6 +8,12 @@ import { crc32, readZip, writeZip } from "../../src/opc/zip.ts";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
+const PROJECT_ROOT = resolve(import.meta.dir, "../..");
+const FIXTURE_ROOTS = [
+  join(PROJECT_ROOT, "fixtures/go-ooxml/testdata"),
+  join(PROJECT_ROOT, "fixtures/python-office-mcp-server/tests/_templates"),
+] as const;
+const EXPECTED_FIXTURE_ARCHIVE_COUNT = 74;
 
 const LOCAL_SIGNATURE = 0x04034b50;
 const CENTRAL_SIGNATURE = 0x02014b50;
@@ -229,6 +235,20 @@ describe("readZip", () => {
     expectZipError(() => readZip(archive), "zip-size-mismatch", "declared size");
   });
 
+  test("refuses deflated members that inflate past their declared size bound", () => {
+    const archive = buildZip([
+      {
+        name: "word/document.xml",
+        blob: encoder.encode("A".repeat(4096)),
+        method: METHOD_DEFLATED,
+        fileSize: 32,
+        localFileSize: 32,
+      },
+    ]);
+
+    expectZipError(() => readZip(archive), "zip-size-mismatch", "declared size");
+  });
+
   test("refuses undeclared trailing bytes after the archive", () => {
     const archive = concatBytes(buildZip([{ name: "word/document.xml", blob: encoder.encode("x") }]), encoder.encode("\n"));
 
@@ -249,18 +269,15 @@ describe("readZip", () => {
     expectZipError(() => readZip(archive, { maxCompressionRatio: 2 }), "zip-compression-ratio-exceeded", "compression ratio");
   });
 
-  test("reads any checked-in ZIP fixtures under default bounds when they are valid", () => {
-    for (const file of listFixtureArchives(resolve(import.meta.dir, "../../fixtures"))) {
+  test("reads every checked-in rcarmo fixture archive under default bounds", () => {
+    const fixtures = fixtureArchives();
+    expect(fixtures).toHaveLength(EXPECTED_FIXTURE_ARCHIVE_COUNT);
+
+    for (const file of fixtures) {
       const bytes = new Uint8Array(readFileSync(file));
       try {
         readZip(bytes);
       } catch (error) {
-        if (
-          error instanceof OoxmlError
-          && (error.code === "zip-end-record-missing" || error.code === "zip-local-metadata-mismatch")
-        ) {
-          continue;
-        }
         throw new Error(`fixture ${file} failed ZIP read: ${(error as Error).message}`);
       }
     }
@@ -282,14 +299,12 @@ function expectZipError(action: () => unknown, code: string, messageFragment: st
   }
 }
 
-function listFixtureArchives(root: string): string[] {
-  try {
-    if (!statSync(root).isDirectory()) {
-      return [];
-    }
-  } catch {
-    return [];
-  }
+function fixtureArchives(): string[] {
+  return FIXTURE_ROOTS.flatMap(collectFixtureArchives).sort();
+}
+
+function collectFixtureArchives(root: string): string[] {
+  if (!statSync(root).isDirectory()) throw new Error(`Missing fixture root: ${root}`);
 
   const result: string[] = [];
   const visit = (dir: string): void => {
@@ -299,14 +314,12 @@ function listFixtureArchives(root: string): string[] {
         visit(next);
         continue;
       }
-      if (/\.(zip|docx|pptx|xlsx)$/i.test(entry.name)) {
-        result.push(next);
-      }
+      if (/\.(zip|docx|pptx|xlsx)$/i.test(entry.name)) result.push(next);
     }
   };
 
   visit(root);
-  return result.sort();
+  return result;
 }
 
 function buildZip(members: ZipMemberSpec[], options: ZipBuildOptions = {}): Uint8Array {

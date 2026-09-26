@@ -1,7 +1,9 @@
+@implemented @bun
 Feature: Strict ZIP custody for OPC packages
   The shared ZIP layer reads OOXML package archives only when they have one
   unambiguous ZIP32 interpretation and stay within bounded resources.
 
+  @id-zip-read-valid
   Scenario: Read a valid ZIP32 archive with stored, deflated, and directory entries
     Given a ZIP archive with canonical OPC member names
     And the archive contains stored and deflated file entries
@@ -11,6 +13,7 @@ Feature: Strict ZIP custody for OPC packages
     And directory entries do not become package parts
     And each returned payload matches its declared CRC and size
 
+  @id-zip-refuse-unsafe
   Scenario: Refuse ambiguous or unsafe ZIP structure
     Given a ZIP archive whose structure has no single safe reading
     When the archive is read through the shared ZIP module
@@ -22,12 +25,13 @@ Feature: Strict ZIP custody for OPC packages
     And the module refuses local-header metadata that disagrees with the central directory
     And the module refuses CRC failures, size mismatches, and undeclared trailing structure
 
+  @id-zip-bounds
   Scenario: Refuse archives that exceed configured bounds before expansion
-    Given a ZIP archive whose declared archive size, entry count, entry size,
-      total expanded size, or compression ratio exceeds the configured limit
+    Given a ZIP archive whose declared archive size, entry count, entry size, total expanded size, or compression ratio exceeds the configured limit
     When the archive is read through the shared ZIP module
     Then the module refuses before allocating unbounded output
 
+  @id-zip-write-deterministic
   Scenario: Write deterministic UTF-8 ZIP32 output
     Given a map of canonical OPC member names and bytes
     When the map is written through the shared ZIP module twice
