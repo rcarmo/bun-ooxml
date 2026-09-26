@@ -1,6 +1,7 @@
 import { OoxmlError } from "../errors.ts";
 import {formatRunProperties} from './run-formatting.ts';
-import { OpcPackage } from "../opc/index.ts";
+import {directParagraphStyle,replaceParagraphStyle} from './paragraph-style.ts';
+import { OpcPackage, getContentType } from "../opc/index.ts";
 import { applyEdits, attribute, elements, escapeAttribute, escapeText, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
 export const W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
@@ -210,6 +211,13 @@ export class Paragraph {
       "docx-unsupported-topology",
       `Paragraph ${this.snapshot.index + 1} uses unsupported DOCX topology ${this.snapshot.unsupported ?? "later-slice-content"}`,
     );
+  }
+
+  /** Direct paragraph style ID, without evaluating inheritance. */
+  get styleId(): string | undefined { this.ensureFresh(); return this.documentRef.paragraphStyle(this.snapshot); }
+
+  setStyle(styleId: string | null): {changed:number} {
+    this.ensureFresh();return this.documentRef.setParagraphStyle(this.snapshot,styleId);
   }
 
   /** Apply direct bold/italic to every supported direct run in this paragraph. */
@@ -636,9 +644,38 @@ export class Document {
     this.applyDocumentCollections(nextCollections);
   }
 
-  formatParagraphRuns(snapshot: ParagraphSnapshot, patch: RunFormattingPatch): RunFormattingReceipt {
-    if(snapshot.version!==this.version||this.paragraphSnapshots[snapshot.index]!==snapshot||this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-paragraph','DOCX paragraph formatting handle is stale');
+  paragraphStyle(snapshot: ParagraphSnapshot): string | undefined {
+    this.assertParagraphSnapshot(snapshot);
+    return directParagraphStyle(this.xml,snapshot.element);
+  }
+
+  setParagraphStyle(snapshot: ParagraphSnapshot, styleId: string | null): {changed:number} {
+    this.assertParagraphSnapshot(snapshot);
+    if(styleId!==null&&(typeof styleId!=='string'||!styleId.trim()))fail('docx-style-argument','Expected a nonempty style ID or null');
     if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    this.assertFormattingUnprotected();
+    if(styleId!==null)this.assertSupportedParagraphStyle(styleId);
+    const next=replaceParagraphStyle(this.xml,snapshot.element,styleId);
+    if(next===this.xml)return {changed:0};
+    this.commitParagraphProperties(next);
+    return {changed:1};
+  }
+
+  formatParagraphRuns(snapshot: ParagraphSnapshot, patch: RunFormattingPatch): RunFormattingReceipt {
+    this.assertParagraphSnapshot(snapshot);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    this.assertFormattingUnprotected();
+    const result=formatRunProperties(this.xml,snapshot.element,patch);
+    if(!result.changedRuns)return {changedRuns:0};
+    this.commitParagraphProperties(result.xml);
+    return {changedRuns:result.changedRuns};
+  }
+
+  private assertParagraphSnapshot(snapshot: ParagraphSnapshot): void {
+    if(snapshot.version!==this.version||this.paragraphSnapshots[snapshot.index]!==snapshot||this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-paragraph','DOCX paragraph formatting handle is stale');
+  }
+
+  private assertFormattingUnprotected(): void {
     for(const rel of this.opcPackage.relationships(DOCUMENT_PART)){
       if(rel.type!=='http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings')continue;
       if(rel.external)fail('docx-format-protected','External settings cannot be checked');
@@ -646,14 +683,14 @@ export class Document {
       if(!isWord(settings.root,'settings'))fail('docx-format-protected','Invalid settings root');
       for(const guard of elements(settings,'documentProtection',W_NS))if(!/^(0|false|off)$/i.test(attribute(guard,'enforcement',W_NS)??''))fail('docx-format-protected','Document protection refuses formatting');
     }
-    const result=formatRunProperties(this.xml,snapshot.element,patch);
-    if(!result.changedRuns)return {changedRuns:0};
-    const nextVersion=this.version+1,nextDocument=parseXml(result.xml);
+  }
+
+  private commitParagraphProperties(nextXml:string):void {
+    const nextVersion=this.version+1,nextDocument=parseXml(nextXml);
     const collections=collectDocumentCollections(nextDocument,nextVersion,this.tableVersion);
     if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-format-unsafe','Formatting unexpectedly changed paragraph text');
-    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,result.xml);this.opcPackage.toBytes();});
-    this.xml=result.xml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
-    return {changedRuns:result.changedRuns};
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
+    this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
   }
 
   resolveTable(table: TableSnapshot): TableSnapshot {
@@ -787,7 +824,9 @@ export class Document {
   }
 
   private assertSupportedParagraphStyle(styleId: string): void {
-    const stylesPart = this.opcPackage.related(DOCUMENT_PART, "styles");
+    const links=this.opcPackage.relationships(DOCUMENT_PART).filter(r=>r.type==='http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles');
+    if(links.length>1||links.some(r=>r.external))fail('docx-style-unsupported','Style relationship must be unique and internal');
+    const stylesPart = links[0]?.resolved;
     if (!stylesPart) {
       fail(
         "docx-style-unsupported",
@@ -795,16 +834,15 @@ export class Document {
       );
     }
 
+    if(getContentType(this.opcPackage,stylesPart)!=='application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml')fail('docx-style-part-invalid','Unexpected styles content type');
     const stylesDocument = parseXml(this.opcPackage.text(stylesPart));
     if (!isWord(stylesDocument.root, "styles")) {
       fail("docx-style-part-invalid", `DOCX styles part ` + stylesPart + ` is invalid`);
     }
 
-    const exists = elements(stylesDocument, "style", W_NS).some((style) =>
-      attribute(style, "type", W_NS) === "paragraph" &&
-      attribute(style, "styleId", W_NS) === styleId
-    );
-    if (!exists) {
+    const selected=stylesDocument.root.children.filter(style=>isWord(style,'style')&&attribute(style,'styleId',W_NS)===styleId);
+    if(selected.length>1)fail('docx-style-ambiguous','Duplicate style ID');
+    if(selected.length!==1||attribute(selected[0]!,'type',W_NS)!=='paragraph') {
       fail("docx-style-missing", `Unknown DOCX paragraph style ` + styleId);
     }
   }

@@ -163,6 +163,21 @@ after changes. Unsupported content, property revisions, ambiguous run properties
 protection and stale handles refuse without mutation. See the
 [formatting contract](../contracts/run-formatting.md) for custody and scope.
 
+## Existing paragraph styles
+
+```ts
+const paragraph = doc.paragraphs[0]!;
+console.log(paragraph.styleId); // direct override only, undefined when absent
+paragraph.setStyle("Heading1"); // must resolve to one existing paragraph style
+await doc.save(output);
+```
+
+`setStyle(null)` removes the override without creating or requiring a styles part.
+Assignment does not edit definitions or compute inheritance. Missing/character or
+ambiguous styles, external styles links, protection, unsupported topology and
+stale handles refuse. Same-style requests preserve bytes; real changes require
+fresh paragraph/span/cell handles. See the [style contract](../contracts/paragraph-style.md).
+
 ## Word review on package snapshots
 
 ```ts

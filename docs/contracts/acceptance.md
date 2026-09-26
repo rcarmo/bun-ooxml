@@ -22,8 +22,8 @@ The shared catalogue defines common expected behaviour. Native bindings and
 per-consumer execution reports are local. Candidate mappings in `docs/behaviors/`
 are not part of the execution inventory until reviewed, reconciled and bound.
 
-The 23 shared selections cover mutation safety, tracked Word dispatch, direct run
-formatting, XML, core package admission,
+The 24 shared selections cover mutation safety, tracked Word dispatch, direct run
+formatting, paragraph-style selection, XML, core package admission,
 graph/ZIP64, text, creation, rectangular tables, Word reviews/comments and
 spreadsheet cache boundaries. Their local feature copies are removed.
 Bindings and unit assertions are unchanged; isolated runner tests may materialise

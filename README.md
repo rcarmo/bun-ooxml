@@ -7,7 +7,8 @@ preserving the Office package parts an edit did not touch.
 Initial authoring creates DOCX paragraphs/tables, PPTX title slides/tables and XLSX sheets/cells
 entirely in Bun. Existing-file edits include guarded cross-run replacement, slide
 text/notes and cell edits with bounded formula-cache invalidation. Word paragraph
-runs support direct bold/italic overrides without text or style-graph changes. `patchOffice()` adds
+runs support direct bold/italic overrides and existing paragraph-style selection
+without text or style-graph changes. `patchOffice()` adds
 read-only previews, all-targets-required batches, guarded saves and per-target
 receipts. It can track one unique Word replacement with explicit author/date and
 report saved revision IDs separately from preview counts. Its original native

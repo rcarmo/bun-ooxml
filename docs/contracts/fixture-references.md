@@ -18,7 +18,7 @@ paths for provenance and one-time migrations. Runtime/test lookup uses IDs, not
 those aliases. Required notices are deduplicated under the shared `notices/`.
 
 The grouped baseline contains 115 unique fixture files in 32 groups, totalling
-6,451,099 bytes. The complete manifest has 140 asset entries, including notices
+6,451,099 bytes. The complete manifest has 141 asset entries, including notices
 and shared workflow metadata. These counts have different meanings from the 74
 logical package inputs exercised by the corpus regression tests.
 
@@ -58,7 +58,7 @@ no Bun bindings. The central `bun-package.json` mapping records six partial and
 24 unmapped declarations from the graph, package-diff and ZIP64 modules; these
 records do not change Bun's executed-case count.
 
-All 23 implemented feature selections now come from the reference checkout.
+All 24 implemented feature selections now come from the reference checkout.
 `workflows/docx/`, `workflows/pptx/`, `workflows/xlsx/` and the package profiles
 replace the final ten local copies, preserving 62 cases and all scenario IDs.
 Only planned backlog features remain local. The 19 comment declarations have

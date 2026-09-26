@@ -1,6 +1,6 @@
 # Native behaviour catalogue staging
 
-The AST inventory contains 274 test declarations in 32 native test files. Five
+The AST inventory contains 291 test declarations in 33 native test files. Five
 candidate mapping files cover the earlier 227 declaration IDs once each; the 19
 new comment declarations have bounded central partial mappings, with remaining
 lexical/encoding/protection cases recorded as gaps. One new reference-custody
@@ -9,6 +9,8 @@ Nine tracked-workflow declarations add runtime dispatcher, receipt and refusal
 checks; their canonical Gherkin runs are recorded separately from native mapping.
 Eighteen direct run-formatting declarations likewise need bounded assertion
 mapping; their 15 canonical cases execute without implying complete formatting.
+Seventeen paragraph-style declarations and 19 canonical cases add bounded assignment
+and removal; style authoring and computed inheritance remain outside that scope.
 Semantic review
 and reconciliation into the shared Gherkin catalogue are unfinished. A bounded
 review of the 18 XML/QName declarations is recorded in the shared
@@ -25,7 +27,7 @@ The shared parsing/QName features now replace their former local copies.
 
 `native-test-inventory.json` records declaration identity, suite/title, source
 location/hash, assertion expressions and loops. It counts declarations, not
-runtime-expanded leaves. Thirty-nine declarations contain parameters or loops
+runtime-expanded leaves. Forty-six declarations contain parameters or loops
 that need explicit expansion review. Assertions hidden in helper calls also need
 manual inspection; an empty extracted assertion list does not mean no assertion
 ran.
@@ -54,5 +56,5 @@ The 19 comment declarations and their source hashes appear in the refreshed
 inventory and the shared `ledgers/consumers/bun-comments.json`. Their four shared
 scenarios expand to 14 cases; `comment-binding-check.json` records the initial
 local execution, and current acceptance reports record the canonical bindings.
-Acceptance now executes 160 Bun cases. Candidate mapping counts never increase
+Acceptance now executes 179 Bun cases. Candidate mapping counts never increase
 that result.

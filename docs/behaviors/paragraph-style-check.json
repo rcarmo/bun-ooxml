@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "scope": "Existing selected paragraph style assignment/removal; no definition creation/inheritance evaluation",
+  "consumerBaseCommit": "3cfa7ff050e2d2cfb21af49fe9e6c7a5c412cf8f",
+  "reference": {
+    "mode": "candidate",
+    "commit": "23a3fa7281be869f217bcc472629de6eecac8650",
+    "manifestSha256": "36c5a86a8a43ec42cf3a854bd9eef462ac3f60a5e938240f15ebce80207f6e9b"
+  },
+  "behavioralRed": "No-op stub failed style/readback/change receipt/stale outcomes before implementation",
+  "run": {
+    "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+    "runId": "f20d39d8-982d-4060-a8e8-51e8fa0c7daf",
+    "startedAt": "2026-09-26T16:18:42.830Z",
+    "finishedAt": "2026-09-26T16:18:44.738Z",
+    "unitTests": 291,
+    "assertions": 3112,
+    "acceptanceCases": 179,
+    "styleCases": 19,
+    "styleSteps": 62,
+    "examples": 3
+  },
+  "scenarios": [
+    {
+      "id": "@id-docx-paragraph-style-selection",
+      "cases": [
+        {
+          "id": "@id-docx-paragraph-style-selection -- operation=\"assign\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-paragraph-style-selection -- operation=\"replace\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-paragraph-style-selection -- operation=\"remove\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-paragraph-style-selection -- operation=\"same-style\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-paragraph-style-selection -- operation=\"absent-removal\"",
+          "result": "passed",
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "id": "@id-docx-paragraph-style-refusal",
+      "cases": [
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"unknown-style\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"character-style\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"duplicate-style\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"duplicate-relationship\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"external-styles\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"wrong-mime\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"duplicate-properties\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"duplicate-pstyle\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"misplaced-pstyle\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"wrong-namespace\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"property-revision\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"protected\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"stale\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-paragraph-style-refusal -- variant=\"invalid-argument\"",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    }
+  ],
+  "review": {
+    "kind": "Cross-session read-only source review",
+    "result": "No confirmed runtime blocker; removal/same-style title overclaim corrected and same-style protected test added; selected-ID uniqueness scope documented"
+  },
+  "limits": [
+    "Seventeen native declarations await central semantic mapping",
+    "Unrelated style IDs are not globally validated for uniqueness",
+    "No effective style evaluation or independent Office rendering",
+    "Go/Python gates establish reference integration only"
+  ],
+  "releaseRun": {
+    "referenceTag": "v0.9.0",
+    "referenceCommit": "23a3fa7281be869f217bcc472629de6eecac8650",
+    "mode": "default-no-overrides",
+    "command": "make check",
+    "runId": "83feaf84-1ae5-4140-8a39-76ed78e14926",
+    "startedAt": "2026-09-26T16:19:31.625Z",
+    "finishedAt": "2026-09-26T16:19:33.461Z",
+    "unitTests": 291,
+    "assertions": 3112,
+    "acceptanceCases": 179,
+    "examples": 3
+  }
+}
