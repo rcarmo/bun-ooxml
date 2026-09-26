@@ -64,8 +64,9 @@ batch. Only the integrating agent commits shared work.
 
 ## Current hazards
 
-The first slices are deliberately smaller than the full source contract. DOCX save
-and package wrappers still differ from the OPC-backed PPTX/XLSX APIs. XLSX omitted
-save paths overwrite the opened path; examples use an explicit output. Native
+The first slices are deliberately smaller than the full source contract. All three
+formats now use shared OPC custody and atomic path saves. DOCX also returns output
+bytes; XLSX omitted save paths overwrite the opened path. Examples use explicit
+output paths. Native
 spreadsheet calculation and producer/rendering comparisons have not been implemented.
 These differences need explicit tests and mappings before a stable public release.

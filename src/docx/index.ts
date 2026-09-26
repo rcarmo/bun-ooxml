@@ -1,12 +1,10 @@
 import { OoxmlError } from "../errors.ts";
-import { readZip, writeZip } from "../opc/zip.ts";
+import { OpcPackage } from "../opc/index.ts";
 import { applyEdits, escapeText, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
 export const W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 
 const DOCUMENT_PART = "word/document.xml";
-const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
-const UTF8_ENCODER = new TextEncoder();
 
 type OpenInput = string | Uint8Array | ArrayBuffer;
 
@@ -34,47 +32,43 @@ type SpanSnapshot = {
   query: string;
 };
 
+type ParagraphCollection = {
+  paragraphs: ParagraphSnapshot[];
+  omittedTopologies: string[];
+};
+
 /**
  * Defensive OPC package wrapper for the DOCX slice.
  *
- * All byte arrays are cloned on ingress and egress so callers cannot mutate the
- * in-memory package behind the document's back.
+ * Public DOCX callers keep the previous wrapper surface while the underlying
+ * custody now delegates to validated, atomic `OpcPackage` behaviour.
  */
 export class DocxPackage {
-  private readonly partsMap: Map<string, Uint8Array>;
-
-  constructor(parts: ReadonlyMap<string, Uint8Array>) {
-    this.partsMap = new Map(
-      Array.from(parts, ([name, bytes]) => [name, cloneBytes(bytes)]),
-    );
-  }
+  constructor(private readonly opcPackage: OpcPackage) {}
 
   get parts(): ReadonlyMap<string, Uint8Array> {
-    return new Map(
-      Array.from(this.partsMap, ([name, bytes]) => [name, cloneBytes(bytes)]),
-    );
+    return new Map(this.opcPackage.names().map((name) => [name, this.opcPackage.get(name)!]));
   }
 
   has(name: string): boolean {
-    return this.partsMap.has(name);
+    return this.opcPackage.get(name) !== undefined;
   }
 
   get(name: string): Uint8Array | undefined {
-    const bytes = this.partsMap.get(name);
-    return bytes ? cloneBytes(bytes) : undefined;
+    return this.opcPackage.get(name);
   }
 
   toBytes(): Uint8Array {
-    return writeZip(this.partsMap);
+    return this.opcPackage.toBytes();
   }
 
   setPart(name: string, bytes: Uint8Array): void {
-    this.partsMap.set(name, cloneBytes(bytes));
+    this.opcPackage.set(name, bytes);
   }
 }
 
 /**
- * Snapshot handle for a body paragraph.
+ * Snapshot handle for a document-order paragraph.
  *
  * This first slice only treats paragraphs made of direct `w:r/w:t` text runs as
  * searchable. Any broader topology is refused instead of flattened lossy.
@@ -197,42 +191,40 @@ export class Span {
  * First DOCX text-editing slice.
  *
  * Scope for this slice:
- * - reads only `word/document.xml` body paragraphs;
+ * - reads `word/document.xml` paragraphs in body order, including those inside
+ *   table cells and nested tables;
  * - searches exact text across direct `w:r/w:t` runs;
  * - rewrites touched text nodes in place without rebuilding unaffected runs.
  *
  * Out of scope for this slice are broader paragraph topologies such as fields,
- * revisions, content controls and other constructs that would require a more
- * structural edit plan.
+ * revisions, content controls, text boxes and other constructs that would
+ * require a more structural edit plan.
  */
 export class Document {
-  private originalBytes?: Uint8Array;
-  private dirty = false;
   private version = 0;
   private xml = "";
   private xmlDocument!: XmlDocument;
   private paragraphSnapshots: ParagraphSnapshot[] = [];
   private paragraphHandles: Paragraph[] = [];
+  private omittedTopologies: string[] = [];
 
   readonly package: DocxPackage;
 
-  private constructor(parts: ReadonlyMap<string, Uint8Array>, originalBytes?: Uint8Array) {
-    this.package = new DocxPackage(parts);
-    this.originalBytes = originalBytes ? cloneBytes(originalBytes) : undefined;
+  private constructor(private readonly opcPackage: OpcPackage) {
+    this.package = new DocxPackage(opcPackage);
     this.reloadDocumentXml();
   }
 
   /** Opens a DOCX package from a filesystem path or raw bytes. */
   static async open(input: OpenInput): Promise<Document> {
     if (typeof input === "string") {
-      const bytes = new Uint8Array(await Bun.file(input).arrayBuffer());
-      return new Document(readZip(bytes), bytes);
+      return new Document(await OpcPackage.open(input));
     }
 
     const bytes = input instanceof Uint8Array
       ? cloneBytes(input)
       : new Uint8Array(input.slice(0));
-    return new Document(readZip(bytes), bytes);
+    return new Document(await OpcPackage.open(bytes));
   }
 
   /** Current paragraph snapshot handles in document order. */
@@ -241,12 +233,12 @@ export class Document {
   }
 
   /**
-   * Finds exact matches across all searchable body paragraphs.
+   * Finds exact matches across all searchable collected paragraphs.
    *
-   * If a match is found in a searchable paragraph, unsupported paragraphs are
-   * ignored for that call. If no matches are found and any paragraph is
-   * unsupported, the first refusal is surfaced instead of pretending the whole
-   * document was searchable.
+   * If a match is found in a searchable paragraph, unsupported paragraphs and
+   * omitted blind regions are ignored for that call. If no matches are found
+   * and any paragraph or omitted region is unsupported, the first refusal is
+   * surfaced instead of pretending the whole document was searchable.
    */
   find(query: string): Span[] {
     const matches = this.paragraphHandles.flatMap((paragraph) => {
@@ -260,7 +252,7 @@ export class Document {
       }
     });
 
-    if (matches.length > 0 || this.paragraphHandles.every((paragraph) => isSearchable(paragraph))) {
+    if (matches.length > 0) {
       return matches;
     }
 
@@ -268,6 +260,14 @@ export class Document {
     if (unsupported) {
       throw unsupported.failure();
     }
+
+    if (this.omittedTopologies.length > 0) {
+      fail(
+        "docx-unsupported-topology",
+        `DOCX document search omits unsupported topology ${this.omittedTopologies[0]}`,
+      );
+    }
+
     return matches;
   }
 
@@ -279,18 +279,12 @@ export class Document {
    * and other source corpora safe across runs.
    */
   async save(path?: string): Promise<Uint8Array> {
-    const bytes = this.dirty
-      ? this.package.toBytes()
-      : this.originalBytes
-        ? cloneBytes(this.originalBytes)
-        : this.package.toBytes();
+    const bytes = this.opcPackage.toBytes();
 
     if (path) {
-      await Bun.write(path, bytes);
+      await this.opcPackage.save(path);
     }
 
-    this.originalBytes = cloneBytes(bytes);
-    this.dirty = false;
     return cloneBytes(bytes);
   }
 
@@ -366,28 +360,31 @@ export class Document {
     }
 
     this.xml = applyEdits(this.xml, edits);
-    this.package.setPart(DOCUMENT_PART, UTF8_ENCODER.encode(this.xml));
-    this.dirty = true;
+    this.opcPackage.set(DOCUMENT_PART, this.xml);
     this.version += 1;
     this.reloadParagraphs();
   }
 
   private reloadDocumentXml(): void {
-    const bytes = this.package.get(DOCUMENT_PART);
-    if (!bytes) {
-      fail("docx-document-part-missing", `Missing required DOCX part ${DOCUMENT_PART}`);
-    }
     try {
-      this.xml = UTF8_DECODER.decode(bytes);
-    } catch {
-      fail("docx-part-encoding-invalid", `${DOCUMENT_PART} is not valid UTF-8`);
+      this.xml = this.opcPackage.text(DOCUMENT_PART);
+    } catch (error) {
+      if (error instanceof OoxmlError && error.code === "opc-part-missing") {
+        fail("docx-document-part-missing", `Missing required DOCX part ${DOCUMENT_PART}`);
+      }
+      if (error instanceof OoxmlError && error.code === "opc-xml-encoding") {
+        fail("docx-part-encoding-invalid", `${DOCUMENT_PART} has invalid XML encoding`);
+      }
+      throw error;
     }
     this.reloadParagraphs();
   }
 
   private reloadParagraphs(): void {
     this.xmlDocument = parseXml(this.xml);
-    this.paragraphSnapshots = collectParagraphs(this.xmlDocument, this.version);
+    const collection = collectParagraphs(this.xmlDocument, this.version);
+    this.omittedTopologies = collection.omittedTopologies;
+    this.paragraphSnapshots = collection.paragraphs;
     this.paragraphHandles = this.paragraphSnapshots.map(
       (snapshot) => new Paragraph(this, snapshot),
     );
@@ -402,15 +399,82 @@ export async function save(document: Document, path?: string): Promise<Uint8Arra
   return document.save(path);
 }
 
-function collectParagraphs(document: XmlDocument, version: number): ParagraphSnapshot[] {
+function collectParagraphs(document: XmlDocument, version: number): ParagraphCollection {
   const body = document.root.children.find((child) => isWord(child, "body"));
   if (!body) {
     fail("docx-document-invalid", "DOCX document XML is missing w:body");
   }
 
-  return body.children
-    .filter((child) => isWord(child, "p"))
-    .map((paragraph, index) => analyzeParagraph(paragraph, index, version));
+  const paragraphs: ParagraphSnapshot[] = [];
+  const omittedTopologies: string[] = [];
+
+  const collectParagraph = (paragraph: XmlElement): void => {
+    paragraphs.push(analyzeParagraph(paragraph, paragraphs.length, version));
+  };
+
+  const noteOmitted = (element: XmlElement): void => {
+    omittedTopologies.push(element.name);
+  };
+
+  const collectTableCell = (cell: XmlElement): void => {
+    for (const child of cell.children) {
+      if (isWord(child, "tcPr")) {
+        continue;
+      }
+      if (isWord(child, "p")) {
+        collectParagraph(child);
+        continue;
+      }
+      if (isWord(child, "tbl")) {
+        collectTable(child);
+        continue;
+      }
+      noteOmitted(child);
+    }
+  };
+
+  const collectTableRow = (row: XmlElement): void => {
+    for (const child of row.children) {
+      if (isWord(child, "trPr")) {
+        continue;
+      }
+      if (isWord(child, "tc")) {
+        collectTableCell(child);
+        continue;
+      }
+      noteOmitted(child);
+    }
+  };
+
+  const collectTable = (table: XmlElement): void => {
+    for (const child of table.children) {
+      if (isWord(child, "tblPr") || isWord(child, "tblGrid") || isWord(child, "tblPrEx")) {
+        continue;
+      }
+      if (isWord(child, "tr")) {
+        collectTableRow(child);
+        continue;
+      }
+      noteOmitted(child);
+    }
+  };
+
+  for (const child of body.children) {
+    if (isWord(child, "p")) {
+      collectParagraph(child);
+      continue;
+    }
+    if (isWord(child, "tbl")) {
+      collectTable(child);
+      continue;
+    }
+    if (isWord(child, "sectPr")) {
+      continue;
+    }
+    noteOmitted(child);
+  }
+
+  return { paragraphs, omittedTopologies };
 }
 
 function analyzeParagraph(paragraph: XmlElement, index: number, version: number): ParagraphSnapshot {

@@ -15,6 +15,17 @@ afterEach(async () => {
 });
 
 describe("gherkin acceptance", () => {
+  test("full gate refuses planned work despite implemented cases passing", async () => {
+    const root = await makeProject({
+      "features/opc/ready.feature": "@implemented @bun\nFeature: ready\n  @id-ready\n  Scenario: verified\n    Then a real assertion passes\n",
+      "features/planned/gap.feature": "@planned\nFeature: gap\n  @id-gap\n  Scenario: unfinished\n    Then remaining work is done\n",
+    });
+    await expect(runAcceptance([{pattern:/^a real assertion passes$/,run:()=>{expect(2+2).toBe(4);}}],{root,full:true})).rejects.toThrow("Full acceptance rejects planned features");
+    const report=await Bun.file(join(root,"artifacts/acceptance.json")).json();
+    expect(report.status).toBe("failed");
+    expect(report.execution.cases.passed).toBe(1);
+    expect(report.execution.cases.planned).toBe(1);
+  });
   test("parses backgrounds and scenario outlines into exact expanded cases", () => {
     const feature = parseFeature(
       "features/opc/outline.feature",
@@ -263,7 +274,7 @@ describe("gherkin acceptance", () => {
     expect(artifact.failures[0]).toContain("boom");
   });
 
-  test("does not require a steps module when nothing executes", async () => {
+  test("refuses an acceptance run with only planned cases rather than passing vacuously", async () => {
     const root = await makeProject({
       "features/planned/deferred.feature": [
         "@planned",
@@ -276,8 +287,9 @@ describe("gherkin acceptance", () => {
       ].join("\n"),
     });
 
-    const report = await runAcceptance(undefined, { root });
-    expect(report.status).toBe("passed");
+    await expect(runAcceptance(undefined, { root })).rejects.toThrow("No implemented cases executed");
+    const report = await Bun.file(join(root,"artifacts/acceptance.json")).json();
+    expect(report.status).toBe("failed");
     expect(report.inventory.features.planned).toBe(1);
     expect(report.execution.features.planned).toBe(1);
   });

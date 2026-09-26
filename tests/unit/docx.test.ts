@@ -44,6 +44,10 @@ describe("docx Document", () => {
     expect(await fromPath.save()).toEqual(original);
     expect(new Uint8Array(readFileSync(tempPath))).toEqual(original);
     expect(await fromBytes.save()).toEqual(original);
+
+    const explicitPath = join(dirname(tempPath), "saved.docx");
+    expect(await fromBytes.save(explicitPath)).toEqual(original);
+    expect(new Uint8Array(readFileSync(explicitPath))).toEqual(original);
   });
 
   test("preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen", async () => {
@@ -107,6 +111,72 @@ describe("docx Document", () => {
     ]);
   });
 
+  test("includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML", async () => {
+    const original = new Uint8Array(readFileSync(join(PYTHON_WORD_ROOT, "simple_table.docx")));
+    const originalXml = UTF8_DECODER.decode(
+      requireDefined(readZip(original).get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`),
+    );
+    const doc = await Document.open(original);
+
+    expect(doc.paragraphs.map((paragraph) => paragraph.text)).toEqual([
+      "Research Materials Inventory",
+      "Item",
+      "Quantity",
+      "Source",
+      "Galvanic battery",
+      "3",
+      "Germany",
+      "Chemical reagents",
+      "12 vials",
+      "Switzerland",
+      "Anatomical charts",
+      "7",
+      "University library",
+      "",
+    ]);
+
+    const span = requireSingleSpan(doc.find("Galvanic battery"), "Galvanic battery");
+    await span.replace("Voltaic battery");
+
+    const saved = await doc.save();
+    const savedXml = UTF8_DECODER.decode(
+      requireDefined(readZip(saved).get(DOCUMENT_PART), `Missing ${DOCUMENT_PART}`),
+    );
+    expect(savedXml).toBe(originalXml.replace(">Galvanic battery<", ">Voltaic battery<"));
+
+    const reopened = await Document.open(saved);
+    expect(reopened.paragraphs.map((paragraph) => paragraph.text)).toEqual([
+      "Research Materials Inventory",
+      "Item",
+      "Quantity",
+      "Source",
+      "Voltaic battery",
+      "3",
+      "Germany",
+      "Chemical reagents",
+      "12 vials",
+      "Switzerland",
+      "Anatomical charts",
+      "7",
+      "University library",
+      "",
+    ]);
+  });
+
+  test("does not descend into text boxes and refuses the blind region when no supported match exists", async () => {
+    const doc = await Document.open(
+      join(
+        PROJECT_ROOT,
+        "references/fixtures-ooxml/reference-assets/docx/tests/paper/fixtures/generated/feature-isolated/textbox.docx",
+      ),
+    );
+
+    expect(doc.find("Body text before the text box.")).toHaveLength(1);
+    expect(() => doc.find("Text living inside the text box.")).toThrow(
+      expect.objectContaining({ code: "docx-unsupported-topology" }),
+    );
+  });
+
   test("detects stale spans before mutation and leaves the package unchanged", async () => {
     const doc = await Document.open(join(PYTHON_WORD_ROOT, "formatted_text.docx"));
 
@@ -167,8 +237,8 @@ describe("docx Document", () => {
 
     expect(report.status).toBe("passed");
     expect(report.inventory.features.implemented).toBe(1);
-    expect(report.inventory.scenarios.implemented).toBe(4);
-    expect(report.execution.cases.passed).toBe(6);
+    expect(report.inventory.scenarios.implemented).toBe(5);
+    expect(report.execution.cases.passed).toBe(7);
     expect(report.execution.steps.failed).toBe(0);
     expect(report.failures).toEqual([]);
   });

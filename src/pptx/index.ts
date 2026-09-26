@@ -8,6 +8,11 @@ const SLIDE_RELATIONSHIP = "http://schemas.openxmlformats.org/officeDocument/200
 
 type OpenInput = string | Uint8Array | ArrayBuffer;
 
+type StoryFragment = {
+  text: string;
+  attrs: Record<string, string>;
+};
+
 type StoryRun = {
   element: XmlElement;
   textElement: XmlElement;
@@ -21,7 +26,9 @@ type StoryRun = {
 type StoryParagraph = {
   element: XmlElement;
   text: string;
-  runs: StoryRun[];
+  fragments: StoryFragment[];
+  editableRuns: StoryRun[];
+  readable: boolean;
   replaceable: boolean;
 };
 
@@ -109,11 +116,12 @@ export class Slide {
   inspectText(_label: string): InspectedParagraph[] {
     const xml = this.presentation.package.text(this.partName);
     const paragraphs = collectStoryParagraphs(xml);
+    assertReadableParagraphs(this.partName, paragraphs);
     const version = this.presentation.currentSlideVersion(this.partName);
 
     return paragraphs.map((paragraph, paragraphIndex) => ({
       text: paragraph.text,
-      runs: paragraph.runs.map((run) => ({ text: run.text, attrs: { ...run.attrs } })),
+      runs: paragraph.fragments.map((fragment) => ({ text: fragment.text, attrs: { ...fragment.attrs } })),
       anchor: {
         kind: "pptx-text",
         part: this.partName,
@@ -139,10 +147,9 @@ export class Slide {
       );
     }
 
-    return collectStoryParagraphs(this.presentation.package.text(notesPart))
-      .map((paragraph) => paragraph.text)
-      .filter((text) => text.length > 0)
-      .join("\n");
+    const paragraphs = collectStoryParagraphs(this.presentation.package.text(notesPart));
+    assertReadableParagraphs(notesPart, paragraphs);
+    return paragraphs.map((paragraph) => paragraph.text).join("\n");
   }
 
   /**
@@ -245,49 +252,95 @@ function collectStoryParagraphs(xml: string): StoryParagraph[] {
 }
 
 function analyzeParagraph(paragraph: XmlElement): StoryParagraph {
-  const runs: StoryRun[] = [];
+  const fragments: StoryFragment[] = [];
+  const editableRuns: StoryRun[] = [];
   const textParts: string[] = [];
   let offset = 0;
+  let readable = true;
   let replaceable = true;
 
   for (const child of paragraph.children) {
     if (isElement(child, "pPr", DRAWING_NS) || isElement(child, "endParaRPr", DRAWING_NS)) {
       continue;
     }
-    if (!isElement(child, "r", DRAWING_NS)) {
+
+    if (isElement(child, "r", DRAWING_NS)) {
+      const textElement = child.children.find((node) => isElement(node, "t", DRAWING_NS));
+      const rPrElement = child.children.find((node) => isElement(node, "rPr", DRAWING_NS));
+      const supportedChildren = child.children.every(
+        (node) => isElement(node, "t", DRAWING_NS) || isElement(node, "rPr", DRAWING_NS),
+      );
+
+      if (!textElement || !supportedChildren || child.children.filter((node) => isElement(node, "t", DRAWING_NS)).length !== 1) {
+        readable = false;
+        replaceable = false;
+        continue;
+      }
+
+      const text = textElement.text;
+      const attrs = { ...(rPrElement?.attributes ?? {}) };
+      fragments.push({ text, attrs });
+      editableRuns.push({
+        element: child,
+        textElement,
+        rPrElement,
+        text,
+        start: offset,
+        end: offset + text.length,
+        attrs,
+      });
+      textParts.push(text);
+      offset += text.length;
+      continue;
+    }
+
+    if (isElement(child, "br", DRAWING_NS)) {
+      const rPrElement = child.children.find((node) => isElement(node, "rPr", DRAWING_NS));
+      const supportedChildren = child.children.every((node) => isElement(node, "rPr", DRAWING_NS));
+      if (!supportedChildren) {
+        readable = false;
+      }
+
+      const text = "\n";
+      fragments.push({ text, attrs: { ...(rPrElement?.attributes ?? {}) } });
+      textParts.push(text);
+      offset += text.length;
       replaceable = false;
       continue;
     }
 
-    const textElement = child.children.find((node) => isElement(node, "t", DRAWING_NS));
-    const rPrElement = child.children.find((node) => isElement(node, "rPr", DRAWING_NS));
-    const supportedChildren = child.children.every(
-      (node) => isElement(node, "t", DRAWING_NS) || isElement(node, "rPr", DRAWING_NS),
-    );
+    if (isElement(child, "fld", DRAWING_NS)) {
+      const textElement = child.children.find((node) => isElement(node, "t", DRAWING_NS));
+      const rPrElement = child.children.find((node) => isElement(node, "rPr", DRAWING_NS));
+      const supportedChildren = child.children.every(
+        (node) => isElement(node, "t", DRAWING_NS)
+          || isElement(node, "rPr", DRAWING_NS)
+          || isElement(node, "endParaRPr", DRAWING_NS),
+      );
+      if (!textElement || !supportedChildren || child.children.filter((node) => isElement(node, "t", DRAWING_NS)).length !== 1) {
+        readable = false;
+        replaceable = false;
+        continue;
+      }
 
-    if (!textElement || !supportedChildren || child.children.filter((node) => isElement(node, "t", DRAWING_NS)).length !== 1) {
+      const text = textElement.text;
+      fragments.push({ text, attrs: { ...(rPrElement?.attributes ?? {}) } });
+      textParts.push(text);
+      offset += text.length;
       replaceable = false;
       continue;
     }
 
-    const text = textElement.text;
-    runs.push({
-      element: child,
-      textElement,
-      rPrElement,
-      text,
-      start: offset,
-      end: offset + text.length,
-      attrs: { ...(rPrElement?.attributes ?? {}) },
-    });
-    textParts.push(text);
-    offset += text.length;
+    readable = false;
+    replaceable = false;
   }
 
   return {
     element: paragraph,
     text: textParts.join(""),
-    runs,
+    fragments,
+    editableRuns,
+    readable,
     replaceable,
   };
 }
@@ -299,7 +352,7 @@ function replaceInParagraph(
   matchEnd: number,
   replacement: string,
 ): string {
-  const touched = paragraph.runs.filter((run) => run.end > matchStart && run.start < matchEnd);
+  const touched = paragraph.editableRuns.filter((run) => run.end > matchStart && run.start < matchEnd);
   const first = touched[0];
   const last = touched.at(-1);
   if (!first || !last) {
@@ -358,6 +411,16 @@ function isXmlWhitespace(char: string | undefined): boolean {
 
 function isElement(element: XmlElement, localName: string, namespaceURI?: string): boolean {
   return element.localName === localName && (namespaceURI === undefined || element.namespaceURI === namespaceURI);
+}
+
+function assertReadableParagraphs(partName: string, paragraphs: StoryParagraph[]): void {
+  const unreadableIndex = paragraphs.findIndex((paragraph) => !paragraph.readable);
+  if (unreadableIndex !== -1) {
+    throw new OoxmlError(
+      "PPTX_UNSUPPORTED_TEXT_TOPOLOGY",
+      `Paragraph ${unreadableIndex + 1} in ${partName} cannot be read faithfully`,
+    );
+  }
 }
 
 function staleAnchor(partName: string, detail: string): OoxmlError {

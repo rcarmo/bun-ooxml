@@ -33,14 +33,19 @@ type WorksheetModel = {
   cells: Map<string, ParsedCell>;
 };
 
-export type Cell = StringCell | NumberCell | BooleanCell | FormulaCell;
+export type Cell = BlankCell | StringCell | NumberCell | BooleanCell | FormulaCell;
 
 export interface BaseCell {
   ref: string;
   styleId?: string;
-  value?: string | number | boolean;
+  value?: string | number | boolean | null;
   formula?: string;
   cached?: string | number | boolean | null;
+}
+
+export interface BlankCell extends BaseCell {
+  kind: "blank";
+  value: null;
 }
 
 export interface StringCell extends BaseCell {
@@ -377,7 +382,17 @@ function parseCell(element: XmlElement, sharedStrings: string[], ref: string): P
 
   const rawValue = valueElement?.text;
   if (rawValue === undefined || rawValue === "") {
-    return undefined;
+    return {
+      ref,
+      element,
+      valueElement,
+      cell: {
+        kind: "blank",
+        ref,
+        styleId,
+        value: null,
+      },
+    };
   }
 
   return {
@@ -448,16 +463,16 @@ function buildValueEdits(cell: ParsedCell, value: ScalarCellValue): CellEdit[] {
 
   if (typeof value === "string") {
     attributes.t = "inlineStr";
-    innerXml = renderInlineString(value);
+    innerXml = renderInlineString(cell.element, value);
   } else if (typeof value === "number") {
     if (!Number.isFinite(value)) {
       throw new OoxmlError("xlsx-value-invalid", `Cell ${cell.ref} cannot store a non-finite number`);
     }
     attributes.t = "n";
-    innerXml = `<v>${escapeText(formatNumber(value))}</v>`;
+    innerXml = renderValueElement(cell.element, formatNumber(value));
   } else {
     attributes.t = "b";
-    innerXml = `<v>${value ? "1" : "0"}</v>`;
+    innerXml = renderValueElement(cell.element, value ? "1" : "0");
   }
 
   if (cell.element.selfClosing) {
@@ -518,10 +533,11 @@ function ensureRecalculationFlags(workbookXml: string, document: XmlDocument): s
     }]);
   }
 
+  const calcPrName = qualifiedName(document.root, "calcPr");
   return applyEdits(workbookXml, [{
     start: document.root.closeStart,
     end: document.root.closeStart,
-    value: '<calcPr calcMode="auto" fullCalcOnLoad="1" forceFullCalc="1"/>',
+    value: `<${calcPrName} calcMode="auto" fullCalcOnLoad="1" forceFullCalc="1"/>`,
   }]);
 }
 
@@ -530,11 +546,25 @@ function directChild(element: XmlElement, localName: string): XmlElement | undef
 }
 
 function extractStringText(element: XmlElement): string {
-  const textNodes = elements(element, "t", S_NS);
-  if (textNodes.length > 0) {
-    return textNodes.map((node) => node.text).join("");
+  if (element.localName === "t" && element.namespaceURI === S_NS) {
+    return element.text;
   }
-  return element.text;
+
+  let sawSpreadsheetChild = false;
+  const parts: string[] = [];
+  for (const child of element.children) {
+    if (child.namespaceURI !== S_NS) {
+      continue;
+    }
+    sawSpreadsheetChild = true;
+    if (child.localName === "t") {
+      parts.push(child.text);
+    } else if (child.localName === "r") {
+      parts.push(extractStringText(child));
+    }
+  }
+
+  return sawSpreadsheetChild ? parts.join("") : element.text;
 }
 
 function normalizeCellReference(reference: string): string {
@@ -570,17 +600,29 @@ function parseNumericValue(rawValue: string, label: string): number {
   return numeric;
 }
 
-function renderInlineString(value: string): string {
+function renderInlineString(cellElement: XmlElement, value: string): string {
   const preserve = /^\s|\s$/.test(value);
+  const isName = qualifiedName(cellElement, "is");
+  const textName = qualifiedName(cellElement, "t");
   return preserve
-    ? `<is><t xml:space="preserve">${escapeText(value)}</t></is>`
-    : `<is><t>${escapeText(value)}</t></is>`;
+    ? `<${isName}><${textName} xml:space="preserve">${escapeText(value)}</${textName}></${isName}>`
+    : `<${isName}><${textName}>${escapeText(value)}</${textName}></${isName}>`;
+}
+
+function renderValueElement(cellElement: XmlElement, value: string): string {
+  const valueName = qualifiedName(cellElement, "v");
+  return `<${valueName}>${escapeText(value)}</${valueName}>`;
 }
 
 function renderAttributes(attributes: Record<string, string>): string {
   return Object.entries(attributes)
     .map(([name, value]) => ` ${name}="${escapeAttribute(value)}"`)
     .join("");
+}
+
+function qualifiedName(element: XmlElement, localName: string): string {
+  const separator = element.name.indexOf(":");
+  return separator === -1 ? localName : `${element.name.slice(0, separator)}:${localName}`;
 }
 
 function formatNumber(value: number): string {

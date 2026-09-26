@@ -6,7 +6,8 @@ import { dirname, join } from "node:path";
 import type { StepBinding } from "../../scripts/gherkin.ts";
 import { readZip, writeZip } from "../../src/opc/zip.ts";
 import { OoxmlError } from "../../src/errors.ts";
-import { Workbook } from "../../src/xlsx/index.ts";
+import { elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
+import { Workbook, type Cell } from "../../src/xlsx/index.ts";
 
 type ScenarioState = {
   sourceBytes?: Uint8Array;
@@ -17,8 +18,10 @@ type ScenarioState = {
   savedParts?: Map<string, Uint8Array>;
   refusal?: unknown;
   outputPath?: string;
+  blankCellBeforeEdit?: Cell;
 };
 
+const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
 const encoder = new TextEncoder();
 const projectRoot = join(import.meta.dir, "..", "..");
 
@@ -151,6 +154,154 @@ export function createCrossSheetCachedFormulaWorkbook(): Uint8Array {
   );
 }
 
+
+export function createPrefixedWorkbookWithBlankCellsAndFormula(): Uint8Array {
+  return writeZip(
+    new Map<string, Uint8Array>([
+      ["[Content_Types].xml", xml(`
+        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+          <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+          <Default Extension="xml" ContentType="application/xml"/>
+          <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+          <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+        </Types>
+      `)],
+      ["_rels/.rels", xml(`
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+        </Relationships>
+      `)],
+      ["xl/workbook.xml", xml(`
+        <x:workbook xmlns:x="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+          xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+          <x:sheets>
+            <x:sheet name="Prefixed" sheetId="1" r:id="rId1"/>
+          </x:sheets>
+        </x:workbook>
+      `)],
+      ["xl/_rels/workbook.xml.rels", xml(`
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+        </Relationships>
+      `)],
+      ["xl/worksheets/sheet1.xml", xml(`
+        <x:worksheet xmlns:x="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+          <x:sheetData>
+            <x:row r="1">
+              <x:c r="A1" s="1"/>
+              <x:c r="B1" s="2"/>
+              <x:c r="C1"><x:f>1+1</x:f><x:v>2</x:v></x:c>
+            </x:row>
+          </x:sheetData>
+        </x:worksheet>
+      `)],
+    ]),
+  );
+}
+
+export function createPhoneticRichTextWorkbook(): Uint8Array {
+  return writeZip(
+    new Map<string, Uint8Array>([
+      ["[Content_Types].xml", xml(`
+        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+          <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+          <Default Extension="xml" ContentType="application/xml"/>
+          <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+          <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+          <Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>
+        </Types>
+      `)],
+      ["_rels/.rels", xml(`
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+        </Relationships>
+      `)],
+      ["xl/workbook.xml", xml(`
+        <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+          xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+          <sheets>
+            <sheet name="Phonetics" sheetId="1" r:id="rId1"/>
+          </sheets>
+        </workbook>
+      `)],
+      ["xl/_rels/workbook.xml.rels", xml(`
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+          <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/>
+        </Relationships>
+      `)],
+      ["xl/sharedStrings.xml", xml(`
+        <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="1" uniqueCount="1">
+          <si>
+            <r><t>Alpha</t></r>
+            <rPh sb="0" eb="5"><t>Guide</t></rPh>
+            <r><t> Beta</t></r>
+          </si>
+        </sst>
+      `)],
+      ["xl/worksheets/sheet1.xml", xml(`
+        <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+          <sheetData>
+            <row r="1">
+              <c r="A1" t="s"><v>0</v></c>
+              <c r="B1" t="inlineStr">
+                <is>
+                  <r><t>Gamma</t></r>
+                  <rPh sb="0" eb="5"><t>Guide</t></rPh>
+                  <r><t> Delta</t></r>
+                </is>
+              </c>
+            </row>
+          </sheetData>
+        </worksheet>
+      `)],
+    ]),
+  );
+}
+
+export function createStyledBlankCellWorkbook(): Uint8Array {
+  return writeZip(
+    new Map<string, Uint8Array>([
+      ["[Content_Types].xml", xml(`
+        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+          <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+          <Default Extension="xml" ContentType="application/xml"/>
+          <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+          <Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>
+        </Types>
+      `)],
+      ["_rels/.rels", xml(`
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+        </Relationships>
+      `)],
+      ["xl/workbook.xml", xml(`
+        <workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+          xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+          <sheets>
+            <sheet name="StyledBlank" sheetId="1" r:id="rId1"/>
+          </sheets>
+        </workbook>
+      `)],
+      ["xl/_rels/workbook.xml.rels", xml(`
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>
+        </Relationships>
+      `)],
+      ["xl/worksheets/sheet1.xml", xml(`
+        <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+          <sheetData>
+            <row r="1">
+              <c r="A1" s="1"/>
+              <c r="B1" s="2"><v>5</v></c>
+            </row>
+          </sheetData>
+        </worksheet>
+      `)],
+    ]),
+  );
+}
+
 export const bindings: StepBinding[] = [
   {
     pattern: /^a synthetic two-sheet XLSX fixture with rel-linked shared strings, numbers, booleans and cached formulas$/,
@@ -190,6 +341,32 @@ export const bindings: StepBinding[] = [
     },
   },
   {
+    pattern: /^a synthetic prefixed XLSX fixture with blank cells and formulas$/,
+    run: async (context) => {
+      const state = scenarioState(context);
+      state.sourceBytes = createPrefixedWorkbookWithBlankCellsAndFormula();
+      state.originalParts = readZip(state.sourceBytes);
+      state.workbook = await Workbook.open(state.sourceBytes);
+    },
+  },
+  {
+    pattern: /^a synthetic XLSX fixture with phonetic guides in shared and inline rich strings$/,
+    run: async (context) => {
+      const state = scenarioState(context);
+      state.sourceBytes = createPhoneticRichTextWorkbook();
+      state.originalParts = readZip(state.sourceBytes);
+    },
+  },
+  {
+    pattern: /^a synthetic XLSX fixture with a styled blank cell$/,
+    run: async (context) => {
+      const state = scenarioState(context);
+      state.sourceBytes = createStyledBlankCellWorkbook();
+      state.originalParts = readZip(state.sourceBytes);
+      state.workbook = await Workbook.open(state.sourceBytes);
+    },
+  },
+  {
     pattern: /^I open the workbook through the XLSX reader$/,
     run: async (context) => {
       const state = scenarioState(context);
@@ -216,6 +393,34 @@ export const bindings: StepBinding[] = [
       const workbook = required(state.workbook, "workbook");
       workbook.worksheet("Model").setCellValue("A1", Number(numeric));
       state.outputPath = await tempWorkbookPath("cache-edit.xlsx");
+      await workbook.save(state.outputPath);
+      state.savedBytes = new Uint8Array(await Bun.file(state.outputPath).arrayBuffer());
+      state.savedParts = readZip(state.savedBytes);
+      state.reopened = await Workbook.open(state.savedBytes);
+    },
+  },
+  {
+    pattern: /^I write "([^"]+)" to prefixed A1, (\d+) to prefixed B1, and save the workbook$/,
+    run: async (context, textValue, numeric) => {
+      const state = scenarioState(context);
+      const workbook = required(state.workbook, "workbook");
+      workbook.worksheet("Prefixed").setCellValue("A1", textValue);
+      workbook.worksheet("Prefixed").setCellValue("B1", Number(numeric));
+      state.outputPath = await tempWorkbookPath("prefixed-edit.xlsx");
+      await workbook.save(state.outputPath);
+      state.savedBytes = new Uint8Array(await Bun.file(state.outputPath).arrayBuffer());
+      state.savedParts = readZip(state.savedBytes);
+      state.reopened = await Workbook.open(state.savedBytes);
+    },
+  },
+  {
+    pattern: /^I change the blank styled cell A1 text to "([^"]+)" and save and reopen the workbook$/,
+    run: async (context, value) => {
+      const state = scenarioState(context);
+      const workbook = required(state.workbook, "workbook");
+      state.blankCellBeforeEdit = workbook.worksheet("StyledBlank").getCell("A1");
+      workbook.worksheet("StyledBlank").setCellValue("A1", value);
+      state.outputPath = await tempWorkbookPath("blank-styled-edit.xlsx");
       await workbook.save(state.outputPath);
       state.savedBytes = new Uint8Array(await Bun.file(state.outputPath).arrayBuffer());
       state.savedParts = readZip(state.savedBytes);
@@ -321,10 +526,67 @@ export const bindings: StepBinding[] = [
     run: (context) => {
       const state = scenarioState(context);
       const savedParts = required(state.savedParts, "savedParts");
-      const workbookXml = decode(savedParts.get("xl/workbook.xml"));
-      assert.match(workbookXml, /calcMode="auto"/);
-      assert.match(workbookXml, /fullCalcOnLoad="1"/);
-      assert.match(workbookXml, /forceFullCalc="1"/);
+      const workbookDocument = parseXml(decode(savedParts.get("xl/workbook.xml")));
+      const calcPr = onlySpreadsheetElement(workbookDocument.root, "calcPr");
+      assert.equal(calcPr.namespaceURI, S_NS);
+      assert.equal(calcPr.attributes.calcMode, "auto");
+      assert.equal(calcPr.attributes.fullCalcOnLoad, "1");
+      assert.equal(calcPr.attributes.forceFullCalc, "1");
+    },
+  },
+  {
+    pattern: /^phonetic guides are excluded while rich text runs stay intact$/,
+    run: (context) => {
+      const workbook = required(scenarioState(context).workbook, "workbook");
+      assert.equal(workbook.worksheet("Phonetics").getCell("A1")?.value, "Alpha Beta");
+      assert.equal(workbook.worksheet("Phonetics").getCell("B1")?.value, "Gamma Delta");
+    },
+  },
+  {
+    pattern: /^the saved prefixed workbook keeps one qualified calcPr and qualified new cell values$/,
+    run: (context) => {
+      const state = scenarioState(context);
+      const savedParts = required(state.savedParts, "savedParts");
+      const workbookDocument = parseXml(decode(savedParts.get("xl/workbook.xml")));
+      const calcPr = onlySpreadsheetElement(workbookDocument.root, "calcPr");
+      assert.equal(calcPr.name, "x:calcPr");
+      assert.equal(calcPr.namespaceURI, S_NS);
+      assert.equal(calcPr.attributes.calcMode, "auto");
+      const sheetDocument = parseXml(decode(savedParts.get("xl/worksheets/sheet1.xml")));
+      const a1 = findCell(sheetDocument.root, "A1");
+      const a1Inline = required(directSpreadsheetChild(a1, "is"), "A1 is");
+      const a1Text = required(directSpreadsheetChild(a1Inline, "t"), "A1 t");
+      assert.equal(a1Inline.name, "x:is");
+      assert.equal(a1Inline.namespaceURI, S_NS);
+      assert.equal(a1Text.name, "x:t");
+      assert.equal(a1Text.namespaceURI, S_NS);
+      assert.equal(a1Text.text, "Alpha");
+      const b1 = findCell(sheetDocument.root, "B1");
+      const b1Value = required(directSpreadsheetChild(b1, "v"), "B1 v");
+      assert.equal(b1Value.name, "x:v");
+      assert.equal(b1Value.namespaceURI, S_NS);
+      assert.equal(b1Value.text, "7");
+      const reopened = required(state.reopened, "reopened");
+      assert.equal(reopened.worksheet("Prefixed").getCell("A1")?.value, "Alpha");
+      assert.equal(reopened.worksheet("Prefixed").getCell("B1")?.value, 7);
+    },
+  },
+  {
+    pattern: /^the blank styled cell was readable as null before editing$/,
+    run: (context) => {
+      const cell = required(scenarioState(context).blankCellBeforeEdit, "blankCellBeforeEdit");
+      assert.equal(cell.kind, "blank");
+      assert.equal(cell.value, null);
+      assert.equal(cell.styleId, "1");
+    },
+  },
+  {
+    pattern: /^the reopened blank styled cell keeps its style and new value$/,
+    run: (context) => {
+      const workbook = required(scenarioState(context).reopened, "reopened");
+      const cell = workbook.worksheet("StyledBlank").getCell("A1");
+      assert.equal(cell?.value, "filled");
+      assert.equal(cell?.styleId, "1");
     },
   },
   {
@@ -380,6 +642,22 @@ function equalBytes(
   const leftBytes = required(left, `${label} left`);
   const rightBytes = required(right, `${label} right`);
   assert.equal(Buffer.compare(Buffer.from(leftBytes), Buffer.from(rightBytes)), 0, `${label} bytes differ`);
+}
+
+function onlySpreadsheetElement(root: XmlElement, localName: string): XmlElement {
+  const matches = elements(root, localName, S_NS);
+  assert.equal(matches.length, 1, `expected exactly one ${localName}`);
+  return required(matches[0], localName);
+}
+
+function findCell(root: XmlElement, ref: string): XmlElement {
+  const cell = elements(root, "c", S_NS).find((element) => element.attributes.r === ref);
+  assert.ok(cell, `missing cell ${ref}`);
+  return cell;
+}
+
+function directSpreadsheetChild(element: XmlElement, localName: string): XmlElement | undefined {
+  return element.children.find((child) => child.localName === localName && child.namespaceURI === S_NS);
 }
 
 function xml(source: string): Uint8Array {

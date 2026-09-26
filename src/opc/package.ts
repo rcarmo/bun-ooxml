@@ -111,7 +111,8 @@ export class OpcPackage {
 
   /** Build and validate before touching the destination. A sibling file permits
    * atomic rename on the same filesystem; fsync makes the archive durable first.
-   * Symlink destinations refuse rather than changing an unexpected target.
+   * A symlink at the final filename refuses. Ancestor directories are trusted
+   * caller inputs (and may be symlinks); this is not a filesystem sandbox.
    */
   async save(path: string): Promise<void> {
     const bytes = this.toBytes();

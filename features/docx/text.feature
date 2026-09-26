@@ -20,6 +20,16 @@ Feature: DOCX slice paragraph text search and run-safe replacement
     Then DOCX slice paragraph 1 text equals "Alpha Beta"
     And DOCX slice paragraph 1 text nodes preserve boundary whitespace
 
+  @id-docx-table-paragraph
+  Scenario: DOCX slice includes table-cell paragraphs in document order for exact replacement
+    Given DOCX slice fixture "fixtures/python-office-mcp-server/tests/_templates/testdata/word/simple_table.docx" is opened
+    When DOCX slice paragraph 5 exact text "Galvanic battery" is replaced with "Voltaic battery"
+    And DOCX slice document is saved and reopened
+    Then DOCX slice paragraph 1 text equals "Research Materials Inventory"
+    And DOCX slice paragraph 2 text equals "Item"
+    And DOCX slice paragraph 5 text equals "Voltaic battery"
+    And DOCX slice paragraph 13 text equals "University library"
+
   @id-docx-stale-span
   Scenario: DOCX slice refuses a stale span without mutating the package
     Given DOCX slice fixture "fixtures/python-office-mcp-server/tests/_templates/testdata/word/formatted_text.docx" is opened

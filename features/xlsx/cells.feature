@@ -24,6 +24,25 @@ Feature: XLSX cell reads and style-preserving value edits
     Then every formula cache is removed across the worksheets
     And workbook calculation flags request full recalculation
 
+  @id-xlsx-prefixed-namespace-safe-edits
+  Scenario: Edit prefixed workbook and worksheet parts without creating unqualified spreadsheet nodes
+    Given a synthetic prefixed XLSX fixture with blank cells and formulas
+    When I write "Alpha" to prefixed A1, 7 to prefixed B1, and save the workbook
+    Then the saved prefixed workbook keeps one qualified calcPr and qualified new cell values
+
+  @id-xlsx-phonetic-guides-excluded
+  Scenario: Read rich strings while excluding phonetic guides
+    Given a synthetic XLSX fixture with phonetic guides in shared and inline rich strings
+    When I open the workbook through the XLSX reader
+    Then phonetic guides are excluded while rich text runs stay intact
+
+  @id-xlsx-styled-blank-cell-editable
+  Scenario: Read and edit a styled blank cell without losing its style
+    Given a synthetic XLSX fixture with a styled blank cell
+    When I change the blank styled cell A1 text to "filled" and save and reopen the workbook
+    Then the blank styled cell was readable as null before editing
+    And the reopened blank styled cell keeps its style and new value
+
   @id-xlsx-refuse-shared-formula-overwrite
   Scenario: Refuse destructive edits to an unsupported shared formula without mutating the workbook
     Given the shared-formula XLSX fixture

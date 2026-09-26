@@ -249,7 +249,9 @@ export function parseXml(text: string): XmlDocument {
       fail("XML_MALFORMED", "]]> is only allowed inside CDATA sections");
     }
 
-    const decoded = decodeEntities(raw);
+    // Normalise literal XML line endings before entity expansion. Character
+    // references such as &#xD; retain their value; source offsets stay unchanged.
+    const decoded = decodeEntities(raw.replace(/\r\n?/g, "\n"));
     if (stack.length === 0) {
       if (!isXmlWhitespace(decoded)) {
         fail("XML_MALFORMED", "Character data is only allowed inside the root element");
@@ -284,7 +286,7 @@ export function parseXml(text: string): XmlDocument {
       fail("XML_MALFORMED", "Unterminated CDATA section");
     }
 
-    appendText(text.slice(index + 9, end));
+    appendText(text.slice(index + 9, end).replace(/\r\n?/g, "\n"));
     index = end + 3;
   }
 
@@ -388,7 +390,7 @@ export function parseXml(text: string): XmlDocument {
 
       parsedAttributes.push({
         name: attributeName,
-        value: decodeEntities(text.slice(valueStart, index)),
+        value: decodeEntities(text.slice(valueStart, index).replace(/\r\n?/g, "\n").replace(/[\n\t]/g, " ")),
       });
       index += 1;
     }
@@ -506,14 +508,17 @@ export function escapeText(value: string): string {
   return value
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+    .replaceAll(">", "&gt;")
+    .replaceAll("\r", "&#xD;");
 }
 
 export function escapeAttribute(value: string): string {
   validateXmlStringChars(value);
   return escapeText(value)
     .replaceAll('"', "&quot;")
-    .replaceAll("'", "&apos;");
+    .replaceAll("'", "&apos;")
+    .replaceAll("\n", "&#xA;")
+    .replaceAll("\t", "&#x9;");
 }
 
 export function applyEdits(

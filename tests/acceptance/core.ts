@@ -260,6 +260,26 @@ type ZipDescription = {
 
 export const bindings: StepBinding[] = [
   {
+    pattern: /^XML text and attributes containing raw CRLF and character references$/,
+    run: context => { context.normalisedSource = '<r a="x\r\ny\tz&#xD;&#xA;&#x9;">u\r\nv\rw&#xD;<![CDATA[c\r\nd]]><s/></r>'; },
+  },
+  {
+    pattern: /^that XML is parsed without rewriting the source$/,
+    run: context => { context.normalisedDoc = parseXml(context.normalisedSource as string); },
+  },
+  {
+    pattern: /^decoded text normalises raw line endings but preserves referenced carriage returns$/,
+    run: context => { assert.equal((context.normalisedDoc as ReturnType<typeof parseXml>).root.text, 'u\nv\nw\rc\nd'); },
+  },
+  {
+    pattern: /^decoded attributes normalise literal whitespace while preserving referenced whitespace$/,
+    run: context => { assert.equal((context.normalisedDoc as ReturnType<typeof parseXml>).root.attributes.a, 'x y z\r\n\t'); },
+  },
+  {
+    pattern: /^element offsets still address the original source string$/,
+    run: context => { const child = (context.normalisedDoc as ReturnType<typeof parseXml>).root.children[0]!; assert.equal((context.normalisedSource as string).slice(child.start,child.end), '<s/>'); },
+  },
+  {
     pattern: /^an XML document with a declaration, comments, processing instructions and namespaces$/,
     run: (context) => {
       const state = coreState(context);

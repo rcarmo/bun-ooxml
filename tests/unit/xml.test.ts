@@ -68,6 +68,18 @@ describe("parseXml", () => {
     expect(doc.root.name).toBe("r");
   });
 
+  test("normalises literal XML whitespace but preserves character references and original offsets", () => {
+    const source = '<r a="x\r\ny\tz&#xD;&#xA;&#x9;">u\r\nv\rw&#xD;<![CDATA[c\r\nd]]><s/></r>';
+    const doc = parseXml(source);
+    expect(doc.root.text).toBe('u\nv\nw\rc\nd');
+    expect(doc.root.attributes.a).toBe('x y z\r\n\t');
+    const value='x\r\n\ty';
+    expect(parseXml(`<r a="${escapeAttribute(value)}">${escapeText(value)}</r>`).root.attributes.a).toBe(value);
+    expect(parseXml(`<r>${escapeText(value)}</r>`).root.text).toBe(value);
+    const child = doc.root.children[0]!;
+    expect(source.slice(child.start,child.end)).toBe('<s/>');
+  });
+
   test("keeps the xml prefix bound implicitly", () => {
     const doc = parseXml('<r xml:lang="en"/>');
     expect(doc.root.attributes).toEqual({ "xml:lang": "en" });

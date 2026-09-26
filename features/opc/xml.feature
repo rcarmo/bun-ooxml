@@ -10,6 +10,14 @@ Feature: Strict XML parsing and offset-safe edits
     Then the root element and descendants expose decoded text, decoded attributes and namespace URIs
     And each element exposes UTF-16 source offsets, parent links, child links, root links and self-closing state
 
+  @id-xml-normalise-line-endings
+  Scenario: Decode XML line endings without changing source offsets
+    Given XML text and attributes containing raw CRLF and character references
+    When that XML is parsed without rewriting the source
+    Then decoded text normalises raw line endings but preserves referenced carriage returns
+    And decoded attributes normalise literal whitespace while preserving referenced whitespace
+    And element offsets still address the original source string
+
   @id-xml-parse-refusals
   Scenario: Refuse malformed or unsafe XML constructs
     Given XML containing a malformed declaration or processing instruction

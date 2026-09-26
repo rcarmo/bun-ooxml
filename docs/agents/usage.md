@@ -28,7 +28,7 @@ if (reopened.find("Payment becomes due").length !== 1) throw new Error("Edit los
 await doc.save(output);
 ```
 
-Current search covers body paragraphs with supported direct `w:r/w:t` text.
+Current search covers body and table-cell paragraphs with supported direct `w:r/w:t` text.
 Fields, revisions, controls, hyperlinks, tabs, breaks and other complex topology
 may refuse. Run formatting outside the replacement survives. Search is exact and
 non-overlapping. `docx-stale-span` means the captured paragraph content changed;
@@ -86,7 +86,10 @@ relationships without network access, and rejects dangling references on save.
 `diff()` is cumulative relative to the opened package. `transaction()` is for
 synchronous work only. A callback must not schedule timers, promises or detached work.
 Path saves validate first, fsync a sibling temporary file and atomically rename it.
-Symlink destinations refuse. No-op output retains the exact original archive bytes.
+A symlink at the final destination refuses. Parent directories can be symlinks;
+callers must choose a trusted output directory. This API is not a filesystem sandbox
+and cannot defend against a concurrently hostile filesystem owner. No-op output
+retains the exact original archive bytes.
 
 ZIP defaults: 256 MiB archive, 128 MiB per entry, 512 MiB expanded total, 10,000
 entries, maximum compression ratio 1,000. Pass stricter `ZipLimits` to package

@@ -74,6 +74,10 @@ export async function runAcceptance(
     report.features = execution.features;
     report.failures.push(...execution.failures);
 
+    if (report.inventory.cases.implemented === 0) {
+      report.failures.push("No implemented cases executed; inventory alone cannot pass acceptance.");
+    }
+
     if (full && report.inventory.features.planned > 0) {
       report.failures.push(
         `Full acceptance rejects planned features: ${report.inventory.features.planned} planned feature(s) remain.`,

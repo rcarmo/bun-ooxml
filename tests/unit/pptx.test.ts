@@ -4,15 +4,18 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 
 import { runAcceptance } from "../../scripts/acceptance.ts";
+import { readZip } from "../../src/opc/zip.ts";
 import { Presentation } from "../../src/pptx/index.ts";
 import {
   bindings,
   runCrossRunReplacementScenario,
   runOrderedNotesScenario,
+  runReadableUnsupportedScenario,
   runStaleAnchorScenario,
 } from "../acceptance/pptx.ts";
 
 const roots: string[] = [];
+const encoder = new TextEncoder();
 
 afterEach(async () => {
   await Promise.all(roots.splice(0).map((root) => rm(root, { recursive: true, force: true })));
@@ -29,21 +32,70 @@ describe("pptx slice", () => {
     const report = await runAcceptance(bindings, { root });
     expect(report.status).toBe("passed");
     expect(report.inventory.features.implemented).toBe(1);
-    expect(report.execution.cases.passed).toBe(3);
+    expect(report.execution.cases.passed).toBe(4);
   });
 
-  test("follows presentation relationships and keeps notes reads read-only", async () => {
+  test("follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only", async () => {
     const result = await runOrderedNotesScenario();
-    expect(result.titles[0]).toBe("Chapter 5");
-    expect(result.notes[0]).toContain("creation");
+    expect(result.titles).toEqual([
+      "Chapter 5",
+      "Frankenstein Lecture Series",
+      "Chapter 4",
+      "Chapter 2",
+      "Chapter 3",
+    ]);
+    expect(result.notes).toEqual([
+      "Key themes:\ncreation, responsibility, isolation\n\nVisible date: 2026-03-12",
+      "Compare to Prometheus myth",
+    ]);
+    expect(result.orderedDiff).toEqual({
+      added: [],
+      changed: [],
+      removed: [],
+    });
+    expect(result.orderedBytesAfterRead).toEqual(result.orderedBytes);
     expect(result.minimalError.code).toBe("PPTX_NOTES_MISSING");
+    expect(result.minimalBytesAfterRefusal).toEqual(result.minimalSource);
+    expect(result.minimalNames.some((name) => name.startsWith("ppt/notesSlides/"))).toBeFalse();
+  });
+
+  test("exposes line breaks and field text in inspectText and refuses editing that topology atomically", async () => {
+    const result = await runReadableUnsupportedScenario();
+    expect(result.paragraphText).toBe("Chapter\n7 Notes");
+    expect(result.paragraphRuns).toEqual([
+      { text: "Chapter", attrs: { b: "1" } },
+      { text: "\n", attrs: { lang: "en-US" } },
+      { text: "7", attrs: { i: "1" } },
+      { text: " Notes", attrs: { u: "sng" } },
+    ]);
+    expect(result.error.code).toBe("PPTX_UNSUPPORTED_TEXT_TOPOLOGY");
+    expect(result.diffAfterRefusal).toEqual({
+      added: [],
+      changed: [],
+      removed: [],
+    });
+    expect(result.bytesAfterRefusal).toEqual(result.sourceBytes);
   });
 
   test("replaces exact anchored text across runs and preserves untouched members", async () => {
     const result = await runCrossRunReplacementScenario();
     expect(result.reopenedTitle).toBe("Friendstein");
-    expect(result.changedParts.changed).toEqual(["ppt/slides/slide1.xml"]);
-    expect(result.titleRuns.map((run) => run.text)).toEqual(["Fr", "iend", "stein"]);
+    expect(result.changedParts).toEqual({
+      added: [],
+      changed: ["ppt/slides/slide1.xml"],
+      removed: [],
+    });
+    expect(result.customMemberBytes).toEqual(encoder.encode("keep-me-safe"));
+    const expectedDocProps = readZip(result.sourceBytes).get("docProps/app.xml");
+    if (!expectedDocProps) {
+      throw new Error("expected docProps/app.xml in source fixture");
+    }
+    expect(result.docPropsBytes).toEqual(expectedDocProps);
+    expect(result.titleRuns).toEqual([
+      { text: "Fr", attrs: { b: "1" } },
+      { text: "iend", attrs: { b: "1" } },
+      { text: "stein", attrs: { u: "sng" } },
+    ]);
   });
 
   test("refuses stale anchors atomically", async () => {

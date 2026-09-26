@@ -1,3 +1,4 @@
+import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -6,7 +7,7 @@ import { join } from "node:path";
 import type { StepBinding } from "../../scripts/gherkin.ts";
 import { OoxmlError } from "../../src/errors.ts";
 import { readZip, writeZip } from "../../src/opc/zip.ts";
-import { Presentation, type TextAnchor } from "../../src/pptx/index.ts";
+import { Presentation } from "../../src/pptx/index.ts";
 import { parseXml } from "../../src/xml/index.ts";
 
 const encoder = new TextEncoder();
@@ -33,16 +34,50 @@ const FRAGMENTED_TITLE_PARAGRAPH = [
   "</a:p>",
 ].join("");
 
+const BREAK_FIELD_TITLE_PARAGRAPH = [
+  "<a:p>",
+  '<a:r><a:rPr b="1"/><a:t>Chapter</a:t></a:r>',
+  '<a:br><a:rPr lang="en-US"/></a:br>',
+  '<a:fld id="{00000000-0000-0000-0000-000000000007}" type="slidenum"><a:rPr i="1"/><a:t>7</a:t></a:fld>',
+  '<a:r><a:rPr u="sng"/><a:t> Notes</a:t></a:r>',
+  "</a:p>",
+].join("");
+
+const COMPLEX_NOTES_PARAGRAPHS = [
+  '<a:p><a:r><a:t>Key themes:</a:t></a:r><a:br/><a:r><a:t>creation, responsibility, isolation</a:t></a:r></a:p>',
+  "<a:p></a:p>",
+  '<a:p><a:r><a:t>Visible date: </a:t></a:r><a:fld id="{00000000-0000-0000-0000-000000000099}" type="datetimeFigureOut"><a:rPr lang="en-US"/><a:t>2026-03-12</a:t></a:fld></a:p>',
+].join("");
+
+type OrderedNotesFixture = {
+  orderedBytes: Uint8Array;
+  minimalSource: Uint8Array;
+};
+
 type OrderedNotesResult = {
   titles: string[];
   notes: string[];
   orderedBytes: Uint8Array;
+  orderedBytesAfterRead: Uint8Array;
+  orderedDiff: { added: string[]; changed: string[]; removed: string[] };
+  minimalSource: Uint8Array;
   minimalError: OoxmlError;
   minimalBytesAfterRefusal: Uint8Array;
   minimalNames: string[];
 };
 
+type ReadableUnsupportedResult = {
+  sourceBytes: Uint8Array;
+  paragraphText: string;
+  paragraphRuns: Array<{ text: string; attrs: Record<string, string> }>;
+  error: OoxmlError;
+  bytesAfterRefusal: Uint8Array;
+  diffAfterRefusal: { added: string[]; changed: string[]; removed: string[] };
+};
+
 type CrossRunResult = {
+  sourceBytes: Uint8Array;
+  savedBytes: Uint8Array;
   reopenedTitle: string;
   changedParts: { added: string[]; changed: string[]; removed: string[] };
   customMemberBytes: Uint8Array;
@@ -58,14 +93,27 @@ type StaleAnchorResult = {
 };
 
 type AcceptanceState = {
+  orderedNotesFixture?: OrderedNotesFixture;
   orderedNotes?: OrderedNotesResult;
+  readableUnsupportedFixture?: Uint8Array;
+  readableUnsupported?: ReadableUnsupportedResult;
+  crossRunFixture?: Uint8Array;
   crossRun?: CrossRunResult;
+  staleAnchorFixture?: Uint8Array;
   staleAnchor?: StaleAnchorResult;
 };
 
-export async function runOrderedNotesScenario(): Promise<OrderedNotesResult> {
-  const orderedBytes = buildRelationshipOrderedNotesFixture();
-  const orderedPresentation = await Presentation.open(orderedBytes);
+export function prepareOrderedNotesFixture(): OrderedNotesFixture {
+  return {
+    orderedBytes: buildRelationshipOrderedNotesFixture(),
+    minimalSource: Uint8Array.from(readFixtureBytesSync(GO_MINIMAL_FIXTURE)),
+  };
+}
+
+export async function runOrderedNotesScenario(
+  fixture: OrderedNotesFixture = prepareOrderedNotesFixture(),
+): Promise<OrderedNotesResult> {
+  const orderedPresentation = await Presentation.open(fixture.orderedBytes);
   const titles = orderedPresentation.slides.map((slide) => {
     const paragraphs = slide.inspectText("acceptance.order.notes");
     return paragraphs[0]?.text ?? "";
@@ -75,8 +123,7 @@ export async function runOrderedNotesScenario(): Promise<OrderedNotesResult> {
     orderedPresentation.slides.at(-1)?.readNotesText() ?? "",
   ];
 
-  const minimalSource = Uint8Array.from(await Bun.file(GO_MINIMAL_FIXTURE).bytes());
-  const minimalPresentation = await Presentation.open(minimalSource);
+  const minimalPresentation = await Presentation.open(fixture.minimalSource);
   let minimalError: OoxmlError | undefined;
   try {
     minimalPresentation.slides[0]?.readNotesText();
@@ -91,66 +138,66 @@ export async function runOrderedNotesScenario(): Promise<OrderedNotesResult> {
     throw new Error("expected missing notes refusal");
   }
 
-  const minimalBytesAfterRefusal = minimalPresentation.package.toBytes();
-  const minimalNames = minimalPresentation.package.names();
-
-  assertEqual(
-    titles,
-    [
-      "Chapter 5",
-      "Frankenstein Lecture Series",
-      "Chapter 4",
-      "Chapter 2",
-      "Chapter 3",
-    ],
-    "slide order should follow presentation relationships rather than filenames",
-  );
-  assertEqual(
-    notes,
-    [
-      "Key themes: creation, responsibility, isolation",
-      "Compare to Prometheus myth",
-    ],
-    "notes should follow reordered logical slide order",
-  );
-  assertEqual(orderedPresentation.package.diff(), {
-    added: [],
-    changed: [],
-    removed: [],
-  }, "reading existing slide notes should not mark package mutations");
-  assertBytesEqual(
-    orderedPresentation.package.toBytes(),
-    orderedBytes,
-    "reading existing slide notes should keep archive bytes untouched",
-  );
-  assertEqual(minimalError.code, "PPTX_NOTES_MISSING", "missing notes should refuse with a stable code");
-  assertBytesEqual(
-    minimalBytesAfterRefusal,
-    minimalSource,
-    "reading notes on a slide without notes must not mutate the archive",
-  );
-  if (minimalNames.some((name) => name.startsWith("ppt/notesSlides/"))) {
-    throw new Error("reading notes created a notes part unexpectedly");
-  }
-
   return {
     titles,
     notes,
-    orderedBytes,
+    orderedBytes: fixture.orderedBytes,
+    orderedBytesAfterRead: orderedPresentation.package.toBytes(),
+    orderedDiff: orderedPresentation.package.diff(),
+    minimalSource: fixture.minimalSource,
     minimalError,
-    minimalBytesAfterRefusal,
-    minimalNames,
+    minimalBytesAfterRefusal: minimalPresentation.package.toBytes(),
+    minimalNames: minimalPresentation.package.names(),
   };
 }
 
-export async function runCrossRunReplacementScenario(): Promise<CrossRunResult> {
-  const source = buildFragmentedTitleFixture();
+export function prepareReadableUnsupportedFixture(): Uint8Array {
+  return buildReadableUnsupportedSlideFixture();
+}
+
+export async function runReadableUnsupportedScenario(
+  source: Uint8Array = prepareReadableUnsupportedFixture(),
+): Promise<ReadableUnsupportedResult> {
   const presentation = await Presentation.open(source);
-  const slide = presentation.slides[0];
-  if (!slide) {
-    throw new Error("fragmented fixture should contain slide 1");
+  const slide = required(presentation.slides[0], "readable unsupported fixture should contain slide 1");
+  const paragraph = required(
+    slide.inspectText("acceptance.readable.unsupported")[0],
+    "expected discoverable title paragraph",
+  );
+
+  let refusal: OoxmlError | undefined;
+  try {
+    slide.replaceTextAt(paragraph.anchor, "Chapter", "Section");
+  } catch (error) {
+    if (error instanceof OoxmlError) {
+      refusal = error;
+    } else {
+      throw error;
+    }
+  }
+  if (!refusal) {
+    throw new Error("expected unsupported-topology refusal");
   }
 
+  return {
+    sourceBytes: source,
+    paragraphText: paragraph.text,
+    paragraphRuns: paragraph.runs,
+    error: refusal,
+    bytesAfterRefusal: presentation.package.toBytes(),
+    diffAfterRefusal: presentation.package.diff(),
+  };
+}
+
+export function prepareCrossRunFixture(): Uint8Array {
+  return buildFragmentedTitleFixture();
+}
+
+export async function runCrossRunReplacementScenario(
+  source: Uint8Array = prepareCrossRunFixture(),
+): Promise<CrossRunResult> {
+  const presentation = await Presentation.open(source);
+  const slide = required(presentation.slides[0], "fragmented fixture should contain slide 1");
   const paragraph = slide.inspectText("acceptance.cross.run").find((item) => item.text === "Frankenstein");
   if (!paragraph) {
     throw new Error("expected title paragraph to be discoverable");
@@ -168,47 +215,28 @@ export async function runCrossRunReplacementScenario(): Promise<CrossRunResult> 
     throw new Error("saved package is missing expected untouched members");
   }
 
-  const titleRuns = readFirstParagraphRuns(decoder.decode(savedParts.get("ppt/slides/slide1.xml") ?? new Uint8Array()));
-
-  assertEqual(reopenedTitle, "Friendstein", "replacement should round-trip through save/reopen");
-  assertEqual(changedParts, {
-    added: [],
-    changed: ["ppt/slides/slide1.xml"],
-    removed: [],
-  }, "only the edited slide part should change");
-  assertBytesEqual(customMemberBytes, encoder.encode("keep-me-safe"), "custom member bytes should stay untouched");
-  assertBytesEqual(
-    docPropsBytes,
-    readZip(source).get("docProps/app.xml") ?? new Uint8Array(),
-    "unrelated docProps bytes should stay untouched",
-  );
-  assertEqual(
-    titleRuns.map((run) => ({ text: run.text, attrs: run.attrs })),
-    [
-      { text: "Fr", attrs: { b: "1" } },
-      { text: "iend", attrs: { b: "1" } },
-      { text: "stein", attrs: { u: "sng" } },
-    ],
-    "cross-run replacement should keep boundary fragments and replacement formatting exact",
-  );
-
   return {
+    sourceBytes: source,
+    savedBytes,
     reopenedTitle,
     changedParts,
     customMemberBytes,
     docPropsBytes,
-    titleRuns,
+    titleRuns: readFirstParagraphRuns(
+      decoder.decode(savedParts.get("ppt/slides/slide1.xml") ?? new Uint8Array()),
+    ),
   };
 }
 
-export async function runStaleAnchorScenario(): Promise<StaleAnchorResult> {
-  const source = Uint8Array.from(await Bun.file(PYTHON_TITLE_FIXTURE).bytes());
-  const presentation = await Presentation.open(source);
-  const slide = presentation.slides[0];
-  if (!slide) {
-    throw new Error("stale-anchor fixture should contain slide 1");
-  }
+export function prepareStaleAnchorFixture(): Uint8Array {
+  return Uint8Array.from(readFixtureBytesSync(PYTHON_TITLE_FIXTURE));
+}
 
+export async function runStaleAnchorScenario(
+  source: Uint8Array = prepareStaleAnchorFixture(),
+): Promise<StaleAnchorResult> {
+  const presentation = await Presentation.open(source);
+  const slide = required(presentation.slides[0], "stale-anchor fixture should contain slide 1");
   const paragraph = slide.inspectText("acceptance.stale.anchor").find((item) => item.text === "Frankenstein");
   if (!paragraph) {
     throw new Error("expected discoverable title paragraph for stale-anchor test");
@@ -233,21 +261,12 @@ export async function runStaleAnchorScenario(): Promise<StaleAnchorResult> {
 
   const bytesAfterRefusal = presentation.package.toBytes();
   const reopened = await Presentation.open(bytesAfterRefusal);
-  const reopenedTitle = reopened.slides[0]?.inspectText("acceptance.stale.anchor.reopen")[0]?.text ?? "";
-
-  assertEqual(refusal.code, "PPTX_STALE_ANCHOR", "stale anchors should refuse with a stable code");
-  assertBytesEqual(
-    bytesAfterRefusal,
-    bytesAfterSuccess,
-    "stale anchor refusal should not mutate the package after a successful edit",
-  );
-  assertEqual(reopenedTitle, "Creature", "post-refusal reopen should keep the successful replacement only");
 
   return {
     error: refusal,
     bytesAfterSuccess,
     bytesAfterRefusal,
-    reopenedTitle,
+    reopenedTitle: reopened.slides[0]?.inspectText("acceptance.stale.anchor.reopen")[0]?.text ?? "",
   };
 }
 
@@ -255,73 +274,190 @@ export const bindings: StepBinding[] = [
   {
     pattern: /^PPTX ordered notes fixtures are prepared$/,
     run: (context) => {
-      const state = context.state as AcceptanceState;
+      const state = scenarioState(context);
+      state.orderedNotesFixture = prepareOrderedNotesFixture();
       state.orderedNotes = undefined;
     },
   },
   {
     pattern: /^PPTX opens the reordered notes fixture and probes notes reads$/,
     run: async (context) => {
-      const state = context.state as AcceptanceState;
-      state.orderedNotes = await runOrderedNotesScenario();
+      const state = scenarioState(context);
+      state.orderedNotes = await runOrderedNotesScenario(required(state.orderedNotesFixture, "orderedNotesFixture"));
     },
   },
   {
-    pattern: /^PPTX keeps slide order and notes reads non-mutating without creating missing notes parts$/,
+    pattern: /^PPTX keeps slide order, notes blank lines, and notes reads non-mutating without creating missing notes parts$/,
     run: (context) => {
-      const state = context.state as AcceptanceState;
-      if (!state.orderedNotes) {
-        throw new Error("ordered notes scenario did not run");
+      const state = scenarioState(context);
+      const result = required(state.orderedNotes, "orderedNotes");
+      assertEqual(
+        result.titles,
+        [
+          "Chapter 5",
+          "Frankenstein Lecture Series",
+          "Chapter 4",
+          "Chapter 2",
+          "Chapter 3",
+        ],
+        "slide order should follow presentation relationships rather than filenames",
+      );
+      assertEqual(
+        result.notes,
+        [
+          "Key themes:\ncreation, responsibility, isolation\n\nVisible date: 2026-03-12",
+          "Compare to Prometheus myth",
+        ],
+        "notes should preserve line breaks, visible fields and intentional blank paragraphs in logical slide order",
+      );
+      assertEqual(
+        result.orderedDiff,
+        { added: [], changed: [], removed: [] },
+        "reading existing slide notes should not mark package mutations",
+      );
+      assertBytesEqual(
+        result.orderedBytesAfterRead,
+        result.orderedBytes,
+        "reading existing slide notes should keep archive bytes untouched",
+      );
+      assertEqual(result.minimalError.code, "PPTX_NOTES_MISSING", "missing notes should refuse with a stable code");
+      assertBytesEqual(
+        result.minimalBytesAfterRefusal,
+        result.minimalSource,
+        "reading notes on a slide without notes must not mutate the archive",
+      );
+      if (result.minimalNames.some((name) => name.startsWith("ppt/notesSlides/"))) {
+        throw new Error("reading notes created a notes part unexpectedly");
       }
+    },
+  },
+  {
+    pattern: /^PPTX line-break and field text fixture is prepared from a real template$/,
+    run: (context) => {
+      const state = scenarioState(context);
+      state.readableUnsupportedFixture = prepareReadableUnsupportedFixture();
+      state.readableUnsupported = undefined;
+    },
+  },
+  {
+    pattern: /^PPTX inspects the paragraph text and attempts an anchored edit on that topology$/,
+    run: async (context) => {
+      const state = scenarioState(context);
+      state.readableUnsupported = await runReadableUnsupportedScenario(
+        required(state.readableUnsupportedFixture, "readableUnsupportedFixture"),
+      );
+    },
+  },
+  {
+    pattern: /^PPTX exposes line breaks and field text faithfully and refuses the unsupported edit without mutation$/,
+    run: (context) => {
+      const state = scenarioState(context);
+      const result = required(state.readableUnsupported, "readableUnsupported");
+      assertEqual(result.paragraphText, "Chapter\n7 Notes", "inspectText should preserve line breaks and visible field text");
+      assertEqual(
+        result.paragraphRuns,
+        [
+          { text: "Chapter", attrs: { b: "1" } },
+          { text: "\n", attrs: { lang: "en-US" } },
+          { text: "7", attrs: { i: "1" } },
+          { text: " Notes", attrs: { u: "sng" } },
+        ],
+        "inspectText runs should expose readable fragments in order",
+      );
+      assertEqual(
+        result.error.code,
+        "PPTX_UNSUPPORTED_TEXT_TOPOLOGY",
+        "editing a paragraph with breaks or fields should refuse with a stable code",
+      );
+      assertEqual(
+        result.diffAfterRefusal,
+        { added: [], changed: [], removed: [] },
+        "unsupported edit refusal should leave the package diff empty",
+      );
+      assertBytesEqual(
+        result.bytesAfterRefusal,
+        result.sourceBytes,
+        "unsupported edit refusal should leave package bytes untouched",
+      );
     },
   },
   {
     pattern: /^PPTX fragmented title fixture is prepared from a real template and an untouched ZIP member$/,
     run: (context) => {
-      const state = context.state as AcceptanceState;
+      const state = scenarioState(context);
+      state.crossRunFixture = prepareCrossRunFixture();
       state.crossRun = undefined;
     },
   },
   {
     pattern: /^PPTX replaces anchored cross-run text and saves then reopens the package$/,
     run: async (context) => {
-      const state = context.state as AcceptanceState;
-      state.crossRun = await runCrossRunReplacementScenario();
+      const state = scenarioState(context);
+      state.crossRun = await runCrossRunReplacementScenario(required(state.crossRunFixture, "crossRunFixture"));
     },
   },
   {
     pattern: /^PPTX preserves the replacement text, the starting run formatting, and unrelated ZIP member bytes$/,
     run: (context) => {
-      const state = context.state as AcceptanceState;
-      if (!state.crossRun) {
-        throw new Error("cross-run scenario did not run");
-      }
+      const state = scenarioState(context);
+      const result = required(state.crossRun, "crossRun");
+      assertEqual(result.reopenedTitle, "Friendstein", "replacement should round-trip through save/reopen");
+      assertEqual(
+        result.changedParts,
+        { added: [], changed: ["ppt/slides/slide1.xml"], removed: [] },
+        "only the edited slide part should change",
+      );
+      assertBytesEqual(result.customMemberBytes, encoder.encode("keep-me-safe"), "custom member bytes should stay untouched");
+      assertBytesEqual(
+        result.docPropsBytes,
+        readZip(result.sourceBytes).get("docProps/app.xml") ?? new Uint8Array(),
+        "unrelated docProps bytes should stay untouched",
+      );
+      assertEqual(
+        result.titleRuns,
+        [
+          { text: "Fr", attrs: { b: "1" } },
+          { text: "iend", attrs: { b: "1" } },
+          { text: "stein", attrs: { u: "sng" } },
+        ],
+        "cross-run replacement should keep boundary fragments and replacement formatting exact",
+      );
     },
   },
   {
     pattern: /^PPTX stale-anchor fixture is prepared from a real template$/,
     run: (context) => {
-      const state = context.state as AcceptanceState;
+      const state = scenarioState(context);
+      state.staleAnchorFixture = prepareStaleAnchorFixture();
       state.staleAnchor = undefined;
     },
   },
   {
     pattern: /^PPTX replaces anchored text once and retries with the stale anchor$/,
     run: async (context) => {
-      const state = context.state as AcceptanceState;
-      state.staleAnchor = await runStaleAnchorScenario();
+      const state = scenarioState(context);
+      state.staleAnchor = await runStaleAnchorScenario(required(state.staleAnchorFixture, "staleAnchorFixture"));
     },
   },
   {
     pattern: /^PPTX refuses the stale anchor and keeps the post-success bytes unchanged$/,
     run: (context) => {
-      const state = context.state as AcceptanceState;
-      if (!state.staleAnchor) {
-        throw new Error("stale anchor scenario did not run");
-      }
+      const state = scenarioState(context);
+      const result = required(state.staleAnchor, "staleAnchor");
+      assertEqual(result.error.code, "PPTX_STALE_ANCHOR", "stale anchors should refuse with a stable code");
+      assertBytesEqual(
+        result.bytesAfterRefusal,
+        result.bytesAfterSuccess,
+        "stale anchor refusal should not mutate the package after a successful edit",
+      );
+      assertEqual(result.reopenedTitle, "Creature", "post-refusal reopen should keep the successful replacement only");
     },
   },
 ];
+
+function scenarioState(context: Record<string, unknown>): AcceptanceState {
+  return context.state as AcceptanceState;
+}
 
 function buildRelationshipOrderedNotesFixture(): Uint8Array {
   const parts = readZip(readFixtureBytesSync(GO_NOTES_FIXTURE));
@@ -332,19 +468,44 @@ function buildRelationshipOrderedNotesFixture(): Uint8Array {
   }
 
   const reordered = [matches[4], matches[0], matches[3], matches[1], matches[2]].join("");
-  const rewritten = presentationXml.replace(matches.join(""), reordered);
-  if (rewritten === presentationXml) {
+  const rewrittenPresentation = presentationXml.replace(matches.join(""), reordered);
+  if (rewrittenPresentation === presentationXml) {
     throw new Error("failed to reorder presentation slide ids");
   }
 
-  parts.set("ppt/presentation.xml", encoder.encode(rewritten));
+  const notesXml = decodeRequiredPart(parts, "ppt/notesSlides/notesSlide5.xml");
+  const originalNotesParagraph = '<a:p><a:r><a:t>Key themes: creation, responsibility, isolation</a:t></a:r></a:p>';
+  if (!notesXml.includes(originalNotesParagraph)) {
+    throw new Error("unexpected notes slide structure in go fixture");
+  }
+
+  parts.set("ppt/presentation.xml", encoder.encode(rewrittenPresentation));
+  parts.set(
+    "ppt/notesSlides/notesSlide5.xml",
+    encoder.encode(notesXml.replace(originalNotesParagraph, COMPLEX_NOTES_PARAGRAPHS)),
+  );
+  return writeZip(parts);
+}
+
+function buildReadableUnsupportedSlideFixture(): Uint8Array {
+  const parts = readZip(readFixtureBytesSync(PYTHON_TITLE_FIXTURE));
+  const slideXml = decodeRequiredPart(parts, "ppt/slides/slide1.xml");
+  const originalParagraph = '<a:p><a:r><a:t>Frankenstein</a:t></a:r></a:p>';
+  if (!slideXml.includes(originalParagraph)) {
+    throw new Error("unexpected title slide structure in python fixture");
+  }
+
+  parts.set(
+    "ppt/slides/slide1.xml",
+    encoder.encode(slideXml.replace(originalParagraph, BREAK_FIELD_TITLE_PARAGRAPH)),
+  );
   return writeZip(parts);
 }
 
 function buildFragmentedTitleFixture(): Uint8Array {
   const parts = readZip(readFixtureBytesSync(PYTHON_TITLE_FIXTURE));
   const slideXml = decodeRequiredPart(parts, "ppt/slides/slide1.xml");
-  const originalParagraph = "<a:p><a:r><a:t>Frankenstein</a:t></a:r></a:p>";
+  const originalParagraph = '<a:p><a:r><a:t>Frankenstein</a:t></a:r></a:p>';
   if (!slideXml.includes(originalParagraph)) {
     throw new Error("unexpected title slide structure in python fixture");
   }
@@ -356,7 +517,7 @@ function buildFragmentedTitleFixture(): Uint8Array {
   parts.set("custom/data.bin", encoder.encode("keep-me-safe"));
 
   const contentTypesXml = decodeRequiredPart(parts, "[Content_Types].xml");
-  if (!contentTypesXml.includes("Extension=\"bin\"")) {
+  if (!contentTypesXml.includes('Extension="bin"')) {
     parts.set(
       "[Content_Types].xml",
       encoder.encode(
@@ -454,6 +615,11 @@ function assertBytesEqual(actual: Uint8Array, expected: Uint8Array, message: str
       throw new Error(`${message}\nfirst byte mismatch at index ${index}`);
     }
   }
+}
+
+function required<T>(value: T | undefined, label: string): T {
+  assert.ok(value !== undefined, `missing ${label}`);
+  return value;
 }
 
 const DRAWING_NS = "http://schemas.openxmlformats.org/drawingml/2006/main";
