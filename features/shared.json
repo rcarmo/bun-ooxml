@@ -341,6 +341,18 @@
       "scenarioIds": [
         "@id-docx-direct-font-size-half-points"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xml/comparison.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-significant-content",
+        "@id-xml-comparison-prefix-attribute-binding",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ]
     }
   ]
 }

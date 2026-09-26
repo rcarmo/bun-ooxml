@@ -50,7 +50,17 @@ export function validateXml(text: string): void {
   scanXml(text, false);
 }
 
-function scanXml(text: string, collectText: boolean): XmlDocument {
+export interface XmlEventSink {
+  start(node: XmlElement, namespaces: ReadonlyMap<string,string>): void;
+  end(): void;
+  text(value: string): void;
+  comment(value: string): void;
+  instruction(target: string, value: string): void;
+}
+/** Syntax-checked events in source order, including comments and PIs outside the root. */
+export function inspectXmlEvents(text:string, sink:XmlEventSink):void { scanXml(text,false,sink); }
+
+function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDocument {
   if (text.length > MAX_INPUT_LENGTH) {
     fail("XML_INPUT_TOO_LARGE", `XML input exceeds ${MAX_INPUT_LENGTH} UTF-16 code units`);
   }
@@ -84,6 +94,7 @@ function scanXml(text: string, collectText: boolean): XmlDocument {
   };
 
   const appendText = (value: string): void => {
+    if(value.length) sink?.text(value);
     if (!collectText || value.length === 0) {
       return;
     }
@@ -287,6 +298,7 @@ function scanXml(text: string, collectText: boolean): XmlDocument {
       fail("XML_MALFORMED", "Malformed XML comment");
     }
 
+    sink?.comment(content.replace(/\r\n?/g, '\n'));
     index = end + 3;
   }
 
@@ -312,6 +324,7 @@ function scanXml(text: string, collectText: boolean): XmlDocument {
     }
 
     if (text.startsWith("?>", index)) {
+      sink?.instruction(target,'');
       index += 2;
       return;
     }
@@ -319,6 +332,7 @@ function scanXml(text: string, collectText: boolean): XmlDocument {
     if (!isWhitespaceChar(text[index])) {
       fail("XML_MALFORMED", `Malformed processing instruction <?${target}>`);
     }
+    const dataStart=index;
     skipWhitespace();
 
     const end = text.indexOf("?>", index);
@@ -326,6 +340,7 @@ function scanXml(text: string, collectText: boolean): XmlDocument {
       fail("XML_MALFORMED", `Unterminated processing instruction <?${target}>`);
     }
 
+    sink?.instruction(target,text.slice(dataStart,end).replace(/\r\n?/g, '\n'));
     index = end + 2;
   }
 
@@ -473,6 +488,8 @@ function scanXml(text: string, collectText: boolean): XmlDocument {
     element.root = parent ? parent.root : element;
     parent?.children.push(element);
     preorder.push(element);
+    sink?.start(element,frame);
+    if(selfClosing)sink?.end();
     if (!root) {
       root = element;
     }
@@ -503,6 +520,7 @@ function scanXml(text: string, collectText: boolean): XmlDocument {
       fail("XML_MISMATCHED_TAG", `Expected </${current?.name ?? "?"}> but found </${name}>`);
     }
 
+    sink?.end();
     current.closeStart = closeStart;
     current.end = index;
   }

@@ -45,9 +45,10 @@ workflow also fails even if every fixture hash still matches.
 File identity and derivation are resolved through the root manifest.
 
 The ZIP and XML member admission profiles under `workflows/package/` are bound
-to [`admitPackage`](package-admission.md). The semantic-diff profile and
-`workflows/xml/comparison.feature` have no Bun bindings. Admission does not
-establish XML equivalence or package-diff semantics.
+to [`admitPackage`](package-admission.md). The ten cases in
+`workflows/xml/comparison.feature` use [`xmlEquivalent`](xml-comparison.md).
+The package semantic-diff profile has no Bun binding; `diffPackages` retains
+byte/content-type semantics.
 
 ## Shared scenario selection
 

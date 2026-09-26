@@ -1,5 +1,6 @@
 /** Bun-native OOXML entry points. See docs/agents/usage.md for safe edit workflows. */
 export { OoxmlError } from "./errors.ts";
+export { xmlEquivalent } from './xml/comparison.ts';
 export { admitPackage } from "./opc/admission.ts";
 export type { ZipLimits } from "./opc/zip.ts";
 export { OpcPackage, type PackageDiff, type Relationship } from "./opc/package.ts";

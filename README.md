@@ -29,6 +29,8 @@ Existing comment threads can be inspected and individual resolution flags change
 without touching comment bodies or anchors.
 [`admitPackage()`](docs/contracts/package-admission.md) validates bounded ZIP
 structure and XML members without requiring a complete OPC graph.
+[`xmlEquivalent()`](docs/contracts/xml-comparison.md) provides conservative
+XML comparison for the documented preservation profile.
 ZIP, XML and OPC code use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 

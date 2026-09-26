@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 437,
+  "nativeDeclarations": 451,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 210,
+  "withoutStagingCount": 224,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3235,6 +3235,76 @@
       "id": "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
       "path": "tests/unit/xlsx-cell-style.test.ts",
       "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:OPC relationship order is ignored only for unambiguous relation collections",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:prefix-valued attributes retain bindings including inherited and implicit namespaces",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:comparison supports matching UTF encodings without changing either input",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:comparison retains standalone intent and refuses unsupported XML versions",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:MC prefix lists and nested rebinding are not lost during namespace normalization",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:all ten shared comparator cases execute with exact booleans and input custody",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:deep segmented comparison is bounded without repeated ancestor text and depth violations return false",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:unprefixed xsi:type values retain the default namespace that resolves their QName",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:MC Choice Requires prefix lists retain bindings even without colon-valued attributes",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:MC MustUnderstand lists and QName-like text retain in-scope namespace bindings",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:processing instruction spacing is retained rather than trimmed by parser events",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
     }
   ]
 }

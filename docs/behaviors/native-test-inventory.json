@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 437,
-  "files": 46,
+  "count": 451,
+  "files": 47,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -259,6 +259,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/xml-comparison.test.ts",
+      "sha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "declarations": 14,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xml-names.test.ts",
       "sha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
       "declarations": 5,
@@ -366,7 +372,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "e3af2cec47c4b74f1bb30b9e321679316d673021a6e698fe2a31f0543852de69"
+      "sha256": "36fbb15b51f1a246eefb04854d7db4b5e4f48b1375046fc5cedd3550535b4efb"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -399,6 +405,10 @@
     {
       "path": "tests/acceptance/xlsx.ts",
       "sha256": "2d24d4de5172b9a4a038fbb1e137a1926cdd1568f0da9bb9b30cce4d6cc75629"
+    },
+    {
+      "path": "tests/acceptance/xml-comparison.ts",
+      "sha256": "5a3f7a3058f4682b2cd5421da64be76d213fd67b966aa45dfa1bb720a2f75f3b"
     },
     {
       "path": "tests/acceptance/xml-names.ts",
@@ -512,6 +522,8 @@
     "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
+    "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
+    "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
@@ -620,6 +632,8 @@
     "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
+    "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
+    "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
@@ -15258,6 +15272,399 @@
         "mkdir",
         "runAcceptance",
         "tempRoot"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 5,
+      "title": "XML comparison uses expanded names and decoded values, not prefix spelling",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq('<a xmlns=\"u\" z=\"2\" x=\"&amp;\"/>','<p:a xmlns:p=\"u\" x=\"&#38;\" z=\"2\"></p:a>')).toBe(true)",
+        "expect(eq('<a xmlns:p=\"u\" p:x=\"yes\"/>','<a xmlns:q=\"u\" q:x=\"yes\"/>')).toBe(true)",
+        "expect(eq('<a x=\"yes\"/>','<a xmlns:p=\"u\" p:x=\"yes\"/>')).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n expect(eq('<a xmlns=\"u\" z=\"2\" x=\"&amp;\"/>','<p:a xmlns:p=\"u\" x=\"&#38;\" z=\"2\"></p:a>')).toBe(true);\n expect(eq('<a xmlns:p=\"u\" p:x=\"yes\"/>','<a xmlns:q=\"u\" q:x=\"yes\"/>')).toBe(true);\n expect(eq('<a x=\"yes\"/>','<a xmlns:p=\"u\" p:x=\"yes\"/>')).toBe(false);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 10,
+      "title": "comparison preserves text, tails, child order and markup content",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(a!,b!)).toBe(false)",
+        "expect(eq('<a>x<![CDATA[&y]]>z</a>','<a>x&amp;yz</a>')).toBe(true)",
+        "expect(eq('<a>one\\r\\ntwo</a>','<a>one\\ntwo</a>')).toBe(true)",
+        "expect(eq('<a>&#13;</a>','<a>\\r</a>')).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const [a,b] of [['<a><b/> tail</a>','<a> tail<b/></a>'],['<a><b/><c/></a>','<a><c/><b/></a>'],['<a><!--old--></a>','<a><!--new--></a>'],['<a><?one x?></a>','<a><?two x?></a>'],['<?one x?><a/>','<?one y?><a/>'],['<a/><!--one-->','<a/><!--two-->'],['<a> x </a>','<a>x</a>']])expect(eq(a!,b!)).toBe(false);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n for(const [a,b] of [['<a><b/> tail</a>','<a> tail<b/></a>'],['<a><b/><c/></a>','<a><c/><b/></a>'],['<a><!--old--></a>','<a><!--new--></a>'],['<a><?one x?></a>','<a><?two x?></a>'],['<?one x?><a/>','<?one y?><a/>'],['<a/><!--one-->','<a/><!--two-->'],['<a> x </a>','<a>x</a>']])expect(eq(a!,b!)).toBe(false);\n expect(eq('<a>x<![CDATA[&y]]>z</a>','<a>x&amp;yz</a>')).toBe(true);\n expect(eq('<a>one\\r\\ntwo</a>','<a>one\\ntwo</a>')).toBe(true);\n expect(eq('<a>&#13;</a>','<a>\\r</a>')).toBe(false);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:OPC relationship order is ignored only for unambiguous relation collections",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 16,
+      "title": "OPC relationship order is ignored only for unambiguous relation collections",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}${a}</Relationships>`)).toBe(true)",
+        "expect(eq(`<Relationships xmlns=\"other\">${a}${b}</Relationships>`,`<Relationships xmlns=\"other\">${b}${a}</Relationships>`)).toBe(false)",
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`,`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`)).toBe(false)",
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}text${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}text${a}</Relationships>`)).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const ns='http://schemas.openxmlformats.org/package/2006/relationships',a='<Relationship Id=\"a\" Target=\"a.xml\"/>',b='<Relationship Id=\"b\" Target=\"b.xml\"/>';\n expect(eq(`<Relationships xmlns=\"${ns}\">${a}${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}${a}</Relationships>`)).toBe(true);\n expect(eq(`<Relationships xmlns=\"other\">${a}${b}</Relationships>`,`<Relationships xmlns=\"other\">${b}${a}</Relationships>`)).toBe(false);\n expect(eq(`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`,`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`)).toBe(false);\n expect(eq(`<Relationships xmlns=\"${ns}\">${a}text${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}text${a}</Relationships>`)).toBe(false);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:prefix-valued attributes retain bindings including inherited and implicit namespaces",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 23,
+      "title": "prefix-valued attributes retain bindings including inherited and implicit namespaces",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:p=\"v\" value=\"p:x\"/>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\"><b value=\"p:x\"/></a>','<a xmlns:p=\"v\"><b value=\"p:x\"/></a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:q=\"u\" value=\"q:x\"/>')).toBe(false)",
+        "expect(eq('<a value=\"xml:lang\"/>','<a value=\"xml:lang\"/>')).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:p=\"v\" value=\"p:x\"/>')).toBe(false);\n expect(eq('<a xmlns:p=\"u\"><b value=\"p:x\"/></a>','<a xmlns:p=\"v\"><b value=\"p:x\"/></a>')).toBe(false);\n expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:q=\"u\" value=\"q:x\"/>')).toBe(false);\n expect(eq('<a value=\"xml:lang\"/>','<a value=\"xml:lang\"/>')).toBe(true);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 29,
+      "title": "malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(x,x)).toBe(false)",
+        "expect(xmlEquivalent(Uint8Array.of(255),Uint8Array.of(255))).toBe(false)",
+        "expect(eq('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a/>','<a/>')).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "for(const x of ['broken','<a>','<!DOCTYPE a><a/>','<!DOCTYPE a [<!ENTITY e \"x\">]><a>&e;</a>','<a xmlns:p=\"u\" p:x=\"1\" p:x=\"2\"/>','<a value=\"missing:x\"/>'])expect(eq(x,x)).toBe(false);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n for(const x of ['broken','<a>','<!DOCTYPE a><a/>','<!DOCTYPE a [<!ENTITY e \"x\">]><a>&e;</a>','<a xmlns:p=\"u\" p:x=\"1\" p:x=\"2\"/>','<a value=\"missing:x\"/>'])expect(eq(x,x)).toBe(false);\n expect(xmlEquivalent(Uint8Array.of(255),Uint8Array.of(255))).toBe(false);\n expect(eq('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a/>','<a/>')).toBe(false);\n}",
+      "calls": [
+        "Uint8Array.of",
+        "eq",
+        "expect",
+        "expect().toBe",
+        "xmlEquivalent"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:comparison supports matching UTF encodings without changing either input",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 34,
+      "title": "comparison supports matching UTF encodings without changing either input",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xmlEquivalent(a,b)).toBe(true)",
+        "expect(a).toEqual(beforeA)",
+        "expect(b).toEqual(beforeB)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const a=utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a>雪</a>'),b=utf8('<a>雪</a>'),beforeA=a.slice(),beforeB=b.slice();expect(xmlEquivalent(a,b)).toBe(true);expect(a).toEqual(beforeA);expect(b).toEqual(beforeB);\n}",
+      "calls": [
+        "a.slice",
+        "b.slice",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "utf16",
+        "utf8",
+        "xmlEquivalent"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:comparison retains standalone intent and refuses unsupported XML versions",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 38,
+      "title": "comparison retains standalone intent and refuses unsupported XML versions",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq('<?xml version=\"1.0\"?><a/>','<a/>')).toBe(true)",
+        "expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<a/>')).toBe(false)",
+        "expect(eq('<?xml version=\"1.1\"?><a/>','<?xml version=\"1.1\"?><a/>')).toBe(false)",
+        "expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<?xml-standalone yes?><a/>')).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n expect(eq('<?xml version=\"1.0\"?><a/>','<a/>')).toBe(true);\n expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<a/>')).toBe(false);\n expect(eq('<?xml version=\"1.1\"?><a/>','<?xml version=\"1.1\"?><a/>')).toBe(false);\n expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<?xml-standalone yes?><a/>')).toBe(false);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:MC prefix lists and nested rebinding are not lost during namespace normalization",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 44,
+      "title": "MC prefix lists and nested rebinding are not lost during namespace normalization",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"u\" mc:Ignorable=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"v\" mc:Ignorable=\"p\"/>`)).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\"><b xmlns:p=\"v\" value=\"p:x\"/></a>','<a xmlns:p=\"u\"><b value=\"p:x\"/></a>')).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const mc='http://schemas.openxmlformats.org/markup-compatibility/2006';\n expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"u\" mc:Ignorable=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"v\" mc:Ignorable=\"p\"/>`)).toBe(false);\n expect(eq('<a xmlns:p=\"u\"><b xmlns:p=\"v\" value=\"p:x\"/></a>','<a xmlns:p=\"u\"><b value=\"p:x\"/></a>')).toBe(false);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:all ten shared comparator cases execute with exact booleans and input custody",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 49,
+      "title": "all ten shared comparator cases execute with exact booleans and input custody",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(10)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/xml-comparison.ts');\n const path='workflows/xml/comparison.feature',ids=['@id-xml-comparison-prefix-and-opc-order','@id-xml-comparison-significant-content','@id-xml-comparison-prefix-attribute-binding','@id-xml-comparison-unsafe-input','@id-xml-comparison-processing-instructions-and-comments'];\n const feature=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),ids),count=(n:number)=>({implemented:n,planned:0,total:n});\n const result=await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(5),cases:count(10),steps:count(40)}},bindings,'comparison-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(10);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:deep segmented comparison is bounded without repeated ancestor text and depth violations return false",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 55,
+      "title": "deep segmented comparison is bounded without repeated ancestor text and depth violations return false",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(source,source)).toBe(true)",
+        "expect(eq(deep,deep)).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const source='<a>'.repeat(256)+('x'.repeat(4096)+'<!--segment-->').repeat(64)+'</a>'.repeat(256);expect(eq(source,source)).toBe(true);\n const deep='<a>'.repeat(257)+'</a>'.repeat(257);expect(eq(deep,deep)).toBe(false);\n}",
+      "calls": [
+        ".repeat",
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:unprefixed xsi:type values retain the default namespace that resolves their QName",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 60,
+      "title": "unprefixed xsi:type values retain the default namespace that resolves their QName",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:one\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`,`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:two\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`)).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const xsi='http://www.w3.org/2001/XMLSchema-instance';\n expect(eq(`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:one\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`,`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:two\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`)).toBe(false);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:MC Choice Requires prefix lists retain bindings even without colon-valued attributes",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 65,
+      "title": "MC Choice Requires prefix lists retain bindings even without colon-valued attributes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" Requires=\"p\"/>`,`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" Requires=\"p\"/>`)).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const mc='http://schemas.openxmlformats.org/markup-compatibility/2006';\n expect(eq(`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" Requires=\"p\"/>`,`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" Requires=\"p\"/>`)).toBe(false);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:MC MustUnderstand lists and QName-like text retain in-scope namespace bindings",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 70,
+      "title": "MC MustUnderstand lists and QName-like text retain in-scope namespace bindings",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" mc:MustUnderstand=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" mc:MustUnderstand=\"p\"/>`)).toBe(false)",
+        "expect(eq(`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`,`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`)).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\">p:x</a>','<a xmlns:p=\"urn:two\">p:x</a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\"><b>p<![CDATA[:x]]></b></a>','<a xmlns:p=\"urn:two\"><b>p:x</b></a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\">p<![CDATA[:x]]></a>','<a xmlns:p=\"urn:one\">p:x</a>')).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n const mc='http://schemas.openxmlformats.org/markup-compatibility/2006';\n expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" mc:MustUnderstand=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" mc:MustUnderstand=\"p\"/>`)).toBe(false);\n expect(eq(`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`,`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`)).toBe(false);\n expect(eq('<a xmlns:p=\"urn:one\">p:x</a>','<a xmlns:p=\"urn:two\">p:x</a>')).toBe(false);\n expect(eq('<a xmlns:p=\"urn:one\"><b>p<![CDATA[:x]]></b></a>','<a xmlns:p=\"urn:two\"><b>p:x</b></a>')).toBe(false);\n expect(eq('<a xmlns:p=\"urn:one\">p<![CDATA[:x]]></a>','<a xmlns:p=\"urn:one\">p:x</a>')).toBe(true);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-comparison.test.ts:processing instruction spacing is retained rather than trimmed by parser events",
+      "path": "tests/unit/xml-comparison.test.ts",
+      "line": 79,
+      "title": "processing instruction spacing is retained rather than trimmed by parser events",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(eq('<?p x?><a/>','<?p  x?><a/>')).toBe(false)",
+        "expect(eq('<a><?p\\tx?></a>','<a><?p x?></a>')).toBe(false)",
+        "expect(eq('<?p?><a/>','<?p ?><a/>')).toBe(false)",
+        "expect(eq('<?p\\r\\nx?><a/>','<?p\\nx?><a/>')).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+      "body": "{\n expect(eq('<?p x?><a/>','<?p  x?><a/>')).toBe(false);\n expect(eq('<a><?p\\tx?></a>','<a><?p x?></a>')).toBe(false);\n expect(eq('<?p?><a/>','<?p ?><a/>')).toBe(false);\n expect(eq('<?p\\r\\nx?><a/>','<?p\\nx?><a/>')).toBe(true);\n}",
+      "calls": [
+        "eq",
+        "expect",
+        "expect().toBe"
       ],
       "reviewReasons": [],
       "unresolved": []
