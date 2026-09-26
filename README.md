@@ -16,13 +16,12 @@ ZIP, XML and OPC code
 use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 
-Full ports of OOXML DOCX, OOXML PPTX and OOXML XLSX, including their inherited
-APIs, are in progress. Creation is limited to those initial paragraph/slide/cell surfaces. This version
+Full DOCX, PPTX and XLSX behaviour coverage is in progress. Creation is limited to those initial paragraph/slide/cell surfaces. This version
 does not implement general Word Compare, move/format/table revisions, comment threads,
 slide imports, merged-table restructuring or chart authoring,
 structural spreadsheet edits or calculation.
 The [scope and closure criteria](docs/contracts/port-scope.md) and
-[behaviour ledger](docs/contracts/parity-ledger.json) track that work.
+[shared workflow ledger](references/fixtures-ooxml/ledgers/workflows.json) track that work.
 
 ```ts
 import { Document } from "bun-ooxml";
@@ -37,17 +36,17 @@ await document.save("contract-edited.docx");
 Use the [native workflow API](docs/contracts/workflow-api.md) for preview/strict/safe
 batches. Read [agent usage](docs/agents/usage.md) before editing unfamiliar files. It covers
 refusals, target lifetimes and save/reopen checks. [Agent maintenance](docs/agents/maintenance.md)
-explains source pins and the Gherkin-to-test-to-outcome workflow.
+explains reference pins and the Gherkin-to-test-to-outcome workflow.
 
 ## Development
 
 Requires Bun 1.4.1 or newer. `make install` installs development tools; `make check`
-runs types, frozen-source checks, unit tests, exact Gherkin acceptance and examples.
-`make parity` also requires all planned work and source/test gaps to be closed.
+runs types, shared-reference checks, unit tests, exact Gherkin acceptance and examples.
+`make parity` also requires all planned behaviour gaps to be closed.
 It currently fails as expected.
 
-Tests use committed fixtures from `rcarmo/go-ooxml` and
-`rcarmo/python-office-mcp-server`. Frozen Python sources under `references/` are
-reference material; the Bun library never imports or executes them.
+Tests use the tagged shared reference submodule. Clone with --recurse-submodules
+or run git submodule update --init --recursive. Fixtures are read-only; missing
+inputs fail rather than generating fallbacks.
 
 MIT. See [third-party notices](THIRD_PARTY_NOTICES.md) for source and fixture provenance.

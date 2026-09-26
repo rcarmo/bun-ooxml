@@ -319,6 +319,15 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
     const text = await Bun.file(join(root, path)).text();
     features.push(parseFeature(path, text));
   }
+  const sharedConfig = Bun.file(join(root, 'features/shared.json'));
+  if (await sharedConfig.exists()) {
+    const shared = await sharedConfig.json();
+    for (const entry of shared.features) {
+      if (typeof entry.path !== 'string' || !entry.path.startsWith('references/fixtures-ooxml/') || entry.path.split('/').includes('..') || entry.lifecycle !== 'implemented' || entry.runner !== 'bun') throw new Error('Invalid shared feature mapping');
+      const text = await Bun.file(join(root, entry.path)).text();
+      features.push(parseFeature(entry.path, text.replace(/^@planned/m, '@implemented @bun')));
+    }
+  }
   features.sort((left, right) => left.path.localeCompare(right.path));
   validateInventory(features);
   return {

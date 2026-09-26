@@ -66,7 +66,7 @@ await wb.save("new.xlsx");
 ```
 
 These APIs author minimal packages without copying fixtures or invoking Python.
-They are not the full upstream authoring surface. DOCX supports simple bold/italic
+They are not the full authoring surface. DOCX supports simple bold/italic
 runs and existing paragraph style IDs; unknown styles refuse. PPTX authors one
 owned title layout/master/theme; appending to an existing deck requires one safe,
 compatible layout. XLSX can add valid, case-distinct sheet names and missing cells
@@ -230,7 +230,7 @@ never fetches external targets.
 `diffPackages` reports SHA256, byte length and effective content types, including
 type-only changes. It ignores ZIP metadata differences and does not claim XML
 semantic equivalence, rendered appearance or calculation correctness. See
-`docs/contracts/graph-api.md` for ownership limits and the bounded upstream mapping.
+`docs/contracts/graph-api.md` for ownership limits and the shared workflow references.
 
 ## Package-level operations
 

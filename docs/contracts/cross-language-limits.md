@@ -1,61 +1,19 @@
-# Cross-language scope limits
+# Cross-language limits
 
-Shared workflow outcomes cover the operations named by each scenario. They do
-not make Python, Go and Bun API surfaces equivalent. Keep these gaps explicit
-when mapping upstream code or adding features.
+Shared workflow passes establish only their selected outcomes. Runtime APIs and
+full coverage differ by consumer.
 
-## Word revisions and patch options
+Word review supports bounded direct run insertion/deletion, selected linked
+stories and exact tracked replacement. General comparison, moves/property/table
+revisions, comment threads and patchOffice track-changes dispatch remain gaps.
 
-The Python review reports that `word_accept_all_changes` traverses main document
-XML only. Separate headers, footers and footnotes, move revisions and formatting
-revisions need their own tests. The `office_patch` `track_changes` dispatch argument
-was reported unused. These observations are requirements to investigate in a full
-port, not compatibility behaviours to reproduce silently.
+Spreadsheet edits invalidate supported worksheet formula caches without computing
+results. Array/dataTable topologies refuse value edits; chart/external-link caches
+and calculation chains are preserved, not refreshed.
 
-Bun's current workflow performs direct text replacements in its supported body and
-table paragraphs. It has no track-changes dispatch switch. Separate package APIs
-now inspect linked stories and resolve bounded run-level insertions/deletions
-across selected body/header/footer/note/comment parts. `trackedReplace` authors one
-exact plain-text change and verifies accept/reject copies. See [review-api.md](review-api.md).
-Move, format, table-row and nested revisions, full comparison and comment threads
-still need their own implementation and saved-outcome evidence.
+For commentsExtended metadata, consult shared facts ContentTypeCommentsExtended
+and ContentTypeCommentsExtendedSpecified and their evidence. The observed alias
+is disputed; vendor metadata and pinned fixture agree on the specified value.
+No independent Office authoring/reopen certification has run.
 
-## Spreadsheet derived values
-
-Bun clears cached `<v>` contents on worksheet cells containing `<f>`. Array and
-data-table results can occupy ordinary cells without `<f>`; their presence now
-refuses value edits before any model or filesystem commit. This bounded guard
-will need replacement by reviewed range-aware invalidation for full parity.
-
-Ordinary formula cache invalidation neither recalculates formulas nor refreshes
-chart caches, external-link caches, calculation chains or other opaque derived
-parts. These are preserved unchanged. `recalculation-required` reports work that
-an engine still needs to do, not proof that every representation is current.
-
-The shared cache fixture deliberately has ordinary formulas, two sheets and no
-calcChain. Passing it does not close broader cache/range/external-reference tests.
-See `features/xlsx/cache-boundaries.feature` for executable boundaries and
-`features/planned/cross-language-followups.feature` for unresolved obligations.
-
-## Extended-comment content type
-
-Pinned source constants disagree:
-
-* `references/fixtures-ooxml/reference-assets/docx/src/docx/commentops.py` and the pinned Python MCP
-  `tools/word_tools.py` use
-  `application/vnd.openxmlformats-officedocument.wordprocessingml.commentsExtended+xml`.
-* The Go reference at `43eda6e`, `pkg/packaging/constants.go`, uses
-  `application/vnd.ms-word.commentsExtended+xml`.
-
-Record this as an unresolved schema/Office compatibility question. A source
-majority or one library reopening its own output does not resolve it. Bun has
-not implemented this part; select its content type only with an authoritative
-schema/reference and independently checked producer/consumer fixture.
-
-## Transport evidence
-
-Python's reported 19-case acceptance is direct-server-call evidence. Its separate
-clean-wheel tests exercise stdio. Legacy SSE/TCP availability does not prove
-mutation outcomes over those transports; HTTP/SSE/TCP remains unverified here.
-Bun executes the shared workflows as native library calls and exposes no MCP
-transport in this repository. Neither runner inherits the other's transport proof.
+Native-library, direct-server-call and transport evidence stay separate.

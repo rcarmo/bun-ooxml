@@ -48,8 +48,7 @@ Rules:
 
 The writer materialises the entire archive in memory. Forced tiny archives and
 65,535-entry archives are tested; multi-gigabyte writes and independent native
-Office producer compatibility are unverified. See `zip64-mapping.json` for the
-bounded upstream preflight-test mapping; other module tests remain gaps.
+resource/preflight validation; broader format behaviours remain gaps.
 
 ## Error-code summary
 

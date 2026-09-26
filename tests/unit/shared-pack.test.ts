@@ -7,7 +7,7 @@ import {parseFeature} from "../../scripts/gherkin.ts";
 const root=join(import.meta.dir,"../..");
 describe("shared v2 inventory and provenance",()=>{
   test("checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",async()=>{
-    expect(await verifySharedPack(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:17});
+    expect(await verifySharedPack(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:11});
   });
   test("stable identity excludes path, UUID and example insertion order",()=>{
     expect(stableCaseKey("@id-example",{z:"2",a:"1"})).toBe('@id-example:{"a":"1","z":"2"}');
@@ -37,13 +37,11 @@ Feature: JSON escaping
   test("rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",async()=>{
     const temp=await mkdtemp(join(tmpdir(),"bun-shared-pack-"));
     try {
-      await mkdir(join(temp,"upstream"),{recursive:true});
-      await Bun.write(join(temp,"references/manifest.json"),Bun.file(join(root,"references/manifest.json")));
       await cp(join(root,"features"),join(temp,"features"),{recursive:true});
-      await cp(join(root,"docs/contracts/shared-v2"),join(temp,"docs/contracts/shared-v2"),{recursive:true});
-      await cp(join(root,"docs/contracts/office-mutation"),join(temp,"docs/contracts/office-mutation"),{recursive:true});
+      await cp(join(root,"docs/contracts/shared-v2"),join(temp,"docs/contracts/shared-v2"),{recursive:true,dereference:true});
+      await cp(join(root,"references/fixtures-ooxml"),join(temp,"references/fixtures-ooxml"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});
       for(const [file,expectedError] of [
-        ["features/workflow/mutation-safety.feature","Active shared feature differs"],
+        ["docs/contracts/shared-v2/pack/features/mutation-safety.feature","Shared pack artifact drift"],
         ["docs/contracts/shared-v2/pack/fixtures/default-style.xlsx","Shared pack artifact drift"],
         ["docs/contracts/shared-v2/pack/expanded-contracts.json","Shared pack artifact drift"],
       ]) {
@@ -51,7 +49,7 @@ Feature: JSON escaping
         const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;
         await Bun.write(path,modified);await expect(verifySharedPack(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);
       }
-      expect(await verifySharedPack(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:17});
+      expect(await verifySharedPack(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:11});
     } finally {await rm(temp,{recursive:true,force:true});}
   });
 });

@@ -27,5 +27,5 @@ Parallel API contracts:
 Each format has src/*/index.ts ownership; supporting helper modules inside own
 format directory allowed. Tests and features authoring first before code; bindings
 exported tests/acceptance/create-{format}.ts, parent combines. No borrowed python
-template binary, no font/render/runtime dependency. This is not all inherited
+template binary, no font/render/runtime dependency. This does not cover all
 creation/style/theme/table/chart API parity.

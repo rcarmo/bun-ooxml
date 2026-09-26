@@ -39,7 +39,7 @@ export function parseBatchTable(table:string[][]):{target:string;value:string|nu
  */
 export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;cases:number;fixtures:number;files:number}> {
   const metadata=await Bun.file(join(root,PATH,"manifest.json")).json();
-  check(metadata.version===1&&metadata.workflowLayer===true&&metadata.upstreamApiParityCredit===false,"Workflow/library parity scope changed");
+  check(metadata.version===1&&metadata.workflowLayer===true&&metadata.libraryParityCredit===false,"Workflow/library parity scope changed");
   check(safe(metadata.pack)&&safe(metadata.featurePath),"Unsafe shared pack path");
   const pack=join(root,metadata.pack);
   const manifestBytes=await Bun.file(join(pack,"pack-manifest.json")).bytes();
@@ -55,8 +55,9 @@ export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;case
   for await(const file of new Bun.Glob("**/*").scan({cwd:pack,onlyFiles:true}))check(known.has(file),`Unpinned shared pack artifact ${file}`);
   const featureText=await Bun.file(join(pack,"features/mutation-safety.feature")).text();
   check(metadata.execution?.lifecycle==='implemented'&&metadata.execution?.runner==='bun',"Missing execution-copy policy");
-  const executionText=await Bun.file(join(root,metadata.featurePath)).text();
-  check(executionText===featureText.replace(/^@planned/m,'@implemented @bun'),"Active shared feature differs beyond lifecycle tags");
+  const executionText=featureText.replace(/^@planned/m,'@implemented @bun');
+  const config=await Bun.file(join(root,'features/shared.json')).json();
+  check(config.features.some((f:any)=>f.path===metadata.featurePath&&f.lifecycle==='implemented'&&f.runner==='bun'),'Missing shared workflow execution mapping');
   const executionFeature=parseFeature(metadata.featurePath,executionText);
   check(executionFeature.lifecycle==='implemented'&&executionFeature.runner==='bun',"Invalid native execution feature");
   const feature=parseFeature("features/mutation-safety.feature",featureText);
@@ -64,14 +65,13 @@ export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;case
   check(isDeepStrictEqual(feature.scenarios.map(s=>s.scenarioId),metadata.scenarios),"Shared scenario IDs changed");
   const fixtureManifest=await Bun.file(join(pack,"fixture-manifest.json")).json() as FixtureManifest;
   check(fixtureManifest.schemaVersion===1&&fixtureManifest.contractRevision===metadata.contractRevision&&fixtureManifest.fixtures.length===4,"Fixture inventory changed");
-  check(safe(fixtureManifest.generator.path)&&fixtureManifest.generator.sha256===manifest.files[fixtureManifest.generator.path],"Fixture recipe drift");
-  const source=await Bun.file(join(root,"references/manifest.json")).json();
-  check(source.sources.some((s:any)=>s.id==="python-office-mcp-server"&&s.commit===metadata.sourceCommit),"Shared source commit differs from imported source");
+  check(manifest.distributionRevision===metadata.distributionRevision,'Shared distribution identity changed');
+  const source=await Bun.file(join(root,'references/fixtures-ooxml/manifest.json')).json();
   const fixtures=new Map<string,FixtureManifest["fixtures"][number]>();
   for(const fixture of fixtureManifest.fixtures) {
     check(safe(fixture.path)&&!fixtures.has(fixture.id),"Duplicate/unsafe fixture identity");fixtures.set(fixture.id,fixture);
     check(fixture.origin.revision===metadata.sourceCommit,"Fixture source revision drift");
-    const original=source.files.find((f:any)=>f.source==="python-office-mcp-server"&&f.upstreamPath===fixture.origin.path);
+    const original=source.files.find((f:any)=>f.origin.repository===fixture.origin.repository&&f.origin.revision===fixture.origin.revision&&f.origin.path===fixture.origin.path);
     check(original&&original.sha256===fixture.origin.sha256,"Fixture origin not in pinned corpus");
     const fixtureBytes=await Bun.file(join(pack,fixture.path)).bytes();
     await verifyFixture(fixtureBytes,fixture);
@@ -98,9 +98,8 @@ export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;case
   // step text/arguments remain exact. Passing status comes only from acceptance.
   check(isDeepStrictEqual(executionFeature.scenarios.map(s=>s.scenarioId),feature.scenarios.map(s=>s.scenarioId)),"Execution IDs drifted");
   const active=await inventoryFeatures(root);
-  const historical=await Bun.file(join(root,"docs/contracts/office-mutation/manifest.json")).json();
-  const activeIds=new Set(active.features.flatMap(f=>f.scenarios.map(s=>s.scenarioId)));
-  for(const row of historical.scenarios)check(!activeIds.has(row.id)&&metadata.scenarios.includes(row.replacedBy),"Historical/new ID mapping missing or double-counted");
+  const activeIds=active.features.flatMap(f=>f.scenarios.map(s=>s.scenarioId));
+  for(const id of metadata.scenarios)check(activeIds.filter(x=>x===id).length===1,'Shared scenario must execute exactly once');
   return {scenarios:8,cases:19,fixtures:fixtures.size,files:entries.length};
 }
 if(import.meta.main)console.log("Shared pack input/inventory verification (no workflow execution):",await verifySharedPack());

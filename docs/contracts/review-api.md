@@ -46,7 +46,5 @@ replacement/original. Tests check formatting and opaque-part preservation. Full 
 and paragraph/table change algebra remain unported; don't claim general compare.
 
 The root and ./docx entrypoints export these APIs. Tests/features are named
-story/revisions/redline; `review-mapping.json` links bounded outcomes to frozen
-upstream APIs/tests. Frozen inputs are unchanged. All mappings are partial;
-author filtering, revision snapshots, full comparison and whole-module test
-coverage remain gaps.
+story/revisions/redline. Shared fixtures are unchanged. Author filtering,
+revision snapshots, full comparison and broader revision coverage remain gaps.

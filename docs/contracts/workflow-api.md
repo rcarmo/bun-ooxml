@@ -47,4 +47,4 @@ safe-output hardlink aliases refuse. Caller directories must be trusted.
 
 Contract tests bind the frozen shared v2 feature with only lifecycle-tag changes;
 source text, scenario IDs, expanded examples and arguments remain pinned. Native
-library support and workflow coverage are separate from inherited OOXML API parity.
+library support and workflow coverage are separate from full format behaviour coverage.

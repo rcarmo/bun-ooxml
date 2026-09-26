@@ -1,14 +1,14 @@
 @planned
-Feature: Full source-pinned Office library ports
-  The behaviour ledger is the full denominator. These contracts describe the
+Feature: Full Office document behaviour
+  The shared workflow ledger records required outcomes. These contracts describe the
   remaining families; they receive no credit until bound to executed outcomes.
 
   @id-parity-inherited
-  Scenario Outline: Preserve inherited <format> library behaviour
-    Given the pinned <format> source modules and inherited tests
-    When every public API and observable test case is mapped to TypeScript
-    Then each mapping has executed Gherkin steps and saved reopened outcomes
-    And no source or test ledger gaps remain for <format>
+  Scenario Outline: Preserve complete <format> document behaviour
+    Given the pinned <format> facts fixtures and behaviour contracts
+    When every required operation has a native implementation
+    Then each contract has executed Gherkin steps and saved reopened outcomes
+    And no planned behaviour gaps remain for <format>
     Examples:
       | format |
       | docx   |
