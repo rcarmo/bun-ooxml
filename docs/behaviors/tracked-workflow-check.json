@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "scope": "Bounded single-target trackedDOCX workflow dispatch; no multi-target redlining",
+  "consumerBaseCommit": "5e1bf00493e21c7a37b3a268bc8565128a35fbc9",
+  "reference": {
+    "mode": "candidate",
+    "commit": "111740069babc6648325dd9d62ada585ecbd3553",
+    "manifestSha256": "e48443112170e18a4d299c26720409f3a9eda2974205834e82841c69ebca5534"
+  },
+  "behavioralRed": "Prior workflow ignored trackChanges and lacked revision counts;2 initial dispatch tests failed",
+  "run": {
+    "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+    "runId": "b6d5e9a2-9411-4b09-91cd-beb68de4d168",
+    "startedAt": "2026-09-26T15:49:41.460Z",
+    "finishedAt": "2026-09-26T15:49:43.157Z",
+    "unitTests": 254,
+    "assertions": 2716,
+    "acceptanceCases": 145,
+    "trackedCases": 17,
+    "trackedSteps": 56,
+    "examples": 3
+  },
+  "scenarios": [
+    {
+      "id": "@id-docx-track-changes-option-outcome",
+      "cases": [
+        {
+          "id": "@id-docx-track-changes-option-outcome -- operation=\"tracked\", outcome=\"committed\", committed=\"1\", revisions=\"2\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-track-changes-option-outcome -- operation=\"untracked\", outcome=\"committed\", committed=\"1\", revisions=\"0\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-track-changes-option-outcome -- operation=\"no-op\", outcome=\"committed\", committed=\"0\", revisions=\"0\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-track-changes-option-outcome -- operation=\"preview\", outcome=\"preview\", committed=\"0\", revisions=\"0\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-track-changes-option-outcome -- operation=\"deletion\", outcome=\"committed\", committed=\"1\", revisions=\"1\"",
+          "result": "passed",
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "id": "@id-docx-workflow-tracked-refusal",
+      "cases": [
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"missing\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"ambiguous\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"drawing\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"existing\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"protected\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"external-settings\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"multiple-targets\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"invalid-author\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"invalid-date\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"non-docx\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"invalid-option\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-workflow-tracked-refusal -- variant=\"missing-metadata\"",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "One unique main-story plain-text replacement only",
+    "Existing revisions/unsupported topology/protection/settingsrefusal before writes",
+    "Preview revision count is distinct from committed count and IDs",
+    "Nine native declarations await central assertionmapping",
+    "No independent Office rendering/calculation result"
+  ],
+  "releaseRun": {
+    "referenceTag": "v0.7.0",
+    "referenceCommit": "111740069babc6648325dd9d62ada585ecbd3553",
+    "mode": "default-no-overrides",
+    "command": "make check",
+    "runId": "039f1fda-b4b4-49d9-bbe1-68135f5227b6",
+    "startedAt": "2026-09-26T15:53:53.040Z",
+    "finishedAt": "2026-09-26T15:53:54.658Z",
+    "status": "passed",
+    "unitTests": 256,
+    "assertions": 2729,
+    "acceptanceCases": 145,
+    "examples": 3
+  },
+  "additionalRed": "Caller mutation of trackChanges/metadata/value after dispatch changed requested operation before request snapshot fix",
+  "review": {
+    "kind": "Cross-session read-only source review",
+    "result": "No confirmed runtime blocker; early-stale test mislabeled as late; renamed and separate injected post-staging custody test added",
+    "independentDelegate": "Timed out, no independent review evidence"
+  }
+}

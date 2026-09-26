@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "consumer": "bun",
   "discovery": "TypeScript AST; declarations are not runtime-expanded leaf cases",
-  "count": 247,
-  "files": 30,
+  "count": 256,
+  "files": 31,
   "dynamicCases": [
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
     "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
@@ -30,6 +30,8 @@
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
     "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
+    "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
+    "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -2528,11 +2530,11 @@
       "suites": [],
       "kind": "test",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(138)"
+        "expect(await verifyReferences(root)).toBe(139)"
       ],
       "loops": [],
-      "sourceSha256": "1ec6407e677b84605e0b30bd8772f28ba1eed8e23848283e6fc110f2fdf42529",
-      "body": "{expect(await verifyReferences(root)).toBe(138);}"
+      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
+      "body": "{expect(await verifyReferences(root)).toBe(139);}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
@@ -2545,7 +2547,7 @@
         "expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin')"
       ],
       "loops": [],
-      "sourceSha256": "1ec6407e677b84605e0b30bd8772f28ba1eed8e23848283e6fc110f2fdf42529",
+      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}"
     },
     {
@@ -2558,7 +2560,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(138)",
+        "expect(await verifyReferences(tmp)).toBe(139)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -2568,8 +2570,8 @@
           "expression": "for(const change of ["
         }
       ],
-      "sourceSha256": "1ec6407e677b84605e0b30bd8772f28ba1eed8e23848283e6fc110f2fdf42529",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(138);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(139);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
@@ -2588,7 +2590,7 @@
         "expect(git('status','--porcelain')).toBe('')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular')",
-        "expect(await verifyReferences(tmp)).toBe(138)"
+        "expect(await verifyReferences(tmp)).toBe(139)"
       ],
       "loops": [
         {
@@ -2596,8 +2598,8 @@
           "expression": "for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']])"
         }
       ],
-      "sourceSha256": "1ec6407e677b84605e0b30bd8772f28ba1eed8e23848283e6fc110f2fdf42529",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(138);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(139);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
@@ -3025,6 +3027,183 @@
       "loops": [],
       "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"cross-sheet-cache.xlsx\");\n    const root = await tempRoot();\n    const output = join(root, fixture.id);\n    const workbook = await Workbook.open(await readFixtureBytes(fixture));\n\n    workbook.worksheet(\"Input\").setCellValue(\"A1\", 10);\n    await workbook.save(output);\n\n    const savedBytes = Uint8Array.from(await Bun.file(output).bytes());\n    const reopened = await Workbook.open(output);\n\n    expect(reopened.worksheet(\"Input\").getCell(\"A1\")).toMatchObject({\n      kind: \"number\",\n      value: 10,\n    });\n    expect(reopened.worksheet(\"Calc\").getCell(\"A1\")).toMatchObject({\n      kind: \"formula\",\n      formula: \"Input!A1*2\",\n      cached: null,\n    });\n    await expect(assertPreservedOutput(savedBytes, fixture)).resolves.toBeUndefined();\n  }"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:tracked Word workflow dispatch executes17outcome/refusal cases",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 8,
+      "title": "tracked Word workflow dispatch executes17outcome/refusal cases",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(17)"
+      ],
+      "loops": [],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const path='workflows/docx/tracked-workflow.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun')),cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(17);\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:initial destination precondition refusal reports zero revision counts",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 13,
+      "title": "initial destination precondition refusal reports zero revision counts",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(r.status).toBe('refused')",
+        "expect((r as any).trackedRevisions).toBe(0)",
+        "expect((r as any).revisionIds).toEqual([])",
+        "expect(await Bun.file(s.output).text()).toBe('output sentinel')"
+      ],
+      "loops": [],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const s=await setupTrackedWorkflow(),r=await patchOffice({...requestFor(s,'tracked'),expectedDestinationSha256:null});expect(r.status).toBe('refused');expect((r as any).trackedRevisions).toBe(0);expect((r as any).revisionIds).toEqual([]);expect(await Bun.file(s.output).text()).toBe('output sentinel');\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:output serialization/save refusal clears staged revision identities",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 17,
+      "title": "output serialization/save refusal clears staged revision identities",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(r.status).toBe('refused')",
+        "expect(r.trackedRevisions).toBe(0)",
+        "expect(r.previewRevisions).toBe(0)",
+        "expect(r.revisionIds).toEqual([])",
+        "expect(r.changedParts).toEqual([])",
+        "expect(await Bun.file(s.output).text()).toBe('output sentinel')",
+        "expect(await Bun.file(s.source).bytes()).toEqual(Uint8Array.from(s.before))"
+      ],
+      "loops": [],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const {OpcPackage}=await import('../../src/opc/package.ts'),s=await setupTrackedWorkflow();const save=OpcPackage.prototype.save;\n OpcPackage.prototype.save=async()=>{throw new Error('injected final save failure');};\n try{const r=await patchOffice(requestFor(s,'tracked'));expect(r.status).toBe('refused');expect(r.trackedRevisions).toBe(0);expect(r.previewRevisions).toBe(0);expect(r.revisionIds).toEqual([]);expect(r.changedParts).toEqual([]);expect(await Bun.file(s.output).text()).toBe('output sentinel');expect(await Bun.file(s.source).bytes()).toEqual(Uint8Array.from(s.before));}finally{OpcPackage.prototype.save=save;}\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:strict tracked overwrite and explicit false dispatch have distinct saved outcomes",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 22,
+      "title": "strict tracked overwrite and explicit false dispatch have distinct saved outcomes",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(r.status).toBe('committed')",
+        "expect(r.trackedRevisions).toBe(2)",
+        "expect(inspectRevisions(p).revisions.map(x=>x.id)).toEqual(r.revisionIds)",
+        "expect(inspectStories(p,{view:'original'}).stories[0]!.paragraphs[0]!.text).toBe('Payment within thirty days.')",
+        "expect(await Bun.file(s.output).text()).toBe('output sentinel')",
+        "expect(plain.status).toBe('committed')",
+        "expect(plain.trackedRevisions).toBe(0)",
+        "expect(inspectRevisions(await OpcPackage.open(t.output)).revisions).toEqual([])"
+      ],
+      "loops": [],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const {OpcPackage}=await import('../../src/opc/package.ts'),{inspectRevisions}=await import('../../src/docx/revisions.ts'),{inspectStories}=await import('../../src/docx/story.ts');\n const s=await setupTrackedWorkflow(),request=requestFor(s,'tracked');delete request.output;request.mode='strict';\n const r=await patchOffice(request);expect(r.status).toBe('committed');expect(r.trackedRevisions).toBe(2);const p=await OpcPackage.open(s.source);expect(inspectRevisions(p).revisions.map(x=>x.id)).toEqual(r.revisionIds);expect(inspectStories(p,{view:'original'}).stories[0]!.paragraphs[0]!.text).toBe('Payment within thirty days.');expect(await Bun.file(s.output).text()).toBe('output sentinel');\n const t=await setupTrackedWorkflow(),untracked=requestFor(t,'untracked');untracked.revisionMetadata={author:'',date:'invalid'};const plain=await patchOffice(untracked);expect(plain.status).toBe('committed');expect(plain.trackedRevisions).toBe(0);expect(inspectRevisions(await OpcPackage.open(t.output)).revisions).toEqual([]);\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 28,
+      "title": "tracked no-op still validates metadata and refuses unsupported topology",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(r.status).toBe('refused')",
+        "expect(r.trackedRevisions).toBe(0)",
+        "expect(await Bun.file(s.output).text()).toBe('output sentinel')",
+        "expect((await patchOffice(request)).status).toBe('refused')"
+      ],
+      "loops": [
+        {
+          "line": 29,
+          "expression": "for(const variant of ['protected','existing','external-settings','drawing'])"
+        }
+      ],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n for(const variant of ['protected','existing','external-settings','drawing']){const s=await setupTrackedWorkflow(variant),request=requestFor(s,'no-op');const r=await patchOffice(request);expect(r.status).toBe('refused');expect(r.trackedRevisions).toBe(0);expect(await Bun.file(s.output).text()).toBe('output sentinel');}\n const s=await setupTrackedWorkflow(),request=requestFor(s,'no-op');request.revisionMetadata={author:'Reviewer',date:'2026-02-30T12:00:00Z'};expect((await patchOffice(request)).status).toBe('refused');\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:overlapping literal occurrences never become one tracked target",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 32,
+      "title": "overlapping literal occurrences never become one tracked target",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(r.status).toBe('refused')",
+        "expect(r.results[0]?.matched).toBe(2)",
+        "expect(r.trackedRevisions).toBe(0)",
+        "expect(await Bun.file(s.source).bytes()).toEqual(before)",
+        "expect(await Bun.file(s.output).text()).toBe('output sentinel')"
+      ],
+      "loops": [],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const {OpcPackage}=await import('../../src/opc/package.ts'),s=await setupTrackedWorkflow(),p=await OpcPackage.open(s.source);p.set(p.mainPart(),p.text(p.mainPart()).replace('thirty days.','aaa'));await p.save(s.source);const before=await Bun.file(s.source).bytes();const request=requestFor(s,'tracked');request.changes=[{target:'aa',value:'x'}];const r=await patchOffice(request);expect(r.status).toBe('refused');expect(r.results[0]?.matched).toBe(2);expect(r.trackedRevisions).toBe(0);expect(await Bun.file(s.source).bytes()).toEqual(before);expect(await Bun.file(s.output).text()).toBe('output sentinel');\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 36,
+      "title": "malformed settings root and runtime metadata do not bypass tracked preflight",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(r.status).toBe('refused')",
+        "expect(r.trackedRevisions).toBe(0)",
+        "expect(await Bun.file(s.source).bytes()).toEqual(before)",
+        "expect(await Bun.file(s.output).text()).toBe('output sentinel')",
+        "expect(x.status).toBe('refused')",
+        "expect(x.trackedRevisions).toBe(0)",
+        "expect(x.previewRevisions).toBe(0)"
+      ],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const revisionMetadata of [null,"
+        }
+      ],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const {OpcPackage,addPart,addRelationship}=await import('../../src/opc/index.ts');\n const s=await setupTrackedWorkflow(),p=await OpcPackage.open(s.source);addPart(p,'word/settings.xml','<wrong/>','application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');await p.save(s.source);const before=await Bun.file(s.source).bytes();\n const r=await patchOffice(requestFor(s,'tracked'));expect(r.status).toBe('refused');expect(r.trackedRevisions).toBe(0);expect(await Bun.file(s.source).bytes()).toEqual(before);expect(await Bun.file(s.output).text()).toBe('output sentinel');\n const t=await setupTrackedWorkflow();for(const revisionMetadata of [null,{}, {author:3,date:'2026-09-26T12:00:00Z'},{author:'A',date:false}]){const request=requestFor(t,'tracked') as any;request.revisionMetadata=revisionMetadata;const x=await patchOffice(request);expect(x.status).toBe('refused');expect(x.trackedRevisions).toBe(0);expect(x.previewRevisions).toBe(0);}\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:caller mutation after dispatch cannot change the requested tracking mode or revision metadata",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 43,
+      "title": "caller mutation after dispatch cannot change the requested tracking mode or revision metadata",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(result.status).toBe('committed')",
+        "expect(result.trackedRevisions).toBe(2)",
+        "expect(result.results[0]?.value).toBe('within sixty')",
+        "expect(revisions.every(r=>r.author==='Original reviewer')).toBe(true)",
+        "expect(revisions).toHaveLength(2)"
+      ],
+      "loops": [],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const {OpcPackage}=await import('../../src/opc/package.ts'),{inspectRevisions}=await import('../../src/docx/revisions.ts');\n const s=await setupTrackedWorkflow(),request=requestFor(s,'tracked');request.revisionMetadata={author:'Original reviewer',date:'2026-09-26T12:00:00Z'};\n const pending=patchOffice(request);request.trackChanges=false;request.revisionMetadata.author='Mutated reviewer';request.changes[0]!.value='unrequested value';\n const result=await pending;expect(result.status).toBe('committed');expect(result.trackedRevisions).toBe(2);expect(result.results[0]?.value).toBe('within sixty');\n const revisions=inspectRevisions(await OpcPackage.open(s.output)).revisions;expect(revisions.every(r=>r.author==='Original reviewer')).toBe(true);expect(revisions).toHaveLength(2);\n}"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:destination change after staging refuses without publishing staged revisions",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "line": 51,
+      "title": "destination change after staging refuses without publishing staged revisions",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(staged).toBe(true)",
+        "expect(r.status).toBe('refused')",
+        "expect(r.error?.code).toBe('workflow-stale-destination')",
+        "expect(r.trackedRevisions).toBe(0)",
+        "expect(r.revisionIds).toEqual([])",
+        "expect(r.changedParts).toEqual([])",
+        "expect(await Bun.file(s.output).text()).toBe('external writer')",
+        "expect(await Bun.file(s.source).bytes()).toEqual(Uint8Array.from(s.before))"
+      ],
+      "loops": [],
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800",
+      "body": "{\n const {OpcPackage}=await import('../../src/opc/package.ts'),{writeFileSync}=await import('node:fs'),s=await setupTrackedWorkflow();\n const serialize=OpcPackage.prototype.toBytes;let staged=false;\n OpcPackage.prototype.toBytes=function(){const bytes=serialize.call(this);if(!staged&&this.text(this.mainPart()).includes('Workflow reviewer')){staged=true;writeFileSync(s.output,'external writer');}return bytes;};\n try{const r=await patchOffice(requestFor(s,'tracked'));expect(staged).toBe(true);expect(r.status).toBe('refused');expect(r.error?.code).toBe('workflow-stale-destination');expect(r.trackedRevisions).toBe(0);expect(r.revisionIds).toEqual([]);expect(r.changedParts).toEqual([]);expect(await Bun.file(s.output).text()).toBe('external writer');expect(await Bun.file(s.source).bytes()).toEqual(Uint8Array.from(s.before));}finally{OpcPackage.prototype.toBytes=serialize;}\n}"
     },
     {
       "id": "bun:tests/unit/workflow-acceptance.test.ts:workflow shared acceptance / executes the frozen shared workflow feature as 19 implemented Bun cases",

@@ -20,8 +20,11 @@ export function trackedReplace(pkg:OpcPackage,part:string,query:string,replaceme
  if(canonical!==normalizedDate)fail('docx-redline-argument','Date contains invalid calendar fields');
  escapeText(query);escapeText(replacement);escapeAttribute(options.author);
  const parts=storyParts(pkg);if(!parts.some(p=>p.part===part))fail('docx-redline-story','Target is not a reachable Word story');
- for(const rel of pkg.relationships(pkg.mainPart()))if(!rel.external&&rel.type===OFFICE+'settings'){
-  for(const protection of elements(parseXml(pkg.text(rel.resolved!)),'documentProtection',W))if(!['0','false','off'].includes(attribute(protection,'enforcement',W)??''))fail('docx-redline-protected','Protected document refuses tracked replacement');
+ for(const rel of pkg.relationships(pkg.mainPart()))if(rel.type===OFFICE+'settings'){
+  if(rel.external)fail('docx-redline-protected','External settings cannot be checked');
+  const settings=parseXml(pkg.text(rel.resolved!));
+  if(settings.root.namespaceURI!==W||settings.root.localName!=='settings')fail('docx-redline-protected','Unexpected settings root');
+  for(const protection of elements(settings,'documentProtection',W))if(!['0','false','off'].includes(attribute(protection,'enforcement',W)??''))fail('docx-redline-protected','Protected document refuses tracked replacement');
  }
  const revisionState=inspectRevisions(pkg);
  if(revisionState.revisions.some(r=>r.part===part)||revisionState.unsupported.some(r=>r.part===part))fail('docx-redline-existing-revisions','Resolve target story revisions before redlining');

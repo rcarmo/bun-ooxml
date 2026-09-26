@@ -53,6 +53,24 @@ race the final fingerprint check and atomic rename. Choose trusted directories;
 leaf symlinks and safe-mode same-file/hardlink destinations refuse. See
 `docs/contracts/workflow-api.md` for the bounded target and receipt contract.
 
+For one tracked Word replacement, request it explicitly:
+
+```ts
+const receipt = await patchOffice({
+  source: input, output, mode: "safe",
+  trackChanges: true,
+  revisionMetadata: { author: "Reviewer", date: "2026-09-26T12:00:00Z" },
+  changes: [{ target: "thirty days", value: "sixty days" }],
+});
+if (receipt.status !== "committed") throw new Error(receipt.error?.message);
+```
+
+`trackedRevisions` and `revisionIds` describe saved revision nodes; a replacement
+normally has two nodes for one committed change. Preview uses `previewRevisions`
+and never claims committed IDs. Multiple tracked targets, existing revisions and
+unsupported/protected stories refuse before writes. Omit the option or use false
+for the original untracked workflow.
+
 ## Native creation
 
 ```ts

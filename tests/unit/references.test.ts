@@ -5,7 +5,7 @@ import{join}from'node:path';
 import{verifyReferences}from'../../scripts/references.ts';
 import{fixturesRoot}from'../../scripts/fixture-inputs.ts';
 const root=join(import.meta.dir,'../..');
-test('shared manifest, annotated tag and exact submodule commit match required pin',async()=>{expect(await verifyReferences(root)).toBe(138);});
+test('shared manifest, annotated tag and exact submodule commit match required pin',async()=>{expect(await verifyReferences(root)).toBe(139);});
 test('missing pin refuses rather than using an implicit or generated fixture corpus',async()=>{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}});
 test('mutated seals and wrong tag or revision refuse in an isolated reference clone',async()=>{
  const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{
@@ -13,7 +13,7 @@ test('mutated seals and wrong tag or revision refuse in an isolated reference cl
   const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);
   const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');
   for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}
-  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(138);
+  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(139);
   const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();
   await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);
   const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();
@@ -43,6 +43,6 @@ test('index hints cannot hide modified facts or workflow ledgers from reference 
    const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');
    await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);
   }
-  expect(await verifyReferences(tmp)).toBe(138);
+  expect(await verifyReferences(tmp)).toBe(139);
  }finally{await rm(tmp,{recursive:true,force:true});}
 });

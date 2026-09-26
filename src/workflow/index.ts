@@ -1,6 +1,9 @@
 import { lstat, realpath } from "node:fs/promises";
 import { basename, dirname, extname, join, resolve } from "node:path";
 import { Document } from "../docx/index.ts";
+import { trackedReplace } from '../docx/redline.ts';
+import { inspectStories } from '../docx/story.ts';
+import { inspectRevisions } from '../docx/revisions.ts';
 import { Presentation } from "../pptx/index.ts";
 import { findPlaceholderText } from "../pptx/placeholders.ts";
 import { Workbook } from "../xlsx/index.ts";
@@ -15,6 +18,8 @@ export interface PatchRequest {
   mode:"dry_run"|"strict"|"safe";
   changes:{target:string;value:PatchValue}[];
   multilineWrap?:boolean;
+  trackChanges?:boolean;
+  revisionMetadata?:{author:string;date:string};
   calculationPolicy?:"invalidate-without-recalculation";
   expectedSourceSha256?:string;
   expectedDestinationSha256?:string|null;
@@ -28,6 +33,7 @@ export interface PatchReceipt {
   status:"preview"|"refused"|"committed"; committedChanges:number;
   results:TargetResult[]; sourceSha256:string;outputSha256?:string;
   calculationState:"unchanged"|"recalculation-required";
+  trackedRevisions:number; previewRevisions:number; revisionIds:string[];
   error?:{code:string;message:string};changedParts:string[];
 }
 interface Snapshot {path:string; bytes?:Uint8Array; hash:string|null; dev?:number;ino?:number;}
@@ -42,9 +48,12 @@ function refuse(code:string,message:string):never {throw new OoxmlError(code,mes
  * This first slice is all-targets-required in every mode, with no best-effort fallback.
  */
 export async function patchOffice(request:PatchRequest):Promise<PatchReceipt> {
-  const receipt:PatchReceipt={status:"refused",committedChanges:0,results:[],sourceSha256:"",calculationState:"unchanged",changedParts:[]};
+  const receipt:PatchReceipt={status:"refused",committedChanges:0,results:[],sourceSha256:"",calculationState:"unchanged",changedParts:[],trackedRevisions:0,previewRevisions:0,revisionIds:[]};
   try {
     validateRequest(request);
+    // Own the request before the first await; caller mutation must not change
+    // tracked intent, author/date or any resolved target during asynchronous I/O.
+    request={...request,changes:request.changes.map(c=>({target:c.target,value:c.value})),revisionMetadata:request.revisionMetadata?{author:request.revisionMetadata.author,date:request.revisionMetadata.date}:undefined};
     // Resolve parent links so aliases share a writer lock; refuse leaf links explicitly.
     const sourcePath=await canonicalPath(request.source);
     const outputPath=request.output?await canonicalPath(request.output):sourcePath;
@@ -65,8 +74,10 @@ export async function patchOffice(request:PatchRequest):Promise<PatchReceipt> {
         if(!["docx","pptx","xlsx"].includes(format))refuse("workflow-format-unsupported","Only DOCX/PPTX/XLSX are supported");
         if(request.multilineWrap&&format!=="xlsx")refuse("workflow-option-unsupported","Wrapping applies to XLSX only");
         if(request.calculationPolicy&&format!=="xlsx")refuse("workflow-option-unsupported","Calculation policy applies to XLSX only");
+        if(request.trackChanges&&format!=="docx")refuse('workflow-option-unsupported','Tracked replacement applies to DOCX only');
         const original=await OpcPackage.open(source.bytes);
-        const doc=format==="docx"?await Document.open(source.bytes):undefined;
+        const tracked=request.trackChanges?{pkg:await OpcPackage.open(source.bytes),ids:[] as string[]}:undefined;
+        const doc=format==="docx"&&!tracked?await Document.open(source.bytes):undefined;
         const deck=format==="pptx"?await Presentation.open(source.bytes):undefined;
         const book=format==="xlsx"?await Workbook.open(source.bytes):undefined;
         const targets:Target[]=[];
@@ -77,7 +88,7 @@ export async function patchOffice(request:PatchRequest):Promise<PatchReceipt> {
         for(const change of request.changes) {
           const result:TargetResult={...change,matched:0,status:"matched"};receipt.results.push(result);
           try {
-            const target=doc?resolveDocx(doc,change,result):deck?resolvePptx(deck,change,result):resolveXlsx(book!,change,result,request.multilineWrap===true);
+            const target=tracked?resolveTrackedDocx(tracked,change,result,request.revisionMetadata!):doc?resolveDocx(doc,change,result):deck?resolvePptx(deck,change,result):resolveXlsx(book!,change,result,request.multilineWrap===true);
             if(keys.has(target.key))refuse("workflow-overlapping-targets",`Repeated target ${change.target}`);
             if(target.range&&targets.some(t=>t.range&&t.range.paragraph===target.range!.paragraph&&t.range.start<target.range!.end&&target.range!.start<t.range.end))refuse("workflow-overlapping-targets","Overlapping text ranges refuse");
             keys.add(target.key);targets.push(target);
@@ -93,7 +104,7 @@ export async function patchOffice(request:PatchRequest):Promise<PatchReceipt> {
         }
         const changed:boolean[]=[];
         for(const target of targets)changed.push(await target.apply());
-        const outputBytes=doc?await doc.save():deck?deck.package.toBytes():book!.package.toBytes();
+        const outputBytes=tracked?tracked.pkg.toBytes():doc?await doc.save():deck?deck.package.toBytes():book!.package.toBytes();
         // Reopen once for package invariants and verify each requested effect.
         const outputPackage=await OpcPackage.open(outputBytes);
         for(const target of targets)await target.verify(outputBytes);
@@ -102,6 +113,7 @@ export async function patchOffice(request:PatchRequest):Promise<PatchReceipt> {
         const calculationState=book&&targets.some(t=>t.invalidatesCalculation)&&hasFormulas(book)?"recalculation-required":"unchanged";
         if(request.mode==="dry_run") {
           receipt.status="preview";
+          receipt.previewRevisions=tracked?.ids.length??0;
           // Preview describes the change without claiming the source now needs recalculation.
           return receipt;
         }
@@ -113,12 +125,30 @@ export async function patchOffice(request:PatchRequest):Promise<PatchReceipt> {
         receipt.calculationState=calculationState;
         receipt.results.forEach((result,i)=>{result.status=changed[i]?"committed":"unchanged";});
         receipt.committedChanges=changed.filter(Boolean).length;
+        receipt.trackedRevisions=tracked?.ids.length??0;
+        receipt.revisionIds=tracked?.ids.slice()??[];
         return receipt;
       } catch(error) {return failedReceipt(receipt,error);}
     });
   } catch(error) {return failedReceipt(receipt,error);}
 }
 
+function resolveTrackedDocx(state:{pkg:OpcPackage;ids:string[]},change:PatchRequest['changes'][number],result:TargetResult,metadata:{author:string;date:string}):Target {
+  if(typeof change.value!=='string')refuse('workflow-value-unsupported','DOCX replacements require string values');
+  const part=state.pkg.mainPart(),replacement=change.value;
+  const story=inspectStories(state.pkg,{view:'current'}).stories.find(s=>s.part===part);
+  let matches=0;
+  for(const p of story?.paragraphs??[])for(let index=0;(index=p.text.indexOf(change.target,index))>=0;index++)matches++;
+  result.matched=matches;
+  if(matches!==1)refuse(matches?'workflow-target-ambiguous':'workflow-target-missing','Tracked replacement requires one exact main-story target');
+  return {key:change.target,result,apply:()=>{
+    const applied=trackedReplace(state.pkg,part,change.target,replacement,metadata);state.ids=applied.revisionIds;return state.ids.length>0;
+  },verify:async bytes=>{
+    const reopened=await OpcPackage.open(bytes),revisions=inspectRevisions(reopened);
+    const observed=revisions.revisions.filter(r=>r.part===part);
+    if(revisions.unsupported.some(r=>r.part===part)||observed.length!==state.ids.length||observed.some(r=>!state.ids.includes(r.id)||r.author!==metadata.author||r.date!==metadata.date))refuse('workflow-verification-failed','Saved tracked revisions differ from staged revision identities');
+  }};
+}
 function resolveDocx(doc:Document,change:PatchRequest["changes"][number],result:TargetResult):Target {
   if(typeof change.value!=="string")refuse("workflow-value-unsupported","DOCX replacements require string values");
   const replacement=change.value;
@@ -185,6 +215,11 @@ function hasFormulas(book:Workbook):boolean{return book.package.relationships(bo
 function partChanges(before:OpcPackage,after:OpcPackage):string[]{return [...new Set([...before.names(),...after.names()])].filter(name=>{const a=before.get(name),b=after.get(name);return !a||!b||sha(a)!==sha(b);}).sort();}
 function validateRequest(r:PatchRequest):void {
   if(!r||typeof r.source!=="string"||!r.source||!["dry_run","strict","safe"].includes(r.mode)||!Array.isArray(r.changes)||!r.changes.length)refuse("workflow-request-invalid","Source, mode and nonempty changes required");
+  if(r.trackChanges!==undefined&&typeof r.trackChanges!=='boolean')refuse('workflow-request-invalid','trackChanges must be boolean');
+  if(r.trackChanges){
+    if(r.changes.length!==1)refuse('workflow-tracked-batch-unsupported','Tracked workflow supports exactly one target');
+    if(!r.revisionMetadata||typeof r.revisionMetadata.author!=='string'||typeof r.revisionMetadata.date!=='string')refuse('workflow-request-invalid','Tracked changes require explicit author and UTC date');
+  }
   if(r.changes.length>1000)refuse("workflow-request-limit","At most 1000 targets per batch");
   if(r.calculationPolicy!==undefined&&r.calculationPolicy!=="invalidate-without-recalculation")refuse("workflow-policy-unsupported","Only cache invalidation without recalculation is available");
   for(const c of r.changes)if(!c||typeof c.target!=="string"||!c.target||!(c.value===null||typeof c.value==="string"||typeof c.value==="boolean"||typeof c.value==="number"&&Number.isFinite(c.value)))refuse("workflow-request-invalid","Invalid target/value");
@@ -195,7 +230,7 @@ async function snapshot(path:string):Promise<Snapshot>{
   catch(e){if((e as NodeJS.ErrnoException).code==="ENOENT")return {path,hash:null};throw e;}
 }
 async function checkSnapshot(before:Snapshot,code:string):Promise<void>{const now=await snapshot(before.path);if(now.hash!==before.hash||now.dev!==before.dev||now.ino!==before.ino)refuse(code,"File changed while staging the batch");}
-function failedReceipt(receipt:PatchReceipt,error:unknown):PatchReceipt{receipt.status="refused";receipt.committedChanges=0;receipt.changedParts=[];receipt.calculationState="unchanged";receipt.error={code:errorCode(error),message:errorMessage(error)};return receipt;}
+function failedReceipt(receipt:PatchReceipt,error:unknown):PatchReceipt{receipt.status="refused";receipt.committedChanges=0;receipt.changedParts=[];receipt.calculationState="unchanged";receipt.trackedRevisions=0;receipt.previewRevisions=0;receipt.revisionIds=[];receipt.error={code:errorCode(error),message:errorMessage(error)};return receipt;}
 function errorCode(error:unknown):string{return error instanceof OoxmlError?error.code:"workflow-io-or-validation-failed";}
 function errorMessage(error:unknown):string{return error instanceof Error?error.message:String(error);}
 async function withLocks<T>(paths:string[],fn:()=>Promise<T>):Promise<T>{

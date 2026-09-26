@@ -4,9 +4,11 @@
 A request is `{ source: string, output?: string, format?: 'docx'|'pptx'|'xlsx',
 mode: 'dry_run'|'strict'|'safe', changes: {target: string, value: string|number|boolean|null}[],
 multilineWrap?: boolean, calculationPolicy?: 'invalidate-without-recalculation',
+trackChanges?: boolean, revisionMetadata?: {author:string;date:string},
 expectedSourceSha256?: string, expectedDestinationSha256?: string|null }`.
 
-All modes resolve targets against one private source snapshot. The workflow
+All modes copy request values before asynchronous I/O and resolve targets against
+one private source snapshot. The workflow
 requires all targets to be unique, supported and non-overlapping. It refuses the
 entire batch otherwise, including safe mode; best-effort is not implemented.
 Dry run may stage in memory but never writes. Safe requires a distinct destination;
@@ -15,7 +17,8 @@ strict defaults to source but accepts a distinct output. Never silently fall bac
 Receipt fields: `status: 'preview'|'refused'|'committed'`, `committedChanges: number`,
 `results: {target,value,matched:number,status:'matched'|'unmatched'|'unsupported'|'unchanged'|'committed',code?:string}[]`,
 `sourceSha256`, `outputSha256?: string`, `calculationState:'unchanged'|'recalculation-required'`,
-`error?: {code:string,message:string}`, `changedParts:string[]`.
+`error?: {code:string,message:string}`, `changedParts:string[]`,
+`trackedRevisions:number`, `previewRevisions:number`, `revisionIds:string[]`.
 Preview reports zero committed operations, actual per-target matches and requested
 values. Committed counts come from changed staged operations after successful
 atomic save, never from input length. Refusal has zero and no committed results.
@@ -26,6 +29,30 @@ shape and one supported paragraph. XLSX `Sheet!A1` or `A1` on the first sheet, e
 cell only. Null clearing and formula-cell overwrites refuse. No formula assignment
 via value; strings beginning `=` are literal text. Complex DOCX topology outside
 the supported body/table subset refuses the workflow instead of hiding blind regions.
+
+## Tracked Word dispatch
+
+`trackChanges: true` supports exactly one unique plain-text main-story target and
+requires a nonblank author and valid UTC ISO date in `revisionMetadata`. It stages
+`trackedReplace`, saves native insertion/deletion nodes and verifies their IDs
+and author/date after reopening. Existing revisions, unsupported topology,
+protection and invalid/external settings refuse. Multi-target tracked batches
+refuse before mutation; untracked batches retain their existing limits.
+
+A changed replacement normally creates two revision IDs; pure deletion creates
+one. `committedChanges` counts the one edit, while `trackedRevisions` counts saved
+revision nodes. `revisionIds` contains only committed IDs. Preview returns zero
+committed revisions/IDs and reports staged count in `previewRevisions`. No-op,
+untracked and refused calls report zero revision counts. Refusal after staging
+clears provisional metadata and writes neither file. False or omitted
+`trackChanges` retains untracked editing; its revision metadata is unused.
+
+The shared tracked-workflow feature refines the existing
+`@id-docx-track-changes-option-outcome` obligation. Accept/reject text and unrelated
+payloads are asserted independently from receipt counts. General comparison,
+multiple tracked targets and broader structural revisions remain unsupported.
+
+## Format helpers
 
 Guarded helper APIs:
 * `src/xlsx/styles.ts`: `setCellWrapText(workbook: Workbook, sheetName: string, address: string, enabled: boolean): void`.

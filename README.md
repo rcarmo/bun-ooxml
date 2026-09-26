@@ -8,7 +8,9 @@ Initial authoring creates DOCX paragraphs/tables, PPTX title slides/tables and X
 entirely in Bun. Existing-file edits include guarded cross-run replacement, slide
 text/notes and cell edits with bounded formula-cache invalidation. `patchOffice()` adds
 read-only previews, all-targets-required batches, guarded saves and per-target
-receipts. Its native bindings pass the 19 shared mutation cases. Guarded OPC graph
+receipts. It can track one unique Word replacement with explicit author/date and
+report saved revision IDs separately from preview counts. Its original native
+bindings pass the 19 shared mutation cases. Guarded OPC graph
 helpers add/detach parts and relationships; package diffs identify payload and
 content-type changes. Package-level Word review APIs inspect linked stories,
 resolve supported run-level revisions and author bounded tracked replacements.

@@ -10,13 +10,6 @@ Feature: Cross-language limitations require independent full-port contracts
     And rejecting yields the original content in every selected story
     And unsupported revision forms are reported without partial mutation
 
-  @id-docx-track-changes-option-outcome
-  Scenario: A track-changes option changes the saved review representation
-    Given a document edit with explicit track-changes intent
-    When the edit is saved through the native revision API
-    Then saved Word-native revisions match that intent
-    And the option is not ignored by a workflow dispatcher
-
   @id-docx-commentsextended-content-type
   Scenario: Extended comments use an independently validated content type
     Given conflicting upstream commentsExtended content-type constants
