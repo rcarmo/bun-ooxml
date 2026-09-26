@@ -8,7 +8,9 @@ Initial authoring creates DOCX paragraphs/tables, PPTX title slides/tables and X
 entirely in Bun. Existing-file edits include guarded cross-run replacement, slide
 text/notes and cell edits with bounded formula-cache invalidation. Word paragraph
 runs support direct bold/italic overrides and existing paragraph-style selection
-without text or style-graph changes. `patchOffice()` adds
+without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)
+adds named paragraph styles with validated base chains and direct bold/italic flags.
+`patchOffice()` adds
 read-only previews, all-targets-required batches, guarded saves and per-target
 receipts. It can track one unique Word replacement with explicit author/date and
 report saved revision IDs separately from preview counts. Its original native

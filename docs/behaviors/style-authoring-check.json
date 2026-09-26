@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "scope": "Bounded named paragraph style creation; no effective inheritance or Office rendering credit",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.10.0",
+    "commit": "f479bce5f16bfc46cd396892640bb755e51bb4e9",
+    "manifestSha256": "54102d059fd33f324b9bae28b779e08a699ce78332661099ba8748e099db0599",
+    "annotatedTagObject": "21567f754a4bddef05d9a86a2b08aff7dd635c78"
+  },
+  "checks": {
+    "candidate": {
+      "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+      "runId": "fc2b72c5-e055-4c41-951d-5e58fd2e8a5e",
+      "log": "/workspace/tmp/bun-style-authoring-candidate.log",
+      "unitTests": 302,
+      "assertions": 3438,
+      "acceptanceCases": 203
+    },
+    "released": {
+      "command": "make check",
+      "mode": "default-no-overrides",
+      "runId": "a66dd319-d903-4a60-a513-423c9991be24",
+      "unitTests": 302,
+      "assertions": 3438,
+      "acceptanceCases": 203,
+      "styleCases": 24,
+      "examples": 3,
+      "log": "/workspace/tmp/bun-style-authoring-release.log"
+    }
+  },
+  "sourceSha256": {
+    "src/docx/index.ts": "a8e9fa2235d6988c018b0e9b5495209bbe0e4c0135faa3cb7855b05a27ea7dc9",
+    "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+    "src/index.ts": "48214b981d7cd475e954e52f4a8b0d5ece5b177b36e368aee4f748a45e12c49d",
+    "tests/acceptance/style-authoring.ts": "e3439546d2576bbfd267d2dc5a6be41612d25ca25a32d3712c970db614fdf3fe",
+    "tests/unit/docx-style-authoring.test.ts": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+  },
+  "caseOutcomes": [
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring -- registry=\"absent\", options=\"plain\"",
+      "status": "passed",
+      "steps": 5
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring -- registry=\"existing\", options=\"based\"",
+      "status": "passed",
+      "steps": 5
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring -- registry=\"existing\", options=\"flags\"",
+      "status": "passed",
+      "steps": 5
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring -- registry=\"empty\", options=\"flags\"",
+      "status": "passed",
+      "steps": 5
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring -- registry=\"aliased\", options=\"based\"",
+      "status": "passed",
+      "steps": 5
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring -- registry=\"default-namespace\", options=\"based\"",
+      "status": "passed",
+      "steps": 5
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring -- registry=\"collision\", options=\"plain\"",
+      "status": "passed",
+      "steps": 5
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"duplicate-id\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"character-id\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"missing-base\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"character-base\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"duplicate-base\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"cyclic-base\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"broken-base-chain\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"malformed-base\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"duplicate-relationship\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"external-styles\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"wrong-mime\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"wrong-root\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"wrong-id-namespace\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"protected\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"invalid-argument\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"stale-document\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-paragraph-style-authoring-refusal -- kind=\"styles-with-effects\"",
+      "status": "passed",
+      "steps": 3
+    }
+  ],
+  "review": {
+    "delegate": "Timed out after120s; no review credit",
+    "python": "Read-only source review over d39fa28; no confirmed runtime bug. Test title corrected to avoid deep-chain execution claim. No independent test rerun credited."
+  },
+  "siblingReferenceGates": {
+    "python": {
+      "sourceCommit": "28d9841",
+      "scopedChecks": 82,
+      "mutation": {
+        "cases": 19,
+        "steps": 159
+      },
+      "xml": {
+        "cases": 10,
+        "steps": 40
+      },
+      "package": {
+        "cases": 14,
+        "steps": 47
+      },
+      "priorAssetsUnchanged": 141,
+      "log": "/workspace/tmp/python-v010-candidate.log",
+      "styleExecutionCredit": false
+    },
+    "go": {
+      "sourceCommit": "7bc680ac3d66a3443144254e4eb4ce39bba6edd4",
+      "batch": 118,
+      "acceptanceCases": 291,
+      "priorAssetsUnchanged": 141,
+      "styleExecutionCredit": false
+    }
+  },
+  "limits": [
+    "No style replacement/deletion or default/linked/next/character/table/numbering style authoring",
+    "No computed inheritance, theme reconciliation or stylesWithEffects synchronisation",
+    "No independent Office/schema validation or full semantic parity"
+  ]
+}

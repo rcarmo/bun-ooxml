@@ -120,6 +120,11 @@
       "path": "references/fixtures-ooxml/workflows/docx/paragraph-style.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/style-authoring.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

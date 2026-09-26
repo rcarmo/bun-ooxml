@@ -11,6 +11,7 @@ import { bindings as redlineBindings } from "./redline-docx.ts";
 import { bindings as commentBindings } from "./comments-docx.ts";
 import { bindings as formattingBindings } from './run-formatting.ts';
 import { bindings as paragraphStyleBindings } from './paragraph-style.ts';
+import { bindings as styleAuthoringBindings } from './style-authoring.ts';
 import { bindings as trackedWorkflowBindings, cleanupTrackedWorkflowFixtures } from './tracked-workflow.ts';
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as createPptxBindings } from "./create-pptx.ts";
@@ -36,6 +37,7 @@ export const bindings: StepBinding[] = [
   ...commentBindings,
   ...formattingBindings,
   ...paragraphStyleBindings,
+  ...styleAuthoringBindings,
   ...trackedWorkflowBindings,
   ...createDocxBindings,
   ...createPptxBindings,

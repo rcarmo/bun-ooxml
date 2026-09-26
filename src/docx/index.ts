@@ -1,6 +1,8 @@
 import { OoxmlError } from "../errors.ts";
 import {formatRunProperties} from './run-formatting.ts';
 import {directParagraphStyle,replaceParagraphStyle} from './paragraph-style.ts';
+import {authorParagraphStyle,normalizeStyleOptions,type AddParagraphStyleOptions,type ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
+export type {AddParagraphStyleOptions,ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
 import { OpcPackage, getContentType } from "../opc/index.ts";
 import { applyEdits, attribute, elements, escapeAttribute, escapeText, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
@@ -401,6 +403,15 @@ export class Document {
   /** Creates a new minimal DOCX package without borrowed template bytes. */
   static create(): Document {
     return new Document(OpcPackage.fromParts(buildMinimalDocxParts()));
+  }
+
+  /** Author a named paragraph style without computing inherited formatting. */
+  addParagraphStyle(styleId: string, options: AddParagraphStyleOptions): ParagraphStyleDefinitionReceipt {
+    const normalized=normalizeStyleOptions(styleId,options);
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document XML changed outside this document handle');
+    this.assertFormattingUnprotected();
+    // Style definitions do not alter paragraph offsets; existing handles remain usable.
+    return authorParagraphStyle(this.opcPackage,DOCUMENT_PART,styleId,normalized);
   }
 
   /** Current paragraph snapshot handles in document order. */

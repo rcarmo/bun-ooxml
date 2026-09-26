@@ -163,6 +163,16 @@ after changes. Unsupported content, property revisions, ambiguous run properties
 protection and stale handles refuse without mutation. See the
 [formatting contract](../contracts/run-formatting.md) for custody and scope.
 
+## Author paragraph styles
+
+`doc.addParagraphStyle("Custom", {name: "Custom", basedOn: "Heading1", bold: true})`
+creates a named paragraph style; omit `basedOn` when no base is needed. It creates
+an OPC-linked registry if absent, preserves existing definitions and document
+text, and refuses duplicate IDs, invalid base chains, protection and dual
+stylesWithEffects registries. Existing handles survive definition creation.
+Select the new style with `setStyle()` or `addParagraph(..., {style: "Custom"})`.
+See [style authoring](../contracts/style-authoring.md) for scope and refusals.
+
 ## Existing paragraph styles
 
 ```ts
