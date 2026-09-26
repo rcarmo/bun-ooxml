@@ -5,26 +5,26 @@ Shared reference manifest: **125 assets**. Implementation evidence remains consu
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|
 | features/docx/create.feature | implemented | 4 | 8 | 47 |
-| features/docx/redline.feature | implemented | 2 | 6 | 20 |
-| features/docx/revisions.feature | implemented | 4 | 4 | 32 |
-| features/docx/story.feature | implemented | 3 | 3 | 21 |
 | features/docx/tables.feature | implemented | 4 | 7 | 45 |
 | features/docx/text.feature | implemented | 5 | 7 | 33 |
-| features/opc/graph.feature | implemented | 4 | 4 | 16 |
 | features/opc/package.feature | implemented | 3 | 3 | 11 |
 | features/opc/relationship-namespaces.feature | implemented | 2 | 4 | 16 |
 | features/opc/zip.feature | implemented | 4 | 4 | 25 |
-| features/opc/zip64.feature | implemented | 4 | 4 | 13 |
 | features/planned/cross-language-followups.feature | planned | 4 | 4 | 17 |
 | features/planned/full-port.feature | planned | 5 | 7 | 28 |
 | features/planned/office-mutation-additions.feature | planned | 3 | 3 | 12 |
 | features/pptx/create.feature | implemented | 3 | 3 | 9 |
 | features/pptx/tables.feature | implemented | 4 | 5 | 15 |
-| features/pptx/text.feature | implemented | 4 | 4 | 12 |
-| features/xlsx/cache-boundaries.feature | implemented | 2 | 3 | 12 |
-| features/xlsx/cells.feature | implemented | 8 | 8 | 30 |
 | features/xlsx/create.feature | implemented | 7 | 7 | 29 |
 | references/fixtures-ooxml/workflows/mutation-safety.feature | implemented | 8 | 19 | 159 |
+| references/fixtures-ooxml/workflows/native/docx-redline.feature | implemented | 2 | 6 | 20 |
+| references/fixtures-ooxml/workflows/native/docx-revisions.feature | implemented | 4 | 4 | 32 |
+| references/fixtures-ooxml/workflows/native/docx-story.feature | implemented | 3 | 3 | 21 |
+| references/fixtures-ooxml/workflows/native/opc-graph.feature | implemented | 4 | 4 | 16 |
+| references/fixtures-ooxml/workflows/native/opc-zip64.feature | implemented | 4 | 4 | 13 |
+| references/fixtures-ooxml/workflows/native/pptx-text.feature | implemented | 4 | 4 | 12 |
+| references/fixtures-ooxml/workflows/native/xlsx-cache-boundaries.feature | implemented | 2 | 3 | 12 |
+| references/fixtures-ooxml/workflows/native/xlsx-cells.feature | implemented | 8 | 8 | 30 |
 | references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 19 |
 | references/fixtures-ooxml/workflows/xml/parsing.feature | implemented | 5 | 5 | 22 |
 

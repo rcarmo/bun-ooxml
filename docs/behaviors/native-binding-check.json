@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "scope": "Remove identical local feature copies and execute existing canonical native profiles; no runtime changes",
+  "sourceCommit": "70cf558a8de15ae826c96efb2d12457f2efe073b",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.4.0",
+    "commit": "40eb26e684b12073956e4f24915444075a60c212",
+    "manifestSha256": "40197c33917e4516a1eed7e1d0552ae6485da6b6097d7abbd80d3982bb95924c"
+  },
+  "equivalence": "Exact feature bytes except lifecycle tags; same scenario IDs, example identities, step text and arguments",
+  "run": {
+    "command": "make check",
+    "mode": "default-no-overrides",
+    "runId": "3fea4296-daa9-411c-8dc0-223e85bd5f53",
+    "startedAt": "2026-09-26T14:57:57.592Z",
+    "finishedAt": "2026-09-26T14:57:58.922Z",
+    "unitTests": 227,
+    "acceptanceCases": 114,
+    "sharedNativeCases": 36,
+    "sharedNativeSteps": 156,
+    "examples": 3
+  },
+  "features": [
+    {
+      "path": "references/fixtures-ooxml/workflows/native/docx-redline.feature",
+      "compiledSourceSha256": "b49d1c3907b1874fc5dca298803491e1596be35f6094f564586b757acd58886a",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-docx-tracked-replace-roundtrip",
+          "caseId": "@id-docx-tracked-replace-roundtrip",
+          "result": "passed",
+          "steps": 5
+        },
+        {
+          "scenarioId": "@id-docx-tracked-replace-refusal",
+          "caseId": "@id-docx-tracked-replace-refusal -- case=\"ambiguous\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-docx-tracked-replace-refusal",
+          "caseId": "@id-docx-tracked-replace-refusal -- case=\"drawing\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-docx-tracked-replace-refusal",
+          "caseId": "@id-docx-tracked-replace-refusal -- case=\"existing\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-docx-tracked-replace-refusal",
+          "caseId": "@id-docx-tracked-replace-refusal -- case=\"protected\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-docx-tracked-replace-refusal",
+          "caseId": "@id-docx-tracked-replace-refusal -- case=\"bad-date\"",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/docx-revisions.feature",
+      "compiledSourceSha256": "f7bc66c39a845746513f1864f4074c5c6c7c34fc17ab0f3f55558dd21c21f168",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-docx-revisions-all-stories",
+          "caseId": "@id-docx-revisions-all-stories",
+          "result": "passed",
+          "steps": 8
+        },
+        {
+          "scenarioId": "@id-docx-revisions-rollback",
+          "caseId": "@id-docx-revisions-rollback",
+          "result": "passed",
+          "steps": 12
+        },
+        {
+          "scenarioId": "@id-docx-revisions-empty-deletion",
+          "caseId": "@id-docx-revisions-empty-deletion",
+          "result": "passed",
+          "steps": 5
+        },
+        {
+          "scenarioId": "@id-docx-revisions-protected",
+          "caseId": "@id-docx-revisions-protected",
+          "result": "passed",
+          "steps": 7
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/docx-story.feature",
+      "compiledSourceSha256": "c3ef641b76f59c6a5a426ad3902e3d04d1fc236052680a83e662ed95d2b299ac",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-docx-story-parts",
+          "caseId": "@id-docx-story-parts",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-docx-story-views",
+          "caseId": "@id-docx-story-views",
+          "result": "passed",
+          "steps": 13
+        },
+        {
+          "scenarioId": "@id-docx-story-blind",
+          "caseId": "@id-docx-story-blind",
+          "result": "passed",
+          "steps": 5
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/opc-graph.feature",
+      "compiledSourceSha256": "b9e49877c869bf2cd9081ed774bfaa82839649a83ed239b86731ac0b81c139fa",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-opc-add-related-part",
+          "caseId": "@id-opc-add-related-part",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-opc-graph-rollback",
+          "caseId": "@id-opc-graph-rollback",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-opc-remove-related-part",
+          "caseId": "@id-opc-remove-related-part",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-opc-diff-content-type",
+          "caseId": "@id-opc-diff-content-type",
+          "result": "passed",
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/opc-zip64.feature",
+      "compiledSourceSha256": "0dd524db46e21475779ff947f49af8310bc5d9808eb5a18afb8682f65036d16c",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-parity-zip64",
+          "caseId": "@id-parity-zip64",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-zip64-preflight-count",
+          "caseId": "@id-zip64-preflight-count",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-zip64-unsafe-offset",
+          "caseId": "@id-zip64-unsafe-offset",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-zip64-resource-limit",
+          "caseId": "@id-zip64-resource-limit",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/pptx-text.feature",
+      "compiledSourceSha256": "f11b26034e84dcff76a0ae2490e32f3951b7a69741ea62d6bedf3a43f7d817eb",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-pptx-order-notes-read",
+          "caseId": "@id-pptx-order-notes-read",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-pptx-readable-unsupported-topology",
+          "caseId": "@id-pptx-readable-unsupported-topology",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-pptx-cross-run-replace",
+          "caseId": "@id-pptx-cross-run-replace",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-pptx-stale-anchor-refusal",
+          "caseId": "@id-pptx-stale-anchor-refusal",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/xlsx-cache-boundaries.feature",
+      "compiledSourceSha256": "f75d8ee7afcb9faf5e75bb96317ec0a3a55ddd807d97bb57f5d769dfed0db7b3",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-xlsx-array-input-refusal",
+          "caseId": "@id-xlsx-array-input-refusal -- topology=\"array\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xlsx-array-input-refusal",
+          "caseId": "@id-xlsx-array-input-refusal -- topology=\"dataTable\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xlsx-cache-scope-opaque-parts",
+          "caseId": "@id-xlsx-cache-scope-opaque-parts",
+          "result": "passed",
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/xlsx-cells.feature",
+      "compiledSourceSha256": "44b45ab988239b826ef89dce79119de862698391cd9a3db40cfff8f692163186",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-xlsx-read-rel-linked-shared-strings",
+          "caseId": "@id-xlsx-read-rel-linked-shared-strings",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xlsx-preserve-styled-cell-edit",
+          "caseId": "@id-xlsx-preserve-styled-cell-edit",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xlsx-clear-cross-sheet-caches",
+          "caseId": "@id-xlsx-clear-cross-sheet-caches",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xlsx-prefixed-namespace-safe-edits",
+          "caseId": "@id-xlsx-prefixed-namespace-safe-edits",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-xlsx-phonetic-guides-excluded",
+          "caseId": "@id-xlsx-phonetic-guides-excluded",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-xlsx-styled-blank-cell-editable",
+          "caseId": "@id-xlsx-styled-blank-cell-editable",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xlsx-refuse-shared-formula-overwrite",
+          "caseId": "@id-xlsx-refuse-shared-formula-overwrite",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xlsx-refuse-array-formula-overwrite",
+          "caseId": "@id-xlsx-refuse-array-formula-overwrite",
+          "result": "passed",
+          "steps": 4
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Bun execution only; no Go/Python credit",
+    "Existing feature content and reference tag unchanged",
+    "Native declaration catalogue semantic review remains separate/incomplete"
+  ]
+}

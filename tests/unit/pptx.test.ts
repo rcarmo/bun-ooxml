@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { runAcceptance } from "../../scripts/acceptance.ts";
 import { readZip } from "../../src/opc/zip.ts";
 import { Presentation } from "../../src/pptx/index.ts";
-import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
+import { fixturePath, fixturesRoot, F } from "../../scripts/fixture-inputs.ts";
 import {
   bindings,
   runCrossRunReplacementScenario,
@@ -25,9 +25,7 @@ afterEach(async () => {
 describe("pptx slice", () => {
   test("acceptance feature passes with the dedicated PPTX bindings", async () => {
     const root = await makeProject({
-      "features/pptx/text.feature": await Bun.file(
-        join(import.meta.dir, "../../features/pptx/text.feature"),
-      ).text(),
+      "features/pptx/text.feature": (await Bun.file(join(fixturesRoot(), "workflows/native/pptx-text.feature")).text()).replace(/^@planned/m, "@implemented @bun"),
     });
 
     const report = await runAcceptance(bindings, { root });

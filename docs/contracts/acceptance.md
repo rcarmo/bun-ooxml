@@ -22,6 +22,12 @@ The shared catalogue defines common expected behaviour. Native bindings and
 per-consumer execution reports are local. Candidate mappings in `docs/behaviors/`
 are not part of the execution inventory until reviewed, reconciled and bound.
 
+The shared selections include mutation safety, XML parsing/QName checks and eight
+native profiles (OPC graph/ZIP64, Word stories/revisions/redlines, slide text,
+spreadsheet cells and cache boundaries). Their local feature copies are removed.
+Bindings and unit assertions are unchanged; isolated runner tests may materialise
+the canonical text with a lifecycle overlay in a temporary directory.
+
 Feature tags are strict:
 
 - implemented features must be tagged exactly `@implemented @bun`

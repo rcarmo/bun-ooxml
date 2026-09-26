@@ -15,6 +15,46 @@
       "path": "references/fixtures-ooxml/workflows/xml/names.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/docx-story.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/docx-revisions.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/docx-redline.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/opc-graph.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/opc-zip64.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/pptx-text.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/xlsx-cells.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/native/xlsx-cache-boundaries.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

@@ -43,8 +43,12 @@ XML parsing and QName acceptance read `workflows/xml/parsing.feature` and
 `workflows/xml/names.feature` directly. The old local XML features are removed;
 scenario IDs and all 11 expanded cases are unchanged. Python comparison has a
 separate `workflows/xml/comparison.feature` profile, without a Bun binding.
-Reviewed native-test snapshots in `ledgers/consumers/` record overlaps and gaps;
-only the Bun acceptance report records executed Bun cases.
+Eight `workflows/native/` profiles also execute directly from this same pin,
+covering OPC graph/ZIP64, Word stories/revisions/redlines, slide text and
+spreadsheet cells/cache boundaries. Removing their identical local copies changes
+no IDs or expanded cases. `docs/behaviors/native-binding-check.json` records the
+36-case transition check. Shared native-test mappings in `ledgers/consumers/`
+record overlaps and gaps; Bun acceptance reports record executed Bun cases.
 
 ## Candidate checks
 

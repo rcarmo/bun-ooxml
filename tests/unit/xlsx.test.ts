@@ -9,7 +9,7 @@ import { OoxmlError } from "../../src/errors.ts";
 import { readZip } from "../../src/opc/zip.ts";
 import { elements, parseXml, type XmlElement } from "../../src/xml/index.ts";
 import { Workbook } from "../../src/xlsx/index.ts";
-import { fixturePath, F } from "../../scripts/fixture-inputs.ts";
+import { fixturePath, fixturesRoot, F } from "../../scripts/fixture-inputs.ts";
 import {
   bindings,
   createCrossSheetCachedFormulaWorkbook,
@@ -252,7 +252,7 @@ describe("Worksheet.setCellValue", () => {
 describe("xlsx acceptance feature", () => {
   test("executes the implemented xlsx scenarios with exported bindings", async () => {
     const root = await tempRoot();
-    const featureText = await Bun.file(join(import.meta.dir, "../../features/xlsx/cells.feature")).text();
+    const featureText = (await Bun.file(join(fixturesRoot(), "workflows/native/xlsx-cells.feature")).text()).replace(/^@planned/m, "@implemented @bun");
     await mkdir(join(root, "features", "xlsx"), { recursive: true });
     await Bun.write(join(root, "features/xlsx/cells.feature"), featureText);
 

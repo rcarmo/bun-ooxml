@@ -1,3 +1,4 @@
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import { afterEach, describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import {textboxDocument} from '../fixtures/native-edge-cases.ts';
@@ -187,7 +188,7 @@ function storyText(
 async function makeAcceptanceRoot(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "bun-ooxml-docx-story-acceptance-"));
   tempRoots.push(root);
-  const featureText = await Bun.file(join(PROJECT_ROOT, "features/docx/story.feature")).text();
+  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/native/docx-story.feature")).text()).replace(/^@planned/m, '@implemented @bun');
   const path = join(root, "features", "docx", "story.feature");
   await mkdir(dirname(path), { recursive: true });
   await Bun.write(path, featureText);

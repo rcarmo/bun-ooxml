@@ -500,14 +500,16 @@
       ],
       "then": [
         "Verification returns {scenarios:8,cases:19,fixtures:4,files:2}.",
-        "Canonical features remain planned; the local implementation overlay executes no mutation during inventory verification."
+        "Canonical features remain planned; the local implementation overlay executes no mutation during inventory verification.",
+        "Each of the eight canonical native features is selected exactly once as implemented, with no duplicated scenario ID in the combined inventory."
       ],
       "examples": [
         "The four pinned fixtures are present-placeholder.docx, title-and-subtitle.pptx, default-style.xlsx, and cross-sheet-cache.xlsx.",
         "The shared scenarios include dry-run custody, strict-batch atomicity, PPTX accumulation, XLSX style closure, and cross-sheet cache invalidation."
       ],
       "limitations": [
-        "This declaration is an inventory/provenance verifier by design; it does not run patchOffice or claim workflow success."
+        "This declaration is an inventory/provenance verifier by design; it does not run patchOffice or claim workflow success.",
+        "This selection check does not execute the native feature bindings; the full acceptance run records those separately."
       ]
     },
     {

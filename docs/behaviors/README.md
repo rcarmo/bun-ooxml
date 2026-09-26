@@ -17,7 +17,7 @@ The shared parsing/QName features now replace their former local copies.
 
 `native-test-inventory.json` records declaration identity, suite/title, source
 location/hash, assertion expressions and loops. It counts declarations, not
-runtime-expanded leaves. Twenty-four declarations contain parameters or loops
+runtime-expanded leaves. Twenty-five declarations contain parameters or loops
 that need explicit expansion review. Assertions hidden in helper calls also need
 manual inspection; an empty extracted assertion list does not mean no assertion
 ran.

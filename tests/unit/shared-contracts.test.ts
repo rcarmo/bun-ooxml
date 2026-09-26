@@ -3,12 +3,23 @@ import {join} from "node:path";
 import {cp,mkdir,mkdtemp,rm} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {parseBatchTable,stableCaseKey,verifySharedContracts} from "../../scripts/shared-contracts.ts";
-import {parseFeature} from "../../scripts/gherkin.ts";
+import {inventoryFeatures,parseFeature} from "../../scripts/gherkin.ts";
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 const root=join(import.meta.dir,"../..");
 describe("shared mutation inventory and custody",()=>{
   test("checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",async()=>{
     expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});
+    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();
+    const canonical=ledger.features.filter((path:string)=>path.startsWith('workflows/native/'));
+    expect(canonical).toHaveLength(8);
+    const inventory=await inventoryFeatures(root);
+    for(const path of canonical){
+      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);
+      expect(shared).toHaveLength(1);
+      expect(shared[0]!.lifecycle).toBe('implemented');
+      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);
+      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);
+    }
   });
   test("stable identity excludes path, UUID and example insertion order",()=>{
     expect(stableCaseKey("@id-example",{z:"2",a:"1"})).toBe('@id-example:{"a":"1","z":"2"}');
