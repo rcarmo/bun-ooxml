@@ -1,155 +1,320 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "features": [
     {
       "path": "references/fixtures-ooxml/workflows/mutation-safety.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-dry-run-no-mutation",
+        "@id-docx-dry-run-no-mutation",
+        "@id-xlsx-dry-run-no-mutation",
+        "@id-xlsx-strict-batch-atomicity",
+        "@id-docx-strict-batch-per-target-results",
+        "@id-pptx-batch-output-accumulates",
+        "@id-xlsx-style-dependency-closure",
+        "@id-xlsx-cross-sheet-cache-invalidation"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/xml/parsing.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xml-parse-offsets",
+        "@id-xml-normalise-line-endings",
+        "@id-xml-parse-refusals",
+        "@id-xml-parse-bounds",
+        "@id-xml-apply-edits"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/xml/names.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xml-invalid-qname-components",
+        "@id-xml-unicode-qname-components",
+        "@id-xml-outside-root-nbsp"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/docx-story.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-story-parts",
+        "@id-docx-story-views",
+        "@id-docx-story-blind"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/docx-revisions.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-revisions-all-stories",
+        "@id-docx-revisions-rollback",
+        "@id-docx-revisions-empty-deletion",
+        "@id-docx-revisions-protected"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/docx-redline.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-tracked-replace-roundtrip",
+        "@id-docx-tracked-replace-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/opc-graph.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-opc-add-related-part",
+        "@id-opc-graph-rollback",
+        "@id-opc-remove-related-part",
+        "@id-opc-diff-content-type"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/opc-zip64.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-parity-zip64",
+        "@id-zip64-preflight-count",
+        "@id-zip64-unsafe-offset",
+        "@id-zip64-resource-limit"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/pptx-text.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-order-notes-read",
+        "@id-pptx-readable-unsupported-topology",
+        "@id-pptx-cross-run-replace",
+        "@id-pptx-stale-anchor-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/xlsx-cells.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-read-rel-linked-shared-strings",
+        "@id-xlsx-preserve-styled-cell-edit",
+        "@id-xlsx-clear-cross-sheet-caches",
+        "@id-xlsx-prefixed-namespace-safe-edits",
+        "@id-xlsx-phonetic-guides-excluded",
+        "@id-xlsx-styled-blank-cell-editable",
+        "@id-xlsx-refuse-shared-formula-overwrite",
+        "@id-xlsx-refuse-array-formula-overwrite"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/native/xlsx-cache-boundaries.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-array-input-refusal",
+        "@id-xlsx-cache-scope-opaque-parts"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/comments.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-comments-inspection",
+        "@id-docx-comments-resolution",
+        "@id-docx-comments-noop",
+        "@id-docx-comments-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/text.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-format-preserve",
+        "@id-docx-xml-space",
+        "@id-docx-table-paragraph",
+        "@id-docx-stale-span",
+        "@id-docx-refuse-topology"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/creation.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-create-minimal-package",
+        "@id-docx-create-style-validation",
+        "@id-docx-create-stale-opaque",
+        "@id-docx-create-atomic-refusals"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/tables.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-table-create-roundtrip",
+        "@id-docx-table-opaque-preserve",
+        "@id-docx-table-stale-cell",
+        "@id-docx-table-atomic-refusals"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/pptx/creation.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-create-new-minimal",
+        "@id-pptx-create-anchor-preservation",
+        "@id-pptx-create-refusals"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/pptx/tables.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-table-roundtrip-geometry",
+        "@id-pptx-table-formatting",
+        "@id-pptx-table-stale-handle",
+        "@id-pptx-table-atomic-refusals"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/xlsx/creation.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-create-native-default",
+        "@id-xlsx-create-add-worksheet",
+        "@id-xlsx-create-prefixed-missing-cell",
+        "@id-xlsx-create-coordinate-boundary",
+        "@id-xlsx-create-row-ordering",
+        "@id-xlsx-create-invalid-params-atomic",
+        "@id-xlsx-create-existing-fixture-append"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/package/preservation.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-opc-package-corpus-noop",
+        "@id-opc-package-transaction-rollback",
+        "@id-opc-package-preserve-unrelated"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/package/zip32.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-zip-read-valid",
+        "@id-zip-refuse-unsafe",
+        "@id-zip-bounds",
+        "@id-zip-write-deterministic"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/package/relationship-namespaces.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-office-relationship-prefix-alias",
+        "@id-office-relationship-wrong-uri"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/tracked-workflow.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-track-changes-option-outcome",
+        "@id-docx-workflow-tracked-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/run-formatting.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-direct-run-formatting",
+        "@id-docx-direct-formatting-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/paragraph-style.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection",
+        "@id-docx-paragraph-style-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/style-authoring.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-authoring",
+        "@id-docx-paragraph-style-authoring-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/pptx/text-box.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/xlsx/cell-style.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection",
+        "@id-xlsx-cell-style-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/page-layout.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-final-section-layout",
+        "@id-docx-final-section-layout-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/pptx/slide-order.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation",
+        "@id-pptx-slide-permutation-refusal"
+      ]
     },
     {
       "path": "references/fixtures-ooxml/workflows/docx/effective-formatting.feature",
       "lifecycle": "implemented",
-      "runner": "bun"
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-effective-run-formatting",
+        "@id-docx-effective-run-formatting-refusal"
+      ]
     }
   ]
 }

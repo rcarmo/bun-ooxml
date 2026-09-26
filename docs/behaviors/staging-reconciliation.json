@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 409,
+  "nativeDeclarations": 413,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 182,
+  "withoutStagingCount": 186,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -1009,7 +1009,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentSourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1018,7 +1018,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentSourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1027,7 +1027,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentSourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1036,7 +1036,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentSourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1045,7 +1045,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentSourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1054,7 +1054,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentSourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1063,7 +1063,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "currentSourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1072,7 +1072,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "currentSourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1083,7 +1083,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "currentSourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -2189,97 +2189,97 @@
     {
       "id": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:missing done flag uses an attribute prefix under a default element namespace",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:serialization failure rolls back the done flag while retaining earlier edits",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:inspection results are detached and cannot bypass package custody",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:comment paragraph newlines and tabs are read without rewriting bodies",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:non-self-closing entries retain boundary whitespace exactly",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:multiple comments settings and external settings refuse before mutation",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:incomplete extended metadata remains inspectable but absent targets cannot be resolved",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:public entrypoints save and reopen the resolved flag without changing comment bodies",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused",
       "path": "tests/unit/docx-comments.test.ts",
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
     },
     {
       "id": "bun:tests/unit/docx-effective-formatting.test.ts:effective run formatting executes 25 saved outcomes and read-only refusals",
@@ -2899,7 +2899,27 @@
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
       "path": "tests/unit/references.test.ts",
-      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e"
+      "sourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9"
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
+      "path": "tests/unit/shared-selection.test.ts",
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:selection rejects implicit whole-file implementation, unknown IDs, duplicates and empty selections",
+      "path": "tests/unit/shared-selection.test.ts",
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:full acceptance rejects planned scenarios inside an otherwise implemented feature",
+      "path": "tests/unit/shared-selection.test.ts",
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:unbound outline rows may share display names without hiding their distinct identities",
+      "path": "tests/unit/shared-selection.test.ts",
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c"
     },
     {
       "id": "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",

@@ -84,6 +84,8 @@ export type AcceptanceCase = {
 };
 
 export type AcceptanceScenario = {
+  /** Runtime-specific status when a shared feature contains unbound scenarios. */
+  lifecycle?: AcceptanceLifecycle;
   scenarioId: string;
   name: string;
   location: SourceLocation;
@@ -96,6 +98,7 @@ export type AcceptanceFeature = {
   name: string;
   lifecycle: AcceptanceLifecycle;
   runner?: "bun";
+  /** Canonical source tags. Runtime activation is represented by lifecycle/runner. */
   tags: string[];
   sourceSha256: string;
   scenarios: AcceptanceScenario[];
@@ -206,7 +209,7 @@ export function newAcceptanceRunId(): string {
   return randomUUID();
 }
 
-export function parseFeature(path: string, text: string): AcceptanceFeature {
+export function parseFeature(path: string, text: string, options: { allowDuplicateCaseNames?: boolean } = {}): AcceptanceFeature {
   const ids = IdGenerator.incrementing();
   const document = new Parser(
     new AstBuilder(ids),
@@ -273,7 +276,7 @@ export function parseFeature(path: string, text: string): AcceptanceFeature {
       if (!parsedCase.name.trim()) {
         throw new Error(`Case name must not be empty: ${path}:${parsedCase.location.line}`);
       }
-      if (caseNames.has(parsedCase.name)) {
+      if (!options.allowDuplicateCaseNames && caseNames.has(parsedCase.name)) {
         throw new Error(
           `Duplicate expanded case name for ${scenarioId} in ${path}: ${JSON.stringify(parsedCase.name)}`,
         );
@@ -313,6 +316,18 @@ export function parseFeature(path: string, text: string): AcceptanceFeature {
   } satisfies AcceptanceFeature;
 }
 
+export function selectSharedScenarios(path: string, text: string, scenarioIds: unknown): AcceptanceFeature {
+  const feature = parseFeature(path, text, {allowDuplicateCaseNames: true});
+  if (feature.lifecycle !== 'planned') throw new Error('Shared feature must remain planned: ' + path);
+  if (!Array.isArray(scenarioIds) || !scenarioIds.length) throw new Error('Invalid shared scenario selection: empty or missing IDs');
+  if (new Set(scenarioIds).size !== scenarioIds.length) throw new Error('Duplicate shared scenario selection');
+  const known = new Set(feature.scenarios.map(s => s.scenarioId));
+  for (const id of scenarioIds) if (typeof id !== 'string' || !known.has(id)) throw new Error('Unknown shared scenario: ' + String(id));
+  const selected = new Set(scenarioIds);
+  for (const scenario of feature.scenarios) if (selected.has(scenario.scenarioId) && new Set(scenario.cases.map(c=>c.name)).size !== scenario.cases.length) throw new Error('Duplicate implemented case name: '+scenario.scenarioId);
+  return {...feature, lifecycle: 'implemented', runner: 'bun', scenarios: feature.scenarios.map(s => ({...s, lifecycle: selected.has(s.scenarioId) ? 'implemented' : 'planned'}))};
+}
+
 export async function inventoryFeatures(root: string): Promise<AcceptanceInventory> {
   const features: AcceptanceFeature[] = [];
   for await (const path of new Bun.Glob(FEATURE_GLOB).scan({ cwd: root })) {
@@ -322,12 +337,13 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
   const sharedConfig = Bun.file(join(root, 'features/shared.json'));
   if (await sharedConfig.exists()) {
     const shared = await sharedConfig.json();
+    if (shared.schemaVersion !== 2 || !Array.isArray(shared.features)) throw new Error('Invalid shared feature mapping schema');
     for (const entry of shared.features) {
       if (typeof entry.path !== 'string' || !entry.path.startsWith('references/fixtures-ooxml/') || entry.path.split('/').includes('..') || entry.lifecycle !== 'implemented' || entry.runner !== 'bun') throw new Error('Invalid shared feature mapping');
       const input = process.env.OOXML_FIXTURES_ROOT && root === resolve(import.meta.dir, '..')
         ? join(process.env.OOXML_FIXTURES_ROOT, entry.path.slice('references/fixtures-ooxml/'.length)) : join(root, entry.path);
       const text = await Bun.file(input).text();
-      features.push(parseFeature(entry.path, text.replace(/^@planned/m, '@implemented @bun')));
+      features.push(selectSharedScenarios(entry.path, text, entry.scenarioIds));
     }
   }
   features.sort((left, right) => left.path.localeCompare(right.path));
@@ -365,6 +381,11 @@ export async function executeAcceptance(
 
     const scenarioReports: AcceptanceScenarioReport[] = [];
     for (const scenario of feature.scenarios) {
+      const lifecycle = scenario.lifecycle ?? feature.lifecycle;
+      if (lifecycle === 'planned') {
+        scenarioReports.push(planFeature({...feature, lifecycle: 'planned', scenarios: [scenario]}).scenarios[0]!);
+        continue;
+      }
       const caseReports: AcceptanceCaseReport[] = [];
       for (const acceptanceCase of scenario.cases) {
         const state: Record<string, unknown> = {};
@@ -382,12 +403,14 @@ export async function executeAcceptance(
           },
           scenario: {
             id: scenario.scenarioId,
+            lifecycle,
             name: scenario.name,
             tags: [...scenario.tags],
             location: scenario.location,
           },
           case: {
             id: acceptanceCase.caseId,
+            lifecycle,
             name: acceptanceCase.name,
             location: acceptanceCase.location,
             tags: [...acceptanceCase.tags],
@@ -484,7 +507,7 @@ export async function executeAcceptance(
         }
         caseReports.push({
           ...acceptanceCase,
-          lifecycle: feature.lifecycle,
+          lifecycle,
           result,
           steps,
           error: caseError,
@@ -496,7 +519,7 @@ export async function executeAcceptance(
         name: scenario.name,
         location: scenario.location,
         tags: [...scenario.tags],
-        lifecycle: feature.lifecycle,
+        lifecycle,
         result: caseReports.every((acceptanceCase) => acceptanceCase.result === "passed")
           ? "passed"
           : "failed",
@@ -511,9 +534,8 @@ export async function executeAcceptance(
       runner: feature.runner,
       tags: [...feature.tags],
       sourceSha256: feature.sourceSha256,
-      result: scenarioReports.every((scenario) => scenario.result === "passed")
-        ? "passed"
-        : "failed",
+      // Feature result summarises attempted scenarios; planned cases stay explicit below.
+      result: scenarioReports.some(scenario => scenario.result === 'failed') ? 'failed' : 'passed',
       scenarios: scenarioReports,
     });
   }
@@ -821,10 +843,11 @@ function countInventory(features: readonly AcceptanceFeature[]) {
   for (const feature of features) {
     bumpInventoryCount(counts.features, feature.lifecycle, 1);
     for (const scenario of feature.scenarios) {
-      bumpInventoryCount(counts.scenarios, feature.lifecycle, 1);
+      const lifecycle = scenario.lifecycle ?? feature.lifecycle;
+      bumpInventoryCount(counts.scenarios, lifecycle, 1);
       for (const acceptanceCase of scenario.cases) {
-        bumpInventoryCount(counts.cases, feature.lifecycle, 1);
-        bumpInventoryCount(counts.steps, feature.lifecycle, acceptanceCase.steps.length);
+        bumpInventoryCount(counts.cases, lifecycle, 1);
+        bumpInventoryCount(counts.steps, lifecycle, acceptanceCase.steps.length);
       }
     }
   }

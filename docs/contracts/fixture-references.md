@@ -48,6 +48,23 @@ The package-admission and semantic-diff profiles under `workflows/package/`, and
 `workflows/xml/comparison.feature`, have no Bun bindings. Their presence in the
 specification does not mean the Bun APIs implement them.
 
+## Shared scenario selection
+
+`features/shared.json` uses schema 2. Each entry lists the exact canonical
+`scenarioIds` implemented by Bun. Shared files remain `@planned`; selection
+changes runtime status without rewriting their source text or hash. Scenarios
+outside the selection remain visible as planned and their steps are not run.
+
+A shared operation family may include another editor policy or an unimplemented
+outcome. Adding that scenario does not expand Bun's implemented set. Duplicate,
+unknown or empty selections fail, and full acceptance rejects any planned case,
+including cases in a partly implemented feature. Full mode runs selected cases
+and then checks for planned gaps; it is not a side-effect-free preflight.
+
+Source tags stay unchanged for provenance. Bindings and reports use explicit
+scenario/case `lifecycle` fields for runtime status. A feature's result summarises
+its attempted scenarios; case counts and the CLI retain every planned gap.
+
 ## Alternate reference checkout
 
 Checks normally use the gitlink and `references/fixtures-ooxml.pin.json`.

@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 409,
-  "files": 43,
+  "count": 413,
+  "files": 44,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -20,7 +20,7 @@
     },
     {
       "path": "tests/unit/docx-comments.test.ts",
-      "sha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "declarations": 19,
       "issues": []
     },
@@ -158,7 +158,7 @@
     },
     {
       "path": "tests/unit/pptx.test.ts",
-      "sha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "sha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "declarations": 6,
       "issues": []
     },
@@ -170,7 +170,7 @@
     },
     {
       "path": "tests/unit/references.test.ts",
-      "sha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "sha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
       "declarations": 4,
       "issues": []
     },
@@ -190,6 +190,12 @@
       "path": "tests/unit/shared-fixtures.test.ts",
       "sha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "declarations": 11,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/shared-selection.test.ts",
+      "sha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "declarations": 4,
       "issues": []
     },
     {
@@ -451,6 +457,7 @@
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
     "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
+    "bun:tests/unit/shared-selection.test.ts:selection rejects implicit whole-file implementation, unknown IDs, duplicates and empty selections",
     "bun:tests/unit/test-inventory.test.ts:inventory drift check detects added tests, edited helpers and no-test file changes without rewriting report",
     "bun:tests/unit/test-inventory.test.ts:inventory fails closed on imported binding shadowing, indirect aliases and tagged tables",
     "bun:tests/unit/test-inventory.test.ts:native registration shadows in destructuring and deferred helper registration are unresolved",
@@ -543,6 +550,8 @@
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
     "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
+    "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
+    "bun:tests/unit/shared-selection.test.ts:selection rejects implicit whole-file implementation, unknown IDs, duplicates and empty selections",
     "bun:tests/unit/test-inventory.test.ts:inventory drift check detects added tests, edited helpers and no-test file changes without rewriting report",
     "bun:tests/unit/test-inventory.test.ts:inventory fails closed on imported binding shadowing, indirect aliases and tagged tables",
     "bun:tests/unit/test-inventory.test.ts:native registration shadows in destructuring and deferred helper registration are unresolved",
@@ -949,10 +958,9 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
-      "body": "{\n const path='references/fixtures-ooxml/workflows/docx/comments.feature',f=parseFeature(path,(await Bun.file(join(fixturesRoot(), \"workflows/docx/comments.feature\")).text()).replace(/^@planned/m, '@implemented @bun'));const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(14);\n}",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
+      "body": "{\n const path='references/fixtures-ooxml/workflows/docx/comments.feature',selected=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(), \"workflows/docx/comments.feature\")).text(),['@id-docx-comments-inspection','@id-docx-comments-resolution','@id-docx-comments-noop','@id-docx-comments-refusal']),f={...selected,scenarios:selected.scenarios.filter(s=>s.lifecycle==='implemented')};const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(14);\n}",
       "calls": [
-        ".replace",
         "Bun.file",
         "Bun.file().text",
         "cases.reduce",
@@ -965,7 +973,8 @@
         "fixturesRoot",
         "join",
         "newAcceptanceRunId",
-        "parseFeature"
+        "selectSharedScenarios",
+        "selected.scenarios.filter"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -985,7 +994,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),ex='word/commentsExtended.xml';p.set(ex,p.text(ex).replaceAll('xmlns:w15=','xmlns:thread=').replaceAll('w15:','thread:'));\n const before=p.text(ex);setCommentResolved(p,'1',true);expect(p.text(ex)).toBe(before.replace('thread:paraId=\"3395B541\" thread:done=\"0\"','thread:paraId=\"3395B541\" thread:done=\"1\"'));\n const reopened=await OpcPackage.open(p.toBytes());expect(inspectComments(reopened).comments[1]!.resolved).toBe(true);\n}",
       "calls": [
         "OpcPackage.open",
@@ -1020,7 +1029,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture('revision-body'),before=p.toBytes();expect(inspectComments(p).unsupported.length).toBeGreaterThan(0);expect(p.toBytes()).toEqual(before);expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "commentFixture",
@@ -1056,7 +1065,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),before=p.toBytes();for(const id of ['missing','-1','999'])expect(()=>setCommentResolved(p,id,true)).toThrow();\n expect(()=>setCommentResolved(p,'1','false' as unknown as boolean)).toThrow();expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "commentFixture",
@@ -1093,7 +1102,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n const xml=p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"',`w15:paraId=\"3395B541\" note=\"literal w15:done='0'\" w15:done = '&#48;'`);\n p.set(part,xml);const before=p.toBytes();\n expect(setCommentResolved(p,'1',true)).toEqual({changed:1,changedParts:[part]});\n expect(p.text(part)).toBe(xml.replace(\"w15:done = '&#48;'\",\"w15:done = '1'\"));\n const reopened=await OpcPackage.open(p.toBytes());expect(inspectComments(reopened).comments.find(c=>c.id==='1')?.resolved).toBe(true);\n const original=await OpcPackage.open(before);for(const name of p.names())if(name!==part)expect(p.get(name)).toEqual(original.get(name));\n}",
       "calls": [
         "OpcPackage.open",
@@ -1136,7 +1145,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n const xml=p.text(part).replaceAll('w15:commentsEx','commentsEx').replaceAll('w15:commentEx','commentEx').replace('xmlns:w15=','xmlns=').replaceAll('w15:','q:').replace('<commentsEx ', '<commentsEx xmlns:q=\"http://schemas.microsoft.com/office/word/2012/wordml\" ').replace('q:paraId=\"3395B541\" q:done=\"0\"','q:paraId=\"3395B541\"');\n p.set(part,xml);const before=p.toBytes();expect(setCommentResolved(p,'1',false).changed).toBe(0);expect(p.toBytes()).toEqual(before);\n expect(setCommentResolved(p,'1',true).changed).toBe(1);expect(p.text(part)).toBe(xml.replace('q:paraId=\"3395B541\"/>','q:paraId=\"3395B541\" q:done=\"1\"/>'));\n expect(inspectComments(await OpcPackage.open(p.toBytes())).comments.find(c=>c.id==='1')?.resolved).toBe(true);\n}",
       "calls": [
         "OpcPackage.open",
@@ -1181,7 +1190,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n for(const [word,state]of [['on',true],['true',true],['off',false],['false',false]] as const){\n  const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"',`w15:paraId=\"3395B541\" w15:done=\"${word}\"`));const before=p.toBytes();\n  expect(setCommentResolved(p,'1',state)).toEqual({changed:0,changedParts:[]});expect(p.toBytes()).toEqual(before);\n }\n}",
       "calls": [
         "commentFixture",
@@ -1214,7 +1223,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n p.set('word/document.xml',p.text('word/document.xml').replace('</w:body>','<!--prior edit--></w:body>'));const before=p.toBytes(),xml=p.text(part);\n const serialize=p.toBytes;p.toBytes=()=>{throw new Error('injected serialization failure');};\n try{expect(()=>setCommentResolved(p,'1',true)).toThrow('injected serialization failure');expect(p.text(part)).toBe(xml);}finally{p.toBytes=serialize;}\n expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "commentFixture",
@@ -1251,7 +1260,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n for(const key of ['done','paraIdParent']){\n  const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace(`w15:${key}=`,`bogus:${key}=`).replace('<w15:commentsEx ','<w15:commentsEx xmlns:bogus=\"urn:wrong\" '));const before=p.toBytes();\n  expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n }\n}",
       "calls": [
         "commentFixture",
@@ -1292,7 +1301,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';\n for(const enforcement of [undefined,'','1','true','on','unexpected','false','0','OFF']){\n  const p=await commentFixture(),settings=p.related(p.mainPart(),'settings')!;\n  expect(settings).toBeDefined();\n  p.set(settings,`<s:settings xmlns:s=\"${W}\"><s:documentProtection${enforcement===undefined?'':` s:enforcement=\"${enforcement}\"`}/></s:settings>`);\n  const before=p.toBytes();\n  if(['false','0','OFF'].includes(enforcement??'')){expect(setCommentResolved(p,'1',true).changed).toBe(1);}else{expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);}\n }\n const p=await commentFixture(),settings=p.related(p.mainPart(),'settings')!;\n p.set(settings,`<s:settings xmlns:s=\"${W}\"><s:documentProtection s:enforcement=\"0\"/><s:documentProtection s:enforcement=\"1\"/></s:settings>`);const before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         ".includes",
@@ -1331,7 +1340,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),before=p.toBytes(),first=inspectComments(p);first.comments[1]!.resolved=true;first.comments[2]!.parentId='999';first.comments[0]!.text='mutated';first.unsupported.push({part:'word/comments.xml',kind:'invented'});\n const second=inspectComments(p);expect(second.comments[1]!.resolved).toBe(false);expect(second.comments[2]!.parentId).toBe('1');expect(second.comments[0]!.text).toBe('This is a great opening');expect(second.unsupported).toEqual([]);expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "commentFixture",
@@ -1362,7 +1371,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),part='word/comments.xml';const xml=p.text(part).replace('This is a great opening','This is a great opening</w:t><w:tab/><w:t>tab</w:t><w:br/><w:t>line');p.set(part,xml);const before=p.toBytes();\n expect(inspectComments(p).comments[0]!.text).toBe('This is a great opening\\ttab\\nline');expect(p.toBytes()).toEqual(before);\n setCommentResolved(p,'1',true);expect(p.text(part)).toBe(xml);expect((await OpcPackage.open(p.toBytes())).text(part)).toBe(xml);\n}",
       "calls": [
         ".text",
@@ -1396,7 +1405,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';const xml=p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"/>','w15:paraId=\"3395B541\" \\n > \\r\\n </w15:commentEx>');p.set(part,xml);\n setCommentResolved(p,'1',true);expect(p.text(part)).toBe(xml.replace('w15:paraId=\"3395B541\" \\n >','w15:paraId=\"3395B541\" w15:done=\"1\" \\n >'));expect(inspectComments(p).comments[1]!.resolved).toBe(true);\n}",
       "calls": [
         "commentFixture",
@@ -1429,7 +1438,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const {addPart,addRelationship}=await import('../../src/opc/index.ts');const p=await commentFixture(),W='http://schemas.openxmlformats.org/wordprocessingml/2006/main',R='http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings';\n addPart(p,'word/extra-settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"true\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),R,'extra-settings.xml');let before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n const q=await commentFixture();addRelationship(q,q.mainPart(),R,'https://example.invalid/settings.xml',{external:true});before=q.toBytes();expect(()=>setCommentResolved(q,'1',true)).toThrow();expect(q.toBytes()).toEqual(before);\n}",
       "calls": [
         "addPart",
@@ -1467,7 +1476,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml',xml=p.text(part).replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"');\n const encode=(value:string)=>{const out=new Uint8Array(2+value.length*2),view=new DataView(out.buffer);view.setUint16(0,0xfeff,true);for(let i=0;i<value.length;i++)view.setUint16(2+i*2,value.charCodeAt(i),true);return out;};\n p.set(part,encode(xml));setCommentResolved(p,'1',true);expect(p.get(part)).toEqual(encode(xml.replace('w15:paraId=\"3395B541\" w15:done=\"0\"','w15:paraId=\"3395B541\" w15:done=\"1\"')));\n expect(inspectComments(await OpcPackage.open(p.toBytes())).comments[1]!.resolved).toBe(true);\n}",
       "calls": [
         "OpcPackage.open",
@@ -1512,7 +1521,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n for(const [from,to]of [['w:id=\"1\"','id=\"1\"'],['w14:paraId=\"3395B541\"','paraId=\"3395B541\"']] as const){\n  const p=await commentFixture(),part='word/comments.xml';p.set(part,p.text(part).replace(from,to));const before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n }\n}",
       "calls": [
         "commentFixture",
@@ -1547,7 +1556,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace(/<w15:commentEx w15:paraId=\"103008CD\"[^>]*\\/>/,''));\n const before=p.toBytes();expect(inspectComments(p).comments).toHaveLength(3);expect(()=>setCommentResolved(p,'0',true)).toThrow();expect(p.toBytes()).toEqual(before);\n expect(setCommentResolved(p,'1',true).changed).toBe(1);\n}",
       "calls": [
         "commentFixture",
@@ -1583,7 +1592,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const {mkdtemp,rm}=await import('node:fs/promises'),{tmpdir}=await import('node:os');\n const api=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');\n expect(api.inspectComments).toBe(docx.inspectComments);expect(api.setCommentResolved).toBe(docx.setCommentResolved);\n const root=await mkdtemp(join(tmpdir(),'bun-comment-save-'));\n try{const p=await commentFixture(),comments=p.get('word/comments.xml')!,path=join(root,'resolved.docx');api.setCommentResolved(p,'1',true);await p.save(path);const q=await OpcPackage.open(path);expect(api.inspectComments(q).comments[1]!.resolved).toBe(true);expect(q.get('word/comments.xml')).toEqual(comments);}finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "OpcPackage.open",
@@ -1620,7 +1629,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969",
+      "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
       "body": "{\n const {Document}=await import('../../src/docx/index.ts'),p=await OpcPackage.open(await Document.create().save()),before=p.toBytes();\n expect(inspectComments(p)).toEqual({comments:[],unsupported:[]});expect(()=>setCommentResolved(p,'0',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.create",
@@ -9659,12 +9668,12 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
-      "body": "{\n    const root = await makeProject({\n      \"features/pptx/text.feature\": (await Bun.file(join(fixturesRoot(), \"workflows/native/pptx-text.feature\")).text()).replace(/^@planned/m, \"@implemented @bun\"),\n    });\n\n    const report = await runAcceptance(bindings, { root });\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(1);\n    expect(report.execution.cases.passed).toBe(4);\n  }",
+      "sourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
+      "body": "{\n    const root = await makeProject({\n      \"references/fixtures-ooxml/workflows/native/pptx-text.feature\": await Bun.file(join(fixturesRoot(), \"workflows/native/pptx-text.feature\")).text(),\n      \"features/shared.json\": JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/workflows/native/pptx-text.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-order-notes-read','@id-pptx-readable-unsupported-topology','@id-pptx-cross-run-replace','@id-pptx-stale-anchor-refusal']}]}),\n    });\n\n    const report = await runAcceptance(bindings, { root });\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(1);\n    expect(report.execution.cases.passed).toBe(4);\n  }",
       "calls": [
-        ".replace",
         "Bun.file",
         "Bun.file().text",
+        "JSON.stringify",
         "expect",
         "expect().toBe",
         "fixturesRoot",
@@ -9678,7 +9687,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
       "path": "tests/unit/pptx.test.ts",
-      "line": 37,
+      "line": 38,
       "title": "follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
       "suites": [
         "pptx slice"
@@ -9697,7 +9706,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "sourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "body": "{\n    const result = await runOrderedNotesScenario();\n    expect(result.titles).toEqual([\n      \"Chapter 5\",\n      \"Frankenstein Lecture Series\",\n      \"Chapter 4\",\n      \"Chapter 2\",\n      \"Chapter 3\",\n    ]);\n    expect(result.notes).toEqual([\n      \"Key themes:\\ncreation, responsibility, isolation\\n\\nVisible date: 2026-03-12\",\n      \"Compare to Prometheus myth\",\n    ]);\n    expect(result.orderedDiff).toEqual({\n      added: [],\n      changed: [],\n      removed: [],\n    });\n    expect(result.orderedBytesAfterRead).toEqual(result.orderedBytes);\n    expect(result.minimalError.code).toBe(\"PPTX_NOTES_MISSING\");\n    expect(result.minimalBytesAfterRefusal).toEqual(result.minimalSource);\n    expect(result.minimalNames.some((name) => name.startsWith(\"ppt/notesSlides/\"))).toBeFalse();\n  }",
       "calls": [
         "expect",
@@ -9714,7 +9723,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / exposes line breaks and field text in inspectText and refuses editing that topology atomically",
       "path": "tests/unit/pptx.test.ts",
-      "line": 61,
+      "line": 62,
       "title": "exposes line breaks and field text in inspectText and refuses editing that topology atomically",
       "suites": [
         "pptx slice"
@@ -9731,7 +9740,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "sourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "body": "{\n    const result = await runReadableUnsupportedScenario();\n    expect(result.paragraphText).toBe(\"Chapter\\n7 Notes\");\n    expect(result.paragraphRuns).toEqual([\n      { text: \"Chapter\", attrs: { b: \"1\" } },\n      { text: \"\\n\", attrs: { lang: \"en-US\" } },\n      { text: \"7\", attrs: { i: \"1\" } },\n      { text: \" Notes\", attrs: { u: \"sng\" } },\n    ]);\n    expect(result.error.code).toBe(\"PPTX_UNSUPPORTED_TEXT_TOPOLOGY\");\n    expect(result.diffAfterRefusal).toEqual({\n      added: [],\n      changed: [],\n      removed: [],\n    });\n    expect(result.bytesAfterRefusal).toEqual(result.sourceBytes);\n  }",
       "calls": [
         "expect",
@@ -9745,7 +9754,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / replaces exact anchored text across runs and preserves untouched members",
       "path": "tests/unit/pptx.test.ts",
-      "line": 79,
+      "line": 80,
       "title": "replaces exact anchored text across runs and preserves untouched members",
       "suites": [
         "pptx slice"
@@ -9762,7 +9771,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "sourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "body": "{\n    const result = await runCrossRunReplacementScenario();\n    expect(result.reopenedTitle).toBe(\"Friendstein\");\n    expect(result.changedParts).toEqual({\n      added: [],\n      changed: [\"ppt/slides/slide1.xml\"],\n      removed: [],\n    });\n    expect(result.customMemberBytes).toEqual(encoder.encode(\"keep-me-safe\"));\n    const expectedDocProps = readZip(result.sourceBytes).get(\"docProps/app.xml\");\n    if (!expectedDocProps) {\n      throw new Error(\"expected docProps/app.xml in source fixture\");\n    }\n    expect(result.docPropsBytes).toEqual(expectedDocProps);\n    expect(result.titleRuns).toEqual([\n      { text: \"Fr\", attrs: { b: \"1\" } },\n      { text: \"iend\", attrs: { b: \"1\" } },\n      { text: \"stein\", attrs: { u: \"sng\" } },\n    ]);\n  }",
       "calls": [
         "encoder.encode",
@@ -9779,7 +9788,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / refuses stale anchors atomically",
       "path": "tests/unit/pptx.test.ts",
-      "line": 100,
+      "line": 101,
       "title": "refuses stale anchors atomically",
       "suites": [
         "pptx slice"
@@ -9794,7 +9803,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "sourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "body": "{\n    const result = await runStaleAnchorScenario();\n    expect(result.error.code).toBe(\"PPTX_STALE_ANCHOR\");\n    expect(result.reopenedTitle).toBe(\"Creature\");\n    expect(result.bytesAfterRefusal).toEqual(result.bytesAfterSuccess);\n  }",
       "calls": [
         "expect",
@@ -9808,7 +9817,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / opens from path and bytes and saves a no-op deck byte-identically",
       "path": "tests/unit/pptx.test.ts",
-      "line": 107,
+      "line": 108,
       "title": "opens from path and bytes and saves a no-op deck byte-identically",
       "suites": [
         "pptx slice"
@@ -9823,7 +9832,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "sourceSha256": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
       "body": "{\n    const sourcePath = fixturePath(F.officeSlides.titleSlide);\n    const sourceBytes = Uint8Array.from(await Bun.file(sourcePath).bytes());\n\n    const fromPath = await Presentation.open(sourcePath);\n    const fromBytes = await Presentation.open(sourceBytes);\n\n    expect(fromPath.slides[0]?.inspectText(\"unit.open.path\")[0]?.text).toBe(\"Frankenstein\");\n    expect(fromBytes.package.toBytes()).toEqual(sourceBytes);\n\n    const root = await mkdtemp(join(tmpdir(), \"bun-ooxml-pptx-open-\"));\n    roots.push(root);\n    const output = join(root, \"title-slide-copy.pptx\");\n    await fromPath.save(output);\n    expect(Uint8Array.from(await Bun.file(output).bytes())).toEqual(sourceBytes);\n  }",
       "calls": [
         "Bun.file",
@@ -10053,19 +10062,19 @@
     {
       "id": "bun:tests/unit/references.test.ts:shared manifest, annotated tag and exact submodule commit match required pin",
       "path": "tests/unit/references.test.ts",
-      "line": 8,
+      "line": 9,
       "title": "shared manifest, annotated tag and exact submodule commit match required pin",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(163)"
+        "expect(await verifyReferences(root)).toBe(expectedAssets)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
-      "body": "{expect(await verifyReferences(root)).toBe(163);}",
+      "sourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
+      "body": "{expect(await verifyReferences(root)).toBe(expectedAssets);}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -10077,7 +10086,7 @@
     {
       "id": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
       "path": "tests/unit/references.test.ts",
-      "line": 9,
+      "line": 10,
       "title": "missing pin refuses rather than using an implicit or generated fixture corpus",
       "suites": [],
       "kind": "test",
@@ -10088,7 +10097,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "sourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}",
       "calls": [
         "expect",
@@ -10105,7 +10114,7 @@
     {
       "id": "bun:tests/unit/references.test.ts:mutated seals and wrong tag or revision refuse in an isolated reference clone",
       "path": "tests/unit/references.test.ts",
-      "line": 10,
+      "line": 11,
       "title": "mutated seals and wrong tag or revision refuse in an isolated reference clone",
       "suites": [],
       "kind": "test",
@@ -10113,20 +10122,20 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(163)",
+        "expect(await verifyReferences(tmp)).toBe(expectedAssets)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 15,
+          "line": 16,
           "expression": "for(const change of ["
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(163);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(expectedAssets);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         ".repeat",
         "Bun.file",
@@ -10155,7 +10164,7 @@
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
       "path": "tests/unit/references.test.ts",
-      "line": 26,
+      "line": 27,
       "title": "index hints cannot hide modified facts or workflow ledgers from reference validation",
       "suites": [],
       "kind": "test",
@@ -10169,20 +10178,20 @@
         "expect(git('status','--porcelain')).toBe('')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular')",
-        "expect(await verifyReferences(tmp)).toBe(163)"
+        "expect(await verifyReferences(tmp)).toBe(expectedAssets)"
       ],
       "deferredAssertions": [
         "expect(r.exitCode).toBe(0)"
       ],
       "loops": [
         {
-          "line": 33,
+          "line": 34,
           "expression": "for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(163);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(expectedAssets);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().bytes",
@@ -11043,6 +11052,152 @@
         "workbook.save",
         "workbook.worksheet",
         "workbook.worksheet().setCellValue"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
+      "path": "tests/unit/shared-selection.test.ts",
+      "line": 11,
+      "title": "shared scenario selection retains unsupported outcomes as planned without invoking their steps",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inventory.counts.scenarios).toEqual({implemented:1,planned:1,total:2})",
+        "expect(inventory.counts.cases).toEqual({implemented:1,planned:1,total:2})",
+        "expect(feature.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(text).digest('hex'))",
+        "expect(calls).toBe(2)",
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.features).toEqual({passed:1,failed:0,planned:0,total:1})",
+        "expect(result.counts.cases).toEqual({passed:1,failed:0,planned:1,total:2})",
+        "expect(result.features[0]!.scenarios[1]!.cases[0]!.steps.every(s=>s.status==='planned')).toBe(true)"
+      ],
+      "deferredAssertions": [
+        "expect((context.scenario as {lifecycle:string}).lifecycle).toBe('implemented')",
+        "expect((context.case as {lifecycle:string}).lifecycle).toBe('implemented')",
+        "expect((context.feature as {tags:string[]}).tags).toEqual(['@planned'])"
+      ],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "body": "{\n const root=await project({schemaVersion:2,features:[entry]});try{\n  const inventory=await inventoryFeatures(root);expect(inventory.counts.scenarios).toEqual({implemented:1,planned:1,total:2});expect(inventory.counts.cases).toEqual({implemented:1,planned:1,total:2});\n  const feature=inventory.features[0]!;expect(feature.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(text).digest('hex'));\n  let calls=0;const result=await executeAcceptance(inventory,[{pattern:/^a bound (input|outcome)$/,run:(context)=>{calls++;expect((context.scenario as {lifecycle:string}).lifecycle).toBe('implemented');expect((context.case as {lifecycle:string}).lifecycle).toBe('implemented');expect((context.feature as {tags:string[]}).tags).toEqual(['@planned']);}}],'selection-test');\n  expect(calls).toBe(2);expect(result.failures).toEqual([]);expect(result.counts.features).toEqual({passed:1,failed:0,planned:0,total:1});expect(result.counts.cases).toEqual({passed:1,failed:0,planned:1,total:2});\n  expect(result.features[0]!.scenarios[1]!.cases[0]!.steps.every(s=>s.status==='planned')).toBe(true);\n }finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "inventoryFeatures",
+        "project",
+        "result.features.0.scenarios.1.cases.0.steps.every",
+        "rm"
+      ],
+      "reviewReasons": [
+        "deferred-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:selection rejects implicit whole-file implementation, unknown IDs, duplicates and empty selections",
+      "path": "tests/unit/shared-selection.test.ts",
+      "line": 20,
+      "title": "selection rejects implicit whole-file implementation, unknown IDs, duplicates and empty selections",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>selectSharedScenarios(path,text,['@id-missing'])).toThrow('Unknown')",
+        "expect(()=>selectSharedScenarios(path,text,['@id-bound','@id-bound'])).toThrow('Duplicate')",
+        "expect(()=>selectSharedScenarios(path,text,[])).toThrow('empty')",
+        "expect(()=>selectSharedScenarios(path,text.replace('@planned','@implemented @bun'),['@id-bound'])).toThrow('planned')",
+        "expect(inventoryFeatures(root)).rejects.toThrow('shared')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 25,
+          "expression": "for(const config of ["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "body": "{\n expect(()=>selectSharedScenarios(path,text,['@id-missing'])).toThrow('Unknown');\n expect(()=>selectSharedScenarios(path,text,['@id-bound','@id-bound'])).toThrow('Duplicate');\n expect(()=>selectSharedScenarios(path,text,[])).toThrow('empty');\n expect(()=>selectSharedScenarios(path,text.replace('@planned','@implemented @bun'),['@id-bound'])).toThrow('planned');\n for(const config of [{schemaVersion:1,features:[entry]},{schemaVersion:2,features:[{path,lifecycle:'implemented',runner:'bun'}]}]){\n  const root=await project(config);try{await expect(inventoryFeatures(root)).rejects.toThrow('shared');}finally{await rm(root,{recursive:true,force:true});}\n }\n}",
+      "calls": [
+        "expect",
+        "expect().rejects.toThrow",
+        "expect().toThrow",
+        "inventoryFeatures",
+        "project",
+        "rm",
+        "selectSharedScenarios",
+        "text.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:full acceptance rejects planned scenarios inside an otherwise implemented feature",
+      "path": "tests/unit/shared-selection.test.ts",
+      "line": 29,
+      "title": "full acceptance rejects planned scenarios inside an otherwise implemented feature",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(runAcceptance([{pattern:/^a bound (input|outcome)$/,run:()=>{}}],{root,full:true})).rejects.toThrow('planned')",
+        "expect(report.execution.cases.passed).toBe(1)",
+        "expect(report.execution.cases.planned).toBe(1)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "body": "{\n const root=await project({schemaVersion:2,features:[entry]});try{\n  await expect(runAcceptance([{pattern:/^a bound (input|outcome)$/,run:()=>{}}],{root,full:true})).rejects.toThrow('planned');\n  const report=await Bun.file(join(root,'artifacts/acceptance.json')).json();expect(report.execution.cases.passed).toBe(1);expect(report.execution.cases.planned).toBe(1);\n }finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().json",
+        "expect",
+        "expect().rejects.toThrow",
+        "expect().toBe",
+        "join",
+        "project",
+        "rm",
+        "runAcceptance"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-selection.test.ts:unbound outline rows may share display names without hiding their distinct identities",
+      "path": "tests/unit/shared-selection.test.ts",
+      "line": 36,
+      "title": "unbound outline rows may share display names without hiding their distinct identities",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(rows).toHaveLength(2)",
+        "expect(new Set(rows.map(c=>c.identityKey)).size).toBe(2)",
+        "expect(()=>selectSharedScenarios(path,outlines,['@id-outline'])).toThrow('Duplicate implemented')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "b392361e7b68c78de5599e832d55f7e0799560247c85721620a587bafccc310c",
+      "body": "{\n const outlines=text+' @id-outline\\n Scenario Outline: Shared display name\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | one |\\n   | two |\\n';\n const f=selectSharedScenarios(path,outlines,['@id-bound']);const rows=f.scenarios.find(s=>s.scenarioId==='@id-outline')!.cases;\n expect(rows).toHaveLength(2);expect(new Set(rows.map(c=>c.identityKey)).size).toBe(2);\n expect(()=>selectSharedScenarios(path,outlines,['@id-outline'])).toThrow('Duplicate implemented');\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "f.scenarios.find",
+        "rows.map",
+        "selectSharedScenarios"
       ],
       "reviewReasons": [],
       "unresolved": []

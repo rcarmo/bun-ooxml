@@ -78,9 +78,9 @@ export async function runAcceptance(
       report.failures.push("No implemented cases executed; inventory alone cannot pass acceptance.");
     }
 
-    if (full && report.inventory.features.planned > 0) {
+    if (full && report.inventory.cases.planned > 0) {
       report.failures.push(
-        `Full acceptance rejects planned features: ${report.inventory.features.planned} planned feature(s) remain.`,
+        `Full acceptance rejects planned features or cases: ${report.inventory.cases.planned} planned case(s) remain.`,
       );
     }
 
@@ -192,7 +192,7 @@ if (import.meta.main) {
   try {
     const report = await runAcceptance(undefined, { full });
     console.log(
-      `Acceptance ${report.status}: ${report.execution.cases.passed}/${report.inventory.cases.implemented} implemented case(s) passed; planned features ${report.inventory.features.planned}.`,
+      `Acceptance ${report.status}: ${report.execution.cases.passed}/${report.inventory.cases.implemented} implemented case(s) passed; planned cases ${report.inventory.cases.planned}.`,
     );
   } catch (error) {
     console.error(formatError(error));
