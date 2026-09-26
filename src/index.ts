@@ -2,6 +2,7 @@
 export { OoxmlError } from "./errors.ts";
 export { xmlEquivalent } from './xml/comparison.ts';
 export { admitPackage } from "./opc/admission.ts";
+export { comparePackageArchives, type PackageComparison } from './opc/comparison.ts';
 export type { ZipLimits } from "./opc/zip.ts";
 export { OpcPackage, type PackageDiff, type Relationship } from "./opc/package.ts";
 export { Document, Span, type RunFormattingPatch, type RunFormattingReceipt, type EffectiveRunFormatting, type EffectiveFlag, type FormattingContribution, type AddParagraphStyleOptions, type ParagraphStyleDefinitionReceipt, type PageLayout } from "./docx/index.ts";

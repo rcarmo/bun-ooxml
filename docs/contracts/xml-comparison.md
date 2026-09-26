@@ -47,6 +47,6 @@ The ten shared comparison cases are bound directly. Additional tests check tail
 text, comments, PI data, QName-sensitive bindings, encodings and depth refusal.
 Python's comparator also reorders content-type children and differs in namespace
 and malformed-collection policies. These tests establish their exact stated
-outcomes, not cross-runtime equivalence for every XML input. Package semantic
-diff remains a separate, unbound operation; `diffPackages()` keeps its existing
-byte/content-type semantics.
+outcomes, not cross-runtime equivalence for every XML input.
+[`comparePackageArchives()`](package-comparison.md) uses this profile for admitted
+XML members. `diffPackages()` keeps its existing byte/content-type semantics.

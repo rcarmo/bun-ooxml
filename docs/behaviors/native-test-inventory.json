@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 451,
-  "files": 47,
+  "count": 463,
+  "files": 48,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -124,6 +124,12 @@
       "path": "tests/unit/package-admission.test.ts",
       "sha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
       "declarations": 11,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/package-comparison.test.ts",
+      "sha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "declarations": 12,
       "issues": []
     },
     {
@@ -339,6 +345,10 @@
       "sha256": "a702f05cd22cd1139a118b6d8b57a801236c7ac5a521699cdcd29bb1d0485b60"
     },
     {
+      "path": "tests/acceptance/package-comparison.ts",
+      "sha256": "d68481c2680ca81e709289ce7942128a3bb1e831faeac1c9902bedb457547adc"
+    },
+    {
       "path": "tests/acceptance/page-layout.ts",
       "sha256": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a"
     },
@@ -372,7 +382,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "36fbb15b51f1a246eefb04854d7db4b5e4f48b1375046fc5cedd3550535b4efb"
+      "sha256": "0c7a8bfc8d7316cdb15097727fd8d0714cccaff65a1e162c0546c6adf439f788"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -481,6 +491,7 @@
     "bun:tests/unit/package-admission.test.ts:ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
     "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
     "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
+    "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
@@ -586,6 +597,7 @@
     "bun:tests/unit/package-admission.test.ts:ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
     "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
     "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
+    "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
     "bun:tests/unit/package.test.ts:OpcPackage / conservatively refuses percent-encoded internal names and relationship targets",
     "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
     "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
@@ -8551,6 +8563,383 @@
         "parseXml",
         "utf8",
         "validateXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:archive comparison separates equivalent XML, changed binary, additions and removals without requiring an OPC graph",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 7,
+      "title": "archive comparison separates equivalent XML, changed binary, additions and removals without requiring an OPC graph",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:['c.bin'],removed:['removed.bin'],changed:['b.bin'],equivalent_xml:['a.xml'],unchanged:[]})",
+        "expect(before).toEqual(b)",
+        "expect(after).toEqual(a)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const before=archive([['a.xml','<a xmlns=\"u\"><b x=\"1\"/></a>'],['b.bin','x'],['removed.bin','gone']]);\n const after=archive([['a.xml','<p:a xmlns:p=\"u\"><p:b x=\"1\"/></p:a>'],['b.bin','y'],['c.bin','z']]);\n const b=before.slice(),a=after.slice();\n expect(comparePackageArchives(before,after)).toEqual({added:['c.bin'],removed:['removed.bin'],changed:['b.bin'],equivalent_xml:['a.xml'],unchanged:[]});expect(before).toEqual(b);expect(after).toEqual(a);\n}",
+      "calls": [
+        "after.slice",
+        "archive",
+        "before.slice",
+        "comparePackageArchives",
+        "expect",
+        "expect().toEqual"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:exact payload equality is unchanged even when ZIP storage or metadata differ",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 13,
+      "title": "exact payload equality is unchanged even when ZIP storage or metadata differ",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(before).not.toEqual(after)",
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:['a.xml','opaque.bin']})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const entries=[['a.xml',utf8('<a/>')],['opaque.bin',utf8('exact')]] as const,before=admissionZip(entries,0),after=admissionZip([...entries].reverse(),8);\n expect(before).not.toEqual(after);expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:['a.xml','opaque.bin']});\n}",
+      "calls": [
+        ".reverse",
+        "admissionZip",
+        "comparePackageArchives",
+        "expect",
+        "expect().not.toEqual",
+        "expect().toEqual",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:only XML suffixes receive equivalence checks and semantically significant XML stays changed",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 17,
+      "title": "only XML suffixes receive equivalence checks and semantically significant XML stays changed",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['comment.xml','same.bin','value.xml'],equivalent_xml:['ITEM.XML','_rels/.rels'],unchanged:[]})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const a='<a xmlns=\"u\"><b x=\"1\"/></a>',b='<p:a xmlns:p=\"u\"><p:b x=\"1\"/></p:a>';\n const before=archive([['same.bin',a],['ITEM.XML',a],['_rels/.rels',a],['value.xml','<a> x </a>'],['comment.xml','<!--old--><a/>']]);\n const after=archive([['same.bin',b],['ITEM.XML',b],['_rels/.rels',b],['value.xml','<a>x</a>'],['comment.xml','<!--new--><a/>']]);\n expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['comment.xml','same.bin','value.xml'],equivalent_xml:['ITEM.XML','_rels/.rels'],unchanged:[]});\n}",
+      "calls": [
+        "archive",
+        "comparePackageArchives",
+        "expect",
+        "expect().toEqual"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 23,
+      "title": "input admission refuses unsafe XML anywhere even if identical, added or removed",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>comparePackageArchives(before!,after!)).toThrow(expect.objectContaining({code:'XML_DTD_FORBIDDEN'}))",
+        "expect(before).toEqual(b)",
+        "expect(after).toEqual(a)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 25,
+          "expression": "for(const [before,after]of [[invalid,invalid],[valid,invalid],[invalid,valid]])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const valid=archive([['a.xml','<a/>']]),invalid=archive([['bad.xml','<!DOCTYPE a><a/>']]);\n for(const [before,after]of [[invalid,invalid],[valid,invalid],[invalid,valid]]){const b=before!.slice(),a=after!.slice();expect(()=>comparePackageArchives(before!,after!)).toThrow(expect.objectContaining({code:'XML_DTD_FORBIDDEN'}));expect(before).toEqual(b);expect(after).toEqual(a);}\n}",
+      "calls": [
+        "after.slice",
+        "archive",
+        "before.slice",
+        "comparePackageArchives",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:each archive passes ZIP integrity and independent resource budgets before classification",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 27,
+      "title": "each archive passes ZIP integrity and independent resource budgets before classification",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>comparePackageArchives(valid,corrupt)).toThrow(expect.objectContaining({code:'zip-crc-mismatch'}))",
+        "expect(()=>comparePackageArchives(valid,large,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}))",
+        "expect(()=>comparePackageArchives(large,valid,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}))",
+        "expect(comparePackageArchives(valid,valid,{maxEntries:1,maxEntryBytes:4,maxTotalBytes:4}).unchanged).toEqual(['a.xml'])",
+        "expect(()=>comparePackageArchives(valid,valid,{maxEntries:NaN})).toThrow(expect.objectContaining({code:'package-admission-limit-invalid'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const valid=archive([['a.xml','<a/>']]),large=archive([['a.xml','<a/>'],['b.bin','xx']]),corrupt=valid.slice();corrupt[35]=0x20;\n expect(()=>comparePackageArchives(valid,corrupt)).toThrow(expect.objectContaining({code:'zip-crc-mismatch'}));\n expect(()=>comparePackageArchives(valid,large,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}));\n expect(()=>comparePackageArchives(large,valid,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}));\n expect(comparePackageArchives(valid,valid,{maxEntries:1,maxEntryBytes:4,maxTotalBytes:4}).unchanged).toEqual(['a.xml']);\n expect(()=>comparePackageArchives(valid,valid,{maxEntries:NaN})).toThrow(expect.objectContaining({code:'package-admission-limit-invalid'}));\n}",
+      "calls": [
+        "archive",
+        "comparePackageArchives",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "valid.slice"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:UTF encoding differences can be equivalent but namespace-sensitive values cannot",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 35,
+      "title": "UTF encoding differences can be equivalent but namespace-sensitive values cannot",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['q.xml'],equivalent_xml:['text.xml'],unchanged:[]})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const before=admissionZip([['text.xml',utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a>雪</a>')],['q.xml',utf8('<a xmlns:p=\"one\" v=\"p:x\"/>')]]);\n const after=archive([['text.xml','<a>雪</a>'],['q.xml','<a xmlns:p=\"two\" v=\"p:x\"/>']]);expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['q.xml'],equivalent_xml:['text.xml'],unchanged:[]});\n}",
+      "calls": [
+        "admissionZip",
+        "archive",
+        "comparePackageArchives",
+        "expect",
+        "expect().toEqual",
+        "utf16",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:category lists are sorted, disjoint, exhaustive and detached across comparisons",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 39,
+      "title": "category lists are sorted, disjoint, exhaustive and detached across comparisons",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(new Set(all).size).toBe(all.length)",
+        "expect([...all].sort()).toEqual(['a.xml','b.bin','m.bin','r.bin','z.bin'])",
+        "expect(reverse.added).toEqual(result.removed)",
+        "expect(reverse.removed).toEqual(result.added)",
+        "expect(reverse.changed).toEqual(result.changed)",
+        "expect(reverse.equivalent_xml).toEqual(result.equivalent_xml)",
+        "expect(comparePackageArchives(before,after).changed).toEqual(['m.bin'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const before=archive([['z.bin','same'],['r.bin','gone'],['a.xml','<a/>'],['m.bin','old']]),after=archive([['b.bin','new'],['m.bin','new'],['a.xml','<a></a>'],['z.bin','same']]);\n const result=comparePackageArchives(before,after),all=Object.values(result).flat();expect(new Set(all).size).toBe(all.length);expect([...all].sort()).toEqual(['a.xml','b.bin','m.bin','r.bin','z.bin']);\n const reverse=comparePackageArchives(after,before);expect(reverse.added).toEqual(result.removed);expect(reverse.removed).toEqual(result.added);expect(reverse.changed).toEqual(result.changed);expect(reverse.equivalent_xml).toEqual(result.equivalent_xml);\n result.changed.push('fake');expect(comparePackageArchives(before,after).changed).toEqual(['m.bin']);\n}",
+      "calls": [
+        ".sort",
+        "Object.values",
+        "Object.values().flat",
+        "archive",
+        "comparePackageArchives",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "result.changed.push"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:empty archives and empty directory members do not invent file differences",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 45,
+      "title": "empty archives and empty directory members do not invent file differences",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(comparePackageArchives(empty,directory)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:[]})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const empty=admissionZip([]),directory=admissionZip([['empty/',new Uint8Array()]]);expect(comparePackageArchives(empty,directory)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:[]});\n}",
+      "calls": [
+        "admissionZip",
+        "comparePackageArchives",
+        "expect",
+        "expect().toEqual"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:existing OPC byte/content-type diff retains its behavior for XML whitespace changes",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 48,
+      "title": "existing OPC byte/content-type diff retains its behavior for XML whitespace changes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(diffPackages(before,after).changed).toContain('word/document.xml')",
+        "expect(comparePackageArchives(original,changed).changed).toContain('word/document.xml')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const d=Document.create();d.addParagraph('Keep');const original=d.package.toBytes(),parts=readZip(original),source=new TextDecoder().decode(parts.get('word/document.xml')!);parts.set('word/document.xml',utf8(source.replace('</w:document>','\\n</w:document>')));const changed=writeZip(parts);\n const before=await OpcPackage.open(original),after=await OpcPackage.open(changed);expect(diffPackages(before,after).changed).toContain('word/document.xml');\n // Whitespace inside the document element remains significant in this conservative profile.\n expect(comparePackageArchives(original,changed).changed).toContain('word/document.xml');\n}",
+      "calls": [
+        ".decode",
+        "Document.create",
+        "OpcPackage.open",
+        "comparePackageArchives",
+        "d.addParagraph",
+        "d.package.toBytes",
+        "diffPackages",
+        "expect",
+        "expect().toContain",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "source.replace",
+        "utf8",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:the exact shared package semantic-diff case compares concrete table inputs",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 55,
+      "title": "the exact shared package semantic-diff case compares concrete table inputs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)",
+        "expect(result.counts.steps.passed).toBe(7)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/package-comparison.ts');\n const path='workflows/package/semantic-diff.feature',f=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),['@id-package-diff-equivalent-xml-and-binary-changes']),count=(n:number)=>({implemented:n,planned:0,total:n});\n const result=await executeAcceptance({root:'.',features:[f],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(7)}},bindings,'package-comparison-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(1);expect(result.counts.steps.passed).toBe(7);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:duplicate member names cannot collapse into a misleading set report",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 60,
+      "title": "duplicate member names cannot collapse into a misleading set report",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>comparePackageArchives(bad,good)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}))",
+        "expect(()=>comparePackageArchives(good,bad)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const good=archive([['a.xml','<a/>']]),bad=archive([['a.xml','<a/>'],['a.xml','<b/>']]);\n expect(()=>comparePackageArchives(bad,good)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}));expect(()=>comparePackageArchives(good,bad)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}));\n}",
+      "calls": [
+        "archive",
+        "comparePackageArchives",
+        "expect",
+        "expect().toThrow",
+        "expect.objectContaining"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-comparison.test.ts:prefix-only XML goes into the new equivalence list but stays changed in OPC byte diff",
+      "path": "tests/unit/package-comparison.test.ts",
+      "line": 65,
+      "title": "prefix-only XML goes into the new equivalence list but stays changed in OPC byte diff",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(comparePackageArchives(original,modified).equivalent_xml).toEqual(['word/document.xml'])",
+        "expect(diffPackages(await OpcPackage.open(original),await OpcPackage.open(modified)).changed).toEqual(['word/document.xml'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+      "body": "{\n const d=Document.create();d.addParagraph('Keep');const original=d.package.toBytes(),parts=readZip(original),source=new TextDecoder().decode(parts.get('word/document.xml')!);\n parts.set('word/document.xml',utf8(source.replaceAll('w:', 'q:').replace('xmlns:w=', 'xmlns:q=')));const modified=writeZip(parts);\n expect(comparePackageArchives(original,modified).equivalent_xml).toEqual(['word/document.xml']);\n expect(diffPackages(await OpcPackage.open(original),await OpcPackage.open(modified)).changed).toEqual(['word/document.xml']);\n}",
+      "calls": [
+        ".decode",
+        "Document.create",
+        "OpcPackage.open",
+        "comparePackageArchives",
+        "d.addParagraph",
+        "d.package.toBytes",
+        "diffPackages",
+        "expect",
+        "expect().toEqual",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "source.replaceAll",
+        "source.replaceAll().replace",
+        "utf8",
+        "writeZip"
       ],
       "reviewReasons": [],
       "unresolved": []

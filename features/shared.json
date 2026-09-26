@@ -353,6 +353,14 @@
         "@id-xml-comparison-unsafe-input",
         "@id-xml-comparison-processing-instructions-and-comments"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/semantic-diff.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ]
     }
   ]
 }

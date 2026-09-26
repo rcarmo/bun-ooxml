@@ -47,8 +47,9 @@ File identity and derivation are resolved through the root manifest.
 The ZIP and XML member admission profiles under `workflows/package/` are bound
 to [`admitPackage`](package-admission.md). The ten cases in
 `workflows/xml/comparison.feature` use [`xmlEquivalent`](xml-comparison.md).
-The package semantic-diff profile has no Bun binding; `diffPackages` retains
-byte/content-type semantics.
+The package semantic-diff case uses
+[`comparePackageArchives`](package-comparison.md); `diffPackages` retains
+its separate byte/content-type semantics.
 
 ## Shared scenario selection
 
