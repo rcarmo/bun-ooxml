@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "da6b2e1d9145f17a3815fc5758ffa68ff6d4309a",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.12.0",
+    "commit": "89518aa62c9515a7ccbe05ed9afc1bbc89e1118a",
+    "manifestSha256": "deef358591495f89e853a5ac3371a52032e263238c20d43e5deaa738768f9b0e"
+  },
+  "inventory": {
+    "declarations": 354,
+    "files": 39,
+    "supportFiles": 27,
+    "dynamic": 71,
+    "reviewRequired": 102,
+    "unresolved": 0
+  },
+  "historicalStaging": {
+    "rows": 227,
+    "present": 227,
+    "missing": 0,
+    "withoutStaging": 127,
+    "sourceEquivalence": "unverified; candidate rows have no pins",
+    "executionCredit": false
+  },
+  "checks": {
+    "command": "make check",
+    "unitTests": 354,
+    "assertions": 4250,
+    "acceptanceCases": 253,
+    "runId": "128bb2e2-4971-41ce-bb6e-5fcceeb46b63",
+    "examples": 3,
+    "inventoryTests": 14,
+    "inventoryAssertions": 51
+  },
+  "sources": {
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "scripts/mapping-reconciliation.ts": "2997ed9b7e21f5c3823338679081e0930eff2e3f89c30db8f79008d3e1add529",
+    "tests/unit/test-inventory.test.ts": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+  },
+  "review": {
+    "scope": "read-only sibling review; no independent rerun",
+    "ownerFixes": [
+      "destructured/default/rest/catch binding audit",
+      "transparent TS alias detection",
+      "deferred nested matcher provenance",
+      "test-support file hashing"
+    ],
+    "broaderSemanticCredit": false
+  },
+  "limits": [
+    "AST declaration discovery is not runtime expansion",
+    "Dependencies outside tests/ are outside this inventory hash snapshot",
+    "Canonical mapping review and all-format parity remain incomplete"
+  ]
+}

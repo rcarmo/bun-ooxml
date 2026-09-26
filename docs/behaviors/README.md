@@ -1,60 +1,73 @@
-# Native behaviour catalogue staging
+# Native behaviour catalogue
 
-The AST inventory contains 291 test declarations in 33 native test files. Five
-candidate mapping files cover the earlier 227 declaration IDs once each; the 19
-new comment declarations have bounded central partial mappings, with remaining
-lexical/encoding/protection cases recorded as gaps. One new reference-custody
-declaration checks hidden Git-index changes and still needs central mapping.
-Nine tracked-workflow declarations add runtime dispatcher, receipt and refusal
-checks; their canonical Gherkin runs are recorded separately from native mapping.
-Eighteen direct run-formatting declarations likewise need bounded assertion
-mapping; their 15 canonical cases execute without implying complete formatting.
-Seventeen paragraph-style declarations and 19 canonical cases add bounded assignment
-and removal; style authoring and computed inheritance remain outside that scope.
-Semantic review
-and reconciliation into the shared Gherkin catalogue are unfinished. A bounded
-review of the 18 XML/QName declarations is recorded in the shared
-`ledgers/consumers/bun-xml.json`, with partial and unmapped assertions explicit.
-The shared parsing/QName features now replace their former local copies.
+`native-test-inventory.json` records the current Bun test declarations from
+`tests/unit/**/*.test.ts`. Schema 2 contains 354 declarations in 39 files. This is an
+AST denominator, not a runtime-expanded case count or proof of semantic coverage.
+It records whole-file hashes, declaration locations, suite/title identities,
+inline bodies, direct matcher expressions, call names and review reasons.
 
-| Candidate group | Declarations |
-|---|---:|
-| Package, ZIP and graph | 65 |
-| Word documents and reviews | 45 |
-| Slides, spreadsheets and cache boundaries | 40 |
-| XML, namespace and format guards | 38 |
-| Workflows, references and acceptance runner | 39 |
+71 declarations have dynamic titles, parameterisation, loops, conditions or
+lifecycle modifiers requiring review. 102 declarations need some assertion or
+expansion review, including tests whose assertions are in helpers. These groups
+overlap. The inventory does not evaluate helper bodies or expand runtime tables.
+All source files in the discovery glob are hashed, including files with no tests.
+The snapshot also hashes 27 other TypeScript files under `tests/`, so test-helper
+and acceptance-binding changes invalidate it. Dependencies outside `tests/` are not
+hashed by this inventory; runtime behaviour is covered by separate test runs.
+Three declarations contain deferred matcher syntax in nested functions; that
+syntax is listed separately and does not count as a direct assertion.
 
-`native-test-inventory.json` records declaration identity, suite/title, source
-location/hash, assertion expressions and loops. It counts declarations, not
-runtime-expanded leaves. Forty-six declarations contain parameters or loops
-that need explicit expansion review. Assertions hidden in helper calls also need
-manual inspection; an empty extracted assertion list does not mean no assertion
-ran.
-
-The `staging-*.json` files contain proposed preconditions, operations and outcomes.
-Their `reviewState` is `candidate-needs-parent-review`; they have no canonical
-scenario IDs and grant no new Gherkin execution credit. They were drafted before
-the grouped fixture migration. Review fixture/path and inventory descriptions
-against current tests before importing them centrally, even when test IDs match.
-
-Refresh the native inventory with:
+## Drift gates
 
 ```sh
-bun run scripts/test-inventory.ts
+bun scripts/test-inventory.ts
+bun scripts/mapping-reconciliation.ts
+make check
 ```
 
-For each candidate, inspect the current assertion and helper behaviour, expand
-parameter variants, and record any weak, conditional or missing checks. Reuse the
-central scenario ID for equivalent behaviour. Conflicting preconditions or
-outcomes need a separate scenario or an explicit issue, not contradictory copies.
+`make check` and `bun run check` compare committed outputs with regenerated data.
+Adding/removing a declaration or changing a discovered file fails until the
+inventory is refreshed. The check does not rewrite reports. Duplicate test
+identities and unresolved registrations refuse. Named and namespace `bun:test`
+imports are recognised; indirect aliases, tagged tables, non-inline test/suite
+callbacks, deferred helper registrations and detected binding shadowing need
+explicit parser/review work. Transparent TypeScript wrappers are unwrapped before
+alias checks. Destructured, default/rest and catch bindings are inspected for
+shadowed imports.
 
-Only reviewed functional Gherkin enters `fixtures-ooxml`. Per-language ledgers
-retain test-to-scenario mappings and execution results. Staging descriptions remain review inputs. The shared XML mapping supersedes
-XML-specific candidate prose here; remaining non-XML rows still need review.
-The 19 comment declarations and their source hashes appear in the refreshed
-inventory and the shared `ledgers/consumers/bun-comments.json`. Their four shared
-scenarios expand to 14 cases; `comment-binding-check.json` records the initial
-local execution, and current acceptance reports record the canonical bindings.
-Acceptance now executes 179 Bun cases. Candidate mapping counts never increase
-that result.
+This is syntax analysis, not a general TypeScript execution model. Discovery is
+limited to the unit-test glob and supported registration syntax. Integration and
+oracle workflows have separate reports and remain outside this denominator.
+No inventory row grants execution credit.
+
+## Historical candidate mappings
+
+The five `staging-*.json` candidate groups retain 227 earlier declaration IDs.
+`staging-reconciliation.json` finds all 227 identities in the current source and
+lists 127 newer declarations without historical staging. The report itself is
+excluded from candidate discovery. These counts describe only those five files,
+not the separate canonical consumer mappings.
+
+The old candidates have no source pins. A matching test ID does not prove that
+its body, helper assertions or fixture semantics are unchanged. Every surviving
+row stays `identity-present-needs-review`, with source equivalence unverified and
+execution credit false. Missing IDs would remain explicit rather than disappearing.
+Each source candidate must be read and compared before central reconciliation.
+
+Shared `ledgers/consumers/bun-xml.json`, `bun-package.json` and `bun-comments.json`
+contain their own source-pinned, bounded mappings. They supersede corresponding
+historical prose only for the assertions they explicitly cover. Comment mappings
+remain partial; archive custody, direct flags and other native assertions can
+exceed the shared scenario wording.
+
+## Reconciliation work
+
+Review concrete Then predicates, helpers, negative paths and parameter rows.
+Keep weak substring/count assertions separate from exact equality or preservation.
+Record the current file hashes and gaps when proposing shared IDs. Preserve
+operation differences between consumers. Shared Gherkin and facts live centrally;
+local mappings, inventories and native results remain consumer-specific.
+
+Current acceptance executes 253 implemented cases selected from the shared
+reference. Neither 354 declarations nor 227 candidate IDs increases that result or
+closes the full-format backlog.

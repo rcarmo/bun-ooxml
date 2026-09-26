@@ -1,0 +1,2825 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
+  "executionCredit": false,
+  "nativeDeclarations": 354,
+  "stagingRows": 227,
+  "identitiesPresent": 227,
+  "identitiesMissing": 0,
+  "withoutStagingCount": 127,
+  "stagingSources": [
+    {
+      "path": "docs/behaviors/staging-docx.json",
+      "sha256": "78dd00b0623ee9b7f629f07b5f5d6e34968d5a7ea36d348dba6529c442a3d105"
+    },
+    {
+      "path": "docs/behaviors/staging-package.json",
+      "sha256": "4b4de72ca6ef1e03f6af74ae01c5bbfaccecd7039d2e240bc294f0f8c17171c1"
+    },
+    {
+      "path": "docs/behaviors/staging-slides-sheets.json",
+      "sha256": "9b850f31bf96d4f2b1c64b0abbeebac3af257add1713377a8e7970a14da7f147"
+    },
+    {
+      "path": "docs/behaviors/staging-workflow-harness.json",
+      "sha256": "502809dcff3820c630342ba266277f9ab33b056ab19f3fbe6313e838be551072"
+    },
+    {
+      "path": "docs/behaviors/staging-xml-format-guards.json",
+      "sha256": "137fef8921c5062b52d974d9ad1a2a59d1c9c90305680cf55a6374de7c873e8b"
+    }
+  ],
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "53bd1c77678d8c0ebff50f380713650cda2960049783d0febbdeae88f779f335",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / executes every cache boundary Given/When/Then",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "53bd1c77678d8c0ebff50f380713650cda2960049783d0febbdeae88f779f335",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / workflow refuses and preserves an existing output when the workbook has array followers",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "53bd1c77678d8c0ebff50f380713650cda2960049783d0febbdeae88f779f335",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / adds an override to a self-closing prefixed root without rewriting names",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / detached overrides remain queryable for parts that do not yet exist",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / getContentType resolves defaults and overrides across namespace prefixes",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / invalid inputs and malformed current content types leave bytes untouched",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / removePartContentType removes only the matching override and never rewrites defaults",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / setPartContentType is an exact no-op when a default already yields the requested type",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/content-types.test.ts:opc content type helpers / updates an existing override in place and preserves surrounding raw XML",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / creates a minimal package and appends escaped bold italic text before sectPr",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / invalidates earlier spans after append without disturbing preserved parts",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / permits empty text and keeps the authored paragraph before sectPr after reopen",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / refuses invalid arguments and unsupported or unknown styles atomically",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / validates known paragraph styles and preserves opaque parts on append",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:executes all saved-outcome redline feature cases",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "558a8a9d1eac6f0ad2f36b3b3171fb42c3b1ce57b29ed66eef8b7b04b4fd5ede",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:invalid calendar dates and formatting-only run barriers refuse without mutation",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "558a8a9d1eac6f0ad2f36b3b3171fb42c3b1ce57b29ed66eef8b7b04b4fd5ede",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:overlapping literal occurrences refuse an ambiguous tracked target",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "558a8a9d1eac6f0ad2f36b3b3171fb42c3b1ce57b29ed66eef8b7b04b4fd5ede",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:pure deletion and exact no-op preserve their declared outcomes",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "558a8a9d1eac6f0ad2f36b3b3171fb42c3b1ce57b29ed66eef8b7b04b4fd5ede",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "558a8a9d1eac6f0ad2f36b3b3171fb42c3b1ce57b29ed66eef8b7b04b4fd5ede",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:tracked replacement emits distinct IDs and native author/date with accept/reject algebra",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "558a8a9d1eac6f0ad2f36b3b3171fb42c3b1ce57b29ed66eef8b7b04b4fd5ede",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-redline.test.ts:XML comments and literal inter-run content are barriers rather than discarded during redlining",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "558a8a9d1eac6f0ad2f36b3b3171fb42c3b1ce57b29ed66eef8b7b04b4fd5ede",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / discovers reachable nested story parts for inspection and selected resolution",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / passes the DOCX revisions acceptance feature with dedicated bindings",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / preflights unsupported nested stories and protected packages before mutating bytes",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / preserves namespaced run properties when unwrapping and renames delText on reject",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-revisions.test.ts:docx revisions / rejects unsafe namespace lifts atomically",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / counts blind regions for native text boxes fields alternate content unknown namespaces orphans and external story rels",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "357f3edfc4e1f082a39bcf6471b081362a0546f9bffcd8c4c42d8ebb3ab24576",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / inspection never mutates package bytes",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "357f3edfc4e1f082a39bcf6471b081362a0546f9bffcd8c4c42d8ebb3ab24576",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / inspects current, original and all views across synthetic body/header/footer/note stories with renamed prefixes",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "357f3edfc4e1f082a39bcf6471b081362a0546f9bffcd8c4c42d8ebb3ab24576",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / lists linked native story parts in deterministic order",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "357f3edfc4e1f082a39bcf6471b081362a0546f9bffcd8c4c42d8ebb3ab24576",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / passes the DOCX story acceptance feature with dedicated bindings",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "357f3edfc4e1f082a39bcf6471b081362a0546f9bffcd8c4c42d8ebb3ab24576",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-story.test.ts:docx story inspection / reads owned document headers/comments and native notes without inferring from filenames",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "357f3edfc4e1f082a39bcf6471b081362a0546f9bffcd8c4c42d8ebb3ab24576",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / adds a rectangular table before sectPr and round-trips escaped text, spaces, and normalized newlines",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / authoring into a body with w rebound never silently writes foreign elements",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / passes the DOCX table acceptance feature with dedicated bindings",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / preserves tcPr, first paragraph properties, and first run formatting when replacing a simple cell",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / refuses bad indices, merged cells, nested cell topology, and bizarre grids atomically",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / run-level namespace declarations survive copied table-cell run properties",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / stale table and cell handles refuse after document mutation while fresh handles stay live",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / updates existing simple table cells while preserving opaque package parts",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx-tables.test.ts:docx Document tables / validates table dimensions with bounded rectangular authoring",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2b0a3df7542f65d3e4ee5a0764ec6651ca4f2808f51c4598602fba87e8876303",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / detects stale spans before mutation and leaves the package unchanged",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / does not descend into text boxes and refuses the blind region when no supported match exists",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / keeps repeated exact occurrences correct across replacements",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / opens from a path or bytes and save() never rewrites the opened source path implicitly",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / passes the DOCX acceptance feature with exported bindings",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / preserves boundary whitespace with xml:space on touched text nodes",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / refuses fields, tracked revisions and content controls with a stable code",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/docx.test.ts:docx Document / replaces exact cross-run text without reconstructing unaffected runs or formatting",
+      "stagingPath": "docs/behaviors/staging-docx.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / fails ambiguous bindings",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / fails undefined bindings without silent pass",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / full gate refuses planned work despite implemented cases passing",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [
+        "deferred-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / loaded binding cleanup runs after failed outcomes and cleanup failure cannot pass",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / parses backgrounds and scenario outlines into exact expanded cases",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / refuses an acceptance run with only planned cases rather than passing vacuously",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rejects scenarios without Then and reports failing Then assertions",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rejects tag contract violations",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rewrites stale acceptance artifacts before a failing run",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "3bb2c2ec6b8cad87172c612cd259fa99c42dceb2c71438e4c993eb872a95a763",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / collision and missing relationship targets leave package byte-identical",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / dollar replacement tokens in external targets are literal bytes, not JS replacement directives",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / equivalent relationship leaves existing overrides and XML encoding byte-identical",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / opaque parts and content types survive related save/reopen",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / part name allocation considers orphan and case-colliding names",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / referenced parts refuse until explicitly detached, then only owned metadata is removed",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship deduplication and smallest available IDs avoid unnecessary edits",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship referenced from owner XML cannot be removed; unknown binary owners refuse",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / removing a part removes its own rels but never cascades into targets",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / ignores ZIP metadata-only changes",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / marks content-type-only changes as changed even when payload bytes are identical",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / raw fixture no-op diffs are empty, preserve exact source bytes, and return detached reports",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / reports added and removed parts with content-type updates via package.set",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / reports opaque payload edits with hashes, lengths, content types, and detached part records",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / conservatively refuses percent-encoded internal names and relationship targets",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / preserves UTF-16 XML encoding when string edits are written back",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / refuses symlink save destinations",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / rejects async transaction callbacks before they run and does not special-case thenables",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / returns detached copies and keeps custody of opened source bytes",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / save refuses invalid packages without touching an existing target",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / appends to a compatible deck without disturbing first-slide bytes until the earlier anchor edits them",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / authors a minimal presentation whose master, layout and theme links reopen through the native reader",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / refuses invalid arguments and unsafe title-layout selection atomically",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / accepts p:ph type=title as a title placeholder",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / does not resolve nested group placeholders as slide titles",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / finds shared title and subtitle without mutating the package",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses duplicate direct placeholder shapes",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses empty title placeholders until empty replacement is supported",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses multi-paragraph subtitle placeholders",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses placeholder paragraphs with break and field topology",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / uses the direct placeholder shape rather than the first text paragraph",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / passes the PPTX table acceptance feature with dedicated bindings",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / preserves simple table cell formatting when replacing text and reopening",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / refuses merged and malformed table topologies atomically",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / round-trips saved table geometry sums and text after reopen",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / stale table cell handles refuse atomically after slide mutation",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "56994cc55aa515fdf38dc5877f3360f08f582908e0804ad0de008ac98892c5cb",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / exposes line breaks and field text in inspectText and refuses editing that topology atomically",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / opens from path and bytes and saves a no-op deck byte-identically",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / refuses stale anchors atomically",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / replaces exact anchored text across runs and preserves untouched members",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "292e08cf5e2d4c3e68971705b2c302e6f5d945b00b5c78c199547e75eb3baf78",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/references.test.ts:mutated seals and wrong tag or revision refuse in an isolated reference clone",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/references.test.ts:shared manifest, annotated tag and exact submodule commit match required pin",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / locally rebound r takes precedence over its parent declaration",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / shared namespace Gherkin executes all four cases with real outcomes",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / worksheet relationship type must use the exact officeDocument URI, not merely its suffix",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / XLSX accepts a locally scoped prefix alias through value and style edits",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / Gherkin escaping must preserve JSON newline escapes before typed decoding",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a0cd7933994337af36583545e63009a9b3a357b99d740e3f0b39405b979d8fac",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / DOCX edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / PPTX edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / XLSX cache edit preserves shared fixture invariants after save and reopen (unit-only)",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects a detached sentinel even if the root rel bytes are re-pinned",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects invalid XLSX style indices in allowed changed worksheet parts",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects opaque member drift outside the allowed parts",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects unexpected added members",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects unexpected deleted members",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / implicit style zero still requires a cellXfs definition",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifyFixture rejects a wrong whole-archive hash before edit semantics",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow-acceptance.test.ts:workflow shared acceptance / executes the frozen shared workflow feature as 19 implemented Bun cases",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a8004ad190b81d42f36415c43438783887065abc7f16c0e6224024e6a524dcd3",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / concurrent guarded writers serialize and only one source revision can commit",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / destination fingerprint and symlink protections leave existing bytes untouched",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / distinct output accumulates two PPTX edits and counts actual commits",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / DOCX overlapping text ranges refuse even when neither target contains the other",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / invalid XML replacements refuse asynchronously without touching either file",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / no-op and duplicate targets cannot inflate committed count",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / previews report matched targets but never write source or an existing destination",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / source fingerprints and safe path aliases refuse without writes",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / strict batches reject a later missing target before saving an earlier match",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/workflow.test.ts:native staged workflow / XLSX style closure and cache receipts reflect staged output, not guessed input count",
+      "stagingPath": "docs/behaviors/staging-workflow-harness.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:adding a worksheet works when the existing r alias is scoped to only the first sheet",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:dimension stays before sheetViews and cols when a missing cell is authored",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / adds worksheets with independent ids, relationship closure and working returned handles",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / authors a minimal workbook with styles that saves and reopens through the native reader",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / accepts the maximum worksheet coordinate and keeps rows and cells sorted as they are added",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / appends a missing cell to an existing worksheet while preserving surrounding nodes and unrelated parts",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / creates qualified dimension row cell and text nodes in a prefixed worksheet",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses unsafe existing row ordering before mutation",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-create.test.ts:xlsx create acceptance feature / executes the implemented xlsx creation scenarios with exported bindings",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / creates a wrapped style closure for the shared default-style fixture and survives reopen",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "26bae7ee4d283b3109bdb28f31bad7d28adb89232790fd9a0bbe4b211c2496d8",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / preserves namespace prefixes, reuses the appended equivalent xf and leaves formula caches intact",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "26bae7ee4d283b3109bdb28f31bad7d28adb89232790fd9a0bbe4b211c2496d8",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / refuses a missing target cell",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "26bae7ee4d283b3109bdb28f31bad7d28adb89232790fd9a0bbe4b211c2496d8",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / rolls back before mutation when the cell style index is out of range",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "26bae7ee4d283b3109bdb28f31bad7d28adb89232790fd9a0bbe4b211c2496d8",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / rolls back before mutation when xf dependencies reference missing style collections",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "26bae7ee4d283b3109bdb28f31bad7d28adb89232790fd9a0bbe4b211c2496d8",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / excludes phonetic guides while retaining shared and inline rich text runs",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real go-ooxml inline, numeric and boolean cells through workbook relationships",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real python-office shared strings from bytes",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads rel-linked shared strings, numerics, booleans and cached formulas across worksheets",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / conservatively invalidates cached formulas across worksheets and sets workbook calc flags",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / preserves style attributes and unrelated parts after save and reopen",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / qualifies inserted spreadsheet nodes in prefixed workbook and worksheet edits without duplicating calcPr",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / reads styled blank cells as null and preserves their style when edited",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported array formula edits without mutating the package",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported shared formula edits without mutating the package",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xlsx.test.ts:xlsx acceptance feature / executes the implemented xlsx scenarios with exported bindings",
+      "stagingPath": "docs/behaviors/staging-slides-sheets.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "2c9eeea8c798a67f5aa64c3b190af888ceed67ae8494b06f0dce20e8d8656b7c",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / executes the six QName/whitespace acceptance cases",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / literal whitespace normalises before character reference decoding",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / applies sorted disjoint edits with escaped text and XML fragments",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / refuses overlapping bounds and unsafe resulting XML",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:applyEdits / returns OoxmlError instances",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:escaping helpers / escape text and attribute values",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / accepts predefined and numeric entities",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / accepts xml-stylesheet processing instructions before the root element",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / expanded attribute lookup honours aliases, local rebinding and unqualified attributes",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / keeps the xml prefix bound implicitly",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / normalises literal XML whitespace but preserves character references and original offsets",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / parses namespaces, mixed content and UTF-16 offsets",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / refuses excessive depth, node count and input length",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / rejects malformed or unsafe XML",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/xml.test.ts:parseXml / stores attributes in null-prototype maps",
+      "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:crc32 / matches the standard test vector",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / enforces configured archive, count, entry, total, and ratio bounds",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses ASCII case-colliding member names",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses CRC mismatches",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses declared size mismatches",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses deflated members that inflate past their declared size bound",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses duplicate member names",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses encrypted members",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses local and central metadata mismatches",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses malformed ZIP64 sentinels without ZIP64 directory records",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses multi-disk archives",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses noncanonical part paths",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses undeclared trailing bytes after the archive",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses unsupported compression methods",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / refuses ASCII case-colliding output names",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / refuses non-empty directory entries",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / writes deterministic UTF-8 ZIP32 output that readZip can reopen",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads an empty deflate payload under a nonzero native inflate cap",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads ZIP64 members that use per-entry extras and 64-bit data descriptors",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses an undeclared gap before the ZIP64 end record",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses CRC mismatches in ZIP64 archives",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses duplicate central ZIP64 extras rather than guessing",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses malformed ZIP64 locators",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses missing central ZIP64 extras for sentinel fields",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses truncated central ZIP64 extras",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses unsupported ZIP64 extensible data sectors",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 central counts that cannot fit the declared central span",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 data descriptor mismatches",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 local and central size mismatches",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 offsets beyond Number.MAX_SAFE_INTEGER",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / automatically emits ZIP64 EOCD records for 65535 tiny entries",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [
+        "body-loop"
+      ],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / writes forced tiny ZIP64 output that readZip can reopen",
+      "stagingPath": "docs/behaviors/staging-package.json",
+      "state": "identity-present-needs-review",
+      "sourceEquivalence": "unverified-staging-has-no-source-pin",
+      "currentSourceSha256": "576bbb3615856e4bc131b5c32b923db5027a04c61f8ae2fa7c5650d9acf14eb2",
+      "currentReviewReasons": [],
+      "executionCredit": false
+    }
+  ],
+  "withoutStaging": [
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:missing done flag uses an attribute prefix under a default element namespace",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:serialization failure rolls back the done flag while retaining earlier edits",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:inspection results are detached and cannot bypass package custody",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:comment paragraph newlines and tabs are read without rewriting bodies",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:non-self-closing entries retain boundary whitespace exactly",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:multiple comments settings and external settings refuse before mutation",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:incomplete extended metadata remains inspectable but absent targets cannot be resolved",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:public entrypoints save and reopen the resolved flag without changing comment bodies",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused",
+      "path": "tests/unit/docx-comments.test.ts",
+      "sourceSha256": "9e78a7a4412b53ed017a35b7f8e0a56b4896a98754129654cceb9b7d0357f969"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:direct run formatting executes15 saved outcome and refusal cases",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:changed formatting stales spans and paragraphs but no-op preserves handles",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:explicit false writes off properties while null removes direct overrides",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:aliased namespaces remain bound and unrelated property bytes are retained",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:reapplying explicit values preserves lexically different Boolean spellings and handles",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:absent and self-closing run properties insert in schema order",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:serialization failure retains package, earlier edits and valid paragraph handle",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:all runs preflight before one malformed later property can change an earlier run",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:table-cell formatting invalidates cell handles without changing grid or cell text",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:empty paragraphs no-op while unsupported self-closing runs refuse nonempty formatting",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:inserting a property while deleting its following sibling yields valid ordering",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:default namespace elements receive qualified formatting without changing unqualified attributes",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:formatting does not change style graphs or Unicode text and explicitly disabled settings permit edits",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:fresh spans remain usable after formatting while preserving direct properties",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:malformed bold or italic refuses even when the other flag is requested",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:paragraph style selection executes19 saved outcome and refusal cases",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:changed style invalidates handles but no-op preserves them",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:null removes only direct style without requiring a style registry",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:aliased namespaces and encoded style IDs retain text and unrelated properties",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:same direct style retains quote spelling and exact archive bytes",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:missing, self-closing properties and self-closing empty paragraphs accept first style child",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:style-only update preserves UTF-16 encoding and BOM",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:serialization rollback leaves earlier changes and paragraph handles intact",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:table handles survive style changes but stale cells and spans refuse",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:removal requests still refuse protection and invalid topology",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:no registry, invalid registry and character styles refuse addition without touching the package",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:style getters inspect direct override only and do not select defaults",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:default namespace, direct run formatting and fresh spans survive style assignment",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:external or later enforcing settings refuse while explicit disabled settings allow selection",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:style mutations refuse lexical barriers, run revisions and unknown paragraph properties",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:disk save and reopen retain chosen direct style and untouched definitions",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-style.test.ts:same-style request still refuses document protection without touching handles",
+      "path": "tests/unit/docx-paragraph-style.test.ts",
+      "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:paragraph style authoring executes24 saved outcomes and atomic refusals",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:definition creation preserves paragraph, table-cell and span handles until a text edit",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:styles-only update retains UTF16 LE and BE declarations, BOM and old definitions",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:final serialization failure rolls back new registry graph and existing registry append",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:input data rejects unknown keys, accessors and invalid XML without package changes",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:all registry IDs must be unique for authoring, including unselected duplicates",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:selected base chains require paragraph targets and refuse multiple or foreign links",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:new styles honor arbitrary relationship target paths and preserve registry metadata",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:XML attribute escapes and dollar replacement tokens are literal in self-closing registries",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:disabled protection allows authoring but external or later enforcing settings refuse",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-style-authoring.test.ts:disk save reopen retains authored base and flags without dirtying document text",
+      "path": "tests/unit/docx-style-authoring.test.ts",
+      "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/oracle-process.test.ts:oracle runner captures success and rejects missing commands",
+      "path": "tests/unit/oracle-process.test.ts",
+      "sourceSha256": "9794b02aac859024269cf4baf27b6db7222b43332e5e7d7b7acb7e8562d01c9f"
+    },
+    {
+      "id": "bun:tests/unit/oracle-process.test.ts:oracle timeout kills descendants retaining output pipes and bounds completion",
+      "path": "tests/unit/oracle-process.test.ts",
+      "sourceSha256": "9794b02aac859024269cf4baf27b6db7222b43332e5e7d7b7acb7e8562d01c9f"
+    },
+    {
+      "id": "bun:tests/unit/oracle-process.test.ts:oracle output is bounded and excessive output terminates the command group",
+      "path": "tests/unit/oracle-process.test.ts",
+      "sourceSha256": "9794b02aac859024269cf4baf27b6db7222b43332e5e7d7b7acb7e8562d01c9f"
+    },
+    {
+      "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
+      "path": "tests/unit/pptx-create.test.ts",
+      "sourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68"
+    },
+    {
+      "id": "bun:tests/unit/pptx-create.test.ts:authored title layout gives title and subtitle explicit nonoverlapping slide-space bounds",
+      "path": "tests/unit/pptx-create.test.ts",
+      "sourceSha256": "b7c3cbbf47cca2d89166e6faa52dbfda689af170394ad93527919cf498c72c68"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:text-box creation stales same-slide anchors and tables but not other slides",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:serialization failure restores prior edits, versions and still-usable anchors",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:new shapes bind namespaces locally even when p/a are absent or shadowed",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:tree ambiguity, lexical barriers and malformed shape identity refuse atomically",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:external slide reorder invalidates old slide identity while raw same-slide edits are read live",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:real presentation adds a text box and saves/reopens without changing other payloads",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-text-box.test.ts:disk save retains multiline paragraphs, direct flags and extension tail order",
+      "path": "tests/unit/pptx-text-box.test.ts",
+      "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/property-campaign.test.ts:seeded inputs repeat exactly and a different seed changes the corpus",
+      "path": "tests/unit/property-campaign.test.ts",
+      "sourceSha256": "4283545d1c3de1bbfe0762556103ffb7b315452b14a5dd059cba02601cb2a2d8"
+    },
+    {
+      "id": "bun:tests/unit/property-campaign.test.ts:small native campaign records actual executed families and reproducible input hashes",
+      "path": "tests/unit/property-campaign.test.ts",
+      "sourceSha256": "4283545d1c3de1bbfe0762556103ffb7b315452b14a5dd059cba02601cb2a2d8"
+    },
+    {
+      "id": "bun:tests/unit/property-campaign.test.ts:campaign rejects invalid budgets and preserves failing case inputs",
+      "path": "tests/unit/property-campaign.test.ts",
+      "sourceSha256": "4283545d1c3de1bbfe0762556103ffb7b315452b14a5dd059cba02601cb2a2d8"
+    },
+    {
+      "id": "bun:tests/unit/property-campaign.test.ts:timing reports retain raw samples and calculate median and nearest-rank p95",
+      "path": "tests/unit/property-campaign.test.ts",
+      "sourceSha256": "4283545d1c3de1bbfe0762556103ffb7b315452b14a5dd059cba02601cb2a2d8"
+    },
+    {
+      "id": "bun:tests/unit/property-campaign.test.ts:mutant buffer custody is checked on accepted and typed-refusal paths",
+      "path": "tests/unit/property-campaign.test.ts",
+      "sourceSha256": "4283545d1c3de1bbfe0762556103ffb7b315452b14a5dd059cba02601cb2a2d8"
+    },
+    {
+      "id": "bun:tests/unit/property-campaign.test.ts:a failed performance run replaces old pass evidence and starts with running status",
+      "path": "tests/unit/property-campaign.test.ts",
+      "sourceSha256": "4283545d1c3de1bbfe0762556103ffb7b315452b14a5dd059cba02601cb2a2d8"
+    },
+    {
+      "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
+      "path": "tests/unit/references.test.ts",
+      "sourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:native inventory keeps declaration counts distinct from each tables and registration loops",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:native inventory marks dynamic suite names, callbacks and conditional registrations explicitly",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:native inventory retains todo declarations without pretending they execute",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:native inventory records body loops and only direct matcher expressions, not helper execution",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:native inventory has deterministic hashes and refuses duplicate identities",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:inventory drift check detects added tests, edited helpers and no-test file changes without rewriting report",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:drift checks refuse unresolved callbacks even when a matching report exists",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:staging reconciliation distinguishes surviving IDs, missing IDs and absent mappings without credit",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:inventory fails closed on imported binding shadowing, indirect aliases and tagged tables",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:native registration shadows in destructuring and deferred helper registration are unresolved",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:transparent TypeScript expressions cannot hide imported registration aliases",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:nested function matchers are deferred syntax rather than direct test assertions",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/test-inventory.test.ts:test-support file edits invalidate the inventory independently of declaration files",
+      "path": "tests/unit/test-inventory.test.ts",
+      "sourceSha256": "2b9bf731cf71c03083383e2feda4bbf5f9441d0b0f20f9d9e610bcb384432715"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:tracked Word workflow dispatch executes17outcome/refusal cases",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:initial destination precondition refusal reports zero revision counts",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:output serialization/save refusal clears staged revision identities",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:strict tracked overwrite and explicit false dispatch have distinct saved outcomes",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:overlapping literal occurrences never become one tracked target",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:caller mutation after dispatch cannot change the requested tracking mode or revision metadata",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/tracked-workflow.test.ts:destination change after staging refuses without publishing staged revisions",
+      "path": "tests/unit/tracked-workflow.test.ts",
+      "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:cell style selection executes27 saved outcomes and atomic refusals",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:style-only edits preserve cell payloads for scalar and formula topologies",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:null removes direct index without styles registry and explicit zero remains distinct",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:same numeric style preserves lexical index spelling and exact original archive",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:style attribute scanner handles quotes, prefixes and unrelated values containing s=",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:UTF16 LE/BE worksheet declaration, BOM and target value survive style selection",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:serialization rollback retains earlier edits, cached values and live worksheet facades",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:external changes to another worksheet or workbook metadata refuse cached-model style updates",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:custom number formats and selected base dependencies are validated",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:wrong-namespace style indexes and malformed direct row placement refuse",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:all index argument errors refuse without changing source bytes",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:protected no-op and removal both refuse conservatively",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:disk save and reopen retain style selection, definitions and formula cache",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:worksheet aliases to the same part refuse instead of leaving a second cached model stale",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
+      "path": "tests/unit/xlsx-cell-style.test.ts",
+      "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    }
+  ]
+}

@@ -63,7 +63,9 @@ Gherkin or complete format coverage.
 ## Development
 
 Requires Bun 1.4.1 or newer. `make install` installs development tools; `make check`
-runs types, shared-reference checks, unit tests, exact Gherkin acceptance and examples.
+runs types, native-inventory/mapping drift checks, shared-reference checks, unit
+tests, exact Gherkin acceptance and examples. See the [native catalogue](docs/behaviors/README.md)
+for refresh commands and the distinction between declarations and executed cases.
 `make parity` also requires all planned behaviour gaps to be closed.
 It currently fails as expected.
 
