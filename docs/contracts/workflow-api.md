@@ -35,6 +35,11 @@ Guarded helper APIs:
   Resolves `p:ph type=title|ctrTitle|subTitle` in direct shapes, must be unique,
   one supported text paragraph; no heuristic first paragraph selection.
 
+Calculation receipts describe worksheet `<f>` cell cache invalidation only. Array
+and data-table result ranges refuse value edits before mutation because followers
+may lack `<f>`. Chart/external-link/opaque caches and calculation chains are
+preserved; no general cache freshness or calculation certification is implied.
+
 The workflow implementation owns async file identity checks and serialises its own
 writers by canonical source/output path. It does not claim isolation against an
 external filesystem writer between final check and rename. Final symlinks and

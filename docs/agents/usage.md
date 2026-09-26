@@ -38,8 +38,9 @@ unchanged edits and actually committed changes; refusals always commit zero.
 Targets are exact DOCX body/table text, `slide:1/title` or `slide:1/subtitle`, and
 `Sheet!A1` or `A1`. Existing cells only; null clears and formula overwrites refuse.
 XLSX `multilineWrap: true` clones/reuses the correct xf and preserves its dependencies.
-`calculationPolicy: 'invalidate-without-recalculation'` clears caches and reports
-recalculation required without producing an answer. `expectedDestinationSha256`
+`calculationPolicy: 'invalidate-without-recalculation'` clears cached values on
+worksheet formula-bearing cells and reports recalculation required without producing
+an answer. Array/data-table result ranges refuse value edits before any write. `expectedDestinationSha256`
 can guard an existing output; null requires the output to be absent.
 
 Only this API's writers share its process-local path locks. External editors can
@@ -53,7 +54,7 @@ leaf symlinks and safe-mode same-file/hardlink destinations refuse. See
 const doc = await Document.open(input);
 const spans = doc.find("Payment is due");
 if (spans.length !== 1) throw new Error("Ambiguous or missing target");
-spans[0]!.replace("Payment becomes due");
+await spans[0]!.replace("Payment becomes due");
 const outputBytes = await doc.save(); // No implicit overwrite of the input.
 const reopened = await Document.open(outputBytes);
 if (reopened.find("Payment becomes due").length !== 1) throw new Error("Edit lost");
@@ -107,9 +108,16 @@ if (reopened.worksheet(wb.sheetnames[0]!).getCell("A2")?.value !== "Updated valu
 Only existing supported simple cells can be written. Numeric, boolean, inline and
 shared-string values can be read; formulas expose stored cached values. The API
 preserves the target cell style index. Shared and array formula overwrites refuse.
-After an input edit, this first slice conservatively clears formula caches across
-all worksheets and requests recalculation on open. It does not calculate formulas.
-A missing cached value is not zero, a current answer or a successful calculation.
+After an input edit, this slice clears `<v>` contents only on worksheet cells
+carrying `<f>`, across all loaded worksheets, and requests recalculation on open.
+Array/data-table formulas may have result followers without `<f>`; value edits in
+such workbooks refuse atomically with `xlsx-cache-topology-unsupported`. Style-only
+edits do not need that invalidation and preserve caches.
+
+Chart caches, external-link caches, other opaque derived values and calculation
+chains are preserved, not refreshed or certified. A recalculation flag or receipt
+does not establish their freshness. This API does not calculate formulas. A missing
+cached value is not zero, a current answer or a successful calculation.
 
 ## Package-level operations
 

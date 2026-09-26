@@ -142,6 +142,20 @@ export class Workbook {
       );
     }
 
+    // Validate the selected cell first to retain its specific formula refusal.
+    const valueEdits = buildValueEdits(cell, value);
+    // Array/data-table followers may have cached values without their own <f>.
+    // Clearing only anchors would silently leave those answers stale. Until the
+    // range engine owns every result cell, refuse the whole value edit up front.
+    for (const model of this.sheetsByName.values()) {
+      for (const formula of elements(model.document, "f", S_NS)) {
+        if (formula.attributes.t === "array" || formula.attributes.t === "dataTable") {
+          throw new OoxmlError("xlsx-cache-topology-unsupported",
+            `Cannot invalidate ${formula.attributes.t} result ranges in worksheet ${model.name}`);
+        }
+      }
+    }
+
     const formulasPresent = [...this.sheetsByName.values()].some((model) =>
       [...model.cells.values()].some((entry) => entry.formulaElement !== undefined)
     );
@@ -150,7 +164,7 @@ export class Workbook {
       for (const model of this.sheetsByName.values()) {
         const edits: CellEdit[] = [];
         if (model.name === sheetName) {
-          edits.push(...buildValueEdits(cell, value));
+          edits.push(...valueEdits);
         }
         if (formulasPresent) {
           edits.push(...buildFormulaCacheInvalidationEdits(model));

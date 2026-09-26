@@ -5,6 +5,7 @@ import { bindings as namespaceBindings } from "./relationship-namespaces.ts";
 import { bindings as docxBindings } from "./docx.ts";
 import { bindings as pptxBindings } from "./pptx.ts";
 import { bindings as xlsxBindings } from "./xlsx.ts";
+import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 export const cleanup = cleanupWorkflowFixtures;
 
@@ -15,6 +16,7 @@ export const bindings: StepBinding[] = [
   ...docxBindings,
   ...pptxBindings,
   ...xlsxBindings,
+  ...cacheBoundaryBindings,
   ...workflowBindings,
 ];
 

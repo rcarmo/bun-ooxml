@@ -31,6 +31,12 @@ recorded for both rcarmo/go-ooxml and rcarmo/python-office-mcp-server. Uncommitt
 MCP changes are excluded. OOXML source and tests are pinned, including inherited
 surfaces; OOXML additions alone are insufficient for full parity.
 
+## Cross-language limits
+
+`cross-language-limits.md` records bounded revision/cache/transport behaviour and
+an unresolved extended-comment content-type discrepancy. Its planned scenarios
+must be closed by independent evidence; shared workflow passes do not cover them.
+
 ## Closure
 
 Every imported behaviour has a reviewed mapping to Gherkin, executed steps and
