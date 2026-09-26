@@ -32,6 +32,8 @@ without touching comment bodies or anchors.
 structure and XML members without requiring a complete OPC graph.
 [`xmlEquivalent()`](docs/contracts/xml-comparison.md) provides conservative
 XML comparison for the documented preservation profile.
+[`XmlSnapshot`](docs/contracts/xml-removal.md) removes disjoint XML subtrees
+without rewriting surrounding source characters.
 [`comparePackageArchives()`](docs/contracts/package-comparison.md) separates
 those equivalent XML payloads from binary changes, additions and removals.
 ZIP, XML and OPC code use Bun's built-in file, hash and compression implementations. There are no

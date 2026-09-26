@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 487,
-  "files": 50,
+  "count": 498,
+  "files": 51,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -289,6 +289,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/xml-removal.test.ts",
+      "sha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "declarations": 11,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xml.test.ts",
       "sha256": "9a2b961cb2ddb6f468fbafbd9d5a8e51c6d32f5948ed8fe2dd69abc7f4306a45",
       "declarations": 13,
@@ -398,7 +404,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "f8326f07aa4d8b369cf468857e8c76c377687148b4298dce0e7f9bc92aca39cd"
+      "sha256": "1fb09795acba6e14d1abb205a21501285e69a41f322c26424b817f05043d07d1"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -443,6 +449,10 @@
     {
       "path": "tests/acceptance/xml-names.ts",
       "sha256": "f03469e1441b8ca40564690f6bec79a3d4cbb60a138432a23cca9607cfead688"
+    },
+    {
+      "path": "tests/acceptance/xml-removal.ts",
+      "sha256": "6c58e00c24219bc3f1f4360504cc3f7e7f797fa4ba09afb12710a03a2866de81"
     },
     {
       "path": "tests/acceptance/zip64.ts",
@@ -570,6 +580,9 @@
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
+    "bun:tests/unit/xml-removal.test.ts:root, duplicate and ancestor-descendant removal refuse atomically",
+    "bun:tests/unit/xml-removal.test.ts:handles belong only to their issuing snapshot, even for identical source",
+    "bun:tests/unit/xml-removal.test.ts:snapshot construction refuses malformed, DTD-bearing and oversized input",
     "bun:tests/unit/xml.test.ts:parseXml / rejects malformed or unsafe XML",
     "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
     "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / automatically emits ZIP64 EOCD records for 65535 tiny entries"
@@ -693,6 +706,9 @@
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
+    "bun:tests/unit/xml-removal.test.ts:root, duplicate and ancestor-descendant removal refuse atomically",
+    "bun:tests/unit/xml-removal.test.ts:handles belong only to their issuing snapshot, even for identical source",
+    "bun:tests/unit/xml-removal.test.ts:snapshot construction refuses malformed, DTD-bearing and oversized input",
     "bun:tests/unit/xml.test.ts:parseXml / rejects malformed or unsafe XML",
     "bun:tests/unit/zip.test.ts:writeZip / refuses ASCII case-colliding output names",
     "bun:tests/unit/zip.test.ts:writeZip / refuses non-empty directory entries",
@@ -17128,6 +17144,363 @@
         "newAcceptanceRunId",
         "parseFeature",
         "text.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:removing disjoint XML elements preserves all surrounding source characters",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 8,
+      "title": "removing disjoint XML elements preserves all surrounding source characters",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.remove([c!, a!])).toBe('<r xmlns:p=\"u\"><!--keep--> gap </r>')",
+        "expect(snapshot.remove([])).toBe(source)",
+        "expect(snapshot.remove([a!])).toBe('<r xmlns:p=\"u\"><!--keep--> gap <p:c /></r>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const snapshot = XmlSnapshot.parse(source);\n  const [, a, , c] = snapshot.elements;\n  expect(snapshot.remove([c!, a!])).toBe('<r xmlns:p=\"u\"><!--keep--> gap </r>');\n  expect(snapshot.remove([])).toBe(source);\n  expect(snapshot.remove([a!])).toBe('<r xmlns:p=\"u\"><!--keep--> gap <p:c /></r>');\n  expect(snapshot.remove([c!, a!])).toBe('<r xmlns:p=\"u\"><!--keep--> gap </r>');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "snapshot.remove"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:root, duplicate and ancestor-descendant removal refuse atomically",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 17,
+      "title": "root, duplicate and ancestor-descendant removal refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => snapshot.remove(targets)).toThrow(code(error))",
+        "expect(snapshot.remove([])).toBe(source)",
+        "expect(snapshot.remove([b!])).toBe(source.replace('<p:b>text</p:b>', ''))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 20,
+          "expression": "for (const [targets, error] of [\n    [[root!], 'XML_REMOVAL_ROOT'], [[a!, a!], 'XML_REMOVAL_OVERLAP'],\n    [[a!, b!], 'XML_REMOVAL_OVERLAP'], [[b!, a!], 'XML_REMOVAL_OVERLAP'],\n  ] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const snapshot = XmlSnapshot.parse(source);\n  const [root, a, b] = snapshot.elements;\n  for (const [targets, error] of [\n    [[root!], 'XML_REMOVAL_ROOT'], [[a!, a!], 'XML_REMOVAL_OVERLAP'],\n    [[a!, b!], 'XML_REMOVAL_OVERLAP'], [[b!, a!], 'XML_REMOVAL_OVERLAP'],\n  ] as const) {\n    expect(() => snapshot.remove(targets)).toThrow(code(error));\n    expect(snapshot.remove([])).toBe(source);\n  }\n  expect(snapshot.remove([b!])).toBe(source.replace('<p:b>text</p:b>', ''));\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "code",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "snapshot.remove",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:handles belong only to their issuing snapshot, even for identical source",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 30,
+      "title": "handles belong only to their issuing snapshot, even for identical source",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => snapshot.remove([target as typeof a])).toThrow(code('XML_REMOVAL_TARGET'))",
+        "expect(() => snapshot.remove(null as never)).toThrow(code('XML_REMOVAL_TARGET'))",
+        "expect(snapshot.remove([])).toBe(source)",
+        "expect(() => XmlSnapshot.parse(result).remove([a])).toThrow(code('XML_REMOVAL_TARGET'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for (const target of [other.elements[1],"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const snapshot = XmlSnapshot.parse(source), other = XmlSnapshot.parse(source);\n  const a = snapshot.elements[1]!;\n  for (const target of [other.elements[1], { ...a }, { ...a, start: 0 }, null, undefined, 1]) {\n    expect(() => snapshot.remove([target as typeof a])).toThrow(code('XML_REMOVAL_TARGET'));\n  }\n  expect(() => snapshot.remove(null as never)).toThrow(code('XML_REMOVAL_TARGET'));\n  expect(snapshot.remove([])).toBe(source);\n  const result = snapshot.remove([a]);\n  expect(() => XmlSnapshot.parse(result).remove([a])).toThrow(code('XML_REMOVAL_TARGET'));\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "XmlSnapshot.parse().remove",
+        "code",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "snapshot.remove"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:snapshots and target offsets are immutable and names use expanded namespaces",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 42,
+      "title": "snapshots and target offsets are immutable and names use expanded namespaces",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(Object.isFrozen(snapshot)).toBe(true)",
+        "expect(Object.isFrozen(snapshot.elements)).toBe(true)",
+        "expect(snapshot.elements.every(Object.isFrozen)).toBe(true)",
+        "expect(snapshot.elements.map(({ name, localName, namespaceURI }) => ({ name, localName, namespaceURI }))).toEqual([\n    { name: 'r', localName: 'r', namespaceURI: 'u' },\n    { name: 'p:a', localName: 'a', namespaceURI: 'v' },\n    { name: 'a', localName: 'a', namespaceURI: '' },\n  ])",
+        "expect(() => { (snapshot.elements[1] as { start: number }).start = 0; }).toThrow()",
+        "expect(snapshot.remove([snapshot.elements[1]!])).toBe('<r xmlns=\"u\"><a xmlns=\"\"/></r>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const snapshot = XmlSnapshot.parse('<r xmlns=\"u\"><p:a xmlns:p=\"v\"/><a xmlns=\"\"/></r>');\n  expect(Object.isFrozen(snapshot)).toBe(true);\n  expect(Object.isFrozen(snapshot.elements)).toBe(true);\n  expect(snapshot.elements.every(Object.isFrozen)).toBe(true);\n  expect(snapshot.elements.map(({ name, localName, namespaceURI }) => ({ name, localName, namespaceURI }))).toEqual([\n    { name: 'r', localName: 'r', namespaceURI: 'u' },\n    { name: 'p:a', localName: 'a', namespaceURI: 'v' },\n    { name: 'a', localName: 'a', namespaceURI: '' },\n  ]);\n  expect(() => { (snapshot.elements[1] as { start: number }).start = 0; }).toThrow();\n  expect(snapshot.remove([snapshot.elements[1]!])).toBe('<r xmlns=\"u\"><a xmlns=\"\"/></r>');\n}",
+      "calls": [
+        "Object.isFrozen",
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "snapshot.elements.every",
+        "snapshot.elements.map",
+        "snapshot.remove"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:UTF-16 offsets preserve astral characters, raw line endings, declarations and PIs",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 56,
+      "title": "UTF-16 offsets preserve astral characters, raw line endings, declarations and PIs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml.slice(x.start, x.end)).toBe('<x a=\"&amp;\">雪</x>')",
+        "expect(snapshot.remove([x])).toBe(xml.replace('<x a=\"&amp;\">雪</x>', ''))",
+        "expect(parseXml(snapshot.remove([x])).root.text).toBe('😀\\n\\n')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const xml = '<?xml version=\"1.0\"?>\\r\\n<?keep v?>\\r\\n<r>😀\\r\\n<x a=\"&amp;\">雪</x><!--tail-->\\r\\n</r>\\r\\n';\n  const snapshot = XmlSnapshot.parse(xml), x = snapshot.elements[1]!;\n  expect(xml.slice(x.start, x.end)).toBe('<x a=\"&amp;\">雪</x>');\n  expect(snapshot.remove([x])).toBe(xml.replace('<x a=\"&amp;\">雪</x>', ''));\n  expect(parseXml(snapshot.remove([x])).root.text).toBe('😀\\n\\n');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "parseXml",
+        "snapshot.remove",
+        "xml.replace",
+        "xml.slice"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:removal validates newly adjacent text before returning output",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 64,
+      "title": "removal validates newly adjacent text before returning output",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.remove([snapshot.elements[1]!])).toBe('<r>]]&gt;<b/>>tail</r>')",
+        "expect(() => dangerous.remove([dangerous.elements[1]!])).toThrow(code('XML_REMOVAL_UNSAFE'))",
+        "expect(dangerous.remove([])).toBe('<r>]]<a/>>tail</r>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const xml = '<r>]]<a/>&gt;<b/>>tail</r>', snapshot = XmlSnapshot.parse(xml);\n  expect(snapshot.remove([snapshot.elements[1]!])).toBe('<r>]]&gt;<b/>>tail</r>');\n  const dangerous = XmlSnapshot.parse('<r>]]<a/>>tail</r>');\n  expect(() => dangerous.remove([dangerous.elements[1]!])).toThrow(code('XML_REMOVAL_UNSAFE'));\n  expect(dangerous.remove([])).toBe('<r>]]<a/>>tail</r>');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "code",
+        "dangerous.remove",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "snapshot.remove"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:snapshot construction refuses malformed, DTD-bearing and oversized input",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 72,
+      "title": "snapshot construction refuses malformed, DTD-bearing and oversized input",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => XmlSnapshot.parse(xml)).toThrow(OoxmlError)",
+        "expect(() => XmlSnapshot.parse(input as string)).toThrow(code('XML_REMOVAL_SOURCE'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 73,
+          "expression": "for (const xml of ['<r>', '<!DOCTYPE r><r/>', '<r>\\u0000</r>', '<r>' + 'x'.repeat(8 * 1024 * 1024) + '</r>', '<r>'.repeat(257) + '</r>'.repeat(257)])"
+        },
+        {
+          "line": 76,
+          "expression": "for (const input of [null, undefined, 1,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  for (const xml of ['<r>', '<!DOCTYPE r><r/>', '<r>\\u0000</r>', '<r>' + 'x'.repeat(8 * 1024 * 1024) + '</r>', '<r>'.repeat(257) + '</r>'.repeat(257)]) {\n    expect(() => XmlSnapshot.parse(xml)).toThrow(OoxmlError);\n  }\n  for (const input of [null, undefined, 1, {}]) expect(() => XmlSnapshot.parse(input as string)).toThrow(code('XML_REMOVAL_SOURCE'));\n}",
+      "calls": [
+        ".repeat",
+        "XmlSnapshot.parse",
+        "code",
+        "expect",
+        "expect().toThrow"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:removal preserves unselected descendants and never mutates selection arrays",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 79,
+      "title": "removal preserves unselected descendants and never mutates selection arrays",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.remove(targets)).toBe('<r><b><c/></b></r>')",
+        "expect(targets.map(t => t.name)).toEqual(['d', 'a'])",
+        "expect(snapshot.elements.map(t => t.name)).toEqual(['r', 'a', 'b', 'c', 'd'])",
+        "expect(XmlSnapshot.parse('<r/>').remove([])).toBe('<r/>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const snapshot = XmlSnapshot.parse('<r><a/><b><c/></b><d/></r>');\n  const targets = Object.freeze([snapshot.elements[4]!, snapshot.elements[1]!]);\n  expect(snapshot.remove(targets)).toBe('<r><b><c/></b></r>');\n  expect(targets.map(t => t.name)).toEqual(['d', 'a']);\n  expect(snapshot.elements.map(t => t.name)).toEqual(['r', 'a', 'b', 'c', 'd']);\n  expect(XmlSnapshot.parse('<r/>').remove([])).toBe('<r/>');\n}",
+      "calls": [
+        "Object.freeze",
+        "XmlSnapshot.parse",
+        "XmlSnapshot.parse().remove",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "snapshot.elements.map",
+        "snapshot.remove",
+        "targets.map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:bounded snapshots do not collect descendant text at every ancestor",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 88,
+      "title": "bounded snapshots do not collect descendant text at every ancestor",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.elements).toHaveLength(201)",
+        "expect(snapshot.elements.every(t => !('text' in t) && !('children' in t))).toBe(true)",
+        "expect(snapshot.remove([snapshot.elements[200]!])).toBe(prefix + 'x'.repeat(256 * 1024) + suffix)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const prefix = '<r>'.repeat(200), suffix = '</r>'.repeat(200);\n  const xml = prefix + 'x'.repeat(256 * 1024) + '<drop/>' + suffix;\n  const snapshot = XmlSnapshot.parse(xml);\n  expect(snapshot.elements).toHaveLength(201);\n  expect(snapshot.elements.every(t => !('text' in t) && !('children' in t))).toBe(true);\n  expect(snapshot.remove([snapshot.elements[200]!])).toBe(prefix + 'x'.repeat(256 * 1024) + suffix);\n}",
+      "calls": [
+        ".repeat",
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "snapshot.elements.every",
+        "snapshot.remove"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:target selection uses bounded array entries rather than an overridable iterator",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 97,
+      "title": "target selection uses bounded array entries rather than an overridable iterator",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.remove(targets)).toBe('<r><b/></r>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const snapshot = XmlSnapshot.parse('<r><a/><b/></r>');\n  const targets = [snapshot.elements[1]!];\n  targets[Symbol.iterator] = function* () { yield snapshot.elements[2]!; return undefined; };\n  expect(snapshot.remove(targets)).toBe('<r><b/></r>');\n}",
+      "calls": [
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toBe",
+        "snapshot.remove"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:three canonical XML removal cases execute while unrelated shared operations stay planned",
+      "path": "tests/unit/xml-removal.test.ts",
+      "line": 104,
+      "title": "three canonical XML removal cases execute while unrelated shared operations stay planned",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(3)",
+        "expect(result.counts.cases.planned).toBeGreaterThan(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d",
+      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts');\n  const { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings, scenarioIds } = await import('../acceptance/xml-removal.ts');\n  const path = 'workflows/xml/parsing.feature';\n  const feature = selectSharedScenarios(path, await Bun.file(join(fixturesRoot(), path)).text(), scenarioIds);\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  const result = await executeAcceptance({ root: '.', features: [feature], counts: {\n    features: count(1), scenarios: count(2), cases: count(3), steps: count(10),\n  } }, bindings, 'xml-removal-unit');\n  expect(result.failures).toEqual([]);\n  expect(result.counts.cases.passed).toBe(3);\n  expect(result.counts.cases.planned).toBeGreaterThan(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
       ],
       "reviewReasons": [],
       "unresolved": []

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 487,
+  "nativeDeclarations": 498,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 260,
+  "withoutStagingCount": 271,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3485,6 +3485,61 @@
       "id": "bun:tests/unit/xml-comparison.test.ts:processing instruction spacing is retained rather than trimmed by parser events",
       "path": "tests/unit/xml-comparison.test.ts",
       "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:removing disjoint XML elements preserves all surrounding source characters",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:root, duplicate and ancestor-descendant removal refuse atomically",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:handles belong only to their issuing snapshot, even for identical source",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:snapshots and target offsets are immutable and names use expanded namespaces",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:UTF-16 offsets preserve astral characters, raw line endings, declarations and PIs",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:removal validates newly adjacent text before returning output",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:snapshot construction refuses malformed, DTD-bearing and oversized input",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:removal preserves unselected descendants and never mutates selection arrays",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:bounded snapshots do not collect descendant text at every ancestor",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:target selection uses bounded array entries rather than an overridable iterator",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-removal.test.ts:three canonical XML removal cases execute while unrelated shared operations stay planned",
+      "path": "tests/unit/xml-removal.test.ts",
+      "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
     }
   ]
 }
