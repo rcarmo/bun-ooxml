@@ -41,6 +41,16 @@ type QualifiedName = {
 };
 
 export function parseXml(text: string): XmlDocument {
+  return scanXml(text, true);
+}
+
+/** Apply the same XML syntax/namespace/resource checks without retaining
+ * descendant text for every ancestor. Intended for non-editing admission. */
+export function validateXml(text: string): void {
+  scanXml(text, false);
+}
+
+function scanXml(text: string, collectText: boolean): XmlDocument {
   if (text.length > MAX_INPUT_LENGTH) {
     fail("XML_INPUT_TOO_LARGE", `XML input exceeds ${MAX_INPUT_LENGTH} UTF-16 code units`);
   }
@@ -74,7 +84,7 @@ export function parseXml(text: string): XmlDocument {
   };
 
   const appendText = (value: string): void => {
-    if (value.length === 0) {
+    if (!collectText || value.length === 0) {
       return;
     }
 

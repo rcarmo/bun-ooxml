@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 413,
+  "nativeDeclarations": 424,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 186,
+  "withoutStagingCount": 197,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2735,6 +2735,61 @@
       "id": "bun:tests/unit/outcome-mappings.test.ts:standalone mapping validation refuses unresolved declaration records",
       "path": "tests/unit/outcome-mappings.test.ts",
       "sourceSha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission accepts XML without an OPC graph and returns detached payloads",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission validates every XML and relationship member but keeps unrelated bytes opaque",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission refuses DTD and malformed XML with parser-specific reasons without changing bytes",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission rejects invalid and contradictory byte encodings rather than decoding lossily",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission resource controls have successful exact-boundary controls and typed refusals",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:syntax-only XML validation handles deep segmented text without ancestor text materialisation",
+      "path": "tests/unit/package-admission.test.ts",
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",

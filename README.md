@@ -27,8 +27,9 @@ content-type changes. Package-level Word review APIs inspect linked stories,
 resolve supported run-level revisions and author bounded tracked replacements.
 Existing comment threads can be inspected and individual resolution flags changed
 without touching comment bodies or anchors.
-ZIP, XML and OPC code
-use Bun's built-in file, hash and compression implementations. There are no
+[`admitPackage()`](docs/contracts/package-admission.md) validates bounded ZIP
+structure and XML members without requiring a complete OPC graph.
+ZIP, XML and OPC code use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 
 General Word Compare, move/format/table revisions, comment authoring, slide imports,

@@ -315,6 +315,24 @@
         "@id-docx-effective-run-formatting",
         "@id-docx-effective-run-formatting-refusal"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/zip-admission.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-members",
+        "@id-package-admission-resource-limits",
+        "@id-package-admission-unsupported-compression"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/xml-member-admission.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-xml-members"
+      ]
     }
   ]
 }

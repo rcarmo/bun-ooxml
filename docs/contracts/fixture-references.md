@@ -44,9 +44,10 @@ workflow also fails even if every fixture hash still matches.
 `features/shared.json` selects the shared workflows used by Bun acceptance tests.
 File identity and derivation are resolved through the root manifest.
 
-The package-admission and semantic-diff profiles under `workflows/package/`, and
-`workflows/xml/comparison.feature`, have no Bun bindings. Their presence in the
-specification does not mean the Bun APIs implement them.
+The ZIP and XML member admission profiles under `workflows/package/` are bound
+to [`admitPackage`](package-admission.md). The semantic-diff profile and
+`workflows/xml/comparison.feature` have no Bun bindings. Admission does not
+establish XML equivalence or package-diff semantics.
 
 ## Shared scenario selection
 

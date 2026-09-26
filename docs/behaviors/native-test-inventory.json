@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 413,
-  "files": 44,
+  "count": 424,
+  "files": 45,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -112,6 +112,12 @@
       "path": "tests/unit/outcome-mappings.test.ts",
       "sha256": "fe9495bea2cdbccd3cba83877891058f50ff8c60b215d9e2c3f37394177b587b",
       "declarations": 17,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/package-admission.test.ts",
+      "sha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "declarations": 11,
       "issues": []
     },
     {
@@ -313,6 +319,10 @@
       "sha256": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f"
     },
     {
+      "path": "tests/acceptance/package-admission.ts",
+      "sha256": "a702f05cd22cd1139a118b6d8b57a801236c7ac5a521699cdcd29bb1d0485b60"
+    },
+    {
       "path": "tests/acceptance/page-layout.ts",
       "sha256": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a"
     },
@@ -346,7 +356,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "390b2cbb9f388eda3977942c9ec3ede199e28b4dc06520a382aec0248768fa55"
+      "sha256": "b29b558bbd35e43c7230f614173e3676b9e5c47017d9da8f518d5ef05d774cef"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -387,6 +397,10 @@
     {
       "path": "tests/acceptance/zip64.ts",
       "sha256": "a78945e1d11f5ad32138e2ab12c1b64d4dfe8402d602460a0b9a9bbb466e5f42"
+    },
+    {
+      "path": "tests/fixtures/admission.ts",
+      "sha256": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e"
     },
     {
       "path": "tests/fixtures/native-edge-cases.ts",
@@ -433,6 +447,15 @@
     "bun:tests/unit/docx-style-authoring.test.ts:disabled protection allows authoring but external or later enforcing settings refuse",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
+    "bun:tests/unit/package-admission.test.ts:admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
+    "bun:tests/unit/package-admission.test.ts:admission validates every XML and relationship member but keeps unrelated bytes opaque",
+    "bun:tests/unit/package-admission.test.ts:admission refuses DTD and malformed XML with parser-specific reasons without changing bytes",
+    "bun:tests/unit/package-admission.test.ts:admission rejects invalid and contradictory byte encodings rather than decoding lossily",
+    "bun:tests/unit/package-admission.test.ts:admission resource controls have successful exact-boundary controls and typed refusals",
+    "bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds",
+    "bun:tests/unit/package-admission.test.ts:ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
+    "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
+    "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
@@ -522,6 +545,15 @@
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / full gate refuses planned work despite implemented cases passing",
     "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
+    "bun:tests/unit/package-admission.test.ts:admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
+    "bun:tests/unit/package-admission.test.ts:admission validates every XML and relationship member but keeps unrelated bytes opaque",
+    "bun:tests/unit/package-admission.test.ts:admission refuses DTD and malformed XML with parser-specific reasons without changing bytes",
+    "bun:tests/unit/package-admission.test.ts:admission rejects invalid and contradictory byte encodings rather than decoding lossily",
+    "bun:tests/unit/package-admission.test.ts:admission resource controls have successful exact-boundary controls and typed refusals",
+    "bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds",
+    "bun:tests/unit/package-admission.test.ts:ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
+    "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
+    "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
     "bun:tests/unit/package.test.ts:OpcPackage / conservatively refuses percent-encoded internal names and relationship targets",
     "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
     "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
@@ -7499,6 +7531,442 @@
         "expect().toThrow",
         "reconcileOutcomeMappings",
         "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission accepts XML without an OPC graph and returns detached payloads",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 6,
+      "title": "admission accepts XML without an OPC graph and returns detached payloads",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parts.get('a.xml')).toEqual(utf8(xml))",
+        "expect(parts.get('opaque.bin')).toEqual(Uint8Array.of(0xff,0x00))",
+        "expect(bytes).toEqual(before)",
+        "expect(admitPackage(bytes).get('a.xml')).toEqual(utf8(xml))",
+        "expect(OpcPackage.open(bytes)).rejects.toMatchObject({code:'opc-content-types-missing'})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n const bytes=admissionZip([['a.xml',utf8(xml)],['opaque.bin',Uint8Array.of(0xff,0x00)]]),before=bytes.slice();\n const parts=admitPackage(bytes);expect(parts.get('a.xml')).toEqual(utf8(xml));expect(parts.get('opaque.bin')).toEqual(Uint8Array.of(0xff,0x00));expect(bytes).toEqual(before);\n parts.get('a.xml')!.fill(0);expect(bytes).toEqual(before);expect(admitPackage(bytes).get('a.xml')).toEqual(utf8(xml));\n await expect(OpcPackage.open(bytes)).rejects.toMatchObject({code:'opc-content-types-missing'});\n}",
+      "calls": [
+        "OpcPackage.open",
+        "Uint8Array.of",
+        "admissionZip",
+        "admitPackage",
+        "admitPackage().get",
+        "bytes.slice",
+        "expect",
+        "expect().rejects.toMatchObject",
+        "expect().toEqual",
+        "parts.get",
+        "parts.get().fill",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 12,
+      "title": "admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(admitPackage(bytes).get('a.xml')).toEqual(payload)",
+        "expect(bytes).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 13,
+          "expression": "for(const payload of [Uint8Array.from([0xef,0xbb,0xbf,...utf8(xml)]),utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a>雪</a>'),utf16('<?xml version=\"1.0\" encoding=\"UTF-16BE\"?><a>雪</a>',true)])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n for(const payload of [Uint8Array.from([0xef,0xbb,0xbf,...utf8(xml)]),utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a>雪</a>'),utf16('<?xml version=\"1.0\" encoding=\"UTF-16BE\"?><a>雪</a>',true)]){\n  const bytes=admissionZip([['a.xml',payload]]),before=bytes.slice();expect(admitPackage(bytes).get('a.xml')).toEqual(payload);expect(bytes).toEqual(before);\n }\n}",
+      "calls": [
+        "Uint8Array.from",
+        "admissionZip",
+        "admitPackage",
+        "admitPackage().get",
+        "bytes.slice",
+        "expect",
+        "expect().toEqual",
+        "utf16",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission validates every XML and relationship member but keeps unrelated bytes opaque",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 17,
+      "title": "admission validates every XML and relationship member but keeps unrelated bytes opaque",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>admitPackage(bytes)).toThrow(OoxmlError)",
+        "expect(bytes).toEqual(before)",
+        "expect(admitPackage(admissionZip([['opaque.bin',utf8('<broken>')]])).get('opaque.bin')).toEqual(utf8('<broken>'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 18,
+          "expression": "for(const name of ['a.xml','A.XML','_rels/.rels','custom.RELS'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n for(const name of ['a.xml','A.XML','_rels/.rels','custom.RELS']){\n  const bytes=admissionZip([['valid.xml',utf8(xml)],[name,utf8('<broken>')]]),before=bytes.slice();expect(()=>admitPackage(bytes)).toThrow(OoxmlError);expect(bytes).toEqual(before);\n }\n expect(admitPackage(admissionZip([['opaque.bin',utf8('<broken>')]])).get('opaque.bin')).toEqual(utf8('<broken>'));\n}",
+      "calls": [
+        "admissionZip",
+        "admitPackage",
+        "admitPackage().get",
+        "bytes.slice",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission refuses DTD and malformed XML with parser-specific reasons without changing bytes",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 23,
+      "title": "admission refuses DTD and malformed XML with parser-specific reasons without changing bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 24,
+          "expression": "for(const [payload,code]of [[utf8('<!DOCTYPE a [<!ENTITY e \"text\">]><a>&e;</a>'),'XML_DTD_FORBIDDEN'],[utf16('<!DOCTYPE a><a/>'),'XML_DTD_FORBIDDEN'],[utf8('<broken>'),'XML_MALFORMED']] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n for(const [payload,code]of [[utf8('<!DOCTYPE a [<!ENTITY e \"text\">]><a>&e;</a>'),'XML_DTD_FORBIDDEN'],[utf16('<!DOCTYPE a><a/>'),'XML_DTD_FORBIDDEN'],[utf8('<broken>'),'XML_MALFORMED']] as const){\n  const bytes=admissionZip([['a.xml',payload]]),before=bytes.slice();expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code}));expect(bytes).toEqual(before);\n }\n}",
+      "calls": [
+        "admissionZip",
+        "admitPackage",
+        "bytes.slice",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "utf16",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission rejects invalid and contradictory byte encodings rather than decoding lossily",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 28,
+      "title": "admission rejects invalid and contradictory byte encodings rather than decoding lossily",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code:'opc-xml-encoding'}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 29,
+          "expression": "for(const payload of [Uint8Array.of(0xff),utf16('<a/>').slice(0,-1),utf8('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a/>'),utf16('<?xml version=\"1.0\" encoding=\"UTF-8\"?><a/>'),utf8('<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><a/>')])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n for(const payload of [Uint8Array.of(0xff),utf16('<a/>').slice(0,-1),utf8('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a/>'),utf16('<?xml version=\"1.0\" encoding=\"UTF-8\"?><a/>'),utf8('<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><a/>')]){\n  const bytes=admissionZip([['a.xml',payload]]),before=bytes.slice();expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code:'opc-xml-encoding'}));expect(bytes).toEqual(before);\n }\n}",
+      "calls": [
+        "Uint8Array.of",
+        "admissionZip",
+        "admitPackage",
+        "bytes.slice",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "utf16",
+        "utf16().slice",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission resource controls have successful exact-boundary controls and typed refusals",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 33,
+      "title": "admission resource controls have successful exact-boundary controls and typed refusals",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(admitPackage(bytes,{maxArchiveBytes:bytes.length,maxEntries:1,maxEntryBytes:4,maxTotalBytes:4,maxCompressionRatio:1}).size).toBe(1)",
+        "expect(()=>admitPackage(bytes,limits)).toThrow(expect.objectContaining({code}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 36,
+          "expression": "for(const [limits,code]of [["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n const bytes=admissionZip([['a.xml',utf8(xml)]],0),before=bytes.slice();\n expect(admitPackage(bytes,{maxArchiveBytes:bytes.length,maxEntries:1,maxEntryBytes:4,maxTotalBytes:4,maxCompressionRatio:1}).size).toBe(1);\n for(const [limits,code]of [[{maxArchiveBytes:bytes.length-1},'zip-archive-too-large'],[{maxEntries:0},'zip-too-many-entries'],[{maxEntryBytes:3},'zip-entry-too-large'],[{maxTotalBytes:3},'zip-total-too-large'],[{maxCompressionRatio:0.5},'zip-compression-ratio-exceeded']] as const){expect(()=>admitPackage(bytes,limits)).toThrow(expect.objectContaining({code}));expect(bytes).toEqual(before);}\n}",
+      "calls": [
+        "admissionZip",
+        "admitPackage",
+        "bytes.slice",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 38,
+      "title": "invalid admission limit configuration refuses rather than disabling bounds",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>admitPackage(bytes,limits)).toThrow(expect.objectContaining({code:'package-admission-limit-invalid'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const limits of ["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n const bytes=admissionZip([['a.xml',utf8(xml)]]);\n for(const limits of [{maxEntries:NaN},{maxEntryBytes:Infinity},{maxTotalBytes:-1},{maxArchiveBytes:1.5},{maxCompressionRatio:0},{maxCompressionRatio:NaN}])expect(()=>admitPackage(bytes,limits)).toThrow(expect.objectContaining({code:'package-admission-limit-invalid'}));\n}",
+      "calls": [
+        "admissionZip",
+        "admitPackage",
+        "expect",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 42,
+      "title": "ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(readZip(deflated).get('a.xml')!.length).toBe(10007)",
+        "expect([...bzip.slice(35,35+BZIP2_A.length)]).toEqual([...BZIP2_A])",
+        "expect(()=>admitPackage(bzip)).toThrow(expect.objectContaining({code:'zip-method-unsupported'}))",
+        "expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "for(const [entries,code] of [\n  [[['a.xml','<a/>'],['a.xml','<b/>']],'zip-duplicate-entry'],[[['../a.xml','<a/>']],'zip-name-invalid'],[[['/a.xml','<a/>']],'zip-name-invalid'],[[['x\\\\a.xml','<a/>']],'zip-name-invalid'],[[['a/','payload']],'zip-directory-entry-invalid'],\n ] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n const deflated=admissionZip([['a.xml',utf8('<a>'+' '.repeat(10000)+'</a>')]],8);expect(readZip(deflated).get('a.xml')!.length).toBe(10007);\n const bzip=admissionZip([['a.xml',utf8(xml)]],12);expect([...bzip.slice(35,35+BZIP2_A.length)]).toEqual([...BZIP2_A]);expect(()=>admitPackage(bzip)).toThrow(expect.objectContaining({code:'zip-method-unsupported'}));\n for(const [entries,code] of [\n  [[['a.xml','<a/>'],['a.xml','<b/>']],'zip-duplicate-entry'],[[['../a.xml','<a/>']],'zip-name-invalid'],[[['/a.xml','<a/>']],'zip-name-invalid'],[[['x\\\\a.xml','<a/>']],'zip-name-invalid'],[[['a/','payload']],'zip-directory-entry-invalid'],\n ] as const){const bytes=admissionZip(entries.map(([n,s])=>[n,utf8(s)] as const)),before=bytes.slice();expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code}));expect(bytes).toEqual(before);}\n}",
+      "calls": [
+        ".repeat",
+        "admissionZip",
+        "admitPackage",
+        "bytes.slice",
+        "bzip.slice",
+        "entries.map",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "readZip",
+        "readZip().get",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 50,
+      "title": "all thirteen shared admission cases execute concrete refusals with positive controls",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(13)",
+        "expect(result.counts.steps.passed).toBe(40)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 54,
+          "expression": "for(const [path,ids]of [['workflows/package/zip-admission.feature',['@id-package-admission-unsafe-members','@id-package-admission-resource-limits','@id-package-admission-unsupported-compression']],['workflows/package/xml-member-admission.feature',['@id-package-admission-unsafe-xml-members']]] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n const {join}=await import('node:path'),{fixturesRoot}=await import('../../scripts/fixture-inputs.ts');\n const {selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/package-admission.ts');\n const features=[];\n for(const [path,ids]of [['workflows/package/zip-admission.feature',['@id-package-admission-unsafe-members','@id-package-admission-resource-limits','@id-package-admission-unsupported-compression']],['workflows/package/xml-member-admission.feature',['@id-package-admission-unsafe-xml-members']]] as const){\n  features.push(selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),[...ids]));\n }\n const count=(n:number)=>({implemented:n,planned:0,total:n});const result=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(4),cases:count(13),steps:count(40)}},bindings,'unit-admission');\n expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(13);expect(result.counts.steps.passed).toBe(40);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "features.push",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 61,
+      "title": "admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...parts.keys()]).toEqual(['a.xml'])",
+        "expect(storage).toEqual(before)",
+        "expect(()=>admitPackage(corrupt)).toThrow(expect.objectContaining({code:'zip-crc-mismatch'}))",
+        "expect(corrupt).toEqual(snapshot)",
+        "expect(()=>admitPackage(admissionZip([['a.xml',payload]]))).toThrow(expect.objectContaining({code:'XML_DTD_FORBIDDEN'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 65,
+          "expression": "for(const payload of [utf8('<!DOCTYPE a SYSTEM \"https://example.invalid/no-fetch\"><a/>'),utf16('<!DOCTYPE a><a/>',true)])expect(()=>admitPackage(admissionZip([['a.xml',payload]]))).toThrow(expect.objectContaining("
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n const valid=admissionZip([['a.xml',utf8('<a/>')],['empty/',new Uint8Array()]]),storage=new Uint8Array(valid.length+16);storage.set(valid,8);\n const view=storage.subarray(8,8+valid.length),before=storage.slice(),parts=admitPackage(view);expect([...parts.keys()]).toEqual(['a.xml']);expect(storage).toEqual(before);parts.get('a.xml')!.fill(0);expect(storage).toEqual(before);\n const corrupt=admissionZip([['a.xml',utf8('<a/>')]]);corrupt[35]=0x20;const snapshot=corrupt.slice();expect(()=>admitPackage(corrupt)).toThrow(expect.objectContaining({code:'zip-crc-mismatch'}));expect(corrupt).toEqual(snapshot);\n for(const payload of [utf8('<!DOCTYPE a SYSTEM \"https://example.invalid/no-fetch\"><a/>'),utf16('<!DOCTYPE a><a/>',true)])expect(()=>admitPackage(admissionZip([['a.xml',payload]]))).toThrow(expect.objectContaining({code:'XML_DTD_FORBIDDEN'}));\n}",
+      "calls": [
+        "admissionZip",
+        "admitPackage",
+        "corrupt.slice",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "parts.get",
+        "parts.get().fill",
+        "parts.keys",
+        "storage.set",
+        "storage.slice",
+        "storage.subarray",
+        "utf16",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-admission.test.ts:syntax-only XML validation handles deep segmented text without ancestor text materialisation",
+      "path": "tests/unit/package-admission.test.ts",
+      "line": 68,
+      "title": "syntax-only XML validation handles deep segmented text without ancestor text materialisation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(validateXml(source)).toBeUndefined()",
+        "expect(()=>validateXml('<a>'.repeat(257)+'x'+'</a>'.repeat(257))).toThrow(expect.objectContaining({code:'XML_DEPTH_LIMIT'}))",
+        "expect(()=>validateXml('<a>&unknown;</a>')).toThrow(expect.objectContaining({code:'XML_ENTITY_FORBIDDEN'}))",
+        "expect(admitPackage(bytes).get('deep.xml')).toEqual(utf8(source))",
+        "expect(parseXml('<a>x<b>y</b>z</a>').root.text).toBe('xyz')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+      "body": "{\n const {validateXml,parseXml}=await import('../../src/xml/index.ts');\n const source='<a>'.repeat(256)+('x'.repeat(8192)+'<!--segment-->').repeat(256)+'</a>'.repeat(256);\n expect(validateXml(source)).toBeUndefined();\n expect(()=>validateXml('<a>'.repeat(257)+'x'+'</a>'.repeat(257))).toThrow(expect.objectContaining({code:'XML_DEPTH_LIMIT'}));\n expect(()=>validateXml('<a>&unknown;</a>')).toThrow(expect.objectContaining({code:'XML_ENTITY_FORBIDDEN'}));\n const bytes=admissionZip([['deep.xml',utf8(source)]],0);expect(admitPackage(bytes).get('deep.xml')).toEqual(utf8(source));\n // Public parser still provides descendant text for editors.\n expect(parseXml('<a>x<b>y</b>z</a>').root.text).toBe('xyz');\n}",
+      "calls": [
+        ".repeat",
+        "admissionZip",
+        "admitPackage",
+        "admitPackage().get",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "parseXml",
+        "utf8",
+        "validateXml"
       ],
       "reviewReasons": [],
       "unresolved": []
