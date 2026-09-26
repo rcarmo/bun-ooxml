@@ -18,7 +18,7 @@ paths for provenance and one-time migrations. Runtime/test lookup uses IDs, not
 those aliases. Required notices are deduplicated under the shared `notices/`.
 
 The grouped baseline contains 115 unique fixture files in 32 groups, totalling
-6,451,099 bytes. The complete manifest has 122 asset entries, including notices
+6,451,099 bytes. The complete manifest has 125 asset entries, including notices
 and shared workflow metadata. These counts have different meanings from the 74
 logical package inputs exercised by the corpus regression tests.
 
@@ -38,6 +38,13 @@ workflow also fails even if every fixture hash still matches.
 member-preservation policies. `workflows/mutation-safety.feature` defines the 19
 expanded cases. File identity and original derivation are resolved through the
 root manifest; no separate fixture manifest, pack or generated cases are stored.
+
+XML parsing and QName acceptance read `workflows/xml/parsing.feature` and
+`workflows/xml/names.feature` directly. The old local XML features are removed;
+scenario IDs and all 11 expanded cases are unchanged. Python comparison has a
+separate `workflows/xml/comparison.feature` profile, without a Bun binding.
+Reviewed native-test snapshots in `ledgers/consumers/` record overlaps and gaps;
+only the Bun acceptance report records executed Bun cases.
 
 ## Candidate checks
 

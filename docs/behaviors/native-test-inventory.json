@@ -2177,11 +2177,11 @@
       "suites": [],
       "kind": "test",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(122)"
+        "expect(await verifyReferences(root)).toBe(125)"
       ],
       "loops": [],
-      "sourceSha256": "2c09980fec85dfd3d0cc48c3ad21236b07de2debdcfabc088624e528d7b9edd1",
-      "body": "{expect(await verifyReferences(root)).toBe(122);}"
+      "sourceSha256": "89fbdaffd5359c052e85e0cf04930e931542b3cbd768cb697603d8e5feb877ab",
+      "body": "{expect(await verifyReferences(root)).toBe(125);}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
@@ -2194,7 +2194,7 @@
         "expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin')"
       ],
       "loops": [],
-      "sourceSha256": "2c09980fec85dfd3d0cc48c3ad21236b07de2debdcfabc088624e528d7b9edd1",
+      "sourceSha256": "89fbdaffd5359c052e85e0cf04930e931542b3cbd768cb697603d8e5feb877ab",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}"
     },
     {
@@ -2207,7 +2207,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(122)",
+        "expect(await verifyReferences(tmp)).toBe(125)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -2217,8 +2217,8 @@
           "expression": "for(const change of ["
         }
       ],
-      "sourceSha256": "2c09980fec85dfd3d0cc48c3ad21236b07de2debdcfabc088624e528d7b9edd1",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(122);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "89fbdaffd5359c052e85e0cf04930e931542b3cbd768cb697603d8e5feb877ab",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(125);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
@@ -3435,7 +3435,7 @@
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 7,
+      "line": 8,
       "title": "rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
       "suites": [
         "XML QName component admission"
@@ -3446,17 +3446,17 @@
       ],
       "loops": [
         {
-          "line": 8,
+          "line": 9,
           "expression": "for(const xml of ['<p:1 xmlns:p=\"urn:p\"/>','<p:-x xmlns:p=\"urn:p\"/>','<p:.x xmlns:p=\"urn:p\"/>','<p:\\u0301x xmlns:p=\"urn:p\"/>','<r xmlns:p=\"urn:p\" p:1=\"x\"/>','<r xmlns:1=\"urn:p\"/>','<r xmlns:-p=\"urn:p\"/>','<r xmlns:p:q=\"urn:p\"/>'])expect(()=>parseXml(xml)).toThrow();"
         }
       ],
-      "sourceSha256": "51179d28472fda636dcd2c281cbecb11db5d9784f1f3dfd44d780ea36d34b3f1",
+      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
       "body": "{\n  for(const xml of ['<p:1 xmlns:p=\"urn:p\"/>','<p:-x xmlns:p=\"urn:p\"/>','<p:.x xmlns:p=\"urn:p\"/>','<p:\\u0301x xmlns:p=\"urn:p\"/>','<r xmlns:p=\"urn:p\" p:1=\"x\"/>','<r xmlns:1=\"urn:p\"/>','<r xmlns:-p=\"urn:p\"/>','<r xmlns:p:q=\"urn:p\"/>'])expect(()=>parseXml(xml)).toThrow();\n }"
     },
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 10,
+      "line": 11,
       "title": "retains legal Unicode NCNames and exact source offsets",
       "suites": [
         "XML QName component admission"
@@ -3469,17 +3469,17 @@
       ],
       "loops": [
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const name of ['π','名','é','𐐀','a1','_x','a-b','a.b','a\\u0301'])"
         }
       ],
-      "sourceSha256": "51179d28472fda636dcd2c281cbecb11db5d9784f1f3dfd44d780ea36d34b3f1",
+      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
       "body": "{\n  for(const name of ['π','名','é','𐐀','a1','_x','a-b','a.b','a\\u0301']){const xml=`<π:${name} xmlns:π=\"urn:n\" π:${name}=\"yes\"/>`;const d=parseXml(xml);expect(d.root.localName).toBe(name);expect(attribute(d.root,name,'urn:n')).toBe('yes');expect(xml.slice(d.root.start,d.root.end)).toBe(xml);}\n }"
     },
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 13,
+      "line": 14,
       "title": "outside-root XML whitespace is lexical and NBSP is never whitespace",
       "suites": [
         "XML QName component admission"
@@ -3491,17 +3491,17 @@
       ],
       "loops": [
         {
-          "line": 14,
+          "line": 15,
           "expression": "for(const source of ['\\u00a0<r/>','<r/>\\u00a0','&#32;<r/>','<r/>&#x20;'])expect(()=>parseXml(source)).toThrow();"
         }
       ],
-      "sourceSha256": "51179d28472fda636dcd2c281cbecb11db5d9784f1f3dfd44d780ea36d34b3f1",
+      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
       "body": "{\n  for(const source of ['\\u00a0<r/>','<r/>\\u00a0','&#32;<r/>','<r/>&#x20;'])expect(()=>parseXml(source)).toThrow();\n  expect(parseXml(' \\r\\n\\t<r/> \\r\\n\\t').root.localName).toBe('r');\n }"
     },
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / literal whitespace normalises before character reference decoding",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 17,
+      "line": 18,
       "title": "literal whitespace normalises before character reference decoding",
       "suites": [
         "XML QName component admission"
@@ -3512,13 +3512,13 @@
         "expect(d.root.text).toBe('a\\nb\\ncd\\ne\\nf')"
       ],
       "loops": [],
-      "sourceSha256": "51179d28472fda636dcd2c281cbecb11db5d9784f1f3dfd44d780ea36d34b3f1",
+      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
       "body": "{\n  const d=parseXml('<r a=\"x\\r\\ny\\tz&#9;&#10;&#13;\">a\\r\\nb\\rc<![CDATA[d\\r\\ne\\rf]]></r>');\n  expect(d.root.attributes.a).toBe('x y z\\t\\n\\r');expect(d.root.text).toBe('a\\nb\\ncd\\ne\\nf');\n }"
     },
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / executes the six QName/whitespace acceptance cases",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 21,
+      "line": 22,
       "title": "executes the six QName/whitespace acceptance cases",
       "suites": [
         "XML QName component admission"
@@ -3529,8 +3529,8 @@
         "expect(result.counts.cases.passed).toBe(6)"
       ],
       "loops": [],
-      "sourceSha256": "51179d28472fda636dcd2c281cbecb11db5d9784f1f3dfd44d780ea36d34b3f1",
-      "body": "{\n  const path='features/opc/xml-names.feature',f=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());const cases=f.scenarios.flatMap(s=>s.cases);const count=(n:number)=>({implemented:n,planned:0,total:n});\n  const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(6);\n }"
+      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "body": "{\n  const path='workflows/xml/names.feature',text=await Bun.file(join(fixturesRoot(),path)).text();\n  const f=parseFeature('references/fixtures-ooxml/'+path,text.replace(/^@planned/m,'@implemented @bun'));const cases=f.scenarios.flatMap(s=>s.cases);const count=(n:number)=>({implemented:n,planned:0,total:n});\n  const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(6);\n }"
     },
     {
       "id": "bun:tests/unit/xml.test.ts:parseXml / parses namespaces, mixed content and UTF-16 offsets",

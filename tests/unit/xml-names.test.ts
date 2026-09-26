@@ -1,5 +1,6 @@
 import {describe,expect,test} from 'bun:test';
 import {join} from 'node:path';
+import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {parseXml,attribute} from '../../src/xml/index.ts';
 import {parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from '../../scripts/gherkin.ts';
 import {bindings} from '../acceptance/xml-names.ts';
@@ -19,7 +20,8 @@ describe('XML QName component admission',()=>{
   expect(d.root.attributes.a).toBe('x y z\t\n\r');expect(d.root.text).toBe('a\nb\ncd\ne\nf');
  });
  test('executes the six QName/whitespace acceptance cases',async()=>{
-  const path='features/opc/xml-names.feature',f=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());const cases=f.scenarios.flatMap(s=>s.cases);const count=(n:number)=>({implemented:n,planned:0,total:n});
+  const path='workflows/xml/names.feature',text=await Bun.file(join(fixturesRoot(),path)).text();
+  const f=parseFeature('references/fixtures-ooxml/'+path,text.replace(/^@planned/m,'@implemented @bun'));const cases=f.scenarios.flatMap(s=>s.cases);const count=(n:number)=>({implemented:n,planned:0,total:n});
   const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};
   const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(6);
  });

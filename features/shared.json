@@ -5,6 +5,16 @@
       "path": "references/fixtures-ooxml/workflows/mutation-safety.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xml/parsing.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xml/names.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

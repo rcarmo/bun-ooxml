@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "scope": "Bun canonical XML parsing and QName binding migration; runtime unchanged",
+  "consumerBaseRevision": "9e39177ca69f60988328c189b62894845501b4db",
+  "consumerWorkingChanges": [
+    "features/shared.json selects canonical parsing and names",
+    "local XML feature copies deleted",
+    "QName test reads canonical feature through fixturesRoot"
+  ],
+  "reference": {
+    "mode": "candidate",
+    "commit": "40eb26e684b12073956e4f24915444075a60c212",
+    "manifestSha256": "40197c33917e4516a1eed7e1d0552ae6485da6b6097d7abbd80d3982bb95924c"
+  },
+  "run": {
+    "runId": "755edc06-edad-4ec1-905d-f427ecf3f6ad",
+    "startedAt": "2026-09-26T14:46:30.668Z",
+    "finishedAt": "2026-09-26T14:46:32.102Z",
+    "result": "passed",
+    "command": "OOXML_FIXTURES_ROOT=<clean candidate> OOXML_REFERENCE_PIN=<candidate pin> make check",
+    "unitTests": 227,
+    "acceptanceCases": 114,
+    "examples": 3
+  },
+  "xmlFeatures": [
+    {
+      "path": "references/fixtures-ooxml/workflows/xml/names.feature",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-xml-invalid-qname-components",
+          "caseId": "@id-xml-invalid-qname-components -- component=\"element-local\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-xml-invalid-qname-components",
+          "caseId": "@id-xml-invalid-qname-components -- component=\"attribute-local\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-xml-invalid-qname-components",
+          "caseId": "@id-xml-invalid-qname-components -- component=\"declared-prefix\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-xml-unicode-qname-components",
+          "caseId": "@id-xml-unicode-qname-components",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xml-outside-root-nbsp",
+          "caseId": "@id-xml-outside-root-nbsp -- position=\"before\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-xml-outside-root-nbsp",
+          "caseId": "@id-xml-outside-root-nbsp -- position=\"after\"",
+          "result": "passed",
+          "steps": 3
+        }
+      ],
+      "compiledSourceSha256": "7950ff0979d2d199e002ee591020877b78537df612f87c00eeb71193bb434552",
+      "canonicalSourceSha256": "032ccd1e7adc03078f17baa55ac0d6aa216790d975e57c797b0d79aacc981ed8",
+      "overlay": "@planned -> @implemented @bun in memory only"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xml/parsing.feature",
+      "result": "passed",
+      "cases": [
+        {
+          "scenarioId": "@id-xml-parse-offsets",
+          "caseId": "@id-xml-parse-offsets",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "scenarioId": "@id-xml-normalise-line-endings",
+          "caseId": "@id-xml-normalise-line-endings",
+          "result": "passed",
+          "steps": 5
+        },
+        {
+          "scenarioId": "@id-xml-parse-refusals",
+          "caseId": "@id-xml-parse-refusals",
+          "result": "passed",
+          "steps": 6
+        },
+        {
+          "scenarioId": "@id-xml-parse-bounds",
+          "caseId": "@id-xml-parse-bounds",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "scenarioId": "@id-xml-apply-edits",
+          "caseId": "@id-xml-apply-edits",
+          "result": "passed",
+          "steps": 4
+        }
+      ],
+      "compiledSourceSha256": "ed69b44575125968188a164ebcc0a478ba2e2e938ad21c01f2b0c22175a97dbe",
+      "canonicalSourceSha256": "9ed18e4e4172f1742015e99fae46142bad12a4a50357b00b3c62c4889214c0da",
+      "overlay": "@planned -> @implemented @bun in memory only"
+    }
+  ],
+  "limits": [
+    "These results are Bun execution only",
+    "Native declaration mappings remain separately partial or unmapped",
+    "Comparison profile has no Bun binding",
+    "Candidate execution is not default release-pin evidence",
+    "An independent model review timed out and supplies no review evidence; Go owner reviewed native mappings and corrected specific overclaims"
+  ],
+  "releaseRun": {
+    "referenceTag": "v0.4.0",
+    "referenceCommit": "40eb26e684b12073956e4f24915444075a60c212",
+    "mode": "default-no-overrides",
+    "command": "make check",
+    "runId": "5ff0e90b-b609-46e0-bfa0-1aaddfbb08e4",
+    "startedAt": "2026-09-26T14:50:20.761Z",
+    "finishedAt": "2026-09-26T14:50:22.094Z",
+    "result": "passed",
+    "unitTests": 227,
+    "acceptanceCases": 114,
+    "xmlCases": 11,
+    "xmlSteps": 41,
+    "examples": 3
+  }
+}

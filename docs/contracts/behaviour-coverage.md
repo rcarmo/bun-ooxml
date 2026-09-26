@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-Shared reference manifest: **122 assets**. Implementation evidence remains consumer-local.
+Shared reference manifest: **125 assets**. Implementation evidence remains consumer-local.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|
@@ -13,8 +13,6 @@ Shared reference manifest: **122 assets**. Implementation evidence remains consu
 | features/opc/graph.feature | implemented | 4 | 4 | 16 |
 | features/opc/package.feature | implemented | 3 | 3 | 11 |
 | features/opc/relationship-namespaces.feature | implemented | 2 | 4 | 16 |
-| features/opc/xml-names.feature | implemented | 3 | 6 | 19 |
-| features/opc/xml.feature | implemented | 5 | 5 | 22 |
 | features/opc/zip.feature | implemented | 4 | 4 | 25 |
 | features/opc/zip64.feature | implemented | 4 | 4 | 13 |
 | features/planned/cross-language-followups.feature | planned | 4 | 4 | 17 |
@@ -27,6 +25,8 @@ Shared reference manifest: **122 assets**. Implementation evidence remains consu
 | features/xlsx/cells.feature | implemented | 8 | 8 | 30 |
 | features/xlsx/create.feature | implemented | 7 | 7 | 29 |
 | references/fixtures-ooxml/workflows/mutation-safety.feature | implemented | 8 | 19 | 159 |
+| references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 19 |
+| references/fixtures-ooxml/workflows/xml/parsing.feature | implemented | 5 | 5 | 22 |
 
 Shared workflow IDs and facts are pinned by `references/fixtures-ooxml`.
 Counts are contract inventory, not execution evidence. Run `make check` for outcomes.

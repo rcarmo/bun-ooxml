@@ -365,7 +365,7 @@
       "testId": "bun:tests/unit/xml-names.test.ts:XML QName component admission / executes the six QName/whitespace acceptance cases",
       "title": "executes the six QName/whitespace acceptance cases",
       "given": [
-        "The acceptance runner parses features/opc/xml-names.feature into one feature containing three scenarios and six executable cases.",
+        "The acceptance runner parses references/fixtures-ooxml/workflows/xml/names.feature into one feature containing three scenarios and six executable cases.",
         "Those six cases are the three invalid numeric-leading QName-component examples, the one Unicode-valid QName scenario, and the two non-breaking-space position examples."
       ],
       "when": [
