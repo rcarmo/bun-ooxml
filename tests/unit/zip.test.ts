@@ -186,13 +186,13 @@ describe("readZip", () => {
     expectZipError(() => readZip(archive), "zip-multi-disk-unsupported", "multi-disk");
   });
 
-  test("refuses ZIP64 archives until ZIP64 support is implemented", () => {
+  test("refuses malformed ZIP64 sentinels without ZIP64 directory records", () => {
     const archive = buildZip([{ name: "word/document.xml", blob: encoder.encode("x") }], {
       totalEntries: 0xffff,
       diskEntries: 0xffff,
     });
 
-    expectZipError(() => readZip(archive), "zip-zip64-unsupported", "ZIP64");
+    expectZipError(() => readZip(archive), "zip-structure-invalid", "ZIP64");
   });
 
   test("refuses local and central metadata mismatches", () => {

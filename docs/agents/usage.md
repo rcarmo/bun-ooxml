@@ -126,6 +126,9 @@ retains the exact original archive bytes.
 ZIP defaults: 256 MiB archive, 128 MiB per entry, 512 MiB expanded total, 10,000
 entries, maximum compression ratio 1,000. Pass stricter `ZipLimits` to package
 loading for untrusted inputs. XML has separate fixed input/depth/node limits.
-ZIP64 is explicitly unported. Unsupported formats must never be converted silently.
+Single-disk ZIP64 is supported with the same bounds, validated 64-bit metadata and
+hard inflate caps. Multi-disk archives, ambiguous extras and extensible ZIP64 end
+sectors refuse. The writer is in-memory, not a large-file streaming API. Unsupported
+formats must never be converted silently.
 
 See `examples/agent-edit.ts` for a runnable fixture-backed smoke example.

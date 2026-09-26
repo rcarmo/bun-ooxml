@@ -6,7 +6,7 @@
 `src/opc/zip.ts` (sync, Bun compression only):
 * `type ZipLimits = { maxEntries?: number; maxEntryBytes?: number; maxTotalBytes?: number; maxCompressionRatio?: number; maxArchiveBytes?: number }`
 * `readZip(bytes: Uint8Array, limits?: ZipLimits): Map<string, Uint8Array>`
-* `writeZip(parts: ReadonlyMap<string, Uint8Array>): Uint8Array`
+* `writeZip(parts: ReadonlyMap<string, Uint8Array>, options?: { forceZip64?: boolean }): Uint8Array`
 * `crc32(bytes: Uint8Array): number`
 
 `src/opc/package.ts`:

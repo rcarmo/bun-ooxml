@@ -21,7 +21,7 @@ Feature: Strict ZIP custody for OPC packages
     And the module refuses ASCII case-colliding member names
     And the module refuses noncanonical member paths
     And the module refuses encrypted or unsupported-compression members
-    And the module refuses multi-disk and ZIP64 archives until ZIP64 is implemented
+    And the module refuses multi-disk archives and ZIP64 sentinels without valid end records
     And the module refuses local-header metadata that disagrees with the central directory
     And the module refuses CRC failures, size mismatches, and undeclared trailing structure
 

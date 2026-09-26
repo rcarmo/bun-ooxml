@@ -43,9 +43,3 @@ Feature: Full source-pinned Office library ports
     Then values errors and exclusions match the pinned comparison corpus
     And no foreign runtime or Office subprocess executes
 
-  @id-parity-zip64
-  Scenario: ZIP64 packages receive bounded validation
-    Given a ZIP64 package with consistent end records local headers and payloads
-    When Bun reads and edits it under caller resource limits
-    Then size and count validation occurs before expansion
-    And malformed ZIP64 structures refuse with typed errors

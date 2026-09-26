@@ -737,10 +737,10 @@ export const bindings: StepBinding[] = [
     },
   },
   {
-    pattern: /^the module refuses multi-disk and ZIP64 archives until ZIP64 is implemented$/,
+    pattern: /^the module refuses multi-disk archives and ZIP64 sentinels without valid end records$/,
     run: (context) => {
       assertZipRefusal(coreState(context), "multi-disk", "zip-multi-disk-unsupported");
-      assertZipRefusal(coreState(context), "zip64", "zip-zip64-unsupported");
+      assertZipRefusal(coreState(context), "zip64", "zip-structure-invalid");
     },
   },
   {
