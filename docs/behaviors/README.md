@@ -37,6 +37,12 @@ nested functions. It does not execute parameter tables or analyse arbitrary
 TypeScript callbacks. Integration and Office-application checks have separate
 reports.
 
+The ZIP32 acceptance tests execute checksum, typed-refusal and configured-limit
+examples against the native ZIP API. They share the original unit-test archive
+builder; separate tests inspect mutated header fields and reject incorrect error
+codes, messages, fabricated success and changed input buffers. Limit refusals
+check API results, without measuring allocation timing or peak memory.
+
 ## Requirement mappings
 
 The slide-order, effective-formatting and XML-value reports associate literal

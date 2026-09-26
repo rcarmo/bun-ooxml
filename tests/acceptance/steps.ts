@@ -8,6 +8,7 @@ import { bindings as xmlRemovalBindings } from './xml-removal.ts';
 import { bindings as xmlValuesBindings } from './xml-values.ts';
 import { bindings as graphBindings } from "./graph.ts";
 import { bindings as zip64Bindings } from "./zip64.ts";
+import { bindings as zip32Bindings } from './zip32.ts';
 import { bindings as namespaceBindings } from "./relationship-namespaces.ts";
 import { bindings as docxBindings } from "./docx.ts";
 import { bindings as storyBindings } from "./story-docx.ts";
@@ -47,6 +48,7 @@ export const bindings: StepBinding[] = [
   ...xmlValuesBindings,
   ...graphBindings,
   ...zip64Bindings,
+  ...zip32Bindings,
   ...namespaceBindings,
   ...docxBindings,
   ...storyBindings,

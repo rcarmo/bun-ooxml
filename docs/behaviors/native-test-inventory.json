@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 502,
-  "files": 52,
+  "count": 507,
+  "files": 53,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -308,8 +308,14 @@
     },
     {
       "path": "tests/unit/zip.test.ts",
-      "sha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "declarations": 19,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/zip32-bindings.test.ts",
+      "sha256": "fd6bf505456534c084277cea75be715aaf59a59f38e74a3622a0e3357bad89d4",
+      "declarations": 5,
       "issues": []
     },
     {
@@ -410,7 +416,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "14ef1039e551c5070c7b7ab0638552f18f3cc5b5ad57e577d85359eb382aca18"
+      "sha256": "35e5745c7d7d989619004f39e7059326b0209afb1df29839edfb42d75aadf49b"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -465,6 +471,10 @@
       "sha256": "bcad16fc6f9bf2a11fe45ccf0cab19f188540a4433b948bed294acbce5393b48"
     },
     {
+      "path": "tests/acceptance/zip32.ts",
+      "sha256": "ebd15700addadcf54f71392688f5e552b1f6247b8c054fbb23aea9776dd708af"
+    },
+    {
       "path": "tests/acceptance/zip64.ts",
       "sha256": "a78945e1d11f5ad32138e2ab12c1b64d4dfe8402d602460a0b9a9bbb466e5f42"
     },
@@ -475,6 +485,10 @@
     {
       "path": "tests/fixtures/native-edge-cases.ts",
       "sha256": "3eae7fd40508d3b4dd8e5e186633d87cf5372a04cff9e35f8ca2609c042c601a"
+    },
+    {
+      "path": "tests/fixtures/zip32.ts",
+      "sha256": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812"
     }
   ],
   "dynamicCases": [
@@ -597,6 +611,10 @@
     "bun:tests/unit/xml-values-bindings.test.ts:XML value assertions reject corrupted parser, metadata and escaping results",
     "bun:tests/unit/xml.test.ts:parseXml / rejects malformed or unsafe XML",
     "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
+    "bun:tests/unit/zip32-bindings.test.ts:wrong CRC, error code and message expectations fail bound ZIP32 predicates",
+    "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
+    "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
+    "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
     "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / automatically emits ZIP64 EOCD records for 65535 tiny entries"
   ],
   "reviewRequired": [
@@ -740,6 +758,10 @@
     "bun:tests/unit/zip.test.ts:readZip / refuses undeclared trailing bytes after the archive",
     "bun:tests/unit/zip.test.ts:readZip / enforces configured archive, count, entry, total, and ratio bounds",
     "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
+    "bun:tests/unit/zip32-bindings.test.ts:wrong CRC, error code and message expectations fail bound ZIP32 predicates",
+    "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
+    "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
+    "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
     "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses an undeclared gap before the ZIP64 end record",
     "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses malformed ZIP64 locators",
     "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 central counts that cannot fit the declared central span",
@@ -18113,7 +18135,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:crc32 / matches the standard test vector",
       "path": "tests/unit/zip.test.ts",
-      "line": 63,
+      "line": 21,
       "title": "matches the standard test vector",
       "suites": [
         "crc32"
@@ -18126,7 +18148,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    expect(crc32(encoder.encode(\"123456789\"))).toBe(0xcbf43926);\n  }",
       "calls": [
         "crc32",
@@ -18140,7 +18162,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:writeZip / writes deterministic UTF-8 ZIP32 output that readZip can reopen",
       "path": "tests/unit/zip.test.ts",
-      "line": 69,
+      "line": 27,
       "title": "writes deterministic UTF-8 ZIP32 output that readZip can reopen",
       "suites": [
         "writeZip"
@@ -18156,7 +18178,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const parts = new Map<string, Uint8Array>([\n      [\"word/\", new Uint8Array()],\n      [\"word/document.xml\", encoder.encode(\"<w:document/>\")],\n      [\"[Content_Types].xml\", encoder.encode(\"<Types/>\")],\n      [\"docProps/core.xml\", encoder.encode(\"<core/>\")],\n    ]);\n\n    const first = writeZip(parts);\n    const second = writeZip(parts);\n\n    expect(first).toEqual(second);\n\n    const reopened = readZip(first);\n    expect(Array.from(reopened.keys())).toEqual([\n      \"[Content_Types].xml\",\n      \"docProps/core.xml\",\n      \"word/document.xml\",\n    ]);\n    expect(decoder.decode(reopened.get(\"word/document.xml\")!)).toBe(\"<w:document/>\");\n    expect(decoder.decode(reopened.get(\"[Content_Types].xml\")!)).toBe(\"<Types/>\");\n  }",
       "calls": [
         "Array.from",
@@ -18176,7 +18198,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:writeZip / refuses ASCII case-colliding output names",
       "path": "tests/unit/zip.test.ts",
-      "line": 92,
+      "line": 50,
       "title": "refuses ASCII case-colliding output names",
       "suites": [
         "writeZip"
@@ -18187,7 +18209,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const parts = new Map<string, Uint8Array>([\n      [\"word/document.xml\", encoder.encode(\"one\")],\n      [\"WORD/document.xml\", encoder.encode(\"two\")],\n    ]);\n\n    expectZipError(\n      () => writeZip(parts),\n      \"zip-case-collision\",\n      \"ASCII case-collides\",\n    );\n  }",
       "calls": [
         "encoder.encode",
@@ -18202,7 +18224,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:writeZip / refuses non-empty directory entries",
       "path": "tests/unit/zip.test.ts",
-      "line": 105,
+      "line": 63,
       "title": "refuses non-empty directory entries",
       "suites": [
         "writeZip"
@@ -18213,7 +18235,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const parts = new Map<string, Uint8Array>([[\"word/\", encoder.encode(\"not empty\")]]);\n\n    expectZipError(\n      () => writeZip(parts),\n      \"zip-directory-entry-invalid\",\n      \"must be empty\",\n    );\n  }",
       "calls": [
         "encoder.encode",
@@ -18228,7 +18250,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment",
       "path": "tests/unit/zip.test.ts",
-      "line": 117,
+      "line": 75,
       "title": "reads a valid archive with a directory entry, data descriptor, and declared comment",
       "suites": [
         "readZip"
@@ -18243,7 +18265,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip(\n      [\n        { name: \"word/\", method: METHOD_STORED, blob: new Uint8Array() },\n        { name: \"[Content_Types].xml\", method: METHOD_STORED, blob: encoder.encode(\"<Types/>\") },\n        {\n          name: \"word/document.xml\",\n          method: METHOD_DEFLATED,\n          blob: encoder.encode(\"<w:document/>\"),\n          flags: FLAG_UTF8 | FLAG_DATA_DESCRIPTOR,\n          dataDescriptor: true,\n          descriptorSignature: true,\n        },\n      ],\n      { archiveComment: encoder.encode(\"kept as declared ZIP comment\") },\n    );\n\n    const parts = readZip(archive);\n    expect(Array.from(parts.keys())).toEqual([\"[Content_Types].xml\", \"word/document.xml\"]);\n    expect(decoder.decode(parts.get(\"[Content_Types].xml\")!)).toBe(\"<Types/>\");\n    expect(decoder.decode(parts.get(\"word/document.xml\")!)).toBe(\"<w:document/>\");\n  }",
       "calls": [
         "Array.from",
@@ -18263,7 +18285,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses duplicate member names",
       "path": "tests/unit/zip.test.ts",
-      "line": 140,
+      "line": 98,
       "title": "refuses duplicate member names",
       "suites": [
         "readZip"
@@ -18274,7 +18296,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([\n      { name: \"word/document.xml\", blob: encoder.encode(\"one\") },\n      { name: \"word/document.xml\", blob: encoder.encode(\"two\") },\n    ]);\n\n    expectZipError(() => readZip(archive), \"zip-duplicate-entry\", \"duplicate ZIP member\");\n  }",
       "calls": [
         "buildZip",
@@ -18290,7 +18312,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses ASCII case-colliding member names",
       "path": "tests/unit/zip.test.ts",
-      "line": 149,
+      "line": 107,
       "title": "refuses ASCII case-colliding member names",
       "suites": [
         "readZip"
@@ -18301,7 +18323,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([\n      { name: \"word/document.xml\", blob: encoder.encode(\"one\") },\n      { name: \"WORD/document.xml\", blob: encoder.encode(\"two\") },\n    ]);\n\n    expectZipError(() => readZip(archive), \"zip-case-collision\", \"ASCII case-collides\");\n  }",
       "calls": [
         "buildZip",
@@ -18317,7 +18339,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses noncanonical part paths",
       "path": "tests/unit/zip.test.ts",
-      "line": 158,
+      "line": 116,
       "title": "refuses noncanonical part paths",
       "suites": [
         "readZip"
@@ -18328,7 +18350,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([{ name: \"../word/document.xml\", blob: encoder.encode(\"bad\") }]);\n\n    expectZipError(() => readZip(archive), \"zip-name-invalid\", \"noncanonical\");\n  }",
       "calls": [
         "buildZip",
@@ -18344,7 +18366,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses encrypted members",
       "path": "tests/unit/zip.test.ts",
-      "line": 164,
+      "line": 122,
       "title": "refuses encrypted members",
       "suites": [
         "readZip"
@@ -18355,7 +18377,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([\n      { name: \"word/document.xml\", blob: encoder.encode(\"secret\"), flags: FLAG_UTF8 | 0x0001 },\n    ]);\n\n    expectZipError(() => readZip(archive), \"zip-encryption-unsupported\", \"encrypted\");\n  }",
       "calls": [
         "buildZip",
@@ -18371,7 +18393,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses unsupported compression methods",
       "path": "tests/unit/zip.test.ts",
-      "line": 172,
+      "line": 130,
       "title": "refuses unsupported compression methods",
       "suites": [
         "readZip"
@@ -18382,7 +18404,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([{ name: \"word/document.xml\", blob: encoder.encode(\"x\"), method: 12 }]);\n\n    expectZipError(() => readZip(archive), \"zip-method-unsupported\", \"compression method\");\n  }",
       "calls": [
         "buildZip",
@@ -18398,7 +18420,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses multi-disk archives",
       "path": "tests/unit/zip.test.ts",
-      "line": 178,
+      "line": 136,
       "title": "refuses multi-disk archives",
       "suites": [
         "readZip"
@@ -18409,7 +18431,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([{ name: \"word/document.xml\", blob: encoder.encode(\"x\") }], {\n      diskNumber: 1,\n    });\n\n    expectZipError(() => readZip(archive), \"zip-multi-disk-unsupported\", \"multi-disk\");\n  }",
       "calls": [
         "buildZip",
@@ -18425,7 +18447,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses malformed ZIP64 sentinels without ZIP64 directory records",
       "path": "tests/unit/zip.test.ts",
-      "line": 186,
+      "line": 144,
       "title": "refuses malformed ZIP64 sentinels without ZIP64 directory records",
       "suites": [
         "readZip"
@@ -18436,7 +18458,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([{ name: \"word/document.xml\", blob: encoder.encode(\"x\") }], {\n      totalEntries: 0xffff,\n      diskEntries: 0xffff,\n    });\n\n    expectZipError(() => readZip(archive), \"zip-structure-invalid\", \"ZIP64\");\n  }",
       "calls": [
         "buildZip",
@@ -18452,7 +18474,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses local and central metadata mismatches",
       "path": "tests/unit/zip.test.ts",
-      "line": 195,
+      "line": 153,
       "title": "refuses local and central metadata mismatches",
       "suites": [
         "readZip"
@@ -18463,7 +18485,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([\n      {\n        name: \"word/document.xml\",\n        localName: \"word/other.xml\",\n        blob: encoder.encode(\"x\"),\n      },\n    ]);\n\n    expectZipError(() => readZip(archive), \"zip-local-metadata-mismatch\", \"local and central\");\n  }",
       "calls": [
         "buildZip",
@@ -18479,7 +18501,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses CRC mismatches",
       "path": "tests/unit/zip.test.ts",
-      "line": 207,
+      "line": 165,
       "title": "refuses CRC mismatches",
       "suites": [
         "readZip"
@@ -18490,7 +18512,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([\n      {\n        name: \"word/document.xml\",\n        blob: encoder.encode(\"payload\"),\n        crc: 0xdeadbeef,\n      },\n    ]);\n\n    expectZipError(() => readZip(archive), \"zip-crc-mismatch\", \"CRC\");\n  }",
       "calls": [
         "buildZip",
@@ -18506,7 +18528,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses declared size mismatches",
       "path": "tests/unit/zip.test.ts",
-      "line": 219,
+      "line": 177,
       "title": "refuses declared size mismatches",
       "suites": [
         "readZip"
@@ -18517,7 +18539,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([\n      {\n        name: \"word/document.xml\",\n        blob: encoder.encode(\"payload\"),\n        method: METHOD_STORED,\n        fileSize: 99,\n        compressedSize: 99,\n        localFileSize: 99,\n        localCompressedSize: 99,\n      },\n    ]);\n\n    expectZipError(() => readZip(archive), \"zip-size-mismatch\", \"declared size\");\n  }",
       "calls": [
         "buildZip",
@@ -18533,7 +18555,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses deflated members that inflate past their declared size bound",
       "path": "tests/unit/zip.test.ts",
-      "line": 235,
+      "line": 193,
       "title": "refuses deflated members that inflate past their declared size bound",
       "suites": [
         "readZip"
@@ -18544,7 +18566,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = buildZip([\n      {\n        name: \"word/document.xml\",\n        blob: encoder.encode(\"A\".repeat(4096)),\n        method: METHOD_DEFLATED,\n        fileSize: 32,\n        localFileSize: 32,\n      },\n    ]);\n\n    expectZipError(() => readZip(archive), \"zip-size-mismatch\", \"declared size\");\n  }",
       "calls": [
         ".repeat",
@@ -18561,7 +18583,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / refuses undeclared trailing bytes after the archive",
       "path": "tests/unit/zip.test.ts",
-      "line": 249,
+      "line": 207,
       "title": "refuses undeclared trailing bytes after the archive",
       "suites": [
         "readZip"
@@ -18572,7 +18594,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const archive = concatBytes(buildZip([{ name: \"word/document.xml\", blob: encoder.encode(\"x\") }]), encoder.encode(\"\\n\"));\n\n    expectZipError(() => readZip(archive), \"zip-end-record-missing\", \"end-of-central-directory\");\n  }",
       "calls": [
         "buildZip",
@@ -18589,7 +18611,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / enforces configured archive, count, entry, total, and ratio bounds",
       "path": "tests/unit/zip.test.ts",
-      "line": 255,
+      "line": 213,
       "title": "enforces configured archive, count, entry, total, and ratio bounds",
       "suites": [
         "readZip"
@@ -18600,7 +18622,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const repetitive = encoder.encode(\"A\".repeat(4096));\n    const archive = buildZip([\n      { name: \"a.bin\", blob: repetitive },\n      { name: \"b.bin\", blob: encoder.encode(\"bb\") },\n    ]);\n\n    expectZipError(() => readZip(archive, { maxArchiveBytes: archive.length - 1 }), \"zip-archive-too-large\", \"archive bytes\");\n    expectZipError(() => readZip(archive, { maxEntries: 1 }), \"zip-too-many-entries\", \"entry limit\");\n    expectZipError(() => readZip(archive, { maxEntryBytes: 8 }), \"zip-entry-too-large\", \"entry limit\");\n    expectZipError(() => readZip(archive, { maxTotalBytes: 8 }), \"zip-total-too-large\", \"total expanded\");\n    expectZipError(() => readZip(archive, { maxCompressionRatio: 2 }), \"zip-compression-ratio-exceeded\", \"compression ratio\");\n  }",
       "calls": [
         ".repeat",
@@ -18617,7 +18639,7 @@
     {
       "id": "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
       "path": "tests/unit/zip.test.ts",
-      "line": 269,
+      "line": 227,
       "title": "reads every checked-in rcarmo fixture archive under default bounds",
       "suites": [
         "readZip"
@@ -18630,12 +18652,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 273,
+          "line": 231,
           "expression": "for (const file of fixtures)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "559ec05a987de7dd08c1d0e09461624d4b0f3b74b835e81d6e71c04743462118",
+      "sourceSha256": "7f93de90ed0a30765cbee47cfc8a2de45cd25d4b7176cdc3e22a9958a4d6ad1c",
       "body": "{\n    const fixtures = fixtureArchives();\n    expect(fixtures).toHaveLength(EXPECTED_FIXTURE_ARCHIVE_COUNT);\n\n    for (const file of fixtures) {\n      const bytes = new Uint8Array(readFileSync(file));\n      try {\n        readZip(bytes);\n      } catch (error) {\n        throw new Error(`fixture ${file} failed ZIP read: ${(error as Error).message}`);\n      }\n    }\n  }",
       "calls": [
         "expect",
@@ -18646,6 +18668,249 @@
       ],
       "reviewReasons": [
         "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/zip32-bindings.test.ts:twenty canonical ZIP32 checksum, refusal and configured-bound cases execute",
+      "path": "tests/unit/zip32-bindings.test.ts",
+      "line": 23,
+      "title": "twenty canonical ZIP32 checksum, refusal and configured-bound cases execute",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(20)",
+        "expect(result.counts.cases.planned).toBe(4)",
+        "expect(result.counts.steps.undefined).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fd6bf505456534c084277cea75be715aaf59a59f38e74a3622a0e3357bad89d4",
+      "body": "{\n  const result = await run();\n  expect(result.failures).toEqual([]);\n  expect(result.counts.cases.passed).toBe(20);\n  expect(result.counts.cases.planned).toBe(4);\n  expect(result.counts.steps.undefined).toBe(0);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "run"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/zip32-bindings.test.ts:wrong CRC, error code and message expectations fail bound ZIP32 predicates",
+      "path": "tests/unit/zip32-bindings.test.ts",
+      "line": 31,
+      "title": "wrong CRC, error code and message expectations fail bound ZIP32 predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [
+        "expect(s.includes(from!)).toBe(true)"
+      ],
+      "loops": [
+        {
+          "line": 32,
+          "expression": "for (const [from, to] of [\n    ['hexadecimal CBF43926', 'hexadecimal DEADBEEF'],\n    ['zip-crc-mismatch', 'zip-wrong-code'],\n    ['| CRC                      |', '| wrong message            |'],\n  ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fd6bf505456534c084277cea75be715aaf59a59f38e74a3622a0e3357bad89d4",
+      "body": "{\n  for (const [from, to] of [\n    ['hexadecimal CBF43926', 'hexadecimal DEADBEEF'],\n    ['zip-crc-mismatch', 'zip-wrong-code'],\n    ['| CRC                      |', '| wrong message            |'],\n  ]) {\n    const result = await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });\n    failedPredicate(result);\n  }\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "failedPredicate",
+        "run",
+        "s.includes",
+        "s.replace"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "deferred-assertion",
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
+      "path": "tests/unit/zip32-bindings.test.ts",
+      "line": 42,
+      "title": "ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(plain.view.getUint16(6, true)).toBe(0x800)",
+        "expect(plain.view.getUint16(8, true)).toBe(8)",
+        "expect(plain.view.getUint32(14, true)).toBe(crc32Test(encode('payload')))",
+        "expect(decode(inflateRawSync(plain.bytes.subarray(plain.data, plain.central)))).toBe('payload')",
+        "expect(encrypted.view.getUint16(6, true)).toBe(0x801)",
+        "expect(encrypted.view.getUint16(encrypted.central + 8, true)).toBe(0x801)",
+        "expect(unsupported.view.getUint16(8, true)).toBe(12)",
+        "expect(unsupported.view.getUint16(unsupported.central + 10, true)).toBe(12)",
+        "expect(decode(unsupported.bytes.subarray(unsupported.data, unsupported.central))).toBe('payload')",
+        "expect(disk.view.getUint16(disk.end + 4, true)).toBe(1)",
+        "expect(counts.view.getUint16(counts.end + 8, true)).toBe(65535)",
+        "expect(counts.view.getUint16(counts.end + 10, true)).toBe(65535)",
+        "expect(counts.central + counts.view.getUint32(counts.end + 12, true)).toBe(counts.end)",
+        "expect(decode(mismatch.bytes.subarray(30, mismatch.data))).toBe('word/other.xml')",
+        "expect(decode(mismatch.bytes.subarray(mismatch.central + 46, mismatch.central + 46 + mismatch.view.getUint16(mismatch.central + 28, true)))).toBe('word/document.xml')",
+        "expect(crc.view.getUint32(14, true)).toBe(0xdeadbeef)",
+        "expect(crc.view.getUint32(crc.central + 16, true)).toBe(0xdeadbeef)",
+        "expect(stored.view.getUint16(8, true)).toBe(0)",
+        "expect(stored.view.getUint16(stored.central + 10, true)).toBe(0)",
+        "expect(stored.view.getUint32(offset, true)).toBe(99)",
+        "expect(decode(stored.bytes.subarray(stored.data, stored.central))).toBe('payload')",
+        "expect(overrun.view.getUint32(22, true)).toBe(32)",
+        "expect(overrun.view.getUint32(overrun.central + 24, true)).toBe(32)",
+        "expect(overrun.view.getUint32(18, true)).toBe(overrun.central - overrun.data)",
+        "expect(overrun.view.getUint32(overrun.central + 20, true)).toBe(overrun.central - overrun.data)",
+        "expect(decode(inflateRawSync(overrun.bytes.subarray(overrun.data, overrun.central)))).toBe('A'.repeat(4096))",
+        "expect(overrun.view.getUint32(14, true)).toBe(crc32Test(encode('A'.repeat(4096))))",
+        "expect(overrun.view.getUint32(overrun.central + 16, true)).toBe(crc32Test(encode('A'.repeat(4096))))",
+        "expect(tail.subarray(0, -1)).toEqual(plain.bytes)",
+        "expect(tail.at(-1)).toBe(10)"
+      ],
+      "deferredAssertions": [
+        "expect(view.getUint32(0, true)).toBe(0x04034b50)",
+        "expect(view.getUint32(central, true)).toBe(0x02014b50)",
+        "expect(view.getUint32(end, true)).toBe(0x06054b50)"
+      ],
+      "loops": [
+        {
+          "line": 84,
+          "expression": "for (const offset of [18, 22, stored.central + 20, stored.central + 24]) expect(stored.view.getUint32(offset, true)).toBe(99);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fd6bf505456534c084277cea75be715aaf59a59f38e74a3622a0e3357bad89d4",
+      "body": "{\n  const { readerSample } = await import('../acceptance/zip32.ts');\n  const { inflateRawSync } = await import('node:zlib');\n  const { crc32Test } = await import('../fixtures/zip32.ts');\n  const encode = (s: string) => new TextEncoder().encode(s), decode = (b: Uint8Array) => new TextDecoder().decode(b);\n  const sample = (mutation: string, value = 'payload') => {\n    const bytes = readerSample([{ name: 'word/document.xml', blob: encode(value) }], mutation);\n    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);\n    const end = bytes.length - 22, central = view.getUint32(end + 16, true);\n    const data = 30 + view.getUint16(26, true) + view.getUint16(28, true);\n    expect(view.getUint32(0, true)).toBe(0x04034b50);\n    expect(view.getUint32(central, true)).toBe(0x02014b50);\n    expect(view.getUint32(end, true)).toBe(0x06054b50);\n    return { bytes, view, end, central, data };\n  };\n  const plain = sample('none');\n  expect(plain.view.getUint16(6, true)).toBe(0x800);\n  expect(plain.view.getUint16(8, true)).toBe(8);\n  expect(plain.view.getUint32(14, true)).toBe(crc32Test(encode('payload')));\n  expect(decode(inflateRawSync(plain.bytes.subarray(plain.data, plain.central)))).toBe('payload');\n  const encrypted = sample('general-purpose bit 0 is set in both headers');\n  expect(encrypted.view.getUint16(6, true)).toBe(0x801);\n  expect(encrypted.view.getUint16(encrypted.central + 8, true)).toBe(0x801);\n  const unsupported = sample('both methods are 12 and payload bytes are stored uncompressed');\n  expect(unsupported.view.getUint16(8, true)).toBe(12);\n  expect(unsupported.view.getUint16(unsupported.central + 10, true)).toBe(12);\n  expect(decode(unsupported.bytes.subarray(unsupported.data, unsupported.central))).toBe('payload');\n  const disk = sample('end record disk number is 1');\n  expect(disk.view.getUint16(disk.end + 4, true)).toBe(1);\n  const counts = sample('both end-record counts are 65535 without ZIP64 records');\n  expect(counts.view.getUint16(counts.end + 8, true)).toBe(65535);\n  expect(counts.view.getUint16(counts.end + 10, true)).toBe(65535);\n  expect(counts.central + counts.view.getUint32(counts.end + 12, true)).toBe(counts.end);\n  const mismatch = sample('local name is word/other.xml');\n  expect(decode(mismatch.bytes.subarray(30, mismatch.data))).toBe('word/other.xml');\n  expect(decode(mismatch.bytes.subarray(mismatch.central + 46, mismatch.central + 46 + mismatch.view.getUint16(mismatch.central + 28, true)))).toBe('word/document.xml');\n  const crc = sample('both CRC fields are hexadecimal DEADBEEF');\n  expect(crc.view.getUint32(14, true)).toBe(0xdeadbeef);\n  expect(crc.view.getUint32(crc.central + 16, true)).toBe(0xdeadbeef);\n  const stored = sample('method is STORED and all size fields are 99');\n  expect(stored.view.getUint16(8, true)).toBe(0);\n  expect(stored.view.getUint16(stored.central + 10, true)).toBe(0);\n  for (const offset of [18, 22, stored.central + 20, stored.central + 24]) expect(stored.view.getUint32(offset, true)).toBe(99);\n  expect(decode(stored.bytes.subarray(stored.data, stored.central))).toBe('payload');\n  const overrun = sample('payload repeats A 4096 times but both expanded sizes are 32', 'A');\n  expect(overrun.view.getUint32(22, true)).toBe(32);\n  expect(overrun.view.getUint32(overrun.central + 24, true)).toBe(32);\n  expect(overrun.view.getUint32(18, true)).toBe(overrun.central - overrun.data);\n  expect(overrun.view.getUint32(overrun.central + 20, true)).toBe(overrun.central - overrun.data);\n  expect(decode(inflateRawSync(overrun.bytes.subarray(overrun.data, overrun.central)))).toBe('A'.repeat(4096));\n  expect(overrun.view.getUint32(14, true)).toBe(crc32Test(encode('A'.repeat(4096))));\n  expect(overrun.view.getUint32(overrun.central + 16, true)).toBe(crc32Test(encode('A'.repeat(4096))));\n  const tail = readerSample([{ name: 'word/document.xml', blob: encode('payload') }], 'a newline byte follows the complete uncommented archive');\n  expect(tail.subarray(0, -1)).toEqual(plain.bytes); expect(tail.at(-1)).toBe(10);\n}",
+      "calls": [
+        ".decode",
+        ".encode",
+        ".repeat",
+        "counts.view.getUint16",
+        "counts.view.getUint32",
+        "crc.view.getUint32",
+        "crc32Test",
+        "decode",
+        "disk.view.getUint16",
+        "encode",
+        "encrypted.view.getUint16",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "inflateRawSync",
+        "mismatch.bytes.subarray",
+        "mismatch.view.getUint16",
+        "overrun.bytes.subarray",
+        "overrun.view.getUint32",
+        "plain.bytes.subarray",
+        "plain.view.getUint16",
+        "plain.view.getUint32",
+        "readerSample",
+        "sample",
+        "stored.bytes.subarray",
+        "stored.view.getUint16",
+        "stored.view.getUint32",
+        "tail.at",
+        "tail.subarray",
+        "unsupported.bytes.subarray",
+        "unsupported.view.getUint16",
+        "view.getUint16",
+        "view.getUint32"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "deferred-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
+      "path": "tests/unit/zip32-bindings.test.ts",
+      "line": 98,
+      "title": "ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(actual).toEqual(names)",
+        "expect(specs.map(s => s.name)).toEqual(names)",
+        "expect(specs.map(s => new TextDecoder().decode(s.blob))).toEqual(names.map((_, i) => String(i)))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 100,
+          "expression": "for (const names of [['word/document.xml', 'word/document.xml'], ['word/document.xml', 'WORD/document.xml'], ['../word/document.xml']])"
+        },
+        {
+          "line": 105,
+          "expression": "for (let i = 0; i < names.length; i++)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fd6bf505456534c084277cea75be715aaf59a59f38e74a3622a0e3357bad89d4",
+      "body": "{\n  const { readerSample } = await import('../acceptance/zip32.ts');\n  for (const names of [['word/document.xml', 'word/document.xml'], ['word/document.xml', 'WORD/document.xml'], ['../word/document.xml']]) {\n    const specs = names.map((name, i) => ({ name, blob: new TextEncoder().encode(String(i)) }));\n    const bytes = readerSample(specs, 'none'), view = new DataView(bytes.buffer);\n    let cursor = view.getUint32(bytes.length - 6, true);\n    const actual: string[] = [];\n    for (let i = 0; i < names.length; i++) {\n      const size = view.getUint16(cursor + 28, true);\n      actual.push(new TextDecoder().decode(bytes.subarray(cursor + 46, cursor + 46 + size)));\n      cursor += 46 + size;\n    }\n    expect(actual).toEqual(names);\n    expect(specs.map(s => s.name)).toEqual(names);\n    expect(specs.map(s => new TextDecoder().decode(s.blob))).toEqual(names.map((_, i) => String(i)));\n  }\n}",
+      "calls": [
+        ".decode",
+        ".encode",
+        "String",
+        "actual.push",
+        "bytes.subarray",
+        "expect",
+        "expect().toEqual",
+        "names.map",
+        "readerSample",
+        "specs.map",
+        "view.getUint16",
+        "view.getUint32"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
+      "path": "tests/unit/zip32-bindings.test.ts",
+      "line": 116,
+      "title": "ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 119,
+          "expression": "for (const step of steps) for (const mutate of [\n    (s: State) =>"
+        },
+        {
+          "line": 119,
+          "expression": "for (const mutate of [\n    (s: State) =>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fd6bf505456534c084277cea75be715aaf59a59f38e74a3622a0e3357bad89d4",
+      "body": "{\n  type State = { error?: unknown; output?: unknown; archive?: Uint8Array };\n  const steps = ['Bun readZip reads the sample with default limits', 'Bun writeZip writes the entries with default options', 'Bun readZip reads the archive with only maxEntries set to 1'];\n  for (const step of steps) for (const mutate of [\n    (s: State) => { s.error = undefined; s.output = new Map(); },\n    (s: State) => { s.error = new Error('untyped'); },\n    ...(step.includes('readZip') ? [(s: State) => { if (s.archive) s.archive[0] = s.archive[0]! ^ 1; }] : []),\n  ]) {\n    const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); mutate(c.state as State);\n    } } : b);\n    failedPredicate(await run(s => s, corrupted));\n  }\n}",
+      "calls": [
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "failedPredicate",
+        "mutate",
+        "run",
+        "step.includes"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "helper-or-no-direct-assertion"
       ],
       "unresolved": []
     },

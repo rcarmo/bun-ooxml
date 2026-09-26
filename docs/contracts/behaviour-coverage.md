@@ -32,7 +32,7 @@ The shared reference contains **200 assets**. The table lists available tests; a
 | references/fixtures-ooxml/workflows/package/semantic-diff.feature | implemented | 1 | 1 | 1 | 0 | 7 |
 | references/fixtures-ooxml/workflows/package/xml-member-admission.feature | implemented | 1 | 3 | 3 | 0 | 9 |
 | references/fixtures-ooxml/workflows/package/zip-admission.feature | implemented | 3 | 10 | 10 | 0 | 31 |
-| references/fixtures-ooxml/workflows/package/zip32.feature | mixed | 8 | 24 | 4 | 20 | 116 |
+| references/fixtures-ooxml/workflows/package/zip32.feature | implemented | 8 | 24 | 24 | 0 | 116 |
 | references/fixtures-ooxml/workflows/pptx/creation.feature | implemented | 3 | 3 | 3 | 0 | 9 |
 | references/fixtures-ooxml/workflows/pptx/slide-order.feature | implemented | 2 | 21 | 21 | 0 | 70 |
 | references/fixtures-ooxml/workflows/pptx/tables.feature | implemented | 4 | 5 | 5 | 0 | 15 |

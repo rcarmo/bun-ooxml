@@ -242,7 +242,11 @@
         "@id-zip-read-valid",
         "@id-zip-refuse-unsafe",
         "@id-zip-bounds",
-        "@id-zip-write-deterministic"
+        "@id-zip-write-deterministic",
+        "@id-zip-crc32-standard-vector",
+        "@id-bun-zip32-reader-refusal",
+        "@id-bun-zip32-writer-refusal",
+        "@id-bun-zip32-configured-bounds"
       ]
     },
     {
