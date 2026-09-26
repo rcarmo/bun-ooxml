@@ -39,7 +39,9 @@ runtime package dependencies or Office subprocesses.
 
 General Word Compare, move/format/table revisions, comment authoring, slide imports,
 merged-table restructuring, chart authoring, structural spreadsheet edits and
-formula calculation are unsupported. See [supported operations and limits](docs/contracts/port-scope.md).
+formula calculation are unsupported. [Direct A1 range parsing](docs/contracts/a1-ranges.md)
+is available independently; it does not edit references or evaluate formulas.
+See [supported operations and limits](docs/contracts/port-scope.md).
 
 ```ts
 import { Document } from "bun-ooxml";

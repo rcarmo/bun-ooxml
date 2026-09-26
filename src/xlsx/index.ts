@@ -1,4 +1,5 @@
 import { posix } from "node:path";
+export {parseA1Range,type A1Range,type A1Coordinate,type A1RangeAxis} from './range.ts';
 
 import { OoxmlError } from "../errors.ts";
 import { OpcPackage, relationshipPath, sameBytes } from "../opc/package.ts";

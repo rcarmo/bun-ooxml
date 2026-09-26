@@ -30,6 +30,7 @@ import { bindings as tablePptxBindings } from "./tables-pptx.ts";
 import { bindings as pptxBindings } from "./pptx.ts";
 import { bindings as notesEditingBindings } from './notes-editing.ts';
 import { bindings as xlsxBindings } from "./xlsx.ts";
+import { bindings as xlsxRangeBindings } from './xlsx-range.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupTrackedWorkflowFixtures(),cleanupFontSize()]);}
@@ -66,6 +67,7 @@ export const bindings: StepBinding[] = [
   ...pptxBindings,
   ...notesEditingBindings,
   ...xlsxBindings,
+  ...xlsxRangeBindings,
   ...cacheBoundaryBindings,
   ...workflowBindings,
 ];

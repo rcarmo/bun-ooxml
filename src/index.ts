@@ -11,6 +11,6 @@ export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding
 export { trackedReplace } from "./docx/redline.ts";
 export { inspectComments, setCommentResolved, type CommentInfo, type CommentFinding, type CommentInspection } from "./docx/comments.ts";
 export { Presentation, type NotesAnchor, type TextBoxGeometry, type TextBoxOptions, type TextBoxReceipt } from "./pptx/index.ts";
-export { Workbook } from "./xlsx/index.ts";
+export { Workbook, parseA1Range, type A1Range, type A1Coordinate, type A1RangeAxis } from "./xlsx/index.ts";
 export { patchOffice, type PatchRequest, type PatchReceipt, type TargetResult } from "./workflow/index.ts";
 export type { Story, StoryKind } from "./docx/story.ts";

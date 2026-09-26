@@ -368,6 +368,15 @@
       "scenarioIds": [
         "@id-package-diff-equivalent-xml-and-binary-changes"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/formula-references.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing",
+        "@id-xlsx-go-direct-range-refusal"
+      ]
     }
   ]
 }

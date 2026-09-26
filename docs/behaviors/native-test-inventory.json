@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 477,
-  "files": 49,
+  "count": 487,
+  "files": 50,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -259,6 +259,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "declarations": 10,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xlsx-styles.test.ts",
       "sha256": "26bae7ee4d283b3109bdb28f31bad7d28adb89232790fd9a0bbe4b211c2496d8",
       "declarations": 5,
@@ -392,7 +398,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "c346b1e25954fbd2b40e0b90813a2a6392f7a1b85bb439dc121ec3a554f56436"
+      "sha256": "f8326f07aa4d8b369cf468857e8c76c377687148b4298dce0e7f9bc92aca39cd"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -421,6 +427,10 @@
     {
       "path": "tests/acceptance/workflow.ts",
       "sha256": "f4d982796cc5de9d9a8e4d7f2902d18d1a2896cd0c72a05faa1e626d7243b4cf"
+    },
+    {
+      "path": "tests/acceptance/xlsx-range.ts",
+      "sha256": "9ea6b2fc1f9465ffc371c66b599db9b451081c6a0791acf974f648d5a7582ff0"
     },
     {
       "path": "tests/acceptance/xlsx.ts",
@@ -550,6 +560,11 @@
     "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
+    "bun:tests/unit/xlsx-range.test.ts:quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
+    "bun:tests/unit/xlsx-range.test.ts:unsupported syntax refuses as one typed error without accepting partial input",
+    "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
+    "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
+    "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -668,6 +683,11 @@
     "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
+    "bun:tests/unit/xlsx-range.test.ts:quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
+    "bun:tests/unit/xlsx-range.test.ts:unsupported syntax refuses as one typed error without accepting partial input",
+    "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
+    "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
+    "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -15582,6 +15602,325 @@
         "tempRoot"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 4,
+      "title": "direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parseA1Range(\"'O''Brien'!$B2:C$4\")).toEqual({sheet:\"O'Brien\",axis:'cell',first:{row:2,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:4,column:3,rowAbsolute:true,columnAbsolute:false}})",
+        "expect(parseA1Range('a3:B1')).toEqual({sheet:'',axis:'cell',first:{row:3,column:1,rowAbsolute:false,columnAbsolute:false},last:{row:1,column:2,rowAbsolute:false,columnAbsolute:false}})",
+        "expect(single.first).toEqual({row:1048576,column:16384,rowAbsolute:false,columnAbsolute:false})",
+        "expect(single.last).toEqual(single.first)",
+        "expect(single.last).not.toBe(single.first)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n expect(parseA1Range(\"'O''Brien'!$B2:C$4\")).toEqual({sheet:\"O'Brien\",axis:'cell',first:{row:2,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:4,column:3,rowAbsolute:true,columnAbsolute:false}});\n expect(parseA1Range('a3:B1')).toEqual({sheet:'',axis:'cell',first:{row:3,column:1,rowAbsolute:false,columnAbsolute:false},last:{row:1,column:2,rowAbsolute:false,columnAbsolute:false}});\n const single=parseA1Range('XFD1048576');expect(single.first).toEqual({row:1048576,column:16384,rowAbsolute:false,columnAbsolute:false});expect(single.last).toEqual(single.first);expect(single.last).not.toBe(single.first);\n}",
+      "calls": [
+        "expect",
+        "expect().not.toBe",
+        "expect().toEqual",
+        "parseA1Range"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:whole row and column references retain zero for the missing coordinate",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 9,
+      "title": "whole row and column references retain zero for the missing coordinate",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parseA1Range('$B:$B')).toEqual({sheet:'',axis:'column',first:{row:0,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:0,column:2,rowAbsolute:false,columnAbsolute:true}})",
+        "expect(parseA1Range('$3:$1')).toEqual({sheet:'',axis:'row',first:{row:3,column:0,rowAbsolute:true,columnAbsolute:false},last:{row:1,column:0,rowAbsolute:true,columnAbsolute:false}})",
+        "expect(parseA1Range(\"'3'!1:1\").sheet).toBe('3')",
+        "expect(parseA1Range('Sheet!$A$1').sheet).toBe('Sheet')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n expect(parseA1Range('$B:$B')).toEqual({sheet:'',axis:'column',first:{row:0,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:0,column:2,rowAbsolute:false,columnAbsolute:true}});\n expect(parseA1Range('$3:$1')).toEqual({sheet:'',axis:'row',first:{row:3,column:0,rowAbsolute:true,columnAbsolute:false},last:{row:1,column:0,rowAbsolute:true,columnAbsolute:false}});\n expect(parseA1Range(\"'3'!1:1\").sheet).toBe('3');expect(parseA1Range('Sheet!$A$1').sheet).toBe('Sheet');\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "parseA1Range"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 14,
+      "title": "quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parseA1Range(source).sheet).toBe(name)",
+        "expect(parseA1Range('Sheet_1!a1').sheet).toBe('Sheet_1')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 15,
+          "expression": "for(const name of ['Input Data','雪 sheet',\"O'Brien\",'A!B'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n for(const name of ['Input Data','雪 sheet',\"O'Brien\",'A!B']){const source=\"'\"+name.replaceAll(\"'\",\"''\")+\"'!A1\";expect(parseA1Range(source).sheet).toBe(name);}\n expect(parseA1Range('Sheet_1!a1').sheet).toBe('Sheet_1');\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "name.replaceAll",
+        "parseA1Range"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:unsupported syntax refuses as one typed error without accepting partial input",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 18,
+      "title": "unsupported syntax refuses as one typed error without accepting partial input",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>parseA1Range(source)).toThrow(OoxmlError)",
+        "expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 19,
+          "expression": "for(const source of ['','A','1','A:B1','1:A2','A1:B','A1:2','SUM(A1)','[Book]Sheet!A1','Sheet1:Sheet2!A1','A1#','@A1','A1,B2','A1 B2','A0:A2','A1048577:A1048577','XFE:XFE','0:1','A:','1:','[X]A:B','INDIRECT(A1)','=A1','A1:B2:Z3','A01',' A1','A1 ','A1!','!A1',\"'unfinished!A1\",\"''!A1\",'Sheet!Other!A1','3!A1'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n for(const source of ['','A','1','A:B1','1:A2','A1:B','A1:2','SUM(A1)','[Book]Sheet!A1','Sheet1:Sheet2!A1','A1#','@A1','A1,B2','A1 B2','A0:A2','A1048577:A1048577','XFE:XFE','0:1','A:','1:','[X]A:B','INDIRECT(A1)','=A1','A1:B2:Z3','A01',' A1','A1 ','A1!','!A1',\"'unfinished!A1\",\"''!A1\",'Sheet!Other!A1','3!A1']){\n  expect(()=>parseA1Range(source)).toThrow(OoxmlError);expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}));\n }\n}",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "parseA1Range"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 23,
+      "title": "sheet qualifier policy refuses external, invalid and unsafe name forms",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 24,
+          "expression": "for(const source of [\"'a:b'!A1\",\"'[book]sheet'!A1\",\"'a/b'!A1\",\"'a\\\\b'!A1\",\"'a?b'!A1\",\"'a*b'!A1\",\"'a\\u0000b'!A1\",\"'a\\ud800b'!A1\",'A B!A1'])expect(()=>parseA1Range(source)).toThrow(expect.objectContaining("
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n for(const source of [\"'a:b'!A1\",\"'[book]sheet'!A1\",\"'a/b'!A1\",\"'a\\\\b'!A1\",\"'a?b'!A1\",\"'a*b'!A1\",\"'a\\u0000b'!A1\",\"'a\\ud800b'!A1\",'A B!A1'])expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}));\n}",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "parseA1Range"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 26,
+      "title": "row and column overflow, invalid argument types and excessive input refuse before work",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>parseA1Range(source as string)).toThrow(OoxmlError)",
+        "expect(parseA1Range('A1:XFD1048576').last).toEqual({row:1048576,column:16384,rowAbsolute:false,columnAbsolute:false})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 27,
+          "expression": "for(const source of ['ZZZZZZZZZZZZZZZZZZ9999999999999999','A999999999999999999999','999999999999999999:1','$0:$1','XFE1','A1048577','a'.repeat(1024*1024+1),null,123])expect(()=>parseA1Range(source as string)).toThrow(OoxmlError);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n for(const source of ['ZZZZZZZZZZZZZZZZZZ9999999999999999','A999999999999999999999','999999999999999999:1','$0:$1','XFE1','A1048577','a'.repeat(1024*1024+1),null,123])expect(()=>parseA1Range(source as string)).toThrow(OoxmlError);\n expect(parseA1Range('A1:XFD1048576').last).toEqual({row:1048576,column:16384,rowAbsolute:false,columnAbsolute:false});\n}",
+      "calls": [
+        ".repeat",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "parseA1Range"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:returned coordinates are detached and no parser state leaks between calls",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 30,
+      "title": "returned coordinates are detached and no parser state leaks between calls",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parseA1Range('A1:B2').first.row).toBe(1)",
+        "expect(parseA1Range('A1:B2').last.column).toBe(2)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n const first=parseA1Range('A1:B2');first.first.row=100;first.last.column=99;expect(parseA1Range('A1:B2').first.row).toBe(1);expect(parseA1Range('A1:B2').last.column).toBe(2);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "parseA1Range"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:thirteen existing direct-range canonical cases execute without activating formula analysis",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 34,
+      "title": "thirteen existing direct-range canonical cases execute without activating formula analysis",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(13)",
+        "expect(result.counts.cases.planned).toBe(32)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,scenarioIds}=await import('../acceptance/xlsx-range.ts');\n const path='workflows/xlsx/formula-references.feature',f=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),scenarioIds),count=(n:number)=>({implemented:n,planned:0,total:n});\n const result=await executeAcceptance({root:'.',features:[f],counts:{features:count(1),scenarios:count(2),cases:count(13),steps:count(45)}},bindings,'range-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(13);expect(result.counts.cases.planned).toBe(32);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:bounded UTF-8 input refuses oversize Unicode sheet qualifiers",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 39,
+      "title": "bounded UTF-8 input refuses oversize Unicode sheet qualifiers",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(source.length).toBeLessThan(1048576)",
+        "expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n const source=\"'\"+'雪'.repeat(400000)+\"'!A1\";expect(source.length).toBeLessThan(1048576);expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}));\n}",
+      "calls": [
+        ".repeat",
+        "expect",
+        "expect().toBeLessThan",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "parseA1Range"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "line": 43,
+      "title": "boundary coordinate combinations retain both independent absolute flags",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parsed.first).toEqual({row,column,rowAbsolute:ra,columnAbsolute:ca})",
+        "expect(parsed.last).toEqual(parsed.first)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 44,
+          "expression": "for(const [letters,column]of [['A',1],['Z',26],['AA',27],['XFD',16384]] as const)for(const row of [1,9,1048576])for(const ca of [false,true])for(const ra of [false,true])"
+        },
+        {
+          "line": 44,
+          "expression": "for(const row of [1,9,1048576])for(const ca of [false,true])for(const ra of [false,true])"
+        },
+        {
+          "line": 44,
+          "expression": "for(const ca of [false,true])for(const ra of [false,true])"
+        },
+        {
+          "line": 44,
+          "expression": "for(const ra of [false,true])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+      "body": "{\n for(const [letters,column]of [['A',1],['Z',26],['AA',27],['XFD',16384]] as const)for(const row of [1,9,1048576])for(const ca of [false,true])for(const ra of [false,true]){\n  const token=(ca?'$':'')+letters+(ra?'$':'')+row,parsed=parseA1Range(token+':'+token);expect(parsed.first).toEqual({row,column,rowAbsolute:ra,columnAbsolute:ca});expect(parsed.last).toEqual(parsed.first);\n }\n}",
+      "calls": [
+        "expect",
+        "expect().toEqual",
+        "parseA1Range"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {

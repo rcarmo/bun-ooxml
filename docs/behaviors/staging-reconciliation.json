@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 477,
+  "nativeDeclarations": 487,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 250,
+  "withoutStagingCount": 260,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3365,6 +3365,56 @@
       "id": "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
       "path": "tests/unit/xlsx-cell-style.test.ts",
       "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:whole row and column references retain zero for the missing coordinate",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:unsupported syntax refuses as one typed error without accepting partial input",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:returned coordinates are detached and no parser state leaks between calls",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:thirteen existing direct-range canonical cases execute without activating formula analysis",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:bounded UTF-8 input refuses oversize Unicode sheet qualifiers",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
+      "path": "tests/unit/xlsx-range.test.ts",
+      "sourceSha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd"
     },
     {
       "id": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
