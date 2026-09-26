@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, test } from "bun:test";
+import {sharedFormulaWorkbook} from '../fixtures/native-edge-cases.ts';
 import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
@@ -227,11 +228,7 @@ describe("Worksheet.setCellValue", () => {
   });
 
   test("refuses unsupported shared formula edits without mutating the package", async () => {
-    const path = join(
-      import.meta.dir,
-      "../../references/fixtures-ooxml/reference-assets/xlsx/tests/paper/fixtures/features/shared_formulas.xlsx",
-    );
-    const originalBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
+    const originalBytes = await sharedFormulaWorkbook();
     const workbook = await Workbook.open(originalBytes);
 
     expect(() => workbook.worksheet("Calc").setCellValue("B2", 99)).toThrow(
@@ -244,11 +241,7 @@ describe("Worksheet.setCellValue", () => {
   });
 
   test("refuses unsupported array formula edits without mutating the package", async () => {
-    const path = join(
-      import.meta.dir,
-      "../../references/fixtures-ooxml/reference-assets/xlsx/tests/paper/fixtures/features/shared_formulas.xlsx",
-    );
-    const originalBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
+    const originalBytes = await sharedFormulaWorkbook();
     const workbook = await Workbook.open(originalBytes);
 
     expect(() => workbook.worksheet("Calc").setCellValue("D2", 99)).toThrow(

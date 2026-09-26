@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, test } from "bun:test";
+import {textboxDocument} from '../fixtures/native-edge-cases.ts';
 import { readFileSync, readdirSync } from "node:fs";
 import { copyFile, mkdtemp, mkdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -164,14 +165,9 @@ describe("docx Document", () => {
   });
 
   test("does not descend into text boxes and refuses the blind region when no supported match exists", async () => {
-    const doc = await Document.open(
-      join(
-        PROJECT_ROOT,
-        "references/fixtures-ooxml/reference-assets/docx/tests/paper/fixtures/generated/feature-isolated/textbox.docx",
-      ),
-    );
+    const doc = await Document.open(await textboxDocument());
 
-    expect(doc.find("Body text before the text box.")).toHaveLength(1);
+    expect(doc.find("Outside the text box.")).toHaveLength(1);
     expect(() => doc.find("Text living inside the text box.")).toThrow(
       expect.objectContaining({ code: "docx-unsupported-topology" }),
     );

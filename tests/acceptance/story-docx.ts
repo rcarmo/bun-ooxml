@@ -11,10 +11,6 @@ const PYTHON_WORD_ROOT = join(
   PROJECT_ROOT,
   "fixtures/python-office-mcp-server/tests/_templates/testdata/word",
 );
-const UPSTREAM_FIXTURES = join(
-  PROJECT_ROOT,
-  "references/fixtures-ooxml/reference-assets/docx/tests/paper/fixtures/generated",
-);
 const W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
 const R_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
 const MC_NS = "http://schemas.openxmlformats.org/markup-compatibility/2006";
@@ -104,11 +100,8 @@ export async function openStoryFixture(name: string): Promise<OpcPackage> {
 
 export function resolveStoryFixturePath(name: string): string {
   const real = new Map<string, string>([
-    ["gauntlet", join(UPSTREAM_FIXTURES, "gauntlet/gauntlet.docx")],
-    ["header-footer-sections", join(UPSTREAM_FIXTURES, "feature-isolated/header-footer-sections.docx")],
-    ["footnotes-endnotes", join(UPSTREAM_FIXTURES, "feature-isolated/footnotes-endnotes.docx")],
-    ["comments", join(UPSTREAM_FIXTURES, "feature-isolated/comments.docx")],
-    ["textbox", join(UPSTREAM_FIXTURES, "feature-isolated/textbox.docx")],
+    ["header-footer-sections", join(PYTHON_WORD_ROOT, "headers_footers.docx")],
+    ["comments", join(PYTHON_WORD_ROOT, "comments.docx")],
   ]);
   return required(real.get(name), `unknown DOCX story fixture ${name}`);
 }

@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
+import {textboxDocument} from '../fixtures/native-edge-cases.ts';
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -22,47 +23,37 @@ afterEach(async () => {
 });
 
 describe("docx story inspection", () => {
-  test("lists real gauntlet story parts in deterministic order", async () => {
-    const pkg = await OpcPackage.open(resolveStoryFixturePath("gauntlet"));
+  test("lists linked native story parts in deterministic order", async () => {
+    const pkg = await createSyntheticRevisionFixture();
 
     expect(storyParts(pkg)).toEqual([
       { part: "word/document.xml", kind: "body" },
       { part: "word/header1.xml", kind: "header" },
-      { part: "word/header2.xml", kind: "header" },
-      { part: "word/header3.xml", kind: "header" },
       { part: "word/footer1.xml", kind: "footer" },
+      { part: "word/footer2.xml", kind: "footer" },
       { part: "word/footnotes.xml", kind: "footnotes" },
       { part: "word/endnotes.xml", kind: "endnotes" },
       { part: "word/comments.xml", kind: "comments" },
     ]);
   });
 
-  test("reads real headers, footnotes, endnotes and comments without inferring from filenames", async () => {
+  test("reads owned document headers/comments and native notes without inferring from filenames", async () => {
     const headerPkg = await OpcPackage.open(resolveStoryFixturePath("header-footer-sections"));
-    const notePkg = await OpcPackage.open(resolveStoryFixturePath("footnotes-endnotes"));
+    const notePkg = await createSyntheticRevisionFixture();
     const commentPkg = await OpcPackage.open(resolveStoryFixturePath("comments"));
 
     const headers = inspectStories(headerPkg);
     const notes = inspectStories(notePkg);
     const comments = inspectStories(commentPkg);
 
-    expect(storyText(headers, "word/header1.xml")).toEqual(["Header for section one"]);
-    expect(storyText(headers, "word/header2.xml")).toEqual(["First-page header for section one"]);
-    expect(storyText(headers, "word/header3.xml")).toEqual(["Header for section two"]);
-    expect(storyText(headers, "word/footer1.xml")).toEqual(["Footer for section one"]);
-    expect(storyText(headers, "word/footer2.xml")).toEqual(["Footer for section two"]);
-
-    expect(storyText(notes, "word/document.xml")).toEqual([
-      "Opening paragraph without any notes.",
-      "This sentence carries a footnote reference.",
-      "This sentence carries an endnote reference.",
-    ]);
-    expect(storyText(notes, "word/footnotes.xml")).toEqual([" The footnote body text, hand-authored."]);
-    expect(storyText(notes, "word/endnotes.xml")).toEqual([" The endnote body text, hand-authored."]);
-
+    expect(storyText(headers, "word/header1.xml")).toEqual(["FRANKENSTEIN - by Mary Shelley"]);
+    expect(storyText(headers, "word/header2.xml")).toEqual(["FRANKENSTEIN - First Page"]);
+    expect(storyText(headers, "word/footer1.xml")).toEqual(["Prepared by Test Author"]);
+    expect(storyText(notes, "word/document.xml")).toEqual(["Body intro", "Table\tCell\nLine2", "Inserted body paragraph", "Body kept"]);
+    expect(storyText(notes, "word/footnotes.xml")).toEqual([" Footnote new text"]);
+    expect(storyText(notes, "word/endnotes.xml")).toEqual([" Endnote text"]);
     expect(storyText(comments, "word/comments.xml")).toEqual([
-      "Please double-check this figure.",
-      "Approved as written.",
+      "This is a great opening", "Classical hubris", "(this is a threaded reply)",
     ]);
   });
 
@@ -126,8 +117,8 @@ describe("docx story inspection", () => {
     ]);
   });
 
-  test("counts blind regions for real text boxes and synthetic fields alternate content unknown namespaces orphans and external story rels", async () => {
-    const textboxPkg = await OpcPackage.open(resolveStoryFixturePath("textbox"));
+  test("counts blind regions for native text boxes fields alternate content unknown namespaces orphans and external story rels", async () => {
+    const textboxPkg = await OpcPackage.open(await textboxDocument());
     const blindPkg = await createSyntheticBlindFixture();
 
     const textbox = inspectStories(textboxPkg);
@@ -153,7 +144,7 @@ describe("docx story inspection", () => {
   });
 
   test("inspection never mutates package bytes", async () => {
-    const source = new Uint8Array(readFileSync(resolveStoryFixturePath("gauntlet")));
+    const source = new Uint8Array(readFileSync(resolveStoryFixturePath("header-footer-sections")));
     const pkg = await OpcPackage.open(source);
 
     inspectStories(pkg, { view: "all" });

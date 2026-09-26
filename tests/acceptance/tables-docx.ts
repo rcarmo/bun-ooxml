@@ -1,4 +1,5 @@
 import { expect } from "bun:test";
+import {mergedNestedTableDocument} from '../fixtures/native-edge-cases.ts';
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
@@ -36,7 +37,7 @@ export const bindings: StepBinding[] = [
       state.rememberedOpaquePart = undefined;
       state.document = source === "new-document"
         ? Document.create()
-        : await Document.open(resolveFixture(source));
+        : await Document.open(source === 'native-merged-nested' ? await mergedNestedTableDocument() : resolveFixture(source));
     },
   },
   {

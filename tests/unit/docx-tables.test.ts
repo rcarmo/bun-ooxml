@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, test } from "bun:test";
+import {mergedNestedTableDocument} from '../fixtures/native-edge-cases.ts';
 import { readFileSync } from "node:fs";
 import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -112,9 +113,7 @@ describe("docx Document tables", () => {
     expect(() => requireTable(simple, 0).cell(9, 0)).toThrow(RangeError);
     expect(await simple.save()).toEqual(simpleBaseline);
 
-    const merged = await Document.open(
-      join(PROJECT_ROOT, "references/fixtures-ooxml/reference-assets/docx/tests/paper/fixtures/generated/feature-isolated/table-merged-nested.docx"),
-    );
+    const merged = await Document.open(await mergedNestedTableDocument());
     const mergedBaseline = await merged.save();
     const mergedTable = requireTable(merged, 0);
     expect(mergedTable.rows).toBe(3);

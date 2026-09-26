@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {sharedFormulaWorkbook} from '../fixtures/native-edge-cases.ts';
 import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
@@ -334,8 +335,7 @@ export const bindings: StepBinding[] = [
     pattern: /^the shared-formula XLSX fixture$/,
     run: async (context) => {
       const state = scenarioState(context);
-      const path = projectPath("references/fixtures-ooxml/reference-assets/xlsx/tests/paper/fixtures/features/shared_formulas.xlsx");
-      state.sourceBytes = new Uint8Array(await Bun.file(path).arrayBuffer());
+      state.sourceBytes = await sharedFormulaWorkbook();
       state.originalParts = readZip(state.sourceBytes);
       state.workbook = await Workbook.open(state.sourceBytes);
     },

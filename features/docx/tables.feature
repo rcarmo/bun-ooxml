@@ -48,6 +48,6 @@ Feature: DOCX native rectangular tables
     Examples:
       | source                                                                                         | case        | code                         |
       | fixtures/python-office-mcp-server/tests/_templates/testdata/word/simple_table.docx            | row-oob     | range                        |
-      | references/fixtures-ooxml/reference-assets/docx/tests/paper/fixtures/generated/feature-isolated/table-merged-nested.docx  | merged-cell | docx-table-merged-cell       |
-      | references/fixtures-ooxml/reference-assets/docx/tests/paper/fixtures/generated/feature-isolated/table-merged-nested.docx  | nested-cell | docx-table-cell-unsupported  |
+      | native-merged-nested  | merged-cell | docx-table-merged-cell       |
+      | native-merged-nested  | nested-cell | docx-table-cell-unsupported  |
       | synthetic-grid-before                                                                          | bizarre     | docx-table-unsupported       |
