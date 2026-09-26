@@ -12,12 +12,14 @@ receipts. Its native bindings pass the 19 shared mutation cases. Guarded OPC gra
 helpers add/detach parts and relationships; package diffs identify payload and
 content-type changes. Package-level Word review APIs inspect linked stories,
 resolve supported run-level revisions and author bounded tracked replacements.
+Existing comment threads can be inspected and individual resolution flags changed
+without touching comment bodies or anchors.
 ZIP, XML and OPC code
 use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 
 Full DOCX, PPTX and XLSX behaviour coverage is in progress. Creation is limited to those initial paragraph/slide/cell surfaces. This version
-does not implement general Word Compare, move/format/table revisions, comment threads,
+does not implement general Word Compare, move/format/table revisions, comment authoring,
 slide imports, merged-table restructuring or chart authoring,
 structural spreadsheet edits or calculation.
 The [scope and closure criteria](docs/contracts/port-scope.md) and

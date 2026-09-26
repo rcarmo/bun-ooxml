@@ -1,7 +1,8 @@
 # Native behaviour catalogue staging
 
-The AST inventory contains 227 test declarations in 29 native test files. Five
-candidate mapping files cover those declaration IDs once each. Semantic review
+The AST inventory contains 246 test declarations in 30 native test files. Five
+candidate mapping files cover the earlier 227 declaration IDs once each; the 19
+new comment declarations still need central semantic reconciliation. Semantic review
 and reconciliation into the shared Gherkin catalogue are unfinished. A bounded
 review of the 18 XML/QName declarations is recorded in the shared
 `ledgers/consumers/bun-xml.json`, with partial and unmapped assertions explicit.
@@ -17,7 +18,7 @@ The shared parsing/QName features now replace their former local copies.
 
 `native-test-inventory.json` records declaration identity, suite/title, source
 location/hash, assertion expressions and loops. It counts declarations, not
-runtime-expanded leaves. Twenty-five declarations contain parameters or loops
+runtime-expanded leaves. Thirty-two declarations contain parameters or loops
 that need explicit expansion review. Assertions hidden in helper calls also need
 manual inspection; an empty extracted assertion list does not mean no assertion
 ran.
@@ -41,5 +42,9 @@ outcomes need a separate scenario or an explicit issue, not contradictory copies
 
 Only reviewed functional Gherkin enters `fixtures-ooxml`. Per-language ledgers
 retain test-to-scenario mappings and execution results. Staging descriptions remain review inputs. The shared XML mapping supersedes
-XML-specific candidate prose here; remaining non-XML rows still need review. The existing 114 executable Bun cases remain the current acceptance
-result; candidate mapping counts do not change that result.
+XML-specific candidate prose here; remaining non-XML rows still need review.
+The 19 new comment declarations and their source hashes appear in the refreshed
+inventory. Their four local scenarios expand to 14 executed cases, recorded in
+`comment-binding-check.json`; they are not yet shared canonical mappings.
+Acceptance now executes 128 Bun cases. Candidate mapping counts never increase
+that result.

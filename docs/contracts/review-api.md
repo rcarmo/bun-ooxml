@@ -48,3 +48,5 @@ document comparison and paragraph/table change algebra are not implemented.
 The root and ./docx entrypoints export these APIs. Tests/features are named
 story/revisions/redline. Shared fixtures are unchanged. Author filtering,
 revision snapshots, full comparison and broader revision coverage remain gaps.
+Existing comment inspection and targeted resolution are documented separately in
+[comments-api.md](comments-api.md); comment bodies and anchors are never edited.

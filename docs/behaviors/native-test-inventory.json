@@ -2,10 +2,17 @@
   "schemaVersion": 1,
   "consumer": "bun",
   "discovery": "TypeScript AST; declarations are not runtime-expanded leaf cases",
-  "count": 227,
-  "files": 29,
+  "count": 246,
+  "files": 30,
   "dynamicCases": [
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+    "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
+    "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
+    "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
+    "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
+    "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
+    "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
+    "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
     "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/docx-redline.test.ts:XML comments and literal inter-run content are barriers rather than discarded during redlining",
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
@@ -211,6 +218,348 @@
       "loops": [],
       "sourceSha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
       "body": "{\n    const pkg = await OpcPackage.open(createPackageBytes());\n    const originalPart = pkg.get(\"[Content_Types].xml\")!;\n\n    expectOoxmlError(\n      () => setPartContentType(pkg, \"../bad.xml\", \"application/xml\"),\n      \"opc-part-name-invalid\",\n      \"Noncanonical part name\",\n    );\n    expectOoxmlError(\n      () => setPartContentType(pkg, \"word/bad.xml\", \"not a mime\"),\n      \"opc-content-type-invalid\",\n      \"Invalid content type\",\n    );\n    expect(pkg.get(\"[Content_Types].xml\")).toEqual(originalPart);\n\n    pkg.set(\n      \"[Content_Types].xml\",\n      `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`\n      + `<Types xmlns=\"${CONTENT_TYPES_NS}\">`\n      + `<Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/>`\n      + `<Override PartName=\"/${DOCUMENT_PART}\" ContentType=\"${MAIN_CONTENT_TYPE}\"/>`\n      + `<Override PartName=\"/${DOCUMENT_PART}\" ContentType=\"application/duplicate+xml\"/>`\n      + `</Types>`,\n    );\n    const duplicateBytes = pkg.get(\"[Content_Types].xml\")!;\n\n    expectOoxmlError(\n      () => getContentType(pkg, DOCUMENT_PART),\n      \"opc-content-types-invalid\",\n      \"Duplicate/missing part override\",\n    );\n    expect(pkg.get(\"[Content_Types].xml\")).toEqual(duplicateBytes);\n\n    pkg.set(\n      \"[Content_Types].xml\",\n      `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`\n      + `<ct:Types xmlns:ct=\"${CONTENT_TYPES_NS}\">`\n      + `<ct:Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/>`\n      + `<bad:Override xmlns:bad=\"urn:not-content-types\" PartName=\"/${DOCUMENT_PART}\" ContentType=\"${MAIN_CONTENT_TYPE}\"/>`\n      + `</ct:Types>`,\n    );\n    const wrongNamespaceBytes = pkg.get(\"[Content_Types].xml\")!;\n\n    expectOoxmlError(\n      () => removePartContentType(pkg, DOCUMENT_PART),\n      \"opc-content-types-invalid\",\n      \"Malformed content type\",\n    );\n    expect(pkg.get(\"[Content_Types].xml\")).toEqual(wrongNamespaceBytes);\n  }"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 8,
+      "title": "all existing comment Gherkin cases assert saved outcomes",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(14)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const path='features/docx/comments.feature',f=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(14);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 14,
+      "title": "renamed extension prefixes and multiline comments preserve exact unrelated bytes",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(p.text(ex)).toBe(before.replace('thread:paraId=\"3395B541\" thread:done=\"0\"','thread:paraId=\"3395B541\" thread:done=\"1\"'))",
+        "expect(inspectComments(reopened).comments[1]!.resolved).toBe(true)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),ex='word/commentsExtended.xml';p.set(ex,p.text(ex).replaceAll('xmlns:w15=','xmlns:thread=').replaceAll('w15:','thread:'));\n const before=p.text(ex);setCommentResolved(p,'1',true);expect(p.text(ex)).toBe(before.replace('thread:paraId=\"3395B541\" thread:done=\"0\"','thread:paraId=\"3395B541\" thread:done=\"1\"'));\n const reopened=await OpcPackage.open(p.toBytes());expect(inspectComments(reopened).comments[1]!.resolved).toBe(true);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 20,
+      "title": "unsupported comment body is reported read-only and no resolution mutates it",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(inspectComments(p).unsupported.length).toBeGreaterThan(0)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture('revision-body'),before=p.toBytes();expect(inspectComments(p).unsupported.length).toBeGreaterThan(0);expect(p.toBytes()).toEqual(before);expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 24,
+      "title": "unknown IDs and runtime nonboolean arguments leave package unchanged",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>setCommentResolved(p,id,true)).toThrow()",
+        "expect(()=>setCommentResolved(p,'1','false' as unknown as boolean)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [
+        {
+          "line": 25,
+          "expression": "for(const id of ['missing','-1','999'])expect(()=>setCommentResolved(p,id,true)).toThrow();"
+        }
+      ],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),before=p.toBytes();for(const id of ['missing','-1','999'])expect(()=>setCommentResolved(p,id,true)).toThrow();\n expect(()=>setCommentResolved(p,'1','false' as unknown as boolean)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 29,
+      "title": "attribute edits preserve quote style, spacing, entities and unrelated attribute text",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(setCommentResolved(p,'1',true)).toEqual({changed:1,changedParts:[part]})",
+        "expect(p.text(part)).toBe(xml.replace(\"w15:done = '&#48;'\",\"w15:done = '1'\"))",
+        "expect(inspectComments(reopened).comments.find(c=>c.id==='1')?.resolved).toBe(true)",
+        "expect(p.get(name)).toEqual(original.get(name))"
+      ],
+      "loops": [
+        {
+          "line": 36,
+          "expression": "for(const name of p.names())if(name!==part)expect(p.get(name)).toEqual(original.get(name));"
+        }
+      ],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n const xml=p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"',`w15:paraId=\"3395B541\" note=\"literal w15:done='0'\" w15:done = '&#48;'`);\n p.set(part,xml);const before=p.toBytes();\n expect(setCommentResolved(p,'1',true)).toEqual({changed:1,changedParts:[part]});\n expect(p.text(part)).toBe(xml.replace(\"w15:done = '&#48;'\",\"w15:done = '1'\"));\n const reopened=await OpcPackage.open(p.toBytes());expect(inspectComments(reopened).comments.find(c=>c.id==='1')?.resolved).toBe(true);\n const original=await OpcPackage.open(before);for(const name of p.names())if(name!==part)expect(p.get(name)).toEqual(original.get(name));\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:missing done flag uses an attribute prefix under a default element namespace",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 38,
+      "title": "missing done flag uses an attribute prefix under a default element namespace",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(setCommentResolved(p,'1',false).changed).toBe(0)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(setCommentResolved(p,'1',true).changed).toBe(1)",
+        "expect(p.text(part)).toBe(xml.replace('q:paraId=\"3395B541\"/>','q:paraId=\"3395B541\" q:done=\"1\"/>'))",
+        "expect(inspectComments(await OpcPackage.open(p.toBytes())).comments.find(c=>c.id==='1')?.resolved).toBe(true)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n const xml=p.text(part).replaceAll('w15:commentsEx','commentsEx').replaceAll('w15:commentEx','commentEx').replace('xmlns:w15=','xmlns=').replaceAll('w15:','q:').replace('<commentsEx ', '<commentsEx xmlns:q=\"http://schemas.microsoft.com/office/word/2012/wordml\" ').replace('q:paraId=\"3395B541\" q:done=\"0\"','q:paraId=\"3395B541\"');\n p.set(part,xml);const before=p.toBytes();expect(setCommentResolved(p,'1',false).changed).toBe(0);expect(p.toBytes()).toEqual(before);\n expect(setCommentResolved(p,'1',true).changed).toBe(1);expect(p.text(part)).toBe(xml.replace('q:paraId=\"3395B541\"/>','q:paraId=\"3395B541\" q:done=\"1\"/>'));\n expect(inspectComments(await OpcPackage.open(p.toBytes())).comments.find(c=>c.id==='1')?.resolved).toBe(true);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 45,
+      "title": "same boolean state retains on/off spelling and exact archive bytes",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(setCommentResolved(p,'1',state)).toEqual({changed:0,changedParts:[]})",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [
+        {
+          "line": 46,
+          "expression": "for(const [word,state]of [['on',true],['true',true],['off',false],['false',false]] as const)"
+        }
+      ],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n for(const [word,state]of [['on',true],['true',true],['off',false],['false',false]] as const){\n  const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"',`w15:paraId=\"3395B541\" w15:done=\"${word}\"`));const before=p.toBytes();\n  expect(setCommentResolved(p,'1',state)).toEqual({changed:0,changedParts:[]});expect(p.toBytes()).toEqual(before);\n }\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:serialization failure rolls back the done flag while retaining earlier edits",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 51,
+      "title": "serialization failure rolls back the done flag while retaining earlier edits",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow('injected serialization failure')",
+        "expect(p.text(part)).toBe(xml)",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';\n p.set('word/document.xml',p.text('word/document.xml').replace('</w:body>','<!--prior edit--></w:body>'));const before=p.toBytes(),xml=p.text(part);\n const serialize=p.toBytes;p.toBytes=()=>{throw new Error('injected serialization failure');};\n try{expect(()=>setCommentResolved(p,'1',true)).toThrow('injected serialization failure');expect(p.text(part)).toBe(xml);}finally{p.toBytes=serialize;}\n expect(p.toBytes()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 58,
+      "title": "misqualified done or parent metadata refuses instead of being ignored",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [
+        {
+          "line": 59,
+          "expression": "for(const key of ['done','paraIdParent'])"
+        }
+      ],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n for(const key of ['done','paraIdParent']){\n  const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace(`w15:${key}=`,`bogus:${key}=`).replace('<w15:commentsEx ','<w15:commentsEx xmlns:bogus=\"urn:wrong\" '));const before=p.toBytes();\n  expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n }\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 65,
+      "title": "resolution refuses every enforcing settings part and accepts only explicit disabled protection",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(settings).toBeDefined()",
+        "expect(setCommentResolved(p,'1',true).changed).toBe(1)",
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [
+        {
+          "line": 67,
+          "expression": "for(const enforcement of [undefined,'','1','true','on','unexpected','false','0','OFF'])"
+        }
+      ],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';\n for(const enforcement of [undefined,'','1','true','on','unexpected','false','0','OFF']){\n  const p=await commentFixture(),settings=p.related(p.mainPart(),'settings')!;\n  expect(settings).toBeDefined();\n  p.set(settings,`<s:settings xmlns:s=\"${W}\"><s:documentProtection${enforcement===undefined?'':` s:enforcement=\"${enforcement}\"`}/></s:settings>`);\n  const before=p.toBytes();\n  if(['false','0','OFF'].includes(enforcement??'')){expect(setCommentResolved(p,'1',true).changed).toBe(1);}else{expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);}\n }\n const p=await commentFixture(),settings=p.related(p.mainPart(),'settings')!;\n p.set(settings,`<s:settings xmlns:s=\"${W}\"><s:documentProtection s:enforcement=\"0\"/><s:documentProtection s:enforcement=\"1\"/></s:settings>`);const before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:inspection results are detached and cannot bypass package custody",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 77,
+      "title": "inspection results are detached and cannot bypass package custody",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(second.comments[1]!.resolved).toBe(false)",
+        "expect(second.comments[2]!.parentId).toBe('1')",
+        "expect(second.comments[0]!.text).toBe('This is a great opening')",
+        "expect(second.unsupported).toEqual([])",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),before=p.toBytes(),first=inspectComments(p);first.comments[1]!.resolved=true;first.comments[2]!.parentId='999';first.comments[0]!.text='mutated';first.unsupported.push({part:'word/comments.xml',kind:'invented'});\n const second=inspectComments(p);expect(second.comments[1]!.resolved).toBe(false);expect(second.comments[2]!.parentId).toBe('1');expect(second.comments[0]!.text).toBe('This is a great opening');expect(second.unsupported).toEqual([]);expect(p.toBytes()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:comment paragraph newlines and tabs are read without rewriting bodies",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 81,
+      "title": "comment paragraph newlines and tabs are read without rewriting bodies",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(inspectComments(p).comments[0]!.text).toBe('This is a great opening\\ttab\\nline')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(p.text(part)).toBe(xml)",
+        "expect((await OpcPackage.open(p.toBytes())).text(part)).toBe(xml)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),part='word/comments.xml';const xml=p.text(part).replace('This is a great opening','This is a great opening</w:t><w:tab/><w:t>tab</w:t><w:br/><w:t>line');p.set(part,xml);const before=p.toBytes();\n expect(inspectComments(p).comments[0]!.text).toBe('This is a great opening\\ttab\\nline');expect(p.toBytes()).toEqual(before);\n setCommentResolved(p,'1',true);expect(p.text(part)).toBe(xml);expect((await OpcPackage.open(p.toBytes())).text(part)).toBe(xml);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:non-self-closing entries retain boundary whitespace exactly",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 86,
+      "title": "non-self-closing entries retain boundary whitespace exactly",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(p.text(part)).toBe(xml.replace('w15:paraId=\"3395B541\" \\n >','w15:paraId=\"3395B541\" w15:done=\"1\" \\n >'))",
+        "expect(inspectComments(p).comments[1]!.resolved).toBe(true)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';const xml=p.text(part).replace('w15:paraId=\"3395B541\" w15:done=\"0\"/>','w15:paraId=\"3395B541\" \\n > \\r\\n </w15:commentEx>');p.set(part,xml);\n setCommentResolved(p,'1',true);expect(p.text(part)).toBe(xml.replace('w15:paraId=\"3395B541\" \\n >','w15:paraId=\"3395B541\" w15:done=\"1\" \\n >'));expect(inspectComments(p).comments[1]!.resolved).toBe(true);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:multiple comments settings and external settings refuse before mutation",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 90,
+      "title": "multiple comments settings and external settings refuse before mutation",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>setCommentResolved(q,'1',true)).toThrow()",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const {addPart,addRelationship}=await import('../../src/opc/index.ts');const p=await commentFixture(),W='http://schemas.openxmlformats.org/wordprocessingml/2006/main',R='http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings';\n addPart(p,'word/extra-settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"true\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),R,'extra-settings.xml');let before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n const q=await commentFixture();addRelationship(q,q.mainPart(),R,'https://example.invalid/settings.xml',{external:true});before=q.toBytes();expect(()=>setCommentResolved(q,'1',true)).toThrow();expect(q.toBytes()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 96,
+      "title": "UTF-16 extension encoding and BOM survive a done-only edit",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(p.get(part)).toEqual(encode(xml.replace('w15:paraId=\"3395B541\" w15:done=\"0\"','w15:paraId=\"3395B541\" w15:done=\"1\"')))",
+        "expect(inspectComments(await OpcPackage.open(p.toBytes())).comments[1]!.resolved).toBe(true)"
+      ],
+      "loops": [
+        {
+          "line": 98,
+          "expression": "for(let i=0;i<value.length;i++)view.setUint16(2+i*2,value.charCodeAt(i),true);"
+        }
+      ],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml',xml=p.text(part).replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"');\n const encode=(value:string)=>{const out=new Uint8Array(2+value.length*2),view=new DataView(out.buffer);view.setUint16(0,0xfeff,true);for(let i=0;i<value.length;i++)view.setUint16(2+i*2,value.charCodeAt(i),true);return out;};\n p.set(part,encode(xml));setCommentResolved(p,'1',true);expect(p.get(part)).toEqual(encode(xml.replace('w15:paraId=\"3395B541\" w15:done=\"0\"','w15:paraId=\"3395B541\" w15:done=\"1\"')));\n expect(inspectComments(await OpcPackage.open(p.toBytes())).comments[1]!.resolved).toBe(true);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 102,
+      "title": "misqualified comment IDs and paragraph metadata refuse the whole resolution",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [
+        {
+          "line": 103,
+          "expression": "for(const [from,to]of [['w:id=\"1\"','id=\"1\"'],['w14:paraId=\"3395B541\"','paraId=\"3395B541\"']] as const)"
+        }
+      ],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n for(const [from,to]of [['w:id=\"1\"','id=\"1\"'],['w14:paraId=\"3395B541\"','paraId=\"3395B541\"']] as const){\n  const p=await commentFixture(),part='word/comments.xml';p.set(part,p.text(part).replace(from,to));const before=p.toBytes();expect(()=>setCommentResolved(p,'1',true)).toThrow();expect(p.toBytes()).toEqual(before);\n }\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:incomplete extended metadata remains inspectable but absent targets cannot be resolved",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 107,
+      "title": "incomplete extended metadata remains inspectable but absent targets cannot be resolved",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(inspectComments(p).comments).toHaveLength(3)",
+        "expect(()=>setCommentResolved(p,'0',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(setCommentResolved(p,'1',true).changed).toBe(1)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const p=await commentFixture(),part='word/commentsExtended.xml';p.set(part,p.text(part).replace(/<w15:commentEx w15:paraId=\"103008CD\"[^>]*\\/>/,''));\n const before=p.toBytes();expect(inspectComments(p).comments).toHaveLength(3);expect(()=>setCommentResolved(p,'0',true)).toThrow();expect(p.toBytes()).toEqual(before);\n expect(setCommentResolved(p,'1',true).changed).toBe(1);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:public entrypoints save and reopen the resolved flag without changing comment bodies",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 113,
+      "title": "public entrypoints save and reopen the resolved flag without changing comment bodies",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(api.inspectComments).toBe(docx.inspectComments)",
+        "expect(api.setCommentResolved).toBe(docx.setCommentResolved)",
+        "expect(api.inspectComments(q).comments[1]!.resolved).toBe(true)",
+        "expect(q.get('word/comments.xml')).toEqual(comments)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const {mkdtemp,rm}=await import('node:fs/promises'),{tmpdir}=await import('node:os');\n const api=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');\n expect(api.inspectComments).toBe(docx.inspectComments);expect(api.setCommentResolved).toBe(docx.setCommentResolved);\n const root=await mkdtemp(join(tmpdir(),'bun-comment-save-'));\n try{const p=await commentFixture(),comments=p.get('word/comments.xml')!,path=join(root,'resolved.docx');api.setCommentResolved(p,'1',true);await p.save(path);const q=await OpcPackage.open(path);expect(api.inspectComments(q).comments[1]!.resolved).toBe(true);expect(q.get('word/comments.xml')).toEqual(comments);}finally{await rm(root,{recursive:true,force:true});}\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused",
+      "path": "tests/unit/docx-comments.test.ts",
+      "line": 120,
+      "title": "a document without comment parts remains unchanged when inspected or refused",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(inspectComments(p)).toEqual({comments:[],unsupported:[]})",
+        "expect(()=>setCommentResolved(p,'0',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "loops": [],
+      "sourceSha256": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+      "body": "{\n const {Document}=await import('../../src/docx/index.ts'),p=await OpcPackage.open(await Document.create().save()),before=p.toBytes();\n expect(inspectComments(p)).toEqual({comments:[],unsupported:[]});expect(()=>setCommentResolved(p,'0',true)).toThrow();expect(p.toBytes()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / creates a minimal package and appends escaped bold italic text before sectPr",
@@ -2178,11 +2527,11 @@
       "suites": [],
       "kind": "test",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(125)"
+        "expect(await verifyReferences(root)).toBe(128)"
       ],
       "loops": [],
-      "sourceSha256": "89fbdaffd5359c052e85e0cf04930e931542b3cbd768cb697603d8e5feb877ab",
-      "body": "{expect(await verifyReferences(root)).toBe(125);}"
+      "sourceSha256": "5e2525af3c6994d9c3185c1bb9e8053642eb49bbd47d231f639b6b6abd0363da",
+      "body": "{expect(await verifyReferences(root)).toBe(128);}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
@@ -2195,7 +2544,7 @@
         "expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin')"
       ],
       "loops": [],
-      "sourceSha256": "89fbdaffd5359c052e85e0cf04930e931542b3cbd768cb697603d8e5feb877ab",
+      "sourceSha256": "5e2525af3c6994d9c3185c1bb9e8053642eb49bbd47d231f639b6b6abd0363da",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}"
     },
     {
@@ -2208,7 +2557,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(125)",
+        "expect(await verifyReferences(tmp)).toBe(128)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -2218,8 +2567,8 @@
           "expression": "for(const change of ["
         }
       ],
-      "sourceSha256": "89fbdaffd5359c052e85e0cf04930e931542b3cbd768cb697603d8e5feb877ab",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(125);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "5e2525af3c6994d9c3185c1bb9e8053642eb49bbd47d231f639b6b6abd0363da",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(128);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",

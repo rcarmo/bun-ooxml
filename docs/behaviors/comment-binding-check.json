@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "scope": "Existing Word comment inspection and per-entry commentEx done mutation only",
+  "consumerBaseCommit": "f284d1748cb5b5b20a5dcf2d93f365f8646bd81d",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.5.0",
+    "commit": "db913c65bb652c11c05eb40793be37b56761cb53",
+    "manifestSha256": "668f480b6bcd95e2a13b0b94cecfc19a5d2bd1e2648f59887bcb259184f127dc"
+  },
+  "sourceSha256": {
+    "src/docx/comments.ts": "eca35561548bf0bed07f01231bb4342066915b2523bc1252896428ea29706ab6",
+    "tests/unit/docx-comments.test.ts": "25d3bba4abe5a9aff286d93f1572a4b395cc56de08b88830e0d005c0639e6624",
+    "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
+    "features/docx/comments.feature": "eb864bc834d6ed17a56015a914a5405bf8bdbde181ea48ee0faa6b246e9dc516"
+  },
+  "behavioralRed": {
+    "resume": "Restored stub returned changed0 and retained false done state;2of4tests failed",
+    "guards": "Attribute edit, missing done, rollback and wrong-namespace checks:6of9tests failed before implementation"
+  },
+  "run": {
+    "command": "make check",
+    "mode": "default-no-overrides",
+    "runId": "5c30de62-e2ea-46bb-8a38-16ffbc1881b6",
+    "startedAt": "2026-09-26T15:22:26.591Z",
+    "finishedAt": "2026-09-26T15:22:31.085Z",
+    "unitTests": 246,
+    "assertions": 2460,
+    "acceptanceCases": 128,
+    "commentCases": 14,
+    "commentSteps": 46,
+    "examples": 3
+  },
+  "nativeDeclarations": [
+    "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
+    "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
+    "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
+    "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
+    "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
+    "bun:tests/unit/docx-comments.test.ts:missing done flag uses an attribute prefix under a default element namespace",
+    "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
+    "bun:tests/unit/docx-comments.test.ts:serialization failure rolls back the done flag while retaining earlier edits",
+    "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
+    "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
+    "bun:tests/unit/docx-comments.test.ts:inspection results are detached and cannot bypass package custody",
+    "bun:tests/unit/docx-comments.test.ts:comment paragraph newlines and tabs are read without rewriting bodies",
+    "bun:tests/unit/docx-comments.test.ts:non-self-closing entries retain boundary whitespace exactly",
+    "bun:tests/unit/docx-comments.test.ts:multiple comments settings and external settings refuse before mutation",
+    "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
+    "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
+    "bun:tests/unit/docx-comments.test.ts:incomplete extended metadata remains inspectable but absent targets cannot be resolved",
+    "bun:tests/unit/docx-comments.test.ts:public entrypoints save and reopen the resolved flag without changing comment bodies",
+    "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused"
+  ],
+  "scenarios": [
+    {
+      "id": "@id-docx-comments-inspection",
+      "cases": [
+        {
+          "id": "@id-docx-comments-inspection",
+          "result": "passed",
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "id": "@id-docx-comments-resolution",
+      "cases": [
+        {
+          "id": "@id-docx-comments-resolution",
+          "result": "passed",
+          "steps": 6
+        }
+      ]
+    },
+    {
+      "id": "@id-docx-comments-noop",
+      "cases": [
+        {
+          "id": "@id-docx-comments-noop",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    },
+    {
+      "id": "@id-docx-comments-refusal",
+      "cases": [
+        {
+          "id": "@id-docx-comments-refusal -- case=\"missing-extension\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"duplicate-id\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"duplicate-para\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"missing-parent\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"cycle\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"invalid-done\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"wrong-mime\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"external-link\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"protected\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"revision-body\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-comments-refusal -- case=\"orphan-entry\"",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Readback uses native XML/OPC; independent Office reopening/rendering remains unverified",
+    "Only existing extended-comment entries can be resolved; no body/anchor rewrite or thread-wide action",
+    "Nineteen new declaration mappings have not undergone central semantic reconciliation",
+    "Independent delegate safety review timed out; no review credit"
+  ]
+}

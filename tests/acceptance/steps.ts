@@ -8,6 +8,7 @@ import { bindings as docxBindings } from "./docx.ts";
 import { bindings as storyBindings } from "./story-docx.ts";
 import { bindings as revisionBindings } from "./revisions-docx.ts";
 import { bindings as redlineBindings } from "./redline-docx.ts";
+import { bindings as commentBindings } from "./comments-docx.ts";
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
@@ -29,6 +30,7 @@ export const bindings: StepBinding[] = [
   ...storyBindings,
   ...revisionBindings,
   ...redlineBindings,
+  ...commentBindings,
   ...createDocxBindings,
   ...createPptxBindings,
   ...createXlsxBindings,

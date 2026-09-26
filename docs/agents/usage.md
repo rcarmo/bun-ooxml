@@ -156,9 +156,32 @@ within plain direct runs. It rejects unsupported story topology, existing target
 revisions, fields, controls, drawings and inter-run barriers. Supply a nonblank
 author and valid UTC date. Inserted text uses the first matched run's formatting;
 deleted fragments retain their original run properties. Accept/reject text is
-verified on private copies before committing. General Word Compare and comment
-editing are not implemented. See `docs/contracts/review-api.md` and the executable
-`examples/review-word.ts`.
+verified on private copies before committing. General Word Compare is not
+implemented. See `docs/contracts/review-api.md` and `examples/review-word.ts`.
+
+## Existing Word comments
+
+```ts
+import { OpcPackage, inspectComments, setCommentResolved } from "bun-ooxml";
+const pkg = await OpcPackage.open(input);
+const inspection = inspectComments(pkg);
+if (inspection.unsupported.length) throw new Error("Unsupported comment graph");
+const target = inspection.comments.find(comment => comment.id === "1");
+if (!target) throw new Error("Missing comment");
+setCommentResolved(pkg, target.id, true);
+await pkg.save(output);
+const reopened = await OpcPackage.open(output);
+if (!inspectComments(reopened).comments.find(comment => comment.id === target.id)?.resolved) {
+  throw new Error("Comment resolution was not saved");
+}
+```
+
+This changes only an existing `commentEx` done flag, without cascading to replies.
+Comment bodies and anchors stay untouched. Missing extension metadata, malformed
+reply graphs, protection and unsupported bodies refuse without partial writes.
+A same-state request preserves the original archive. Creating/deleting comments,
+rewriting bodies and repairing anchors are unsupported; see the
+[comments contract](../contracts/comments-api.md).
 
 ## PPTX
 

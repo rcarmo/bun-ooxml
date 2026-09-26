@@ -4,6 +4,7 @@ Shared reference manifest: **128 assets**. Implementation evidence remains consu
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|
+| features/docx/comments.feature | implemented | 4 | 14 | 46 |
 | features/docx/create.feature | implemented | 4 | 8 | 47 |
 | features/docx/tables.feature | implemented | 4 | 7 | 45 |
 | features/docx/text.feature | implemented | 5 | 7 | 33 |
