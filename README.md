@@ -13,8 +13,8 @@ a bounded paragraph-style cascade with provenance and explicit unsupported conte
 package parts. Existing-file edits include guarded cross-run replacement, slide
 text/notes and cell edits with bounded formula-cache invalidation. Existing XLSX
 [cell-style selection](docs/contracts/cell-style.md) preserves values, formulas and caches. Word paragraph
-runs support direct bold/italic overrides and existing paragraph-style selection
-without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)
+runs support direct bold/italic overrides, [half-point font sizes](docs/contracts/font-size.md)
+and existing paragraph-style selection without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)
 adds named paragraph styles with validated base chains and direct bold/italic flags.
 [Page geometry](docs/contracts/page-layout.md) changes the final Word section's
 size and margins while preserving earlier sections and text.

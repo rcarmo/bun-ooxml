@@ -1,7 +1,7 @@
 # Direct paragraph run formatting
 
-`Paragraph.setRunFormatting(patch)` applies direct bold/italic overrides to every
-supported direct run in one paragraph. It returns `{ changedRuns: number }`.
+`Paragraph.setRunFormatting(patch)` applies direct bold, italic and
+[font-size](font-size.md) overrides to every supported direct run in one paragraph. It returns `{ changedRuns: number }`.
 `RunFormattingPatch` and `RunFormattingReceipt` are exported from the root and
 `./docx` entrypoints.
 
@@ -12,8 +12,10 @@ paragraph.setRunFormatting({ bold: true, italic: false });
 document.paragraphs[0]!.setRunFormatting({ bold: null });
 ```
 
-Each field accepts true, false, null or undefined. True writes on; false writes
-explicit off; null removes the direct property; undefined leaves it unchanged.
+Bold and italic accept true, false, null or undefined. True writes on; false
+writes explicit off. `fontSizePt` accepts positive numbers exactly representable
+in half-points. For all fields, null removes the direct property and undefined
+leaves it unchanged.
 This API does not compute inherited formatting or alter paragraph/character
 styles. It applies to the whole paragraph, including paragraphs in table cells;
 substring formatting and run splitting are unsupported.
@@ -21,7 +23,7 @@ substring formatting and run splitting are unsupported.
 ## Preservation and handles
 
 Text and all package parts outside the main document remain byte-identical.
-Unrelated run-property elements retain their original bytes. Selected bold/italic
+Unrelated run-property elements retain their original bytes. Selected bold/italic/size
 elements may be replaced by namespace-qualified elements; additions follow Word
 run-property order. Source encoding/BOM and namespace identity survive save/reopen.
 
@@ -39,7 +41,8 @@ success. A thrown serialization error preserves the package and existing handles
 The API accepts only plain direct text runs and a conservative set of ordered
 leaf run properties. Fields, tracked content, controls, mixed lexical content,
 property revisions, unknown/duplicated/out-of-order properties and malformed or
-misqualified Boolean values refuse. Empty paragraphs report zero changed runs;
+misqualified Boolean values refuse. Font-size edits and reads also reject
+malformed, misqualified or unsupported direct size values. Empty paragraphs report zero changed runs;
 nonempty formatting on self-closing empty runs refuses.
 
 All linked settings parts must be inspectable and unprotected. Missing or unknown

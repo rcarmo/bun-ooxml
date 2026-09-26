@@ -333,6 +333,14 @@
       "scenarioIds": [
         "@id-package-admission-unsafe-xml-members"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/font-size.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-direct-font-size-half-points"
+      ]
     }
   ]
 }

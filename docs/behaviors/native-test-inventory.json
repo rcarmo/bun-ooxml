@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 424,
-  "files": 45,
+  "count": 437,
+  "files": 46,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -34,6 +34,12 @@
       "path": "tests/unit/docx-effective-formatting.test.ts",
       "sha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
       "declarations": 12,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "declarations": 13,
       "issues": []
     },
     {
@@ -315,6 +321,10 @@
       "sha256": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f"
     },
     {
+      "path": "tests/acceptance/font-size.ts",
+      "sha256": "d152543037cf97e92ce8469f29fd307960c1a9c2c0575706a91e7fd42d91aba2"
+    },
+    {
       "path": "tests/acceptance/graph.ts",
       "sha256": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f"
     },
@@ -356,7 +366,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "b29b558bbd35e43c7230f614173e3676b9e5c47017d9da8f518d5ef05d774cef"
+      "sha256": "e3af2cec47c4b74f1bb30b9e321679316d673021a6e698fe2a31f0543852de69"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -420,6 +430,11 @@
     "bun:tests/unit/docx-effective-formatting.test.ts:UTF16 LE and BE preserve encoding/BOM and inspect reopened style definitions",
     "bun:tests/unit/docx-effective-formatting.test.ts:selected ancestry refuses missing bases, links, wrong namespaces and duplicate property containers",
     "bun:tests/unit/docx-effective-formatting.test.ts:complex-script text and unsupported property contexts refuse rather than guess flags",
+    "bun:tests/unit/docx-font-size.test.ts:direct font size writes exactly one half-point value and reopens without changing text or other parts",
+    "bun:tests/unit/docx-font-size.test.ts:font-size set, remove and combined patches preserve schema ordering and unrelated direct properties",
+    "bun:tests/unit/docx-font-size.test.ts:font-size validation and ambiguous existing sizes refuse atomically",
+    "bun:tests/unit/docx-font-size.test.ts:font-size refuses document protection and mixed run topology without mutation",
+    "bun:tests/unit/docx-font-size.test.ts:direct size API keeps its positive half-point policy separate from broader measure syntax",
     "bun:tests/unit/docx-formatting.test.ts:absent and self-closing run properties insert in schema order",
     "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
     "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
@@ -517,6 +532,11 @@
     "bun:tests/unit/docx-effective-formatting.test.ts:UTF16 LE and BE preserve encoding/BOM and inspect reopened style definitions",
     "bun:tests/unit/docx-effective-formatting.test.ts:selected ancestry refuses missing bases, links, wrong namespaces and duplicate property containers",
     "bun:tests/unit/docx-effective-formatting.test.ts:complex-script text and unsupported property contexts refuse rather than guess flags",
+    "bun:tests/unit/docx-font-size.test.ts:direct font size writes exactly one half-point value and reopens without changing text or other parts",
+    "bun:tests/unit/docx-font-size.test.ts:font-size set, remove and combined patches preserve schema ordering and unrelated direct properties",
+    "bun:tests/unit/docx-font-size.test.ts:font-size validation and ambiguous existing sizes refuse atomically",
+    "bun:tests/unit/docx-font-size.test.ts:font-size refuses document protection and mixed run topology without mutation",
+    "bun:tests/unit/docx-font-size.test.ts:direct size API keeps its positive half-point policy separate from broader measure syntax",
     "bun:tests/unit/docx-formatting.test.ts:absent and self-closing run properties insert in schema order",
     "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
     "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
@@ -2350,6 +2370,556 @@
         "formattingDocument",
         "p.effectiveRunFormatting",
         "xml.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:direct font size writes exactly one half-point value and reopens without changing text or other parts",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 9,
+      "title": "direct font size writes exactly one half-point value and reopens without changing text or other parts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(opened.paragraphs[0]!.directFontSizes()).toEqual([null])",
+        "expect(opened.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toEqual({changedRuns:1})",
+        "expect(nodes).toHaveLength(1)",
+        "expect(attribute(nodes[0]!,'val',W)).toBe('21')",
+        "expect(reopened.paragraphs[0]!.directFontSizes()).toEqual([10.5])",
+        "expect(reopened.paragraphs[0]!.text).toBe('Size sample')",
+        "expect(after.get(name)).toEqual(before.get(name))",
+        "expect(after.names()).toEqual(before.names())"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 14,
+          "expression": "for(const name of before.names())if(name!==part)expect(after.get(name)).toEqual(before.get(name));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const d=Document.create();d.addParagraph('Size sample');const source=d.package.toBytes(),before=await OpcPackage.open(source),opened=await Document.open(source);\n expect(opened.paragraphs[0]!.directFontSizes()).toEqual([null]);expect(opened.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toEqual({changedRuns:1});\n const saved=opened.package.toBytes(),reopened=await Document.open(saved),nodes=elements(parseXml(xml(reopened)),'sz',W);\n expect(nodes).toHaveLength(1);expect(attribute(nodes[0]!,'val',W)).toBe('21');expect(reopened.paragraphs[0]!.directFontSizes()).toEqual([10.5]);expect(reopened.paragraphs[0]!.text).toBe('Size sample');\n const after=await OpcPackage.open(saved);for(const name of before.names())if(name!==part)expect(after.get(name)).toEqual(before.get(name));expect(after.names()).toEqual(before.names());\n}",
+      "calls": [
+        "Document.create",
+        "Document.open",
+        "OpcPackage.open",
+        "after.get",
+        "after.names",
+        "attribute",
+        "before.get",
+        "before.names",
+        "d.addParagraph",
+        "d.package.toBytes",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "opened.package.toBytes",
+        "opened.paragraphs.0.directFontSizes",
+        "opened.paragraphs.0.setRunFormatting",
+        "parseXml",
+        "reopened.paragraphs.0.directFontSizes",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size set, remove and combined patches preserve schema ordering and unrelated direct properties",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 16,
+      "title": "font-size set, remove and combined patches preserve schema ordering and unrelated direct properties",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.paragraphs[0]!.setRunFormatting({bold:false,italic:true,fontSizePt:12}).changedRuns).toBe(3)",
+        "expect(names.indexOf('b')).toBeLessThan(names.indexOf('i'))",
+        "expect(names.indexOf('i')).toBeLessThan(names.indexOf('sz'))",
+        "expect(xml(d)).toContain('<w:color w:val=\"008800\"/>')",
+        "expect(d.paragraphs[0]!.directFontSizes()).toEqual([12,12,12])",
+        "expect(d.paragraphs[0]!.setRunFormatting({fontSizePt:null}).changedRuns).toBe(3)",
+        "expect(d.paragraphs[0]!.directFontSizes()).toEqual([null,null,null])",
+        "expect(d.paragraphs[0]!.text).toBe('Alpha Beta Gamma')",
+        "expect(original).toContain('Alpha')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 18,
+          "expression": "for(const r of runs)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const d=await Document.open(formattingPackage()),original=xml(d);expect(d.paragraphs[0]!.setRunFormatting({bold:false,italic:true,fontSizePt:12}).changedRuns).toBe(3);\n const runs=elements(parseXml(xml(d)),'r',W);for(const r of runs){const names=r.children.find(n=>n.localName==='rPr')!.children.map(n=>n.localName);expect(names.indexOf('b')).toBeLessThan(names.indexOf('i'));expect(names.indexOf('i')).toBeLessThan(names.indexOf('sz'));}\n expect(xml(d)).toContain('<w:color w:val=\"008800\"/>');expect(d.paragraphs[0]!.directFontSizes()).toEqual([12,12,12]);\n expect(d.paragraphs[0]!.setRunFormatting({fontSizePt:null}).changedRuns).toBe(3);expect(d.paragraphs[0]!.directFontSizes()).toEqual([null,null,null]);expect(d.paragraphs[0]!.text).toBe('Alpha Beta Gamma');expect(original).toContain('Alpha');\n}",
+      "calls": [
+        "Document.open",
+        "d.paragraphs.0.directFontSizes",
+        "d.paragraphs.0.setRunFormatting",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toBeLessThan",
+        "expect().toContain",
+        "expect().toEqual",
+        "formattingPackage",
+        "names.indexOf",
+        "parseXml",
+        "r.children.find",
+        "r.children.find().children.map",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:equal size including leading-zero halfpoints is byte-identical and keeps handles live",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 22,
+      "title": "equal size including leading-zero halfpoints is byte-identical and keeps handles live",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(current.setRunFormatting({fontSizePt:10.5})).toEqual({changedRuns:0})",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect(current.text).toBe('Alpha Beta Gamma')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const p=await OpcPackage.open(formattingPackage());p.set(part,p.text(part).replace('<w:color w:val=\"008800\"/>','<w:color w:val=\"008800\"/><w:sz w:val=\"021\"/>'));\n const d=await Document.open(p.toBytes()),h=d.paragraphs[0]!;h.setRunFormatting({fontSizePt:10.5});const current=d.paragraphs[0]!,bytes=d.package.toBytes();expect(current.setRunFormatting({fontSizePt:10.5})).toEqual({changedRuns:0});expect(d.package.toBytes()).toEqual(bytes);expect(current.text).toBe('Alpha Beta Gamma');\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "current.setRunFormatting",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "formattingPackage",
+        "h.setRunFormatting",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size validation and ambiguous existing sizes refuse atomically",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 26,
+      "title": "font-size validation and ambiguous existing sizes refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>h.setRunFormatting({fontSizePt:size as number})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(h.text).toBe('Alpha Beta Gamma')",
+        "expect(()=>broken.paragraphs[0]!.directFontSizes()).toThrow()",
+        "expect(()=>broken.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toThrow()",
+        "expect(broken.package.toBytes()).toEqual(bytes)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 28,
+          "expression": "for(const size of [NaN,Infinity,-1,0,10.25,'12'])"
+        },
+        {
+          "line": 29,
+          "expression": "for(const property of ['<w:sz/>','<w:sz val=\"21\"/>','<w:sz w:val=\"bad\"/>','<w:sz w:val=\"21\"/><w:sz w:val=\"22\"/>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const d=await Document.open(formattingPackage()),before=d.package.toBytes(),h=d.paragraphs[0]!;\n for(const size of [NaN,Infinity,-1,0,10.25,'12']){expect(()=>h.setRunFormatting({fontSizePt:size as number})).toThrow();expect(d.package.toBytes()).toEqual(before);expect(h.text).toBe('Alpha Beta Gamma');}\n for(const property of ['<w:sz/>','<w:sz val=\"21\"/>','<w:sz w:val=\"bad\"/>','<w:sz w:val=\"21\"/><w:sz w:val=\"22\"/>']){\n  const p=await OpcPackage.open(formattingPackage());p.set(part,p.text(part).replace('<w:color w:val=\"008800\"/>','<w:color w:val=\"008800\"/>'+property));const broken=await Document.open(p.toBytes()),bytes=broken.package.toBytes();\n  expect(()=>broken.paragraphs[0]!.directFontSizes()).toThrow();expect(()=>broken.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toThrow();expect(broken.package.toBytes()).toEqual(bytes);\n }\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "broken.package.toBytes",
+        "broken.paragraphs.0.directFontSizes",
+        "broken.paragraphs.0.setRunFormatting",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "formattingPackage",
+        "h.setRunFormatting",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size edits preserve complex-script size rather than claim to resolve it",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 34,
+      "title": "font-size edits preserve complex-script size rather than claim to resolve it",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml(d)).toContain('<w:szCs w:val=\"30\"/>')",
+        "expect(xml(d).indexOf('w:sz ')).toBeLessThan(xml(d).indexOf('w:szCs '))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const p=await OpcPackage.open(formattingPackage());p.set(part,p.text(part).replace('<w:color w:val=\"008800\"/>','<w:color w:val=\"008800\"/><w:szCs w:val=\"30\"/>'));\n const d=await Document.open(p.toBytes());d.paragraphs[0]!.setRunFormatting({fontSizePt:10.5});expect(xml(d)).toContain('<w:szCs w:val=\"30\"/>');expect(xml(d).indexOf('w:sz ')).toBeLessThan(xml(d).indexOf('w:szCs '));\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBeLessThan",
+        "expect().toContain",
+        "formattingPackage",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "xml",
+        "xml().indexOf"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size handles stale after edits and late validation failures retain bytes and handles",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 39,
+      "title": "font-size handles stale after edits and late validation failures retain bytes and handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>old.directFontSizes()).toThrow('stale')",
+        "expect(span.replace('Late')).rejects.toThrow('stale')",
+        "expect(()=>live.setRunFormatting({fontSizePt:12})).toThrow('serialization failure')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(live.directFontSizes()).toEqual([10.5,10.5,10.5])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const d=await Document.open(formattingPackage()),old=d.paragraphs[0]!,span=old.find('Alpha')[0]!;old.setRunFormatting({fontSizePt:10.5});\n expect(()=>old.directFontSizes()).toThrow('stale');await expect(span.replace('Late')).rejects.toThrow('stale');\n const live=d.paragraphs[0]!,before=d.package.toBytes(),internals=d as unknown as {opcPackage:OpcPackage},serialize=internals.opcPackage.toBytes.bind(internals.opcPackage);\n internals.opcPackage.toBytes=()=>{throw Error('serialization failure');};try{expect(()=>live.setRunFormatting({fontSizePt:12})).toThrow('serialization failure');}finally{internals.opcPackage.toBytes=serialize;}\n expect(d.package.toBytes()).toEqual(before);expect(live.directFontSizes()).toEqual([10.5,10.5,10.5]);\n}",
+      "calls": [
+        "Document.open",
+        "Error",
+        "d.package.toBytes",
+        "expect",
+        "expect().rejects.toThrow",
+        "expect().toEqual",
+        "expect().toThrow",
+        "formattingPackage",
+        "internals.opcPackage.toBytes.bind",
+        "live.directFontSizes",
+        "live.setRunFormatting",
+        "old.directFontSizes",
+        "old.find",
+        "old.setRunFormatting",
+        "span.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:all runs preflight font-size attributes before any early run can change",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 46,
+      "title": "all runs preflight font-size attributes before any early run can change",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({fontSizePt:12})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const p=await OpcPackage.open(formattingPackage());p.set(part,p.text(part).replace('<w:rPr/>','<w:rPr><w:sz w:val=\"21\" foreign=\"bad\"/></w:rPr>'));const d=await Document.open(p.toBytes()),before=d.package.toBytes();\n expect(()=>d.paragraphs[0]!.setRunFormatting({fontSizePt:12})).toThrow();expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "formattingPackage",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size writes survive namespace aliases and UTF-16 without touching complex-script size",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 50,
+      "title": "font-size writes survive namespace aliases and UTF-16 without touching complex-script size",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...bytes.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.paragraphs[0]!.directFontSizes()).toEqual([10.5,10.5,10.5])",
+        "expect(reopened.paragraphs[0]!.text).toBe('Alpha Beta Gamma')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const {utf16}=await import('../fixtures/admission.ts');const p=await OpcPackage.open(formattingPackage());p.set(part,utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?>'+p.text(part).replaceAll('w:', 'x:').replace('xmlns:w=','xmlns:x=')));\n const d=await Document.open(p.toBytes());d.paragraphs[0]!.setRunFormatting({fontSizePt:10.5});const bytes=d.package.get(part)!;expect([...bytes.slice(0,2)]).toEqual([255,254]);const reopened=await Document.open(d.package.toBytes());expect(reopened.paragraphs[0]!.directFontSizes()).toEqual([10.5,10.5,10.5]);expect(reopened.paragraphs[0]!.text).toBe('Alpha Beta Gamma');\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "bytes.slice",
+        "d.package.get",
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "formattingPackage",
+        "p.set",
+        "p.text",
+        "p.text().replaceAll",
+        "p.text().replaceAll().replace",
+        "p.toBytes",
+        "reopened.paragraphs.0.directFontSizes",
+        "utf16"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size refuses document protection and mixed run topology without mutation",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 54,
+      "title": "font-size refuses document protection and mixed run topology without mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 55,
+          "expression": "for(const variant of ['protected','field'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n for(const variant of ['protected','field']){const p=await OpcPackage.open(formattingPackage());\n  if(variant==='field')p.set(part,p.text(part).replace('<w:t>Alpha</w:t>','<w:t>Alpha</w:t><w:fldChar w:fldCharType=\"begin\"/>'));\n  else{p.set('word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);p.set('[Content_Types].xml',p.text('[Content_Types].xml').replace('</Types>','<Override PartName=\"/word/settings.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml\"/></Types>'));p.set('word/_rels/document.xml.rels','<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\"><Relationship Id=\"rIdSettings\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings\" Target=\"settings.xml\"/></Relationships>');}\n  const d=await Document.open(p.toBytes()),before=d.package.toBytes();expect(()=>d.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toThrow();expect(d.package.toBytes()).toEqual(before);\n }\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "formattingPackage",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:canonical half-point scenario uses an actual saved path and reopened size",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 61,
+      "title": "canonical half-point scenario uses an actual saved path and reopened size",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,cleanup}=await import('../acceptance/font-size.ts');\n const path='workflows/docx/font-size.feature',f=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),['@id-docx-direct-font-size-half-points']);const count=(n:number)=>({implemented:n,planned:0,total:n});\n try{const result=await executeAcceptance({root:'.',features:[f],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(6)}},bindings,'font-size-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(1);}finally{await cleanup();}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "cleanup",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:direct size API keeps its positive half-point policy separate from broader measure syntax",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 67,
+      "title": "direct size API keeps its positive half-point policy separate from broader measure syntax",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.paragraphs[0]!.setRunFormatting({fontSizePt:0.5}).changedRuns).toBe(3)",
+        "expect(d.paragraphs[0]!.directFontSizes()).toEqual([0.5,0.5,0.5])",
+        "expect(()=>h.setRunFormatting({fontSizePt:Number.MAX_SAFE_INTEGER})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect(()=>opened.paragraphs[0]!.directFontSizes()).toThrow()",
+        "expect(()=>opened.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toThrow()",
+        "expect(opened.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 70,
+          "expression": "for(const val of ['0','12pt','21.0','9007199254740992'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const d=await Document.open(formattingPackage());expect(d.paragraphs[0]!.setRunFormatting({fontSizePt:0.5}).changedRuns).toBe(3);expect(d.paragraphs[0]!.directFontSizes()).toEqual([0.5,0.5,0.5]);\n const h=d.paragraphs[0]!,bytes=d.package.toBytes();expect(()=>h.setRunFormatting({fontSizePt:Number.MAX_SAFE_INTEGER})).toThrow();expect(d.package.toBytes()).toEqual(bytes);\n for(const val of ['0','12pt','21.0','9007199254740992']){const p=await OpcPackage.open(formattingPackage());p.set(part,p.text(part).replace('<w:color w:val=\"008800\"/>',`<w:color w:val=\"008800\"/><w:sz w:val=\"${val}\"/>`));const opened=await Document.open(p.toBytes()),before=opened.package.toBytes();expect(()=>opened.paragraphs[0]!.directFontSizes()).toThrow();expect(()=>opened.paragraphs[0]!.setRunFormatting({fontSizePt:10.5})).toThrow();expect(opened.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "d.paragraphs.0.directFontSizes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "formattingPackage",
+        "h.setRunFormatting",
+        "opened.package.toBytes",
+        "opened.paragraphs.0.directFontSizes",
+        "opened.paragraphs.0.setRunFormatting",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size formatting inside a table preserves grid and existing direct properties",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 73,
+      "title": "font-size formatting inside a table preserves grid and existing direct properties",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(table.rows).toBe(1)",
+        "expect(table.columns).toBe(1)",
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(fresh.tables[0]!.cell(0,0).text).toBe('Cell size')",
+        "expect(fresh.paragraphs.find(p=>p.text==='Cell size')!.directFontSizes()).toEqual([10.5])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const d=Document.create();d.addTable(1,1);d.tables[0]!.cell(0,0).text='Cell size';const opened=await Document.open(d.package.toBytes()),table=opened.tables[0]!,cell=table.cell(0,0),p=opened.paragraphs.find(p=>p.text==='Cell size')!;\n p.setRunFormatting({fontSizePt:10.5});expect(table.rows).toBe(1);expect(table.columns).toBe(1);expect(()=>cell.text).toThrow('stale');const fresh=await Document.open(opened.package.toBytes());expect(fresh.tables[0]!.cell(0,0).text).toBe('Cell size');expect(fresh.paragraphs.find(p=>p.text==='Cell size')!.directFontSizes()).toEqual([10.5]);\n}",
+      "calls": [
+        "Document.create",
+        "Document.open",
+        "d.addTable",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fresh.paragraphs.find",
+        "fresh.paragraphs.find().directFontSizes",
+        "fresh.tables.0.cell",
+        "opened.package.toBytes",
+        "opened.paragraphs.find",
+        "p.setRunFormatting",
+        "table.cell"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:later malformed size blocks a combined patch and inspection without partial mutation",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "line": 78,
+      "title": "later malformed size blocks a combined patch and inspection without partial mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>h.setRunFormatting({bold:true,italic:false,fontSizePt:10.5})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(h.text).toBe('Alpha Beta Gamma')",
+        "expect(()=>h.directFontSizes()).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e",
+      "body": "{\n const p=await OpcPackage.open(formattingPackage());p.set(part,p.text(part).replace('<w:rPr/>','<w:rPr><w:sz w:val=\"not-a-size\"/></w:rPr>'));const d=await Document.open(p.toBytes()),h=d.paragraphs[0]!,before=d.package.toBytes();\n expect(()=>h.setRunFormatting({bold:true,italic:false,fontSizePt:10.5})).toThrow();expect(d.package.toBytes()).toEqual(before);expect(h.text).toBe('Alpha Beta Gamma');expect(()=>h.directFontSizes()).toThrow();\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "formattingPackage",
+        "h.directFontSizes",
+        "h.setRunFormatting",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
       ],
       "reviewReasons": [],
       "unresolved": []

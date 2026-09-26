@@ -1,7 +1,7 @@
 import { OoxmlError } from "../errors.ts";
 import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
 export type {EffectiveRunFormatting,EffectiveFlag,FormattingContribution} from './effective-formatting.ts';
-import {formatRunProperties} from './run-formatting.ts';
+import {formatRunProperties,directFontSizes as readDirectFontSizes} from './run-formatting.ts';
 import {readPageLayout,replacePageLayout,normalizePageLayout,type PageLayout} from './page-layout.ts';
 export type {PageLayout} from './page-layout.ts';
 import {directParagraphStyle,replaceParagraphStyle} from './paragraph-style.ts';
@@ -32,7 +32,7 @@ export type AddParagraphOptions = {
 };
 
 /** Direct overrides only: null removes the property, false is explicit off. */
-export type RunFormattingPatch = { bold?: boolean | null; italic?: boolean | null };
+export type RunFormattingPatch = { bold?: boolean | null; italic?: boolean | null; fontSizePt?: number | null };
 export type RunFormattingReceipt = { changedRuns: number };
 
 type NormalizedAddParagraphOptions = {
@@ -232,7 +232,12 @@ export class Paragraph {
     this.ensureFresh();return this.documentRef.setParagraphStyle(this.snapshot,styleId);
   }
 
-  /** Apply direct bold/italic to every supported direct run in this paragraph. */
+  /** Direct non-complex-script sizes in run order; null means no direct size. */
+  directFontSizes(): Array<number|null> {
+    this.ensureFresh();return this.documentRef.inspectParagraphFontSizes(this.snapshot);
+  }
+
+  /** Apply direct bold/italic/font size to every supported direct run. */
   setRunFormatting(patch: RunFormattingPatch): RunFormattingReceipt {
     this.ensureFresh();
     return this.documentRef.formatParagraphRuns(this.snapshot, patch);
@@ -682,6 +687,12 @@ export class Document {
   inspectParagraphFormatting(snapshot: ParagraphSnapshot): EffectiveRunFormatting[] {
     this.assertParagraphSnapshot(snapshot);
     return inspectEffectiveFormatting(this.opcPackage,DOCUMENT_PART,snapshot.element);
+  }
+
+  inspectParagraphFontSizes(snapshot: ParagraphSnapshot): Array<number|null> {
+    this.assertParagraphSnapshot(snapshot);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    return readDirectFontSizes(this.xml,snapshot.element);
   }
 
   paragraphStyle(snapshot: ParagraphSnapshot): string | undefined {

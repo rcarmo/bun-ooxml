@@ -10,6 +10,7 @@ The shared reference contains **200 assets**. The table lists available tests; a
 | references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 13 | 23 | 14 | 9 | 102 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 4 | 8 | 8 | 0 | 47 |
 | references/fixtures-ooxml/workflows/docx/effective-formatting.feature | implemented | 2 | 25 | 25 | 0 | 84 |
+| references/fixtures-ooxml/workflows/docx/font-size.feature | implemented | 1 | 1 | 1 | 0 | 6 |
 | references/fixtures-ooxml/workflows/docx/page-layout.feature | implemented | 2 | 22 | 22 | 0 | 74 |
 | references/fixtures-ooxml/workflows/docx/paragraph-style.feature | implemented | 2 | 19 | 19 | 0 | 62 |
 | references/fixtures-ooxml/workflows/docx/run-formatting.feature | implemented | 2 | 15 | 15 | 0 | 49 |

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 424,
+  "nativeDeclarations": 437,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 197,
+  "withoutStagingCount": 210,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2340,6 +2340,71 @@
       "id": "bun:tests/unit/docx-effective-formatting.test.ts:raw root relationship changes cannot repoint the document behind a formatting handle",
       "path": "tests/unit/docx-effective-formatting.test.ts",
       "sourceSha256": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:direct font size writes exactly one half-point value and reopens without changing text or other parts",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size set, remove and combined patches preserve schema ordering and unrelated direct properties",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:equal size including leading-zero halfpoints is byte-identical and keeps handles live",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size validation and ambiguous existing sizes refuse atomically",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size edits preserve complex-script size rather than claim to resolve it",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size handles stale after edits and late validation failures retain bytes and handles",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:all runs preflight font-size attributes before any early run can change",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size writes survive namespace aliases and UTF-16 without touching complex-script size",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size refuses document protection and mixed run topology without mutation",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:canonical half-point scenario uses an actual saved path and reopened size",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:direct size API keeps its positive half-point policy separate from broader measure syntax",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:font-size formatting inside a table preserves grid and existing direct properties",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
+    },
+    {
+      "id": "bun:tests/unit/docx-font-size.test.ts:later malformed size blocks a combined patch and inspection without partial mutation",
+      "path": "tests/unit/docx-font-size.test.ts",
+      "sourceSha256": "bf444f43f786d25f0228c708f30ad12ce7f67687e7771c422fa34e45c905870e"
     },
     {
       "id": "bun:tests/unit/docx-formatting.test.ts:direct run formatting executes15 saved outcome and refusal cases",

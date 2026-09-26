@@ -11,6 +11,7 @@ import { bindings as revisionBindings } from "./revisions-docx.ts";
 import { bindings as redlineBindings } from "./redline-docx.ts";
 import { bindings as commentBindings } from "./comments-docx.ts";
 import { bindings as formattingBindings } from './run-formatting.ts';
+import { bindings as fontSizeBindings, cleanup as cleanupFontSize } from './font-size.ts';
 import { bindings as paragraphStyleBindings } from './paragraph-style.ts';
 import { bindings as styleAuthoringBindings } from './style-authoring.ts';
 import { bindings as textBoxBindings } from './text-box.ts';
@@ -28,7 +29,7 @@ import { bindings as pptxBindings } from "./pptx.ts";
 import { bindings as xlsxBindings } from "./xlsx.ts";
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupTrackedWorkflowFixtures()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupTrackedWorkflowFixtures(),cleanupFontSize()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -43,6 +44,7 @@ export const bindings: StepBinding[] = [
   ...redlineBindings,
   ...commentBindings,
   ...formattingBindings,
+  ...fontSizeBindings,
   ...paragraphStyleBindings,
   ...styleAuthoringBindings,
   ...textBoxBindings,
