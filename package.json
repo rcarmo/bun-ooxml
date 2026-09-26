@@ -1,0 +1,31 @@
+{
+  "name": "bun-ooxml",
+  "version": "0.1.0-dev.0",
+  "description": "Bun-native TypeScript ports of OOXML Office and the underlying OOXML libraries",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts",
+    "./opc": "./src/opc/index.ts",
+    "./docx": "./src/docx/index.ts",
+    "./pptx": "./src/pptx/index.ts",
+    "./xlsx": "./src/xlsx/index.ts"
+  },
+  "engines": {
+    "bun": ">=1.4.1"
+  },
+  "scripts": {
+    "test": "bun test tests/unit",
+    "typecheck": "tsc --noEmit",
+    "acceptance": "bun run scripts/acceptance.ts",
+    "verify": "bun run scripts/verify.ts",
+    "check": "bun run typecheck && bun run verify && bun test tests/unit && bun run acceptance"
+  },
+  "devDependencies": {
+    "@cucumber/gherkin": "^42.0.1",
+    "@cucumber/messages": "^34.2.1",
+    "@types/bun": "^1.4.2",
+    "typescript": "^7.0.2"
+  }
+}
