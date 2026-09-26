@@ -421,7 +421,7 @@
       "testId": "bun:tests/unit/xlsx-create.test.ts:adding a worksheet works when the existing r alias is scoped to only the first sheet",
       "title": "adding a worksheet works when the existing r alias is scoped to only the first sheet",
       "given": [
-        "The workbook comes from the shared-v2 XLSX fixture rewritten so the workbook part uses link:id instead of r:id for its sheet relationship attribute spelling.",
+        "The workbook comes from the shared mutation XLSX fixture rewritten so the workbook part uses link:id instead of r:id for its sheet relationship attribute spelling.",
         "The original xl/worksheets/sheet1.xml bytes are captured before mutation."
       ],
       "when": [

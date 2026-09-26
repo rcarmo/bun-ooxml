@@ -9,7 +9,8 @@ by format and scenario purpose, with one file per unique SHA-256.
 A fixture entry contains `id`, `path`, `bytes`, `sha256`, `role`, `format`,
 `scenarioGroup`, `origins`, `aliases` and `scenarioIds`. IDs have the form
 `fixture-<full-SHA-256>`. Paths are relative to the shared repository, for example
-`fixtures/docx/comments/comments-<hash-prefix>.docx`.
+`fixtures/xlsx/mutation-safety/cross-sheet-cache.xlsx`. Short hash suffixes only
+disambiguate distinct same-named fixtures; consumers never construct these paths.
 
 The same file may serve several scenarios. Its ID is reused; neither another
 origin nor another scenario creates a physical copy. `aliases` retains historical
@@ -17,7 +18,7 @@ paths for provenance and one-time migrations. Runtime/test lookup uses IDs, not
 those aliases. Required notices are deduplicated under the shared `notices/`.
 
 The grouped baseline contains 115 unique fixture files in 32 groups, totalling
-6,451,099 bytes. The complete manifest has 123 asset entries, including notices
+6,451,099 bytes. The complete manifest has 122 asset entries, including notices
 and shared workflow metadata. These counts have different meanings from the 74
 logical package inputs exercised by the corpus regression tests.
 
@@ -29,13 +30,14 @@ escaped paths refuse. The helper is test/development tooling; it is not a runtim
 Office editing dependency.
 
 `scripts/references.ts` verifies the pinned commit, annotated release tag, root
-manifest seal, shared-pack seal, all asset hashes and a clean Git checkout.
+manifest seal, all asset hashes and a clean Git checkout.
 Missing references fail with submodule initialisation guidance. A changed fact or
 workflow also fails even if every fixture hash still matches.
 
-The shared mutation fixture manifest uses `pathBase: "repository-root"` and
-`assetId` references. Its four logical fixture IDs and 19 case identities retain
-their existing meaning. No fixture bytes live inside the shared workflow pack.
+`contracts/mutation-safety.json` references four fixture IDs and records their
+member-preservation policies. `workflows/mutation-safety.feature` defines the 19
+expanded cases. File identity and original derivation are resolved through the
+root manifest; no separate fixture manifest, pack or generated cases are stored.
 
 ## Candidate checks
 
@@ -47,7 +49,7 @@ OOXML_FIXTURES_ROOT=/absolute/path/to/clean/candidate \
 OOXML_REFERENCE_PIN=/absolute/path/to/candidate.pin.json make check
 ```
 
-A candidate pin has `mode: "candidate"`, repository URL, exact commit and both
-manifest seals. It cannot claim a release tag. Candidate results do not establish
+A candidate pin has `mode: "candidate"`, repository URL, exact commit and the root
+manifest seal. It cannot claim a release tag. Candidate results do not establish
 that a released recursive clone works; run the default checks again after tagging
 and repinning. Never write test output into either checkout.

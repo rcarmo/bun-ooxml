@@ -5,15 +5,14 @@ import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 
 import type { StepBinding } from "../../scripts/gherkin.ts";
-import { assertPreservedOutput, verifyFixture, type FixtureRecord } from "../../scripts/shared-fixtures.ts";
-import { parseBatchTable } from "../../scripts/shared-pack.ts";
+import { assertPreservedOutput, verifyFixture, loadMutationFixtures, type FixtureRecord } from "../../scripts/shared-fixtures.ts";
+import { parseBatchTable } from "../../scripts/shared-contracts.ts";
 import { Document, OpcPackage, Presentation, Workbook } from "../../src/index.ts";
 import { findPlaceholderText } from "../../src/pptx/placeholders.ts";
 import { patchOffice, type PatchReceipt } from "../../src/workflow/index.ts";
 import { elements, parseXml } from "../../src/xml/index.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const PACK_ROOT = join(fixturesRoot(), "shared/v2/pack");
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
 const encoder = new TextEncoder();
 const tempRoots: string[] = [];
@@ -398,7 +397,7 @@ async function directoryEntries(root: string): Promise<string[]> {
 }
 
 async function fixtureById(id: string): Promise<FixtureRecord> {
-  manifestPromise ??= Bun.file(join(PACK_ROOT, "fixture-manifest.json")).json() as Promise<{ fixtures: FixtureRecord[] }>;
+  manifestPromise ??= loadMutationFixtures();
   const fixture = (await manifestPromise).fixtures.find((entry) => entry.id === id);
   return required(fixture, `missing shared fixture ${id}`);
 }

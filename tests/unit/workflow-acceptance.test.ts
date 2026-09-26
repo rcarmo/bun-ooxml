@@ -8,7 +8,7 @@ import { bindings, cleanupWorkflowFixtures } from "../acceptance/workflow.ts";
 
 const PROJECT_ROOT = new URL("../..", import.meta.url).pathname;
 const FEATURE_PATH = "features/native/workflow-mutation-safety.feature";
-const FROZEN_FEATURE = join(fixturesRoot(),'shared/v2/pack/features/mutation-safety.feature');
+const FROZEN_FEATURE = join(fixturesRoot(),'workflows/mutation-safety.feature');
 
 afterAll(async () => {
   await cleanupWorkflowFixtures();

@@ -2,13 +2,13 @@ import {describe,expect,test} from "bun:test";
 import {join} from "node:path";
 import {cp,mkdir,mkdtemp,rm} from "node:fs/promises";
 import {tmpdir} from "node:os";
-import {parseBatchTable,stableCaseKey,verifySharedPack} from "../../scripts/shared-pack.ts";
+import {parseBatchTable,stableCaseKey,verifySharedContracts} from "../../scripts/shared-contracts.ts";
 import {parseFeature} from "../../scripts/gherkin.ts";
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 const root=join(import.meta.dir,"../..");
-describe("shared v2 inventory and provenance",()=>{
+describe("shared mutation inventory and custody",()=>{
   test("checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",async()=>{
-    expect(await verifySharedPack(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:3});
+    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});
   });
   test("stable identity excludes path, UUID and example insertion order",()=>{
     expect(stableCaseKey("@id-example",{z:"2",a:"1"})).toBe('@id-example:{"a":"1","z":"2"}');
@@ -35,24 +35,24 @@ Feature: JSON escaping
     expect(parseBatchTable(compile('"first\\\\nsecond"'))).toEqual([{target:'A1',value:'first\nsecond'}]);
   });
 
-  test("rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",async()=>{
-    const temp=await mkdtemp(join(tmpdir(),"bun-shared-pack-"));
+  test("rejects feature, fixture and policy tampering while leaving original fixtures untouched",async()=>{
+    const temp=await mkdtemp(join(tmpdir(),"bun-shared-contracts-"));
     try {
       await cp(join(root,"features"),join(temp,"features"),{recursive:true});
-      await mkdir(join(temp,'docs/contracts/shared-v2'),{recursive:true});
-      await Bun.write(join(temp,'docs/contracts/shared-v2/manifest.json'),Bun.file(join(root,'docs/contracts/shared-v2/manifest.json')));
       await cp(fixturesRoot(),join(temp,"references/fixtures-ooxml"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});
-      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/shared/v2/pack/fixture-manifest.json')).json();
+      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/manifest.json')).json();
+      const contract=await Bun.file(join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json')).json();
+      const fixture=manifest.files.find((f:any)=>f.id===contract.fixtures[0].assetId);
       for(const [file,expectedError] of [
-        ["references/fixtures-ooxml/shared/v2/pack/features/mutation-safety.feature","Shared pack artifact drift"],
-        ['references/fixtures-ooxml/'+manifest.fixtures[0].path,'sha256 drift'],
-        ["references/fixtures-ooxml/shared/v2/pack/expanded-contracts.json","Shared pack artifact drift"],
+        ["references/fixtures-ooxml/workflows/mutation-safety.feature","Shared contract artifact drift"],
+        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],
+        ["references/fixtures-ooxml/contracts/mutation-safety.json","Shared contract artifact drift"],
       ]) {
         const path=join(temp,file!);const original=await Bun.file(path).bytes();
         const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;
-        await Bun.write(path,modified);await expect(verifySharedPack(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);
+        await Bun.write(path,modified);await expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);
       }
-      expect(await verifySharedPack(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:3});
+      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});
     } finally {await rm(temp,{recursive:true,force:true});}
   });
 });

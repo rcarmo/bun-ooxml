@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-Shared reference manifest: **123 assets**. Implementation evidence remains consumer-local.
+Shared reference manifest: **122 assets**. Implementation evidence remains consumer-local.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|
@@ -26,7 +26,7 @@ Shared reference manifest: **123 assets**. Implementation evidence remains consu
 | features/xlsx/cache-boundaries.feature | implemented | 2 | 3 | 12 |
 | features/xlsx/cells.feature | implemented | 8 | 8 | 30 |
 | features/xlsx/create.feature | implemented | 7 | 7 | 29 |
-| references/fixtures-ooxml/shared/v2/pack/features/mutation-safety.feature | implemented | 8 | 19 | 159 |
+| references/fixtures-ooxml/workflows/mutation-safety.feature | implemented | 8 | 19 | 159 |
 
 Shared workflow IDs and facts are pinned by `references/fixtures-ooxml`.
 Counts are contract inventory, not execution evidence. Run `make check` for outcomes.

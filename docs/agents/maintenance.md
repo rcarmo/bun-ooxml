@@ -8,7 +8,7 @@ verify saved/reopened content and custody, then run `make check`.
 
 `references/fixtures-ooxml` is the only reference checkout. Initialise recursive
 submodules; `references/fixtures-ooxml.pin.json` records the release tag, commit
-and manifest seals. Verification requires the annotated tag to resolve to that
+and the root-manifest seal. Verification requires the annotated tag to resolve to that
 commit and the entire checkout to be clean, including facts and workflows.
 
 Reusable fixture files live once under `fixtures/<format>/<scenario-group>/` in
@@ -33,6 +33,14 @@ credit. `artifacts/acceptance.json` records each step, source hash and outcome.
 Those candidates must be reviewed and reconciled into the shared catalogue before
 receiving canonical scenario IDs. They neither replace executed tests nor close
 planned behaviour gaps. Refresh the inventory after changing tests.
+
+## Priority communication
+
+Use `chat` with `target_agent_name: "@alias"` and explicit `mode: "steer"` for
+scope changes, stop/hold requests, release corrections, safety blockers and
+unblocking decisions. Use `mode: "queue"` only for routine progress. Include the
+current commit/tag, requested action, owner and superseded notice. Acknowledge the
+latest state once; verify delayed messages rather than replaying obsolete work.
 
 ## Mutation boundaries
 

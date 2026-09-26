@@ -210,8 +210,8 @@
         "verifyReferences(root) is executed against the repository checkout."
       ],
       "then": [
-        "The verification succeeds and returns 123, the number of files listed in the pinned shared reference manifest.",
-        "Success means the tag, commit, manifest seal, shared-pack seal, per-file hashes, safe relative paths, and clean worktree all matched the pin exactly."
+        "The verification succeeds and returns 122, the number of files listed in the pinned shared reference manifest.",
+        "Success means the tag, commit, root-manifest seal, per-file hashes, safe relative paths, and clean worktree all matched the pin exactly."
       ],
       "examples": [
         "The pinned annotated tag v0.1.1 must resolve to the exact pinned commit 13b34b40f9d4b79de9378b5253bb21b5ca2e2742."
@@ -251,27 +251,27 @@
       ],
       "then": [
         "Each pin drift variant is refused.",
-        "Once the original pin is restored, verification succeeds again and returns 123.",
+        "Once the original pin is restored, verification succeeds again and returns 122.",
         "A dirty worktree caused by the whitespace change is refused with Shared reference worktree is dirty.",
         "Overwriting the fixture archive is refused with Reference drift."
       ],
       "examples": [
         "Negative variant: wrong manifest seal.",
-        "Negative variant: wrong shared-pack seal.",
         "Negative variant: wrong commit.",
         "Negative variant: wrong tag.",
         "Negative variant: clean pin but dirty worktree.",
         "Negative variant: clean git state but mutated fixture payload."
       ],
       "limitations": [
-        "Four pin-drift variants are exercised inside one looped declaration rather than as separate leaf tests."
+        "Four pin-drift variants are exercised inside one looped declaration rather than as separate leaf tests.",
+        "Root-manifest-only seal replaces the former redundant pack seal; exact revision/tag checks remain."
       ]
     },
     {
       "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
       "title": "verifies the four pinned shared fixtures and their readback preconditions",
       "given": [
-        "references/fixtures-ooxml/shared/v2/pack/fixture-manifest.json lists exactly four pinned fixtures: cross-sheet-cache.xlsx, default-style.xlsx, present-placeholder.docx, and title-and-subtitle.pptx.",
+        "references/fixtures-ooxml/contracts/mutation-safety.json lists exactly four pinned fixtures: cross-sheet-cache.xlsx, default-style.xlsx, present-placeholder.docx, and title-and-subtitle.pptx.",
         "verifyFixture checks whole-archive sha256 and byte length, exact ZIP member set, zero payload drift outside the manifest, the preservation sentinel part and root relationship, and format-specific native readback facts."
       ],
       "when": [
@@ -428,7 +428,7 @@
       "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / DOCX edit preserves shared fixture invariants after save and reopen (unit-only)",
       "title": "DOCX edit preserves shared fixture invariants after save and reopen (unit-only)",
       "given": [
-        "present-placeholder.docx is opened natively from shared-pack bytes and the first live match for <Present> is selected.",
+        "present-placeholder.docx is opened natively from canonical fixture bytes and the first live match for <Present> is selected.",
         "A temporary output path is prepared for saving the edited document."
       ],
       "when": [
@@ -449,7 +449,7 @@
       "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / PPTX edit preserves shared fixture invariants after save and reopen (unit-only)",
       "title": "PPTX edit preserves shared fixture invariants after save and reopen (unit-only)",
       "given": [
-        "title-and-subtitle.pptx is opened natively from shared-pack bytes and the first slide title paragraph is inspected.",
+        "title-and-subtitle.pptx is opened natively from canonical fixture bytes and the first slide title paragraph is inspected.",
         "A temporary output path is prepared for saving the edited presentation."
       ],
       "when": [
@@ -470,7 +470,7 @@
       "testId": "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / XLSX cache edit preserves shared fixture invariants after save and reopen (unit-only)",
       "title": "XLSX cache edit preserves shared fixture invariants after save and reopen (unit-only)",
       "given": [
-        "cross-sheet-cache.xlsx is opened natively from shared-pack bytes and a temporary output path is prepared.",
+        "cross-sheet-cache.xlsx is opened natively from canonical fixture bytes and a temporary output path is prepared.",
         "The workbook begins with Input!A1 = 1 and Calc!A1 as the formula Input!A1*2 with cached value 2."
       ],
       "when": [
@@ -489,20 +489,18 @@
       ]
     },
     {
-      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
       "title": "checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
       "given": [
-        "verifySharedPack reads docs/contracts/shared-v2/manifest.json, references/fixtures-ooxml/shared/v2/pack/pack-manifest.json, the planned shared feature, expanded-contracts.json, fixture-manifest.json, features/shared.json, and the pinned references corpus.",
-        "The shared-pack contract declares workflowLayer = true, libraryParityCredit = false, contractRevision ooxml-shared-contracts-v2, 8 scenarios, 19 expanded cases, 4 fixtures, and 3 pinned workflow metadata files.",
-        "The helper also validates that the execution copy policy rewrites only @planned to @implemented @bun and that each shared scenario executes exactly once in the active inventory."
+        "The pinned root manifest seals workflows/mutation-safety.feature and contracts/mutation-safety.json.",
+        "The policy references four canonical fixture assets with exact member hashes and allowed-change lists; the feature expands to 8 scenarios and 19 cases."
       ],
       "when": [
-        "verifySharedPack(root) is executed."
+        "verifySharedContracts compiles the official Gherkin, validates unique stable case keys and typed mutation tables, resolves canonical IDs and verifies archive readback."
       ],
       "then": [
-        "The helper returns { scenarios: 8, cases: 19, fixtures: 4, files: 3 }.",
-        "Returning those counts means the pack-manifest seal matched, every pinned file hash matched, the compiled planned inventory matched expanded-contracts.json exactly, the four fixture records verified against the pinned source revision, and typed mutation tables parsed successfully where present.",
-        "No workflow execution receipt is fabricated or counted as a pass by this helper."
+        "Verification returns {scenarios:8,cases:19,fixtures:4,files:2}.",
+        "Canonical features remain planned; the local implementation overlay executes no mutation during inventory verification."
       ],
       "examples": [
         "The four pinned fixtures are present-placeholder.docx, title-and-subtitle.pptx, default-style.xlsx, and cross-sheet-cache.xlsx.",
@@ -513,7 +511,7 @@
       ]
     },
     {
-      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / stable identity excludes path, UUID and example insertion order",
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
       "title": "stable identity excludes path, UUID and example insertion order",
       "given": [
         "The scenario id under test is @id-example.",
@@ -536,7 +534,7 @@
       ]
     },
     {
-      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / typed mutation inputs preserve strings, numeric values and significant whitespace",
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
       "title": "typed mutation inputs preserve strings, numeric values and significant whitespace",
       "given": [
         "A valid mutation table has header [target, value_json] and rows Input!A1 => 10, A2 => \"10\", A3 => \"first\\nsecond\", and A4 => null.",
@@ -560,7 +558,7 @@
       ]
     },
     {
-      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / Gherkin escaping must preserve JSON newline escapes before typed decoding",
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "title": "Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "given": [
         "A planned feature is compiled in memory with a data-table cell under value_json.",
@@ -583,25 +581,23 @@
       ]
     },
     {
-      "testId": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",
-      "title": "rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",
+      "testId": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
+      "title": "rejects feature, fixture and policy tampering while leaving original fixtures untouched",
       "given": [
-        "A temporary copy is made of the project's features tree, docs/contracts/shared-v2 tree, and references/fixtures-ooxml tree so mutations do not touch the checked-in originals.",
-        "Three copied shared-pack artifacts are selected for tampering: pack/features/mutation-safety.feature, pack/fixtures/default-style.xlsx, and pack/expanded-contracts.json."
+        "An isolated copy contains the canonical workflow, root manifest, fixture assets and mutation policies."
       ],
       "when": [
-        "For each selected artifact, one extra trailing space byte is appended, verifySharedPack(temp) is run and expected to fail, and the original bytes are restored before moving to the next artifact.",
-        "After all restorations, verifySharedPack(temp) is run one final time."
+        "A space is appended separately to the workflow, a referenced fixture and the policy; each is restored after refusal."
       ],
       "then": [
-        "Each tampered artifact is refused with Shared pack artifact drift.",
-        "After restoration, the copied pack verifies successfully again as { scenarios: 8, cases: 19, fixtures: 4, files: 3 }.",
-        "Because all edits happened inside the temp copy, the original project fixtures and manifests remain untouched."
+        "Feature and policy tampering refuse against their root-manifest hashes.",
+        "Fixture tampering refuses archive hash verification.",
+        "Restoring all inputs yields {scenarios:8,cases:19,fixtures:4,files:2}; originals remain untouched."
       ],
       "examples": [
-        "Tamper point: the frozen feature file itself.",
-        "Tamper point: the pinned workbook fixture default-style.xlsx.",
-        "Tamper point: the compiled expanded-contracts inventory."
+        "workflows/mutation-safety.feature: artifact drift",
+        "canonical fixture: sha256 drift",
+        "contracts/mutation-safety.json: artifact drift"
       ],
       "limitations": [
         "Three concrete drift locations are looped through one declaration rather than split into separate tests."
@@ -611,7 +607,7 @@
       "testId": "bun:tests/unit/workflow-acceptance.test.ts:workflow shared acceptance / executes the frozen shared workflow feature as 19 implemented Bun cases",
       "title": "executes the frozen shared workflow feature as 19 implemented Bun cases",
       "given": [
-        "The frozen shared feature text is read from references/fixtures-ooxml/shared/v2/pack/features/mutation-safety.feature and transformed in memory by replacing @planned with @implemented @bun.",
+        "The frozen shared feature text is read from references/fixtures-ooxml/workflows/mutation-safety.feature and transformed in memory by replacing @planned with @implemented @bun.",
         "That transformed text is parsed under the native path features/native/workflow-mutation-safety.feature, so the execution copy is marked implemented and its parsed path does not contain /planned/.",
         "The workflow acceptance bindings come from tests/acceptance/workflow.ts and drive real fixture setup, patchOffice calls, reopen checks, count checks, and preserved-output checks."
       ],

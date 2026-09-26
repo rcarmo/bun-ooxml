@@ -1,6 +1,8 @@
 import { Document, OpcPackage, Presentation, Workbook } from "../src/index.ts";
 import { attribute, elements, parseXml } from "../src/xml/index.ts";
 import { readZip } from "../src/opc/zip.ts";
+import {join} from 'node:path';
+import {fixturesRoot} from './fixture-inputs.ts';
 
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
 const SENTINEL_PART = "customXml/preservation-sentinel.xml";
@@ -22,8 +24,6 @@ export interface FixtureRecord {
   path: string;
   sha256: string;
   bytes: number;
-  origin: FixtureOrigin;
-  transformation: string;
   facts: Record<string, unknown>;
   allowedChangedPartsForSuccess: string[];
   mustPreservePayloads: Record<string, string>;
@@ -32,14 +32,26 @@ export interface FixtureRecord {
 
 export interface FixtureManifest {
   schemaVersion: number;
-  pathBase: string;
   contractRevision: string;
-  generator: {
-    path: string;
-    sha256: string;
-    zip: string;
-  };
   fixtures: FixtureRecord[];
+}
+
+/** Resolve policy-only fixture references; archive identity belongs to one manifest. */
+export async function loadMutationFixtures(root=fixturesRoot()): Promise<FixtureManifest> {
+  const contract=await Bun.file(join(root,'contracts/mutation-safety.json')).json();
+  const manifest=await Bun.file(join(root,'manifest.json')).json();
+  assert(contract.schemaVersion===1&&contract.fixturePolicy?.membership==='exact'&&contract.fixturePolicy?.preserve==='all-except-allowed','Invalid mutation fixture policy');
+  const ids=new Set<string>();
+  const fixtures=contract.fixtures.map((policy:any)=>{
+    assert(!ids.has(policy.id),'Duplicate workflow fixture');ids.add(policy.id);
+    const asset=manifest.files.find((entry:any)=>entry.id===policy.assetId&&entry.role==='fixture');
+    assert(asset,'Missing canonical workflow fixture');
+    assert(!('path' in policy)&&!('sha256' in policy)&&!('mustPreservePayloads' in policy),'Duplicated fixture metadata');
+    const allowed=new Set<string>(policy.allowedChangedPartsForSuccess);
+    assert(allowed.size===policy.allowedChangedPartsForSuccess.length&&[...allowed].every(name=>Object.hasOwn(policy.memberSha256,name)),'Invalid change allowance');
+    return {...policy,path:asset.path,bytes:asset.bytes,sha256:asset.sha256,mustPreservePayloads:Object.fromEntries(Object.entries(policy.memberSha256).filter(([name])=>!allowed.has(name)))} as FixtureRecord;
+  });
+  return {schemaVersion:1,contractRevision:contract.contractRevision,fixtures};
 }
 
 export async function verifyFixture(bytes: Uint8Array, fixture: FixtureRecord): Promise<void> {

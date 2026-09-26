@@ -6,7 +6,7 @@ import {Presentation} from "../../src/pptx/index.ts";
 import {Workbook} from "../../src/xlsx/index.ts";
 import {setCellWrapText} from "../../src/xlsx/styles.ts";
 import {OoxmlError} from "../../src/errors.ts";
-import {assertPreservedOutput,type FixtureManifest} from '../../scripts/shared-fixtures.ts';
+import {assertPreservedOutput,loadMutationFixtures,type FixtureManifest} from '../../scripts/shared-fixtures.ts';
 import {parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from "../../scripts/gherkin.ts";
 import {bindings,namespaceFixture} from "../acceptance/relationship-namespaces.ts";
 const pkg='http://schemas.openxmlformats.org/package/2006/relationships';
@@ -20,7 +20,7 @@ describe('expanded Office relationship attribute identity',()=>{
   const bytes=await namespaceFixture('xlsx','alias');const book=await Workbook.open(bytes);
   book.worksheet('Sheet').setCellValue('A1','wrapped\nvalue');setCellWrapText(book,'Sheet','A1',true);
   const reopened=await Workbook.open(book.package.toBytes());expect(reopened.worksheet('Sheet').getCell('A1')?.value).toBe('wrapped\nvalue');expect(reopened.package.text(reopened.package.mainPart())).toContain('link:id=');
-  const manifest=await Bun.file(join(fixturesRoot(),'shared/v2/pack/fixture-manifest.json')).json() as FixtureManifest;
+  const manifest=await loadMutationFixtures();
   await expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined();
  });
  test('wrong URI and unqualified id refuse even with the familiar r spelling',async()=>{

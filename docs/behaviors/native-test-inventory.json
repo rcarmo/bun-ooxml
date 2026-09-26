@@ -18,9 +18,9 @@
     "bun:tests/unit/references.test.ts:mutated seals and wrong tag or revision refuse in an isolated reference clone",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
+    "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
+    "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
     "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
-    "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / typed mutation inputs preserve strings, numeric values and significant whitespace",
-    "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -2177,11 +2177,11 @@
       "suites": [],
       "kind": "test",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(123)"
+        "expect(await verifyReferences(root)).toBe(122)"
       ],
       "loops": [],
-      "sourceSha256": "e0b7abffb53d139f7f15d7dfdd52f76643b5eb456e114d6ec33ac98f4b6f5eff",
-      "body": "{expect(await verifyReferences(root)).toBe(123);}"
+      "sourceSha256": "2c09980fec85dfd3d0cc48c3ad21236b07de2debdcfabc088624e528d7b9edd1",
+      "body": "{expect(await verifyReferences(root)).toBe(122);}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
@@ -2194,7 +2194,7 @@
         "expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin')"
       ],
       "loops": [],
-      "sourceSha256": "e0b7abffb53d139f7f15d7dfdd52f76643b5eb456e114d6ec33ac98f4b6f5eff",
+      "sourceSha256": "2c09980fec85dfd3d0cc48c3ad21236b07de2debdcfabc088624e528d7b9edd1",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}"
     },
     {
@@ -2207,7 +2207,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(123)",
+        "expect(await verifyReferences(tmp)).toBe(122)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -2217,8 +2217,8 @@
           "expression": "for(const change of ["
         }
       ],
-      "sourceSha256": "e0b7abffb53d139f7f15d7dfdd52f76643b5eb456e114d6ec33ac98f4b6f5eff",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{sharedPackManifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(123);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "2c09980fec85dfd3d0cc48c3ad21236b07de2debdcfabc088624e528d7b9edd1",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(122);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
@@ -2235,7 +2235,7 @@
         "expect(deck.package.toBytes()).toEqual(bytes)"
       ],
       "loops": [],
-      "sourceSha256": "e50da167297739fea2a7db34d34623f020bbf3c1babb2c42d176d16a77d07108",
+      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
       "body": "{\n  const bytes=await namespaceFixture('pptx','alias');const deck=await Presentation.open(bytes);\n  expect(deck.slides.length).toBe(1);expect(deck.package.text(deck.package.mainPart())).toContain('link:id=');\n  expect(deck.package.toBytes()).toEqual(bytes);\n }"
     },
     {
@@ -2253,8 +2253,8 @@
         "expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined()"
       ],
       "loops": [],
-      "sourceSha256": "e50da167297739fea2a7db34d34623f020bbf3c1babb2c42d176d16a77d07108",
-      "body": "{\n  const bytes=await namespaceFixture('xlsx','alias');const book=await Workbook.open(bytes);\n  book.worksheet('Sheet').setCellValue('A1','wrapped\\nvalue');setCellWrapText(book,'Sheet','A1',true);\n  const reopened=await Workbook.open(book.package.toBytes());expect(reopened.worksheet('Sheet').getCell('A1')?.value).toBe('wrapped\\nvalue');expect(reopened.package.text(reopened.package.mainPart())).toContain('link:id=');\n  const manifest=await Bun.file(join(fixturesRoot(),'shared/v2/pack/fixture-manifest.json')).json() as FixtureManifest;\n  await expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined();\n }"
+      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
+      "body": "{\n  const bytes=await namespaceFixture('xlsx','alias');const book=await Workbook.open(bytes);\n  book.worksheet('Sheet').setCellValue('A1','wrapped\\nvalue');setCellWrapText(book,'Sheet','A1',true);\n  const reopened=await Workbook.open(book.package.toBytes());expect(reopened.worksheet('Sheet').getCell('A1')?.value).toBe('wrapped\\nvalue');expect(reopened.package.text(reopened.package.mainPart())).toContain('link:id=');\n  const manifest=await loadMutationFixtures();\n  await expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined();\n }"
     },
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
@@ -2278,7 +2278,7 @@
           "expression": "for(const variant of ['wrong','unqualified'] as const)"
         }
       ],
-      "sourceSha256": "e50da167297739fea2a7db34d34623f020bbf3c1babb2c42d176d16a77d07108",
+      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
       "body": "{\n  for(const format of ['pptx','xlsx'] as const)for(const variant of ['wrong','unqualified'] as const){\n   const bytes=await namespaceFixture(format,variant);\n   await expect(format==='pptx'?Presentation.open(bytes):Workbook.open(bytes)).rejects.toBeInstanceOf(OoxmlError);\n  }\n }"
     },
     {
@@ -2294,7 +2294,7 @@
         "expect(Workbook.open(p.toBytes())).rejects.toBeInstanceOf(OoxmlError)"
       ],
       "loops": [],
-      "sourceSha256": "e50da167297739fea2a7db34d34623f020bbf3c1babb2c42d176d16a77d07108",
+      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
       "body": "{\n  const bytes=await namespaceFixture('xlsx','original');const p=await OpcPackage.open(bytes);\n  const path='xl/_rels/workbook.xml.rels';p.set(path,p.text(path).replace('http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet','urn:foreign/worksheet'));\n  await expect(Workbook.open(p.toBytes())).rejects.toBeInstanceOf(OoxmlError);\n }"
     },
     {
@@ -2310,7 +2310,7 @@
         "expect(Presentation.open(package_.toBytes())).rejects.toThrow('does not resolve to an internal slide relationship')"
       ],
       "loops": [],
-      "sourceSha256": "e50da167297739fea2a7db34d34623f020bbf3c1babb2c42d176d16a77d07108",
+      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
       "body": "{\n  const original=await namespaceFixture('pptx','original');const package_=await OpcPackage.open(original);const part=package_.mainPart();\n  package_.set(part,package_.text(part).replace('<p:sldId ',`<p:sldId xmlns:r=\"${pkg}\" `));\n  await expect(Presentation.open(package_.toBytes())).rejects.toThrow('does not resolve to an internal slide relationship');\n }"
     },
     {
@@ -2332,7 +2332,7 @@
           "expression": "for(const format of ['pptx','xlsx'] as const)"
         }
       ],
-      "sourceSha256": "e50da167297739fea2a7db34d34623f020bbf3c1babb2c42d176d16a77d07108",
+      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
       "body": "{\n  for(const format of ['pptx','xlsx'] as const){\n   const bytes=await namespaceFixture(format,'alias');const p=await OpcPackage.open(bytes);const main=p.mainPart();\n   p.set(main,p.text(main).replace(/link:id=\"([^\"]+)\"/,`xmlns:r=\"${pkg}\" r:id=\"bogus\" link:id=\"$1\"`));\n   if(format==='pptx')expect((await Presentation.open(p.toBytes())).slides.length).toBe(1);\n   else expect((await Workbook.open(p.toBytes())).sheetnames).toEqual(['Sheet']);\n  }\n }"
     },
     {
@@ -2349,8 +2349,103 @@
         "expect(result.counts.cases.passed).toBe(4)"
       ],
       "loops": [],
-      "sourceSha256": "e50da167297739fea2a7db34d34623f020bbf3c1babb2c42d176d16a77d07108",
+      "sourceSha256": "b07365e772ac6966ab4b4d7961aa19290e102b14494b77821624844b12f8845b",
       "body": "{\n  const path='features/opc/relationship-namespaces.feature';const feature=parseFeature(path,await Bun.file(join(import.meta.dir,'../..',path)).text());\n  const inventory:AcceptanceInventory={root:'.',features:[feature],counts:{features:{implemented:1,planned:0,total:1},scenarios:{implemented:2,planned:0,total:2},cases:{implemented:4,planned:0,total:4},steps:{implemented:16,planned:0,total:16}}};\n  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(4);\n }"
+    },
+    {
+      "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
+      "path": "tests/unit/shared-contracts.test.ts",
+      "line": 10,
+      "title": "checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
+      "suites": [
+        "shared mutation inventory and custody"
+      ],
+      "kind": "test",
+      "assertions": [
+        "expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2})"
+      ],
+      "loops": [],
+      "sourceSha256": "a26c240a7f15558cdf52bd38ddf17adb90c2078f7a8ead6eb49185c397977dcc",
+      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});\n  }"
+    },
+    {
+      "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
+      "path": "tests/unit/shared-contracts.test.ts",
+      "line": 13,
+      "title": "stable identity excludes path, UUID and example insertion order",
+      "suites": [
+        "shared mutation inventory and custody"
+      ],
+      "kind": "test",
+      "assertions": [
+        "expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}')",
+        "expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}')",
+        "expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}))"
+      ],
+      "loops": [],
+      "sourceSha256": "a26c240a7f15558cdf52bd38ddf17adb90c2078f7a8ead6eb49185c397977dcc",
+      "body": "{\n    expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}');\n    expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}');\n    expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}));\n  }"
+    },
+    {
+      "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
+      "path": "tests/unit/shared-contracts.test.ts",
+      "line": 18,
+      "title": "typed mutation inputs preserve strings, numeric values and significant whitespace",
+      "suites": [
+        "shared mutation inventory and custody"
+      ],
+      "kind": "test",
+      "assertions": [
+        "expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ])",
+        "expect(()=>parseBatchTable(table)).toThrow()"
+      ],
+      "loops": [
+        {
+          "line": 22,
+          "expression": "for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\""
+        }
+      ],
+      "sourceSha256": "a26c240a7f15558cdf52bd38ddf17adb90c2078f7a8ead6eb49185c397977dcc",
+      "body": "{\n    expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ]);\n    for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\"{}\"]],[[\"target\",\"value_json\"],[\"A1\",\"1e999\"]]])expect(()=>parseBatchTable(table)).toThrow();\n  }"
+    },
+    {
+      "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / Gherkin escaping must preserve JSON newline escapes before typed decoding",
+      "path": "tests/unit/shared-contracts.test.ts",
+      "line": 24,
+      "title": "Gherkin escaping must preserve JSON newline escapes before typed decoding",
+      "suites": [
+        "shared mutation inventory and custody"
+      ],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow()",
+        "expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}])"
+      ],
+      "loops": [],
+      "sourceSha256": "a26c240a7f15558cdf52bd38ddf17adb90c2078f7a8ead6eb49185c397977dcc",
+      "body": "{\n    const compile=(value:string)=>parseFeature('features/planned/example.feature',`@planned\nFeature: JSON escaping\n  @id-json-escaping\n  Scenario: Typed newline\n    When a batch is prepared:\n      | target | value_json |\n      | A1 | ${value} |\n    Then the typed value contains a newline\n`).scenarios[0]!.cases[0]!.steps[0]!.argument!.dataTable!;\n    expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow();\n    expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}]);\n  }"
+    },
+    {
+      "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
+      "path": "tests/unit/shared-contracts.test.ts",
+      "line": 38,
+      "title": "rejects feature, fixture and policy tampering while leaving original fixtures untouched",
+      "suites": [
+        "shared mutation inventory and custody"
+      ],
+      "kind": "test",
+      "assertions": [
+        "expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!)",
+        "expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:2})"
+      ],
+      "loops": [
+        {
+          "line": 46,
+          "expression": "for(const [file,expectedError] of [\n        [\"references/fixtures-ooxml/workflows/mutation-safety.feature\",\"Shared contract artifact drift\"],\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ])"
+        }
+      ],
+      "sourceSha256": "a26c240a7f15558cdf52bd38ddf17adb90c2078f7a8ead6eb49185c397977dcc",
+      "body": "{\n    const temp=await mkdtemp(join(tmpdir(),\"bun-shared-contracts-\"));\n    try {\n      await cp(join(root,\"features\"),join(temp,\"features\"),{recursive:true});\n      await cp(fixturesRoot(),join(temp,\"references/fixtures-ooxml\"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});\n      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/manifest.json')).json();\n      const contract=await Bun.file(join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json')).json();\n      const fixture=manifest.files.find((f:any)=>f.id===contract.fixtures[0].assetId);\n      for(const [file,expectedError] of [\n        [\"references/fixtures-ooxml/workflows/mutation-safety.feature\",\"Shared contract artifact drift\"],\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ]) {\n        const path=join(temp,file!);const original=await Bun.file(path).bytes();\n        const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;\n        await Bun.write(path,modified);await expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);\n      }\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});\n    } finally {await rm(temp,{recursive:true,force:true});}\n  }"
     },
     {
       "id": "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
@@ -2371,7 +2466,7 @@
           "expression": "for (const fixture of manifest.fixtures)"
         }
       ],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const manifest = await loadManifest();\n\n    expect(manifest.fixtures.map((fixture) => fixture.id).sort()).toEqual([\n      \"cross-sheet-cache.xlsx\",\n      \"default-style.xlsx\",\n      \"present-placeholder.docx\",\n      \"title-and-subtitle.pptx\",\n    ]);\n\n    for (const fixture of manifest.fixtures) {\n      await expect(verifyFixture(await readFixtureBytes(fixture), fixture)).resolves.toBeUndefined();\n    }\n  }"
     },
     {
@@ -2387,7 +2482,7 @@
         "expect(verifyFixture(mutated, fixture)).rejects.toThrow(/archive sha256/i)"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"present-placeholder.docx\");\n    const mutated = rewritePart(\n      await readFixtureBytes(fixture),\n      \"word/document.xml\",\n      (xml) => xml.replace(\"&lt;Present&gt;\", \"&lt;Changed&gt;\"),\n    );\n\n    await expect(verifyFixture(mutated, fixture)).rejects.toThrow(/archive sha256/i);\n  }"
     },
     {
@@ -2403,7 +2498,7 @@
         "expect(assertPreservedOutput(mutated, fixture)).rejects.toThrow(/unexpected payload drift/i)"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"title-and-subtitle.pptx\");\n    const mutated = rewritePart(\n      await readFixtureBytes(fixture),\n      \"docProps/app.xml\",\n      (xml) => xml.replace(\"<Application>\", \"<Application data-test=\\\"changed\\\">\") ,\n    );\n\n    await expect(assertPreservedOutput(mutated, fixture)).rejects.toThrow(/unexpected payload drift/i);\n  }"
     },
     {
@@ -2419,7 +2514,7 @@
         "expect(assertPreservedOutput(mutated, retargeted)).rejects.toThrow(/sentinel root relationship/i)"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"default-style.xlsx\");\n    const mutated = rewritePart(\n      await readFixtureBytes(fixture),\n      \"_rels/.rels\",\n      (xml) => xml.replace('Target=\"customXml/preservation-sentinel.xml\"', 'Target=\"docProps/app.xml\"'),\n    );\n    const retargeted = withPinnedMember(fixture, \"_rels/.rels\", partBytes(mutated, \"_rels/.rels\"));\n\n    await expect(assertPreservedOutput(mutated, retargeted)).rejects.toThrow(/sentinel root relationship/i);\n  }"
     },
     {
@@ -2435,7 +2530,7 @@
         "expect(assertPreservedOutput(mutated, fixture)).rejects.toThrow(/style index/i)"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"default-style.xlsx\");\n    const mutated = rewritePart(\n      await readFixtureBytes(fixture),\n      \"xl/worksheets/sheet1.xml\",\n      (xml) => xml.replace('<s:c r=\"A1\" t=\"inlineStr\">', '<s:c r=\"A1\" s=\"99\" t=\"inlineStr\">'),\n    );\n\n    await expect(assertPreservedOutput(mutated, fixture)).rejects.toThrow(/style index/i);\n  }"
     },
     {
@@ -2451,7 +2546,7 @@
         "expect(assertPreservedOutput(mutated, fixture)).rejects.toThrow(/style index/i)"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"default-style.xlsx\");\n    const mutated = rewritePart(await readFixtureBytes(fixture), \"xl/styles.xml\",\n      xml => xml.replace(/<cellXfs\\b[^>]*>[\\s\\S]*?<\\/cellXfs>/, '<cellXfs count=\"0\"/>'));\n    await expect(assertPreservedOutput(mutated, fixture)).rejects.toThrow(/style index/i);\n  }"
     },
     {
@@ -2467,7 +2562,7 @@
         "expect(assertPreservedOutput(writeZip(parts), fixture)).rejects.toThrow(/unexpected added parts/i)"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"cross-sheet-cache.xlsx\");\n    const bytes = await readFixtureBytes(fixture);\n    const parts = readZip(bytes);\n    parts.set(\"customXml/unexpected.xml\", encoder.encode(\"<unexpected/>\"));\n\n    await expect(assertPreservedOutput(writeZip(parts), fixture)).rejects.toThrow(/unexpected added parts/i);\n  }"
     },
     {
@@ -2483,7 +2578,7 @@
         "expect(assertPreservedOutput(writeZip(parts), fixture)).rejects.toThrow(/unexpected deleted parts/i)"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"present-placeholder.docx\");\n    const bytes = await readFixtureBytes(fixture);\n    const parts = readZip(bytes);\n    parts.delete(\"customXml/preservation-sentinel.xml\");\n\n    await expect(assertPreservedOutput(writeZip(parts), fixture)).rejects.toThrow(/unexpected deleted parts/i);\n  }"
     },
     {
@@ -2500,7 +2595,7 @@
         "expect(assertPreservedOutput(savedBytes, fixture)).resolves.toBeUndefined()"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"present-placeholder.docx\");\n    const root = await tempRoot();\n    const output = join(root, fixture.id);\n    const document = await Document.open(await readFixtureBytes(fixture));\n    const match = document.find(\"<Present>\")[0];\n    if (!match) throw new Error(\"expected DOCX match\");\n\n    await match.replace(\"<Present now>\");\n    await document.save(output);\n\n    const savedBytes = Uint8Array.from(await Bun.file(output).bytes());\n    const reopened = await Document.open(output);\n\n    expect(reopened.paragraphs.map((paragraph) => paragraph.text)).toEqual([\"<Present now>\"]);\n    await expect(assertPreservedOutput(savedBytes, fixture)).resolves.toBeUndefined();\n  }"
     },
     {
@@ -2517,7 +2612,7 @@
         "expect(assertPreservedOutput(savedBytes, fixture)).resolves.toBeUndefined()"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"title-and-subtitle.pptx\");\n    const root = await tempRoot();\n    const output = join(root, fixture.id);\n    const presentation = await Presentation.open(await readFixtureBytes(fixture));\n    const paragraph = presentation.slides[0]?.inspectText(\"shared-fixture.unit\")[0];\n    if (!paragraph) throw new Error(\"expected PPTX title paragraph\");\n\n    presentation.slides[0]!.replaceTextAt(paragraph.anchor, \"Original title\", \"Updated title\");\n    await presentation.save(output);\n\n    const savedBytes = Uint8Array.from(await Bun.file(output).bytes());\n    const reopened = await Presentation.open(output);\n\n    expect(reopened.slides[0]?.inspectText(\"shared-fixture.unit\").map((entry) => entry.text)).toEqual([\n      \"Updated title\",\n      \"Original subtitle\",\n    ]);\n    await expect(assertPreservedOutput(savedBytes, fixture)).resolves.toBeUndefined();\n  }"
     },
     {
@@ -2535,103 +2630,8 @@
         "expect(assertPreservedOutput(savedBytes, fixture)).resolves.toBeUndefined()"
       ],
       "loops": [],
-      "sourceSha256": "dfc8b669ebd53bd03927ee57f008acaa38f8d2a2b9ad1cbf0824e1340f3dc97f",
+      "sourceSha256": "347e014150ac05e184047307ff1396898b3c065a933fa0a2d057458f9e37dbd0",
       "body": "{\n    const fixture = await fixtureById(\"cross-sheet-cache.xlsx\");\n    const root = await tempRoot();\n    const output = join(root, fixture.id);\n    const workbook = await Workbook.open(await readFixtureBytes(fixture));\n\n    workbook.worksheet(\"Input\").setCellValue(\"A1\", 10);\n    await workbook.save(output);\n\n    const savedBytes = Uint8Array.from(await Bun.file(output).bytes());\n    const reopened = await Workbook.open(output);\n\n    expect(reopened.worksheet(\"Input\").getCell(\"A1\")).toMatchObject({\n      kind: \"number\",\n      value: 10,\n    });\n    expect(reopened.worksheet(\"Calc\").getCell(\"A1\")).toMatchObject({\n      kind: \"formula\",\n      formula: \"Input!A1*2\",\n      cached: null,\n    });\n    await expect(assertPreservedOutput(savedBytes, fixture)).resolves.toBeUndefined();\n  }"
-    },
-    {
-      "id": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
-      "path": "tests/unit/shared-pack.test.ts",
-      "line": 10,
-      "title": "checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
-      "suites": [
-        "shared v2 inventory and provenance"
-      ],
-      "kind": "test",
-      "assertions": [
-        "expect(await verifySharedPack(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:3})"
-      ],
-      "loops": [],
-      "sourceSha256": "c31f0536e932bd1bba42ee9d86b6078361747f17a96c2d8f33702e2faa7861c2",
-      "body": "{\n    expect(await verifySharedPack(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:3});\n  }"
-    },
-    {
-      "id": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / stable identity excludes path, UUID and example insertion order",
-      "path": "tests/unit/shared-pack.test.ts",
-      "line": 13,
-      "title": "stable identity excludes path, UUID and example insertion order",
-      "suites": [
-        "shared v2 inventory and provenance"
-      ],
-      "kind": "test",
-      "assertions": [
-        "expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}')",
-        "expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}')",
-        "expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}))"
-      ],
-      "loops": [],
-      "sourceSha256": "c31f0536e932bd1bba42ee9d86b6078361747f17a96c2d8f33702e2faa7861c2",
-      "body": "{\n    expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}');\n    expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}');\n    expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}));\n  }"
-    },
-    {
-      "id": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / typed mutation inputs preserve strings, numeric values and significant whitespace",
-      "path": "tests/unit/shared-pack.test.ts",
-      "line": 18,
-      "title": "typed mutation inputs preserve strings, numeric values and significant whitespace",
-      "suites": [
-        "shared v2 inventory and provenance"
-      ],
-      "kind": "test",
-      "assertions": [
-        "expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ])",
-        "expect(()=>parseBatchTable(table)).toThrow()"
-      ],
-      "loops": [
-        {
-          "line": 22,
-          "expression": "for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\""
-        }
-      ],
-      "sourceSha256": "c31f0536e932bd1bba42ee9d86b6078361747f17a96c2d8f33702e2faa7861c2",
-      "body": "{\n    expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ]);\n    for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\"{}\"]],[[\"target\",\"value_json\"],[\"A1\",\"1e999\"]]])expect(()=>parseBatchTable(table)).toThrow();\n  }"
-    },
-    {
-      "id": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / Gherkin escaping must preserve JSON newline escapes before typed decoding",
-      "path": "tests/unit/shared-pack.test.ts",
-      "line": 24,
-      "title": "Gherkin escaping must preserve JSON newline escapes before typed decoding",
-      "suites": [
-        "shared v2 inventory and provenance"
-      ],
-      "kind": "test",
-      "assertions": [
-        "expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow()",
-        "expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}])"
-      ],
-      "loops": [],
-      "sourceSha256": "c31f0536e932bd1bba42ee9d86b6078361747f17a96c2d8f33702e2faa7861c2",
-      "body": "{\n    const compile=(value:string)=>parseFeature('features/planned/example.feature',`@planned\nFeature: JSON escaping\n  @id-json-escaping\n  Scenario: Typed newline\n    When a batch is prepared:\n      | target | value_json |\n      | A1 | ${value} |\n    Then the typed value contains a newline\n`).scenarios[0]!.cases[0]!.steps[0]!.argument!.dataTable!;\n    expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow();\n    expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}]);\n  }"
-    },
-    {
-      "id": "bun:tests/unit/shared-pack.test.ts:shared v2 inventory and provenance / rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",
-      "path": "tests/unit/shared-pack.test.ts",
-      "line": 38,
-      "title": "rejects feature, fixture and compiled-inventory tampering while leaving original fixtures untouched",
-      "suites": [
-        "shared v2 inventory and provenance"
-      ],
-      "kind": "test",
-      "assertions": [
-        "expect(verifySharedPack(temp)).rejects.toThrow(expectedError!)",
-        "expect(await verifySharedPack(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:3})"
-      ],
-      "loops": [
-        {
-          "line": 46,
-          "expression": "for(const [file,expectedError] of [\n        [\"references/fixtures-ooxml/shared/v2/pack/features/mutation-safety.feature\",\"Shared pack artifact drift\"],\n        ['references/fixtures-ooxml/'+manifest.fixtures[0].path,'sha256 drift'],\n        [\"references/fixtures-ooxml/shared/v2/pack/expanded-contracts.json\",\"Shared pack artifact drift\"],\n      ])"
-        }
-      ],
-      "sourceSha256": "c31f0536e932bd1bba42ee9d86b6078361747f17a96c2d8f33702e2faa7861c2",
-      "body": "{\n    const temp=await mkdtemp(join(tmpdir(),\"bun-shared-pack-\"));\n    try {\n      await cp(join(root,\"features\"),join(temp,\"features\"),{recursive:true});\n      await mkdir(join(temp,'docs/contracts/shared-v2'),{recursive:true});\n      await Bun.write(join(temp,'docs/contracts/shared-v2/manifest.json'),Bun.file(join(root,'docs/contracts/shared-v2/manifest.json')));\n      await cp(fixturesRoot(),join(temp,\"references/fixtures-ooxml\"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});\n      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/shared/v2/pack/fixture-manifest.json')).json();\n      for(const [file,expectedError] of [\n        [\"references/fixtures-ooxml/shared/v2/pack/features/mutation-safety.feature\",\"Shared pack artifact drift\"],\n        ['references/fixtures-ooxml/'+manifest.fixtures[0].path,'sha256 drift'],\n        [\"references/fixtures-ooxml/shared/v2/pack/expanded-contracts.json\",\"Shared pack artifact drift\"],\n      ]) {\n        const path=join(temp,file!);const original=await Bun.file(path).bytes();\n        const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;\n        await Bun.write(path,modified);await expect(verifySharedPack(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);\n      }\n      expect(await verifySharedPack(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:3});\n    } finally {await rm(temp,{recursive:true,force:true});}\n  }"
     },
     {
       "id": "bun:tests/unit/workflow-acceptance.test.ts:workflow shared acceptance / executes the frozen shared workflow feature as 19 implemented Bun cases",
@@ -2662,7 +2662,7 @@
         "expect(execution.counts.steps.ambiguous).toBe(0)"
       ],
       "loops": [],
-      "sourceSha256": "abbd13945ca00a9109312e169d6d2b1370aec70e4e609520cdcdcd1d44000798",
+      "sourceSha256": "a8004ad190b81d42f36415c43438783887065abc7f16c0e6224024e6a524dcd3",
       "body": "{\n    const text = (await Bun.file(FROZEN_FEATURE).text()).replace(/^@planned\\s*$/m, \"@implemented @bun\");\n    const feature = parseFeature(FEATURE_PATH, text);\n    const inventory = inventoryFor(feature);\n    const caseCount = feature.scenarios.flatMap((scenario) => scenario.cases).length;\n    const expectedOutcomeCount = feature.scenarios\n      .flatMap((scenario) => scenario.cases)\n      .flatMap((acceptanceCase) => acceptanceCase.steps)\n      .filter((step) => step.type === PickleStepType.OUTCOME).length;\n\n    expect(feature.lifecycle).toBe(\"implemented\");\n    expect(feature.runner).toBe(\"bun\");\n    expect(feature.path).toBe(FEATURE_PATH);\n    expect(feature.path).not.toContain(\"/planned/\");\n    expect(feature.scenarios).toHaveLength(8);\n    expect(caseCount).toBe(19);\n\n    const execution = await executeAcceptance(inventory, bindings, newAcceptanceRunId());\n    const passedOutcomeCount = execution.features\n      .flatMap((report) => report.scenarios)\n      .flatMap((report) => report.cases)\n      .flatMap((report) => report.steps)\n      .filter((step) => step.type === PickleStepType.OUTCOME && step.status === \"passed\").length;\n\n    expect(execution.failures).toEqual([]);\n    expect(execution.counts.features).toEqual({ passed: 1, failed: 0, planned: 0, total: 1 });\n    expect(execution.counts.scenarios).toEqual({ passed: 8, failed: 0, planned: 0, total: 8 });\n    expect(execution.counts.cases.passed).toBe(19);\n    expect(execution.counts.cases.failed).toBe(0);\n    expect(execution.counts.cases.planned).toBe(0);\n    expect(execution.counts.cases.total).toBe(19);\n    expect(passedOutcomeCount).toBe(expectedOutcomeCount);\n    expect(execution.counts.steps.failed).toBe(0);\n    expect(execution.counts.steps.undefined).toBe(0);\n    expect(execution.counts.steps.ambiguous).toBe(0);\n  }"
     },
     {

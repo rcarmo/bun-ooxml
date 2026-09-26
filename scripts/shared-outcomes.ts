@@ -1,7 +1,7 @@
 import { isDeepStrictEqual } from "node:util";
 import { PickleStepType } from "@cucumber/messages";
 import type { AcceptanceFeature, AcceptanceCase, StepArgumentView } from "./gherkin.ts";
-import { stableCaseKey } from "./shared-pack.ts";
+import { stableCaseKey } from "./shared-contracts.ts";
 
 /** Cross-language evidence envelope. Native runners produce records independently.
  * Validation checks identity and assertion consistency, never Office semantics.

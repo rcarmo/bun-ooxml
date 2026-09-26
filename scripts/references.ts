@@ -17,7 +17,6 @@ export async function verifyReferences(root:string):Promise<number>{
  if(git('rev-parse','HEAD')!==pin.commit||(!candidate&&(git('rev-parse',`refs/tags/${pin.tag}^{commit}`)!==pin.commit||git('cat-file','-t',`refs/tags/${pin.tag}`)!=='tag')))throw Error('Shared submodule/tag pin mismatch');
  const manifestBytes=await Bun.file(join(refs,'manifest.json')).bytes();
  if(digest(manifestBytes)!==pin.manifestSha256)throw Error('Shared manifest seal mismatch');
- if(digest(await Bun.file(join(refs,'shared/v2/pack/pack-manifest.json')).bytes())!==pin.sharedPackManifestSha256)throw Error('Shared pack seal mismatch');
  const manifest=JSON.parse(new TextDecoder().decode(manifestBytes)),known=new Set<string>();
  if(manifest.schemaVersion!==2||manifest.fixturePathBase!=='repository-root'||!Array.isArray(manifest.files)||!manifest.files.length)throw Error('Invalid shared manifest');
  const hashes=new Set<string>(),ids=new Set<string>();

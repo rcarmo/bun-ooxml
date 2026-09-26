@@ -11,10 +11,10 @@ import {
   assertPreservedOutput,
   type FixtureRecord,
   verifyFixture,
+  loadMutationFixtures,
 } from "../../scripts/shared-fixtures.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const PACK_ROOT = resolveSharedPackRoot();
 const tempRoots: string[] = [];
 const encoder = new TextEncoder();
 const decoder = new TextDecoder("utf-8", { fatal: true });
@@ -182,7 +182,7 @@ type FixtureManifest = {
 };
 
 async function loadManifest(): Promise<FixtureManifest> {
-  return Bun.file(join(PACK_ROOT, "fixture-manifest.json")).json() as Promise<FixtureManifest>;
+  return loadMutationFixtures();
 }
 
 async function fixtureById(id: string): Promise<FixtureRecord> {
@@ -193,12 +193,6 @@ async function fixtureById(id: string): Promise<FixtureRecord> {
 
 async function readFixtureBytes(fixture: FixtureRecord): Promise<Uint8Array> {
   return Uint8Array.from(await Bun.file(fixturePath(fixture.assetId)).bytes());
-}
-
-function resolveSharedPackRoot(): string {
-  const preferred = join(fixturesRoot(), "shared/v2/pack");
-  if (!existsSync(join(preferred, "fixture-manifest.json"))) throw new Error("Missing pinned shared fixture pack");
-  return preferred;
 }
 
 async function tempRoot(): Promise<string> {
