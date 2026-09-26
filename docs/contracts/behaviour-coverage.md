@@ -27,7 +27,7 @@ The shared reference contains **200 assets**. The table lists available tests; a
 | references/fixtures-ooxml/workflows/native/pptx-text.feature | mixed | 13 | 13 | 11 | 2 | 58 |
 | references/fixtures-ooxml/workflows/native/xlsx-cache-boundaries.feature | implemented | 2 | 3 | 3 | 0 | 12 |
 | references/fixtures-ooxml/workflows/native/xlsx-cells.feature | implemented | 8 | 8 | 8 | 0 | 30 |
-| references/fixtures-ooxml/workflows/package/preservation.feature | mixed | 10 | 14 | 3 | 11 | 119 |
+| references/fixtures-ooxml/workflows/package/preservation.feature | implemented | 10 | 14 | 14 | 0 | 119 |
 | references/fixtures-ooxml/workflows/package/relationship-namespaces.feature | implemented | 2 | 4 | 4 | 0 | 16 |
 | references/fixtures-ooxml/workflows/package/semantic-diff.feature | implemented | 1 | 1 | 1 | 0 | 7 |
 | references/fixtures-ooxml/workflows/package/xml-member-admission.feature | implemented | 1 | 3 | 3 | 0 | 9 |

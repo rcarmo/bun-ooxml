@@ -2,6 +2,8 @@ import type { StepBinding } from "../../scripts/gherkin.ts";
 import { bindings as coreBindings } from "./core.ts";
 import { bindings as packageAdmissionBindings } from './package-admission.ts';
 import { bindings as packageComparisonBindings } from './package-comparison.ts';
+import { bindings as refusalBindings } from './refusal-outcomes.ts';
+import { bindings as opcCustodyBindings, cleanup as cleanupOpcCustody } from './opc-custody.ts';
 import { bindings as xmlNameBindings } from "./xml-names.ts";
 import { bindings as xmlComparisonBindings } from './xml-comparison.ts';
 import { bindings as xmlRemovalBindings } from './xml-removal.ts';
@@ -36,12 +38,14 @@ import { bindings as xlsxBindings } from "./xlsx.ts";
 import { bindings as xlsxRangeBindings } from './xlsx-range.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupTrackedWorkflowFixtures(),cleanupFontSize()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupTrackedWorkflowFixtures(),cleanupFontSize(),cleanupOpcCustody()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
   ...packageAdmissionBindings,
   ...packageComparisonBindings,
+  ...refusalBindings,
+  ...opcCustodyBindings,
   ...xmlNameBindings,
   ...xmlComparisonBindings,
   ...xmlRemovalBindings,

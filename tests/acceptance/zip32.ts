@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import type { StepBinding } from '../../scripts/gherkin.ts';
-import { OoxmlError } from '../../src/errors.ts';
 import { crc32, readZip, writeZip, type ZipLimits } from '../../src/opc/zip.ts';
 import { buildZip, type ZipMemberSpec } from '../fixtures/zip32.ts';
 
@@ -60,9 +59,4 @@ export const bindings: StepBinding[] = [
     const n = value === 'archive byte length minus 1' ? s.archive.length - 1 : Number(value);
     assert(Number.isSafeInteger(n) && n > 0); read(s, { [limit!]: n });
   } },
-  { pattern: /^it throws an OoxmlError with code (\S+)$/, run: (c, code) => {
-    const s = state(c); assert(s.error instanceof OoxmlError); assert.equal(s.error.code, code); assert.equal(s.output, undefined);
-    if (s.archive) assert.deepEqual(s.archive, s.before);
-  } },
-  { pattern: /^the error message contains (.+)$/, run: (c, message) => { const s = state(c); assert(s.error instanceof OoxmlError); assert(s.error.message.includes(message!)); } },
 ];

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 507,
+  "nativeDeclarations": 513,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 280,
+  "withoutStagingCount": 286,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2700,6 +2700,36 @@
       "id": "bun:tests/unit/docx-style-authoring.test.ts:disk save reopen retains authored base and flags without dirtying document text",
       "path": "tests/unit/docx-style-authoring.test.ts",
       "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
+      "path": "tests/unit/opc-custody-bindings.test.ts",
+      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439"
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
+      "path": "tests/unit/opc-custody-bindings.test.ts",
+      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439"
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
+      "path": "tests/unit/opc-custody-bindings.test.ts",
+      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439"
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
+      "path": "tests/unit/opc-custody-bindings.test.ts",
+      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439"
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
+      "path": "tests/unit/opc-custody-bindings.test.ts",
+      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439"
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
+      "path": "tests/unit/opc-custody-bindings.test.ts",
+      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439"
     },
     {
       "id": "bun:tests/unit/oracle-process.test.ts:oracle runner captures success and rejects missing commands",

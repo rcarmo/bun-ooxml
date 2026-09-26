@@ -43,6 +43,14 @@ builder; separate tests inspect mutated header fields and reject incorrect error
 codes, messages, fabricated success and changed input buffers. Limit refusals
 check API results, without measuring allocation timing or peak memory.
 
+The OPC custody cases use the shared three-member package example, without a
+Word schema or renderer. They check detached buffers, UTF-16LE member bytes,
+transaction callback behaviour and existing-file/symlink refusal. Edited archives
+are reopened and unrelated member payloads compared; these comparisons do not
+require unchanged ZIP headers after an edit. Save tests read destination bytes
+from disk, and the runner removes temporary directories even after a failed case.
+Concurrent path replacement is outside these tests.
+
 ## Requirement mappings
 
 The slide-order, effective-formatting and XML-value reports associate literal

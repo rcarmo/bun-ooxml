@@ -231,7 +231,14 @@
       "scenarioIds": [
         "@id-opc-package-corpus-noop",
         "@id-opc-package-transaction-rollback",
-        "@id-opc-package-preserve-unrelated"
+        "@id-opc-package-preserve-unrelated",
+        "@id-bun-opc-open-refusal",
+        "@id-bun-opc-detached-byte-copies",
+        "@id-bun-opc-preserve-utf16le-edit",
+        "@id-bun-opc-async-transaction-refusal",
+        "@id-bun-opc-thenable-transaction-result",
+        "@id-bun-opc-save-invalid-target-custody",
+        "@id-bun-opc-symlink-destination-refusal"
       ]
     },
     {
