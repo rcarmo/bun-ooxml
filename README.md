@@ -7,7 +7,9 @@ preserving the Office package parts an edit did not touch.
 The first slice handles guarded cross-run text replacement, slide text and notes,
 and existing-cell edits with formula-cache invalidation. `patchOffice()` adds
 read-only previews, all-targets-required batches, guarded saves and per-target
-receipts. Its native bindings pass the 19 shared mutation cases. ZIP, XML and OPC code
+receipts. Its native bindings pass the 19 shared mutation cases. Guarded OPC graph
+helpers add/detach parts and relationships; package diffs identify payload and
+content-type changes. ZIP, XML and OPC code
 use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 

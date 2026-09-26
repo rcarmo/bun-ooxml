@@ -119,6 +119,35 @@ chains are preserved, not refreshed or certified. A recalculation flag or receip
 does not establish their freshness. This API does not calculate formulas. A missing
 cached value is not zero, a current answer or a successful calculation.
 
+## Guarded package graph edits
+
+```ts
+import { addPart, addRelationship, diffPackages } from "bun-ooxml/opc";
+const before = await OpcPackage.open(input);
+const edited = await OpcPackage.open(before.toBytes());
+addPart(edited, "custom/data.bin", new Uint8Array([1, 2, 3]), "application/octet-stream");
+addRelationship(edited, "", "urn:example:data", "custom/data.bin");
+const report = diffPackages(before, edited);
+await edited.save(output);
+```
+
+Graph helpers mutate a valid package within a synchronous rollback boundary and
+validate before returning. They do not update format object-model caches; use them
+before opening a format reader or reopen afterward. Never modify an already-loaded
+format's graph behind cached handles and assume its model automatically refreshes.
+
+`removePart` refuses incoming relationships. Explicitly detach an unreferenced
+relationship first; removal also refuses if the owner's XML uses its officeDocument
+`id`, `embed` or `link`. Unknown binary owner link semantics refuse. No cascade or
+unrelated orphan collection occurs. `nextPartName` checks all preserved members,
+including case-colliding orphan names. `walkParts` follows internal edges once and
+never fetches external targets.
+
+`diffPackages` reports SHA256, byte length and effective content types, including
+type-only changes. It ignores ZIP metadata differences and does not claim XML
+semantic equivalence, rendered appearance or calculation correctness. See
+`docs/contracts/graph-api.md` for ownership limits and the bounded upstream mapping.
+
 ## Package-level operations
 
 `OpcPackage` retains original bytes, returns detached part copies, resolves internal
