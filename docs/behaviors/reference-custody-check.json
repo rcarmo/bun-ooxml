@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "scope": "Referencevalidationonly; no documentruntime or Gherkin changes",
+  "consumerBaseCommit": "7f400faee289cacebfaaa62f237a021c02b97893",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.6.0",
+    "commit": "dc8fdccd5a7e14c9154bb71e68e10c7404fe4fa0",
+    "manifestSha256": "28976c7c9ec6acec15383549087adb09a2b2ee476ffd81c4396c37a30a4ebc92"
+  },
+  "behavioralRed": "Modified fact under assume-unchanged was accepted by prior porcelain+asset-hash guard",
+  "checks": [
+    "assume-unchanged fact bytes refuse",
+    "skip-worktree workflow ledger bytes refuse",
+    "executable-mode change refuses with core.filemode=false",
+    "same-bytes symlink refuses under hidden index hint",
+    "referenceindexbytes remainunchanged during verification"
+  ],
+  "run": {
+    "command": "make check",
+    "runId": "c964cda3-7873-4543-8b01-85f1c0982b11",
+    "unitTests": 247,
+    "assertions": 2486,
+    "acceptanceCases": 128,
+    "examples": 3,
+    "status": "passed"
+  },
+  "limits": [
+    "Developmentreferencecustody only, no addedformatcoverage",
+    "New native declaration awaits central semantic mapping",
+    "Windows skips Unix executable/symlink test section"
+  ]
+}

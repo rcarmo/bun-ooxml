@@ -1,9 +1,10 @@
 # Native behaviour catalogue staging
 
-The AST inventory contains 246 test declarations in 30 native test files. Five
+The AST inventory contains 247 test declarations in 30 native test files. Five
 candidate mapping files cover the earlier 227 declaration IDs once each; the 19
 new comment declarations have bounded central partial mappings, with remaining
-lexical/encoding/protection cases recorded as gaps. Semantic review
+lexical/encoding/protection cases recorded as gaps. One new reference-custody
+declaration checks hidden Git-index changes and still needs central mapping. Semantic review
 and reconciliation into the shared Gherkin catalogue are unfinished. A bounded
 review of the 18 XML/QName declarations is recorded in the shared
 `ledgers/consumers/bun-xml.json`, with partial and unmapped assertions explicit.
@@ -19,7 +20,7 @@ The shared parsing/QName features now replace their former local copies.
 
 `native-test-inventory.json` records declaration identity, suite/title, source
 location/hash, assertion expressions and loops. It counts declarations, not
-runtime-expanded leaves. Thirty-two declarations contain parameters or loops
+runtime-expanded leaves. Thirty-three declarations contain parameters or loops
 that need explicit expansion review. Assertions hidden in helper calls also need
 manual inspection; an empty extracted assertion list does not mean no assertion
 ran.

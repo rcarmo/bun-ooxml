@@ -30,7 +30,10 @@ escaped paths refuse. The helper is test/development tooling; it is not a runtim
 Office editing dependency.
 
 `scripts/references.ts` verifies the pinned commit, annotated release tag, root
-manifest seal, all asset hashes and a clean Git checkout.
+manifest seal, all asset hashes and a clean Git checkout. Every tracked file is
+also compared with its raw Git blob, regular-file type, executable mode and
+non-symlink path. This catches facts and workflows hidden by `assume-unchanged`,
+`skip-worktree` or disabled mode tracking; validation does not modify index hints.
 Missing references fail with submodule initialisation guidance. A changed fact or
 workflow also fails even if every fixture hash still matches.
 

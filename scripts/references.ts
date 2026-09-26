@@ -1,4 +1,5 @@
 import {join,resolve} from 'node:path';
+import {lstat,readFile,realpath} from 'node:fs/promises';
 const PROJECT_ROOT=resolve(import.meta.dir,'..');
 const digest=(bytes:Uint8Array)=>new Bun.CryptoHasher('sha256').update(bytes).digest('hex');
 const safe=(path:unknown):path is string=>typeof path==='string'&&!!path&&!/[\\:\u0000-\u001f]/.test(path)&&path.split('/').every(p=>!!p&&p!=='.'&&p!=='..');
@@ -22,6 +23,20 @@ export async function verifyReferences(root:string):Promise<number>{
  const hashes=new Set<string>(),ids=new Set<string>();
  for(const f of manifest.files){if(!safe(f.path)||known.has(f.path)||hashes.has(f.sha256)||ids.has(f.id)||!Number.isSafeInteger(f.bytes)||f.bytes<0||!/^[a-f0-9]{64}$/.test(f.sha256))throw Error('Invalid or duplicate reference path/hash/ID');known.add(f.path);hashes.add(f.sha256);ids.add(f.id);
  if(f.role==='fixture'&&(f.id!=='fixture-'+f.sha256||!['docx','pptx','xlsx','png'].includes(f.format)||!/^[a-z0-9-]+$/.test(f.scenarioGroup)||!f.path.startsWith(`fixtures/${f.format}/${f.scenarioGroup}/`)))throw Error('Invalid grouped fixture identity');const bytes=await Bun.file(join(refs,f.path)).bytes();if(bytes.length!==f.bytes||digest(bytes)!==f.sha256)throw Error('Reference drift: '+f.path);}
- if(git('status','--porcelain','--untracked-files=all'))throw Error('Shared reference worktree is dirty');
+ if(git('--no-optional-locks','status','--porcelain','--untracked-files=all'))throw Error('Shared reference worktree is dirty');
+ // Status honours index hints/filters. Compare raw tracked bytes independently.
+ const objectFormat=git('rev-parse','--show-object-format');
+ if(objectFormat!=='sha1'&&objectFormat!=='sha256')throw Error('Unsupported reference object format');
+ const referenceRoot=await realpath(refs);
+ for(const record of git('ls-tree','-r','-z','--full-tree','HEAD').split('\0').filter(Boolean)){
+  const match=record.match(/^(100644|100755) blob ([a-f0-9]+)\t([^\0]+)$/);
+  if(!match||!safe(match[3]))throw Error('Unsupported tracked reference entry');
+  const [,mode,objectId,path]=match,full=join(referenceRoot,path!);
+  const stat=await lstat(full);
+  if(!stat.isFile()||await realpath(full)!==full)throw Error('Tracked reference must be a regular non-symlink file: '+path);
+  if(process.platform!=='win32'&&Boolean(stat.mode&0o111)!==(mode==='100755'))throw Error('Tracked reference mode differs: '+path);
+  const bytes=await readFile(full),actual=new Bun.CryptoHasher(objectFormat).update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+  if(actual!==objectId)throw Error('Tracked reference bytes differ: '+path);
+ }
  return known.size;
 }
