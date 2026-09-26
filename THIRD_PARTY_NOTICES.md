@@ -15,6 +15,12 @@
   request. Clarify redistribution permission before making the repository public.
   Its fixture provenance is in `fixtures/python-office-mcp-server/tests/_templates/FIXTURES.md`.
 
+`docs/contracts/office-mutation/audit/` retains the read-only audit export from
+2026-09-26, including recipe/test sources and diagnostic observations. Its
+`manifest.json` records artifact hashes and the reviewed revision. It does not
+supply additional licensed runtime code or validated Office output goldens. Keep
+the same private-development redistribution restriction as the MCP reference.
+
 Frozen Python source/test files are reference inputs. Runtime exports include only
 TypeScript under `src/`. Gherkin, messages and TypeScript packages are development
 dependencies with their own bundled licence notices.

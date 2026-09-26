@@ -16,6 +16,7 @@ check:
 	bun run typecheck
 	bun run verify
 	bun run scripts/coverage.ts --check
+	bun run scripts/office-contracts.ts
 	bun run scripts/symbols.ts --check
 	bun test tests/unit
 	bun run acceptance

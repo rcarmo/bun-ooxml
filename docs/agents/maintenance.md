@@ -37,6 +37,15 @@ proves provenance only. Set `mapped` only after reviewed assertions cover the wh
 row, with all partial/refused/manual cases recorded. The full-parity gate also
 requires no planned features. Do not reduce the denominator to improve a percentage.
 
+## Shared Python audit contracts
+
+Read `docs/contracts/office-mutation/README.md` before binding shared mutation
+workflows. The six `@id-office-*` scenarios and extra Bun obligations stay planned
+until every outcome passes. Historical defect observations are diagnostics, never
+golden outputs. Preserve native-runner versus MCP-transport identity and record
+actual generated input hashes at execution time. `make check` verifies the separate
+audit manifest and ID migrations; it does not execute Python scripts.
+
 ## Implementation invariants
 
 * Preserve opaque members; parse only what the operation owns. Getter results must
