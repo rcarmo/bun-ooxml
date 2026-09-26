@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "scope": "Shared specification/reference integration, no new runtime assertions or font-size/VML execution",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.16.0",
+    "commit": "641146c020e1011b8f3e930f5fb4fd0b76c27b3d",
+    "manifestSha256": "341cdea9d1184231070e210bbdd148afecc32284da35b788d9522a24f9725cb0"
+  },
+  "sourceSha256": {
+    "scripts/references.ts": "a674ee873176bebb8f50d83bccd88196775229794d072b559d6fc66bfb8a6adc",
+    "tests/unit/references.test.ts": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+    "scripts/coverage.ts": "ea6e9f7983df23705f734d2504ffb5bcc675000ec95633cecb4e394f45bc0fe4"
+  },
+  "checks": {
+    "command": "make check",
+    "tests": 409,
+    "assertions": 5062,
+    "acceptanceCases": 321,
+    "acceptanceRunId": "93be8f72-31b8-4164-b22f-d8e72bfc34a1",
+    "log": "/workspace/tmp/bun-ecma-release.log"
+  },
+  "shared": {
+    "assets": 163,
+    "priorRecordsUnchanged": 147,
+    "specificationPdfs": 4,
+    "verbatimGoDocuments": 5,
+    "sourceIndexVariants": 351,
+    "sourceSnapshots": 12,
+    "goEcmaDeclarations": 35,
+    "workflowScenarios": 122,
+    "workflowCases": 352,
+    "newPlannedScenarios": 7
+  },
+  "deprecationReview": {
+    "entries": 4,
+    "relatedNonDeprecationChanges": 2,
+    "complete": false
+  },
+  "limitations": [
+    "Specification is the oracle; implementation source/test observations are separate",
+    "Go inventory and declaration mappings do not establish conformance",
+    "Seven new Gherkin scenarios have no Bun execution bindings",
+    "Part-by-part deprecation review and full spec coverage remain incomplete",
+    "Original Go source copies removed by Go owner only after released adoption"
+  ]
+}

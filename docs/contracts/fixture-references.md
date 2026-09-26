@@ -1,5 +1,13 @@
 # Shared fixture references
 
+The [ECMA specification index](../../references/fixtures-ooxml/specs/ecma-376/README.md)
+contains all four parts as unchanged official PDFs. Extracts and derived notes are
+labelled separately. The specification defines expected format behavior;
+implementation tests and application output identify compatibility differences.
+The [deprecation register](../../references/fixtures-ooxml/specs/ecma-376/deprecations.json)
+records cited removals and deprecated constructs without conflating them with
+Transitional-only syntax.
+
 The shared specification in `references/fixtures-ooxml` defines expected behaviour
 and supplies reusable validation fixtures. The manifest is schema 2; storage is
 grouped by format and scenario purpose, with one file per unique SHA-256.

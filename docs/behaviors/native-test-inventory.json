@@ -170,7 +170,7 @@
     },
     {
       "path": "tests/unit/references.test.ts",
-      "sha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
+      "sha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
       "declarations": 4,
       "issues": []
     },
@@ -10059,13 +10059,13 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(147)"
+        "expect(await verifyReferences(root)).toBe(163)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
-      "body": "{expect(await verifyReferences(root)).toBe(147);}",
+      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "body": "{expect(await verifyReferences(root)).toBe(163);}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -10088,7 +10088,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
+      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}",
       "calls": [
         "expect",
@@ -10113,7 +10113,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(147)",
+        "expect(await verifyReferences(tmp)).toBe(163)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -10125,8 +10125,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(147);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(163);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         ".repeat",
         "Bun.file",
@@ -10169,7 +10169,7 @@
         "expect(git('status','--porcelain')).toBe('')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular')",
-        "expect(await verifyReferences(tmp)).toBe(147)"
+        "expect(await verifyReferences(tmp)).toBe(163)"
       ],
       "deferredAssertions": [
         "expect(r.exitCode).toBe(0)"
@@ -10181,8 +10181,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(147);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(163);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().bytes",

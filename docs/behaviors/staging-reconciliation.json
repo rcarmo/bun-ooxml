@@ -1063,7 +1063,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
+      "currentSourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1072,7 +1072,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
+      "currentSourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1083,7 +1083,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b",
+      "currentSourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -2899,7 +2899,7 @@
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
       "path": "tests/unit/references.test.ts",
-      "sourceSha256": "e19d48db281a7b35433331e635ae6d4220c6a4aad8701bc39853a3a860ecca4b"
+      "sourceSha256": "0cced3f69bee482d90fad28e8c62370a121c340654ce396d552f79a3c349e65e"
     },
     {
       "id": "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",
