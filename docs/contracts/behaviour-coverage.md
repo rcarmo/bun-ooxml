@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-Shared reference manifest: **147 assets**. Implementation evidence remains consumer-local.
+The shared reference contains **147 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|
@@ -38,6 +38,6 @@ Shared reference manifest: **147 assets**. Implementation evidence remains consu
 | references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 19 |
 | references/fixtures-ooxml/workflows/xml/parsing.feature | implemented | 5 | 5 | 22 |
 
-Shared workflow IDs and facts are pinned by `references/fixtures-ooxml`.
-Counts are contract inventory, not execution evidence. Run `make check` for outcomes.
-All planned cases remain gaps. Removing external source inventories does not close behavioural gaps.
+Specifications and shared tests are in `references/fixtures-ooxml`.
+Run `make check` to execute implemented scenarios. Planned scenarios are not run.
+These counts describe test cases, not the percentage of the OOXML specification supported.

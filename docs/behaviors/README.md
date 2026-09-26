@@ -1,121 +1,53 @@
-# Native behaviour catalogue
+# Tests and specification coverage
 
-`native-test-inventory.json` records the current Bun test declarations from
-`tests/unit/**/*.test.ts`. Schema 2 contains 409 declarations in 43 files. This is an
-AST denominator, not a runtime-expanded case count or proof of semantic coverage.
-It records whole-file hashes, declaration locations, suite/title identities,
-inline bodies, direct matcher expressions, call names and review reasons.
+The shared ECMA specification defines expected OOXML behavior. Tests check the
+implemented operations against those requirements. Application output is useful
+for compatibility checks, but does not override the standard.
 
-85 declarations have dynamic titles, parameterisation, loops, conditions or
-lifecycle modifiers requiring review. 116 declarations need some assertion or
-expansion review, including tests whose assertions are in helpers. These groups
-overlap. The inventory does not evaluate helper bodies or expand runtime tables.
-All source files in the discovery glob are hashed, including files with no tests.
-The snapshot also hashes 30 other TypeScript files under `tests/`, so test-helper
-and acceptance-binding changes invalidate it. Dependencies outside `tests/` are not
-hashed by this inventory; runtime behaviour is covered by separate test runs.
-Three declarations contain deferred matcher syntax in nested functions; that
-syntax is listed separately and does not count as a direct assertion.
+## Find results
 
-## Drift gates
+| File | Contents |
+|---|---|
+| `artifacts/acceptance.json` | Results for every executed Gherkin case and step |
+| `native-test-inventory.json` | Unit-test declarations, assertions and source hashes |
+| `outcome-reconciliation.json` | Connections between tests and shared scenarios, including missing assertions |
+| `*-check.json` | Recorded validation commands, source versions and results |
+
+The current Gherkin inventory is in
+[behaviour coverage](../contracts/behaviour-coverage.md). Planned scenarios are not
+run. A unit-test declaration may contain loops or call helpers, so its presence
+alone does not count as a tested requirement.
+
+## Maintain the reports
 
 ```sh
 bun scripts/test-inventory.ts
 bun scripts/mapping-reconciliation.ts
+bun scripts/outcome-mappings.ts
 make check
 ```
 
-`make check` and `bun run check` compare committed outputs with regenerated data.
-Adding/removing a declaration or changing a discovered file fails until the
-inventory is refreshed. The check does not rewrite reports. Duplicate test
-identities and unresolved registrations refuse. Named and namespace `bun:test`
-imports are recognised; indirect aliases, tagged tables, non-inline test/suite
-callbacks, deferred helper registrations and detected binding shadowing need
-explicit parser/review work. Transparent TypeScript wrappers are unwrapped before
-alias checks. Destructured, default/rest and catch bindings are inspected for
-shadowed imports.
+Review test and requirement changes before refreshing reports. `make check`
+compares the saved reports with current source and rejects missing declarations,
+changed source hashes, duplicate identities and unsupported registrations.
 
-This is syntax analysis, not a general TypeScript execution model. Discovery is
-limited to the unit-test glob and supported registration syntax. Integration and
-oracle workflows have separate reports and remain outside this denominator.
-No inventory row grants execution credit.
+The inventory reads `tests/unit/**/*.test.ts` and hashes supporting TypeScript
+files under `tests/`. It records direct assertions separately from assertions in
+nested functions. It does not execute parameter tables or analyse arbitrary
+TypeScript callbacks. Integration and Office-application checks have separate
+reports.
 
-## Historical candidate mappings
+## Requirement mappings
 
-The five `staging-*.json` candidate groups retain 227 earlier declaration IDs.
-`staging-reconciliation.json` finds all 227 identities in the current source and
-lists 182 newer declarations without historical staging. The report itself is
-excluded from candidate discovery. These counts describe only those five files,
-not the separate canonical consumer mappings.
+The slide-order and effective-formatting reports associate literal assertions
+with shared scenarios. They also list gaps, such as an untested result field or
+an input variant missing from the scenario. Each report has its own source hashes
+and required files; one cannot supply a missing reference for another.
 
-The old candidates have no source pins. A matching test ID does not prove that
-its body, helper assertions or fixture semantics are unchanged. Every surviving
-row stays `identity-present-needs-review`, with source equivalence unverified and
-execution credit false. Missing IDs would remain explicit rather than disappearing.
-Each source candidate must be read and compared before central reconciliation.
+Unresolved registrations, missing assertions or conflicting source records fail
+validation. The descriptions still need human review: matching an assertion's
+source text cannot establish that it tests the intended specification requirement.
 
-Shared `ledgers/consumers/bun-xml.json`, `bun-package.json` and `bun-comments.json`
-contain their own source-pinned, bounded mappings. They supersede corresponding
-historical prose only for the assertions they explicitly cover. Comment mappings
-remain partial; archive custody, direct flags and other native assertions can
-exceed the shared scenario wording.
-
-## Source-pinned outcome mappings
-
-[`slide-order-mappings.json`](slide-order-mappings.json) maps all 13 slide-order
-native declarations to canonical scenario IDs, literal native assertions,
-reviewed outcomes and explicit gaps. Its wrapper lists the 21 canonical case
-keys; other declarations retain scenario-level partial mappings because their
-anchor, encoding, constructor, rollback and invalid-input variants lack exact
-canonical rows.
-
-[`effective-formatting-mappings.json`](effective-formatting-mappings.json) adds
-12 DOCX inspection declarations. The wrapper links 25 canonical case keys;
-additional defaults/toggle combinations, result isolation, live styles, UTF-16,
-protected reads and raw relationship changes remain scenario-level mappings.
-Gaps distinguish asserted outcomes from test titles: the protected-read test does
-not compare handle identity, and the unused-ancestry test does not create duplicate
-IDs. Changing an italic result contribution is not followed by an isolation
-assertion. No renderer agreement is inferred; the independent 3/4 marker result
-and known LibreOffice difference remain in the runtime release evidence.
-
-[`outcome-reconciliation.json`](outcome-reconciliation.json), schema 2, retains the
-full 409-declaration denominator: 25 have bounded mappings and 384 are unmapped by
-these two ledgers. All mappings remain partial and carry `executionCredit: false`.
-Each row records `scenario-only` or `explicit-case-keys` link granularity.
-Body-loop review flags remain present, and the runtime leaf count is unknown.
-The 321 acceptance cases still supply the separately recorded execution result.
-
-Standalone generation and `bun scripts/outcome-mappings.ts --check` reject
-unresolved native registrations, including source-level issues outside the mapped
-scopes. They also fail on stale reviewed source hashes,
-missing scoped declarations, duplicate or unknown IDs, missing or extra direct
-literal assertions, and missing outcome/gap descriptions. Each ledger is checked
-against its own reviewed source set and canonical feature. Fixed registrations
-require both ledgers and their complete scope paths. Duplicate ledger names,
-overlapping test scopes, duplicate canonical scenarios and conflicting shared
-source hashes refuse. A sibling ledger cannot supply a missing source pin or
-scenario link. The report retains each row's ledger identity and counts the native
-denominator once.
-
-Each reviewed source set includes the native test, acceptance helper, relevant
-format implementation, canonical feature, Gherkin runner and inventory parser. It is not a transitive dependency closure. The gate
-checks integrity; it cannot determine whether prose accurately describes an
-assertion. Review source changes before updating pins. `make check` runs this
-gate without awarding additional execution credit.
-
-These consumer mappings add no behaviour IDs or duplicate Gherkin. The central
-reference remains the source of canonical scenarios. Wider Bun/Go/Python mapping
-and runtime-leaf reconciliation is still open.
-
-## Reconciliation work
-
-Review concrete Then predicates, helpers, negative paths and parameter rows.
-Keep weak substring/count assertions separate from exact equality or preservation.
-Record the current file hashes and gaps when proposing shared IDs. Preserve
-operation differences between consumers. Shared Gherkin and facts live centrally;
-local mappings, inventories and native results remain consumer-specific.
-
-Current acceptance executes 321 implemented cases selected from the shared
-reference. Neither 409 declarations nor 227 candidate IDs increases that result or
-closes the full-format backlog.
+Older `staging-*.json` files are retained as historical notes. Their matching test
+names do not establish current behavior. Full format coverage and test-to-clause
+mapping remain incomplete.
