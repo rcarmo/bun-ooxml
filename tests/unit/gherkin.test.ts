@@ -15,6 +15,17 @@ afterEach(async () => {
 });
 
 describe("gherkin acceptance", () => {
+  test("loaded binding cleanup runs after failed outcomes and cleanup failure cannot pass",async()=>{
+    const root=await makeProject({
+      'features/opc/cleanup.feature':'@implemented @bun\nFeature: cleanup\n  @id-cleanup\n  Scenario: failed operation cleans\n    Then fail the operation\n',
+      'tests/acceptance/steps.ts':'export const bindings=[{pattern:/^fail the operation$/,run(){throw new Error("test failure")}}]; export async function cleanup(){await Bun.write(import.meta.dir+"/cleaned","yes");}',
+    });
+    await expect(runAcceptance(undefined,{root})).rejects.toThrow('test failure');
+    expect(await Bun.file(join(root,'tests/acceptance/cleaned')).text()).toBe('yes');
+    await Bun.write(join(root,'tests/acceptance/fail-cleanup.ts'),'export const bindings=[{pattern:/^fail the operation$/,run(){}}]; export async function cleanup(){throw new Error("cleanup refusal");}');
+    await expect(runAcceptance(undefined,{root,stepsModulePath:join(root,'tests/acceptance/fail-cleanup.ts')})).rejects.toThrow('Acceptance cleanup failed');
+    expect((await Bun.file(join(root,'artifacts/acceptance.json')).json()).status).toBe('failed');
+  });
   test("full gate refuses planned work despite implemented cases passing", async () => {
     const root = await makeProject({
       "features/opc/ready.feature": "@implemented @bun\nFeature: ready\n  @id-ready\n  Scenario: verified\n    Then a real assertion passes\n",

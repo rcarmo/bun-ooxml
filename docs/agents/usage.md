@@ -15,6 +15,38 @@ Treat `OoxmlError.code` as a refusal. Do not catch it and continue with raw XML 
 an automatic fallback. Return the code and target to the caller. Reacquire stale
 spans/anchors after edits rather than retrying them blindly.
 
+## Native batches and previews
+
+```ts
+import { patchOffice } from "bun-ooxml";
+const changes = [{ target: "<Present>", value: "Approved" }];
+const preview = await patchOffice({ source: input, mode: "dry_run", changes });
+if (preview.status !== "preview") throw new Error(preview.error?.message);
+const result = await patchOffice({
+  source: input, output, mode: "safe", changes,
+  expectedSourceSha256: preview.sourceSha256,
+});
+if (result.status !== "committed") throw new Error(result.error?.message);
+```
+
+`dry_run` stages in memory but leaves source/destination and directory entries
+untouched. `strict` can write the source or a chosen output; `safe` requires a
+distinct path. All modes currently require every target to be supported, unique
+and non-overlapping. No best-effort fallback occurs. Receipts distinguish matches,
+unchanged edits and actually committed changes; refusals always commit zero.
+
+Targets are exact DOCX body/table text, `slide:1/title` or `slide:1/subtitle`, and
+`Sheet!A1` or `A1`. Existing cells only; null clears and formula overwrites refuse.
+XLSX `multilineWrap: true` clones/reuses the correct xf and preserves its dependencies.
+`calculationPolicy: 'invalidate-without-recalculation'` clears caches and reports
+recalculation required without producing an answer. `expectedDestinationSha256`
+can guard an existing output; null requires the output to be absent.
+
+Only this API's writers share its process-local path locks. External editors can
+race the final fingerprint check and atomic rename. Choose trusted directories;
+leaf symlinks and safe-mode same-file/hardlink destinations refuse. See
+`docs/contracts/workflow-api.md` for the bounded target and receipt contract.
+
 ## DOCX
 
 ```ts

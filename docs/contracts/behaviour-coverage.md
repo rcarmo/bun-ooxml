@@ -6,10 +6,10 @@ current per-step results in `artifacts/acceptance.json`.
 
 | Inventory | Implemented | Planned | Total |
 |---|---:|---:|---:|
-| features | 6 | 3 | 9 |
-| scenarios | 29 | 17 | 46 |
-| cases | 31 | 30 | 61 |
-| steps | 133 | 203 | 336 |
+| features | 7 | 2 | 9 |
+| scenarios | 37 | 9 | 46 |
+| cases | 50 | 11 | 61 |
+| steps | 292 | 44 | 336 |
 
 ## Source/test mappings
 
@@ -30,8 +30,8 @@ refinement and reviewed Gherkin step mappings before receiving parity credit.
 * `features/opc/package.feature`: implemented, 3 scenario(s), 3 expanded case(s).
 * `features/opc/xml.feature`: implemented, 5 scenario(s), 5 expanded case(s).
 * `features/opc/zip.feature`: implemented, 4 scenario(s), 4 expanded case(s).
-* `features/planned/cross-language-regressions.feature`: planned, 8 scenario(s), 19 expanded case(s).
 * `features/planned/full-port.feature`: planned, 6 scenario(s), 8 expanded case(s).
 * `features/planned/office-mutation-additions.feature`: planned, 3 scenario(s), 3 expanded case(s).
 * `features/pptx/text.feature`: implemented, 4 scenario(s), 4 expanded case(s).
+* `features/workflow/mutation-safety.feature`: implemented, 8 scenario(s), 19 expanded case(s).
 * `features/xlsx/cells.feature`: implemented, 8 scenario(s), 8 expanded case(s).

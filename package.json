@@ -10,7 +10,8 @@
     "./opc": "./src/opc/index.ts",
     "./docx": "./src/docx/index.ts",
     "./pptx": "./src/pptx/index.ts",
-    "./xlsx": "./src/xlsx/index.ts"
+    "./xlsx": "./src/xlsx/index.ts",
+    "./workflow": "./src/workflow/index.ts"
   },
   "engines": {
     "bun": ">=1.4.1"

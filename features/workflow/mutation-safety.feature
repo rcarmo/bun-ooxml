@@ -1,4 +1,4 @@
-@planned
+@implemented @bun
 Feature: Shared OOXML mutation safety
   Acceptance adapters translate these document operations to native APIs or MCP tools.
   Planned scenarios are inventory only and cannot count as executed passes.

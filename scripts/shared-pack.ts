@@ -54,7 +54,11 @@ export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;case
   }
   for await(const file of new Bun.Glob("**/*").scan({cwd:pack,onlyFiles:true}))check(known.has(file),`Unpinned shared pack artifact ${file}`);
   const featureText=await Bun.file(join(pack,"features/mutation-safety.feature")).text();
-  check(await Bun.file(join(root,metadata.featurePath)).text()===featureText,"Active shared feature differs from frozen pack");
+  check(metadata.execution?.lifecycle==='implemented'&&metadata.execution?.runner==='bun',"Missing execution-copy policy");
+  const executionText=await Bun.file(join(root,metadata.featurePath)).text();
+  check(executionText===featureText.replace(/^@planned/m,'@implemented @bun'),"Active shared feature differs beyond lifecycle tags");
+  const executionFeature=parseFeature(metadata.featurePath,executionText);
+  check(executionFeature.lifecycle==='implemented'&&executionFeature.runner==='bun',"Invalid native execution feature");
   const feature=parseFeature("features/mutation-safety.feature",featureText);
   check(feature.lifecycle==="planned"&&feature.scenarios.length===8,"Shared workflow coverage not planned");
   check(isDeepStrictEqual(feature.scenarios.map(s=>s.scenarioId),metadata.scenarios),"Shared scenario IDs changed");
@@ -90,6 +94,9 @@ export async function verifySharedPack(root=ROOT):Promise<{scenarios:number;case
   // The parser includes optional undefined fields; JSON interchange omits them.
   // Compare the serialized envelope, without discarding any defined field/value.
   check(isDeepStrictEqual(JSON.parse(JSON.stringify(expected)),expanded),"Expanded steps/examples/source locations drifted");
+  // Native execution copies receive new source hashes; shared stable keys and
+  // step text/arguments remain exact. Passing status comes only from acceptance.
+  check(isDeepStrictEqual(executionFeature.scenarios.map(s=>s.scenarioId),feature.scenarios.map(s=>s.scenarioId)),"Execution IDs drifted");
   const active=await inventoryFeatures(root);
   const historical=await Bun.file(join(root,"docs/contracts/office-mutation/manifest.json")).json();
   const activeIds=new Set(active.features.flatMap(f=>f.scenarios.map(s=>s.scenarioId)));

@@ -43,7 +43,7 @@ Feature: JSON escaping
       await cp(join(root,"docs/contracts/shared-v2"),join(temp,"docs/contracts/shared-v2"),{recursive:true});
       await cp(join(root,"docs/contracts/office-mutation"),join(temp,"docs/contracts/office-mutation"),{recursive:true});
       for(const [file,expectedError] of [
-        ["features/planned/cross-language-regressions.feature","Active shared feature differs"],
+        ["features/workflow/mutation-safety.feature","Active shared feature differs"],
         ["docs/contracts/shared-v2/pack/fixtures/default-style.xlsx","Shared pack artifact drift"],
         ["docs/contracts/shared-v2/pack/expanded-contracts.json","Shared pack artifact drift"],
       ]) {

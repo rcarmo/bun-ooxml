@@ -59,15 +59,15 @@ export async function runAcceptance(
   await mkdir(dirname(artifactPath), { recursive: true });
   await writeReport(report);
 
+  let cleanup: (() => unknown | Promise<unknown>) | undefined;
   try {
     const inventory = await inventoryFeatures(root);
     report.inventory = inventory.counts;
 
-    const effectiveBindings =
-      bindings ??
-      (inventory.counts.cases.implemented > 0
-        ? await loadBindings(stepsModulePath, runId)
-        : []);
+    const loaded = !bindings && inventory.counts.cases.implemented > 0
+      ? await loadBindings(stepsModulePath, runId) : undefined;
+    cleanup=loaded?.cleanup;
+    const effectiveBindings=bindings??loaded?.bindings??[];
 
     const execution = await executeAcceptance(inventory, effectiveBindings, runId);
     report.execution = execution.counts;
@@ -90,6 +90,9 @@ export async function runAcceptance(
     report.failures.push(formatError(error));
   }
 
+  try { await cleanup?.(); } catch(error) {
+    report.status='failed'; report.failures.push(`Acceptance cleanup failed: ${formatError(error)}`);
+  }
   report.finishedAt = new Date().toISOString();
   await writeReport(report);
 
@@ -103,13 +106,14 @@ export async function runAcceptance(
 async function loadBindings(
   stepsModulePath: string,
   runId: string,
-): Promise<readonly StepBinding[]> {
+): Promise<{bindings:readonly StepBinding[]; cleanup?:()=>unknown|Promise<unknown>}> {
   try {
     const url = new URL(pathToFileURL(stepsModulePath).href);
     url.searchParams.set("acceptanceRunId", runId);
     const module = (await import(url.href)) as {
       bindings?: unknown;
       default?: unknown;
+      cleanup?: unknown;
     };
     const candidate = module.bindings ?? module.default;
     if (!Array.isArray(candidate)) {
@@ -128,7 +132,8 @@ async function loadBindings(
         );
       }
     }
-    return bindings;
+    if(module.cleanup!==undefined&&typeof module.cleanup!=="function")throw new Error('cleanup export must be a function');
+    return {bindings,cleanup:module.cleanup as (()=>unknown|Promise<unknown>)|undefined};
   } catch (error) {
     throw new Error(
       `Unable to load acceptance bindings from ${stepsModulePath}: ${formatError(error)}`,

@@ -2,7 +2,7 @@
   "version": 1,
   "pack": "docs/contracts/shared-v2/pack",
   "packManifestSha256": "4fb30e0d1a75e889985eceb0c6929dc59971089cc3bc692f18675f36dfeb81de",
-  "featurePath": "features/planned/cross-language-regressions.feature",
+  "featurePath": "features/workflow/mutation-safety.feature",
   "contractRevision": "ooxml-shared-contracts-v2",
   "sourceCommit": "36ac406ad9d4bd3e7538b4bcc7aa2fb0e51cc943",
   "workflowLayer": true,
@@ -16,5 +16,12 @@
     "@id-pptx-batch-output-accumulates",
     "@id-xlsx-style-dependency-closure",
     "@id-xlsx-cross-sheet-cache-invalidation"
-  ]
+  ],
+  "execution": {
+    "lifecycle": "implemented",
+    "runner": "bun",
+    "sourceTag": "@planned",
+    "executionTag": "@implemented @bun",
+    "note": "Only lifecycle tag is transformed; frozen shared pack remains planned."
+  }
 }

@@ -40,8 +40,9 @@ requires no planned features. Do not reduce the denominator to improve a percent
 ## Shared Python audit contracts
 
 Read `docs/contracts/shared-v2/README.md` before binding shared mutation workflows.
-The eight format-specific scenarios expand to 19 planned cases with four pinned
-derived inputs. Historical `@id-office-*` IDs are archived aliases, never extra
+The eight format-specific scenarios expand to 19 implemented native cases with
+four pinned derived inputs. The execution feature differs from the frozen planned
+pack only in lifecycle/runner tags. Each native Then binding asserts its outcome. Historical `@id-office-*` IDs are archived aliases, never extra
 coverage. Historical defect observations are diagnostics, never golden outputs.
 Preserve native-runner versus MCP-transport identity, stable case keys, typed JSON
 values and actual input hashes. `make check` verifies the separate pack/audit

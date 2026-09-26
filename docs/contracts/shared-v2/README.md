@@ -1,7 +1,8 @@
 # Deterministic shared Office contracts
 
-The active shared workflow feature contains eight planned scenarios and 19
-expanded cases. Four pinned inputs derive from the already imported Python MCP
+The native shared workflow execution copy contains eight implemented scenarios
+and 19 expanded cases; all pass through `patchOffice()`. The frozen export retains
+its original planned tags. Four pinned inputs derive from the already imported Python MCP
 revision `36ac406ad9d4bd3e7538b4bcc7aa2fb0e51cc943`. The pack is stored under
 `pack/`; `manifest.json` pins its manifest, source revision and active IDs. The
 v2 manifest hash is `4fb30e0d1a75e889985eceb0c6929dc59971089cc3bc692f18675f36dfeb81de`.
@@ -17,7 +18,8 @@ independent style reader.
 `scripts/shared-pack.ts` verifies every pack file, compiles the original feature
 with the official Gherkin parser, and compares all expanded steps, arguments,
 source locations and example values with the exported inventory. The active Bun
-feature is byte-identical to the v2 pack. `stableCaseKey` uses
+feature differs from the v2 pack only by replacing `@planned` with
+`@implemented @bun`; the verifier refuses any other change. `stableCaseKey` uses
 scenario ID plus sorted example values; compiler UUIDs and local file paths never
 form cross-runtime identity. Every `value_json` table entry is decoded as JSON so
 numeric 10 differs from string "10" and escaped newlines become actual newlines.
@@ -28,10 +30,11 @@ and the opaque sentinel's payload and root relationship. Preservation checks
 reject added/deleted members and any payload change outside the allowed set.
 Allowed parts still need semantic assertions; an allowance is only an upper bound.
 
-Unit tests exercise real supported DOCX/PPTX edits and XLSX input/cache changes on
-these files, then save/reopen and validate preservation. These unit checks do not
-implement the shared workflow, preview, transaction, wrapping or receipt contracts.
-All 19 workflow cases remain planned. No source-module/API parity rows are closed.
+Native bindings in `tests/acceptance/workflow.ts` execute all 19 cases using
+`patchOffice()`. Every Then asserts receipt counts, source/destination custody,
+reopened values, style closure or preservation as specified. Extra unit tests
+cover concurrent guarded writers, fingerprints, path aliases, invalid XML and
+overlapping targets. No inherited source-module/API parity rows are closed.
 
 ## Typed inputs and exchange version
 
@@ -44,7 +47,9 @@ All four binary fixture hashes and 19 stable case identities remain unchanged.
 
 The outcome interchange proposal is now version 2: it requires `stableCaseKey`
 in addition to local case ID. Old version-1 records cannot silently satisfy the
-new identity contract. No workflow exporter or production mutation API is added.
+new identity contract. `patchOffice()` is now a production export; a cross-language
+outcome exporter remains separate work. The native acceptance ledger records the
+execution feature hash and expanded steps; the sealed shared hash stays pinned.
 
 ## Fixture custody
 
@@ -60,18 +65,18 @@ regeneration are historical evidence in the pack, not native Office rendering or
 proof that the proposed mutation cases pass. Defective Python observations remain
 diagnostics and must never become output goldens.
 
-## Future native workflow binding
+## Native workflow binding
 
-Bind preview/strict/safe operations to native batch/staging code without adding
-an MCP transport requirement. Count only actual committed changes. Before applying
-a strict batch, resolve every target and refuse missing or ambiguous targets before
-writes. A distinct existing destination must survive refusal byte-for-byte; after
+Preview/strict/safe operations use native batch/staging code without MCP transport.
+Receipts count only changed operations after atomic save succeeds. All modes
+resolve every target first and refuse missing, ambiguous or overlapping targets.
+The first safe mode also requires all targets; best-effort is not implemented. A distinct existing destination must survive refusal byte-for-byte; after
 return no staging files may remain in the document directory.
 
 For the cache case, select `invalidate-without-recalculation` even when a native
 calculation engine later exists. Preserve the formula, clear the dependent cache,
-and report recalculation required. A successful native cell edit without those
-receipt/read assertions is partial progress, not a shared-case pass.
+and report recalculation required. Native bindings assert both receipt state and reopened formula/cache values.
+Independent native Office calculation/rendering checks remain unverified.
 
 Before publication, review fixture redistribution permission. The MCP source has
 no root licence at the pinned revision; original template/library notices remain

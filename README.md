@@ -5,7 +5,9 @@ Excel workbooks. I want document edits to stay inside the Bun process while
 preserving the Office package parts an edit did not touch.
 
 The first slice handles guarded cross-run text replacement, slide text and notes,
-and existing-cell edits with formula-cache invalidation. ZIP, XML and OPC code
+and existing-cell edits with formula-cache invalidation. `patchOffice()` adds
+read-only previews, all-targets-required batches, guarded saves and per-target
+receipts. Its native bindings pass the 19 shared mutation cases. ZIP, XML and OPC code
 use Bun's built-in file, hash and compression implementations. There are no
 runtime package dependencies or Office subprocesses.
 
@@ -25,7 +27,8 @@ matches[0]!.replace("thirty business days");
 await document.save("contract-edited.docx");
 ```
 
-Read [agent usage](docs/agents/usage.md) before editing unfamiliar files. It covers
+Use the [native workflow API](docs/contracts/workflow-api.md) for preview/strict/safe
+batches. Read [agent usage](docs/agents/usage.md) before editing unfamiliar files. It covers
 refusals, target lifetimes and save/reopen checks. [Agent maintenance](docs/agents/maintenance.md)
 explains source pins and the Gherkin-to-test-to-outcome workflow.
 

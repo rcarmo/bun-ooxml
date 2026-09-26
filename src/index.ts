@@ -4,3 +4,4 @@ export { OpcPackage, type PackageDiff, type Relationship } from "./opc/package.t
 export { Document, Span } from "./docx/index.ts";
 export { Presentation } from "./pptx/index.ts";
 export { Workbook } from "./xlsx/index.ts";
+export { patchOffice, type PatchRequest, type PatchReceipt, type TargetResult } from "./workflow/index.ts";
