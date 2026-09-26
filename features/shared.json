@@ -110,6 +110,11 @@
       "path": "references/fixtures-ooxml/workflows/docx/tracked-workflow.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/run-formatting.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }

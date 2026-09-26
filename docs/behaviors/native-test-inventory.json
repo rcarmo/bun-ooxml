@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "consumer": "bun",
   "discovery": "TypeScript AST; declarations are not runtime-expanded leaf cases",
-  "count": 256,
-  "files": 31,
+  "count": 274,
+  "files": 32,
   "dynamicCases": [
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
     "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
@@ -14,6 +14,10 @@
     "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
     "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
     "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
+    "bun:tests/unit/docx-formatting.test.ts:absent and self-closing run properties insert in schema order",
+    "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
+    "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
+    "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
     "bun:tests/unit/docx-redline.test.ts:XML comments and literal inter-run content are barriers rather than discarded during redlining",
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
@@ -697,6 +701,330 @@
       ],
       "sourceSha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
       "body": "{\n    const featurePath = \"references/fixtures-ooxml/workflows/docx/creation.feature\";\n    const feature = parseFeature(featurePath, (await Bun.file(join(fixturesRoot(), \"workflows/docx/creation.feature\")).text()).replace(/^@planned/m, '@implemented @bun'));\n    const inventory = inventoryFor(feature);\n\n    for (const bindings of [createBindings, parentBindings]) {\n      const execution = await executeAcceptance(inventory, bindings, newAcceptanceRunId());\n      expect(execution.failures).toEqual([]);\n      expect(execution.counts.features).toEqual({ passed: 1, failed: 0, planned: 0, total: 1 });\n      expect(execution.counts.scenarios).toEqual({ passed: 4, failed: 0, planned: 0, total: 4 });\n      expect(execution.counts.cases).toEqual({ passed: 8, failed: 0, planned: 0, total: 8 });\n      expect(execution.counts.steps.failed).toBe(0);\n      expect(execution.counts.steps.undefined).toBe(0);\n      expect(execution.counts.steps.ambiguous).toBe(0);\n    }\n  }"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:direct run formatting executes15 saved outcome and refusal cases",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 9,
+      "title": "direct run formatting executes15 saved outcome and refusal cases",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(15)"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const path='workflows/docx/run-formatting.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun')),cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n const r=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(15);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:changed formatting stales spans and paragraphs but no-op preserves handles",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 14,
+      "title": "changed formatting stales spans and paragraphs but no-op preserves handles",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(p.text).toBe('Alpha beta')",
+        "expect(()=>p.setRunFormatting({italic:true})).toThrow('stale')",
+        "expect(span.replace('Other')).rejects.toThrow('stale')",
+        "expect(await d.save()).toEqual(before)"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument(),p=d.paragraphs[0]!,span=p.find('Alpha')[0]!;p.setRunFormatting({});expect(p.text).toBe('Alpha beta');p.setRunFormatting({bold:true});const before=await d.save();expect(()=>p.setRunFormatting({italic:true})).toThrow('stale');await expect(span.replace('Other')).rejects.toThrow('stale');expect(await d.save()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:explicit false writes off properties while null removes direct overrides",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 17,
+      "title": "explicit false writes off properties while null removes direct overrides",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(d.paragraphs[0]!.setRunFormatting({bold:false})).toEqual({changedRuns:2})",
+        "expect(directFlags(new TextDecoder().decode(d.package.get('word/document.xml')!)).map(x=>x.bold)).toEqual(['0','0'])",
+        "expect(directFlags(new TextDecoder().decode(d.package.get('word/document.xml')!)).map(x=>x.bold)).toEqual([null,null])"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument();expect(d.paragraphs[0]!.setRunFormatting({bold:false})).toEqual({changedRuns:2});expect(directFlags(new TextDecoder().decode(d.package.get('word/document.xml')!)).map(x=>x.bold)).toEqual(['0','0']);d.paragraphs[0]!.setRunFormatting({bold:null});expect(directFlags(new TextDecoder().decode(d.package.get('word/document.xml')!)).map(x=>x.bold)).toEqual([null,null]);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:aliased namespaces remain bound and unrelated property bytes are retained",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 21,
+      "title": "aliased namespaces remain bound and unrelated property bytes are retained",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(next).toContain('<q:color q:val=\"AABBCC\"/>')",
+        "expect(next).toContain('<q:u q:val=\"single\"/>')",
+        "expect(directFlags(next)).toEqual([{bold:'0',italic:'1'},{bold:'0',italic:'1'}])",
+        "expect(q.paragraphs[0]!.text).toBe('Alpha beta')"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument(),p=await OpcPackage.open(await d.save());let xml=p.text(p.mainPart()).replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:');p.set(p.mainPart(),xml);const q=await Document.open(p.toBytes());q.paragraphs[0]!.setRunFormatting({bold:false,italic:true});\n const saved=await OpcPackage.open(await q.save()),next=saved.text(saved.mainPart());expect(next).toContain('<q:color q:val=\"AABBCC\"/>');expect(next).toContain('<q:u q:val=\"single\"/>');expect(directFlags(next)).toEqual([{bold:'0',italic:'1'},{bold:'0',italic:'1'}]);expect(q.paragraphs[0]!.text).toBe('Alpha beta');\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:reapplying explicit values preserves lexically different Boolean spellings and handles",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 25,
+      "title": "reapplying explicit values preserves lexically different Boolean spellings and handles",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(handle.setRunFormatting({bold:true,italic:true})).toEqual({changedRuns:0})",
+        "expect(await q.save()).toEqual(before)",
+        "expect(handle.text).toBe('text')"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=Document.create();d.addParagraph('text',{bold:true,italic:true});const p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:b/>',\"<w:b w:val = 'on' />\").replace('<w:i/>','<w:i w:val=\"true\"/>'));const q=await Document.open(p.toBytes()),before=await q.save(),handle=q.paragraphs[0]!;\n expect(handle.setRunFormatting({bold:true,italic:true})).toEqual({changedRuns:0});expect(await q.save()).toEqual(before);expect(handle.text).toBe('text');\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:absent and self-closing run properties insert in schema order",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 29,
+      "title": "absent and self-closing run properties insert in schema order",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(q.paragraphs[0]!.setRunFormatting({bold:true,italic:false}).changedRuns).toBe(1)",
+        "expect(directFlags(xml)).toEqual([{bold:'1',italic:'0'}])",
+        "expect(q.paragraphs[0]!.text).toBe('text')",
+        "expect(xml).toContain('data=\"keep\"')",
+        "expect(xml.indexOf('rStyle')).toBeLessThan(xml.indexOf('<w:b '))",
+        "expect(xml.indexOf('<w:b ')).toBeLessThan(xml.indexOf('<w:i '))"
+      ],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "for(const props of ['', '<w:rPr/>','<w:rPr data=\"keep\"/>','<w:rPr><w:rStyle w:val=\"Style\"/><w:rFonts w:ascii=\"A\"/><w:color w:val=\"123456\"/><w:u w:val=\"single\"/></w:rPr>'])"
+        }
+      ],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n for(const props of ['', '<w:rPr/>','<w:rPr data=\"keep\"/>','<w:rPr><w:rStyle w:val=\"Style\"/><w:rFonts w:ascii=\"A\"/><w:color w:val=\"123456\"/><w:u w:val=\"single\"/></w:rPr>']){\n  const d=Document.create();d.addParagraph('text');const p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:r>',`<w:r>${props}`));const q=await Document.open(p.toBytes());expect(q.paragraphs[0]!.setRunFormatting({bold:true,italic:false}).changedRuns).toBe(1);const saved=await OpcPackage.open(await q.save()),xml=saved.text(saved.mainPart());expect(directFlags(xml)).toEqual([{bold:'1',italic:'0'}]);expect(q.paragraphs[0]!.text).toBe('text');if(props.includes('data='))expect(xml).toContain('data=\"keep\"');if(props.includes('rStyle'))expect(xml.indexOf('rStyle')).toBeLessThan(xml.indexOf('<w:b '));expect(xml.indexOf('<w:b ')).toBeLessThan(xml.indexOf('<w:i '));\n }\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:serialization failure retains package, earlier edits and valid paragraph handle",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 34,
+      "title": "serialization failure retains package, earlier edits and valid paragraph handle",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>handle.setRunFormatting({bold:false})).toThrow('injected serialization refusal')",
+        "expect(await d.save()).toEqual(before)",
+        "expect(handle.text).toBe('Alpha beta')",
+        "expect(handle.setRunFormatting({bold:false}).changedRuns).toBe(2)"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument();d.addParagraph('earlier edit');const before=await d.save(),handle=d.paragraphs[0]!,original=OpcPackage.prototype.toBytes;\n OpcPackage.prototype.toBytes=function(){throw new Error('injected serialization refusal');};\n try{expect(()=>handle.setRunFormatting({bold:false})).toThrow('injected serialization refusal');}finally{OpcPackage.prototype.toBytes=original;}\n expect(await d.save()).toEqual(before);expect(handle.text).toBe('Alpha beta');expect(handle.setRunFormatting({bold:false}).changedRuns).toBe(2);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 40,
+      "title": "UTF-16 encoding and unrelated package members survive formatting",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect([...saved.get(part)!.slice(0,2)]).toEqual([255,254])",
+        "expect(saved.text(part)).toContain('encoding=\"UTF-16\"')",
+        "expect(directFlags(saved.text(part)).map(x=>x.italic)).toEqual(['1','1'])",
+        "expect(saved.get(name)).toEqual(p.get(name))"
+      ],
+      "loops": [
+        {
+          "line": 41,
+          "expression": "for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),true);"
+        },
+        {
+          "line": 41,
+          "expression": "for(const name of p.names())if(name!==part)expect(saved.get(name)).toEqual(p.get(name));"
+        }
+      ],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument(),p=await OpcPackage.open(await d.save()),part=p.mainPart(),xml=p.text(part).replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"');const bytes=new Uint8Array(2+xml.length*2),v=new DataView(bytes.buffer);v.setUint16(0,0xfeff,true);for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),true);p.set(part,bytes);const q=await Document.open(p.toBytes());q.paragraphs[0]!.setRunFormatting({italic:true});const saved=await OpcPackage.open(await q.save());expect([...saved.get(part)!.slice(0,2)]).toEqual([255,254]);expect(saved.text(part)).toContain('encoding=\"UTF-16\"');expect(directFlags(saved.text(part)).map(x=>x.italic)).toEqual(['1','1']);for(const name of p.names())if(name!==part)expect(saved.get(name)).toEqual(p.get(name));\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:all runs preflight before one malformed later property can change an earlier run",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 43,
+      "title": "all runs preflight before one malformed later property can change an earlier run",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>q.paragraphs[0]!.setRunFormatting({bold:false})).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument(),p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:i w:val=\"0\"/>','<w:b w:val=\"invalid\"/><w:i w:val=\"0\"/>'));const q=await Document.open(p.toBytes()),before=await q.save();expect(()=>q.paragraphs[0]!.setRunFormatting({bold:false})).toThrow();expect(await q.save()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:table-cell formatting invalidates cell handles without changing grid or cell text",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 46,
+      "title": "table-cell formatting invalidates cell handles without changing grid or cell text",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(table.cell(0,0).text).toBe('table text')",
+        "expect(q.tables[0]!.rows).toBe(1)",
+        "expect(q.tables[0]!.columns).toBe(1)",
+        "expect(q.tables[0]!.cell(0,0).text).toBe('table text')"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=Document.create(),table=d.addTable(1,1);table.cell(0,0).text='table text';const cell=table.cell(0,0),p=d.paragraphs.find(p=>p.text==='table text')!;p.setRunFormatting({bold:true});expect(()=>cell.text).toThrow('stale');expect(table.cell(0,0).text).toBe('table text');const q=await Document.open(await d.save());expect(q.tables[0]!.rows).toBe(1);expect(q.tables[0]!.columns).toBe(1);expect(q.tables[0]!.cell(0,0).text).toBe('table text');\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:empty paragraphs no-op while unsupported self-closing runs refuse nonempty formatting",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 49,
+      "title": "empty paragraphs no-op while unsupported self-closing runs refuse nonempty formatting",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(p.setRunFormatting({bold:true})).toEqual({changedRuns:0})",
+        "expect(await d.save()).toEqual(before)",
+        "expect(()=>q.paragraphs[0]!.setRunFormatting({bold:true})).toThrow()",
+        "expect(await q.save()).toEqual(bytes)"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=Document.create();d.addParagraph();const p=d.paragraphs[0]!,before=await d.save();expect(p.setRunFormatting({bold:true})).toEqual({changedRuns:0});expect(await d.save()).toEqual(before);\n const pkg=await OpcPackage.open(before);pkg.set(pkg.mainPart(),pkg.text(pkg.mainPart()).replace('</w:p>','<w:r/></w:p>'));const q=await Document.open(pkg.toBytes()),bytes=await q.save();expect(()=>q.paragraphs[0]!.setRunFormatting({bold:true})).toThrow();expect(await q.save()).toEqual(bytes);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 53,
+      "title": "unknown flags, duplicated or out-of-order properties refuse with no mutation",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>q.paragraphs[0]!.setRunFormatting({bold:true})).toThrow()",
+        "expect(await q.save()).toEqual(before)",
+        "expect(()=>d.paragraphs[0]!.setRunFormatting(patch as any)).toThrow()",
+        "expect(await d.save()).toEqual(before)"
+      ],
+      "loops": [
+        {
+          "line": 54,
+          "expression": "for(const props of ['<w:b/><w:b/>','<w:color/><w:b/>','<q:b xmlns:q=\"urn:wrong\"/>','<w:b val=\"0\"/>','<w:rPrChange/>'])"
+        },
+        {
+          "line": 57,
+          "expression": "for(const patch of [null,[],"
+        }
+      ],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n for(const props of ['<w:b/><w:b/>','<w:color/><w:b/>','<q:b xmlns:q=\"urn:wrong\"/>','<w:b val=\"0\"/>','<w:rPrChange/>']){\n  const d=Document.create();d.addParagraph('x');const p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:r>',`<w:r><w:rPr>${props}</w:rPr>`));const q=await Document.open(p.toBytes()),before=await q.save();expect(()=>q.paragraphs[0]!.setRunFormatting({bold:true})).toThrow();expect(await q.save()).toEqual(before);\n }\n const d=await formattingDocument(),before=await d.save();for(const patch of [null,[],{underline:true},{italic:'yes'}]){expect(()=>d.paragraphs[0]!.setRunFormatting(patch as any)).toThrow();expect(await d.save()).toEqual(before);}\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:inserting a property while deleting its following sibling yields valid ordering",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 60,
+      "title": "inserting a property while deleting its following sibling yields valid ordering",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(d.paragraphs[0]!.setRunFormatting({bold:true,italic:null}).changedRuns).toBe(1)",
+        "expect(directFlags(q.text(q.mainPart()))).toEqual([{bold:'1',italic:null}])"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=Document.create();d.addParagraph('x',{italic:true});expect(d.paragraphs[0]!.setRunFormatting({bold:true,italic:null}).changedRuns).toBe(1);const q=await OpcPackage.open(await d.save());expect(directFlags(q.text(q.mainPart()))).toEqual([{bold:'1',italic:null}]);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:default namespace elements receive qualified formatting without changing unqualified attributes",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 63,
+      "title": "default namespace elements receive qualified formatting without changing unqualified attributes",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(directFlags(saved.text(saved.mainPart()))).toEqual([{bold:'1',italic:'0'}])",
+        "expect(q.paragraphs[0]!.text).toBe('x')"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=Document.create();d.addParagraph('x');const p=await OpcPackage.open(await d.save());let xml=p.text(p.mainPart()).replaceAll('w:','').replace('xmlns:w=', 'xmlns=');p.set(p.mainPart(),xml);const q=await Document.open(p.toBytes());q.paragraphs[0]!.setRunFormatting({bold:true,italic:false});const saved=await OpcPackage.open(await q.save());expect(directFlags(saved.text(saved.mainPart()))).toEqual([{bold:'1',italic:'0'}]);expect(q.paragraphs[0]!.text).toBe('x');\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:formatting does not change style graphs or Unicode text and explicitly disabled settings permit edits",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 67,
+      "title": "formatting does not change style graphs or Unicode text and explicitly disabled settings permit edits",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(result.get('word/styles.xml')).toEqual(p.get('word/styles.xml'))",
+        "expect(result.get('word/settings.xml')).toEqual(p.get('word/settings.xml'))",
+        "expect(result.text(result.mainPart())).toContain('<w:pStyle w:val=\"BoldStyle\"/>')",
+        "expect(q.paragraphs[0]!.text).toBe('π 😀 café')",
+        "expect(directFlags(result.text(result.mainPart()))).toEqual([{bold:'0',italic:null}])"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const {addPart,addRelationship}=await import('../../src/opc/index.ts');const d=Document.create();d.addParagraph('π 😀 café');const p=await OpcPackage.open(await d.save());\n addPart(p,'word/styles.xml',`<w:styles xmlns:w=\"${W}\"><w:style w:type=\"paragraph\" w:styleId=\"BoldStyle\"><w:rPr><w:b/></w:rPr></w:style></w:styles>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles','styles.xml');\n addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"false\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');\n p.set(p.mainPart(),p.text(p.mainPart()).replace(/(<w:p\\b[^>]*>)/,'$1<w:pPr><w:pStyle w:val=\"BoldStyle\"/></w:pPr>'));const q=await Document.open(p.toBytes());q.paragraphs[0]!.setRunFormatting({bold:false});const result=await OpcPackage.open(await q.save());expect(result.get('word/styles.xml')).toEqual(p.get('word/styles.xml'));expect(result.get('word/settings.xml')).toEqual(p.get('word/settings.xml'));expect(result.text(result.mainPart())).toContain('<w:pStyle w:val=\"BoldStyle\"/>');expect(q.paragraphs[0]!.text).toBe('π 😀 café');expect(directFlags(result.text(result.mainPart()))).toEqual([{bold:'0',italic:null}]);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 73,
+      "title": "protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({})).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(()=>q.paragraphs[0]!.setRunFormatting({bold:false})).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "loops": [
+        {
+          "line": 74,
+          "expression": "for(const kind of ['protected','external-settings','tracked','field'])"
+        }
+      ],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n for(const kind of ['protected','external-settings','tracked','field']){const d=await formattingDocument(kind),before=await d.save();expect(()=>d.paragraphs[0]!.setRunFormatting({})).toThrow();expect(await d.save()).toEqual(before);}\n const d=await formattingDocument(),p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:color w:val=\"AABBCC\"/>','<!--extension--><w:color w:val=\"AABBCC\"/>'));const q=await Document.open(p.toBytes()),before=await q.save();expect(()=>q.paragraphs[0]!.setRunFormatting({bold:false})).toThrow();expect(await q.save()).toEqual(before);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:fresh spans remain usable after formatting while preserving direct properties",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 78,
+      "title": "fresh spans remain usable after formatting while preserving direct properties",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(d.paragraphs[0]!.text).toBe('Alpha gamma')",
+        "expect(directFlags(p.text(p.mainPart())).map(f=>f.bold)).toEqual(['1','1'])"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument();d.paragraphs[0]!.setRunFormatting({bold:true});const span=d.paragraphs[0]!.find('beta')[0]!;await span.replace('gamma');const p=await OpcPackage.open(await d.save());expect(d.paragraphs[0]!.text).toBe('Alpha gamma');expect(directFlags(p.text(p.mainPart())).map(f=>f.bold)).toEqual(['1','1']);\n}"
+    },
+    {
+      "id": "bun:tests/unit/docx-formatting.test.ts:malformed bold or italic refuses even when the other flag is requested",
+      "path": "tests/unit/docx-formatting.test.ts",
+      "line": 81,
+      "title": "malformed bold or italic refuses even when the other flag is requested",
+      "suites": [],
+      "kind": "test",
+      "assertions": [
+        "expect(()=>q.paragraphs[0]!.setRunFormatting({bold:true})).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "loops": [],
+      "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
+      "body": "{\n const d=await formattingDocument(),p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:i w:val=\"0\"/>','<w:i w:val=\"maybe\"/>'));const q=await Document.open(p.toBytes()),before=await q.save();expect(()=>q.paragraphs[0]!.setRunFormatting({bold:true})).toThrow();expect(await q.save()).toEqual(before);\n}"
     },
     {
       "id": "bun:tests/unit/docx-redline.test.ts:tracked replacement emits distinct IDs and native author/date with accept/reject algebra",
@@ -2530,11 +2858,11 @@
       "suites": [],
       "kind": "test",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(139)"
+        "expect(await verifyReferences(root)).toBe(140)"
       ],
       "loops": [],
-      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
-      "body": "{expect(await verifyReferences(root)).toBe(139);}"
+      "sourceSha256": "b775f4e46d7004cfd0ddc7a1d7b8bb16c15f534f481b5e473af8d2c3eec6f159",
+      "body": "{expect(await verifyReferences(root)).toBe(140);}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
@@ -2547,7 +2875,7 @@
         "expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin')"
       ],
       "loops": [],
-      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
+      "sourceSha256": "b775f4e46d7004cfd0ddc7a1d7b8bb16c15f534f481b5e473af8d2c3eec6f159",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}"
     },
     {
@@ -2560,7 +2888,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(139)",
+        "expect(await verifyReferences(tmp)).toBe(140)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -2570,8 +2898,8 @@
           "expression": "for(const change of ["
         }
       ],
-      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(139);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "b775f4e46d7004cfd0ddc7a1d7b8bb16c15f534f481b5e473af8d2c3eec6f159",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(140);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
@@ -2590,7 +2918,7 @@
         "expect(git('status','--porcelain')).toBe('')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular')",
-        "expect(await verifyReferences(tmp)).toBe(139)"
+        "expect(await verifyReferences(tmp)).toBe(140)"
       ],
       "loops": [
         {
@@ -2598,8 +2926,8 @@
           "expression": "for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']])"
         }
       ],
-      "sourceSha256": "992ab961462d8e9c579d666577a86bd63017d40aab83b4360d5494f0e052aee6",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(139);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
+      "sourceSha256": "b775f4e46d7004cfd0ddc7a1d7b8bb16c15f534f481b5e473af8d2c3eec6f159",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(140);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}"
     },
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",

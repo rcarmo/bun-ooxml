@@ -9,6 +9,7 @@ import { bindings as storyBindings } from "./story-docx.ts";
 import { bindings as revisionBindings } from "./revisions-docx.ts";
 import { bindings as redlineBindings } from "./redline-docx.ts";
 import { bindings as commentBindings } from "./comments-docx.ts";
+import { bindings as formattingBindings } from './run-formatting.ts';
 import { bindings as trackedWorkflowBindings, cleanupTrackedWorkflowFixtures } from './tracked-workflow.ts';
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as createPptxBindings } from "./create-pptx.ts";
@@ -32,6 +33,7 @@ export const bindings: StepBinding[] = [
   ...revisionBindings,
   ...redlineBindings,
   ...commentBindings,
+  ...formattingBindings,
   ...trackedWorkflowBindings,
   ...createDocxBindings,
   ...createPptxBindings,

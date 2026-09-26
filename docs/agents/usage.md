@@ -148,6 +148,21 @@ Use `inspectStories()` for linked body/header/footer/note/comment text and exami
 its `blindRegions` before relying on coverage. Story-aware search/handles are not
 part of `Document.find()`.
 
+## Direct paragraph formatting
+
+```ts
+const paragraph = doc.paragraphs[0]!;
+paragraph.setRunFormatting({ bold: true, italic: false });
+await doc.save(output);
+```
+
+This applies direct bold/italic to every supported run in one paragraph. Null
+removes an override; false writes explicit off. It does not compute effective
+style or split text ranges. Reacquire paragraphs, spans and table-cell handles
+after changes. Unsupported content, property revisions, ambiguous run properties,
+protection and stale handles refuse without mutation. See the
+[formatting contract](../contracts/run-formatting.md) for custody and scope.
+
 ## Word review on package snapshots
 
 ```ts

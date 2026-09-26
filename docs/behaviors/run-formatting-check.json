@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "scope": "Paragraph-wide direct bold/italic only; no substring splitting or computed inheritance",
+  "consumerBaseCommit": "095f6d8d8dfb0df11a5c5e64fea47e8a3b87f6e1",
+  "reference": {
+    "mode": "candidate",
+    "commit": "b5729fc0c0fd59a98bfdfa5e4906143c3c6ce56a",
+    "manifestSha256": "c9a3500c9a9ed7d85b7c26eb0d187ea75388ea35a1e4a4593c0eb5e8ab77330e"
+  },
+  "behavioralRed": [
+    "Existing stub returned changedRuns0 and failed saved property/handle outcomes",
+    "Malformed italic was accepted when bold alone requested; stricter full preflight fixed"
+  ],
+  "run": {
+    "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+    "runId": "bdc95b90-39a7-4163-b8d4-c2723975efff",
+    "startedAt": "2026-09-26T16:07:52.363Z",
+    "finishedAt": "2026-09-26T16:07:54.118Z",
+    "unitTests": 274,
+    "assertions": 2895,
+    "acceptanceCases": 160,
+    "formattingCases": 15,
+    "formattingSteps": 49,
+    "examples": 3
+  },
+  "scenarios": [
+    {
+      "id": "@id-docx-direct-run-formatting",
+      "cases": [
+        {
+          "id": "@id-docx-direct-run-formatting -- operation=\"enable\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-direct-run-formatting -- operation=\"disable\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-direct-run-formatting -- operation=\"remove\"",
+          "result": "passed",
+          "steps": 4
+        },
+        {
+          "id": "@id-docx-direct-run-formatting -- operation=\"no-op\"",
+          "result": "passed",
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "id": "@id-docx-direct-formatting-refusal",
+      "cases": [
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"field\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"tracked\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"mixed-content\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"duplicate-property\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"malformed-flag\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"wrong-namespace\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"property-revision\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"protected\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"external-settings\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"stale\"",
+          "result": "passed",
+          "steps": 3
+        },
+        {
+          "id": "@id-docx-direct-formatting-refusal -- variant=\"invalid-option\"",
+          "result": "passed",
+          "steps": 3
+        }
+      ]
+    }
+  ],
+  "review": {
+    "kind": "Cross-session read-only source review",
+    "result": "No confirmed runtime blocker; fresh-span testtitle overclaim corrected, separate realfreshspan testcase added"
+  },
+  "limits": [
+    "Eighteen new declarations require central assertion mapping",
+    "No computed style/run splitting/Office rendering validation",
+    "Other consumer candidate gates establish reference integration only"
+  ],
+  "releaseRun": {
+    "referenceTag": "v0.8.0",
+    "referenceCommit": "b5729fc0c0fd59a98bfdfa5e4906143c3c6ce56a",
+    "command": "make check",
+    "mode": "default-no-overrides",
+    "runId": "eb4c3eea-6ecd-4d72-8e32-7610b01b0f08",
+    "startedAt": "2026-09-26T16:08:44.671Z",
+    "finishedAt": "2026-09-26T16:08:46.452Z",
+    "unitTests": 274,
+    "assertions": 2895,
+    "acceptanceCases": 160,
+    "examples": 3
+  }
+}

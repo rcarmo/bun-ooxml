@@ -1,4 +1,5 @@
 import { OoxmlError } from "../errors.ts";
+import {formatRunProperties} from './run-formatting.ts';
 import { OpcPackage } from "../opc/index.ts";
 import { applyEdits, attribute, elements, escapeAttribute, escapeText, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
@@ -23,6 +24,10 @@ export type AddParagraphOptions = {
   style?: string;
 };
 
+/** Direct overrides only: null removes the property, false is explicit off. */
+export type RunFormattingPatch = { bold?: boolean | null; italic?: boolean | null };
+export type RunFormattingReceipt = { changedRuns: number };
+
 type NormalizedAddParagraphOptions = {
   bold: boolean;
   italic: boolean;
@@ -37,6 +42,7 @@ type TextSegment = {
 };
 
 type ParagraphSnapshot = {
+  element: XmlElement;
   index: number;
   version: number;
   text: string;
@@ -204,6 +210,12 @@ export class Paragraph {
       "docx-unsupported-topology",
       `Paragraph ${this.snapshot.index + 1} uses unsupported DOCX topology ${this.snapshot.unsupported ?? "later-slice-content"}`,
     );
+  }
+
+  /** Apply direct bold/italic to every supported direct run in this paragraph. */
+  setRunFormatting(patch: RunFormattingPatch): RunFormattingReceipt {
+    this.ensureFresh();
+    return this.documentRef.formatParagraphRuns(this.snapshot, patch);
   }
 
   private ensureFresh(): void {
@@ -622,6 +634,26 @@ export class Document {
     this.version = nextVersion;
     this.xmlDocument = nextDocument;
     this.applyDocumentCollections(nextCollections);
+  }
+
+  formatParagraphRuns(snapshot: ParagraphSnapshot, patch: RunFormattingPatch): RunFormattingReceipt {
+    if(snapshot.version!==this.version||this.paragraphSnapshots[snapshot.index]!==snapshot||this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-paragraph','DOCX paragraph formatting handle is stale');
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    for(const rel of this.opcPackage.relationships(DOCUMENT_PART)){
+      if(rel.type!=='http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings')continue;
+      if(rel.external)fail('docx-format-protected','External settings cannot be checked');
+      const settings=parseXml(this.opcPackage.text(rel.resolved!));
+      if(!isWord(settings.root,'settings'))fail('docx-format-protected','Invalid settings root');
+      for(const guard of elements(settings,'documentProtection',W_NS))if(!/^(0|false|off)$/i.test(attribute(guard,'enforcement',W_NS)??''))fail('docx-format-protected','Document protection refuses formatting');
+    }
+    const result=formatRunProperties(this.xml,snapshot.element,patch);
+    if(!result.changedRuns)return {changedRuns:0};
+    const nextVersion=this.version+1,nextDocument=parseXml(result.xml);
+    const collections=collectDocumentCollections(nextDocument,nextVersion,this.tableVersion);
+    if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-format-unsafe','Formatting unexpectedly changed paragraph text');
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,result.xml);this.opcPackage.toBytes();});
+    this.xml=result.xml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+    return {changedRuns:result.changedRuns};
   }
 
   resolveTable(table: TableSnapshot): TableSnapshot {
@@ -1047,6 +1079,7 @@ function analyzeParagraph(paragraph: XmlElement, index: number, version: number)
   }
 
   return {
+    element: paragraph,
     index,
     version,
     text: textParts.join(""),
