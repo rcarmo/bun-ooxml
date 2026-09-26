@@ -10,7 +10,7 @@ relationship ID, attributes and namespace bindings; whitespace between list slot
 and presentation XML outside the entries stay unchanged. Slide parts, notes,
 relationships, masters, layouts, themes and all other members are byte-identical.
 Existing custom-show, extension, protection or unrecognised presentation metadata
-refuses because this slice does not reconcile additional order-dependent state.
+refuses because the API does not reconcile additional order-dependent state.
 
 `presentation.slides` returns a detached array. A Slide object stays tied to the
 same part, and its `index` reports its current logical position. Reordering does
@@ -29,12 +29,10 @@ publish an inconsistent handle list after a raw reorder.
 
 The package transaction serialises before publishing the new handle order. Failed
 serialisation preserves earlier edits, archive bytes, indexes and snapshots.
-UTF-16/BOM and exact slide-entry spelling are covered by native regressions.
+UTF-16/BOM and exact slide-entry spelling are preserved.
 
-Independent Open XML SDK and LibreOffice PDF page/text checks exercise a two-slide
-reversal. This does not establish arbitrary deck rendering or compatibility with
-custom shows, sections or extension metadata. Microsoft PowerPoint validation and
-full slide composition remain open.
-
-Canonical feature: `workflows/pptx/slide-order.feature` in the shared reference.
-Native bindings/tests: `tests/acceptance/slide-order.ts`, `tests/unit/pptx-slide-order.test.ts`.
+The shared specification defines expected behaviour in
+`workflows/pptx/slide-order.feature`. Independent Open XML SDK and LibreOffice
+PDF page/text checks exercise a two-slide reversal. General deck rendering,
+custom shows, sections, extension metadata and Microsoft PowerPoint compatibility
+remain unverified. Broader slide composition is unsupported.

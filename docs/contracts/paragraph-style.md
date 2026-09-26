@@ -22,7 +22,7 @@ alone and requires no registry. The getter can report an unknown stored ID;
 it neither validates definitions nor chooses a default. Malformed direct metadata
 still refuses. No operation creates styles or evaluates effective formatting.
 
-## Editing and custody
+## Editing and preservation
 
 Assignment preserves paragraph text, direct run formatting and unrelated
 paragraph properties. New `pStyle` is inserted first in `pPr`; existing style
@@ -41,8 +41,6 @@ wrong namespaces and stale snapshots refuse before mutation. Empty paragraphs an
 self-closing property containers can receive a style. Error codes use the existing
 `docx-style-*`, `docx-format-*`, stale and unsupported-topology families.
 
-The canonical profile contains 19 saved-outcome/refusal cases. Native regressions
-also check aliases, escaped IDs, UTF-16, no-op spelling, empty nodes, table cells,
-settings, rollback and disk readback. Broader paragraph layout editing, style
-creation, computed inheritance and independent Office rendering remain outside
-this tested slice.
+The shared specification defines expected behaviour in
+`workflows/docx/paragraph-style.feature`. This API does not edit paragraph layout,
+create styles or compute inheritance. Independent Office rendering is unverified.

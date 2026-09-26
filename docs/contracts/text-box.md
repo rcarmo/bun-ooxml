@@ -31,10 +31,7 @@ inside the package transaction; refusal leaves bytes and slide versions unchange
 A successful append invalidates same-slide text anchors and table/cell handles.
 Handles on other slides remain usable. Reacquire same-slide handles after insertion.
 
-Tests cover saved/reopened text, geometry, flags, names, identity, existing-shape
-preservation, real-fixture payload custody, stale handles and injected rollback.
-Independent PowerPoint rendering/schema validation, inherited layout formatting,
-text fitting, arbitrary shapes and shape deletion/cloning remain open.
-
-Canonical contract: `workflows/pptx/text-box.feature` in the shared reference.
-Native tests: `tests/unit/pptx-text-box.test.ts` and `tests/acceptance/text-box.ts`.
+The shared specification defines expected behaviour in
+`workflows/pptx/text-box.feature`. Independent PowerPoint rendering and general
+schema compatibility remain unverified. Inherited layout formatting, text fitting,
+arbitrary shapes, shape deletion and cloning are outside this API.

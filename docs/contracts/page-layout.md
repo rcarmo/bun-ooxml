@@ -3,7 +3,7 @@
 `Document.getPageLayout()` reads the existing final body section's direct page
 size, orientation and margins. `setPageLayout(layout)` accepts the complete object
 and returns `{changed: 0 | 1}`. Geometry uses integer twips: width/height are
-positive; margins, header/footer distances and gutter are nonnegative. This slice
+positive; margins, header/footer distances and gutter are nonnegative. The API
 bounds each value to 31,680 twips and requires a positive content rectangle.
 Orientation must agree with width/height; square pages allow either orientation.
 
@@ -19,16 +19,14 @@ move. Table handles remain valid; reacquire their cells. Stale document XML,
 protection, invalid metadata, section revisions, unknown/misordered section
 children, lexical barriers, mirrored/book-fold/gutter settings and section bidi
 flags refuse atomically. Getter accessors and unknown request fields refuse.
-Negative top/bottom margins, implicit sizes and printer-specific layout are outside
-this slice. Existing paper-size codes are preserved, not recalculated.
+Negative top/bottom margins are unsupported. The API does not infer implicit sizes
+or printer-specific layout. Existing paper-size codes are preserved, not
+recalculated.
 
-Serialization validates inside the rollback boundary. Native tests cover no-ops,
-refusals, namespace aliases/collisions, multi-section custody, UTF-16/BOM,
-header relationships, stale handles and disk save/reopen. The independent authored
-sample validates with Open XML SDK 3.5.1 and exports through LibreOffice 24.2.7 to
-a 792×612-point landscape PDF. This single sample does not establish general
-pagination, margin rendering, headers/footers, printer behaviour or Microsoft Word
-fidelity.
+Serialization validates inside the rollback boundary. An authored sample validates
+with Open XML SDK 3.5.1 and exports through LibreOffice 24.2.7 to a 792×612-point
+landscape PDF. General pagination, margin rendering, headers/footers, printer
+behaviour and Microsoft Word fidelity remain unverified.
 
-Canonical feature: `workflows/docx/page-layout.feature` in the shared reference.
-Bindings/tests: `tests/acceptance/page-layout.ts`, `tests/unit/docx-page-layout.test.ts`.
+The shared specification defines expected behaviour in
+`workflows/docx/page-layout.feature`.

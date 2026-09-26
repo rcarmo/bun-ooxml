@@ -2,7 +2,7 @@
 
 `make property-campaign` runs two deterministic synthetic corpora and five fixed
 native timing workloads. Production code and shared fixture bytes are untouched.
-CI runs this lane separately and uploads its corpora and JSON reports.
+CI runs these checks separately and uploads their corpora and JSON reports.
 
 Each seed (`20260926`, `8675309`) generates 256 inputs with a 32-bit LCG. Exact
 UTF-8 JSON bytes are written to `artifacts/property-campaign/seed-<seed>/corpus.json`
@@ -36,8 +36,8 @@ replayable. `report.json` records completed-case counters, errors, refusal codes
 source hashes and environment. Status and the failure list determine success;
 completed-operation counters alone do not, including failures injected after a
 completed operation. Reports get a fresh run ID and `running` state before work;
-failed runs overwrite prior pass evidence. Counts are executions of these bounded
-properties, not a denominator for all possible format behaviours.
+failed runs replace earlier successful reports. Counts describe only the sampled
+properties.
 
 ## Timing method
 
@@ -49,11 +49,11 @@ operations and correctness checks. They exclude input construction and disk I/O.
 Workloads: parse/edit/reparse 1,001 XML elements; read/write/read a 128-member ZIP64
 archive with 512 KiB of uncompressed payload; open/edit/save/reopen a 50-paragraph
 DOCX, an eight-slide PPTX and a 128-cell XLSX. Each Office sample changes one target.
-Process RSS is sampled after the batch; it is not peak memory or allocation cost.
+Process RSS is sampled after all workloads; it is not peak memory or allocation cost.
 GC and CPU scheduling are uncontrolled. There is no speedup comparison or portable
 pass threshold.
 
 These are fixed-seed property samples, not a coverage-guided fuzzing campaign.
 No minimiser, all-input proof, large-archive stress, schema validation or independent
-Office execution is included. Use the [independent oracle lane](office-oracles.md)
-for its separate three-sample schema/rendering checks. Full parity remains open.
+Office execution is included. See [independent validation](office-oracles.md) for
+the separate three-sample schema and PDF checks.

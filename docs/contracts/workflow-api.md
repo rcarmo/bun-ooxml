@@ -47,10 +47,9 @@ untracked and refused calls report zero revision counts. Refusal after staging
 clears provisional metadata and writes neither file. False or omitted
 `trackChanges` retains untracked editing; its revision metadata is unused.
 
-The shared tracked-workflow feature refines the existing
-`@id-docx-track-changes-option-outcome` obligation. Accept/reject text and unrelated
-payloads are asserted independently from receipt counts. General comparison,
-multiple tracked targets and broader structural revisions remain unsupported.
+General comparison, multiple tracked targets and broader structural revisions
+are unsupported. Saved accept/reject text and unrelated payload preservation are
+checked separately from receipt counts.
 
 ## Format helpers
 
@@ -72,7 +71,5 @@ writers by canonical source/output path. It does not claim isolation against an
 external filesystem writer between final check and rename. Final symlinks and
 safe-output hardlink aliases refuse. Caller directories must be trusted.
 
-Contract tests read the shared v2 feature from the pinned reference checkout and
-apply lifecycle tags in memory. Source text, scenario IDs, expanded examples and
-arguments remain pinned; fixture bytes resolve through canonical manifest IDs. Native
-library support and workflow coverage are separate from full format behaviour coverage.
+The shared specification defines workflow targets, expected receipts and preservation
+rules. Acceptance tests use its scenarios and fixtures directly.

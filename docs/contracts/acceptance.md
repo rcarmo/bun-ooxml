@@ -6,9 +6,8 @@ The Bun-native acceptance runner lives in:
 - `scripts/acceptance.ts`
 
 It uses the official `@cucumber/gherkin` parser/compiler plus
-`@cucumber/messages` pickles. Acceptance is inventory-first: every compiled case
-is known before execution, including Background expansion and Scenario Outline
-rows.
+`@cucumber/messages` pickles. The runner enumerates every compiled case before execution, including Background
+expansion and Scenario Outline rows.
 
 ## Source contract
 
@@ -18,16 +17,9 @@ rows.
 no shared feature copy is stored in the consumer. Duplicate IDs across local and shared features
 are rejected by the combined inventory.
 
-The shared catalogue defines common expected behaviour. Native bindings and
-per-consumer execution reports are local. Candidate mappings in `docs/behaviors/`
-are not part of the execution inventory until reviewed, reconciled and bound.
-
-The 24 shared selections cover mutation safety, tracked Word dispatch, direct run
-formatting, paragraph-style selection, XML, core package admission,
-graph/ZIP64, text, creation, rectangular tables, Word reviews/comments and
-spreadsheet cache boundaries. Their local feature copies are removed.
-Bindings and unit assertions are unchanged; isolated runner tests may materialise
-the canonical text with a lifecycle overlay in a temporary directory.
+The shared specification defines expected behaviour. Local bindings run those
+scenarios against the Bun APIs and write the results. Only features selected in
+`features/shared.json` or local planned features enter the runner's inventory.
 
 Feature tags are strict:
 
@@ -110,7 +102,7 @@ bun run scripts/acceptance.ts --full
 
 `--full` fails whenever any planned feature remains.
 
-## Artifact ledger
+## Run report
 
 Every run rewrites `artifacts/acceptance.json` immediately with a fresh `runId`
 so stale passing output cannot survive a later failure.
@@ -127,5 +119,5 @@ The final artifact records:
 - exact expanded step text and execution outcome
 - all failures
 
-The report is a scenario ledger, not just a pass/fail summary. Each expanded
-Scenario Outline row is preserved as its own case with its exact values.
+Each expanded Scenario Outline row is preserved as its own case with its exact
+values.

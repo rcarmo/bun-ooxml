@@ -1,8 +1,8 @@
 # Independent authored-file checks
 
 `make office-oracles` generates three small native Office files and checks them
-with independent tools. It is a development-only lane; production operations and
-`make check` remain Bun-only. CI runs the lane separately and uploads its inputs,
+with independent tools. These development checks are separate from the Bun-only
+production APIs and `make check`. CI uploads their inputs,
 PDFs, extracted text, recalculated workbook and JSON report.
 
 Install .NET 10, LibreOffice Writer/Impress/Calc and Poppler. The validator pins
@@ -26,8 +26,7 @@ make office-oracles
   temporary user profile. Poppler checks expected page counts (1, 2, 1), text
   markers, the two slide titles on their expected pages after reversing slide
   order, and the DOCX sample's
-  792×612-point landscape page dimensions. These checks detected
-  missing title text; they do not measure clipping in general, compare pixels,
+  792×612-point landscape page dimensions. They do not measure clipping in general, compare pixels,
   measure all bounds or establish font/layout equivalence with Microsoft Office.
 * Four Latin DOCX markers compare native bold/italic with Poppler PDF markup.
   LibreOffice 24.2.7 agrees on three; it keeps bold after two true paragraph-style
@@ -40,29 +39,27 @@ make office-oracles
   the independently saved XLSX. Formula assembly uses native OPC in this test;
   it is not a new formula-authoring or calculation API.
 
-The initial schema probe found three incomplete view-property elements in newly
-created PPTX files. Native regression tests and the SDK check now cover pane
-sizes, scales and origins. The initial PDF probe also found clipped titles caused
-by absent placeholder geometry; the owned title layout now supplies nonoverlapping
-title/subtitle bounds. Existing imported layouts are unchanged.
+The SDK check covers PPTX view-property pane sizes, scales and origins. Generated
+title layouts have explicit nonoverlapping title/subtitle bounds; imported layouts
+are unchanged.
 
-A separate initial probe imported stale XLSX cache 999 into LibreOffice 24.2.7 and retained 999 despite
-recalculation flags. The successful lane depends on Bun's explicit cache removal.
+LibreOffice 24.2.7 retained a stale XLSX cache value of 999 when imported with
+recalculation flags alone. The successful recalculation check requires Bun's
+explicit cache removal.
 Applications may choose different recalculation policies; flags alone do not prove
 that cached answers are fresh.
 
-## Unverified work
+## Limits
 
-The lane covers three generated samples, not the full fixture corpus, arbitrary
-layout inheritance, revisions/comments, pivots, charts or formula grammar.
-Microsoft Word/PowerPoint/Excel rendering, pixel comparisons, broad calculation
-parity, fuzzing and performance remain open. No schema or rendering result supplies
-execution credit to sibling consumers or closes the full release gate.
+These checks cover three generated samples. They do not cover the full fixture
+corpus, arbitrary layout inheritance, revisions/comments, pivots, charts or formula
+grammar. Microsoft Word/PowerPoint/Excel rendering, pixel comparison and broad
+calculation accuracy are unverified.
 
 Each oracle command runs in a separate POSIX process group, with a timeout,
 a 4 MiB output cap and a bounded post-kill drain. The timeout test starts a real
 descendant holding the pipes and checks that it cannot write a delayed marker.
-Independent validation does not run on Windows in this lane.
+These independent checks do not run on Windows.
 
 Sources: `scripts/office-oracles.ts`, `scripts/oracle-process.ts`, `tests/oracles/schema/`, and the two native
 regressions in `tests/unit/pptx-create.test.ts`. Results are written to

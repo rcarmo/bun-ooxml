@@ -2,8 +2,9 @@
 
 The creation APIs build packages from TypeScript XML/OPC primitives. They do not
 copy templates or invoke an external producer. Saved packages reopen through the
-native readers and pass relationship/content-type validation; Office rendering
-has not been independently checked.
+native readers and pass relationship/content-type validation. The
+[independent checks](office-oracles.md) cover a few generated samples; general
+Microsoft Office rendering compatibility remains unverified.
 
 ## Word
 
@@ -34,5 +35,5 @@ not be empty or contain forbidden characters or boundary apostrophes. Coordinate
 stay within Excel row/column limits. Inline strings, numeric and boolean values
 are written explicitly; formula assignment is outside this API.
 
-`examples/create-office.ts` exercises all three save/reopen paths. Formatting,
-media, charts and structural authoring beyond these bounded APIs remain gaps.
+`examples/create-office.ts` exercises all three save/reopen paths. Media, chart
+and structural authoring beyond the documented APIs are unsupported.

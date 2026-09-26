@@ -45,8 +45,8 @@ Before returning, resolve copies accept/reject and assert semantic text matches
 replacement/original. Tests check formatting and opaque-part preservation. General
 document comparison and paragraph/table change algebra are not implemented.
 
-The root and ./docx entrypoints export these APIs. Tests/features are named
-story/revisions/redline. Shared fixtures are unchanged. Author filtering,
-revision snapshots, full comparison and broader revision coverage remain gaps.
+The root and ./docx entrypoints export these APIs. Author filtering, revision
+snapshots, full comparison and other revision types are unsupported. The shared
+specification defines the supported story and revision outcomes.
 Existing comment inspection and targeted resolution are documented separately in
 [comments-api.md](comments-api.md); comment bodies and anchors are never edited.

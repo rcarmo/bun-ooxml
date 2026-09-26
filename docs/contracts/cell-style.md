@@ -26,10 +26,7 @@ worksheets and shared strings before mutation. Out-of-band changes require reope
 the workbook. Style definitions are read live. Existing worksheet facades keep
 working after a supported mutation; returned Cell objects remain detached values.
 
-Tests cover 27 shared cases plus encoding, lexical preservation, dependency
-validation, model aliases, serialisation rollback and disk save/reopen. Native
-readback does not establish Excel rendering, computed number formats, conditional
-formatting, calculation or full style parity.
-
-Canonical feature: `workflows/xlsx/cell-style.feature` in the shared reference.
-Bindings/tests: `tests/acceptance/cell-style.ts`, `tests/unit/xlsx-cell-style.test.ts`.
+The shared specification defines expected behaviour in
+`workflows/xlsx/cell-style.feature`. Independent Excel rendering, computed number
+formats, conditional formatting, calculation and complete style equivalence have
+not been validated.

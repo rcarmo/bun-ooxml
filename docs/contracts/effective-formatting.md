@@ -41,13 +41,11 @@ allowed on protected documents.
 Open XML SDK validates the authored probe. LibreOffice 24.2.7 PDF output, extracted
 with Poppler, agrees on inherited bold, explicit direct-off, and direct bold plus
 italic. It retains bold across two true paragraph-style toggles, while the OOXML
-rule above returns false. The report records **3/4 matching markers** and the
-known difference. The optional oracle fails on unexpected mismatches in the other
-markers; it does not treat this known difference as agreement. Microsoft Word and
-general font/script/layout equivalence have not been validated.
+rule above returns false for that double-bold ancestry case. The report records
+**3/4 matching markers** and the known difference. The optional oracle fails on
+unexpected mismatches in the other markers; it does not treat this known
+difference as agreement. Microsoft Word and general font/script/layout
+equivalence have not been validated.
 
-Canonical contract: `workflows/docx/effective-formatting.feature` in the shared
-reference. Native checks: `tests/unit/docx-effective-formatting.test.ts` and
-`tests/acceptance/effective-formatting.ts`. Their coverage includes provenance,
-read-only custody, retained spans, namespace/UTF-16 handling, live style changes,
-ambiguous registries, unsupported contexts and saved/reopened values.
+The shared specification defines expected behaviour in
+`workflows/docx/effective-formatting.feature`.

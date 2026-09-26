@@ -1,18 +1,18 @@
-# Using bun-ooxml from an agent
+# Using bun-ooxml
 
 Use the exported classes in `src/index.ts`. Runtime operations run inside Bun.
 There is no Python executable, LibreOffice installation or network dependency.
 
 Development examples use the pinned shared fixture checkout. Initialise recursive
 submodules first; fixtures resolve by ID through `scripts/fixture-inputs.ts` and
-must never be edited in place. Grouped fixture storage and candidate testing are
-documented in [fixture references](../contracts/fixture-references.md).
+must never be edited in place. The shared specification defines expected behaviour;
+see [fixture references](../contracts/fixture-references.md) for lookup and validation.
 
 ## Decide before editing
 
 1. Keep an immutable input and choose a different output path.
 2. Inspect targets and require the intended match count. A missing target is not success.
-3. Use a guarded format API. Direct OPC/XML writes require ownership of every affected reference.
+3. Use a guarded format API. Direct OPC/XML writes require updating every affected reference.
 4. Save, reopen with the same format reader, and assert the requested value.
 5. Compare changed package parts and verify unrelated payloads. XML checks do not prove rendered appearance.
 
@@ -69,7 +69,7 @@ if (receipt.status !== "committed") throw new Error(receipt.error?.message);
 normally has two nodes for one committed change. Preview uses `previewRevisions`
 and never claims committed IDs. Multiple tracked targets, existing revisions and
 unsupported/protected stories refuse before writes. Omit the option or use false
-for the original untracked workflow.
+for untracked editing.
 
 ## Native creation
 
@@ -89,13 +89,14 @@ await wb.save("new.xlsx");
 ```
 
 These APIs author minimal packages without copying fixtures or invoking Python.
-They are not the full authoring surface. DOCX supports simple bold/italic
+They support a limited set of authoring operations. DOCX supports simple bold/italic
 runs and existing paragraph style IDs; unknown styles refuse. PPTX authors one
 owned title layout/master/theme; appending to an existing deck requires one safe,
 compatible layout. XLSX can add valid, case-distinct sheet names and missing cells
 within Excel bounds, keeping rows/cells sorted and dimension metadata ordered.
-Reopen saved files and assert expected content. Native Office rendering has not
-been independently verified. `examples/create-office.ts` is an executable example.
+Reopen saved files and assert expected content. General Microsoft Office rendering
+compatibility is unverified; [independent checks](../contracts/office-oracles.md)
+cover a few generated samples. `examples/create-office.ts` is an executable example.
 
 ## Existing cell styles
 
@@ -140,8 +141,8 @@ Geometry uses integer EMUs. Newline sequences create paragraphs; empty lines
 survive. Reacquire text anchors and tables on the edited slide after appending.
 Existing shape XML and all other package parts stay unchanged. Unsupported tree
 structure, ambiguous shape IDs and protection refuse atomically. See the
-[text-box contract](../contracts/text-box.md) for limits; rendering and inherited
-formatting are not independently verified.
+[text-box contract](../contracts/text-box.md) for limits; general rendering fidelity
+and inherited formatting are unverified.
 
 ## Rectangular tables
 
@@ -166,7 +167,7 @@ DOCX cell replacement retains cell properties and first paragraph/run formatting
 newlines become paragraphs (CRLF/CR normalise to LF). PPTX edits require one plain
 supported paragraph and retain first-run formatting. Arbitrary multi-paragraph,
 nested table, merged grid, field/drawing or other unsafe topology refuses. There
-is no row/column insertion, merging or splitting in this slice. Reopen after save
+is no row/column insertion, merging or splitting. Reopen after save
 and assert cell values; visual Office fidelity is not independently verified.
 
 ## DOCX
@@ -186,7 +187,7 @@ Current search covers body and table-cell paragraphs with supported direct `w:r/
 Fields, revisions, controls, hyperlinks, tabs, breaks and other complex topology
 may refuse. Run formatting outside the replacement survives. Search is exact and
 non-overlapping. `docx-stale-span` means the captured paragraph content changed;
-`docx-unsupported-topology` means this slice cannot represent the edit safely.
+`docx-unsupported-topology` means the API cannot represent the edit safely.
 
 `Document.find()` can find supported paragraphs while other paragraphs refuse
 inspection; absence of matches is not proof that all document stories were searched.
@@ -218,7 +219,7 @@ for (const run of formatting) {
 }
 ```
 
-This read-only Latin-text slice resolves document defaults, paragraph-style
+This read-only Latin-text API resolves document defaults, paragraph-style
 ancestry and direct run flags. Unknown contexts refuse, including character,
 numbering, table and complex-script formatting. See the
 [effective-formatting contract](../contracts/effective-formatting.md) for toggle
@@ -334,7 +335,7 @@ if (reopened.slides[0]!.inspectText("FY26").length !== 1) throw new Error("Edit 
 Slide order follows `sldIdLst` relationships. Anchors belong to the originating
 slide instance and version. A replacement changes the first exact match in the
 anchored paragraph. `readNotesText()` reads existing notes without creating a part.
-Cloning/imports, theme resolution and chart mutation are planned.
+Cloning/imports, theme resolution and chart mutation are unsupported.
 
 ## XLSX
 
@@ -354,7 +355,7 @@ Supported simple cells can be written or added to ordinary worksheets. Unsafe
 row/cell order and unsupported structures refuse insertion. Numeric, boolean, inline and
 shared-string values can be read; formulas expose stored cached values. The API
 preserves the target cell style index. Shared and array formula overwrites refuse.
-After an input edit, this slice clears `<v>` contents only on worksheet cells
+After an input edit, the API clears `<v>` contents only on worksheet cells
 carrying `<f>`, across all loaded worksheets, and requests recalculation on open.
 Array/data-table formulas may have result followers without `<f>`; value edits in
 such workbooks refuse atomically with `xlsx-cache-topology-unsupported`. Style-only

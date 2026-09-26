@@ -49,7 +49,6 @@ rather than reusing old offsets. Error codes are `docx-format-argument`,
 `docx-format-unsupported`, `docx-format-protected`, `docx-format-unsafe`, or the
 existing stale/unsupported paragraph codes.
 
-The canonical feature has 15 cases. Native regressions add namespace/default-XML,
-property-order, UTF-16, no-op spelling, stale/fresh handles and injected rollback
-checks. These establish native XML/package outcomes; independent Word rendering
-and broad schema/style inheritance compatibility have not been tested.
+The shared specification defines expected behaviour in
+`workflows/docx/run-formatting.feature`. Independent Word rendering and broad
+schema/style inheritance compatibility have not been tested.

@@ -65,10 +65,7 @@ readers afterward; it does not refresh a live `Document` cache.
 
 ## Checks and limits
 
-`references/fixtures-ooxml/workflows/docx/comments.feature` binds 14 observable
-cases using the canonical comments fixture. Native tests add namespace/lexical/encoding custody, absent flags,
-protected settings, detached inspection, disk save/reopen and injected rollback.
-No shared fixture is modified. CommentsExtended MIME uses the vendor-backed
-OpenXML value recorded in the shared fact registry; the disputed alias refuses.
-Native XML/package readback passed; independent Word reopening/rendering has not
-been performed. An independent review attempt timed out and supplied no evidence.
+The shared specification defines expected behaviour in
+`workflows/docx/comments.feature`. CommentsExtended MIME uses the vendor-backed
+OpenXML value; the disputed alias refuses. Independent Word reopening and
+rendering have not been performed.

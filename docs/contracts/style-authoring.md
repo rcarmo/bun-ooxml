@@ -29,10 +29,7 @@ Later paragraph style selection or text edits follow their own invalidation rule
 ## Limits
 
 No style rewriting/deletion, character/table/numbering style creation, default
-selection, linked/next styles, theme resolution or computed inheritance. Registry
-creation and selection have native save/reopen evidence; independent Word rendering
-and schema validation remain unverified.
-
-Tests: `tests/unit/docx-style-authoring.test.ts` and
-`tests/acceptance/style-authoring.ts`. The canonical feature is
-`workflows/docx/style-authoring.feature` in the shared reference.
+selection, linked/next styles, theme resolution or computed inheritance. Native
+save/reopen checks cover registry creation and selection; independent Word
+rendering and general schema compatibility remain unverified. The shared
+specification defines expected behaviour in `workflows/docx/style-authoring.feature`.

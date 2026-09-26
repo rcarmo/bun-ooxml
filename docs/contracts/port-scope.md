@@ -1,18 +1,17 @@
 # Behaviour scope
 
-The target covers DOCX/PPTX/XLSX package preservation, authoring, formatting,
-comments/revisions, composition, charts, structural spreadsheet editing and
-calculation. Current bounded slices do not close this scope.
+bun-ooxml supports selected DOCX, PPTX and XLSX authoring and editing operations
+while preserving unrelated package parts. The API contracts describe supported
+targets and explicit refusals. General document comparison, comment authoring,
+slide imports, chart authoring, merged-table restructuring, structural spreadsheet
+editing and formula calculation are unsupported.
 
-Shared workflow contracts, expected outcomes, facts and fixture provenance are in
-references/fixtures-ooxml. All implemented Gherkin is selected from that checkout;
-consumer bindings, native regressions and planned backlog features stay local.
-All planned contracts remain gaps; replacing external-source inventories does not
-turn unimplemented behaviour into completed work. The complete native test
-catalogue is being captured and reconciled; staging mappings are not coverage.
+The shared specification in `references/fixtures-ooxml` defines expected outcomes,
+format facts and fixture provenance. Bun acceptance tests select workflows from
+that specification; unsupported operations are not enabled by their presence there.
 
-Production runs inside Bun. External Office applications may be independent test
-oracles only. The [authored-file oracle lane](office-oracles.md) checks three
-small samples with Open XML SDK schema validation, LibreOffice PDF text/page
-checks and one external formula recalculation. Broader rendering/calculation
-fidelity and full-corpus validation remain open.
+Production operations run inside Bun. [Independent validation](office-oracles.md)
+uses Open XML SDK, LibreOffice and Poppler on three generated samples. It checks
+schema, PDF text/page properties and one external formula recalculation. General
+Microsoft Office rendering compatibility and broad calculation accuracy are
+unverified.

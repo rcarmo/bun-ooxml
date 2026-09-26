@@ -1,4 +1,4 @@
-# Rectangular table slice
+# Rectangular tables
 
 Native rectangular DOCX/PPTX tables support creation and bounded cell edits.
 Merge/split and row/column structural mutations are not implemented. Existing merged tables can be inspected only when grid mapping
@@ -12,7 +12,7 @@ text payload while retaining the first paragraph and run properties. Empty cells
 valid tblPr/tblGrid/tr/tc/tcPr/p structure, bounded dimensions, table handles refuse
 on structural document edits and cell handles refuse after any mutation. Newlines
 normalise CRLF/CR and become paragraphs. The first paragraph/run properties are
-retained with their namespace declarations. Full style inheritance and merging are gaps.
+retained with their namespace declarations. Full style inheritance and merging are unsupported.
 
 PPTX: `Slide.addTable(rows,columns,{x,y,width,height}): Table` with integer EMU geometry.
 `Slide.tables: Table[]`, same rows/columns/cell text API. Native graphicFrame/a:tbl,
@@ -25,6 +25,6 @@ and cell handles become stale after a slide mutation; reacquire from Slide.table
 Both: zero-based indices, typed range errors, unchanged saved bytes on refusal;
 XML escaping and boundary whitespace; saved/reopened table content and opaque
 parts verified. Reacquire stale handles after edits; they are checked against
-fingerprints or revision counters. Executable table contracts live in
+fingerprints or revision counters. The shared specification defines table behaviour in
 `references/fixtures-ooxml/workflows/docx/tables.feature` and
 `references/fixtures-ooxml/workflows/pptx/tables.feature`.

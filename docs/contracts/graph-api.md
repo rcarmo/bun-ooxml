@@ -18,8 +18,8 @@ refuses Office relationship-id/embed/link references in owner XML; non-XML owner
 with outgoing relationships refuse rather than assuming reference semantics.
 Owner XML does not get patched automatically. These helpers operate on OpcPackage;
 format readers cache some model state, so callers must reopen the format after
-graph edits. No cascade, import or arbitrary
-relationship URI rewriting in this slice.
+graph edits. Cascade deletion, import and arbitrary relationship URI rewriting
+are unsupported.
 
 `src/opc/content-types.ts` exports:
 * `getContentType(pkg, name): string | undefined`
