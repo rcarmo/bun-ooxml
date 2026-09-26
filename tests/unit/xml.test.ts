@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
 import {
+  attribute,
   applyEdits,
   elements,
   escapeAttribute,
@@ -78,6 +79,20 @@ describe("parseXml", () => {
     expect(parseXml(`<r>${escapeText(value)}</r>`).root.text).toBe(value);
     const child = doc.root.children[0]!;
     expect(source.slice(child.start,child.end)).toBe('<s/>');
+  });
+
+  test("expanded attribute lookup honours aliases, local rebinding and unqualified attributes",()=>{
+    const d=parseXml('<r xmlns="urn:default" xmlns:a="urn:a" xmlns:r="urn:a" id="plain" a:id="outer"><child xmlns:r="urn:b" r:id="inner" xml:lang="en"/><other r:id="sibling"/></r>');
+    expect(attribute(d.root,'id')).toBe('plain');
+    expect(attribute(d.root,'id','urn:default')).toBeUndefined();
+    expect(attribute(d.root,'id','urn:a')).toBe('outer');
+    expect(attribute(d.root.children[0]!,'id','urn:b')).toBe('inner');
+    expect(attribute(d.root.children[0]!,'id','urn:a')).toBeUndefined();
+    expect(attribute(d.root.children[1]!,'id','urn:a')).toBe('sibling');
+    expect(attribute(d.root.children[0]!,'lang',XML_NS)).toBe('en');
+    expect(d.root.attributeNamespaces['a:id']).toBe('urn:a');
+    expect(Object.isFrozen(d.root.attributeNamespaces)).toBe(true);
+    expect(Object.getPrototypeOf(d.root.attributeNamespaces)).toBeNull();
   });
 
   test("keeps the xml prefix bound implicitly", () => {

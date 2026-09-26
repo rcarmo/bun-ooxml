@@ -1,6 +1,6 @@
 import { OoxmlError } from "../errors.ts";
 import { OpcPackage } from "../opc/package.ts";
-import { applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
+import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
 
 const PRESENTATION_NS = "http://schemas.openxmlformats.org/presentationml/2006/main";
 const DRAWING_NS = "http://schemas.openxmlformats.org/drawingml/2006/main";
@@ -224,7 +224,7 @@ function resolveSlideParts(pkg: OpcPackage, mainPartName: string): string[] {
   return sldIdList.children
     .filter((child) => isElement(child, "sldId", PRESENTATION_NS))
     .map((slideId) => {
-      const relationshipId = slideId.attributes["r:id"];
+      const relationshipId = attribute(slideId, "id", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
       const relationship = relationshipId ? relationships.get(relationshipId) : undefined;
       if (!relationship || relationship.type !== SLIDE_RELATIONSHIP || !relationship.resolved) {
         throw new OoxmlError(

@@ -1,5 +1,5 @@
 import { Document, OpcPackage, Presentation, Workbook } from "../src/index.ts";
-import { elements, parseXml } from "../src/xml/index.ts";
+import { attribute, elements, parseXml } from "../src/xml/index.ts";
 import { readZip } from "../src/opc/zip.ts";
 
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
@@ -274,8 +274,8 @@ function resolveWorksheetPart(pkg: OpcPackage, sheetName: string): string {
     if (sheet.attributes.name !== sheetName) {
       continue;
     }
-    const relationshipId = sheet.attributes["r:id"];
-    assert(relationshipId !== undefined, `Workbook sheet ${sheetName} is missing r:id`);
+    const relationshipId = attribute(sheet, "id", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+    assert(relationshipId !== undefined, `Workbook sheet ${sheetName} is missing an officeDocument relationship id`);
     const resolved = relationships.get(relationshipId);
     assert(resolved !== undefined, `Workbook sheet ${sheetName} has no resolved worksheet part`);
     return resolved;

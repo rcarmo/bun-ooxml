@@ -57,6 +57,11 @@ manifests and ID migrations; it does not execute Python scripts.
   before a failing one to detect partial writes.
 * Keep text offsets bound to the inspected XML. Escaped user text and replacement
   XML fragments are different inputs. Never concatenate unescaped text into XML.
+* Resolve attribute identity by `attribute(element, localName, namespaceURI)`.
+  `r:id` uses the officeDocument relationship URI; relationship-file elements use
+  the package relationship URI. Valid prefixes may be renamed or locally rebound.
+  Unprefixed attributes never inherit the default element namespace. Do not copy
+  a wrong namespace into a synthetic fixture to match an implementation bug.
 * A cell edit can invalidate caches on other sheets. A style index is valid only
   when its style-table dependency exists in the output.
 * Use Bun builtins for I/O, hashes, compression and tests. Bun's `node:zlib` and

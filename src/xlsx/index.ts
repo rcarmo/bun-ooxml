@@ -1,6 +1,7 @@
 import { OoxmlError } from "../errors.ts";
 import { OpcPackage } from "../opc/package.ts";
 import {
+  attribute,
   applyEdits,
   elements,
   escapeAttribute,
@@ -205,16 +206,16 @@ export class Workbook {
 
     for (const sheetElement of elements(this.workbookDocument.root, "sheet", S_NS)) {
       const name = sheetElement.attributes.name;
-      const relationshipId = sheetElement.attributes["r:id"];
+      const relationshipId = attribute(sheetElement, "id", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
       if (!name || !relationshipId) {
-        throw new OoxmlError("xlsx-workbook-invalid", "Workbook sheet entry is missing name or r:id");
+        throw new OoxmlError("xlsx-workbook-invalid", "Workbook sheet entry is missing name or an officeDocument relationship id");
       }
       if (this.sheetsByName.has(name)) {
         throw new OoxmlError("xlsx-worksheet-duplicate", `Duplicate worksheet name ${name}`);
       }
 
       const relationship = relationships.get(relationshipId);
-      if (!relationship?.resolved || !relationship.type.endsWith("/worksheet")) {
+      if (!relationship?.resolved || relationship.type !== "http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet") {
         throw new OoxmlError(
           "xlsx-workbook-invalid",
           `Workbook sheet ${name} references missing worksheet relationship ${relationshipId}`,

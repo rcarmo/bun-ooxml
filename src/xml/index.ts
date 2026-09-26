@@ -16,6 +16,9 @@ export interface XmlElement {
   localName: string;
   namespaceURI: string;
   attributes: Record<string, string>;
+  /** URI per lexical attribute, resolved in this node's scope; unprefixed
+   * attributes never inherit the default element namespace. */
+  attributeNamespaces: Readonly<Record<string, string>>;
   children: XmlElement[];
   parent?: XmlElement;
   root: XmlElement;
@@ -407,15 +410,18 @@ export function parseXml(text: string): XmlDocument {
 
     const resolvedName = resolveElementName(name, frame);
     const attributes = Object.create(null) as Record<string, string>;
+    const attributeNamespaces = Object.create(null) as Record<string,string>;
     const expandedAttributes = new Set<string>();
 
     for (const attribute of parsedAttributes) {
       attributes[attribute.name] = attribute.value;
       if (isNamespaceDeclaration(attribute.name)) {
+        attributeNamespaces[attribute.name]=XMLNS_NS;
         continue;
       }
 
       const resolvedAttribute = resolveAttributeName(attribute.name, frame);
+      attributeNamespaces[attribute.name]=resolvedAttribute.namespaceURI;
       const expandedName = `${resolvedAttribute.namespaceURI}\u0000${resolvedAttribute.localName}`;
       if (expandedAttributes.has(expandedName)) {
         fail(
@@ -441,6 +447,7 @@ export function parseXml(text: string): XmlDocument {
       localName: resolvedName.localName,
       namespaceURI: resolvedName.namespaceURI,
       attributes,
+      attributeNamespaces:Object.freeze(attributeNamespaces),
       children: [],
       parent,
       root: undefined as unknown as XmlElement,
@@ -488,6 +495,16 @@ export function parseXml(text: string): XmlDocument {
     current.closeStart = closeStart;
     current.end = index;
   }
+}
+
+/** Lookup by expanded attribute name. Prefix spelling is preserved in attributes
+ * for lossless edits, but must not be used to infer semantic namespace identity. */
+export function attribute(element: XmlElement, localName: string, namespaceURI = ""): string | undefined {
+  for(const name of Object.keys(element.attributes)) {
+    const local=name.includes(":")?name.slice(name.indexOf(":")+1):name;
+    if(local===localName && element.attributeNamespaces[name]===namespaceURI)return element.attributes[name];
+  }
+  return undefined;
 }
 
 export function elements(

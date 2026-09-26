@@ -28,6 +28,9 @@
 * `XmlElement`: `name`, `localName`, `namespaceURI`, `attributes: Record<string,string>`,
   `children: XmlElement[]`, `parent?: XmlElement`, `text: string` decoded aggregate,
   `start`, `openEnd`, `closeStart`, `end` UTF-16 offsets; `selfClosing: boolean`
+* `attribute(element: XmlElement, localName: string, namespaceURI?: string): string | undefined`
+  resolves expanded names using the element's immutable `attributeNamespaces` map;
+  an omitted URI matches unqualified attributes only. Prefix spelling is not identity.
 * `elements(xml: XmlDocument | XmlElement, localName: string, namespaceURI?: string): XmlElement[]`
 * `escapeText(value: string): string`, `escapeAttribute(value: string): string`
 * `applyEdits(xml: string, edits: {start: number; end: number; value: string}[]): string`

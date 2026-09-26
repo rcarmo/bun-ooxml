@@ -1,5 +1,5 @@
 import { OoxmlError } from "../errors.ts";
-import { applyEdits, elements, escapeAttribute, parseXml, type XmlElement } from "../xml/index.ts";
+import { attribute, applyEdits, elements, escapeAttribute, parseXml, type XmlElement } from "../xml/index.ts";
 import { Workbook } from "./index.ts";
 
 const S_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
@@ -127,7 +127,7 @@ function resolveWorksheetPart(workbook: Workbook, sheetName: string): string {
     if (sheet.attributes.name !== sheetName) {
       continue;
     }
-    const relationshipId = sheet.attributes["r:id"];
+    const relationshipId = attribute(sheet, "id", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
     if (!relationshipId) {
       throw new OoxmlError("xlsx-workbook-invalid", `Workbook sheet ${sheetName} is missing r:id`);
     }
