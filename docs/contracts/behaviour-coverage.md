@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-Shared reference manifest: **125 assets**. Implementation evidence remains consumer-local.
+Shared reference manifest: **128 assets**. Implementation evidence remains consumer-local.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|

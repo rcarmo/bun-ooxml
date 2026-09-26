@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "scope": "Package catalogue reference update only; no Bun package-admission or semantic-diff bindings added",
+  "consumerBaseCommit": "a8692057a678e143e8d657627c89351c51eed751",
+  "reference": {
+    "mode": "candidate",
+    "commit": "db913c65bb652c11c05eb40793be37b56761cb53",
+    "manifestSha256": "668f480b6bcd95e2a13b0b94cecfc19a5d2bd1e2648f59887bcb259184f127dc"
+  },
+  "run": {
+    "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidate pin> make check",
+    "runId": "ceb1a016-f0ef-490f-90fc-f8638d2508de",
+    "startedAt": "2026-09-26T15:08:04.766Z",
+    "finishedAt": "2026-09-26T15:08:06.050Z",
+    "unitTests": 227,
+    "acceptanceCases": 114,
+    "examples": 3
+  },
+  "nativePackageSubset": {
+    "command": "bun test tests/unit/graph.test.ts tests/unit/package-diff.test.ts tests/unit/zip64.test.ts",
+    "passedDeclarations": 30,
+    "assertions": 107
+  },
+  "limits": [
+    "The new14package cases have no Bun bindings and gain no Bun execution credit",
+    "Sixpartial and24unmapped declaration mappings remain incomplete",
+    "Go graphplan/retainedarchive and Python semantic-diff behaviours are distinct"
+  ],
+  "releaseRun": {
+    "referenceTag": "v0.5.0",
+    "referenceCommit": "db913c65bb652c11c05eb40793be37b56761cb53",
+    "mode": "default-no-overrides",
+    "command": "make check",
+    "runId": "15f73331-c4e7-486c-8386-a6a2e2003dc2",
+    "startedAt": "2026-09-26T15:12:40.584Z",
+    "finishedAt": "2026-09-26T15:12:41.905Z",
+    "status": "passed",
+    "unitTests": 227,
+    "acceptanceCases": 114,
+    "examples": 3
+  }
+}

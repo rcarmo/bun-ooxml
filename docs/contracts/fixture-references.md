@@ -18,7 +18,7 @@ paths for provenance and one-time migrations. Runtime/test lookup uses IDs, not
 those aliases. Required notices are deduplicated under the shared `notices/`.
 
 The grouped baseline contains 115 unique fixture files in 32 groups, totalling
-6,451,099 bytes. The complete manifest has 125 asset entries, including notices
+6,451,099 bytes. The complete manifest has 128 asset entries, including notices
 and shared workflow metadata. These counts have different meanings from the 74
 logical package inputs exercised by the corpus regression tests.
 
@@ -49,6 +49,11 @@ spreadsheet cells/cache boundaries. Removing their identical local copies change
 no IDs or expanded cases. `docs/behaviors/native-binding-check.json` records the
 36-case transition check. Shared native-test mappings in `ledgers/consumers/`
 record overlaps and gaps; Bun acceptance reports record executed Bun cases.
+
+The package admission and semantic-diff profiles under `workflows/package/` have
+no Bun bindings. The central `bun-package.json` mapping records six partial and
+24 unmapped declarations from the graph, package-diff and ZIP64 modules; these
+records do not change Bun's executed-case count.
 
 ## Candidate checks
 
