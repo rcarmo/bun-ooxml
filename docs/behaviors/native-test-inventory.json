@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 380,
-  "files": 41,
+  "count": 389,
+  "files": 42,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -100,6 +100,12 @@
       "path": "tests/unit/oracle-process.test.ts",
       "sha256": "9794b02aac859024269cf4baf27b6db7222b43332e5e7d7b7acb7e8562d01c9f",
       "declarations": 3,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "declarations": 9,
       "issues": []
     },
     {
@@ -6539,6 +6545,262 @@
         "expect().toBeLessThanOrEqual",
         "process.cwd",
         "runOracleCommand"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:outcome mappings validate source pins and preserve the unmapped denominator without execution credit",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 26,
+      "title": "outcome mappings validate source pins and preserve the unmapped denominator without execution credit",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.mappedDeclarations).toBe(2)",
+        "expect(r.totalDeclarations).toBe(3)",
+        "expect(r.unmappedTestIds).toEqual(['bun:elsewhere:unmapped'])",
+        "expect(r.executionCredit).toBe(false)",
+        "expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const {inventory,features,sources,ledger}=sample();\n inventory.cases.push({...inventory.cases[0]!,id:'bun:elsewhere:unmapped',path:'tests/unit/other.test.ts'});\n const r=reconcileOutcomeMappings(inventory,ledger,features,sources) as any;\n expect(r.mappedDeclarations).toBe(2);expect(r.totalDeclarations).toBe(3);expect(r.unmappedTestIds).toEqual(['bun:elsewhere:unmapped']);expect(r.executionCredit).toBe(false);expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "inventory.cases.push",
+        "r.mappings.every",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses missing or duplicated test declarations",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 32,
+      "title": "mapping gate refuses missing or duplicated test declarations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Missing')",
+        "expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Duplicate')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const {inventory,features,sources,ledger}=sample();ledger.mappings.pop();expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Missing');\n ledger.mappings.push(ledger.mappings[0]!);expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Duplicate');\n}",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "ledger.mappings.pop",
+        "ledger.mappings.push",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses stale source or nonexistent native assertions",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 36,
+      "title": "mapping gate refuses stale source or nonexistent native assertions",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('source')",
+        "expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('assertion')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const a=sample();a.sources['tests/unit/sample.test.ts']+=' ';expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('source');\n const b=sample();b.ledger.mappings[0]!.assertions=['expect(1).toBe(99)'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('assertion');\n}",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 40,
+      "title": "mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('scenario')",
+        "expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('case')",
+        "expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('Duplicate')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const a=sample();a.ledger.mappings[0]!.scenarioIds=['@id-absent'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('scenario');\n const b=sample();b.ledger.mappings[0]!.caseKeys=['@id-pptx-mapping-test|{\"kind\":\"absent\"}'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('case');\n const c=sample();c.features.push(c.features[0]!);expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('Duplicate');\n}",
+      "calls": [
+        "c.features.push",
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 45,
+      "title": "mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('pin')",
+        "expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('scope')",
+        "expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('outcome')",
+        "expect(()=>reconcileOutcomeMappings(d.inventory,d.ledger,d.features,d.sources)).toThrow('gap')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const a=sample();delete a.ledger.sourceSha256['workflows/pptx/sample.feature'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('pin');\n const b=sample();b.ledger.scopePaths.push('tests/unit/missing.test.ts');expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('scope');\n const c=sample();c.ledger.mappings[0]!.outcomes=[];expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('outcome');\n const d=sample();d.ledger.mappings[0]!.gaps=[];expect(()=>reconcileOutcomeMappings(d.inventory,d.ledger,d.features,d.sources)).toThrow('gap');\n}",
+      "calls": [
+        "b.ledger.scopePaths.push",
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects fabricated execution credit and preserves dynamic review flags",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 51,
+      "title": "mapping gate rejects fabricated execution credit and preserves dynamic review flags",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('credit')",
+        "expect(r.mappings[0].reviewReasons).toEqual(['body-loop'])",
+        "expect(r.runtimeLeafCount).toBe(null)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const a=sample();(a.ledger as any).executionCredit=true;expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('credit');\n const b=sample();b.inventory.cases[0]!.reviewReasons.push('body-loop');\n const r=reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources) as any;\n expect(r.mappings[0].reviewReasons).toEqual(['body-loop']);expect(r.runtimeLeafCount).toBe(null);\n}",
+      "calls": [
+        "b.inventory.cases.0.reviewReasons.push",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:committed mappings enumerate every slide-order test, assertions and known gaps",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 58,
+      "title": "committed mappings enumerate every slide-order test, assertions and known gaps",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(report.mappedDeclarations).toBe(13)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-13)",
+        "expect(report.mappings[0]!.caseKeys).toHaveLength(21)",
+        "expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport();\n expect(report.mappedDeclarations).toBe(13);\n expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-13);\n expect(report.mappings[0]!.caseKeys).toHaveLength(21);\n expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "outcomeMappingReport",
+        "report.mappings.every"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 67,
+      "title": "mapping gate refuses silently omitted native assertions",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('assertion')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const a=sample();a.inventory.cases[0]!.assertions.push('expect(3).toBe(3)');\n expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('assertion');\n}",
+      "calls": [
+        "a.inventory.cases.0.assertions.push",
+        "expect",
+        "expect().toThrow",
+        "reconcileOutcomeMappings",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "line": 71,
+      "title": "scenario-only links remain explicitly distinct from case-key links",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.mappings[0].linkGranularity).toBe('scenario-only')",
+        "expect(r.mappings[1].linkGranularity).toBe('explicit-case-keys')",
+        "expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37",
+      "body": "{\n const a=sample();a.ledger.mappings[1]!.caseKeys=[a.features[0]!.scenarios[0]!.cases[0]!.identityKey];\n const r=reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources) as any;\n expect(r.mappings[0].linkGranularity).toBe('scenario-only');\n expect(r.mappings[1].linkGranularity).toBe('explicit-case-keys');\n expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "r.mappings.every",
+        "reconcileOutcomeMappings",
+        "sample"
       ],
       "reviewReasons": [],
       "unresolved": []

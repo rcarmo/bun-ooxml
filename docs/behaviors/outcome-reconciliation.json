@@ -1,0 +1,766 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "runtimeLeafCount": null,
+  "scope": "Source-pinned assertion mappings; semantic outcomes and gaps require human review; no test execution is inferred",
+  "totalDeclarations": 389,
+  "mappedDeclarations": 13,
+  "sourceSha256": {
+    "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+    "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
+    "src/pptx/index.ts": "2ac2b87c1507e74742ba7c2d6501036574530ffb8b16d5102a9bfd392058688d",
+    "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
+    "scripts/gherkin.ts": "4f8c38ec3b8cada3a38366a97b76ed3052aef606545cc98dfb3c202df09d70bf",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e"
+  },
+  "unmappedTestIds": [
+    "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+    "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / workflow refuses and preserves an existing output when the workbook has array followers",
+    "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / executes every cache boundary Given/When/Then",
+    "bun:tests/unit/content-types.test.ts:opc content type helpers / getContentType resolves defaults and overrides across namespace prefixes",
+    "bun:tests/unit/content-types.test.ts:opc content type helpers / setPartContentType is an exact no-op when a default already yields the requested type",
+    "bun:tests/unit/content-types.test.ts:opc content type helpers / adds an override to a self-closing prefixed root without rewriting names",
+    "bun:tests/unit/content-types.test.ts:opc content type helpers / updates an existing override in place and preserves surrounding raw XML",
+    "bun:tests/unit/content-types.test.ts:opc content type helpers / removePartContentType removes only the matching override and never rewrites defaults",
+    "bun:tests/unit/content-types.test.ts:opc content type helpers / detached overrides remain queryable for parts that do not yet exist",
+    "bun:tests/unit/content-types.test.ts:opc content type helpers / invalid inputs and malformed current content types leave bytes untouched",
+    "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
+    "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
+    "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
+    "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
+    "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
+    "bun:tests/unit/docx-comments.test.ts:missing done flag uses an attribute prefix under a default element namespace",
+    "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
+    "bun:tests/unit/docx-comments.test.ts:serialization failure rolls back the done flag while retaining earlier edits",
+    "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
+    "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
+    "bun:tests/unit/docx-comments.test.ts:inspection results are detached and cannot bypass package custody",
+    "bun:tests/unit/docx-comments.test.ts:comment paragraph newlines and tabs are read without rewriting bodies",
+    "bun:tests/unit/docx-comments.test.ts:non-self-closing entries retain boundary whitespace exactly",
+    "bun:tests/unit/docx-comments.test.ts:multiple comments settings and external settings refuse before mutation",
+    "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
+    "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
+    "bun:tests/unit/docx-comments.test.ts:incomplete extended metadata remains inspectable but absent targets cannot be resolved",
+    "bun:tests/unit/docx-comments.test.ts:public entrypoints save and reopen the resolved flag without changing comment bodies",
+    "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused",
+    "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / creates a minimal package and appends escaped bold italic text before sectPr",
+    "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / permits empty text and keeps the authored paragraph before sectPr after reopen",
+    "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / validates known paragraph styles and preserves opaque parts on append",
+    "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / refuses invalid arguments and unsupported or unknown styles atomically",
+    "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / invalidates earlier spans after append without disturbing preserved parts",
+    "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
+    "bun:tests/unit/docx-formatting.test.ts:direct run formatting executes15 saved outcome and refusal cases",
+    "bun:tests/unit/docx-formatting.test.ts:changed formatting stales spans and paragraphs but no-op preserves handles",
+    "bun:tests/unit/docx-formatting.test.ts:explicit false writes off properties while null removes direct overrides",
+    "bun:tests/unit/docx-formatting.test.ts:aliased namespaces remain bound and unrelated property bytes are retained",
+    "bun:tests/unit/docx-formatting.test.ts:reapplying explicit values preserves lexically different Boolean spellings and handles",
+    "bun:tests/unit/docx-formatting.test.ts:absent and self-closing run properties insert in schema order",
+    "bun:tests/unit/docx-formatting.test.ts:serialization failure retains package, earlier edits and valid paragraph handle",
+    "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
+    "bun:tests/unit/docx-formatting.test.ts:all runs preflight before one malformed later property can change an earlier run",
+    "bun:tests/unit/docx-formatting.test.ts:table-cell formatting invalidates cell handles without changing grid or cell text",
+    "bun:tests/unit/docx-formatting.test.ts:empty paragraphs no-op while unsupported self-closing runs refuse nonempty formatting",
+    "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
+    "bun:tests/unit/docx-formatting.test.ts:inserting a property while deleting its following sibling yields valid ordering",
+    "bun:tests/unit/docx-formatting.test.ts:default namespace elements receive qualified formatting without changing unqualified attributes",
+    "bun:tests/unit/docx-formatting.test.ts:formatting does not change style graphs or Unicode text and explicitly disabled settings permit edits",
+    "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+    "bun:tests/unit/docx-formatting.test.ts:fresh spans remain usable after formatting while preserving direct properties",
+    "bun:tests/unit/docx-formatting.test.ts:malformed bold or italic refuses even when the other flag is requested",
+    "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
+    "bun:tests/unit/docx-page-layout.test.ts:page geometry changes stale paragraphs and cells while table handles remain valid",
+    "bun:tests/unit/docx-page-layout.test.ts:numeric and default-orientation no-op retains exact spelling and existing handles",
+    "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
+    "bun:tests/unit/docx-page-layout.test.ts:serialization refusal leaves prior changes, page values and paragraph identity intact",
+    "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+    "bun:tests/unit/docx-page-layout.test.ts:orientation writes avoid shadowed namespace prefixes and retain paper codes and attributes",
+    "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+    "bun:tests/unit/docx-page-layout.test.ts:protection applies to same-geometry requests and disabled settings allow mutation",
+    "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
+    "bun:tests/unit/docx-page-layout.test.ts:disk save retains final geometry and leaves earlier section XML byte-identical",
+    "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
+    "bun:tests/unit/docx-page-layout.test.ts:attribute-only layout edits preserve exact unrelated spelling inside geometry nodes",
+    "bun:tests/unit/docx-paragraph-style.test.ts:paragraph style selection executes19 saved outcome and refusal cases",
+    "bun:tests/unit/docx-paragraph-style.test.ts:changed style invalidates handles but no-op preserves them",
+    "bun:tests/unit/docx-paragraph-style.test.ts:null removes only direct style without requiring a style registry",
+    "bun:tests/unit/docx-paragraph-style.test.ts:aliased namespaces and encoded style IDs retain text and unrelated properties",
+    "bun:tests/unit/docx-paragraph-style.test.ts:same direct style retains quote spelling and exact archive bytes",
+    "bun:tests/unit/docx-paragraph-style.test.ts:missing, self-closing properties and self-closing empty paragraphs accept first style child",
+    "bun:tests/unit/docx-paragraph-style.test.ts:style-only update preserves UTF-16 encoding and BOM",
+    "bun:tests/unit/docx-paragraph-style.test.ts:serialization rollback leaves earlier changes and paragraph handles intact",
+    "bun:tests/unit/docx-paragraph-style.test.ts:table handles survive style changes but stale cells and spans refuse",
+    "bun:tests/unit/docx-paragraph-style.test.ts:removal requests still refuse protection and invalid topology",
+    "bun:tests/unit/docx-paragraph-style.test.ts:no registry, invalid registry and character styles refuse addition without touching the package",
+    "bun:tests/unit/docx-paragraph-style.test.ts:style getters inspect direct override only and do not select defaults",
+    "bun:tests/unit/docx-paragraph-style.test.ts:default namespace, direct run formatting and fresh spans survive style assignment",
+    "bun:tests/unit/docx-paragraph-style.test.ts:external or later enforcing settings refuse while explicit disabled settings allow selection",
+    "bun:tests/unit/docx-paragraph-style.test.ts:style mutations refuse lexical barriers, run revisions and unknown paragraph properties",
+    "bun:tests/unit/docx-paragraph-style.test.ts:disk save and reopen retain chosen direct style and untouched definitions",
+    "bun:tests/unit/docx-paragraph-style.test.ts:same-style request still refuses document protection without touching handles",
+    "bun:tests/unit/docx-redline.test.ts:tracked replacement emits distinct IDs and native author/date with accept/reject algebra",
+    "bun:tests/unit/docx-redline.test.ts:pure deletion and exact no-op preserve their declared outcomes",
+    "bun:tests/unit/docx-redline.test.ts:invalid calendar dates and formatting-only run barriers refuse without mutation",
+    "bun:tests/unit/docx-redline.test.ts:XML comments and literal inter-run content are barriers rather than discarded during redlining",
+    "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
+    "bun:tests/unit/docx-redline.test.ts:overlapping literal occurrences refuse an ambiguous tracked target",
+    "bun:tests/unit/docx-redline.test.ts:executes all saved-outcome redline feature cases",
+    "bun:tests/unit/docx-revisions.test.ts:docx revisions / discovers reachable nested story parts for inspection and selected resolution",
+    "bun:tests/unit/docx-revisions.test.ts:docx revisions / preserves namespaced run properties when unwrapping and renames delText on reject",
+    "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
+    "bun:tests/unit/docx-revisions.test.ts:docx revisions / rejects unsafe namespace lifts atomically",
+    "bun:tests/unit/docx-revisions.test.ts:docx revisions / preflights unsupported nested stories and protected packages before mutating bytes",
+    "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+    "bun:tests/unit/docx-revisions.test.ts:docx revisions / passes the DOCX revisions acceptance feature with dedicated bindings",
+    "bun:tests/unit/docx-story.test.ts:docx story inspection / lists linked native story parts in deterministic order",
+    "bun:tests/unit/docx-story.test.ts:docx story inspection / reads owned document headers/comments and native notes without inferring from filenames",
+    "bun:tests/unit/docx-story.test.ts:docx story inspection / inspects current, original and all views across synthetic body/header/footer/note stories with renamed prefixes",
+    "bun:tests/unit/docx-story.test.ts:docx story inspection / counts blind regions for native text boxes fields alternate content unknown namespaces orphans and external story rels",
+    "bun:tests/unit/docx-story.test.ts:docx story inspection / inspection never mutates package bytes",
+    "bun:tests/unit/docx-story.test.ts:docx story inspection / passes the DOCX story acceptance feature with dedicated bindings",
+    "bun:tests/unit/docx-style-authoring.test.ts:paragraph style authoring executes24 saved outcomes and atomic refusals",
+    "bun:tests/unit/docx-style-authoring.test.ts:definition creation preserves paragraph, table-cell and span handles until a text edit",
+    "bun:tests/unit/docx-style-authoring.test.ts:styles-only update retains UTF16 LE and BE declarations, BOM and old definitions",
+    "bun:tests/unit/docx-style-authoring.test.ts:final serialization failure rolls back new registry graph and existing registry append",
+    "bun:tests/unit/docx-style-authoring.test.ts:input data rejects unknown keys, accessors and invalid XML without package changes",
+    "bun:tests/unit/docx-style-authoring.test.ts:all registry IDs must be unique for authoring, including unselected duplicates",
+    "bun:tests/unit/docx-style-authoring.test.ts:selected base chains require paragraph targets and refuse multiple or foreign links",
+    "bun:tests/unit/docx-style-authoring.test.ts:new styles honor arbitrary relationship target paths and preserve registry metadata",
+    "bun:tests/unit/docx-style-authoring.test.ts:XML attribute escapes and dollar replacement tokens are literal in self-closing registries",
+    "bun:tests/unit/docx-style-authoring.test.ts:disabled protection allows authoring but external or later enforcing settings refuse",
+    "bun:tests/unit/docx-style-authoring.test.ts:disk save reopen retains authored base and flags without dirtying document text",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / authoring into a body with w rebound never silently writes foreign elements",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / run-level namespace declarations survive copied table-cell run properties",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / adds a rectangular table before sectPr and round-trips escaped text, spaces, and normalized newlines",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / updates existing simple table cells while preserving opaque package parts",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / preserves tcPr, first paragraph properties, and first run formatting when replacing a simple cell",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / refuses bad indices, merged cells, nested cell topology, and bizarre grids atomically",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / stale table and cell handles refuse after document mutation while fresh handles stay live",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / validates table dimensions with bounded rectangular authoring",
+    "bun:tests/unit/docx-tables.test.ts:docx Document tables / passes the DOCX table acceptance feature with dedicated bindings",
+    "bun:tests/unit/docx.test.ts:docx Document / opens from a path or bytes and save() never rewrites the opened source path implicitly",
+    "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
+    "bun:tests/unit/docx.test.ts:docx Document / replaces exact cross-run text without reconstructing unaffected runs or formatting",
+    "bun:tests/unit/docx.test.ts:docx Document / preserves boundary whitespace with xml:space on touched text nodes",
+    "bun:tests/unit/docx.test.ts:docx Document / includes table-cell paragraphs in document order and replaces them without reconstructing unrelated table XML",
+    "bun:tests/unit/docx.test.ts:docx Document / does not descend into text boxes and refuses the blind region when no supported match exists",
+    "bun:tests/unit/docx.test.ts:docx Document / detects stale spans before mutation and leaves the package unchanged",
+    "bun:tests/unit/docx.test.ts:docx Document / keeps repeated exact occurrences correct across replacements",
+    "bun:tests/unit/docx.test.ts:docx Document / refuses fields, tracked revisions and content controls with a stable code",
+    "bun:tests/unit/docx.test.ts:docx Document / passes the DOCX acceptance feature with exported bindings",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / loaded binding cleanup runs after failed outcomes and cleanup failure cannot pass",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / full gate refuses planned work despite implemented cases passing",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / parses backgrounds and scenario outlines into exact expanded cases",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rejects tag contract violations",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / fails undefined bindings without silent pass",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / fails ambiguous bindings",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rejects scenarios without Then and reports failing Then assertions",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rewrites stale acceptance artifacts before a failing run",
+    "bun:tests/unit/gherkin.test.ts:gherkin acceptance / refuses an acceptance run with only planned cases rather than passing vacuously",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / opaque parts and content types survive related save/reopen",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / collision and missing relationship targets leave package byte-identical",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship deduplication and smallest available IDs avoid unnecessary edits",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / equivalent relationship leaves existing overrides and XML encoding byte-identical",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / dollar replacement tokens in external targets are literal bytes, not JS replacement directives",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / referenced parts refuse until explicitly detached, then only owned metadata is removed",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship referenced from owner XML cannot be removed; unknown binary owners refuse",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / part name allocation considers orphan and case-colliding names",
+    "bun:tests/unit/graph.test.ts:guarded OPC graph edits / removing a part removes its own rels but never cascades into targets",
+    "bun:tests/unit/oracle-process.test.ts:oracle runner captures success and rejects missing commands",
+    "bun:tests/unit/oracle-process.test.ts:oracle timeout kills descendants retaining output pipes and bounds completion",
+    "bun:tests/unit/oracle-process.test.ts:oracle output is bounded and excessive output terminates the command group",
+    "bun:tests/unit/outcome-mappings.test.ts:outcome mappings validate source pins and preserve the unmapped denominator without execution credit",
+    "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses missing or duplicated test declarations",
+    "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses stale source or nonexistent native assertions",
+    "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
+    "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
+    "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects fabricated execution credit and preserves dynamic review flags",
+    "bun:tests/unit/outcome-mappings.test.ts:committed mappings enumerate every slide-order test, assertions and known gaps",
+    "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
+    "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
+    "bun:tests/unit/package-diff.test.ts:diffPackages / raw fixture no-op diffs are empty, preserve exact source bytes, and return detached reports",
+    "bun:tests/unit/package-diff.test.ts:diffPackages / ignores ZIP metadata-only changes",
+    "bun:tests/unit/package-diff.test.ts:diffPackages / reports opaque payload edits with hashes, lengths, content types, and detached part records",
+    "bun:tests/unit/package-diff.test.ts:diffPackages / reports added and removed parts with content-type updates via package.set",
+    "bun:tests/unit/package-diff.test.ts:diffPackages / marks content-type-only changes as changed even when payload bytes are identical",
+    "bun:tests/unit/package.test.ts:OpcPackage / conservatively refuses percent-encoded internal names and relationship targets",
+    "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
+    "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
+    "bun:tests/unit/package.test.ts:OpcPackage / returns detached copies and keeps custody of opened source bytes",
+    "bun:tests/unit/package.test.ts:OpcPackage / preserves UTF-16 XML encoding when string edits are written back",
+    "bun:tests/unit/package.test.ts:OpcPackage / rejects async transaction callbacks before they run and does not special-case thenables",
+    "bun:tests/unit/package.test.ts:OpcPackage / save refuses invalid packages without touching an existing target",
+    "bun:tests/unit/package.test.ts:OpcPackage / refuses symlink save destinations",
+    "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
+    "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / authors a minimal presentation whose master, layout and theme links reopen through the native reader",
+    "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / appends to a compatible deck without disturbing first-slide bytes until the earlier anchor edits them",
+    "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / refuses invalid arguments and unsafe title-layout selection atomically",
+    "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
+    "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
+    "bun:tests/unit/pptx-create.test.ts:authored title layout gives title and subtitle explicit nonoverlapping slide-space bounds",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / finds shared title and subtitle without mutating the package",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / accepts p:ph type=title as a title placeholder",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / uses the direct placeholder shape rather than the first text paragraph",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / does not resolve nested group placeholders as slide titles",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses duplicate direct placeholder shapes",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses multi-paragraph subtitle placeholders",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses placeholder paragraphs with break and field topology",
+    "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses empty title placeholders until empty replacement is supported",
+    "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / round-trips saved table geometry sums and text after reopen",
+    "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / preserves simple table cell formatting when replacing text and reopening",
+    "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / stale table cell handles refuse atomically after slide mutation",
+    "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / refuses merged and malformed table topologies atomically",
+    "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / passes the PPTX table acceptance feature with dedicated bindings",
+    "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",
+    "bun:tests/unit/pptx-text-box.test.ts:text-box creation stales same-slide anchors and tables but not other slides",
+    "bun:tests/unit/pptx-text-box.test.ts:serialization failure restores prior edits, versions and still-usable anchors",
+    "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
+    "bun:tests/unit/pptx-text-box.test.ts:new shapes bind namespaces locally even when p/a are absent or shadowed",
+    "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
+    "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
+    "bun:tests/unit/pptx-text-box.test.ts:tree ambiguity, lexical barriers and malformed shape identity refuse atomically",
+    "bun:tests/unit/pptx-text-box.test.ts:external slide reorder invalidates old slide identity while raw same-slide edits are read live",
+    "bun:tests/unit/pptx-text-box.test.ts:real presentation adds a text box and saves/reopens without changing other payloads",
+    "bun:tests/unit/pptx-text-box.test.ts:disk save retains multiline paragraphs, direct flags and extension tail order",
+    "bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings",
+    "bun:tests/unit/pptx.test.ts:pptx slice / follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
+    "bun:tests/unit/pptx.test.ts:pptx slice / exposes line breaks and field text in inspectText and refuses editing that topology atomically",
+    "bun:tests/unit/pptx.test.ts:pptx slice / replaces exact anchored text across runs and preserves untouched members",
+    "bun:tests/unit/pptx.test.ts:pptx slice / refuses stale anchors atomically",
+    "bun:tests/unit/pptx.test.ts:pptx slice / opens from path and bytes and saves a no-op deck byte-identically",
+    "bun:tests/unit/property-campaign.test.ts:seeded inputs repeat exactly and a different seed changes the corpus",
+    "bun:tests/unit/property-campaign.test.ts:small native campaign records actual executed families and reproducible input hashes",
+    "bun:tests/unit/property-campaign.test.ts:campaign rejects invalid budgets and preserves failing case inputs",
+    "bun:tests/unit/property-campaign.test.ts:timing reports retain raw samples and calculate median and nearest-rank p95",
+    "bun:tests/unit/property-campaign.test.ts:mutant buffer custody is checked on accepted and typed-refusal paths",
+    "bun:tests/unit/property-campaign.test.ts:a failed performance run replaces old pass evidence and starts with running status",
+    "bun:tests/unit/references.test.ts:shared manifest, annotated tag and exact submodule commit match required pin",
+    "bun:tests/unit/references.test.ts:missing pin refuses rather than using an implicit or generated fixture corpus",
+    "bun:tests/unit/references.test.ts:mutated seals and wrong tag or revision refuse in an isolated reference clone",
+    "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
+    "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
+    "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / XLSX accepts a locally scoped prefix alias through value and style edits",
+    "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
+    "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / worksheet relationship type must use the exact officeDocument URI, not merely its suffix",
+    "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / locally rebound r takes precedence over its parent declaration",
+    "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
+    "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / shared namespace Gherkin executes all four cases with real outcomes",
+    "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
+    "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
+    "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
+    "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / Gherkin escaping must preserve JSON newline escapes before typed decoding",
+    "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifies the four pinned shared fixtures and their readback preconditions",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / verifyFixture rejects a wrong whole-archive hash before edit semantics",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects opaque member drift outside the allowed parts",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects a detached sentinel even if the root rel bytes are re-pinned",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects invalid XLSX style indices in allowed changed worksheet parts",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / implicit style zero still requires a cellXfs definition",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects unexpected added members",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture validation / assertPreservedOutput rejects unexpected deleted members",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / DOCX edit preserves shared fixture invariants after save and reopen (unit-only)",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / PPTX edit preserves shared fixture invariants after save and reopen (unit-only)",
+    "bun:tests/unit/shared-fixtures.test.ts:shared fixture preservation on supported native edits / XLSX cache edit preserves shared fixture invariants after save and reopen (unit-only)",
+    "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",
+    "bun:tests/unit/test-inventory.test.ts:native inventory keeps declaration counts distinct from each tables and registration loops",
+    "bun:tests/unit/test-inventory.test.ts:native inventory marks dynamic suite names, callbacks and conditional registrations explicitly",
+    "bun:tests/unit/test-inventory.test.ts:native inventory retains todo declarations without pretending they execute",
+    "bun:tests/unit/test-inventory.test.ts:native inventory records body loops and only direct matcher expressions, not helper execution",
+    "bun:tests/unit/test-inventory.test.ts:native inventory has deterministic hashes and refuses duplicate identities",
+    "bun:tests/unit/test-inventory.test.ts:inventory drift check detects added tests, edited helpers and no-test file changes without rewriting report",
+    "bun:tests/unit/test-inventory.test.ts:drift checks refuse unresolved callbacks even when a matching report exists",
+    "bun:tests/unit/test-inventory.test.ts:staging reconciliation distinguishes surviving IDs, missing IDs and absent mappings without credit",
+    "bun:tests/unit/test-inventory.test.ts:inventory fails closed on imported binding shadowing, indirect aliases and tagged tables",
+    "bun:tests/unit/test-inventory.test.ts:native registration shadows in destructuring and deferred helper registration are unresolved",
+    "bun:tests/unit/test-inventory.test.ts:transparent TypeScript expressions cannot hide imported registration aliases",
+    "bun:tests/unit/test-inventory.test.ts:nested function matchers are deferred syntax rather than direct test assertions",
+    "bun:tests/unit/test-inventory.test.ts:test-support file edits invalidate the inventory independently of declaration files",
+    "bun:tests/unit/tracked-workflow.test.ts:tracked Word workflow dispatch executes17outcome/refusal cases",
+    "bun:tests/unit/tracked-workflow.test.ts:initial destination precondition refusal reports zero revision counts",
+    "bun:tests/unit/tracked-workflow.test.ts:output serialization/save refusal clears staged revision identities",
+    "bun:tests/unit/tracked-workflow.test.ts:strict tracked overwrite and explicit false dispatch have distinct saved outcomes",
+    "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
+    "bun:tests/unit/tracked-workflow.test.ts:overlapping literal occurrences never become one tracked target",
+    "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
+    "bun:tests/unit/tracked-workflow.test.ts:caller mutation after dispatch cannot change the requested tracking mode or revision metadata",
+    "bun:tests/unit/tracked-workflow.test.ts:destination change after staging refuses without publishing staged revisions",
+    "bun:tests/unit/workflow-acceptance.test.ts:workflow shared acceptance / executes the frozen shared workflow feature as 19 implemented Bun cases",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / previews report matched targets but never write source or an existing destination",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / strict batches reject a later missing target before saving an earlier match",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / distinct output accumulates two PPTX edits and counts actual commits",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / source fingerprints and safe path aliases refuse without writes",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / destination fingerprint and symlink protections leave existing bytes untouched",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / XLSX style closure and cache receipts reflect staged output, not guessed input count",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / invalid XML replacements refuse asynchronously without touching either file",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / concurrent guarded writers serialize and only one source revision can commit",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / DOCX overlapping text ranges refuse even when neither target contains the other",
+    "bun:tests/unit/workflow.test.ts:native staged workflow / no-op and duplicate targets cannot inflate committed count",
+    "bun:tests/unit/xlsx-cell-style.test.ts:cell style selection executes27 saved outcomes and atomic refusals",
+    "bun:tests/unit/xlsx-cell-style.test.ts:style-only edits preserve cell payloads for scalar and formula topologies",
+    "bun:tests/unit/xlsx-cell-style.test.ts:null removes direct index without styles registry and explicit zero remains distinct",
+    "bun:tests/unit/xlsx-cell-style.test.ts:same numeric style preserves lexical index spelling and exact original archive",
+    "bun:tests/unit/xlsx-cell-style.test.ts:style attribute scanner handles quotes, prefixes and unrelated values containing s=",
+    "bun:tests/unit/xlsx-cell-style.test.ts:UTF16 LE/BE worksheet declaration, BOM and target value survive style selection",
+    "bun:tests/unit/xlsx-cell-style.test.ts:serialization rollback retains earlier edits, cached values and live worksheet facades",
+    "bun:tests/unit/xlsx-cell-style.test.ts:external changes to another worksheet or workbook metadata refuse cached-model style updates",
+    "bun:tests/unit/xlsx-cell-style.test.ts:custom number formats and selected base dependencies are validated",
+    "bun:tests/unit/xlsx-cell-style.test.ts:wrong-namespace style indexes and malformed direct row placement refuse",
+    "bun:tests/unit/xlsx-cell-style.test.ts:all index argument errors refuse without changing source bytes",
+    "bun:tests/unit/xlsx-cell-style.test.ts:protected no-op and removal both refuse conservatively",
+    "bun:tests/unit/xlsx-cell-style.test.ts:disk save and reopen retain style selection, definitions and formula cache",
+    "bun:tests/unit/xlsx-cell-style.test.ts:worksheet aliases to the same part refuse instead of leaving a second cached model stale",
+    "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
+    "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
+    "bun:tests/unit/xlsx-create.test.ts:adding a worksheet works when the existing r alias is scoped to only the first sheet",
+    "bun:tests/unit/xlsx-create.test.ts:dimension stays before sheetViews and cols when a missing cell is authored",
+    "bun:tests/unit/xlsx-create.test.ts:Workbook.create / authors a minimal workbook with styles that saves and reopens through the native reader",
+    "bun:tests/unit/xlsx-create.test.ts:Workbook.create / adds worksheets with independent ids, relationship closure and working returned handles",
+    "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
+    "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / creates qualified dimension row cell and text nodes in a prefixed worksheet",
+    "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / accepts the maximum worksheet coordinate and keeps rows and cells sorted as they are added",
+    "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
+    "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses unsafe existing row ordering before mutation",
+    "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / appends a missing cell to an existing worksheet while preserving surrounding nodes and unrelated parts",
+    "bun:tests/unit/xlsx-create.test.ts:xlsx create acceptance feature / executes the implemented xlsx creation scenarios with exported bindings",
+    "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / creates a wrapped style closure for the shared default-style fixture and survives reopen",
+    "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / preserves namespace prefixes, reuses the appended equivalent xf and leaves formula caches intact",
+    "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / refuses a missing target cell",
+    "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / rolls back before mutation when the cell style index is out of range",
+    "bun:tests/unit/xlsx-styles.test.ts:setCellWrapText / rolls back before mutation when xf dependencies reference missing style collections",
+    "bun:tests/unit/xlsx.test.ts:Workbook.open / reads rel-linked shared strings, numerics, booleans and cached formulas across worksheets",
+    "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real go-ooxml inline, numeric and boolean cells through workbook relationships",
+    "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real python-office shared strings from bytes",
+    "bun:tests/unit/xlsx.test.ts:Workbook.open / excludes phonetic guides while retaining shared and inline rich text runs",
+    "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / preserves style attributes and unrelated parts after save and reopen",
+    "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / conservatively invalidates cached formulas across worksheets and sets workbook calc flags",
+    "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / qualifies inserted spreadsheet nodes in prefixed workbook and worksheet edits without duplicating calcPr",
+    "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / reads styled blank cells as null and preserves their style when edited",
+    "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported shared formula edits without mutating the package",
+    "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported array formula edits without mutating the package",
+    "bun:tests/unit/xlsx.test.ts:xlsx acceptance feature / executes the implemented xlsx scenarios with exported bindings",
+    "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
+    "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
+    "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
+    "bun:tests/unit/xml-names.test.ts:XML QName component admission / literal whitespace normalises before character reference decoding",
+    "bun:tests/unit/xml-names.test.ts:XML QName component admission / executes the six QName/whitespace acceptance cases",
+    "bun:tests/unit/xml.test.ts:parseXml / parses namespaces, mixed content and UTF-16 offsets",
+    "bun:tests/unit/xml.test.ts:parseXml / accepts predefined and numeric entities",
+    "bun:tests/unit/xml.test.ts:parseXml / accepts xml-stylesheet processing instructions before the root element",
+    "bun:tests/unit/xml.test.ts:parseXml / normalises literal XML whitespace but preserves character references and original offsets",
+    "bun:tests/unit/xml.test.ts:parseXml / expanded attribute lookup honours aliases, local rebinding and unqualified attributes",
+    "bun:tests/unit/xml.test.ts:parseXml / keeps the xml prefix bound implicitly",
+    "bun:tests/unit/xml.test.ts:parseXml / stores attributes in null-prototype maps",
+    "bun:tests/unit/xml.test.ts:parseXml / rejects malformed or unsafe XML",
+    "bun:tests/unit/xml.test.ts:parseXml / refuses excessive depth, node count and input length",
+    "bun:tests/unit/xml.test.ts:escaping helpers / escape text and attribute values",
+    "bun:tests/unit/xml.test.ts:applyEdits / applies sorted disjoint edits with escaped text and XML fragments",
+    "bun:tests/unit/xml.test.ts:applyEdits / refuses overlapping bounds and unsafe resulting XML",
+    "bun:tests/unit/xml.test.ts:applyEdits / returns OoxmlError instances",
+    "bun:tests/unit/zip.test.ts:crc32 / matches the standard test vector",
+    "bun:tests/unit/zip.test.ts:writeZip / writes deterministic UTF-8 ZIP32 output that readZip can reopen",
+    "bun:tests/unit/zip.test.ts:writeZip / refuses ASCII case-colliding output names",
+    "bun:tests/unit/zip.test.ts:writeZip / refuses non-empty directory entries",
+    "bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment",
+    "bun:tests/unit/zip.test.ts:readZip / refuses duplicate member names",
+    "bun:tests/unit/zip.test.ts:readZip / refuses ASCII case-colliding member names",
+    "bun:tests/unit/zip.test.ts:readZip / refuses noncanonical part paths",
+    "bun:tests/unit/zip.test.ts:readZip / refuses encrypted members",
+    "bun:tests/unit/zip.test.ts:readZip / refuses unsupported compression methods",
+    "bun:tests/unit/zip.test.ts:readZip / refuses multi-disk archives",
+    "bun:tests/unit/zip.test.ts:readZip / refuses malformed ZIP64 sentinels without ZIP64 directory records",
+    "bun:tests/unit/zip.test.ts:readZip / refuses local and central metadata mismatches",
+    "bun:tests/unit/zip.test.ts:readZip / refuses CRC mismatches",
+    "bun:tests/unit/zip.test.ts:readZip / refuses declared size mismatches",
+    "bun:tests/unit/zip.test.ts:readZip / refuses deflated members that inflate past their declared size bound",
+    "bun:tests/unit/zip.test.ts:readZip / refuses undeclared trailing bytes after the archive",
+    "bun:tests/unit/zip.test.ts:readZip / enforces configured archive, count, entry, total, and ratio bounds",
+    "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses an undeclared gap before the ZIP64 end record",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads an empty deflate payload under a nonzero native inflate cap",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads ZIP64 members that use per-entry extras and 64-bit data descriptors",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses malformed ZIP64 locators",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 central counts that cannot fit the declared central span",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 offsets beyond Number.MAX_SAFE_INTEGER",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses unsupported ZIP64 extensible data sectors",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses missing central ZIP64 extras for sentinel fields",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses duplicate central ZIP64 extras rather than guessing",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses truncated central ZIP64 extras",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 local and central size mismatches",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 data descriptor mismatches",
+    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses CRC mismatches in ZIP64 archives",
+    "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / writes forced tiny ZIP64 output that readZip can reopen",
+    "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / automatically emits ZIP64 EOCD records for 65535 tiny entries"
+  ],
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation",
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [
+        "@id-pptx-slide-permutation|{\"kind\":\"reverse\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"rotate\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"same\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"empty\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"aliased\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"default-namespace\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"notes\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-index\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"missing-index\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"out-of-range\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"fractional-index\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-id\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-target\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"wrong-mime\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-list\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"lexical-barrier\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"custom-show\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"extension-metadata\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"protected\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"stale-main\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"stale-relationships\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(21)"
+      ],
+      "outcomes": [
+        "The unit wrapper executes all 21 canonical rows and asserts an empty failure list and exactly 21 passed cases.",
+        "The pinned acceptance bindings assert reopened title/notes order and receipts, exact unrelated payloads, unchanged XML outside list entries, stable handles, and refusal bytes/order."
+      ],
+      "gaps": [
+        "Wrapper assertions aggregate step outcomes; the concrete outcome assertions live in the separately pinned helper.",
+        "No native leaf-count inference beyond the explicit 21-case acceptance result; broader deck metadata is unsupported."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:reorder preserves captured slide anchors and table cells while indexes follow order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(a.index).toBe(2)",
+        "expect(b.index).toBe(1)",
+        "expect(d.currentSlideVersion(a.partName)).toBe(version)",
+        "expect(cell.text).toBe('before')",
+        "expect(()=>a.replaceTextAt(anchor,'Alpha','stale')).toThrow('stale')",
+        "expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Changed','after','same slide'])"
+      ],
+      "outcomes": [
+        "Reordering keeps the slide version and retained cell value while indexes follow the new order.",
+        "A content edit invalidates an old anchor; reopened original slide contains Changed, after and same slide."
+      ],
+      "gaps": [
+        "The canonical scenario names stable identities but lacks rows for table-cell and content-version transitions."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:a text anchor captured before reorder can still edit its original slide",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Updated'])"
+      ],
+      "outcomes": [
+        "A pre-reorder text anchor edits its original slide; reopened titles are Beta, Gamma, Updated."
+      ],
+      "gaps": [
+        "The rotate row checks saved order but has no explicit pre-reorder-anchor action."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide arrays are detached and repeated reorder plus append maintain indexes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.slides[0]).toBe(a)",
+        "expect(d.slideCount).toBe(3)",
+        "expect(a.index).toBe(0)",
+        "expect(last.index).toBe(3)",
+        "expect(last.index).toBe(0)",
+        "expect((await Presentation.open(d.package.toBytes())).slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Delta','Alpha','Beta','Gamma'])"
+      ],
+      "outcomes": [
+        "Mutating a returned slide array does not alter owned count or handles.",
+        "Repeated reorder and append retain indexes and reopen as Delta, Alpha, Beta, Gamma."
+      ],
+      "gaps": [
+        "Detached-array and append-after-reorder sequences lack canonical rows."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:serialization rollback preserves earlier edits, handle identities and order snapshot",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides([2,1,0])).toThrow('injected order serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.slides).toEqual(handles)",
+        "expect(a.index).toBe(0)",
+        "expect(a.index).toBe(2)",
+        "expect(a.inspectText('after').at(-1)!.text).toBe('earlier')"
+      ],
+      "outcomes": [
+        "Injected serialization failure preserves bytes, handle order and the first slide index.",
+        "A later valid reorder succeeds with the earlier edit retained."
+      ],
+      "gaps": [
+        "The canonical refusal scenario has no injected serializer-failure row.",
+        "This test inspects the retained edit in memory after retry; disk rollback is not asserted here."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.package.get(main)!.slice(0,2)]).toEqual(le?[255,254]:[254,255])",
+        "expect(saved.package.text(main)).toContain('encoding=\"UTF-16\"')",
+        "expect(saved.package.get(n)).toEqual(b)",
+        "expect(saved.slides[0]!.inspectText('read')[0]!.text).toBe('Gamma')"
+      ],
+      "outcomes": [
+        "Both byte orders reopen with the original BOM/encoding declaration, Gamma first and all other parts byte-identical."
+      ],
+      "gaps": [
+        "Canonical rows lack UTF-16 variants.",
+        "The body loop and all-members preservation loop are retained for expansion review; no measured runtime leaf count."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(list2.children.map(n=>actual.slice(n.start,n.end))).toEqual([entries[2]!,entries[0]!,entries[1]!])",
+        "expect(actual.slice(list2.openEnd,list2.closeStart)).toBe('\\n  '+entries[2]+'\\n  '+entries[0]+'\\n  '+entries[1])"
+      ],
+      "outcomes": [
+        "Raw slide-ID entries retain quote spelling and local relationship-prefix declarations in reordered slots.",
+        "The list content equals the expected entries separated by the original whitespace slots."
+      ],
+      "gaps": [
+        "Canonical alias rows do not enumerate local per-entry aliases or exact quote/slot whitespace variants.",
+        "Assertions inspect package XML in memory; no saved reopen in this declaration."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides(order as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Invalid arrays and nonarrays throw and preserve exact archive bytes; accessors are never invoked."
+      ],
+      "gaps": [
+        "Canonical rows cover ordinary numeric permutation errors, not sparse/accessor/nonarray/symbol-property variants.",
+        "Dynamic loop expansion is reviewed as source only; no measured runtime leaf count."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:same-order requests still validate protection, IDs and stale metadata",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides([0,1,2])).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.reorderSlides([0,1,2])).toThrow('outside')",
+        "expect(()=>d.addTextSlide('unsafe')).toThrow('outside')"
+      ],
+      "outcomes": [
+        "No-op requests reject unsafe metadata and preserve archive bytes.",
+        "A raw root relationship edit rejects both reorder and append before further mutation."
+      ],
+      "gaps": [
+        "No-op refusal and root-relationship/append interactions lack dedicated canonical rows.",
+        "Loop variants are not expanded into measured leaves."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:invalid lexical slide IDs refuse before archive changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>q.reorderSlides([2,1,0])).toThrow()",
+        "expect(q.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Out-of-range, malformed and negative lexical slide IDs refuse with exact archive bytes retained."
+      ],
+      "gaps": [
+        "The canonical duplicate-ID row does not specify these four lexical/range variants.",
+        "Loop variants are not expanded into measured leaves."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:disk saved slide order and linked notes follow logical handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Alpha'])",
+        "expect(q.slides.map(s=>s.readNotesText())).toEqual(['Notes 1','Notes 2','Notes 0'])"
+      ],
+      "outcomes": [
+        "After disk save/reopen the rotated titles are Beta, Gamma, Alpha and notes are Notes 1, Notes 2, Notes 0."
+      ],
+      "gaps": [
+        "The canonical notes row uses reversal; this native test combines notes with rotation."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides(order)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Extra 00/01/0002 own keys throw without changing archive bytes, for data and accessor properties; no getter runs."
+      ],
+      "gaps": [
+        "The canonical refusal scenario lacks noncanonical own-key data/accessor rows.",
+        "Nested loops are retained for expansion review; no measured runtime leaf count."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:public three-argument Slide constructor retains identity across reorders",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(alias.index).toBe(0)",
+        "expect(alias.index).toBe(2)",
+        "expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Alias','retained'])",
+        "expect(()=>new Slide(d,'ppt/slides/absent.xml').index).toThrow('not in this presentation')"
+      ],
+      "outcomes": [
+        "A public constructor alias follows the original part from index 0 to 2 and reopens with Alias and retained text.",
+        "A nonexistent part alias refuses its index lookup."
+      ],
+      "gaps": [
+        "Canonical identity rows do not exercise public constructor aliases or missing-part aliases."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false
+    }
+  ]
+}

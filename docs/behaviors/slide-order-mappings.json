@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/pptx-slide-order.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
+    "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
+    "src/pptx/index.ts": "2ac2b87c1507e74742ba7c2d6501036574530ffb8b16d5102a9bfd392058688d",
+    "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
+    "scripts/gherkin.ts": "4f8c38ec3b8cada3a38366a97b76ed3052aef606545cc98dfb3c202df09d70bf",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation",
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [
+        "@id-pptx-slide-permutation|{\"kind\":\"reverse\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"rotate\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"same\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"empty\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"aliased\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"default-namespace\"}",
+        "@id-pptx-slide-permutation|{\"kind\":\"notes\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-index\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"missing-index\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"out-of-range\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"fractional-index\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-id\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-target\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"wrong-mime\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"duplicate-list\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"lexical-barrier\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"custom-show\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"extension-metadata\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"protected\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"stale-main\"}",
+        "@id-pptx-slide-permutation-refusal|{\"kind\":\"stale-relationships\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(21)"
+      ],
+      "outcomes": [
+        "The unit wrapper executes all 21 canonical rows and asserts an empty failure list and exactly 21 passed cases.",
+        "The pinned acceptance bindings assert reopened title/notes order and receipts, exact unrelated payloads, unchanged XML outside list entries, stable handles, and refusal bytes/order."
+      ],
+      "gaps": [
+        "Wrapper assertions aggregate step outcomes; the concrete outcome assertions live in the separately pinned helper.",
+        "No native leaf-count inference beyond the explicit 21-case acceptance result; broader deck metadata is unsupported."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:reorder preserves captured slide anchors and table cells while indexes follow order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(a.index).toBe(2)",
+        "expect(b.index).toBe(1)",
+        "expect(d.currentSlideVersion(a.partName)).toBe(version)",
+        "expect(cell.text).toBe('before')",
+        "expect(()=>a.replaceTextAt(anchor,'Alpha','stale')).toThrow('stale')",
+        "expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Changed','after','same slide'])"
+      ],
+      "outcomes": [
+        "Reordering keeps the slide version and retained cell value while indexes follow the new order.",
+        "A content edit invalidates an old anchor; reopened original slide contains Changed, after and same slide."
+      ],
+      "gaps": [
+        "The canonical scenario names stable identities but lacks rows for table-cell and content-version transitions."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:a text anchor captured before reorder can still edit its original slide",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Updated'])"
+      ],
+      "outcomes": [
+        "A pre-reorder text anchor edits its original slide; reopened titles are Beta, Gamma, Updated."
+      ],
+      "gaps": [
+        "The rotate row checks saved order but has no explicit pre-reorder-anchor action."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide arrays are detached and repeated reorder plus append maintain indexes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.slides[0]).toBe(a)",
+        "expect(d.slideCount).toBe(3)",
+        "expect(a.index).toBe(0)",
+        "expect(last.index).toBe(3)",
+        "expect(last.index).toBe(0)",
+        "expect((await Presentation.open(d.package.toBytes())).slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Delta','Alpha','Beta','Gamma'])"
+      ],
+      "outcomes": [
+        "Mutating a returned slide array does not alter owned count or handles.",
+        "Repeated reorder and append retain indexes and reopen as Delta, Alpha, Beta, Gamma."
+      ],
+      "gaps": [
+        "Detached-array and append-after-reorder sequences lack canonical rows."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:serialization rollback preserves earlier edits, handle identities and order snapshot",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides([2,1,0])).toThrow('injected order serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.slides).toEqual(handles)",
+        "expect(a.index).toBe(0)",
+        "expect(a.index).toBe(2)",
+        "expect(a.inspectText('after').at(-1)!.text).toBe('earlier')"
+      ],
+      "outcomes": [
+        "Injected serialization failure preserves bytes, handle order and the first slide index.",
+        "A later valid reorder succeeds with the earlier edit retained."
+      ],
+      "gaps": [
+        "The canonical refusal scenario has no injected serializer-failure row.",
+        "This test inspects the retained edit in memory after retry; disk rollback is not asserted here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.package.get(main)!.slice(0,2)]).toEqual(le?[255,254]:[254,255])",
+        "expect(saved.package.text(main)).toContain('encoding=\"UTF-16\"')",
+        "expect(saved.package.get(n)).toEqual(b)",
+        "expect(saved.slides[0]!.inspectText('read')[0]!.text).toBe('Gamma')"
+      ],
+      "outcomes": [
+        "Both byte orders reopen with the original BOM/encoding declaration, Gamma first and all other parts byte-identical."
+      ],
+      "gaps": [
+        "Canonical rows lack UTF-16 variants.",
+        "The body loop and all-members preservation loop are retained for expansion review; no measured runtime leaf count."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(list2.children.map(n=>actual.slice(n.start,n.end))).toEqual([entries[2]!,entries[0]!,entries[1]!])",
+        "expect(actual.slice(list2.openEnd,list2.closeStart)).toBe('\\n  '+entries[2]+'\\n  '+entries[0]+'\\n  '+entries[1])"
+      ],
+      "outcomes": [
+        "Raw slide-ID entries retain quote spelling and local relationship-prefix declarations in reordered slots.",
+        "The list content equals the expected entries separated by the original whitespace slots."
+      ],
+      "gaps": [
+        "Canonical alias rows do not enumerate local per-entry aliases or exact quote/slot whitespace variants.",
+        "Assertions inspect package XML in memory; no saved reopen in this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides(order as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Invalid arrays and nonarrays throw and preserve exact archive bytes; accessors are never invoked."
+      ],
+      "gaps": [
+        "Canonical rows cover ordinary numeric permutation errors, not sparse/accessor/nonarray/symbol-property variants.",
+        "Dynamic loop expansion is reviewed as source only; no measured runtime leaf count."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:same-order requests still validate protection, IDs and stale metadata",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides([0,1,2])).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.reorderSlides([0,1,2])).toThrow('outside')",
+        "expect(()=>d.addTextSlide('unsafe')).toThrow('outside')"
+      ],
+      "outcomes": [
+        "No-op requests reject unsafe metadata and preserve archive bytes.",
+        "A raw root relationship edit rejects both reorder and append before further mutation."
+      ],
+      "gaps": [
+        "No-op refusal and root-relationship/append interactions lack dedicated canonical rows.",
+        "Loop variants are not expanded into measured leaves."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:invalid lexical slide IDs refuse before archive changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>q.reorderSlides([2,1,0])).toThrow()",
+        "expect(q.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Out-of-range, malformed and negative lexical slide IDs refuse with exact archive bytes retained."
+      ],
+      "gaps": [
+        "The canonical duplicate-ID row does not specify these four lexical/range variants.",
+        "Loop variants are not expanded into measured leaves."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:disk saved slide order and linked notes follow logical handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['Beta','Gamma','Alpha'])",
+        "expect(q.slides.map(s=>s.readNotesText())).toEqual(['Notes 1','Notes 2','Notes 0'])"
+      ],
+      "outcomes": [
+        "After disk save/reopen the rotated titles are Beta, Gamma, Alpha and notes are Notes 1, Notes 2, Notes 0."
+      ],
+      "gaps": [
+        "The canonical notes row uses reversal; this native test combines notes with rotation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:noncanonical numeric own keys and accessors refuse instead of hiding extra order data",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.reorderSlides(order)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Extra 00/01/0002 own keys throw without changing archive bytes, for data and accessor properties; no getter runs."
+      ],
+      "gaps": [
+        "The canonical refusal scenario lacks noncanonical own-key data/accessor rows.",
+        "Nested loops are retained for expansion review; no measured runtime leaf count."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-slide-order.test.ts:public three-argument Slide constructor retains identity across reorders",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-slide-permutation"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(alias.index).toBe(0)",
+        "expect(alias.index).toBe(2)",
+        "expect(q.slides[2]!.inspectText('saved').map(p=>p.text)).toEqual(['Alias','retained'])",
+        "expect(()=>new Slide(d,'ppt/slides/absent.xml').index).toThrow('not in this presentation')"
+      ],
+      "outcomes": [
+        "A public constructor alias follows the original part from index 0 to 2 and reopens with Alias and retained text.",
+        "A nonexistent part alias refuses its index lookup."
+      ],
+      "gaps": [
+        "Canonical identity rows do not exercise public constructor aliases or missing-part aliases."
+      ]
+    }
+  ]
+}

@@ -18,6 +18,7 @@ check:
 	bun run typecheck
 	bun run scripts/test-inventory.ts --check
 	bun run scripts/mapping-reconciliation.ts --check
+	bun run scripts/outcome-mappings.ts --check
 	bun run verify
 	bun run scripts/coverage.ts --check
 	bun run scripts/shared-contracts.ts

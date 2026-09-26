@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 380,
+  "nativeDeclarations": 389,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 153,
+  "withoutStagingCount": 162,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2590,6 +2590,51 @@
       "id": "bun:tests/unit/oracle-process.test.ts:oracle output is bounded and excessive output terminates the command group",
       "path": "tests/unit/oracle-process.test.ts",
       "sourceSha256": "9794b02aac859024269cf4baf27b6db7222b43332e5e7d7b7acb7e8562d01c9f"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:outcome mappings validate source pins and preserve the unmapped denominator without execution credit",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses missing or duplicated test declarations",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses stale source or nonexistent native assertions",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects fabricated execution credit and preserves dynamic review flags",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:committed mappings enumerate every slide-order test, assertions and known gaps",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
+    },
+    {
+      "id": "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
+      "path": "tests/unit/outcome-mappings.test.ts",
+      "sourceSha256": "368512c47fe6b75b5f14e943b15cee55246c7bc191ad3cb6064862414d470c37"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
