@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "scope": "Three native authored samples; no full Office compatibility claim",
+  "sourceBase": "6fa79eb923787e42272d8edce0e52b7b41ade810",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.12.0",
+    "commit": "89518aa62c9515a7ccbe05ed9afc1bbc89e1118a",
+    "manifestSha256": "deef358591495f89e853a5ac3371a52032e263238c20d43e5deaa738768f9b0e"
+  },
+  "versions": {
+    "dotnet": "10.0.400",
+    "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+    "poppler": "pdftotext version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+  },
+  "sources": {
+    "scripts/office-oracles.ts": "bb3b848adec6f9e98bd44e429466fc08481f71dcef5e9625e26d414d3e0bceef",
+    "scripts/oracle-process.ts": "162ffeee57acf45fe794c3d778960f670548358cad63ea4f2df153a4a0cf7084",
+    "tests/oracles/schema/Program.cs": "6f73c79c8bf5edf71afe1076991032ffc9515ed476a8836c908eb19a5e997ef5",
+    "tests/oracles/schema/SchemaCheck.csproj": "61f37badb8a83b06af9785fd2a7446c9cdf16ac7485f052ecf93a2dcccbb0a22",
+    "tests/oracles/schema/packages.lock.json": "1ad2e65b1c4329e88a7fe77b759fe850443f16bc1fecabb718ad4f54ff381213",
+    "src/docx/index.ts": "a8e9fa2235d6988c018b0e9b5495209bbe0e4c0135faa3cb7855b05a27ea7dc9",
+    "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+    "src/pptx/index.ts": "5a916d91446944d541e59a4adb659b7e2041e948319b5bab8d1f8a97f8629977",
+    "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+    "src/xlsx/index.ts": "5d817686f0a2107a725525b0115b7aa7846a3760390476179aff356eaafa4f73",
+    "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e"
+  },
+  "inputs": [
+    {
+      "file": "word.docx",
+      "sha256": "1afac6da8f185c3962ec0404a02704ddd86d7718cdf2712233da73af7c9c8f2a"
+    },
+    {
+      "file": "deck.pptx",
+      "sha256": "84544b04d455985cde4af227059fe66e4765d92e7ce98f61c42eaa273b7eb519"
+    },
+    {
+      "file": "book.xlsx",
+      "sha256": "fc1234a42a14a4ab9783b820b80558b9a1280cc8634ef73a272aaec661f0e3cb"
+    }
+  ],
+  "schema": {
+    "schemaVersion": 1,
+    "validator": "DocumentFormat.OpenXml",
+    "version": "3.5.1+Branch.main.Sha.3139fdfd27414548a41555f7848d5728f6e71a42.3139fdfd27414548a41555f7848d5728f6e71a42",
+    "profile": "Office2019",
+    "status": "passed",
+    "results": [
+      {
+        "file": "word.docx",
+        "sha256": "1afac6da8f185c3962ec0404a02704ddd86d7718cdf2712233da73af7c9c8f2a",
+        "errors": [],
+        "truncated": false
+      },
+      {
+        "file": "deck.pptx",
+        "sha256": "84544b04d455985cde4af227059fe66e4765d92e7ce98f61c42eaa273b7eb519",
+        "errors": [],
+        "truncated": false
+      },
+      {
+        "file": "book.xlsx",
+        "sha256": "fc1234a42a14a4ab9783b820b80558b9a1280cc8634ef73a272aaec661f0e3cb",
+        "errors": [],
+        "truncated": false
+      }
+    ]
+  },
+  "negativeControl": {
+    "schemaVersion": 1,
+    "validator": "DocumentFormat.OpenXml",
+    "version": "3.5.1+Branch.main.Sha.3139fdfd27414548a41555f7848d5728f6e71a42.3139fdfd27414548a41555f7848d5728f6e71a42",
+    "profile": "Office2019",
+    "status": "failed",
+    "results": [
+      {
+        "file": "negative.pptx",
+        "sha256": "440a66443c33fe11f0b1c83089b9eb81fa62fa041a6cd3326838e7436b15d9d8",
+        "errors": [
+          {
+            "Id": "Sch_IncompleteContentExpectingComplex",
+            "Description": "The element has incomplete content. List of possible elements expected: <http://schemas.openxmlformats.org/presentationml/2006/main:restoredLeft>.",
+            "part": "/ppt/viewProps.xml",
+            "xpath": "/p:viewPr[1]/p:normalViewPr[1]"
+          }
+        ],
+        "truncated": false
+      }
+    ]
+  },
+  "rendering": [
+    {
+      "file": "word.pdf",
+      "sha256": "f68be0b6226e9e39ac4f69a49e93a6565e83710862a1a9043aa9903b5707ff3f",
+      "pages": 1,
+      "expectedText": [
+        "Native Word oracle",
+        "A second paragraph.",
+        "Answer",
+        "42"
+      ],
+      "textSha256": "aa2eb81a7b2d165dad631ab1b068b4f15fe445391193527121951943964578d9",
+      "status": "passed",
+      "visualComparison": "not performed"
+    },
+    {
+      "file": "deck.pdf",
+      "sha256": "57eafd87f2ecface803a7aa7b026d92368a2eaabcc27036c8ce32be4c949dbc1",
+      "pages": 2,
+      "expectedText": [
+        "Native slide oracle",
+        "Second slide oracle",
+        "Positioned oracle box",
+        "Answer",
+        "42"
+      ],
+      "textSha256": "10a28678fc0d0e77e50a8f6fc35543e7445ea9e264747ce9c87c79c0d0abae8f",
+      "status": "passed",
+      "visualComparison": "not performed"
+    },
+    {
+      "file": "book.pdf",
+      "sha256": "64250f2ad172f6fefc0d85b969e4b65bb2580e095f2ce5cfe1c328d2facaeb67",
+      "pages": 1,
+      "expectedText": [
+        "21",
+        "22",
+        "43"
+      ],
+      "textSha256": "78304c8279947d6c717e0d3bebd73882b3a95e6e819c2da471b1e7e9b572206e",
+      "status": "passed",
+      "visualComparison": "not performed"
+    }
+  ],
+  "calculation": {
+    "producer": "LibreOffice 24.2.7.2 420(Build:2)",
+    "formula": "SUM(A1:A2)",
+    "inputs": [
+      21,
+      22
+    ],
+    "originalCache": 999,
+    "inputCache": null,
+    "expected": 43,
+    "observed": 43,
+    "outputSha256": "3b84370f64695384eb0477782508d70e6f1f094cc3c35972de8ac30ca8ab74d0",
+    "status": "passed",
+    "bunCalculation": false
+  },
+  "native": {
+    "unitTests": 334,
+    "assertions": 4168,
+    "acceptanceCases": 253,
+    "runId": "b7f7dfff-8e3c-4e36-8f58-efb12148079b",
+    "examples": 3
+  },
+  "limits": [
+    "Three authored samples, not all fixtures or format operations",
+    "PDF page/text assertions do not establish visual fidelity or font equivalence",
+    "LibreOffice is not Microsoft Office",
+    "One arithmetic formula recalculated externally; no Bun calculation credit"
+  ],
+  "findings": [
+    {
+      "id": "pptx-view-properties",
+      "before": "3 Sch_IncompleteContentExpectingComplex errors in /ppt/viewProps.xml",
+      "after": "required pane sizes, scales and origins; SDK validates authored deck"
+    },
+    {
+      "id": "pptx-title-layout",
+      "before": "LibreOffice clipped title text with absent layout placeholder geometry",
+      "after": "explicit title/subtitle layout transforms; full PDF title markers present"
+    },
+    {
+      "id": "calc-cache-import",
+      "observed": "LibreOffice24.2.7 retained stale999 despite recalcflags; Bun cacheclear plus external recalc produces43",
+      "nativeCalculation": false
+    }
+  ],
+  "review": {
+    "scope": "Read-only sibling review, no independent rerun",
+    "finding": "Launcher-only kill could retain descendant pipes indefinitely",
+    "ownerFix": "Separate POSIX groups, group kill,1s bounded drain,4MiB output cap;3runner tests including child-ready and delayed-marker assertion",
+    "visualClaim": "Per-page slide markers added; no pixel or general nonclipping guarantee"
+  }
+}

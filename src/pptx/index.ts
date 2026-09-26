@@ -571,12 +571,16 @@ function buildViewPropsXml(): string {
   return [
     xmlDeclaration(),
     `<p:viewPr xmlns:a="${DRAWING_NS}" xmlns:r="${OFFICE_REL_NS}" xmlns:p="${PRESENTATION_NS}">`,
-    `<p:normalViewPr/>`,
-    `<p:slideViewPr><p:cSldViewPr/></p:slideViewPr>`,
-    `<p:notesTextViewPr/>`,
+    `<p:normalViewPr><p:restoredLeft sz="15620"/><p:restoredTop sz="94660"/></p:normalViewPr>`,
+    `<p:slideViewPr><p:cSldViewPr>${buildCommonViewXml()}</p:cSldViewPr></p:slideViewPr>`,
+    `<p:notesTextViewPr>${buildCommonViewXml()}</p:notesTextViewPr>`,
     `<p:gridSpacing cx="76200" cy="76200"/>`,
     `</p:viewPr>`,
   ].join("");
+}
+
+function buildCommonViewXml(): string {
+  return `<p:cViewPr><p:scale><a:sx n="100" d="100"/><a:sy n="100" d="100"/></p:scale><p:origin x="0" y="0"/></p:cViewPr>`;
 }
 
 function buildTableStylesXml(): string {
@@ -725,7 +729,7 @@ function buildLayoutPlaceholderShapeXml(options: {
     `<p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr>`,
     `<p:nvPr>${buildPlaceholderXml(options.placeholder)}</p:nvPr>`,
     `</p:nvSpPr>`,
-    `<p:spPr/>`,
+    `<p:spPr><a:xfrm><a:off x="457200" y="${options.placeholder.type==='subTitle'?'2286000':'457200'}"/><a:ext cx="8229600" cy="1371600"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr>`,
     `<p:txBody><a:bodyPr/><a:lstStyle/>${buildTextParagraphXml(options.text)}</p:txBody>`,
     `</p:sp>`,
   ].join("");

@@ -12,4 +12,7 @@ turn unimplemented behaviour into completed work. The complete native test
 catalogue is being captured and reconciled; staging mappings are not coverage.
 
 Production runs inside Bun. External Office applications may be independent test
-oracles only. XML readback does not establish rendering or calculation fidelity.
+oracles only. The [authored-file oracle lane](office-oracles.md) checks three
+small samples with Open XML SDK schema validation, LibreOffice PDF text/page
+checks and one external formula recalculation. Broader rendering/calculation
+fidelity and full-corpus validation remain open.

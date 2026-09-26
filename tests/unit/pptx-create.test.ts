@@ -1,4 +1,7 @@
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
+import {Presentation} from '../../src/pptx/index.ts';
+import {parseXml,elements} from '../../src/xml/index.ts';
+const PRESENTATION_NS='http://schemas.openxmlformats.org/presentationml/2006/main';
 import { describe, expect, test } from "bun:test";
 import { join, resolve } from "node:path";
 
@@ -176,3 +179,27 @@ function inventoryFor(feature: AcceptanceFeature): AcceptanceInventory {
     },
   };
 }
+
+test('authored presentation view properties have required pane sizes, scales and origins',()=>{
+ const deck=Presentation.create(),root=parseXml(deck.package.text('ppt/viewProps.xml')).root;
+ const normal=elements(root,'normalViewPr',PRESENTATION_NS)[0]!;
+ expect(normal.children.map(n=>n.localName)).toEqual(['restoredLeft','restoredTop']);
+ expect(normal.children.map(n=>n.attributes.sz)).toEqual(['15620','94660']);
+ const slide=elements(root,'cSldViewPr',PRESENTATION_NS)[0]!,notes=elements(root,'notesTextViewPr',PRESENTATION_NS)[0]!;
+ for(const container of [slide,notes]){
+  expect(container.children.map(n=>n.localName)).toEqual(['cViewPr']);
+  const view=container.children[0]!;expect(view.children.map(n=>n.localName)).toEqual(['scale','origin']);
+  expect(view.children[0]!.children.map(n=>[n.namespaceURI,n.localName,n.attributes])).toEqual([
+   ['http://schemas.openxmlformats.org/drawingml/2006/main','sx',{n:'100',d:'100'}],
+   ['http://schemas.openxmlformats.org/drawingml/2006/main','sy',{n:'100',d:'100'}],
+  ]);
+  expect(view.children[1]!.attributes).toEqual({x:'0',y:'0'});
+ }
+});
+
+test('authored title layout gives title and subtitle explicit nonoverlapping slide-space bounds',()=>{
+ const deck=Presentation.create(),xml=parseXml(deck.package.text('ppt/slideLayouts/slideLayout1.xml'));
+ const shapes=elements(xml,'sp',PRESENTATION_NS);expect(shapes).toHaveLength(2);
+ expect(shapes.map(s=>elements(s,'off','http://schemas.openxmlformats.org/drawingml/2006/main').map(n=>n.attributes))).toEqual([[{x:'457200',y:'457200'}],[{x:'457200',y:'2286000'}]]);
+ expect(shapes.map(s=>elements(s,'ext','http://schemas.openxmlformats.org/drawingml/2006/main').map(n=>n.attributes))).toEqual([[{cx:'8229600',cy:'1371600'}],[{cx:'8229600',cy:'1371600'}]]);
+});

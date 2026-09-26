@@ -1,4 +1,4 @@
-.PHONY: install lint typecheck test acceptance verify examples check parity clean
+.PHONY: install lint typecheck test acceptance verify examples check parity office-oracles clean
 install:
 	bun install --frozen-lockfile
 lint: typecheck
@@ -26,6 +26,9 @@ check:
 	bun run examples/review-word.ts
 	bun run verify
 	bun run scripts/shared-contracts.ts
+# Independent development-only validators, never called by runtime APIs.
+office-oracles:
+	bun run scripts/office-oracles.ts
 parity: check
 	bun run scripts/verify.ts --full
 	bun run scripts/acceptance.ts --full

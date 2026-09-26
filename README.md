@@ -67,6 +67,11 @@ runs types, shared-reference checks, unit tests, exact Gherkin acceptance and ex
 `make parity` also requires all planned behaviour gaps to be closed.
 It currently fails as expected.
 
+`make office-oracles` separately checks three authored files with Open XML SDK,
+LibreOffice and Poppler. It catches schema errors, missing PDF text and one
+external calculation round trip. See [independent checks](docs/contracts/office-oracles.md)
+for prerequisites and limits; these tools are never production dependencies.
+
 Tests use the tagged shared reference submodule. Clone with --recurse-submodules
 or run git submodule update --init --recursive. Fixtures are read-only; missing
 inputs fail rather than generating fallbacks.
