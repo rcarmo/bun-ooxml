@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 527,
+  "nativeDeclarations": 543,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 300,
+  "withoutStagingCount": 316,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3645,6 +3645,86 @@
       "id": "bun:tests/unit/xml-removal.test.ts:three canonical XML removal cases execute while unrelated shared operations stay planned",
       "path": "tests/unit/xml-removal.test.ts",
       "sourceSha256": "49114efeec5214c6b31ccb397025c4cef467d4efb528fdd362b4988a96966e1d"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:structured insertion preserves parent tag spelling, tail, comments and siblings",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:replacement renders only in the surviving parent scope with exact canonical custody",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:4 by 5 by 5 namespace matrix preserves element, attribute and text meanings",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:structured batches reject root replacement, overlapping and duplicate targets including empty payloads",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:disjoint replacements and insertions preserve original order independent of target order",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:new child scopes do not leak into siblings or reuse shadowed parent prefixes",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:structured edits require issued handles, frozen inputs are accepted and caller iterators ignored",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:invalid structured names, namespace declarations, duplicate attributes and data refuse atomically",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:bounded renderer refuses cycles, excessive depth, node counts and expanded output",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:empty replacements validate newly adjacent text before returning output",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:generated prefixes avoid occupied bindings and scale across many distinct attribute namespaces",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:rendered size budget includes inherited-prefix names, declarations and self-closing expansion",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:depth limits include existing ancestors and shared authored objects are independent siblings",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:seven canonical structured-edit cases execute without activating the byte-input seed case",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:structured acceptance predicates reject corrupted namespaces, text, no-ops and fabricated refusals",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
+    },
+    {
+      "id": "bun:tests/unit/xml-structure.test.ts:namespace scope work has a separate bounded refusal for repeated broad scopes",
+      "path": "tests/unit/xml-structure.test.ts",
+      "sourceSha256": "655441b4264bae0587e5fc11dd982143bb912c2a6a6e937d00cff23eb5204fe3"
     },
     {
       "id": "bun:tests/unit/xml-values-bindings.test.ts:eleven XML value cases execute with every Then asserted and other operations left planned",

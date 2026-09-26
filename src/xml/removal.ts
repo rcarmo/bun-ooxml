@@ -1,7 +1,9 @@
 import { OoxmlError } from '../errors.ts';
 import { inspectXmlEvents, validateXml, type XmlElement } from './index.ts';
-import { setSnapshotAttributes, type AttributeSource, type XmlAttributePatch } from './attributes.ts';
+import { setSnapshotAttributes, type XmlAttributePatch } from './attributes.ts';
 export type { XmlAttributePatch } from './attributes.ts';
+import { editStructure, type StructureSource, type XmlStructurePatch } from './structure.ts';
+export type { XmlExpandedName, XmlStructuredAttribute, XmlContent, XmlStructurePatch } from './structure.ts';
 
 /** Immutable UTF-16 source offsets. Only the issuing snapshot accepts this handle. */
 export interface XmlRemovalTarget {
@@ -17,7 +19,7 @@ export class XmlSnapshot {
   readonly elements: readonly XmlRemovalTarget[];
   readonly #source: string;
   readonly #owned = new WeakSet<XmlRemovalTarget>();
-  readonly #attributeSources = new WeakMap<XmlRemovalTarget, AttributeSource>();
+  readonly #attributeSources = new WeakMap<XmlRemovalTarget, StructureSource>();
 
   private constructor(source: string) {
     if (typeof source !== 'string') fail('XML_REMOVAL_SOURCE', 'Expected an XML source string');
@@ -28,12 +30,13 @@ export class XmlSnapshot {
     inspectXmlEvents(source, {
       start(node) { nodes.push(node); }, end() {}, text() {}, comment() {}, instruction() {},
     });
-    const metadata = new Map<XmlElement, AttributeSource>();
+    const metadata = new Map<XmlElement, StructureSource>();
     this.elements = Object.freeze(nodes.map(node => {
       const { name, localName, namespaceURI, start, end } = node;
       const target = Object.freeze({ name, localName, namespaceURI, start, end });
-      const attributes: AttributeSource = { start, openEnd: node.openEnd, selfClosing: node.selfClosing,
-        attributes: node.attributes, namespaces: node.attributeNamespaces, parent: node.parent ? metadata.get(node.parent) : undefined };
+      const parent = node.parent ? metadata.get(node.parent) : undefined;
+      const attributes: StructureSource = { name, start, end, closeStart: node.closeStart, openEnd: node.openEnd, selfClosing: node.selfClosing,
+        attributes: node.attributes, namespaces: node.attributeNamespaces, parent, depth: (parent?.depth ?? 0) + 1 };
       metadata.set(node, attributes);
       this.#owned.add(target);
       this.#attributeSources.set(target, attributes);
@@ -47,6 +50,16 @@ export class XmlSnapshot {
   /** Set existing or new attributes in the original snapshot's namespace scope. */
   setAttributes(patches: readonly XmlAttributePatch[]): string {
     return setSnapshotAttributes(this.#source, patches, this.#attributeSources);
+  }
+
+  /** Append authored content in the target element's namespace scope. */
+  appendChildren(patches: readonly XmlStructurePatch[]): string {
+    return editStructure(this.#source, patches, this.#attributeSources, false);
+  }
+
+  /** Replace disjoint non-root elements in their surviving parents' scopes. */
+  replaceElements(patches: readonly XmlStructurePatch[]): string {
+    return editStructure(this.#source, patches, this.#attributeSources, true);
   }
 
   /** Return a new string; the original snapshot and all of its handles stay valid. */
