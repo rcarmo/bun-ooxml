@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-Shared reference manifest: **144 assets**. Implementation evidence remains consumer-local.
+Shared reference manifest: **145 assets**. Implementation evidence remains consumer-local.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Steps |
 |---|---|---:|---:|---:|
@@ -9,6 +9,7 @@ Shared reference manifest: **144 assets**. Implementation evidence remains consu
 | features/planned/office-mutation-additions.feature | planned | 3 | 3 | 12 |
 | references/fixtures-ooxml/workflows/docx/comments.feature | implemented | 4 | 14 | 46 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 4 | 8 | 47 |
+| references/fixtures-ooxml/workflows/docx/page-layout.feature | implemented | 2 | 22 | 74 |
 | references/fixtures-ooxml/workflows/docx/paragraph-style.feature | implemented | 2 | 19 | 62 |
 | references/fixtures-ooxml/workflows/docx/run-formatting.feature | implemented | 2 | 15 | 49 |
 | references/fixtures-ooxml/workflows/docx/style-authoring.feature | implemented | 2 | 24 | 86 |

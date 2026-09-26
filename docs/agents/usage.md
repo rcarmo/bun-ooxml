@@ -180,6 +180,20 @@ Use `inspectStories()` for linked body/header/footer/note/comment text and exami
 its `blindRegions` before relying on coverage. Story-aware search/handles are not
 part of `Document.find()`.
 
+## Final section page layout
+
+```ts
+const page = doc.getPageLayout();
+doc.setPageLayout({...page, width: 15840, height: 12240, orientation: "landscape"});
+await doc.save(output);
+```
+
+Values are integer twips. The existing final body section is selected; earlier
+sections and header/footer links are preserved. Reacquire paragraph/span/cell
+handles after a real change. Mirrored/book-fold layouts and ambiguous geometry
+refuse. See [page geometry](../contracts/page-layout.md) for bounds and independent
+validation scope.
+
 ## Direct paragraph formatting
 
 ```ts

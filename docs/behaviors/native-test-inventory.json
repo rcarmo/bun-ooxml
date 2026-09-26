@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 354,
-  "files": 39,
+  "count": 367,
+  "files": 40,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -34,6 +34,12 @@
       "path": "tests/unit/docx-formatting.test.ts",
       "sha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
       "declarations": 18,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "declarations": 13,
       "issues": []
     },
     {
@@ -146,7 +152,7 @@
     },
     {
       "path": "tests/unit/references.test.ts",
-      "sha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "sha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
       "declarations": 4,
       "issues": []
     },
@@ -279,6 +285,10 @@
       "sha256": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f"
     },
     {
+      "path": "tests/acceptance/page-layout.ts",
+      "sha256": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a"
+    },
+    {
       "path": "tests/acceptance/paragraph-style.ts",
       "sha256": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27"
     },
@@ -304,7 +314,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "e836337f2bab7ae3e810993d59b7aa302f9217651c8e4f40d942b3fb30d34648"
+      "sha256": "93a6a300ee7e6fcad3fb35a96a289ae00d5880374671bdd77eb9c2a12bc1ce47"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -365,6 +375,11 @@
     "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
     "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
     "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+    "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
+    "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+    "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+    "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
+    "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
     "bun:tests/unit/docx-paragraph-style.test.ts:missing, self-closing properties and self-closing empty paragraphs accept first style child",
     "bun:tests/unit/docx-paragraph-style.test.ts:style-only update preserves UTF-16 encoding and BOM",
     "bun:tests/unit/docx-paragraph-style.test.ts:removal requests still refuse protection and invalid topology",
@@ -438,6 +453,11 @@
     "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
     "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
     "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+    "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
+    "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+    "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+    "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
+    "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
     "bun:tests/unit/docx-paragraph-style.test.ts:missing, self-closing properties and self-closing empty paragraphs accept first style child",
     "bun:tests/unit/docx-paragraph-style.test.ts:style-only update preserves UTF-16 encoding and BOM",
     "bun:tests/unit/docx-paragraph-style.test.ts:removal requests still refuse protection and invalid topology",
@@ -2558,6 +2578,557 @@
         "p.toBytes",
         "q.paragraphs.0.setRunFormatting",
         "q.save"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 6,
+      "title": "final section geometry executes22 saved outcomes and atomic refusals",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(22)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const path='workflows/docx/page-layout.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun')),rows=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inv:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(rows.length),steps:count(rows.reduce((n,c)=>n+c.steps.length,0))}};\n const r=await executeAcceptance(inv,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(22);\n}",
+      "calls": [
+        ".replace",
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "f.scenarios.flatMap",
+        "fixturesRoot",
+        "join",
+        "newAcceptanceRunId",
+        "parseFeature",
+        "rows.reduce"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:page geometry changes stale paragraphs and cells while table handles remain valid",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 17,
+      "title": "page geometry changes stale paragraphs and cells while table handles remain valid",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.getPageLayout()).toEqual(originalLayout)",
+        "expect(await d.save()).toEqual(before)",
+        "expect(()=>p.text).toThrow('stale')",
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(span.replace('wrong')).rejects.toThrow('stale')",
+        "expect(table.cell(0,0).text).toBe('cell')",
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))",
+        "expect(q.tables[0]!.cell(0,0).text).toBe('cell')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const d=await layoutDocument(),table=d.addTable(1,1);table.cell(0,0).text='cell';const p=d.paragraphs[0]!,span=p.find('Layout')[0]!,cell=table.cell(0,0),before=await d.save();expect(d.getPageLayout()).toEqual(originalLayout);expect(await d.save()).toEqual(before);d.setPageLayout(desired('landscape'));expect(()=>p.text).toThrow('stale');expect(()=>cell.text).toThrow('stale');await expect(span.replace('wrong')).rejects.toThrow('stale');expect(table.cell(0,0).text).toBe('cell');const q=await Document.open(await d.save());expect(q.getPageLayout()).toEqual(desired('landscape'));expect(q.tables[0]!.cell(0,0).text).toBe('cell');\n}",
+      "calls": [
+        "Document.open",
+        "d.addTable",
+        "d.getPageLayout",
+        "d.save",
+        "d.setPageLayout",
+        "desired",
+        "expect",
+        "expect().rejects.toThrow",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "layoutDocument",
+        "p.find",
+        "q.getPageLayout",
+        "q.tables.0.cell",
+        "span.replace",
+        "table.cell"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:numeric and default-orientation no-op retains exact spelling and existing handles",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 20,
+      "title": "numeric and default-orientation no-op retains exact spelling and existing handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(q.getPageLayout().width).toBe(12240)",
+        "expect(q.setPageLayout(originalLayout)).toEqual({changed:0})",
+        "expect(await q.save()).toEqual(before)",
+        "expect(q.paragraphs[0]).toBe(handle)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const d=await layoutDocument(),p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('w:w=\"12240\"',\"w:w = '012240'\"));const q=await Document.open(p.toBytes()),before=await q.save(),handle=q.paragraphs[0]!;const copy=q.getPageLayout();copy.width=3;expect(q.getPageLayout().width).toBe(12240);expect(q.setPageLayout(originalLayout)).toEqual({changed:0});expect(await q.save()).toEqual(before);expect(q.paragraphs[0]).toBe(handle);\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.save",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "layoutDocument",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "q.getPageLayout",
+        "q.save",
+        "q.setPageLayout"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 23,
+      "title": "layout write preserves UTF16 LE and BE encoding, BOM and body text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...saved.get(saved.mainPart())!.slice(0,2)]).toEqual(little?[255,254]:[254,255])",
+        "expect(saved.text(saved.mainPart())).toContain('encoding=\"UTF-16\"')",
+        "expect(q.paragraphs[0]!.text).toBe('Layout text π')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 24,
+          "expression": "for(const little of [true,false])"
+        },
+        {
+          "line": 24,
+          "expression": "for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),little);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n for(const little of [true,false]){const d=await layoutDocument(),p=await OpcPackage.open(await d.save()),xml=p.text(p.mainPart()).replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"'),bytes=new Uint8Array(2+xml.length*2),view=new DataView(bytes.buffer);view.setUint16(0,0xfeff,little);for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),little);p.set(p.mainPart(),bytes);const q=await Document.open(p.toBytes());q.setPageLayout(desired('landscape'));const saved=await OpcPackage.open(await q.save());expect([...saved.get(saved.mainPart())!.slice(0,2)]).toEqual(little?[255,254]:[254,255]);expect(saved.text(saved.mainPart())).toContain('encoding=\"UTF-16\"');expect(q.paragraphs[0]!.text).toBe('Layout text π');}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.save",
+        "desired",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "layoutDocument",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "q.save",
+        "q.setPageLayout",
+        "saved.get",
+        "saved.get().slice",
+        "saved.mainPart",
+        "saved.text",
+        "view.setUint16",
+        "xml.charCodeAt"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:serialization refusal leaves prior changes, page values and paragraph identity intact",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 26,
+      "title": "serialization refusal leaves prior changes, page values and paragraph identity intact",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.setPageLayout(desired('landscape'))).toThrow('injected layout serialization')",
+        "expect(await d.save()).toEqual(before)",
+        "expect(d.getPageLayout()).toEqual(originalLayout)",
+        "expect(d.paragraphs[0]).toBe(handle)",
+        "expect(d.paragraphs.at(-1)!.text).toBe('earlier')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const d=await layoutDocument();d.addParagraph('earlier');const before=await d.save(),handle=d.paragraphs[0]!,serialize=OpcPackage.prototype.toBytes;OpcPackage.prototype.toBytes=function(){throw Error('injected layout serialization');};try{expect(()=>d.setPageLayout(desired('landscape'))).toThrow('injected layout serialization');}finally{OpcPackage.prototype.toBytes=serialize;}expect(await d.save()).toEqual(before);expect(d.getPageLayout()).toEqual(originalLayout);expect(d.paragraphs[0]).toBe(handle);d.setPageLayout(desired('landscape'));expect(d.paragraphs.at(-1)!.text).toBe('earlier');\n}",
+      "calls": [
+        "Error",
+        "d.addParagraph",
+        "d.getPageLayout",
+        "d.paragraphs.at",
+        "d.save",
+        "d.setPageLayout",
+        "desired",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "layoutDocument"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 29,
+      "title": "layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.setPageLayout(opts as any)).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "for(const opts of ["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const d=await layoutDocument(),before=await d.save();let calls=0;for(const opts of [{...originalLayout,get width(){calls++;return 1;}},{width:10},{...originalLayout,unknown:true},{...originalLayout,width:31681},{...originalLayout,width:1.5},{...originalLayout,width:NaN},{...originalLayout,orientation:'landscape'},{...originalLayout,header:20000},{...originalLayout,[Symbol('extra')]:1}]){expect(()=>d.setPageLayout(opts as any)).toThrow();expect(await d.save()).toEqual(before);}expect(calls).toBe(0);\n}",
+      "calls": [
+        "Symbol",
+        "d.save",
+        "d.setPageLayout",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "layoutDocument"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:orientation writes avoid shadowed namespace prefixes and retain paper codes and attributes",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 32,
+      "title": "orientation writes avoid shadowed namespace prefixes and retain paper codes and attributes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain('q:code=\"9\"')",
+        "expect(xml).toContain('xmlns:layout=\"urn:other\"')",
+        "expect(xml).toContain('layoutx:orient=\"landscape\"')",
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const d=await layoutDocument('aliased'),p=await OpcPackage.open(await d.save());p.set(p.mainPart(),p.text(p.mainPart()).replace('<q:pgSz ','<q:pgSz xmlns:layout=\"urn:other\" q:code=\"9\" '));const q=await Document.open(p.toBytes());q.setPageLayout(desired('landscape'));const xml=(await OpcPackage.open(await q.save())).text('word/document.xml');expect(xml).toContain('q:code=\"9\"');expect(xml).toContain('xmlns:layout=\"urn:other\"');expect(xml).toContain('layoutx:orient=\"landscape\"');expect(q.getPageLayout()).toEqual(desired('landscape'));\n}",
+      "calls": [
+        ".text",
+        "Document.open",
+        "OpcPackage.open",
+        "d.save",
+        "desired",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "layoutDocument",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "q.getPageLayout",
+        "q.save",
+        "q.setPageLayout"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 35,
+      "title": "mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 36,
+          "expression": "for(const name of ['mirrorMargins','gutterAtTop','bookFoldPrinting','bookFoldRevPrinting','bidi','rtlGutter'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n for(const name of ['mirrorMargins','gutterAtTop','bookFoldPrinting','bookFoldRevPrinting','bidi','rtlGutter']){const d=await layoutDocument(),p=await OpcPackage.open(await d.save());if(name==='bidi'||name==='rtlGutter')p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:docGrid',`<w:${name}/><w:docGrid`));else{addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:${name}/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}const q=await Document.open(p.toBytes()),before=await q.save();expect(()=>q.setPageLayout(desired('landscape'))).toThrow();expect(await q.save()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.save",
+        "desired",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "layoutDocument",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "q.save",
+        "q.setPageLayout"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:protection applies to same-geometry requests and disabled settings allow mutation",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 38,
+      "title": "protection applies to same-geometry requests and disabled settings allow mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.setPageLayout(originalLayout)).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(q.getPageLayout().orientation).toBe('landscape')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const d=await layoutDocument('protected'),before=await d.save();expect(()=>d.setPageLayout(originalLayout)).toThrow();expect(await d.save()).toEqual(before);const p=await OpcPackage.open(before);p.set('word/settings.xml',p.text('word/settings.xml').replace('enforcement=\"1\"','enforcement=\"0\"'));const q=await Document.open(p.toBytes());q.setPageLayout(desired('landscape'));expect(q.getPageLayout().orientation).toBe('landscape');\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.save",
+        "d.setPageLayout",
+        "desired",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "layoutDocument",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "q.getPageLayout",
+        "q.setPageLayout"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 41,
+      "title": "invalid metadata geometry attributes and page-size children refuse reads and mutations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml.includes(from)).toBe(true)",
+        "expect(()=>q.getPageLayout()).toThrow()",
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 42,
+          "expression": "for(const [from,to]of [['w:top=\"1440\"','w:top=\"-1\"'],['w:header=\"720\"',''],['w:h=\"15840\"','w:h=\"12px\"'],['w:w=\"12240\"','w:w=\"12240\" w:orient=\"sideways\"'],['<w:pgSz w:w=\"12240\" w:h=\"15840\"/>','<w:pgSz w:w=\"12240\" w:h=\"15840\"><w:bad/></w:pgSz>']] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n for(const [from,to]of [['w:top=\"1440\"','w:top=\"-1\"'],['w:header=\"720\"',''],['w:h=\"15840\"','w:h=\"12px\"'],['w:w=\"12240\"','w:w=\"12240\" w:orient=\"sideways\"'],['<w:pgSz w:w=\"12240\" w:h=\"15840\"/>','<w:pgSz w:w=\"12240\" w:h=\"15840\"><w:bad/></w:pgSz>']] as const){const d=await layoutDocument(),p=await OpcPackage.open(await d.save()),xml=p.text(p.mainPart());expect(xml.includes(from)).toBe(true);p.set(p.mainPart(),xml.replace(from,to));const q=await Document.open(p.toBytes()),before=await q.save();expect(()=>q.getPageLayout()).toThrow();expect(()=>q.setPageLayout(desired('landscape'))).toThrow();expect(await q.save()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.save",
+        "desired",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "layoutDocument",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "q.getPageLayout",
+        "q.save",
+        "q.setPageLayout",
+        "xml.includes",
+        "xml.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:disk save retains final geometry and leaves earlier section XML byte-identical",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 44,
+      "title": "disk save retains final geometry and leaves earlier section XML byte-identical",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))",
+        "expect(new TextDecoder().decode(q.package.get('word/document.xml')!)).toContain(raw)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const {mkdtemp,rm}=await import('node:fs/promises'),{tmpdir}=await import('node:os'),{join}=await import('node:path'),root=await mkdtemp(join(tmpdir(),'bun-page-layout-'));try{const d=await layoutDocument('earlier-section'),before=new TextDecoder().decode(d.package.get('word/document.xml')!),section=elements(parseXml(before),'sectPr',W)[0]!,raw=before.slice(section.start,section.end);d.setPageLayout(desired('landscape'));const path=join(root,'landscape.docx');await d.save(path);const q=await Document.open(path);expect(q.getPageLayout()).toEqual(desired('landscape'));expect(new TextDecoder().decode(q.package.get('word/document.xml')!)).toContain(raw);}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        ".decode",
+        "Document.open",
+        "before.slice",
+        "d.package.get",
+        "d.save",
+        "d.setPageLayout",
+        "desired",
+        "elements",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "join",
+        "layoutDocument",
+        "mkdtemp",
+        "parseXml",
+        "q.getPageLayout",
+        "q.package.get",
+        "rm",
+        "tmpdir"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 48,
+      "title": "margin child elements and text refuse reads and writes without mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>q.getPageLayout()).toThrow()",
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 49,
+          "expression": "for(const content of ['<w:bad/>','unexpected text'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n for(const content of ['<w:bad/>','unexpected text']){const d=await layoutDocument(),p=await OpcPackage.open(await d.save()),xml=p.text(p.mainPart());p.set(p.mainPart(),xml.replace(/(<w:pgMar[^>]*?)\\/>/,`$1>${content}</w:pgMar>`));const q=await Document.open(p.toBytes()),before=await q.save();expect(()=>q.getPageLayout()).toThrow();expect(()=>q.setPageLayout(desired('landscape'))).toThrow();expect(await q.save()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.save",
+        "desired",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "layoutDocument",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "q.getPageLayout",
+        "q.save",
+        "q.setPageLayout",
+        "xml.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:attribute-only layout edits preserve exact unrelated spelling inside geometry nodes",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "line": 51,
+      "title": "attribute-only layout edits preserve exact unrelated spelling inside geometry nodes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(next).toBe(xml.replace(\"w:w = '12240'\",'w:w = \"12000\"').replace('w:top=\"1440\"','w:top=\"1200\"'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+      "body": "{\n const d=await layoutDocument(),p=await OpcPackage.open(await d.save());const xml=p.text(p.mainPart()).replace('<w:pgSz w:w=\"12240\" w:h=\"15840\"/>',`<w:pgSz xmlns:z='urn:custom' w:code = '009' w:w = '12240' w:h=\"15840\" />`).replace('w:header=\"720\"',\"w:header = '00720'\");p.set(p.mainPart(),xml);const q=await Document.open(p.toBytes());q.setPageLayout({...originalLayout,width:12000,top:1200});const next=(await OpcPackage.open(await q.save())).text(p.mainPart());expect(next).toBe(xml.replace(\"w:w = '12240'\",'w:w = \"12000\"').replace('w:top=\"1440\"','w:top=\"1200\"'));\n}",
+      "calls": [
+        ".text",
+        "Document.open",
+        "OpcPackage.open",
+        "d.save",
+        "expect",
+        "expect().toBe",
+        "layoutDocument",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.text().replace().replace",
+        "p.toBytes",
+        "q.save",
+        "q.setPageLayout",
+        "xml.replace",
+        "xml.replace().replace"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -7981,13 +8552,13 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(await verifyReferences(root)).toBe(144)"
+        "expect(await verifyReferences(root)).toBe(145)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
-      "body": "{expect(await verifyReferences(root)).toBe(144);}",
+      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "body": "{expect(await verifyReferences(root)).toBe(145);}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -8010,7 +8581,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
       "body": "{const tmp=await mkdtemp(join(tmpdir(),'reference-pin-'));try{await expect(verifyReferences(tmp)).rejects.toThrow('Missing required shared reference pin');}finally{await rm(tmp,{recursive:true,force:true});}}",
       "calls": [
         "expect",
@@ -8035,7 +8606,7 @@
       "assertions": [
         "expect(clone.exitCode).toBe(0)",
         "expect(verifyReferences(tmp)).rejects.toThrow()",
-        "expect(await verifyReferences(tmp)).toBe(144)",
+        "expect(await verifyReferences(tmp)).toBe(145)",
         "expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Reference drift')"
       ],
@@ -8047,8 +8618,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(144);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-drift-'));try{\n  await mkdir(join(tmp,'references'),{recursive:true});\n  const clone=Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),join(tmp,'references/fixtures-ooxml')]);expect(clone.exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();const path=join(tmp,'references/fixtures-ooxml.pin.json');\n  for(const change of [{manifestSha256:'0'.repeat(64)},{commit:'0'.repeat(40)},{tag:'v99.0.0'}]){await Bun.write(path,JSON.stringify({...pin,...change}));await expect(verifyReferences(tmp)).rejects.toThrow();}\n  await Bun.write(path,JSON.stringify(pin));expect(await verifyReferences(tmp)).toBe(145);\n  const facts=join(tmp,'references/fixtures-ooxml/facts/constants.json'),original=await Bun.file(facts).text();\n  await Bun.write(facts,original+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Shared reference worktree is dirty');await Bun.write(facts,original);\n  const contract=join(tmp,'references/fixtures-ooxml/contracts/mutation-safety.json'),policy=await Bun.file(contract).text();\n  await Bun.write(contract,policy+' ');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');await Bun.write(contract,policy);\n  const manifest=await Bun.file(join(tmp,'references/fixtures-ooxml/manifest.json')).json();\n  await Bun.write(join(tmp,'references/fixtures-ooxml',manifest.files.find((f:any)=>f.role==='fixture').path),'tampered');await expect(verifyReferences(tmp)).rejects.toThrow('Reference drift');\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         ".repeat",
         "Bun.file",
@@ -8091,7 +8662,7 @@
         "expect(git('status','--porcelain')).toBe('')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs')",
         "expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular')",
-        "expect(await verifyReferences(tmp)).toBe(144)"
+        "expect(await verifyReferences(tmp)).toBe(145)"
       ],
       "deferredAssertions": [
         "expect(r.exitCode).toBe(0)"
@@ -8103,8 +8674,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
-      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(144);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
+      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
+      "body": "{\n const tmp=await mkdtemp(join(tmpdir(),'reference-hidden-'));\n try{\n  await mkdir(join(tmp,'references'),{recursive:true});const refs=join(tmp,'references/fixtures-ooxml');\n  expect(Bun.spawnSync(['git','clone','--quiet','--no-hardlinks',fixturesRoot(),refs]).exitCode).toBe(0);\n  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??join(root,'references/fixtures-ooxml.pin.json')).json();await Bun.write(join(tmp,'references/fixtures-ooxml.pin.json'),JSON.stringify(pin));\n  const git=(...args:string[])=>{const r=Bun.spawnSync(['git','-C',refs,...args]);expect(r.exitCode).toBe(0);return r.stdout.toString().trim();};\n  for(const [flag,clear,path]of [['--assume-unchanged','--no-assume-unchanged','facts/constants.json'],['--skip-worktree','--no-skip-worktree','ledgers/workflows.json']]){\n   const file=join(refs,path!),before=await Bun.file(file).text();git('update-index',flag!,path!);await Bun.write(file,before+' ');expect(git('status','--porcelain','--untracked-files=all')).toBe('');\n   const indexBefore=await Bun.file(join(refs,'.git/index')).bytes();\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference');expect(await Bun.file(join(refs,'.git/index')).bytes()).toEqual(indexBefore);expect(await Bun.file(file).text()).toBe(before+' ');\n   await Bun.write(file,before);git('update-index',clear!,path!);\n  }\n  if(process.platform!=='win32'){\n   const path='facts/constants.json',file=join(refs,path),original=await Bun.file(file).bytes();\n   git('config','core.filemode','false');await chmod(file,0o755);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference mode differs');await chmod(file,0o644);\n   const target=join(tmp,'external-facts.json');await Bun.write(target,original);git('update-index','--assume-unchanged',path);await unlink(file);await symlink(target,file);expect(git('status','--porcelain')).toBe('');\n   await expect(verifyReferences(tmp)).rejects.toThrow('Tracked reference must be a regular');await unlink(file);await Bun.write(file,original);git('update-index','--no-assume-unchanged',path);\n  }\n  expect(await verifyReferences(tmp)).toBe(145);\n }finally{await rm(tmp,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().bytes",

@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "scope": "Existing final-body-section direct page geometry; no broad pagination/rendering parity",
+  "reference": {
+    "repository": "https://github.com/rcarmo/fixtures-ooxml",
+    "tag": "v0.13.0",
+    "commit": "aaf87902d2c381e72d75878dad4e49b137feafc6",
+    "manifestSha256": "bdc2cfd5ade694e0d47835c62cce58fdffbfee484fe1cfb8e8e44993cf55f430",
+    "annotatedTagObject": "bff54b1ca1586e1d06eb6f9eb6b0a851398606d7"
+  },
+  "checks": {
+    "candidate": {
+      "command": "OOXML_FIXTURES_ROOT=<candidate> OOXML_REFERENCE_PIN=<candidatepin> make check",
+      "runId": "b4b1c4cc-2134-4a7e-b32d-4be77449e94d",
+      "unitTests": 367,
+      "assertions": 4481,
+      "acceptanceCases": 275,
+      "log": "/workspace/tmp/bun-page-layout-candidate.log"
+    },
+    "released": {
+      "command": "make check",
+      "mode": "default-no-overrides",
+      "runId": "ade3e7bf-3799-4c78-b97e-cb0d467136a9",
+      "unitTests": 367,
+      "assertions": 4481,
+      "acceptanceCases": 275,
+      "pageLayoutCases": 22,
+      "examples": 3,
+      "log": "/workspace/tmp/bun-page-layout-release.log"
+    }
+  },
+  "sourceSha256": {
+    "src/docx/index.ts": "31ab5edc5f972cf29e1ff1a82d130962e2b42a0087dfbc5597b021a18248944b",
+    "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
+    "tests/acceptance/page-layout.ts": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a",
+    "tests/unit/docx-page-layout.test.ts": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+    "scripts/office-oracles.ts": "fbf41ef638178fa133c924ffefa142ae6af5eb2ea4fb6c94399db1d49beb391f"
+  },
+  "caseOutcomes": [
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"portrait\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"landscape\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"margins\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"same\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"aliased\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"default-namespace\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"earlier-section\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout -- kind=\"header-reference\"",
+      "status": "passed",
+      "steps": 4
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"missing-section\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"duplicate-section\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"misplaced-section\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"duplicate-size\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"missing-margins\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"wrong-namespace\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"section-revision\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"lexical-barrier\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"invalid-width\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"negative-margin\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"no-content-area\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"invalid-orientation\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"protected\"",
+      "status": "passed",
+      "steps": 3
+    },
+    {
+      "caseKey": "@id-docx-final-section-layout-refusal -- kind=\"stale-document\"",
+      "status": "passed",
+      "steps": 3
+    }
+  ],
+  "independent": {
+    "versions": {
+      "dotnet": "10.0.400",
+      "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+      "poppler": "pdftotext version 24.02.0\nCopyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org\nCopyright 1996-2011, 2022 Glyph & Cog, LLC"
+    },
+    "schema": {
+      "schemaVersion": 1,
+      "validator": "DocumentFormat.OpenXml",
+      "version": "3.5.1+Branch.main.Sha.3139fdfd27414548a41555f7848d5728f6e71a42.3139fdfd27414548a41555f7848d5728f6e71a42",
+      "profile": "Office2019",
+      "status": "passed",
+      "results": [
+        {
+          "file": "word.docx",
+          "sha256": "a9d43745017e45adfcf5ab111e497cbaf1b8ee83360b0907f50ea80e17c551d9",
+          "errors": [],
+          "truncated": false
+        },
+        {
+          "file": "deck.pptx",
+          "sha256": "84544b04d455985cde4af227059fe66e4765d92e7ce98f61c42eaa273b7eb519",
+          "errors": [],
+          "truncated": false
+        },
+        {
+          "file": "book.xlsx",
+          "sha256": "fc1234a42a14a4ab9783b820b80558b9a1280cc8634ef73a272aaec661f0e3cb",
+          "errors": [],
+          "truncated": false
+        }
+      ]
+    },
+    "wordRendering": {
+      "file": "word.pdf",
+      "sha256": "bf327f4760d029cd1f22ab921f9b7a50690fc99cff059f4168b1d90c772915ca",
+      "pages": 1,
+      "pageSizePoints": [
+        792,
+        612
+      ],
+      "expectedText": [
+        "Native Word oracle",
+        "A second paragraph.",
+        "Answer",
+        "42"
+      ],
+      "textSha256": "aa2eb81a7b2d165dad631ab1b068b4f15fe445391193527121951943964578d9",
+      "status": "passed",
+      "visualComparison": "not performed"
+    },
+    "scope": "Schema-valid authored landscape sample; one792x612point PDF with text checks, no margin/header/visual fidelity claim"
+  },
+  "review": {
+    "scope": "Bounded read-only sibling source review",
+    "ownerCorrections": [
+      "Added actual pgMar child/text refusal",
+      "Exact geometry-node attribute custody regression exposed unchanged00720 header value being normalised; fixed numeric semantic equality skip",
+      "Renamed malformed metadata test precisely"
+    ],
+    "independentRetest": false
+  },
+  "siblingReferenceGates": {
+    "go": {
+      "sourceCommit": "2a92d88de72f5ac7f3d466ad5ae2e20721990bb8",
+      "batch": 127,
+      "acceptanceCases": 291,
+      "priorAssetsUnchanged": 144,
+      "layoutExecutionCredit": false
+    },
+    "python": {
+      "sourceCommit": "1325833",
+      "scopedChecks": 82,
+      "mutation": {
+        "cases": 19,
+        "steps": 159
+      },
+      "xml": {
+        "cases": 10,
+        "steps": 40
+      },
+      "package": {
+        "cases": 14,
+        "steps": 47
+      },
+      "priorAssetsUnchanged": 144,
+      "log": "/workspace/tmp/python-v013-candidate.log",
+      "layoutExecutionCredit": false
+    }
+  },
+  "limits": [
+    "No section creation/reordering or earlier-section editing",
+    "No mirrored/bidi/printer layout calculation; negative margins refused",
+    "Independent MicrosoftWord/general pagination/margins/header rendering not verified"
+  ]
+}

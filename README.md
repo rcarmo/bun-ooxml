@@ -12,6 +12,8 @@ text/notes and cell edits with bounded formula-cache invalidation. Existing XLSX
 runs support direct bold/italic overrides and existing paragraph-style selection
 without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)
 adds named paragraph styles with validated base chains and direct bold/italic flags.
+[Page geometry](docs/contracts/page-layout.md) changes the final Word section's
+size and margins while preserving earlier sections and text.
 `patchOffice()` adds
 read-only previews, all-targets-required batches, guarded saves and per-target
 receipts. It can track one unique Word replacement with explicit author/date and

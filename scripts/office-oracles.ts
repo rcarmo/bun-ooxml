@@ -21,14 +21,14 @@ async function command(args:string[],seconds=90){
 const check=(condition:unknown,message:string)=>{if(!condition)throw Error(message);};
 async function ok(args:string[],seconds=90){const r=await command(args,seconds);check(r.exit===0,`${args[0]} failed: ${r.stderr}`);return r;}
 try{
- for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/docx/style-authoring.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
+ for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/docx/style-authoring.ts','src/docx/page-layout.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
  report.versions.dotnet=(await ok(['dotnet','--version'])).stdout.trim();
  report.versions.libreoffice=(await ok(['libreoffice','--version'])).stdout.trim();
  const poppler=await ok(['pdftotext','-v']);report.versions.poppler=(poppler.stderr||poppler.stdout).trim();
  const project='tests/oracles/schema/SchemaCheck.csproj';
  await ok(['dotnet','restore',project,'--locked-mode']);await ok(['dotnet','build',project,'--no-restore','--configuration','Release']);
  const validator=join(root,'tests/oracles/schema/bin/Release/net10.0/SchemaCheck.dll');
- const doc=Document.create();doc.addParagraphStyle('Smoke',{name:'Oracle heading',bold:true});doc.addParagraph('Native Word oracle',{style:'Smoke'});doc.addParagraph('A second paragraph.');const table=doc.addTable(1,2);table.cell(0,0).text='Answer';table.cell(0,1).text='42';
+ const doc=Document.create();doc.addParagraphStyle('Smoke',{name:'Oracle heading',bold:true});doc.addParagraph('Native Word oracle',{style:'Smoke'});doc.addParagraph('A second paragraph.');const table=doc.addTable(1,2);table.cell(0,0).text='Answer';table.cell(0,1).text='42';doc.setPageLayout({...doc.getPageLayout(),width:15840,height:12240,orientation:'landscape'});
  const deck=Presentation.create();deck.addTextSlide('Native slide oracle','First page');const slide=deck.addTextSlide('Second slide oracle');slide.addTextBox('Positioned oracle box',{x:914400,y:914400,width:5486400,height:914400},{bold:true});slide.addTable(1,2,{x:914400,y:2743200,width:5486400,height:914400});slide.tables[0]!.cell(0,0).text='Answer';slide.tables[0]!.cell(0,1).text='42';
  const book=Workbook.create();book.worksheet('Sheet1').setCellValue('A1',20);book.worksheet('Sheet1').setCellValue('A2',22);book.worksheet('Sheet1').setCellValue('A3',999);book.worksheet('Sheet1').setCellStyle('A1',0);
  // Explicit oracle fixture assembly via native OPC; there is no formula-authoring API claim.
@@ -48,10 +48,12 @@ try{
   const name=path.split('/').at(-1)!.replace(/\.[^.]+$/,'.pdf'),pdf=join(dir,name),bytes=await Bun.file(pdf).bytes();check(bytes.length>100&&new TextDecoder().decode(bytes.slice(0,5))==='%PDF-','Missing PDF output');
   await Bun.write(join(out,name),bytes);
   const info=await ok(['pdfinfo',pdf]),pageCount=Number(info.stdout.match(/^Pages:\s+(\d+)/m)?.[1]);check(pageCount===expected[i]!.pages,'Unexpected PDF page count for '+name);
+  const size=info.stdout.match(/^Page size:\s+([\d.]+) x ([\d.]+) pts/m),pageSizePoints=size?[Number(size[1]),Number(size[2])]:null;
+  if(i===0)check(pageSizePoints?.[0]===792&&pageSizePoints?.[1]===612,'Landscape DOCX PDF page size mismatch');
   const text=(await ok(['pdftotext','-layout',pdf,'-'])).stdout;await Bun.write(join(out,name+'.txt'),text);
   for(const marker of expected[i]!.text)check(i===2?text.split(/\s+/).includes(marker):text.includes(marker),'Missing rendered marker '+marker+' in '+name);if(i===2)check(!text.split(/\s+/).includes('999'),'Stale formula cache rendered');
   if(i===1){const pages=text.split('\f');for(const marker of ['Native slide oracle','First page'])check(pages[0]?.includes(marker),'First-slide marker on wrong page');for(const marker of ['Second slide oracle','Positioned oracle box','Answer','42'])check(pages[1]?.includes(marker),'Second-slide marker on wrong page');}
-  report.rendering.push({file:name,sha256:sha(bytes),pages:pageCount,expectedText:expected[i]!.text,textSha256:sha(new TextEncoder().encode(text)),status:'passed',visualComparison:'not performed'});
+  report.rendering.push({file:name,sha256:sha(bytes),pages:pageCount,pageSizePoints,expectedText:expected[i]!.text,textSha256:sha(new TextEncoder().encode(text)),status:'passed',visualComparison:'not performed'});
  }
  const roundtrip=join(sandbox,'roundtrip');await mkdir(roundtrip);await ok(['libreoffice',`-env:UserInstallation=file://${sandbox}/profile-calc`,'--headless','--convert-to','xlsx:Calc MS Excel 2007 XML','--outdir',roundtrip,paths[2]!]);
  const recalcPath=join(roundtrip,'book.xlsx'),recalc=await Workbook.open(recalcPath),answer=recalc.worksheet('Sheet1').getCell('A3');check(answer?.kind==='formula'&&answer.formula==='SUM(A1:A2)'&&answer.cached===43,'External formula roundtrip did not calculate43');

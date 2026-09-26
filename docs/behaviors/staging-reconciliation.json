@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 354,
+  "nativeDeclarations": 367,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 127,
+  "withoutStagingCount": 140,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -1063,7 +1063,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "currentSourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1072,7 +1072,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "currentSourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1083,7 +1083,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1",
+      "currentSourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -2372,6 +2372,71 @@
       "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
     },
     {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:page geometry changes stale paragraphs and cells while table handles remain valid",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:numeric and default-orientation no-op retains exact spelling and existing handles",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:serialization refusal leaves prior changes, page values and paragraph identity intact",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:orientation writes avoid shadowed namespace prefixes and retain paper codes and attributes",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:protection applies to same-geometry requests and disabled settings allow mutation",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:disk save retains final geometry and leaves earlier section XML byte-identical",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
+      "id": "bun:tests/unit/docx-page-layout.test.ts:attribute-only layout edits preserve exact unrelated spelling inside geometry nodes",
+      "path": "tests/unit/docx-page-layout.test.ts",
+      "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
+    },
+    {
       "id": "bun:tests/unit/docx-paragraph-style.test.ts:paragraph style selection executes19 saved outcome and refusal cases",
       "path": "tests/unit/docx-paragraph-style.test.ts",
       "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
@@ -2624,7 +2689,7 @@
     {
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
       "path": "tests/unit/references.test.ts",
-      "sourceSha256": "5c58f3d46cbb45ad1e052adc097125ec7de7cbed8391b8c03466eaed39e400d1"
+      "sourceSha256": "ef425ec59169f1d624f1d482957cf0760b9f9b2dbed26f63650eb928438360d4"
     },
     {
       "id": "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",

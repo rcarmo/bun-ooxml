@@ -1,5 +1,7 @@
 import { OoxmlError } from "../errors.ts";
 import {formatRunProperties} from './run-formatting.ts';
+import {readPageLayout,replacePageLayout,normalizePageLayout,type PageLayout} from './page-layout.ts';
+export type {PageLayout} from './page-layout.ts';
 import {directParagraphStyle,replaceParagraphStyle} from './paragraph-style.ts';
 import {authorParagraphStyle,normalizeStyleOptions,type AddParagraphStyleOptions,type ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
 export type {AddParagraphStyleOptions,ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
@@ -412,6 +414,20 @@ export class Document {
     this.assertFormattingUnprotected();
     // Style definitions do not alter paragraph offsets; existing handles remain usable.
     return authorParagraphStyle(this.opcPackage,DOCUMENT_PART,styleId,normalized);
+  }
+
+  /** Direct page geometry of the existing final body section. */
+  getPageLayout(): PageLayout {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
+    return readPageLayout(this.xml);
+  }
+  setPageLayout(layout:PageLayout):{changed:number} {
+    const normalized=normalizePageLayout(layout);
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
+    this.assertFormattingUnprotected();
+    for(const rel of this.opcPackage.relationships(DOCUMENT_PART))if(rel.type==='http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings'&&!rel.external){const settings=parseXml(this.opcPackage.text(rel.resolved!));if(['mirrorMargins','gutterAtTop','bookFoldPrinting','bookFoldRevPrinting'].some(name=>elements(settings,name,W_NS).length))fail('docx-layout-unsupported','Mirrored/book-fold/gutter settings require computed page geometry');}
+    const next=replacePageLayout(this.xml,normalized);if(next===this.xml)return {changed:0};
+    this.commitParagraphProperties(next);return {changed:1};
   }
 
   /** Current paragraph snapshot handles in document order. */

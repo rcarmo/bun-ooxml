@@ -135,6 +135,11 @@
       "path": "references/fixtures-ooxml/workflows/xlsx/cell-style.feature",
       "lifecycle": "implemented",
       "runner": "bun"
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/page-layout.feature",
+      "lifecycle": "implemented",
+      "runner": "bun"
     }
   ]
 }
