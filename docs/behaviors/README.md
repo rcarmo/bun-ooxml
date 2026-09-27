@@ -112,6 +112,21 @@ real-presentation text-box test also reopens bytes, despite its saved-file wordi
 All these differences remain explicit in the ledgers; independent Office checks
 are separate evidence, not credited by these source mappings.
 
+The [paragraph-style ledger](docx-paragraph-styles-mappings.json) maps 17
+declarations and 62 direct expressions; the [style-authoring ledger](docx-style-authoring-mappings.json)
+maps 11 declarations and 43 expressions. One aggregate wrapper per ledger links
+to its 19 or 24 shared cases. The other 26 records remain scenario-only, and all
+319 prior mapping records are unchanged.
+
+Both bindings reopen serialized bytes rather than paths. Assignment custody
+checks selected main-part fragments and complete unrelated member payloads, not
+an exact main-XML edit diff. Authoring checks definition metadata and old child
+substrings before a separate selection step changes the paragraph reference.
+Two native disk tests provide bounded path readback. Several encoding tests use
+live getters or omit new-definition assertions; those limits remain explicit.
+Direct references and basedOn links do not establish inherited formatting, and
+these ledgers add no execution or rendering credit.
+
 The [DOCX-model ledger](docx-model-mappings.json) records all 130 declarations and
 683 direct assertion expressions in ten suites: append-run, cell properties,
 row headers, paragraph text, body insertion, table-row edits, row-text reads,

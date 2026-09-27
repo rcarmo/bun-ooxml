@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-paragraph-style.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-paragraph-style.test.ts": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf",
+    "tests/acceptance/paragraph-style.ts": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27",
+    "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
+    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/paragraph-style.feature": "462be357951e2961b9b35dfe3457216709e3c6a02eeb0988c6a3c2279b730490"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:paragraph style selection executes19 saved outcome and refusal cases",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection",
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [
+        "@id-docx-paragraph-style-selection|{\"operation\":\"assign\"}",
+        "@id-docx-paragraph-style-selection|{\"operation\":\"replace\"}",
+        "@id-docx-paragraph-style-selection|{\"operation\":\"remove\"}",
+        "@id-docx-paragraph-style-selection|{\"operation\":\"same-style\"}",
+        "@id-docx-paragraph-style-selection|{\"operation\":\"absent-removal\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"unknown-style\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"character-style\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"duplicate-style\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"duplicate-relationship\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"external-styles\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"wrong-mime\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"duplicate-properties\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"duplicate-pstyle\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"misplaced-pstyle\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"wrong-namespace\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"property-revision\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"protected\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"stale\"}",
+        "@id-docx-paragraph-style-refusal|{\"variant\":\"invalid-argument\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(19)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and 19 passed shared cases. Pinned bindings compare reopened direct getter/XML style and change receipts, selected paragraph properties and all unrelated payloads, exact no-op archives, and refusal archive custody."
+      ],
+      "gaps": [
+        "Two aggregate assertions only; semantic checks are delegated. The bindings use byte reopen, no path save; the custody text getter is live, and only keepNext, spacing and bold fragments are asserted in main XML. Refusal codes are constrained to the docx- prefix, not exact per-kind errors. No inherited/default formatting resolution.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:changed style invalidates handles but no-op preserves them",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection",
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.styleId).toBe('Heading1')",
+        "expect(p.setStyle('Heading1').changed).toBe(0)",
+        "expect(p.text).toBe('Styled π text')",
+        "expect(p.setStyle('Body').changed).toBe(1)",
+        "expect(()=>p.styleId).toThrow('stale')",
+        "expect(span.replace('Updated')).rejects.toThrow('stale')",
+        "expect(await d.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "An identical style reports zero changes and leaves the held paragraph readable. Changing to Body reports one change; subsequent old paragraph and span access refuse as stale and the postchange archive remains exact."
+      ],
+      "gaps": [
+        "Native lifecycle extension combines same-style and replacement in one document. The new direct Body getter is not explicitly read back, and there is no byte reopen, disk save or all-member comparison here.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:null removes only direct style without requiring a style registry",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.styleId).toBe('Unknown')",
+        "expect(q.paragraphs[0]!.setStyle(null)).toEqual({changed:1})",
+        "expect(q.paragraphs[0]!.styleId).toBeUndefined()",
+        "expect(r.text(r.mainPart())).toContain('<w:keepNext/>')",
+        "expect(r.names()).not.toContain('word/styles.xml')"
+      ],
+      "outcomes": [
+        "A direct Unknown reference is removed with changed=1 despite no registry; the live getter becomes undefined, serialized main XML retains keepNext and the archive has no word/styles.xml."
+      ],
+      "gaps": [
+        "Native missing-registry removal extension. Getter is live while custody is checked through a reopened package, not a reopened Document; no path save, inherited-style resolution or full main-XML comparison.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:aliased namespaces and encoded style IDs retain text and unrelated properties",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.setStyle('A&B').changed).toBe(1)",
+        "expect(q.paragraphs[0]!.styleId).toBe('A&B')",
+        "expect(saved.text(saved.mainPart())).toContain('w:val=\"A&amp;B\"')",
+        "expect(saved.text(saved.mainPart())).toContain('<q:keepNext/>')",
+        "expect(saved.get('word/styles.xml')).toEqual(p.get('word/styles.xml'))"
+      ],
+      "outcomes": [
+        "Assigning A&B through an aliased main namespace reports one change, preserves the live decoded ID, serializes its escaped value, retains keepNext and leaves registry bytes exact."
+      ],
+      "gaps": [
+        "Native alias/entity extension; the live style getter is not reopened Document evidence. Despite the title, no explicit paragraph text comparison appears here; no disk save or full main-XML equality.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:same direct style retains quote spelling and exact archive bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(handle.setStyle('Heading1').changed).toBe(0)",
+        "expect(await q.save()).toEqual(before)",
+        "expect(handle.styleId).toBe('Heading1')"
+      ],
+      "outcomes": [
+        "Selecting Heading1 over a single-quoted entity-encoded Heading&#49; value reports zero changes, retains the exact archive and leaves the same handle readable with Heading1."
+      ],
+      "gaps": [
+        "Native lexical no-op extension. No path save or independent formatting check; equality covers serialization, not application rendering.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:missing, self-closing properties and self-closing empty paragraphs accept first style child",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.setStyle('Heading1').changed).toBe(1)",
+        "expect(q.paragraphs[0]!.styleId).toBe('Heading1')",
+        "expect(q.paragraphs[0]!.text).toBe(shape==='empty-paragraph'?'':'Styled π text')",
+        "expect(saved.text(saved.mainPart())).toContain('data=\"keep\"')"
+      ],
+      "outcomes": [
+        "Missing properties, self-closing properties and an empty paragraph accept Heading1 with changed=1, matching live ID/text and preserving the empty-properties data attribute after serialization."
+      ],
+      "gaps": [
+        "Native topology matrix. Direct getter and text assertions are live; no reopened Document or path save, and no explicit first-child ordering assertion despite the title.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:style-only update preserves UTF-16 encoding and BOM",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.get(saved.mainPart())!.slice(0,2)]).toEqual([255,254])",
+        "expect(saved.text(saved.mainPart())).toContain('encoding=\"UTF-16\"')",
+        "expect(q.paragraphs[0]!.styleId).toBe('Heading1')"
+      ],
+      "outcomes": [
+        "A UTF-16LE main part retains its BOM/declaration after selection and package reopen; the live paragraph getter reports Heading1."
+      ],
+      "gaps": [
+        "UTF-16LE only; no BE input, reopened Document style getter, text comparison or disk save in this declaration. Encoding preservation does not itself establish effective formatting.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:serialization rollback leaves earlier changes and paragraph handles intact",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-refusal",
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>handle.setStyle('Heading1')).toThrow('injected style save failure')",
+        "expect(await d.save()).toEqual(before)",
+        "expect(handle.styleId).toBeUndefined()",
+        "expect(handle.setStyle('Heading1').changed).toBe(1)"
+      ],
+      "outcomes": [
+        "Injected serialization failure preserves archive bytes including an earlier paragraph; the old handle still reports no direct style and retrying Heading1 returns one change."
+      ],
+      "gaps": [
+        "Native rollback extension, not a path-save fault. The retry is checked via its receipt only, not reopened style or text; earlier changes are preserved through archive equality.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:table handles survive style changes but stale cells and spans refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection",
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(span.replace('old')).rejects.toThrow('stale')",
+        "expect(table.cell(0,0).text).toBe('cell')",
+        "expect(q.tables[0]!.cell(0,0).text).toBe('cell')",
+        "expect(q.paragraphs.find(p=>p.text==='cell')!.styleId).toBe('Heading1')"
+      ],
+      "outcomes": [
+        "Style assignment in a table cell invalidates the held cell and span, but fresh table access retains cell text. Byte reopen checks that text and the cell paragraph Heading1 reference."
+      ],
+      "gaps": [
+        "Native table-handle extension. No path save, selected definition comparison, exact refusal code or unrelated-member custody assertion here.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:removal requests still refuse protection and invalid topology",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setStyle(null)).toThrow()",
+        "expect(await d.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Null removal refuses protection, duplicate/misplaced properties, wrong-namespace style metadata and property revisions, preserving archive bytes for each input."
+      ],
+      "gaps": [
+        "Native removal-policy matrix reuses unsafe shared setups but sends null instead of Heading1. Generic errors only; cached handle identity and disk custody are not asserted.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:no registry, invalid registry and character styles refuse addition without touching the package",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setStyle('Heading1')).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(()=>q.addParagraph('new',{style:kind==='character-style'?'Emphasis':'Heading1'})).toThrow()",
+        "expect(await q.save()).toEqual(snapshot)",
+        "expect(()=>q.paragraphs[0]!.setStyle('Heading1')).toThrow()"
+      ],
+      "outcomes": [
+        "Selection without a registry refuses unchanged; paragraph creation with character style or ambiguous/external/wrong-MIME registry also refuses unchanged. A wrong-root registry independently refuses direct assignment with byte custody."
+      ],
+      "gaps": [
+        "Mixed native entry points: most loop branches use addParagraph rather than setStyle. This is not a single canonical assignment case or a claim of style-authoring coverage. Generic errors only, no saved path.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:style getters inspect direct override only and do not select defaults",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection",
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.paragraphs[0]!.styleId).toBeUndefined()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(()=>d.paragraphs[0]!.setStyle(value as any)).toThrow()"
+      ],
+      "outcomes": [
+        "An absent direct override reads undefined without archive changes. Empty, whitespace, undefined, object and Boolean style arguments each refuse and retain exact bytes."
+      ],
+      "gaps": [
+        "Native direct-getter and invalid-input matrix. It does not construct a default style to test inheritance; undefined means no direct reference, not computed formatting. No path save or exact typed error.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:default namespace, direct run formatting and fresh spans survive style assignment",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.text).toBe('Updated π text')",
+        "expect(q.paragraphs[0]!.styleId).toBe('Heading1')",
+        "expect(saved.text(saved.mainPart())).toContain('<b/>')"
+      ],
+      "outcomes": [
+        "Default-namespaced paragraph assignment leaves a fresh span editable; Updated pi text and Heading1 are read live and serialized XML retains the original bold element."
+      ],
+      "gaps": [
+        "Native namespace/span extension. Text/style are not reread from a reopened Document, and bold is checked as an XML fragment rather than an effective-formatting value. No disk save.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:external or later enforcing settings refuse while explicit disabled settings allow selection",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-refusal",
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.setStyle('Heading1').changed).toBe(1)",
+        "expect(()=>q.paragraphs[0]!.setStyle('Heading1')).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "External settings and mixed disabled/enforcing protection refuse selection with exact archive custody, while explicit disabled protection permits a changed=1 receipt."
+      ],
+      "gaps": [
+        "Native protection-policy matrix. The positive branch checks only the receipt, not a postedit getter or reopened output. Generic refusal errors only; no disk save.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:style mutations refuse lexical barriers, run revisions and unknown paragraph properties",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(original.includes(from)).toBe(true)",
+        "expect(()=>q.paragraphs[0]!.setStyle('Heading1')).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A lexical barrier, unknown paragraph property, run-format revision or field-instruction text causes style mutation to refuse with exact archive custody; each original fragment is confirmed before modification."
+      ],
+      "gaps": [
+        "Native topology matrix, distinct from shared unsafe cases. Generic errors only, no cached-handle or saved-path check; this is not full Word schema validation.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:disk save and reopen retain chosen direct style and untouched definitions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.paragraphs[0]!.styleId).toBe('Heading1')",
+        "expect(q.package.get('word/styles.xml')).toEqual(styles)"
+      ],
+      "outcomes": [
+        "A real disk save/reopen retains Heading1 in the paragraph getter and preserves the complete styles.xml payload."
+      ],
+      "gaps": [
+        "Native path check strengthens shared byte reopen, but does not compare paragraph text, every unrelated member, a change receipt or computed appearance. Cleanup runs in finally without an independent absence assertion.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-style.test.ts:same-style request still refuses document protection without touching handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paragraph-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(handle.styleId).toBe('Heading1')",
+        "expect(()=>handle.setStyle('Heading1')).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "An existing Heading1 reference remains readable before and after a protected same-style request refuses; archive bytes remain exact."
+      ],
+      "gaps": [
+        "Native protected-no-op extension, not the canonical protected assignment input. Generic error only; retaining the held getter does not characterize every other handle or disk state.",
+        "Source mapping only; direct/deferred assertion separation and dynamic review flags are retained. Runtime leaves unknown; no new execution, inherited-formatting or rendering credit."
+      ]
+    }
+  ]
+}
