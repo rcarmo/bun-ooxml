@@ -25,9 +25,9 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 243 scenarios / 612 cases; 577 implemented and 35 planned.
+- Shared: 250 scenarios / 638 cases; 603 implemented and 35 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 252 scenarios / 623 cases; 577 implemented and 46 planned.
+- Combined: 259 scenarios / 649 cases; 603 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -70,9 +70,12 @@ See the [merge contract](../contracts/table-merge.md).
 
 `Table.mergeColumnCells` adds bounded single-column vertical merging. Twelve
 native declarations verify retained cells, content, formatting and encodings,
-refusal and transactional rollback. They remain unmapped until physical vertical
-outcomes are reviewed centrally. The 516 existing mapping records and all 577
-executed case identities are unchanged; the property-setter profile stays planned.
+refusal and transactional rollback. Shared v0.30 adds seven vertical scenarios /
+26 cases in the same operation family. The table-merging ledger adds fourteen
+partial records (530 total); only the positive wrapper selects the 26 case keys.
+Of 516 prior records, 514 are unchanged and two inventory guards update only their
+global implemented count. All 577 earlier executed identities and the horizontal
+case fingerprints are unchanged; the property-setter profile stays planned.
 See the [vertical merge contract](../contracts/table-vertical-merge.md).
 
 ## Format and operation layout

@@ -28,5 +28,5 @@ test('mapping relocation preserves 470 records and explicitly accounts for two w
  expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(unchanged)).digest('hex')).toBe('a87881cd02360bf6db2556d4cb39bc4a22bb59db90752d4fff83dd9f81960b41');
  expect(r.mappings.find(m=>m.testId===ids[0])!.assertions).toContain('expect(report.inventory.features.implemented).toBe(2)');
  expect(r.mappings.find(m=>m.testId===ids[1])!.assertions).toContain('expect(good.counts.cases.planned).toBe(0)');
- expect(r.mappedDeclarations).toBe(516);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();
+ expect(r.mappedDeclarations).toBe(530);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();
 });

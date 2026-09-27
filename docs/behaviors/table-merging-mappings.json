@@ -4,10 +4,12 @@
   "executionCredit": false,
   "scopePaths": [
     "tests/unit/docx-table-merge.test.ts",
-    "tests/unit/table-merge-outcomes.test.ts"
+    "tests/unit/table-merge-outcomes.test.ts",
+    "tests/unit/docx-table-vertical-merge.test.ts",
+    "tests/unit/vertical-merge-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-table-merge.test.ts": "f4786c6377289342e9d6842521e989cb18a8d0154d34b73d073e57228fbcd5d7",
+    "tests/unit/docx-table-merge.test.ts": "18c703e644850a48924ac75efaaa2c00e3579b3b76da215dae80552adb1b21f9",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/index.ts": "9a420b33b2d3f5e996c7c6e7d5f796594a9b666f4908c22afc16978c975b4672",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -18,11 +20,14 @@
     "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-    "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+    "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
-    "workflows/docx/table-merging.feature": "ea26fe30dabae6dd353775b7bf5e59ca136c3aa53489d3aa3ec00b7ccc60fa8b"
+    "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
+    "tests/unit/docx-table-vertical-merge.test.ts": "a517b0b476b9902ba618ff4196dbeeceb5c0590412b698766d5fc5e7080a3602",
+    "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
+    "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
   },
   "mappings": [
     {
@@ -258,7 +263,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(577)",
+        "expect(inv.counts.cases.implemented).toBe(603)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -375,6 +380,330 @@
       ],
       "gaps": [
         "Corruption is after reopening, not an independent writer or runtime fault; other cases unaltered."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip",
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(current.rows).toBe(3)",
+        "expect(current.columns).toBe(3)",
+        "expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>cell.text).toThrow()",
+        "expect(()=>paragraph.text).toThrow()",
+        "expect(()=>current.cell(row,1)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(current.cell(2,2).text).toBe('Tail')",
+        "expect(elements(tree,'tc',W)).toHaveLength(9)",
+        "expect(elements(tree,'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(withoutFlags(next)).toBe(source)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(paragraphs)",
+        "expect(read.paragraphs.map(p=>p.text)).toEqual(paragraphs)",
+        "expect(read.tables[0]!.cell(2,2).text).toBe('Tail')",
+        "expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(read.package.get(n)).toEqual(b)",
+        "expect([...read.package.parts.keys()]).toEqual([...before.keys()])"
+      ],
+      "outcomes": [
+        "Path save/reopen retains9cells, restart/continue flags, text/grid/widths/formatting modulo flags and unrelated members; held handles refuse."
+      ],
+      "gaps": [
+        "One main range only; structural validation not rendered layout or other consumer execution."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.rows).toBe(3)",
+        "expect(t.columns).toBe(3)",
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(before)",
+        "expect(elements(parseXml(xml(d)),'vMerge',W)).toHaveLength(2)"
+      ],
+      "outcomes": [
+        "Three edge/middle native ranges retain all paragraphs and exact XML minus flags."
+      ],
+      "gaps": [
+        "Byte inspection only and native ranges differ from central three rows; no case keys."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-content-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(3)"
+      ],
+      "outcomes": [
+        "Seven continuation text/space/format/lexical/attribute variants refuse unchanged with tablehandle intact."
+      ],
+      "gaps": [
+        "Loop variants exceed six central samples; not arbitrary content or constructor validation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-coordinate-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(...args as [number,number,number])).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(invoked).toBe(false)"
+      ],
+      "outcomes": [
+        "Invalid finite/nonfinite/type/unsafe/singleton/reversed ranges refuse with exact archive and no coercion."
+      ],
+      "gaps": [
+        "Native argument policy extends central coordinate rows; no general proxy claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-structure-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Late horizontal/vertical markers, nested cell, bad width, revision, missinggrid and malformedspan refuse unchanged."
+      ],
+      "gaps": [
+        "Seven concrete native variants; no generic XML/schema validator claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-structure-refusal",
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Protection externalsettings and externally changed mainXML refuse without mutation."
+      ],
+      "gaps": [
+        "No concurrent process or filesystem isolation claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow('injected')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(3)",
+        "expect(cell.text).toBe('Keep & <text>')",
+        "expect(paragraph.text).toBe('Before')"
+      ],
+      "outcomes": [
+        "Reached set/serialize faults restore complete archive and held table/cell/paragraph handles."
+      ],
+      "gaps": [
+        "Synchronous fault injection, not process crash or disk durability."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...read.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])",
+        "expect(withoutFlags(xml(read))).toBe(source)",
+        "expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(read.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "UTF8BOM and aliased UTF16LE/BE retain marker, namespace-boundflags, exactXMLminusflags and unrelated parts afterbyte reopen."
+      ],
+      "gaps": [
+        "Byte roundtrip only; centralwrapper checks output paths."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(action).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.cell(2,2).text).toBe('Tail')",
+        "expect(t.tryCell(3,1)).toBeNull()"
+      ],
+      "outcomes": [
+        "Editable merged cells, row edits and repeated merge requests refuse without changingarchive; tail stays readable."
+      ],
+      "gaps": [
+        "Only stated coordinate operations; out-of-range nullable lookup stays null."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip",
+        "@id-docx-vertical-merge-structure-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(cells(xml(d))[1]!.children[0]!.children.map(n=>n.localName)).toEqual(['tcW','vMerge','tcBorders','shd','textDirection','vAlign'])",
+        "expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Ownerpropertyorder correct; sectionparagraph, lexicalbarrier and decoratedwidth outside range refuse unchanged."
+      ],
+      "gaps": [
+        "Extra native admission cases; no independent rendering."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(d.tables[1]!.cell(0,0).text).toBe('Other table')",
+        "expect([...d.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(d.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Unselected secondtable and all non-mainmembers unchanged; completeXMLminusflags identical."
+      ],
+      "gaps": [
+        "One two-table fixture; no external producer sample."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical native authoring does not select incompatible shared getter or horizontal outcomes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-merge-properties"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.lifecycle).toBe('planned')",
+        "expect(s.cases).toHaveLength(1)",
+        "expect(inv.counts.cases.implemented).toBe(603)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "outcomes": [
+        "Historical setter/verticalprofile remains planned and inventory totals are explicitlychecked."
+      ],
+      "gaps": [
+        "Inventory-only guard; no getter/setter/profileexecution."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/vertical-merge-outcomes.test.ts:seven shared vertical merge contracts execute26 cases without activating horizontal neighbours",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip",
+        "@id-docx-vertical-merge-content-refusal",
+        "@id-docx-vertical-merge-structure-refusal",
+        "@id-docx-vertical-merge-coordinate-refusal",
+        "@id-docx-vertical-merge-rollback",
+        "@id-docx-vertical-merge-encoding",
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [
+        "@id-docx-vertical-merge-roundtrip|{\"column\":\"1\",\"first\":\"0\",\"last\":\"2\"}",
+        "@id-docx-vertical-merge-roundtrip|{\"column\":\"0\",\"first\":\"1\",\"last\":\"2\"}",
+        "@id-docx-vertical-merge-roundtrip|{\"column\":\"2\",\"first\":\"0\",\"last\":\"1\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"text\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"space-text\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"cell-shading\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"paragraph-format\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"empty-run\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"lexical-comment\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"existing-vertical\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"missing-grid\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"width-mismatch\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"nested-unselected\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"protected\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"external-settings\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"singleton\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"reversed\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"outside\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"fractional\"}",
+        "@id-docx-vertical-merge-rollback|{\"stage\":\"part-write\"}",
+        "@id-docx-vertical-merge-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-vertical-merge-encoding|{\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-vertical-merge-encoding|{\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-vertical-merge-encoding|{\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-vertical-merge-stale|{\"target\":\"old-handles\"}",
+        "@id-docx-vertical-merge-stale|{\"target\":\"merged-cells\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(26)",
+        "expect(r.counts.cases.planned).toBe(26)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Seven central verticalcontracts execute26cases; horizontal26neighbours stayplanned in boundedwrapper; nofailuresundefinedambiguoussteps."
+      ],
+      "gaps": [
+        "Execution delegatedtopinnedbindings; no crossconsumer credit or stronger render claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/vertical-merge-outcomes.test.ts:missing continuation flags wrong paragraph text and opaque payload corruption fail shared vertical predicates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBe(3)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Missingcontinue flags, wrongreopenedparagraph and opaquecorruption fail3roundtripcases withoutundefined/ambiguoussteps."
+      ],
+      "gaps": [
+        "Corruptions occur afterreopen; othercases unaltered; no faultstage expansion."
       ]
     }
   ]

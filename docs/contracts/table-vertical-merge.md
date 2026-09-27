@@ -45,7 +45,14 @@ UTF-8 BOM and aliased UTF-16LE/BE inputs retain their markers and namespace mean
 The optional Office oracle validates one authored sample with the Open XML SDK
 and reopens it natively; rendered geometry is untested.
 
-The native declarations are unmapped pending central physical vertical-merge
-contracts. The existing shared horizontal contract and individual span/vertical
-setter profile remain unchanged. No shared execution or other-consumer parity
-credit is granted by this addition.
+Shared v0.30 adds seven vertical scenarios / 26 cases to the existing
+[table-merging family](../../references/fixtures-ooxml/contracts/table-merging.md).
+`tests/acceptance/vertical-merging.ts` executes the saved geometry, exact XML and
+member custody, refusal, reached rollback, encoding and handle predicates. Negative
+controls remove continuation markers or corrupt saved text/opaque payloads.
+
+The table-merging ledger now includes fourteen vertical partial mappings: twelve
+native declarations and two outcome wrappers. Only the positive wrapper selects
+26 case keys. Existing horizontal cases and the individual property-setter
+profile retain their predicates; the latter stays planned. Other consumers
+receive no execution or parity credit from these Bun results.

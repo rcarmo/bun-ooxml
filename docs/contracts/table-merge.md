@@ -64,3 +64,6 @@ Fifteen partial mappings cover twelve native declarations and three outcome
 wrappers. Only the positive shared wrapper selects the 26 case keys. The
 historical setter-profile mapping is an inventory-only guard with no case keys;
 Python and Go gain no execution or parity credit from these Bun results.
+Shared v0.30 adds a [separate vertical rule](table-vertical-merge.md) with 26 cases;
+the same mapping ledger holds 29 partial records across both axes. The horizontal
+predicates and their 26 case identities are unchanged.

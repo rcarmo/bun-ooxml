@@ -533,7 +533,14 @@
         "@id-docx-horizontal-merge-coordinate-refusal",
         "@id-docx-horizontal-merge-rollback",
         "@id-docx-horizontal-merge-encoding",
-        "@id-docx-horizontal-merge-stale"
+        "@id-docx-horizontal-merge-stale",
+        "@id-docx-vertical-merge-roundtrip",
+        "@id-docx-vertical-merge-content-refusal",
+        "@id-docx-vertical-merge-structure-refusal",
+        "@id-docx-vertical-merge-coordinate-refusal",
+        "@id-docx-vertical-merge-rollback",
+        "@id-docx-vertical-merge-encoding",
+        "@id-docx-vertical-merge-stale"
       ]
     }
   ]

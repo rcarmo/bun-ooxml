@@ -4,10 +4,10 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 1027,
-  "mappedDeclarations": 516,
+  "totalDeclarations": 1030,
+  "mappedDeclarations": 530,
   "sourceSha256": {
-    "tests/unit/docx-table-merge.test.ts": "f4786c6377289342e9d6842521e989cb18a8d0154d34b73d073e57228fbcd5d7",
+    "tests/unit/docx-table-merge.test.ts": "18c703e644850a48924ac75efaaa2c00e3579b3b76da215dae80552adb1b21f9",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/index.ts": "9a420b33b2d3f5e996c7c6e7d5f796594a9b666f4908c22afc16978c975b4672",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -18,15 +18,18 @@
     "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-    "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+    "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
-    "workflows/docx/table-merging.feature": "ea26fe30dabae6dd353775b7bf5e59ca136c3aa53489d3aa3ec00b7ccc60fa8b",
+    "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
+    "tests/unit/docx-table-vertical-merge.test.ts": "a517b0b476b9902ba618ff4196dbeeceb5c0590412b698766d5fc5e7080a3602",
+    "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
+    "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076",
     "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
     "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
     "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-    "tests/unit/docx-heading-classification.test.ts": "947f42fef7dd2e53c50746a585e50aa566b41c5d7a7c7c84d089ad1bf12b3975",
+    "tests/unit/docx-heading-classification.test.ts": "e59fdb273d47c10b1d6399e5cd9a1728f7ffdc472b5b1723f1b91efe53b0b44a",
     "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
@@ -181,11 +184,13 @@
       "name": "table-merging",
       "scopePaths": [
         "tests/unit/docx-table-merge.test.ts",
-        "tests/unit/table-merge-outcomes.test.ts"
+        "tests/unit/table-merge-outcomes.test.ts",
+        "tests/unit/docx-table-vertical-merge.test.ts",
+        "tests/unit/vertical-merge-outcomes.test.ts"
       ],
-      "mappedDeclarations": 15,
+      "mappedDeclarations": 29,
       "sourceSha256": {
-        "tests/unit/docx-table-merge.test.ts": "f4786c6377289342e9d6842521e989cb18a8d0154d34b73d073e57228fbcd5d7",
+        "tests/unit/docx-table-merge.test.ts": "18c703e644850a48924ac75efaaa2c00e3579b3b76da215dae80552adb1b21f9",
         "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
         "src/docx/index.ts": "9a420b33b2d3f5e996c7c6e7d5f796594a9b666f4908c22afc16978c975b4672",
         "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -196,11 +201,14 @@
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
-        "workflows/docx/table-merging.feature": "ea26fe30dabae6dd353775b7bf5e59ca136c3aa53489d3aa3ec00b7ccc60fa8b"
+        "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
+        "tests/unit/docx-table-vertical-merge.test.ts": "a517b0b476b9902ba618ff4196dbeeceb5c0590412b698766d5fc5e7080a3602",
+        "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
+        "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
       }
     },
     {
@@ -216,7 +224,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
@@ -229,7 +237,7 @@
       ],
       "mappedDeclarations": 8,
       "sourceSha256": {
-        "tests/unit/docx-heading-classification.test.ts": "947f42fef7dd2e53c50746a585e50aa566b41c5d7a7c7c84d089ad1bf12b3975",
+        "tests/unit/docx-heading-classification.test.ts": "e59fdb273d47c10b1d6399e5cd9a1728f7ffdc472b5b1723f1b91efe53b0b44a",
         "src/docx/index.ts": "9a420b33b2d3f5e996c7c6e7d5f796594a9b666f4908c22afc16978c975b4672",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
@@ -257,7 +265,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
         "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
@@ -337,7 +345,7 @@
         "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
         "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
         "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "workflows/pptx/notes.feature": "6980daafe08bb43e7ba2f73807a402a3ebabe239f0d41bad81b7c09ca7355f41",
         "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
@@ -367,7 +375,7 @@
         "tests/acceptance/cell-properties.ts": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d",
         "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "src/docx/index.ts": "9a420b33b2d3f5e996c7c6e7d5f796594a9b666f4908c22afc16978c975b4672",
         "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
         "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
@@ -426,7 +434,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/body-anchors.ts": "6c340f7d86eb2d0f00d74e5699f64d2631f2cabfec6f19ca3185e8326ea25505",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -451,7 +459,7 @@
         "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -695,7 +703,7 @@
         "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
         "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
@@ -717,7 +725,7 @@
         "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
         "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
@@ -953,18 +961,6 @@
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style scope assertions and case ownership cannot silently shrink or cross features",
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style runtime helper and canonical pins are individually mandatory and fresh",
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style reconciliation preserves evidence nested assertions flags and unknown runtime leaves",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
-    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical native authoring does not select incompatible shared getter or horizontal outcomes",
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / authoring into a body with w rebound never silently writes foreign elements",
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / run-level namespace declarations survive copied table-cell run properties",
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / adds a rectangular table before sectPr and round-trips escaped text, spaces, and normalized newlines",
@@ -1095,7 +1091,7 @@
     "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
     "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
     "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
-    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 612 shared cases plus eleven local-only cases with only reviewed tracking activations",
+    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 638 shared cases plus eleven local-only cases with only reviewed tracking activations",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
@@ -1116,7 +1112,7 @@
     "bun:tests/unit/shared-selection.test.ts:selection rejects implicit whole-file implementation, unknown IDs, duplicates and empty selections",
     "bun:tests/unit/shared-selection.test.ts:full acceptance rejects planned scenarios inside an otherwise implemented feature",
     "bun:tests/unit/shared-selection.test.ts:outline rows with shared display names execute and report every distinct identity",
-    "bun:tests/unit/table-merge-mappings.test.ts:physical merge mappings cover15 declarations and select26 cases without granting vertical profile credit",
+    "bun:tests/unit/table-merge-mappings.test.ts:physical merge mappings cover29 declarations and select26 cases for each axis without granting vertical profile credit",
     "bun:tests/unit/table-merge-mappings.test.ts:physical merge mapping omission stale helper pins unknown keys and invented assertions refuse",
     "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",
     "bun:tests/unit/test-inventory.test.ts:native inventory keeps declaration counts distinct from each tables and registration loops",
@@ -1143,6 +1139,7 @@
     "bun:tests/unit/tracked-workflow.test.ts:destination change after staging refuses without publishing staged revisions",
     "bun:tests/unit/tracking-settings-mappings.test.ts:tracking mappings cover fourteen declarations with bounded case keys and preserve all472 older records",
     "bun:tests/unit/tracking-settings-mappings.test.ts:tracking mapping omissions stale source unknown cases and altered direct assertions refuse",
+    "bun:tests/unit/vertical-merge-mappings.test.ts:vertical associations add14 partial records and preserve516 prior rows except two inventory totals",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word wording plus the reviewed tracking toggle executes 30 IDs and 67 cases with four profiles planned",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word actor changes preserve default execution identities and every prior mapping record",
@@ -1604,7 +1601,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(577)",
+        "expect(inv.counts.cases.implemented).toBe(603)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -1749,6 +1746,438 @@
       ],
       "gaps": [
         "Corruption is after reopening, not an independent writer or runtime fault; other cases unaltered."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip",
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(current.rows).toBe(3)",
+        "expect(current.columns).toBe(3)",
+        "expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>cell.text).toThrow()",
+        "expect(()=>paragraph.text).toThrow()",
+        "expect(()=>current.cell(row,1)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(current.cell(2,2).text).toBe('Tail')",
+        "expect(elements(tree,'tc',W)).toHaveLength(9)",
+        "expect(elements(tree,'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(withoutFlags(next)).toBe(source)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(paragraphs)",
+        "expect(read.paragraphs.map(p=>p.text)).toEqual(paragraphs)",
+        "expect(read.tables[0]!.cell(2,2).text).toBe('Tail')",
+        "expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(read.package.get(n)).toEqual(b)",
+        "expect([...read.package.parts.keys()]).toEqual([...before.keys()])"
+      ],
+      "outcomes": [
+        "Path save/reopen retains9cells, restart/continue flags, text/grid/widths/formatting modulo flags and unrelated members; held handles refuse."
+      ],
+      "gaps": [
+        "One main range only; structural validation not rendered layout or other consumer execution."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.rows).toBe(3)",
+        "expect(t.columns).toBe(3)",
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(before)",
+        "expect(elements(parseXml(xml(d)),'vMerge',W)).toHaveLength(2)"
+      ],
+      "outcomes": [
+        "Three edge/middle native ranges retain all paragraphs and exact XML minus flags."
+      ],
+      "gaps": [
+        "Byte inspection only and native ranges differ from central three rows; no case keys."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-content-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(3)"
+      ],
+      "outcomes": [
+        "Seven continuation text/space/format/lexical/attribute variants refuse unchanged with tablehandle intact."
+      ],
+      "gaps": [
+        "Loop variants exceed six central samples; not arbitrary content or constructor validation."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-coordinate-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(...args as [number,number,number])).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(invoked).toBe(false)"
+      ],
+      "outcomes": [
+        "Invalid finite/nonfinite/type/unsafe/singleton/reversed ranges refuse with exact archive and no coercion."
+      ],
+      "gaps": [
+        "Native argument policy extends central coordinate rows; no general proxy claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-structure-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Late horizontal/vertical markers, nested cell, bad width, revision, missinggrid and malformedspan refuse unchanged."
+      ],
+      "gaps": [
+        "Seven concrete native variants; no generic XML/schema validator claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-structure-refusal",
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Protection externalsettings and externally changed mainXML refuse without mutation."
+      ],
+      "gaps": [
+        "No concurrent process or filesystem isolation claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow('injected')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(3)",
+        "expect(cell.text).toBe('Keep & <text>')",
+        "expect(paragraph.text).toBe('Before')"
+      ],
+      "outcomes": [
+        "Reached set/serialize faults restore complete archive and held table/cell/paragraph handles."
+      ],
+      "gaps": [
+        "Synchronous fault injection, not process crash or disk durability."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...read.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])",
+        "expect(withoutFlags(xml(read))).toBe(source)",
+        "expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(read.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "UTF8BOM and aliased UTF16LE/BE retain marker, namespace-boundflags, exactXMLminusflags and unrelated parts afterbyte reopen."
+      ],
+      "gaps": [
+        "Byte roundtrip only; centralwrapper checks output paths."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(action).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.cell(2,2).text).toBe('Tail')",
+        "expect(t.tryCell(3,1)).toBeNull()"
+      ],
+      "outcomes": [
+        "Editable merged cells, row edits and repeated merge requests refuse without changingarchive; tail stays readable."
+      ],
+      "gaps": [
+        "Only stated coordinate operations; out-of-range nullable lookup stays null."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip",
+        "@id-docx-vertical-merge-structure-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(cells(xml(d))[1]!.children[0]!.children.map(n=>n.localName)).toEqual(['tcW','vMerge','tcBorders','shd','textDirection','vAlign'])",
+        "expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Ownerpropertyorder correct; sectionparagraph, lexicalbarrier and decoratedwidth outside range refuse unchanged."
+      ],
+      "gaps": [
+        "Extra native admission cases; no independent rendering."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(d.tables[1]!.cell(0,0).text).toBe('Other table')",
+        "expect([...d.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(d.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Unselected secondtable and all non-mainmembers unchanged; completeXMLminusflags identical."
+      ],
+      "gaps": [
+        "One two-table fixture; no external producer sample."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical native authoring does not select incompatible shared getter or horizontal outcomes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-merge-properties"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.lifecycle).toBe('planned')",
+        "expect(s.cases).toHaveLength(1)",
+        "expect(inv.counts.cases.implemented).toBe(603)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "outcomes": [
+        "Historical setter/verticalprofile remains planned and inventory totals are explicitlychecked."
+      ],
+      "gaps": [
+        "Inventory-only guard; no getter/setter/profileexecution."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/vertical-merge-outcomes.test.ts:seven shared vertical merge contracts execute26 cases without activating horizontal neighbours",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip",
+        "@id-docx-vertical-merge-content-refusal",
+        "@id-docx-vertical-merge-structure-refusal",
+        "@id-docx-vertical-merge-coordinate-refusal",
+        "@id-docx-vertical-merge-rollback",
+        "@id-docx-vertical-merge-encoding",
+        "@id-docx-vertical-merge-stale"
+      ],
+      "caseKeys": [
+        "@id-docx-vertical-merge-roundtrip|{\"column\":\"1\",\"first\":\"0\",\"last\":\"2\"}",
+        "@id-docx-vertical-merge-roundtrip|{\"column\":\"0\",\"first\":\"1\",\"last\":\"2\"}",
+        "@id-docx-vertical-merge-roundtrip|{\"column\":\"2\",\"first\":\"0\",\"last\":\"1\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"text\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"space-text\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"cell-shading\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"paragraph-format\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"empty-run\"}",
+        "@id-docx-vertical-merge-content-refusal|{\"content\":\"lexical-comment\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"existing-vertical\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"missing-grid\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"width-mismatch\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"nested-unselected\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"protected\"}",
+        "@id-docx-vertical-merge-structure-refusal|{\"structure\":\"external-settings\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"singleton\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"reversed\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"outside\"}",
+        "@id-docx-vertical-merge-coordinate-refusal|{\"coordinates\":\"fractional\"}",
+        "@id-docx-vertical-merge-rollback|{\"stage\":\"part-write\"}",
+        "@id-docx-vertical-merge-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-vertical-merge-encoding|{\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-vertical-merge-encoding|{\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-vertical-merge-encoding|{\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-vertical-merge-stale|{\"target\":\"old-handles\"}",
+        "@id-docx-vertical-merge-stale|{\"target\":\"merged-cells\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(26)",
+        "expect(r.counts.cases.planned).toBe(26)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Seven central verticalcontracts execute26cases; horizontal26neighbours stayplanned in boundedwrapper; nofailuresundefinedambiguoussteps."
+      ],
+      "gaps": [
+        "Execution delegatedtopinnedbindings; no crossconsumer credit or stronger render claim."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "table-merging"
+    },
+    {
+      "testId": "bun:tests/unit/vertical-merge-outcomes.test.ts:missing continuation flags wrong paragraph text and opaque payload corruption fail shared vertical predicates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-vertical-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBe(3)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Missingcontinue flags, wrongreopenedparagraph and opaquecorruption fail3roundtripcases withoutundefined/ambiguoussteps."
+      ],
+      "gaps": [
+        "Corruptions occur afterreopen; othercases unaltered; no faultstage expansion."
       ],
       "linkGranularity": "scenario-only",
       "reviewReasons": [
@@ -2179,7 +2608,7 @@
         "expect(p.headingLevel).toBe(0)",
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
-        "expect(inv.counts.cases.implemented).toBe(577)",
+        "expect(inv.counts.cases.implemented).toBe(603)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
