@@ -4,8 +4,8 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 895,
-  "mappedDeclarations": 295,
+  "totalDeclarations": 900,
+  "mappedDeclarations": 319,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
@@ -92,6 +92,14 @@
     "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e",
     "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "workflows/xlsx/cell-style.feature": "2b8067d70864d75a3f709bb653c12d605777eb0c87ead6270eb2014ec0e4a6ca",
+    "tests/unit/pptx-text-box.test.ts": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53",
+    "tests/acceptance/text-box.ts": "ec053673d9309fcc5dac36ddbac0ca5684f3bd19d99efaac8e0010f2b0d335a3",
+    "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+    "workflows/pptx/text-box.feature": "f1095dc45f85db19d45603fe38938cfc6414c74f3b1f5de63b23f9fd56e880ee",
+    "tests/unit/docx-page-layout.test.ts": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+    "tests/acceptance/page-layout.ts": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a",
+    "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
+    "workflows/docx/page-layout.feature": "5aca6616eabfbc3c409897f1ee271f9a51a1e37835c1c512ffa13d97cf610181",
     "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de",
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
     "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
@@ -314,6 +322,47 @@
       }
     },
     {
+      "name": "pptx-text-boxes",
+      "scopePaths": [
+        "tests/unit/pptx-text-box.test.ts"
+      ],
+      "mappedDeclarations": 11,
+      "sourceSha256": {
+        "tests/unit/pptx-text-box.test.ts": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53",
+        "tests/acceptance/text-box.ts": "ec053673d9309fcc5dac36ddbac0ca5684f3bd19d99efaac8e0010f2b0d335a3",
+        "src/pptx/index.ts": "6912aedc6e09726c4e3dc57e34c0057f3873c858bb6fa843f171bc1e2d79cded",
+        "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/pptx/text-box.feature": "f1095dc45f85db19d45603fe38938cfc6414c74f3b1f5de63b23f9fd56e880ee"
+      }
+    },
+    {
+      "name": "docx-page-layout",
+      "scopePaths": [
+        "tests/unit/docx-page-layout.test.ts"
+      ],
+      "mappedDeclarations": 13,
+      "sourceSha256": {
+        "tests/unit/docx-page-layout.test.ts": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+        "tests/acceptance/page-layout.ts": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a",
+        "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
+        "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/page-layout.feature": "5aca6616eabfbc3c409897f1ee271f9a51a1e37835c1c512ffa13d97cf610181"
+      }
+    },
+    {
       "name": "formula-references",
       "scopePaths": [
         "tests/unit/xlsx-range.test.ts",
@@ -435,19 +484,6 @@
     "bun:tests/unit/docx-outline-level.test.ts:set and serialization faults roll back outline edits with live paragraph and cell handles",
     "bun:tests/unit/docx-outline-level.test.ts:namespace aliases UTF8 BOM and UTF16 codecs survive outline edits and byte reopen",
     "bun:tests/unit/docx-outline-level.test.ts:complete output bounds refuse new outline metadata without invalidating the held paragraph",
-    "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
-    "bun:tests/unit/docx-page-layout.test.ts:page geometry changes stale paragraphs and cells while table handles remain valid",
-    "bun:tests/unit/docx-page-layout.test.ts:numeric and default-orientation no-op retains exact spelling and existing handles",
-    "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
-    "bun:tests/unit/docx-page-layout.test.ts:serialization refusal leaves prior changes, page values and paragraph identity intact",
-    "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
-    "bun:tests/unit/docx-page-layout.test.ts:orientation writes avoid shadowed namespace prefixes and retain paper codes and attributes",
-    "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
-    "bun:tests/unit/docx-page-layout.test.ts:protection applies to same-geometry requests and disabled settings allow mutation",
-    "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
-    "bun:tests/unit/docx-page-layout.test.ts:disk save retains final geometry and leaves earlier section XML byte-identical",
-    "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
-    "bun:tests/unit/docx-page-layout.test.ts:attribute-only layout edits preserve exact unrelated spelling inside geometry nodes",
     "bun:tests/unit/docx-paragraph-properties.test.ts:direct paragraph properties set and read all supported values without changing text",
     "bun:tests/unit/docx-paragraph-properties.test.ts:direct values distinguish absent, explicit zero/off and removal; no-op preserves archive and handles",
     "bun:tests/unit/docx-paragraph-properties.test.ts:spacing edits preserve unrelated line/auto attributes and other paragraph property source",
@@ -574,6 +610,11 @@
     "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
     "bun:tests/unit/formula-mappings.test.ts:formula reconciliation retains source assertion arrays, review flags and input evidence unchanged",
     "bun:tests/unit/formula-mappings.test.ts:split literal and refusal predicates keep only their actually matched canonical case links",
+    "bun:tests/unit/geometry-mappings.test.ts:geometry ledgers cover 24 declarations and 84 expressions with all 295 prior records preserved",
+    "bun:tests/unit/geometry-mappings.test.ts:geometry mappings separate byte serialization disk readback and live getter scope",
+    "bun:tests/unit/geometry-mappings.test.ts:each geometry suite and every literal assertion are mandatory and cannot borrow other feature cases",
+    "bun:tests/unit/geometry-mappings.test.ts:geometry runtime binding fixture-helper and canonical source pins all fail independently when stale or missing",
+    "bun:tests/unit/geometry-mappings.test.ts:geometry reconciliation preserves original inputs direct and deferred assertions and review flags",
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / loaded binding cleanup runs after failed outcomes and cleanup failure cannot pass",
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / full gate refuses planned work despite implemented cases passing",
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / parses backgrounds and scenario outlines into exact expanded cases",
@@ -686,17 +727,6 @@
     "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / stale table cell handles refuse atomically after slide mutation",
     "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / refuses merged and malformed table topologies atomically",
     "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / passes the PPTX table acceptance feature with dedicated bindings",
-    "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",
-    "bun:tests/unit/pptx-text-box.test.ts:text-box creation stales same-slide anchors and tables but not other slides",
-    "bun:tests/unit/pptx-text-box.test.ts:serialization failure restores prior edits, versions and still-usable anchors",
-    "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
-    "bun:tests/unit/pptx-text-box.test.ts:new shapes bind namespaces locally even when p/a are absent or shadowed",
-    "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
-    "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
-    "bun:tests/unit/pptx-text-box.test.ts:tree ambiguity, lexical barriers and malformed shape identity refuse atomically",
-    "bun:tests/unit/pptx-text-box.test.ts:external slide reorder invalidates old slide identity while raw same-slide edits are read live",
-    "bun:tests/unit/pptx-text-box.test.ts:real presentation adds a text box and saves/reopens without changing other payloads",
-    "bun:tests/unit/pptx-text-box.test.ts:disk save retains multiline paragraphs, direct flags and extension tail order",
     "bun:tests/unit/property-campaign.test.ts:seeded inputs repeat exactly and a different seed changes the corpus",
     "bun:tests/unit/property-campaign.test.ts:small native campaign records actual executed families and reproducible input hashes",
     "bun:tests/unit/property-campaign.test.ts:campaign rejects invalid budgets and preserves failing case inputs",
@@ -8707,6 +8737,717 @@
       "unresolved": [],
       "executionCredit": false,
       "ledger": "xlsx-styles"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [
+        "@id-pptx-text-box-authoring|{\"kind\":\"plain\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"multiline\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"empty\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"formatted\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"alias\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"default-namespace\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"extension-tail\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"nested-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"negative-position\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"zero-extent\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"fractional-geometry\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"oversized-geometry\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"invalid-text\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"invalid-options\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"duplicate-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"malformed-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"exhausted-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"duplicate-tree\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"missing-prefix-properties\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"misplaced-extension\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"alternate-content\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"transformed-tree\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"protected-presentation\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(23)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and 23 passed examples. Pinned bindings verify shape receipt/identity, EMU geometry, normalized paragraphs, direct flags and noAutofit after byte reopen; custody checks retain existing slide source and other payloads. Refusals retain archive bytes and slide version."
+      ],
+      "gaps": [
+        "Only two aggregate assertions occur in this declaration; semantic checks are delegated to the pinned bindings. Positive cases use byte reopen, no path save. Custody checks use the live package rather than the reopened presentation; refusal codes are constrained to PPTX_ or XML_ prefixes, not individual codes. No rendering or geometric fit comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:text-box creation stales same-slide anchors and tables but not other slides",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceTextAt(anchor,'Existing','Old')).toThrow('stale')",
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(()=>table.rows).toThrow('stale')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.tables[0]!.rows).toBe(1)",
+        "expect(q.slides[0]!.inspectText('reopened').some(p=>p.text==='updated text')).toBe(true)",
+        "expect(q.slides[1]!.inspectText('reopened')[0]!.text).toBe('Changed slide')"
+      ],
+      "outcomes": [
+        "Appending a box makes prior same-slide anchor, cell and table handles stale without changing the resulting archive on refusal; a fresh table still has one row. Other-slide anchor editing remains usable and both later text edits survive byte reopen."
+      ],
+      "gaps": [
+        "Native mixed lifecycle extension, not a canonical input. It checks stale messages and reopened text, not exact geometry, the box receipt, all other payloads or path persistence.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:serialization failure restores prior edits, versions and still-usable anchors",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.addTextBox('later',geometry)).toThrow('injected box serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.currentSlideVersion(s.partName)).toBe(version)",
+        "expect(s.inspectText('after')[0]!.text).toBe('Kept title')"
+      ],
+      "outcomes": [
+        "Injected serialization failure leaves archive bytes and slide version equal to their preattempt state; an old anchor remains usable to change the original title to Kept title."
+      ],
+      "gaps": [
+        "Native rollback extension retains a prior earlier box through full archive equality. The recovered title is inspected live; no byte reopen, disk failure, or separately asserted recovered insertion receipt.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.package.get(s.partName)!.slice(0,2)]).toEqual(little?[255,254]:[254,255])",
+        "expect(saved.package.text(s.partName)).toContain('encoding=\"UTF-16\"')",
+        "expect(saved.slides[0]!.inspectText('read').at(-1)!.text).toBe('π text')"
+      ],
+      "outcomes": [
+        "UTF-16LE and BE slides retain their BOM and declaration, and the appended pi text is the final inspected paragraph after byte reopen."
+      ],
+      "gaps": [
+        "Native codec extension with different text. No explicit geometry, name, direct flags, shape-ID or unrelated-member comparison in this declaration; no path save.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:new shapes bind namespaces locally even when p/a are absent or shadowed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(elements(sp,'cNvPr',P)[0]!.attributes.name).toBe('literal $& \"π\"')",
+        "expect(elements(sp,'t',A)[0]!.text).toBe('literal $& <&> \"π\"\\t ')",
+        "expect(elements(sp,'rPr',A)[0]!.attributes).toEqual({b:'0',i:'1'})"
+      ],
+      "outcomes": [
+        "A new shape binds correct presentation/drawing namespaces despite wrong p/a bindings on its aliased parent; the name and literal text with dollar/ampersand/quotes/tab match, and direct flags are exactly b=0 and i=1."
+      ],
+      "gaps": [
+        "Native shadowing/literal-text extension. Inspects generated live XML, not reopened output, and does not compare geometry or full archive custody.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.addTextBox('x',g as any,o as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Ten malformed geometry/options objects refuse without archive changes; accessor counters remain zero. Cases include inherited required data, unknown fields, empty name, null italic, nonfinite extent and symbol fields."
+      ],
+      "gaps": [
+        "Native request-validation matrix. Generic errors only, with no exact error-code, slide-version or path-custody assertion. Rejection of these samples is not a general proxy side-effect guarantee.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.addTextBox('one',geometry).shapeId).toBe(96)",
+        "expect(s.addTextBox('two',geometry).shapeId).toBe(97)",
+        "expect(d.slides[1]!.addTextBox('other',geometry).shapeId).toBe(3)",
+        "expect(()=>slide.addTextBox('x',geometry)).toThrow()",
+        "expect(q.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Nested IDs produce 96 then 97 on the first slide, while the other slide allocates 3. Fractional, exponent, signed, zero, excessive and colliding leading-zero identities all refuse with archive custody."
+      ],
+      "gaps": [
+        "Native finite identity matrix; 0001 numerically collides with the existing root ID, so its refusal does not establish a blanket leading-zero policy. Receipt IDs are checked live, without output reopen or geometry checks.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:tree ambiguity, lexical barriers and malformed shape identity refuse atomically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml.includes(from)).toBe(true)",
+        "expect(()=>s.addTextBox('x',geometry)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Duplicate common-slide data, a lexical comment barrier, duplicate shape identity metadata or missing identity metadata each refuse and leave archive bytes unchanged; source fragments are confirmed present before corruption."
+      ],
+      "gaps": [
+        "Native topology extension beyond shared duplicate-tree/prefix variants. Generic errors only; no exact code, unchanged version or saved-file assertion.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:external slide reorder invalidates old slide identity while raw same-slide edits are read live",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.inspectText('live')[0]!.text).toBe('External text')",
+        "expect(()=>s.addTextBox('refused',geometry)).toThrow('Slide order')",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A raw same-slide title change is read live during box insertion. Reversing presentation slide references externally then makes the held slide refuse another insertion with a Slide order error and exact archive custody."
+      ],
+      "gaps": [
+        "Native live-source versus stale-identity extension, not public reorderSlides behavior. No explicit assertion of the first new box after creation, or byte/disk reopen.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:real presentation adds a text box and saves/reopens without changing other payloads",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.slides[0]!.inspectText('read').some(p=>p.text==='Native textbox')).toBe(true)",
+        "expect(receipt.shapeId).toBeGreaterThan(1)",
+        "expect(q.package.get(n)).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "A pinned real notes presentation gains Native textbox text after byte reopen, returns a shape ID greater than one, and retains every original nonedited-slide member payload."
+      ],
+      "gaps": [
+        "Native real-fixture extension uses the stable fixture resolver rather than the authored shared deck. This is byte reopen, not a disk save despite the title. Bold is supplied but not read back; geometry, added-member absence and exact shape-ID allocation are not asserted.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:disk save retains multiline paragraphs, direct flags and extension tail order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(tree.children.at(-1)!.localName).toBe('extLst')",
+        "expect(tree.children.at(-2)!.localName).toBe('sp')",
+        "expect(q.slides[0]!.inspectText('read').slice(1).map(p=>p.text)).toEqual(['one','','two'])",
+        "expect(q.slides[0]!.inspectText('read').slice(1).map(p=>p.runs[0]!.attrs)).toEqual([{b:'1',i:'0'},{b:'1',i:'0'},{b:'1',i:'0'}])"
+      ],
+      "outcomes": [
+        "A disk save/reopen retains three paragraphs one/empty/two with direct b=1 and i=0 on every run; the shape tree ends with extLst preceded by the new sp."
+      ],
+      "gaps": [
+        "Native path check extends the extension-tail input with multiline text and formatting. It does not compare geometry, receipt fields or every unrelated payload; directory cleanup is called in finally but absence is not separately asserted.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "pptx-text-boxes"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout",
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [
+        "@id-docx-final-section-layout|{\"kind\":\"portrait\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"landscape\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"margins\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"same\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"aliased\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"default-namespace\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"earlier-section\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"header-reference\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"missing-section\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"duplicate-section\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"misplaced-section\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"duplicate-size\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"missing-margins\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"wrong-namespace\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"section-revision\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"lexical-barrier\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"invalid-width\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"negative-margin\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"no-content-area\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"invalid-orientation\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"protected\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"stale-document\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(22)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and 22 passed examples. Pinned bindings compare all requested page fields, receipt, text and XML width/height after byte reopen; nongeometry main source and all other payloads stay exact, and refusals preserve archive bytes and paragraph identity."
+      ],
+      "gaps": [
+        "Only two aggregate assertions occur here; semantic predicates are delegated to the pinned bindings. save() has no path, so these are byte reopen checks with no path save. Refusal codes are only constrained to the docx- prefix. No rendering, pagination or independent-reader credit.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:page geometry changes stale paragraphs and cells while table handles remain valid",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout",
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.getPageLayout()).toEqual(originalLayout)",
+        "expect(await d.save()).toEqual(before)",
+        "expect(()=>p.text).toThrow('stale')",
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(span.replace('wrong')).rejects.toThrow('stale')",
+        "expect(table.cell(0,0).text).toBe('cell')",
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))",
+        "expect(q.tables[0]!.cell(0,0).text).toBe('cell')"
+      ],
+      "outcomes": [
+        "Reading page layout leaves serialized bytes exact. After changing geometry, old paragraph, cell and span handles refuse while the table remains usable; byte reopen retains the requested landscape fields and cell text."
+      ],
+      "gaps": [
+        "Native handle-lifecycle extension adds a table. No path save, all-member comparison or change-receipt assertion in this declaration; stale-handle error text is checked rather than exact codes.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:numeric and default-orientation no-op retains exact spelling and existing handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.getPageLayout().width).toBe(12240)",
+        "expect(q.setPageLayout(originalLayout)).toEqual({changed:0})",
+        "expect(await q.save()).toEqual(before)",
+        "expect(q.paragraphs[0]).toBe(handle)"
+      ],
+      "outcomes": [
+        "Mutating a returned layout copy does not affect the document width. A numeric/default-orientation no-op reports zero changes, keeps exact archive spelling and retains the same paragraph object."
+      ],
+      "gaps": [
+        "Native no-op extension includes leading-zero single-quoted width. No rendering, byte-reopened geometry or filesystem save is asserted; identity retention is distinct from every operation on a handle.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.get(saved.mainPart())!.slice(0,2)]).toEqual(little?[255,254]:[254,255])",
+        "expect(saved.text(saved.mainPart())).toContain('encoding=\"UTF-16\"')",
+        "expect(q.paragraphs[0]!.text).toBe('Layout text π')"
+      ],
+      "outcomes": [
+        "Both UTF-16 byte orders retain their BOM and declaration after layout update and serialized package reopen; the first body paragraph still reads Layout text pi."
+      ],
+      "gaps": [
+        "The body text getter is live on the original Document, not on a reopened Document. There is no reopened geometry assertion, unrelated-part comparison or path save in this codec extension.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:serialization refusal leaves prior changes, page values and paragraph identity intact",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal",
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.setPageLayout(desired('landscape'))).toThrow('injected layout serialization')",
+        "expect(await d.save()).toEqual(before)",
+        "expect(d.getPageLayout()).toEqual(originalLayout)",
+        "expect(d.paragraphs[0]).toBe(handle)",
+        "expect(d.paragraphs.at(-1)!.text).toBe('earlier')"
+      ],
+      "outcomes": [
+        "Injected serialization failure preserves exact archive bytes, original page fields and paragraph identity, including prior edits. Retrying the layout write succeeds and the earlier appended paragraph remains visible."
+      ],
+      "gaps": [
+        "Native rollback/retry extension; the final successful retry checks the live final paragraph rather than requested geometry or receipt. No disk fault or saved-path readback.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.setPageLayout(opts as any)).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Accessor, incomplete, unknown-key, excessive/fractional/nonfinite width, inconsistent orientation, oversized header and symbol options all refuse with exact archive custody; the getter counter remains zero."
+      ],
+      "gaps": [
+        "Native input-validation matrix. Generic errors only; no getter coercion occurs for the accessor sample, but arbitrary Proxy traps are not characterized. No paragraph-identity or disk-state comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:orientation writes avoid shadowed namespace prefixes and retain paper codes and attributes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml).toContain('q:code=\"9\"')",
+        "expect(xml).toContain('xmlns:layout=\"urn:other\"')",
+        "expect(xml).toContain('layoutx:orient=\"landscape\"')",
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))"
+      ],
+      "outcomes": [
+        "Serialized XML retains the existing paper code and shadowed layout prefix while adding a distinct layoutx landscape attribute; the live getter matches requested landscape fields."
+      ],
+      "gaps": [
+        "Native namespace-allocation extension with aliased elements. XML is checked after package serialization, but full PageLayout equality uses the live Document; no path save or all-member comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Enabled mirror margins, gutter-at-top, two bookfold settings and two section bidi/gutter flags each cause mutation refusal and exact archive preservation."
+      ],
+      "gaps": [
+        "Native unsupported-layout matrix distinct from shared protected input. Generic errors only; it does not separately assert read refusal, exact error codes, paragraph identity or disk custody.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:protection applies to same-geometry requests and disabled settings allow mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal",
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.setPageLayout(originalLayout)).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(q.getPageLayout().orientation).toBe('landscape')"
+      ],
+      "outcomes": [
+        "A protected same-geometry request refuses with byte custody. Disabling enforcement in the settings part permits a later landscape update and the live orientation getter is landscape."
+      ],
+      "gaps": [
+        "Native protection/no-op and disabled-setting extension. Positive branch only checks orientation live, not all requested dimensions, receipt, saved bytes or reopened text.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml.includes(from)).toBe(true)",
+        "expect(()=>q.getPageLayout()).toThrow()",
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Negative/missing margins, nonnumeric height, invalid orientation and nested page-size content each refuse reads and writes while preserving archive bytes; source mutation fragments are confirmed present."
+      ],
+      "gaps": [
+        "Native metadata-validation matrix. Generic errors only, no handle identity or filesystem assertion, and no attempt at full Word schema validation.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:disk save retains final geometry and leaves earlier section XML byte-identical",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))",
+        "expect(new TextDecoder().decode(q.package.get('word/document.xml')!)).toContain(raw)"
+      ],
+      "outcomes": [
+        "A disk save/reopen retains complete requested final landscape geometry and the exact earlier section XML substring captured before the edit."
+      ],
+      "gaps": [
+        "Native earlier-section path check strengthens the shared byte reopen. It asserts the earlier substring remains present, not its independent occurrence count or all unrelated payloads. Cleanup is called in finally but absence is not separately asserted.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>q.getPageLayout()).toThrow()",
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unknown child markup and literal text within page margins each cause read and write refusal without changing the archive."
+      ],
+      "gaps": [
+        "Native margin-content matrix. The source replacement is not separately checked for effectiveness; generic errors only, no paragraph identity or saved-file assertion.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:attribute-only layout edits preserve exact unrelated spelling inside geometry nodes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(next).toBe(xml.replace(\"w:w = '12240'\",'w:w = \"12000\"').replace('w:top=\"1440\"','w:top=\"1200\"'))"
+      ],
+      "outcomes": [
+        "Only the requested width and top-margin attribute values change in the serialized XML; custom namespace, paper code, quote/space spelling and an unchanged leading-zero header value remain exactly as before."
+      ],
+      "gaps": [
+        "Native lexical-preservation extension with two fields, not the shared full margins input. Full XML equality follows serialization but there is no reopened PageLayout getter, path save or other-member comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-page-layout"
     },
     {
       "testId": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",

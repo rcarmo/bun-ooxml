@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-page-layout.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-page-layout.test.ts": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+    "tests/acceptance/page-layout.ts": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a",
+    "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
+    "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/page-layout.feature": "5aca6616eabfbc3c409897f1ee271f9a51a1e37835c1c512ffa13d97cf610181"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout",
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [
+        "@id-docx-final-section-layout|{\"kind\":\"portrait\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"landscape\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"margins\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"same\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"aliased\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"default-namespace\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"earlier-section\"}",
+        "@id-docx-final-section-layout|{\"kind\":\"header-reference\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"missing-section\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"duplicate-section\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"misplaced-section\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"duplicate-size\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"missing-margins\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"wrong-namespace\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"section-revision\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"lexical-barrier\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"invalid-width\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"negative-margin\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"no-content-area\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"invalid-orientation\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"protected\"}",
+        "@id-docx-final-section-layout-refusal|{\"kind\":\"stale-document\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(22)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and 22 passed examples. Pinned bindings compare all requested page fields, receipt, text and XML width/height after byte reopen; nongeometry main source and all other payloads stay exact, and refusals preserve archive bytes and paragraph identity."
+      ],
+      "gaps": [
+        "Only two aggregate assertions occur here; semantic predicates are delegated to the pinned bindings. save() has no path, so these are byte reopen checks with no path save. Refusal codes are only constrained to the docx- prefix. No rendering, pagination or independent-reader credit.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:page geometry changes stale paragraphs and cells while table handles remain valid",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout",
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.getPageLayout()).toEqual(originalLayout)",
+        "expect(await d.save()).toEqual(before)",
+        "expect(()=>p.text).toThrow('stale')",
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(span.replace('wrong')).rejects.toThrow('stale')",
+        "expect(table.cell(0,0).text).toBe('cell')",
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))",
+        "expect(q.tables[0]!.cell(0,0).text).toBe('cell')"
+      ],
+      "outcomes": [
+        "Reading page layout leaves serialized bytes exact. After changing geometry, old paragraph, cell and span handles refuse while the table remains usable; byte reopen retains the requested landscape fields and cell text."
+      ],
+      "gaps": [
+        "Native handle-lifecycle extension adds a table. No path save, all-member comparison or change-receipt assertion in this declaration; stale-handle error text is checked rather than exact codes.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:numeric and default-orientation no-op retains exact spelling and existing handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.getPageLayout().width).toBe(12240)",
+        "expect(q.setPageLayout(originalLayout)).toEqual({changed:0})",
+        "expect(await q.save()).toEqual(before)",
+        "expect(q.paragraphs[0]).toBe(handle)"
+      ],
+      "outcomes": [
+        "Mutating a returned layout copy does not affect the document width. A numeric/default-orientation no-op reports zero changes, keeps exact archive spelling and retains the same paragraph object."
+      ],
+      "gaps": [
+        "Native no-op extension includes leading-zero single-quoted width. No rendering, byte-reopened geometry or filesystem save is asserted; identity retention is distinct from every operation on a handle.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.get(saved.mainPart())!.slice(0,2)]).toEqual(little?[255,254]:[254,255])",
+        "expect(saved.text(saved.mainPart())).toContain('encoding=\"UTF-16\"')",
+        "expect(q.paragraphs[0]!.text).toBe('Layout text π')"
+      ],
+      "outcomes": [
+        "Both UTF-16 byte orders retain their BOM and declaration after layout update and serialized package reopen; the first body paragraph still reads Layout text pi."
+      ],
+      "gaps": [
+        "The body text getter is live on the original Document, not on a reopened Document. There is no reopened geometry assertion, unrelated-part comparison or path save in this codec extension.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:serialization refusal leaves prior changes, page values and paragraph identity intact",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal",
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.setPageLayout(desired('landscape'))).toThrow('injected layout serialization')",
+        "expect(await d.save()).toEqual(before)",
+        "expect(d.getPageLayout()).toEqual(originalLayout)",
+        "expect(d.paragraphs[0]).toBe(handle)",
+        "expect(d.paragraphs.at(-1)!.text).toBe('earlier')"
+      ],
+      "outcomes": [
+        "Injected serialization failure preserves exact archive bytes, original page fields and paragraph identity, including prior edits. Retrying the layout write succeeds and the earlier appended paragraph remains visible."
+      ],
+      "gaps": [
+        "Native rollback/retry extension; the final successful retry checks the live final paragraph rather than requested geometry or receipt. No disk fault or saved-path readback.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.setPageLayout(opts as any)).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Accessor, incomplete, unknown-key, excessive/fractional/nonfinite width, inconsistent orientation, oversized header and symbol options all refuse with exact archive custody; the getter counter remains zero."
+      ],
+      "gaps": [
+        "Native input-validation matrix. Generic errors only; no getter coercion occurs for the accessor sample, but arbitrary Proxy traps are not characterized. No paragraph-identity or disk-state comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:orientation writes avoid shadowed namespace prefixes and retain paper codes and attributes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml).toContain('q:code=\"9\"')",
+        "expect(xml).toContain('xmlns:layout=\"urn:other\"')",
+        "expect(xml).toContain('layoutx:orient=\"landscape\"')",
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))"
+      ],
+      "outcomes": [
+        "Serialized XML retains the existing paper code and shadowed layout prefix while adding a distinct layoutx landscape attribute; the live getter matches requested landscape fields."
+      ],
+      "gaps": [
+        "Native namespace-allocation extension with aliased elements. XML is checked after package serialization, but full PageLayout equality uses the live Document; no path save or all-member comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Enabled mirror margins, gutter-at-top, two bookfold settings and two section bidi/gutter flags each cause mutation refusal and exact archive preservation."
+      ],
+      "gaps": [
+        "Native unsupported-layout matrix distinct from shared protected input. Generic errors only; it does not separately assert read refusal, exact error codes, paragraph identity or disk custody.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:protection applies to same-geometry requests and disabled settings allow mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal",
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.setPageLayout(originalLayout)).toThrow()",
+        "expect(await d.save()).toEqual(before)",
+        "expect(q.getPageLayout().orientation).toBe('landscape')"
+      ],
+      "outcomes": [
+        "A protected same-geometry request refuses with byte custody. Disabling enforcement in the settings part permits a later landscape update and the live orientation getter is landscape."
+      ],
+      "gaps": [
+        "Native protection/no-op and disabled-setting extension. Positive branch only checks orientation live, not all requested dimensions, receipt, saved bytes or reopened text.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml.includes(from)).toBe(true)",
+        "expect(()=>q.getPageLayout()).toThrow()",
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Negative/missing margins, nonnumeric height, invalid orientation and nested page-size content each refuse reads and writes while preserving archive bytes; source mutation fragments are confirmed present."
+      ],
+      "gaps": [
+        "Native metadata-validation matrix. Generic errors only, no handle identity or filesystem assertion, and no attempt at full Word schema validation.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:disk save retains final geometry and leaves earlier section XML byte-identical",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.getPageLayout()).toEqual(desired('landscape'))",
+        "expect(new TextDecoder().decode(q.package.get('word/document.xml')!)).toContain(raw)"
+      ],
+      "outcomes": [
+        "A disk save/reopen retains complete requested final landscape geometry and the exact earlier section XML substring captured before the edit."
+      ],
+      "gaps": [
+        "Native earlier-section path check strengthens the shared byte reopen. It asserts the earlier substring remains present, not its independent occurrence count or all unrelated payloads. Cleanup is called in finally but absence is not separately asserted.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>q.getPageLayout()).toThrow()",
+        "expect(()=>q.setPageLayout(desired('landscape'))).toThrow()",
+        "expect(await q.save()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unknown child markup and literal text within page margins each cause read and write refusal without changing the archive."
+      ],
+      "gaps": [
+        "Native margin-content matrix. The source replacement is not separately checked for effectiveness; generic errors only, no paragraph identity or saved-file assertion.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-page-layout.test.ts:attribute-only layout edits preserve exact unrelated spelling inside geometry nodes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-final-section-layout"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(next).toBe(xml.replace(\"w:w = '12240'\",'w:w = \"12000\"').replace('w:top=\"1440\"','w:top=\"1200\"'))"
+      ],
+      "outcomes": [
+        "Only the requested width and top-margin attribute values change in the serialized XML; custom namespace, paper code, quote/space spelling and an unchanged leading-zero header value remain exactly as before."
+      ],
+      "gaps": [
+        "Native lexical-preservation extension with two fields, not the shared full margins input. Full XML equality follows serialization but there is no reopened PageLayout getter, path save or other-member comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    }
+  ]
+}

@@ -65,8 +65,8 @@ controls reject wrong values, reversed order and missing or extra array members.
 
 ## Requirement mappings
 
-The slide-order, effective-formatting, XML-value, PPTX-core, DOCX-model,
-DOCX-anchor, XLSX-comments, XLSX-styles and formula reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
+The mapping reports associate literal assertions with shared scenarios. They
+also list gaps, such as an untested result field or
 an input variant missing from the scenario. Each report has its own source hashes
 and required files; one cannot supply a missing reference for another.
 
@@ -94,6 +94,23 @@ Other differences include a bold first-run template where the shared case uses
 explicit false, and late metadata changes that stale an existing target before
 new topology can be validated. These gaps remain in the individual mappings.
 The mappings record no rendering result or new execution credit.
+
+The [PPTX text-box ledger](pptx-text-boxes-mappings.json) maps 11 declarations
+and 40 direct assertion expressions. The [DOCX page-layout ledger](docx-page-layout-mappings.json)
+maps 13 declarations and 44 expressions. Each has one aggregate acceptance
+wrapper linked to all cases in its shared feature (23 and 22 respectively); the
+other 22 records are scenario-only. All 295 earlier mapping records are unchanged.
+
+Their positive bindings reopen serialized bytes, not paths. Text-box geometry
+checks compare integer EMU attributes; page-layout checks compare direct twip
+values. Neither establishes rendered geometry or pagination. Separate disk tests
+check text-box paragraph/flag/extension ordering and final page geometry with an
+earlier section XML substring. These disk tests do not assert all package bytes.
+The page-layout UTF-16 test checks BOM/declaration after serialization, but its
+paragraph getter is still live and it has no reopened geometry assertion. The
+real-presentation text-box test also reopens bytes, despite its saved-file wording.
+All these differences remain explicit in the ledgers; independent Office checks
+are separate evidence, not credited by these source mappings.
 
 The [DOCX-model ledger](docx-model-mappings.json) records all 130 declarations and
 683 direct assertion expressions in ten suites: append-run, cell properties,

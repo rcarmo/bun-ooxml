@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/pptx-text-box.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/pptx-text-box.test.ts": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53",
+    "tests/acceptance/text-box.ts": "ec053673d9309fcc5dac36ddbac0ca5684f3bd19d99efaac8e0010f2b0d335a3",
+    "src/pptx/index.ts": "6912aedc6e09726c4e3dc57e34c0057f3873c858bb6fa843f171bc1e2d79cded",
+    "src/pptx/text-box.ts": "abe01c1e7fcdc036eb9156af01fa007e624c9dae29ff429c898628f5b43fe907",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/pptx/text-box.feature": "f1095dc45f85db19d45603fe38938cfc6414c74f3b1f5de63b23f9fd56e880ee"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [
+        "@id-pptx-text-box-authoring|{\"kind\":\"plain\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"multiline\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"empty\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"formatted\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"alias\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"default-namespace\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"extension-tail\"}",
+        "@id-pptx-text-box-authoring|{\"kind\":\"nested-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"negative-position\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"zero-extent\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"fractional-geometry\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"oversized-geometry\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"invalid-text\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"invalid-options\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"duplicate-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"malformed-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"exhausted-id\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"duplicate-tree\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"missing-prefix-properties\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"misplaced-extension\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"alternate-content\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"transformed-tree\"}",
+        "@id-pptx-text-box-refusal|{\"kind\":\"protected-presentation\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(23)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and 23 passed examples. Pinned bindings verify shape receipt/identity, EMU geometry, normalized paragraphs, direct flags and noAutofit after byte reopen; custody checks retain existing slide source and other payloads. Refusals retain archive bytes and slide version."
+      ],
+      "gaps": [
+        "Only two aggregate assertions occur in this declaration; semantic checks are delegated to the pinned bindings. Positive cases use byte reopen, no path save. Custody checks use the live package rather than the reopened presentation; refusal codes are constrained to PPTX_ or XML_ prefixes, not individual codes. No rendering or geometric fit comparison.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:text-box creation stales same-slide anchors and tables but not other slides",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceTextAt(anchor,'Existing','Old')).toThrow('stale')",
+        "expect(()=>cell.text).toThrow('stale')",
+        "expect(()=>table.rows).toThrow('stale')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.tables[0]!.rows).toBe(1)",
+        "expect(q.slides[0]!.inspectText('reopened').some(p=>p.text==='updated text')).toBe(true)",
+        "expect(q.slides[1]!.inspectText('reopened')[0]!.text).toBe('Changed slide')"
+      ],
+      "outcomes": [
+        "Appending a box makes prior same-slide anchor, cell and table handles stale without changing the resulting archive on refusal; a fresh table still has one row. Other-slide anchor editing remains usable and both later text edits survive byte reopen."
+      ],
+      "gaps": [
+        "Native mixed lifecycle extension, not a canonical input. It checks stale messages and reopened text, not exact geometry, the box receipt, all other payloads or path persistence.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:serialization failure restores prior edits, versions and still-usable anchors",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.addTextBox('later',geometry)).toThrow('injected box serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.currentSlideVersion(s.partName)).toBe(version)",
+        "expect(s.inspectText('after')[0]!.text).toBe('Kept title')"
+      ],
+      "outcomes": [
+        "Injected serialization failure leaves archive bytes and slide version equal to their preattempt state; an old anchor remains usable to change the original title to Kept title."
+      ],
+      "gaps": [
+        "Native rollback extension retains a prior earlier box through full archive equality. The recovered title is inspected live; no byte reopen, disk failure, or separately asserted recovered insertion receipt.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.package.get(s.partName)!.slice(0,2)]).toEqual(little?[255,254]:[254,255])",
+        "expect(saved.package.text(s.partName)).toContain('encoding=\"UTF-16\"')",
+        "expect(saved.slides[0]!.inspectText('read').at(-1)!.text).toBe('π text')"
+      ],
+      "outcomes": [
+        "UTF-16LE and BE slides retain their BOM and declaration, and the appended pi text is the final inspected paragraph after byte reopen."
+      ],
+      "gaps": [
+        "Native codec extension with different text. No explicit geometry, name, direct flags, shape-ID or unrelated-member comparison in this declaration; no path save.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:new shapes bind namespaces locally even when p/a are absent or shadowed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(elements(sp,'cNvPr',P)[0]!.attributes.name).toBe('literal $& \"π\"')",
+        "expect(elements(sp,'t',A)[0]!.text).toBe('literal $& <&> \"π\"\\t ')",
+        "expect(elements(sp,'rPr',A)[0]!.attributes).toEqual({b:'0',i:'1'})"
+      ],
+      "outcomes": [
+        "A new shape binds correct presentation/drawing namespaces despite wrong p/a bindings on its aliased parent; the name and literal text with dollar/ampersand/quotes/tab match, and direct flags are exactly b=0 and i=1."
+      ],
+      "gaps": [
+        "Native shadowing/literal-text extension. Inspects generated live XML, not reopened output, and does not compare geometry or full archive custody.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.addTextBox('x',g as any,o as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(calls).toBe(0)"
+      ],
+      "outcomes": [
+        "Ten malformed geometry/options objects refuse without archive changes; accessor counters remain zero. Cases include inherited required data, unknown fields, empty name, null italic, nonfinite extent and symbol fields."
+      ],
+      "gaps": [
+        "Native request-validation matrix. Generic errors only, with no exact error-code, slide-version or path-custody assertion. Rejection of these samples is not a general proxy side-effect guarantee.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.addTextBox('one',geometry).shapeId).toBe(96)",
+        "expect(s.addTextBox('two',geometry).shapeId).toBe(97)",
+        "expect(d.slides[1]!.addTextBox('other',geometry).shapeId).toBe(3)",
+        "expect(()=>slide.addTextBox('x',geometry)).toThrow()",
+        "expect(q.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Nested IDs produce 96 then 97 on the first slide, while the other slide allocates 3. Fractional, exponent, signed, zero, excessive and colliding leading-zero identities all refuse with archive custody."
+      ],
+      "gaps": [
+        "Native finite identity matrix; 0001 numerically collides with the existing root ID, so its refusal does not establish a blanket leading-zero policy. Receipt IDs are checked live, without output reopen or geometry checks.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:tree ambiguity, lexical barriers and malformed shape identity refuse atomically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml.includes(from)).toBe(true)",
+        "expect(()=>s.addTextBox('x',geometry)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Duplicate common-slide data, a lexical comment barrier, duplicate shape identity metadata or missing identity metadata each refuse and leave archive bytes unchanged; source fragments are confirmed present before corruption."
+      ],
+      "gaps": [
+        "Native topology extension beyond shared duplicate-tree/prefix variants. Generic errors only; no exact code, unchanged version or saved-file assertion.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:external slide reorder invalidates old slide identity while raw same-slide edits are read live",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring",
+        "@id-pptx-text-box-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.inspectText('live')[0]!.text).toBe('External text')",
+        "expect(()=>s.addTextBox('refused',geometry)).toThrow('Slide order')",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A raw same-slide title change is read live during box insertion. Reversing presentation slide references externally then makes the held slide refuse another insertion with a Slide order error and exact archive custody."
+      ],
+      "gaps": [
+        "Native live-source versus stale-identity extension, not public reorderSlides behavior. No explicit assertion of the first new box after creation, or byte/disk reopen.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:real presentation adds a text box and saves/reopens without changing other payloads",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.slides[0]!.inspectText('read').some(p=>p.text==='Native textbox')).toBe(true)",
+        "expect(receipt.shapeId).toBeGreaterThan(1)",
+        "expect(q.package.get(n)).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "A pinned real notes presentation gains Native textbox text after byte reopen, returns a shape ID greater than one, and retains every original nonedited-slide member payload."
+      ],
+      "gaps": [
+        "Native real-fixture extension uses the stable fixture resolver rather than the authored shared deck. This is byte reopen, not a disk save despite the title. Bold is supplied but not read back; geometry, added-member absence and exact shape-ID allocation are not asserted.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-text-box.test.ts:disk save retains multiline paragraphs, direct flags and extension tail order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-text-box-authoring"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(tree.children.at(-1)!.localName).toBe('extLst')",
+        "expect(tree.children.at(-2)!.localName).toBe('sp')",
+        "expect(q.slides[0]!.inspectText('read').slice(1).map(p=>p.text)).toEqual(['one','','two'])",
+        "expect(q.slides[0]!.inspectText('read').slice(1).map(p=>p.runs[0]!.attrs)).toEqual([{b:'1',i:'0'},{b:'1',i:'0'},{b:'1',i:'0'}])"
+      ],
+      "outcomes": [
+        "A disk save/reopen retains three paragraphs one/empty/two with direct b=1 and i=0 on every run; the shape tree ends with extLst preceded by the new sp."
+      ],
+      "gaps": [
+        "Native path check extends the extension-tail input with multiline text and formatting. It does not compare geometry, receipt fields or every unrelated payload; directory cleanup is called in finally but absence is not separately asserted.",
+        "Bounded source mapping only; direct versus deferred assertions and dynamic review flags are retained. Runtime leaf count is unknown; no new execution or rendering credit."
+      ]
+    }
+  ]
+}
