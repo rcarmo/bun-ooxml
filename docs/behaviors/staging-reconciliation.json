@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 646,
+  "nativeDeclarations": 659,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 419,
+  "withoutStagingCount": 432,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2910,6 +2910,71 @@
       "id": "bun:tests/unit/docx-paragraph-style.test.ts:same-style request still refuses document protection without touching handles",
       "path": "tests/unit/docx-paragraph-style.test.ts",
       "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:whole paragraph text replaces empty and existing values with fresh handles and saved readback",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:replacement keeps all paragraph/run properties and sibling/member fragments but concentrates text in first leaf",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:same text is a validated lexical no-op retaining entities, archive and held span",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:self-closing paragraphs, runs and text leaves insert safely under alias and foreign w bindings",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:invalid text types, XML characters, controls and input limits refuse without changing handles or bytes",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:fields, revisions, lexical text barriers and unknown text attributes refuse even on same text",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:protection, stale handles and externally changed source refuse before write or no-op",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:write and serialization faults roll back bytes while retaining paragraph/span/cell handles",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:table paragraph changes retain dimensions and sibling text with UTF-16 byte reopen",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:xml:space edits retain declaration values, quotes and encoded default while preserving first-leaf boundary spaces",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:setter output bounds retain archive and live handles",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:five canonical text getter cases execute and corrupted getter/expected values fail assertions",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-text.test.ts:first existing text leaf owns replacement even after an empty run and no-leaf insertion retains first-run formatting",
+      "path": "tests/unit/docx-paragraph-text.test.ts",
+      "sourceSha256": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde"
     },
     {
       "id": "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",

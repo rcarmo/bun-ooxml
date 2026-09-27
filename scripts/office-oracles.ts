@@ -21,14 +21,14 @@ async function command(args:string[],seconds=90){
 const check=(condition:unknown,message:string)=>{if(!condition)throw Error(message);};
 async function ok(args:string[],seconds=90){const r=await command(args,seconds);check(r.exit===0,`${args[0]} failed: ${r.stderr}`);return r;}
 try{
- for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/docx/style-authoring.ts','src/docx/page-layout.ts','src/docx/effective-formatting.ts','src/docx/row-header.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/pptx/slide-order.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
+ for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/docx/style-authoring.ts','src/docx/page-layout.ts','src/docx/effective-formatting.ts','src/docx/row-header.ts','src/docx/paragraph-text.ts','src/docx/append-run.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/pptx/slide-order.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
  report.versions.dotnet=(await ok(['dotnet','--version'])).stdout.trim();
  report.versions.libreoffice=(await ok(['libreoffice','--version'])).stdout.trim();
  const poppler=await ok(['pdftotext','-v']);report.versions.poppler=(poppler.stderr||poppler.stdout).trim();
  const project='tests/oracles/schema/SchemaCheck.csproj';
  await ok(['dotnet','restore',project,'--locked-mode']);await ok(['dotnet','build',project,'--no-restore','--configuration','Release']);
  const validator=join(root,'tests/oracles/schema/bin/Release/net10.0/SchemaCheck.dll');
- const doc=Document.create();doc.addParagraphStyle('Smoke',{name:'Oracle heading',bold:true});doc.addParagraph('Native Word oracle',{style:'Smoke'});doc.addParagraph('A second paragraph.');
+ const doc=Document.create();doc.addParagraphStyle('Smoke',{name:'Oracle heading',bold:true});doc.addParagraph('Native Word oracle',{style:'Smoke'});doc.addParagraph('Obsolete text.').appendRun(' trailing text').setText('A second paragraph.');
  doc.addParagraphStyle('CascadeBase',{name:'Cascade Base',bold:true});doc.addParagraphStyle('CascadeToggle',{name:'Cascade Toggle',basedOn:'CascadeBase',bold:true,italic:true});
  doc.addParagraph('BOLDMARK',{style:'CascadeBase'});doc.addParagraph('TOGGLEMARK',{style:'CascadeToggle'});doc.addParagraph('PLAINMARK',{style:'CascadeBase'});doc.paragraphs.at(-1)!.setRunFormatting({bold:false});doc.addParagraph('BOTHMARK',{bold:true,italic:true});
  const formattingExpected=doc.paragraphs.filter(p=>p.text.endsWith('MARK')).map(p=>{const r=p.effectiveRunFormatting()[0]!;return {text:r.text,bold:r.bold.value,italic:r.italic.value};});

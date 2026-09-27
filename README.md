@@ -13,8 +13,9 @@ a bounded paragraph-style cascade with provenance and explicit unsupported conte
 package parts. Existing-file edits include guarded cross-run replacement, slide
 text, [existing speaker notes](docs/contracts/notes-editing.md) and cell edits
 with bounded formula-cache invalidation. Existing XLSX
-[cell-style selection](docs/contracts/cell-style.md) preserves values, formulas and caches. Word paragraph
-paragraphs can [append independently formatted runs](docs/contracts/append-run.md).
+[cell-style selection](docs/contracts/cell-style.md) preserves values, formulas and caches. Word
+paragraphs can [append independently formatted runs](docs/contracts/append-run.md)
+or [replace their whole text](docs/contracts/paragraph-text.md) while retaining existing run properties.
 Existing runs support [direct Boolean formatting](docs/contracts/run-formatting.md), including
 strike-through and selected text effects, [direct colour, underline and highlighting](docs/contracts/run-appearance.md),
 [half-point font sizes](docs/contracts/font-size.md), [direct Latin font names](docs/contracts/run-font-name.md)

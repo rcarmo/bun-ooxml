@@ -1,5 +1,6 @@
 import { OoxmlError } from "../errors.ts";
 import {appendParagraphRun} from './append-run.ts';
+import {replaceParagraphText} from './paragraph-text.ts';
 import {readRowHeader,editRowHeader} from './row-header.ts';
 import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
 export type {DirectCellProperties,CellPropertiesPatch,CellTopBorder} from './cell-properties.ts';
@@ -230,6 +231,12 @@ export class Paragraph {
   effectiveRunFormatting(): EffectiveRunFormatting[] {
     this.ensureFresh();
     return this.documentRef.inspectParagraphFormatting(this.snapshot);
+  }
+
+  /** Replace all plain text, retaining runs/properties, and return the current handle. */
+  setText(text: string): Paragraph {
+    this.ensureFresh(); this.ensureSearchable();
+    return this.documentRef.setParagraphText(this.snapshot,text);
   }
 
   /** Append one independent plain-text run and return a fresh paragraph handle. */
@@ -809,17 +816,30 @@ export class Document {
     return {changedRuns:result.changedRuns};
   }
 
+  setParagraphText(snapshot:ParagraphSnapshot,text:string):Paragraph {
+    this.assertParagraphSnapshot(snapshot);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    this.assertFormattingUnprotected();
+    const nextXml=replaceParagraphText(this.xml,snapshot.element,text);
+    if(nextXml===this.xml)return this.paragraphHandles[snapshot.index]!;
+    return this.commitParagraphText(snapshot,nextXml,text);
+  }
+
   appendRunToParagraph(snapshot:ParagraphSnapshot,text:string,formatting:RunFormattingPatch):Paragraph {
     this.assertParagraphSnapshot(snapshot);
     if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
     this.assertFormattingUnprotected();
     const nextXml=appendParagraphRun(this.xml,snapshot.element,text,formatting);
+    return this.commitParagraphText(snapshot,nextXml,snapshot.text+text);
+  }
+
+  private commitParagraphText(snapshot:ParagraphSnapshot,nextXml:string,text:string):Paragraph {
     const nextVersion=this.version+1,nextDocument=parseXml(nextXml);
     const collections=collectDocumentCollections(nextDocument,nextVersion,this.tableVersion);
-    const expected=this.paragraphSnapshots.map((p,i)=>i===snapshot.index?p.text+text:p.text);
-    if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(expected))fail('docx-run-unsafe','Appending a run changed unexpected paragraph text');
+    const expected=this.paragraphSnapshots.map((p,i)=>i===snapshot.index?text:p.text);
+    if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(expected))fail('docx-run-unsafe','Paragraph edit changed unexpected paragraph text');
     const grids=(tables:TableSnapshot[])=>tables.map(t=>[t.rows,t.columns]);
-    if(JSON.stringify(grids(collections.tables.tables))!==JSON.stringify(grids(this.tableSnapshots)))fail('docx-run-unsafe','Appending a run changed the table grid');
+    if(JSON.stringify(grids(collections.tables.tables))!==JSON.stringify(grids(this.tableSnapshots)))fail('docx-run-unsafe','Paragraph edit changed the table grid');
     this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
     this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
     return this.paragraphHandles[snapshot.index]!;
