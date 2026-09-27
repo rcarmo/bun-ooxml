@@ -71,6 +71,18 @@ only the new wording; corruption controls and unchanged-default-identity checks
 remain active. This adds no workbook calculation, schema or rendering coverage,
 and changes none of the 472 mapping records.
 
+Shared v0.27 completes the catalogue-wide actor/profile wording pass: comment
+and template APIs use operation labels, XML escaping/error profiles lose their
+origin prefixes, and XLSX creation keeps fixture provenance without a Bun actor.
+The changed 24 IDs / 25 cases do not add Bun bindings. Nine authored-comment cases
+stay planned; thirteen template cases remain outside Bun's loaded inventory.
+Only the two already implemented XML profile IDs remain active. All 525 default
+case identities and 472 mapping records are unchanged.
+
+The shared catalogue's weak-outcome review records dictionary-only responses,
+non-vacuous-filter gaps and missing cache/authoring custody checks. Neutral words
+do not turn those API observations into complete semantic analysis or parity.
+
 ## Maintain the reports
 
 ```sh

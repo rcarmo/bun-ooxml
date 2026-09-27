@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 955,
+  "nativeDeclarations": 958,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 728,
+  "withoutStagingCount": 731,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2154,6 +2154,21 @@
       "id": "bun:tests/unit/admission-mappings.test.ts:admission reconciliation preserves inputs direct deferred assertion sets and review flags without runtime leaves",
       "path": "tests/unit/admission-mappings.test.ts",
       "sourceSha256": "9d5a974077a0d4faa70ef5b6f414c6cef1ead877e4a45c89921419ec128b63ed"
+    },
+    {
+      "id": "bun:tests/unit/comment-template-neutrality.test.ts:comment/template API labels do not activate unsupported consumer scenarios",
+      "path": "tests/unit/comment-template-neutrality.test.ts",
+      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf"
+    },
+    {
+      "id": "bun:tests/unit/comment-template-neutrality.test.ts:retained weak response and comment policies are not strengthened by neutral names",
+      "path": "tests/unit/comment-template-neutrality.test.ts",
+      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf"
+    },
+    {
+      "id": "bun:tests/unit/comment-template-neutrality.test.ts:profile-only adoption preserves all default case identities and every bounded mapping record",
+      "path": "tests/unit/comment-template-neutrality.test.ts",
+      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf"
     },
     {
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison ledgers cover 26 declarations and 74 expressions preserving 347 predecessor mappings",

@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 955,
-  "files": 105,
+  "count": 958,
+  "files": 106,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -15,6 +15,12 @@
     {
       "path": "tests/unit/cache-boundaries.test.ts",
       "sha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
+      "declarations": 3,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/comment-template-neutrality.test.ts",
+      "sha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
       "declarations": 3,
       "issues": []
     },
@@ -915,6 +921,7 @@
     "bun:tests/unit/admission-mappings.test.ts:admission scope assertions and missing second canonical feature cannot silently pass",
     "bun:tests/unit/admission-mappings.test.ts:admission pins require both canonical sources and each runtime helper and test source",
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+    "bun:tests/unit/comment-template-neutrality.test.ts:comment/template API labels do not activate unsupported consumer scenarios",
     "bun:tests/unit/comparison-mappings.test.ts:comparison ledgers cover 26 declarations and 74 expressions preserving 347 predecessor mappings",
     "bun:tests/unit/comparison-mappings.test.ts:comparison scopes declarations literal assertions and canonical case ownership cannot shrink or cross features",
     "bun:tests/unit/comparison-mappings.test.ts:comparison runtime binding fixture-builder and canonical pins fail independently when stale or absent",
@@ -1293,6 +1300,7 @@
     "bun:tests/unit/admission-mappings.test.ts:admission scope assertions and missing second canonical feature cannot silently pass",
     "bun:tests/unit/admission-mappings.test.ts:admission pins require both canonical sources and each runtime helper and test source",
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+    "bun:tests/unit/comment-template-neutrality.test.ts:comment/template API labels do not activate unsupported consumer scenarios",
     "bun:tests/unit/comparison-mappings.test.ts:comparison ledgers cover 26 declarations and 74 expressions preserving 347 predecessor mappings",
     "bun:tests/unit/comparison-mappings.test.ts:comparison scopes declarations literal assertions and canonical case ownership cannot shrink or cross features",
     "bun:tests/unit/comparison-mappings.test.ts:comparison runtime binding fixture-builder and canonical pins fail independently when stale or absent",
@@ -1976,6 +1984,140 @@
         "f.scenarios.flatMap",
         "newAcceptanceRunId",
         "sharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/comment-template-neutrality.test.ts:comment/template API labels do not activate unsupported consumer scenarios",
+      "path": "tests/unit/comment-template-neutrality.test.ts",
+      "line": 6,
+      "title": "comment/template API labels do not activate unsupported consumer scenarios",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(ids).toHaveLength(24)",
+        "expect(observed.filter(s=>s.lifecycle==='implemented').map(s=>s.scenarioId).sort()).toEqual(['@id-xml-escaping-values','@id-xml-typed-parse-error'])",
+        "expect(observed.filter(s=>s.lifecycle==='planned')).toHaveLength(9)",
+        "expect(templates).toHaveLength(13)",
+        "expect(active.filter(s=>templates.includes(s.scenarioId))).toEqual([])",
+        "expect(f.lifecycle).toBe('planned')",
+        "expect(f.scenarios.every(s=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 12,
+          "expression": "for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
+      "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/comment-template-wording-migration.json')).json(),inv=await inventoryFeatures(process.cwd()),active=inv.features.flatMap(f=>f.scenarios),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)) as string[];\n expect(ids).toHaveLength(24);const observed=active.filter(s=>ids.includes(s.scenarioId));expect(observed.filter(s=>s.lifecycle==='implemented').map(s=>s.scenarioId).sort()).toEqual(['@id-xml-escaping-values','@id-xml-typed-parse-error']);expect(observed.filter(s=>s.lifecycle==='planned')).toHaveLength(9);\n // Templates remain outside Bun's loaded execution inventory; inspect the shared\n // lifecycle directly rather than granting a pass or silently claiming binding.\n const templates=ids.filter(id=>id.includes('template'));expect(templates).toHaveLength(13);expect(active.filter(s=>templates.includes(s.scenarioId))).toEqual([]);\n for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature']){const f=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text());expect(f.lifecycle).toBe('planned');expect(f.scenarios.every(s=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().json",
+        "Bun.file().text",
+        "active.filter",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "f.scenarios.every",
+        "f.scenarios.map",
+        "fixturesRoot",
+        "id.includes",
+        "ids.filter",
+        "ids.includes",
+        "inv.features.flatMap",
+        "inventoryFeatures",
+        "join",
+        "m.files.flatMap",
+        "observed.filter",
+        "observed.filter().map",
+        "observed.filter().map().sort",
+        "parseFeature",
+        "process.cwd",
+        "templates.includes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/comment-template-neutrality.test.ts:retained weak response and comment policies are not strengthened by neutral names",
+      "path": "tests/unit/comment-template-neutrality.test.ts",
+      "line": 14,
+      "title": "retained weak response and comment policies are not strengthened by neutral names",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(plain.cases[0]!.steps.at(-1)!.text).toBe('its response is a dictionary')",
+        "expect(comments.scenarios.find(s=>s.scenarioId==='@id-python-comments-filter-predicates')!.cases[0]!.steps.some(s=>s.text==='the open-filter, resolved-filter, and mine-filter results are each nonempty')).toBe(true)",
+        "expect(comments.scenarios.find(s=>s.scenarioId==='@id-docx-comments-refusal')!.cases.some(c=>c.name.includes('missing-extension'))).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
+      "body": "{\n const path='workflows/docx/template-analysis.feature',f=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()),plain=f.scenarios.find(s=>s.scenarioId==='@id-python-word-template-analysis-plain-response')!;expect(plain.cases[0]!.steps.at(-1)!.text).toBe('its response is a dictionary');\n const p='workflows/docx/comments.feature',comments=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text());expect(comments.scenarios.find(s=>s.scenarioId==='@id-python-comments-filter-predicates')!.cases[0]!.steps.some(s=>s.text==='the open-filter, resolved-filter, and mine-filter results are each nonempty')).toBe(true);expect(comments.scenarios.find(s=>s.scenarioId==='@id-docx-comments-refusal')!.cases.some(c=>c.name.includes('missing-extension'))).toBe(true);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "c.name.includes",
+        "comments.scenarios.find",
+        "comments.scenarios.find().cases.0.steps.some",
+        "comments.scenarios.find().cases.some",
+        "expect",
+        "expect().toBe",
+        "f.scenarios.find",
+        "fixturesRoot",
+        "join",
+        "parseFeature",
+        "plain.cases.0.steps.at"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/comment-template-neutrality.test.ts:profile-only adoption preserves all default case identities and every bounded mapping record",
+      "path": "tests/unit/comment-template-neutrality.test.ts",
+      "line": 18,
+      "title": "profile-only adoption preserves all default case identities and every bounded mapping record",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(keys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inv.counts.cases.planned).toBe(35)",
+        "expect(r.mappedDeclarations).toBe(472)",
+        "expect(r.executionCredit).toBe(false)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(35);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "JSON.stringify",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "f.scenarios.filter",
+        "f.scenarios.filter().flatMap",
+        "inv.features.flatMap",
+        "inv.features.flatMap().sort",
+        "inventoryFeatures",
+        "outcomeMappingReport",
+        "process.cwd",
+        "s.cases.map"
       ],
       "reviewReasons": [],
       "unresolved": []

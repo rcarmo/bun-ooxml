@@ -4,7 +4,7 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 955,
+  "totalDeclarations": 958,
   "mappedDeclarations": 472,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
@@ -25,7 +25,7 @@
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
     "workflows/xml/editing.feature": "a9c308f9995d7a335b3d96054c2eb8fd8286937c95a46bd07b26428c63292ff3",
-    "workflows/xml/parsing.feature": "f50e20a9ad3c776ffdc54c0cf7e9a2b13c613c375e91dfbe49ea735782bae9c2",
+    "workflows/xml/parsing.feature": "350edcdfa0dc1206f9f5165cae93ba41c12b6974ee21e71cd3329ed2a82438ff",
     "tests/unit/pptx.test.ts": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
     "tests/acceptance/pptx.ts": "7e4ab7286825d0a5aeb3cda3284bb1afa39e6a9986eca45d4432ad3eaab31e1f",
     "tests/acceptance/pptx-custody.ts": "d3814ec9b812385a1a6894e239cb5cdee6f46bed16eefe30c1d2e193472f4425",
@@ -128,7 +128,7 @@
     "tests/unit/docx-comments.test.ts": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
     "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
     "src/docx/comments.ts": "eca35561548bf0bed07f01231bb4342066915b2523bc1252896428ea29706ab6",
-    "workflows/docx/comments.feature": "7c1d435624140439a68e0b70801b7e0c19be4e28008dcb66d9e9c1acb33dc9e0",
+    "workflows/docx/comments.feature": "4382383b2c93681fdc1ec96c5b157bce619ac39f02250f2f7e840ff0a4234129",
     "tests/unit/graph.test.ts": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
     "tests/unit/package-diff.test.ts": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
     "tests/acceptance/graph.ts": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f",
@@ -209,7 +209,7 @@
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/xml/editing.feature": "a9c308f9995d7a335b3d96054c2eb8fd8286937c95a46bd07b26428c63292ff3",
-        "workflows/xml/parsing.feature": "f50e20a9ad3c776ffdc54c0cf7e9a2b13c613c375e91dfbe49ea735782bae9c2"
+        "workflows/xml/parsing.feature": "350edcdfa0dc1206f9f5165cae93ba41c12b6974ee21e71cd3329ed2a82438ff"
       }
     },
     {
@@ -538,7 +538,7 @@
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/docx/comments.feature": "7c1d435624140439a68e0b70801b7e0c19be4e28008dcb66d9e9c1acb33dc9e0"
+        "workflows/docx/comments.feature": "4382383b2c93681fdc1ec96c5b157bce619ac39f02250f2f7e840ff0a4234129"
       }
     },
     {
@@ -686,6 +686,9 @@
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / workflow refuses and preserves an existing output when the workbook has array followers",
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / executes every cache boundary Given/When/Then",
+    "bun:tests/unit/comment-template-neutrality.test.ts:comment/template API labels do not activate unsupported consumer scenarios",
+    "bun:tests/unit/comment-template-neutrality.test.ts:retained weak response and comment policies are not strengthened by neutral names",
+    "bun:tests/unit/comment-template-neutrality.test.ts:profile-only adoption preserves all default case identities and every bounded mapping record",
     "bun:tests/unit/comparison-mappings.test.ts:comparison ledgers cover 26 declarations and 74 expressions preserving 347 predecessor mappings",
     "bun:tests/unit/comparison-mappings.test.ts:comparison mapping gaps preserve aggregate wrappers QName policies resource and unchanged-list limits",
     "bun:tests/unit/comparison-mappings.test.ts:comparison scopes declarations literal assertions and canonical case ownership cannot shrink or cross features",
