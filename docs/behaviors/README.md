@@ -25,9 +25,9 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 236 scenarios / 586 cases; 550 implemented and 36 planned.
+- Shared: 236 scenarios / 586 cases; 551 implemented and 35 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 245 scenarios / 597 cases; 550 implemented and 47 planned.
+- Combined: 245 scenarios / 597 cases; 551 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -45,7 +45,14 @@ Bun's [direct heading classifier](../contracts/paragraph-style.md#direct-heading
 adds eight native scenario-only associations (494 total mappings). All 486 prior
 records are unchanged. Its exact `Heading1`–`Heading9` policy and absent-style
 `undefined` result do not implement the whole shared getter profile. All five
-shared heading cases remain planned; the 550 executed case identities are unchanged.
+shared heading cases remain planned; that change preserved all 550 executed case identities.
+
+[Nullable DOCX cell access](../contracts/table-api.md#nullable-docx-cell-access)
+subsequently activates one shared cell-presence/bounds case through `Table.tryCell`.
+It adds seven partial mappings (501 total). Of the 494 prior records, 493 are
+unchanged and one heading-inventory guard updates only its two global count
+assertions. Tests preserve the earlier execution baseline after excluding exactly
+the reviewed additions.
 
 ## Format and operation layout
 

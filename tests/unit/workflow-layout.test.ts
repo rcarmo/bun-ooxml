@@ -11,7 +11,7 @@ test('format regrouping retains the exact 525 implemented shared case identities
  const originalKeys=withoutTrackingToggle(keys);
  expect(originalKeys).toHaveLength(525);expect(new Set(originalKeys).size).toBe(525);
  expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');
- expect(inventory.counts.cases.planned).toBe(47);
+ expect(inventory.counts.cases.planned).toBe(46);
  for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\/fixtures-ooxml\/workflows\/(docx|pptx|xlsx|package|xml)\/[a-z0-9-]+\.feature$/);}
 });
 test('multi-feature wrapper selection executes only requested identities and rejects missing ones',async()=>{
@@ -24,9 +24,9 @@ test('multi-feature wrapper selection executes only requested identities and rej
 });
 test('mapping relocation preserves 470 records and explicitly accounts for two wrapper count changes',async()=>{
  const r=await outcomeMappingReport(),ids=['bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings','bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting'];
- const unchanged=r.mappings.filter(m=>!['tracking-settings','heading-classification'].includes(m.ledger)&&!ids.includes(m.testId));expect(unchanged).toHaveLength(470);
+ const unchanged=r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell'].includes(m.ledger)&&!ids.includes(m.testId));expect(unchanged).toHaveLength(470);
  expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(unchanged)).digest('hex')).toBe('a87881cd02360bf6db2556d4cb39bc4a22bb59db90752d4fff83dd9f81960b41');
  expect(r.mappings.find(m=>m.testId===ids[0])!.assertions).toContain('expect(report.inventory.features.implemented).toBe(2)');
  expect(r.mappings.find(m=>m.testId===ids[1])!.assertions).toContain('expect(good.counts.cases.planned).toBe(0)');
- expect(r.mappedDeclarations).toBe(494);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();
+ expect(r.mappedDeclarations).toBe(501);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();
 });

@@ -23,6 +23,6 @@ test('all eighteen portable-profile cases execute the retained inputs and outcom
 test('wording and profile labels do not change default acceptance identities or credit',async()=>{
  const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();
  const originalKeys=withoutTrackingToggle(keys);
- expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(47);
- const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(494);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings.filter(m=>!['tracking-settings','heading-classification'].includes(m.ledger)))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');
+ expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(46);
+ const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(501);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell'].includes(m.ledger)))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');
 });

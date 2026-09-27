@@ -54,6 +54,7 @@ import { bindings as cellPropertiesBindings } from './cell-properties.ts';
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
 import { bindings as tableDocxBindings } from "./tables-docx.ts";
+import {bindings as nullableCellBindings} from './nullable-cell.ts';
 import { bindings as tablePptxBindings } from "./tables-pptx.ts";
 import { bindings as pptxBindings } from "./pptx.ts";
 import { bindings as pptxCustodyBindings } from './pptx-custody.ts';
@@ -122,6 +123,7 @@ export const bindings: StepBinding[] = [
   ...createPptxBindings,
   ...createXlsxBindings,
   ...tableDocxBindings,
+  ...nullableCellBindings,
   ...tablePptxBindings,
   ...pptxBindings,
   ...pptxCustodyBindings,

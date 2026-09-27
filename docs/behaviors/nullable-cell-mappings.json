@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-nullable-cell.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
+    "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
+    "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
+    "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable table access returns nine usable cells and null at each integer boundary without mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(cell).not.toBeNull()",
+        "expect(cell!.text).toBe(`${r},${c}`)",
+        "expect(cell!.directProperties()).toEqual(t.cell(r,c).directProperties())",
+        "expect(t.tryCell(r!,c!)).toBeNull()",
+        "expect(()=>t.cell(r!,c!)).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Nine nullable cell handles read expected text/properties; eight integer boundaries return null while strict cell access throws; archive unchanged."
+      ],
+      "gaps": [
+        "In-memory matrix only; not path persistence or every table topology."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable access refuses invalid numeric coordinates without coercion even if the other axis is outside",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(value as any,0)).toThrow(RangeError)",
+        "expect(()=>t.tryCell(0,value as any)).toThrow(RangeError)",
+        "expect(()=>t.tryCell(-1,value as any)).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(called).toBe(false)",
+        "expect(t.tryCell(-0,-0)!.text).toBe('0,0')"
+      ],
+      "outcomes": [
+        "Noninteger nonfinite unsafe and nonnumeric coordinates refuse without coercion even when the other axis is outside; negative zero resolves first cell."
+      ],
+      "gaps": [
+        "Invalid-input policy exceeds shared integer-boundary predicate; no general proxy or hostile runtime claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable cells edit through the existing checked path and saved tables reopen with all original coordinates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.text).toThrow(expect.objectContaining({code:'docx-stale-table-cell'}))",
+        "expect(t.tryCell(1,1)!.text).toBe('Updated & <cell>')",
+        "expect(reopened.tables).toHaveLength(1)",
+        "expect(reopened.tables[0]!.rows).toBe(3)",
+        "expect(reopened.tables[0]!.columns).toBe(3)",
+        "expect(reopened.tables[0]!.tryCell(r,c)!.text).toBe(r===1&&c===1?'Updated & <cell>':`${r},${c}`)",
+        "expect(reopened.tables[0]!.tryCell(3,0)).toBeNull()",
+        "expect([...reopened.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Nullable cell edits use checked mutation; held cell goes stale; path reopen preserves all nine coordinates, edited text and unrelated payloads."
+      ],
+      "gaps": [
+        "One edit to one rectangular table; independent Office rendering and merge editing untested."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:stale structural handles refuse both in-range and out-of-range nullable lookup",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(r!,c!)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Structurally stale tables reject in-range and out-of-range nullable reads with exact archive custody."
+      ],
+      "gaps": [
+        "One insertion case; no arbitrary concurrent mutation evidence."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:externally changed table bytes cannot masquerade as a missing cell",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(-1,0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>t.tryCell(0,0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Externally changed document XML refuses nullable access both in-range and outside without changing archive."
+      ],
+      "gaps": [
+        "One external text replacement; not every external graph or package mutation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable access does not hide merged cells unsupported grids or unsafe cell text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(0,0)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(t.tryCell(3,0)).toBeNull()",
+        "expect(()=>t.tryCell(0,0)).toThrow(expect.objectContaining({code:'docx-table-unsupported'}))",
+        "expect(()=>t.tryCell(-1,0)).toThrow(expect.objectContaining({code:'docx-table-unsupported'}))",
+        "expect(cell).not.toBeNull()",
+        "expect(()=>cell!.text).toThrow(expect.objectContaining({code:'docx-table-cell-unsupported'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Merged target and unsupported grid refuse; out-of-range merged-table coordinate returns null; unsafe nested cell text still refuses; archives unchanged."
+      ],
+      "gaps": [
+        "Only three topology variants; no merged-table support or general schema-validation claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:shared nullable profile executes one case and detects missing in-range cells or fabricated boundary cells",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(boundary.counts.cases.failed).toBe(1)",
+        "expect(boundary.counts.steps.undefined).toBe(0)"
+      ],
+      "outcomes": [
+        "One shared nullable-cell scenario executes; missing fifth cell and fabricated boundary cell controls fail without undefined bindings."
+      ],
+      "gaps": [
+        "Scenario checks nine object-presence results and four null boundaries only; save/reopen remains separate native evidence."
+      ]
+    }
+  ]
+}

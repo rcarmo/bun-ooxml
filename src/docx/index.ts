@@ -400,6 +400,15 @@ export class Table {
     return this.documentRef.setRowHeader(this.liveTable(),row,value);
   }
 
+  /** Null for an absent integer coordinate; invalid inputs and unsafe/stale tables still refuse. */
+  tryCell(row: number, column: number): TableCell | null {
+    const table=this.liveTable();
+    if(!Number.isSafeInteger(row)||!Number.isSafeInteger(column))throw new RangeError('Table coordinates must be safe integers');
+    if(table.unsupported)fail('docx-table-unsupported', `DOCX table ${table.index + 1} uses unsupported topology ${table.unsupported}`);
+    if(row<0||column<0||row>=table.rows||column>=table.columns)return null;
+    return this.cell(row,column);
+  }
+
   cell(row: number, column: number): TableCell {
     const table = this.liveTable();
     assertTableCoordinate(table, row, column);
@@ -1085,7 +1094,7 @@ export class Document {
   }
 
   resolveTable(table: TableSnapshot): TableSnapshot {
-    if (this.tableVersion !== table.version) {
+    if (this.tableVersion !== table.version || this.opcPackage.text(DOCUMENT_PART)!==this.xml) {
       fail("docx-stale-table", "DOCX table handle is stale after document mutation");
     }
 

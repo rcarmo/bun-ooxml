@@ -6,8 +6,8 @@
     "tests/unit/docx-heading-classification.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-heading-classification.test.ts": "cd6e8bb112387c432aa56341fc84951a5098cd403ab93bc4c4e4f5bf4dfd1fa5",
-    "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+    "tests/unit/docx-heading-classification.test.ts": "834df9edc8906796480c57fa99445406fe1ff24ff6de67e6b958b625f9a5ea77",
+    "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
     "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
@@ -179,8 +179,8 @@
         "expect(p.headingLevel).toBe(0)",
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
-        "expect(inv.counts.cases.implemented).toBe(550)",
-        "expect(inv.counts.cases.planned).toBe(47)"
+        "expect(inv.counts.cases.implemented).toBe(551)",
+        "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
         "Empty string assignment refuses; null removes style and reads undefined/false/zero; all five shared getter cases remain planned and acceptance totals are unchanged."

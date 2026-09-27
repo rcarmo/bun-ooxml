@@ -4,17 +4,22 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 989,
-  "mappedDeclarations": 494,
+  "totalDeclarations": 998,
+  "mappedDeclarations": 501,
   "sourceSha256": {
-    "tests/unit/docx-heading-classification.test.ts": "cd6e8bb112387c432aa56341fc84951a5098cd403ab93bc4c4e4f5bf4dfd1fa5",
-    "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
-    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
-    "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+    "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
+    "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
     "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
+    "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
+    "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+    "tests/unit/docx-heading-classification.test.ts": "834df9edc8906796480c57fa99445406fe1ff24ff6de67e6b958b625f9a5ea77",
+    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+    "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
     "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
     "tests/unit/tracking-settings-outcomes.test.ts": "3c3e98c041670f9d2e400129fca532a83a2b872d4728b1f603f6913de7bdd12b",
@@ -22,7 +27,6 @@
     "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
     "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
-    "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
     "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
     "workflows/docx/tracking-settings.feature": "ba4621e6acd4b892b5a214d57d3d9057b568135d0f21a5ff40fc69b4b6417e9e",
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
@@ -60,7 +64,6 @@
     "tests/acceptance/append-run.ts": "8d1fa7168cc986390f3646fc55e5333283cbb771b41e5f6f985ad2306be89a46",
     "tests/acceptance/cell-properties.ts": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d",
     "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
-    "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
     "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
     "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
     "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
@@ -90,7 +93,6 @@
     "workflows/docx/paragraphs.feature": "7c448d5863f64ef188b3cb2ec1c9a82fb4a8a2c7c5104058ccf21ad2561e6856",
     "workflows/docx/properties.feature": "59757333a4894b19364fd2b40fd2f1ceaafa19c21f357b4b9ef764bf2197be04",
     "workflows/docx/run-formatting.feature": "7af8ef3a85775d91a2025e033fd818dbda4bf8799210b294544b4ae1743536a1",
-    "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d",
     "tests/unit/docx-body-anchors.test.ts": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
     "tests/unit/docx-body-map.test.ts": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277",
@@ -171,14 +173,33 @@
   },
   "ledgers": [
     {
+      "name": "nullable-cell",
+      "scopePaths": [
+        "tests/unit/docx-nullable-cell.test.ts"
+      ],
+      "mappedDeclarations": 7,
+      "sourceSha256": {
+        "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
+        "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
+        "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
+      }
+    },
+    {
       "name": "heading-classification",
       "scopePaths": [
         "tests/unit/docx-heading-classification.test.ts"
       ],
       "mappedDeclarations": 8,
       "sourceSha256": {
-        "tests/unit/docx-heading-classification.test.ts": "cd6e8bb112387c432aa56341fc84951a5098cd403ab93bc4c4e4f5bf4dfd1fa5",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "tests/unit/docx-heading-classification.test.ts": "834df9edc8906796480c57fa99445406fe1ff24ff6de67e6b958b625f9a5ea77",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
@@ -199,13 +220,13 @@
         "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
         "tests/unit/tracking-settings-outcomes.test.ts": "3c3e98c041670f9d2e400129fca532a83a2b872d4728b1f603f6913de7bdd12b",
         "src/docx/tracking-settings.ts": "90cd9885ddf07129c8281e72f9ff79c6e24603de31fa0bcc74d27a349f08898a",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
         "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
-        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
@@ -237,7 +258,7 @@
       "sourceSha256": {
         "tests/unit/docx-effective-formatting.test.ts": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
         "tests/acceptance/effective-formatting.ts": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
@@ -285,7 +306,7 @@
         "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
         "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
         "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
-        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "workflows/pptx/notes.feature": "6980daafe08bb43e7ba2f73807a402a3ebabe239f0d41bad81b7c09ca7355f41",
         "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
@@ -315,8 +336,8 @@
         "tests/acceptance/cell-properties.ts": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d",
         "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
         "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
         "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
@@ -365,7 +386,7 @@
       "sourceSha256": {
         "tests/unit/docx-body-anchors.test.ts": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
         "tests/unit/docx-body-map.test.ts": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/docx/body-map.ts": "ddb2f4e83eee1744b9623199f8b7fb3991fdb5a4a77ace4d3223ad904b2a174d",
         "src/docx/body-insertion.ts": "aef562d13488d4f7d78d44d258fd451669ee85b677682dff35402c1a3f8364bb",
         "src/docx/paragraph-properties.ts": "498c2369d8a0005b1fc0c1a0182d85b14a4ce72133a5cf456b67483e5f45bd37",
@@ -374,7 +395,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/body-anchors.ts": "6c340f7d86eb2d0f00d74e5699f64d2631f2cabfec6f19ca3185e8326ea25505",
-        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -399,7 +420,7 @@
         "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
-        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -459,7 +480,7 @@
       "sourceSha256": {
         "tests/unit/docx-page-layout.test.ts": "b1aa47aa13041d11631d963deac263feddaa5214a8daf788d8cd58e1798520cd",
         "tests/acceptance/page-layout.ts": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
@@ -481,7 +502,7 @@
       "sourceSha256": {
         "tests/unit/docx-paragraph-style.test.ts": "fe5a9aeef872fb439a798c94104d0d6969d4987166c3b773f346d6c21d55521e",
         "tests/acceptance/paragraph-style.ts": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
@@ -504,7 +525,7 @@
         "tests/unit/docx-style-authoring.test.ts": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4",
         "tests/acceptance/style-authoring.ts": "e3439546d2576bbfd267d2dc5a6be41612d25ca25a32d3712c970db614fdf3fe",
         "tests/acceptance/paragraph-style.ts": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
@@ -555,7 +576,7 @@
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "src/xml/comparison.ts": "19a2252c38a7fa20b539dce9af4fc06a39c95f27204c1c46a73e66065424609e",
@@ -578,7 +599,7 @@
         "tests/unit/docx-comments.test.ts": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
         "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
         "src/docx/comments.ts": "eca35561548bf0bed07f01231bb4342066915b2523bc1252896428ea29706ab6",
-        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/index.ts": "58a1b6a817bab7acfca46def05bd48b32ad23d251f800350fcee05e6b5b74a24",
         "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
@@ -643,7 +664,7 @@
         "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
         "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
         "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
@@ -665,7 +686,7 @@
         "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
         "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+        "tests/acceptance/steps.ts": "60b2402cd11abad73310fb6a37e7c3ffe7343322ed57eb8d0ba839dadab7f5c3",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
@@ -942,6 +963,8 @@
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / refuses an acceptance run with only planned cases rather than passing vacuously",
     "bun:tests/unit/heading-classification-mappings.test.ts:eight direct-heading associations retain empty case keys and all486 prior mapping records",
     "bun:tests/unit/heading-classification-mappings.test.ts:heading mapping missing assertions stale runtime pins and unknown keys refuse",
+    "bun:tests/unit/nullable-cell-mappings.test.ts:nullable cell mappings select one shared case with partial native associations and retain prior records except explicit inventory totals",
+    "bun:tests/unit/nullable-cell-mappings.test.ts:nullable mappings refuse stale sources missing declarations and unsupported case claims",
     "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody ledger enumerates 15 declarations and 66 expressions preserving 446 predecessor records",
     "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody descriptions distinguish exact corpus archives native live reads and physical destinations",
     "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody scopes exact assertions and unrelated graph-case borrowing refuse",
@@ -1076,7 +1099,7 @@
     "bun:tests/unit/tracking-settings-mappings.test.ts:tracking mappings cover fourteen declarations with bounded case keys and preserve all472 older records",
     "bun:tests/unit/tracking-settings-mappings.test.ts:tracking mapping omissions stale source unknown cases and altered direct assertions refuse",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
-    "bun:tests/unit/word-neutral-bindings.test.ts:Word wording plus the reviewed tracking toggle executes 29 IDs and 66 cases with five profiles planned",
+    "bun:tests/unit/word-neutral-bindings.test.ts:Word wording plus the reviewed tracking toggle executes 30 IDs and 67 cases with four profiles planned",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word actor changes preserve default execution identities and every prior mapping record",
     "bun:tests/unit/workflow-acceptance.test.ts:workflow shared acceptance / executes the frozen shared workflow feature as 19 implemented Bun cases",
     "bun:tests/unit/workflow-layout.test.ts:format regrouping retains the exact 525 implemented shared case identities",
@@ -1225,6 +1248,212 @@
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 reconciliation retains direct refusal predicates review flags and uncounted helper separation"
   ],
   "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable table access returns nine usable cells and null at each integer boundary without mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(cell).not.toBeNull()",
+        "expect(cell!.text).toBe(`${r},${c}`)",
+        "expect(cell!.directProperties()).toEqual(t.cell(r,c).directProperties())",
+        "expect(t.tryCell(r!,c!)).toBeNull()",
+        "expect(()=>t.cell(r!,c!)).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Nine nullable cell handles read expected text/properties; eight integer boundaries return null while strict cell access throws; archive unchanged."
+      ],
+      "gaps": [
+        "In-memory matrix only; not path persistence or every table topology."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "nullable-cell"
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable access refuses invalid numeric coordinates without coercion even if the other axis is outside",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(value as any,0)).toThrow(RangeError)",
+        "expect(()=>t.tryCell(0,value as any)).toThrow(RangeError)",
+        "expect(()=>t.tryCell(-1,value as any)).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(called).toBe(false)",
+        "expect(t.tryCell(-0,-0)!.text).toBe('0,0')"
+      ],
+      "outcomes": [
+        "Noninteger nonfinite unsafe and nonnumeric coordinates refuse without coercion even when the other axis is outside; negative zero resolves first cell."
+      ],
+      "gaps": [
+        "Invalid-input policy exceeds shared integer-boundary predicate; no general proxy or hostile runtime claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "nullable-cell"
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable cells edit through the existing checked path and saved tables reopen with all original coordinates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.text).toThrow(expect.objectContaining({code:'docx-stale-table-cell'}))",
+        "expect(t.tryCell(1,1)!.text).toBe('Updated & <cell>')",
+        "expect(reopened.tables).toHaveLength(1)",
+        "expect(reopened.tables[0]!.rows).toBe(3)",
+        "expect(reopened.tables[0]!.columns).toBe(3)",
+        "expect(reopened.tables[0]!.tryCell(r,c)!.text).toBe(r===1&&c===1?'Updated & <cell>':`${r},${c}`)",
+        "expect(reopened.tables[0]!.tryCell(3,0)).toBeNull()",
+        "expect([...reopened.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Nullable cell edits use checked mutation; held cell goes stale; path reopen preserves all nine coordinates, edited text and unrelated payloads."
+      ],
+      "gaps": [
+        "One edit to one rectangular table; independent Office rendering and merge editing untested."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "nullable-cell"
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:stale structural handles refuse both in-range and out-of-range nullable lookup",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(r!,c!)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Structurally stale tables reject in-range and out-of-range nullable reads with exact archive custody."
+      ],
+      "gaps": [
+        "One insertion case; no arbitrary concurrent mutation evidence."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "nullable-cell"
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:externally changed table bytes cannot masquerade as a missing cell",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(-1,0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>t.tryCell(0,0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Externally changed document XML refuses nullable access both in-range and outside without changing archive."
+      ],
+      "gaps": [
+        "One external text replacement; not every external graph or package mutation."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "nullable-cell"
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:nullable access does not hide merged cells unsupported grids or unsafe cell text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.tryCell(0,0)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(t.tryCell(3,0)).toBeNull()",
+        "expect(()=>t.tryCell(0,0)).toThrow(expect.objectContaining({code:'docx-table-unsupported'}))",
+        "expect(()=>t.tryCell(-1,0)).toThrow(expect.objectContaining({code:'docx-table-unsupported'}))",
+        "expect(cell).not.toBeNull()",
+        "expect(()=>cell!.text).toThrow(expect.objectContaining({code:'docx-table-cell-unsupported'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Merged target and unsupported grid refuse; out-of-range merged-table coordinate returns null; unsafe nested cell text still refuses; archives unchanged."
+      ],
+      "gaps": [
+        "Only three topology variants; no merged-table support or general schema-validation claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "nullable-cell"
+    },
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:shared nullable profile executes one case and detects missing in-range cells or fabricated boundary cells",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "caseKeys": [
+        "@id-docx-go-table-cell-access"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(boundary.counts.cases.failed).toBe(1)",
+        "expect(boundary.counts.steps.undefined).toBe(0)"
+      ],
+      "outcomes": [
+        "One shared nullable-cell scenario executes; missing fifth cell and fabricated boundary cell controls fail without undefined bindings."
+      ],
+      "gaps": [
+        "Scenario checks nine object-presence results and four null boundaries only; save/reopen remains separate native evidence."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "nullable-cell"
+    },
     {
       "testId": "bun:tests/unit/docx-heading-classification.test.ts:direct Heading1 through Heading9 classify by identifier without changing package bytes",
       "status": "partial",
@@ -1439,8 +1668,8 @@
         "expect(p.headingLevel).toBe(0)",
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
-        "expect(inv.counts.cases.implemented).toBe(550)",
-        "expect(inv.counts.cases.planned).toBe(47)"
+        "expect(inv.counts.cases.implemented).toBe(551)",
+        "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
         "Empty string assignment refuses; null removes style and reads undefined/false/zero; all five shared getter cases remain planned and acceptance totals are unchanged."
