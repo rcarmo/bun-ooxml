@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 818,
+  "nativeDeclarations": 825,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 591,
+  "withoutStagingCount": 598,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4565,6 +4565,41 @@
       "id": "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
       "path": "tests/unit/xlsx-cell-style.test.ts",
       "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:canonical XLSX comment and VML inspection checks both relationships and exact comment values",
+      "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
+      "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:each canonical relationship identity type target and comment text rejects a wrong expected value",
+      "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
+      "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:observed comment VML results reject false external aliased duplicate missing and swapped values",
+      "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
+      "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:wrong worksheet relationship and comment namespaces cannot satisfy the graph predicates",
+      "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
+      "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:namespace aliases and rich comment text are read by expanded names without modifying their input",
+      "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
+      "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:duplicate drawing IDs comment records and missing relationship dependencies fail independently of custody",
+      "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
+      "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:read-only graph predicates detect input or opaque VML payload mutation",
+      "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
+      "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
     },
     {
       "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:static formula analysis counts references without interpreting strings, functions or exponents as cells",

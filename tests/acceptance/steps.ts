@@ -57,6 +57,7 @@ import { bindings as pptxCustodyBindings } from './pptx-custody.ts';
 import { bindings as notesEditingBindings } from './notes-editing.ts';
 import { bindings as xlsxBindings } from "./xlsx.ts";
 import { bindings as xlsxRangeBindings } from './xlsx-range.ts';
+import { bindings as xlsxCommentVmlBindings } from './xlsx-comment-vml.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
@@ -121,6 +122,7 @@ export const bindings: StepBinding[] = [
   ...notesEditingBindings,
   ...xlsxBindings,
   ...xlsxRangeBindings,
+  ...xlsxCommentVmlBindings,
   ...cacheBoundaryBindings,
   ...workflowBindings,
   ...workflowReceiptBindings,

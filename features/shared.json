@@ -457,6 +457,14 @@
         "@id-office-preview-details",
         "@id-office-docx-exact-match-counts"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/comment-vml-custody.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ]
     }
   ]
 }
