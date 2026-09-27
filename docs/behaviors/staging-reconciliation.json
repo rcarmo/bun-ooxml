@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 630,
+  "nativeDeclarations": 641,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 403,
+  "withoutStagingCount": 414,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2885,6 +2885,61 @@
       "id": "bun:tests/unit/docx-paragraph-style.test.ts:same-style request still refuses document protection without touching handles",
       "path": "tests/unit/docx-paragraph-style.test.ts",
       "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:all on/off lexical values read correctly and validated no-ops retain exact XML and handles",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:self-closing properties and unordered trPrBase metadata retain exact sibling fragments",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:invalid coordinates and non-Boolean input refuse atomically",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:duplicate, decorated, wrong-namespace, revised and lexical markers refuse even removal or no-op",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:unsupported row/table topology, revision and merged-cell contexts refuse before mutation",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:protection and external XML changes refuse including same-value requests",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:package write and serialization failure roll back bytes and retain paragraph/cell/table handles",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:alias and conflicting lexical w bindings plus UTF-16 save retain expanded marker identity",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:shared header getter executes and false readback or initial-state predicates fail assertions",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-header.test.ts:output bound refuses row header insertion without expiring live handles",
+      "path": "tests/unit/docx-row-header.test.ts",
+      "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
     },
     {
       "id": "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",

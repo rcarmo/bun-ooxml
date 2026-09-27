@@ -36,6 +36,7 @@ import { bindings as trackedWorkflowBindings, cleanupTrackedWorkflowFixtures } f
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as docxModelBindings } from './docx-model.ts';
 import { bindings as appendRunBindings } from './append-run.ts';
+import { bindings as rowHeaderBindings } from './row-header.ts';
 import { bindings as cellPropertiesBindings } from './cell-properties.ts';
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
@@ -88,6 +89,7 @@ export const bindings: StepBinding[] = [
   ...createDocxBindings,
   ...docxModelBindings,
   ...appendRunBindings,
+  ...rowHeaderBindings,
   ...cellPropertiesBindings,
   ...createPptxBindings,
   ...createXlsxBindings,

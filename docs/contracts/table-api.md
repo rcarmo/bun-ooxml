@@ -14,7 +14,9 @@ on structural document edits and cell handles refuse after any mutation. Newline
 normalise CRLF/CR and become paragraphs. The first paragraph/run properties are
 retained with their namespace declarations. `TableCell.directProperties()` and
 `setProperties()` provide [bounded direct cell formatting](cell-properties.md)
-without replacing text or changing the grid. Full style inheritance and merging are unsupported.
+without replacing text or changing the grid. `Table.isRowHeader(row)` and
+`setRowHeader(row, boolean | null)` inspect and edit [direct row-header markers](row-header.md).
+They do not predict rendered page repetition. Full style inheritance and merging are unsupported.
 
 PPTX: `Slide.addTable(rows,columns,{x,y,width,height}): Table` with integer EMU geometry.
 `Slide.tables: Table[]`, same rows/columns/cell text API. Native graphicFrame/a:tbl,

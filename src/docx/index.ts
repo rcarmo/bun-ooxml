@@ -1,5 +1,6 @@
 import { OoxmlError } from "../errors.ts";
 import {appendParagraphRun} from './append-run.ts';
+import {readRowHeader,editRowHeader} from './row-header.ts';
 import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
 export type {DirectCellProperties,CellPropertiesPatch,CellTopBorder} from './cell-properties.ts';
 import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
@@ -338,6 +339,16 @@ export class Table {
   get columns(): number {
     const table = this.liveTable();
     return table.columns;
+  }
+
+  /** Inspect the direct row marker, not effective pagination or style inheritance. */
+  isRowHeader(row: number): boolean {
+    return this.documentRef.getRowHeader(this.liveTable(),row);
+  }
+
+  /** Boolean writes an explicit marker; null removes it. Table handles remain usable. */
+  setRowHeader(row: number, value: boolean | null): {changed: number} {
+    return this.documentRef.setRowHeader(this.liveTable(),row,value);
   }
 
   cell(row: number, column: number): TableCell {
@@ -834,6 +845,27 @@ export class Document {
     if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-format-unsafe','Formatting unexpectedly changed paragraph text');
     this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
     this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+  }
+
+  private assertRowHeaderTarget(snapshot:TableSnapshot,row:number):void {
+    if(snapshot.version!==this.tableVersion||this.tableSnapshots[snapshot.index]!==snapshot)fail('docx-stale-table','Table snapshot is stale');
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-table','Document XML changed outside the table handle');
+    if(!Number.isInteger(row)||row<0||row>=snapshot.rows)throw new RangeError('DOCX table row is out of range');
+    if(snapshot.unsupported)fail('docx-table-unsupported',`Table contains unsupported topology: ${snapshot.unsupported}`);
+  }
+
+  getRowHeader(snapshot:TableSnapshot,row:number):boolean {
+    this.assertRowHeaderTarget(snapshot,row);
+    return readRowHeader(this.xml,snapshot.element,row);
+  }
+
+  setRowHeader(snapshot:TableSnapshot,row:number,value:boolean|null):{changed:number} {
+    this.assertRowHeaderTarget(snapshot,row);this.assertFormattingUnprotected();
+    const next=editRowHeader(this.xml,snapshot.element,row,value);if(next===this.xml)return {changed:0};
+    const tables=collectTables(parseXml(next),this.tableVersion,this.version+1);
+    const grids=(items:TableSnapshot[])=>items.map(t=>[t.rows,t.columns]);
+    if(JSON.stringify(grids(tables.tables))!==JSON.stringify(grids(this.tableSnapshots)))fail('docx-row-header-unsafe','Row-header edit changed table dimensions');
+    this.commitParagraphProperties(next);return {changed:1};
   }
 
   resolveTable(table: TableSnapshot): TableSnapshot {
