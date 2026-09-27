@@ -19,11 +19,12 @@ tables/controls supported; unknown/fields/drawings/AlternateContent counted, nev
 silently asserted complete. Existing Document.paragraphs semantics stay unchanged.
 
 `src/docx/revisions.ts`:
-* `inspectRevisions(pkg): {revisions:Revision[];unsupported:RevisionFinding[]}`
-* `Revision = {part:string;id:string;kind:'insertion'|'deletion';author?:string;date?:string;text:string}`
+* `RevisionProfile = 'text-only'|'text-and-run-properties'`
+* `inspectRevisions(pkg,options?:{profile?:RevisionProfile}): {revisions:Revision[];unsupported:RevisionFinding[]}`
+* `Revision = {part:string;id:string;kind:'insertion'|'deletion'|'run-properties';author?:string;date?:string;text:string}`
 * `RevisionFinding = {part:string;kind:string;reason:string}`
-* `resolveRevisions(pkg, action:'accept'|'reject', options?:{parts?:string[]}): {resolved:number;changedParts:string[]}`
-Bounded run-level w:ins/w:del as direct children of w:p, plain w:r/w:t or w:delText
+* `resolveRevisions(pkg, action:'accept'|'reject', options?:{parts?:string[],profile?:RevisionProfile}): {resolved:number;changedParts:string[]}`
+The default `text-only` profile supports bounded run-level w:ins/w:del as direct children of w:p, plain w:r/w:t or w:delText
 and rPr safe formatting. All selected stories preflight before mutation; unsupported
 move/format/table-row/nested revisions refuse entire scope, as do unsafe namespace
 lift, missing/duplicate ids (scope per part), protected docs. No partial resolution.
@@ -45,8 +46,11 @@ Before returning, resolve copies accept/reject and assert semantic text matches
 replacement/original. Tests check formatting and opaque-part preservation. General
 document comparison and paragraph/table change algebra are not implemented.
 
-The root and ./docx entrypoints export these APIs. Author filtering, revision
-snapshots, full comparison and other revision types are unsupported. The shared
+The root and ./docx entrypoints export these APIs. The opt-in
+[`text-and-run-properties` profile](run-property-revisions.md) also resolves bounded
+direct run-property snapshots; default text-only refusal is unchanged.
+Author filtering, general revision snapshots, full comparison and other revision
+types are unsupported. The shared
 specification defines the supported story and revision outcomes.
 Existing comment inspection and targeted resolution are documented separately in
 [comments-api.md](comments-api.md); comment bodies and anchors are never edited.

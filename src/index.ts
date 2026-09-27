@@ -12,7 +12,7 @@ export type { ZipLimits } from "./opc/zip.ts";
 export { OpcPackage, type PackageDiff, type Relationship } from "./opc/package.ts";
 export { Document, Span, type TemplateInspection, type TemplateParagraph, type TemplateSection, type TemplateTable, type TemplatePlaceholder, type DirectDocumentProperties, type DocumentPropertiesPatch, type CoreProperties, type CorePropertiesPatch, type AddParagraphOptions, type BodyAnchor, type BodyMap, type BodyPlaceholder, type DirectCellProperties, type CellPropertiesPatch, type CellTopBorder, type DirectParagraphProperties, type ParagraphPropertiesPatch, type ParagraphAlignment, type RunFormattingPatch, type DirectRunFlags, type DirectRunAppearance, type UnderlineStyle, type HighlightColor, type RunVerticalAlignment, type RunFormattingReceipt, type EffectiveRunFormatting, type EffectiveFlag, type FormattingContribution, type AddParagraphStyleOptions, type ParagraphStyleDefinitionReceipt, type PageLayout } from "./docx/index.ts";
 export { inspectStories, storyParts, type RevisionView, type StoryInspection } from "./docx/story.ts";
-export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding } from "./docx/revisions.ts";
+export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding, type RevisionProfile } from "./docx/revisions.ts";
 export { trackedReplace } from "./docx/redline.ts";
 export { inspectComments, setCommentResolved, inspectCommentThreads, setCommentThreadResolved, type CommentInfo, type CommentFinding, type CommentInspection, type CommentThread, type CommentThreadInspection, type CommentThreadReceipt } from "./docx/comments.ts";
 export { Presentation, type NotesAnchor, type TextBoxGeometry, type TextBoxOptions, type TextBoxReceipt } from "./pptx/index.ts";

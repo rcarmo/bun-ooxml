@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1067,
+  "nativeDeclarations": 1079,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 840,
+  "withoutStagingCount": 852,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3649,6 +3649,66 @@
       "id": "bun:tests/unit/docx-property-mappings.test.ts:property runtime, binding and native pins independently refuse missing and stale sources",
       "path": "tests/unit/docx-property-mappings.test.ts",
       "sourceSha256": "4a65ef4688dc96a64b31b6e037460ea46fc2677a3a4e9d5908cd9aa296522601"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:default text-only refusal stays unchanged and selected property profile leaves all other stories byte-identical",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:unsafe later run-property snapshots refuse both actions without partially resolving earlier text stories",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:run-property snapshot namespace meaning BOM and unrelated lexical bytes survive reject in three encodings",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:run-property profile validates protected external-settings and invalid profile requests before no-op",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:reached later-write and serialization faults restore property snapshots text flags and prior unrelated edits",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:empty previous properties restore the complete empty set and namespace shadowing stays local",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:extended-profile no-op still checks linked protection and external settings without changing bytes",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:default text revision writer also retains UTF8 BOM and extended profile refuses unknown selections and moves",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:all supported direct property families restore exact previous set and malformed scalar values refuse",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:post-write validation fault rolls back and unsupported unselected properties do not expand selected scope",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:public entrypoints expose the opt-in profile without activating the broader shared or local revision obligations",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db"
     },
     {
       "id": "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",

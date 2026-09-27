@@ -103,6 +103,19 @@ The nine authored-comment profiles stay planned. The 546 earlier mapping records
 are unchanged apart from four inventory totals; all 625 earlier executed case
 identities remain. See [comment threads](../contracts/comment-threads.md).
 
+## Run-property revision profile
+
+The opt-in `text-and-run-properties` revision profile accepts current direct run
+properties or restores their complete previous snapshot on rejection. Default
+text-only inspection and resolution retain their formatting-refusal policy.
+Twelve native tests cover seven reachable stories, exact output, selected scope,
+namespace and encoding preservation, empty snapshots, malformed inputs and
+transaction rollback. They have no shared mappings yet. All 562 mapping records
+and 648 executed case identities are unchanged; 46 cases remain planned.
+The independent SDK schema oracle checks one source and both resolved body
+outputs, including a missing-author refusal control. See
+[run-property revisions](../contracts/run-property-revisions.md).
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

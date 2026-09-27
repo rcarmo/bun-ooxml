@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1067,
-  "files": 126,
+  "count": 1079,
+  "files": 127,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -202,6 +202,12 @@
       "path": "tests/unit/docx-redline.test.ts",
       "sha256": "1474b818eb632b76cc5fddf3e859848bdf01b28f12c77101930452b325f0fe46",
       "declarations": 7,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "sha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "declarations": 12,
       "issues": []
     },
     {
@@ -1221,6 +1227,14 @@
     "bun:tests/unit/docx-property-mappings.test.ts:property runtime, binding and native pins independently refuse missing and stale sources",
     "bun:tests/unit/docx-redline.test.ts:XML comments and literal inter-run content are barriers rather than discarded during redlining",
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
+    "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
+    "bun:tests/unit/docx-revision-properties.test.ts:unsafe later run-property snapshots refuse both actions without partially resolving earlier text stories",
+    "bun:tests/unit/docx-revision-properties.test.ts:run-property snapshot namespace meaning BOM and unrelated lexical bytes survive reject in three encodings",
+    "bun:tests/unit/docx-revision-properties.test.ts:run-property profile validates protected external-settings and invalid profile requests before no-op",
+    "bun:tests/unit/docx-revision-properties.test.ts:reached later-write and serialization faults restore property snapshots text flags and prior unrelated edits",
+    "bun:tests/unit/docx-revision-properties.test.ts:empty previous properties restore the complete empty set and namespace shadowing stays local",
+    "bun:tests/unit/docx-revision-properties.test.ts:extended-profile no-op still checks linked protection and external settings without changing bytes",
+    "bun:tests/unit/docx-revision-properties.test.ts:all supported direct property families restore exact previous set and malformed scalar values refuse",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
     "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",
@@ -1668,6 +1682,14 @@
     "bun:tests/unit/docx-property-mappings.test.ts:property runtime, binding and native pins independently refuse missing and stale sources",
     "bun:tests/unit/docx-redline.test.ts:XML comments and literal inter-run content are barriers rather than discarded during redlining",
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
+    "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
+    "bun:tests/unit/docx-revision-properties.test.ts:unsafe later run-property snapshots refuse both actions without partially resolving earlier text stories",
+    "bun:tests/unit/docx-revision-properties.test.ts:run-property snapshot namespace meaning BOM and unrelated lexical bytes survive reject in three encodings",
+    "bun:tests/unit/docx-revision-properties.test.ts:run-property profile validates protected external-settings and invalid profile requests before no-op",
+    "bun:tests/unit/docx-revision-properties.test.ts:reached later-write and serialization faults restore property snapshots text flags and prior unrelated edits",
+    "bun:tests/unit/docx-revision-properties.test.ts:empty previous properties restore the complete empty set and namespace shadowing stays local",
+    "bun:tests/unit/docx-revision-properties.test.ts:extended-profile no-op still checks linked protection and external settings without changing bytes",
+    "bun:tests/unit/docx-revision-properties.test.ts:all supported direct property families restore exact previous set and malformed scalar values refuse",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
     "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",
@@ -15689,6 +15711,581 @@
         "f.scenarios.flatMap",
         "newAcceptanceRunId",
         "sharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 9,
+      "title": "opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(report.unsupported).toEqual([])",
+        "expect(report.revisions).toHaveLength(21)",
+        "expect(report.revisions.filter(r=>r.kind==='run-properties').map(r=>[r.part,r.id,r.author,r.text])).toEqual(stories.map(part=>[part,'80','Editor','Stable']))",
+        "expect(p.toBytes()).toEqual(source)",
+        "expect(receipt).toEqual({resolved:21,changedParts:stories})",
+        "expect(inspect(read)).toEqual({revisions:[],unsupported:[]})",
+        "expect(xml).toContain(action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>')",
+        "expect(xml).toBe(noProps.text(part))",
+        "expect(elements(parseXml(xml),'t',W).map(t=>t.text).join('')).toContain(action==='accept'?'modernized.':'historic.')",
+        "expect(xml).not.toContain('rPrChange')",
+        "expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source))",
+        "expect(resolve(read,action)).toEqual({resolved:0,changedParts:[]})",
+        "expect(read.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 9,
+          "expression": "for(const action of ['accept','reject'] as const)"
+        },
+        {
+          "line": 9,
+          "expression": "for(const part of stories)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{for(const action of ['accept','reject'] as const){const {p,stories}=await input(),source=p.toBytes(),baseline=await OpcPackage.open(source),report=inspect(p);expect(report.unsupported).toEqual([]);expect(report.revisions).toHaveLength(21);expect(report.revisions.filter(r=>r.kind==='run-properties').map(r=>[r.part,r.id,r.author,r.text])).toEqual(stories.map(part=>[part,'80','Editor','Stable']));expect(p.toBytes()).toEqual(source);const dir=await mkdtemp(join(tmpdir(),'property-review-'));try{const src=join(dir,'source.docx'),out=join(dir,'output.docx');await Bun.write(src,source);const receipt=resolve(p,action);expect(receipt).toEqual({resolved:21,changedParts:stories});await p.save(out);const read=await OpcPackage.open(out);expect(inspect(read)).toEqual({revisions:[],unsupported:[]});for(const part of stories){const original=baseline.text(part),xml=read.text(part);expect(xml).toContain(action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>');const noProps=await OpcPackage.open(source);noProps.set(part,original.replace(properties,action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>'));resolveRevisions(noProps,action,{parts:[part]});expect(xml).toBe(noProps.text(part));expect(elements(parseXml(xml),'t',W).map(t=>t.text).join('')).toContain(action==='accept'?'modernized.':'historic.');expect(xml).not.toContain('rPrChange');}await bytesEqual(read,baseline,stories);expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source));const before=read.toBytes();expect(resolve(read,action)).toEqual({resolved:0,changedParts:[]});expect(read.toBytes()).toEqual(before);}finally{await rm(dir,{recursive:true,force:true});}}}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().bytes",
+        "Bun.write",
+        "OpcPackage.open",
+        "Uint8Array.from",
+        "baseline.text",
+        "bytesEqual",
+        "elements",
+        "elements().map",
+        "elements().map().join",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "input",
+        "inspect",
+        "join",
+        "mkdtemp",
+        "noProps.set",
+        "noProps.text",
+        "original.replace",
+        "p.save",
+        "p.toBytes",
+        "parseXml",
+        "read.text",
+        "read.toBytes",
+        "report.revisions.filter",
+        "report.revisions.filter().map",
+        "resolve",
+        "resolveRevisions",
+        "rm",
+        "stories.map",
+        "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:default text-only refusal stays unchanged and selected property profile leaves all other stories byte-identical",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 10,
+      "title": "default text-only refusal stays unchanged and selected property profile leaves all other stories byte-identical",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inspectRevisions(p).unsupported.filter(f=>f.kind==='format')).toHaveLength(7)",
+        "expect(()=>resolveRevisions(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:3,changedParts:['word/header1.xml']})",
+        "expect(inspect(p).revisions).toHaveLength(18)",
+        "expect(stories).toHaveLength(7)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{const {p,stories}=await input(),before=p.toBytes(),base=await OpcPackage.open(before);expect(inspectRevisions(p).unsupported.filter(f=>f.kind==='format')).toHaveLength(7);expect(()=>resolveRevisions(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:3,changedParts:['word/header1.xml']});await bytesEqual(p,base,['word/header1.xml']);expect(inspect(p).revisions).toHaveLength(18);expect(stories).toHaveLength(7);}",
+      "calls": [
+        "OpcPackage.open",
+        "bytesEqual",
+        "expect",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input",
+        "inspect",
+        "inspectRevisions",
+        "inspectRevisions().unsupported.filter",
+        "p.toBytes",
+        "resolve",
+        "resolveRevisions"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:unsafe later run-property snapshots refuse both actions without partially resolving earlier text stories",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 11,
+      "title": "unsafe later run-property snapshots refuse both actions without partially resolving earlier text stories",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(changed,name).not.toBe(xml)",
+        "expect(inspect(p).unsupported.length,name).toBeGreaterThan(0)",
+        "expect(()=>resolve(p,action),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes(),name).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for(const [name,defect]of defects)for(const action of ['accept','reject'] as const)"
+        },
+        {
+          "line": 33,
+          "expression": "for(const action of ['accept','reject'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{const defects:[string,(s:string)=>string][]=[\n ['missing',s=>s.replace('<w:rPr>'+previous+'</w:rPr>','')],\n ['duplicate-snapshot',s=>s.replace(previous,previous+'</w:rPr><w:rPr>')],\n ['duplicate-change',s=>s.replace(change,change+change.replace('80','81'))],\n ['nested',s=>s.replace(previous,previous+change.replace('80','81'))],\n ['wrong-parent',s=>s.replace(properties,properties.replace(change,'')+change)],\n ['drawing',s=>s.replace('<w:t>Stable</w:t>','<w:drawing/>')],\n ['unknown',s=>s.replace('<w:i/>','<w:glow/>')],\n ['duplicate-property',s=>s.replace('<w:i/>','<w:i/><w:i/>')],\n ['decorated',s=>s.replace('<w:i/>','<w:i vendor=\"x\"/>')],\n ['invalid',s=>s.replace('<w:i/>','<w:i w:val=\"maybe\"/>')],\n ['duplicate-id',s=>s.replace('w:id=\"80\"',s.match(/w:id=\"\\d+\"/)![0])],\n ['bad-order',s=>s.replace(previous,'<w:color w:val=\"445566\"/><w:i/>')],\n ['mixed',s=>s.replace(previous,'UNOWNED'+previous)],\n ['nested-text',s=>s.replace('<w:rPr>'+previous+'</w:rPr>','<w:rPr><w:ins w:id=\"81\"/></w:rPr>')],\n ['foreign',s=>s.replace('<w:i/>','<x:i xmlns:x=\"urn:other\"/>')],\n ['missing-author',s=>s.replace(' w:author=\"Editor\"','')],\n ['unqualified-author',s=>s.replace('w:author=\"Editor\"','author=\"Editor\"')],\n ['paragraph-mark',s=>s.replace(run,'<w:pPr>'+properties+'</w:pPr>')],\n ['comment',s=>s.replace(previous,'<!--unowned-->'+previous)],\n ['conflicting-flags',s=>s.replace('<w:i/>','<w:caps/><w:smallCaps/>')],\n ['nested-insertion',s=>s.replace(run,'<w:ins w:id=\"90\" w:author=\"Editor\">'+run+'</w:ins>')],\n ];for(const [name,defect]of defects)for(const action of ['accept','reject'] as const){const {p}=await input(),part='word/header1.xml',xml=p.text(part),changed=defect(xml);expect(changed,name).not.toBe(xml);p.set(part,changed);const before=p.toBytes();expect(inspect(p).unsupported.length,name).toBeGreaterThan(0);expect(()=>resolve(p,action),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes(),name).toEqual(before);}}",
+      "calls": [
+        "change.replace",
+        "defect",
+        "expect",
+        "expect().not.toBe",
+        "expect().toBeGreaterThan",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input",
+        "inspect",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "properties.replace",
+        "resolve",
+        "s.match",
+        "s.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:run-property snapshot namespace meaning BOM and unrelated lexical bytes survive reject in three encodings",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 34,
+      "title": "run-property snapshot namespace meaning BOM and unrelated lexical bytes survive reject in three encodings",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(resolve(p,'reject',[part])).toEqual({resolved:3,changedParts:[part]})",
+        "expect(props.name).toBe('q:rPr')",
+        "expect(props.children.map(c=>[c.namespaceURI,c.localName])).toEqual([[W,'i'],[W,'color']])",
+        "expect(attribute(props.children[1]!,'val',W)).toBe('445566')",
+        "expect(read.text(part)).toContain(\"z:val='445566'\")",
+        "expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 34,
+          "expression": "for(const encoding of ['bom','le','be'])"
+        },
+        {
+          "line": 34,
+          "expression": "for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),encoding==='le');"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{for(const encoding of ['bom','le','be']){const {p}=await input(),part=p.mainPart();let xml=p.text(part).replace(properties,`<w:rPr xmlns:z=\"${W}\">${current}<w:rPrChange xmlns:q=\"${W}\" w:id=\"80\" w:author=\"Editor\"><q:rPr><q:i/><z:color z:val='445566'/></q:rPr></w:rPrChange></w:rPr>`);if(encoding==='bom')p.set(part,new Uint8Array([239,187,191,...new TextEncoder().encode(xml)]));else{xml=xml.replace(/encoding=\"UTF-8\"/i,'encoding=\"UTF-16\"');const bytes=new Uint8Array(2+xml.length*2);bytes.set(encoding==='le'?[255,254]:[254,255]);const v=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),encoding==='le');p.set(part,bytes);}const baseline=await OpcPackage.open(p.toBytes());expect(resolve(p,'reject',[part])).toEqual({resolved:3,changedParts:[part]});const read=await OpcPackage.open(p.toBytes());const parsed=parseXml(read.text(part)),props=elements(parsed,'rPr',W).find(n=>n.children.some(c=>c.localName==='i'))!;expect(props.name).toBe('q:rPr');expect(props.children.map(c=>[c.namespaceURI,c.localName])).toEqual([[W,'i'],[W,'color']]);expect(attribute(props.children[1]!,'val',W)).toBe('445566');expect(read.text(part)).toContain(\"z:val='445566'\");expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);await bytesEqual(read,baseline,[part]);}}",
+      "calls": [
+        ".encode",
+        "OpcPackage.open",
+        "attribute",
+        "bytes.set",
+        "bytesEqual",
+        "elements",
+        "elements().find",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "input",
+        "n.children.some",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "parseXml",
+        "props.children.map",
+        "read.get",
+        "read.get().slice",
+        "read.text",
+        "resolve",
+        "v.setUint16",
+        "xml.charCodeAt",
+        "xml.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:run-property profile validates protected external-settings and invalid profile requests before no-op",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 35,
+      "title": "run-property profile validates protected external-settings and invalid profile requests before no-op",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>resolveRevisions(p,'accept',{profile:(defect==='invalid'?'bad':profile) as typeof profile})).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 35,
+          "expression": "for(const defect of ['protected','external','invalid'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{for(const defect of ['protected','external','invalid']){const {p}=await input();if(defect==='protected'){p.set('word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}if(defect==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});const before=p.toBytes();expect(()=>resolveRevisions(p,'accept',{profile:(defect==='invalid'?'bad':profile) as typeof profile})).toThrow();expect(p.toBytes()).toEqual(before);}}",
+      "calls": [
+        "addRelationship",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "input",
+        "p.mainPart",
+        "p.set",
+        "p.toBytes",
+        "resolveRevisions"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:reached later-write and serialization faults restore property snapshots text flags and prior unrelated edits",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 36,
+      "title": "reached later-write and serialization faults restore property snapshots text flags and prior unrelated edits",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow('injected')",
+        "expect(reached).toBe(true)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).revisions).toHaveLength(21)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 36,
+          "expression": "for(const stage of ['write','serialize'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{for(const stage of ['write','serialize']){const {p}=await input();p.set(p.mainPart(),p.text(p.mainPart()).replace('</w:body>','<w:p><w:r><w:t>Prior edit</w:t></w:r></w:p></w:body>'));const before=p.toBytes(),set=p.set.bind(p),serialize=p.toBytes.bind(p);let reached=false;if(stage==='write')p.set=(n,v)=>{set(n,v);if(n==='word/header1.xml'){reached=true;throw Error('injected property write');}};else p.toBytes=()=>{reached=true;throw Error('injected property serialize');};try{expect(()=>resolve(p,'reject')).toThrow('injected');expect(reached).toBe(true);}finally{p.set=set;p.toBytes=serialize;}expect(p.toBytes()).toEqual(before);expect(inspect(p).revisions).toHaveLength(21);}}",
+      "calls": [
+        "Error",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "input",
+        "inspect",
+        "p.mainPart",
+        "p.set",
+        "p.set.bind",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "p.toBytes.bind",
+        "resolve",
+        "set"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:empty previous properties restore the complete empty set and namespace shadowing stays local",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 37,
+      "title": "empty previous properties restore the complete empty set and namespace shadowing stays local",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(resolve(p,'reject',[part]).resolved).toBe(3)",
+        "expect(pr.localName).toBe('rPr')",
+        "expect(pr.children.map(c=>[c.namespaceURI,c.localName])).toEqual(saved.includes('q:i')?[[W,'i']]:[])",
+        "expect(xml).not.toContain('rPrChange')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 37,
+          "expression": "for(const saved of ['<w:rPr/>',`<w:rPr xmlns:q=\"$"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{for(const saved of ['<w:rPr/>',`<w:rPr xmlns:q=\"${W}\"><q:i/></w:rPr>`]){const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace(change,`<w:rPrChange xmlns:q=\"urn:outer\" w:id=\"80\" w:author=\"Editor\">${saved}</w:rPrChange>`));expect(resolve(p,'reject',[part]).resolved).toBe(3);const xml=p.text(part),r=elements(parseXml(xml),'r',W).find(r=>r.children.some(t=>t.localName==='t'&&t.text==='Stable'))!,pr=r.children[0]!;expect(pr.localName).toBe('rPr');expect(pr.children.map(c=>[c.namespaceURI,c.localName])).toEqual(saved.includes('q:i')?[[W,'i']]:[]);expect(xml).not.toContain('rPrChange');}}",
+      "calls": [
+        "elements",
+        "elements().find",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toEqual",
+        "input",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "parseXml",
+        "pr.children.map",
+        "r.children.some",
+        "resolve",
+        "saved.includes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:extended-profile no-op still checks linked protection and external settings without changing bytes",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 38,
+      "title": "extended-profile no-op still checks linked protection and external settings without changing bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 38,
+          "expression": "for(const defect of ['protected','external','wrong-root'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{for(const defect of ['protected','external','wrong-root']){const {p}=await input();resolve(p,'accept');if(defect==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});else{p.set('word/settings.xml',defect==='wrong-root'?`<w:notSettings xmlns:w=\"${W}\"/>`:`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}const before=p.toBytes();expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}));expect(p.toBytes()).toEqual(before);}}",
+      "calls": [
+        "addRelationship",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input",
+        "p.mainPart",
+        "p.set",
+        "p.toBytes",
+        "resolve"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:default text revision writer also retains UTF8 BOM and extended profile refuses unknown selections and moves",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 39,
+      "title": "default text revision writer also retains UTF8 BOM and extended profile refuses unknown selections and moves",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...p.get(part)!.slice(0,3)]).toEqual([239,187,191])",
+        "expect(()=>resolve(q,'accept',['word/unknown.xml'])).toThrow(expect.objectContaining({code:'docx-revisions-unknown-part'}))",
+        "expect(()=>inspectRevisions(q,{profile:'bad' as typeof profile})).toThrow(expect.objectContaining({code:'docx-revisions-invalid-profile'}))",
+        "expect(q.toBytes()).toEqual(before)",
+        "expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(q.toBytes()).toEqual(moved)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{const p=await openRevisionFixture('all-stories'),part=p.mainPart();p.set(part,new Uint8Array([239,187,191,...new TextEncoder().encode(p.text(part))]));resolveRevisions(p,'accept',{parts:[part]});expect([...p.get(part)!.slice(0,3)]).toEqual([239,187,191]);const q=(await input()).p,before=q.toBytes();expect(()=>resolve(q,'accept',['word/unknown.xml'])).toThrow(expect.objectContaining({code:'docx-revisions-unknown-part'}));expect(()=>inspectRevisions(q,{profile:'bad' as typeof profile})).toThrow(expect.objectContaining({code:'docx-revisions-invalid-profile'}));expect(q.toBytes()).toEqual(before);q.set(part,q.text(part).replace(run,'<w:moveFrom w:id=\"90\" w:author=\"Editor\">'+run+'</w:moveFrom>'));const moved=q.toBytes();expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(moved);}",
+      "calls": [
+        ".encode",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input",
+        "inspectRevisions",
+        "openRevisionFixture",
+        "p.get",
+        "p.get().slice",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "q.set",
+        "q.text",
+        "q.text().replace",
+        "q.toBytes",
+        "resolve",
+        "resolveRevisions"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:all supported direct property families restore exact previous set and malformed scalar values refuse",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 40,
+      "title": "all supported direct property families restore exact previous set and malformed scalar values refuse",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(resolve(p,'reject',[part]).resolved).toBe(3)",
+        "expect(p.text(part)).toContain(saved)",
+        "expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const invalid of [saved.replace('w:val=\"28\"','w:val=\"0\"'),saved.replace('w:val=\"24\"','w:val=\"1.5\"'),saved.replace('w:hAnsi=\"Arial\"','w:hAnsi=\"Calibri\"'),saved.replace('w:val=\"yellow\"','w:val=\"purple\"'),saved.replace('w:val=\"double\"','w:val=\"unknown\"'),saved.replace('w:val=\"auto\"','w:themeColor=\"accent1\"')])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{const saved='<w:rPr><w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\"/><w:b w:val=\"0\"/><w:bCs/><w:i/><w:iCs/><w:strike/><w:shadow/><w:vanish/><w:color w:val=\"auto\"/><w:sz w:val=\"28\"/><w:szCs w:val=\"24\"/><w:highlight w:val=\"yellow\"/><w:u w:val=\"double\"/><w:vertAlign w:val=\"superscript\"/></w:rPr>';const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace('<w:rPr>'+previous+'</w:rPr>',saved));expect(resolve(p,'reject',[part]).resolved).toBe(3);expect(p.text(part)).toContain(saved);for(const invalid of [saved.replace('w:val=\"28\"','w:val=\"0\"'),saved.replace('w:val=\"24\"','w:val=\"1.5\"'),saved.replace('w:hAnsi=\"Arial\"','w:hAnsi=\"Calibri\"'),saved.replace('w:val=\"yellow\"','w:val=\"purple\"'),saved.replace('w:val=\"double\"','w:val=\"unknown\"'),saved.replace('w:val=\"auto\"','w:themeColor=\"accent1\"')]){const q=(await input()).p;q.set(part,q.text(part).replace('<w:rPr>'+previous+'</w:rPr>',invalid));const before=q.toBytes();expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(before);}}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "q.set",
+        "q.text",
+        "q.text().replace",
+        "q.toBytes",
+        "resolve",
+        "saved.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:post-write validation fault rolls back and unsupported unselected properties do not expand selected scope",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 41,
+      "title": "post-write validation fault rolls back and unsupported unselected properties do not expand selected scope",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(resolve(p,'accept',[p.mainPart()]).resolved).toBe(3)",
+        "expect(()=>resolve(q,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-validation'}))",
+        "expect(reached).toBe(true)",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{const {p}=await input(),part='word/header1.xml';p.set(part,p.text(part).replace('<w:i/>','<w:unknown/>'));const baseline=await OpcPackage.open(p.toBytes());expect(resolve(p,'accept',[p.mainPart()]).resolved).toBe(3);await bytesEqual(p,baseline,[p.mainPart()]);const q=(await input()).p,before=q.toBytes(),set=q.set.bind(q);let reached=false;q.set=(n,v)=>{set(n,v);if(n===part){reached=true;set(n,q.text(n).replace('<w:rPr>'+previous+'</w:rPr>',properties));}};try{expect(()=>resolve(q,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-validation'}));expect(reached).toBe(true);}finally{q.set=set;}expect(q.toBytes()).toEqual(before);}",
+      "calls": [
+        "OpcPackage.open",
+        "bytesEqual",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "q.set.bind",
+        "q.text",
+        "q.text().replace",
+        "q.toBytes",
+        "resolve",
+        "set"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-properties.test.ts:public entrypoints expose the opt-in profile without activating the broader shared or local revision obligations",
+      "path": "tests/unit/docx-revision-properties.test.ts",
+      "line": 42,
+      "title": "public entrypoints expose the opt-in profile without activating the broader shared or local revision obligations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(root.inspectRevisions).toBe(inspectRevisions)",
+        "expect(docx.resolveRevisions).toBe(resolveRevisions)",
+        "expect(inv.counts.cases.implemented).toBe(648)",
+        "expect(inv.counts.cases.planned).toBe(46)",
+        "expect(s.lifecycle??f.lifecycle).toBe('planned')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "703690a8d8f632b6269940821fbb98188617d769eaa374705c299d24ac77e2db",
+      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());expect(inv.counts.cases.implemented).toBe(648);expect(inv.counts.cases.planned).toBe(46);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "f.scenarios.find",
+        "f.scenarios.some",
+        "inv.features.find",
+        "inventoryFeatures",
+        "process.cwd"
       ],
       "reviewReasons": [],
       "unresolved": []

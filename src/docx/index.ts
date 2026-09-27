@@ -1850,7 +1850,7 @@ function fail(code: string, message: string): never {
 }
 
 export { inspectStories, storyParts, type RevisionView, type Story, type StoryInspection, type StoryKind } from "./story.ts";
-export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding } from "./revisions.ts";
+export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding, type RevisionProfile } from "./revisions.ts";
 // Review mutations operate on OpcPackage snapshots; reopen Document afterward.
 export { trackedReplace } from "./redline.ts";
 export { inspectComments, setCommentResolved, inspectCommentThreads, setCommentThreadResolved, type CommentInfo, type CommentFinding, type CommentInspection, type CommentThread, type CommentThreadInspection, type CommentThreadReceipt } from "./comments.ts";

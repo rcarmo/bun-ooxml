@@ -1,4 +1,5 @@
 import { OoxmlError } from "../errors.ts";
+import {runPropertyChangeProblem,restoredRunProperties} from './revision-properties.ts';
 import { OpcPackage } from "../opc/index.ts";
 import { applyEdits, attribute, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
@@ -44,7 +45,7 @@ type ScannedStoryPart = {
 export type Revision = {
   part: string;
   id: string;
-  kind: "insertion" | "deletion";
+  kind: "insertion" | "deletion" | "run-properties";
   author?: string;
   date?: string;
   text: string;
@@ -56,8 +57,15 @@ export type RevisionFinding = {
   reason: string;
 };
 
-export function inspectRevisions(pkg: OpcPackage): { revisions: Revision[]; unsupported: RevisionFinding[] } {
-  const scanned = discoverStoryParts(pkg).map((story) => scanStoryPart(pkg, story));
+export type RevisionProfile = 'text-only' | 'text-and-run-properties';
+function revisionProfile(value:unknown):RevisionProfile {
+  if(value===undefined)return 'text-only';
+  if(value!=='text-only'&&value!=='text-and-run-properties')throw new OoxmlError('docx-revisions-invalid-profile','Unknown revision profile');
+  return value;
+}
+export function inspectRevisions(pkg: OpcPackage, options:{profile?:RevisionProfile}={}): { revisions: Revision[]; unsupported: RevisionFinding[] } {
+  const profile=revisionProfile(options.profile);
+  const scanned = discoverStoryParts(pkg).map((story) => scanStoryPart(pkg, story,profile));
   return {
     revisions: scanned.flatMap((story) => story.revisions.map(({ element: _element, ...revision }) => revision)),
     unsupported: scanned.flatMap((story) => story.unsupported),
@@ -67,19 +75,20 @@ export function inspectRevisions(pkg: OpcPackage): { revisions: Revision[]; unsu
 export function resolveRevisions(
   pkg: OpcPackage,
   action: "accept" | "reject",
-  options: { parts?: string[] } = {},
+  options: { parts?: string[]; profile?:RevisionProfile } = {},
 ): { resolved: number; changedParts: string[] } {
   if (action !== "accept" && action !== "reject") {
     throw new OoxmlError("docx-revisions-invalid-action", `Unsupported revision action: ${String(action)}`);
   }
 
+  const profile=revisionProfile(options.profile);
   const stories = discoverStoryParts(pkg);
   const selected = selectStoryParts(stories, options.parts);
   if (selected.length === 0) {
     return { resolved: 0, changedParts: [] };
   }
 
-  const scanned = selected.map((story) => scanStoryPart(pkg, story));
+  const scanned = selected.map((story) => scanStoryPart(pkg, story,profile));
   const unsupported = scanned.flatMap((story) => [
     ...story.unsupported,
     ...namespaceLiftFindings(story, action),
@@ -88,6 +97,7 @@ export function resolveRevisions(
     throw new OoxmlError("docx-revisions-unsupported", describeUnsupported(unsupported));
   }
 
+  if(profile==='text-and-run-properties'&&isProtected(pkg,true))throw new OoxmlError('docx-revisions-protected','Cannot resolve run-property revisions with protected or external settings');
   const resolved = scanned.reduce((sum, story) => sum + story.revisions.length, 0);
   if (resolved === 0) {
     return { resolved: 0, changedParts: [] };
@@ -112,8 +122,14 @@ export function resolveRevisions(
     for (const plan of plans) {
       const updated = applyEdits(plan.story.xml, plan.edits);
       if (updated !== plan.story.xml) {
-        pkg.set(plan.story.part, updated);
+        const bytes=pkg.get(plan.story.part)!;
+        pkg.set(plan.story.part,bytes[0]===239&&bytes[1]===187&&bytes[2]===191?'\ufeff'+updated:updated);
+        parseXml(pkg.text(plan.story.part));
       }
+    }
+    if(profile==='text-and-run-properties')for(const plan of plans){
+      const result=scanStoryPart(pkg,{part:plan.story.part,kind:plan.story.kind},profile);
+      if(result.revisions.length||result.unsupported.length)throw new OoxmlError('docx-revisions-validation','Resolution left revision markup or unsupported content');
     }
     pkg.toBytes();
   });
@@ -189,7 +205,7 @@ function selectStoryParts(stories: StoryPart[], requested?: string[]): StoryPart
   return stories.filter((story) => requestedSet.has(story.part));
 }
 
-function scanStoryPart(pkg: OpcPackage, story: StoryPart): ScannedStoryPart {
+function scanStoryPart(pkg: OpcPackage, story: StoryPart, profile:RevisionProfile='text-only'): ScannedStoryPart {
   const xml = pkg.text(story.part);
   const document = parseXml(xml);
   const revisions: SupportedRevisionEntry[] = [];
@@ -202,8 +218,10 @@ function scanStoryPart(pkg: OpcPackage, story: StoryPart): ScannedStoryPart {
       continue;
     }
 
-    if (element.localName === "ins" || element.localName === "del") {
-      const support = inspectRunRevision(element,xml);
+    const propertyChange=profile==='text-and-run-properties'&&element.localName==='rPrChange';
+    if (element.localName === "ins" || element.localName === "del" || propertyChange) {
+      const problem=propertyChange?runPropertyChangeProblem(element,xml):undefined;
+      const support = propertyChange?(problem?{supported:false as const,kind:'format',reason:problem}:{supported:true as const}):inspectRunRevision(element,xml);
       if (!support.supported) {
         pushFinding(unsupported, unsupportedKeys, story.part, support.kind, support.reason, element.start);
         continue;
@@ -218,10 +236,10 @@ function scanStoryPart(pkg: OpcPackage, story: StoryPart): ScannedStoryPart {
       const entry: SupportedRevisionEntry = {
         part: story.part,
         id,
-        kind: element.localName === "ins" ? "insertion" : "deletion",
+        kind: propertyChange?'run-properties':element.localName === "ins" ? "insertion" : "deletion",
         author: attribute(element, "author", W_NS),
         date: attribute(element, "date", W_NS),
-        text: revisionText(element),
+        text: revisionText(propertyChange?element.parent!.parent!:element),
         element,
       };
       revisions.push(entry);
@@ -456,6 +474,11 @@ function buildStoryEdits(
 ): Array<{ start: number; end: number; value: string }> {
   const edits: Array<{ start: number; end: number; value: string }> = [];
   for (const revision of story.revisions) {
+    if(revision.kind==='run-properties'){
+      const target=action==='accept'?revision.element:revision.element.parent!;
+      edits.push({start:target.start,end:target.end,value:action==='accept'?'':restoredRunProperties(revision.element,story.xml)});
+      continue;
+    }
     if (action === "accept") {
       edits.push(revision.kind === "insertion"
         ? { start: revision.element.start, end: revision.element.end, value: unwrapRevision(story.xml, revision.element, false) }
@@ -569,10 +592,12 @@ function pushFinding(
   findings.push({ part, kind, reason });
 }
 
-function isProtected(pkg: OpcPackage): boolean {
+function isProtected(pkg: OpcPackage,strict=false): boolean {
   for (const rel of pkg.relationships(pkg.mainPart())) {
-    if (rel.external || rel.type !== OFFICE_REL + "settings") continue;
+    if (rel.type !== OFFICE_REL + "settings") continue;
+    if(rel.external){if(strict)return true;continue;}
     const settings = parseXml(pkg.text(rel.resolved!));
+    if(strict&&(settings.root.namespaceURI!==W_NS||settings.root.localName!=='settings'))return true;
     for (const protection of settings.elements) {
       if (protection.namespaceURI !== W_NS || protection.localName !== "documentProtection") continue;
       // Bounded editing refuses unknown/missing enforcement and ignores only an
