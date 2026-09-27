@@ -77,6 +77,21 @@ also map separately. `tests/acceptance/xml-values.ts` executes the shared value
 inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
 
+The [OPC graph ledger](opc-graph-mappings.json) maps 15 declarations and 56
+direct expressions from graph-edit and byte/content-type diff tests. All links
+are scenario-only: neither suite contains a shared acceptance wrapper. All 392
+previous records remain unchanged. Native graph tests reopen serialized bytes,
+not paths, and individual rows state which payloads or metadata are compared.
+The first add test checks the relationship target, MIME and main document bytes,
+but not the new opaque payload itself.
+
+Diff tests compare hashes, lengths, MIME and exact category arrays. Some build
+changes with low-level `set`/`delete` and manual content-type edits; those tests
+do not prove guarded graph-edit behaviour. The metadata-only test changes a ZIP
+comment, not every possible metadata field. Orphan traversal, name allocation
+and relationship identity are bounded extensions of the shared graph scenarios.
+None of these mappings adds semantic XML or Office-rendering credit.
+
 The [XML-comparison ledger](xml-comparison-mappings.json) maps 14 declarations
 and 42 direct expressions. The [package-comparison ledger](package-comparison-mappings.json)
 maps 12 declarations and 32 expressions. Their two aggregate wrappers link to

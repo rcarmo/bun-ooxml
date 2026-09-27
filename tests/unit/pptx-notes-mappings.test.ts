@@ -17,7 +17,7 @@ async function sample(){
 test('PPTX notes mapping extension covers exactly two added suites while retaining all six prior records',async()=>{
  const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='pptx-core')!;expect(ledger.scopePaths).toEqual(paths);expect(ledger.mappedDeclarations).toBe(33);
  const rows=report.mappings.filter(r=>r.ledger==='pptx-core').slice(6);expect(rows).toHaveLength(27);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(109);expect(paths.slice(1).map(p=>rows.filter(r=>r.testId.includes(p)).length)).toEqual([14,13]);
- expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true);expect(report.mappedDeclarations).toBe(392);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-392);expect(report.runtimeLeafCount).toBeNull();
+ expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true);expect(report.mappedDeclarations).toBe(407);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-407);expect(report.runtimeLeafCount).toBeNull();
  const raw=await Bun.file('docs/behaviors/pptx-core-mappings.json').json();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('1cc69f5444a96f8831041d2609baef34cac2e649aa61f133b6a1733e982a47ee');
  const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys.length)).toEqual([8,1]);expect(exact.every(r=>r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);
 });

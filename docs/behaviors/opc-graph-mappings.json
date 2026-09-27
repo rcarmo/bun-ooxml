@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/graph.test.ts",
+    "tests/unit/package-diff.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/graph.test.ts": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
+    "tests/unit/package-diff.test.ts": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
+    "tests/acceptance/graph.ts": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+    "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/native/opc-graph.feature": "20f2ca5d050d96372286a8b03920bcc301709504a4578d6e7bde212c2411e3fe"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / opaque parts and content types survive related save/reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-add-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(reopened.relationships().find(r=>r.id===rel.id)?.resolved).toBe('custom/data.bin')",
+        "expect(getContentType(reopened,'custom/data.bin')).toBe('application/octet-stream')",
+        "expect(reopened.get('word/document.xml')).toEqual(original)"
+      ],
+      "outcomes": [
+        "After adding an opaque part and root relationship, a reopened package resolves that relationship to custom/data.bin, reports application/octet-stream and retains the exact original main document payload."
+      ],
+      "gaps": [
+        "Native byte reopen, not disk save. It does not explicitly read the new payload or compare all unrelated members, although the canonical binding does both. Inputs share the pinned document but differ in relationship type, so this remains scenario-only.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / collision and missing relationship targets leave package byte-identical",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-graph-rollback",
+        "@id-opc-add-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>addPart(p,'WORD/document.xml','x','application/xml')).toThrow()",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>addRelationship(p,'','urn:test/data','absent.xml')).toThrow()"
+      ],
+      "outcomes": [
+        "A case-colliding main-part name and a relationship to an absent target each refuse without changing archive bytes."
+      ],
+      "gaps": [
+        "Native add/dependency atomicity extension, not the canonical referenced-part deletion input. Generic errors only; no exact code or filesystem assertion.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship deduplication and smallest available IDs avoid unnecessary edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-add-related-part",
+        "@id-opc-remove-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(addRelationship(p,'','urn:test/a','/custom/a.xml').id).toBe(first.id)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(addRelationship(p,'','urn:test/a','custom/a.xml').id).toBe(first.id)"
+      ],
+      "outcomes": [
+        "Equivalent relative/absolute internal targets reuse the same relationship ID without archive changes; explicit removal then readdition reuses the same available ID."
+      ],
+      "gaps": [
+        "Native deduplication/allocation extension. It checks ID equality, not a full minimal-ID census, content-type readback or saved output.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / equivalent relationship leaves existing overrides and XML encoding byte-identical",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-add-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.text('[Content_Types].xml')).toContain('/custom/_rels/a.xml.rels')",
+        "expect(addRelationship(p,'custom/a.xml','urn:test/url','https://example.invalid/',{external:true}).id).toBe(first.id)",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "An equivalent external relationship reuses its ID and exact archive bytes after an explicit relationships content-type override was added and confirmed present."
+      ],
+      "gaps": [
+        "Native no-op metadata extension. The title mentions XML encoding, but the test does not introduce a distinct encoding or explicitly compare encoding markers. No new related-part shared input, byte reopen or path save.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / dollar replacement tokens in external targets are literal bytes, not JS replacement directives",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-add-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(rel.target).toBe('https://example.invalid/$&')"
+      ],
+      "outcomes": [
+        "An external target containing literal $& is returned exactly by relationship creation."
+      ],
+      "gaps": [
+        "Native escaping regression. Only returned target text is asserted, not serialized relationship bytes or reopened output despite the title; no archive custody or path save.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / referenced parts refuse until explicitly detached, then only owned metadata is removed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-graph-rollback",
+        "@id-opc-remove-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>removePart(p,'custom/a.bin')).toThrow('referenced')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(reopened.get('custom/a.bin')).toBeUndefined()",
+        "expect(reopened.text('[Content_Types].xml')).not.toContain('/custom/a.bin')"
+      ],
+      "outcomes": [
+        "A referenced custom/a.bin refuses removal with referenced error text and exact byte custody; detaching then removing it yields a byte-reopened package with no part or its override fragment."
+      ],
+      "gaps": [
+        "Native removal combines refusal and success with a different name/payload/type than the shared case. No exact OoxmlError code, explicit all-targets census, other-member equality or path save.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / relationship referenced from owner XML cannot be removed; unknown binary owners refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-graph-rollback",
+        "@id-opc-remove-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>removeRelationship(p,'word/document.xml',r.id)).toThrow('referenced')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>removeRelationship(p,'custom/owner.bin',b.id)).toThrow('binary')",
+        "expect(p.toBytes()).toEqual(next)"
+      ],
+      "outcomes": [
+        "A relationship ID embedded in owner XML cannot be removed and retains the archive; a relationship owned by an opaque binary part independently refuses with binary error text and byte custody."
+      ],
+      "gaps": [
+        "Native owner-reference/policy extension. Does not validate the injected Word markup against schema, test all reference-attribute kinds or use the canonical root-relationship removal. No disk save.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-add-related-part",
+        "@id-opc-remove-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(parts.filter(n=>n==='custom/a.xml').length).toBe(1)",
+        "expect(parts).toContain('custom/b.xml')",
+        "expect(parts).not.toContain('custom/orphan.xml')",
+        "expect(p.get('custom/orphan.xml')).toBeDefined()"
+      ],
+      "outcomes": [
+        "Cycle traversal visits custom/a.xml once, includes b.xml, omits the unlinked orphan from its result and leaves the orphan payload present."
+      ],
+      "gaps": [
+        "Native graph-walk extension. An external relationship is supplied but the result never explicitly asserts absence of its URL; the title alone does not prove external exclusion. No complete traversal-list or package-byte equality is asserted.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / part name allocation considers orphan and case-colliding names",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-add-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(nextPartName(p,'word/header%d.xml')).toBe('word/header3.xml')",
+        "expect(()=>nextPartName(p,'missing-template')).toThrow()"
+      ],
+      "outcomes": [
+        "Name allocation skips existing word/header1.xml and case-colliding WORD/header2.xml to return word/header3.xml; a template without a placeholder refuses."
+      ],
+      "gaps": [
+        "Native allocator extension with orphan names. No part is created by this call, and no mutation-free byte comparison, exact error or disk save is asserted.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/graph.test.ts:guarded OPC graph edits / removing a part removes its own rels but never cascades into targets",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-remove-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.get('custom/_rels/a.xml.rels')).toBeUndefined()",
+        "expect(p.get('custom/b.xml')).toBeDefined()",
+        "expect(OpcPackage.open(p.toBytes())).resolves.toBeInstanceOf(OpcPackage)"
+      ],
+      "outcomes": [
+        "Deleting an unreferenced owner part removes its owned relationships part, leaves the target part present and permits serialized package reopen."
+      ],
+      "gaps": [
+        "Native noncascading deletion extension. Owned-rel removal and target presence are checked live before reopen; the reopened result is only checked for package type. No exact target payload, content-type reconciliation details or filesystem save.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / raw fixture no-op diffs are empty, preserve exact source bytes, and return detached reports",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-diff-content-type"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(report).toEqual({\n      added: [],\n      removed: [],\n      changed: [],\n      unchanged: before.names(),\n      parts: [],\n    })",
+        "expect(before.toBytes()).toEqual(original)",
+        "expect(after.toBytes()).toEqual(original)",
+        "expect(diffPackages(before, after)).toEqual({\n      added: [],\n      removed: [],\n      changed: [],\n      unchanged: before.names(),\n      parts: [],\n    })"
+      ],
+      "outcomes": [
+        "Comparing two views of the pinned original yields exact empty change/add/remove/parts lists and unchanged names. Mutating returned arrays does not alter a fresh report, and both inputs retain original ZIP bytes."
+      ],
+      "gaps": [
+        "Native no-op/report-isolation extension, not a content-type change. Tests report copies and input custody without save/reopen of modified data or every nested array mutation.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / ignores ZIP metadata-only changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-diff-content-type"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(metadataOnly).not.toEqual(bytes)",
+        "expect(diffPackages(before, after)).toEqual({\n      added: [],\n      removed: [],\n      changed: [],\n      unchanged: before.names(),\n      parts: [],\n    })",
+        "expect(before.toBytes()).toEqual(bytes)",
+        "expect(after.toBytes()).toEqual(metadataOnly)"
+      ],
+      "outcomes": [
+        "Appending a ZIP comment produces explicitly different archives but equal payload reports; each package retains its own original archive bytes."
+      ],
+      "gaps": [
+        "Native ZIP comment-only extension, not every metadata field, compression or entry-order variation. No content-type mutation or disk save is performed.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / reports opaque payload edits with hashes, lengths, content types, and detached part records",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-diff-content-type"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(report.added).toEqual([])",
+        "expect(report.removed).toEqual([])",
+        "expect(report.changed).toEqual([\"custom/data.bin\"])",
+        "expect(report.unchanged).toEqual([\"[Content_Types].xml\", \"_rels/.rels\", \"word/document.xml\"])",
+        "expect(report.parts).toEqual([\n      {\n        name: \"custom/data.bin\",\n        kind: \"changed\",\n        beforeSha256: sha(Uint8Array.of(1, 2, 3)),\n        afterSha256: sha(replacement),\n        beforeBytes: 3,\n        afterBytes: 4,\n        beforeContentType: \"application/vnd.example.opaque\",\n        afterContentType: \"application/vnd.example.opaque\",\n      },\n    ])",
+        "expect(after.get(\"custom/data.bin\")).toEqual(replacement)",
+        "expect(before.toBytes()).toEqual(beforeBytes)",
+        "expect(diffPackages(before, after).parts).toEqual([\n      {\n        name: \"custom/data.bin\",\n        kind: \"changed\",\n        beforeSha256: sha(Uint8Array.of(1, 2, 3)),\n        afterSha256: sha(replacement),\n        beforeBytes: 3,\n        afterBytes: 4,\n        beforeContentType: \"application/vnd.example.opaque\",\n        afterContentType: \"application/vnd.example.opaque\",\n      },\n    ])"
+      ],
+      "outcomes": [
+        "An opaque part byte edit yields exact sorted categories and one record with before/after SHA-256, lengths and MIME. Mutating report values leaves the live edited payload and original archive intact, and a fresh record remains correct."
+      ],
+      "gaps": [
+        "Native diff/report-isolation extension uses an authored minimal OPC package, not the shared Word fixture. It does not compare the entire modified archive before/after diff or save/reopen output.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / reports added and removed parts with content-type updates via package.set",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-diff-content-type",
+        "@id-opc-add-related-part",
+        "@id-opc-remove-related-part"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(report.added).toEqual([\"custom/fresh.xml\"])",
+        "expect(report.removed).toEqual([\"custom/obsolete.xml\"])",
+        "expect(report.changed).toEqual([\"[Content_Types].xml\"])",
+        "expect(report.unchanged).toEqual([\"_rels/.rels\", \"custom/existing.bin\", \"word/document.xml\"])",
+        "expect(report.parts).toEqual([\n      {\n        name: \"[Content_Types].xml\",\n        kind: \"changed\",\n        beforeSha256: sha(before.get(\"[Content_Types].xml\")!),\n        afterSha256: sha(after.get(\"[Content_Types].xml\")!),\n        beforeBytes: before.get(\"[Content_Types].xml\")!.length,\n        afterBytes: after.get(\"[Content_Types].xml\")!.length,\n        beforeContentType: \"application/xml\",\n        afterContentType: \"application/xml\",\n      },\n      {\n        name: \"custom/fresh.xml\",\n        kind: \"added\",\n        afterSha256: sha(afterPayload),\n        afterBytes: afterPayload.length,\n        afterContentType: \"application/vnd.example.fresh+xml\",\n      },\n      {\n        name: \"custom/obsolete.xml\",\n        kind: \"removed\",\n        beforeSha256: sha(before.get(\"custom/obsolete.xml\")!),\n        beforeBytes: before.get(\"custom/obsolete.xml\")!.length,\n        beforeContentType: \"application/vnd.example.obsolete+xml\",\n      },\n    ])"
+      ],
+      "outcomes": [
+        "Direct deletion/addition and content-type edits yield exact added/removed/changed/unchanged categories plus records with hashes, lengths and MIME for changed registry, new part and removed part."
+      ],
+      "gaps": [
+        "Native low-level set/delete construction, not the guarded graph addPart/removePart operations or canonical detach sequence. No modified-package reopen, disk save or post-diff full-byte custody assertion.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-diff.test.ts:diffPackages / marks content-type-only changes as changed even when payload bytes are identical",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-diff-content-type"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(report.added).toEqual([])",
+        "expect(report.removed).toEqual([])",
+        "expect(report.changed).toEqual([\"[Content_Types].xml\", \"custom/payload.bin\"])",
+        "expect(report.unchanged).toEqual([\"_rels/.rels\", \"word/document.xml\"])",
+        "expect(report.parts).toEqual([\n      {\n        name: \"[Content_Types].xml\",\n        kind: \"changed\",\n        beforeSha256: sha(before.get(\"[Content_Types].xml\")!),\n        afterSha256: sha(after.get(\"[Content_Types].xml\")!),\n        beforeBytes: before.get(\"[Content_Types].xml\")!.length,\n        afterBytes: after.get(\"[Content_Types].xml\")!.length,\n        beforeContentType: \"application/xml\",\n        afterContentType: \"application/xml\",\n      },\n      {\n        name: \"custom/payload.bin\",\n        kind: \"changed\",\n        beforeSha256: sha(payload),\n        afterSha256: sha(payload),\n        beforeBytes: payload.length,\n        afterBytes: payload.length,\n        beforeContentType: \"application/vnd.example.before\",\n        afterContentType: \"application/vnd.example.after\",\n      },\n    ])"
+      ],
+      "outcomes": [
+        "Changing only an opaque part content type reports exactly registry and payload part as changed; the payload record has identical hashes/lengths but changed MIME, with exact other category lists."
+      ],
+      "gaps": [
+        "Native custom/payload.bin target and authored minimal OPC graph differ from the canonical word/document.xml fixture. Expected hashes are computed from the known payload; no separate payload equality, modified archive reopen or disk save is asserted.",
+        "Scenario-only source mapping; no semantic XML, schema/rendering or new execution credit. No native acceptance wrapper is claimed; dynamic/deferred review flags retained and runtime leaves unknown."
+      ]
+    }
+  ]
+}
