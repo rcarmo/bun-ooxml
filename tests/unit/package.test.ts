@@ -27,22 +27,19 @@ afterEach(async () => {
 
 describe("OpcPackage", () => {
   test("conservatively refuses percent-encoded internal names and relationship targets", async () => {
-    await expectOpcErrorAsync(
-      OpcPackage.open(createPackageBytes({ documentName: "word/%66oo.xml" })),
-      "opc-part-name-invalid",
-      "Noncanonical part name",
-    );
+    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({ documentName: "word/%66oo.xml" })), "opc-part-name-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-part-name-invalid");
+    expect((error as OoxmlError).message).toContain("Noncanonical part name"); }
 
-    await expectOpcErrorAsync(
-      OpcPackage.open(createPackageBytes({ relTarget: "word/%66oo.xml" })),
-      "opc-target-invalid",
-      "Percent-encoded",
-    );
+    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({ relTarget: "word/%66oo.xml" })), "opc-target-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-target-invalid");
+    expect((error as OoxmlError).message).toContain("Percent-encoded"); }
   });
 
   test("validates content-type metadata", async () => {
-    await expectOpcErrorAsync(
-      OpcPackage.open(createPackageBytes({
+    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({
         contentTypesXml:
           `<?xml version="1.0" encoding="UTF-8"?>`
           + `<Types xmlns="${CONTENT_TYPES_NS}">`
@@ -50,31 +47,29 @@ describe("OpcPackage", () => {
           + `<Default Extension="rels" ContentType="application/xml"/>`
           + `<Override PartName="/${DOCUMENT_PART}" ContentType="${MAIN_CONTENT_TYPE}"/>`
           + `</Types>`,
-      })),
-      "opc-content-types-invalid",
-      "Duplicate/missing default extension",
-    );
+      })), "opc-content-types-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-content-types-invalid");
+    expect((error as OoxmlError).message).toContain("Duplicate/missing default extension"); }
   });
 
   test("rejects missing and duplicate OPC relationship references", async () => {
-    await expectOpcErrorAsync(
-      OpcPackage.open(createPackageBytes({ relTarget: "word/missing.xml" })),
-      "opc-relationship-target-missing",
-      "Missing target",
-    );
+    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({ relTarget: "word/missing.xml" })), "opc-relationship-target-missing");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-relationship-target-missing");
+    expect((error as OoxmlError).message).toContain("Missing target"); }
 
-    await expectOpcErrorAsync(
-      OpcPackage.open(createPackageBytes({
+    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({
         rootRelationshipsXml:
           `<?xml version="1.0" encoding="UTF-8"?>`
           + `<Relationships xmlns="${RELATIONSHIPS_NS}">`
           + `<Relationship Id="rId1" Type="${OFFICE_DOCUMENT_REL}" Target="${DOCUMENT_PART}"/>`
           + `<Relationship Id="rId1" Type="${OFFICE_DOCUMENT_REL}" Target="${DOCUMENT_PART}"/>`
           + `</Relationships>`,
-      })),
-      "opc-relationship-duplicate",
-      "Duplicate relationship id",
-    );
+      })), "opc-relationship-duplicate");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-relationship-duplicate");
+    expect((error as OoxmlError).message).toContain("Duplicate relationship id"); }
   });
 
   test("returns detached copies and keeps custody of opened source bytes", async () => {
@@ -108,14 +103,13 @@ describe("OpcPackage", () => {
     const pkg = await OpcPackage.open(createPackageBytes());
     let ran = false;
 
-    expectOpcErrorSync(
-      () => pkg.transaction(async () => {
+    { const error = captureOpcErrorSync(() => pkg.transaction(async () => {
         ran = true;
         pkg.set(DOCUMENT_PART, `<?xml version="1.0" encoding="UTF-8"?><document>Beta</document>`);
-      }),
-      "opc-async-transaction",
-      "synchronous edits",
-    );
+      }), "opc-async-transaction");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-async-transaction");
+    expect((error as OoxmlError).message).toContain("synchronous edits"); }
 
     expect(ran).toBe(false);
     expect(pkg.text(DOCUMENT_PART)).toContain("Alpha");
@@ -139,7 +133,10 @@ describe("OpcPackage", () => {
     const pkg = await OpcPackage.open(bytes);
     pkg.delete(DOCUMENT_PART);
 
-    await expectOpcErrorAsync(pkg.save(path), "opc-relationship-target-missing", "Missing target");
+    { const error = await captureOpcErrorAsync(pkg.save(path), "opc-relationship-target-missing");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-relationship-target-missing");
+    expect((error as OoxmlError).message).toContain("Missing target"); }
     expect([...await Bun.file(path).bytes()]).toEqual([...bytes]);
   });
 
@@ -153,7 +150,10 @@ describe("OpcPackage", () => {
 
     const pkg = await OpcPackage.open(bytes);
 
-    await expectOpcErrorAsync(pkg.save(link), "opc-symlink-destination", "Symlink");
+    { const error = await captureOpcErrorAsync(pkg.save(link), "opc-symlink-destination");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("opc-symlink-destination");
+    expect((error as OoxmlError).message).toContain("Symlink"); }
     expect([...await Bun.file(target).bytes()]).toEqual([...bytes]);
   });
 
@@ -215,30 +215,13 @@ function encodeUtf16Le(text: string): Uint8Array {
 
 function fixtureArchives(): string[] { return fixturePaths(CORPUS74_PACKAGE_IDS); }
 
-function expectOpcErrorSync(action: () => unknown, code: string, messageFragment: string): void {
-  try {
-    action();
-    throw new Error(`expected ${code}`);
-  } catch (error) {
-    if (error instanceof Error && error.message === `expected ${code}`) throw error;
-    expect(error).toBeInstanceOf(OoxmlError);
-    const refusal = error as OoxmlError;
-    expect(refusal.code).toBe(code);
-    expect(refusal.message).toContain(messageFragment);
-  }
+function captureOpcErrorSync(action: () => unknown, code: string): unknown {
+  try { action(); throw new Error(`expected ${code}`); }
+  catch (error) { if (error instanceof Error && error.message === `expected ${code}`) throw error; return error; }
 }
-
-async function expectOpcErrorAsync(action: Promise<unknown>, code: string, messageFragment: string): Promise<void> {
-  try {
-    await action;
-    throw new Error(`expected ${code}`);
-  } catch (error) {
-    if (error instanceof Error && error.message === `expected ${code}`) throw error;
-    expect(error).toBeInstanceOf(OoxmlError);
-    const refusal = error as OoxmlError;
-    expect(refusal.code).toBe(code);
-    expect(refusal.message).toContain(messageFragment);
-  }
+async function captureOpcErrorAsync(action: Promise<unknown>, code: string): Promise<unknown> {
+  try { await action; throw new Error(`expected ${code}`); }
+  catch (error) { if (error instanceof Error && error.message === `expected ${code}`) throw error; return error; }
 }
 
 async function tempRoot(): Promise<string> {

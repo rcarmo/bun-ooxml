@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 930,
-  "files": 98,
+  "count": 935,
+  "files": 99,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -14,7 +14,7 @@
     },
     {
       "path": "tests/unit/comparison-mappings.test.ts",
-      "sha256": "e3326afbb7ce8814481eee8812f1c51bde9959359d15533392e939ce06f1a0ad",
+      "sha256": "d4fb816660c35ee952f84a597b77e6d26ec7a4cae5b944e8a3c3c2217275b277",
       "declarations": 5,
       "issues": []
     },
@@ -26,7 +26,7 @@
     },
     {
       "path": "tests/unit/docx-anchor-mappings.test.ts",
-      "sha256": "004c7fec3f0dd5ad671a58aa93ece7e3cbb6733d09951dadcc5fa6013f7b2008",
+      "sha256": "bc22e42d2db356ab8843df4365f75c6353056af0cd8a7ff4ef99415b8d1616ce",
       "declarations": 5,
       "issues": []
     },
@@ -56,7 +56,7 @@
     },
     {
       "path": "tests/unit/docx-comment-mappings.test.ts",
-      "sha256": "e93bc0bcd73ccc5598b9fc2e149a7b6e19a6e9269754e8e5a15869c2c49ce4f1",
+      "sha256": "9b76de9d8ad20c796104e0c8ca7d768b2cf2ce91bec88e132322c57e9d06e52c",
       "declarations": 5,
       "issues": []
     },
@@ -116,7 +116,7 @@
     },
     {
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "declarations": 8,
       "issues": []
     },
@@ -152,7 +152,7 @@
     },
     {
       "path": "tests/unit/docx-property-mappings.test.ts",
-      "sha256": "ba4606510c118655d67446d7b8287c9825d1817f788c43a434af8bb2d37904fa",
+      "sha256": "d80be9dc490573ddc300509694ae2f0e319c07a2c2573a5d04c51ede8d108a04",
       "declarations": 4,
       "issues": []
     },
@@ -212,7 +212,7 @@
     },
     {
       "path": "tests/unit/docx-style-mappings.test.ts",
-      "sha256": "0224b4b150d6754331d553f4bad395863196395c7f211ec21719f2d613a9bf53",
+      "sha256": "528606365abf3f4d1b14d2b53f1dabeb17d8c9a52f972f8a296f84a69a202758",
       "declarations": 5,
       "issues": []
     },
@@ -242,13 +242,13 @@
     },
     {
       "path": "tests/unit/formula-mappings.test.ts",
-      "sha256": "c72056f8a0d6abc3a51ffec443bdb9a6ec6e2962d68a530826b18eea3e8cd93e",
+      "sha256": "8ccd0feeedc2716c8c702471b3364b7ba23e93550ce6d1c25751845946060602",
       "declarations": 6,
       "issues": []
     },
     {
       "path": "tests/unit/geometry-mappings.test.ts",
-      "sha256": "0c5d0e8f2ffac51d2477be212d312e5a97e3f6f8faadbdf757368fb337521356",
+      "sha256": "b0041feb19a05cfbdf7b756d3f4b434e10ce121323f96d80bf3df85b879ea138",
       "declarations": 5,
       "issues": []
     },
@@ -266,13 +266,19 @@
     },
     {
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439",
+      "sha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
       "declarations": 6,
       "issues": []
     },
     {
+      "path": "tests/unit/opc-custody-mappings.test.ts",
+      "sha256": "0259c3410525c39f4a22b775df95236235d207ff2b7d2584522a83120ec05cae",
+      "declarations": 5,
+      "issues": []
+    },
+    {
       "path": "tests/unit/opc-graph-mappings.test.ts",
-      "sha256": "54633a16166bc5ce7951d7e620ba588514de7aaebc2e1975e0951b0afbaf002e",
+      "sha256": "0da186fd303682eeebc640cf59f24b9512cb63b14a016ed155ee97125ff9d826",
       "declarations": 5,
       "issues": []
     },
@@ -284,7 +290,7 @@
     },
     {
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "declarations": 19,
       "issues": []
     },
@@ -308,7 +314,7 @@
     },
     {
       "path": "tests/unit/package.test.ts",
-      "sha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "sha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
       "declarations": 9,
       "issues": []
     },
@@ -332,7 +338,7 @@
     },
     {
       "path": "tests/unit/pptx-notes-mappings.test.ts",
-      "sha256": "a57df99730da8b91c9bd28c69e677f4c9c95cfdb0bed7e76fccc9ecbd99718cb",
+      "sha256": "4997d60c12411c9a48302bd4ccc4c1731106aa399df88f364ec078dbb83aa51e",
       "declarations": 5,
       "issues": []
     },
@@ -446,7 +452,7 @@
     },
     {
       "path": "tests/unit/xlsx-comment-mappings.test.ts",
-      "sha256": "958d482b6d2fa151868667a7ffc7f6de73ca29d74d9f6520c1f396d58a004f7a",
+      "sha256": "c9bc2ec7236e2f0b09f3deadf745504707c65744732bcb56930f4b876fb9077f",
       "declarations": 5,
       "issues": []
     },
@@ -488,7 +494,7 @@
     },
     {
       "path": "tests/unit/xlsx-style-mappings.test.ts",
-      "sha256": "8317b06a89c02a65dcd83881a434ff996ab216f1473f10897ae01f1280bf5832",
+      "sha256": "4da932dc51c924e0ea2b8df0476d981927fe38bef00b8325efec401e0cbdce4e",
       "declarations": 5,
       "issues": []
     },
@@ -578,13 +584,13 @@
     },
     {
       "path": "tests/unit/zip32-mappings.test.ts",
-      "sha256": "fab31eb4fc11cbd1b8ca84472adb21a0e3bd637fe520cc410daaebbbfa7f8dca",
+      "sha256": "109dd358480bcb153383fa1fc3ff3f05c096399c02beaa19bc1ec8b35bb0c5fb",
       "declarations": 5,
       "issues": []
     },
     {
       "path": "tests/unit/zip64-mappings.test.ts",
-      "sha256": "0c37523135ba752010f4e1c0346003968277a5cbfe877edb4fd1a8dfd7834a2e",
+      "sha256": "01381717534899f93ba1c4c1cb70ce9be44a4a4fb07da78b9b51f09d03c88ceb",
       "declarations": 5,
       "issues": []
     },
@@ -1067,6 +1073,8 @@
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
+    "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody scopes exact assertions and unrelated graph-case borrowing refuse",
+    "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody source pins independently reject stale or absent suite runtime helper and shared files",
     "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph scope and literal assertions cannot shrink or borrow semantic diff cases",
     "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph runtime fixture and canonical source pins fail independently when stale or absent",
     "bun:tests/unit/package-admission.test.ts:admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
@@ -1436,6 +1444,8 @@
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
+    "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody scopes exact assertions and unrelated graph-case borrowing refuse",
+    "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody source pins independently reject stale or absent suite runtime helper and shared files",
     "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph scope and literal assertions cannot shrink or borrow semantic diff cases",
     "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph runtime fixture and canonical source pins fail independently when stale or absent",
     "bun:tests/unit/package-admission.test.ts:admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
@@ -1448,9 +1458,6 @@
     "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
     "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
     "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
-    "bun:tests/unit/package.test.ts:OpcPackage / conservatively refuses percent-encoded internal names and relationship targets",
-    "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
-    "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
@@ -1741,8 +1748,8 @@
         "expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path])",
         "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases])",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','formula-references'].includes(m.ledger)))).digest('hex')).toBe('99e806c10922c9f07c6768dadc7c417a29ceacf041c8f8a0b30c2b0de8a7b71c')"
       ],
@@ -1754,8 +1761,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e3326afbb7ce8814481eee8812f1c51bde9959359d15533392e939ce06f1a0ad",
-      "body": "{\n const r=await outcomeMappingReport();for(const d of definitions){const rows=r.mappings.filter(m=>m.ledger===d.name);expect(rows).toHaveLength(d.count);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(d.assertions);expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);}expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','formula-references'].includes(m.ledger)))).digest('hex')).toBe('99e806c10922c9f07c6768dadc7c417a29ceacf041c8f8a0b30c2b0de8a7b71c');\n}",
+      "sourceSha256": "d4fb816660c35ee952f84a597b77e6d26ec7a4cae5b944e8a3c3c2217275b277",
+      "body": "{\n const r=await outcomeMappingReport();for(const d of definitions){const rows=r.mappings.filter(m=>m.ledger===d.name);expect(rows).toHaveLength(d.count);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(d.assertions);expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);}expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','formula-references'].includes(m.ledger)))).digest('hex')).toBe('99e806c10922c9f07c6768dadc7c417a29ceacf041c8f8a0b30c2b0de8a7b71c');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -1803,7 +1810,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e3326afbb7ce8814481eee8812f1c51bde9959359d15533392e939ce06f1a0ad",
+      "sourceSha256": "d4fb816660c35ee952f84a597b77e6d26ec7a4cae5b944e8a3c3c2217275b277",
       "body": "{\n const r=await outcomeMappingReport(),xml=r.mappings.filter(m=>m.ledger==='xml-comparison'),pkg=r.mappings.filter(m=>m.ledger==='package-comparison');expect(xml[0]!.caseKeys).toEqual([]);expect(xml[2]!.gaps.join(' ')).toContain('Type');expect(xml[8]!.gaps.join(' ')).toContain('aggregate');expect(xml[9]!.gaps.join(' ')).toContain('timing');expect(xml[12]!.gaps.join(' ')).toContain('not schema');expect(pkg[0]!.gaps.join(' ')).toContain('no OPC');expect(pkg[6]!.gaps.join(' ')).toContain('single');expect(pkg[9]!.gaps.join(' ')).toContain('unchanged');expect(pkg[9]!.gaps.join(' ')).toContain('aggregate');expect(pkg[11]!.outcomes.join(' ')).toContain('byte diff');expect(pkg.every(m=>m.gaps.join(' ').includes('no new execution'))).toBe(true);\n}",
       "calls": [
         "expect",
@@ -1849,7 +1856,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e3326afbb7ce8814481eee8812f1c51bde9959359d15533392e939ce06f1a0ad",
+      "sourceSha256": "d4fb816660c35ee952f84a597b77e6d26ec7a4cae5b944e8a3c3c2217275b277",
       "body": "{\n for(const d of definitions){const a=await sample(d);a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample(d);b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample(d);c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const e=await sample(d);e.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-docx-final-section-layout|{\"kind\":\"landscape\"}'];expect(()=>reconcileOutcomeMappingSets(e.inventory,e.sets)).toThrow('case');}\n}",
       "calls": [
         "b.sets.0.ledger.mappings.pop",
@@ -1889,7 +1896,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e3326afbb7ce8814481eee8812f1c51bde9959359d15533392e939ce06f1a0ad",
+      "sourceSha256": "d4fb816660c35ee952f84a597b77e6d26ec7a4cae5b944e8a3c3c2217275b277",
       "body": "{\n for(const d of definitions)for(const p of [d.path,...d.sources,d.canonical]){const a=await sample(d);expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample(d);delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -1928,7 +1935,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e3326afbb7ce8814481eee8812f1c51bde9959359d15533392e939ce06f1a0ad",
+      "sourceSha256": "d4fb816660c35ee952f84a597b77e6d26ec7a4cae5b944e8a3c3c2217275b277",
       "body": "{\n for(const d of definitions){const a=await sample(d),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();}\n}",
       "calls": [
         "JSON.stringify",
@@ -2184,16 +2191,16 @@
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
         "expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids))",
         "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([3,1])",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','xlsx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('5caf6c8a92a85c477c38ef65c46a0b9ad03042af73f79c17a96fccbc14edc4a7')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "004c7fec3f0dd5ad671a58aa93ece7e3cbb6733d09951dadcc5fa6013f7b2008",
-      "body": "{\n const r=await outcomeMappingReport(),ledger=r.ledgers.find(l=>l.name==='docx-anchors');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(28);const rows=r.mappings.filter(m=>m.ledger==='docx-anchors');expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(122);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([3,1]);expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','xlsx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('5caf6c8a92a85c477c38ef65c46a0b9ad03042af73f79c17a96fccbc14edc4a7');\n}",
+      "sourceSha256": "bc22e42d2db356ab8843df4365f75c6353056af0cd8a7ff4ef99415b8d1616ce",
+      "body": "{\n const r=await outcomeMappingReport(),ledger=r.ledgers.find(l=>l.name==='docx-anchors');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(28);const rows=r.mappings.filter(m=>m.ledger==='docx-anchors');expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(122);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([3,1]);expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','xlsx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('5caf6c8a92a85c477c38ef65c46a0b9ad03042af73f79c17a96fccbc14edc4a7');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -2242,7 +2249,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "004c7fec3f0dd5ad671a58aa93ece7e3cbb6733d09951dadcc5fa6013f7b2008",
+      "sourceSha256": "bc22e42d2db356ab8843df4365f75c6353056af0cd8a7ff4ef99415b8d1616ce",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='docx-anchors'),find=(suffix:string)=>rows.find(m=>m.testId.endsWith(suffix))!;\n const listing=find('body anchors read explicit outlines and paragraphs in saved order and filter case-insensitively without mutation');expect(listing.caseKeys).toEqual([]);expect(listing.gaps.join(' ')).toContain('byte reopen');expect(listing.gaps.join(' ')).toContain('Customer context');\n const insert=find('insert after captured heading saves immediately adjacent text and preserves every unrelated member');expect(insert.gaps.join(' ')).toContain('Current intro/Current delivery');expect(insert.gaps.join(' ')).toContain('bold is checked before save');\n const map=find('body map reports exact saved heading table placeholder and anchor counts without changing file or package bytes');expect(map.caseKeys).toEqual([]);expect(map.outcomes.join(' ')).toContain('real path');\n const exact=rows.filter(m=>m.caseKeys.length);expect(exact.every(m=>m.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);expect(exact[0]!.gaps.join(' ')).toContain('two planned');expect(exact[1]!.gaps.join(' ')).toContain('four planned');\n const controls=find('canonical map predicates independently reject false counts empty anchors and changed file custody');expect(controls.gaps.join(' ')).toContain('AssertionError');expect(controls.gaps.join(' ')).toContain('nested');\n expect(rows.every(m=>!m.scenarioIds.some(id=>id.includes('hints')))).toBe(true);\n}",
       "calls": [
         ".mappings.filter",
@@ -2294,7 +2301,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "004c7fec3f0dd5ad671a58aa93ece7e3cbb6733d09951dadcc5fa6013f7b2008",
+      "sourceSha256": "bc22e42d2db356ab8843df4365f75c6353056af0cd8a7ff4ef99415b8d1616ce",
       "body": "{\n for(const path of paths){const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample(),i=b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(path));expect(i).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(i,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings.find(m=>m.testId.includes(path))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings.find(m=>m.testId.includes(path))!.caseKeys=['@id-python-word-anchor-section-discovery-hints'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');}\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -2336,7 +2343,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "004c7fec3f0dd5ad671a58aa93ece7e3cbb6733d09951dadcc5fa6013f7b2008",
+      "sourceSha256": "bc22e42d2db356ab8843df4365f75c6353056af0cd8a7ff4ef99415b8d1616ce",
       "body": "{\n for(const path of [...paths,...pins,canonical]){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[path];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -2370,7 +2377,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "004c7fec3f0dd5ad671a58aa93ece7e3cbb6733d09951dadcc5fa6013f7b2008",
+      "sourceSha256": "bc22e42d2db356ab8843df4365f75c6353056af0cd8a7ff4ef99415b8d1616ce",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         "JSON.stringify",
@@ -4804,16 +4811,16 @@
         "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([14])",
         "expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids))",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','formula-references'].includes(m.ledger)))).digest('hex')).toBe('0c943212897540b5b26edc5d792bc409ec8376f4791b0943d31cb4dd371fbefb')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e93bc0bcd73ccc5598b9fc2e149a7b6e19a6e9269754e8e5a15869c2c49ce4f1",
-      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='docx-comments');expect(rows).toHaveLength(19);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(60);expect(r.ledgers.find(l=>l.name==='docx-comments')!.scopePaths).toEqual([path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([14]);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','formula-references'].includes(m.ledger)))).digest('hex')).toBe('0c943212897540b5b26edc5d792bc409ec8376f4791b0943d31cb4dd371fbefb');\n}",
+      "sourceSha256": "9b76de9d8ad20c796104e0c8ca7d768b2cf2ce91bec88e132322c57e9d06e52c",
+      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='docx-comments');expect(rows).toHaveLength(19);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(60);expect(r.ledgers.find(l=>l.name==='docx-comments')!.scopePaths).toEqual([path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([14]);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','formula-references'].includes(m.ledger)))).digest('hex')).toBe('0c943212897540b5b26edc5d792bc409ec8376f4791b0943d31cb4dd371fbefb');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -4860,7 +4867,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e93bc0bcd73ccc5598b9fc2e149a7b6e19a6e9269754e8e5a15869c2c49ce4f1",
+      "sourceSha256": "9b76de9d8ad20c796104e0c8ca7d768b2cf2ce91bec88e132322c57e9d06e52c",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='docx-comments');expect(rows[0]!.gaps.join(' ')).toContain('aggregate');expect(rows[0]!.gaps.join(' ')).toContain('byte reopen');expect(rows[0]!.gaps.join(' ')).toContain('OoxmlError');expect(rows[0]!.gaps.join(' ')).toContain('member');expect(rows[1]!.gaps.join(' ')).toContain('unrelated');expect(rows[9]!.gaps.join(' ')).toContain('receipt');expect(rows[14]!.gaps.join(' ')).toContain('UTF-16LE');expect(rows[16]!.gaps.join(' ')).toContain('does not create');expect(rows[17]!.outcomes.join(' ')).toContain('disk');expect(rows[17]!.caseKeys).toEqual([]);expect(rows.every(m=>m.scenarioIds.every(id=>!id.includes('python')))).toBe(true);\n}",
       "calls": [
         ".mappings.filter",
@@ -4899,7 +4906,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e93bc0bcd73ccc5598b9fc2e149a7b6e19a6e9269754e8e5a15869c2c49ce4f1",
+      "sourceSha256": "9b76de9d8ad20c796104e0c8ca7d768b2cf2ce91bec88e132322c57e9d06e52c",
       "body": "{\n const a=await sample();a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-python-comments-reply-root-resolution'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');\n}",
       "calls": [
         "b.sets.0.ledger.mappings.pop",
@@ -4933,7 +4940,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e93bc0bcd73ccc5598b9fc2e149a7b6e19a6e9269754e8e5a15869c2c49ce4f1",
+      "sourceSha256": "9b76de9d8ad20c796104e0c8ca7d768b2cf2ce91bec88e132322c57e9d06e52c",
       "body": "{\n for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -4967,7 +4974,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e93bc0bcd73ccc5598b9fc2e149a7b6e19a6e9269754e8e5a15869c2c49ce4f1",
+      "sourceSha256": "9b76de9d8ad20c796104e0c8ca7d768b2cf2ce91bec88e132322c57e9d06e52c",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         "JSON.stringify",
@@ -9807,15 +9814,15 @@
         "expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true)",
         "expect(report.executionCredit).toBe(false)",
         "expect(report.runtimeLeafCount).toBeNull()",
-        "expect(report.mappedDeclarations).toBe(446)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446)",
+        "expect(report.mappedDeclarations).toBe(461)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461)",
         "expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter']))"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
-      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='docx-model');\n expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(130);\n const mappings=report.mappings.filter(m=>m.ledger==='docx-model');expect(mappings).toHaveLength(130);\n expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true);\n expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(446);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446);\n expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter']));\n}",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
+      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='docx-model');\n expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(130);\n const mappings=report.mappings.filter(m=>m.ledger==='docx-model');expect(mappings).toHaveLength(130);\n expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true);\n expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(461);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461);\n expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter']));\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -9861,7 +9868,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model');\n const aggregates=rows.filter(m=>m.testId.includes('shared'));\n expect(aggregates).toHaveLength(3);expect(aggregates.every(m=>m.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n expect(aggregates.map(m=>m.caseKeys.length)).toEqual([2,2,1]);\n const rowToggle=rows.find(m=>m.testId.endsWith('direct row header toggles preserve text, dimensions and other members after path save/reopen'))!;\n expect(rowToggle.caseKeys).toEqual([]);expect(rowToggle.gaps.join(' ')).toContain('2x2');expect(rowToggle.gaps.join(' ')).toContain('3x2');\n expect(rowToggle.outcomes.join(' ')).toContain('live dimensions and Header/Body text are checked before save');\n expect(rowToggle.outcomes.join(' ')).toContain('Real path reopen retains true/false row states, the Body cell text and unrelated members');\n const cell=rows.find(m=>m.testId.endsWith('direct cell properties survive reopen without changing text, grid, sibling cells or other package parts'))!;\n expect(cell.outcomes.join(' ')).toContain('live dimensions and selected text are checked before save');\n expect(cell.outcomes.join(' ')).toContain('After reopen, exact sibling-cell XML and every unrelated member match');\n const outputLimits=rows.filter(m=>m.testId.includes('output bound'));\n expect(outputLimits).toHaveLength(8);expect(outputLimits.every(m=>m.caseKeys.length===0&&m.gaps.join(' ').includes('Control-only'))).toBe(true);\n const formatting=rows.find(m=>m.testId.endsWith('per-run authoring preserves selected formatting after real path save and reopen'))!;\n expect(formatting.caseKeys).toEqual(['@id-docx-go-roundtrip-selected-formatting']);expect(formatting.gaps.join(' ')).toContain('No unrelated-part');\n const utf16=rows.filter(m=>m.testId.includes('UTF-16'));expect(utf16).toHaveLength(7);expect(utf16.every(m=>m.caseKeys.length===0&&m.gaps.join(' ').includes('UTF-16'))).toBe(true);\n}",
       "calls": [
         "aggregates.every",
@@ -9906,7 +9913,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "body": "{\n const a=await sample();a.sets[0]!.ledger.scopePaths.pop();expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n const b=await sample();b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n const c=await sample();c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');\n const d=await sample();d.sets[0]!.ledger.mappings[0]!.assertions[0]='expect(fake).toBe(true)';expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('assertion');\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.pop",
@@ -9942,7 +9949,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "body": "{\n for(const path of ['src/docx/append-run.ts','src/docx/cell-properties.ts','src/docx/row-header.ts','src/docx/index.ts','tests/acceptance/docx-model.ts',canonical]){\n  const a=await sample();a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n }\n const b=await sample();b.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-xml-parse-simple'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scenario');\n const c=await sample();c.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-docx-go-table-header-getter'];expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('case');\n const d=await sample();delete d.sets[0]!.ledger.sourceSha256['src/docx/row-header.ts'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('pin');\n}",
       "calls": [
         "expect",
@@ -9975,7 +9982,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),report=reconcileOutcomeMappingSets(a.inventory,a.sets);\n expect(report.mappings).toHaveLength(130);expect(JSON.stringify(a)).toBe(before);\n expect(report.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(c=>c.assertions));\n expect(report.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(c=>c.reviewReasons));\n expect(report.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(c=>c.deferredAssertions));\n expect(report.mappings.some(m=>m.reviewReasons.length>0)).toBe(true);\n const ownCases=report.mappings.filter(m=>m.caseKeys.length>0);expect(ownCases).toHaveLength(12);\n}",
       "calls": [
         "JSON.stringify",
@@ -10021,7 +10028,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model').slice(38,88);\n expect(rows).toHaveLength(50);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(262);\n const groups=['docx-paragraph-text.test.ts','docx-insert-paragraph.test.ts','docx-table-rows.test.ts','docx-row-texts.test.ts'];\n expect(groups.map(path=>rows.filter(m=>m.testId.includes(path)).length)).toEqual([13,13,14,10]);\n const exact=rows.filter(m=>m.caseKeys.length);expect(exact).toHaveLength(4);expect(exact.map(m=>m.caseKeys.length)).toEqual([5,1,1,1]);expect(exact.every(m=>m.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const sequential=rows.find(m=>m.testId.endsWith('whole paragraph text replaces empty and existing values with fresh handles and saved readback'))!;\n expect(sequential.caseKeys).toEqual([]);expect(sequential.gaps.join(' ')).toContain('sequentially');expect(sequential.gaps.join(' ')).toContain('five outline values use byte reopen');\n const rowCounts=rows.find(m=>m.testId.endsWith('append insert delete return fresh tables and retain row order after real path save'))!;\n expect(rowCounts.caseKeys).toEqual([]);expect(rowCounts.gaps.join(' ')).toContain('2x3, not local 2x2');expect(rowCounts.gaps.join(' ')).toContain('Only the final state is path-reopened');\n const firstRow=rows.find(m=>m.testId.endsWith('row texts read exact cells in column order and detach results without archive mutation'))!;\n expect(firstRow.gaps.join(' ')).toContain('only cell(0,0), not all four');expect(firstRow.caseKeys).toEqual([]);\n expect(rows.every(m=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "exact.every",
@@ -10077,7 +10084,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "body": "{\n for(const path of paths.slice(3)){\n  const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n  const b=await sample();const index=b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(path));expect(index).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n }\n for(const path of ['tests/acceptance/paragraph-text.ts','tests/acceptance/paragraph-properties.ts','tests/acceptance/body-insertion.ts','tests/acceptance/table-rows.ts','tests/acceptance/row-texts.ts','src/docx/paragraph-text.ts','src/docx/body-insertion.ts','src/docx/table-rows.ts']){\n  const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n }\n}",
       "calls": [
         "Object.hasOwn",
@@ -10119,7 +10126,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "3743bcbb189eb1d1453ad6d2e90f87c8a9c813ef26aec0661862bb847eb9a611",
+      "sourceSha256": "7614325584a1ba8a083df8d6aeab34ec4953898be006866e0180c5e9fea5413b",
       "body": "{\n for(const path of paths.slice(3)){\n  const a=await sample(),row=a.sets[0]!.ledger.mappings.find(m=>m.testId.includes(path))!;row.assertions.pop();expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('assertion');\n  const b=await sample(),other=b.sets[0]!.ledger.mappings.find(m=>m.testId.includes(path))!;other.caseKeys=['@id-docx-go-table-header-getter'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('case');\n }\n const a=await sample(),row=a.sets[0]!.ledger.mappings.find(m=>m.testId.includes('five canonical text getter cases'))!;row.caseKeys=['@id-docx-go-paragraph-text-getter|invented'];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('case');\n}",
       "calls": [
         "a.sets.0.ledger.mappings.find",
@@ -13150,14 +13157,14 @@
         "expect(exact.map(r=>r.caseKeys)).toEqual(ids.map(id=>[id]))",
         "expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('30ae497339a8a5bafd44fb3cf0233c70e67f0dc8f34966163f43b8b9173801fe')",
-        "expect(report.mappedDeclarations).toBe(446)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446)"
+        "expect(report.mappedDeclarations).toBe(461)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "ba4606510c118655d67446d7b8287c9825d1817f788c43a434af8bb2d37904fa",
-      "body": "{\n const report=await outcomeMappingReport(),all=report.mappings.filter(m=>m.ledger==='docx-model'),rows=all.slice(88);\n expect(rows).toHaveLength(42);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(226);\n expect(paths.map(p=>rows.filter(r=>r.testId.startsWith('bun:'+p+':')).length)).toEqual([15,15,12]);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.outcomes.length&&r.gaps.length)).toBe(true);\n expect(new Set(rows.flatMap(r=>r.scenarioIds))).toEqual(new Set(ids));\n const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys)).toEqual(ids.map(id=>[id]));\n expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json();\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('30ae497339a8a5bafd44fb3cf0233c70e67f0dc8f34966163f43b8b9173801fe');\n expect(report.mappedDeclarations).toBe(446);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446);\n}",
+      "sourceSha256": "d80be9dc490573ddc300509694ae2f0e319c07a2c2573a5d04c51ede8d108a04",
+      "body": "{\n const report=await outcomeMappingReport(),all=report.mappings.filter(m=>m.ledger==='docx-model'),rows=all.slice(88);\n expect(rows).toHaveLength(42);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(226);\n expect(paths.map(p=>rows.filter(r=>r.testId.startsWith('bun:'+p+':')).length)).toEqual([15,15,12]);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.outcomes.length&&r.gaps.length)).toBe(true);\n expect(new Set(rows.flatMap(r=>r.scenarioIds))).toEqual(new Set(ids));\n const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys)).toEqual(ids.map(id=>[id]));\n expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json();\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('30ae497339a8a5bafd44fb3cf0233c70e67f0dc8f34966163f43b8b9173801fe');\n expect(report.mappedDeclarations).toBe(461);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461);\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -13213,7 +13220,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "ba4606510c118655d67446d7b8287c9825d1817f788c43a434af8bb2d37904fa",
+      "sourceSha256": "d80be9dc490573ddc300509694ae2f0e319c07a2c2573a5d04c51ede8d108a04",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model').slice(88),find=(name:string)=>rows.find(r=>r.testId.endsWith(name))!;\n const core=find('all fifteen core fields survive real path save/reopen with exact unrelated payload custody');\n expect(core.caseKeys).toEqual([]);expect(core.gaps.join(' ')).toContain('only title, creator and subject');expect(core.gaps.join(' ')).toContain('relationship and MIME checks occur before save');\n const doc=find('direct title-page and background values persist through path reopen without changing content or unrelated members');\n expect(doc.caseKeys).toEqual([]);expect(doc.gaps.join(' ')).toContain('Table dimensions and stale handles are checked before save');\n const style=find('unresolved direct table style survives path reopen without registry creation or unrelated changes');\n expect(style.caseKeys).toEqual([]);expect(style.gaps.join(' ')).toContain('undefined');expect(style.gaps.join(' ')).toContain('no style resolution or rendered appearance');\n expect(rows.filter(r=>r.testId.includes('output bound')).map(r=>r.caseKeys)).toEqual([[],[],[]]);\n const wrappers=rows.filter(r=>r.caseKeys.length);expect(wrappers.every(r=>r.gaps.join(' ').includes('No save/reopen'))).toBe(true);\n expect(wrappers[0]!.gaps.join(' ')).toContain('cached getter result');expect(wrappers[2]!.gaps.join(' ')).toContain('cached before/after strings');\n}",
       "calls": [
         "core.gaps.join",
@@ -13264,7 +13271,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ba4606510c118655d67446d7b8287c9825d1817f788c43a434af8bb2d37904fa",
+      "sourceSha256": "d80be9dc490573ddc300509694ae2f0e319c07a2c2573a5d04c51ede8d108a04",
       "body": "{\n for(const [i,path]of paths.entries()){\n  const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n  const b=await sample(),index=b.sets[0]!.ledger.mappings.findIndex(r=>r.testId.startsWith('bun:'+path+':'));expect(index).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n  const c=await sample();c.sets[0]!.ledger.mappings.find(r=>r.testId.startsWith('bun:'+path+':'))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');\n  const d=await sample();d.sets[0]!.ledger.mappings.find(r=>r.testId.startsWith('bun:'+path+':'))!.caseKeys=[ids[(i+1)%ids.length]!];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');\n }\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -13307,7 +13314,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ba4606510c118655d67446d7b8287c9825d1817f788c43a434af8bb2d37904fa",
+      "sourceSha256": "d80be9dc490573ddc300509694ae2f0e319c07a2c2573a5d04c51ede8d108a04",
       "body": "{\n for(const path of [...pins,...paths]){\n  const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n  const b=await sample();delete b.sets[0]!.ledger.sourceSha256[path];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n }\n}",
       "calls": [
         "Object.hasOwn",
@@ -16908,8 +16915,8 @@
         "expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path])",
         "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases])",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','formula-references'].includes(m.ledger)))).digest('hex')).toBe('d52b55529483d22ac24547eece2b84becf1da1a4d72ba21a580d7864de807ab8')"
       ],
@@ -16921,8 +16928,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0224b4b150d6754331d553f4bad395863196395c7f211ec21719f2d613a9bf53",
-      "body": "{\n const r=await outcomeMappingReport();for(const d of definitions){const rows=r.mappings.filter(m=>m.ledger===d.name);expect(rows).toHaveLength(d.count);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(d.assertions);expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);}expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','formula-references'].includes(m.ledger)))).digest('hex')).toBe('d52b55529483d22ac24547eece2b84becf1da1a4d72ba21a580d7864de807ab8');\n}",
+      "sourceSha256": "528606365abf3f4d1b14d2b53f1dabeb17d8c9a52f972f8a296f84a69a202758",
+      "body": "{\n const r=await outcomeMappingReport();for(const d of definitions){const rows=r.mappings.filter(m=>m.ledger===d.name);expect(rows).toHaveLength(d.count);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(d.assertions);expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);}expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','formula-references'].includes(m.ledger)))).digest('hex')).toBe('d52b55529483d22ac24547eece2b84becf1da1a4d72ba21a580d7864de807ab8');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -16975,7 +16982,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0224b4b150d6754331d553f4bad395863196395c7f211ec21719f2d613a9bf53",
+      "sourceSha256": "528606365abf3f4d1b14d2b53f1dabeb17d8c9a52f972f8a296f84a69a202758",
       "body": "{\n const r=await outcomeMappingReport(),selection=r.mappings.filter(m=>m.ledger==='docx-paragraph-styles'),authoring=r.mappings.filter(m=>m.ledger==='docx-style-authoring');for(const rows of [selection,authoring]){expect(rows[0]!.gaps.join(' ')).toContain('aggregate');expect(rows[0]!.gaps.join(' ')).toContain('byte reopen');expect(rows[0]!.gaps.join(' ')).toContain('no path save');}expect(selection[3]!.gaps.join(' ')).toContain('live');expect(selection[6]!.gaps.join(' ')).toContain('UTF-16LE only');expect(selection[15]!.outcomes.join(' ')).toContain('disk');expect(selection[15]!.gaps.join(' ')).toContain('text');expect(authoring[2]!.gaps.join(' ')).toContain('new definition');expect(authoring[8]!.gaps.join(' ')).toContain('flags');expect(authoring[10]!.outcomes.join(' ')).toContain('disk');expect(authoring[10]!.caseKeys).toEqual([]);\n}",
       "calls": [
         "authoring.10.outcomes.join",
@@ -17019,7 +17026,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0224b4b150d6754331d553f4bad395863196395c7f211ec21719f2d613a9bf53",
+      "sourceSha256": "528606365abf3f4d1b14d2b53f1dabeb17d8c9a52f972f8a296f84a69a202758",
       "body": "{\n for(const d of definitions){const a=await sample(d);a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample(d);b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample(d);c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const e=await sample(d);e.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-docx-final-section-layout|{\"kind\":\"landscape\"}'];expect(()=>reconcileOutcomeMappingSets(e.inventory,e.sets)).toThrow('case');}\n}",
       "calls": [
         "b.sets.0.ledger.mappings.pop",
@@ -17059,7 +17066,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0224b4b150d6754331d553f4bad395863196395c7f211ec21719f2d613a9bf53",
+      "sourceSha256": "528606365abf3f4d1b14d2b53f1dabeb17d8c9a52f972f8a296f84a69a202758",
       "body": "{\n for(const d of definitions)for(const p of [d.path,...d.sources,d.canonical]){const a=await sample(d);expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample(d);delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -17098,7 +17105,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0224b4b150d6754331d553f4bad395863196395c7f211ec21719f2d613a9bf53",
+      "sourceSha256": "528606365abf3f4d1b14d2b53f1dabeb17d8c9a52f972f8a296f84a69a202758",
       "body": "{\n for(const d of definitions){const a=await sample(d),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();}\n}",
       "calls": [
         "JSON.stringify",
@@ -19073,8 +19080,8 @@
         "expect(ledger).toBeDefined()",
         "expect(ledger!.scopePaths).toEqual(paths)",
         "expect(ledger!.mappedDeclarations).toBe(31)",
-        "expect(report.mappedDeclarations).toBe(446)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446)",
+        "expect(report.mappedDeclarations).toBe(461)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461)",
         "expect(report.executionCredit).toBe(false)",
         "expect(report.runtimeLeafCount).toBeNull()",
         "expect(rows).toHaveLength(31)",
@@ -19084,8 +19091,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c72056f8a0d6abc3a51ffec443bdb9a6ec6e2962d68a530826b18eea3e8cd93e",
-      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='formula-references');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(31);expect(report.mappedDeclarations).toBe(446);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446);expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();const rows=report.mappings.filter(m=>m.ledger==='formula-references');expect(rows).toHaveLength(31);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.assertions.length&&m.outcomes.length&&m.gaps.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds)).size).toBe(9);\n}",
+      "sourceSha256": "8ccd0feeedc2716c8c702471b3364b7ba23e93550ce6d1c25751845946060602",
+      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='formula-references');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(31);expect(report.mappedDeclarations).toBe(461);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461);expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();const rows=report.mappings.filter(m=>m.ledger==='formula-references');expect(rows).toHaveLength(31);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.assertions.length&&m.outcomes.length&&m.gaps.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds)).size).toBe(9);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -19124,7 +19131,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c72056f8a0d6abc3a51ffec443bdb9a6ec6e2962d68a530826b18eea3e8cd93e",
+      "sourceSha256": "8ccd0feeedc2716c8c702471b3364b7ba23e93550ce6d1c25751845946060602",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='formula-references');\n const wrappers=rows.filter(m=>m.testId.includes('canonical'));expect(wrappers).toHaveLength(3);expect(wrappers.map(m=>m.caseKeys.length)).toEqual([13,19,13]);expect(wrappers.every(m=>m.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const analyzer=rows.find(m=>m.testId.includes('xlsx-formula-analysis.test.ts:finite expression matrix'))!;expect(analyzer.caseKeys).toEqual([]);expect(analyzer.gaps.join(' ')).toContain('does not call the remapper');\n const remap=rows.find(m=>m.testId.includes('xlsx-formula-remap.test.ts:finite 288-expression'))!;expect(remap.caseKeys).toEqual(['@id-xlsx-go-static-reference-properties']);expect(remap.gaps.join(' ')).toContain('not a fuzz campaign');\n const exact=rows.find(m=>m.testId.endsWith('static insertions rewrite exact shared expressions without touching literals or unrelated sheets'))!;expect(exact.caseKeys).toHaveLength(5);\n const limits=rows.filter(m=>m.testId.includes('output growth')||m.testId.includes('excessive input'));expect(limits.every(m=>m.caseKeys.length===0)).toBe(true);\n}",
       "calls": [
         "analyzer.gaps.join",
@@ -19170,7 +19177,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c72056f8a0d6abc3a51ffec443bdb9a6ec6e2962d68a530826b18eea3e8cd93e",
+      "sourceSha256": "8ccd0feeedc2716c8c702471b3364b7ba23e93550ce6d1c25751845946060602",
       "body": "{\n for(const p of paths){const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(v=>v!==p);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();const index=b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(p));b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');}\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -19211,7 +19218,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c72056f8a0d6abc3a51ffec443bdb9a6ec6e2962d68a530826b18eea3e8cd93e",
+      "sourceSha256": "8ccd0feeedc2716c8c702471b3364b7ba23e93550ce6d1c25751845946060602",
       "body": "{\n for(const p of ['src/xlsx/range.ts','src/xlsx/formula.ts','src/xlsx/formula-remap.ts','tests/acceptance/xlsx-range.ts','tests/acceptance/formula-analysis.ts','tests/acceptance/formula-remap.ts',canonical]){const a=await sample();a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');}\n const a=await sample();a.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-xlsx-go-static-reference-properties'];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('case');const b=await sample();b.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-docx-go-new-empty-body'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scenario');const c=await sample();delete c.sets[0]!.ledger.sourceSha256['src/xlsx/formula-remap.ts'];expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('pin');\n}",
       "calls": [
         "expect",
@@ -19243,7 +19250,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c72056f8a0d6abc3a51ffec443bdb9a6ec6e2962d68a530826b18eea3e8cd93e",
+      "sourceSha256": "8ccd0feeedc2716c8c702471b3364b7ba23e93550ce6d1c25751845946060602",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(r.mappings).toHaveLength(31);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(c=>c.assertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(c=>c.reviewReasons));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(c=>c.deferredAssertions));expect(JSON.stringify(a)).toBe(before);expect(r.mappings.some(m=>m.reviewReasons.length>0)).toBe(true);\n}",
       "calls": [
         "JSON.stringify",
@@ -19283,7 +19290,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c72056f8a0d6abc3a51ffec443bdb9a6ec6e2962d68a530826b18eea3e8cd93e",
+      "sourceSha256": "8ccd0feeedc2716c8c702471b3364b7ba23e93550ce6d1c25751845946060602",
       "body": "{\n const {inventory,sets}=await sample(),r=reconcileOutcomeMappingSets(inventory,sets),rows=r.mappings;\n const count=rows.find(m=>m.testId.includes('static formula analysis counts references'))!;expect(count.scenarioIds).toContain('@id-xlsx-go-formula-literal-punctuation');expect(count.caseKeys).toHaveLength(6);expect(count.caseKeys.every(k=>k.startsWith('@id-xlsx-go-formula-analysis-counts|'))).toBe(true);\n const bad=rows.find(m=>m.testId.includes('unsupported or incomplete grammar throws'))!;expect(bad.scenarioIds).toContain('@id-xlsx-go-formula-literal-punctuation');expect(bad.caseKeys).toHaveLength(7);expect(bad.caseKeys.every(k=>k.startsWith('@id-xlsx-go-formula-analysis-refusal|'))).toBe(true);\n const split=rows.filter(m=>m.testId.includes('xlsx-formula-remap.test.ts')&&m.scenarioIds.includes('@id-xlsx-go-static-remap-refusal')&&!m.testId.includes('canonical'));expect(split.length).toBeGreaterThan(0);expect(split.every(m=>m.caseKeys.length===0)).toBe(true);\n expect(rows.filter(m=>m.caseKeys.length)).toHaveLength(9);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(127);\n}",
       "calls": [
         "bad.caseKeys.every",
@@ -19320,8 +19327,8 @@
         "expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path])",
         "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases])",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','formula-references'].includes(m.ledger)))).digest('hex')).toBe('62cd07b9e6b8645d0e55b40a3513ae33738e01681a61c41cab1c193e681d8f56')"
       ],
@@ -19333,8 +19340,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0c5d0e8f2ffac51d2477be212d312e5a97e3f6f8faadbdf757368fb337521356",
-      "body": "{\n const r=await outcomeMappingReport();for(const d of definitions){const rows=r.mappings.filter(m=>m.ledger===d.name);expect(rows).toHaveLength(d.count);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(d.assertions);expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);}expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','formula-references'].includes(m.ledger)))).digest('hex')).toBe('62cd07b9e6b8645d0e55b40a3513ae33738e01681a61c41cab1c193e681d8f56');\n}",
+      "sourceSha256": "b0041feb19a05cfbdf7b756d3f4b434e10ce121323f96d80bf3df85b879ea138",
+      "body": "{\n const r=await outcomeMappingReport();for(const d of definitions){const rows=r.mappings.filter(m=>m.ledger===d.name);expect(rows).toHaveLength(d.count);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(d.assertions);expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);}expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','formula-references'].includes(m.ledger)))).digest('hex')).toBe('62cd07b9e6b8645d0e55b40a3513ae33738e01681a61c41cab1c193e681d8f56');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -19387,7 +19394,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0c5d0e8f2ffac51d2477be212d312e5a97e3f6f8faadbdf757368fb337521356",
+      "sourceSha256": "b0041feb19a05cfbdf7b756d3f4b434e10ce121323f96d80bf3df85b879ea138",
       "body": "{\n const r=await outcomeMappingReport(),boxes=r.mappings.filter(m=>m.ledger==='pptx-text-boxes'),layouts=r.mappings.filter(m=>m.ledger==='docx-page-layout');for(const rows of [boxes,layouts]){expect(rows[0]!.gaps.join(' ')).toContain('aggregate');expect(rows[0]!.gaps.join(' ')).toContain('byte reopen');expect(rows[0]!.gaps.join(' ')).toContain('no path save');}expect(boxes[9]!.gaps.join(' ')).toContain('byte reopen');expect(boxes[10]!.outcomes.join(' ')).toContain('disk');expect(boxes[10]!.gaps.join(' ')).toContain('geometry');expect(layouts[3]!.gaps.join(' ')).toContain('live');expect(layouts[3]!.gaps.join(' ')).toContain('no reopened geometry');expect(layouts[6]!.gaps.join(' ')).toContain('live');expect(layouts[10]!.outcomes.join(' ')).toContain('disk');expect(layouts[10]!.caseKeys).toEqual([]);\n}",
       "calls": [
         "boxes.10.gaps.join",
@@ -19430,7 +19437,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0c5d0e8f2ffac51d2477be212d312e5a97e3f6f8faadbdf757368fb337521356",
+      "sourceSha256": "b0041feb19a05cfbdf7b756d3f4b434e10ce121323f96d80bf3df85b879ea138",
       "body": "{\n for(const d of definitions){const a=await sample(d);a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample(d);b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample(d);c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const e=await sample(d);e.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-xlsx-cell-style-selection|{\"kind\":\"assign\"}'];expect(()=>reconcileOutcomeMappingSets(e.inventory,e.sets)).toThrow('case');}\n}",
       "calls": [
         "b.sets.0.ledger.mappings.pop",
@@ -19470,7 +19477,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0c5d0e8f2ffac51d2477be212d312e5a97e3f6f8faadbdf757368fb337521356",
+      "sourceSha256": "b0041feb19a05cfbdf7b756d3f4b434e10ce121323f96d80bf3df85b879ea138",
       "body": "{\n for(const d of definitions)for(const p of [d.path,...d.sources,d.canonical]){const a=await sample(d);expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample(d);delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -19509,7 +19516,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0c5d0e8f2ffac51d2477be212d312e5a97e3f6f8faadbdf757368fb337521356",
+      "sourceSha256": "b0041feb19a05cfbdf7b756d3f4b434e10ce121323f96d80bf3df85b879ea138",
       "body": "{\n for(const d of definitions){const a=await sample(d),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();}\n}",
       "calls": [
         "JSON.stringify",
@@ -20215,7 +20222,7 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 19,
+      "line": 15,
       "title": "eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
       "suites": [],
       "kind": "test",
@@ -20228,7 +20235,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439",
+      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
       "body": "{\n  const r = await run(); expect(r.failures).toEqual([]); expect(r.counts.cases.passed).toBe(11); expect(r.counts.cases.planned).toBe(3);\n}",
       "calls": [
         "expect",
@@ -20242,43 +20249,47 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 22,
+      "line": 18,
       "title": "changed OPC error-code, message, content and BOM predicates fail",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
-      "assertions": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
       "deferredAssertions": [
         "expect(s.includes(from!)).toBe(true)"
       ],
       "loops": [
         {
-          "line": 23,
-          "expression": "for (const [from, to] of [\n    ['code opc-async-transaction', 'code opc-wrong-code'],\n    ['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ]) failedPredicate(await run(s =>"
+          "line": 19,
+          "expression": "for (const [from, to] of [\n    ['code opc-async-transaction', 'code opc-wrong-code'],\n    ['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439",
-      "body": "{\n  for (const [from, to] of [\n    ['code opc-async-transaction', 'code opc-wrong-code'],\n    ['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ]) failedPredicate(await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); }));\n}",
+      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
+      "body": "{\n  for (const [from, to] of [\n    ['code opc-async-transaction', 'code opc-wrong-code'],\n    ['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ]) { const r=await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "expect",
         "expect().toBe",
-        "failedPredicate",
+        "expect().toBeGreaterThan",
         "run",
         "s.includes",
         "s.replace"
       ],
       "reviewReasons": [
         "body-loop",
-        "deferred-assertion",
-        "helper-or-no-direct-assertion"
+        "deferred-assertion"
       ],
       "unresolved": []
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 31,
+      "line": 30,
       "title": "OPC refusal archives contain the exact background and named mutation",
       "suites": [],
       "kind": "test",
@@ -20296,12 +20307,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 40,
+          "line": 39,
           "expression": "for (let i = 0; i < snapshots.length; i++)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439",
+      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
       "body": "{\n  const { readZip } = await import('../../src/opc/zip.ts');\n  const { parseXml } = await import('../../src/xml/index.ts');\n  const snapshots: Uint8Array[] = [];\n  const checking = bindings.map(b => b.pattern.test('Bun OpcPackage opens its archive bytes') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n    await b.run(c, ...captures);\n    const s = c.state as { archive: Uint8Array }; snapshots.push(s.archive.slice());\n  } } : b);\n  const result = await run(s => s, checking); expect(result.failures).toEqual([]); expect(snapshots).toHaveLength(5);\n  for (let i = 0; i < snapshots.length; i++) {\n    const parts = readZip(snapshots[i]!);\n    const document = i === 0 ? 'word/%66oo.xml' : 'word/document.xml';\n    expect([...parts.keys()]).toEqual(['[Content_Types].xml', '_rels/.rels', document]);\n    const decode = (name: string) => new TextDecoder('utf-8', { fatal: true }).decode(parts.get(name)!);\n    expect(decode(document)).toBe('<?xml version=\"1.0\" encoding=\"UTF-8\"?><document>Alpha</document>');\n    const ct = parseXml(decode('[Content_Types].xml')).root;\n    expect(ct.namespaceURI).toBe('http://schemas.openxmlformats.org/package/2006/content-types');\n    expect(ct.children.map(n => [n.localName, { ...n.attributes }])).toEqual([\n      ['Default', { Extension: 'rels', ContentType: 'application/vnd.openxmlformats-package.relationships+xml' }],\n      ['Default', { Extension: i === 2 ? 'rels' : 'xml', ContentType: 'application/xml' }],\n      ['Override', { PartName: '/' + document, ContentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml' }],\n    ]);\n    const rels = parseXml(decode('_rels/.rels')).root;\n    expect(rels.namespaceURI).toBe('http://schemas.openxmlformats.org/package/2006/relationships');\n    expect(rels.children.map(n => [n.localName, { ...n.attributes }])).toEqual(Array.from({ length: i === 4 ? 2 : 1 }, () => ['Relationship', {\n      Id: 'rId1', Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument',\n      Target: i < 2 ? 'word/%66oo.xml' : i === 3 ? 'word/missing.xml' : 'word/document.xml',\n    }]));\n  }\n}",
       "calls": [
         ".decode",
@@ -20332,84 +20343,100 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 62,
+      "line": 61,
       "title": "OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
-      "assertions": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 76,
+          "line": 75,
           "expression": "for (const [step, mutate] of mutations)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439",
-      "body": "{\n  type State = import('../acceptance/opc-custody.ts').CustodyState;\n  const mutations: [string, (s: State) => void][] = [\n    ['Bun OpcPackage opens its archive bytes', s => { s.error = undefined; s.output = {}; }],\n    ['Bun OpcPackage opens its archive bytes', s => { s.error = new Error('untyped'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.pkg!.set('word/document.xml', '<document>Wrong</document>'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.original![0] = s.original![0]! ^ 1; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member![0] = 0; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member = new Uint8Array([255, 254, 65, 0]); }],\n    ['its transaction is called with an async callback that would replace Alpha with Beta and set a ran flag', s => { s.ran = true; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.transactionResult = {}; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.thenCalls = 1; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.pkg!.set('word/document.xml', '<document>Alpha</document>'); }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); mutate(c.state as State);\n    } } : b);\n    failedPredicate(await run(s => s, corrupt));\n  }\n}",
+      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
+      "body": "{\n  type State = import('../acceptance/opc-custody.ts').CustodyState;\n  const mutations: [string, (s: State) => void][] = [\n    ['Bun OpcPackage opens its archive bytes', s => { s.error = undefined; s.output = {}; }],\n    ['Bun OpcPackage opens its archive bytes', s => { s.error = new Error('untyped'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.pkg!.set('word/document.xml', '<document>Wrong</document>'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.original![0] = s.original![0]! ^ 1; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member![0] = 0; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member = new Uint8Array([255, 254, 65, 0]); }],\n    ['its transaction is called with an async callback that would replace Alpha with Beta and set a ran flag', s => { s.ran = true; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.transactionResult = {}; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.thenCalls = 1; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.pkg!.set('word/document.xml', '<document>Alpha</document>'); }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); mutate(c.state as State);\n    } } : b);\n    const r=await run(s => s, corrupt);\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "b.pattern.test",
         "b.run",
         "bindings.map",
-        "failedPredicate",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
         "mutate",
         "run",
         "s.pkg.set"
       ],
       "reviewReasons": [
-        "body-loop",
-        "helper-or-no-direct-assertion"
+        "body-loop"
       ],
       "unresolved": []
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 84,
+      "line": 85,
       "title": "OPC destination assertions detect overwritten files and replaced symlinks",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
-      "assertions": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 87,
+          "line": 88,
           "expression": "for (const [step, mutate] of [\n    ['the package is saved to the existing destination', async (s: State) =>"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439",
-      "body": "{\n  const { unlink } = await import('node:fs/promises');\n  type State = import('../acceptance/opc-custody.ts').CustodyState;\n  for (const [step, mutate] of [\n    ['the package is saved to the existing destination', async (s: State) => { await Bun.write(s.destination!, 'changed'); }],\n    ['the unchanged package is saved through the symlink path', async (s: State) => { await Bun.write(s.destination!, 'changed'); }],\n    ['the unchanged package is saved through the symlink path', async (s: State) => { await unlink(s.link!); await Bun.write(s.link!, s.original!); }],\n  ] as const) {\n    const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); const s = c.state as State;\n      // The save binding covers both destinations; restrict this mutation to the requested one.\n      if (Boolean(s.link) === step.includes('symlink')) await mutate(s);\n    } } : b);\n    failedPredicate(await run(s => s, corrupt));\n  }\n}",
+      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
+      "body": "{\n  const { unlink } = await import('node:fs/promises');\n  type State = import('../acceptance/opc-custody.ts').CustodyState;\n  for (const [step, mutate] of [\n    ['the package is saved to the existing destination', async (s: State) => { await Bun.write(s.destination!, 'changed'); }],\n    ['the unchanged package is saved through the symlink path', async (s: State) => { await Bun.write(s.destination!, 'changed'); }],\n    ['the unchanged package is saved through the symlink path', async (s: State) => { await unlink(s.link!); await Bun.write(s.link!, s.original!); }],\n  ] as const) {\n    const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); const s = c.state as State;\n      // The save binding covers both destinations; restrict this mutation to the requested one.\n      if (Boolean(s.link) === step.includes('symlink')) await mutate(s);\n    } } : b);\n    const r=await run(s => s, corrupt);\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "Boolean",
         "Bun.write",
         "b.pattern.test",
         "b.run",
         "bindings.map",
-        "failedPredicate",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
         "mutate",
         "run",
         "step.includes",
         "unlink"
       ],
       "reviewReasons": [
-        "body-loop",
-        "helper-or-no-direct-assertion"
+        "body-loop"
       ],
       "unresolved": []
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 101,
+      "line": 104,
       "title": "OPC temporary destinations are cleaned after success and predicate failure",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
         "expect((await run(s => s, checking)).failures).toEqual([])",
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)",
         "expect(paths).toHaveLength(4)",
         "expect(lstat(path)).rejects.toMatchObject({ code: 'ENOENT' })",
         "expect(lstat(join(path, '..'))).rejects.toMatchObject({ code: 'ENOENT' })"
@@ -20417,22 +20444,23 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 110,
+          "line": 115,
           "expression": "for (const path of paths)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "df65678a579adef4006789f8bf7fe56a31f7677d99ae3229ef5ee68ef4603439",
-      "body": "{\n  const { lstat } = await import('node:fs/promises');\n  const paths: string[] = [];\n  const checking = bindings.map(b => b.pattern.test('an existing destination file contains the base package archive bytes') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n    await b.run(c, ...captures); paths.push((c.state as { destination: string }).destination);\n  } } : b);\n  expect((await run(s => s, checking)).failures).toEqual([]);\n  failedPredicate(await run(s => s.replace('message contains Missing target', 'message contains wrong'), checking));\n  expect(paths).toHaveLength(4);\n  for (const path of paths) {\n    await expect(lstat(path)).rejects.toMatchObject({ code: 'ENOENT' });\n    await expect(lstat(join(path, '..'))).rejects.toMatchObject({ code: 'ENOENT' });\n  }\n}",
+      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
+      "body": "{\n  const { lstat } = await import('node:fs/promises');\n  const paths: string[] = [];\n  const checking = bindings.map(b => b.pattern.test('an existing destination file contains the base package archive bytes') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n    await b.run(c, ...captures); paths.push((c.state as { destination: string }).destination);\n  } } : b);\n  expect((await run(s => s, checking)).failures).toEqual([]);\n  const r=await run(s => s.replace('message contains Missing target', 'message contains wrong'), checking);\n  expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n  expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  expect(paths).toHaveLength(4);\n  for (const path of paths) {\n    await expect(lstat(path)).rejects.toMatchObject({ code: 'ENOENT' });\n    await expect(lstat(join(path, '..'))).rejects.toMatchObject({ code: 'ENOENT' });\n  }\n}",
       "calls": [
         "b.pattern.test",
         "b.run",
         "bindings.map",
         "expect",
         "expect().rejects.toMatchObject",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
         "expect().toEqual",
         "expect().toHaveLength",
-        "failedPredicate",
         "join",
         "lstat",
         "paths.push",
@@ -20442,6 +20470,212 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody ledger enumerates 15 declarations and 66 expressions preserving 446 predecessor records",
+      "path": "tests/unit/opc-custody-mappings.test.ts",
+      "line": 5,
+      "title": "OPC custody ledger enumerates 15 declarations and 66 expressions preserving 446 predecessor records",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(rows).toHaveLength(15)",
+        "expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(66)",
+        "expect(r.ledgers.find(l=>l.name==='opc-custody')!.scopePaths).toEqual(paths)",
+        "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([11])",
+        "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
+        "expect(r.runtimeLeafCount).toBeNull()",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>m.ledger!=='opc-custody'))).digest('hex')).toBe('7ca257b76f67bf854ca3d0fde8e5dba35a609f6cbbddbebb9d759abf0f726bcf')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "0259c3410525c39f4a22b775df95236235d207ff2b7d2584522a83120ec05cae",
+      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='opc-custody');expect(rows).toHaveLength(15);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(66);expect(r.ledgers.find(l=>l.name==='opc-custody')!.scopePaths).toEqual(paths);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([11]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>m.ledger!=='opc-custody'))).digest('hex')).toBe('7ca257b76f67bf854ca3d0fde8e5dba35a609f6cbbddbebb9d759abf0f726bcf');\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "JSON.stringify",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "outcomeMappingReport",
+        "r.ledgers.find",
+        "r.mappings.filter",
+        "rows.every",
+        "rows.filter",
+        "rows.filter().map",
+        "rows.reduce"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody descriptions distinguish exact corpus archives native live reads and physical destinations",
+      "path": "tests/unit/opc-custody-mappings.test.ts",
+      "line": 8,
+      "title": "OPC custody descriptions distinguish exact corpus archives native live reads and physical destinations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(rows[0]!.gaps.join(' ')).toContain('relationship target')",
+        "expect(rows[4]!.gaps.join(' ')).toContain('ZIP layer')",
+        "expect(rows[5]!.gaps.join(' ')).toContain('live')",
+        "expect(rows[6]!.outcomes.join(' ')).toContain('disk')",
+        "expect(rows[7]!.gaps.join(' ')).toContain('symlink')",
+        "expect(rows[8]!.gaps.join(' ')).toContain('combined')",
+        "expect(rows[9]!.gaps.join(' ')).toContain('three planned')",
+        "expect(rows[9]!.gaps.join(' ')).toContain('aggregate')",
+        "expect(rows[10]!.gaps.join(' ')).toContain('nested')",
+        "expect(rows[14]!.outcomes.join(' ')).toContain('ENOENT')",
+        "expect(rows.every(m=>!m.scenarioIds.includes('@id-opc-package-transaction-rollback'))).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "0259c3410525c39f4a22b775df95236235d207ff2b7d2584522a83120ec05cae",
+      "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='opc-custody');expect(rows[0]!.gaps.join(' ')).toContain('relationship target');expect(rows[4]!.gaps.join(' ')).toContain('ZIP layer');expect(rows[5]!.gaps.join(' ')).toContain('live');expect(rows[6]!.outcomes.join(' ')).toContain('disk');expect(rows[7]!.gaps.join(' ')).toContain('symlink');expect(rows[8]!.gaps.join(' ')).toContain('combined');expect(rows[9]!.gaps.join(' ')).toContain('three planned');expect(rows[9]!.gaps.join(' ')).toContain('aggregate');expect(rows[10]!.gaps.join(' ')).toContain('nested');expect(rows[14]!.outcomes.join(' ')).toContain('ENOENT');expect(rows.every(m=>!m.scenarioIds.includes('@id-opc-package-transaction-rollback'))).toBe(true);\n}",
+      "calls": [
+        ".mappings.filter",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "m.scenarioIds.includes",
+        "outcomeMappingReport",
+        "rows.0.gaps.join",
+        "rows.10.gaps.join",
+        "rows.14.outcomes.join",
+        "rows.4.gaps.join",
+        "rows.5.gaps.join",
+        "rows.6.outcomes.join",
+        "rows.7.gaps.join",
+        "rows.8.gaps.join",
+        "rows.9.gaps.join",
+        "rows.every"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody scopes exact assertions and unrelated graph-case borrowing refuse",
+      "path": "tests/unit/opc-custody-mappings.test.ts",
+      "line": 11,
+      "title": "OPC custody scopes exact assertions and unrelated graph-case borrowing refuse",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope')",
+        "expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped')",
+        "expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion')",
+        "expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 12,
+          "expression": "for(const p of paths)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "0259c3410525c39f4a22b775df95236235d207ff2b7d2584522a83120ec05cae",
+      "body": "{\n for(const p of paths){const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(x=>x!==p);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.splice(b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(p)),1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.caseKeys=['@id-opc-add-related-part'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');}\n}",
+      "calls": [
+        "a.sets.0.ledger.scopePaths.filter",
+        "b.sets.0.ledger.mappings.findIndex",
+        "b.sets.0.ledger.mappings.splice",
+        "c.sets.0.ledger.mappings.find",
+        "c.sets.0.ledger.mappings.find().assertions.pop",
+        "d.sets.0.ledger.mappings.find",
+        "expect",
+        "expect().toThrow",
+        "m.testId.includes",
+        "reconcileOutcomeMappingSets",
+        "sample"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody source pins independently reject stale or absent suite runtime helper and shared files",
+      "path": "tests/unit/opc-custody-mappings.test.ts",
+      "line": 14,
+      "title": "OPC custody source pins independently reject stale or absent suite runtime helper and shared files",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true)",
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source')",
+        "expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 15,
+          "expression": "for(const p of pins)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "0259c3410525c39f4a22b775df95236235d207ff2b7d2584522a83120ec05cae",
+      "body": "{\n for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
+      "calls": [
+        "Object.hasOwn",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "reconcileOutcomeMappingSets",
+        "sample"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody reconciliation retains direct versus nested assertions original inputs flags and unknown leaves",
+      "path": "tests/unit/opc-custody-mappings.test.ts",
+      "line": 17,
+      "title": "OPC custody reconciliation retains direct versus nested assertions original inputs flags and unknown leaves",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(JSON.stringify(a)).toBe(before)",
+        "expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions))",
+        "expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions))",
+        "expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons))",
+        "expect(r.executionCredit).toBe(false)",
+        "expect(r.runtimeLeafCount).toBeNull()",
+        "expect(r.mappings[10]!.deferredAssertions).toHaveLength(1)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "0259c3410525c39f4a22b775df95236235d207ff2b7d2584522a83120ec05cae",
+      "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();expect(r.mappings[10]!.deferredAssertions).toHaveLength(1);\n}",
+      "calls": [
+        "JSON.stringify",
+        "a.inventory.cases.map",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "r.mappings.map",
+        "reconcileOutcomeMappingSets",
+        "sample"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {
@@ -20459,16 +20693,16 @@
         "expect(rows.every(m=>m.caseKeys.length===0)).toBe(true)",
         "expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids))",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('7a389b0b94229ad767478130ecaa2bf3b77352ff59bf08aeadce8d45070c4541')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "54633a16166bc5ce7951d7e620ba588514de7aaebc2e1975e0951b0afbaf002e",
-      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='opc-graph');expect(rows).toHaveLength(15);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(56);expect(r.ledgers.find(l=>l.name==='opc-graph')!.scopePaths).toEqual(paths);expect(rows.every(m=>m.caseKeys.length===0)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('7a389b0b94229ad767478130ecaa2bf3b77352ff59bf08aeadce8d45070c4541');\n}",
+      "sourceSha256": "0da186fd303682eeebc640cf59f24b9512cb63b14a016ed155ee97125ff9d826",
+      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='opc-graph');expect(rows).toHaveLength(15);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(56);expect(r.ledgers.find(l=>l.name==='opc-graph')!.scopePaths).toEqual(paths);expect(rows.every(m=>m.caseKeys.length===0)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('7a389b0b94229ad767478130ecaa2bf3b77352ff59bf08aeadce8d45070c4541');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -20511,7 +20745,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "54633a16166bc5ce7951d7e620ba588514de7aaebc2e1975e0951b0afbaf002e",
+      "sourceSha256": "0da186fd303682eeebc640cf59f24b9512cb63b14a016ed155ee97125ff9d826",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='opc-graph');expect(rows[0]!.gaps.join(' ')).toContain('byte reopen');expect(rows[0]!.gaps.join(' ')).toContain('new payload');expect(rows[3]!.gaps.join(' ')).toContain('encoding');expect(rows[7]!.gaps.join(' ')).toContain('external');expect(rows[9]!.gaps.join(' ')).toContain('live');expect(rows[11]!.gaps.join(' ')).toContain('ZIP comment');expect(rows[13]!.gaps.join(' ')).toContain('set/delete');expect(rows[14]!.gaps.join(' ')).toContain('custom/payload.bin');expect(rows.every(m=>m.gaps.join(' ').includes('no semantic XML'))).toBe(true);\n}",
       "calls": [
         ".mappings.filter",
@@ -20555,7 +20789,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "54633a16166bc5ce7951d7e620ba588514de7aaebc2e1975e0951b0afbaf002e",
+      "sourceSha256": "0da186fd303682eeebc640cf59f24b9512cb63b14a016ed155ee97125ff9d826",
       "body": "{\n for(const p of paths){const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(x=>x!==p);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.splice(b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(p)),1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.caseKeys=['@id-package-diff-equivalent-xml-and-binary-changes'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');}\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -20596,7 +20830,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "54633a16166bc5ce7951d7e620ba588514de7aaebc2e1975e0951b0afbaf002e",
+      "sourceSha256": "0da186fd303682eeebc640cf59f24b9512cb63b14a016ed155ee97125ff9d826",
       "body": "{\n for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -20630,7 +20864,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "54633a16166bc5ce7951d7e620ba588514de7aaebc2e1975e0951b0afbaf002e",
+      "sourceSha256": "0da186fd303682eeebc640cf59f24b9512cb63b14a016ed155ee97125ff9d826",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         "JSON.stringify",
@@ -20764,7 +20998,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {inventory,features,sources,ledger}=sample();\n inventory.cases.push({...inventory.cases[0]!,id:'bun:elsewhere:unmapped',path:'tests/unit/other.test.ts'});\n const r=reconcileOutcomeMappings(inventory,ledger,features,sources) as any;\n expect(r.mappedDeclarations).toBe(2);expect(r.totalDeclarations).toBe(3);expect(r.unmappedTestIds).toEqual(['bun:elsewhere:unmapped']);expect(r.executionCredit).toBe(false);expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "expect",
@@ -20793,7 +21027,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {inventory,features,sources,ledger}=sample();ledger.mappings.pop();expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Missing');\n ledger.mappings.push(ledger.mappings[0]!);expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Duplicate');\n}",
       "calls": [
         "expect",
@@ -20821,7 +21055,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=sample();a.sources['tests/unit/sample.test.ts']+=' ';expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('source');\n const b=sample();b.ledger.mappings[0]!.assertions=['expect(1).toBe(99)'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('assertion');\n}",
       "calls": [
         "expect",
@@ -20848,7 +21082,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=sample();a.ledger.mappings[0]!.scenarioIds=['@id-absent'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('scenario');\n const b=sample();b.ledger.mappings[0]!.caseKeys=['@id-pptx-mapping-test|{\"kind\":\"absent\"}'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('case');\n const c=sample();c.features.push(c.features[0]!);expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('Duplicate');\n}",
       "calls": [
         "c.features.push",
@@ -20877,7 +21111,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=sample();delete a.ledger.sourceSha256['workflows/pptx/sample.feature'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('pin');\n const b=sample();b.ledger.scopePaths.push('tests/unit/missing.test.ts');expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('scope');\n const c=sample();c.ledger.mappings[0]!.outcomes=[];expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('outcome');\n const d=sample();d.ledger.mappings[0]!.gaps=[];expect(()=>reconcileOutcomeMappings(d.inventory,d.ledger,d.features,d.sources)).toThrow('gap');\n}",
       "calls": [
         "b.ledger.scopePaths.push",
@@ -20905,7 +21139,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=sample();(a.ledger as any).executionCredit=true;expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('credit');\n const b=sample();b.inventory.cases[0]!.reviewReasons.push('body-loop');\n const r=reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources) as any;\n expect(r.mappings[0].reviewReasons).toEqual(['body-loop']);expect(r.runtimeLeafCount).toBe(null);\n}",
       "calls": [
         "b.inventory.cases.0.reviewReasons.push",
@@ -20928,9 +21162,9 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(report.mappedDeclarations).toBe(446)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446)",
-        "expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['docx-anchors',28],['xlsx-comments',19],['xlsx-styles',16],['pptx-text-boxes',11],['docx-page-layout',13],['docx-paragraph-styles',17],['docx-style-authoring',11],['xml-comparison',14],['package-comparison',12],['docx-comments',19],['opc-graph',15],['zip64',15],['zip32',24],['formula-references',31]])",
+        "expect(report.mappedDeclarations).toBe(461)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461)",
+        "expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['docx-anchors',28],['xlsx-comments',19],['xlsx-styles',16],['pptx-text-boxes',11],['docx-page-layout',13],['docx-paragraph-styles',17],['docx-style-authoring',11],['xml-comparison',14],['package-comparison',12],['docx-comments',19],['opc-graph',15],['zip64',15],['zip32',24],['opc-custody',15],['formula-references',31]])",
         "expect(report.mappings[0]!.caseKeys).toHaveLength(21)",
         "expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25)",
         "expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true)"
@@ -20938,8 +21172,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
-      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport();\n expect(report.mappedDeclarations).toBe(446);\n expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446);\n expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['docx-anchors',28],['xlsx-comments',19],['xlsx-styles',16],['pptx-text-boxes',11],['docx-page-layout',13],['docx-paragraph-styles',17],['docx-style-authoring',11],['xml-comparison',14],['package-comparison',12],['docx-comments',19],['opc-graph',15],['zip64',15],['zip32',24],['formula-references',31]]);\n expect(report.mappings[0]!.caseKeys).toHaveLength(21);\n expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);\n expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);\n}",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
+      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport();\n expect(report.mappedDeclarations).toBe(461);\n expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461);\n expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['docx-anchors',28],['xlsx-comments',19],['xlsx-styles',16],['pptx-text-boxes',11],['docx-page-layout',13],['docx-paragraph-styles',17],['docx-style-authoring',11],['xml-comparison',14],['package-comparison',12],['docx-comments',19],['opc-graph',15],['zip64',15],['zip32',24],['opc-custody',15],['formula-references',31]]);\n expect(report.mappings[0]!.caseKeys).toHaveLength(21);\n expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);\n expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -20967,7 +21201,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=sample();a.inventory.cases[0]!.assertions.push('expect(3).toBe(3)');\n expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('assertion');\n}",
       "calls": [
         "a.inventory.cases.0.assertions.push",
@@ -20995,7 +21229,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=sample();a.ledger.mappings[1]!.caseKeys=[a.features[0]!.scenarios[0]!.cases[0]!.identityKey];\n const r=reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources) as any;\n expect(r.mappings[0].linkGranularity).toBe('scenario-only');\n expect(r.mappings[1].linkGranularity).toBe('explicit-case-keys');\n expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "expect",
@@ -21027,7 +21261,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {inventory,sets}=twoSets();inventory.cases.push({...inventory.cases[0]!,id:'bun:outside',path:'tests/unit/outside.test.ts'});\n const r=reconcileOutcomeMappingSets(inventory,sets) as any;\n expect(r.mappedDeclarations).toBe(4);expect(r.totalDeclarations).toBe(5);expect(r.unmappedTestIds).toEqual(['bun:outside']);\n expect(r.ledgers.map((l:any)=>[l.name,l.mappedDeclarations])).toEqual([['first',2],['second',2]]);\n expect(r.mappings.map((m:any)=>m.ledger)).toEqual(['first','first','second','second']);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBe(null);\n}",
       "calls": [
         "expect",
@@ -21057,7 +21291,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=twoSets();a.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-docx-second-test'];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scenario');\n const b=twoSets();delete b.sets[0]!.ledger.sourceSha256['workflows/pptx/sample.feature'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n}",
       "calls": [
         "expect",
@@ -21084,7 +21318,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=twoSets();a.sets[1]!.name='first';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('name');\n const b=twoSets();b.sets[1]={...b.sets[0]!,name:'second'};expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scope');\n const c=twoSets();c.sets[1]!.features=c.sets[0]!.features;c.sets[1]!.sources['workflows/pptx/sample.feature']=feature;c.sets[1]!.ledger.sourceSha256['workflows/pptx/sample.feature']=createHash('sha256').update(feature).digest('hex');c.sets[1]!.ledger.mappings.forEach(m=>m.scenarioIds=['@id-pptx-mapping-test']);expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('scenario');\n}",
       "calls": [
         "c.sets.1.ledger.mappings.forEach",
@@ -21115,7 +21349,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=twoSets();expect(()=>reconcileOutcomeMappingSets(a.inventory,[])).toThrow('ledger');\n a.sets[0]!.expectedScopePaths.push('tests/unit/required.test.ts');expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n const b=twoSets();b.sets.forEach((s,i)=>{s.sources['shared.ts']=String(i);s.ledger.sourceSha256['shared.ts']=createHash('sha256').update(String(i)).digest('hex');});expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('source');\n}",
       "calls": [
         "String",
@@ -21148,7 +21382,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {inventory,sets}=twoSets();\n sets.forEach(s=>{s.sources['shared.ts']='shared';s.ledger.sourceSha256['shared.ts']=createHash('sha256').update('shared').digest('hex');});\n const before=JSON.stringify(sets),first=reconcileOutcomeMappings(inventory,sets[0]!.ledger,sets[0]!.features,sets[0]!.sources),report=reconcileOutcomeMappingSets(inventory,sets);\n expect(report.sourceSha256['shared.ts']).toBe(sets[0]!.ledger.sourceSha256['shared.ts']!);\n expect(report.mappings.filter(m=>m.ledger==='first').map(({ledger,...row})=>row)).toEqual(first.mappings);\n expect(JSON.stringify(sets)).toBe(before);\n}",
       "calls": [
         "JSON.stringify",
@@ -21182,7 +21416,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {inventory,sets}=twoSets();sets[0]!.ledger.mappings[0]!.caseKeys=[sets[1]!.features[0]!.scenarios[0]!.cases[0]!.identityKey];\n expect(()=>reconcileOutcomeMappingSets(inventory,sets)).toThrow('case');\n}",
       "calls": [
         "expect",
@@ -21210,7 +21444,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {mkdtemp,rm,mkdir,writeFile}=await import('node:fs/promises'),{tmpdir}=await import('node:os'),{join}=await import('node:path'),{inventoryNativeTests}=await import('../../scripts/test-inventory.ts');\n const root=await mkdtemp(join(tmpdir(),'bun-unresolved-outcomes-'));\n try{\n  await mkdir(join(root,'tests/unit'),{recursive:true});\n  await writeFile(join(root,'tests/unit/hidden.test.ts'),`import {describe} from 'bun:test'; const register=()=>{}; describe('hidden',register);`);\n  const native=await inventoryNativeTests(root);expect(native.unresolved.length).toBeGreaterThan(0);expect(native.cases).toHaveLength(0);\n  const a=sample(),inventory={cases:a.inventory.cases,unresolved:native.unresolved};\n  expect(()=>reconcileOutcomeMappings(inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved');\n  expect(()=>reconcileOutcomeMappingSets(inventory,[{name:'valid',expectedScopePaths:a.ledger.scopePaths,ledger:a.ledger,features:a.features,sources:a.sources}])).toThrow('Unresolved');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "expect",
@@ -21245,7 +21479,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const a=sample();a.inventory.cases[0]!.unresolved.push('unsupported registration');\n expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved');\n}",
       "calls": [
         "a.inventory.cases.0.unresolved.push",
@@ -21280,7 +21514,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport(),xml=report.mappings.filter(m=>m.ledger==='xml-values');\n expect(xml).toHaveLength(13);\n const lookup=xml.find(m=>m.testId.endsWith('expanded attribute lookup honours aliases, local rebinding and unqualified attributes'))!;\n expect(lookup.scenarioIds).toEqual(['@id-xml-expanded-attribute-lookup','@id-xml-immutable-namespace-metadata']);\n expect(lookup.caseKeys).toEqual([]);expect(lookup.gaps.join(' ')).toContain('not the dedicated canonical metadata input');\n const edits=xml.filter(m=>m.scenarioIds.includes('@id-xml-apply-edits'));\n expect(edits).toHaveLength(2);expect(edits.every(m=>m.caseKeys.length===0&&m.status==='partial')).toBe(true);\n const implicit=xml.find(m=>m.scenarioIds.includes('@id-xml-implicit-xml-prefix'))!;\n expect(implicit.assertions).toContain(\"expect(doc.root.attributeNamespaces['xml:lang']).toBe(XML_NS)\");\n expect(implicit.assertions).toContain(\"expect(attribute(doc.root, 'lang', XML_NS)).toBe('en')\");\n expect(implicit.assertions.some(a=>a.startsWith('expect(XML_NS)'))).toBe(false);\n expect(xml.every(m=>m.executionCredit===false&&m.gaps.length>0)).toBe(true);\n}",
       "calls": [
         "a.startsWith",
@@ -21325,7 +21559,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "301e6e3c4f6e62ebcb13864cd499304cd964fed2906767d9eb1440ff04e169ff",
+      "sourceSha256": "27f0c8aec748f91f690ed45912bfdd44fc2f92f54fe687bb8c3bcc5f072576ac",
       "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='pptx-core').slice(0,6);\n expect(rows).toHaveLength(6);\n expect(rows[0]!.scenarioIds).toHaveLength(4);expect(rows[0]!.assertions).toHaveLength(3);\n expect(rows[0]!.gaps.join(' ')).toContain('aggregate status and counts');\n const cross=rows.find(m=>m.testId.endsWith('replaces exact anchored text across runs and preserves untouched members'))!;\n expect(cross.gaps.join(' ')).toContain('Only two unrelated saved members');\n const noop=rows.find(m=>m.scenarioIds.includes('@id-pptx-bun-open-save-noop'))!;\n expect(noop.caseKeys).toEqual(['@id-pptx-bun-open-save-noop']);\n expect(noop.gaps.join(' ')).toContain('byte-open disk save');\n expect(rows.every(m=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n expect(rows.flatMap(m=>m.scenarioIds).some(id=>id.includes('go-notes')||id.includes('slide-order'))).toBe(false);\n}",
       "calls": [
         "cross.gaps.join",
@@ -22369,78 +22603,100 @@
       ],
       "kind": "test",
       "lifecycle": "normal",
-      "assertions": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-part-name-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"Noncanonical part name\")",
+        "expect((error as OoxmlError).code).toBe(\"opc-target-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"Percent-encoded\")"
+      ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
-      "body": "{\n    await expectOpcErrorAsync(\n      OpcPackage.open(createPackageBytes({ documentName: \"word/%66oo.xml\" })),\n      \"opc-part-name-invalid\",\n      \"Noncanonical part name\",\n    );\n\n    await expectOpcErrorAsync(\n      OpcPackage.open(createPackageBytes({ relTarget: \"word/%66oo.xml\" })),\n      \"opc-target-invalid\",\n      \"Percent-encoded\",\n    );\n  }",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
+      "body": "{\n    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({ documentName: \"word/%66oo.xml\" })), \"opc-part-name-invalid\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-part-name-invalid\");\n    expect((error as OoxmlError).message).toContain(\"Noncanonical part name\"); }\n\n    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({ relTarget: \"word/%66oo.xml\" })), \"opc-target-invalid\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-target-invalid\");\n    expect((error as OoxmlError).message).toContain(\"Percent-encoded\"); }\n  }",
       "calls": [
         "OpcPackage.open",
+        "captureOpcErrorAsync",
         "createPackageBytes",
-        "expectOpcErrorAsync"
+        "expect",
+        "expect().toBe",
+        "expect().toBeInstanceOf",
+        "expect().toContain"
       ],
-      "reviewReasons": [
-        "helper-or-no-direct-assertion"
-      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {
       "id": "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
       "path": "tests/unit/package.test.ts",
-      "line": 43,
+      "line": 41,
       "title": "validates content-type metadata",
       "suites": [
         "OpcPackage"
       ],
       "kind": "test",
       "lifecycle": "normal",
-      "assertions": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-content-types-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"Duplicate/missing default extension\")"
+      ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
-      "body": "{\n    await expectOpcErrorAsync(\n      OpcPackage.open(createPackageBytes({\n        contentTypesXml:\n          `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`\n          + `<Types xmlns=\"${CONTENT_TYPES_NS}\">`\n          + `<Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/>`\n          + `<Default Extension=\"rels\" ContentType=\"application/xml\"/>`\n          + `<Override PartName=\"/${DOCUMENT_PART}\" ContentType=\"${MAIN_CONTENT_TYPE}\"/>`\n          + `</Types>`,\n      })),\n      \"opc-content-types-invalid\",\n      \"Duplicate/missing default extension\",\n    );\n  }",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
+      "body": "{\n    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({\n        contentTypesXml:\n          `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`\n          + `<Types xmlns=\"${CONTENT_TYPES_NS}\">`\n          + `<Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/>`\n          + `<Default Extension=\"rels\" ContentType=\"application/xml\"/>`\n          + `<Override PartName=\"/${DOCUMENT_PART}\" ContentType=\"${MAIN_CONTENT_TYPE}\"/>`\n          + `</Types>`,\n      })), \"opc-content-types-invalid\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-content-types-invalid\");\n    expect((error as OoxmlError).message).toContain(\"Duplicate/missing default extension\"); }\n  }",
       "calls": [
         "OpcPackage.open",
+        "captureOpcErrorAsync",
         "createPackageBytes",
-        "expectOpcErrorAsync"
+        "expect",
+        "expect().toBe",
+        "expect().toBeInstanceOf",
+        "expect().toContain"
       ],
-      "reviewReasons": [
-        "helper-or-no-direct-assertion"
-      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {
       "id": "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
       "path": "tests/unit/package.test.ts",
-      "line": 59,
+      "line": 56,
       "title": "rejects missing and duplicate OPC relationship references",
       "suites": [
         "OpcPackage"
       ],
       "kind": "test",
       "lifecycle": "normal",
-      "assertions": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-relationship-target-missing\")",
+        "expect((error as OoxmlError).message).toContain(\"Missing target\")",
+        "expect((error as OoxmlError).code).toBe(\"opc-relationship-duplicate\")",
+        "expect((error as OoxmlError).message).toContain(\"Duplicate relationship id\")"
+      ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
-      "body": "{\n    await expectOpcErrorAsync(\n      OpcPackage.open(createPackageBytes({ relTarget: \"word/missing.xml\" })),\n      \"opc-relationship-target-missing\",\n      \"Missing target\",\n    );\n\n    await expectOpcErrorAsync(\n      OpcPackage.open(createPackageBytes({\n        rootRelationshipsXml:\n          `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`\n          + `<Relationships xmlns=\"${RELATIONSHIPS_NS}\">`\n          + `<Relationship Id=\"rId1\" Type=\"${OFFICE_DOCUMENT_REL}\" Target=\"${DOCUMENT_PART}\"/>`\n          + `<Relationship Id=\"rId1\" Type=\"${OFFICE_DOCUMENT_REL}\" Target=\"${DOCUMENT_PART}\"/>`\n          + `</Relationships>`,\n      })),\n      \"opc-relationship-duplicate\",\n      \"Duplicate relationship id\",\n    );\n  }",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
+      "body": "{\n    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({ relTarget: \"word/missing.xml\" })), \"opc-relationship-target-missing\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-relationship-target-missing\");\n    expect((error as OoxmlError).message).toContain(\"Missing target\"); }\n\n    { const error = await captureOpcErrorAsync(OpcPackage.open(createPackageBytes({\n        rootRelationshipsXml:\n          `<?xml version=\"1.0\" encoding=\"UTF-8\"?>`\n          + `<Relationships xmlns=\"${RELATIONSHIPS_NS}\">`\n          + `<Relationship Id=\"rId1\" Type=\"${OFFICE_DOCUMENT_REL}\" Target=\"${DOCUMENT_PART}\"/>`\n          + `<Relationship Id=\"rId1\" Type=\"${OFFICE_DOCUMENT_REL}\" Target=\"${DOCUMENT_PART}\"/>`\n          + `</Relationships>`,\n      })), \"opc-relationship-duplicate\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-relationship-duplicate\");\n    expect((error as OoxmlError).message).toContain(\"Duplicate relationship id\"); }\n  }",
       "calls": [
         "OpcPackage.open",
+        "captureOpcErrorAsync",
         "createPackageBytes",
-        "expectOpcErrorAsync"
+        "expect",
+        "expect().toBe",
+        "expect().toBeInstanceOf",
+        "expect().toContain"
       ],
-      "reviewReasons": [
-        "helper-or-no-direct-assertion"
-      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {
       "id": "bun:tests/unit/package.test.ts:OpcPackage / returns detached copies and keeps custody of opened source bytes",
       "path": "tests/unit/package.test.ts",
-      "line": 80,
+      "line": 75,
       "title": "returns detached copies and keeps custody of opened source bytes",
       "suites": [
         "OpcPackage"
@@ -22454,7 +22710,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
       "body": "{\n    const source = createPackageBytes();\n    const original = source.slice();\n    const pkg = await OpcPackage.open(source);\n\n    source.fill(0);\n    const first = pkg.get(DOCUMENT_PART)!;\n    first.fill(0);\n\n    expect(UTF8_DECODER.decode(pkg.get(DOCUMENT_PART)!)).toContain(\"Alpha\");\n    expect(pkg.toBytes()).toEqual(original);\n  }",
       "calls": [
         "OpcPackage.open",
@@ -22475,7 +22731,7 @@
     {
       "id": "bun:tests/unit/package.test.ts:OpcPackage / preserves UTF-16 XML encoding when string edits are written back",
       "path": "tests/unit/package.test.ts",
-      "line": 93,
+      "line": 88,
       "title": "preserves UTF-16 XML encoding when string edits are written back",
       "suites": [
         "OpcPackage"
@@ -22490,7 +22746,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
       "body": "{\n    const utf16Document = encodeUtf16Le(\n      `<?xml version=\"1.0\" encoding=\"UTF-16\"?><document>Alpha</document>`,\n    );\n    const pkg = await OpcPackage.open(createPackageBytes({ documentBytes: utf16Document }));\n\n    pkg.set(DOCUMENT_PART, pkg.text(DOCUMENT_PART).replace(\"Alpha\", \"Beta\"));\n\n    const saved = readZip(pkg.toBytes()).get(DOCUMENT_PART)!;\n    expect([...saved.slice(0, 2)]).toEqual([0xff, 0xfe]);\n    expect(UTF16LE_DECODER.decode(saved)).toContain(\"Beta\");\n    expect(UTF16LE_DECODER.decode(saved)).toContain('encoding=\"UTF-16\"');\n  }",
       "calls": [
         "OpcPackage.open",
@@ -22514,7 +22770,7 @@
     {
       "id": "bun:tests/unit/package.test.ts:OpcPackage / rejects async transaction callbacks before they run and does not special-case thenables",
       "path": "tests/unit/package.test.ts",
-      "line": 107,
+      "line": 102,
       "title": "rejects async transaction callbacks before they run and does not special-case thenables",
       "suites": [
         "OpcPackage"
@@ -22522,6 +22778,9 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-async-transaction\")",
+        "expect((error as OoxmlError).message).toContain(\"synchronous edits\")",
         "expect(ran).toBe(false)",
         "expect(pkg.text(DOCUMENT_PART)).toContain(\"Alpha\")",
         "expect(result).toBe(thenable)",
@@ -22530,15 +22789,16 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
-      "body": "{\n    const pkg = await OpcPackage.open(createPackageBytes());\n    let ran = false;\n\n    expectOpcErrorSync(\n      () => pkg.transaction(async () => {\n        ran = true;\n        pkg.set(DOCUMENT_PART, `<?xml version=\"1.0\" encoding=\"UTF-8\"?><document>Beta</document>`);\n      }),\n      \"opc-async-transaction\",\n      \"synchronous edits\",\n    );\n\n    expect(ran).toBe(false);\n    expect(pkg.text(DOCUMENT_PART)).toContain(\"Alpha\");\n\n    const thenable = { then: () => { throw new Error(\"must not be awaited\"); } };\n    const result = pkg.transaction(() => {\n      pkg.set(DOCUMENT_PART, `<?xml version=\"1.0\" encoding=\"UTF-8\"?><document>Beta</document>`);\n      return thenable;\n    });\n\n    expect(result).toBe(thenable);\n    expect(pkg.text(DOCUMENT_PART)).toContain(\"Beta\");\n  }",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
+      "body": "{\n    const pkg = await OpcPackage.open(createPackageBytes());\n    let ran = false;\n\n    { const error = captureOpcErrorSync(() => pkg.transaction(async () => {\n        ran = true;\n        pkg.set(DOCUMENT_PART, `<?xml version=\"1.0\" encoding=\"UTF-8\"?><document>Beta</document>`);\n      }), \"opc-async-transaction\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-async-transaction\");\n    expect((error as OoxmlError).message).toContain(\"synchronous edits\"); }\n\n    expect(ran).toBe(false);\n    expect(pkg.text(DOCUMENT_PART)).toContain(\"Alpha\");\n\n    const thenable = { then: () => { throw new Error(\"must not be awaited\"); } };\n    const result = pkg.transaction(() => {\n      pkg.set(DOCUMENT_PART, `<?xml version=\"1.0\" encoding=\"UTF-8\"?><document>Beta</document>`);\n      return thenable;\n    });\n\n    expect(result).toBe(thenable);\n    expect(pkg.text(DOCUMENT_PART)).toContain(\"Beta\");\n  }",
       "calls": [
         "OpcPackage.open",
+        "captureOpcErrorSync",
         "createPackageBytes",
         "expect",
         "expect().toBe",
+        "expect().toBeInstanceOf",
         "expect().toContain",
-        "expectOpcErrorSync",
         "pkg.set",
         "pkg.text",
         "pkg.transaction"
@@ -22549,7 +22809,7 @@
     {
       "id": "bun:tests/unit/package.test.ts:OpcPackage / save refuses invalid packages without touching an existing target",
       "path": "tests/unit/package.test.ts",
-      "line": 133,
+      "line": 127,
       "title": "save refuses invalid packages without touching an existing target",
       "suites": [
         "OpcPackage"
@@ -22557,22 +22817,28 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-relationship-target-missing\")",
+        "expect((error as OoxmlError).message).toContain(\"Missing target\")",
         "expect([...await Bun.file(path).bytes()]).toEqual([...bytes])"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
-      "body": "{\n    const bytes = createPackageBytes();\n    const root = await tempRoot();\n    const path = join(root, \"existing.docx\");\n    await Bun.write(path, bytes);\n\n    const pkg = await OpcPackage.open(bytes);\n    pkg.delete(DOCUMENT_PART);\n\n    await expectOpcErrorAsync(pkg.save(path), \"opc-relationship-target-missing\", \"Missing target\");\n    expect([...await Bun.file(path).bytes()]).toEqual([...bytes]);\n  }",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
+      "body": "{\n    const bytes = createPackageBytes();\n    const root = await tempRoot();\n    const path = join(root, \"existing.docx\");\n    await Bun.write(path, bytes);\n\n    const pkg = await OpcPackage.open(bytes);\n    pkg.delete(DOCUMENT_PART);\n\n    { const error = await captureOpcErrorAsync(pkg.save(path), \"opc-relationship-target-missing\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-relationship-target-missing\");\n    expect((error as OoxmlError).message).toContain(\"Missing target\"); }\n    expect([...await Bun.file(path).bytes()]).toEqual([...bytes]);\n  }",
       "calls": [
         "Bun.file",
         "Bun.file().bytes",
         "Bun.write",
         "OpcPackage.open",
+        "captureOpcErrorAsync",
         "createPackageBytes",
         "expect",
+        "expect().toBe",
+        "expect().toBeInstanceOf",
+        "expect().toContain",
         "expect().toEqual",
-        "expectOpcErrorAsync",
         "join",
         "pkg.delete",
         "pkg.save",
@@ -22584,7 +22850,7 @@
     {
       "id": "bun:tests/unit/package.test.ts:OpcPackage / refuses symlink save destinations",
       "path": "tests/unit/package.test.ts",
-      "line": 146,
+      "line": 143,
       "title": "refuses symlink save destinations",
       "suites": [
         "OpcPackage"
@@ -22592,22 +22858,28 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-symlink-destination\")",
+        "expect((error as OoxmlError).message).toContain(\"Symlink\")",
         "expect([...await Bun.file(target).bytes()]).toEqual([...bytes])"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
-      "body": "{\n    const bytes = createPackageBytes();\n    const root = await tempRoot();\n    const target = join(root, \"target.docx\");\n    const link = join(root, \"target-link.docx\");\n    await Bun.write(target, bytes);\n    await symlink(target, link);\n\n    const pkg = await OpcPackage.open(bytes);\n\n    await expectOpcErrorAsync(pkg.save(link), \"opc-symlink-destination\", \"Symlink\");\n    expect([...await Bun.file(target).bytes()]).toEqual([...bytes]);\n  }",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
+      "body": "{\n    const bytes = createPackageBytes();\n    const root = await tempRoot();\n    const target = join(root, \"target.docx\");\n    const link = join(root, \"target-link.docx\");\n    await Bun.write(target, bytes);\n    await symlink(target, link);\n\n    const pkg = await OpcPackage.open(bytes);\n\n    { const error = await captureOpcErrorAsync(pkg.save(link), \"opc-symlink-destination\");\n    expect(error).toBeInstanceOf(OoxmlError);\n    expect((error as OoxmlError).code).toBe(\"opc-symlink-destination\");\n    expect((error as OoxmlError).message).toContain(\"Symlink\"); }\n    expect([...await Bun.file(target).bytes()]).toEqual([...bytes]);\n  }",
       "calls": [
         "Bun.file",
         "Bun.file().bytes",
         "Bun.write",
         "OpcPackage.open",
+        "captureOpcErrorAsync",
         "createPackageBytes",
         "expect",
+        "expect().toBe",
+        "expect().toBeInstanceOf",
+        "expect().toContain",
         "expect().toEqual",
-        "expectOpcErrorAsync",
         "join",
         "pkg.save",
         "symlink",
@@ -22638,7 +22910,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "02c5837eeb0e95e65a85c4eea22996528f6300ef6fc49f3b68f330770bc299ca",
+      "sourceSha256": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
       "body": "{\n    const fixtures = fixtureArchives();\n    expect(fixtures).toHaveLength(EXPECTED_FIXTURE_ARCHIVE_COUNT);\n\n    for (const path of fixtures) {\n      const original = Uint8Array.from(await Bun.file(path).bytes());\n      const pkg = await OpcPackage.open(original);\n      expect(pkg.toBytes()).toEqual(original);\n    }\n  }",
       "calls": [
         "Bun.file",
@@ -23585,8 +23857,8 @@
         "expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(109)",
         "expect(paths.slice(1).map(p=>rows.filter(r=>r.testId.includes(p)).length)).toEqual([14,13])",
         "expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true)",
-        "expect(report.mappedDeclarations).toBe(446)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446)",
+        "expect(report.mappedDeclarations).toBe(461)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461)",
         "expect(report.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('1cc69f5444a96f8831041d2609baef34cac2e649aa61f133b6a1733e982a47ee')",
         "expect(exact.map(r=>r.caseKeys.length)).toEqual([8,1])",
@@ -23595,8 +23867,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a57df99730da8b91c9bd28c69e677f4c9c95cfdb0bed7e76fccc9ecbd99718cb",
-      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='pptx-core')!;expect(ledger.scopePaths).toEqual(paths);expect(ledger.mappedDeclarations).toBe(33);\n const rows=report.mappings.filter(r=>r.ledger==='pptx-core').slice(6);expect(rows).toHaveLength(27);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(109);expect(paths.slice(1).map(p=>rows.filter(r=>r.testId.includes(p)).length)).toEqual([14,13]);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true);expect(report.mappedDeclarations).toBe(446);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446);expect(report.runtimeLeafCount).toBeNull();\n const raw=await Bun.file('docs/behaviors/pptx-core-mappings.json').json();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('1cc69f5444a96f8831041d2609baef34cac2e649aa61f133b6a1733e982a47ee');\n const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys.length)).toEqual([8,1]);expect(exact.every(r=>r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n}",
+      "sourceSha256": "4997d60c12411c9a48302bd4ccc4c1731106aa399df88f364ec078dbb83aa51e",
+      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='pptx-core')!;expect(ledger.scopePaths).toEqual(paths);expect(ledger.mappedDeclarations).toBe(33);\n const rows=report.mappings.filter(r=>r.ledger==='pptx-core').slice(6);expect(rows).toHaveLength(27);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(109);expect(paths.slice(1).map(p=>rows.filter(r=>r.testId.includes(p)).length)).toEqual([14,13]);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true);expect(report.mappedDeclarations).toBe(461);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461);expect(report.runtimeLeafCount).toBeNull();\n const raw=await Bun.file('docs/behaviors/pptx-core-mappings.json').json();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('1cc69f5444a96f8831041d2609baef34cac2e649aa61f133b6a1733e982a47ee');\n const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys.length)).toEqual([8,1]);expect(exact.every(r=>r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -23654,7 +23926,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a57df99730da8b91c9bd28c69e677f4c9c95cfdb0bed7e76fccc9ecbd99718cb",
+      "sourceSha256": "4997d60c12411c9a48302bd4ccc4c1731106aa399df88f364ec078dbb83aa51e",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(r=>r.ledger==='pptx-core').slice(6),find=(suffix:string)=>rows.find(r=>r.testId.endsWith(suffix))!;\n const splice=find('existing notes replacement changes only its notes payload and reopens exact text');expect(splice.caseKeys).toEqual([]);expect(splice.gaps.join(' ')).toContain('byte reopen, not the required new path');\n const invalid=find('foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target');expect(invalid.caseKeys).toEqual([]);expect(invalid.gaps.join(' ')).toContain('no raw FF input');expect(invalid.gaps.join(' ')).toContain('other session archive is not compared');\n const multiline=find('multiline uses only first-run template and preserves boundary empty paragraphs');expect(multiline.caseKeys).toEqual([]);expect(multiline.gaps.join(' ')).toContain('no direct four-paragraph count');\n const templates=find('multiline copies selected paragraph and first-run property fragments');expect(templates.gaps.join(' ')).toContain('b=\"1\" differs from canonical b=\"0\"');\n const saved=find('UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member');expect(saved.caseKeys).toEqual([]);expect(saved.outcomes.join(' ')).toContain('real path save/reopen');expect(saved.gaps.join(' ')).toContain('does not compare an exact one-leaf lexical splice');\n const late=find('late protection and unsupported notes topology refuse byte no-ops without destructive repair');expect(late.gaps.join(' ')).toContain('stale-source checks may reject before topology or protection validation');\n const compound=find('canonical foreign invalid-byte and no-op case executes all four refusals and exact archive custody');expect(compound.gaps.join(' ')).toContain('string entry point');expect(compound.gaps.join(' ')).toContain('only the FF error code');\n}",
       "calls": [
         ".mappings.filter",
@@ -23701,7 +23973,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a57df99730da8b91c9bd28c69e677f4c9c95cfdb0bed7e76fccc9ecbd99718cb",
+      "sourceSha256": "4997d60c12411c9a48302bd4ccc4c1731106aa399df88f364ec078dbb83aa51e",
       "body": "{\n for(const path of paths.slice(1)){\n  const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n  const b=await sample(),index=b.sets[0]!.ledger.mappings.findIndex(r=>r.testId.includes(path));expect(index).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n  const c=await sample();c.sets[0]!.ledger.mappings.find(r=>r.testId.includes(path))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');\n  const d=await sample();d.sets[0]!.ledger.mappings.find(r=>r.testId.includes(path))!.caseKeys=['@id-pptx-bun-open-save-noop'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');\n }\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -23744,7 +24016,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a57df99730da8b91c9bd28c69e677f4c9c95cfdb0bed7e76fccc9ecbd99718cb",
+      "sourceSha256": "4997d60c12411c9a48302bd4ccc4c1731106aa399df88f364ec078dbb83aa51e",
       "body": "{\n for(const path of [...pins,...paths.slice(1)]){\n  const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n  const b=await sample();delete b.sets[0]!.ledger.sourceSha256[path];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n }\n}",
       "calls": [
         "Object.hasOwn",
@@ -23780,7 +24052,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a57df99730da8b91c9bd28c69e677f4c9c95cfdb0bed7e76fccc9ecbd99718cb",
+      "sourceSha256": "4997d60c12411c9a48302bd4ccc4c1731106aa399df88f364ec078dbb83aa51e",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),report=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);\n expect(report.mappings.map(r=>r.assertions)).toEqual(a.inventory.cases.map(r=>r.assertions));expect(report.mappings.map(r=>r.reviewReasons)).toEqual(a.inventory.cases.map(r=>r.reviewReasons));expect(report.mappings.map(r=>r.deferredAssertions)).toEqual(a.inventory.cases.map(r=>r.deferredAssertions));expect(report.executionCredit).toBe(false);\n const row=report.mappings.find(r=>r.testId.endsWith('compound notes assertions detect each missing refusal, wrong decoding error and changed archive'))!;expect(row.caseKeys).toEqual([]);expect(row.gaps.join(' ')).toContain('Control-only');\n}",
       "calls": [
         "JSON.stringify",
@@ -29537,15 +29809,15 @@
         "expect(rows.every(r=>r.scenarioIds.length===1&&r.scenarioIds[0]===id)).toBe(true)",
         "expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length&&r.assertions.length)).toBe(true)",
         "expect(rows.filter(r=>r.caseKeys.length).map(r=>r.caseKeys)).toEqual([[id]])",
-        "expect(report.mappedDeclarations).toBe(446)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446)",
+        "expect(report.mappedDeclarations).toBe(461)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461)",
         "expect(report.runtimeLeafCount).toBeNull()"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "958d482b6d2fa151868667a7ffc7f6de73ca29d74d9f6520c1f396d58a004f7a",
-      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(r=>r.name==='xlsx-comments');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(19);\n const rows=report.mappings.filter(r=>r.ledger==='xlsx-comments');expect(rows).toHaveLength(19);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(72);expect(rows.every(r=>r.scenarioIds.length===1&&r.scenarioIds[0]===id)).toBe(true);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length&&r.assertions.length)).toBe(true);\n expect(rows.filter(r=>r.caseKeys.length).map(r=>r.caseKeys)).toEqual([[id]]);expect(report.mappedDeclarations).toBe(446);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446);expect(report.runtimeLeafCount).toBeNull();\n}",
+      "sourceSha256": "c9bc2ec7236e2f0b09f3deadf745504707c65744732bcb56930f4b876fb9077f",
+      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(r=>r.name==='xlsx-comments');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(19);\n const rows=report.mappings.filter(r=>r.ledger==='xlsx-comments');expect(rows).toHaveLength(19);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(72);expect(rows.every(r=>r.scenarioIds.length===1&&r.scenarioIds[0]===id)).toBe(true);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length&&r.assertions.length)).toBe(true);\n expect(rows.filter(r=>r.caseKeys.length).map(r=>r.caseKeys)).toEqual([[id]]);expect(report.mappedDeclarations).toBe(461);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-461);expect(report.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -29588,7 +29860,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "958d482b6d2fa151868667a7ffc7f6de73ca29d74d9f6520c1f396d58a004f7a",
+      "sourceSha256": "c9bc2ec7236e2f0b09f3deadf745504707c65744732bcb56930f4b876fb9077f",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(r=>r.ledger==='xlsx-comments'),find=(suffix:string)=>rows.find(r=>r.testId.endsWith(suffix))!;\n const direct=find('native comment inspection returns detached exact authors refs text and separate VML relationship without writes');expect(direct.caseKeys).toEqual([]);expect(direct.gaps.join(' ')).toContain('no file save');\n const graph=find('external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged');expect(graph.gaps.join(' ')).toContain('member arrays');\n const opaque=find('fresh inspections observe live metadata changes and protection does not turn reads into mutations');expect(opaque.gaps.join(' ')).toContain('opaque');expect(opaque.caseKeys).toEqual([]);\n const canonical=find('canonical XLSX comment and VML inspection checks both relationships and exact comment values');expect(canonical.gaps.join(' ')).toContain('aggregate status and counts');expect(canonical.gaps.join(' ')).toContain('five planned cases');\n const baseline=find('duplicate drawing IDs comment records and missing relationship dependencies fail independently of custody');expect(baseline.gaps.join(' ')).toContain('baseline serialization');expect(baseline.gaps.join(' ')).toContain('not necessarily the reader');\n const controls=rows.filter(r=>r.testId.includes('xlsx-comment-vml-bindings.test.ts')).filter(r=>!r.caseKeys.length);expect(controls).toHaveLength(6);expect(controls.every(r=>r.gaps.join(' ').includes('delegated'))).toBe(true);\n}",
       "calls": [
         ".mappings.filter",
@@ -29639,7 +29911,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "958d482b6d2fa151868667a7ffc7f6de73ca29d74d9f6520c1f396d58a004f7a",
+      "sourceSha256": "c9bc2ec7236e2f0b09f3deadf745504707c65744732bcb56930f4b876fb9077f",
       "body": "{\n for(const path of paths){\n  const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n  const b=await sample(),index=b.sets[0]!.ledger.mappings.findIndex(r=>r.testId.includes(path));expect(index).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n  const c=await sample();c.sets[0]!.ledger.mappings.find(r=>r.testId.includes(path))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');\n  const d=await sample();d.sets[0]!.ledger.mappings.find(r=>r.testId.includes(path))!.caseKeys=['@id-xlsx-comment-vml-disjoint-row-shift'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');\n }\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -29681,7 +29953,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "958d482b6d2fa151868667a7ffc7f6de73ca29d74d9f6520c1f396d58a004f7a",
+      "sourceSha256": "c9bc2ec7236e2f0b09f3deadf745504707c65744732bcb56930f4b876fb9077f",
       "body": "{\n for(const path of [...paths,...pins,canonical]){\n  const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n  const b=await sample();delete b.sets[0]!.ledger.sourceSha256[path];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n }\n}",
       "calls": [
         "Object.hasOwn",
@@ -29715,7 +29987,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "958d482b6d2fa151868667a7ffc7f6de73ca29d74d9f6520c1f396d58a004f7a",
+      "sourceSha256": "c9bc2ec7236e2f0b09f3deadf745504707c65744732bcb56930f4b876fb9077f",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),report=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(report.mappings.map(r=>r.assertions)).toEqual(a.inventory.cases.map(r=>r.assertions));expect(report.mappings.map(r=>r.reviewReasons)).toEqual(a.inventory.cases.map(r=>r.reviewReasons));expect(report.mappings.map(r=>r.deferredAssertions)).toEqual(a.inventory.cases.map(r=>r.deferredAssertions));expect(report.executionCredit).toBe(false);\n expect(report.mappings.every(r=>!r.scenarioIds.some(id=>id.includes('row-')||id.includes('limited-editor')))).toBe(true);\n}",
       "calls": [
         "JSON.stringify",
@@ -32081,8 +32353,8 @@
         "expect(rows).toHaveLength(16)",
         "expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(52)",
         "expect(r.ledgers.find(l=>l.name==='xlsx-styles')!.scopePaths).toEqual([path])",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
         "expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set([selection,refusal]))",
         "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([27])",
@@ -32092,8 +32364,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8317b06a89c02a65dcd83881a434ff996ab216f1473f10897ae01f1280bf5832",
-      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='xlsx-styles');expect(rows).toHaveLength(16);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(52);expect(r.ledgers.find(l=>l.name==='xlsx-styles')!.scopePaths).toEqual([path]);expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set([selection,refusal]));expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([27]);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('70de36f4d9378b8df39a2d433a9972108b852d1b59868a60e0bb7f554088e792');\n}",
+      "sourceSha256": "4da932dc51c924e0ea2b8df0476d981927fe38bef00b8325efec401e0cbdce4e",
+      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='xlsx-styles');expect(rows).toHaveLength(16);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(52);expect(r.ledgers.find(l=>l.name==='xlsx-styles')!.scopePaths).toEqual([path]);expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set([selection,refusal]));expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([27]);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('70de36f4d9378b8df39a2d433a9972108b852d1b59868a60e0bb7f554088e792');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -32139,7 +32411,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8317b06a89c02a65dcd83881a434ff996ab216f1473f10897ae01f1280bf5832",
+      "sourceSha256": "4da932dc51c924e0ea2b8df0476d981927fe38bef00b8325efec401e0cbdce4e",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='xlsx-styles');expect(rows[0]!.gaps.join(' ')).toContain('aggregate');expect(rows[0]!.gaps.join(' ')).toContain('byte reopen');expect(rows[0]!.gaps.join(' ')).toContain('no disk');expect(rows[5]!.gaps.join(' ')).toContain('no style-index');expect(rows[11]!.gaps.join(' ')).toContain('absent');expect(rows[12]!.outcomes.join(' ')).toContain('disk');expect(rows[12]!.caseKeys).toEqual([]);expect(rows[14]!.gaps.join(' ')).toContain('existing');expect(rows[15]!.gaps.join(' ')).toContain('does not calculate');expect(rows.every(m=>!m.gaps.join(' ').includes('full formatting parity'))).toBe(true);\n}",
       "calls": [
         ".mappings.filter",
@@ -32179,7 +32451,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8317b06a89c02a65dcd83881a434ff996ab216f1473f10897ae01f1280bf5832",
+      "sourceSha256": "4da932dc51c924e0ea2b8df0476d981927fe38bef00b8325efec401e0cbdce4e",
       "body": "{\n const a=await sample();a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings[1]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings[1]!.caseKeys=[`${refusal}|{\"kind\":\"invalid-index\"}`];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');const e=await sample();e.sets[0]!.ledger.mappings[1]!.assertions[0]='expect(fiction).toBe(true)';expect(()=>reconcileOutcomeMappingSets(e.inventory,e.sets)).toThrow('assertion');\n}",
       "calls": [
         "b.sets.0.ledger.mappings.pop",
@@ -32213,7 +32485,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "8317b06a89c02a65dcd83881a434ff996ab216f1473f10897ae01f1280bf5832",
+      "sourceSha256": "4da932dc51c924e0ea2b8df0476d981927fe38bef00b8325efec401e0cbdce4e",
       "body": "{\n for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -32247,7 +32519,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8317b06a89c02a65dcd83881a434ff996ab216f1473f10897ae01f1280bf5832",
+      "sourceSha256": "4da932dc51c924e0ea2b8df0476d981927fe38bef00b8325efec401e0cbdce4e",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.runtimeLeafCount).toBeNull();expect(r.executionCredit).toBe(false);\n}",
       "calls": [
         "JSON.stringify",
@@ -37367,17 +37639,18 @@
         "expect(r.ledgers.find(l=>l.name==='zip32')!.scopePaths).toEqual(paths)",
         "expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([20])",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>m.ledger!=='zip32'))).digest('hex')).toBe('bb62305515e90cc39e2781b6ffb8710f3176bca2872335927a9a6b02eb907dcb')"
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','opc-graph','zip64','formula-references'].includes(m.ledger)))).digest('hex')).toBe('bb62305515e90cc39e2781b6ffb8710f3176bca2872335927a9a6b02eb907dcb')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fab31eb4fc11cbd1b8ca84472adb21a0e3bd637fe520cc410daaebbbfa7f8dca",
-      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='zip32');expect(rows).toHaveLength(24);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(106);expect(rows.slice(0,19).reduce((n,m)=>n+m.assertions.length,0)).toBe(61);expect(r.ledgers.find(l=>l.name==='zip32')!.scopePaths).toEqual(paths);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([20]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>m.ledger!=='zip32'))).digest('hex')).toBe('bb62305515e90cc39e2781b6ffb8710f3176bca2872335927a9a6b02eb907dcb');\n}",
+      "sourceSha256": "109dd358480bcb153383fa1fc3ff3f05c096399c02beaa19bc1ec8b35bb0c5fb",
+      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='zip32');expect(rows).toHaveLength(24);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(106);expect(rows.slice(0,19).reduce((n,m)=>n+m.assertions.length,0)).toBe(61);expect(r.ledgers.find(l=>l.name==='zip32')!.scopePaths).toEqual(paths);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([20]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','opc-graph','zip64','formula-references'].includes(m.ledger)))).digest('hex')).toBe('bb62305515e90cc39e2781b6ffb8710f3176bca2872335927a9a6b02eb907dcb');\n}",
       "calls": [
+        ".includes",
         ".update",
         ".update().digest",
         "JSON.stringify",
@@ -37421,7 +37694,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fab31eb4fc11cbd1b8ca84472adb21a0e3bd637fe520cc410daaebbbfa7f8dca",
+      "sourceSha256": "109dd358480bcb153383fa1fc3ff3f05c096399c02beaa19bc1ec8b35bb0c5fb",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='zip32');expect(rows[9]!.gaps.join(' ')).toContain('BZIP2');expect(rows[17]!.gaps.join(' ')).toContain('deduplicated');expect(rows[18]!.gaps.join(' ')).toContain('smoke');expect(rows[19]!.gaps.join(' ')).toContain('aggregate');expect(rows[19]!.gaps.join(' ')).toContain('four planned');expect(rows[20]!.gaps.join(' ')).toContain('nested');expect(rows[21]!.gaps.join(' ')).toContain('signature');expect(rows[23]!.gaps.join(' ')).toContain('writer');expect(rows.filter(m=>m.caseKeys.length)[0]!.testId).toContain('twenty canonical');\n}",
       "calls": [
         ".mappings.filter",
@@ -37462,7 +37735,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "fab31eb4fc11cbd1b8ca84472adb21a0e3bd637fe520cc410daaebbbfa7f8dca",
+      "sourceSha256": "109dd358480bcb153383fa1fc3ff3f05c096399c02beaa19bc1ec8b35bb0c5fb",
       "body": "{\n for(const p of paths){const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(x=>x!==p);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.splice(b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(p)),1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.caseKeys=['@id-parity-zip64'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');}\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -37503,7 +37776,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "fab31eb4fc11cbd1b8ca84472adb21a0e3bd637fe520cc410daaebbbfa7f8dca",
+      "sourceSha256": "109dd358480bcb153383fa1fc3ff3f05c096399c02beaa19bc1ec8b35bb0c5fb",
       "body": "{\n for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -37540,7 +37813,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fab31eb4fc11cbd1b8ca84472adb21a0e3bd637fe520cc410daaebbbfa7f8dca",
+      "sourceSha256": "109dd358480bcb153383fa1fc3ff3f05c096399c02beaa19bc1ec8b35bb0c5fb",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();expect(r.mappings[20]!.deferredAssertions).toHaveLength(1);expect(r.mappings[21]!.deferredAssertions).toHaveLength(3);expect(r.mappings.every(m=>m.assertions.length>0)).toBe(true);\n}",
       "calls": [
         "JSON.stringify",
@@ -37573,16 +37846,16 @@
         "expect(rows.every(m=>m.caseKeys.length===0)).toBe(true)",
         "expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids))",
         "expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true)",
-        "expect(r.mappedDeclarations).toBe(446)",
-        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446)",
+        "expect(r.mappedDeclarations).toBe(461)",
+        "expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461)",
         "expect(r.runtimeLeafCount).toBeNull()",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','opc-graph','formula-references'].includes(m.ledger)))).digest('hex')).toBe('4f4cb2c7a65ce8c94580b49ab3480179315f7f8ffc3a223d820e7b601ecc5ace')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0c37523135ba752010f4e1c0346003968277a5cbfe877edb4fd1a8dfd7834a2e",
-      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='zip64');expect(rows).toHaveLength(15);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(46);expect(r.ledgers.find(l=>l.name==='zip64')!.scopePaths).toEqual([path]);expect(rows.every(m=>m.caseKeys.length===0)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(446);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-446);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','opc-graph','formula-references'].includes(m.ledger)))).digest('hex')).toBe('4f4cb2c7a65ce8c94580b49ab3480179315f7f8ffc3a223d820e7b601ecc5ace');\n}",
+      "sourceSha256": "01381717534899f93ba1c4c1cb70ce9be44a4a4fb07da78b9b51f09d03c88ceb",
+      "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='zip64');expect(rows).toHaveLength(15);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(46);expect(r.ledgers.find(l=>l.name==='zip64')!.scopePaths).toEqual([path]);expect(rows.every(m=>m.caseKeys.length===0)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(461);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-461);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','opc-graph','formula-references'].includes(m.ledger)))).digest('hex')).toBe('4f4cb2c7a65ce8c94580b49ab3480179315f7f8ffc3a223d820e7b601ecc5ace');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -37625,7 +37898,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0c37523135ba752010f4e1c0346003968277a5cbfe877edb4fd1a8dfd7834a2e",
+      "sourceSha256": "01381717534899f93ba1c4c1cb70ce9be44a4a4fb07da78b9b51f09d03c88ceb",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='zip64');expect(rows[2]!.gaps.join(' ')).toContain('signed');expect(rows[4]!.gaps.join(' ')).toContain('allocation');expect(rows[5]!.gaps.join(' ')).toContain('locator');expect(rows[11]!.gaps.join(' ')).toContain('compressed');expect(rows[13]!.gaps.join(' ')).toContain('helper');expect(rows[13]!.gaps.join(' ')).toContain('changed-member');expect(rows[14]!.gaps.join(' ')).toContain('empty');expect(rows[14]!.gaps.join(' ')).toContain('resource-limit');expect(rows.every(m=>!m.scenarioIds.includes('@id-zip64-resource-limit'))).toBe(true);\n}",
       "calls": [
         ".mappings.filter",
@@ -37662,7 +37935,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0c37523135ba752010f4e1c0346003968277a5cbfe877edb4fd1a8dfd7834a2e",
+      "sourceSha256": "01381717534899f93ba1c4c1cb70ce9be44a4a4fb07da78b9b51f09d03c88ceb",
       "body": "{\n const a=await sample();a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-package-diff-equivalent-xml-and-binary-changes'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');\n}",
       "calls": [
         "b.sets.0.ledger.mappings.pop",
@@ -37696,7 +37969,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0c37523135ba752010f4e1c0346003968277a5cbfe877edb4fd1a8dfd7834a2e",
+      "sourceSha256": "01381717534899f93ba1c4c1cb70ce9be44a4a4fb07da78b9b51f09d03c88ceb",
       "body": "{\n for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -37732,7 +38005,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0c37523135ba752010f4e1c0346003968277a5cbfe877edb4fd1a8dfd7834a2e",
+      "sourceSha256": "01381717534899f93ba1c4c1cb70ce9be44a4a4fb07da78b9b51f09d03c88ceb",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();const refusals=r.mappings.filter(m=>m.testId.includes('refuses'));expect(refusals).toHaveLength(11);expect(refusals.every(m=>m.assertions.length===3&&m.assertions.some(s=>s.includes('toBeInstanceOf(OoxmlError)')))).toBe(true);\n}",
       "calls": [
         "JSON.stringify",

@@ -12,10 +12,6 @@ async function run(change: (s: string) => string = s => s, activeBindings: StepB
   try { return await executeAcceptance({ root: '.', features: [f], counts: { features: count(1), scenarios: count(7), cases: count(11), steps: count(107) } }, activeBindings, 'opc-custody-unit'); }
   finally { await cleanup(); }
 }
-function failedPredicate(r: Awaited<ReturnType<typeof run>>) {
-  expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);
-  expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);
-}
 test('eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes', async () => {
   const r = await run(); expect(r.failures).toEqual([]); expect(r.counts.cases.passed).toBe(11); expect(r.counts.cases.planned).toBe(3);
 });
@@ -25,7 +21,10 @@ test('changed OPC error-code, message, content and BOM predicates fail', async (
     ['message contains synchronous edits', 'message contains wrong message'],
     ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],
     ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],
-  ]) failedPredicate(await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); }));
+  ]) { const r=await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });
+    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);
+    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);
+  }
 });
 
 test('OPC refusal archives contain the exact background and named mutation', async () => {
@@ -77,7 +76,9 @@ test('OPC predicates reject changed package bytes, callback flags, thenable iden
     const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
       await b.run(c, ...captures); mutate(c.state as State);
     } } : b);
-    failedPredicate(await run(s => s, corrupt));
+    const r=await run(s => s, corrupt);
+    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);
+    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);
   }
 });
 
@@ -94,7 +95,9 @@ test('OPC destination assertions detect overwritten files and replaced symlinks'
       // The save binding covers both destinations; restrict this mutation to the requested one.
       if (Boolean(s.link) === step.includes('symlink')) await mutate(s);
     } } : b);
-    failedPredicate(await run(s => s, corrupt));
+    const r=await run(s => s, corrupt);
+    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);
+    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);
   }
 });
 
@@ -105,7 +108,9 @@ test('OPC temporary destinations are cleaned after success and predicate failure
     await b.run(c, ...captures); paths.push((c.state as { destination: string }).destination);
   } } : b);
   expect((await run(s => s, checking)).failures).toEqual([]);
-  failedPredicate(await run(s => s.replace('message contains Missing target', 'message contains wrong'), checking));
+  const r=await run(s => s.replace('message contains Missing target', 'message contains wrong'), checking);
+  expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);
+  expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);
   expect(paths).toHaveLength(4);
   for (const path of paths) {
     await expect(lstat(path)).rejects.toMatchObject({ code: 'ENOENT' });

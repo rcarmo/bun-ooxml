@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/package.test.ts",
+    "tests/unit/opc-custody-bindings.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/package.test.ts": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
+    "tests/unit/opc-custody-bindings.test.ts": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
+    "tests/acceptance/opc-custody.ts": "565a06a9d96174e33e32e5c2d7226192a55342c83c49db4c66dfc0856eacd3ba",
+    "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
+    "tests/acceptance/steps.ts": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a",
+    "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/package/preservation.feature": "eb3cd4f4d534549b8b8d53dc2c3cb75a9e5c35d614effbb5f446623c0db4e4b1"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / conservatively refuses percent-encoded internal names and relationship targets",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-open-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-part-name-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"Noncanonical part name\")",
+        "expect((error as OoxmlError).code).toBe(\"opc-target-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"Percent-encoded\")"
+      ],
+      "outcomes": [
+        "Percent-encoded internal part name and root relationship target inputs reject with OoxmlError, exact opc-part-name-invalid/opc-target-invalid codes and corresponding message fragments."
+      ],
+      "gaps": [
+        "Native first input changes document and override names but leaves the relationship target at word/document.xml, unlike the shared mutation which changes all three. Refusal precedence still exposes the intended name code. No input-byte custody or file save asserted here.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / validates content-type metadata",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-open-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-content-types-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"Duplicate/missing default extension\")"
+      ],
+      "outcomes": [
+        "Duplicate rels content-type defaults reject with OoxmlError, opc-content-types-invalid and Duplicate/missing default extension text."
+      ],
+      "gaps": [
+        "Native three-member metadata control also omits the normal xml default; rejection checks the intended duplicate code/message, not a complete schema diagnosis. No input-custody assertion.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / rejects missing and duplicate OPC relationship references",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-open-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-relationship-target-missing\")",
+        "expect((error as OoxmlError).message).toContain(\"Missing target\")",
+        "expect((error as OoxmlError).code).toBe(\"opc-relationship-duplicate\")",
+        "expect((error as OoxmlError).message).toContain(\"Duplicate relationship id\")"
+      ],
+      "outcomes": [
+        "Missing relationship target and duplicate rId1 definitions each reject with OoxmlError and exact target-missing/duplicate codes and message fragments."
+      ],
+      "gaps": [
+        "Native pair corresponds to shared mutations but does not run their background or assert caller-buffer preservation. Literal repeated class checks are deduplicated in source inventory; no path save.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / returns detached copies and keeps custody of opened source bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-detached-byte-copies"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(UTF8_DECODER.decode(pkg.get(DOCUMENT_PART)!)).toContain(\"Alpha\")",
+        "expect(pkg.toBytes()).toEqual(original)"
+      ],
+      "outcomes": [
+        "Overwriting both caller archive and returned document arrays with zeros leaves a fresh document getter containing Alpha and serialization byte-identical to the original copy."
+      ],
+      "gaps": [
+        "Native detached-byte test does not reopen the serialized result as the binding does, and does not separately assert every overwritten array byte is zero. No format-schema or disk-save claim.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / preserves UTF-16 XML encoding when string edits are written back",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-preserve-utf16le-edit"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.slice(0, 2)]).toEqual([0xff, 0xfe])",
+        "expect(UTF16LE_DECODER.decode(saved)).toContain(\"Beta\")",
+        "expect(UTF16LE_DECODER.decode(saved)).toContain('encoding=\"UTF-16\"')"
+      ],
+      "outcomes": [
+        "After Alpha-to-Beta text replacement, the ZIP-extracted document member retains FF FE BOM and decoded Beta text plus UTF-16 declaration."
+      ],
+      "gaps": [
+        "Native UTF-16LE-only check reopens through the ZIP layer, not OpcPackage or a path. It does not explicitly reject remaining Alpha or compare unrelated members; those additional checks belong to the binding.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / rejects async transaction callbacks before they run and does not special-case thenables",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-async-transaction-refusal",
+        "@id-bun-opc-thenable-transaction-result"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-async-transaction\")",
+        "expect((error as OoxmlError).message).toContain(\"synchronous edits\")",
+        "expect(ran).toBe(false)",
+        "expect(pkg.text(DOCUMENT_PART)).toContain(\"Alpha\")",
+        "expect(result).toBe(thenable)",
+        "expect(pkg.text(DOCUMENT_PART)).toContain(\"Beta\")"
+      ],
+      "outcomes": [
+        "An async callback refuses with exact class/code/message before its ran flag changes and leaves Alpha visible. A synchronous callback returns its thenable by identity and leaves Beta visible without throwing from then."
+      ],
+      "gaps": [
+        "Native transaction policy test checks live text and identity, not a serialized archive or byte reopen. Then has no explicit invocation counter here; throwing if called is the control. This does not test rollback of a callback that actually ran and failed.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / save refuses invalid packages without touching an existing target",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-save-invalid-target-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-relationship-target-missing\")",
+        "expect((error as OoxmlError).message).toContain(\"Missing target\")",
+        "expect([...await Bun.file(path).bytes()]).toEqual([...bytes])"
+      ],
+      "outcomes": [
+        "Deleting the main part makes saving to an existing disk file reject with exact target-missing class/code/message; the destination bytes remain identical."
+      ],
+      "gaps": [
+        "Native physical-file refusal checks file bytes but does not reopen the destination OPC package as the binding does. Cleanup is scheduled afterEach, with no independent absence assertion in this declaration.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / refuses symlink save destinations",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-symlink-destination-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"opc-symlink-destination\")",
+        "expect((error as OoxmlError).message).toContain(\"Symlink\")",
+        "expect([...await Bun.file(target).bytes()]).toEqual([...bytes])"
+      ],
+      "outcomes": [
+        "Saving an unchanged package through a real symlink rejects with exact symlink-destination class/code/message and retains the target file bytes."
+      ],
+      "gaps": [
+        "Native symlink refusal does not inspect link identity or its target string after the attempt; those checks live in the canonical binding. No successful save or concurrent replacement race is tested.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-opc-package-corpus-noop"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(fixtures).toHaveLength(EXPECTED_FIXTURE_ARCHIVE_COUNT)",
+        "expect(pkg.toBytes()).toEqual(original)"
+      ],
+      "outcomes": [
+        "All 74 enumerated fixture paths are opened through OpcPackage and their serialized whole-archive bytes equal their originals."
+      ],
+      "gaps": [
+        "The count is combined across corpora, not the two separate exact nonzero corpus counts required by the shared scenario. Unlike readZip smoke this compares every original archive, but it does not reopen each serialized result again, edit it or compare schema/rendering outcomes.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-open-refusal",
+        "@id-bun-opc-detached-byte-copies",
+        "@id-bun-opc-preserve-utf16le-edit",
+        "@id-bun-opc-async-transaction-refusal",
+        "@id-bun-opc-thenable-transaction-result",
+        "@id-bun-opc-save-invalid-target-custody",
+        "@id-bun-opc-symlink-destination-refusal"
+      ],
+      "caseKeys": [
+        "@id-bun-opc-open-refusal|{\"variant\":\"escaped part name\",\"mutation\":\"rename the document, content-type override and relationship target to word/%66oo.xml\",\"code\":\"opc-part-name-invalid\",\"message\":\"Noncanonical part name\"}",
+        "@id-bun-opc-open-refusal|{\"variant\":\"escaped target\",\"mutation\":\"change only the root relationship target to word/%66oo.xml\",\"code\":\"opc-target-invalid\",\"message\":\"Percent-encoded\"}",
+        "@id-bun-opc-open-refusal|{\"variant\":\"duplicate default\",\"mutation\":\"replace the xml default with a second rels default of type application/xml\",\"code\":\"opc-content-types-invalid\",\"message\":\"Duplicate/missing default extension\"}",
+        "@id-bun-opc-open-refusal|{\"variant\":\"missing target\",\"mutation\":\"change only the root relationship target to word/missing.xml\",\"code\":\"opc-relationship-target-missing\",\"message\":\"Missing target\"}",
+        "@id-bun-opc-open-refusal|{\"variant\":\"duplicate relation ID\",\"mutation\":\"duplicate the complete rId1 root relationship\",\"code\":\"opc-relationship-duplicate\",\"message\":\"Duplicate relationship id\"}",
+        "@id-bun-opc-detached-byte-copies",
+        "@id-bun-opc-preserve-utf16le-edit",
+        "@id-bun-opc-async-transaction-refusal",
+        "@id-bun-opc-thenable-transaction-result",
+        "@id-bun-opc-save-invalid-target-custody",
+        "@id-bun-opc-symlink-destination-refusal"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(11)",
+        "expect(r.counts.cases.planned).toBe(3)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures, 11 passed selected cases and three planned siblings. Pinned bindings check typed refusals, detached bytes, UTF-16 and nonmain custody, callback state/thenable identity and real destination/symlink preservation, with cleanup in finally."
+      ],
+      "gaps": [
+        "Only aggregate results are asserted in this declaration; semantic and filesystem predicates are delegated. The three planned cases refer to isolated selection, not the full runner. Byte roundtrips and actual save-path refusals remain distinct; no successful disk edit or generic rollback execution is claimed.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-open-refusal",
+        "@id-bun-opc-detached-byte-copies",
+        "@id-bun-opc-preserve-utf16le-edit",
+        "@id-bun-opc-async-transaction-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong error code/message, document text and BOM expectations produce nonzero failed case/step counts without undefined or ambiguous steps."
+      ],
+      "gaps": [
+        "Native negative wrapper; the source-fragment existence check remains nested, not a direct aggregate expression. Counts are positive bounds rather than precise failed steps. No independent semantic success credit.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-open-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(snapshots).toHaveLength(5)",
+        "expect([...parts.keys()]).toEqual(['[Content_Types].xml', '_rels/.rels', document])",
+        "expect(decode(document)).toBe('<?xml version=\"1.0\" encoding=\"UTF-8\"?><document>Alpha</document>')",
+        "expect(ct.namespaceURI).toBe('http://schemas.openxmlformats.org/package/2006/content-types')",
+        "expect(ct.children.map(n => [n.localName, { ...n.attributes }])).toEqual([\n      ['Default', { Extension: 'rels', ContentType: 'application/vnd.openxmlformats-package.relationships+xml' }],\n      ['Default', { Extension: i === 2 ? 'rels' : 'xml', ContentType: 'application/xml' }],\n      ['Override', { PartName: '/' + document, ContentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml' }],\n    ])",
+        "expect(rels.namespaceURI).toBe('http://schemas.openxmlformats.org/package/2006/relationships')",
+        "expect(rels.children.map(n => [n.localName, { ...n.attributes }])).toEqual(Array.from({ length: i === 4 ? 2 : 1 }, () => ['Relationship', {\n      Id: 'rId1', Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument',\n      Target: i < 2 ? 'word/%66oo.xml' : i === 3 ? 'word/missing.xml' : 'word/document.xml',\n    }]))"
+      ],
+      "outcomes": [
+        "Five captured refusal inputs have exactly the required member names, document text, metadata namespaces and complete default/override/relationship records for each mutation; the enclosing run has no failures."
+      ],
+      "gaps": [
+        "Native fixture-fidelity control inspects ZIP-decoded inputs after the open step and checks canonical refusal run results in aggregate. It does not directly reassert each typed refusal or turn malformed document XML into Word-schema evidence.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-open-refusal",
+        "@id-bun-opc-detached-byte-copies",
+        "@id-bun-opc-preserve-utf16le-edit",
+        "@id-bun-opc-async-transaction-refusal",
+        "@id-bun-opc-thenable-transaction-result"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Fabricated success/untyped errors, changed package/original bytes, broken BOM/content, ran flag, wrong thenable identity/invocation count and reverted text all trigger aggregate assertion failures without undefined/ambiguous steps."
+      ],
+      "gaps": [
+        "Native mutation controls delegate the actual custody/callback predicates. They assert positive failed-count bounds, not exact locations or full error attribution for every sabotage; no path save in these controls.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-save-invalid-target-custody",
+        "@id-bun-opc-symlink-destination-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Overwriting destination files or replacing a symlink with a regular file each causes failed case/step counts without undefined/ambiguous bindings."
+      ],
+      "gaps": [
+        "Native real-file sabotage controls delegate file/link checks and are scoped by link presence. They do not identify an exact failed step or establish race-safe save behavior; cleanup is provided by run finally.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-opc-save-invalid-target-custody",
+        "@id-bun-opc-symlink-destination-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect((await run(s => s, checking)).failures).toEqual([])",
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)",
+        "expect(paths).toHaveLength(4)",
+        "expect(lstat(path)).rejects.toMatchObject({ code: 'ENOENT' })",
+        "expect(lstat(join(path, '..'))).rejects.toMatchObject({ code: 'ENOENT' })"
+      ],
+      "outcomes": [
+        "A successful run and a wrong-message run capture four temporary destinations; every file and its parent directory subsequently rejects lstat with ENOENT."
+      ],
+      "gaps": [
+        "Native cleanup control checks explicit run-helper cleanup after success and predicate failure. It does not test interrupted process cleanup or automatic recovery when the cleanup function itself fails; no generic transaction rollback claim.",
+        "Bounded source mapping, no new execution or complete OPC/Office parity credit. Equivalent helper inlining retains runtime predicates; direct/deferred assertions and loop review flags preserved, runtime leaves unknown."
+      ]
+    }
+  ]
+}

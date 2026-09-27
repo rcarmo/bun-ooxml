@@ -108,6 +108,22 @@ a changed member as the shared roundtrip requires. Structural refusals are
 associated with directory preflight scenarios as extensions, not exact cases.
 No mapping claims allocation timing, file persistence or full ZIP64 parity.
 
+The [OPC custody ledger](opc-custody-mappings.json) maps 15 declarations and
+66 direct expressions. One wrapper links to 11 selected cases; the other 14
+records remain scenario-only. Its three planned siblings describe isolated
+selection, not global coverage. Equivalent helper inlining preserves the two
+suites' 231 runtime assertions, and all 446 prior mapping records are unchanged.
+
+Native corpus coverage compares each of 74 archive serializations exactly, but
+does not count the two source corpora separately or reopen each result a second
+time. The UTF-16 test uses the ZIP layer; the binding adds OPC reopen and unrelated
+member checks. Async-function refusal happens before the body runs; a synchronous
+callback can return an untouched thenable. This is not general rollback evidence.
+Physical save-refusal tests check existing files and symlink targets; the binding
+also checks link identity, and dedicated controls verify temporary-file cleanup.
+None establishes trusted-ancestor safety, concurrent path replacement or Word
+schema validity for the deliberately minimal three-member package.
+
 The [OPC graph ledger](opc-graph-mappings.json) maps 15 declarations and 56
 direct expressions from graph-edit and byte/content-type diff tests. All links
 are scenario-only: neither suite contains a shared acceptance wrapper. All 392
