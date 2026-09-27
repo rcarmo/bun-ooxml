@@ -7,7 +7,7 @@
     "tests/unit/comment-thread-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-comment-threads.test.ts": "73c2069f2cf939350e9a3c6bb6c358f0002acf1aeb221896579012d931696a19",
+    "tests/unit/docx-comment-threads.test.ts": "d4b0233f3153ac351a085703288b5d6b2f3af64ec258888ecddb445c151db3ba",
     "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
     "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -17,7 +17,7 @@
     "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
-    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
     "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
     "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
     "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
@@ -312,7 +312,7 @@
         "expect(planned).toHaveLength(9)",
         "expect(planned.every(s=>s.lifecycle==='planned')).toBe(true)",
         "expect(inv.counts.cases.implemented).toBe(726)",
-        "expect(inv.counts.cases.planned).toBe(46)"
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "All nine authored-comment profiles remain planned; complete catalogue totals asserted."

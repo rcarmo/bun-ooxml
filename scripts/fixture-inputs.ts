@@ -34,7 +34,9 @@ export const F = {
     formattedText: "fixture-9a92eba3dc84f293a82de9496e571c780fd258cc3bf276b74464faaef5835dbc",
     headersFooters: "fixture-3bafa155242222dbd3529b56af6b8f1939cbd2e954de5b80afeadbbd53a432aa",
     headings: "fixture-8513f05370714f5e288ec1ca2fb76fe21b74b458636f325666b20b100c9b021a",
-    minimal: "fixture-9726b477472ddb7595875c9f30493df2577e587416b18418d0dc7221046690fe",
+    // The former minimal archive differed from default only in ZIP timestamps;
+    // the historical byte identity is recorded by the shared content ledger.
+    minimal: "fixture-d9d6a313182a71a73d75a26a0ff3b7826dbd2e300e1d202114ec9f8fb018fda5",
     numberedList: "fixture-37d3c408403dbecf4310f0a0b1313dc0c3756302e1778cc32d975823988ea3b2",
     sdtContentControls: "fixture-368fe96cb3ae55a0cc5fecbb599eda1d1058596d4914992f596083f291071ae4",
     simpleTable: "fixture-87e3c67cb73bdbf5c8389791fd2bb459ba0eaac862149af6fd7c5b641dafd56b",
@@ -136,7 +138,6 @@ export const GO_TESTDATA_PACKAGE_IDS = [
   F.goWord.formattedText,
   F.goWord.headersFooters,
   F.goWord.headings,
-  F.goWord.minimal,
   F.goWord.numberedList,
   F.goWord.sdtContentControls,
   F.goWord.simpleTable,
@@ -367,7 +368,7 @@ function validateManifestFile(file: ManifestFile): void {
 
 function validateFixtureFile(file: ManifestFile, id: string): void {
   if (id !== 'fixture-' + file.sha256) throw new Error(`Fixture ID/hash mismatch: ${id}`);
-  if (typeof file.format !== "string" || !/^(docx|pptx|xlsx|png)$/.test(file.format)) {
+  if (typeof file.format !== "string" || !/^(docx|pptx|xlsx|png|zip)$/.test(file.format)) {
     throw new Error(`Fixture format missing or invalid for ${id}`);
   }
   if (typeof file.scenarioGroup !== "string" || !/^[a-z0-9-]+$/.test(file.scenarioGroup)) {

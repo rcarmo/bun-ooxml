@@ -911,16 +911,16 @@ export const bindings: StepBinding[] = [
       const corpora = requireDefined(opc.corpora, "Missing fixture corpora");
       const go = requireDefined(corpora.find((corpus) => corpus.name === "go-ooxml"));
       const python = requireDefined(corpora.find((corpus) => corpus.name === "python-office-mcp-server"));
-      assert.equal(go.allFiles.length, 37);
-      assert.equal(go.packageFiles.length, 37);
+      assert.equal(go.allFiles.length, 36);
+      assert.equal(go.packageFiles.length, 36);
       assert.equal(python.allFiles.length, 35);
       assert.equal(python.packageFiles.length, 35);
       assert.ok(go.allFiles.length > 0);
       assert.ok(go.packageFiles.length > 0);
       assert.ok(python.allFiles.length > 0);
       assert.ok(python.packageFiles.length > 0);
-      assert.equal(go.allFiles.length + python.allFiles.length, 72);
-      assert.equal(go.packageFiles.length + python.packageFiles.length, 72);
+      assert.equal(go.allFiles.length + python.allFiles.length, 71);
+      assert.equal(go.packageFiles.length + python.packageFiles.length, 71);
     },
   },
   {

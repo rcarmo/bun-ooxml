@@ -25,9 +25,9 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 292 scenarios / 772 cases; 726 implemented and 46 planned.
+- Shared: 299 scenarios / 785 cases; 726 implemented and 59 planned.
 - Local-only: zero scenarios or cases. The eleven former local cases are now shared planned contracts.
-- Combined: 292 scenarios / 772 cases; 726 implemented and 46 planned.
+- Combined: 299 scenarios / 785 cases; 726 implemented and 59 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -115,7 +115,7 @@ using the resolver under test. Four corruption controls reject incorrect propert
 receipt, unrelated-member and namespace outcomes. Twelve native tests and two
 outcome tests have partial mappings with explicit limits. Of 562 earlier mapping
 records, 557 are unchanged and five update inventory totals only. All 648 earlier
-executed case identities remain; 46 cases are still planned.
+executed case identities remain; 59 cases are now planned after later shared additions.
 The independent SDK schema oracle checks one source and both resolved body
 outputs, including a missing-author refusal control. See
 [run-property revisions](../contracts/run-property-revisions.md).
@@ -132,7 +132,7 @@ corruption controls cover position, residual markers, receipts, unrelated bytes
 and namespace loss. Twelve native tests and two outcome tests have partial
 mappings with explicit limits. Of 576 prior records, 569 are unchanged; six update
 global totals and one updates the focused property wrapper's planned neighbours.
-All 681 earlier executed case identities remain; 46 cases are still planned.
+All 681 earlier executed case identities remain; 59 cases are now planned after later shared additions.
 The SDK oracle checks one body source and both outputs, with a missing-name
 refusal control. See [paired run moves](../contracts/run-move-revisions.md).
 
@@ -295,7 +295,7 @@ previous mappings remain unchanged.
 Existing refusal and aggregate-failure predicates now sit in their test bodies;
 the two suites still execute 186 assertions. Literal-expression inventory
 collapses repeated expressions, while nested fixture-signature and source-match
-checks remain separate. The 74-archive corpus loop is admission smoke, not exact
+checks remain separate. The 73-archive retained corpus loop is admission smoke, not exact
 member readback. Method 12 inputs contain plain bytes rather than BZIP2 streams.
 Bounds tests observe errors, not allocation timing. Native refusal tests do not
 check input custody; the pinned acceptance bindings do. No mapping implies
@@ -323,7 +323,7 @@ records remain scenario-only. Its three planned siblings describe isolated
 selection, not global coverage. Equivalent helper inlining preserves the two
 suites' 231 runtime assertions, and all 446 prior mapping records are unchanged.
 
-Native corpus coverage compares each of 74 archive serializations exactly, but
+Native corpus coverage compares each of 73 retained archive serializations exactly, but
 does not count the two source corpora separately or reopen each result a second
 time. The UTF-16 test uses the ZIP layer; the binding adds OPC reopen and unrelated
 member checks. Async-function refusal happens before the body runs; a synchronous

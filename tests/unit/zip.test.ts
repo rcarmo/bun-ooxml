@@ -10,7 +10,7 @@ import { crc32, readZip, writeZip } from "../../src/opc/zip.ts";
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const PROJECT_ROOT = resolve(import.meta.dir, "../..");
-const EXPECTED_FIXTURE_ARCHIVE_COUNT = 74;
+const EXPECTED_FIXTURE_ARCHIVE_COUNT = 73;
 
 const FLAG_UTF8 = 0x0800;
 const FLAG_DATA_DESCRIPTOR = 0x0008;

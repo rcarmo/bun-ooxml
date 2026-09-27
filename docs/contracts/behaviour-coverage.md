@@ -1,20 +1,21 @@
 # Behaviour coverage
 
-The shared reference contains **366 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **368 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 292 | 772 | 726 | 46 |
+| Shared catalogue | 299 | 785 | 726 | 59 |
 | Local-only obligations | 0 | 0 | 0 | 0 |
-| Combined inventory | 292 | 772 | 726 | 46 |
+| Combined inventory | 299 | 785 | 726 | 59 |
 
-The canonical denominator is **292 shared scenarios / 772 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+The canonical denominator is **299 shared scenarios / 785 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
 | references/fixtures-ooxml/workflows/docx/anchor-discovery.feature | mixed | 5 | 5 | 4 | 1 | 23 |
 | references/fixtures-ooxml/workflows/docx/comment-content-type.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 21 | 46 | 37 | 9 | 210 |
+| references/fixtures-ooxml/workflows/docx/completion-audit.feature | planned | 3 | 4 | 0 | 4 | 36 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 5 | 9 | 9 | 0 | 50 |
 | references/fixtures-ooxml/workflows/docx/effective-formatting.feature | implemented | 2 | 25 | 25 | 0 | 84 |
 | references/fixtures-ooxml/workflows/docx/font-size.feature | implemented | 1 | 1 | 1 | 0 | 6 |
@@ -41,12 +42,13 @@ The canonical denominator is **292 shared scenarios / 772 shared cases**. Local-
 | references/fixtures-ooxml/workflows/package/relationship-namespaces.feature | implemented | 2 | 4 | 4 | 0 | 16 |
 | references/fixtures-ooxml/workflows/package/semantic-diff.feature | implemented | 1 | 1 | 1 | 0 | 7 |
 | references/fixtures-ooxml/workflows/package/xml-member-admission.feature | implemented | 1 | 3 | 3 | 0 | 9 |
-| references/fixtures-ooxml/workflows/package/zip-admission.feature | implemented | 3 | 10 | 10 | 0 | 31 |
+| references/fixtures-ooxml/workflows/package/zip-admission.feature | mixed | 4 | 11 | 10 | 1 | 38 |
 | references/fixtures-ooxml/workflows/package/zip32.feature | implemented | 8 | 24 | 24 | 0 | 116 |
 | references/fixtures-ooxml/workflows/package/zip64.feature | implemented | 4 | 4 | 4 | 0 | 13 |
 | references/fixtures-ooxml/workflows/pptx/creation.feature | implemented | 3 | 3 | 3 | 0 | 9 |
+| references/fixtures-ooxml/workflows/pptx/layout-recommendation.feature | planned | 2 | 6 | 0 | 6 | 39 |
 | references/fixtures-ooxml/workflows/pptx/mutation-safety.feature | implemented | 3 | 6 | 6 | 0 | 45 |
-| references/fixtures-ooxml/workflows/pptx/notes.feature | implemented | 9 | 9 | 9 | 0 | 43 |
+| references/fixtures-ooxml/workflows/pptx/notes.feature | mixed | 10 | 11 | 9 | 2 | 69 |
 | references/fixtures-ooxml/workflows/pptx/preservation.feature | implemented | 1 | 1 | 1 | 0 | 6 |
 | references/fixtures-ooxml/workflows/pptx/slide-import.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/pptx/slide-order.feature | implemented | 2 | 21 | 21 | 0 | 70 |

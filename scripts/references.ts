@@ -22,7 +22,7 @@ export async function verifyReferences(root:string):Promise<number>{
  if(manifest.schemaVersion!==2||manifest.fixturePathBase!=='repository-root'||!Array.isArray(manifest.files)||!manifest.files.length)throw Error('Invalid shared manifest');
  const hashes=new Set<string>(),ids=new Set<string>();
  for(const f of manifest.files){if(!safe(f.path)||known.has(f.path)||hashes.has(f.sha256)||ids.has(f.id)||!Number.isSafeInteger(f.bytes)||f.bytes<0||!/^[a-f0-9]{64}$/.test(f.sha256))throw Error('Invalid or duplicate reference path/hash/ID');known.add(f.path);hashes.add(f.sha256);ids.add(f.id);
- if(f.role==='fixture'&&(f.id!=='fixture-'+f.sha256||!['docx','pptx','xlsx','png'].includes(f.format)||!/^[a-z0-9-]+$/.test(f.scenarioGroup)||!f.path.startsWith(`fixtures/${f.format}/${f.scenarioGroup}/`)))throw Error('Invalid grouped fixture identity');const bytes=await Bun.file(join(refs,f.path)).bytes();if(bytes.length!==f.bytes||digest(bytes)!==f.sha256)throw Error('Reference drift: '+f.path);}
+ if(f.role==='fixture'&&(f.id!=='fixture-'+f.sha256||!['docx','pptx','xlsx','png','zip'].includes(f.format)||!/^[a-z0-9-]+$/.test(f.scenarioGroup)||!f.path.startsWith(`fixtures/${f.format}/${f.scenarioGroup}/`)))throw Error('Invalid grouped fixture identity');const bytes=await Bun.file(join(refs,f.path)).bytes();if(bytes.length!==f.bytes||digest(bytes)!==f.sha256)throw Error('Reference drift: '+f.path);}
  if(git('--no-optional-locks','status','--porcelain','--untracked-files=all'))throw Error('Shared reference worktree is dirty');
  // Status honours index hints/filters. Compare raw tracked bytes independently.
  const objectFormat=git('rev-parse','--show-object-format');
