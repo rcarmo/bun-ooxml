@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 783,
+  "nativeDeclarations": 790,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 556,
+  "withoutStagingCount": 563,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4360,6 +4360,41 @@
       "id": "bun:tests/unit/tracked-workflow.test.ts:destination change after staging refuses without publishing staged revisions",
       "path": "tests/unit/tracked-workflow.test.ts",
       "sourceSha256": "32e0862d392fee9e750081d5d1041481c8aa28d50ffa004b0541c3064f574800"
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:retained receipt scenarios execute both exact Then predicates with no undefined bindings",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe"
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:preview Then assertions reject incorrect target value count status and fabricated commit claims",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe"
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:placeholder Then assertions reject swapped counts missing duplicated or mislabelled results and false success",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe"
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:receipt predicates reject changed source destination and unexpected directory entries",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe"
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:exact-count expected text and original-title fixture controls fail real assertions",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe"
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:receipt temporary paths are removed after success failed Then and failed Given assertions",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe"
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:acceptance runner cleans receipt fixtures on a failing binding without caller cleanup",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe"
     },
     {
       "id": "bun:tests/unit/xlsx-cell-style.test.ts:cell style selection executes27 saved outcomes and atomic refusals",

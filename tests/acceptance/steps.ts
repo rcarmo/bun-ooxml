@@ -59,7 +59,8 @@ import { bindings as xlsxBindings } from "./xlsx.ts";
 import { bindings as xlsxRangeBindings } from './xlsx-range.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupTrackedWorkflowFixtures(),cleanupFontSize(),cleanupOpcCustody()]);}
+import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupTrackedWorkflowFixtures(),cleanupFontSize(),cleanupOpcCustody()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -122,6 +123,7 @@ export const bindings: StepBinding[] = [
   ...xlsxRangeBindings,
   ...cacheBoundaryBindings,
   ...workflowBindings,
+  ...workflowReceiptBindings,
 ];
 
 export default bindings;

@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 783,
-  "files": 78,
+  "count": 790,
+  "files": 79,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -361,6 +361,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "sha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "declarations": 7,
+      "issues": []
+    },
+    {
       "path": "tests/unit/workflow.test.ts",
       "sha256": "a68fa9b0c8ede27b4a33bc0355f0070f4cac9dcc7a2cfe779231d5a9630e8185",
       "declarations": 10,
@@ -638,7 +644,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "9443ffb19519e1065f375ed7849efab709bacb1657cac968c17660eb4255c469"
+      "sha256": "34fc494bddc484a245ac018e54d4328a5485b3b15157b78d06b6b015229e3a5b"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -671,6 +677,10 @@
     {
       "path": "tests/acceptance/tracked-workflow.ts",
       "sha256": "24bdc885987f352536ab5ebe49d7aed9878d68e7b206f9cbde129c175ab22b7f"
+    },
+    {
+      "path": "tests/acceptance/workflow-receipts.ts",
+      "sha256": "6ffc5146bdac315d9470ca603eb94be2ca31947e0aec591f01ede85e5f24a370"
     },
     {
       "path": "tests/acceptance/workflow.ts",
@@ -949,6 +959,12 @@
     "bun:tests/unit/test-inventory.test.ts:transparent TypeScript expressions cannot hide imported registration aliases",
     "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
     "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
+    "bun:tests/unit/workflow-receipts.test.ts:preview Then assertions reject incorrect target value count status and fabricated commit claims",
+    "bun:tests/unit/workflow-receipts.test.ts:placeholder Then assertions reject swapped counts missing duplicated or mislabelled results and false success",
+    "bun:tests/unit/workflow-receipts.test.ts:receipt predicates reject changed source destination and unexpected directory entries",
+    "bun:tests/unit/workflow-receipts.test.ts:exact-count expected text and original-title fixture controls fail real assertions",
+    "bun:tests/unit/workflow-receipts.test.ts:receipt temporary paths are removed after success failed Then and failed Given assertions",
+    "bun:tests/unit/workflow-receipts.test.ts:acceptance runner cleans receipt fixtures on a failing binding without caller cleanup",
     "bun:tests/unit/xlsx-cell-style.test.ts:style-only edits preserve cell payloads for scalar and formula topologies",
     "bun:tests/unit/xlsx-cell-style.test.ts:UTF16 LE/BE worksheet declaration, BOM and target value survive style selection",
     "bun:tests/unit/xlsx-cell-style.test.ts:external changes to another worksheet or workbook metadata refuse cached-model style updates",
@@ -1237,6 +1253,12 @@
     "bun:tests/unit/test-inventory.test.ts:transparent TypeScript expressions cannot hide imported registration aliases",
     "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
     "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
+    "bun:tests/unit/workflow-receipts.test.ts:preview Then assertions reject incorrect target value count status and fabricated commit claims",
+    "bun:tests/unit/workflow-receipts.test.ts:placeholder Then assertions reject swapped counts missing duplicated or mislabelled results and false success",
+    "bun:tests/unit/workflow-receipts.test.ts:receipt predicates reject changed source destination and unexpected directory entries",
+    "bun:tests/unit/workflow-receipts.test.ts:exact-count expected text and original-title fixture controls fail real assertions",
+    "bun:tests/unit/workflow-receipts.test.ts:receipt temporary paths are removed after success failed Then and failed Given assertions",
+    "bun:tests/unit/workflow-receipts.test.ts:acceptance runner cleans receipt fixtures on a failing binding without caller cleanup",
     "bun:tests/unit/xlsx-cell-style.test.ts:style-only edits preserve cell payloads for scalar and formula topologies",
     "bun:tests/unit/xlsx-cell-style.test.ts:UTF16 LE/BE worksheet declaration, BOM and target value survive style selection",
     "bun:tests/unit/xlsx-cell-style.test.ts:external changes to another worksheet or workbook metadata refuse cached-model style updates",
@@ -24150,6 +24172,267 @@
         "parseFeature"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:retained receipt scenarios execute both exact Then predicates with no undefined bindings",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "line": 19,
+      "title": "retained receipt scenarios execute both exact Then predicates with no undefined bindings",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(2)",
+        "expect(result.counts.steps.passed).toBe(8)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "body": "{\n const result=await execute(await sourceText());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(2);expect(result.counts.steps.passed).toBe(8);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        "execute",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "sourceText"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:preview Then assertions reject incorrect target value count status and fabricated commit claims",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "line": 30,
+      "title": "preview Then assertions reject incorrect target value count status and fabricated commit claims",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 32,
+          "expression": "for(const mutate of [\n  (s:State)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "body": "{\n const source=await sourceText();\n for(const mutate of [\n  (s:State)=>{s.receipt.results[0]!.target='slide:1/subtitle';},\n  (s:State)=>{s.receipt.results[0]!.value='Wrong';},\n  (s:State)=>{s.receipt.results[0]!.matched=0;},\n  (s:State)=>{s.receipt.results[0]!.status='committed';},\n  (s:State)=>{s.receipt.results.push({...s.receipt.results[0]!});},\n  (s:State)=>{s.receipt.results=[];},\n  (s:State)=>{s.receipt.status='committed';},\n  (s:State)=>{s.receipt.committedChanges=1;},\n  (s:State)=>{s.receipt.outputSha256='fake';},\n  (s:State)=>{s.receipt.sourceSha256='fake';},\n  (s:State)=>{s.receipt.error={code:'fake',message:'fake'};},\n ])failed(await execute(source,changed(preview,mutate)));\n}",
+      "calls": [
+        "changed",
+        "execute",
+        "failed",
+        "s.receipt.results.push",
+        "sourceText"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:placeholder Then assertions reject swapped counts missing duplicated or mislabelled results and false success",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "line": 47,
+      "title": "placeholder Then assertions reject swapped counts missing duplicated or mislabelled results and false success",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 49,
+          "expression": "for(const mutate of [\n  (s:State)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "body": "{\n const source=await sourceText();\n for(const mutate of [\n  (s:State)=>{s.receipt.results[0]!.matched=0;},\n  (s:State)=>{s.receipt.results[1]!.matched=1;},\n  (s:State)=>{s.receipt.results[0]!.matched=2;},\n  (s:State)=>{s.receipt.results.reverse();},\n  (s:State)=>{s.receipt.results[1]={...s.receipt.results[0]!};},\n  (s:State)=>{s.receipt.results.pop();},\n  (s:State)=>{s.receipt.results[1]!.target='<Wrong>';},\n  (s:State)=>{s.receipt.results[0]!.value='Wrong';},\n  (s:State)=>{s.receipt.results[0]!.status='committed';},\n  (s:State)=>{s.receipt.results[1]!.code='wrong-code';},\n  (s:State)=>{s.receipt.error=undefined;},\n  (s:State)=>{s.receipt.status='committed';s.receipt.committedChanges=1;},\n  (s:State)=>{s.receipt.changedParts=['word/document.xml'];},\n ])failed(await execute(source,changed(counts,mutate)));\n}",
+      "calls": [
+        "changed",
+        "execute",
+        "failed",
+        "s.receipt.results.pop",
+        "s.receipt.results.reverse",
+        "sourceText"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:receipt predicates reject changed source destination and unexpected directory entries",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "line": 66,
+      "title": "receipt predicates reject changed source destination and unexpected directory entries",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 68,
+          "expression": "for(const step of [preview,counts])for(const field of ['source','output','extra'] as const)"
+        },
+        {
+          "line": 68,
+          "expression": "for(const field of ['source','output','extra'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "body": "{\n const source=await sourceText();\n for(const step of [preview,counts])for(const field of ['source','output','extra'] as const){\n  failed(await execute(source,changed(step,async s=>{await Bun.write(field==='extra'?join(s.root,'unexpected.tmp'):s[field],'changed bytes');})));\n }\n}",
+      "calls": [
+        "Bun.write",
+        "changed",
+        "execute",
+        "failed",
+        "join",
+        "sourceText"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:exact-count expected text and original-title fixture controls fail real assertions",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "line": 73,
+      "title": "exact-count expected text and original-title fixture controls fail real assertions",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(source).toContain(from!)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 75,
+          "expression": "for(const [from,to]of [['\"<Present>\" reports exactly one match','\"<Present>\" reports exactly zero matches'],['\"<Missing>\" reports exactly zero matches','\"<Missing>\" reports exactly one match'],['the title \"Original title\"','the title \"Wrong title\"']])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "body": "{\n const source=await sourceText();\n for(const [from,to]of [['\"<Present>\" reports exactly one match','\"<Present>\" reports exactly zero matches'],['\"<Missing>\" reports exactly zero matches','\"<Missing>\" reports exactly one match'],['the title \"Original title\"','the title \"Wrong title\"']]){expect(source).toContain(from!);failed(await execute(source.replace(from!,to!)));}\n}",
+      "calls": [
+        "execute",
+        "expect",
+        "expect().toContain",
+        "failed",
+        "source.replace",
+        "sourceText"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:receipt temporary paths are removed after success failed Then and failed Given assertions",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "line": 78,
+      "title": "receipt temporary paths are removed after success failed Then and failed Given assertions",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect((await execute(source,capture)).failures).toEqual([])",
+        "expect(roots).toHaveLength(6)",
+        "expect(new Set(roots).size).toBe(6)",
+        "expect(lstat(root)).rejects.toMatchObject({code:'ENOENT'})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 84,
+          "expression": "for(const root of roots)await expect(lstat(root)).rejects.toMatchObject("
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "body": "{\n const roots:string[]=[],source=await sourceText();\n const capture=bindings.map(b=>b.pattern.test('a presentation with the title \"Original title\"')||b.pattern.test('a document containing \"<Present>\" once and not containing \"<Missing>\"')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{try{await b.run(c,...args);}finally{roots.push((c.state as State).root);}}}:b);\n expect((await execute(source,capture)).failures).toEqual([]);\n failed(await execute(source.replace('\"<Missing>\" reports exactly zero matches','\"<Missing>\" reports exactly one match'),capture));\n failed(await execute(source.replace('the title \"Original title\"','the title \"Wrong title\"'),capture));\n expect(roots).toHaveLength(6);expect(new Set(roots).size).toBe(6);for(const root of roots)await expect(lstat(root)).rejects.toMatchObject({code:'ENOENT'});\n}",
+      "calls": [
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "execute",
+        "expect",
+        "expect().rejects.toMatchObject",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "failed",
+        "lstat",
+        "roots.push",
+        "source.replace",
+        "sourceText"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/workflow-receipts.test.ts:acceptance runner cleans receipt fixtures on a failing binding without caller cleanup",
+      "path": "tests/unit/workflow-receipts.test.ts",
+      "line": 87,
+      "title": "acceptance runner cleans receipt fixtures on a failing binding without caller cleanup",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(runAcceptance(undefined,{root,stepsModulePath:steps})).rejects.toThrow('injected after setup')",
+        "expect(paths).toHaveLength(2)",
+        "expect(lstat(p)).rejects.toMatchObject({code:'ENOENT'})",
+        "expect(result.status).toBe('failed')",
+        "expect(result.execution.cases.failed).toBe(2)",
+        "expect(result.execution.steps.undefined).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 93,
+          "expression": "for(const p of paths)await expect(lstat(p)).rejects.toMatchObject("
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3fa973300cd0e3b7aad0e0e62a57dc524b183a3cac631152f99bc0fa5d8e4abe",
+      "body": "{\n const root=await mkdtemp(join(tmpdir(),'receipt-runner-')),log=join(root,'paths.json'),steps=join(root,'steps.ts'),base=join(import.meta.dir,'../acceptance/steps.ts');\n try{\n  await Bun.write(join(root,'features/receipts.feature'),(await sourceText()).replace('@planned','@implemented @bun'));\n  await Bun.write(steps,`import {bindings as base,cleanup} from ${JSON.stringify(base)}; import {writeFile} from 'node:fs/promises'; export {cleanup}; const paths:string[]=[]; export const bindings=base.map(b=>b.pattern.test(${JSON.stringify(preview)})||b.pattern.test(${JSON.stringify(counts)})?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args); paths.push((c.state as {root:string}).root); await writeFile(${JSON.stringify(log)},JSON.stringify(paths)); throw Error('injected after setup');}}:b);`);\n  await expect(runAcceptance(undefined,{root,stepsModulePath:steps})).rejects.toThrow('injected after setup');\n  const paths=await Bun.file(log).json() as string[];expect(paths).toHaveLength(2);for(const p of paths)await expect(lstat(p)).rejects.toMatchObject({code:'ENOENT'});\n  const result=await Bun.file(join(root,'artifacts/acceptance.json')).json();expect(result.status).toBe('failed');expect(result.execution.cases.failed).toBe(2);expect(result.execution.steps.undefined).toBe(0);\n }finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        ".replace",
+        "Bun.file",
+        "Bun.file().json",
+        "Bun.write",
+        "JSON.stringify",
+        "expect",
+        "expect().rejects.toMatchObject",
+        "expect().rejects.toThrow",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "join",
+        "lstat",
+        "mkdtemp",
+        "rm",
+        "runAcceptance",
+        "sourceText",
+        "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {

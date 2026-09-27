@@ -447,6 +447,15 @@
         "@id-docx-go-section-title-background-getters",
         "@id-docx-go-table-style-getter"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/workflow-receipts.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-office-preview-details",
+        "@id-office-docx-exact-match-counts"
+      ]
     }
   ]
 }

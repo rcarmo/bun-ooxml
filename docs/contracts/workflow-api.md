@@ -22,6 +22,10 @@ Receipt fields: `status: 'preview'|'refused'|'committed'`, `committedChanges: nu
 Preview reports zero committed operations, actual per-target matches and requested
 values. Committed counts come from changed staged operations after successful
 atomic save, never from input length. Refusal has zero and no committed results.
+A resolved target keeps its own match count even when another target causes the
+batch to refuse. A batch containing `<Present>` once and no `<Missing>` returns
+counts of one and zero, with no committed changes. Preview results use status
+`matched`; the source and destination stay unchanged.
 
 Targets: DOCX exact literal body/table text with one match.
 PPTX `slide:N/title` or `slide:N/subtitle`, 1-based slide number, unique real placeholder
@@ -73,3 +77,11 @@ safe-output hardlink aliases refuse. Caller directories must be trusted.
 
 The shared specification defines workflow targets, expected receipts and preservation
 rules. Acceptance tests use its scenarios and fixtures directly.
+
+The shared [receipt scenarios](../../references/fixtures-ooxml/workflows/workflow-receipts.feature) check a
+PPTX title preview and DOCX per-placeholder counts against shared fixture copies.
+They compare source bytes, an existing destination and directory entries, then
+reopen the source. Negative controls corrupt receipt fields or files and require
+assertion failures; temporary files are removed after successful and failed cases.
+The separate [independent spreadsheet style-reader check](../../features/planned/office-mutation-additions.feature)
+is not implemented by these cases.

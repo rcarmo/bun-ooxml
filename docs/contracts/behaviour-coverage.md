@@ -1,12 +1,12 @@
 # Behaviour coverage
 
-The shared reference contains **200 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **202 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
 | features/planned/cross-language-followups.feature | planned | 3 | 3 | 0 | 3 | 13 |
 | features/planned/full-port.feature | planned | 5 | 7 | 0 | 7 | 28 |
-| features/planned/office-mutation-additions.feature | planned | 3 | 3 | 0 | 3 | 12 |
+| features/planned/office-mutation-additions.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 13 | 23 | 14 | 9 | 102 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 4 | 8 | 8 | 0 | 47 |
 | references/fixtures-ooxml/workflows/docx/document-model.feature | mixed | 29 | 70 | 61 | 9 | 233 |
@@ -38,6 +38,7 @@ The shared reference contains **200 assets**. The table lists available tests; a
 | references/fixtures-ooxml/workflows/pptx/slide-order.feature | implemented | 2 | 21 | 21 | 0 | 70 |
 | references/fixtures-ooxml/workflows/pptx/tables.feature | implemented | 4 | 5 | 5 | 0 | 15 |
 | references/fixtures-ooxml/workflows/pptx/text-box.feature | implemented | 2 | 23 | 23 | 0 | 77 |
+| references/fixtures-ooxml/workflows/workflow-receipts.feature | implemented | 2 | 2 | 2 | 0 | 8 |
 | references/fixtures-ooxml/workflows/xlsx/cell-style.feature | implemented | 2 | 27 | 27 | 0 | 90 |
 | references/fixtures-ooxml/workflows/xlsx/creation.feature | implemented | 7 | 7 | 7 | 0 | 29 |
 | references/fixtures-ooxml/workflows/xlsx/formula-references.feature | implemented | 9 | 45 | 45 | 0 | 152 |
