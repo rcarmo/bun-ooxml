@@ -24,9 +24,9 @@ test('multi-feature wrapper selection executes only requested identities and rej
 });
 test('mapping relocation preserves 470 records and explicitly accounts for two wrapper count changes',async()=>{
  const r=await outcomeMappingReport(),ids=['bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings','bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting'];
- const unchanged=r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory'].includes(m.ledger)&&!ids.includes(m.testId));expect(unchanged).toHaveLength(470);
+ const unchanged=r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads'].includes(m.ledger)&&!ids.includes(m.testId));expect(unchanged).toHaveLength(470);
  expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(unchanged)).digest('hex')).toBe('a87881cd02360bf6db2556d4cb39bc4a22bb59db90752d4fff83dd9f81960b41');
  expect(r.mappings.find(m=>m.testId===ids[0])!.assertions).toContain('expect(report.inventory.features.implemented).toBe(2)');
  expect(r.mappings.find(m=>m.testId===ids[1])!.assertions).toContain('expect(good.counts.cases.planned).toBe(0)');
- expect(r.mappedDeclarations).toBe(546);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();
+ expect(r.mappedDeclarations).toBe(562);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();
 });

@@ -25,9 +25,9 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 258 scenarios / 660 cases; 625 implemented and 35 planned.
+- Shared: 266 scenarios / 683 cases; 648 implemented and 35 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 267 scenarios / 671 cases; 625 implemented and 46 planned.
+- Combined: 275 scenarios / 694 cases; 648 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -94,11 +94,14 @@ profiles stay planned; no SOW, colour-guidance or table-purpose inference is imp
 ## Existing comment threads
 
 Immutable `inspectCommentThreads` grouping and `setCommentThreadResolved` add an
-existing-extension, complete-thread policy. Fourteen native declarations cover
-exact IDs, mixed states, path reopen, byte custody, atomic refusal and encoding.
-They remain unmapped pending central contracts for this policy. The nine authored
-comment profiles stay planned; all 546 prior mapping records and 625 executed
-case identities are unchanged. See [comment threads](../contracts/comment-threads.md).
+existing-extension, complete-thread policy. Eight shared scenarios / 23 cases
+check exact membership, mixed states, saved output, unchanged bytes, atomic
+refusal, rollback and encoding. Fourteen native declarations and two outcome
+tests have partial mappings with explicit limits. Four negative controls reject
+wrong descendant state, receipt membership, unrelated bytes and mixed state.
+The nine authored-comment profiles stay planned. The 546 earlier mapping records
+are unchanged apart from four inventory totals; all 625 earlier executed case
+identities remain. See [comment threads](../contracts/comment-threads.md).
 
 ## Format and operation layout
 

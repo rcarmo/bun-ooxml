@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-comment-threads.test.ts",
+    "tests/unit/comment-thread-outcomes.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-comment-threads.test.ts": "bfaadcd7cad4bd7a2d367b9509d5cbf3fcd213c2050d54a10273925f2d7a61d3",
+    "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
+    "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
+    "src/docx/index.ts": "685767de85fcea15e0ea7bae47b335dcf2917666c0d72dcec736114d389642b4",
+    "src/index.ts": "923661bc47017f856323e8f561f21ebf95ea75257c46b6571f9352cc5e897458",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
+    "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
+    "tests/acceptance/steps.ts": "b08374af84fdca64ab58541edd88c84dd6c3a2cc8a8a8948ccbca2f54172cc2a",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:thread inspection returns two nonempty roots and exact detached replies without changing bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-inspection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.unsupported).toEqual([])",
+        "expect(r.threads.map(t=>[t.root.id,t.replies.map(c=>c.id)])).toEqual([['0',[]],['1',['2']]])",
+        "expect(r.threads[1]!.root.text).toBe('Classical hubris')",
+        "expect(r.threads[1]!.replies[0]!.text).toBe('(this is a threaded reply)')",
+        "expect(r.threads[1]!.replies[0]!.parentId).toBe('1')",
+        "expect(Object.isFrozen(v)).toBe(true)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(r.threads[1]!.root.resolved).toBe(false)",
+        "expect(inspectCommentThreads(p).threads[1]!.root.resolved).toBe(true)"
+      ],
+      "outcomes": [
+        "Exact root and reply IDs, text, parent, frozen detached report and unchanged archive."
+      ],
+      "gaps": [
+        "One pinned graph; no authored comments or filtered response API."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:resolving a reply updates its complete existing thread while retaining unrelated root bodies anchors and members through path reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(setCommentThreadResolved(p,'02',true)).toEqual({rootId:'1',commentIds:['1','2'],changed:2,changedParts:[EX]})",
+        "expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',true,'1']])",
+        "expect(p.text(C)).toBe(before.text(C))",
+        "expect(p.text(p.mainPart())).toBe(before.text(before.mainPart()))",
+        "expect(p.names()).toEqual(before.names())",
+        "expect(p.get(n)).toEqual(before.get(n))",
+        "expect(states(read)).toEqual(states(p))",
+        "expect(inspectCommentThreads(read).threads[1]!.replies).toHaveLength(1)",
+        "expect(setCommentThreadResolved(read,'1',false)).toEqual({rootId:'1',commentIds:['1','2'],changed:2,changedParts:[EX]})",
+        "expect(reopened.get(n)).toEqual(before.get(n))"
+      ],
+      "outcomes": [
+        "Reply02 selects root1 and reply2; exact receipt and states, non-extension custody, path reopen and undo restore original members."
+      ],
+      "gaps": [
+        "No Word UI verification or extension creation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:mixed states only change mismatched flags and repeat requests preserve exact archives while single-comment semantics remain unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-noop"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',false,'1']])",
+        "expect(setCommentThreadResolved(p,'2',true).changed).toBe(1)",
+        "expect(setCommentThreadResolved(p,'1',true)).toEqual({rootId:'1',commentIds:['1','2'],changed:0,changedParts:[]})",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(setCommentThreadResolved(p,'0',true).commentIds).toEqual(['0'])",
+        "expect(states(p)).toEqual([['0',true,null],['1',true,null],['2',true,'1']])"
+      ],
+      "outcomes": [
+        "Single-comment edit leaves reply open; complete-thread changes one flag, repeat changes zero with exact archive, then root0 changes separately."
+      ],
+      "gaps": [
+        "Final states cover two operations; central binding separately asserts full state immediately after each call."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:nested descendants and out-of-order extension entries resolve to the root and retain parent IDs",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-inspection",
+        "@id-docx-existing-thread-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectCommentThreads(p).threads.map(t=>[t.root.id,t.replies.map(r=>[r.id,r.parentId])])).toEqual([['0',[]],['1',[['2','1'],['3','2']]]])",
+        "expect(setCommentThreadResolved(p,'3',true)).toEqual({rootId:'1',commentIds:['1','2','3'],changed:3,changedParts:[EX]})",
+        "expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',true,'1'],['3',true,'2']])",
+        "expect(p.text(C)).toBe(before)"
+      ],
+      "outcomes": [
+        "Nested member3 selects root1; reversed extension entries preserve exact receipt, direct parents and comments-part bytes."
+      ],
+      "gaps": [
+        "One three-member synthetic chain; no saved path in this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:missing root metadata refuses even if selected reply already has the requested state",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentThreadResolved(p,'2',false)).toThrow(expect.objectContaining({code:'docx-comments-missing-extension'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspectCommentThreads(p).threads[1]!.root.id).toBe('1')"
+      ],
+      "outcomes": [
+        "Missing root commentEx entry throws missing-extension before requested-open no-op; exact archive unchanged."
+      ],
+      "gaps": [
+        "One missing metadata variant; no general authoring support."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:invalid arguments unsafe graphs unsupported bodies and protection refuse atomically including no-ops",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentThreadResolved(p,id as string,value as boolean)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>setCommentThreadResolved(p,'2',false)).toThrow()"
+      ],
+      "outcomes": [
+        "Invalid arguments, malformed graphs, missing extension, protection and unsupported bodies throw without byte changes."
+      ],
+      "gaps": [
+        "Additional native variants have no exact compiled case identities; errors are not all code-specific."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:thread inspection retains explicit unsupported findings but mutation does not silently ignore unsupported siblings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-unsupported"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.threads).toHaveLength(2)",
+        "expect(r.unsupported.length).toBeGreaterThan(0)",
+        "expect(Object.isFrozen(r.unsupported[0])).toBe(true)",
+        "expect(()=>setCommentThreadResolved(p,'2',true)).toThrow(expect.objectContaining({code:'docx-comments-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Two root groups and a frozen nonempty unsupported finding remain visible; mutation throws unsupported unchanged."
+      ],
+      "gaps": [
+        "One revision-body sibling; no partial mutation permission."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:injected write or serialization failure restores all flags and retains prior package edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentThreadResolved(p,'3',true)).toThrow('injected')",
+        "expect(reached).toBe(true)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(states(p)).toEqual([['0',false,null],['1',false,null],['2',false,'1'],['3',false,'2']])"
+      ],
+      "outcomes": [
+        "Reached write and serialization hooks throw; all nested flags and prior main-part edit survive rollback byte-for-byte."
+      ],
+      "gaps": [
+        "Synchronous injected faults only, not filesystem crash recovery."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:thread updates retain alias namespaces lexical values and UTF8 BOM or UTF16 byte order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(setCommentThreadResolved(p,'3',true).changed).toBe(3)",
+        "expect(states(read).map(s=>s[1])).toEqual([false,true,true,true])",
+        "expect([...read.get(EX)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])",
+        "expect(read.text(EX)).toContain(\"q:done = 'false'\")",
+        "expect(read.get(n)).toEqual(before.get(n))"
+      ],
+      "outcomes": [
+        "UTF8 BOM and UTF16 LE/BE reopen with alias namespaces, unrelated flag spelling, resolved descendants and unchanged other parts."
+      ],
+      "gaps": [
+        "In-memory serialization/reopen; central wrapper adds path save."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:single-comment edits also retain an existing UTF8 BOM and empty thread inspection returns explicit empty arrays",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-inspection",
+        "@id-docx-existing-thread-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...p.get(EX)!.slice(0,3)]).toEqual([239,187,191])",
+        "expect(inspectCommentThreads(empty)).toEqual({threads:[],unsupported:[]})",
+        "expect(empty.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Single-comment edit retains UTF8 BOM; empty-package thread inspection returns exact empty arrays without mutation."
+      ],
+      "gaps": [
+        "Adjacent single-comment and empty-input regressions; these do not execute the central nested encoding cases."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:comment source order including descendants before roots remains deterministic without changing thread ownership",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-inspection",
+        "@id-docx-existing-thread-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(chunks).toHaveLength(4)",
+        "expect(r.threads.map(t=>[t.root.id,t.replies.map(c=>c.id)])).toEqual([['0',[]],['1',['3','2']]])",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(setCommentThreadResolved(p,'3',true).commentIds).toEqual(['3','2','1'])",
+        "expect(inspectComments(p).comments.map(c=>[c.id,c.resolved])).toEqual([['3',true],['2',true],['0',false],['1',true]])"
+      ],
+      "outcomes": [
+        "Reordered body3,2,0,1 gives roots0,1/replies3,2; unchanged inspection bytes, receipt3,2,1 and exact resolved states."
+      ],
+      "gaps": [
+        "One reordered graph; no path save in this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:batched flag edits preserve every unrelated character with quote entity and missing-flag variants",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-resolution",
+        "@id-docx-existing-thread-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(setCommentThreadResolved(p,'2',true).changed).toBe(3)",
+        "expect(p.text(EX)).toBe(expected)",
+        "expect(p.text(EX)).toContain(\"w15:done = 'off'\")"
+      ],
+      "outcomes": [
+        "Exact extension XML after three selected flags change; unrelated off spelling retained, entity value replaced and absent done inserted."
+      ],
+      "gaps": [
+        "Lexical native variant differs from central encoding input; no exact case identity claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:thread operation count bound refuses without returning a truncated result or mutating flags",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-limit"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspectCommentThreads(p)).toThrow(expect.objectContaining({code:'docx-comments-limit'}))",
+        "expect(()=>setCommentThreadResolved(p,'0',false)).toThrow(expect.objectContaining({code:'docx-comments-limit'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Both operations throw docx-comments-limit for10001 comments and retain exact archive."
+      ],
+      "gaps": [
+        "Admission bound only; no timing or allocation guarantee."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comment-threads.test.ts:existing-extension threads do not activate authored-comment response or root-only resolution profiles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-inspection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(planned).toHaveLength(9)",
+        "expect(planned.every(s=>s.lifecycle==='planned')).toBe(true)",
+        "expect(inv.counts.cases.implemented).toBe(648)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "outcomes": [
+        "All nine authored-comment profiles remain planned; complete catalogue totals asserted."
+      ],
+      "gaps": [
+        "Inventory guard only, no inspection or authored-profile execution credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/comment-thread-outcomes.test.ts:eight existing-thread contracts execute23 cases leaving historical23 neighbours planned",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-inspection",
+        "@id-docx-existing-thread-resolution",
+        "@id-docx-existing-thread-noop",
+        "@id-docx-existing-thread-refusal",
+        "@id-docx-existing-thread-rollback",
+        "@id-docx-existing-thread-encoding",
+        "@id-docx-existing-thread-unsupported",
+        "@id-docx-existing-thread-limit"
+      ],
+      "caseKeys": [
+        "@id-docx-existing-thread-inspection|{\"layout\":\"pinned\"}",
+        "@id-docx-existing-thread-inspection|{\"layout\":\"nested\"}",
+        "@id-docx-existing-thread-inspection|{\"layout\":\"reordered\"}",
+        "@id-docx-existing-thread-resolution|{\"layout\":\"pinned\",\"id\":\"1\",\"members\":\"1,2\",\"changed\":\"2\"}",
+        "@id-docx-existing-thread-resolution|{\"layout\":\"pinned\",\"id\":\"02\",\"members\":\"1,2\",\"changed\":\"2\"}",
+        "@id-docx-existing-thread-resolution|{\"layout\":\"nested\",\"id\":\"3\",\"members\":\"1,2,3\",\"changed\":\"3\"}",
+        "@id-docx-existing-thread-noop",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"missing-root-entry\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"missing-extension\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"duplicate-id\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"cycle\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"invalid-done\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"protected\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"external-settings\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"unsupported-body\"}",
+        "@id-docx-existing-thread-refusal|{\"defect\":\"unknown-target\"}",
+        "@id-docx-existing-thread-rollback|{\"stage\":\"part-write\"}",
+        "@id-docx-existing-thread-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-existing-thread-encoding|{\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-existing-thread-encoding|{\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-existing-thread-encoding|{\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-existing-thread-unsupported",
+        "@id-docx-existing-thread-limit"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(23)",
+        "expect(r.counts.cases.planned).toBe(23)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "All eight central scenarios execute23 cases with exact membership, saved output, no-op, refusal, byte preservation, encodings and rollback."
+      ],
+      "gaps": [
+        "Execution comes from pinned bindings; no other consumer or Word UI credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/comment-thread-outcomes.test.ts:missing resolved descendants corrupted membership and unrelated bytes cannot pass complete-thread checks",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-existing-thread-resolution",
+        "@id-docx-existing-thread-noop"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong descendant state, receipt membership, unrelated bytes or mixed state cause concrete outcome failure."
+      ],
+      "gaps": [
+        "Four post-operation corruptions only; not exhaustive mutation testing."
+      ]
+    }
+  ]
+}

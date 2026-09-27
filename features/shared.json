@@ -202,7 +202,15 @@
         "@id-docx-comments-inspection",
         "@id-docx-comments-resolution",
         "@id-docx-comments-noop",
-        "@id-docx-comments-refusal"
+        "@id-docx-comments-refusal",
+        "@id-docx-existing-thread-inspection",
+        "@id-docx-existing-thread-resolution",
+        "@id-docx-existing-thread-noop",
+        "@id-docx-existing-thread-refusal",
+        "@id-docx-existing-thread-rollback",
+        "@id-docx-existing-thread-encoding",
+        "@id-docx-existing-thread-unsupported",
+        "@id-docx-existing-thread-limit"
       ]
     },
     {

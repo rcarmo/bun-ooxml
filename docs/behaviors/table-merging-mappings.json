@@ -9,7 +9,7 @@
     "tests/unit/vertical-merge-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-table-merge.test.ts": "f6e26e03ce761468736472879229cd461f10c83c314906f3dd529548a74ebf08",
+    "tests/unit/docx-table-merge.test.ts": "08a59531768da5ae41d5e48e653a5bab219ba019e8c6397aaba5ebd2eec33193",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/index.ts": "685767de85fcea15e0ea7bae47b335dcf2917666c0d72dcec736114d389642b4",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -20,12 +20,12 @@
     "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-    "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
+    "tests/acceptance/steps.ts": "b08374af84fdca64ab58541edd88c84dd6c3a2cc8a8a8948ccbca2f54172cc2a",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-    "tests/unit/docx-table-vertical-merge.test.ts": "e64f237a37354adbd337134140c1f17692981ae520f06e4bb7202e2ea2d2e8cb",
+    "tests/unit/docx-table-vertical-merge.test.ts": "88537042b790fd541f4084583ba9578977f7862750b3b1e6008ac5d0d3ea464f",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
   },
@@ -263,7 +263,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(625)",
+        "expect(inv.counts.cases.implemented).toBe(648)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -623,7 +623,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(625)",
+        "expect(inv.counts.cases.implemented).toBe(648)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [

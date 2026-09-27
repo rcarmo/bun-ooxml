@@ -43,7 +43,9 @@ through a reply. It does not create comments, replies, filters or extensions.
 Fourteen native tests use the pinned threaded Word fixture and controlled native
 mutations for nested descendants, source-order permutations, exact member/lexical
 custody, mixed states, no-ops, missing metadata, protection, unsupported bodies,
-rollback, path save/reopen and BOM/UTF-16 encodings. They are unmapped pending
-central contracts for this existing-extension, complete-thread policy. The nine
-shared authored-comment profiles remain planned; no API-parity credit follows.
+rollback, path save/reopen and BOM/UTF-16 encodings. The
+[shared existing-thread cases](../../references/fixtures-ooxml/contracts/comment-threads.md)
+check eight scenarios / 23 cases, including saved output and exact member bytes.
+Fourteen native tests and two outcome tests have partial mappings; the mapping
+ledger records their limits. All nine authored-comment profiles remain planned.
 No independent Word thread UI or rendering validation has been performed.

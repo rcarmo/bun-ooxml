@@ -1,14 +1,14 @@
 # Behaviour coverage
 
-The shared reference contains **212 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **213 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 258 | 660 | 625 | 35 |
+| Shared catalogue | 266 | 683 | 648 | 35 |
 | Local-only obligations | 9 | 11 | 0 | 11 |
-| Combined inventory | 267 | 671 | 625 | 46 |
+| Combined inventory | 275 | 694 | 648 | 46 |
 
-The canonical denominator is **258 shared scenarios / 660 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+The canonical denominator is **266 shared scenarios / 683 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
@@ -16,7 +16,7 @@ The canonical denominator is **258 shared scenarios / 660 shared cases**. Local-
 | features/planned/full-port.feature | planned | 5 | 7 | 0 | 7 | 28 |
 | features/planned/office-mutation-additions.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/docx/anchor-discovery.feature | mixed | 5 | 5 | 4 | 1 | 23 |
-| references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 13 | 23 | 14 | 9 | 102 |
+| references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 21 | 46 | 37 | 9 | 210 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 5 | 9 | 9 | 0 | 50 |
 | references/fixtures-ooxml/workflows/docx/effective-formatting.feature | implemented | 2 | 25 | 25 | 0 | 84 |
 | references/fixtures-ooxml/workflows/docx/font-size.feature | implemented | 1 | 1 | 1 | 0 | 6 |
