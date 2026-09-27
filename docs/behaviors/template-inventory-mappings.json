@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-template-inspection.test.ts",
+    "tests/unit/template-inventory-outcomes.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-template-inspection.test.ts": "2d4cc100691b945f6c579f97b4cfaa42ed16bd395aba900dde1baa408e7ef993",
+    "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
+    "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
+    "src/docx/index.ts": "f84b7a9e6788e547e9b33e86c828f224d506120af5e6088821034bd779db6cdb",
+    "src/docx/body-map.ts": "33d9c9420b790db89c0efdf81ea6f118620f3af47b97174717c6399577daecdd",
+    "src/docx/body-insertion.ts": "aef562d13488d4f7d78d44d258fd451669ee85b677682dff35402c1a3f8364bb",
+    "src/docx/paragraph-properties.ts": "498c2369d8a0005b1fc0c1a0182d85b14a4ce72133a5cf456b67483e5f45bd37",
+    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+    "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
+    "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
+    "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
+    "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:template inspection returns concrete sections placeholders locations and table text without mutating archive",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.scope).toBe('main-body-and-tables')",
+        "expect(r.counts).toEqual({paragraphs:8,sections:2,tables:1,placeholders:3})",
+        "expect(r.paragraphs.map(p=>p.text)).toEqual(['Statement for <Customer>','Use <Project> and [TBD].','Role','Hours','<Role>','40','Delivery','No placeholder'])",
+        "expect(r.sections).toEqual([{paragraphIndex:0,bodyIndex:0,text:'Statement for <Customer>',level:1},{paragraphIndex:6,bodyIndex:3,text:'Delivery',level:2}])",
+        "expect(r.tables).toEqual([{index:0,bodyIndex:2,rows:2,columns:2,cells:[['Role','Hours'],['<Role>','40']]}])",
+        "expect(r.paragraphs[4]!.table).toEqual({index:0,row:1,column:0,paragraph:0})",
+        "expect(r.placeholders).toEqual([{paragraphIndex:0,bodyIndex:0,start:14,end:24,text:'<Customer>',name:'Customer'},{paragraphIndex:1,bodyIndex:1,start:4,end:13,text:'<Project>',name:'Project'},{paragraphIndex:4,bodyIndex:2,start:0,end:6,text:'<Role>',name:'Role'}])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Statement for <Customer>')",
+        "expect(t.cell(1,1).text).toBe('40')"
+      ],
+      "outcomes": [
+        "Concrete paragraph/section/table/placeholder values, indexes, UTF16offsets and held handles match with unchanged archive."
+      ],
+      "gaps": [
+        "Selected direct inputs only; no semantic SOW/guidance/cache classification."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-snapshot"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(r)",
+        "expect(read.package.get(n)).toEqual(b)",
+        "expect(Object.isFrozen(value)).toBe(true)",
+        "expect(r.paragraphs.at(-1)!.text).toBe('No placeholder')",
+        "expect(r.counts.placeholders).toBe(3)",
+        "expect(d.inspectTemplate().counts.placeholders).toBe(4)"
+      ],
+      "outcomes": [
+        "Pathsave/reopen reproduces report and members; nested results are frozen and detached across later edit."
+      ],
+      "gaps": [
+        "One fixture/path and one later edit, not crossprocess cache or concurrent isolation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:plain and empty documents return useful empty inventories without inventing classifications",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-empty"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.inspectTemplate().counts).toEqual({paragraphs:0,sections:0,tables:0,placeholders:0})",
+        "expect(r.sections).toEqual([])",
+        "expect(r.paragraphs[0]!.styleId).toBe('Heading1')",
+        "expect(r.paragraphs[0]!.outlineLevel).toBeNull()",
+        "expect(r.placeholders.map(p=>p.name)).toEqual(['Customer'])",
+        "expect(Object.keys(r).sort()).toEqual(['counts','paragraphs','placeholders','scope','sections','tables'])"
+      ],
+      "outcomes": [
+        "Empty output counts and directstyle/outline policy distinguished from bluecoloured heading-namedstyle."
+      ],
+      "gaps": [
+        "Native blue/style case exceeds central empty/plain inputs; no computed formatting."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:placeholders span plain runs but never paragraphs and retain Unicode UTF16 offsets and occurrence order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-placeholders"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual([{start:3,end:13,name:'Customer'},{start:14,end:24,name:'Customer'}])",
+        "expect(d.inspectBodyMap().placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name})))"
+      ],
+      "outcomes": [
+        "Literal scanner crosses plainruns, keeps UTF16 offsets/order, excludes nested/blank/bracket/crossparagraph tokens; bodymap agrees."
+      ],
+      "gaps": [
+        "Scanner does not classify squarebrackets or semantic guidance; no other story traversal."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:table cell paragraphs have distinct locations and cannot create cross-paragraph placeholders or sections",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-placeholders"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.tables[0]!.cells).toEqual([['<A>\\n<B>\\n<split\\nend>']])",
+        "expect(r.paragraphs.map(p=>p.table!.paragraph)).toEqual([0,1,2,3])",
+        "expect(r.placeholders.map(p=>[p.paragraphIndex,p.name])).toEqual([[0,'A'],[1,'B']])",
+        "expect(r.sections).toEqual([])"
+      ],
+      "outcomes": [
+        "Multiline cell paragraphs retain locations and joinedtext without crossparagraph placeholders or sections."
+      ],
+      "gaps": [
+        "Additional native tableparagraph fixture; not shared sample case identity."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>loaded.inspectTemplate()).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Late fields hyperlinks controls nested/merged cells badgrid and malformedoutline refuse unchanged."
+      ],
+      "gaps": [
+        "Seven native variants, not all malformed OOXML; no partial reporting credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:stale external document edits refuse and no header story or macro text is silently included",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-scope",
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.inspectTemplate().placeholders.map(p=>p.name)).toEqual(['Customer','Project','Role'])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-stale-document'}))",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "outcomes": [
+        "Header excluded with bytecustody; externalmainXML change triggers stale refusal."
+      ],
+      "gaps": [
+        "One header and one mutation; no full story traversal or concurrency."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(expected)",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Aliased UTF16BE report matches original with exactarchivecustody."
+      ],
+      "gaps": [
+        "One encoding variant in this declaration; other encoding case bound by shared wrapper."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:global placeholder and paragraph bounds refuse instead of returning a truncated successful report",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-bounds"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>loaded.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(loaded.package.toBytes()).toEqual(b)"
+      ],
+      "outcomes": [
+        "Global10001 placeholder and paragraph samples refuse limits instead of truncating, archiveunchanged."
+      ],
+      "gaps": [
+        "Native-generated loops not independent producer or timing/allocation evidence."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(changed).not.toBe(source)",
+        "expect(e).toBeInstanceOf(Error)",
+        "expect(()=>read.inspectTemplate()).toThrow()",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Gridcomments/decorations/wrongnamespace/duplicateoutline inputs refuse during load or inspection."
+      ],
+      "gaps": [
+        "Admission may fail at open; not every case reaches inspectTemplate."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:table count and aggregate placeholder limits apply across cells with no successful truncation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-bounds"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(read.package.toBytes()).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "Aggregate placeholders acrosscells and1001tables refuse exact limits with bytecustody."
+      ],
+      "gaps": [
+        "Two concrete bounds only; no performance guarantee or fuzzcompleteness."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:read-only inspection permits protected input and leaves all template response/cache scenarios planned",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-scope"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.inspectTemplate().counts.placeholders).toBe(3)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(templates).toHaveLength(2)",
+        "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
+        "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
+        "expect(inv.counts.cases.implemented).toBe(625)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "outcomes": [
+        "Protectedread permitted and prior13response/cachecases stayplanned; inventorytotalasserted."
+      ],
+      "gaps": [
+        "No response-status/cache implementation or sharedcredit for historical profiles."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(source).not.toBe(p.text(p.mainPart()))",
+        "expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-unsupported'}))",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Nonzero rowoffsets includinglaterrow and mismatched/missingwidths refuse with bytecustody."
+      ],
+      "gaps": [
+        "Native variants are scenariomapped only; no exact compiled row claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(expected)",
+        "expect(read.package.toBytes()).toEqual(before)",
+        "expect(()=>read.inspectTemplate()).toThrow()"
+      ],
+      "outcomes": [
+        "Explicit0/00 rowoffsets preserve report; negative/badlexical offsets refuse unchanged."
+      ],
+      "gaps": [
+        "Admission boundary only; no inherited logicalgrid inference."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/template-inventory-outcomes.test.ts:eight concrete inventory contracts execute22 cases leaving all6 historical response cases planned",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-empty",
+        "@id-docx-template-inventory-placeholders",
+        "@id-docx-template-inventory-refusal",
+        "@id-docx-template-inventory-bounds",
+        "@id-docx-template-inventory-encoding",
+        "@id-docx-template-inventory-snapshot",
+        "@id-docx-template-inventory-scope"
+      ],
+      "caseKeys": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-empty|{\"kind\":\"empty\"}",
+        "@id-docx-template-inventory-empty|{\"kind\":\"plain\"}",
+        "@id-docx-template-inventory-placeholders",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"late-field\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"body-control\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"nested-cell\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"merged-cell\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"row-before\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"row-after\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"width-mismatch\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"missing-width\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"grid-comment\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"stale-wrapper\"}",
+        "@id-docx-template-inventory-bounds|{\"limit\":\"10001-paragraphs\"}",
+        "@id-docx-template-inventory-bounds|{\"limit\":\"10001-placeholders\"}",
+        "@id-docx-template-inventory-bounds|{\"limit\":\"1001-tables\"}",
+        "@id-docx-template-inventory-encoding|{\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-template-inventory-encoding|{\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-template-inventory-snapshot",
+        "@id-docx-template-inventory-scope|{\"context\":\"protected\"}",
+        "@id-docx-template-inventory-scope|{\"context\":\"header\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(22)",
+        "expect(r.counts.cases.planned).toBe(6)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Eight central contracts execute22cases with prior6responsecases planned and noundefined/ambiguoussteps."
+      ],
+      "gaps": [
+        "Outcomes delegated to pinnedbindings, no borrowed other-consumer credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/template-inventory-outcomes.test.ts:wrong output offsets table values and omitted paragraphs fail concrete inventory assertions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-placeholders"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong report offset, tablevalue or omittedparagraph fails concreteassertions without undefined/ambiguoussteps."
+      ],
+      "gaps": [
+        "Corruption occurs after native inspection; not independent parser or all-output mutation coverage."
+      ]
+    }
+  ]
+}

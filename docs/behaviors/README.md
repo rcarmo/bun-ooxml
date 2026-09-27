@@ -25,9 +25,9 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 250 scenarios / 638 cases; 603 implemented and 35 planned.
+- Shared: 258 scenarios / 660 cases; 625 implemented and 35 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 259 scenarios / 649 cases; 603 implemented and 46 planned.
+- Combined: 267 scenarios / 671 cases; 625 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -83,10 +83,12 @@ See the [vertical merge contract](../contracts/table-vertical-merge.md).
 `Document.inspectTemplate()` reads body/table text, direct-outline sections,
 rectangular table values and literal placeholders with location offsets. It
 returns immutable snapshots and refuses unsupported inputs without mutation.
-Fourteen native declarations remain unmapped pending central concrete-output
-contracts. The existing response-shape/cache profiles stay planned; no SOW,
-colour-guidance or table-purpose inference is implemented. The 530 existing
-mapping records and 603 executed case identities are unchanged. See the
+Shared v0.31 adds eight scenarios / 22 cases with exact values, source custody,
+bounds, snapshot and refusal predicates. Sixteen partial mappings cover fourteen
+native tests and two wrappers (546 total). Of 530 prior records, 527 are unchanged
+and three inventory guards update only their global implemented count. All 603
+preceding executed identities are unchanged. The thirteen response-shape/cache
+profiles stay planned; no SOW, colour-guidance or table-purpose inference is implemented. See the
 [inspection contract](../contracts/template-inspection.md).
 
 ## Format and operation layout

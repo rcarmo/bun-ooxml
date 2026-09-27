@@ -542,6 +542,21 @@
         "@id-docx-vertical-merge-encoding",
         "@id-docx-vertical-merge-stale"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/template-analysis.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-empty",
+        "@id-docx-template-inventory-placeholders",
+        "@id-docx-template-inventory-refusal",
+        "@id-docx-template-inventory-bounds",
+        "@id-docx-template-inventory-encoding",
+        "@id-docx-template-inventory-snapshot",
+        "@id-docx-template-inventory-scope"
+      ]
     }
   ]
 }

@@ -4,33 +4,41 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 1044,
-  "mappedDeclarations": 530,
+  "totalDeclarations": 1048,
+  "mappedDeclarations": 546,
   "sourceSha256": {
-    "tests/unit/docx-table-merge.test.ts": "18c703e644850a48924ac75efaaa2c00e3579b3b76da215dae80552adb1b21f9",
-    "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
+    "tests/unit/docx-template-inspection.test.ts": "2d4cc100691b945f6c579f97b4cfaa42ed16bd395aba900dde1baa408e7ef993",
+    "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
+    "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
     "src/docx/index.ts": "f84b7a9e6788e547e9b33e86c828f224d506120af5e6088821034bd779db6cdb",
-    "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
+    "src/docx/body-map.ts": "33d9c9420b790db89c0efdf81ea6f118620f3af47b97174717c6399577daecdd",
+    "src/docx/body-insertion.ts": "aef562d13488d4f7d78d44d258fd451669ee85b677682dff35402c1a3f8364bb",
+    "src/docx/paragraph-properties.ts": "498c2369d8a0005b1fc0c1a0182d85b14a4ce72133a5cf456b67483e5f45bd37",
+    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
     "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
     "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
     "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
     "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
-    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
-    "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-    "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+    "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
+    "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e",
+    "tests/unit/docx-table-merge.test.ts": "f6e26e03ce761468736472879229cd461f10c83c314906f3dd529548a74ebf08",
+    "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
+    "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-    "tests/unit/docx-table-vertical-merge.test.ts": "a517b0b476b9902ba618ff4196dbeeceb5c0590412b698766d5fc5e7080a3602",
+    "tests/unit/docx-table-vertical-merge.test.ts": "e64f237a37354adbd337134140c1f17692981ae520f06e4bb7202e2ea2d2e8cb",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076",
     "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
     "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
     "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-    "tests/unit/docx-heading-classification.test.ts": "e59fdb273d47c10b1d6399e5cd9a1728f7ffdc472b5b1723f1b91efe53b0b44a",
-    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+    "tests/unit/docx-heading-classification.test.ts": "d4aca5001b834dc89c99711ac22a92ab0b185d9bc54e834be40d471324104f39",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
     "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
@@ -86,7 +94,6 @@
     "tests/acceptance/table-rows.ts": "428362a65ff56d8d48bc522f28cbb6c69fbfee9dae2b7d504639b25ba9953f32",
     "tests/acceptance/row-texts.ts": "7e970db034c35d0e398e00012f99b66d67bd143feea60d252e75da8c63ae1a1e",
     "src/docx/paragraph-text.ts": "0dbc88686d883e39fa360212396ea1433444e1531dc3c1a48ad94a29fbe563e4",
-    "src/docx/body-insertion.ts": "aef562d13488d4f7d78d44d258fd451669ee85b677682dff35402c1a3f8364bb",
     "src/docx/table-rows.ts": "5d21ea63b48c48827446b28d72233ab74ed5b2c749c6eccb57ad28127dbdde92",
     "tests/unit/docx-core-properties.test.ts": "830ca4634113e5d70834a08c94417c4c7180cb60294e100de9161266d844b26a",
     "tests/unit/docx-document-properties.test.ts": "3e143f3d8bfd8699c79eabcb200f4d6adc281d918b1b39b781e59d7b6c09a578",
@@ -104,8 +111,6 @@
     "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d",
     "tests/unit/docx-body-anchors.test.ts": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
     "tests/unit/docx-body-map.test.ts": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277",
-    "src/docx/body-map.ts": "33d9c9420b790db89c0efdf81ea6f118620f3af47b97174717c6399577daecdd",
-    "src/docx/paragraph-properties.ts": "498c2369d8a0005b1fc0c1a0182d85b14a4ce72133a5cf456b67483e5f45bd37",
     "src/index.ts": "fefda77f70f6bfe362dd6b5b95d1deb6d6f5ec9299ef515e62e4950c40cd6670",
     "tests/acceptance/body-anchors.ts": "6c340f7d86eb2d0f00d74e5699f64d2631f2cabfec6f19ca3185e8326ea25505",
     "workflows/docx/anchor-discovery.feature": "322cf1df8cb454241bf9255cfe62b9f4c84f83042cc27f102b88ef06ff99d911",
@@ -181,6 +186,34 @@
   },
   "ledgers": [
     {
+      "name": "template-inventory",
+      "scopePaths": [
+        "tests/unit/docx-template-inspection.test.ts",
+        "tests/unit/template-inventory-outcomes.test.ts"
+      ],
+      "mappedDeclarations": 16,
+      "sourceSha256": {
+        "tests/unit/docx-template-inspection.test.ts": "2d4cc100691b945f6c579f97b4cfaa42ed16bd395aba900dde1baa408e7ef993",
+        "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
+        "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
+        "src/docx/index.ts": "f84b7a9e6788e547e9b33e86c828f224d506120af5e6088821034bd779db6cdb",
+        "src/docx/body-map.ts": "33d9c9420b790db89c0efdf81ea6f118620f3af47b97174717c6399577daecdd",
+        "src/docx/body-insertion.ts": "aef562d13488d4f7d78d44d258fd451669ee85b677682dff35402c1a3f8364bb",
+        "src/docx/paragraph-properties.ts": "498c2369d8a0005b1fc0c1a0182d85b14a4ce72133a5cf456b67483e5f45bd37",
+        "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+        "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
+        "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
+        "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
+        "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e"
+      }
+    },
+    {
       "name": "table-merging",
       "scopePaths": [
         "tests/unit/docx-table-merge.test.ts",
@@ -190,7 +223,7 @@
       ],
       "mappedDeclarations": 29,
       "sourceSha256": {
-        "tests/unit/docx-table-merge.test.ts": "18c703e644850a48924ac75efaaa2c00e3579b3b76da215dae80552adb1b21f9",
+        "tests/unit/docx-table-merge.test.ts": "f6e26e03ce761468736472879229cd461f10c83c314906f3dd529548a74ebf08",
         "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
         "src/docx/index.ts": "f84b7a9e6788e547e9b33e86c828f224d506120af5e6088821034bd779db6cdb",
         "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -201,12 +234,12 @@
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
         "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-        "tests/unit/docx-table-vertical-merge.test.ts": "a517b0b476b9902ba618ff4196dbeeceb5c0590412b698766d5fc5e7080a3602",
+        "tests/unit/docx-table-vertical-merge.test.ts": "e64f237a37354adbd337134140c1f17692981ae520f06e4bb7202e2ea2d2e8cb",
         "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
         "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
       }
@@ -224,7 +257,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
@@ -237,7 +270,7 @@
       ],
       "mappedDeclarations": 8,
       "sourceSha256": {
-        "tests/unit/docx-heading-classification.test.ts": "e59fdb273d47c10b1d6399e5cd9a1728f7ffdc472b5b1723f1b91efe53b0b44a",
+        "tests/unit/docx-heading-classification.test.ts": "d4aca5001b834dc89c99711ac22a92ab0b185d9bc54e834be40d471324104f39",
         "src/docx/index.ts": "f84b7a9e6788e547e9b33e86c828f224d506120af5e6088821034bd779db6cdb",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
@@ -265,7 +298,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
         "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
@@ -345,7 +378,7 @@
         "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
         "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
         "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "workflows/pptx/notes.feature": "6980daafe08bb43e7ba2f73807a402a3ebabe239f0d41bad81b7c09ca7355f41",
         "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
@@ -375,7 +408,7 @@
         "tests/acceptance/cell-properties.ts": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d",
         "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "src/docx/index.ts": "f84b7a9e6788e547e9b33e86c828f224d506120af5e6088821034bd779db6cdb",
         "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
         "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
@@ -434,7 +467,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/body-anchors.ts": "6c340f7d86eb2d0f00d74e5699f64d2631f2cabfec6f19ca3185e8326ea25505",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -459,7 +492,7 @@
         "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -703,7 +736,7 @@
         "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
         "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
@@ -725,7 +758,7 @@
         "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
         "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "eab08797cf83f5e83f8594df1e2a82cb818f0afcf68ac418c2748fcf6e7d5019",
+        "tests/acceptance/steps.ts": "42e0f099834ce5d04305cb119bca9e644bb4162efb0adc7b3bd56d1b09a09cd2",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
@@ -970,20 +1003,6 @@
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / stale table and cell handles refuse after document mutation while fresh handles stay live",
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / validates table dimensions with bounded rectangular authoring",
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / passes the DOCX table acceptance feature with dedicated bindings",
-    "bun:tests/unit/docx-template-inspection.test.ts:template inspection returns concrete sections placeholders locations and table text without mutating archive",
-    "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
-    "bun:tests/unit/docx-template-inspection.test.ts:plain and empty documents return useful empty inventories without inventing classifications",
-    "bun:tests/unit/docx-template-inspection.test.ts:placeholders span plain runs but never paragraphs and retain Unicode UTF16 offsets and occurrence order",
-    "bun:tests/unit/docx-template-inspection.test.ts:table cell paragraphs have distinct locations and cannot create cross-paragraph placeholders or sections",
-    "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
-    "bun:tests/unit/docx-template-inspection.test.ts:stale external document edits refuse and no header story or macro text is silently included",
-    "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
-    "bun:tests/unit/docx-template-inspection.test.ts:global placeholder and paragraph bounds refuse instead of returning a truncated successful report",
-    "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
-    "bun:tests/unit/docx-template-inspection.test.ts:table count and aggregate placeholder limits apply across cells with no successful truncation",
-    "bun:tests/unit/docx-template-inspection.test.ts:read-only inspection permits protected input and leaves all template response/cache scenarios planned",
-    "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
-    "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
     "bun:tests/unit/docx.test.ts:docx Document / opens from a path or bytes and save() never rewrites the opened source path implicitly",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/docx.test.ts:docx Document / replaces exact cross-run text without reconstructing unaffected runs or formatting",
@@ -1105,7 +1124,7 @@
     "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
     "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
     "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
-    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 638 shared cases plus eleven local-only cases with only reviewed tracking activations",
+    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 660 shared cases plus eleven local-only cases with only reviewed tracking activations",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
@@ -1128,6 +1147,8 @@
     "bun:tests/unit/shared-selection.test.ts:outline rows with shared display names execute and report every distinct identity",
     "bun:tests/unit/table-merge-mappings.test.ts:physical merge mappings cover29 declarations and select26 cases for each axis without granting vertical profile credit",
     "bun:tests/unit/table-merge-mappings.test.ts:physical merge mapping omission stale helper pins unknown keys and invented assertions refuse",
+    "bun:tests/unit/template-inventory-mappings.test.ts:template inventory mappings add16 partial records with22case wrapper and preserve530 prior rows except three totals",
+    "bun:tests/unit/template-inventory-mappings.test.ts:template mappings refuse omitted declarations stale helpers unsupported case keys and invented assertions",
     "bun:tests/unit/test-inventory.test.ts:native inventory recognises aliased and namespace Bun registrations without unrelated lookalikes",
     "bun:tests/unit/test-inventory.test.ts:native inventory keeps declaration counts distinct from each tables and registration loops",
     "bun:tests/unit/test-inventory.test.ts:native inventory marks dynamic suite names, callbacks and conditional registrations explicitly",
@@ -1304,6 +1325,475 @@
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 reconciliation retains direct refusal predicates review flags and uncounted helper separation"
   ],
   "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:template inspection returns concrete sections placeholders locations and table text without mutating archive",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.scope).toBe('main-body-and-tables')",
+        "expect(r.counts).toEqual({paragraphs:8,sections:2,tables:1,placeholders:3})",
+        "expect(r.paragraphs.map(p=>p.text)).toEqual(['Statement for <Customer>','Use <Project> and [TBD].','Role','Hours','<Role>','40','Delivery','No placeholder'])",
+        "expect(r.sections).toEqual([{paragraphIndex:0,bodyIndex:0,text:'Statement for <Customer>',level:1},{paragraphIndex:6,bodyIndex:3,text:'Delivery',level:2}])",
+        "expect(r.tables).toEqual([{index:0,bodyIndex:2,rows:2,columns:2,cells:[['Role','Hours'],['<Role>','40']]}])",
+        "expect(r.paragraphs[4]!.table).toEqual({index:0,row:1,column:0,paragraph:0})",
+        "expect(r.placeholders).toEqual([{paragraphIndex:0,bodyIndex:0,start:14,end:24,text:'<Customer>',name:'Customer'},{paragraphIndex:1,bodyIndex:1,start:4,end:13,text:'<Project>',name:'Project'},{paragraphIndex:4,bodyIndex:2,start:0,end:6,text:'<Role>',name:'Role'}])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Statement for <Customer>')",
+        "expect(t.cell(1,1).text).toBe('40')"
+      ],
+      "outcomes": [
+        "Concrete paragraph/section/table/placeholder values, indexes, UTF16offsets and held handles match with unchanged archive."
+      ],
+      "gaps": [
+        "Selected direct inputs only; no semantic SOW/guidance/cache classification."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-snapshot"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(r)",
+        "expect(read.package.get(n)).toEqual(b)",
+        "expect(Object.isFrozen(value)).toBe(true)",
+        "expect(r.paragraphs.at(-1)!.text).toBe('No placeholder')",
+        "expect(r.counts.placeholders).toBe(3)",
+        "expect(d.inspectTemplate().counts.placeholders).toBe(4)"
+      ],
+      "outcomes": [
+        "Pathsave/reopen reproduces report and members; nested results are frozen and detached across later edit."
+      ],
+      "gaps": [
+        "One fixture/path and one later edit, not crossprocess cache or concurrent isolation."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:plain and empty documents return useful empty inventories without inventing classifications",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-empty"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.inspectTemplate().counts).toEqual({paragraphs:0,sections:0,tables:0,placeholders:0})",
+        "expect(r.sections).toEqual([])",
+        "expect(r.paragraphs[0]!.styleId).toBe('Heading1')",
+        "expect(r.paragraphs[0]!.outlineLevel).toBeNull()",
+        "expect(r.placeholders.map(p=>p.name)).toEqual(['Customer'])",
+        "expect(Object.keys(r).sort()).toEqual(['counts','paragraphs','placeholders','scope','sections','tables'])"
+      ],
+      "outcomes": [
+        "Empty output counts and directstyle/outline policy distinguished from bluecoloured heading-namedstyle."
+      ],
+      "gaps": [
+        "Native blue/style case exceeds central empty/plain inputs; no computed formatting."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:placeholders span plain runs but never paragraphs and retain Unicode UTF16 offsets and occurrence order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-placeholders"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual([{start:3,end:13,name:'Customer'},{start:14,end:24,name:'Customer'}])",
+        "expect(d.inspectBodyMap().placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name})))"
+      ],
+      "outcomes": [
+        "Literal scanner crosses plainruns, keeps UTF16 offsets/order, excludes nested/blank/bracket/crossparagraph tokens; bodymap agrees."
+      ],
+      "gaps": [
+        "Scanner does not classify squarebrackets or semantic guidance; no other story traversal."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:table cell paragraphs have distinct locations and cannot create cross-paragraph placeholders or sections",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-placeholders"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.tables[0]!.cells).toEqual([['<A>\\n<B>\\n<split\\nend>']])",
+        "expect(r.paragraphs.map(p=>p.table!.paragraph)).toEqual([0,1,2,3])",
+        "expect(r.placeholders.map(p=>[p.paragraphIndex,p.name])).toEqual([[0,'A'],[1,'B']])",
+        "expect(r.sections).toEqual([])"
+      ],
+      "outcomes": [
+        "Multiline cell paragraphs retain locations and joinedtext without crossparagraph placeholders or sections."
+      ],
+      "gaps": [
+        "Additional native tableparagraph fixture; not shared sample case identity."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>loaded.inspectTemplate()).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Late fields hyperlinks controls nested/merged cells badgrid and malformedoutline refuse unchanged."
+      ],
+      "gaps": [
+        "Seven native variants, not all malformed OOXML; no partial reporting credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:stale external document edits refuse and no header story or macro text is silently included",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-scope",
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.inspectTemplate().placeholders.map(p=>p.name)).toEqual(['Customer','Project','Role'])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-stale-document'}))",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "outcomes": [
+        "Header excluded with bytecustody; externalmainXML change triggers stale refusal."
+      ],
+      "gaps": [
+        "One header and one mutation; no full story traversal or concurrency."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(expected)",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Aliased UTF16BE report matches original with exactarchivecustody."
+      ],
+      "gaps": [
+        "One encoding variant in this declaration; other encoding case bound by shared wrapper."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:global placeholder and paragraph bounds refuse instead of returning a truncated successful report",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-bounds"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>loaded.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(loaded.package.toBytes()).toEqual(b)"
+      ],
+      "outcomes": [
+        "Global10001 placeholder and paragraph samples refuse limits instead of truncating, archiveunchanged."
+      ],
+      "gaps": [
+        "Native-generated loops not independent producer or timing/allocation evidence."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(changed).not.toBe(source)",
+        "expect(e).toBeInstanceOf(Error)",
+        "expect(()=>read.inspectTemplate()).toThrow()",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Gridcomments/decorations/wrongnamespace/duplicateoutline inputs refuse during load or inspection."
+      ],
+      "gaps": [
+        "Admission may fail at open; not every case reaches inspectTemplate."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:table count and aggregate placeholder limits apply across cells with no successful truncation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-bounds"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(read.package.toBytes()).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "Aggregate placeholders acrosscells and1001tables refuse exact limits with bytecustody."
+      ],
+      "gaps": [
+        "Two concrete bounds only; no performance guarantee or fuzzcompleteness."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:read-only inspection permits protected input and leaves all template response/cache scenarios planned",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-scope"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.inspectTemplate().counts.placeholders).toBe(3)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(templates).toHaveLength(2)",
+        "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
+        "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
+        "expect(inv.counts.cases.implemented).toBe(625)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "outcomes": [
+        "Protectedread permitted and prior13response/cachecases stayplanned; inventorytotalasserted."
+      ],
+      "gaps": [
+        "No response-status/cache implementation or sharedcredit for historical profiles."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(source).not.toBe(p.text(p.mainPart()))",
+        "expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-unsupported'}))",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Nonzero rowoffsets includinglaterrow and mismatched/missingwidths refuse with bytecustody."
+      ],
+      "gaps": [
+        "Native variants are scenariomapped only; no exact compiled row claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(expected)",
+        "expect(read.package.toBytes()).toEqual(before)",
+        "expect(()=>read.inspectTemplate()).toThrow()"
+      ],
+      "outcomes": [
+        "Explicit0/00 rowoffsets preserve report; negative/badlexical offsets refuse unchanged."
+      ],
+      "gaps": [
+        "Admission boundary only; no inherited logicalgrid inference."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/template-inventory-outcomes.test.ts:eight concrete inventory contracts execute22 cases leaving all6 historical response cases planned",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-empty",
+        "@id-docx-template-inventory-placeholders",
+        "@id-docx-template-inventory-refusal",
+        "@id-docx-template-inventory-bounds",
+        "@id-docx-template-inventory-encoding",
+        "@id-docx-template-inventory-snapshot",
+        "@id-docx-template-inventory-scope"
+      ],
+      "caseKeys": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-empty|{\"kind\":\"empty\"}",
+        "@id-docx-template-inventory-empty|{\"kind\":\"plain\"}",
+        "@id-docx-template-inventory-placeholders",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"late-field\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"body-control\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"nested-cell\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"merged-cell\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"row-before\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"row-after\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"width-mismatch\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"missing-width\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"grid-comment\"}",
+        "@id-docx-template-inventory-refusal|{\"defect\":\"stale-wrapper\"}",
+        "@id-docx-template-inventory-bounds|{\"limit\":\"10001-paragraphs\"}",
+        "@id-docx-template-inventory-bounds|{\"limit\":\"10001-placeholders\"}",
+        "@id-docx-template-inventory-bounds|{\"limit\":\"1001-tables\"}",
+        "@id-docx-template-inventory-encoding|{\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-template-inventory-encoding|{\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-template-inventory-snapshot",
+        "@id-docx-template-inventory-scope|{\"context\":\"protected\"}",
+        "@id-docx-template-inventory-scope|{\"context\":\"header\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(22)",
+        "expect(r.counts.cases.planned).toBe(6)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Eight central contracts execute22cases with prior6responsecases planned and noundefined/ambiguoussteps."
+      ],
+      "gaps": [
+        "Outcomes delegated to pinnedbindings, no borrowed other-consumer credit."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
+    {
+      "testId": "bun:tests/unit/template-inventory-outcomes.test.ts:wrong output offsets table values and omitted paragraphs fail concrete inventory assertions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-template-inventory-values",
+        "@id-docx-template-inventory-placeholders"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong report offset, tablevalue or omittedparagraph fails concreteassertions without undefined/ambiguoussteps."
+      ],
+      "gaps": [
+        "Corruption occurs after native inspection; not independent parser or all-output mutation coverage."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "template-inventory"
+    },
     {
       "testId": "bun:tests/unit/docx-table-merge.test.ts:horizontal merge retains first cell text explicit grid and other row through file reopen",
       "status": "partial",
@@ -1615,7 +2105,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(603)",
+        "expect(inv.counts.cases.implemented).toBe(625)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -2099,7 +2589,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(603)",
+        "expect(inv.counts.cases.implemented).toBe(625)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -2622,7 +3112,7 @@
         "expect(p.headingLevel).toBe(0)",
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
-        "expect(inv.counts.cases.implemented).toBe(603)",
+        "expect(inv.counts.cases.implemented).toBe(625)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [

@@ -41,8 +41,7 @@ scope. No external content is fetched.
 The reader accepts Transitional Word body XML with plain paragraphs and direct
 runs, plus rectangular, unmerged tables with explicit grids and matching explicit
 twip cell widths. Row grid offsets must be absent or lexically valid zero values.
-Fields, hyperlinks,
-controls, revisions, nested/merged tables, malformed selected properties, missing
+Fields, hyperlinks, controls, revisions, nested/merged tables, malformed selected properties, missing
 or mismatched grids, lexical barriers and unknown body structure refuse the whole
 inspection. A stale wrapper refuses instead of inspecting an old snapshot.
 Protection permits reading; it grants no editing permission.
@@ -55,7 +54,14 @@ is no partial-success or truncated result. Outputs remain valid snapshots after
 later document edits and expose no editable anchor handles.
 
 Fourteen native tests cover concrete output, path save/reopen, unchanged bytes,
-immutable snapshots, UTF-16BE aliases, bounds and late refusal. These tests are
-unmapped pending central concrete-output contracts. Existing template response
-shape, status, cache and metadata profiles remain planned; returning an object
-does not satisfy their distinct tool/cache APIs or establish semantic analysis.
+immutable snapshots, UTF-16BE aliases, bounds and late refusal. Shared v0.31 adds
+eight [concrete inventory contracts](../../references/fixtures-ooxml/contracts/template-inventory.md)
+with 22 cases. `tests/acceptance/template-inventory.ts` executes exact results,
+encoding, source custody, scope, bounds and snapshot predicates. Corrupted offsets,
+table values and omitted paragraphs fail its negative controls.
+
+Sixteen partial mappings cover fourteen native declarations and two wrappers;
+only the positive shared wrapper selects the 22 case keys. The thirteen existing
+template response/status/cache profiles remain planned. Returning an object does
+not satisfy those distinct tool/cache APIs or establish semantic classification;
+other consumers receive no execution credit from Bun's binding.
