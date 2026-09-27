@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 618,
+  "nativeDeclarations": 630,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 391,
+  "withoutStagingCount": 403,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2186,6 +2186,66 @@
     }
   ],
   "withoutStaging": [
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:three appended runs remain distinct and concatenate through returned fresh paragraph handles",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:per-run authoring preserves selected formatting after real path save and reopen",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:append retains existing paragraph/run fragments, sibling paragraphs and unrelated member bytes",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:self-closing paragraphs expand with namespace safety and empty text still appends one run",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:invalid text, executable patches and conflicting formatting refuse before mutation",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:unsupported, revised and lexical target topology refuses without silently flattening",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:document protection and external XML changes refuse held append handles",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:staged write and serialization failure preserve paragraph/cell handles and package",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:table append preserves grid and expires cell snapshots, with UTF-16 payload retained",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:append defaults do not borrow direct formatting from previous runs and preserve explicit null",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-append-run.test.ts:run append enforces complete XML output bounds before mutating a nearly full package",
+      "path": "tests/unit/docx-append-run.test.ts",
+      "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
     {
       "id": "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
       "path": "tests/unit/docx-cell-properties.test.ts",

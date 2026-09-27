@@ -1,4 +1,5 @@
 import { OoxmlError } from "../errors.ts";
+import {appendParagraphRun} from './append-run.ts';
 import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
 export type {DirectCellProperties,CellPropertiesPatch,CellTopBorder} from './cell-properties.ts';
 import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
@@ -228,6 +229,12 @@ export class Paragraph {
   effectiveRunFormatting(): EffectiveRunFormatting[] {
     this.ensureFresh();
     return this.documentRef.inspectParagraphFormatting(this.snapshot);
+  }
+
+  /** Append one independent plain-text run and return a fresh paragraph handle. */
+  appendRun(text: string, formatting: RunFormattingPatch = {}): Paragraph {
+    this.ensureFresh(); this.ensureSearchable();
+    return this.documentRef.appendRunToParagraph(this.snapshot,text,formatting);
   }
 
   /** Direct paragraph values only; null means no direct property. */
@@ -789,6 +796,22 @@ export class Document {
     if(!result.changedRuns)return {changedRuns:0};
     this.commitParagraphProperties(result.xml);
     return {changedRuns:result.changedRuns};
+  }
+
+  appendRunToParagraph(snapshot:ParagraphSnapshot,text:string,formatting:RunFormattingPatch):Paragraph {
+    this.assertParagraphSnapshot(snapshot);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    this.assertFormattingUnprotected();
+    const nextXml=appendParagraphRun(this.xml,snapshot.element,text,formatting);
+    const nextVersion=this.version+1,nextDocument=parseXml(nextXml);
+    const collections=collectDocumentCollections(nextDocument,nextVersion,this.tableVersion);
+    const expected=this.paragraphSnapshots.map((p,i)=>i===snapshot.index?p.text+text:p.text);
+    if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(expected))fail('docx-run-unsafe','Appending a run changed unexpected paragraph text');
+    const grids=(tables:TableSnapshot[])=>tables.map(t=>[t.rows,t.columns]);
+    if(JSON.stringify(grids(collections.tables.tables))!==JSON.stringify(grids(this.tableSnapshots)))fail('docx-run-unsafe','Appending a run changed the table grid');
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
+    this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+    return this.paragraphHandles[snapshot.index]!;
   }
 
   private assertParagraphSnapshot(snapshot: ParagraphSnapshot): void {
