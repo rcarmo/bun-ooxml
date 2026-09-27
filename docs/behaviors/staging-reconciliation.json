@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 710,
+  "nativeDeclarations": 720,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 483,
+  "withoutStagingCount": 493,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4180,6 +4180,56 @@
       "id": "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
       "path": "tests/unit/xlsx-cell-style.test.ts",
       "sourceSha256": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:static formula analysis counts references without interpreting strings, functions or exponents as cells",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:quoted sheet names and independent flags retain exact UTF8 byte spans and reversed endpoints",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:unsupported or incomplete grammar throws without returning earlier references",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:bounded expression operators and nested supported functions preserve reference order",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:invalid source types and Unicode, byte, token, reference and nesting limits refuse deterministically",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:finite expression matrix slices reparse and SUM wrapping shifts only byte positions",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:returned references and coordinate objects are independent across calls and endpoints",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:literal punctuation and doubled quotes never become syntax or hidden dependency records",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:canonical formula analysis cases detect false counts, corrupted flags/spans and fabricated refusal success",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:reference and nesting boundary values succeed without widening unsupported axis or sheet syntax",
+      "path": "tests/unit/xlsx-formula-analysis.test.ts",
+      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
     },
     {
       "id": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",

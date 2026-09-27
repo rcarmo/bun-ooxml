@@ -40,7 +40,7 @@ The shared reference contains **200 assets**. The table lists available tests; a
 | references/fixtures-ooxml/workflows/pptx/text-box.feature | implemented | 2 | 23 | 23 | 0 | 77 |
 | references/fixtures-ooxml/workflows/xlsx/cell-style.feature | implemented | 2 | 27 | 27 | 0 | 90 |
 | references/fixtures-ooxml/workflows/xlsx/creation.feature | implemented | 7 | 7 | 7 | 0 | 29 |
-| references/fixtures-ooxml/workflows/xlsx/formula-references.feature | mixed | 9 | 45 | 13 | 32 | 152 |
+| references/fixtures-ooxml/workflows/xlsx/formula-references.feature | mixed | 9 | 45 | 32 | 13 | 152 |
 | references/fixtures-ooxml/workflows/xml/comparison.feature | implemented | 5 | 10 | 10 | 0 | 40 |
 | references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 6 | 0 | 19 |
 | references/fixtures-ooxml/workflows/xml/parsing.feature | implemented | 25 | 31 | 31 | 0 | 116 |

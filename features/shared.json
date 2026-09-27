@@ -407,7 +407,11 @@
       "runner": "bun",
       "scenarioIds": [
         "@id-xlsx-go-direct-range-parsing",
-        "@id-xlsx-go-direct-range-refusal"
+        "@id-xlsx-go-direct-range-refusal",
+        "@id-xlsx-go-formula-analysis-counts",
+        "@id-xlsx-go-formula-quoted-sheet-flags",
+        "@id-xlsx-go-formula-analysis-refusal",
+        "@id-xlsx-go-formula-literal-punctuation"
       ]
     },
     {
