@@ -66,7 +66,7 @@ controls reject wrong values, reversed order and missing or extra array members.
 ## Requirement mappings
 
 The slide-order, effective-formatting, XML-value, PPTX-core, DOCX-model,
-XLSX-comments and formula reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
+DOCX-anchor, XLSX-comments and formula reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
 an input variant missing from the scenario. Each report has its own source hashes
 and required files; one cannot supply a missing reference for another.
 
@@ -129,6 +129,22 @@ assignment, converting an absent ID to an empty string. The native API returns
 predicting its appearance. None of these three shared getter scenarios saves or
 reopens a file. Their wrapper tests assert aggregate results and failure counts;
 separate native tests provide the saved-file checks.
+
+The [DOCX-anchor ledger](docx-anchors-mappings.json) records 28 declarations and
+122 direct assertion expressions from the body-anchor and body-map suites.
+Two acceptance wrappers link to exact case keys; the other 26 records link at
+scenario level. Their 251 predecessor mappings remain unchanged. Wrappers check
+aggregate results; semantic predicates live in the pinned bindings. Native
+listing and encoding tests reopen bytes, while the direct map test saves and
+reopens a real path. Insertion formatting is checked before save, with paragraph
+order and unrelated payloads checked after reopen. Negative map-custody controls
+require an assertion failure at the request step, not a serialization error.
+
+Headings use explicit outline levels, not inherited style names. Map sections
+count heading markers rather than Word section breaks; placeholders are bounded
+literal occurrences in direct body paragraphs, excluding table cells. No mapping
+links to the planned tool-hint case. These records add no execution, transport or
+rendering credit; dynamic and nested assertions retain their inventory flags.
 
 The [formula ledger](formula-references-mappings.json) records 31 declarations
 and 127 direct assertion expressions from the range, analysis and remapping
