@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {mkdtemp,rm} from 'node:fs/promises';import {join} from 'node:path';import {tmpdir} from 'node:os';
-import {Document,type BodyAnchor} from '../../src/index.ts';
+import {Document,type BodyAnchor,type BodyMap} from '../../src/index.ts';
 import type {StepBinding} from '../../scripts/gherkin.ts';
-type State={root:string;path:string;document:Document;anchors:readonly BodyAnchor[];selected?:BodyAnchor;inserted?:string;success?:boolean;original:Uint8Array};
+type State={root:string;path:string;document:Document;anchors:readonly BodyAnchor[];selected?:BodyAnchor;inserted?:string;success?:boolean;original:Uint8Array;map?:BodyMap};
 const state=(c:Record<string,unknown>)=>c.state as State,roots=new Set<string>();
 export async function cleanupBodyAnchors(){await Promise.all([...roots].map(async root=>{await rm(root,{recursive:true,force:true});roots.delete(root);}));}
 async function setup(c:Record<string,unknown>,first:string,second:string,body1:string,body2:string){
@@ -11,6 +11,11 @@ async function setup(c:Record<string,unknown>,first:string,second:string,body1:s
 }
 export const scenarioIds=['@id-python-word-anchor-headings-paragraphs','@id-python-word-anchor-text-filter','@id-python-word-anchor-discover-insert'];
 export const bindings:StepBinding[]=[
+ {pattern:/^a saved Word document has heading "([^"]+)", paragraph "([^"]+)", and a 2x2 Role\/Count table with Architect and 1$/,run:async(c,heading,text)=>{const s=state(c);s.root=await mkdtemp(join(tmpdir(),'body-map-acceptance-'));roots.add(s.root);s.path=join(s.root,'document.docx');const d=Document.create();d.addParagraph(heading!).setProperties({outlineLevel:0});d.addParagraph(text!);const t=d.addTable(2,2);t.cell(0,0).text='Role';t.cell(0,1).text='Count';t.cell(1,0).text='Architect';t.cell(1,1).text='1';await d.save(s.path);s.original=await Bun.file(s.path).bytes();s.document=await Document.open(s.path);assert.deepEqual(s.document.tables[0]!.rowTexts(0),['Role','Count']);assert.deepEqual(s.document.tables[0]!.rowTexts(1),['Architect','1']);}},
+ {pattern:/^its Word document map is requested$/,run:async c=>{const s=state(c);s.map=s.document.inspectBodyMap();assert.deepEqual(s.document.package.toBytes(),s.original);assert.deepEqual(await Bun.file(s.path).bytes(),s.original);}},
+ {pattern:/^the map counts (\d+) section and (\d+) table$/,run:(c,sections,tables)=>{assert.equal(state(c).map!.counts.sections,Number(sections));assert.equal(state(c).map!.counts.tables,Number(tables));}},
+ {pattern:/^the map counts at least (\d+) placeholder and at least (\d+) anchors$/,run:(c,placeholders,anchors)=>{assert(state(c).map!.counts.placeholders>=Number(placeholders));assert(state(c).map!.counts.anchors>=Number(anchors));}},
+ {pattern:/^the map has a nonempty anchors list$/,run:c=>assert(state(c).map!.anchors.length>0)},
  {pattern:/^a saved Word document has headings "([^"]+)" and "([^"]+)" and paragraphs "([^"]+)" and "([^"]+)"$/,run:setup},
  {pattern:/^a saved Word document has headings "([^"]+)" and "([^"]+)" with paragraphs "([^"]+)" and "([^"]+)"$/,run:setup},
  {pattern:/^Word anchors are listed without a query$/,run:async c=>{const s=state(c);s.anchors=s.document.inspectBodyAnchors();assert.deepEqual(s.document.package.toBytes(),s.original);assert.deepEqual(await Bun.file(s.path).bytes(),s.original);}},

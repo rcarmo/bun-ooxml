@@ -106,8 +106,10 @@ identify headings; style names and inherited outlines are not resolved. Use
 `document.insertParagraphAfter(anchor, text, options?)` to insert after a selected
 paragraph, then save and reopen. Anchors are document-owned and expire after an
 edit; copying an anchor or changing raw main XML makes insertion refuse. Table
-cell paragraphs and other stories are outside this API. See
-[body anchors](../contracts/body-anchors.md).
+cell paragraphs and other stories are outside this API. `inspectBodyMap()` adds
+counts of those direct headings, top-level tables and literal `<name>` occurrences,
+plus frozen placeholder records with paragraph-text offsets. Its section count is
+heading markers, not Word section breaks. See [body anchors](../contracts/body-anchors.md).
 
 ## Existing cell styles
 

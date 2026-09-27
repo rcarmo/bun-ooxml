@@ -7,7 +7,7 @@ The shared reference contains **202 assets**. The table lists available tests; a
 | features/planned/cross-language-followups.feature | planned | 3 | 3 | 0 | 3 | 13 |
 | features/planned/full-port.feature | planned | 5 | 7 | 0 | 7 | 28 |
 | features/planned/office-mutation-additions.feature | planned | 1 | 1 | 0 | 1 | 4 |
-| references/fixtures-ooxml/workflows/docx/anchor-discovery.feature | mixed | 5 | 5 | 3 | 2 | 23 |
+| references/fixtures-ooxml/workflows/docx/anchor-discovery.feature | mixed | 5 | 5 | 4 | 1 | 23 |
 | references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 13 | 23 | 14 | 9 | 102 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 4 | 8 | 8 | 0 | 47 |
 | references/fixtures-ooxml/workflows/docx/document-model.feature | mixed | 29 | 70 | 61 | 9 | 233 |

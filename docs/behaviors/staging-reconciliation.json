@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 867,
+  "nativeDeclarations": 881,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 640,
+  "withoutStagingCount": 654,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2315,6 +2315,76 @@
       "id": "bun:tests/unit/docx-body-anchors.test.ts:saved anchor fixtures are cleaned after both successful cases and failed insertion reads",
       "path": "tests/unit/docx-body-anchors.test.ts",
       "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:body map reports exact saved heading table placeholder and anchor counts without changing file or package bytes",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:empty documents and nonheading body paragraphs never acquire synthetic section counts",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:all direct heading levels count markers including repeated titles rather than Word section breaks",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:placeholder scanning preserves repeated text whitespace and UTF16 offsets across direct runs",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:placeholder grammar ignores empty whitespace-only nested oversized and unterminated spans",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:map table counts are top-level only and exclude table-cell text and nested tables from discovery",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:map records are frozen snapshots and their issued anchors retain normal ownership and staleness",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:body map refuses unsupported body paragraph topology and stale main XML without partial counts",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:protection permits body-map inspection without modifying any member or document text",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:aliased UTF16 body maps preserve decoded placeholders and the full original archive",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:placeholder occurrence limit rejects excess output without invalidating existing paragraph handles",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:canonical saved map case checks all counts and a nonempty anchor list",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:canonical map predicates independently reject false counts empty anchors and changed file custody",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-map.test.ts:canonical map temporary source directories are removed after positive and negative count assertions",
+      "path": "tests/unit/docx-body-map.test.ts",
+      "sourceSha256": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277"
     },
     {
       "id": "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",

@@ -6,6 +6,8 @@ export type {CoreProperties,CorePropertiesPatch} from '../opc/core-properties.ts
 import {appendParagraphRun} from './append-run.ts';
 import {replaceParagraphText} from './paragraph-text.ts';
 import {bodyInsertionTarget,insertBodyParagraph} from './body-insertion.ts';
+import {bodyMap,type BodyMap} from './body-map.ts';
+export type {BodyMap,BodyPlaceholder} from './body-map.ts';
 import {editTableRow} from './table-rows.ts';
 import {readTableStyle,editTableStyle} from './table-style.ts';
 import {readRowHeader,editRowHeader} from './row-header.ts';
@@ -639,6 +641,13 @@ export class Document {
     const needle=query?.toLowerCase();const selected=needle?rows.filter(a=>a.text.toLowerCase().includes(needle)):rows;
     for(const anchor of selected)this.bodyAnchors.set(anchor,{version:this.version,bytes});
     return Object.freeze(selected);
+  }
+
+  /** Read direct-body heading/table counts and bounded literal placeholders without editing. */
+  inspectBodyMap():BodyMap {
+    const anchors=this.inspectBodyAnchors();
+    const {body}=bodyInsertionTarget(this.xml,this.xmlDocument,0);
+    return bodyMap(anchors,body.children.filter(n=>isWord(n,'tbl')).length);
   }
 
   /** Insert after a captured body paragraph; all structural snapshot handles expire on success. */
