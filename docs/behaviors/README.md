@@ -29,7 +29,7 @@ path/hash. The coverage table reports the same independent denominators:
 - Local-only: zero scenarios or cases. The eleven former local cases are now shared planned contracts.
 - Combined: 302 scenarios / 789 cases; 729 implemented and 60 planned.
 
-The additional planned case specifies removal of an owned nonstandard XLSX calculation chain; it does not add Bun execution. The earlier inventory update closed an omission of thirteen template cases. Earlier release
+The owned nonstandard XLSX calculation-chain case remains planned for Bun. Shared v0.46 records Go's separately run binding and does not change Bun's 729 executed cases. The earlier inventory update closed an omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
 472 mapping records; visibility does not award a pass.
 
