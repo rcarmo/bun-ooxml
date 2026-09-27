@@ -3,7 +3,9 @@
   "consumer": "bun",
   "executionCredit": false,
   "scopePaths": [
-    "tests/unit/pptx.test.ts"
+    "tests/unit/pptx.test.ts",
+    "tests/unit/pptx-notes-edit.test.ts",
+    "tests/unit/pptx-notes-utf8.test.ts"
   ],
   "sourceSha256": {
     "tests/unit/pptx.test.ts": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
@@ -16,7 +18,13 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/native/pptx-text.feature": "d2e710f66e78dfa0beabf5d7076d7c67fe4e686744f008a2a134122749cb5444"
+    "workflows/native/pptx-text.feature": "d2e710f66e78dfa0beabf5d7076d7c67fe4e686744f008a2a134122749cb5444",
+    "tests/unit/pptx-notes-edit.test.ts": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
+    "tests/unit/pptx-notes-utf8.test.ts": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+    "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
+    "tests/acceptance/notes-editing.ts": "9d79581028fde05cb5538c480e673e65b303d9624854bdda0129470ca4afdeb6",
+    "tests/acceptance/steps.ts": "34fc494bddc484a245ac018e54d4328a5485b3b15157b78d06b6b015229e3a5b",
+    "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e"
   },
   "mappings": [
     {
@@ -157,6 +165,595 @@
       ],
       "gaps": [
         "One no-op presentation is tested. The native declaration reads saved bytes but does not reopen the saved path; the separate acceptance binding adds that check. Path-open toBytes and byte-open disk save are not independently asserted. No edited-presentation serialization or rendering claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-exact-splice"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(target.text).toBe('Remember to emphasize the Gothic elements')",
+        "expect(s.replaceNotesAt(target,'Updated speaker notes')).toEqual({changedParts:[notes]})",
+        "expect(p.package.text(notes)).toBe(before.replace('Remember to emphasize the Gothic elements','Updated speaker notes'))",
+        "expect(after.names()).toEqual(original.names())",
+        "expect(after.get(name)).toEqual(original.get(name))",
+        "expect((await Presentation.open(saved)).slides[0]!.inspectNotesText().text).toBe('Updated speaker notes')"
+      ],
+      "outcomes": [
+        "The original notes text and changed-part list match, the live notes XML equals one exact text splice, and serialized-byte reopen retains replacement text, part names and every other payload."
+      ],
+      "gaps": [
+        "Uses byte reopen, not the required new path save/reopen. Exact lexical splice is compared before serialization; no Office rendering or independent schema result is asserted here.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>other.slides[0]!.replaceNotesAt(target,'foreign')).toThrow()",
+        "expect(()=>s.replaceNotesAt({...target},'forged')).toThrow()",
+        "expect(()=>s.replaceNotesAt(target,text)).toThrow()",
+        "expect(p.package.toBytes()).toEqual(bytes)",
+        "expect(s.replaceNotesAt(target,target.text)).toEqual({changedParts:[]})",
+        "expect(s.inspectNotesText().text).toBe('fresh')"
+      ],
+      "outcomes": [
+        "Foreign and forged string targets refuse; NUL, tab, CR and unpaired-surrogate writes refuse with the first archive unchanged. A held-target identical string returns no changed parts and exact archive bytes, then a fresh replacement reads back."
+      ],
+      "gaps": [
+        "There is no raw FF input in this declaration, so the compound canonical refusal is incomplete. The other session archive is not compared. The first archive is checked during invalid-text attempts and after no-op rather than immediately after each foreign/forged attempt.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:changed notes stale other held targets and empty text can be refilled",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-clear-stale-refill"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesAt(second,'stale')).toThrow('stale')",
+        "expect(s.inspectNotesText().text).toBe('')",
+        "expect(s.inspectNotesText().text).toBe('refilled')"
+      ],
+      "outcomes": [
+        "After clearing, the other held target refuses as stale, a new inspection reads empty notes, and a fresh replacement reads refilled."
+      ],
+      "gaps": [
+        "Direct in-memory clear/stale/refill predicates match the scenario; this record remains scenario-only. No archive-byte refusal assertion, save/reopen or unrelated-member comparison occurs here.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:direct notes mutation and relationship mutation invalidate captured targets",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-part-fingerprint-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesAt(t,'stale')).toThrow('stale')",
+        "expect(p.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Appending whitespace to either the notes XML or slide relationship XML makes the held target refuse as stale and retains the externally changed archive."
+      ],
+      "gaps": [
+        "The canonical input replaces Gothic with Victorian in the notes part. This test instead appends whitespace and adds a separate relationship case; no successful rewrite or disk save.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:self-closing leaf expands and edge whitespace writes XML space preserve",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-self-closing-fill",
+        "@id-pptx-go-notes-edge-space-preserve"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.inspectNotesText().text).toBe('filled')",
+        "expect(p.package.text(notes)).toContain('<a:rPr b=\"1\"/>')",
+        "expect(attribute(leaf,'space','http://www.w3.org/XML/1998/namespace')).toBe('preserve')"
+      ],
+      "outcomes": [
+        "A self-closing bold text run accepts filled text and retains its rPr fragment. A separate edge-space example finds the exact text leaf and asserts its XML-namespace space attribute is preserve."
+      ],
+      "gaps": [
+        "Two independently opened fixtures share one native declaration; property preservation is an extra check. No saved readback or package custody loop. The space value is selected through a find predicate before the direct attribute assertion.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:multiline uses only first-run template and preserves boundary empty paragraphs",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-multiline-template"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.replaceNotesAt(t,t.text)).toEqual({changedParts:[]})",
+        "expect(p.package.get(notes)).toEqual(before)",
+        "expect(s.inspectNotesText().text).toBe('\\n A&B \\n雪\\n')",
+        "expect(p.package.text(notes)).not.toContain('b=\"1\"')"
+      ],
+      "outcomes": [
+        "An identical string preserves the notes member bytes and reports no changed parts; a multiline replacement reads back boundary newlines and has no literal bold attribute anywhere in the notes part."
+      ],
+      "gaps": [
+        "Uses different A&B/snow text and an extra centered paragraph property. There is no direct four-paragraph count, unlike the shared case. No path save, reopen or unrelated-member comparison.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:multiline copies selected paragraph and first-run property fragments",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-template-fragments"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.package.text(notes).split(token).length-1).toBe(2)"
+      ],
+      "outcomes": [
+        "After replacing with a newline b, each of the four selected color/font/language/bullet fragments occurs exactly twice in live notes XML."
+      ],
+      "gaps": [
+        "The native first run b=\"1\" differs from canonical b=\"0\"; the shared fixture includes the explicit namespace on the replacement paragraph. No getter checks the new a/b text, and other property values, whole payload preservation and saved readback are not asserted.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:missing notes and unsupported field topology refuse without creating or rewriting parts",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>minimal.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(minimal.package.toBytes()).toEqual(bytes)",
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Inspecting missing notes or an authored field-bearing notes paragraph throws, leaving the respective archive unchanged."
+      ],
+      "gaps": [
+        "Control-only inspection refusal; no replacement is attempted and no foreign/NUL/FF/tab compound sequence runs. Missing notes use the separate minimal fixture.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "For listed locks, extensions, shared ownership, fragment targets, protection, wrong content type and duplicate body placeholders, notes inspection refuses without changing the altered archive."
+      ],
+      "gaps": [
+        "Control-only finite graph/topology inspection matrix. No mutation call, exact refusal code, raw invalid UTF-8 or complete schema validation is asserted.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:serialization failure rolls back notes and retains a usable target",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesAt(target,'changed')).toThrow('serialize failed')",
+        "expect(p.package.toBytes()).toEqual(before)",
+        "expect(s.inspectNotesText().text).toBe('retry')"
+      ],
+      "outcomes": [
+        "Injected serialization failure during a string edit retains the archive; restoring serialization allows the same target to change notes to retry and read it back."
+      ],
+      "gaps": [
+        "Control-only transactional extension. No package-set injection, real filesystem failure or canonical invalid-input sequence in this declaration.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:eight canonical existing-notes scenarios execute saved and in-memory predicates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-exact-splice",
+        "@id-pptx-go-notes-refusal-and-noop-custody",
+        "@id-pptx-go-notes-clear-stale-refill",
+        "@id-pptx-go-notes-part-fingerprint-refusal",
+        "@id-pptx-go-notes-self-closing-fill",
+        "@id-pptx-go-notes-edge-space-preserve",
+        "@id-pptx-go-notes-multiline-template",
+        "@id-pptx-go-notes-template-fragments"
+      ],
+      "caseKeys": [
+        "@id-pptx-go-notes-exact-splice",
+        "@id-pptx-go-notes-refusal-and-noop-custody",
+        "@id-pptx-go-notes-clear-stale-refill",
+        "@id-pptx-go-notes-part-fingerprint-refusal",
+        "@id-pptx-go-notes-self-closing-fill",
+        "@id-pptx-go-notes-edge-space-preserve",
+        "@id-pptx-go-notes-multiline-template",
+        "@id-pptx-go-notes-template-fragments"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(8)"
+      ],
+      "outcomes": [
+        "All eight selected canonical notes cases pass through the notes-specific bindings with an empty failure list and eight passing cases."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; semantic predicates are delegated to the pinned notes bindings. Only the exact-splice case saves to a real path. The compound case uses the string entry point for no-op and checks only the FF error code explicitly; the other three refusals require Error instances.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-exact-splice"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(reopened.slides[0]!.inspectNotesText().text).toBe('first\\n second ')",
+        "expect([...reopened.package.get(notes)!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.text(notes)).toContain(fragment)"
+      ],
+      "outcomes": [
+        "Aliased UTF-16LE notes replacement survives byte reopen with the requested multiline text, original BOM and every captured non-body placeholder fragment."
+      ],
+      "gaps": [
+        "Native codec/namespace extension with different text and structural replacement. Byte reopen only; the non-body fragment loop has no explicit nonempty-count assertion and there is no all-member custody loop.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:unknown notes extensions and removed slide enrollment refuse rather than editing hidden contexts",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(before)",
+        "expect(()=>q.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(q.package.toBytes()).toEqual(removed)"
+      ],
+      "outcomes": [
+        "An unknown notes extension and removed slide enrollment each make notes inspection refuse, retaining the externally altered archive."
+      ],
+      "gaps": [
+        "Control-only inspection/source extension. No mutation attempt, canonical invalid inputs or exact error code; no save/reopen.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.slides[0]!.inspectNotesText()).toThrow()",
+        "expect(p.package.toBytes()).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "Unknown nested body/list-style/root metadata and an unsupported body attribute make notes inspection throw and preserve each altered archive."
+      ],
+      "gaps": [
+        "Control-only finite inspection matrix; no successful replacement, canonical invalid-input sequence or complete DrawingML schema validation.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-exact-splice"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.replaceNotesUtf8At(target,input)).toEqual({changedParts:[part]})",
+        "expect(input).toEqual(before)",
+        "expect(s.inspectNotesText().text).toBe(value)",
+        "expect(()=>s.replaceNotesUtf8At(target,utf8('stale'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(after.slides[0]!.inspectNotesText().text).toBe(value)",
+        "expect(after.package.names()).toEqual([...parts.keys()].sort())",
+        "expect(after.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Owned UTF-8 input yields the requested Unicode/multiline text and notes-only change receipt; caller input remains intact and later buffer mutation leaves live text unchanged. Old target refuses, while real path save/reopen retains exact text, part-name set and every other member payload."
+      ],
+      "gaps": [
+        "Native byte-entry extension with different text; it does not compare an exact one-leaf lexical splice. It checks Unicode readback and package custody, without Office rendering or schema assertions.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:malformed UTF8 sequences refuse as encoding errors without consuming the held target",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,input)).toThrow(expect.objectContaining({code:'PPTX_NOTES_UTF8_INVALID'}))",
+        "expect(input).toEqual(copy)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})",
+        "expect(s.replaceNotesUtf8At(t,utf8('retry'))).toEqual({changedParts:[part]})"
+      ],
+      "outcomes": [
+        "Seven malformed UTF-8 sequences including FF refuse with PPTX_NOTES_UTF8_INVALID while preserving input and archive bytes. A same-target byte no-op preserves the archive; a later retry reports the notes part changed."
+      ],
+      "gaps": [
+        "Partial compound input coverage only: foreign, NUL and tab are tested elsewhere. Native no-op uses bytes while canonical no-op uses a string. The retry receipt is checked, but its text is not read back here.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:valid UTF8 XML controls and line policy still refuse through the existing notes editor",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,utf8(text))).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})"
+      ],
+      "outcomes": [
+        "Valid UTF-8 encoding of NUL/tab/CR/CRLF and two XML-invalid code points refuses with archive unchanged; byte no-op then reports no changes and keeps exact bytes."
+      ],
+      "gaps": [
+        "Partial compound input coverage: this declaration has no foreign target or malformed FF byte, and asserts generic errors rather than specific codes. No save/reopen.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 byte no-op retains archive and handles; empty and leading BOM bytes are literal text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody",
+        "@id-pptx-go-notes-clear-stale-refill"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(withBom))).toEqual({changedParts:[part]})",
+        "expect(s.inspectNotesText().text).toBe(withBom)",
+        "expect((await Presentation.open(d.package.toBytes())).slides[0]!.inspectNotesText().text).toBe(withBom)",
+        "expect(s.inspectNotesText().text).toBe('')",
+        "expect(s.replaceNotesUtf8At(empty,new Uint8Array())).toEqual({changedParts:[]})",
+        "expect(d.package.toBytes()).toEqual(saved)",
+        "expect(s.inspectNotesText().text).toBe('refilled')"
+      ],
+      "outcomes": [
+        "A byte no-op preserves archive and target; a leading UTF-8 BOM becomes literal FEFF text and survives byte reopen. Empty input clears notes, a second empty input preserves exact bytes, and a fresh target refills notes."
+      ],
+      "gaps": [
+        "Native sequential byte/BOM extension; no second held target is tested for staleness after clearing, and there is no compound foreign/NUL/FF/tab refusal sequence. Reopen occurs for the BOM state only.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:foreign forged wrong-slide and externally changed notes targets refuse bytes including no-op input",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody",
+        "@id-pptx-go-notes-part-fingerprint-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>other.slides[0]!.replaceNotesUtf8At(t,utf8('foreign'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(other.package.toBytes()).toEqual(ob)",
+        "expect(()=>s.replaceNotesUtf8At({...t},utf8(t.text))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(()=>d.slides[1]!.replaceNotesUtf8At(t,utf8('foreign'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>slide.replaceNotesUtf8At(anchor,utf8(anchor.text))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(fresh.package.toBytes()).toEqual(changed)"
+      ],
+      "outcomes": [
+        "Foreign session, forged and wrong-slide byte targets refuse with stale codes; the foreign archive and the first archive retain their bytes. Notes/relationship whitespace edits make held byte no-ops refuse and retain external changes."
+      ],
+      "gaps": [
+        "Native byte-entry and graph extension; canonical fingerprint input changes Gothic to Victorian. No invalid-byte decode or NUL/tab sequence here. First-archive equality follows the combined forged/wrong-slide attempts, not each one separately.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:byte admission rejects shared detached spoofed and oversized views before caller hooks",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,large)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_LIMIT'}))",
+        "expect(called).toBe(false)",
+        "expect(()=>s.replaceNotesUtf8At(t,shared)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_SOURCE'}))",
+        "expect(()=>s.replaceNotesUtf8At(t,input as Uint8Array)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_SOURCE'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})"
+      ],
+      "outcomes": [
+        "Intrinsic bounds reject oversized views without invoking spoofed getters; shared storage, detached/non-byte/spoofed/proxy views refuse with source codes. Final archive bytes remain exact and the held target still accepts a byte no-op."
+      ],
+      "gaps": [
+        "Control-only byte-admission extension. Archive equality is checked after the rejection series, not after every call. No raw FF decoding, saved output or peak-memory measurement.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:Buffer subview decoding ignores iterator slice and buffer getters and preserves adjacent bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-exact-splice"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.replaceNotesUtf8At(t,view)).toEqual({changedParts:[part]})",
+        "expect(s.inspectNotesText().text).toBe('雪😀')",
+        "expect(called).toBe(false)",
+        "expect(Uint8Array.from(input)).toEqual(before)"
+      ],
+      "outcomes": [
+        "A Buffer subview decodes only snow and emoji, reports the notes part changed and ignores overridden getters/iterators/slice; the complete backing buffer, including adjacent bytes, remains unchanged."
+      ],
+      "gaps": [
+        "Native buffer-ownership extension with different text. Checks live getter and input custody only; no archive-member comparison, path save or exact lexical splice.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:package write and serialization faults roll back byte replacements and permit same-target retry",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,utf8('changed'))).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8('retry'))).toEqual({changedParts:[part]})",
+        "expect(s.inspectNotesText().text).toBe('retry')"
+      ],
+      "outcomes": [
+        "Injected package-set and serialization faults refuse byte replacements while retaining the original archive; restoring each method permits same-target retry with the expected changed part and text."
+      ],
+      "gaps": [
+        "Control-only rollback extension. Faults are injected method failures rather than real file-save faults, and no canonical invalid-input sequence or saved retry output is asserted.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:byte replacement retains UTF16 notes-part codec and non-body placeholders after reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-exact-splice"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(after.slides[0]!.inspectNotesText().text).toBe('雪😀')",
+        "expect([...after.package.get(part)!.slice(0,2)]).toEqual([255,254])",
+        "expect(after.package.text(part)).toBe(new TextDecoder('utf-16le').decode(notes).replace(t.text,'雪😀'))",
+        "expect(after.package.get(n)).toEqual(d.package.get(n))"
+      ],
+      "outcomes": [
+        "UTF-8 replacement of a UTF-16LE notes part survives byte reopen with exact snow/emoji text, BOM and complete decoded notes XML equal to the original with one text substitution; all other member payloads match."
+      ],
+      "gaps": [
+        "Native codec extension using a converted fixture and different text. No path save; notes XML comparison is decoded text, not direct UTF-16 byte equality of every unchanged span.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:canonical foreign invalid-byte and no-op case executes all four refusals and exact archive custody",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)",
+        "expect(result.counts.steps.passed).toBe(7)"
+      ],
+      "outcomes": [
+        "The selected compound scenario passes all seven steps through global acceptance bindings with an empty failure list, one passing case and seven passing steps."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; semantic checks reside in pinned notes bindings. Foreign/NUL/tab assert Error presence, while only the FF error code is checked. The identical-text no-op uses the string entry point, not the byte entry point. No saved path or rendering predicate.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:byte entry retains output-size and slide-enrollment refusal with unchanged package bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,new Uint8Array(8*1024*1024).fill(65))).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})",
+        "expect(()=>s.replaceNotesUtf8At(t,utf8('changed'))).toThrow(expect.objectContaining({code:'PPTX_STALE_SLIDE'}))",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "outcomes": [
+        "An 8 MiB ASCII replacement refuses without changing archive bytes and leaves a usable byte no-op target. Removing slide enrollment then raises PPTX_STALE_SLIDE and retains the externally changed archive."
+      ],
+      "gaps": [
+        "Control-only output-size and enrollment extension. The large-output failure asserts a generic error rather than its exact code; no peak-memory measurement or successful bound-sized replacement.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,utf8(t.text))).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Late changes adding protection, a field or a text lock make held byte no-ops refuse while preserving each altered archive."
+      ],
+      "gaps": [
+        "Control-only late-source extension: stale-source checks may reject before topology or protection validation. This declaration does not independently prove the new metadata is rejected on a freshly captured target.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-go-notes-refusal-and-noop-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(bindings.filter(b=>b.pattern.test(step))).toHaveLength(1)",
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Corrupting each refusal slot, clearing the error list, changing the FF error, altering either archive or the expected original bytes causes one failed case/step with no undefined/ambiguous bindings. Archive mutation after the successful no-op also fails the final custody assertion."
+      ],
+      "gaps": [
+        "Control-only aggregate negative runs; semantic predicates live in pinned bindings. It does not itself assert a positive compound run and does not establish independent decoder, filesystem or rendering validation.",
+        "Source mapping only; helper assertions and dynamic loop expansion retain inventory review flags. No test execution or full format parity is inferred."
       ]
     }
   ]

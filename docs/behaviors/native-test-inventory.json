@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 813,
-  "files": 81,
+  "count": 818,
+  "files": 82,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -86,7 +86,7 @@
     },
     {
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "declarations": 8,
       "issues": []
     },
@@ -116,7 +116,7 @@
     },
     {
       "path": "tests/unit/docx-property-mappings.test.ts",
-      "sha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a",
+      "sha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56",
       "declarations": 4,
       "issues": []
     },
@@ -200,7 +200,7 @@
     },
     {
       "path": "tests/unit/formula-mappings.test.ts",
-      "sha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797",
+      "sha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb",
       "declarations": 6,
       "issues": []
     },
@@ -230,7 +230,7 @@
     },
     {
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "declarations": 19,
       "issues": []
     },
@@ -274,6 +274,12 @@
       "path": "tests/unit/pptx-notes-edit.test.ts",
       "sha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "declarations": 14,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "sha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93",
+      "declarations": 5,
       "issues": []
     },
     {
@@ -943,6 +949,8 @@
     "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
+    "bun:tests/unit/pptx-notes-mappings.test.ts:each added notes suite and its direct assertions cannot be omitted or borrow an unrelated case",
+    "bun:tests/unit/pptx-notes-mappings.test.ts:notes runtime binding helper and native source pins reject independent stale or missing input",
     "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
     "bun:tests/unit/pptx-notes-utf8.test.ts:malformed UTF8 sequences refuse as encoding errors without consuming the held target",
     "bun:tests/unit/pptx-notes-utf8.test.ts:valid UTF8 XML controls and line policy still refuse through the existing notes editor",
@@ -1255,6 +1263,8 @@
     "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
+    "bun:tests/unit/pptx-notes-mappings.test.ts:each added notes suite and its direct assertions cannot be omitted or borrow an unrelated case",
+    "bun:tests/unit/pptx-notes-mappings.test.ts:notes runtime binding helper and native source pins reject independent stale or missing input",
     "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
     "bun:tests/unit/pptx-notes-utf8.test.ts:malformed UTF8 sequences refuse as encoding errors without consuming the held target",
     "bun:tests/unit/pptx-notes-utf8.test.ts:valid UTF8 XML controls and line policy still refuse through the existing notes editor",
@@ -7777,15 +7787,15 @@
         "expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true)",
         "expect(report.executionCredit).toBe(false)",
         "expect(report.runtimeLeafCount).toBeNull()",
-        "expect(report.mappedDeclarations).toBe(205)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205)",
+        "expect(report.mappedDeclarations).toBe(232)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232)",
         "expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter']))"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
-      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='docx-model');\n expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(130);\n const mappings=report.mappings.filter(m=>m.ledger==='docx-model');expect(mappings).toHaveLength(130);\n expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true);\n expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(205);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205);\n expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter']));\n}",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
+      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='docx-model');\n expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(130);\n const mappings=report.mappings.filter(m=>m.ledger==='docx-model');expect(mappings).toHaveLength(130);\n expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true);\n expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(232);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232);\n expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter']));\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -7831,7 +7841,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model');\n const aggregates=rows.filter(m=>m.testId.includes('shared'));\n expect(aggregates).toHaveLength(3);expect(aggregates.every(m=>m.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n expect(aggregates.map(m=>m.caseKeys.length)).toEqual([2,2,1]);\n const rowToggle=rows.find(m=>m.testId.endsWith('direct row header toggles preserve text, dimensions and other members after path save/reopen'))!;\n expect(rowToggle.caseKeys).toEqual([]);expect(rowToggle.gaps.join(' ')).toContain('2x2');expect(rowToggle.gaps.join(' ')).toContain('3x2');\n expect(rowToggle.outcomes.join(' ')).toContain('live dimensions and Header/Body text are checked before save');\n expect(rowToggle.outcomes.join(' ')).toContain('Real path reopen retains true/false row states, the Body cell text and unrelated members');\n const cell=rows.find(m=>m.testId.endsWith('direct cell properties survive reopen without changing text, grid, sibling cells or other package parts'))!;\n expect(cell.outcomes.join(' ')).toContain('live dimensions and selected text are checked before save');\n expect(cell.outcomes.join(' ')).toContain('After reopen, exact sibling-cell XML and every unrelated member match');\n const outputLimits=rows.filter(m=>m.testId.includes('output bound'));\n expect(outputLimits).toHaveLength(8);expect(outputLimits.every(m=>m.caseKeys.length===0&&m.gaps.join(' ').includes('Control-only'))).toBe(true);\n const formatting=rows.find(m=>m.testId.endsWith('per-run authoring preserves selected formatting after real path save and reopen'))!;\n expect(formatting.caseKeys).toEqual(['@id-docx-go-roundtrip-selected-formatting']);expect(formatting.gaps.join(' ')).toContain('No unrelated-part');\n const utf16=rows.filter(m=>m.testId.includes('UTF-16'));expect(utf16).toHaveLength(7);expect(utf16.every(m=>m.caseKeys.length===0&&m.gaps.join(' ').includes('UTF-16'))).toBe(true);\n}",
       "calls": [
         "aggregates.every",
@@ -7876,7 +7886,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "body": "{\n const a=await sample();a.sets[0]!.ledger.scopePaths.pop();expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n const b=await sample();b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n const c=await sample();c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');\n const d=await sample();d.sets[0]!.ledger.mappings[0]!.assertions[0]='expect(fake).toBe(true)';expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('assertion');\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.pop",
@@ -7912,7 +7922,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "body": "{\n for(const path of ['src/docx/append-run.ts','src/docx/cell-properties.ts','src/docx/row-header.ts','src/docx/index.ts','tests/acceptance/docx-model.ts',canonical]){\n  const a=await sample();a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n }\n const b=await sample();b.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-xml-parse-simple'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scenario');\n const c=await sample();c.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-docx-go-table-header-getter'];expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('case');\n const d=await sample();delete d.sets[0]!.ledger.sourceSha256['src/docx/row-header.ts'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('pin');\n}",
       "calls": [
         "expect",
@@ -7945,7 +7955,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),report=reconcileOutcomeMappingSets(a.inventory,a.sets);\n expect(report.mappings).toHaveLength(130);expect(JSON.stringify(a)).toBe(before);\n expect(report.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(c=>c.assertions));\n expect(report.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(c=>c.reviewReasons));\n expect(report.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(c=>c.deferredAssertions));\n expect(report.mappings.some(m=>m.reviewReasons.length>0)).toBe(true);\n const ownCases=report.mappings.filter(m=>m.caseKeys.length>0);expect(ownCases).toHaveLength(12);\n}",
       "calls": [
         "JSON.stringify",
@@ -7991,7 +8001,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model').slice(38,88);\n expect(rows).toHaveLength(50);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(262);\n const groups=['docx-paragraph-text.test.ts','docx-insert-paragraph.test.ts','docx-table-rows.test.ts','docx-row-texts.test.ts'];\n expect(groups.map(path=>rows.filter(m=>m.testId.includes(path)).length)).toEqual([13,13,14,10]);\n const exact=rows.filter(m=>m.caseKeys.length);expect(exact).toHaveLength(4);expect(exact.map(m=>m.caseKeys.length)).toEqual([5,1,1,1]);expect(exact.every(m=>m.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const sequential=rows.find(m=>m.testId.endsWith('whole paragraph text replaces empty and existing values with fresh handles and saved readback'))!;\n expect(sequential.caseKeys).toEqual([]);expect(sequential.gaps.join(' ')).toContain('sequentially');expect(sequential.gaps.join(' ')).toContain('five outline values use byte reopen');\n const rowCounts=rows.find(m=>m.testId.endsWith('append insert delete return fresh tables and retain row order after real path save'))!;\n expect(rowCounts.caseKeys).toEqual([]);expect(rowCounts.gaps.join(' ')).toContain('2x3, not local 2x2');expect(rowCounts.gaps.join(' ')).toContain('Only the final state is path-reopened');\n const firstRow=rows.find(m=>m.testId.endsWith('row texts read exact cells in column order and detach results without archive mutation'))!;\n expect(firstRow.gaps.join(' ')).toContain('only cell(0,0), not all four');expect(firstRow.caseKeys).toEqual([]);\n expect(rows.every(m=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "exact.every",
@@ -8047,7 +8057,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "body": "{\n for(const path of paths.slice(3)){\n  const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n  const b=await sample();const index=b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(path));expect(index).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n }\n for(const path of ['tests/acceptance/paragraph-text.ts','tests/acceptance/paragraph-properties.ts','tests/acceptance/body-insertion.ts','tests/acceptance/table-rows.ts','tests/acceptance/row-texts.ts','src/docx/paragraph-text.ts','src/docx/body-insertion.ts','src/docx/table-rows.ts']){\n  const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n }\n}",
       "calls": [
         "Object.hasOwn",
@@ -8089,7 +8099,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089",
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba",
       "body": "{\n for(const path of paths.slice(3)){\n  const a=await sample(),row=a.sets[0]!.ledger.mappings.find(m=>m.testId.includes(path))!;row.assertions.pop();expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('assertion');\n  const b=await sample(),other=b.sets[0]!.ledger.mappings.find(m=>m.testId.includes(path))!;other.caseKeys=['@id-docx-go-table-header-getter'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('case');\n }\n const a=await sample(),row=a.sets[0]!.ledger.mappings.find(m=>m.testId.includes('five canonical text getter cases'))!;row.caseKeys=['@id-docx-go-paragraph-text-getter|invented'];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('case');\n}",
       "calls": [
         "a.sets.0.ledger.mappings.find",
@@ -10612,14 +10622,14 @@
         "expect(exact.map(r=>r.caseKeys)).toEqual(ids.map(id=>[id]))",
         "expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('30ae497339a8a5bafd44fb3cf0233c70e67f0dc8f34966163f43b8b9173801fe')",
-        "expect(report.mappedDeclarations).toBe(205)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205)"
+        "expect(report.mappedDeclarations).toBe(232)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a",
-      "body": "{\n const report=await outcomeMappingReport(),all=report.mappings.filter(m=>m.ledger==='docx-model'),rows=all.slice(88);\n expect(rows).toHaveLength(42);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(226);\n expect(paths.map(p=>rows.filter(r=>r.testId.startsWith('bun:'+p+':')).length)).toEqual([15,15,12]);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.outcomes.length&&r.gaps.length)).toBe(true);\n expect(new Set(rows.flatMap(r=>r.scenarioIds))).toEqual(new Set(ids));\n const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys)).toEqual(ids.map(id=>[id]));\n expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json();\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('30ae497339a8a5bafd44fb3cf0233c70e67f0dc8f34966163f43b8b9173801fe');\n expect(report.mappedDeclarations).toBe(205);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205);\n}",
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56",
+      "body": "{\n const report=await outcomeMappingReport(),all=report.mappings.filter(m=>m.ledger==='docx-model'),rows=all.slice(88);\n expect(rows).toHaveLength(42);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(226);\n expect(paths.map(p=>rows.filter(r=>r.testId.startsWith('bun:'+p+':')).length)).toEqual([15,15,12]);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.outcomes.length&&r.gaps.length)).toBe(true);\n expect(new Set(rows.flatMap(r=>r.scenarioIds))).toEqual(new Set(ids));\n const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys)).toEqual(ids.map(id=>[id]));\n expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json();\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('30ae497339a8a5bafd44fb3cf0233c70e67f0dc8f34966163f43b8b9173801fe');\n expect(report.mappedDeclarations).toBe(232);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232);\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -10675,7 +10685,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a",
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model').slice(88),find=(name:string)=>rows.find(r=>r.testId.endsWith(name))!;\n const core=find('all fifteen core fields survive real path save/reopen with exact unrelated payload custody');\n expect(core.caseKeys).toEqual([]);expect(core.gaps.join(' ')).toContain('only title, creator and subject');expect(core.gaps.join(' ')).toContain('relationship and MIME checks occur before save');\n const doc=find('direct title-page and background values persist through path reopen without changing content or unrelated members');\n expect(doc.caseKeys).toEqual([]);expect(doc.gaps.join(' ')).toContain('Table dimensions and stale handles are checked before save');\n const style=find('unresolved direct table style survives path reopen without registry creation or unrelated changes');\n expect(style.caseKeys).toEqual([]);expect(style.gaps.join(' ')).toContain('undefined');expect(style.gaps.join(' ')).toContain('no style resolution or rendered appearance');\n expect(rows.filter(r=>r.testId.includes('output bound')).map(r=>r.caseKeys)).toEqual([[],[],[]]);\n const wrappers=rows.filter(r=>r.caseKeys.length);expect(wrappers.every(r=>r.gaps.join(' ').includes('No save/reopen'))).toBe(true);\n expect(wrappers[0]!.gaps.join(' ')).toContain('cached getter result');expect(wrappers[2]!.gaps.join(' ')).toContain('cached before/after strings');\n}",
       "calls": [
         "core.gaps.join",
@@ -10726,7 +10736,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a",
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56",
       "body": "{\n for(const [i,path]of paths.entries()){\n  const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n  const b=await sample(),index=b.sets[0]!.ledger.mappings.findIndex(r=>r.testId.startsWith('bun:'+path+':'));expect(index).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n  const c=await sample();c.sets[0]!.ledger.mappings.find(r=>r.testId.startsWith('bun:'+path+':'))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');\n  const d=await sample();d.sets[0]!.ledger.mappings.find(r=>r.testId.startsWith('bun:'+path+':'))!.caseKeys=[ids[(i+1)%ids.length]!];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');\n }\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -10769,7 +10779,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a",
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56",
       "body": "{\n for(const path of [...pins,...paths]){\n  const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n  const b=await sample();delete b.sets[0]!.ledger.sourceSha256[path];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n }\n}",
       "calls": [
         "Object.hasOwn",
@@ -16313,8 +16323,8 @@
         "expect(ledger).toBeDefined()",
         "expect(ledger!.scopePaths).toEqual(paths)",
         "expect(ledger!.mappedDeclarations).toBe(31)",
-        "expect(report.mappedDeclarations).toBe(205)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205)",
+        "expect(report.mappedDeclarations).toBe(232)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232)",
         "expect(report.executionCredit).toBe(false)",
         "expect(report.runtimeLeafCount).toBeNull()",
         "expect(rows).toHaveLength(31)",
@@ -16324,8 +16334,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797",
-      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='formula-references');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(31);expect(report.mappedDeclarations).toBe(205);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205);expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();const rows=report.mappings.filter(m=>m.ledger==='formula-references');expect(rows).toHaveLength(31);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.assertions.length&&m.outcomes.length&&m.gaps.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds)).size).toBe(9);\n}",
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb",
+      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='formula-references');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(31);expect(report.mappedDeclarations).toBe(232);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232);expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();const rows=report.mappings.filter(m=>m.ledger==='formula-references');expect(rows).toHaveLength(31);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.assertions.length&&m.outcomes.length&&m.gaps.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds)).size).toBe(9);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -16364,7 +16374,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797",
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb",
       "body": "{\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='formula-references');\n const wrappers=rows.filter(m=>m.testId.includes('canonical'));expect(wrappers).toHaveLength(3);expect(wrappers.map(m=>m.caseKeys.length)).toEqual([13,19,13]);expect(wrappers.every(m=>m.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n const analyzer=rows.find(m=>m.testId.includes('xlsx-formula-analysis.test.ts:finite expression matrix'))!;expect(analyzer.caseKeys).toEqual([]);expect(analyzer.gaps.join(' ')).toContain('does not call the remapper');\n const remap=rows.find(m=>m.testId.includes('xlsx-formula-remap.test.ts:finite 288-expression'))!;expect(remap.caseKeys).toEqual(['@id-xlsx-go-static-reference-properties']);expect(remap.gaps.join(' ')).toContain('not a fuzz campaign');\n const exact=rows.find(m=>m.testId.endsWith('static insertions rewrite exact shared expressions without touching literals or unrelated sheets'))!;expect(exact.caseKeys).toHaveLength(5);\n const limits=rows.filter(m=>m.testId.includes('output growth')||m.testId.includes('excessive input'));expect(limits.every(m=>m.caseKeys.length===0)).toBe(true);\n}",
       "calls": [
         "analyzer.gaps.join",
@@ -16410,7 +16420,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797",
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb",
       "body": "{\n for(const p of paths){const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(v=>v!==p);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();const index=b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(p));b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');}\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -16451,7 +16461,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797",
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb",
       "body": "{\n for(const p of ['src/xlsx/range.ts','src/xlsx/formula.ts','src/xlsx/formula-remap.ts','tests/acceptance/xlsx-range.ts','tests/acceptance/formula-analysis.ts','tests/acceptance/formula-remap.ts',canonical]){const a=await sample();a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');}\n const a=await sample();a.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-xlsx-go-static-reference-properties'];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('case');const b=await sample();b.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-docx-go-new-empty-body'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scenario');const c=await sample();delete c.sets[0]!.ledger.sourceSha256['src/xlsx/formula-remap.ts'];expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('pin');\n}",
       "calls": [
         "expect",
@@ -16483,7 +16493,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797",
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(r.mappings).toHaveLength(31);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(c=>c.assertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(c=>c.reviewReasons));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(c=>c.deferredAssertions));expect(JSON.stringify(a)).toBe(before);expect(r.mappings.some(m=>m.reviewReasons.length>0)).toBe(true);\n}",
       "calls": [
         "JSON.stringify",
@@ -16523,7 +16533,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797",
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb",
       "body": "{\n const {inventory,sets}=await sample(),r=reconcileOutcomeMappingSets(inventory,sets),rows=r.mappings;\n const count=rows.find(m=>m.testId.includes('static formula analysis counts references'))!;expect(count.scenarioIds).toContain('@id-xlsx-go-formula-literal-punctuation');expect(count.caseKeys).toHaveLength(6);expect(count.caseKeys.every(k=>k.startsWith('@id-xlsx-go-formula-analysis-counts|'))).toBe(true);\n const bad=rows.find(m=>m.testId.includes('unsupported or incomplete grammar throws'))!;expect(bad.scenarioIds).toContain('@id-xlsx-go-formula-literal-punctuation');expect(bad.caseKeys).toHaveLength(7);expect(bad.caseKeys.every(k=>k.startsWith('@id-xlsx-go-formula-analysis-refusal|'))).toBe(true);\n const split=rows.filter(m=>m.testId.includes('xlsx-formula-remap.test.ts')&&m.scenarioIds.includes('@id-xlsx-go-static-remap-refusal')&&!m.testId.includes('canonical'));expect(split.length).toBeGreaterThan(0);expect(split.every(m=>m.caseKeys.length===0)).toBe(true);\n expect(rows.filter(m=>m.caseKeys.length)).toHaveLength(9);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(127);\n}",
       "calls": [
         "bad.caseKeys.every",
@@ -17581,7 +17591,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const {inventory,features,sources,ledger}=sample();\n inventory.cases.push({...inventory.cases[0]!,id:'bun:elsewhere:unmapped',path:'tests/unit/other.test.ts'});\n const r=reconcileOutcomeMappings(inventory,ledger,features,sources) as any;\n expect(r.mappedDeclarations).toBe(2);expect(r.totalDeclarations).toBe(3);expect(r.unmappedTestIds).toEqual(['bun:elsewhere:unmapped']);expect(r.executionCredit).toBe(false);expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "expect",
@@ -17610,7 +17620,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const {inventory,features,sources,ledger}=sample();ledger.mappings.pop();expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Missing');\n ledger.mappings.push(ledger.mappings[0]!);expect(()=>reconcileOutcomeMappings(inventory,ledger,features,sources)).toThrow('Duplicate');\n}",
       "calls": [
         "expect",
@@ -17638,7 +17648,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=sample();a.sources['tests/unit/sample.test.ts']+=' ';expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('source');\n const b=sample();b.ledger.mappings[0]!.assertions=['expect(1).toBe(99)'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('assertion');\n}",
       "calls": [
         "expect",
@@ -17665,7 +17675,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=sample();a.ledger.mappings[0]!.scenarioIds=['@id-absent'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('scenario');\n const b=sample();b.ledger.mappings[0]!.caseKeys=['@id-pptx-mapping-test|{\"kind\":\"absent\"}'];expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('case');\n const c=sample();c.features.push(c.features[0]!);expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('Duplicate');\n}",
       "calls": [
         "c.features.push",
@@ -17694,7 +17704,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=sample();delete a.ledger.sourceSha256['workflows/pptx/sample.feature'];expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('pin');\n const b=sample();b.ledger.scopePaths.push('tests/unit/missing.test.ts');expect(()=>reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources)).toThrow('scope');\n const c=sample();c.ledger.mappings[0]!.outcomes=[];expect(()=>reconcileOutcomeMappings(c.inventory,c.ledger,c.features,c.sources)).toThrow('outcome');\n const d=sample();d.ledger.mappings[0]!.gaps=[];expect(()=>reconcileOutcomeMappings(d.inventory,d.ledger,d.features,d.sources)).toThrow('gap');\n}",
       "calls": [
         "b.ledger.scopePaths.push",
@@ -17722,7 +17732,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=sample();(a.ledger as any).executionCredit=true;expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('credit');\n const b=sample();b.inventory.cases[0]!.reviewReasons.push('body-loop');\n const r=reconcileOutcomeMappings(b.inventory,b.ledger,b.features,b.sources) as any;\n expect(r.mappings[0].reviewReasons).toEqual(['body-loop']);expect(r.runtimeLeafCount).toBe(null);\n}",
       "calls": [
         "b.inventory.cases.0.reviewReasons.push",
@@ -17745,9 +17755,9 @@
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(report.mappedDeclarations).toBe(205)",
-        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205)",
-        "expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',6],['docx-model',130],['formula-references',31]])",
+        "expect(report.mappedDeclarations).toBe(232)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232)",
+        "expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['formula-references',31]])",
         "expect(report.mappings[0]!.caseKeys).toHaveLength(21)",
         "expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25)",
         "expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true)"
@@ -17755,8 +17765,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
-      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport();\n expect(report.mappedDeclarations).toBe(205);\n expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205);\n expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',6],['docx-model',130],['formula-references',31]]);\n expect(report.mappings[0]!.caseKeys).toHaveLength(21);\n expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);\n expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);\n}",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
+      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport();\n expect(report.mappedDeclarations).toBe(232);\n expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232);\n expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['formula-references',31]]);\n expect(report.mappings[0]!.caseKeys).toHaveLength(21);\n expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);\n expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -17784,7 +17794,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=sample();a.inventory.cases[0]!.assertions.push('expect(3).toBe(3)');\n expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('assertion');\n}",
       "calls": [
         "a.inventory.cases.0.assertions.push",
@@ -17812,7 +17822,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=sample();a.ledger.mappings[1]!.caseKeys=[a.features[0]!.scenarios[0]!.cases[0]!.identityKey];\n const r=reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources) as any;\n expect(r.mappings[0].linkGranularity).toBe('scenario-only');\n expect(r.mappings[1].linkGranularity).toBe('explicit-case-keys');\n expect(r.mappings.every((m:any)=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n}",
       "calls": [
         "expect",
@@ -17844,7 +17854,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const {inventory,sets}=twoSets();inventory.cases.push({...inventory.cases[0]!,id:'bun:outside',path:'tests/unit/outside.test.ts'});\n const r=reconcileOutcomeMappingSets(inventory,sets) as any;\n expect(r.mappedDeclarations).toBe(4);expect(r.totalDeclarations).toBe(5);expect(r.unmappedTestIds).toEqual(['bun:outside']);\n expect(r.ledgers.map((l:any)=>[l.name,l.mappedDeclarations])).toEqual([['first',2],['second',2]]);\n expect(r.mappings.map((m:any)=>m.ledger)).toEqual(['first','first','second','second']);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBe(null);\n}",
       "calls": [
         "expect",
@@ -17874,7 +17884,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=twoSets();a.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-docx-second-test'];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scenario');\n const b=twoSets();delete b.sets[0]!.ledger.sourceSha256['workflows/pptx/sample.feature'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n}",
       "calls": [
         "expect",
@@ -17901,7 +17911,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=twoSets();a.sets[1]!.name='first';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('name');\n const b=twoSets();b.sets[1]={...b.sets[0]!,name:'second'};expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scope');\n const c=twoSets();c.sets[1]!.features=c.sets[0]!.features;c.sets[1]!.sources['workflows/pptx/sample.feature']=feature;c.sets[1]!.ledger.sourceSha256['workflows/pptx/sample.feature']=createHash('sha256').update(feature).digest('hex');c.sets[1]!.ledger.mappings.forEach(m=>m.scenarioIds=['@id-pptx-mapping-test']);expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('scenario');\n}",
       "calls": [
         "c.sets.1.ledger.mappings.forEach",
@@ -17932,7 +17942,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=twoSets();expect(()=>reconcileOutcomeMappingSets(a.inventory,[])).toThrow('ledger');\n a.sets[0]!.expectedScopePaths.push('tests/unit/required.test.ts');expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n const b=twoSets();b.sets.forEach((s,i)=>{s.sources['shared.ts']=String(i);s.ledger.sourceSha256['shared.ts']=createHash('sha256').update(String(i)).digest('hex');});expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('source');\n}",
       "calls": [
         "String",
@@ -17965,7 +17975,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const {inventory,sets}=twoSets();\n sets.forEach(s=>{s.sources['shared.ts']='shared';s.ledger.sourceSha256['shared.ts']=createHash('sha256').update('shared').digest('hex');});\n const before=JSON.stringify(sets),first=reconcileOutcomeMappings(inventory,sets[0]!.ledger,sets[0]!.features,sets[0]!.sources),report=reconcileOutcomeMappingSets(inventory,sets);\n expect(report.sourceSha256['shared.ts']).toBe(sets[0]!.ledger.sourceSha256['shared.ts']!);\n expect(report.mappings.filter(m=>m.ledger==='first').map(({ledger,...row})=>row)).toEqual(first.mappings);\n expect(JSON.stringify(sets)).toBe(before);\n}",
       "calls": [
         "JSON.stringify",
@@ -17999,7 +18009,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const {inventory,sets}=twoSets();sets[0]!.ledger.mappings[0]!.caseKeys=[sets[1]!.features[0]!.scenarios[0]!.cases[0]!.identityKey];\n expect(()=>reconcileOutcomeMappingSets(inventory,sets)).toThrow('case');\n}",
       "calls": [
         "expect",
@@ -18027,7 +18037,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const {mkdtemp,rm,mkdir,writeFile}=await import('node:fs/promises'),{tmpdir}=await import('node:os'),{join}=await import('node:path'),{inventoryNativeTests}=await import('../../scripts/test-inventory.ts');\n const root=await mkdtemp(join(tmpdir(),'bun-unresolved-outcomes-'));\n try{\n  await mkdir(join(root,'tests/unit'),{recursive:true});\n  await writeFile(join(root,'tests/unit/hidden.test.ts'),`import {describe} from 'bun:test'; const register=()=>{}; describe('hidden',register);`);\n  const native=await inventoryNativeTests(root);expect(native.unresolved.length).toBeGreaterThan(0);expect(native.cases).toHaveLength(0);\n  const a=sample(),inventory={cases:a.inventory.cases,unresolved:native.unresolved};\n  expect(()=>reconcileOutcomeMappings(inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved');\n  expect(()=>reconcileOutcomeMappingSets(inventory,[{name:'valid',expectedScopePaths:a.ledger.scopePaths,ledger:a.ledger,features:a.features,sources:a.sources}])).toThrow('Unresolved');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "expect",
@@ -18062,7 +18072,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const a=sample();a.inventory.cases[0]!.unresolved.push('unsupported registration');\n expect(()=>reconcileOutcomeMappings(a.inventory,a.ledger,a.features,a.sources)).toThrow('Unresolved');\n}",
       "calls": [
         "a.inventory.cases.0.unresolved.push",
@@ -18097,7 +18107,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
       "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport(),xml=report.mappings.filter(m=>m.ledger==='xml-values');\n expect(xml).toHaveLength(13);\n const lookup=xml.find(m=>m.testId.endsWith('expanded attribute lookup honours aliases, local rebinding and unqualified attributes'))!;\n expect(lookup.scenarioIds).toEqual(['@id-xml-expanded-attribute-lookup','@id-xml-immutable-namespace-metadata']);\n expect(lookup.caseKeys).toEqual([]);expect(lookup.gaps.join(' ')).toContain('not the dedicated canonical metadata input');\n const edits=xml.filter(m=>m.scenarioIds.includes('@id-xml-apply-edits'));\n expect(edits).toHaveLength(2);expect(edits.every(m=>m.caseKeys.length===0&&m.status==='partial')).toBe(true);\n const implicit=xml.find(m=>m.scenarioIds.includes('@id-xml-implicit-xml-prefix'))!;\n expect(implicit.assertions).toContain(\"expect(doc.root.attributeNamespaces['xml:lang']).toBe(XML_NS)\");\n expect(implicit.assertions).toContain(\"expect(attribute(doc.root, 'lang', XML_NS)).toBe('en')\");\n expect(implicit.assertions.some(a=>a.startsWith('expect(XML_NS)'))).toBe(false);\n expect(xml.every(m=>m.executionCredit===false&&m.gaps.length>0)).toBe(true);\n}",
       "calls": [
         "a.startsWith",
@@ -18121,10 +18131,10 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/outcome-mappings.test.ts:PPTX core mappings separate aggregate acceptance, bounded custody and newer notes operations",
+      "id": "bun:tests/unit/outcome-mappings.test.ts:original PPTX mappings retain aggregate acceptance and bounded custody separately from newer notes records",
       "path": "tests/unit/outcome-mappings.test.ts",
       "line": 159,
-      "title": "PPTX core mappings separate aggregate acceptance, bounded custody and newer notes operations",
+      "title": "original PPTX mappings retain aggregate acceptance and bounded custody separately from newer notes records",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
@@ -18142,8 +18152,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf",
-      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='pptx-core');\n expect(rows).toHaveLength(6);\n expect(rows[0]!.scenarioIds).toHaveLength(4);expect(rows[0]!.assertions).toHaveLength(3);\n expect(rows[0]!.gaps.join(' ')).toContain('aggregate status and counts');\n const cross=rows.find(m=>m.testId.endsWith('replaces exact anchored text across runs and preserves untouched members'))!;\n expect(cross.gaps.join(' ')).toContain('Only two unrelated saved members');\n const noop=rows.find(m=>m.scenarioIds.includes('@id-pptx-bun-open-save-noop'))!;\n expect(noop.caseKeys).toEqual(['@id-pptx-bun-open-save-noop']);\n expect(noop.gaps.join(' ')).toContain('byte-open disk save');\n expect(rows.every(m=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n expect(rows.flatMap(m=>m.scenarioIds).some(id=>id.includes('go-notes')||id.includes('slide-order'))).toBe(false);\n}",
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6",
+      "body": "{\n const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');\n const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='pptx-core').slice(0,6);\n expect(rows).toHaveLength(6);\n expect(rows[0]!.scenarioIds).toHaveLength(4);expect(rows[0]!.assertions).toHaveLength(3);\n expect(rows[0]!.gaps.join(' ')).toContain('aggregate status and counts');\n const cross=rows.find(m=>m.testId.endsWith('replaces exact anchored text across runs and preserves untouched members'))!;\n expect(cross.gaps.join(' ')).toContain('Only two unrelated saved members');\n const noop=rows.find(m=>m.scenarioIds.includes('@id-pptx-bun-open-save-noop'))!;\n expect(noop.caseKeys).toEqual(['@id-pptx-bun-open-save-noop']);\n expect(noop.gaps.join(' ')).toContain('byte-open disk save');\n expect(rows.every(m=>m.executionCredit===false&&m.status==='partial')).toBe(true);\n expect(rows.flatMap(m=>m.scenarioIds).some(id=>id.includes('go-notes')||id.includes('slide-order'))).toBe(false);\n}",
       "calls": [
         "cross.gaps.join",
         "expect",
@@ -18157,6 +18167,7 @@
         "noop.gaps.join",
         "outcomeMappingReport",
         "report.mappings.filter",
+        "report.mappings.filter().slice",
         "rows.0.gaps.join",
         "rows.every",
         "rows.find",
@@ -20384,6 +20395,235 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:PPTX notes mapping extension covers exactly two added suites while retaining all six prior records",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "line": 17,
+      "title": "PPTX notes mapping extension covers exactly two added suites while retaining all six prior records",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(ledger.scopePaths).toEqual(paths)",
+        "expect(ledger.mappedDeclarations).toBe(33)",
+        "expect(rows).toHaveLength(27)",
+        "expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(109)",
+        "expect(paths.slice(1).map(p=>rows.filter(r=>r.testId.includes(p)).length)).toEqual([14,13])",
+        "expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true)",
+        "expect(report.mappedDeclarations).toBe(232)",
+        "expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232)",
+        "expect(report.runtimeLeafCount).toBeNull()",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('1cc69f5444a96f8831041d2609baef34cac2e649aa61f133b6a1733e982a47ee')",
+        "expect(exact.map(r=>r.caseKeys.length)).toEqual([8,1])",
+        "expect(exact.every(r=>r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93",
+      "body": "{\n const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='pptx-core')!;expect(ledger.scopePaths).toEqual(paths);expect(ledger.mappedDeclarations).toBe(33);\n const rows=report.mappings.filter(r=>r.ledger==='pptx-core').slice(6);expect(rows).toHaveLength(27);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(109);expect(paths.slice(1).map(p=>rows.filter(r=>r.testId.includes(p)).length)).toEqual([14,13]);\n expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true);expect(report.mappedDeclarations).toBe(232);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232);expect(report.runtimeLeafCount).toBeNull();\n const raw=await Bun.file('docs/behaviors/pptx-core-mappings.json').json();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('1cc69f5444a96f8831041d2609baef34cac2e649aa61f133b6a1733e982a47ee');\n const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys.length)).toEqual([8,1]);expect(exact.every(r=>r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "Bun.file",
+        "Bun.file().json",
+        "JSON.stringify",
+        "exact.every",
+        "exact.map",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "outcomeMappingReport",
+        "paths.slice",
+        "paths.slice().map",
+        "r.gaps.join",
+        "r.gaps.join().includes",
+        "r.testId.includes",
+        "raw.mappings.slice",
+        "report.ledgers.find",
+        "report.mappings.filter",
+        "report.mappings.filter().slice",
+        "rows.every",
+        "rows.filter",
+        "rows.reduce"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:notes mappings keep byte/path, invalid-input, template and stale-source limits explicit",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "line": 25,
+      "title": "notes mappings keep byte/path, invalid-input, template and stale-source limits explicit",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(splice.caseKeys).toEqual([])",
+        "expect(splice.gaps.join(' ')).toContain('byte reopen, not the required new path')",
+        "expect(invalid.caseKeys).toEqual([])",
+        "expect(invalid.gaps.join(' ')).toContain('no raw FF input')",
+        "expect(invalid.gaps.join(' ')).toContain('other session archive is not compared')",
+        "expect(multiline.caseKeys).toEqual([])",
+        "expect(multiline.gaps.join(' ')).toContain('no direct four-paragraph count')",
+        "expect(templates.gaps.join(' ')).toContain('b=\"1\" differs from canonical b=\"0\"')",
+        "expect(saved.caseKeys).toEqual([])",
+        "expect(saved.outcomes.join(' ')).toContain('real path save/reopen')",
+        "expect(saved.gaps.join(' ')).toContain('does not compare an exact one-leaf lexical splice')",
+        "expect(late.gaps.join(' ')).toContain('stale-source checks may reject before topology or protection validation')",
+        "expect(compound.gaps.join(' ')).toContain('string entry point')",
+        "expect(compound.gaps.join(' ')).toContain('only the FF error code')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93",
+      "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(r=>r.ledger==='pptx-core').slice(6),find=(suffix:string)=>rows.find(r=>r.testId.endsWith(suffix))!;\n const splice=find('existing notes replacement changes only its notes payload and reopens exact text');expect(splice.caseKeys).toEqual([]);expect(splice.gaps.join(' ')).toContain('byte reopen, not the required new path');\n const invalid=find('foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target');expect(invalid.caseKeys).toEqual([]);expect(invalid.gaps.join(' ')).toContain('no raw FF input');expect(invalid.gaps.join(' ')).toContain('other session archive is not compared');\n const multiline=find('multiline uses only first-run template and preserves boundary empty paragraphs');expect(multiline.caseKeys).toEqual([]);expect(multiline.gaps.join(' ')).toContain('no direct four-paragraph count');\n const templates=find('multiline copies selected paragraph and first-run property fragments');expect(templates.gaps.join(' ')).toContain('b=\"1\" differs from canonical b=\"0\"');\n const saved=find('UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member');expect(saved.caseKeys).toEqual([]);expect(saved.outcomes.join(' ')).toContain('real path save/reopen');expect(saved.gaps.join(' ')).toContain('does not compare an exact one-leaf lexical splice');\n const late=find('late protection and unsupported notes topology refuse byte no-ops without destructive repair');expect(late.gaps.join(' ')).toContain('stale-source checks may reject before topology or protection validation');\n const compound=find('canonical foreign invalid-byte and no-op case executes all four refusals and exact archive custody');expect(compound.gaps.join(' ')).toContain('string entry point');expect(compound.gaps.join(' ')).toContain('only the FF error code');\n}",
+      "calls": [
+        ".mappings.filter",
+        ".mappings.filter().slice",
+        "compound.gaps.join",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "find",
+        "invalid.gaps.join",
+        "late.gaps.join",
+        "multiline.gaps.join",
+        "outcomeMappingReport",
+        "r.testId.endsWith",
+        "rows.find",
+        "saved.gaps.join",
+        "saved.outcomes.join",
+        "splice.gaps.join",
+        "templates.gaps.join"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:each added notes suite and its direct assertions cannot be omitted or borrow an unrelated case",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "line": 36,
+      "title": "each added notes suite and its direct assertions cannot be omitted or borrow an unrelated case",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope')",
+        "expect(index).toBeGreaterThan(-1)",
+        "expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped')",
+        "expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion')",
+        "expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 37,
+          "expression": "for(const path of paths.slice(1))"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93",
+      "body": "{\n for(const path of paths.slice(1)){\n  const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(p=>p!==path);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');\n  const b=await sample(),index=b.sets[0]!.ledger.mappings.findIndex(r=>r.testId.includes(path));expect(index).toBeGreaterThan(-1);b.sets[0]!.ledger.mappings.splice(index,1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');\n  const c=await sample();c.sets[0]!.ledger.mappings.find(r=>r.testId.includes(path))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');\n  const d=await sample();d.sets[0]!.ledger.mappings.find(r=>r.testId.includes(path))!.caseKeys=['@id-pptx-bun-open-save-noop'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');\n }\n}",
+      "calls": [
+        "a.sets.0.ledger.scopePaths.filter",
+        "b.sets.0.ledger.mappings.findIndex",
+        "b.sets.0.ledger.mappings.splice",
+        "c.sets.0.ledger.mappings.find",
+        "c.sets.0.ledger.mappings.find().assertions.pop",
+        "d.sets.0.ledger.mappings.find",
+        "expect",
+        "expect().toBeGreaterThan",
+        "expect().toThrow",
+        "paths.slice",
+        "r.testId.includes",
+        "reconcileOutcomeMappingSets",
+        "sample"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:notes runtime binding helper and native source pins reject independent stale or missing input",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "line": 45,
+      "title": "notes runtime binding helper and native source pins reject independent stale or missing input",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true)",
+        "expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source')",
+        "expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 46,
+          "expression": "for(const path of [...pins,...paths.slice(1)])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93",
+      "body": "{\n for(const path of [...pins,...paths.slice(1)]){\n  const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,path)).toBe(true);a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');\n  const b=await sample();delete b.sets[0]!.ledger.sourceSha256[path];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');\n }\n}",
+      "calls": [
+        "Object.hasOwn",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "paths.slice",
+        "reconcileOutcomeMappingSets",
+        "sample"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:notes reconciliation retains dynamic and delegated assertion flags without altering inventory or mapping data",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "line": 52,
+      "title": "notes reconciliation retains dynamic and delegated assertion flags without altering inventory or mapping data",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(JSON.stringify(a)).toBe(before)",
+        "expect(report.mappings.map(r=>r.assertions)).toEqual(a.inventory.cases.map(r=>r.assertions))",
+        "expect(report.mappings.map(r=>r.reviewReasons)).toEqual(a.inventory.cases.map(r=>r.reviewReasons))",
+        "expect(report.mappings.map(r=>r.deferredAssertions)).toEqual(a.inventory.cases.map(r=>r.deferredAssertions))",
+        "expect(report.executionCredit).toBe(false)",
+        "expect(row.caseKeys).toEqual([])",
+        "expect(row.gaps.join(' ')).toContain('Control-only')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93",
+      "body": "{\n const a=await sample(),before=JSON.stringify(a),report=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);\n expect(report.mappings.map(r=>r.assertions)).toEqual(a.inventory.cases.map(r=>r.assertions));expect(report.mappings.map(r=>r.reviewReasons)).toEqual(a.inventory.cases.map(r=>r.reviewReasons));expect(report.mappings.map(r=>r.deferredAssertions)).toEqual(a.inventory.cases.map(r=>r.deferredAssertions));expect(report.executionCredit).toBe(false);\n const row=report.mappings.find(r=>r.testId.endsWith('compound notes assertions detect each missing refusal, wrong decoding error and changed archive'))!;expect(row.caseKeys).toEqual([]);expect(row.gaps.join(' ')).toContain('Control-only');\n}",
+      "calls": [
+        "JSON.stringify",
+        "a.inventory.cases.map",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "r.testId.endsWith",
+        "reconcileOutcomeMappingSets",
+        "report.mappings.find",
+        "report.mappings.map",
+        "row.gaps.join",
+        "sample"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {

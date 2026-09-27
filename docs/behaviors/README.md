@@ -77,14 +77,23 @@ also map separately. `tests/acceptance/xml-values.ts` executes the shared value
 inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
 
-The PPTX-core ledger maps `tests/unit/pptx.test.ts` to the original four text/notes
-scenarios and one path/byte-open/no-op-save scenario. Its aggregate acceptance
-test checks report status and counts; the delegated step assertions are recorded
-separately in source. Cross-run editing compares two unrelated saved payloads,
-without a complete saved-member comparison. The no-op acceptance case saves to
-a real temporary path and compares both its file bytes and reopened archive with
-the original fixture. Rendering and newer notes-editing operations have separate
-tests.
+The [PPTX-core ledger](pptx-core-mappings.json) maps three suites to text, notes
+and no-op-save scenarios. The six original `pptx.test.ts` records are unchanged.
+Cross-run editing compares two unrelated saved payloads; the no-op acceptance
+case compares file bytes and its reopened archive with the original fixture.
+
+The two notes suites add 27 declarations and 109 direct assertion expressions.
+Two positive wrappers link to exact case keys; the other 25 mappings link at
+scenario level. Wrappers check aggregate results and counts, with semantic checks
+in the pinned bindings. The direct splice test reopens bytes; the shared splice
+case saves to a path. The string-refusal test never supplies raw `FF`, while the
+compound wrapper does. Its identical-text no-op uses the string entry point.
+Native UTF-8 tests separately check byte no-ops and saved Unicode values.
+
+Other differences include a bold first-run template where the shared case uses
+explicit false, and late metadata changes that stale an existing target before
+new topology can be validated. These gaps remain in the individual mappings.
+The mappings record no rendering result or new execution credit.
 
 The [DOCX-model ledger](docx-model-mappings.json) records all 130 declarations and
 683 direct assertion expressions in ten suites: append-run, cell properties,

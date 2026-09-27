@@ -58,9 +58,9 @@ test('mapping gate rejects fabricated execution credit and preserves dynamic rev
 test('committed ledgers enumerate slide-order, effective-formatting, XML, PPTX and DOCX model assertions with known gaps',async()=>{
  const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');
  const report=await outcomeMappingReport();
- expect(report.mappedDeclarations).toBe(205);
- expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205);
- expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',6],['docx-model',130],['formula-references',31]]);
+ expect(report.mappedDeclarations).toBe(232);
+ expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-232);
+ expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['formula-references',31]]);
  expect(report.mappings[0]!.caseKeys).toHaveLength(21);
  expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);
  expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);
@@ -156,9 +156,9 @@ test('XML ledger retains partial links for different fixtures and split edit pre
  expect(xml.every(m=>m.executionCredit===false&&m.gaps.length>0)).toBe(true);
 });
 
-test('PPTX core mappings separate aggregate acceptance, bounded custody and newer notes operations', async () => {
+test('original PPTX mappings retain aggregate acceptance and bounded custody separately from newer notes records', async () => {
  const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');
- const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='pptx-core');
+ const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='pptx-core').slice(0,6);
  expect(rows).toHaveLength(6);
  expect(rows[0]!.scenarioIds).toHaveLength(4);expect(rows[0]!.assertions).toHaveLength(3);
  expect(rows[0]!.gaps.join(' ')).toContain('aggregate status and counts');

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 813,
+  "nativeDeclarations": 818,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 586,
+  "withoutStagingCount": 591,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2879,42 +2879,42 @@
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:committed DOCX model ledger covers exactly ten full native suites without new execution credit",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:DOCX mappings distinguish aggregate acceptance assertions, native extensions and different table dimensions",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:DOCX ledger refuses dropped suites, dropped declarations, omitted assertions and invented assertions",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:DOCX ledger refuses stale runtime, binding and canonical pins and unrelated canonical identities",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:DOCX mapping validation retains native dynamic review flags and leaves source evidence untouched",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:expanded DOCX mappings retain input, save timing and delegated predicate gaps",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:each added DOCX suite and every new runtime/binding pin is required independently",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-model-mappings.test.ts:new mappings cannot borrow a sibling model case or suppress assertion expressions",
       "path": "tests/unit/docx-model-mappings.test.ts",
-      "sourceSha256": "be305c877972ed72311add9e4a74af2537e60d55a7d5020fe0f542d72f184089"
+      "sourceSha256": "00371b6ff97b2fbd7c551bf9a0cda58abf81edbfa56dcf02ac402cbd2c6108ba"
     },
     {
       "id": "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
@@ -3209,22 +3209,22 @@
     {
       "id": "bun:tests/unit/docx-property-mappings.test.ts:property mapping extension adds exactly 42 declarations and 226 direct expressions while retaining prior records",
       "path": "tests/unit/docx-property-mappings.test.ts",
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a"
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56"
     },
     {
       "id": "bun:tests/unit/docx-property-mappings.test.ts:property mappings distinguish selected fields, live custody, reopened checks and unresolved style references",
       "path": "tests/unit/docx-property-mappings.test.ts",
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a"
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56"
     },
     {
       "id": "bun:tests/unit/docx-property-mappings.test.ts:each property suite, declaration and assertion remains mandatory and cannot borrow a sibling canonical case",
       "path": "tests/unit/docx-property-mappings.test.ts",
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a"
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56"
     },
     {
       "id": "bun:tests/unit/docx-property-mappings.test.ts:property runtime, binding and native pins independently refuse missing and stale sources",
       "path": "tests/unit/docx-property-mappings.test.ts",
-      "sourceSha256": "7edf1f5df16e45ac948740b67aa99b47496e8ee39d686ddb21325ebbbef2db5a"
+      "sourceSha256": "8f69e15adf0d2b90b4bc010a1205ef59bb39b876bffd9b6e3d07a02429102c56"
     },
     {
       "id": "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",
@@ -3689,32 +3689,32 @@
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:formula ledger enumerates all three native suites without changing execution credit or runtime leaf denominator",
       "path": "tests/unit/formula-mappings.test.ts",
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797"
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb"
     },
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:formula mappings separate selected-case wrappers, incomplete analysis matrix and exact remap expressions",
       "path": "tests/unit/formula-mappings.test.ts",
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797"
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb"
     },
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:formula ledger rejects omitted suites, declarations and exact assertions",
       "path": "tests/unit/formula-mappings.test.ts",
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797"
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb"
     },
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
       "path": "tests/unit/formula-mappings.test.ts",
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797"
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb"
     },
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:formula reconciliation retains source assertion arrays, review flags and input evidence unchanged",
       "path": "tests/unit/formula-mappings.test.ts",
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797"
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb"
     },
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:split literal and refusal predicates keep only their actually matched canonical case links",
       "path": "tests/unit/formula-mappings.test.ts",
-      "sourceSha256": "9dc888307f7a2a73f7a593b653516c2c4414be327916dc406f5f468a8e12f797"
+      "sourceSha256": "2b215bda660b0e5231d07ec7b950823ea475699a6ad990b7a7ee5fbd8f8f9ffb"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
@@ -3764,97 +3764,97 @@
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:outcome mappings validate source pins and preserve the unmapped denominator without execution credit",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses missing or duplicated test declarations",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses stale source or nonexistent native assertions",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects fabricated execution credit and preserves dynamic review flags",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:committed ledgers enumerate slide-order, effective-formatting, XML, PPTX and DOCX model assertions with known gaps",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers share one denominator without execution credit or dropped mappings",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers cannot borrow sibling scenarios or source pins",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers reject duplicate names, scopes and canonical scenarios",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:independent ledgers refuse vacuous inputs, scope shrinkage and altered shared sources",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:equal shared source pins preserve each independently validated mapping",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:cross-ledger case keys cannot bypass local scenario ownership",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:outcome reconciliation refuses unresolved registrations even outside mapped scopes",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:standalone mapping validation refuses unresolved declaration records",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/outcome-mappings.test.ts:XML ledger retains partial links for different fixtures and split edit predicates",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
-      "id": "bun:tests/unit/outcome-mappings.test.ts:PPTX core mappings separate aggregate acceptance, bounded custody and newer notes operations",
+      "id": "bun:tests/unit/outcome-mappings.test.ts:original PPTX mappings retain aggregate acceptance and bounded custody separately from newer notes records",
       "path": "tests/unit/outcome-mappings.test.ts",
-      "sourceSha256": "848ba83091ffd1a5126d0dcccfc36094e458961bd5537ae18004d49bb628ffaf"
+      "sourceSha256": "e848613721bca520b47e741ca4f15f8b638c684266011c0b96245c74c180a7b6"
     },
     {
       "id": "bun:tests/unit/package-admission.test.ts:admission accepts XML without an OPC graph and returns detached payloads",
@@ -4070,6 +4070,31 @@
       "id": "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
       "path": "tests/unit/pptx-notes-edit.test.ts",
       "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:PPTX notes mapping extension covers exactly two added suites while retaining all six prior records",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:notes mappings keep byte/path, invalid-input, template and stale-source limits explicit",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:each added notes suite and its direct assertions cannot be omitted or borrow an unrelated case",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:notes runtime binding helper and native source pins reject independent stale or missing input",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93"
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-mappings.test.ts:notes reconciliation retains dynamic and delegated assertion flags without altering inventory or mapping data",
+      "path": "tests/unit/pptx-notes-mappings.test.ts",
+      "sourceSha256": "302a3661ae37dcd929de32ad88595016c61b15f7884deac6ff9f4448f0d6ce93"
     },
     {
       "id": "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
