@@ -86,10 +86,11 @@ a real temporary path and compares both its file bytes and reopened archive with
 the original fixture. Rendering and newer notes-editing operations have separate
 tests.
 
-The [DOCX-model ledger](docx-model-mappings.json) records all 38 declarations and
-195 direct assertion expressions in the append-run, cell-property and row-header
-suites. They link to five existing document-model scenarios. Two direct run tests
-and three acceptance-wrapper tests link to exact case keys. The other 33 mappings
+The [DOCX-model ledger](docx-model-mappings.json) records all 88 declarations and
+457 direct assertion expressions in seven suites: append-run, cell properties,
+row headers, paragraph text, body insertion, table-row edits and row-text reads.
+They link to nine existing document-model scenarios. Two direct run tests and
+seven acceptance-wrapper tests link to exact case keys. The other 79 mappings
 link at scenario level because they use different inputs or add refusal,
 preservation, encoding and resource-limit checks. Every mapping retains partial
 status and lists its gaps.
@@ -98,9 +99,13 @@ The wrapper tests check aggregate results and failure counts; their semantic
 predicates live in the pinned step bindings. Saved-formatting corruption changes
 the reopened in-memory document, not the file on disk. Most native row-header
 examples use 2x2 tables, while the shared case uses 3x2. Cell-property tests combine
-values on 2x2 tables; the shared width/border case uses 1x1. These differences stay
-explicit. Neither exact-case links nor complete suite enumeration add execution
-credit. Dynamic loops retain their review flags, and the runtime leaf count is
+values on 2x2 tables; the shared width/border case uses 1x1. Row-edit tests use a
+2x2 input while the shared count sequence uses 2x3. Their disk check reopens only
+the final state, without verifying each intermediate count after save. Row-text
+roundtrips compare array results; they do not assert all four direct cell getters
+after reopen. The paragraph-text loop reuses one paragraph across values, while
+the shared outline creates independent targets. These differences stay explicit.
+Neither exact-case links nor complete suite enumeration add execution credit. Dynamic loops retain their review flags, and the runtime leaf count is
 unknown. The source pins cover the reviewed files, not their transitive imports.
 
 Unresolved registrations, missing assertions or conflicting source records fail

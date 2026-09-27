@@ -5,7 +5,11 @@
   "scopePaths": [
     "tests/unit/docx-append-run.test.ts",
     "tests/unit/docx-cell-properties.test.ts",
-    "tests/unit/docx-row-header.test.ts"
+    "tests/unit/docx-row-header.test.ts",
+    "tests/unit/docx-paragraph-text.test.ts",
+    "tests/unit/docx-insert-paragraph.test.ts",
+    "tests/unit/docx-table-rows.test.ts",
+    "tests/unit/docx-row-texts.test.ts"
   ],
   "sourceSha256": {
     "tests/unit/docx-append-run.test.ts": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144",
@@ -26,7 +30,19 @@
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/docx/document-model.feature": "134222823c7c4fb5cf9f73c89ea753902278a1b14b2e3b39a1a22fb0fc5b472d"
+    "workflows/docx/document-model.feature": "134222823c7c4fb5cf9f73c89ea753902278a1b14b2e3b39a1a22fb0fc5b472d",
+    "tests/unit/docx-paragraph-text.test.ts": "6dcd85ec5e331361a1f5342179fbcdf5f601267a0bd6df968c4edea0f6232bde",
+    "tests/unit/docx-insert-paragraph.test.ts": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57",
+    "tests/unit/docx-table-rows.test.ts": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831",
+    "tests/unit/docx-row-texts.test.ts": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+    "tests/acceptance/paragraph-text.ts": "2c09f518fdaee28d9ba675dcdbdfbb36490e0c27db54ea4ab7823f150d6f2c41",
+    "tests/acceptance/paragraph-properties.ts": "c4b8f9289c44de2c14fef265318ef2bbce773d56ad4a1241e18ae025ab0d4ceb",
+    "tests/acceptance/body-insertion.ts": "cd864da15106a74c0416c037da45981b0647a932ce9be919ac7b0e62b99f0eb1",
+    "tests/acceptance/table-rows.ts": "0d0136c14054ffc15acef82400201022e2cc350f7eee1faa820201b8d08dcca5",
+    "tests/acceptance/row-texts.ts": "6c38bd5ee2a4320de7d5c096c4e108d896cbff20d46431ec8352f4fae577faae",
+    "src/docx/paragraph-text.ts": "0dbc88686d883e39fa360212396ea1433444e1531dc3c1a48ad94a29fbe563e4",
+    "src/docx/body-insertion.ts": "aef562d13488d4f7d78d44d258fd451669ee85b677682dff35402c1a3f8364bb",
+    "src/docx/table-rows.ts": "5d21ea63b48c48827446b28d72233ab74ed5b2c749c6eccb57ad28127dbdde92"
   },
   "mappings": [
     {
@@ -896,6 +912,1130 @@
       "gaps": [
         "Control-only output bound extension, not successful canonical marking or peak-memory enforcement.",
         "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:whole paragraph text replaces empty and existing values with fresh handles and saved readback",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.text).toBe(value)",
+        "expect(p).toBe(d.paragraphs[0]!)",
+        "expect(p).toBe(held)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>held.text).toThrow()",
+        "expect(reopened.paragraphs[0]!.text).toBe(value)",
+        "expect(p.text).toBe('')",
+        "expect(p.directRunFlags()).toHaveLength(1)",
+        "expect((await Document.open(path)).paragraphs[0]!.text).toBe('  saved <雪>  ')"
+      ],
+      "outcomes": [
+        "Sequential replacements cover the five shared text values plus a supplementary-Unicode value, return current/fresh handles, and survive byte reopen. A later distinct boundary-space value survives real path save/reopen."
+      ],
+      "gaps": [
+        "Values are applied sequentially to one paragraph, unlike independent shared outline cases. Only the later saved snow value is path-reopened; the five outline values use byte reopen.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:replacement keeps all paragraph/run properties and sibling/member fragments but concentrates text in first leaf",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(next.text).toBe(' New & <雪> ')",
+        "expect(xml).toContain(ppr)",
+        "expect(xml).toContain(rpr)",
+        "expect(xml).toContain('<w:r w:rsidR=\"00112233\">')",
+        "expect(xml).toContain('<w:rPr><w:i/></w:rPr>')",
+        "expect(xml).toContain(raw)",
+        "expect(elements(parseXml(xml),'t',W).slice(0,3).map(n=>n.text)).toEqual([' New & <雪> ','',''])",
+        "expect(next.directRunFlags().map(f=>[f.bold,f.italic])).toEqual([[true,null],[null,true]])",
+        "expect(xml).toContain('xml:space=\"preserve\"')",
+        "expect(reopened.paragraphs[0]!.text).toBe(' New & <雪> ')",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "First-leaf replacement and later-leaf clearing retain selected paragraph/run properties, run attribute, sibling fragment and direct flags in memory; byte reopen retains replacement text and every unrelated member."
+      ],
+      "gaps": [
+        "Different mixed-run input and snow replacement. Property fragments and flags are checked before reopen, not rechecked after it; the shared case has no formatting or custody predicates.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:same text is a validated lexical no-op retaining entities, archive and held span",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.setText('A&B')).toBe(p)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.paragraphs[0]!.text).toBe('X&B')"
+      ],
+      "outcomes": [
+        "Identical decoded text returns the same handle and exact archive; a previously held span remains usable for a later replacement."
+      ],
+      "gaps": [
+        "Control-only lexical no-op extension using A&B, not a shared outline value; no disk save or changed setter assertion.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:self-closing paragraphs, runs and text leaves insert safely under alias and foreign w bindings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.text).toBe('one')",
+        "expect((await Document.open(loaded.package.toBytes())).paragraphs[0]!.text).toBe('one')",
+        "expect(elements(parseXml(text(loaded)),'t','urn:foreign')).toHaveLength(0)"
+      ],
+      "outcomes": [
+        "Aliased self-closing paragraph/run/text variants produce the requested text in memory and after byte reopen, without foreign-namespace text elements."
+      ],
+      "gaps": [
+        "Different one-text input and authored namespace variants; no direct comparison of formatting or unrelated members in this test.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:invalid text types, XML characters, controls and input limits refuse without changing handles or bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.setText(value as string)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Old')"
+      ],
+      "outcomes": [
+        "Invalid types, XML characters, tab/line-break text and excessive input refuse with archive and held paragraph text unchanged."
+      ],
+      "gaps": [
+        "Control-only argument/input-bound extension; these values are absent from the successful shared outline.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:fields, revisions, lexical text barriers and unknown text attributes refuse even on same text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setText(value)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Fields, hyperlinks, revisions, lexical barriers and unsupported text attributes refuse same/different/empty text requests with archive unchanged."
+      ],
+      "gaps": [
+        "Control-only topology extension using local XML variants, not valid shared outline targets or a complete Word schema validator.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:protection, stale handles and externally changed source refuse before write or no-op",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>locked.paragraphs[0]!.setText('Old')).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(lb)",
+        "expect(()=>held.setText('New')).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(()=>fresh.setText('New')).toThrow()",
+        "expect(d.package.toBytes()).toEqual(external)"
+      ],
+      "outcomes": [
+        "A protected same-text call refuses without archive change; stale handles refuse; external XML changes are not overwritten by a held current handle."
+      ],
+      "gaps": [
+        "Control-only protection/stale-source extension. The stale-handle branch asserts the error but does not separately compare archive bytes immediately afterward.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:write and serialization faults roll back bytes while retaining paragraph/span/cell handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.setText('New')).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Old')",
+        "expect(cell.text).toBe('Old')",
+        "expect(d.paragraphs[0]!.text).toBe('Works')"
+      ],
+      "outcomes": [
+        "Injected set and serialization failures retain package bytes and held paragraph/cell text; the held span remains usable after restoring the package methods."
+      ],
+      "gaps": [
+        "Control-only rollback extension in a one-cell table. The successful follow-up is Span.replace, not a successful setter retry or filesystem fault.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:table paragraph changes retain dimensions and sibling text with UTF-16 byte reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([t.rows,t.columns]).toEqual([1,2])",
+        "expect(t.cell(0,1).text).toBe('Sibling')",
+        "expect(()=>c.text).toThrow()",
+        "expect(span.replace('bad')).rejects.toThrow(expect.objectContaining({code:'docx-stale-span'}))",
+        "expect(reopened.tables[0]!.cell(0,0).text).toBe('New 雪')",
+        "expect(reopened.tables[0]!.cell(0,1).text).toBe('Sibling')",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])"
+      ],
+      "outcomes": [
+        "UTF-16 table paragraph replacement preserves live dimensions and sibling text while expiring cell/span handles; byte reopen retains both cell texts and the UTF-16 BOM."
+      ],
+      "gaps": [
+        "UTF-16 1x2-table extension; dimensions are checked live before reopen, and no unrelated-member comparison or path save occurs here.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:xml:space edits retain declaration values, quotes and encoded default while preserving first-leaf boundary spaces",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(next.text).toBe(' a ')",
+        "expect(leaves[0]!.attributes['xml:space']).toBe('preserve')",
+        "expect(leaves[1]!.text).toBe('')",
+        "expect(xml).toContain(declaration)",
+        "expect((await Document.open(d.package.toBytes())).paragraphs[0]!.text).toBe(' a ')"
+      ],
+      "outcomes": [
+        "Boundary-space replacement sets xml:space=preserve, clears the later leaf, retains namespace declaration snippets when present, and preserves decoded text through byte reopen."
+      ],
+      "gaps": [
+        "Different a-space input with encoded/default attributes. The test checks parsed xml:space plus declaration snippets, not an exact comparison of every attribute quote or source character.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:setter output bounds retain archive and live handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.setText('x')).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('')"
+      ],
+      "outcomes": [
+        "Exceeding the complete XML output bound raises XML_EDIT_UNSAFE and retains archive bytes and the held empty paragraph."
+      ],
+      "gaps": [
+        "Control-only output bound extension; this checks refusal and custody, not peak-memory allocation or a successful shared value.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:five canonical text getter cases execute and corrupted getter/expected values fail assertions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [
+        "@id-docx-go-paragraph-text-getter|{\"variant\":\"empty\",\"text_json\":\"\\\"\\\"\"}",
+        "@id-docx-go-paragraph-text-getter|{\"variant\":\"simple\",\"text_json\":\"\\\"Hello World\\\"\"}",
+        "@id-docx-go-paragraph-text-getter|{\"variant\":\"spaced\",\"text_json\":\"\\\"  spaces  \\\"\"}",
+        "@id-docx-go-paragraph-text-getter|{\"variant\":\"Japanese\",\"text_json\":\"\\\"日本語テキスト\\\"\"}",
+        "@id-docx-go-paragraph-text-getter|{\"variant\":\"punctuation\",\"text_json\":\"\\\"a < b > c & d\\\"\"}"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(5)",
+        "expect(bad.counts.cases.failed).toBe(5)",
+        "expect(bad.counts.steps.failed).toBe(5)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(wrong.counts.cases.failed).toBe(5)",
+        "expect(wrong.counts.steps.failed).toBe(5)",
+        "expect(wrong.counts.steps.undefined).toBe(0)",
+        "expect(wrong.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "All five selected outline cases pass; deliberately wrong expected text and post-setter corruption each fail five assertion steps without undefined or ambiguous bindings."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; semantic getters are checked by pinned acceptance bindings. Corruption changes the live document and does not test saved-byte corruption.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-paragraph-text.test.ts:first existing text leaf owns replacement even after an empty run and no-leaf insertion retains first-run formatting",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-text-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.text).toBe('New')",
+        "expect(runs[0]!.children.some(n=>n.localName==='t')).toBe(false)",
+        "expect(runs[1]!.children.find(n=>n.localName==='t')!.text).toBe('New')",
+        "expect(p.directRunFlags().map(f=>[f.bold,f.italic])).toEqual([[true,null],[null,true]])",
+        "expect(nodes[0]!.children.find(n=>n.localName==='t')!.text).toBe('First')",
+        "expect(nodes[1]!.children.some(n=>n.localName==='t')).toBe(false)"
+      ],
+      "outcomes": [
+        "When a later run owns the first text leaf, replacement stays there and retains the two direct flag pairs; without text leaves, new text is inserted only in the first run."
+      ],
+      "gaps": [
+        "Different Old/New/First inputs. Flags are asserted in the existing-leaf branch only; the no-leaf branch checks text placement, not a bold getter or saved readback.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:insert at start, middle and end returns correct flattened paragraph and survives path reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.insertParagraph(0,'First').text).toBe('First')",
+        "expect(d.insertParagraph(1,'Third').text).toBe('Third')",
+        "expect(p.index).toBe(1)",
+        "expect(p.text).toBe('Second')",
+        "expect(p.directRunFlags()[0]!.bold).toBe(true)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['First','Second','Third'])",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['Start','First','Second','Third','End'])",
+        "expect((await Document.open(path)).paragraphs.map(p=>p.text)).toEqual(['Start','First','Second','Third','End'])"
+      ],
+      "outcomes": [
+        "Start/middle/end insertion returns the intended paragraph and flattened index; the middle paragraph is bold in memory. The final five-paragraph sequence survives path reopen."
+      ],
+      "gaps": [
+        "Uses insertParagraph for the initial First and Third rather than canonical append calls; no explicit per-operation body counts. Saved output is the extended five-paragraph state, not the intermediate three-block state.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:body index counts tables not table-cell paragraphs; insertion preserves old fragments and unrelated members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.index).toBe(3)",
+        "expect(p.text).toBe('Between')",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','A','B','Between','After'])",
+        "expect(d.tables[0]!.cell(0,1).text).toBe('B')",
+        "expect(body(xml(d)).children.map(n=>n.localName)).toEqual(['p','tbl','p','p','sectPr'])",
+        "expect(xml(d)).toContain(raw)",
+        "expect(reopened.paragraphs[3]!.text).toBe('Between')",
+        "expect([reopened.tables[0]!.rows,reopened.tables[0]!.columns]).toEqual([1,2])",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "A mixed paragraph/table body distinguishes body position from flattened paragraph index, retaining all original direct-body fragments in memory. Byte reopen checks inserted text, table dimensions and every unrelated member."
+      ],
+      "gaps": [
+        "Different mixed-body fixture. Exact fragments, full paragraph order and one sibling cell are checked before reopen, not all reasserted afterward.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:empty insertion is structural and expires paragraphs, spans, table and cell handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inserted.text).toBe('')",
+        "expect(d.paragraphs).toHaveLength(3)",
+        "expect(()=>p.text).toThrow()",
+        "expect(span.replace('x')).rejects.toThrow()",
+        "expect(()=>table.rows).toThrow()",
+        "expect(()=>cell.text).toThrow()"
+      ],
+      "outcomes": [
+        "Inserting an empty paragraph adds a third flattened paragraph and expires held paragraph/span/table/cell handles."
+      ],
+      "gaps": [
+        "Control-only structural-staleness extension on a paragraph plus one-cell table; no canonical First/Second/Third counts or saved state.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:invalid indexes, text and executable options refuse atomically without accessors",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.insertParagraph(index,'x')).toThrow()",
+        "expect(()=>d.insertParagraph(0,text as string)).toThrow()",
+        "expect(()=>d.insertParagraph(0,'x',options as AddParagraphOptions)).toThrow()",
+        "expect(called).toBe(false)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Old')"
+      ],
+      "outcomes": [
+        "Invalid indexes, text and options refuse without invoking accessors; final archive bytes and held text remain unchanged after the series of attempts."
+      ],
+      "gaps": [
+        "Control-only argument extension; byte equality is checked after the entire refusal series, not individually after each attempted call.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:style references require existing paragraph definitions and retain styles bytes after insertion",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.insertParagraph(0,'bad',{style:'Missing'})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.styleId).toBe('Heading1')",
+        "expect(p.directRunFlags()[0]!.italic).toBe(true)",
+        "expect(d.package.get('word/styles.xml')).toEqual(styles)",
+        "expect((await Document.open(d.package.toBytes())).paragraphs[0]!.styleId).toBe('Heading1')"
+      ],
+      "outcomes": [
+        "Missing styles refuse atomically; insertion with an authored existing style reports that style and italic in memory, retains the style part bytes, and retains the style ID after byte reopen."
+      ],
+      "gaps": [
+        "Different Styled input and explicit style setup; italic and styles bytes are checked before reopen, not after it. No style inheritance or canonical body-count assertions.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:unknown body children, duplicate or misplaced sections, lexical barriers and foreign roots refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.insertParagraph(1,'No')).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unknown body children, duplicate/misplaced section metadata, lexical body content and a foreign root refuse insertion without package changes."
+      ],
+      "gaps": [
+        "Control-only topology extension; no successful shared body-order sequence or general section validation.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:protection and external source changes refuse insertion without clobbering package edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>locked.insertParagraph(0,'New')).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(()=>d.insertParagraph(0,'New')).toThrow(expect.objectContaining({code:'docx-stale-document'}))",
+        "expect(d.package.toBytes()).toEqual(external)"
+      ],
+      "outcomes": [
+        "Protected and externally changed main-part inputs refuse insertion, preserving package bytes after each attempt."
+      ],
+      "gaps": [
+        "Control-only protection and exact-source extension with Old/New text, not successful shared body ordering.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:staged write and serialization faults preserve archive and all held handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.insertParagraph(1,'New')).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Old')",
+        "expect(t.rows).toBe(1)",
+        "expect(c.text).toBe('')",
+        "expect(d.paragraphs[0]!.text).toBe('Works')"
+      ],
+      "outcomes": [
+        "Injected package write/serialization failures retain archive, paragraph/table/cell handles and a span that remains usable after restoring package methods."
+      ],
+      "gaps": [
+        "Control-only rollback extension. Follow-up success is a span replacement; no successful insertion retry or filesystem failure is tested.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:aliased UTF-16 bodies under foreign w bindings retain insertion and original children after save",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(reopened.paragraphs.map(p=>p.text)).toEqual(['First','  雪 & < >  ','Third'])",
+        "expect(reopened.paragraphs[1]!.directRunFlags()[0]!.bold).toBe(true)",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "outcomes": [
+        "UTF-16 aliased body insertion survives save-to-bytes/reopen with the three expected texts, inserted bold flag, BOM and every unrelated member."
+      ],
+      "gaps": [
+        "UTF-16 namespace extension with a snow replacement. save() has no path here; text ordering is checked, not exact bytes of the original body children.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:self-closing and sectionless bodies support bounded insertion without inventing sections",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(opened.insertParagraph(0,'New').text).toBe('New')",
+        "expect(elements(parseXml(xml(opened)),'sectPr',W)).toHaveLength(0)",
+        "expect((await Document.open(opened.package.toBytes())).paragraphs[0]!.text).toBe('New')"
+      ],
+      "outcomes": [
+        "Self-closing and sectionless body variants accept a new paragraph and retain absence of section properties; the new text survives byte reopen."
+      ],
+      "gaps": [
+        "Different New input and body variants. Section absence is checked before reopen; no canonical append/count sequence or complete section semantics.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:body-order canonical case rejects incorrect counts and every reordered paragraph expectation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "The selected canonical order case passes; each incorrect operation count or expected paragraph and a corrupted middle paragraph fail one assertion step."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; body counts and text values live in pinned acceptance bindings. Wrong-text expectations are substitutions, not tests of every permutation; no disk save in this shared case.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:complete XML output bounds refuse insertion and preserve existing handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>loaded.insertParagraph(1,'x')).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Old')"
+      ],
+      "outcomes": [
+        "A near-limit complete XML document refuses paragraph insertion with XML_EDIT_UNSAFE and retains archive and the held Old paragraph."
+      ],
+      "gaps": [
+        "Control-only output bound extension; no peak-memory or canonical successful body-order evidence.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-insert-paragraph.test.ts:untouched fields and earlier section properties remain exact when inserting a separate body block",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-body-insert-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.insertParagraph(1,'New').text).toBe('New')",
+        "expect(xml(d)).toContain(field)",
+        "expect(d.paragraphs[1]!.text).toBe('New')",
+        "expect(xml(d).replace(/<w:p xmlns:w=\"[^\"]+\"><w:r><w:t>New<\\/w:t><\\/w:r><\\/w:p>/,'')).toBe(before)"
+      ],
+      "outcomes": [
+        "Insertion beside a field/earlier-section paragraph retains its exact fragment and restores the original entire main XML when the new fragment is removed for comparison."
+      ],
+      "gaps": [
+        "Different field-bearing input; source equality is checked in memory, without save/reopen or interpretation of field or section semantics.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:append insert delete return fresh tables and retain row order after real path save",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.rows).toBe(3)",
+        "expect(()=>held.rows).toThrow()",
+        "expect([t.cell(2,0).text,t.cell(2,1).text]).toEqual(['',''])",
+        "expect(t.rows).toBe(4)",
+        "expect(t.cell(2,0).text).toBe('C')",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','A','B','C','D','','','After'])",
+        "expect(after.tables[0]!.rows).toBe(3)",
+        "expect(after.tables[0]!.columns).toBe(2)",
+        "expect(after.paragraphs.map(p=>p.text)).toEqual(d.paragraphs.map(p=>p.text))"
+      ],
+      "outcomes": [
+        "A local 2x2 table reports 3/4/3 rows through append/insert/delete, expires the old table, and places empty cells as expected. Final path reopen checks a 3x2 grid and flattened paragraph sequence."
+      ],
+      "gaps": [
+        "Canonical input is 2x3, not local 2x2. Only the final state is path-reopened, not intermediate counts; saved row order uses flattened paragraph text rather than per-coordinate readback.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:new rows use explicit grid widths and preserve all old row fragments and unrelated members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.cell(0,0).directProperties().widthTwips).toBe(1800)",
+        "expect(t.cell(0,1).directProperties().widthTwips).toBe(6840)",
+        "expect(t.cell(1,0).text).toBe('A')",
+        "expect(xml(d)).toContain(row)",
+        "expect(xml(d)).toContain(gridXml)",
+        "expect(xml(d)).toBe(source)",
+        "expect(after.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Insertion uses explicit 1800/6840 grid widths and keeps both old row fragments and the grid snippet; deleting the new row restores exact main XML and byte reopen retains unrelated members."
+      ],
+      "gaps": [
+        "Different width/custody input, not canonical count sequence. Cell widths and source fragments are checked before reopen; unrelated members are compared after a net-zero edit sequence.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:deleting a row removes its multiple paragraphs and leaves all other bodies and tables intact",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.rows).toBe(1)",
+        "expect(t.cell(0,0).text).toBe('C')",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','C','D','After','Other table'])",
+        "expect(d.tables[1]!.cell(0,0).text).toBe('Other table')",
+        "expect(t.rows).toBe(2)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','C','D','','','After','Other table'])"
+      ],
+      "outcomes": [
+        "Deleting a multi-paragraph row removes its collected texts while leaving other body and table text; a subsequent empty insertion updates the expected flattened sequence."
+      ],
+      "gaps": [
+        "Local 2x2 plus another table; in-memory-only assertions, no saved output or canonical 3/4/3 transitions.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:row mutations expire all held paragraph span cell and table snapshots",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(fresh).toBe(d.tables[0]!)",
+        "expect(()=>t.columns).toThrow()",
+        "expect(()=>c.text).toThrow()",
+        "expect(()=>p.text).toThrow()",
+        "expect(span.replace('Changed')).rejects.toThrow()"
+      ],
+      "outcomes": [
+        "Successful insertion returns the current table and makes old table, cell, paragraph and span handles refuse."
+      ],
+      "gaps": [
+        "Control-only structural-staleness extension; no canonical row-count values or archive preservation claim for a successful mutation.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:invalid indexes, last-row deletion and row limits refuse without mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.insertRow(index)).toThrow()",
+        "expect(()=>t.deleteRow(index)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(2)",
+        "expect(()=>single.tables[0]!.deleteRow(0)).toThrow()",
+        "expect(single.package.toBytes()).toEqual(sb)",
+        "expect(()=>full.tables[0]!.appendRow()).toThrow()",
+        "expect(full.package.toBytes()).toEqual(fb)"
+      ],
+      "outcomes": [
+        "Invalid insertion/deletion indexes, including deletion at ten, refuse; the final local archive remains unchanged, as do one-row and 100-row boundary tables after refused operations."
+      ],
+      "gaps": [
+        "Control-only boundary extension on 2x2, 1x1 and 100x1 inputs rather than canonical 2x3; no positive canonical sequence or disk save.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:merged nested revised field and lexical tables refuse insertion and deletion before mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.insertRow(1)).toThrow()",
+        "expect(()=>d.tables[0]!.deleteRow(1)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Merged, spanned, nested, revised, field-bearing, lexical and decorated text contexts refuse insertion and deletion while retaining bytes."
+      ],
+      "gaps": [
+        "Control-only all-row topology extension; rejected contexts do not receive support or parity credit.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:missing ambiguous malformed or unsupported grid widths refuse even a deletion",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.appendRow()).toThrow()",
+        "expect(()=>d.tables[0]!.deleteRow(0)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Absent/duplicate grids and missing, negative, excessive or child-bearing grid widths refuse append and deletion without byte changes."
+      ],
+      "gaps": [
+        "Control-only grid-policy extension; shared case uses an ordinary valid grid, and these editor refusals are not full schema validation.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:protection and external XML changes refuse row mutation while preserving current package bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>locked.tables[0]!.appendRow()).toThrow()",
+        "expect(()=>locked.tables[0]!.deleteRow(0)).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(()=>held.insertRow(0)).toThrow()",
+        "expect(()=>held.deleteRow(0)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(external)"
+      ],
+      "outcomes": [
+        "Protected tables and held tables after external XML changes refuse row edits while preserving the current archive."
+      ],
+      "gaps": [
+        "Control-only protection and stale-source extension; no successful canonical mutation or filesystem path checks.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:set and serialization fault injections roll back insert and delete without expiring handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>operation==='insert'?t.insertRow(1):t.deleteRow(1)).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(2)",
+        "expect(c.text).toBe('A')",
+        "expect(p.text).toBe('Before')"
+      ],
+      "outcomes": [
+        "Injected set and serialization faults during insert and delete retain archive bytes, table row count, cell A text and body Before text."
+      ],
+      "gaps": [
+        "Control-only rollback extension; no span handle is tested here, no restored-operation retry and no filesystem failure injection.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:alias and UTF-16 row edits survive byte reopen without namespace capture",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(reopened.tables[0]!.rows).toBe(2)",
+        "expect(reopened.tables[0]!.cell(0,0).text).toBe('雪')",
+        "expect(reopened.tables[0]!.cell(1,1).text).toBe('D')",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "outcomes": [
+        "UTF-16 aliased insertion, cell text assignment and deletion survive save-to-bytes/reopen with two rows, selected snow/D cell texts, BOM and every unrelated member."
+      ],
+      "gaps": [
+        "UTF-16 2x2 extension; no real path is used. Only two saved cell coordinates are checked, and no column count assertion is made after reopen.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:inserted rows do not borrow header, height, shading or direct run formatting from neighbours",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml(d)).toContain(raw)",
+        "expect(t.isRowHeader(0)).toBe(true)",
+        "expect(t.isRowHeader(1)).toBe(false)",
+        "expect(t.cell(1,0).directProperties().shading).toBeNull()",
+        "expect(d.paragraphs[3]!.directRunFlags()).toEqual([])",
+        "expect(inserted.children.some(n=>n.localName==='trPr')).toBe(false)",
+        "expect(reopened.tables[0]!.isRowHeader(0)).toBe(true)",
+        "expect(reopened.tables[0]!.isRowHeader(1)).toBe(false)",
+        "expect(reopened.tables[0]!.cell(0,0).directProperties().shading).toBe('FFFF00')"
+      ],
+      "outcomes": [
+        "Insertion retains the original header-row fragment while the new row lacks header/shading/run flags and trPr; byte reopen retains header flags and original shading."
+      ],
+      "gaps": [
+        "Different neighbouring-format metadata input. New-row direct run flags and absent trPr are checked before reopen; rendering and table-style effects are not measured.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:section-bearing paragraphs and extension attributes refuse row deletion and insertion",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml(d)).toContain(target==='section'?'<w:pPr><w:sectPr/></w:pPr>':'x:tag=\"keep\"')",
+        "expect(()=>d.tables[0]!.deleteRow(0)).toThrow()",
+        "expect(()=>d.tables[0]!.appendRow()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Explicit extension attributes on cell paragraphs/rows/cells/runs and section-bearing paragraphs are present in inputs and force atomic insert/delete refusal."
+      ],
+      "gaps": [
+        "Control-only local unsupported-content policy; no canonical row count, successful mutation or general extension interpretation.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:row insertion output bound refuses without mutating package or handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.appendRow()).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(held.rows).toBe(2)",
+        "expect(held.cell(0,0).text).toBe('A')"
+      ],
+      "outcomes": [
+        "Exceeding the complete XML output bound raises XML_EDIT_UNSAFE while retaining archive bytes, two-row count and first-cell text."
+      ],
+      "gaps": [
+        "Control-only output bound extension; no peak-memory guarantee or successful canonical transition.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-rows.test.ts:canonical row-count binding catches every wrong count and fabricated successful deletion",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "caseKeys": [
+        "@id-docx-go-table-row-counts"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "The selected canonical 2x3 case passes; each wrong 3/4/3 expected count and a fabricated successful invalid deletion cause an assertion-step failure."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; exact values and RangeError/byte custody are checked by pinned bindings. Shared predicates are in-memory only.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:row texts read exact cells in column order and detach results without archive mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(first).toEqual(['A1','B1'])",
+        "expect(t.rowTexts(1)).toEqual(['A2','B2'])",
+        "expect(t.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('A1')",
+        "expect(p.text).toBe('A1')"
+      ],
+      "outcomes": [
+        "Both rows return ordered arrays; mutating the returned array leaves later reads unchanged, archive bytes identical and held first-cell/paragraph text usable."
+      ],
+      "gaps": [
+        "Canonical uses four direct cell getters plus the first row. This test checks both row arrays but directly checks only cell(0,0), not all four cell getters.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:empty, multi-paragraph, Unicode and escaped cell values read consistently after disk save",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.rowTexts(0)).toEqual(['','  雪 & < >  \\nSecond'])",
+        "expect(after.tables[0]!.rowTexts(0)).toEqual(['','  雪 & < >  \\nSecond'])",
+        "expect(after.tables[0]!.rowTexts(1)).toEqual(['A2','B2'])",
+        "expect(after.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Empty and newline-separated Unicode/metacharacter cell values read in row arrays before and after real path save; the second row and all member payloads also match after reopen."
+      ],
+      "gaps": [
+        "Different first-row values. Newline is supplied through the cell setter; saved checks use rowTexts, not four direct cell getters or an XML paragraph-count assertion.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:row text inspection tracks cell edits through live tables but refuses structural staleness and external changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.rowTexts(0)).toEqual(['Changed','B1'])",
+        "expect(()=>t.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>live.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Held tables read current values after cell/header edits; body insertion stales the old table, and external main-part changes force refusal without clobbering bytes."
+      ],
+      "gaps": [
+        "Control-only live/stale inspection extension. Structural stale refusal has no separate immediate archive equality assertion; no canonical unchanged four-cell values.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:invalid row coordinates refuse atomically and do not change existing cell range policy",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.rowTexts(row)).toThrow(RangeError)",
+        "expect(()=>t.cell(-1,0)).toThrow(RangeError)",
+        "expect(()=>t.cell(2,0)).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Invalid row coordinates throw RangeError, as do selected invalid existing cell coordinates; final archive bytes are unchanged."
+      ],
+      "gaps": [
+        "Control-only argument extension. Bun retains throwing cell access, so this does not map to the distinct canonical nil-return policy.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:merged, ragged, nested or field-bearing selected cells refuse rather than return partial row text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.rowTexts(0)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Merged, spanned, ragged, nested or field-bearing selected rows refuse without changing bytes instead of exposing a partial array."
+      ],
+      "gaps": [
+        "Control-only topology extension; this does not establish merged-cell flattening, arbitrary fields or complete grid validation.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:read-only row text remains available under protection and does not expire handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(c.text).toBe('A1')"
+      ],
+      "outcomes": [
+        "Protected-document row inspection returns A1/B1 while retaining exact archive bytes and the held first-cell handle."
+      ],
+      "gaps": [
+        "Protection/read-only extension; no second-row direct getters or saved-output checks in this test.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:aliased UTF-16 row inspection and byte reopen preserve all package members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(loaded.tables[0]!.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(loaded.package.toBytes()).toEqual(source)",
+        "expect(after.tables[0]!.rowTexts(1)).toEqual(['A2','B2'])",
+        "expect(after.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "outcomes": [
+        "UTF-16 alias input reads A1/B1 without archive mutation; save-to-bytes/reopen reads A2/B2 and retains every member payload."
+      ],
+      "gaps": [
+        "UTF-16 extension; no path save. The reopened check is rowTexts for the second row, not all four direct cell getters.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:canonical four-cell and first-row predicates reject wrong cells, row order and omitted row members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(reversed.counts.cases.failed).toBe(1)",
+        "expect(reversed.counts.steps.failed).toBe(1)",
+        "expect(reversed.counts.steps.undefined).toBe(0)"
+      ],
+      "outcomes": [
+        "The selected four-cell/first-row case passes; each wrong cell expectation, reversed first-row expectation and missing/extra array members cause assertion-step failure."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; per-cell getters and exact first-row array predicates live in pinned bindings. No saved-output or general table rendering assertion.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:selected-row inspection does not flatten unsupported cells in other rows or reinterpret lexical text markup",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.tables[0]!.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(()=>d.tables[0]!.rowTexts(1)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A supported first row reads A1/B1 with a retained lexical comment while a field-bearing second row refuses; archive bytes remain unchanged."
+      ],
+      "gaps": [
+        "Different selective-row/lexical context; only the first row is returned and no canonical four-cell direct getter success is established.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-texts.test.ts:inferred grids read supported cells but an empty unresolved row is not a successful empty result",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-cell-text-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inferred.tables[0]!.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(inferred.package.toBytes()).toEqual(ib)",
+        "expect(()=>empty.tables[0]!.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-table-unsupported'}))",
+        "expect(empty.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Valid inferred grids read A1/B1 without byte mutation; a no-grid zero-cell row refuses with docx-table-unsupported and retains its archive."
+      ],
+      "gaps": [
+        "Inferred-grid and vacuous-result controls differ from the authored canonical grid; no complete numeric-grid parsing or schema validation claim.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. Pins identify reviewed files, not a transitive dependency closure."
       ]
     }
   ]
