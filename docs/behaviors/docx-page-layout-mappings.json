@@ -6,7 +6,7 @@
     "tests/unit/docx-page-layout.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-page-layout.test.ts": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
+    "tests/unit/docx-page-layout.test.ts": "b1aa47aa13041d11631d963deac263feddaa5214a8daf788d8cd58e1798520cd",
     "tests/acceptance/page-layout.ts": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a",
     "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
     "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
@@ -17,7 +17,8 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/docx/page-layout.feature": "5aca6616eabfbc3c409897f1ee271f9a51a1e37835c1c512ffa13d97cf610181"
+    "workflows/docx/page-layout.feature": "0f6c6ccc165c37db57be0909398e3d3178d58ca46fe953fa9009986bd8501857",
+    "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d"
   },
   "mappings": [
     {

@@ -2,18 +2,53 @@
   "schemaVersion": 2,
   "features": [
     {
-      "path": "references/fixtures-ooxml/workflows/mutation-safety.feature",
+      "path": "references/fixtures-ooxml/workflows/pptx/mutation-safety.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
         "@id-pptx-dry-run-no-mutation",
-        "@id-docx-dry-run-no-mutation",
-        "@id-xlsx-dry-run-no-mutation",
-        "@id-xlsx-strict-batch-atomicity",
-        "@id-docx-strict-batch-per-target-results",
         "@id-pptx-batch-output-accumulates",
+        "@id-office-preview-details"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/mutation-safety.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-dry-run-no-mutation",
+        "@id-docx-strict-batch-per-target-results",
+        "@id-office-docx-exact-match-counts"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/mutation-safety.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-dry-run-no-mutation",
+        "@id-xlsx-strict-batch-atomicity"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/cell-style.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
         "@id-xlsx-style-dependency-closure",
-        "@id-xlsx-cross-sheet-cache-invalidation"
+        "@id-xlsx-cell-style-selection",
+        "@id-xlsx-cell-style-refusal"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/formula-cache.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-cross-sheet-cache-invalidation",
+        "@id-xlsx-clear-cross-sheet-caches",
+        "@id-xlsx-array-input-refusal",
+        "@id-xlsx-cache-scope-opaque-parts"
       ]
     },
     {
@@ -25,9 +60,6 @@
         "@id-xml-normalise-line-endings",
         "@id-xml-parse-refusals",
         "@id-xml-parse-bounds",
-        "@id-xml-apply-edits",
-        "@id-xml-go-element-removal-custody",
-        "@id-xml-go-element-removal-refusal",
         "@id-xml-entity-values",
         "@id-xml-stylesheet-processing-instruction",
         "@id-xml-expanded-attribute-lookup",
@@ -37,7 +69,17 @@
         "@id-xml-escaping-values",
         "@id-xml-escaping-invalid-character",
         "@id-xml-escaping-whitespace-roundtrip",
-        "@id-xml-typed-parse-error",
+        "@id-xml-typed-parse-error"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xml/editing.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xml-apply-edits",
+        "@id-xml-go-element-removal-custody",
+        "@id-xml-go-element-removal-refusal",
         "@id-xml-go-attribute-splice-custody",
         "@id-xml-go-attribute-batch-refusal",
         "@id-xml-go-child-insertion-custody",
@@ -59,7 +101,7 @@
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/native/docx-story.feature",
+      "path": "references/fixtures-ooxml/workflows/docx/stories.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
@@ -69,27 +111,20 @@
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/native/docx-revisions.feature",
+      "path": "references/fixtures-ooxml/workflows/docx/revisions.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
         "@id-docx-revisions-all-stories",
         "@id-docx-revisions-rollback",
         "@id-docx-revisions-empty-deletion",
-        "@id-docx-revisions-protected"
-      ]
-    },
-    {
-      "path": "references/fixtures-ooxml/workflows/native/docx-redline.feature",
-      "lifecycle": "implemented",
-      "runner": "bun",
-      "scenarioIds": [
+        "@id-docx-revisions-protected",
         "@id-docx-tracked-replace-roundtrip",
         "@id-docx-tracked-replace-refusal"
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/native/opc-graph.feature",
+      "path": "references/fixtures-ooxml/workflows/package/graph.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
@@ -100,7 +135,7 @@
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/native/opc-zip64.feature",
+      "path": "references/fixtures-ooxml/workflows/package/zip64.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
@@ -111,14 +146,11 @@
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/native/pptx-text.feature",
+      "path": "references/fixtures-ooxml/workflows/pptx/notes.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
         "@id-pptx-order-notes-read",
-        "@id-pptx-readable-unsupported-topology",
-        "@id-pptx-cross-run-replace",
-        "@id-pptx-stale-anchor-refusal",
         "@id-pptx-go-notes-exact-splice",
         "@id-pptx-go-notes-clear-stale-refill",
         "@id-pptx-go-notes-part-fingerprint-refusal",
@@ -126,32 +158,39 @@
         "@id-pptx-go-notes-edge-space-preserve",
         "@id-pptx-go-notes-multiline-template",
         "@id-pptx-go-notes-template-fragments",
-        "@id-pptx-bun-open-save-noop",
         "@id-pptx-go-notes-refusal-and-noop-custody"
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/native/xlsx-cells.feature",
+      "path": "references/fixtures-ooxml/workflows/pptx/text.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-readable-unsupported-topology",
+        "@id-pptx-cross-run-replace",
+        "@id-pptx-stale-anchor-refusal"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/pptx/preservation.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-pptx-bun-open-save-noop"
+      ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/xlsx/cells.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
         "@id-xlsx-read-rel-linked-shared-strings",
         "@id-xlsx-preserve-styled-cell-edit",
-        "@id-xlsx-clear-cross-sheet-caches",
         "@id-xlsx-prefixed-namespace-safe-edits",
         "@id-xlsx-phonetic-guides-excluded",
         "@id-xlsx-styled-blank-cell-editable",
         "@id-xlsx-refuse-shared-formula-overwrite",
         "@id-xlsx-refuse-array-formula-overwrite"
-      ]
-    },
-    {
-      "path": "references/fixtures-ooxml/workflows/native/xlsx-cache-boundaries.feature",
-      "lifecycle": "implemented",
-      "runner": "bun",
-      "scenarioIds": [
-        "@id-xlsx-array-input-refusal",
-        "@id-xlsx-cache-scope-opaque-parts"
       ]
     },
     {
@@ -185,7 +224,8 @@
         "@id-docx-create-minimal-package",
         "@id-docx-create-style-validation",
         "@id-docx-create-stale-opaque",
-        "@id-docx-create-atomic-refusals"
+        "@id-docx-create-atomic-refusals",
+        "@id-docx-go-new-empty-body"
       ]
     },
     {
@@ -196,7 +236,15 @@
         "@id-docx-table-create-roundtrip",
         "@id-docx-table-opaque-preserve",
         "@id-docx-table-stale-cell",
-        "@id-docx-table-atomic-refusals"
+        "@id-docx-table-atomic-refusals",
+        "@id-docx-go-table-dimensions-getters",
+        "@id-docx-go-roundtrip-table-text",
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters",
+        "@id-docx-go-table-header-getter",
+        "@id-docx-go-table-row-counts",
+        "@id-docx-go-table-cell-text-getters",
+        "@id-docx-go-table-style-getter"
       ]
     },
     {
@@ -290,7 +338,14 @@
       "runner": "bun",
       "scenarioIds": [
         "@id-docx-direct-run-formatting",
-        "@id-docx-direct-formatting-refusal"
+        "@id-docx-direct-formatting-refusal",
+        "@id-docx-go-run-boolean-formatting",
+        "@id-docx-go-run-color-getter",
+        "@id-docx-go-run-underline-style",
+        "@id-docx-go-run-highlight",
+        "@id-docx-go-run-vertical-align",
+        "@id-docx-go-run-font-name",
+        "@id-docx-go-roundtrip-selected-formatting"
       ]
     },
     {
@@ -321,21 +376,13 @@
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/xlsx/cell-style.feature",
-      "lifecycle": "implemented",
-      "runner": "bun",
-      "scenarioIds": [
-        "@id-xlsx-cell-style-selection",
-        "@id-xlsx-cell-style-refusal"
-      ]
-    },
-    {
       "path": "references/fixtures-ooxml/workflows/docx/page-layout.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
         "@id-docx-final-section-layout",
-        "@id-docx-final-section-layout-refusal"
+        "@id-docx-final-section-layout-refusal",
+        "@id-docx-go-section-title-background-getters"
       ]
     },
     {
@@ -419,43 +466,24 @@
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/docx/document-model.feature",
+      "path": "references/fixtures-ooxml/workflows/docx/paragraphs.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
         "@id-docx-go-paragraph-alignment-getter",
         "@id-docx-go-paragraph-spacing-getters",
         "@id-docx-go-paragraph-advanced-toggles",
-        "@id-docx-go-run-boolean-formatting",
-        "@id-docx-go-run-color-getter",
-        "@id-docx-go-run-underline-style",
-        "@id-docx-go-run-highlight",
-        "@id-docx-go-run-vertical-align",
-        "@id-docx-go-run-font-name",
-        "@id-docx-go-new-empty-body",
-        "@id-docx-go-table-dimensions-getters",
-        "@id-docx-go-roundtrip-table-text",
-        "@id-docx-go-cell-shading-getter",
-        "@id-docx-go-cell-properties-getters",
         "@id-docx-go-paragraph-multiple-runs",
-        "@id-docx-go-roundtrip-selected-formatting",
-        "@id-docx-go-table-header-getter",
         "@id-docx-go-paragraph-text-getter",
-        "@id-docx-go-body-insert-order",
-        "@id-docx-go-table-row-counts",
-        "@id-docx-go-table-cell-text-getters",
-        "@id-docx-go-core-properties-getters",
-        "@id-docx-go-section-title-background-getters",
-        "@id-docx-go-table-style-getter"
+        "@id-docx-go-body-insert-order"
       ]
     },
     {
-      "path": "references/fixtures-ooxml/workflows/workflow-receipts.feature",
+      "path": "references/fixtures-ooxml/workflows/docx/properties.feature",
       "lifecycle": "implemented",
       "runner": "bun",
       "scenarioIds": [
-        "@id-office-preview-details",
-        "@id-office-docx-exact-match-counts"
+        "@id-docx-go-core-properties-getters"
       ]
     },
     {

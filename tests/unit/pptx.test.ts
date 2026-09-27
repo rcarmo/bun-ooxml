@@ -25,13 +25,14 @@ afterEach(async () => {
 describe("pptx slice", () => {
   test("acceptance feature passes with the dedicated PPTX bindings", async () => {
     const root = await makeProject({
-      "references/fixtures-ooxml/workflows/native/pptx-text.feature": await Bun.file(join(fixturesRoot(), "workflows/native/pptx-text.feature")).text(),
-      "features/shared.json": JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/workflows/native/pptx-text.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-order-notes-read','@id-pptx-readable-unsupported-topology','@id-pptx-cross-run-replace','@id-pptx-stale-anchor-refusal']}]}),
+      "references/fixtures-ooxml/workflows/pptx/text.feature": await Bun.file(join(fixturesRoot(), "workflows/pptx/text.feature")).text(),
+      "references/fixtures-ooxml/workflows/pptx/notes.feature": await Bun.file(join(fixturesRoot(), "workflows/pptx/notes.feature")).text(),
+      "features/shared.json": JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/workflows/pptx/text.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-readable-unsupported-topology','@id-pptx-cross-run-replace','@id-pptx-stale-anchor-refusal']},{path:'references/fixtures-ooxml/workflows/pptx/notes.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-order-notes-read']}]}),
     });
 
     const report = await runAcceptance(bindings, { root });
     expect(report.status).toBe("passed");
-    expect(report.inventory.features.implemented).toBe(1);
+    expect(report.inventory.features.implemented).toBe(2);
     expect(report.execution.cases.passed).toBe(4);
   });
 

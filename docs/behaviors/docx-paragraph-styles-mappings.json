@@ -6,7 +6,7 @@
     "tests/unit/docx-paragraph-style.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-paragraph-style.test.ts": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf",
+    "tests/unit/docx-paragraph-style.test.ts": "fe5a9aeef872fb439a798c94104d0d6969d4987166c3b773f346d6c21d55521e",
     "tests/acceptance/paragraph-style.ts": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27",
     "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
     "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
@@ -17,7 +17,8 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/docx/paragraph-style.feature": "462be357951e2961b9b35dfe3457216709e3c6a02eeb0988c6a3c2279b730490"
+    "workflows/docx/paragraph-style.feature": "74d35cd4da1e8e583d0a52b622c4b1bf452d69a1efd1d14f2102aa6163ae993c",
+    "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d"
   },
   "mappings": [
     {

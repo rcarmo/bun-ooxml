@@ -1,3 +1,4 @@
+import {sharedScenarios} from '../helpers/shared-scenarios.ts';
 import {expect,test} from 'bun:test';
 import {join} from 'node:path';
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
@@ -5,13 +6,13 @@ import {executeAcceptance,selectSharedScenarios,type StepBinding} from '../../sc
 import {bindings} from '../acceptance/steps.ts';
 const ids=['@id-docx-go-new-empty-body','@id-docx-go-table-dimensions-getters','@id-docx-go-roundtrip-table-text'];
 async function run(active:StepBinding[]=bindings,change:(s:string)=>string=s=>s){
- const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text();const count=(n:number)=>({implemented:n,planned:0,total:n});
- return executeAcceptance({root:'.',features:[selectSharedScenarios(path,change(source),ids)],counts:{features:count(1),scenarios:count(3),cases:count(10),steps:count(33)}},active,'docx-model-unit');
+ const count=(n:number)=>({implemented:n,planned:0,total:n});
+ return executeAcceptance({root:'.',features:await sharedScenarios(ids,change),counts:{features:count(2),scenarios:count(3),cases:count(10),steps:count(33)}},active,'docx-model-unit');
 }
 function failed(r:Awaited<ReturnType<typeof run>>){expect(r.counts.cases.failed).toBeGreaterThan(0);expect(r.counts.steps.failed).toBeGreaterThan(0);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);}
 test('ten existing DOCX document-model cases execute without activating incompatible table policies',async()=>{
  const result=await run();expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(10);
- for(const id of ['@id-docx-go-table-cell-access','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-run-effects-getters'])expect(result.features[0]!.scenarios.find(s=>s.scenarioId===id)!.result).toBe('planned');
+ for(const id of ['@id-docx-go-table-cell-access','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-run-effects-getters'])expect(result.features.flatMap(f=>f.scenarios).some(s=>s.scenarioId===id)).toBe(false);
 });
 test('wrong table dimensions fail bound getter predicates',async()=>{
  failed(await run(bindings,s=>s.replace('RowCount equals <rows> and ColumnCount equals <cols> in memory','RowCount equals 99 and ColumnCount equals 99 in memory')));

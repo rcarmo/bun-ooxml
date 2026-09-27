@@ -76,8 +76,9 @@ ECMA-376 Part 1, fifth edition (October 2016), defines `caps` in §17.3.2.5,
 same-run exclusions in those clauses. The complete PDF is in the
 [shared specification index](../../references/fixtures-ooxml/specs/ecma-376/README.md).
 
-The shared five-row bold/italic/strike outline in `docx/document-model.feature`
-executes in Bun, alongside the existing `docx/run-formatting.feature` cases. The
+The shared five-row bold/italic/strike outline now belongs to
+`docx/run-formatting.feature` alongside the saved-formatting cases and executes
+in Bun. The
 separate Go all-eight-effects getter case stays planned: it sets mutually exclusive
 effects on one run and checks in-memory values without saving XML. Individual
 valid effects have native save/reopen tests and one Open XML SDK Office2019

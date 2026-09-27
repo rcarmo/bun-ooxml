@@ -88,7 +88,7 @@ test('protected writes, stale source and serialization failure preserve bytes an
 
 test('six shared font-name getter cases execute and corrupted slot data fails real predicates',async()=>{
  const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts');const {bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/run-font-name.ts');
- const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const path='workflows/docx/run-formatting.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});
  const inventory=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(6),steps:count(18)}});
  const good=await executeAcceptance(inventory(source),bindings,'run-font-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(6);expect(good.counts.cases.planned).toBeGreaterThan(0);
  const wrong=await executeAcceptance(inventory(source.replace('its font-name getter equals <font>','its font-name getter equals Wrong')),bindings,'run-font-expected-control');expect(wrong.counts.cases.failed).toBe(6);expect(wrong.counts.steps.failed).toBe(6);expect(wrong.counts.steps.undefined).toBe(0);expect(wrong.counts.steps.ambiguous).toBe(0);

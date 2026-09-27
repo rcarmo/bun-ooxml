@@ -8,9 +8,9 @@ import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 const root=join(import.meta.dir,"../..");
 describe("shared mutation inventory and custody",()=>{
   test("checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",async()=>{
-    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});
+    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});
     const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();
-    const canonical=ledger.features.filter((path:string)=>path.startsWith('workflows/native/'));
+    const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));
     expect(canonical).toHaveLength(8);
     const inventory=await inventoryFeatures(root);
     expect(inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'))).toEqual([]);
@@ -56,7 +56,7 @@ Feature: JSON escaping
       const contract=await Bun.file(join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json')).json();
       const fixture=manifest.files.find((f:any)=>f.id===contract.fixtures[0].assetId);
       for(const [file,expectedError] of [
-        ["references/fixtures-ooxml/workflows/mutation-safety.feature","Shared contract artifact drift"],
+        ...contract.features.map((p:string)=>['references/fixtures-ooxml/'+p,'Shared contract artifact drift']),
         ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],
         ["references/fixtures-ooxml/contracts/mutation-safety.json","Shared contract artifact drift"],
       ]) {
@@ -64,7 +64,26 @@ Feature: JSON escaping
         const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;
         await Bun.write(path,modified);await expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);
       }
-      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:2});
+      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});
+      // Re-seal the deliberately corrupted policy so these controls exercise
+      // schema and selection validation, not just byte-hash rejection.
+      const contractPath=join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json'),manifestPath=join(temp,'references/fixtures-ooxml/manifest.json');
+      for(const mutate of [
+        (c:any)=>{c.features=[];},
+        (c:any)=>{c.features.push(c.features[0]);},
+        (c:any)=>{c.features.pop();},
+        (c:any)=>{c.features[0]='../escape.feature';},
+        (c:any)=>{c.feature='workflows/mutation-safety.feature';},
+        (c:any)=>{c.features.push('workflows/docx/creation.feature');},
+        (c:any)=>{c.scenarioIds[0]='@id-office-preview-details';},
+        (c:any)=>{c.scenarioIds[0]=c.scenarioIds[1];},
+      ]){
+        const modified=structuredClone(contract);mutate(modified);const text=JSON.stringify(modified),copy=structuredClone(manifest),asset=copy.files.find((a:any)=>a.path==='contracts/mutation-safety.json');
+        asset.sha256=new Bun.CryptoHasher('sha256').update(text).digest('hex');asset.bytes=Buffer.byteLength(text);
+        await Bun.write(contractPath,text);await Bun.write(manifestPath,JSON.stringify(copy));await expect(verifySharedContracts(temp)).rejects.toThrow();
+      }
+      await Bun.write(contractPath,JSON.stringify(contract));const original=structuredClone(manifest),asset=original.files.find((a:any)=>a.path==='contracts/mutation-safety.json');asset.sha256=new Bun.CryptoHasher('sha256').update(JSON.stringify(contract)).digest('hex');await Bun.write(manifestPath,JSON.stringify(original));
+      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});
     } finally {await rm(temp,{recursive:true,force:true});}
   });
 });

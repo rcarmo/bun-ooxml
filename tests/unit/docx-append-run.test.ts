@@ -1,3 +1,4 @@
+import {sharedScenarios} from '../helpers/shared-scenarios.ts';
 import {expect,test} from 'bun:test';
 import {mkdtemp,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';
 import {Document,type RunFormattingPatch} from '../../src/index.ts';
@@ -68,13 +69,13 @@ test('table append preserves grid and expires cell snapshots, with UTF-16 payloa
 
 test('two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting',async()=>{
  const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts');const {bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/append-run.ts');
- const path='workflows/docx/document-model.feature',text=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});
- const inv=(source:string)=>({root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(2),cases:count(2),steps:count(9)}});
- const good=await executeAcceptance(inv(text),bindings,'append-run-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(2);expect(good.counts.cases.planned).toBeGreaterThan(0);
- const expected=await executeAcceptance(inv(text.replace('the third run reports colour FF0000, font size 14 and font Arial','the third run reports colour 000000, font size 12 and font Wrong')),bindings,'append-run-expectation');expect(expected.counts.cases.failed).toBe(1);expect(expected.counts.steps.failed).toBe(1);expect(expected.counts.steps.undefined).toBe(0);
+ const count=(n:number)=>({implemented:n,planned:0,total:n});
+ const inv=async(change:(s:string)=>string=s=>s)=>({root:'.',features:await sharedScenarios(scenarioIds,change),counts:{features:count(2),scenarios:count(2),cases:count(2),steps:count(9)}});
+ const good=await executeAcceptance(await inv(),bindings,'append-run-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(2);expect(good.counts.cases.planned).toBe(0);
+ const expected=await executeAcceptance(await inv(s=>s.replace('the third run reports colour FF0000, font size 14 and font Arial','the third run reports colour 000000, font size 12 and font Wrong')),bindings,'append-run-expectation');expect(expected.counts.cases.failed).toBe(1);expect(expected.counts.steps.failed).toBe(1);expect(expected.counts.steps.undefined).toBe(0);
  for(const patch of [{bold:false},{italic:false},{color:'000000'},{fontSizePt:12},{fontName:'Wrong'}]){
   const corrupted=bindings.map(b=>b.pattern.test('the document is saved and reopened')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);(c.state as {reopened:Document}).reopened.paragraphs[0]!.setRunFormatting(patch);}}:b);
-  const bad=await executeAcceptance(inv(text),corrupted,'append-run-format-control');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);
+  const bad=await executeAcceptance(await inv(),corrupted,'append-run-format-control');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);
  }
 });
 

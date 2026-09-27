@@ -139,11 +139,11 @@ test('seven canonical structured-edit cases execute without activating the byte-
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { executeAcceptance, selectSharedScenarios } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-structure.ts');
-  const path = 'workflows/xml/parsing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   const inventory = (source: string) => ({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(5), cases: count(7), steps: count(30) } });
   const good = await executeAcceptance(inventory(text), bindings, 'xml-structure-unit');
-  expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(7); expect(good.counts.cases.planned).toBe(24);
+  expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(7); expect(good.counts.cases.planned).toBe(9);
   const bad = await executeAcceptance(inventory(text.replace('the grandchild text equals JSON "x\\ry\\nz"', 'the grandchild text equals JSON "wrong"')), bindings, 'xml-structure-value-control');
   expect(bad.counts.cases.failed).toBe(1); expect(bad.counts.steps.failed).toBe(1); expect(bad.counts.steps.undefined).toBe(0); expect(bad.counts.steps.ambiguous).toBe(0);
 });
@@ -152,7 +152,7 @@ test('structured acceptance predicates reject corrupted namespaces, text, no-ops
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { executeAcceptance, selectSharedScenarios } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-structure.ts');
-  const path = 'workflows/xml/parsing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   type State = { output?: string; error?: unknown; matrix?: { output: string; noop: string }[] };
   const matrixStep = 'Go inserts child with a flag attribute of JSON value "\\t\\r\\n & 😀" and a plain grandchild of JSON text "x\\ry\\nz" for all 4 by 5 by 5 choices';

@@ -1,12 +1,14 @@
 # Shared mutation workflows
 
-The shared specification defines mutation safety in `workflows/mutation-safety.feature`
-and `contracts/mutation-safety.json`. Eight scenarios expand to 19 cases over four
-fixture policies. Each policy resolves an `assetId`; reusable bytes are
-stored only in `fixtures/<format>/<scenario-group>/`.
+`contracts/mutation-safety.json` schema 2 selects eight scenarios from five
+format-local features. They expand to 19 cases over four fixture policies. Each
+policy resolves an `assetId`; reusable bytes are stored only in
+`fixtures/<format>/<scenario-group>/`.
 
-`features/shared.json` selects the central feature. The Bun runner applies
-lifecycle tags in memory and compiles it with the official Gherkin compiler.
+`features/shared.json` selects exact scenario IDs from the declared files. The Bun
+runner applies lifecycle tags in memory and uses the official Gherkin compiler.
+Each file must be sealed, each selected ID must occur once, and other scenarios
+in those files retain their own implementation status.
 Bindings call `patchOffice` and assert saved output, receipt counts and preserved
 package parts.
 No feature copy or generated expanded-case catalogue is stored locally.

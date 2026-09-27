@@ -8,7 +8,7 @@
     "tests/unit/pptx-notes-utf8.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/pptx.test.ts": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
+    "tests/unit/pptx.test.ts": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
     "tests/acceptance/pptx.ts": "7e4ab7286825d0a5aeb3cda3284bb1afa39e6a9986eca45d4432ad3eaab31e1f",
     "tests/acceptance/pptx-custody.ts": "19a5adee9d24905df90ae1787b3ffb67cb4123ea40d1913cf940ce4fbd368819",
     "src/pptx/index.ts": "6912aedc6e09726c4e3dc57e34c0057f3873c858bb6fa843f171bc1e2d79cded",
@@ -18,13 +18,15 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/native/pptx-text.feature": "d2e710f66e78dfa0beabf5d7076d7c67fe4e686744f008a2a134122749cb5444",
-    "tests/unit/pptx-notes-edit.test.ts": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
-    "tests/unit/pptx-notes-utf8.test.ts": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+    "tests/unit/pptx-notes-edit.test.ts": "5ff23ff0307da42b6d404538ab89188070f1b52a14219d3ca48c94a111e09832",
+    "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
     "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
     "tests/acceptance/notes-editing.ts": "9d79581028fde05cb5538c480e673e65b303d9624854bdda0129470ca4afdeb6",
     "tests/acceptance/steps.ts": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a",
-    "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e"
+    "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+    "workflows/pptx/notes.feature": "a6d11b5450bb7d2280ac095eefec195f736062c4b0faf8655a1d2dc6c546c960",
+    "workflows/pptx/preservation.feature": "b5f6ec1bce609681279180a55ead4122e8a8fcfe9892a5a53dbc2fabbfc06808",
+    "workflows/pptx/text.feature": "30fb7380fc0a133c5b710cd843493ebcaee781d2000c23eabb3bff0290b373a8"
   },
   "mappings": [
     {
@@ -44,7 +46,7 @@
       ],
       "assertions": [
         "expect(report.status).toBe(\"passed\")",
-        "expect(report.inventory.features.implemented).toBe(1)",
+        "expect(report.inventory.features.implemented).toBe(2)",
         "expect(report.execution.cases.passed).toBe(4)"
       ],
       "outcomes": [

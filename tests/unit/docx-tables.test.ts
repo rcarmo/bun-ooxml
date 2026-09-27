@@ -267,9 +267,8 @@ function isWord(element: XmlElement, localName: string): boolean {
 async function makeAcceptanceRoot(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "bun-ooxml-docx-table-acceptance-"));
   tempRoots.push(root);
-  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/docx/tables.feature")).text()).replace(/^@planned/m, '@implemented @bun');
-  const path = join(root, "features", "docx", "tables.feature");
-  await mkdir(dirname(path), { recursive: true });
-  await Bun.write(path, featureText);
+  const path='workflows/docx/tables.feature';
+  await Bun.write(join(root,'references/fixtures-ooxml',path),await Bun.file(join(fixturesRoot(),path)).text());
+  await Bun.write(join(root,'features/shared.json'),JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/'+path,lifecycle:'implemented',runner:'bun',scenarioIds:['@id-docx-table-create-roundtrip','@id-docx-table-opaque-preserve','@id-docx-table-stale-cell','@id-docx-table-atomic-refusals']}]}));
   return root;
 }

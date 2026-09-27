@@ -140,9 +140,8 @@ describe("docx revisions", () => {
 async function makeAcceptanceRoot(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "bun-ooxml-docx-revisions-acceptance-"));
   tempRoots.push(root);
-  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/native/docx-revisions.feature")).text()).replace(/^@planned/m, '@implemented @bun');
-  const path = join(root, "features", "docx", "revisions.feature");
-  await mkdir(dirname(path), { recursive: true });
-  await Bun.write(path, featureText);
+  const path='workflows/docx/revisions.feature';
+  await Bun.write(join(root,'references/fixtures-ooxml',path),await Bun.file(join(fixturesRoot(),path)).text());
+  await Bun.write(join(root,'features/shared.json'),JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/'+path,lifecycle:'implemented',runner:'bun',scenarioIds:['@id-docx-revisions-all-stories','@id-docx-revisions-rollback','@id-docx-revisions-empty-deletion','@id-docx-revisions-protected']}]}));
   return root;
 }

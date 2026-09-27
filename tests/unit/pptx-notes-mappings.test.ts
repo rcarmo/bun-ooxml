@@ -6,19 +6,19 @@ import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {join} from 'node:path';
 const paths=['tests/unit/pptx.test.ts','tests/unit/pptx-notes-edit.test.ts','tests/unit/pptx-notes-utf8.test.ts'];
 const pins=['src/pptx/notes.ts','tests/acceptance/notes-editing.ts','tests/acceptance/steps.ts','tests/fixtures/admission.ts'];
-const canonical='workflows/native/pptx-text.feature';
+const canonical=["workflows/pptx/notes.feature","workflows/pptx/preservation.feature","workflows/pptx/text.feature"];
 async function sample(){
  const ledger=await Bun.file('docs/behaviors/pptx-core-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};
- for(const path of new Set([...Object.keys(ledger.sourceSha256),...paths,...pins]))sources[path]=await Bun.file(path===canonical?join(fixturesRoot(),path):path).text();
+ for(const path of new Set([...Object.keys(ledger.sourceSha256),...paths,...pins]))sources[path]=await Bun.file(canonical.includes(path)?join(fixturesRoot(),path):path).text();
  const inventory={cases:paths.flatMap(p=>inventoryTestSource(p,sources[p]!)),unresolved:[]};
- return {inventory,sets:[{name:'pptx-core',expectedScopePaths:paths,ledger,features:[parseFeature(canonical,sources[canonical]!,{allowDuplicateCaseNames:true})],sources}]};
+ return {inventory,sets:[{name:'pptx-core',expectedScopePaths:paths,ledger,features:canonical.map(p=>parseFeature(p,sources[p]!,{allowDuplicateCaseNames:true})),sources}]};
 }
 
 test('PPTX notes mapping extension covers exactly two added suites while retaining all six prior records',async()=>{
  const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='pptx-core')!;expect(ledger.scopePaths).toEqual(paths);expect(ledger.mappedDeclarations).toBe(33);
  const rows=report.mappings.filter(r=>r.ledger==='pptx-core').slice(6);expect(rows).toHaveLength(27);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(109);expect(paths.slice(1).map(p=>rows.filter(r=>r.testId.includes(p)).length)).toEqual([14,13]);
  expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length)).toBe(true);expect(report.mappedDeclarations).toBe(472);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-472);expect(report.runtimeLeafCount).toBeNull();
- const raw=await Bun.file('docs/behaviors/pptx-core-mappings.json').json();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('1cc69f5444a96f8831041d2609baef34cac2e649aa61f133b6a1733e982a47ee');
+ const raw=await Bun.file('docs/behaviors/pptx-core-mappings.json').json();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(raw.mappings.slice(0,6))).digest('hex')).toBe('a6fda4a5457cafa44eba2181ffea1a2a374c42ede63f41df2b952cfb6c3b0f71');
  const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys.length)).toEqual([8,1]);expect(exact.every(r=>r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);
 });
 

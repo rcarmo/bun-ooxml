@@ -36,6 +36,6 @@ test('overlapping literal occurrences refuse an ambiguous tracked target',async(
 });
 
 test('executes all saved-outcome redline feature cases',async()=>{
- const path='workflows/native/docx-redline.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun'));const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};
+ const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const [f]=await sharedScenarios(['@id-docx-tracked-replace-roundtrip','@id-docx-tracked-replace-refusal']);if(!f)throw Error('Missing redline scenarios');const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};
  const r=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(6);
 });

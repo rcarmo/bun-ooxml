@@ -8,7 +8,6 @@
     "tests/unit/xlsx-formula-remap.test.ts"
   ],
   "sourceSha256": {
-    "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de",
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
     "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
     "tests/unit/xlsx-formula-remap.test.ts": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
@@ -20,7 +19,8 @@
     "tests/acceptance/formula-analysis.ts": "6dc9954e400d9837d132cd9f5056c8c208f7bb65005be931206c5a5b571798bd",
     "tests/acceptance/formula-remap.ts": "e1b68aafd7323a71ecb8b6e140edb82563a90684398430a5b9e7e665fbeedb91",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
-    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407"
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de"
   },
   "mappings": [
     {

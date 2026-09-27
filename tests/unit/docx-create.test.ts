@@ -149,8 +149,8 @@ describe("Document.create and addParagraph", () => {
   });
 
   test("executes the DOCX create feature with dedicated bindings and optional parent aggregation", async () => {
-    const featurePath = "references/fixtures-ooxml/workflows/docx/creation.feature";
-    const feature = parseFeature(featurePath, (await Bun.file(join(fixturesRoot(), "workflows/docx/creation.feature")).text()).replace(/^@planned/m, '@implemented @bun'));
+    const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');
+    const [feature]=await sharedScenarios(['@id-docx-create-minimal-package','@id-docx-create-style-validation','@id-docx-create-stale-opaque','@id-docx-create-atomic-refusals']);if(!feature)throw Error('Missing creation scenarios');
     const inventory = inventoryFor(feature);
 
     for (const bindings of [createBindings, parentBindings]) {

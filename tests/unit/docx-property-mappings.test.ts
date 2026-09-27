@@ -7,12 +7,12 @@ import {join} from 'node:path';
 const paths=['tests/unit/docx-core-properties.test.ts','tests/unit/docx-document-properties.test.ts','tests/unit/docx-table-style.test.ts'];
 const ids=['@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter'];
 const pins=['src/opc/core-properties.ts','src/docx/document-properties.ts','src/docx/table-style.ts','tests/acceptance/core-properties.ts','tests/acceptance/document-properties.ts','tests/acceptance/table-style.ts'];
-const canonical='workflows/docx/document-model.feature';
+const canonical=["workflows/docx/page-layout.feature","workflows/docx/paragraphs.feature","workflows/docx/properties.feature","workflows/docx/run-formatting.feature","workflows/docx/tables.feature"];
 async function sample(){
  const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};
- for(const path of Object.keys(ledger.sourceSha256))sources[path]=await Bun.file(path===canonical?join(fixturesRoot(),path):path).text();
+ for(const path of Object.keys(ledger.sourceSha256))sources[path]=await Bun.file(canonical.includes(path)?join(fixturesRoot(),path):path).text();
  const inventory={cases:ledger.scopePaths.flatMap(path=>inventoryTestSource(path,sources[path]!)),unresolved:[]};
- return {inventory,sets:[{name:'docx-model',expectedScopePaths:ledger.scopePaths.slice(),ledger,features:[parseFeature(canonical,sources[canonical]!,{allowDuplicateCaseNames:true})],sources}]};
+ return {inventory,sets:[{name:'docx-model',expectedScopePaths:ledger.scopePaths.slice(),ledger,features:canonical.map(p=>parseFeature(p,sources[p]!,{allowDuplicateCaseNames:true})),sources}]};
 }
 
 test('property mapping extension adds exactly 42 declarations and 226 direct expressions while retaining prior records',async()=>{
@@ -24,7 +24,7 @@ test('property mapping extension adds exactly 42 declarations and 226 direct exp
  const exact=rows.filter(r=>r.caseKeys.length);expect(exact.map(r=>r.caseKeys)).toEqual(ids.map(id=>[id]));
  expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);
  const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json();
- expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('30ae497339a8a5bafd44fb3cf0233c70e67f0dc8f34966163f43b8b9173801fe');
+ expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('34cfb0ba78d652e98d0dc50afac5241d4265b3e59cb036b4978334d0143e0dc1');
  expect(report.mappedDeclarations).toBe(472);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-472);
 });
 

@@ -6,7 +6,7 @@ import{bindings,cleanupTrackedWorkflowFixtures,setupTrackedWorkflow,requestFor}f
 import{patchOffice}from'../../src/workflow/index.ts';
 afterEach(cleanupTrackedWorkflowFixtures);
 test('tracked Word workflow dispatch executes17outcome/refusal cases',async()=>{
- const path='workflows/docx/tracked-workflow.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun')),cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const [f]=await sharedScenarios(['@id-docx-track-changes-option-outcome','@id-docx-workflow-tracked-refusal']);if(!f)throw Error('Missing tracked workflow');const cases=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
  const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};
  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(17);
 });

@@ -188,7 +188,7 @@ function storyText(
 async function makeAcceptanceRoot(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), "bun-ooxml-docx-story-acceptance-"));
   tempRoots.push(root);
-  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/native/docx-story.feature")).text()).replace(/^@planned/m, '@implemented @bun');
+  const featureText = (await Bun.file(join(fixturesRoot(), "workflows/docx/stories.feature")).text()).replace(/^@planned/m, '@implemented @bun');
   const path = join(root, "features", "docx", "story.feature");
   await mkdir(dirname(path), { recursive: true });
   await Bun.write(path, featureText);

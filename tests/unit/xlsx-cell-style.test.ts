@@ -5,7 +5,7 @@ import {join} from 'node:path';
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 
 test('cell style selection executes27 saved outcomes and atomic refusals',async()=>{
- const path='workflows/xlsx/cell-style.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun')),rows=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const [f]=await sharedScenarios(["@id-xlsx-cell-style-selection","@id-xlsx-cell-style-refusal"]);if(!f)throw Error('Missing shared profile');const rows=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
  const inv:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(rows.length),steps:count(rows.reduce((n,c)=>n+c.steps.length,0))}};
  const r=await executeAcceptance(inv,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(27);
 });

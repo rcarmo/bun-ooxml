@@ -6,7 +6,7 @@
     "tests/unit/xlsx-cell-style.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/xlsx-cell-style.test.ts": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe",
+    "tests/unit/xlsx-cell-style.test.ts": "955f5eee83026179fd957da23b44f75d8bd51328a131bb07ec3afc41f2a73732",
     "tests/acceptance/cell-style.ts": "6509b7a9876ec52a2df3d1405e3a6b085f999cd0a465140af1fcbb21b39a62a3",
     "src/xlsx/index.ts": "f4b07aca325232ee4c594f6a642782b92983cc6918bb68493d6a2d29260ebdde",
     "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e",
@@ -18,7 +18,8 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/xlsx/cell-style.feature": "2b8067d70864d75a3f709bb653c12d605777eb0c87ead6270eb2014ec0e4a6ca"
+    "workflows/xlsx/cell-style.feature": "821a4bdda8541d2afd48873221246451c3ebd24273a20184fa8ea14900c76b7a",
+    "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d"
   },
   "mappings": [
     {

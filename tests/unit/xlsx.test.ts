@@ -252,14 +252,13 @@ describe("Worksheet.setCellValue", () => {
 describe("xlsx acceptance feature", () => {
   test("executes the implemented xlsx scenarios with exported bindings", async () => {
     const root = await tempRoot();
-    const featureText = (await Bun.file(join(fixturesRoot(), "workflows/native/xlsx-cells.feature")).text()).replace(/^@planned/m, "@implemented @bun");
-    await mkdir(join(root, "features", "xlsx"), { recursive: true });
-    await Bun.write(join(root, "features/xlsx/cells.feature"), featureText);
+    for(const path of ["workflows/xlsx/cells.feature","workflows/xlsx/formula-cache.feature"])await Bun.write(join(root,'references/fixtures-ooxml',path),await Bun.file(join(fixturesRoot(),path)).text());
+    await Bun.write(join(root,'features/shared.json'),JSON.stringify({"schemaVersion":2,"features":[{"path":"references/fixtures-ooxml/workflows/xlsx/cells.feature","lifecycle":"implemented","runner":"bun","scenarioIds":["@id-xlsx-read-rel-linked-shared-strings","@id-xlsx-preserve-styled-cell-edit","@id-xlsx-prefixed-namespace-safe-edits","@id-xlsx-phonetic-guides-excluded","@id-xlsx-styled-blank-cell-editable","@id-xlsx-refuse-shared-formula-overwrite","@id-xlsx-refuse-array-formula-overwrite"]},{"path":"references/fixtures-ooxml/workflows/xlsx/formula-cache.feature","lifecycle":"implemented","runner":"bun","scenarioIds":["@id-xlsx-clear-cross-sheet-caches"]}]}));
 
     const report = await runAcceptance(bindings, { root });
 
     expect(report.status).toBe("passed");
-    expect(report.inventory.features.implemented).toBe(1);
+    expect(report.inventory.features.implemented).toBe(2);
     expect(report.inventory.scenarios.implemented).toBe(8);
     expect(report.execution.cases.failed).toBe(0);
     expect(report.execution.steps.undefined).toBe(0);

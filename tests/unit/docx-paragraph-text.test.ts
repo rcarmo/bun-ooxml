@@ -63,7 +63,7 @@ test('setter output bounds retain archive and live handles',async()=>{
 });
 
 test('five canonical text getter cases execute and corrupted getter/expected values fail assertions',async()=>{
- const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/paragraph-text.ts');const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/paragraph-text.ts');const path='workflows/docx/paragraphs.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});
  const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(5),steps:count(15)}});
  const good=await executeAcceptance(inv(source),bindings,'paragraph-text-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(5);
  const bad=await executeAcceptance(inv(source.replace('the paragraph text getter equals JSON <text_json>','the paragraph text getter equals JSON "wrong"')),bindings,'paragraph-text-expected');expect(bad.counts.cases.failed).toBe(5);expect(bad.counts.steps.failed).toBe(5);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);

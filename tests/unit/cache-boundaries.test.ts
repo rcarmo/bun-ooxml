@@ -21,7 +21,7 @@ describe('bounded formula cache custody',()=>{
   }finally{await rm(root,{recursive:true,force:true});}
  });
  test('executes every cache boundary Given/When/Then',async()=>{
-  const path='workflows/native/xlsx-cache-boundaries.feature';const f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun'));
+  const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const [f]=await sharedScenarios(['@id-xlsx-array-input-refusal','@id-xlsx-cache-scope-opaque-parts']);if(!f)throw Error('Missing cache scenarios');
   const cases=f.scenarios.flatMap(s=>s.cases),steps=cases.reduce((n,c)=>n+c.steps.length,0);
   const count=(n:number)=>({implemented:n,planned:0,total:n});
   const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(steps)}};

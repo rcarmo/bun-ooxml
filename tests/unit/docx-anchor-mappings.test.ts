@@ -9,7 +9,7 @@ async function sample(){const ledger=await Bun.file('docs/behaviors/docx-anchors
 
 test('anchor mapping ledger accounts for 28 declarations and 122 direct assertions with prior mappings untouched',async()=>{
  const r=await outcomeMappingReport(),ledger=r.ledgers.find(l=>l.name==='docx-anchors');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(28);const rows=r.mappings.filter(m=>m.ledger==='docx-anchors');expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(122);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([3,1]);expect(r.mappedDeclarations).toBe(472);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-472);expect(r.runtimeLeafCount).toBeNull();
- expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','xlsx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('5caf6c8a92a85c477c38ef65c46a0b9ad03042af73f79c17a96fccbc14edc4a7');
+ expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','xlsx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('2e610f237d15c89c86027f9a75c60cc4e841a2f09ca9c14ee22e1b7d8127be3e');
 });
 
 test('anchor mappings retain saved-input differences, native map detail and actual negative-control attribution',async()=>{

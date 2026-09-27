@@ -7,8 +7,7 @@ import { executeAcceptance, newAcceptanceRunId, parseFeature, type AcceptanceFea
 import { bindings, cleanupWorkflowFixtures } from "../acceptance/workflow.ts";
 
 const PROJECT_ROOT = new URL("../..", import.meta.url).pathname;
-const FEATURE_PATH = "features/native/workflow-mutation-safety.feature";
-const FROZEN_FEATURE = join(fixturesRoot(),'workflows/mutation-safety.feature');
+import {sharedScenarios} from '../helpers/shared-scenarios.ts';
 
 afterAll(async () => {
   await cleanupWorkflowFixtures();
@@ -16,20 +15,20 @@ afterAll(async () => {
 
 describe("workflow shared acceptance", () => {
   test("executes the frozen shared workflow feature as 19 implemented Bun cases", async () => {
-    const text = (await Bun.file(FROZEN_FEATURE).text()).replace(/^@planned\s*$/m, "@implemented @bun");
-    const feature = parseFeature(FEATURE_PATH, text);
-    const inventory = inventoryFor(feature);
-    const caseCount = feature.scenarios.flatMap((scenario) => scenario.cases).length;
-    const expectedOutcomeCount = feature.scenarios
+    const contract=await Bun.file(join(fixturesRoot(),'contracts/mutation-safety.json')).json();
+    const features=await sharedScenarios(contract.scenarioIds),scenarios=features.flatMap(f=>f.scenarios);
+    const inventory = inventoryFor(features);
+    const caseCount = scenarios.flatMap((scenario) => scenario.cases).length;
+    const expectedOutcomeCount = scenarios
       .flatMap((scenario) => scenario.cases)
       .flatMap((acceptanceCase) => acceptanceCase.steps)
       .filter((step) => step.type === PickleStepType.OUTCOME).length;
 
-    expect(feature.lifecycle).toBe("implemented");
-    expect(feature.runner).toBe("bun");
-    expect(feature.path).toBe(FEATURE_PATH);
-    expect(feature.path).not.toContain("/planned/");
-    expect(feature.scenarios).toHaveLength(8);
+    expect(features.every(f=>f.lifecycle==='implemented')).toBe(true);
+    expect(features.every(f=>f.runner==='bun')).toBe(true);
+    expect(features.map(f=>f.path).sort()).toEqual([...contract.features].sort());
+    expect(features.every(f=>!f.path.includes('/planned/'))).toBe(true);
+    expect(scenarios).toHaveLength(8);
     expect(caseCount).toBe(19);
 
     const execution = await executeAcceptance(inventory, bindings, newAcceptanceRunId());
@@ -40,7 +39,7 @@ describe("workflow shared acceptance", () => {
       .filter((step) => step.type === PickleStepType.OUTCOME && step.status === "passed").length;
 
     expect(execution.failures).toEqual([]);
-    expect(execution.counts.features).toEqual({ passed: 1, failed: 0, planned: 0, total: 1 });
+    expect(execution.counts.features).toEqual({ passed: 5, failed: 0, planned: 0, total: 5 });
     expect(execution.counts.scenarios).toEqual({ passed: 8, failed: 0, planned: 0, total: 8 });
     expect(execution.counts.cases.passed).toBe(19);
     expect(execution.counts.cases.failed).toBe(0);
@@ -53,17 +52,18 @@ describe("workflow shared acceptance", () => {
   }, 300_000);
 });
 
-function inventoryFor(feature: AcceptanceFeature): AcceptanceInventory {
-  const scenarios = feature.scenarios.length;
-  const cases = feature.scenarios.flatMap((scenario) => scenario.cases).length;
-  const steps = feature.scenarios
+function inventoryFor(features: AcceptanceFeature[]): AcceptanceInventory {
+  const selected=features.flatMap(f=>f.scenarios);
+  const scenarios = selected.length;
+  const cases = selected.flatMap((scenario) => scenario.cases).length;
+  const steps = selected
     .flatMap((scenario) => scenario.cases)
     .flatMap((acceptanceCase) => acceptanceCase.steps).length;
   return {
     root: PROJECT_ROOT,
-    features: [feature],
+    features,
     counts: {
-      features: { implemented: 1, planned: 0, total: 1 },
+      features: { implemented: features.length, planned: 0, total: features.length },
       scenarios: { implemented: scenarios, planned: 0, total: scenarios },
       cases: { implemented: cases, planned: 0, total: cases },
       steps: { implemented: steps, planned: 0, total: steps },

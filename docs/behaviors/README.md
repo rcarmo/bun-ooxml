@@ -18,6 +18,21 @@ The current Gherkin inventory is in
 run. A unit-test declaration may contain loops or call helpers, so its presence
 alone does not count as a tested requirement.
 
+## Format and operation layout
+
+Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.
+The [shared operation index](../../references/fixtures-ooxml/workflows/README.md)
+replaces the former `native/`, mixed document-model and root workflow files.
+The shared migration ledger preserves all scenario IDs, compiled cases and tags.
+
+Bun keeps the same 525 implemented shared case identities. Test wrappers select
+IDs across current files instead of activating every scenario in a file. Source
+pins were renewed after reviewing the moves. Of 472 mapping records, 470 are
+unchanged; two wrapper assertions now account for two PPTX features and zero
+unselected cases in the narrowly scoped run-authoring wrapper. No document
+runtime code changed. The shared `CATALOGUE.md` lists remaining runtime-specific
+API contracts and wording; file grouping alone does not resolve those differences.
+
 ## Maintain the reports
 
 ```sh

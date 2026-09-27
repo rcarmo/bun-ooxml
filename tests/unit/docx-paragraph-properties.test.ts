@@ -158,7 +158,7 @@ test('nine shared direct paragraph getter cases execute with no credit for other
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/paragraph-properties.ts');
-  const path = 'workflows/docx/document-model.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/docx/paragraphs.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   const run = (source: string) => executeAcceptance({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(3), cases: count(9), steps: count(27) } }, bindings, 'paragraph-properties-unit');
   const good = await run(text); expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(9); expect(good.counts.cases.planned).toBeGreaterThan(0);
@@ -183,7 +183,7 @@ test('canonical flag predicates reject false readbacks rather than trusting sett
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts');
-  const path = 'workflows/docx/document-model.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/docx/paragraphs.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   const corrupt = bindings.map(b => b.pattern.test('KeepLines, PageBreakBefore and WidowControl are set true') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
     await b.run(c, ...captures); (c.state as { document: Document }).document.paragraphs[0]!.setProperties({ widowControl: false });

@@ -5,7 +5,7 @@ import { executeAcceptance, selectSharedScenarios, type StepBinding } from '../.
 import { bindings } from '../acceptance/steps.ts';
 const id = '@id-pptx-bun-open-save-noop';
 async function run(active: StepBinding[] = bindings, change: (s: string) => string = s => s) {
-  const path = 'workflows/native/pptx-text.feature';
+  const path = 'workflows/pptx/preservation.feature';
   const feature = selectSharedScenarios(path, change(await Bun.file(join(fixturesRoot(), path)).text()), [id]);
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   return executeAcceptance({ root: '.', features: [feature], counts: { features: count(1), scenarios: count(1), cases: count(1), steps: count(6) } }, active, 'pptx-custody-unit');
@@ -15,7 +15,7 @@ function refused(r: Awaited<ReturnType<typeof run>>) {
   expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);
 }
 test('canonical Presentation path/byte opening and path save preserve the real archive', async () => {
-  const result = await run(); expect(result.failures).toEqual([]); expect(result.counts.cases.passed).toBe(1); expect(result.counts.cases.planned).toBe(12);
+  const result = await run(); expect(result.failures).toEqual([]); expect(result.counts.cases.passed).toBe(1); expect(result.counts.cases.planned).toBe(0);
 });
 test('wrong first paragraph expectation fails the bound PPTX custody assertion', async () => {
   refused(await run(bindings, s => s.replace('paragraph on its first slide is Frankenstein', 'paragraph on its first slide is Wrong')));

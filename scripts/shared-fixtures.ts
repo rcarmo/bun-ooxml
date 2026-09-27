@@ -40,7 +40,7 @@ export interface FixtureManifest {
 export async function loadMutationFixtures(root=fixturesRoot()): Promise<FixtureManifest> {
   const contract=await Bun.file(join(root,'contracts/mutation-safety.json')).json();
   const manifest=await Bun.file(join(root,'manifest.json')).json();
-  assert(contract.schemaVersion===1&&contract.fixturePolicy?.membership==='exact'&&contract.fixturePolicy?.preserve==='all-except-allowed','Invalid mutation fixture policy');
+  assert(contract.schemaVersion===2&&contract.fixturePolicy?.membership==='exact'&&contract.fixturePolicy?.preserve==='all-except-allowed','Invalid mutation fixture policy');
   const ids=new Set<string>();
   const fixtures=contract.fixtures.map((policy:any)=>{
     assert(!ids.has(policy.id),'Duplicate workflow fixture');ids.add(policy.id);

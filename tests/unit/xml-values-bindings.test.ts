@@ -32,7 +32,7 @@ test('eleven XML value cases execute with every Then asserted and other operatio
   const result = await run();
   expect(result.failures).toEqual([]);
   expect(result.counts.cases.passed).toBe(11);
-  expect(result.counts.cases.planned).toBe(20);
+  expect(result.counts.cases.planned).toBe(4);
   const executed = result.features.flatMap(f => f.scenarios.flatMap(s => s.cases)).filter(c => c.lifecycle === 'implemented');
   expect(executed).toHaveLength(11);
   expect(executed.every(c => c.steps.every(s => s.status === 'passed'))).toBe(true);

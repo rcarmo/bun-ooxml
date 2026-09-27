@@ -106,7 +106,7 @@ test('effect getters reject stale external XML and formatting preserves live tab
 test('five shared direct flag cases execute but spec-incompatible all-effects scenario stays planned', async () => {
  const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts');
  const {bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/run-effects.ts');
- const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const path='workflows/docx/run-formatting.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});
  const inventory={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(5),steps:count(15)}};
  const good=await executeAcceptance(inventory,bindings,'run-effects-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(5);
  expect(good.features[0]!.scenarios.find(s=>s.scenarioId==='@id-docx-go-run-effects-getters')!.result).toBe('planned');

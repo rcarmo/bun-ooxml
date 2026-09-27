@@ -39,8 +39,8 @@ non-symlink path. This catches facts and workflows hidden by `assume-unchanged`,
 Missing references fail with submodule initialisation guidance. A changed fact or
 workflow also fails even if every fixture hash still matches.
 
-`contracts/mutation-safety.json` records allowed member changes for its fixtures.
-`workflows/mutation-safety.feature` defines the corresponding scenarios.
+`contracts/mutation-safety.json` schema 2 records allowed member changes and
+selects eight scenario IDs across five format-local files in its `features` list.
 `features/shared.json` selects the shared workflows used by Bun acceptance tests.
 File identity and derivation are resolved through the root manifest.
 

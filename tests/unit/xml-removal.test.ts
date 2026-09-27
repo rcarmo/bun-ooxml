@@ -106,7 +106,7 @@ test('three canonical XML removal cases execute while unrelated shared operation
   const { join } = await import('node:path');
   const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');
   const { bindings, scenarioIds } = await import('../acceptance/xml-removal.ts');
-  const path = 'workflows/xml/parsing.feature';
+  const path = 'workflows/xml/editing.feature';
   const feature = selectSharedScenarios(path, await Bun.file(join(fixturesRoot(), path)).text(), scenarioIds);
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   const result = await executeAcceptance({ root: '.', features: [feature], counts: {

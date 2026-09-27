@@ -78,8 +78,9 @@ safe-output hardlink aliases refuse. Caller directories must be trusted.
 The shared specification defines workflow targets, expected receipts and preservation
 rules. Acceptance tests use its scenarios and fixtures directly.
 
-The shared [receipt scenarios](../../references/fixtures-ooxml/workflows/workflow-receipts.feature) check a
-PPTX title preview and DOCX per-placeholder counts against shared fixture copies.
+The shared [PPTX preview](../../references/fixtures-ooxml/workflows/pptx/mutation-safety.feature)
+and [DOCX match-count](../../references/fixtures-ooxml/workflows/docx/mutation-safety.feature)
+scenarios use shared fixture copies.
 They compare source bytes, an existing destination and directory entries, then
 reopen the source. Negative controls corrupt receipt fields or files and require
 assertion failures; temporary files are removed after successful and failed cases.

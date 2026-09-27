@@ -5,12 +5,12 @@ import {parseFeature} from '../../scripts/gherkin.ts';
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {join} from 'node:path';
 const paths=['tests/unit/docx-append-run.test.ts','tests/unit/docx-cell-properties.test.ts','tests/unit/docx-row-header.test.ts','tests/unit/docx-paragraph-text.test.ts','tests/unit/docx-insert-paragraph.test.ts','tests/unit/docx-table-rows.test.ts','tests/unit/docx-row-texts.test.ts','tests/unit/docx-core-properties.test.ts','tests/unit/docx-document-properties.test.ts','tests/unit/docx-table-style.test.ts'];
-const canonical='workflows/docx/document-model.feature';
+const canonical=["workflows/docx/page-layout.feature","workflows/docx/paragraphs.feature","workflows/docx/properties.feature","workflows/docx/run-formatting.feature","workflows/docx/tables.feature"];
 async function sample(){
  const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};
- for(const path of Object.keys(ledger.sourceSha256))sources[path]=await Bun.file(path===canonical?join(fixturesRoot(),path):path).text();
+ for(const path of Object.keys(ledger.sourceSha256))sources[path]=await Bun.file(canonical.includes(path)?join(fixturesRoot(),path):path).text();
  const inventory={cases:paths.flatMap(path=>inventoryTestSource(path,sources[path]!)),unresolved:[]};
- const features=[parseFeature(canonical,sources[canonical]!,{allowDuplicateCaseNames:true})];
+ const features=canonical.map(p=>parseFeature(p,sources[p]!,{allowDuplicateCaseNames:true}));
  return {inventory,sets:[{name:'docx-model',expectedScopePaths:paths,ledger,features,sources}]};
 }
 
@@ -50,7 +50,7 @@ test('DOCX ledger refuses dropped suites, dropped declarations, omitted assertio
 });
 
 test('DOCX ledger refuses stale runtime, binding and canonical pins and unrelated canonical identities',async()=>{
- for(const path of ['src/docx/append-run.ts','src/docx/cell-properties.ts','src/docx/row-header.ts','src/docx/index.ts','tests/acceptance/docx-model.ts',canonical]){
+ for(const path of ['src/docx/append-run.ts','src/docx/cell-properties.ts','src/docx/row-header.ts','src/docx/index.ts','tests/acceptance/docx-model.ts',...canonical]){
   const a=await sample();a.sets[0]!.sources[path]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');
  }
  const b=await sample();b.sets[0]!.ledger.mappings[0]!.scenarioIds=['@id-xml-parse-simple'];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('scenario');
