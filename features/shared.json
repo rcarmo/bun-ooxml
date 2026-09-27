@@ -590,6 +590,14 @@
       "scenarioIds": [
         "@id-package-admission-negative-budget"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/data-descriptor-integrity.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-zip-unsigned-descriptor-signature-collision"
+      ]
     }
   ]
 }

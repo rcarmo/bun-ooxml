@@ -7,7 +7,7 @@
     "tests/unit/revision-property-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-revision-properties.test.ts": "4c5d23b63a9869fffcdcf2d9114ef9a0ab8c5fb73ba2a5b628008c86a9642a3c",
+    "tests/unit/docx-revision-properties.test.ts": "f55b1c12d951c154ef9424400c77ca9c94f9b78e67ef9fad77b8d336731d9b43",
     "tests/unit/revision-property-outcomes.test.ts": "f8767818a20f0f86490f18fac0e734143e6292f8e7bc78923d36c6c1dbf115dc",
     "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
     "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
@@ -22,7 +22,7 @@
     "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
     "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
     "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
-    "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
+    "tests/acceptance/steps.ts": "416a345851e9d0252efb6976c0fc6701183ec399d89cdbb5701322eae407dfcb",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd"
@@ -274,7 +274,7 @@
       "assertions": [
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
-        "expect(inv.counts.cases.implemented).toBe(728)",
+        "expect(inv.counts.cases.implemented).toBe(729)",
         "expect(inv.counts.cases.planned).toBe(59)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],

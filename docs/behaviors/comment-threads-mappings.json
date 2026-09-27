@@ -7,7 +7,7 @@
     "tests/unit/comment-thread-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-comment-threads.test.ts": "d922658fca5df1f37d9a48bab413cd3934c0e21d4bf98e603fd65faa672bbfb7",
+    "tests/unit/docx-comment-threads.test.ts": "9d32b44387f5e12918ad477ad88cb6a9fcc399e0900f61f9d1cb4a262771a8d8",
     "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
     "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -20,7 +20,7 @@
     "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
     "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
     "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
-    "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
+    "tests/acceptance/steps.ts": "416a345851e9d0252efb6976c0fc6701183ec399d89cdbb5701322eae407dfcb",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0"
@@ -311,7 +311,7 @@
       "assertions": [
         "expect(planned).toHaveLength(9)",
         "expect(planned.every(s=>s.lifecycle==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(728)",
+        "expect(inv.counts.cases.implemented).toBe(729)",
         "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [

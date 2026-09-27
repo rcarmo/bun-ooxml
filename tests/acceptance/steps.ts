@@ -13,6 +13,7 @@ import { bindings as xmlStructureBindings } from './xml-structure.ts';
 import { bindings as graphBindings } from "./graph.ts";
 import { bindings as zip64Bindings } from "./zip64.ts";
 import { bindings as zip32Bindings } from './zip32.ts';
+import { bindings as dataDescriptorBindings } from './data-descriptor-integrity.ts';
 import { bindings as namespaceBindings } from "./relationship-namespaces.ts";
 import { bindings as docxBindings } from "./docx.ts";
 import { bindings as storyBindings } from "./story-docx.ts";
@@ -88,6 +89,7 @@ export const bindings: StepBinding[] = [
   ...graphBindings,
   ...zip64Bindings,
   ...zip32Bindings,
+  ...dataDescriptorBindings,
   ...namespaceBindings,
   ...docxBindings,
   ...storyBindings,
