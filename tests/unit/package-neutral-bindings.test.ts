@@ -1,3 +1,4 @@
+import {beforeSharedPlannedExpansion} from './mapping-history.ts';
 import {withoutTrackingToggle} from '../helpers/execution-baseline.ts';
 import {test,expect} from 'bun:test';
 import {join} from 'node:path';
@@ -22,5 +23,5 @@ test('package wording keeps default case identities all mapping records and plan
  const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();
  const originalKeys=withoutTrackingToggle(keys);
  expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(59);
- const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(590);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger)))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');
+ const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(590);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');
 });

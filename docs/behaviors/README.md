@@ -20,14 +20,14 @@ alone does not count as a tested requirement.
 
 ## Complete shared inventory
 
-The project loads all 56 canonical features from the pinned workflow registry.
+The project loads all 59 canonical features from the pinned workflow registry.
 Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 299 scenarios / 785 cases; 726 implemented and 59 planned.
+- Shared: 300 scenarios / 787 cases; 728 implemented and 59 planned.
 - Local-only: zero scenarios or cases. The eleven former local cases are now shared planned contracts.
-- Combined: 299 scenarios / 785 cases; 726 implemented and 59 planned.
+- Combined: 300 scenarios / 787 cases; 728 implemented and 59 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -273,10 +273,13 @@ inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
 
 The [package-admission ledger](package-admission-mappings.json) maps 11
-declarations and 36 direct expressions across the shared ZIP-admission and
-XML-member-admission features. Both feature files are required source pins.
-One aggregate wrapper links to all 13 cases; the other ten records remain
-scenario-only, including positive controls that extend refusal contracts.
+declarations and 36 direct expressions across the shared ZIP-admission,
+XML-member-admission and limit-configuration features. All three feature files
+are required source pins. One aggregate wrapper links to the previous 13
+admission cases; the other ten records remain scenario-only. The separate
+negative-budget scenario now executes two sealed DOCX cases through the direct
+admission API: invalid argument before ZIP inspection, no returned parts and
+unchanged caller bytes. Editing-session behaviour is not covered.
 All 461 prior records remain unchanged.
 
 Admission validates ZIP structure and XML syntax without requiring an OPC graph.

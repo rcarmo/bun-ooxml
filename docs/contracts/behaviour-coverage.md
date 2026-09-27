@@ -1,14 +1,14 @@
 # Behaviour coverage
 
-The shared reference contains **368 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **369 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 299 | 785 | 726 | 59 |
+| Shared catalogue | 300 | 787 | 728 | 59 |
 | Local-only obligations | 0 | 0 | 0 | 0 |
-| Combined inventory | 299 | 785 | 726 | 59 |
+| Combined inventory | 300 | 787 | 728 | 59 |
 
-The canonical denominator is **299 shared scenarios / 785 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+The canonical denominator is **300 shared scenarios / 787 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
@@ -37,6 +37,7 @@ The canonical denominator is **299 shared scenarios / 785 shared cases**. Local-
 | references/fixtures-ooxml/workflows/docx/tracked-workflow.feature | implemented | 3 | 18 | 18 | 0 | 60 |
 | references/fixtures-ooxml/workflows/docx/tracking-settings.feature | implemented | 7 | 24 | 24 | 0 | 101 |
 | references/fixtures-ooxml/workflows/office/full-coverage.feature | planned | 1 | 3 | 0 | 3 | 12 |
+| references/fixtures-ooxml/workflows/package/admission-limit-configuration.feature | implemented | 1 | 2 | 2 | 0 | 12 |
 | references/fixtures-ooxml/workflows/package/graph.feature | implemented | 4 | 4 | 4 | 0 | 16 |
 | references/fixtures-ooxml/workflows/package/preservation.feature | implemented | 10 | 14 | 14 | 0 | 119 |
 | references/fixtures-ooxml/workflows/package/relationship-namespaces.feature | implemented | 2 | 4 | 4 | 0 | 16 |

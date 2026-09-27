@@ -582,6 +582,14 @@
         "@id-docx-template-inventory-snapshot",
         "@id-docx-template-inventory-scope"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/package/admission-limit-configuration.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-package-admission-negative-budget"
+      ]
     }
   ]
 }

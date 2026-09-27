@@ -9,7 +9,7 @@
     "tests/unit/vertical-merge-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-table-merge.test.ts": "ce9accfe87daeb2cf8fabef9acb2eacf6aad2e752c99ddd8bd7c00cdcef7feca",
+    "tests/unit/docx-table-merge.test.ts": "7df8b4ae363589f6c46407f9ec61e72ea4bd670e2ef20083c3cc6dc16f1675ae",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -25,7 +25,7 @@
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-    "tests/unit/docx-table-vertical-merge.test.ts": "636815dca1de291e82fdccc9cc0d9748bed7a7409dc6ba77e6cbef5cc345f144",
+    "tests/unit/docx-table-vertical-merge.test.ts": "f16977329df7d984420055407d0947915bb11c5bf7c5085f3a7732f7247ff995",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
   },
@@ -263,7 +263,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(726)",
+        "expect(inv.counts.cases.implemented).toBe(728)",
         "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
@@ -623,7 +623,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(726)",
+        "expect(inv.counts.cases.implemented).toBe(728)",
         "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [

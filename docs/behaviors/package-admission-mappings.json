@@ -7,7 +7,7 @@
   ],
   "sourceSha256": {
     "tests/unit/package-admission.test.ts": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
-    "tests/acceptance/package-admission.ts": "a702f05cd22cd1139a118b6d8b57a801236c7ac5a521699cdcd29bb1d0485b60",
+    "tests/acceptance/package-admission.ts": "d23dd1248f77c6ce76ac56c21b7b8358bc08873767b51f1235799e4f7faae6de",
     "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
     "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
     "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
@@ -20,7 +20,8 @@
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/package/xml-member-admission.feature": "19fa717632d689e7ff4e883fb2af3f31e018373dc79ddb78efecf7742ea14e91",
-    "workflows/package/zip-admission.feature": "8fa7b8618fd9797e3470dfdfa1132b76784f180fe31d344f1d9d758f5c30f09c"
+    "workflows/package/zip-admission.feature": "8fa7b8618fd9797e3470dfdfa1132b76784f180fe31d344f1d9d758f5c30f09c",
+    "workflows/package/admission-limit-configuration.feature": "885083126a39d17a795609bbf5d2e273678b5d8613af9cafdc0fac46396adb8a"
   },
   "mappings": [
     {
@@ -147,7 +148,7 @@
       "testId": "bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds",
       "status": "partial",
       "scenarioIds": [
-        "@id-package-admission-resource-limits"
+        "@id-package-admission-negative-budget"
       ],
       "caseKeys": [],
       "assertions": [
@@ -158,7 +159,8 @@
       ],
       "gaps": [
         "Native option-validation extension, not the shared valid-configuration refusals. No caller-byte check or complete configuration-type matrix here.",
-        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown.",
+        "Native argument test uses a synthetic ZIP and does not check the two sealed DOCX rows, pre-ZIP read ordering, no delivered parts or caller-byte custody; the separate two-row canonical acceptance binding supplies those runtime outcomes."
       ]
     },
     {
