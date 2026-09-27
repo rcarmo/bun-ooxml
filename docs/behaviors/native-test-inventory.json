@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 767,
-  "files": 76,
+  "count": 779,
+  "files": 77,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -172,6 +172,12 @@
       "path": "tests/unit/docx-table-rows.test.ts",
       "sha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831",
       "declarations": 14,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "declarations": 12,
       "issues": []
     },
     {
@@ -626,7 +632,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "c0cb2b19d45d8ebf1105291c998902949b143605eb8938f96533c648c4c343d5"
+      "sha256": "9443ffb19519e1065f375ed7849efab709bacb1657cac968c17660eb4255c469"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -639,6 +645,10 @@
     {
       "path": "tests/acceptance/table-rows.ts",
       "sha256": "0d0136c14054ffc15acef82400201022e2cc350f7eee1faa820201b8d08dcca5"
+    },
+    {
+      "path": "tests/acceptance/table-style.ts",
+      "sha256": "77d029c2b91df2fe4872356a759d0b77db10ba1b08578d9bf75a260079381571"
     },
     {
       "path": "tests/acceptance/tables-docx.ts",
@@ -863,6 +873,15 @@
     "bun:tests/unit/docx-table-rows.test.ts:alias and UTF-16 row edits survive byte reopen without namespace capture",
     "bun:tests/unit/docx-table-rows.test.ts:section-bearing paragraphs and extension attributes refuse row deletion and insertion",
     "bun:tests/unit/docx-table-rows.test.ts:canonical row-count binding catches every wrong count and fabricated successful deletion",
+    "bun:tests/unit/docx-table-style.test.ts:unresolved direct table style survives path reopen without registry creation or unrelated changes",
+    "bun:tests/unit/docx-table-style.test.ts:style writes preserve table properties, all existing row fragments and an unrelated styles registry",
+    "bun:tests/unit/docx-table-style.test.ts:missing or self-closing table properties accept a first-position direct reference",
+    "bun:tests/unit/docx-table-style.test.ts:invalid style arguments refuse with unchanged bytes and current handles",
+    "bun:tests/unit/docx-table-style.test.ts:duplicate misordered revised decorated or wrong-namespace style metadata refuses even removal or no-op",
+    "bun:tests/unit/docx-table-style.test.ts:merged revised nested or unsupported row topology refuses style writes with custody intact",
+    "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
+    "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
+    "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/formula-mappings.test.ts:formula ledger rejects omitted suites, declarations and exact assertions",
     "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
@@ -1133,6 +1152,15 @@
     "bun:tests/unit/docx-table-rows.test.ts:alias and UTF-16 row edits survive byte reopen without namespace capture",
     "bun:tests/unit/docx-table-rows.test.ts:section-bearing paragraphs and extension attributes refuse row deletion and insertion",
     "bun:tests/unit/docx-table-rows.test.ts:canonical row-count binding catches every wrong count and fabricated successful deletion",
+    "bun:tests/unit/docx-table-style.test.ts:unresolved direct table style survives path reopen without registry creation or unrelated changes",
+    "bun:tests/unit/docx-table-style.test.ts:style writes preserve table properties, all existing row fragments and an unrelated styles registry",
+    "bun:tests/unit/docx-table-style.test.ts:missing or self-closing table properties accept a first-position direct reference",
+    "bun:tests/unit/docx-table-style.test.ts:invalid style arguments refuse with unchanged bytes and current handles",
+    "bun:tests/unit/docx-table-style.test.ts:duplicate misordered revised decorated or wrong-namespace style metadata refuses even removal or no-op",
+    "bun:tests/unit/docx-table-style.test.ts:merged revised nested or unsupported row topology refuses style writes with custody intact",
+    "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
+    "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
+    "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/formula-mappings.test.ts:formula ledger rejects omitted suites, declarations and exact assertions",
     "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
@@ -14700,6 +14728,567 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:unresolved direct table style survives path reopen without registry creation or unrelated changes",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 9,
+      "title": "unresolved direct table style survives path reopen without registry creation or unrelated changes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.styleId).toBeUndefined()",
+        "expect(t.setStyle('TableGrid')).toEqual({changed:1})",
+        "expect(t.styleId).toBe('TableGrid')",
+        "expect(d.package.has('word/styles.xml')).toBe(false)",
+        "expect(()=>held.text).toThrow()",
+        "expect(()=>cell.text).toThrow()",
+        "expect(t.cell(0,0).text).toBe('A')",
+        "expect([t.rows,t.columns]).toEqual([2,2])",
+        "expect(after.tables[0]!.styleId).toBe('TableGrid')",
+        "expect(after.tables[0]!.cell(1,1).text).toBe('D')",
+        "expect([...after.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(after.package.get(n)).toEqual(b)",
+        "expect(elements(parseXml(xml(d)),'tblPr',W)[0]!.children.map(n=>n.localName)).toEqual(['tblStyle','tblW'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(after.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.parts,held=d.paragraphs[0]!,cell=t.cell(0,0);expect(t.styleId).toBeUndefined();expect(t.setStyle('TableGrid')).toEqual({changed:1});expect(t.styleId).toBe('TableGrid');expect(d.package.has('word/styles.xml')).toBe(false);expect(()=>held.text).toThrow();expect(()=>cell.text).toThrow();expect(t.cell(0,0).text).toBe('A');expect([t.rows,t.columns]).toEqual([2,2]);\n const dir=await mkdtemp(join(tmpdir(),'table-style-'));try{const path=join(dir,'style.docx');await d.save(path);const after=await Document.open(path);expect(after.tables[0]!.styleId).toBe('TableGrid');expect(after.tables[0]!.cell(1,1).text).toBe('D');expect([...after.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(after.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n expect(elements(parseXml(xml(d)),'tblPr',W)[0]!.children.map(n=>n.localName)).toEqual(['tblStyle','tblW']);\n}",
+      "calls": [
+        "Document.open",
+        "after.package.get",
+        "after.package.parts.keys",
+        "after.tables.0.cell",
+        "before.keys",
+        "d.package.has",
+        "d.save",
+        "elements",
+        "elements().0.children.map",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "parseXml",
+        "rm",
+        "t.cell",
+        "t.setStyle",
+        "tmpdir",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:semantic no-ops retain lexical style ID spelling and handles; null removes only the direct reference",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 15,
+      "title": "semantic no-ops retain lexical style ID spelling and handles; null removes only the direct reference",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.styleId).toBe('A&B')",
+        "expect(t.setStyle('A&B')).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('A')",
+        "expect(t.setStyle(null)).toEqual({changed:1})",
+        "expect(t.styleId).toBeUndefined()",
+        "expect(xml(d)).toBe(source.replace(raw,''))",
+        "expect(t.setStyle(null)).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(noStyle)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n const raw='<w:tblStyle w:val = \\'A&#x26;B\\'/>',d=await fixture(x=>x.replace('<w:tblPr>','<w:tblPr>'+raw)),t=d.tables[0]!,cell=t.cell(0,0),before=d.package.toBytes();expect(t.styleId).toBe('A&B');expect(t.setStyle('A&B')).toEqual({changed:0});expect(d.package.toBytes()).toEqual(before);expect(cell.text).toBe('A');const source=xml(d);expect(t.setStyle(null)).toEqual({changed:1});expect(t.styleId).toBeUndefined();expect(xml(d)).toBe(source.replace(raw,''));const noStyle=d.package.toBytes();expect(t.setStyle(null)).toEqual({changed:0});expect(d.package.toBytes()).toEqual(noStyle);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "fixture",
+        "source.replace",
+        "t.cell",
+        "t.setStyle",
+        "x.replace",
+        "xml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:style writes preserve table properties, all existing row fragments and an unrelated styles registry",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 19,
+      "title": "style writes preserve table properties, all existing row fragments and an unrelated styles registry",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.tables[0]!.styleId).toBe('NotDefined')",
+        "expect(xml(d)).toContain(raw)",
+        "expect(xml(d).replace(/<w:tblStyle[^>]*\\/>/,'')).toBe(source)",
+        "expect(d.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 20,
+          "expression": "for(const raw of rows)expect(xml(d)).toContain(raw);"
+        },
+        {
+          "line": 20,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n const d=await fixture();d.addParagraphStyle('Unrelated',{name:'Other',bold:true});const before=d.package.parts,source=xml(d),rows=elements(parseXml(source),'tr',W).map(r=>source.slice(r.start,r.end));d.tables[0]!.setStyle('NotDefined');expect(d.tables[0]!.styleId).toBe('NotDefined');for(const raw of rows)expect(xml(d)).toContain(raw);expect(xml(d).replace(/<w:tblStyle[^>]*\\/>/,'')).toBe(source);for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);\n}",
+      "calls": [
+        "d.addParagraphStyle",
+        "d.package.get",
+        "d.tables.0.setStyle",
+        "elements",
+        "elements().map",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "fixture",
+        "parseXml",
+        "source.slice",
+        "xml",
+        "xml().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:missing or self-closing table properties accept a first-position direct reference",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 23,
+      "title": "missing or self-closing table properties accept a first-position direct reference",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.setStyle('TableGrid')).toEqual({changed:1})",
+        "expect(t.styleId).toBe('TableGrid')",
+        "expect((await Document.open(d.package.toBytes())).tables[0]!.styleId).toBe('TableGrid')",
+        "expect(t.cell(0,0).text).toBe('A')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 24,
+          "expression": "for(const replacement of ['', '<w:tblPr/>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n for(const replacement of ['', '<w:tblPr/>']){const d=await fixture(x=>x.replace(/<w:tblPr>[^]*?<\\/w:tblPr>/,replacement)),t=d.tables[0]!;expect(t.setStyle('TableGrid')).toEqual({changed:1});expect(t.styleId).toBe('TableGrid');expect((await Document.open(d.package.toBytes())).tables[0]!.styleId).toBe('TableGrid');expect(t.cell(0,0).text).toBe('A');}\n}",
+      "calls": [
+        "Document.open",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "t.cell",
+        "t.setStyle",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:invalid style arguments refuse with unchanged bytes and current handles",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 27,
+      "title": "invalid style arguments refuse with unchanged bytes and current handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.setStyle(value as string)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.styleId).toBeUndefined()",
+        "expect(t.setStyle('雪 & <style>')).toEqual({changed:1})",
+        "expect(t.styleId).toBe('雪 & <style>')",
+        "expect((await Document.open(d.package.toBytes())).tables[0]!.styleId).toBe('雪 & <style>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 28,
+          "expression": "for(const value of [undefined,'',' ',' Leading','Trailing ','a\\tb','a\\u0000b','a\\u0085b','\\ud800','x'.repeat(256),1,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();for(const value of [undefined,'',' ',' Leading','Trailing ','a\\tb','a\\u0000b','a\\u0085b','\\ud800','x'.repeat(256),1,{},new String('TableGrid')]){expect(()=>t.setStyle(value as string)).toThrow();expect(d.package.toBytes()).toEqual(before);expect(t.styleId).toBeUndefined();}expect(t.setStyle('雪 & <style>')).toEqual({changed:1});expect(t.styleId).toBe('雪 & <style>');expect((await Document.open(d.package.toBytes())).tables[0]!.styleId).toBe('雪 & <style>');\n}",
+      "calls": [
+        ".repeat",
+        "Document.open",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "t.setStyle"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:duplicate misordered revised decorated or wrong-namespace style metadata refuses even removal or no-op",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 31,
+      "title": "duplicate misordered revised decorated or wrong-namespace style metadata refuses even removal or no-op",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.styleId).toThrow()",
+        "expect(()=>t.setStyle('TableGrid')).toThrow()",
+        "expect(()=>t.setStyle(null)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 32,
+          "expression": "for(const pr of ['<w:tblPr><w:tblStyle w:val=\"TableGrid\"/><w:tblStyle w:val=\"Other\"/></w:tblPr>','<w:tblPr><w:tblW w:w=\"0\" w:type=\"auto\"/><w:tblStyle w:val=\"TableGrid\"/></w:tblPr>','<w:tblPr><w:tblStyle val=\"TableGrid\"/></w:tblPr>','<w:tblPr><w:tblStyle w:val=\"TableGrid\" w:extra=\"1\"/></w:tblPr>','<w:tblPr><w:tblStyle w:val=\"\"/></w:tblPr>','<w:tblPr><w:tblStyle w:val=\"TableGrid\"><w:bad/></w:tblStyle></w:tblPr>','<w:tblPr><!--keep--><w:tblStyle w:val=\"TableGrid\"/></w:tblPr>','<w:tblPr><w:tblPrChange/></w:tblPr>','<w:tblPr><w:unknown/></w:tblPr>','<w:tblPr/><w:tblPr/>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n for(const pr of ['<w:tblPr><w:tblStyle w:val=\"TableGrid\"/><w:tblStyle w:val=\"Other\"/></w:tblPr>','<w:tblPr><w:tblW w:w=\"0\" w:type=\"auto\"/><w:tblStyle w:val=\"TableGrid\"/></w:tblPr>','<w:tblPr><w:tblStyle val=\"TableGrid\"/></w:tblPr>','<w:tblPr><w:tblStyle w:val=\"TableGrid\" w:extra=\"1\"/></w:tblPr>','<w:tblPr><w:tblStyle w:val=\"\"/></w:tblPr>','<w:tblPr><w:tblStyle w:val=\"TableGrid\"><w:bad/></w:tblStyle></w:tblPr>','<w:tblPr><!--keep--><w:tblStyle w:val=\"TableGrid\"/></w:tblPr>','<w:tblPr><w:tblPrChange/></w:tblPr>','<w:tblPr><w:unknown/></w:tblPr>','<w:tblPr/><w:tblPr/>']){const d=await fixture(x=>x.replace(/<w:tblPr>[^]*?<\\/w:tblPr>/,pr)),before=d.package.toBytes(),t=d.tables[0]!;expect(()=>t.styleId).toThrow();expect(()=>t.setStyle('TableGrid')).toThrow();expect(()=>t.setStyle(null)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "t.setStyle",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:merged revised nested or unsupported row topology refuses style writes with custody intact",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 35,
+      "title": "merged revised nested or unsupported row topology refuses style writes with custody intact",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.tables[0]!.setStyle('TableGrid')).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 36,
+          "expression": "for(const change of [(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge/>'),(x:string)=>x.replace('<w:tr>','<w:tr><w:trPr><w:ins/></w:trPr>'),(x:string)=>x.replace('<w:t>A</w:t>','<w:fldChar w:fldCharType=\"begin\"/>'),(x:string)=>x.replace('</w:tc>','<w:tbl><w:tblGrid><w:gridCol w:w=\"10\"/></w:tblGrid><w:tr><w:tc><w:p/></w:tc></w:tr></w:tbl></w:tc>'),(x:string)=>x.replace(/<w:tblGrid>[^]*?<\\/w:tblGrid>/,''),(x:string)=>x.replace('</w:tbl>','<w:tblPr/></w:tbl>')])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n for(const change of [(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge/>'),(x:string)=>x.replace('<w:tr>','<w:tr><w:trPr><w:ins/></w:trPr>'),(x:string)=>x.replace('<w:t>A</w:t>','<w:fldChar w:fldCharType=\"begin\"/>'),(x:string)=>x.replace('</w:tc>','<w:tbl><w:tblGrid><w:gridCol w:w=\"10\"/></w:tblGrid><w:tr><w:tc><w:p/></w:tc></w:tr></w:tbl></w:tc>'),(x:string)=>x.replace(/<w:tblGrid>[^]*?<\\/w:tblGrid>/,''),(x:string)=>x.replace('</w:tbl>','<w:tblPr/></w:tbl>')]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.tables[0]!.setStyle('TableGrid')).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.setStyle",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:protection, external main XML and structural staleness refuse while protected direct reads stay available",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 39,
+      "title": "protection, external main XML and structural staleness refuse while protected direct reads stay available",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(locked.tables[0]!.styleId).toBe('TableGrid')",
+        "expect(()=>locked.tables[0]!.setStyle('TableGrid')).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(()=>t.styleId).toThrow()",
+        "expect(()=>t.setStyle(null)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(changed)",
+        "expect(()=>old.styleId).toThrow()",
+        "expect(()=>old.setStyle('TableGrid')).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n const d=await fixture(x=>x.replace('<w:tblPr>','<w:tblPr><w:tblStyle w:val=\"TableGrid\"/>')),pkg=await OpcPackage.open(d.package.toBytes());addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(pkg.toBytes()),before=locked.package.toBytes();expect(locked.tables[0]!.styleId).toBe('TableGrid');expect(()=>locked.tables[0]!.setStyle('TableGrid')).toThrow();expect(locked.package.toBytes()).toEqual(before);\n const t=d.tables[0]!;d.package.setPart('word/document.xml',new TextEncoder().encode(xml(d).replace('Before','External')));const changed=d.package.toBytes();expect(()=>t.styleId).toThrow();expect(()=>t.setStyle(null)).toThrow();expect(d.package.toBytes()).toEqual(changed);\n const fresh=await fixture(),old=fresh.tables[0]!;fresh.addParagraph('new');expect(()=>old.styleId).toThrow();expect(()=>old.setStyle('TableGrid')).toThrow();\n}",
+      "calls": [
+        ".encode",
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "fresh.addParagraph",
+        "locked.package.toBytes",
+        "locked.tables.0.setStyle",
+        "old.setStyle",
+        "pkg.mainPart",
+        "pkg.toBytes",
+        "t.setStyle",
+        "x.replace",
+        "xml",
+        "xml().replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 45,
+      "title": "transactional set and serialization faults retain table paragraph and cell handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.setStyle('TableGrid')).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.styleId).toBeUndefined()",
+        "expect(p.text).toBe('Before')",
+        "expect(c.text).toBe('A')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 46,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),t=d.tables[0]!,p=d.paragraphs[0]!,c=t.cell(0,0),before=d.package.toBytes(),pkg=(d as any).opcPackage as OpcPackage,original=pkg[stage].bind(pkg);if(stage==='set')pkg.set=(n,v)=>{(original as OpcPackage['set'])(n,v);throw Error('injected write');};else pkg.toBytes=()=>{throw Error('injected serialize');};try{expect(()=>t.setStyle('TableGrid')).toThrow('injected');}finally{if(stage==='set')pkg.set=original as OpcPackage['set'];else pkg.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(t.styleId).toBeUndefined();expect(p.text).toBe('Before');expect(c.text).toBe('A');}\n}",
+      "calls": [
+        "Error",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "original",
+        "pkg.undefined.bind",
+        "t.cell",
+        "t.setStyle"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 49,
+      "title": "alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(after.tables[0]!.styleId).toBe('TableGrid')",
+        "expect(after.tables[0]!.cell(0,0).text).toBe('A')",
+        "expect([...after.package.get('word/document.xml')!.slice(0,encoding==='utf8'?3:2)]).toEqual(encoding==='utf8'?[239,187,191]:[254,255])",
+        "expect(after.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 50,
+          "expression": "for(const encoding of ['utf8','utf16'])"
+        },
+        {
+          "line": 50,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+2*i,text.charCodeAt(i),false);"
+        },
+        {
+          "line": 50,
+          "expression": "for(const n of pkg.names())if(n!==pkg.mainPart())expect(after.package.get(n)).toEqual(pkg.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n for(const encoding of ['utf8','utf16']){const d=await fixture(x=>x.replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:').replace('<q:tblPr>','<q:tblPr xmlns:w=\"urn:foreign\">')),pkg=await OpcPackage.open(d.package.toBytes());let raw=pkg.get(pkg.mainPart())!;if(encoding==='utf8')raw=new Uint8Array([239,187,191,...raw]);else{const text=pkg.text(pkg.mainPart()).replace('UTF-8','UTF-16');raw=new Uint8Array(2+text.length*2);raw.set([254,255]);const view=new DataView(raw.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+2*i,text.charCodeAt(i),false);}pkg.set(pkg.mainPart(),raw);const doc=await Document.open(pkg.toBytes());doc.tables[0]!.setStyle('TableGrid');const after=await Document.open(await doc.save());expect(after.tables[0]!.styleId).toBe('TableGrid');expect(after.tables[0]!.cell(0,0).text).toBe('A');expect([...after.package.get('word/document.xml')!.slice(0,encoding==='utf8'?3:2)]).toEqual(encoding==='utf8'?[239,187,191]:[254,255]);for(const n of pkg.names())if(n!==pkg.mainPart())expect(after.package.get(n)).toEqual(pkg.get(n));}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "after.package.get",
+        "after.package.get().slice",
+        "after.tables.0.cell",
+        "d.package.toBytes",
+        "doc.save",
+        "doc.tables.0.setStyle",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "pkg.get",
+        "pkg.mainPart",
+        "pkg.names",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes",
+        "raw.set",
+        "text.charCodeAt",
+        "view.setUint16",
+        "x.replaceAll",
+        "x.replaceAll().replaceAll",
+        "x.replaceAll().replaceAll().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 53,
+      "title": "canonical table-style readback rejects false initial or changed style values",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(wrong.counts.cases.failed).toBe(1)",
+        "expect(wrong.counts.steps.failed).toBe(1)",
+        "expect(wrong.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 56,
+          "expression": "for(const field of ['styleBefore','styleAfter'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/table-style.ts');const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(3)}});\n const good=await executeAcceptance(inv(source),bindings,'table-style-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);const wrong=await executeAcceptance(inv(source.replace('the first style is empty and the second style is TableGrid','the first style is empty and the second style is Wrong')),bindings,'table-style-expected');expect(wrong.counts.cases.failed).toBe(1);expect(wrong.counts.steps.failed).toBe(1);expect(wrong.counts.steps.undefined).toBe(0);\n for(const field of ['styleBefore','styleAfter']){const corrupt=bindings.map(b=>b.pattern.test('its style is read, then set to TableGrid and read again')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as Record<string,unknown>)[field]='Corrupt';}}:b);const bad=await executeAcceptance(inv(source),corrupt,'table-style-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "inv",
+        "join",
+        "selectSharedScenarios",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:complete output bounds refuse adding a style reference without invalidating handles",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "line": 59,
+      "title": "complete output bounds refuse adding a style reference without invalidating handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.setStyle('TableGrid')).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(t.styleId).toBeUndefined()",
+        "expect(c.text).toBe('A')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240",
+      "body": "{\n const d=await fixture(),p=await OpcPackage.open(d.package.toBytes()),main=p.mainPart(),source=p.text(main),padding=' '.repeat(8*1024*1024-source.length-2);p.set(main,source.replace('</w:body>',padding+'</w:body>'));const loaded=await Document.open(p.toBytes()),t=loaded.tables[0]!,c=t.cell(0,0),before=loaded.package.toBytes();expect(()=>t.setStyle('TableGrid')).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}));expect(loaded.package.toBytes()).toEqual(before);expect(t.styleId).toBeUndefined();expect(c.text).toBe('A');\n}",
+      "calls": [
+        ".repeat",
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "loaded.package.toBytes",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "source.replace",
+        "t.cell",
+        "t.setStyle"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {

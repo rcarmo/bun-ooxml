@@ -7,6 +7,7 @@ import {appendParagraphRun} from './append-run.ts';
 import {replaceParagraphText} from './paragraph-text.ts';
 import {bodyInsertionTarget,insertBodyParagraph} from './body-insertion.ts';
 import {editTableRow} from './table-rows.ts';
+import {readTableStyle,editTableStyle} from './table-style.ts';
 import {readRowHeader,editRowHeader} from './row-header.ts';
 import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
 export type {DirectCellProperties,CellPropertiesPatch,CellTopBorder} from './cell-properties.ts';
@@ -353,6 +354,10 @@ export class Table {
     const table = this.liveTable();
     return table.columns;
   }
+
+  /** Direct style reference; does not resolve or author the style registry. */
+  get styleId():string|undefined {return this.documentRef.getTableStyle(this.liveTable());}
+  setStyle(styleId:string|null):{changed:number} {return this.documentRef.setTableStyle(this.liveTable(),styleId);}
 
   /** Detached cell texts in column order; no mutation or formatting evaluation. */
   rowTexts(index: number): string[] {return this.documentRef.inspectRowTexts(this.liveTable(),index);}
@@ -938,6 +943,15 @@ export class Document {
     const bom=original[0]===239&&original[1]===187&&original[2]===191?'\ufeff':'';
     this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,bom+nextXml);this.opcPackage.toBytes();});
     this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+  }
+
+  getTableStyle(snapshot:TableSnapshot):string|undefined {
+    this.assertRowHeaderTarget(snapshot,0);return readTableStyle(this.xml,snapshot.element);
+  }
+  setTableStyle(snapshot:TableSnapshot,styleId:string|null):{changed:number} {
+    this.assertRowHeaderTarget(snapshot,0);this.assertFormattingUnprotected();
+    const next=editTableStyle(this.xml,snapshot.element,styleId);if(next===this.xml)return {changed:0};
+    this.commitParagraphProperties(next);return {changed:1};
   }
 
   inspectRowTexts(snapshot:TableSnapshot,index:number):string[] {

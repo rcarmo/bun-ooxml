@@ -18,7 +18,9 @@ retained with their namespace declarations. `TableCell.directProperties()` and
 `setProperties()` provide [bounded direct cell formatting](cell-properties.md)
 without replacing text or changing the grid. `Table.isRowHeader(row)` and
 `setRowHeader(row, boolean | null)` inspect and edit [direct row-header markers](row-header.md).
-They do not predict rendered page repetition. Full style inheritance and merging are unsupported.
+They do not predict rendered page repetition. `Table.styleId` and `setStyle(id | null)`
+read or edit a [direct table-style reference](table-style.md) without creating or
+resolving the style definition. Full style inheritance and merging are unsupported.
 
 PPTX: `Slide.addTable(rows,columns,{x,y,width,height}): Table` with integer EMU geometry.
 `Slide.tables: Table[]`, same rows/columns/cell text API. Native graphicFrame/a:tbl,

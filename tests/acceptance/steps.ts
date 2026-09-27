@@ -46,6 +46,7 @@ import { bindings as formulaAnalysisBindings } from './formula-analysis.ts';
 import { bindings as formulaRemapBindings } from './formula-remap.ts';
 import { bindings as corePropertiesBindings } from './core-properties.ts';
 import { bindings as documentPropertiesBindings } from './document-properties.ts';
+import { bindings as tableStyleBindings } from './table-style.ts';
 import { bindings as cellPropertiesBindings } from './cell-properties.ts';
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
@@ -108,6 +109,7 @@ export const bindings: StepBinding[] = [
   ...formulaRemapBindings,
   ...corePropertiesBindings,
   ...documentPropertiesBindings,
+  ...tableStyleBindings,
   ...cellPropertiesBindings,
   ...createPptxBindings,
   ...createXlsxBindings,

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 767,
+  "nativeDeclarations": 779,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 540,
+  "withoutStagingCount": 552,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3605,6 +3605,66 @@
       "id": "bun:tests/unit/docx-table-rows.test.ts:canonical row-count binding catches every wrong count and fabricated successful deletion",
       "path": "tests/unit/docx-table-rows.test.ts",
       "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:unresolved direct table style survives path reopen without registry creation or unrelated changes",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:semantic no-ops retain lexical style ID spelling and handles; null removes only the direct reference",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:style writes preserve table properties, all existing row fragments and an unrelated styles registry",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:missing or self-closing table properties accept a first-position direct reference",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:invalid style arguments refuse with unchanged bytes and current handles",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:duplicate misordered revised decorated or wrong-namespace style metadata refuses even removal or no-op",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:merged revised nested or unsupported row topology refuses style writes with custody intact",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:protection, external main XML and structural staleness refuse while protected direct reads stay available",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-style.test.ts:complete output bounds refuse adding a style reference without invalidating handles",
+      "path": "tests/unit/docx-table-style.test.ts",
+      "sourceSha256": "d6c218a83e1421a87c6e5c839a83748c5b381aa3d8b17fe8c5265c1a38c34240"
     },
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:formula ledger enumerates all three native suites without changing execution credit or runtime leaf denominator",
