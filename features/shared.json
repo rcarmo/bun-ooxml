@@ -521,6 +521,20 @@
         "@id-docx-tracking-settings-plain-edit",
         "@id-docx-tracking-settings-author-refusal"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/table-merging.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-roundtrip",
+        "@id-docx-horizontal-merge-content-refusal",
+        "@id-docx-horizontal-merge-structure-refusal",
+        "@id-docx-horizontal-merge-coordinate-refusal",
+        "@id-docx-horizontal-merge-rollback",
+        "@id-docx-horizontal-merge-encoding",
+        "@id-docx-horizontal-merge-stale"
+      ]
     }
   ]
 }

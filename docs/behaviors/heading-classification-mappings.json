@@ -6,7 +6,7 @@
     "tests/unit/docx-heading-classification.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-heading-classification.test.ts": "834df9edc8906796480c57fa99445406fe1ff24ff6de67e6b958b625f9a5ea77",
+    "tests/unit/docx-heading-classification.test.ts": "947f42fef7dd2e53c50746a585e50aa566b41c5d7a7c7c84d089ad1bf12b3975",
     "src/docx/index.ts": "ba14e13e7fa18cd89ca55b62c30d39e2e03dc01b296d191ebb0064dc3a681b66",
     "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
@@ -179,7 +179,7 @@
         "expect(p.headingLevel).toBe(0)",
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
-        "expect(inv.counts.cases.implemented).toBe(551)",
+        "expect(inv.counts.cases.implemented).toBe(577)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [

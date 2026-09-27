@@ -20,14 +20,14 @@ alone does not count as a tested requirement.
 
 ## Complete shared inventory
 
-The project loads all 47 canonical features from the pinned workflow registry.
+The project loads all 48 canonical features from the pinned workflow registry.
 Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 236 scenarios / 586 cases; 551 implemented and 35 planned.
+- Shared: 243 scenarios / 612 cases; 577 implemented and 35 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 245 scenarios / 597 cases; 551 implemented and 46 planned.
+- Combined: 252 scenarios / 623 cases; 577 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -58,9 +58,13 @@ the reviewed additions.
 
 `Table.mergeRowCells` adds bounded horizontal authoring with content-loss
 refusals and save/reopen tests. It does not satisfy the shared individual span and
-vertical-merge setter profile. Twelve native declarations remain unmapped until
-physical merge outcomes are reviewed centrally; the 501 prior mapping records
-and all 551 executed case identities stay unchanged. See the [merge contract](../contracts/table-merge.md).
+vertical-merge setter profile. Shared v0.29 adds seven physical-merge scenarios /
+26 cases and Bun executes them with saved geometry, exact custody, refusal and
+rollback assertions. Fifteen partial mappings cover twelve native declarations
+and three wrappers (516 total). Of 501 prior records, 500 are unchanged and one
+heading-inventory guard updates only the implemented-case count. The preceding
+551 executed identities are unchanged; only the 26 new cases were selected.
+See the [merge contract](../contracts/table-merge.md).
 
 ## Format and operation layout
 

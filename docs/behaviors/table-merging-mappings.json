@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-table-merge.test.ts",
+    "tests/unit/table-merge-outcomes.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-table-merge.test.ts": "f4786c6377289342e9d6842521e989cb18a8d0154d34b73d073e57228fbcd5d7",
+    "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
+    "src/docx/index.ts": "ba14e13e7fa18cd89ca55b62c30d39e2e03dc01b296d191ebb0064dc3a681b66",
+    "src/docx/table-merge.ts": "0f22f58f4c65fda9766ba311e4800729da9204b7d24a7ca0e929ac2d252153fc",
+    "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
+    "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
+    "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
+    "tests/acceptance/steps.ts": "93cf5107fac1cb42b3186f25da6878330cb26b7735ec13c650d5e815d513c72f",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+    "workflows/docx/table-merging.feature": "ea26fe30dabae6dd353775b7bf5e59ca136c3aa53489d3aa3ec00b7ccc60fa8b"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:horizontal merge retains first cell text explicit grid and other row through file reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-roundtrip",
+        "@id-docx-horizontal-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(merged.rows).toBe(2)",
+        "expect(merged.columns).toBe(4)",
+        "expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>cell.text).toThrow()",
+        "expect(()=>paragraph.text).toThrow()",
+        "expect(merged.cell(0,3).text).toBe('')",
+        "expect(merged.cell(1,3).text).toBe('Tail')",
+        "expect(()=>merged.cell(0,c)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(cells).toHaveLength(2)",
+        "expect(elements(parseXml(next.xml),'gridSpan',W).map(n=>attribute(n,'val',W))).toEqual(['3'])",
+        "expect(attribute(width,'w',W)).toBe('6480')",
+        "expect(next.xml).toContain(source.xml.slice(grid.start,grid.end))",
+        "expect(next.xml).toContain(source.xml.slice(otherRow.start,otherRow.end))",
+        "expect(read.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','Tail','After'])",
+        "expect(read.tables[0]!.rows).toBe(2)",
+        "expect(read.tables[0]!.columns).toBe(4)",
+        "expect([...read.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(read.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "First range saves/reopens two physical cells with span3/width6480, retained text/grid/row and unrelated members; old handles refuse."
+      ],
+      "gaps": [
+        "One range and UTF8 source; no whole-feature or other-consumer claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-content-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(tableXml(d).xml).toContain('ABCDEF')",
+        "expect(tableXml(d).xml).toContain('center')",
+        "expect(tableXml(d).xml).toContain('Keep &amp; &lt;text&gt;')",
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow()",
+        "expect(bad.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Owner shading/alignment/text retained; seven absorbed content/decoration variants refuse unchanged."
+      ],
+      "gaps": [
+        "Native loop extends central cases; only selected values and no independent rendering."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-coordinate-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeRowCells(...args as [number,number,number])).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.cell(0,0).text).toBe('Keep & <text>')"
+      ],
+      "outcomes": [
+        "Singleton reversed invalid out-of-range and nonfinite/unsafe ranges refuse with bytes and owner text unchanged."
+      ],
+      "gaps": [
+        "Coordinate variants are native loops, not separate case identities."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:existing merges malformed grids width mismatches and protected documents refuse even disjoint requests",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-structure-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.mergeRowCells(1,0,1)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>locked.tables[0]!.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-format-protected'}))",
+        "expect(locked.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Preexisting merge missing/bad grid mismatched widths malformed span and protection refuse unchanged."
+      ],
+      "gaps": [
+        "Selected malformed samples only; no general schema validity or Office behaviour."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:write and serialization faults roll back topology bytes and all held handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeRowCells(0,0,2)).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(2)",
+        "expect(cell.text).toBe('Keep & <text>')",
+        "expect(paragraph.text).toBe('Before')"
+      ],
+      "outcomes": [
+        "Write and serialization faults restore exact archive, prior table/cell/paragraph handles."
+      ],
+      "gaps": [
+        "In-process synchronous injection only, no crash durability."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-encoding",
+        "@id-docx-horizontal-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...loaded.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:[255,254])",
+        "expect(read.paragraphs.some(p=>p.text==='Keep & <text>')).toBe(true)",
+        "expect(read.tables[0]!.columns).toBe(4)",
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}))"
+      ],
+      "outcomes": [
+        "UTF8BOM and aliasedUTF16LE retain marker/content after byte reopen; old merge handles refuse."
+      ],
+      "gaps": [
+        "UTF16BE and path save are checked by central wrapper, not this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-roundtrip",
+        "@id-docx-horizontal-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.columns).toBe(4)",
+        "expect(t.cell(0,0).text).toBe('Keep & <text>')",
+        "expect(t.cell(1,3).text).toBe('Tail')",
+        "expect(()=>t.insertRow(0)).toThrow()",
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(1)",
+        "expect(elements(parseXml(xml.xml),'tc',W)).toHaveLength(1)",
+        "expect(attribute(elements(parseXml(xml.xml),'gridSpan',W)[0]!,'val',W)).toBe('4')"
+      ],
+      "outcomes": [
+        "Middle and full-row merges retain coordinates; row edits and repeated merges refuse with archive custody."
+      ],
+      "gaps": [
+        "Native fixture ranges differ from the three central rows; no path persistence here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:unselected cells and tables retain payloads and empty paragraphs are removed only from selected coordinates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(after).toContain(other)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','','Tail','After','Other table'])",
+        "expect(d.tables[1]!.cell(0,0).text).toBe('Other table')"
+      ],
+      "outcomes": [
+        "Unselected table XML and retained paragraph sequence match after middle merge."
+      ],
+      "gaps": [
+        "Only one second-table fixture; no external producer or rendering."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-structure-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Decorated width, section paragraph and excessive sum refuse without archive mutation."
+      ],
+      "gaps": [
+        "Native-only admission variants extend bounded central associations; no selected case keys."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:external document drift late malformed rows and external settings refuse before topology changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-structure-refusal",
+        "@id-docx-horizontal-merge-stale"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "External main XML drift, late span metadata and external settings refuse unchanged."
+      ],
+      "gaps": [
+        "No arbitrary concurrency or filesystem-writer guarantee."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:horizontal authoring does not activate the shared horizontal and vertical setter profile",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-merge-properties"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(s.lifecycle).toBe('planned')",
+        "expect(s.cases).toHaveLength(1)",
+        "expect(inv.counts.cases.implemented).toBe(577)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "outcomes": [
+        "Historical setter/vertical profile stays planned with one case and current global inventory totals."
+      ],
+      "gaps": [
+        "Inventory guard only; no property setter or vertical merge execution."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-table-merge.test.ts:nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-structure-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Nested tables at owner and unselected cell refuse unchanged."
+      ],
+      "gaps": [
+        "Two positions only; no general recursive editing support."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/table-merge-outcomes.test.ts:seven horizontal merge contracts execute all26 expanded outcomes with no undefined or ambiguous steps",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-roundtrip",
+        "@id-docx-horizontal-merge-content-refusal",
+        "@id-docx-horizontal-merge-structure-refusal",
+        "@id-docx-horizontal-merge-coordinate-refusal",
+        "@id-docx-horizontal-merge-rollback",
+        "@id-docx-horizontal-merge-encoding",
+        "@id-docx-horizontal-merge-stale"
+      ],
+      "caseKeys": [
+        "@id-docx-horizontal-merge-roundtrip|{\"row\":\"0\",\"first\":\"0\",\"last\":\"2\",\"span\":\"3\",\"width\":\"6480\",\"cells\":\"2\"}",
+        "@id-docx-horizontal-merge-roundtrip|{\"row\":\"0\",\"first\":\"0\",\"last\":\"3\",\"span\":\"4\",\"width\":\"8640\",\"cells\":\"1\"}",
+        "@id-docx-horizontal-merge-roundtrip|{\"row\":\"1\",\"first\":\"1\",\"last\":\"2\",\"span\":\"2\",\"width\":\"4320\",\"cells\":\"3\"}",
+        "@id-docx-horizontal-merge-content-refusal|{\"content\":\"text\"}",
+        "@id-docx-horizontal-merge-content-refusal|{\"content\":\"space-text\"}",
+        "@id-docx-horizontal-merge-content-refusal|{\"content\":\"cell-shading\"}",
+        "@id-docx-horizontal-merge-content-refusal|{\"content\":\"paragraph-format\"}",
+        "@id-docx-horizontal-merge-content-refusal|{\"content\":\"empty-run\"}",
+        "@id-docx-horizontal-merge-content-refusal|{\"content\":\"lexical-comment\"}",
+        "@id-docx-horizontal-merge-structure-refusal|{\"structure\":\"existing-vertical\"}",
+        "@id-docx-horizontal-merge-structure-refusal|{\"structure\":\"missing-grid\"}",
+        "@id-docx-horizontal-merge-structure-refusal|{\"structure\":\"width-mismatch\"}",
+        "@id-docx-horizontal-merge-structure-refusal|{\"structure\":\"nested-unselected\"}",
+        "@id-docx-horizontal-merge-structure-refusal|{\"structure\":\"protected\"}",
+        "@id-docx-horizontal-merge-structure-refusal|{\"structure\":\"external-settings\"}",
+        "@id-docx-horizontal-merge-coordinate-refusal|{\"coordinates\":\"singleton\"}",
+        "@id-docx-horizontal-merge-coordinate-refusal|{\"coordinates\":\"reversed\"}",
+        "@id-docx-horizontal-merge-coordinate-refusal|{\"coordinates\":\"outside\"}",
+        "@id-docx-horizontal-merge-coordinate-refusal|{\"coordinates\":\"fractional\"}",
+        "@id-docx-horizontal-merge-rollback|{\"stage\":\"part-write\"}",
+        "@id-docx-horizontal-merge-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-horizontal-merge-encoding|{\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-horizontal-merge-encoding|{\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-horizontal-merge-encoding|{\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-horizontal-merge-stale|{\"target\":\"old-handles\"}",
+        "@id-docx-horizontal-merge-stale|{\"target\":\"merged-cells\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(26)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Seven physical merge contracts execute exactly26 cases with no failures undefined or ambiguous steps."
+      ],
+      "gaps": [
+        "Outcomes delegated to pinned bindings; runtime case assertions do not establish other consumer parity."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/table-merge-outcomes.test.ts:wrong span and width outcomes fail concrete assertions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBe(3)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong expected span and width fail exactly three roundtrip cases without undefined or ambiguous steps."
+      ],
+      "gaps": [
+        "Negative controls cover geometry only."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/table-merge-outcomes.test.ts:corrupted saved text and unrelated payloads cannot pass physical merge custody checks",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-horizontal-merge-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBe(3)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Corrupted reopened text or opaque payload fails exactly three roundtrip cases without undefined or ambiguous steps."
+      ],
+      "gaps": [
+        "Corruption is after reopening, not an independent writer or runtime fault; other cases unaltered."
+      ]
+    }
+  ]
+}

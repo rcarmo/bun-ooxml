@@ -55,6 +55,7 @@ import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
 import { bindings as tableDocxBindings } from "./tables-docx.ts";
 import {bindings as nullableCellBindings} from './nullable-cell.ts';
+import {bindings as tableMergingBindings,cleanupTableMerging} from './table-merging.ts';
 import { bindings as tablePptxBindings } from "./tables-pptx.ts";
 import { bindings as pptxBindings } from "./pptx.ts";
 import { bindings as pptxCustodyBindings } from './pptx-custody.ts';
@@ -65,7 +66,7 @@ import { bindings as xlsxCommentVmlBindings } from './xlsx-comment-vml.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupFontSize(),cleanupOpcCustody()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupFontSize(),cleanupOpcCustody()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -124,6 +125,7 @@ export const bindings: StepBinding[] = [
   ...createXlsxBindings,
   ...tableDocxBindings,
   ...nullableCellBindings,
+  ...tableMergingBindings,
   ...tablePptxBindings,
   ...pptxBindings,
   ...pptxCustodyBindings,

@@ -1,14 +1,14 @@
 # Behaviour coverage
 
-The shared reference contains **209 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **211 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 236 | 586 | 551 | 35 |
+| Shared catalogue | 243 | 612 | 577 | 35 |
 | Local-only obligations | 9 | 11 | 0 | 11 |
-| Combined inventory | 245 | 597 | 551 | 46 |
+| Combined inventory | 252 | 623 | 577 | 46 |
 
-The canonical denominator is **236 shared scenarios / 586 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+The canonical denominator is **243 shared scenarios / 612 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
@@ -29,6 +29,7 @@ The canonical denominator is **236 shared scenarios / 586 shared cases**. Local-
 | references/fixtures-ooxml/workflows/docx/run-formatting.feature | mixed | 10 | 43 | 42 | 1 | 137 |
 | references/fixtures-ooxml/workflows/docx/stories.feature | implemented | 3 | 3 | 3 | 0 | 21 |
 | references/fixtures-ooxml/workflows/docx/style-authoring.feature | implemented | 2 | 24 | 24 | 0 | 86 |
+| references/fixtures-ooxml/workflows/docx/table-merging.feature | implemented | 7 | 26 | 26 | 0 | 95 |
 | references/fixtures-ooxml/workflows/docx/tables.feature | mixed | 14 | 24 | 23 | 1 | 104 |
 | references/fixtures-ooxml/workflows/docx/template-analysis.feature | planned | 6 | 6 | 0 | 6 | 21 |
 | references/fixtures-ooxml/workflows/docx/template-cache.feature | planned | 7 | 7 | 0 | 7 | 38 |

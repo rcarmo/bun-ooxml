@@ -72,11 +72,11 @@ and expanded counts must match the registry. Missing or orphaned inputs fail.
 Small isolated test projects may omit `catalogue`; the project verification gate
 requires it for this repository.
 
-Coverage and acceptance reports separate **586 shared cases** (551 implemented,
-35 planned) from **11 local-only planned cases**. The combined inventory has 597
+Coverage and acceptance reports separate **612 shared cases** (577 implemented,
+35 planned) from **11 local-only planned cases**. The combined inventory has 623
 cases, including 46 planned. After the complete-inventory correction, the
-tracking-author toggle, 24 settings persistence/refusal cases and one nullable-cell
-access case were activated. Thirteen template cases previously omitted from the
+tracking-author toggle, 24 settings persistence/refusal cases, one nullable-cell
+access case and 26 physical-merge cases were activated. Thirteen template cases previously omitted from the
 loaded inventory are now visible with no execution credit. Catalogue membership
 checks do not replace `verifyReferences`, which verifies the pinned commit,
 manifest hashes and tracked-byte custody.

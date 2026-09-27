@@ -54,6 +54,13 @@ the Open XML SDK and reopens it natively. It does not test rendered geometry.
 
 The shared `@id-docx-go-table-merge-properties` case remains planned: it requires
 individual span and vertical-merge setters/getters, with a different topology
-policy. These native tests are unmapped pending central contracts for physical,
-content-preserving horizontal merges. No shared execution or other-consumer
-parity follows from this implementation.
+policy. Shared v0.29 adds seven [physical merge contracts](../../references/fixtures-ooxml/contracts/table-merging.md)
+with 26 cases, executed by `tests/acceptance/table-merging.ts`. They check saved
+geometry, exact retained paragraph order and sibling/source bytes, content-loss
+refusals, reached fault rollback, three encoding markers and stale handles.
+UTF-16BE now has explicit outcome coverage alongside UTF-16LE and UTF-8 BOM.
+
+Fifteen partial mappings cover twelve native declarations and three outcome
+wrappers. Only the positive shared wrapper selects the 26 case keys. The
+historical setter-profile mapping is an inventory-only guard with no case keys;
+Python and Go gain no execution or parity credit from these Bun results.
