@@ -9,7 +9,7 @@ The shared reference contains **200 assets**. The table lists available tests; a
 | features/planned/office-mutation-additions.feature | planned | 3 | 3 | 0 | 3 | 12 |
 | references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 13 | 23 | 14 | 9 | 102 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 4 | 8 | 8 | 0 | 47 |
-| references/fixtures-ooxml/workflows/docx/document-model.feature | mixed | 29 | 70 | 35 | 35 | 233 |
+| references/fixtures-ooxml/workflows/docx/document-model.feature | mixed | 29 | 70 | 45 | 25 | 233 |
 | references/fixtures-ooxml/workflows/docx/effective-formatting.feature | implemented | 2 | 25 | 25 | 0 | 84 |
 | references/fixtures-ooxml/workflows/docx/font-size.feature | implemented | 1 | 1 | 1 | 0 | 6 |
 | references/fixtures-ooxml/workflows/docx/page-layout.feature | implemented | 2 | 22 | 22 | 0 | 74 |

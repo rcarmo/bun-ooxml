@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 597,
-  "files": 61,
+  "count": 603,
+  "files": 62,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -46,6 +46,12 @@
       "path": "tests/unit/docx-formatting.test.ts",
       "sha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2",
       "declarations": 18,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-model-bindings.test.ts",
+      "sha256": "ebb26fca3abb0122440b3a699f030162d77ec0f5fdad5065db0c361c03c6035d",
+      "declarations": 6,
       "issues": []
     },
     {
@@ -403,6 +409,10 @@
       "sha256": "381152c34d7b7a3e99400dfff06ff8610b45a176754e538342aa2e40a47234df"
     },
     {
+      "path": "tests/acceptance/docx-model.ts",
+      "sha256": "a1db5a0c18219ee8440580cccaf03ea65657a027c39f7b25721e9364cdf8c91a"
+    },
+    {
       "path": "tests/acceptance/docx.ts",
       "sha256": "3dbaa55f4112e5f28a1cde21324d2818cc40c133071464672495605c14c9a536"
     },
@@ -492,7 +502,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "476f9097549c1857bbe24247dd9c26ecbe94e979889bb7f64845c8e1d2be4bb1"
+      "sha256": "30286e3ca908f6929e616480868a0f6210c0b106b1adc9ae91871b2efce58d74"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -597,6 +607,10 @@
     "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
     "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
     "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+    "bun:tests/unit/docx-model-bindings.test.ts:ten existing DOCX document-model cases execute without activating incompatible table policies",
+    "bun:tests/unit/docx-model-bindings.test.ts:model predicates reject a missing body and nonzero empty-document counts",
+    "bun:tests/unit/docx-model-bindings.test.ts:saved table checks inspect every cell position and reject changed delivered bytes",
+    "bun:tests/unit/docx-model-bindings.test.ts:DOCX model path outputs are removed after successful and failed saves",
     "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
     "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
     "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
@@ -763,6 +777,11 @@
     "bun:tests/unit/docx-formatting.test.ts:UTF-16 encoding and unrelated package members survive formatting",
     "bun:tests/unit/docx-formatting.test.ts:unknown flags, duplicated or out-of-order properties refuse with no mutation",
     "bun:tests/unit/docx-formatting.test.ts:protected settings and mid-paragraph extension content refuse even an otherwise valid patch",
+    "bun:tests/unit/docx-model-bindings.test.ts:ten existing DOCX document-model cases execute without activating incompatible table policies",
+    "bun:tests/unit/docx-model-bindings.test.ts:wrong table dimensions fail bound getter predicates",
+    "bun:tests/unit/docx-model-bindings.test.ts:model predicates reject a missing body and nonzero empty-document counts",
+    "bun:tests/unit/docx-model-bindings.test.ts:saved table checks inspect every cell position and reject changed delivered bytes",
+    "bun:tests/unit/docx-model-bindings.test.ts:DOCX model path outputs are removed after successful and failed saves",
     "bun:tests/unit/docx-page-layout.test.ts:layout write preserves UTF16 LE and BE encoding, BOM and body text",
     "bun:tests/unit/docx-page-layout.test.ts:layout options reject getters, incomplete fields, unknown keys and oversized geometry",
     "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
@@ -3938,6 +3957,204 @@
         "p.toBytes",
         "q.paragraphs.0.setRunFormatting",
         "q.save"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-model-bindings.test.ts:ten existing DOCX document-model cases execute without activating incompatible table policies",
+      "path": "tests/unit/docx-model-bindings.test.ts",
+      "line": 12,
+      "title": "ten existing DOCX document-model cases execute without activating incompatible table policies",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(10)",
+        "expect(result.features[0]!.scenarios.find(s=>s.scenarioId===id)!.result).toBe('planned')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 14,
+          "expression": "for(const id of ['@id-docx-go-table-cell-access','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-run-effects-getters'])expect(result.features[0]!.scenarios.find(s=>s.scenarioId===id)!.result).toBe('planned');"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ebb26fca3abb0122440b3a699f030162d77ec0f5fdad5065db0c361c03c6035d",
+      "body": "{\n const result=await run();expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(10);\n for(const id of ['@id-docx-go-table-cell-access','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-run-effects-getters'])expect(result.features[0]!.scenarios.find(s=>s.scenarioId===id)!.result).toBe('planned');\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "result.features.0.scenarios.find",
+        "run"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-model-bindings.test.ts:wrong table dimensions fail bound getter predicates",
+      "path": "tests/unit/docx-model-bindings.test.ts",
+      "line": 16,
+      "title": "wrong table dimensions fail bound getter predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "ebb26fca3abb0122440b3a699f030162d77ec0f5fdad5065db0c361c03c6035d",
+      "body": "{\n failed(await run(bindings,s=>s.replace('RowCount equals <rows> and ColumnCount equals <cols> in memory','RowCount equals 99 and ColumnCount equals 99 in memory')));\n}",
+      "calls": [
+        "failed",
+        "run",
+        "s.replace"
+      ],
+      "reviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-model-bindings.test.ts:model predicates reject a missing body and nonzero empty-document counts",
+      "path": "tests/unit/docx-model-bindings.test.ts",
+      "line": 20,
+      "title": "model predicates reject a missing body and nonzero empty-document counts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 22,
+          "expression": "for(const mutate of [(s:State)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ebb26fca3abb0122440b3a699f030162d77ec0f5fdad5065db0c361c03c6035d",
+      "body": "{\n type State=import('../acceptance/docx-model.ts').ModelState;\n for(const mutate of [(s:State)=>{s.body=undefined;},(s:State)=>{s.paragraphCount=1;},(s:State)=>{s.tableCount=1;}]){\n  const corrupt=bindings.map(b=>b.pattern.test('its body paragraphs and tables are enumerated')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);mutate(c.state as State);}}:b);\n  failed(await run(corrupt));\n }\n}",
+      "calls": [
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "failed",
+        "mutate",
+        "run"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-model-bindings.test.ts:saved table checks inspect every cell position and reject changed delivered bytes",
+      "path": "tests/unit/docx-model-bindings.test.ts",
+      "line": 28,
+      "title": "saved table checks inspect every cell position and reject changed delivered bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "for(let position=0;position<9;position++)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ebb26fca3abb0122440b3a699f030162d77ec0f5fdad5065db0c361c03c6035d",
+      "body": "{\n type State=import('../acceptance/docx-model.ts').ModelState;\n for(let position=0;position<9;position++){\n  const corrupt=bindings.map(b=>b.pattern.test('the document is saved and reopened')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);const s=c.state as State;s.reopened!.tables[0]!.cell(Math.floor(position/3),position%3).text='Wrong';}}:b);\n  failed(await run(corrupt));\n }\n const corrupt=bindings.map(b=>b.pattern.test('the document is saved and reopened')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);const s=c.state as State;s.disk![0]=s.disk![0]!^1;}}:b);\n failed(await run(corrupt));\n}",
+      "calls": [
+        "Math.floor",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "failed",
+        "run",
+        "s.reopened.tables.0.cell"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-model-bindings.test.ts:DOCX model path outputs are removed after successful and failed saves",
+      "path": "tests/unit/docx-model-bindings.test.ts",
+      "line": 38,
+      "title": "DOCX model path outputs are removed after successful and failed saves",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(captured?.destination).toBeDefined()",
+        "expect(lstat(captured!.destination!)).rejects.toMatchObject({code:'ENOENT'})",
+        "expect(lstat(join(captured!.destination!,'..'))).rejects.toMatchObject({code:'ENOENT'})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const refusal of [false,true])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ebb26fca3abb0122440b3a699f030162d77ec0f5fdad5065db0c361c03c6035d",
+      "body": "{\n const {lstat}=await import('node:fs/promises');type State=import('../acceptance/docx-model.ts').ModelState;\n for(const refusal of [false,true]){\n  let captured:State|undefined;\n  const controlled=bindings.map(b=>b.pattern.test('the document is saved and reopened')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{\n   captured=c.state as State;if(refusal)captured.document.save=async()=>{throw Error('injected path-save failure');};await b.run(c,...captures);\n  }}:b);\n  const r=await run(controlled);if(refusal)failed(r);else expect(r.failures).toEqual([]);\n  expect(captured?.destination).toBeDefined();await expect(lstat(captured!.destination!)).rejects.toMatchObject({code:'ENOENT'});await expect(lstat(join(captured!.destination!,'..'))).rejects.toMatchObject({code:'ENOENT'});\n }\n}",
+      "calls": [
+        "Error",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "expect",
+        "expect().rejects.toMatchObject",
+        "expect().toBeDefined",
+        "expect().toEqual",
+        "failed",
+        "join",
+        "lstat",
+        "run"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-model-bindings.test.ts:all eight dimension rows and the saved table exercise the requested grid sizes",
+      "path": "tests/unit/docx-model-bindings.test.ts",
+      "line": 50,
+      "title": "all eight dimension rows and the saved table exercise the requested grid sizes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect((await run(checking)).failures).toEqual([])",
+        "expect(dimensions).toEqual([[1,1],[1,5],[5,1],[2,2],[3,3],[5,5],[10,3],[3,10]])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "ebb26fca3abb0122440b3a699f030162d77ec0f5fdad5065db0c361c03c6035d",
+      "body": "{\n type State=import('../acceptance/docx-model.ts').ModelState;const dimensions:number[][]=[];\n const checking=bindings.map(b=>b.pattern.test('a table with 1 rows and 1 columns is added')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);const table=(c.state as State).document.tables[0]!;dimensions.push([table.rows,table.columns]);}}:b);\n expect((await run(checking)).failures).toEqual([]);expect(dimensions).toEqual([[1,1],[1,5],[5,1],[2,2],[3,3],[5,5],[10,3],[3,10]]);\n}",
+      "calls": [
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "dimensions.push",
+        "expect",
+        "expect().toEqual",
+        "run"
       ],
       "reviewReasons": [],
       "unresolved": []

@@ -34,6 +34,7 @@ import { bindings as slideOrderBindings } from './slide-order.ts';
 import { bindings as effectiveFormattingBindings } from './effective-formatting.ts';
 import { bindings as trackedWorkflowBindings, cleanupTrackedWorkflowFixtures } from './tracked-workflow.ts';
 import { bindings as createDocxBindings } from "./create-docx.ts";
+import { bindings as docxModelBindings } from './docx-model.ts';
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
 import { bindings as tableDocxBindings } from "./tables-docx.ts";
@@ -83,6 +84,7 @@ export const bindings: StepBinding[] = [
   ...effectiveFormattingBindings,
   ...trackedWorkflowBindings,
   ...createDocxBindings,
+  ...docxModelBindings,
   ...createPptxBindings,
   ...createXlsxBindings,
   ...tableDocxBindings,

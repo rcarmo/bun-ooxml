@@ -51,6 +51,13 @@ require unchanged ZIP headers after an edit. Save tests read destination bytes
 from disk, and the runner removes temporary directories even after a failed case.
 Concurrent path replacement is outside these tests.
 
+Selected DOCX document-model cases check an empty body, eight authored table
+sizes and a nine-cell table saved to disk and reopened. The size cases inspect
+in-memory getters; only the saved-table case checks disk readback. Controls alter
+each saved cell position independently and verify temporary-directory cleanup.
+Bun throws on out-of-range cell access, so the shared nil-return policy stays
+planned, along with row restructuring and merge-property operations.
+
 ## Requirement mappings
 
 The slide-order, effective-formatting, XML-value and PPTX-core reports associate
