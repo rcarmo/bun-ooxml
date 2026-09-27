@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 825,
-  "files": 83,
+  "count": 837,
+  "files": 84,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -397,6 +397,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "declarations": 12,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xlsx-create.test.ts",
       "sha256": "6f0e025ad15f8c70da1d612308e5b4a0748fe0ca8b92af193c8878b7aa632553",
       "declarations": 11,
@@ -712,7 +718,7 @@
     },
     {
       "path": "tests/acceptance/xlsx-comment-vml.ts",
-      "sha256": "f24029f1a4a70083cbe35940c2040cf49bdb82c49c0457f1df8076fe0f13752d"
+      "sha256": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b"
     },
     {
       "path": "tests/acceptance/xlsx-range.ts",
@@ -1018,6 +1024,12 @@
     "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:wrong worksheet relationship and comment namespaces cannot satisfy the graph predicates",
     "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:duplicate drawing IDs comment records and missing relationship dependencies fail independently of custody",
     "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:read-only graph predicates detect input or opaque VML payload mutation",
+    "bun:tests/unit/xlsx-comments.test.ts:external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged",
+    "bun:tests/unit/xlsx-comments.test.ts:wrong expanded namespaces and part content types never fall back to local-name inspection",
+    "bun:tests/unit/xlsx-comments.test.ts:invalid duplicate and non-cell comment references or author indices refuse without partial lists",
+    "bun:tests/unit/xlsx-comments.test.ts:unknown comment content phonetics nested text and malformed rich runs refuse instead of returning partial text",
+    "bun:tests/unit/xlsx-comments.test.ts:bounded worksheet-comment inputs refuse oversized XML comment counts and invalid part arguments",
+    "bun:tests/unit/xlsx-comments.test.ts:relationship lookalike attributes and fragment targets refuse without changing part payloads",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
     "bun:tests/unit/xlsx-formula-analysis.test.ts:static formula analysis counts references without interpreting strings, functions or exponents as cells",
@@ -1339,6 +1351,12 @@
     "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:wrong worksheet relationship and comment namespaces cannot satisfy the graph predicates",
     "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:duplicate drawing IDs comment records and missing relationship dependencies fail independently of custody",
     "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:read-only graph predicates detect input or opaque VML payload mutation",
+    "bun:tests/unit/xlsx-comments.test.ts:external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged",
+    "bun:tests/unit/xlsx-comments.test.ts:wrong expanded namespaces and part content types never fall back to local-name inspection",
+    "bun:tests/unit/xlsx-comments.test.ts:invalid duplicate and non-cell comment references or author indices refuse without partial lists",
+    "bun:tests/unit/xlsx-comments.test.ts:unknown comment content phonetics nested text and malformed rich runs refuse instead of returning partial text",
+    "bun:tests/unit/xlsx-comments.test.ts:bounded worksheet-comment inputs refuse oversized XML comment counts and invalid part arguments",
+    "bun:tests/unit/xlsx-comments.test.ts:relationship lookalike attributes and fragment targets refuse without changing part payloads",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / refuses invalid worksheet names atomically with case-insensitive duplicate checks",
     "bun:tests/unit/xlsx-create.test.ts:Worksheet.setCellValue missing-cell authoring / refuses invalid coordinates without mutating the workbook",
     "bun:tests/unit/xlsx-formula-analysis.test.ts:static formula analysis counts references without interpreting strings, functions or exponents as cells",
@@ -26604,6 +26622,458 @@
         "body-loop",
         "helper-or-no-direct-assertion"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:native comment inspection returns detached exact authors refs text and separate VML relationship without writes",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 12,
+      "title": "native comment inspection returns detached exact authors refs text and separate VML relationship without writes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(out).toEqual({worksheetPart:sheet,commentsRelationship:{id:'comments',type:R+'/comments',part:comments},vmlRelationship:{id:'anysvml',type:R+'/vmlDrawing',part:vml},comments:[{reference:'A2',authorId:0,author:'Test Author',text:textA},{reference:'A3',authorId:0,author:'Test Author',text:textB}]})",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).comments.map(c=>c.text)).toEqual([textA,textB])",
+        "expect(inspect(p).commentsRelationship!.part).toBe(comments)",
+        "expect(inspect(after)).toEqual(inspect(p))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n const p=await fixture(),before=p.toBytes(),out=inspect(p);expect(out).toEqual({worksheetPart:sheet,commentsRelationship:{id:'comments',type:R+'/comments',part:comments},vmlRelationship:{id:'anysvml',type:R+'/vmlDrawing',part:vml},comments:[{reference:'A2',authorId:0,author:'Test Author',text:textA},{reference:'A3',authorId:0,author:'Test Author',text:textB}]});expect(p.toBytes()).toEqual(before);\n out.comments[0]!.text='wrong';out.comments.push({reference:'B1',authorId:0,author:'Fake',text:'fake'});out.commentsRelationship!.part='wrong';expect(inspect(p).comments.map(c=>c.text)).toEqual([textA,textB]);expect(inspect(p).commentsRelationship!.part).toBe(comments);expect(p.toBytes()).toEqual(before);\n const after=await OpcPackage.open(p.toBytes());expect(inspect(after)).toEqual(inspect(p));\n}",
+      "calls": [
+        "OpcPackage.open",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "inspect",
+        "inspect().comments.map",
+        "out.comments.push",
+        "p.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:empty comment graphs and comments without VML remain distinct from malformed dependencies",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 18,
+      "title": "empty comment graphs and comments without VML remain distinct from malformed dependencies",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inspect(p)).toEqual({worksheetPart:sheet,commentsRelationship:null,vmlRelationship:null,comments:[]})",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(out.comments).toEqual([{reference:'XFD1048576',authorId:0,author:'A',text:'edge'}])",
+        "expect(out.vmlRelationship).toBeNull()",
+        "expect(out.commentsRelationship!.part).toBe(comments)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n const p=Workbook.create().package,before=p.toBytes();expect(inspect(p)).toEqual({worksheetPart:sheet,commentsRelationship:null,vmlRelationship:null,comments:[]});expect(p.toBytes()).toEqual(before);\n addPart(p,comments,`<comments xmlns=\"${S}\"><authors><author>A</author></authors><commentList><comment ref=\"XFD1048576\" authorId=\"0\"><text><t>edge</t></text></comment></commentList></comments>`,C);addRelationship(p,sheet,R+'/comments','../comments/comment1.xml');const out=inspect(p);expect(out.comments).toEqual([{reference:'XFD1048576',authorId:0,author:'A',text:'edge'}]);expect(out.vmlRelationship).toBeNull();expect(out.commentsRelationship!.part).toBe(comments);\n}",
+      "calls": [
+        "Workbook.create",
+        "addPart",
+        "addRelationship",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "inspect",
+        "p.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:rich text alias and UTF16 comment parts read in document order without normalising original bytes",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 23,
+      "title": "rich text alias and UTF16 comment parts read in document order without normalising original bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(out.comments).toEqual([{reference:'B9',authorId:0,author:'  雪 & Co  ',text:' A& 😀'},{reference:'A1',authorId:0,author:'  雪 & Co  ',text:''}])",
+        "expect(out.vmlRelationship!.id).toBe('anysvml')",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n const p=await fixture();p.set(sheet,p.text(sheet).replace('xmlns:r=','xmlns:link=').replace('r:id=\"anysvml\"','link:id=\"anysvml\"'));\n let xml=`<c:comments xmlns:c=\"${S}\"><c:authors><c:author>  雪 &amp; Co  </c:author></c:authors><c:commentList><c:comment ref=\"B9\" authorId=\"0\"><c:text><c:r><c:rPr><c:b/><c:color rgb=\"FFFF0000\"/></c:rPr><c:t xml:space=\"preserve\"> A&amp; </c:t></c:r><c:r><c:t>😀</c:t></c:r></c:text></c:comment><c:comment ref=\"A1\" authorId=\"0\"><c:text><c:t/></c:text></c:comment></c:commentList></c:comments>`;\n const {utf16}=await import('../fixtures/admission.ts');p.set(comments,utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?>'+xml));const before=p.toBytes(),out=inspect(p);expect(out.comments).toEqual([{reference:'B9',authorId:0,author:'  雪 & Co  ',text:' A& 😀'},{reference:'A1',authorId:0,author:'  雪 & Co  ',text:''}]);expect(out.vmlRelationship!.id).toBe('anysvml');expect(p.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "inspect",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.text().replace().replace",
+        "p.toBytes",
+        "utf16"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 29,
+      "title": "external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.names().map(n=>[n,p.get(n)])).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "for(const mutate of [\n  (p:api.OpcPackage)=>p.set(rels,p.text(rels).replace('Id=\"comments\"','Id=\"comments\" TargetMode=\"External\"')),\n  (p:api.OpcPackage)=>p.set(rels,p.text(rels).replace('Id=\"anysvml\"','Id=\"anysvml\" TargetMode=\"External\"')),\n  (p:api.OpcPackage)=>addRelationship(p,sheet,R+'/comments','../comments/comment1.xml',"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n for(const mutate of [\n  (p:api.OpcPackage)=>p.set(rels,p.text(rels).replace('Id=\"comments\"','Id=\"comments\" TargetMode=\"External\"')),\n  (p:api.OpcPackage)=>p.set(rels,p.text(rels).replace('Id=\"anysvml\"','Id=\"anysvml\" TargetMode=\"External\"')),\n  (p:api.OpcPackage)=>addRelationship(p,sheet,R+'/comments','../comments/comment1.xml',{id:'second'}),\n  (p:api.OpcPackage)=>addRelationship(p,sheet,R+'/vmlDrawing','../drawings/commentsDrawing1.vml',{id:'second'}),\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace('r:id=\"anysvml\"','r:id=\"missing\"')),\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace(/<legacyDrawing[^>]*\\/>/,'')),\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace('</worksheet>',`<legacyDrawing xmlns:r=\"${R}\" r:id=\"anysvml\"/></worksheet>`)),\n  (p:api.OpcPackage)=>p.set(rels,p.text(rels).replace('/vmlDrawing','/drawing')),\n  (p:api.OpcPackage)=>p.delete(vml),\n  (p:api.OpcPackage)=>p.delete(comments),\n ]){const p=await fixture();mutate(p);const before=p.names().map(n=>[n,p.get(n)]);expect(()=>inspect(p)).toThrow();expect(p.names().map(n=>[n,p.get(n)])).toEqual(before);}\n}",
+      "calls": [
+        "addRelationship",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "inspect",
+        "mutate",
+        "p.delete",
+        "p.get",
+        "p.names",
+        "p.names().map",
+        "p.set",
+        "p.text",
+        "p.text().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:wrong expanded namespaces and part content types never fall back to local-name inspection",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 44,
+      "title": "wrong expanded namespaces and part content types never fall back to local-name inspection",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "for(const mutate of [\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace(S,'urn:wrong')),\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace('xmlns:r=\"'+R+'\"','xmlns:r=\"urn:wrong\"')),\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace('r:id=\"anysvml\"','id=\"anysvml\"')),\n  (p:api.OpcPackage)=>p.set(comments,p.text(comments).replace(S,'urn:wrong')),\n  (p:api.OpcPackage)=>p.set(comments,p.text(comments).replace('ref=\"A2\"','xmlns:q=\"urn:wrong\" q:ref=\"A2\"')),\n  (p:api.OpcPackage)=>p.set('[Content_Types].xml',p.text('[Content_Types].xml').replace(C,'application/xml')),\n  (p:api.OpcPackage)=>p.set('[Content_Types].xml',p.text('[Content_Types].xml').replace('application/vnd.openxmlformats-officedocument.vmlDrawing','application/xml')),\n ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n for(const mutate of [\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace(S,'urn:wrong')),\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace('xmlns:r=\"'+R+'\"','xmlns:r=\"urn:wrong\"')),\n  (p:api.OpcPackage)=>p.set(sheet,p.text(sheet).replace('r:id=\"anysvml\"','id=\"anysvml\"')),\n  (p:api.OpcPackage)=>p.set(comments,p.text(comments).replace(S,'urn:wrong')),\n  (p:api.OpcPackage)=>p.set(comments,p.text(comments).replace('ref=\"A2\"','xmlns:q=\"urn:wrong\" q:ref=\"A2\"')),\n  (p:api.OpcPackage)=>p.set('[Content_Types].xml',p.text('[Content_Types].xml').replace(C,'application/xml')),\n  (p:api.OpcPackage)=>p.set('[Content_Types].xml',p.text('[Content_Types].xml').replace('application/vnd.openxmlformats-officedocument.vmlDrawing','application/xml')),\n ]){const p=await fixture();mutate(p);const before=p.toBytes();expect(()=>inspect(p)).toThrow();expect(p.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "inspect",
+        "mutate",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:invalid duplicate and non-cell comment references or author indices refuse without partial lists",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 56,
+      "title": "invalid duplicate and non-cell comment references or author indices refuse without partial lists",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 57,
+          "expression": "for(const [from,to]of [\n  ['ref=\"A3\"','ref=\"A2\"'],...['A0','XFE1','A1048577','A1:B2','$A$1','a2','A02','Sheet1!A1',' A2 '].map(ref=>['ref=\"A2\"',`ref=\"$"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n for(const [from,to]of [\n  ['ref=\"A3\"','ref=\"A2\"'],...['A0','XFE1','A1048577','A1:B2','$A$1','a2','A02','Sheet1!A1',' A2 '].map(ref=>['ref=\"A2\"',`ref=\"${ref}\"`]),\n  ...['-1','1','NaN','00','0.5','9007199254740992'].map(id=>['authorId=\"0\"',`authorId=\"${id}\"`]),\n ]){const p=await fixture();p.set(comments,p.text(comments).replace(from!,to!));const before=p.toBytes();expect(()=>inspect(p)).toThrow();expect(p.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        ".map",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "inspect",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:unknown comment content phonetics nested text and malformed rich runs refuse instead of returning partial text",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 63,
+      "title": "unknown comment content phonetics nested text and malformed rich runs refuse instead of returning partial text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 64,
+          "expression": "for(const [from,to]of [\n  ['</comments>','<extLst/></comments>'],['<authors>','<authors><unknown/>'],['<commentList>','<commentList/><commentList>'],['<text><t>','<text><rPh><t>hidden</t></rPh><t>'],['<text><t>','<text><unknown/> <t>'],['<t>This','<t><b/>This'],['<text><t>','<text><t/> <t>'],['<text><t>','<text><r><unknown/></r><t>'],['<text><t>','<text><!--hidden--><t>'],\n ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n for(const [from,to]of [\n  ['</comments>','<extLst/></comments>'],['<authors>','<authors><unknown/>'],['<commentList>','<commentList/><commentList>'],['<text><t>','<text><rPh><t>hidden</t></rPh><t>'],['<text><t>','<text><unknown/> <t>'],['<t>This','<t><b/>This'],['<text><t>','<text><t/> <t>'],['<text><t>','<text><r><unknown/></r><t>'],['<text><t>','<text><!--hidden--><t>'],\n ]){const p=await fixture();p.set(comments,p.text(comments).replace(from!,to!));const before=p.toBytes();expect(()=>inspect(p)).toThrow();expect(p.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "inspect",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:fresh inspections observe live metadata changes and protection does not turn reads into mutations",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 69,
+      "title": "fresh inspections observe live metadata changes and protection does not turn reads into mutations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inspect(p).comments[0]!.text).toBe('changed')",
+        "expect(first.comments[0]!.text).toBe(textA)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).vmlRelationship!.part).toBe(vml)",
+        "expect(p.toBytes()).toEqual(opaque)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n const p=await fixture(),first=inspect(p);p.set(comments,p.text(comments).replace(textA,'changed'));p.set(sheet,p.text(sheet).replace('</worksheet>','<sheetProtection sheet=\"1\"/></worksheet>'));const before=p.toBytes();expect(inspect(p).comments[0]!.text).toBe('changed');expect(first.comments[0]!.text).toBe(textA);expect(p.toBytes()).toEqual(before);\n p.set(vml,'opaque non-XML drawing payload');const opaque=p.toBytes();expect(inspect(p).vmlRelationship!.part).toBe(vml);expect(p.toBytes()).toEqual(opaque);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "inspect",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:bounded worksheet-comment inputs refuse oversized XML comment counts and invalid part arguments",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 74,
+      "title": "bounded worksheet-comment inputs refuse oversized XML comment counts and invalid part arguments",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>inspect(p,part as string)).toThrow()",
+        "expect(()=>inspect(p)).toThrow(expect.objectContaining({code:'xlsx-comments-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(large)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 75,
+          "expression": "for(const part of ['', '../xl/worksheets/sheet1.xml','/xl/worksheets/sheet1.xml','word/document.xml',null])expect(()=>inspect(p,part as string)).toThrow();"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n const p=await fixture();for(const part of ['', '../xl/worksheets/sheet1.xml','/xl/worksheets/sheet1.xml','word/document.xml',null])expect(()=>inspect(p,part as string)).toThrow();\n p.set(comments,`<comments xmlns=\"${S}\"><authors><author>A</author></authors><commentList>${Array.from({length:10001},(_,i)=>`<comment ref=\"A${i+1}\" authorId=\"0\"><text><t>x</t></text></comment>`).join('')}</commentList></comments>`);const before=p.toBytes();expect(()=>inspect(p)).toThrow(expect.objectContaining({code:'xlsx-comments-unsupported'}));expect(p.toBytes()).toEqual(before);\n p.set(comments,`<comments xmlns=\"${S}\">`+' '.repeat(8*1024*1024)+'</comments>');const large=p.toBytes();expect(()=>inspect(p)).toThrow();expect(p.toBytes()).toEqual(large);\n}",
+      "calls": [
+        ".repeat",
+        "Array.from",
+        "Array.from().join",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "inspect",
+        "p.set",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:VML-only and empty comment parts report their distinct graphs without manufacturing comments",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 80,
+      "title": "VML-only and empty comment parts report their distinct graphs without manufacturing comments",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inspect(p).comments).toEqual([])",
+        "expect(inspect(p).commentsRelationship).toBeNull()",
+        "expect(inspect(p).vmlRelationship!.part).toBe(vml)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(q).comments).toEqual([])",
+        "expect(inspect(q).commentsRelationship!.part).toBe(comments)",
+        "expect(q.toBytes()).toEqual(empty)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n const p=await fixture();p.set(rels,p.text(rels).replace(/<Relationship [^>]*Id=\"comments\"[^>]*\\/>/,''));const before=p.toBytes();expect(inspect(p).comments).toEqual([]);expect(inspect(p).commentsRelationship).toBeNull();expect(inspect(p).vmlRelationship!.part).toBe(vml);expect(p.toBytes()).toEqual(before);\n const q=await fixture();q.set(comments,`<comments xmlns=\"${S}\"><authors/><commentList/></comments>`);const empty=q.toBytes();expect(inspect(q).comments).toEqual([]);expect(inspect(q).commentsRelationship!.part).toBe(comments);expect(q.toBytes()).toEqual(empty);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "fixture",
+        "inspect",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "q.set",
+        "q.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:relationship lookalike attributes and fragment targets refuse without changing part payloads",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 85,
+      "title": "relationship lookalike attributes and fragment targets refuse without changing part payloads",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.names().map(n=>[n,p.get(n)])).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 86,
+          "expression": "for(const [from,to]of [\n  ['Id=\"anysvml\"','xmlns:q=\"urn:q\" q:Id=\"anysvml\"'],\n  ['Id=\"anysvml\"','Id=\"anysvml\" xmlns:q=\"urn:q\" q:Id=\"extra\"'],\n  ['Target=\"/xl/comments/comment1.xml\"','Target=\"/xl/comments/comment1.xml#fragment\"'],\n  ['Target=\"/xl/drawings/commentsDrawing1.vml\"','Target=\"/xl/drawings/commentsDrawing1.vml?query\"'],\n ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n for(const [from,to]of [\n  ['Id=\"anysvml\"','xmlns:q=\"urn:q\" q:Id=\"anysvml\"'],\n  ['Id=\"anysvml\"','Id=\"anysvml\" xmlns:q=\"urn:q\" q:Id=\"extra\"'],\n  ['Target=\"/xl/comments/comment1.xml\"','Target=\"/xl/comments/comment1.xml#fragment\"'],\n  ['Target=\"/xl/drawings/commentsDrawing1.vml\"','Target=\"/xl/drawings/commentsDrawing1.vml?query\"'],\n ]){const p=await fixture();p.set(rels,p.text(rels).replace(from!,to!));const before=p.names().map(n=>[n,p.get(n)]);expect(()=>inspect(p)).toThrow();expect(p.names().map(n=>[n,p.get(n)])).toEqual(before);}\n}",
+      "calls": [
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "inspect",
+        "p.get",
+        "p.names",
+        "p.names().map",
+        "p.set",
+        "p.text",
+        "p.text().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:refused metadata can be corrected for a later inspection without changing earlier detached results",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "line": 94,
+      "title": "refused metadata can be corrected for a later inspection without changing earlier detached results",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow(expect.objectContaining({code:'xlsx-comments-unsupported'}))",
+        "expect(p.toBytes()).toEqual(invalid)",
+        "expect(inspect(p).comments[0]!.text).toBe('Corrected')",
+        "expect(first.comments[0]!.text).toBe(textA)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+      "body": "{\n const p=await fixture(),original=p.text(comments),first=inspect(p);p.set(comments,original.replace('authorId=\"0\"','authorId=\"9\"'));const invalid=p.toBytes();expect(()=>inspect(p)).toThrow(expect.objectContaining({code:'xlsx-comments-unsupported'}));expect(p.toBytes()).toEqual(invalid);p.set(comments,original.replace(textA,'Corrected'));expect(inspect(p).comments[0]!.text).toBe('Corrected');expect(first.comments[0]!.text).toBe(textA);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "inspect",
+        "original.replace",
+        "p.set",
+        "p.text",
+        "p.toBytes"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {

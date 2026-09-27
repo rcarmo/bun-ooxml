@@ -369,7 +369,8 @@ chains are preserved, not refreshed or certified. A recalculation flag or receip
 does not establish their freshness. This API does not calculate formulas. A missing
 cached value is not zero, a current answer or a successful calculation.
 
-Existing comment and VML relationships can be inspected with the OPC/XML readers;
+Use `inspectWorksheetComments(pkg, worksheetPart)` for existing comment text,
+authors and separate comment/VML part references;
 see [comment/VML inspection](../contracts/comment-vml-inspection.md). This is a
 read-only check. Comment-aware row shifting, VML editing and the shared limited
 numeric-editor policy are not implemented by that check.

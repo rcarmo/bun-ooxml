@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 825,
+  "nativeDeclarations": 837,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 598,
+  "withoutStagingCount": 610,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4600,6 +4600,66 @@
       "id": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:read-only graph predicates detect input or opaque VML payload mutation",
       "path": "tests/unit/xlsx-comment-vml-bindings.test.ts",
       "sourceSha256": "00698663d9e370f1b16fb5d20938b33581aea5a98c2d95e4f7ab4cf3467cd444"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:native comment inspection returns detached exact authors refs text and separate VML relationship without writes",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:empty comment graphs and comments without VML remain distinct from malformed dependencies",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:rich text alias and UTF16 comment parts read in document order without normalising original bytes",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:wrong expanded namespaces and part content types never fall back to local-name inspection",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:invalid duplicate and non-cell comment references or author indices refuse without partial lists",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:unknown comment content phonetics nested text and malformed rich runs refuse instead of returning partial text",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:fresh inspections observe live metadata changes and protection does not turn reads into mutations",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:bounded worksheet-comment inputs refuse oversized XML comment counts and invalid part arguments",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:VML-only and empty comment parts report their distinct graphs without manufacturing comments",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:relationship lookalike attributes and fragment targets refuse without changing part payloads",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-comments.test.ts:refused metadata can be corrected for a later inspection without changing earlier detached results",
+      "path": "tests/unit/xlsx-comments.test.ts",
+      "sourceSha256": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03"
     },
     {
       "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:static formula analysis counts references without interpreting strings, functions or exponents as cells",
