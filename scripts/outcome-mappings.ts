@@ -81,6 +81,7 @@ export async function outcomeMappingReport(){
  const root=process.cwd();
  // Fixed registrations prevent removing a ledger or shrinking its scope in JSON.
  const registrations=[
+  {name:'tracking-settings',tests:['tests/unit/docx-tracking-settings.test.ts','tests/unit/tracking-settings-outcomes.test.ts'],canonical:['workflows/docx/tracked-workflow.feature','workflows/docx/tracking-settings.feature'],sources:['src/docx/tracking-settings.ts','src/docx/index.ts','src/opc/package.ts','src/opc/graph.ts','src/xml/index.ts','tests/acceptance/tracking-settings.ts','tests/acceptance/tracking-outcomes.ts','tests/acceptance/steps.ts']},
   {name:'slide-order',tests:['tests/unit/pptx-slide-order.test.ts'],canonical:["workflows/pptx/slide-order.feature"],sources:['tests/acceptance/slide-order.ts','src/pptx/index.ts','src/pptx/slide-order.ts']},
   {name:'effective-formatting',tests:['tests/unit/docx-effective-formatting.test.ts'],canonical:["workflows/docx/effective-formatting.feature"],sources:['tests/acceptance/effective-formatting.ts','src/docx/index.ts','src/docx/effective-formatting.ts']},
   {name:'xml-values',tests:['tests/unit/xml.test.ts'],canonical:["workflows/xml/editing.feature","workflows/xml/parsing.feature"],sources:['tests/acceptance/core.ts','tests/acceptance/xml-values.ts','src/xml/index.ts','src/errors.ts']},

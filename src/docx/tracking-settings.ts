@@ -61,7 +61,7 @@ export function setTrackingEnabled(pkg:OpcPackage,enabled:boolean):TrackingSetti
  }
  const before=new Map(pkg.names().map(n=>[n,pkg.get(n)!]));
  return pkg.transaction(()=>{
-  if(state.part)pkg.set(part!,next);else{addPart(pkg,part!,next,MIME);addRelationship(pkg,pkg.mainPart(),REL,'settings.xml');}
+  if(state.part){const bytes=pkg.get(part!)!;pkg.set(part!,bytes[0]===239&&bytes[1]===187&&bytes[2]===191?'\ufeff'+next:next);}else{addPart(pkg,part!,next,MIME);addRelationship(pkg,pkg.mainPart(),REL,'settings.xml');}
   if(readTrackingEnabled(pkg)!==enabled)fail('Tracking setting did not survive the edit');
   pkg.toBytes();
   return {changed:1,changedParts:pkg.names().filter(n=>!before.has(n)||!Buffer.from(before.get(n)!).equals(pkg.get(n)!))};

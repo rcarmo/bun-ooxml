@@ -20,14 +20,14 @@ alone does not count as a tested requirement.
 
 ## Complete shared inventory
 
-The project loads all 46 canonical features from the pinned workflow registry.
+The project loads all 47 canonical features from the pinned workflow registry.
 Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 229 scenarios / 562 cases; 526 implemented and 36 planned.
+- Shared: 236 scenarios / 586 cases; 550 implemented and 36 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 238 scenarios / 573 cases; 526 implemented and 47 planned.
+- Combined: 245 scenarios / 597 cases; 550 implemented and 47 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -35,9 +35,11 @@ notes below describe their historical loaded counts. That inventory change prese
 
 The [tracking preference API](../contracts/tracking-settings.md) subsequently
 activated only `@id-docx-go-track-author-toggle`. Tests retain the original 525-case
-identity hash after removing that one explicit addition. The twelve new native
-declarations cover the getter, persistence and refusal behaviour, but have no
-bounded per-outcome mappings yet. The 472 prior records remain unchanged.
+identity hash after removing that one explicit addition. Shared v0.28 adds seven settings scenarios / 24 cases. Bun executes all 24 through
+saved-output, exact-byte, refusal and rollback assertions. The new settings ledger
+maps fourteen declarations (twelve native tests and two wrappers), all partial
+with explicit gaps. The 472 prior records remain unchanged; the total is now 486.
+The new custody cases also exposed and fixed dropped UTF-8 BOM bytes.
 
 ## Format and operation layout
 

@@ -506,6 +506,20 @@
         "@id-python-word-anchor-discover-insert",
         "@id-python-word-anchor-document-map"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/tracking-settings.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-persistence",
+        "@id-docx-tracking-settings-custody",
+        "@id-docx-tracking-settings-no-op",
+        "@id-docx-tracking-settings-refusal",
+        "@id-docx-tracking-settings-rollback",
+        "@id-docx-tracking-settings-plain-edit",
+        "@id-docx-tracking-settings-author-refusal"
+      ]
     }
   ]
 }

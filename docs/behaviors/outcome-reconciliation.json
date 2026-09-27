@@ -4,32 +4,41 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 975,
-  "mappedDeclarations": 472,
+  "totalDeclarations": 979,
+  "mappedDeclarations": 486,
   "sourceSha256": {
+    "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+    "tests/unit/tracking-settings-outcomes.test.ts": "3c3e98c041670f9d2e400129fca532a83a2b872d4728b1f603f6913de7bdd12b",
+    "src/docx/tracking-settings.ts": "90cd9885ddf07129c8281e72f9ff79c6e24603de31fa0bcc74d27a349f08898a",
+    "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
+    "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
+    "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
+    "workflows/docx/tracking-settings.feature": "ba4621e6acd4b892b5a214d57d3d9057b568135d0f21a5ff40fc69b4b6417e9e",
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
     "src/pptx/index.ts": "6912aedc6e09726c4e3dc57e34c0057f3873c858bb6fa843f171bc1e2d79cded",
     "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
-    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
-    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e",
     "tests/unit/docx-effective-formatting.test.ts": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
     "tests/acceptance/effective-formatting.ts": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f",
-    "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
     "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
     "workflows/docx/effective-formatting.feature": "8f1f31180b9e31dfff4e30ecfd9c9c4596edfaff85561cd53e775135cf748b90",
     "tests/unit/xml.test.ts": "ed4aa6c8d7fee17f424c9d60d1a0f5f2e642ef4849c49e55cfdd7875879fa217",
     "tests/acceptance/core.ts": "98b0f53d5da7ac474087eb0195ab077329f3f20fa751264e7270c2f1e46d2448",
     "tests/acceptance/xml-values.ts": "bcad16fc6f9bf2a11fe45ccf0cab19f188540a4433b948bed294acbce5393b48",
-    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
     "workflows/xml/editing.feature": "a9c308f9995d7a335b3d96054c2eb8fd8286937c95a46bd07b26428c63292ff3",
     "workflows/xml/parsing.feature": "350edcdfa0dc1206f9f5165cae93ba41c12b6974ee21e71cd3329ed2a82438ff",
     "tests/unit/pptx.test.ts": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
     "tests/acceptance/pptx.ts": "7e4ab7286825d0a5aeb3cda3284bb1afa39e6a9986eca45d4432ad3eaab31e1f",
     "tests/acceptance/pptx-custody.ts": "d3814ec9b812385a1a6894e239cb5cdee6f46bed16eefe30c1d2e193472f4425",
-    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
     "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
     "scripts/acceptance.ts": "e4ad64e03f133ceaa362d6f14f7785ecc6517791fd48b3a28e8243f0eeb8dde4",
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
@@ -37,7 +46,6 @@
     "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
     "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
     "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
-    "tests/acceptance/steps.ts": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687",
     "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
     "workflows/pptx/notes.feature": "6980daafe08bb43e7ba2f73807a402a3ebabe239f0d41bad81b7c09ca7355f41",
     "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
@@ -98,7 +106,6 @@
     "tests/unit/xlsx-cell-style.test.ts": "955f5eee83026179fd957da23b44f75d8bd51328a131bb07ec3afc41f2a73732",
     "tests/acceptance/cell-style.ts": "6509b7a9876ec52a2df3d1405e3a6b085f999cd0a465140af1fcbb21b39a62a3",
     "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e",
-    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "workflows/xlsx/cell-style.feature": "821a4bdda8541d2afd48873221246451c3ebd24273a20184fa8ea14900c76b7a",
     "tests/unit/pptx-text-box.test.ts": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53",
     "tests/acceptance/text-box.ts": "ec053673d9309fcc5dac36ddbac0ca5684f3bd19d99efaac8e0010f2b0d335a3",
@@ -162,6 +169,30 @@
     "workflows/xlsx/formula-references.feature": "03aa16e68b314e3f2743a4c34235803e479809bc8414f3fa5e892934b045720e"
   },
   "ledgers": [
+    {
+      "name": "tracking-settings",
+      "scopePaths": [
+        "tests/unit/docx-tracking-settings.test.ts",
+        "tests/unit/tracking-settings-outcomes.test.ts"
+      ],
+      "mappedDeclarations": 14,
+      "sourceSha256": {
+        "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+        "tests/unit/tracking-settings-outcomes.test.ts": "3c3e98c041670f9d2e400129fca532a83a2b872d4728b1f603f6913de7bdd12b",
+        "src/docx/tracking-settings.ts": "90cd9885ddf07129c8281e72f9ff79c6e24603de31fa0bcc74d27a349f08898a",
+        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
+        "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
+        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
+        "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
+        "workflows/docx/tracking-settings.feature": "ba4621e6acd4b892b5a214d57d3d9057b568135d0f21a5ff40fc69b4b6417e9e"
+      }
+    },
     {
       "name": "slide-order",
       "scopePaths": [
@@ -235,7 +266,7 @@
         "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
         "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
         "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
-        "tests/acceptance/steps.ts": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687",
+        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "workflows/pptx/notes.feature": "6980daafe08bb43e7ba2f73807a402a3ebabe239f0d41bad81b7c09ca7355f41",
         "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
@@ -265,7 +296,7 @@
         "tests/acceptance/cell-properties.ts": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d",
         "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687",
+        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
         "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
         "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
         "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
@@ -324,7 +355,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/body-anchors.ts": "6c340f7d86eb2d0f00d74e5699f64d2631f2cabfec6f19ca3185e8326ea25505",
-        "tests/acceptance/steps.ts": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687",
+        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -349,7 +380,7 @@
         "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
-        "tests/acceptance/steps.ts": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687",
+        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -593,7 +624,7 @@
         "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
         "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687",
+        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
         "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
@@ -615,7 +646,7 @@
         "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
         "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687",
+        "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
@@ -860,18 +891,6 @@
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / stale table and cell handles refuse after document mutation while fresh handles stay live",
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / validates table dimensions with bounded rectangular authoring",
     "bun:tests/unit/docx-tables.test.ts:docx Document tables / passes the DOCX table acceptance feature with dedicated bindings",
-    "bun:tests/unit/docx-tracking-settings.test.ts:tracking author toggle follows the shared getter sequence without creating revision markup",
-    "bun:tests/unit/docx-tracking-settings.test.ts:enabled setting persists through file reopen with session-only author and complete graph custody",
-    "bun:tests/unit/docx-tracking-settings.test.ts:custom settings path and prefix retain sibling XML bytes while insertion obeys settings order",
-    "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
-    "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
-    "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
-    "bun:tests/unit/docx-tracking-settings.test.ts:invalid authors and stale main snapshots refuse without touching settings or invoking coercion",
-    "bun:tests/unit/docx-tracking-settings.test.ts:write and serialization faults restore settings graph plus the previous session author",
-    "bun:tests/unit/docx-tracking-settings.test.ts:UTF16 settings retain encoding through enable disable and reopen",
-    "bun:tests/unit/docx-tracking-settings.test.ts:canonical toggle selects one case and detects incorrect intermediate and final values",
-    "bun:tests/unit/docx-tracking-settings.test.ts:the saved preference never silently converts ordinary Bun text mutations into tracked replacements",
-    "bun:tests/unit/docx-tracking-settings.test.ts:a fault after settings relationship creation rolls back all metadata and author state",
     "bun:tests/unit/docx.test.ts:docx Document / opens from a path or bytes and save() never rewrites the opened source path implicitly",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/docx.test.ts:docx Document / replaces exact cross-run text without reconstructing unaffected runs or formatting",
@@ -989,7 +1008,7 @@
     "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
     "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
     "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
-    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 562 shared cases plus eleven local-only cases with only the reviewed tracking-toggle activation",
+    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 586 shared cases plus eleven local-only cases with only reviewed tracking activations",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
@@ -1033,6 +1052,8 @@
     "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
     "bun:tests/unit/tracked-workflow.test.ts:caller mutation after dispatch cannot change the requested tracking mode or revision metadata",
     "bun:tests/unit/tracked-workflow.test.ts:destination change after staging refuses without publishing staged revisions",
+    "bun:tests/unit/tracking-settings-mappings.test.ts:tracking mappings cover fourteen declarations with bounded case keys and preserve all472 older records",
+    "bun:tests/unit/tracking-settings-mappings.test.ts:tracking mapping omissions stale source unknown cases and altered direct assertions refuse",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word wording plus the reviewed tracking toggle executes 29 IDs and 66 cases with five profiles planned",
     "bun:tests/unit/word-neutral-bindings.test.ts:Word actor changes preserve default execution identities and every prior mapping record",
@@ -1183,6 +1204,440 @@
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 reconciliation retains direct refusal predicates review flags and uncounted helper separation"
   ],
   "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:tracking author toggle follows the shared getter sequence without creating revision markup",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-track-author-toggle"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.trackChangesEnabled).toBe(false)",
+        "expect(d.trackAuthor).toBe('')",
+        "expect(d.enableTracking('Test Author').changed).toBe(1)",
+        "expect(d.trackChangesEnabled).toBe(true)",
+        "expect(d.trackAuthor).toBe('Test Author')",
+        "expect(d.trackAuthor).toBe('New Author')",
+        "expect(d.package.toBytes()).toEqual(enabled)",
+        "expect(d.disableTracking().changed).toBe(1)",
+        "expect(held.text).toBe('Retained text')",
+        "expect(internal(d).text(internal(d).mainPart())).not.toContain('trackRevisions')"
+      ],
+      "outcomes": [
+        "Getter sequence, retained author after disable, unchanged held text; no authored revisions in main text."
+      ],
+      "gaps": [
+        "No output-path reopen or independent rendering in this declaration."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:enabled setting persists through file reopen with session-only author and complete graph custody",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-persistence"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(links).toHaveLength(1)",
+        "expect(getContentType(p,part)).toBe(MIME)",
+        "expect(tree.root.localName).toBe('settings')",
+        "expect(flag).toHaveLength(1)",
+        "expect(attribute(flag[0]!,'val',W)).toBe('1')",
+        "expect(p.text(part)).not.toContain('Reviewer')",
+        "expect(opened.trackChangesEnabled).toBe(true)",
+        "expect(opened.trackAuthor).toBe('')",
+        "expect(opened.paragraphs[0]!.text).toBe('Retained text')",
+        "expect((await Document.open(path)).trackChangesEnabled).toBe(false)"
+      ],
+      "outcomes": [
+        "Enabled output path reopen, empty author, relationship/type, explicit flag, disabled path reopen and unrelated-member bytes."
+      ],
+      "gaps": [
+        "Does not independently render or inspect Office UI; graph checks and disabled reopen are scoped."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:custom settings path and prefix retain sibling XML bytes while insertion obeys settings order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(internal(d).relationships('word/document.xml').filter(r=>r.type===REL).map(r=>r.resolved)).toEqual([PART])",
+        "expect(next.replace(/<w:trackRevisions[^>]*\\/>/,'')).toBe(original)",
+        "expect(parseXml(next).root.children.map(n=>n.localName)).toEqual(['zoom','revisionView','trackRevisions','doNotTrackMoves','compat'])",
+        "expect((await Document.open(d.package.toBytes())).trackChangesEnabled).toBe(true)"
+      ],
+      "outcomes": [
+        "Custom path and namespace retain exact sibling source while inserted flag follows settings order."
+      ],
+      "gaps": [
+        "UTF-16 and BOM rows covered separately; byte reopen only in this declaration."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-no-op"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(empty.disableTracking()).toEqual({changed:0,changedParts:[]})",
+        "expect(empty.package.toBytes()).toEqual(before)",
+        "expect(d.trackChangesEnabled).toBe(on)",
+        "expect((on?d.enableTracking('Reviewer'):d.disableTracking()).changed).toBe(0)",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect((await Document.open(self.package.toBytes())).trackChangesEnabled).toBe(true)"
+      ],
+      "outcomes": [
+        "Absent false state and seven on/off lexical forms retain byte-identical no-op archives; empty settings root supports enable."
+      ],
+      "gaps": [
+        "Lexical rows are a native loop, not distinct inventory declarations; no separate saved paths."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow()",
+        "expect(()=>d.disableTracking()).toThrow()",
+        "expect(d.trackAuthor).toBe('Previous')",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect(unlocked.trackChangesEnabled).toBe(true)"
+      ],
+      "outcomes": [
+        "Protected, duplicate, malformed, misplaced and out-of-order settings refuse enable/disable without author or byte changes."
+      ],
+      "gaps": [
+        "Only stated malformed combinations; path outputs and arbitrary extensions untested."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow()",
+        "expect(d.trackAuthor).toBe('')",
+        "expect(d.package.toBytes()).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "External, duplicate, orphan, wrong-root/type, shared-owner and name-collision graphs refuse enable atomically."
+      ],
+      "gaps": [
+        "This declaration attempts enable only; dual enable/disable is tested by shared acceptance."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:invalid authors and stale main snapshots refuse without touching settings or invoking coercion",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-author-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.enableTracking(value as any)).toThrow()",
+        "expect(()=>d.setTrackAuthor(value as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.trackAuthor).toBe('')",
+        "expect(called).toBe(false)",
+        "expect(()=>d.enableTracking('Reviewer')).toThrow()",
+        "expect(()=>d.disableTracking()).toThrow()",
+        "expect(p.toBytes()).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "Blank, XML-unsafe, invalid-type authors and stale main snapshots refuse with exact bytes; coercion not called."
+      ],
+      "gaps": [
+        "Native author/setter and stale-snapshot cases exceed the shared invalid-author rows; no generic proxy guarantee."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:write and serialization faults restore settings graph plus the previous session author",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow('injected')",
+        "expect(d.trackAuthor).toBe('Previous')",
+        "expect(d.trackChangesEnabled).toBe(false)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Retained text')"
+      ],
+      "outcomes": [
+        "Injected write and serialization faults restore archive and prior author for absent/existing settings."
+      ],
+      "gaps": [
+        "Native fault timing differs from explicit shared part/relationship stages; no crash-durability evidence."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:UTF16 settings retain encoding through enable disable and reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-custody"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...d.package.get(PART)!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.trackChangesEnabled).toBe(true)",
+        "expect((await Document.open(reopened.package.toBytes())).trackChangesEnabled).toBe(false)"
+      ],
+      "outcomes": [
+        "UTF-16 settings retain BOM, enabled/disabled state after reopen and unrelated-member bytes."
+      ],
+      "gaps": [
+        "Byte reopen only; no output-path or original sibling-XML assertion in this declaration."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:canonical toggle selects one case and detects incorrect intermediate and final values",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-track-author-toggle"
+      ],
+      "caseKeys": [
+        "@id-docx-go-track-author-toggle"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(bad.counts.steps.failed).toBe(1)"
+      ],
+      "outcomes": [
+        "Canonical getter case executes once; altered expected values and corrupted author/state fail without undefined steps."
+      ],
+      "gaps": [
+        "Wrapper evidence is getter-only; no saved settings or refusal credit."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:the saved preference never silently converts ordinary Bun text mutations into tracked replacements",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-plain-edit"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(opened.trackChangesEnabled).toBe(true)",
+        "expect(opened.paragraphs[0]!.text).toBe('Explicit plain edit')",
+        "expect(inspectRevisions(internal(opened))).toEqual({revisions:[],unsupported:[]})",
+        "expect(opened.trackAuthor).toBe('')"
+      ],
+      "outcomes": [
+        "Enabled preference persists alongside ordinary text edit with no revisions after reopen and empty author."
+      ],
+      "gaps": [
+        "This native declaration omits opaque-part byte assertions; shared acceptance adds them."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/docx-tracking-settings.test.ts:a fault after settings relationship creation rolls back all metadata and author state",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow('injected relationship write')",
+        "expect(d.trackAuthor).toBe('Previous')",
+        "expect(d.trackChangesEnabled).toBe(false)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(p.names()).not.toContain('word/settings.xml')"
+      ],
+      "outcomes": [
+        "Fault after relationship write restores exact archive, prior author and absent settings part."
+      ],
+      "gaps": [
+        "Only late relationship-write stage; no process-crash test."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/tracking-settings-outcomes.test.ts:all seven shared tracking settings contracts execute every one of 24 expanded cases",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-persistence",
+        "@id-docx-tracking-settings-custody",
+        "@id-docx-tracking-settings-no-op",
+        "@id-docx-tracking-settings-refusal",
+        "@id-docx-tracking-settings-rollback",
+        "@id-docx-tracking-settings-plain-edit",
+        "@id-docx-tracking-settings-author-refusal"
+      ],
+      "caseKeys": [
+        "@id-docx-tracking-settings-persistence|{\"enabled\":\"true\"}",
+        "@id-docx-tracking-settings-persistence|{\"enabled\":\"false\"}",
+        "@id-docx-tracking-settings-custody|{\"layout\":\"custom-prefix\"}",
+        "@id-docx-tracking-settings-custody|{\"layout\":\"UTF-16\"}",
+        "@id-docx-tracking-settings-custody|{\"layout\":\"UTF-8-BOM\"}",
+        "@id-docx-tracking-settings-no-op|{\"state\":\"absent\",\"enabled\":\"false\"}",
+        "@id-docx-tracking-settings-no-op|{\"state\":\"on\",\"enabled\":\"true\"}",
+        "@id-docx-tracking-settings-no-op|{\"state\":\"off\",\"enabled\":\"false\"}",
+        "@id-docx-tracking-settings-no-op|{\"state\":\"true\",\"enabled\":\"true\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"protected\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"external\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"duplicate-link\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"orphan\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"wrong-content-type\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"duplicate-flag\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"wrong-order\"}",
+        "@id-docx-tracking-settings-refusal|{\"defect\":\"shared-owner\"}",
+        "@id-docx-tracking-settings-rollback|{\"stage\":\"part-write\"}",
+        "@id-docx-tracking-settings-rollback|{\"stage\":\"relationship-write\"}",
+        "@id-docx-tracking-settings-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-tracking-settings-plain-edit",
+        "@id-docx-tracking-settings-author-refusal|{\"author\":\"blank\"}",
+        "@id-docx-tracking-settings-author-refusal|{\"author\":\"XML-control\"}",
+        "@id-docx-tracking-settings-author-refusal|{\"author\":\"non-string\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(24)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "All seven shared scenarios execute exactly24 expanded cases with no failures, undefined or ambiguous steps."
+      ],
+      "gaps": [
+        "Runtime outcomes delegated to pinned acceptance bindings; no other consumer credit."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
+    {
+      "testId": "bun:tests/unit/tracking-settings-outcomes.test.ts:incorrect tracking persistence and ordinary-edit expected values fail observable assertions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-tracking-settings-persistence",
+        "@id-docx-tracking-settings-plain-edit"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong reopened flag/text expected values fail with no undefined or ambiguous steps."
+      ],
+      "gaps": [
+        "Controls mutate only persistence and plain-edit expectations, not every refusal stage."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "tracking-settings"
+    },
     {
       "testId": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",
       "status": "partial",

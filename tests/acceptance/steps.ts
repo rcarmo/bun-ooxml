@@ -34,6 +34,7 @@ import { bindings as slideOrderBindings } from './slide-order.ts';
 import { bindings as effectiveFormattingBindings } from './effective-formatting.ts';
 import { bindings as trackedWorkflowBindings, cleanupTrackedWorkflowFixtures } from './tracked-workflow.ts';
 import { bindings as trackingSettingsBindings } from './tracking-settings.ts';
+import {bindings as trackingOutcomeBindings,cleanupTrackingOutcomes} from './tracking-outcomes.ts';
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as docxModelBindings } from './docx-model.ts';
 import { bindings as appendRunBindings } from './append-run.ts';
@@ -63,7 +64,7 @@ import { bindings as xlsxCommentVmlBindings } from './xlsx-comment-vml.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupFontSize(),cleanupOpcCustody()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupFontSize(),cleanupOpcCustody()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -101,6 +102,7 @@ export const bindings: StepBinding[] = [
   ...effectiveFormattingBindings,
   ...trackedWorkflowBindings,
   ...trackingSettingsBindings,
+  ...trackingOutcomeBindings,
   ...createDocxBindings,
   ...docxModelBindings,
   ...appendRunBindings,

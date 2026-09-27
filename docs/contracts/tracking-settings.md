@@ -53,7 +53,14 @@ checks. `make office-oracles` validates enabled and disabled output packages wit
 the Open XML SDK. The SDK check covers schema validity; Office UI behaviour and
 automatic redline generation are untested.
 
-All twelve new native declarations remain outside the bounded mapping ledgers.
-The acceptance binding executes the existing shared getter scenario; stronger
-persistence and refusal outcomes need separate central contracts before they can
-receive per-outcome mappings. Other consumers receive no execution credit.
+Shared v0.28 adds seven [settings contracts](../../references/fixtures-ooxml/contracts/tracking-settings.md)
+with 24 cases. `tests/acceptance/tracking-outcomes.ts` saves and reopens outputs,
+checks exact sibling and unrelated bytes, retains UTF-8 BOM and UTF-16 encodings,
+and verifies same-state no-ops, dual refusals and rollback. The BOM case exposed
+and fixed a writer bug that dropped the UTF-8 marker.
+
+`docs/behaviors/tracking-settings-mappings.json` records fourteen declarations:
+twelve native tests and two shared-outcome wrappers. The getter wrapper selects
+one case and the settings wrapper selects 24; other associations are scenario-only.
+Every mapping retains explicit gaps and partial status. Python and Go receive no
+execution credit from these Bun results.
