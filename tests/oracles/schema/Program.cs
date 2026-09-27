@@ -6,6 +6,11 @@ using System.Security.Cryptography;
 using System.Text.Json;
 
 // Development oracle only. Never called from src/ or production operations.
+if (args.Length == 2 && args[0] == "--generate-multistory")
+{
+    Console.WriteLine(JsonSerializer.Serialize(new { schemaVersion = 1, producer = "DocumentFormat.OpenXml", version = typeof(OpenXmlElement).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion, files = MultistoryRevisions.Generate(args[1]) }));
+    return 0;
+}
 if (args.Length == 0) throw new ArgumentException("Provide explicit DOCX/PPTX/XLSX paths");
 var results = new List<object>();
 var failed = false;
@@ -37,7 +42,8 @@ foreach (var input in args)
             lastPrinted = properties.LastPrinted?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
         };
         var spreadsheetStyles = package is SpreadsheetDocument spreadsheet ? SpreadsheetStyleReader.Read(spreadsheet) : null;
-        result = new { file = Path.GetFileName(path), sha256 = before, errors, truncated = errors.Length > 200, coreProperties, spreadsheetStyles };
+        var wordStories = package is WordprocessingDocument word ? MultistoryRevisions.Read(word) : null;
+        result = new { file = Path.GetFileName(path), sha256 = before, errors, truncated = errors.Length > 200, coreProperties, spreadsheetStyles, wordStories };
     }
     catch (Exception e)
     {

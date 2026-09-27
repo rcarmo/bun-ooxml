@@ -136,6 +136,17 @@ All 681 earlier executed case identities remain; 46 cases are still planned.
 The SDK oracle checks one body source and both outputs, with a missing-name
 refusal control. See [paired run moves](../contracts/run-move-revisions.md).
 
+## Independent multistory revision evidence
+
+The optional Office oracle now uses the Open XML SDK to author a separate
+four-story revision source, direct accepted/rejected expectations and a
+schema-valid unsupported footnote sample. Native outputs must match independent
+story bytes and SDK semantic readback while preserving all unrelated/source bytes.
+Three schema-valid corruptions test text, formatting and move order. This work
+has no shared execution or mapping credit; the original multistory scenario
+stays planned until central registration and review. See the
+[multistory oracle](../contracts/multistory-oracle.md).
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

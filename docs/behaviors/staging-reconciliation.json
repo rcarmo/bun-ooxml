@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1101,
+  "nativeDeclarations": 1103,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 874,
+  "withoutStagingCount": 876,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4569,6 +4569,16 @@
       "id": "bun:tests/unit/heading-classification-mappings.test.ts:heading mapping missing assertions stale runtime pins and unknown keys refuse",
       "path": "tests/unit/heading-classification-mappings.test.ts",
       "sourceSha256": "f14a9bb128680da50bfb5fb00a06bf1125fd8a63af9b7d805afe800943e0be5e"
+    },
+    {
+      "id": "bun:tests/unit/multistory-oracle.test.ts:independent multistory evidence accepts exact four-story readback and rejects identity status omission and changed outcomes",
+      "path": "tests/unit/multistory-oracle.test.ts",
+      "sourceSha256": "c701ba4870f061863ce6ef7c32ff458b2c550f669960d213cbade976038f5367"
+    },
+    {
+      "id": "bun:tests/unit/multistory-oracle.test.ts:independent original current and unsupported reports have exact revision inventories and formatting positions",
+      "path": "tests/unit/multistory-oracle.test.ts",
+      "sourceSha256": "c701ba4870f061863ce6ef7c32ff458b2c550f669960d213cbade976038f5367"
     },
     {
       "id": "bun:tests/unit/nullable-cell-mappings.test.ts:nullable cell mappings select one shared case with partial native associations and retain prior records except explicit inventory totals",

@@ -4,7 +4,7 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 1101,
+  "totalDeclarations": 1103,
   "mappedDeclarations": 590,
   "sourceSha256": {
     "tests/unit/docx-revision-moves.test.ts": "acd5cbebe0e8be598c226c78bcf2eba2782cdeb2f12223abe364f2b08f699bb5",
@@ -1140,6 +1140,8 @@
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / refuses an acceptance run with only planned cases rather than passing vacuously",
     "bun:tests/unit/heading-classification-mappings.test.ts:eight direct-heading associations retain empty case keys and all486 prior mapping records",
     "bun:tests/unit/heading-classification-mappings.test.ts:heading mapping missing assertions stale runtime pins and unknown keys refuse",
+    "bun:tests/unit/multistory-oracle.test.ts:independent multistory evidence accepts exact four-story readback and rejects identity status omission and changed outcomes",
+    "bun:tests/unit/multistory-oracle.test.ts:independent original current and unsupported reports have exact revision inventories and formatting positions",
     "bun:tests/unit/nullable-cell-mappings.test.ts:nullable cell mappings select one shared case with partial native associations and retain prior records except explicit inventory totals",
     "bun:tests/unit/nullable-cell-mappings.test.ts:nullable mappings refuse stale sources missing declarations and unsupported case claims",
     "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody ledger enumerates 15 declarations and 66 expressions preserving 446 predecessor records",

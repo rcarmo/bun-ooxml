@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1101,
-  "files": 132,
+  "count": 1103,
+  "files": 133,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -345,6 +345,12 @@
     {
       "path": "tests/unit/heading-classification-mappings.test.ts",
       "sha256": "f14a9bb128680da50bfb5fb00a06bf1125fd8a63af9b7d805afe800943e0be5e",
+      "declarations": 2,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/multistory-oracle.test.ts",
+      "sha256": "c701ba4870f061863ce6ef7c32ff458b2c550f669960d213cbade976038f5367",
       "declarations": 2,
       "issues": []
     },
@@ -1384,6 +1390,8 @@
     "bun:tests/unit/geometry-mappings.test.ts:geometry reconciliation preserves original inputs direct and deferred assertions and review flags",
     "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
     "bun:tests/unit/heading-classification-mappings.test.ts:heading mapping missing assertions stale runtime pins and unknown keys refuse",
+    "bun:tests/unit/multistory-oracle.test.ts:independent multistory evidence accepts exact four-story readback and rejects identity status omission and changed outcomes",
+    "bun:tests/unit/multistory-oracle.test.ts:independent original current and unsupported reports have exact revision inventories and formatting positions",
     "bun:tests/unit/nullable-cell-mappings.test.ts:nullable mappings refuse stale sources missing declarations and unsupported case claims",
     "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
@@ -1857,6 +1865,8 @@
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / full gate refuses planned work despite implemented cases passing",
     "bun:tests/unit/graph.test.ts:guarded OPC graph edits / cycle-safe traversal excludes external targets and preserves orphan parts",
     "bun:tests/unit/heading-classification-mappings.test.ts:heading mapping missing assertions stale runtime pins and unknown keys refuse",
+    "bun:tests/unit/multistory-oracle.test.ts:independent multistory evidence accepts exact four-story readback and rejects identity status omission and changed outcomes",
+    "bun:tests/unit/multistory-oracle.test.ts:independent original current and unsupported reports have exact revision inventories and formatting positions",
     "bun:tests/unit/nullable-cell-mappings.test.ts:nullable mappings refuse stale sources missing declarations and unsupported case claims",
     "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
     "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
@@ -25993,6 +26003,90 @@
         "l.mappings.pop",
         "reconcileOutcomeMappings",
         "structuredClone"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/multistory-oracle.test.ts:independent multistory evidence accepts exact four-story readback and rejects identity status omission and changed outcomes",
+      "path": "tests/unit/multistory-oracle.test.ts",
+      "line": 4,
+      "title": "independent multistory evidence accepts exact four-story readback and rejects identity status omission and changed outcomes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(verifyMultistoryEvidence(report(),file,hash,'accept')).toEqual(expectedStories('accept'))",
+        "expect(()=>verifyMultistoryEvidence(r,file,hash,'accept')).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 4,
+          "expression": "for(const mutate of [(r:any)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "c701ba4870f061863ce6ef7c32ff458b2c550f669960d213cbade976038f5367",
+      "body": "{expect(verifyMultistoryEvidence(report(),file,hash,'accept')).toEqual(expectedStories('accept'));for(const mutate of [(r:any)=>{r.status='failed';},(r:any)=>{r.validator='Bun';},(r:any)=>{r.version='';},(r:any)=>{r.version='3.5.10';},(r:any)=>{r.profile='unknown';},(r:any)=>{r.results[0].file='other.docx';},(r:any)=>{r.results[0].sha256='b'.repeat(64);},(r:any)=>{r.results[0].errors=[{}];},(r:any)=>{r.results[0].truncated=true;},(r:any)=>{r.results[0].exception='failed';},(r:any)=>{r.results.push(structuredClone(r.results[0]));},(r:any)=>{r.results[0].wordStories.pop();},(r:any)=>{r.results[0].wordStories[1].part='word/header2.xml';},(r:any)=>{r.results[0].wordStories[0].paragraphs[1].runs[0].text='wrong';},(r:any)=>{r.results[0].wordStories[1].paragraphs[2].runs[0].bold=false;},(r:any)=>{r.results[0].wordStories[2].paragraphs[3].runs.reverse();},(r:any)=>{r.results[0].wordStories[3].revisions=[{kind:'moveFrom',id:'11'}];},(r:any)=>{r.results[0].wordStories[0].paragraphs.pop();}]){const r=report();mutate(r);expect(()=>verifyMultistoryEvidence(r,file,hash,'accept')).toThrow();}}",
+      "calls": [
+        ".repeat",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expectedStories",
+        "mutate",
+        "r.results.0.wordStories.0.paragraphs.pop",
+        "r.results.0.wordStories.2.paragraphs.3.runs.reverse",
+        "r.results.0.wordStories.pop",
+        "r.results.push",
+        "report",
+        "structuredClone",
+        "verifyMultistoryEvidence"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/multistory-oracle.test.ts:independent original current and unsupported reports have exact revision inventories and formatting positions",
+      "path": "tests/unit/multistory-oracle.test.ts",
+      "line": 5,
+      "title": "independent original current and unsupported reports have exact revision inventories and formatting positions",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(verifyMultistoryEvidence(r,file,hash,mode)).toEqual(expectedStories(mode))",
+        "expect(expectedStories('source').flatMap(s=>s.revisions)).toHaveLength(20)",
+        "expect(expectedStories('unsupported').flatMap(s=>s.revisions)).toHaveLength(21)",
+        "expect(expectedStories('source').every(s=>s.revisions.map(r=>r.kind).join(',')==='del,ins,rPrChange,moveFrom,moveTo')).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 5,
+          "expression": "for(const mode of ['source','reject','unsupported'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "c701ba4870f061863ce6ef7c32ff458b2c550f669960d213cbade976038f5367",
+      "body": "{for(const mode of ['source','reject','unsupported'] as const){const r=report();r.results[0]!.wordStories=expectedStories(mode);expect(verifyMultistoryEvidence(r,file,hash,mode)).toEqual(expectedStories(mode));}expect(expectedStories('source').flatMap(s=>s.revisions)).toHaveLength(20);expect(expectedStories('unsupported').flatMap(s=>s.revisions)).toHaveLength(21);expect(expectedStories('source').every(s=>s.revisions.map(r=>r.kind).join(',')==='del,ins,rPrChange,moveFrom,moveTo')).toBe(true);}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expectedStories",
+        "expectedStories().every",
+        "expectedStories().flatMap",
+        "report",
+        "s.revisions.map",
+        "s.revisions.map().join",
+        "verifyMultistoryEvidence"
       ],
       "reviewReasons": [
         "body-loop"
