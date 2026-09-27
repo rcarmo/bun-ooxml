@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-heading-classification.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-heading-classification.test.ts": "cd6e8bb112387c432aa56341fc84951a5098cd403ab93bc4c4e4f5bf4dfd1fa5",
+    "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+    "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:direct Heading1 through Heading9 classify by identifier without changing package bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.styleId).toBe('Heading'+level)",
+        "expect(p.isHeading).toBe(true)",
+        "expect(p.headingLevel).toBe(level)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Heading text')"
+      ],
+      "outcomes": [
+        "Nine exact Heading1 through Heading9 identifiers read the matching level and true flag without changing bytes or paragraph text."
+      ],
+      "gaps": [
+        "Native loop covers the bounded direct-ID policy; no shared case execution, saved output or wider Go prefix/outline semantics."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:absent ordinary and misleading style IDs do not infer a heading",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.styleId).toBe(id??undefined)",
+        "expect(p.isHeading).toBe(false)",
+        "expect(p.headingLevel).toBe(0)",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Absent style and ten ordinary or misleading identifiers read false and zero; bytes remain unchanged."
+      ],
+      "gaps": [
+        "Bun absent style returns undefined rather than the shared empty-string result; this is not the literal shared setter/getter profile."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:direct style classification does not compute base-style outline or body-anchor semantics",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.headingLevel).toBe(0)",
+        "expect(p.isHeading).toBe(false)",
+        "expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('section_heading')",
+        "expect(p.headingLevel).toBe(1)",
+        "expect(p.isHeading).toBe(true)",
+        "expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('paragraph')"
+      ],
+      "outcomes": [
+        "Direct style classification ignores base-style and outline values; existing body-anchor classification follows direct outline independently."
+      ],
+      "gaps": [
+        "Only two explicit outline states and one base-style chain are checked; no general inherited outline computation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:style classification survives path save reopen without changing text or unrelated members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.paragraphs[0]!.headingLevel).toBe(9)",
+        "expect(read.paragraphs[0]!.isHeading).toBe(true)",
+        "expect(read.paragraphs[0]!.styleId).toBe('Heading9')",
+        "expect(read.paragraphs[0]!.text).toBe('Heading text')",
+        "expect(read.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Path save and reopen retain Heading9 level, flag, style, paragraph text and every package member payload."
+      ],
+      "gaps": [
+        "Only Heading9 is path-reopened here; no independent renderer or other consumer execution."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:changed or externally modified paragraph handles refuse classification instead of serving cached headings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.headingLevel).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(()=>held.isHeading).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(d.paragraphs[0]!.headingLevel).toBe(0)",
+        "expect(()=>fresh.isHeading).toThrow()",
+        "expect(()=>fresh.headingLevel).toThrow()",
+        "expect(d.package.toBytes()).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "Locally invalidated and externally modified paragraph snapshots refuse both heading getters without changing bytes."
+      ],
+      "gaps": [
+        "No concurrency or arbitrary external package edits are checked; refusal conditions are the stated stale snapshots."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:classification reads literal imported IDs without requiring style definitions but refuses ambiguous direct metadata",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(loaded.paragraphs[0]!.headingLevel).toBe(3)",
+        "expect(loaded.paragraphs[0]!.isHeading).toBe(true)",
+        "expect(()=>loaded.paragraphs[0]!.headingLevel).toThrow()",
+        "expect(()=>loaded.paragraphs[0]!.isHeading).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "An imported Heading3 ID reads without a style registry; duplicate and misqualified direct style metadata refuse without byte changes."
+      ],
+      "gaps": [
+        "Only two malformed metadata variants; no styles-part semantic validation, rendering or general XML admission claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:aliased UTF16 direct style reads without editing encoding or root namespace bindings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(loaded.paragraphs[0]!.headingLevel).toBe(2)",
+        "expect(loaded.paragraphs[0]!.isHeading).toBe(true)",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Aliased UTF-16 direct Heading2 reads its level and flag without editing the complete archive."
+      ],
+      "gaps": [
+        "Only UTF-16LE and one namespace alias; no multi-encoding exhaustive proof or path save in this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:empty style retains strict Bun policy and all five shared getter-profile cases stay planned",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.setStyle('')).toThrow(expect.objectContaining({code:'docx-style-argument'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.headingLevel).toBe(1)",
+        "expect(p.styleId).toBeUndefined()",
+        "expect(p.isHeading).toBe(false)",
+        "expect(p.headingLevel).toBe(0)",
+        "expect(profile.lifecycle).toBe('planned')",
+        "expect(profile.cases).toHaveLength(5)",
+        "expect(inv.counts.cases.implemented).toBe(550)",
+        "expect(inv.counts.cases.planned).toBe(47)"
+      ],
+      "outcomes": [
+        "Empty string assignment refuses; null removes style and reads undefined/false/zero; all five shared getter cases remain planned and acceptance totals are unchanged."
+      ],
+      "gaps": [
+        "Inventory presence and planned status confer no execution credit; the five-case profile cannot be selected while the empty-string API differs."
+      ]
+    }
+  ]
+}

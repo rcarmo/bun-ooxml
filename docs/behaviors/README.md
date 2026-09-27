@@ -41,6 +41,12 @@ maps fourteen declarations (twelve native tests and two wrappers), all partial
 with explicit gaps. The 472 prior records remain unchanged; the total is now 486.
 The new custody cases also exposed and fixed dropped UTF-8 BOM bytes.
 
+Bun's [direct heading classifier](../contracts/paragraph-style.md#direct-heading-classification)
+adds eight native scenario-only associations (494 total mappings). All 486 prior
+records are unchanged. Its exact `Heading1`–`Heading9` policy and absent-style
+`undefined` result do not implement the whole shared getter profile. All five
+shared heading cases remain planned; the 550 executed case identities are unchanged.
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

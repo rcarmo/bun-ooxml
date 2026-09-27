@@ -4,21 +4,25 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 979,
-  "mappedDeclarations": 486,
+  "totalDeclarations": 989,
+  "mappedDeclarations": 494,
   "sourceSha256": {
+    "tests/unit/docx-heading-classification.test.ts": "cd6e8bb112387c432aa56341fc84951a5098cd403ab93bc4c4e4f5bf4dfd1fa5",
+    "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+    "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
     "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
     "tests/unit/tracking-settings-outcomes.test.ts": "3c3e98c041670f9d2e400129fca532a83a2b872d4728b1f603f6913de7bdd12b",
     "src/docx/tracking-settings.ts": "90cd9885ddf07129c8281e72f9ff79c6e24603de31fa0bcc74d27a349f08898a",
-    "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
-    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
     "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
-    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
     "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
     "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
-    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
-    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
     "workflows/docx/tracking-settings.feature": "ba4621e6acd4b892b5a214d57d3d9057b568135d0f21a5ff40fc69b4b6417e9e",
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
@@ -61,7 +65,6 @@
     "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
     "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
     "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
-    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
     "tests/unit/docx-paragraph-text.test.ts": "a630512ff9f6fed2281383ae36b2205dd761792185023f8e3c2105341c79f06f",
     "tests/unit/docx-insert-paragraph.test.ts": "75968d343e44ca3928c05d66cc0053bbc646d0fd58120974b08f0b904df97d4f",
     "tests/unit/docx-table-rows.test.ts": "7f9694854d84752481d2182d5e852825b059f77ab33eed7dafba3712e743393c",
@@ -116,10 +119,8 @@
     "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
     "tests/unit/docx-paragraph-style.test.ts": "fe5a9aeef872fb439a798c94104d0d6969d4987166c3b773f346d6c21d55521e",
     "tests/acceptance/paragraph-style.ts": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27",
-    "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
     "tests/unit/docx-style-authoring.test.ts": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4",
     "tests/acceptance/style-authoring.ts": "e3439546d2576bbfd267d2dc5a6be41612d25ca25a32d3712c970db614fdf3fe",
-    "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "workflows/docx/style-authoring.feature": "d4d4224f70d7b18dc963a7bf6e2fd194cf64f5757652e1ce47df9f47ab32502e",
     "tests/unit/xml-comparison.test.ts": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
     "tests/acceptance/xml-comparison.ts": "5a3f7a3058f4682b2cd5421da64be76d213fd67b966aa45dfa1bb720a2f75f3b",
@@ -170,6 +171,24 @@
   },
   "ledgers": [
     {
+      "name": "heading-classification",
+      "scopePaths": [
+        "tests/unit/docx-heading-classification.test.ts"
+      ],
+      "mappedDeclarations": 8,
+      "sourceSha256": {
+        "tests/unit/docx-heading-classification.test.ts": "cd6e8bb112387c432aa56341fc84951a5098cd403ab93bc4c4e4f5bf4dfd1fa5",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
+        "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+        "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971"
+      }
+    },
+    {
       "name": "tracking-settings",
       "scopePaths": [
         "tests/unit/docx-tracking-settings.test.ts",
@@ -180,7 +199,7 @@
         "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
         "tests/unit/tracking-settings-outcomes.test.ts": "3c3e98c041670f9d2e400129fca532a83a2b872d4728b1f603f6913de7bdd12b",
         "src/docx/tracking-settings.ts": "90cd9885ddf07129c8281e72f9ff79c6e24603de31fa0bcc74d27a349f08898a",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
@@ -218,7 +237,7 @@
       "sourceSha256": {
         "tests/unit/docx-effective-formatting.test.ts": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
         "tests/acceptance/effective-formatting.ts": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
@@ -297,7 +316,7 @@
         "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
         "tests/acceptance/steps.ts": "3be930ca5fb9586611290a488c3da941c74b751f17ba5e2177a92ae2a1730213",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
         "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
         "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
@@ -346,7 +365,7 @@
       "sourceSha256": {
         "tests/unit/docx-body-anchors.test.ts": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
         "tests/unit/docx-body-map.test.ts": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/docx/body-map.ts": "ddb2f4e83eee1744b9623199f8b7fb3991fdb5a4a77ace4d3223ad904b2a174d",
         "src/docx/body-insertion.ts": "aef562d13488d4f7d78d44d258fd451669ee85b677682dff35402c1a3f8364bb",
         "src/docx/paragraph-properties.ts": "498c2369d8a0005b1fc0c1a0182d85b14a4ce72133a5cf456b67483e5f45bd37",
@@ -440,7 +459,7 @@
       "sourceSha256": {
         "tests/unit/docx-page-layout.test.ts": "b1aa47aa13041d11631d963deac263feddaa5214a8daf788d8cd58e1798520cd",
         "tests/acceptance/page-layout.ts": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/docx/page-layout.ts": "3f666c251992c571bce99fbcac5de582b46456f66db1fe709a0ce7cec29d68bf",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
@@ -462,7 +481,7 @@
       "sourceSha256": {
         "tests/unit/docx-paragraph-style.test.ts": "fe5a9aeef872fb439a798c94104d0d6969d4987166c3b773f346d6c21d55521e",
         "tests/acceptance/paragraph-style.ts": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
@@ -485,7 +504,7 @@
         "tests/unit/docx-style-authoring.test.ts": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4",
         "tests/acceptance/style-authoring.ts": "e3439546d2576bbfd267d2dc5a6be41612d25ca25a32d3712c970db614fdf3fe",
         "tests/acceptance/paragraph-style.ts": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
@@ -536,7 +555,7 @@
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "src/xml/comparison.ts": "19a2252c38a7fa20b539dce9af4fc06a39c95f27204c1c46a73e66065424609e",
@@ -559,7 +578,7 @@
         "tests/unit/docx-comments.test.ts": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
         "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
         "src/docx/comments.ts": "eca35561548bf0bed07f01231bb4342066915b2523bc1252896428ea29706ab6",
-        "src/docx/index.ts": "4753f7cf6edbf08860f8197486e80d1eba5b472c9167afb932c3c569c81d965a",
+        "src/docx/index.ts": "3c76eed3ac8db1717655c8ab917b2d93c7937570e36fd8feea167cec8a1b6732",
         "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
@@ -921,6 +940,8 @@
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rejects scenarios without Then and reports failing Then assertions",
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / rewrites stale acceptance artifacts before a failing run",
     "bun:tests/unit/gherkin.test.ts:gherkin acceptance / refuses an acceptance run with only planned cases rather than passing vacuously",
+    "bun:tests/unit/heading-classification-mappings.test.ts:eight direct-heading associations retain empty case keys and all486 prior mapping records",
+    "bun:tests/unit/heading-classification-mappings.test.ts:heading mapping missing assertions stale runtime pins and unknown keys refuse",
     "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody ledger enumerates 15 declarations and 66 expressions preserving 446 predecessor records",
     "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody descriptions distinguish exact corpus archives native live reads and physical destinations",
     "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody scopes exact assertions and unrelated graph-case borrowing refuse",
@@ -1204,6 +1225,236 @@
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 reconciliation retains direct refusal predicates review flags and uncounted helper separation"
   ],
   "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:direct Heading1 through Heading9 classify by identifier without changing package bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.styleId).toBe('Heading'+level)",
+        "expect(p.isHeading).toBe(true)",
+        "expect(p.headingLevel).toBe(level)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Heading text')"
+      ],
+      "outcomes": [
+        "Nine exact Heading1 through Heading9 identifiers read the matching level and true flag without changing bytes or paragraph text."
+      ],
+      "gaps": [
+        "Native loop covers the bounded direct-ID policy; no shared case execution, saved output or wider Go prefix/outline semantics."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:absent ordinary and misleading style IDs do not infer a heading",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.styleId).toBe(id??undefined)",
+        "expect(p.isHeading).toBe(false)",
+        "expect(p.headingLevel).toBe(0)",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Absent style and ten ordinary or misleading identifiers read false and zero; bytes remain unchanged."
+      ],
+      "gaps": [
+        "Bun absent style returns undefined rather than the shared empty-string result; this is not the literal shared setter/getter profile."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:direct style classification does not compute base-style outline or body-anchor semantics",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.headingLevel).toBe(0)",
+        "expect(p.isHeading).toBe(false)",
+        "expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('section_heading')",
+        "expect(p.headingLevel).toBe(1)",
+        "expect(p.isHeading).toBe(true)",
+        "expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('paragraph')"
+      ],
+      "outcomes": [
+        "Direct style classification ignores base-style and outline values; existing body-anchor classification follows direct outline independently."
+      ],
+      "gaps": [
+        "Only two explicit outline states and one base-style chain are checked; no general inherited outline computation."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:style classification survives path save reopen without changing text or unrelated members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(read.paragraphs[0]!.headingLevel).toBe(9)",
+        "expect(read.paragraphs[0]!.isHeading).toBe(true)",
+        "expect(read.paragraphs[0]!.styleId).toBe('Heading9')",
+        "expect(read.paragraphs[0]!.text).toBe('Heading text')",
+        "expect(read.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Path save and reopen retain Heading9 level, flag, style, paragraph text and every package member payload."
+      ],
+      "gaps": [
+        "Only Heading9 is path-reopened here; no independent renderer or other consumer execution."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:changed or externally modified paragraph handles refuse classification instead of serving cached headings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.headingLevel).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(()=>held.isHeading).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(d.paragraphs[0]!.headingLevel).toBe(0)",
+        "expect(()=>fresh.isHeading).toThrow()",
+        "expect(()=>fresh.headingLevel).toThrow()",
+        "expect(d.package.toBytes()).toEqual(bytes)"
+      ],
+      "outcomes": [
+        "Locally invalidated and externally modified paragraph snapshots refuse both heading getters without changing bytes."
+      ],
+      "gaps": [
+        "No concurrency or arbitrary external package edits are checked; refusal conditions are the stated stale snapshots."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:classification reads literal imported IDs without requiring style definitions but refuses ambiguous direct metadata",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(loaded.paragraphs[0]!.headingLevel).toBe(3)",
+        "expect(loaded.paragraphs[0]!.isHeading).toBe(true)",
+        "expect(()=>loaded.paragraphs[0]!.headingLevel).toThrow()",
+        "expect(()=>loaded.paragraphs[0]!.isHeading).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "An imported Heading3 ID reads without a style registry; duplicate and misqualified direct style metadata refuse without byte changes."
+      ],
+      "gaps": [
+        "Only two malformed metadata variants; no styles-part semantic validation, rendering or general XML admission claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:aliased UTF16 direct style reads without editing encoding or root namespace bindings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(loaded.paragraphs[0]!.headingLevel).toBe(2)",
+        "expect(loaded.paragraphs[0]!.isHeading).toBe(true)",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Aliased UTF-16 direct Heading2 reads its level and flag without editing the complete archive."
+      ],
+      "gaps": [
+        "Only UTF-16LE and one namespace alias; no multi-encoding exhaustive proof or path save in this declaration."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
+    {
+      "testId": "bun:tests/unit/docx-heading-classification.test.ts:empty style retains strict Bun policy and all five shared getter-profile cases stay planned",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-style-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.setStyle('')).toThrow(expect.objectContaining({code:'docx-style-argument'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.headingLevel).toBe(1)",
+        "expect(p.styleId).toBeUndefined()",
+        "expect(p.isHeading).toBe(false)",
+        "expect(p.headingLevel).toBe(0)",
+        "expect(profile.lifecycle).toBe('planned')",
+        "expect(profile.cases).toHaveLength(5)",
+        "expect(inv.counts.cases.implemented).toBe(550)",
+        "expect(inv.counts.cases.planned).toBe(47)"
+      ],
+      "outcomes": [
+        "Empty string assignment refuses; null removes style and reads undefined/false/zero; all five shared getter cases remain planned and acceptance totals are unchanged."
+      ],
+      "gaps": [
+        "Inventory presence and planned status confer no execution credit; the five-case profile cannot be selected while the empty-string API differs."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "heading-classification"
+    },
     {
       "testId": "bun:tests/unit/docx-tracking-settings.test.ts:tracking author toggle follows the shared getter sequence without creating revision markup",
       "status": "partial",

@@ -22,6 +22,31 @@ alone and requires no registry. The getter can report an unknown stored ID;
 it neither validates definitions nor chooses a default. Malformed direct metadata
 still refuses. No operation creates styles or evaluates effective formatting.
 
+## Direct heading classification
+
+`Paragraph.headingLevel` returns 1–9 only for the exact direct style IDs
+`Heading1` through `Heading9`; every other ID or absent style returns zero.
+`Paragraph.isHeading` is true exactly when that level is nonzero. Both getters
+reuse the direct-style reader and its malformed-property and stale-handle checks.
+They do not mutate package bytes or require a style definition to read an imported
+ID. Assigning a style still requires a valid registered paragraph style.
+
+This classifier ignores display names, case variants, prefixes such as
+`Heading10`, base styles and outline levels. It does not alter body-anchor
+classification, which uses direct `outlineLevel`, or compute inherited formatting.
+Reading `headingLevel` after save/reopen reports the same direct-ID result.
+
+The shared `@id-docx-go-paragraph-style-getters` profile remains planned. Its empty
+row requires an empty-string getter; Bun retains `undefined` for absent `pStyle`
+and refuses `setStyle("")`. `setStyle(null)` removes the property. No adapter
+normalises those different values to award execution credit. Go also accepts
+broader heading prefixes and can fall back to outline level; these getters do
+not implement that wider API policy.
+
+Eight native tests cover the bounded policy, save/reopen, unchanged bytes,
+malformed metadata and stale handles. Their mappings are partial, scenario-only
+associations without case keys or shared execution credit.
+
 ## Editing and preservation
 
 Assignment preserves paragraph text, direct run formatting and unrelated

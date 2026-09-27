@@ -277,6 +277,13 @@ export class Paragraph {
   /** Direct paragraph style ID, without evaluating inheritance. */
   get styleId(): string | undefined { this.ensureFresh(); return this.documentRef.paragraphStyle(this.snapshot); }
 
+  /** Direct, case-sensitive Heading1..Heading9 style-ID classification, without inheritance. */
+  get headingLevel(): number {
+    const id=this.styleId;
+    return id!==undefined&&/^Heading[1-9]$/.test(id)?Number(id.slice(-1)):0;
+  }
+  get isHeading(): boolean { return this.headingLevel!==0; }
+
   setStyle(styleId: string | null): {changed:number} {
     this.ensureFresh();return this.documentRef.setParagraphStyle(this.snapshot,styleId);
   }
