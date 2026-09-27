@@ -98,6 +98,17 @@ Reopen saved files and assert expected content. General Microsoft Office renderi
 compatibility is unverified; [independent checks](../contracts/office-oracles.md)
 cover a few generated samples. `examples/create-office.ts` is an executable example.
 
+## Word body anchors
+
+`document.inspectBodyAnchors(query?)` lists direct body paragraphs with frozen
+anchors and case-insensitive text filtering. Explicit direct outline levels 0–8
+identify headings; style names and inherited outlines are not resolved. Use
+`document.insertParagraphAfter(anchor, text, options?)` to insert after a selected
+paragraph, then save and reopen. Anchors are document-owned and expire after an
+edit; copying an anchor or changing raw main XML makes insertion refuse. Table
+cell paragraphs and other stories are outside this API. See
+[body anchors](../contracts/body-anchors.md).
+
 ## Existing cell styles
 
 ```ts

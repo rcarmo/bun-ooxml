@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 853,
+  "nativeDeclarations": 867,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 626,
+  "withoutStagingCount": 640,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2245,6 +2245,76 @@
       "id": "bun:tests/unit/docx-append-run.test.ts:run append enforces complete XML output bounds before mutating a nearly full package",
       "path": "tests/unit/docx-append-run.test.ts",
       "sourceSha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:body anchors read explicit outlines and paragraphs in saved order and filter case-insensitively without mutation",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:insert after captured heading saves immediately adjacent text and preserves every unrelated member",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:body index counts tables while excluding cell paragraphs and final section properties",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:style names never manufacture headings and explicit nine differs from absence",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:foreign cloned forged and raw-byte-stale anchors refuse without changing either document",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:successful edits invalidate anchors but validated no-ops and failed inserts retain them",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:protection permits discovery but refuses insertion including empty inserted text",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:unsupported or malformed body paragraphs refuse the entire discovery even when query would exclude them",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:empty documents produce no anchors and invalid queries refuse without coercion",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:write and serialization failure roll back inserted text and keep the same anchor usable",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:anchor insertion preserves aliased main XML UTF8 BOM and both UTF16 byte orders after reopen",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:discovery and insertion have separate output bounds with unchanged state on refusal",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:three canonical body-anchor cases reject false headings empty filters and corrupted saved insertion",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:saved anchor fixtures are cleaned after both successful cases and failed insertion reads",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3"
     },
     {
       "id": "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",

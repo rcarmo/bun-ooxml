@@ -22,7 +22,7 @@ import {readParagraphProperties,editParagraphProperties,normalizeParagraphProper
 export type {DirectParagraphProperties,ParagraphPropertiesPatch,ParagraphAlignment} from './paragraph-properties.ts';
 import {authorParagraphStyle,normalizeStyleOptions,type AddParagraphStyleOptions,type ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
 export type {AddParagraphStyleOptions,ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
-import { OpcPackage, getContentType } from "../opc/index.ts";
+import { OpcPackage, getContentType, sameBytes } from "../opc/index.ts";
 import { applyEdits, attribute, elements, escapeAttribute, escapeText, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
 export const W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
@@ -39,6 +39,15 @@ const MAX_TABLE_CELLS = 10_000;
 const DEFAULT_TABLE_WIDTH_DXA = 8_640;
 
 type OpenInput = string | Uint8Array | ArrayBuffer;
+
+/** Captured direct-body paragraph; outline classification uses only explicit outlineLvl. */
+export interface BodyAnchor {
+  readonly kind: 'docx-body-anchor';
+  readonly type: 'section_heading' | 'paragraph';
+  readonly bodyIndex: number;
+  readonly text: string;
+  readonly outlineLevel: number | null;
+}
 
 export type AddParagraphOptions = {
   bold?: boolean;
@@ -476,6 +485,7 @@ export class Document {
   private xmlDocument!: XmlDocument;
   private paragraphSnapshots: ParagraphSnapshot[] = [];
   private paragraphHandles: Paragraph[] = [];
+  private readonly bodyAnchors = new WeakMap<BodyAnchor,{version:number;bytes:Uint8Array}>();
   private omittedTopologies: string[] = [];
   private tableSnapshots: TableSnapshot[] = [];
   private tableHandles: Table[] = [];
@@ -608,6 +618,36 @@ export class Document {
     return paragraph;
   }
 
+  /** Discover direct-body paragraphs only; tables count toward bodyIndex but their contents are excluded. */
+  inspectBodyAnchors(query?:string):readonly BodyAnchor[] {
+    if(query!==undefined&&(typeof query!=='string'||query.length>4096))fail('docx-anchor-query','Anchor query must be a string of at most 4096 UTF-16 units');
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document XML changed outside this handle');
+    const {body}=bodyInsertionTarget(this.xml,this.xmlDocument,0),bytes=this.opcPackage.get(DOCUMENT_PART)!;
+    const byElement=new Map(this.paragraphSnapshots.map(p=>[p.element,p]));
+    const rows:BodyAnchor[]=[];let index=0;
+    for(const node of body.children){
+      if(isWord(node,'sectPr'))continue;
+      if(isWord(node,'p')){
+        const snapshot=byElement.get(node);if(!snapshot)fail('docx-anchor-unsupported','Body paragraph is not represented by the document model');
+        if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+        const outlineLevel=readParagraphProperties(this.xml,node).outlineLevel;
+        const anchor:BodyAnchor=Object.freeze({kind:'docx-body-anchor',type:outlineLevel!==null&&outlineLevel<9?'section_heading':'paragraph',bodyIndex:index,text:snapshot.text,outlineLevel});
+        rows.push(anchor);
+      }
+      index++;
+    }
+    const needle=query?.toLowerCase();const selected=needle?rows.filter(a=>a.text.toLowerCase().includes(needle)):rows;
+    for(const anchor of selected)this.bodyAnchors.set(anchor,{version:this.version,bytes});
+    return Object.freeze(selected);
+  }
+
+  /** Insert after a captured body paragraph; all structural snapshot handles expire on success. */
+  insertParagraphAfter(anchor:BodyAnchor,text:string,options?:AddParagraphOptions):Paragraph {
+    const state=anchor&&this.bodyAnchors.get(anchor),live=this.opcPackage.get(DOCUMENT_PART);
+    if(!state||state.version!==this.version||!live||!sameBytes(state.bytes,live))fail('docx-stale-anchor','Body anchor is foreign, forged or stale');
+    return this.insertParagraph(anchor.bodyIndex+1,text,options);
+  }
+
   /** Insert at a top-level body block index (paragraphs/tables, excluding final sectPr). */
   insertParagraph(index: number, text: string, options?: AddParagraphOptions): Paragraph {
     if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document XML changed outside this handle');
@@ -634,7 +674,8 @@ export class Document {
     if(JSON.stringify(remaining.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-insert-unsafe','Insertion changed existing paragraph text');
     const grids=(tables:TableSnapshot[])=>tables.map(t=>[t.rows,t.columns]);
     if(JSON.stringify(grids(collections.tables.tables))!==JSON.stringify(grids(this.tableSnapshots)))fail('docx-insert-unsafe','Insertion changed table dimensions');
-    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
+    const original=this.opcPackage.get(DOCUMENT_PART)!,bom=original[0]===239&&original[1]===187&&original[2]===191?'\ufeff':'';
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,bom+nextXml);this.opcPackage.toBytes();});
     this.xml=nextXml;this.version=nextVersion;this.tableVersion=nextTableVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
     return this.paragraphHandles[authored.index]!;
   }

@@ -3,7 +3,8 @@
 `Document.insertParagraph(index, text, options?)` creates a plain paragraph at a
 zero-based body position and returns its fresh paragraph handle. Each top-level
 paragraph or table counts as one position. Cell paragraphs and the final body
-section properties do not count.
+section properties do not count. [Body anchors](body-anchors.md) provide discovery
+and `insertParagraphAfter()` without requiring the caller to calculate that position.
 
 ```ts
 const document = Document.create();

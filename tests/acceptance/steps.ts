@@ -39,6 +39,7 @@ import { bindings as appendRunBindings } from './append-run.ts';
 import { bindings as rowHeaderBindings } from './row-header.ts';
 import { bindings as paragraphTextBindings } from './paragraph-text.ts';
 import { bindings as bodyInsertionBindings } from './body-insertion.ts';
+import { bindings as bodyAnchorBindings, cleanupBodyAnchors } from './body-anchors.ts';
 import { bindings as tableRowsBindings } from './table-rows.ts';
 import { bindings as rowTextsBindings } from './row-texts.ts';
 import { bindings as xmlByteSnapshotBindings } from './xml-byte-snapshot.ts';
@@ -61,7 +62,7 @@ import { bindings as xlsxCommentVmlBindings } from './xlsx-comment-vml.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupTrackedWorkflowFixtures(),cleanupFontSize(),cleanupOpcCustody()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupFontSize(),cleanupOpcCustody()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -104,6 +105,7 @@ export const bindings: StepBinding[] = [
   ...rowHeaderBindings,
   ...paragraphTextBindings,
   ...bodyInsertionBindings,
+  ...bodyAnchorBindings,
   ...tableRowsBindings,
   ...rowTextsBindings,
   ...xmlByteSnapshotBindings,

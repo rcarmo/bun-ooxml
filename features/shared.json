@@ -465,6 +465,16 @@
       "scenarioIds": [
         "@id-xlsx-comment-vml-existing-graph"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/anchor-discovery.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-python-word-anchor-headings-paragraphs",
+        "@id-python-word-anchor-text-filter",
+        "@id-python-word-anchor-discover-insert"
+      ]
     }
   ]
 }

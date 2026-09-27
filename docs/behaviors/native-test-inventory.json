@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 853,
-  "files": 86,
+  "count": 867,
+  "files": 87,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -22,6 +22,12 @@
       "path": "tests/unit/docx-append-run.test.ts",
       "sha256": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144",
       "declarations": 12,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "sha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "declarations": 14,
       "issues": []
     },
     {
@@ -529,6 +535,10 @@
       "sha256": "6ee880ca361688f7a9a5e72069034353713348f572f6e1d35b9f70906865f205"
     },
     {
+      "path": "tests/acceptance/body-anchors.ts",
+      "sha256": "10aeca110552aa457ae3b6945ac604fea3f25ae4eb6c4180e2bb47ddb1f405be"
+    },
+    {
       "path": "tests/acceptance/body-insertion.ts",
       "sha256": "cd864da15106a74c0416c037da45981b0647a932ce9be919ac7b0e62b99f0eb1"
     },
@@ -686,7 +696,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "6b97bd235d357ef5612d038ad2a21d0f3f2b0d41b73f69f448a2f91f5cdcbbd1"
+      "sha256": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -797,6 +807,14 @@
     "bun:tests/unit/docx-append-run.test.ts:staged write and serialization failure preserve paragraph/cell handles and package",
     "bun:tests/unit/docx-append-run.test.ts:table append preserves grid and expires cell snapshots, with UTF-16 payload retained",
     "bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting",
+    "bun:tests/unit/docx-body-anchors.test.ts:insert after captured heading saves immediately adjacent text and preserves every unrelated member",
+    "bun:tests/unit/docx-body-anchors.test.ts:foreign cloned forged and raw-byte-stale anchors refuse without changing either document",
+    "bun:tests/unit/docx-body-anchors.test.ts:unsupported or malformed body paragraphs refuse the entire discovery even when query would exclude them",
+    "bun:tests/unit/docx-body-anchors.test.ts:empty documents produce no anchors and invalid queries refuse without coercion",
+    "bun:tests/unit/docx-body-anchors.test.ts:write and serialization failure roll back inserted text and keep the same anchor usable",
+    "bun:tests/unit/docx-body-anchors.test.ts:anchor insertion preserves aliased main XML UTF8 BOM and both UTF16 byte orders after reopen",
+    "bun:tests/unit/docx-body-anchors.test.ts:three canonical body-anchor cases reject false headings empty filters and corrupted saved insertion",
+    "bun:tests/unit/docx-body-anchors.test.ts:saved anchor fixtures are cleaned after both successful cases and failed insertion reads",
     "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
     "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
     "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
@@ -1124,6 +1142,14 @@
     "bun:tests/unit/docx-append-run.test.ts:staged write and serialization failure preserve paragraph/cell handles and package",
     "bun:tests/unit/docx-append-run.test.ts:table append preserves grid and expires cell snapshots, with UTF-16 payload retained",
     "bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting",
+    "bun:tests/unit/docx-body-anchors.test.ts:insert after captured heading saves immediately adjacent text and preserves every unrelated member",
+    "bun:tests/unit/docx-body-anchors.test.ts:foreign cloned forged and raw-byte-stale anchors refuse without changing either document",
+    "bun:tests/unit/docx-body-anchors.test.ts:unsupported or malformed body paragraphs refuse the entire discovery even when query would exclude them",
+    "bun:tests/unit/docx-body-anchors.test.ts:empty documents produce no anchors and invalid queries refuse without coercion",
+    "bun:tests/unit/docx-body-anchors.test.ts:write and serialization failure roll back inserted text and keep the same anchor usable",
+    "bun:tests/unit/docx-body-anchors.test.ts:anchor insertion preserves aliased main XML UTF8 BOM and both UTF16 byte orders after reopen",
+    "bun:tests/unit/docx-body-anchors.test.ts:three canonical body-anchor cases reject false headings empty filters and corrupted saved insertion",
+    "bun:tests/unit/docx-body-anchors.test.ts:saved anchor fixtures are cleaned after both successful cases and failed insertion reads",
     "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
     "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
     "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
@@ -2351,6 +2377,606 @@
         "xml.replace"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:body anchors read explicit outlines and paragraphs in saved order and filter case-insensitively without mutation",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 8,
+      "title": "body anchors read explicit outlines and paragraphs in saved order and filter case-insensitively without mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(anchors.map(a=>[a.type,a.bodyIndex,a.text,a.outlineLevel])).toEqual([['section_heading',0,'Introduction',0],['paragraph',1,'Customer context',null],['section_heading',2,'Delivery approach',1],['paragraph',3,'Use iterative delivery',null]])",
+        "expect(d.inspectBodyAnchors('DeLiVeRy').map(a=>a.text)).toEqual(['Delivery approach','Use iterative delivery'])",
+        "expect(d.inspectBodyAnchors('absent')).toEqual([])",
+        "expect(d.inspectBodyAnchors('')).toEqual(anchors)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(Object.isFrozen(anchors)).toBe(true)",
+        "expect(anchors.every(Object.isFrozen)).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=await fixture(),before=d.package.toBytes(),anchors=d.inspectBodyAnchors();expect(anchors.map(a=>[a.type,a.bodyIndex,a.text,a.outlineLevel])).toEqual([['section_heading',0,'Introduction',0],['paragraph',1,'Customer context',null],['section_heading',2,'Delivery approach',1],['paragraph',3,'Use iterative delivery',null]]);expect(d.inspectBodyAnchors('DeLiVeRy').map(a=>a.text)).toEqual(['Delivery approach','Use iterative delivery']);expect(d.inspectBodyAnchors('absent')).toEqual([]);expect(d.inspectBodyAnchors('')).toEqual(anchors);expect(d.package.toBytes()).toEqual(before);expect(Object.isFrozen(anchors)).toBe(true);expect(anchors.every(Object.isFrozen)).toBe(true);\n}",
+      "calls": [
+        "Object.isFrozen",
+        "anchors.every",
+        "anchors.map",
+        "d.inspectBodyAnchors",
+        "d.inspectBodyAnchors().map",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:insert after captured heading saves immediately adjacent text and preserves every unrelated member",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 12,
+      "title": "insert after captured heading saves immediately adjacent text and preserves every unrelated member",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inserted.text).toBe('Inserted after discovered anchor')",
+        "expect(inserted.directRunFlags()[0]!.bold).toBe(true)",
+        "expect(()=>held.text).toThrow()",
+        "expect(()=>span.replace('stale')).toThrow()",
+        "expect(()=>d.insertParagraphAfter(anchor,'stale')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}))",
+        "expect(after.paragraphs.map(p=>p.text)).toEqual(['Introduction','Customer context','Delivery approach','Inserted after discovered anchor','Use iterative delivery'])",
+        "expect(after.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 14,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(after.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=await fixture(),anchor=d.inspectBodyAnchors('delivery').find(a=>a.text==='Delivery approach')!,before=d.package.parts,held=d.paragraphs[0]!,span=held.find('Introduction')[0]!;const inserted=d.insertParagraphAfter(anchor,'Inserted after discovered anchor',{bold:true});expect(inserted.text).toBe('Inserted after discovered anchor');expect(inserted.directRunFlags()[0]!.bold).toBe(true);expect(()=>held.text).toThrow();expect(()=>span.replace('stale')).toThrow();expect(()=>d.insertParagraphAfter(anchor,'stale')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}));\n const root=await mkdtemp(join(tmpdir(),'body-anchor-'));try{const path=join(root,'anchors.docx');await d.save(path);const after=await Document.open(path);expect(after.paragraphs.map(p=>p.text)).toEqual(['Introduction','Customer context','Delivery approach','Inserted after discovered anchor','Use iterative delivery']);for(const[n,b]of before)if(n!=='word/document.xml')expect(after.package.get(n)).toEqual(b);}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "after.package.get",
+        "after.paragraphs.map",
+        "d.insertParagraphAfter",
+        "d.inspectBodyAnchors",
+        "d.inspectBodyAnchors().find",
+        "d.save",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "held.find",
+        "inserted.directRunFlags",
+        "join",
+        "mkdtemp",
+        "rm",
+        "span.replace",
+        "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:body index counts tables while excluding cell paragraphs and final section properties",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 17,
+      "title": "body index counts tables while excluding cell paragraphs and final section properties",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(anchors.map(a=>[a.bodyIndex,a.text])).toEqual([[0,'Before'],[2,'After']])",
+        "expect(d.inspectBodyAnchors().map(a=>[a.bodyIndex,a.text])).toEqual([[0,'Before'],[1,'Between'],[3,'After']])",
+        "expect(d.tables[0]!.cell(0,0).text).toBe('Not a body anchor')",
+        "expect(()=>table.rows).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=Document.create();d.addParagraph('Before');d.addTable(1,1);d.tables[0]!.cell(0,0).text='Not a body anchor';d.addParagraph('After').setProperties({outlineLevel:8});const anchors=d.inspectBodyAnchors();expect(anchors.map(a=>[a.bodyIndex,a.text])).toEqual([[0,'Before'],[2,'After']]);const table=d.tables[0]!;d.insertParagraphAfter(anchors[0]!,'Between');expect(d.inspectBodyAnchors().map(a=>[a.bodyIndex,a.text])).toEqual([[0,'Before'],[1,'Between'],[3,'After']]);expect(d.tables[0]!.cell(0,0).text).toBe('Not a body anchor');expect(()=>table.rows).toThrow();\n}",
+      "calls": [
+        "Document.create",
+        "anchors.map",
+        "d.addParagraph",
+        "d.addParagraph().setProperties",
+        "d.addTable",
+        "d.insertParagraphAfter",
+        "d.inspectBodyAnchors",
+        "d.inspectBodyAnchors().map",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:style names never manufacture headings and explicit nine differs from absence",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 21,
+      "title": "style names never manufacture headings and explicit nine differs from absence",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(rows.map(a=>[a.type,a.outlineLevel])).toEqual([['paragraph',null],['paragraph',9],['section_heading',7]])",
+        "expect(d.paragraphs[0]!.styleId).toBe('Heading1')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=Document.create();d.addParagraphStyle('Heading1',{name:'Heading One'});d.addParagraph('Style only',{style:'Heading1'});d.addParagraph('Explicit body').setProperties({outlineLevel:9});d.addParagraph('Direct heading').setProperties({outlineLevel:7});const rows=d.inspectBodyAnchors();expect(rows.map(a=>[a.type,a.outlineLevel])).toEqual([['paragraph',null],['paragraph',9],['section_heading',7]]);expect(d.paragraphs[0]!.styleId).toBe('Heading1');\n}",
+      "calls": [
+        "Document.create",
+        "d.addParagraph",
+        "d.addParagraph().setProperties",
+        "d.addParagraphStyle",
+        "d.inspectBodyAnchors",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "rows.map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:foreign cloned forged and raw-byte-stale anchors refuse without changing either document",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 25,
+      "title": "foreign cloned forged and raw-byte-stale anchors refuse without changing either document",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.insertParagraphAfter(target as typeof a,'bad')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(other.package.toBytes()).toEqual(ob)",
+        "expect(()=>d.insertParagraphAfter(a,'bad')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}))",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 26,
+          "expression": "for(const target of [other.inspectBodyAnchors()[0]!,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=await fixture(),other=await fixture(),a=d.inspectBodyAnchors()[0]!,before=d.package.toBytes(),ob=other.package.toBytes();for(const target of [other.inspectBodyAnchors()[0]!,{...a},null]){expect(()=>d.insertParagraphAfter(target as typeof a,'bad')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}));expect(d.package.toBytes()).toEqual(before);}expect(other.package.toBytes()).toEqual(ob);\n // A BOM-only external edit has identical decoded XML but different exact bytes.\n const raw=d.package.get('word/document.xml')!;d.package.setPart('word/document.xml',new Uint8Array([239,187,191,...raw]));const changed=d.package.toBytes();expect(()=>d.insertParagraphAfter(a,'bad')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}));expect(d.package.toBytes()).toEqual(changed);\n}",
+      "calls": [
+        "d.insertParagraphAfter",
+        "d.inspectBodyAnchors",
+        "d.package.get",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "other.inspectBodyAnchors",
+        "other.package.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:successful edits invalidate anchors but validated no-ops and failed inserts retain them",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 31,
+      "title": "successful edits invalidate anchors but validated no-ops and failed inserts retain them",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.insertParagraphAfter(a,'bad\\nline')).toThrow()",
+        "expect(()=>d.insertParagraphAfter(fresh,'stale')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=await fixture(),a=d.inspectBodyAnchors()[0]!;d.paragraphs[0]!.setProperties({outlineLevel:0});expect(()=>d.insertParagraphAfter(a,'bad\\nline')).toThrow();d.insertParagraphAfter(a,'allowed');const fresh=d.inspectBodyAnchors()[0]!;d.paragraphs[1]!.setText('Changed');const before=d.package.toBytes();expect(()=>d.insertParagraphAfter(fresh,'stale')).toThrow(expect.objectContaining({code:'docx-stale-anchor'}));expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "d.insertParagraphAfter",
+        "d.inspectBodyAnchors",
+        "d.package.toBytes",
+        "d.paragraphs.0.setProperties",
+        "d.paragraphs.1.setText",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:protection permits discovery but refuses insertion including empty inserted text",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 35,
+      "title": "protection permits discovery but refuses insertion including empty inserted text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(anchors).toHaveLength(4)",
+        "expect(()=>locked.insertParagraphAfter(anchors[0]!,'')).toThrow(expect.objectContaining({code:'docx-format-protected'}))",
+        "expect(locked.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(pkg.toBytes()),before=locked.package.toBytes(),anchors=locked.inspectBodyAnchors();expect(anchors).toHaveLength(4);expect(()=>locked.insertParagraphAfter(anchors[0]!,'')).toThrow(expect.objectContaining({code:'docx-format-protected'}));expect(locked.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "locked.insertParagraphAfter",
+        "locked.inspectBodyAnchors",
+        "locked.package.toBytes",
+        "pkg.mainPart",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:unsupported or malformed body paragraphs refuse the entire discovery even when query would exclude them",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 39,
+      "title": "unsupported or malformed body paragraphs refuse the entire discovery even when query would exclude them",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.inspectBodyAnchors('Introduction')).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const change of [\n  (s:string)=>s.replace('<w:t>Use iterative delivery</w:t>','<w:fldChar w:fldCharType=\"begin\"/>'),\n  (s:string)=>s.replace('w:val=\"1\"','w:val=\"10\"'),\n  (s:string)=>s.replace('</w:body>','<w:sdt/></w:body>'),\n  (s:string)=>s.replace('<w:body>','<w:body><!--lexical-->'),\n ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n for(const change of [\n  (s:string)=>s.replace('<w:t>Use iterative delivery</w:t>','<w:fldChar w:fldCharType=\"begin\"/>'),\n  (s:string)=>s.replace('w:val=\"1\"','w:val=\"10\"'),\n  (s:string)=>s.replace('</w:body>','<w:sdt/></w:body>'),\n  (s:string)=>s.replace('<w:body>','<w:body><!--lexical-->'),\n ]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.inspectBodyAnchors('Introduction')).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.inspectBodyAnchors",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "s.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:empty documents produce no anchors and invalid queries refuse without coercion",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 48,
+      "title": "empty documents produce no anchors and invalid queries refuse without coercion",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.inspectBodyAnchors()).toEqual([])",
+        "expect(()=>d.inspectBodyAnchors(q as string)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 49,
+          "expression": "for(const q of [null,1,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=Document.create(),before=d.package.toBytes();expect(d.inspectBodyAnchors()).toEqual([]);for(const q of [null,1,{},'x'.repeat(4097)])expect(()=>d.inspectBodyAnchors(q as string)).toThrow();expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        ".repeat",
+        "Document.create",
+        "d.inspectBodyAnchors",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:write and serialization failure roll back inserted text and keep the same anchor usable",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 52,
+      "title": "write and serialization failure roll back inserted text and keep the same anchor usable",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.insertParagraphAfter(a,'bad')).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.insertParagraphAfter(a,'retry').text).toBe('retry')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 53,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),a=d.inspectBodyAnchors()[0]!,before=d.package.toBytes(),pkg=(d as any).opcPackage as OpcPackage,original=pkg[stage].bind(pkg);if(stage==='set')pkg.set=(n,v)=>{(original as OpcPackage['set'])(n,v);throw Error('injected');};else pkg.toBytes=()=>{throw Error('injected');};try{expect(()=>d.insertParagraphAfter(a,'bad')).toThrow('injected');}finally{if(stage==='set')pkg.set=original as OpcPackage['set'];else pkg.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(d.insertParagraphAfter(a,'retry').text).toBe('retry');}\n}",
+      "calls": [
+        "Error",
+        "d.insertParagraphAfter",
+        "d.inspectBodyAnchors",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "original",
+        "pkg.undefined.bind"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:anchor insertion preserves aliased main XML UTF8 BOM and both UTF16 byte orders after reopen",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 56,
+      "title": "anchor insertion preserves aliased main XML UTF8 BOM and both UTF16 byte orders after reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(after.paragraphs.map(p=>p.text)).toEqual(['Introduction','雪😀','Customer context','Delivery approach','Use iterative delivery'])",
+        "expect([...after.package.get('word/document.xml')!.slice(0,codec==='utf8'?3:2)]).toEqual(codec==='utf8'?[239,187,191]:codec==='le'?[255,254]:[254,255])",
+        "expect(after.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 57,
+          "expression": "for(const codec of ['utf8','le','be'])"
+        },
+        {
+          "line": 57,
+          "expression": "for(let i=0;i<text.length;i++)v.setUint16(2+2*i,text.charCodeAt(i),codec==='le');"
+        },
+        {
+          "line": 57,
+          "expression": "for(const n of pkg.names())if(n!==pkg.mainPart())expect(after.package.get(n)).toEqual(pkg.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n for(const codec of ['utf8','le','be']){const d=await fixture(s=>s.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=')),pkg=await OpcPackage.open(d.package.toBytes()),raw=pkg.get(pkg.mainPart())!;if(codec==='utf8')pkg.set(pkg.mainPart(),new Uint8Array([239,187,191,...raw]));else{const text=pkg.text(pkg.mainPart()).replace('UTF-8','UTF-16'),b=new Uint8Array(2+text.length*2);b.set(codec==='le'?[255,254]:[254,255]);const v=new DataView(b.buffer);for(let i=0;i<text.length;i++)v.setUint16(2+2*i,text.charCodeAt(i),codec==='le');pkg.set(pkg.mainPart(),b);}const loaded=await Document.open(pkg.toBytes()),a=loaded.inspectBodyAnchors('Introduction')[0]!;loaded.insertParagraphAfter(a,'雪😀');const after=await Document.open(await loaded.save());expect(after.paragraphs.map(p=>p.text)).toEqual(['Introduction','雪😀','Customer context','Delivery approach','Use iterative delivery']);expect([...after.package.get('word/document.xml')!.slice(0,codec==='utf8'?3:2)]).toEqual(codec==='utf8'?[239,187,191]:codec==='le'?[255,254]:[254,255]);for(const n of pkg.names())if(n!==pkg.mainPart())expect(after.package.get(n)).toEqual(pkg.get(n));}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "after.package.get",
+        "after.package.get().slice",
+        "after.paragraphs.map",
+        "b.set",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "fixture",
+        "loaded.insertParagraphAfter",
+        "loaded.inspectBodyAnchors",
+        "loaded.save",
+        "pkg.get",
+        "pkg.mainPart",
+        "pkg.names",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes",
+        "s.replaceAll",
+        "s.replaceAll().replaceAll",
+        "text.charCodeAt",
+        "v.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:discovery and insertion have separate output bounds with unchanged state on refusal",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 60,
+      "title": "discovery and insertion have separate output bounds with unchanged state on refusal",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>loaded.insertParagraphAfter(a,'too large')).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(loaded.inspectBodyAnchors()[0]!.text).toBe('Introduction')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const d=await fixture(),source=xml(d);d.package.setPart('word/document.xml',new TextEncoder().encode(source.replace('</w:body>',' '.repeat(8*1024*1024-source.length-1)+'</w:body>')));const loaded=await Document.open(d.package.toBytes()),a=loaded.inspectBodyAnchors()[0]!,before=loaded.package.toBytes();expect(()=>loaded.insertParagraphAfter(a,'too large')).toThrow();expect(loaded.package.toBytes()).toEqual(before);expect(loaded.inspectBodyAnchors()[0]!.text).toBe('Introduction');\n}",
+      "calls": [
+        ".encode",
+        ".repeat",
+        "Document.open",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "loaded.insertParagraphAfter",
+        "loaded.inspectBodyAnchors",
+        "loaded.package.toBytes",
+        "source.replace",
+        "xml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:three canonical body-anchor cases reject false headings empty filters and corrupted saved insertion",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 64,
+      "title": "three canonical body-anchor cases reject false headings empty filters and corrupted saved insertion",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(3)",
+        "expect(good.counts.cases.planned).toBe(2)",
+        "expect(result.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(result.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)",
+        "expect(wrong.counts.cases.failed).toBe(1)",
+        "expect(wrong.counts.steps.undefined).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 68,
+          "expression": "for(const [step,mutate]of [\n  ['Word anchors are listed without a query',(s:any)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,cleanup}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/body-anchors.ts');const path='workflows/docx/anchor-discovery.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});\n const run=async(active=bindings,text=source)=>{const feature=selectSharedScenarios(path,text,scenarioIds);try{return await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(3),cases:count(3),steps:count(16)}},active,'anchors-canonical');}finally{await cleanup();}};\n const good=await run();expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(3);expect(good.counts.cases.planned).toBe(2);\n for(const [step,mutate]of [\n  ['Word anchors are listed without a query',(s:any)=>{s.anchors=s.anchors.map((a:any)=>({...a,type:'paragraph'}));}],\n  ['Word anchors are listed with query \"delivery\"',(s:any)=>{s.anchors=[];}],\n  ['Word anchors are listed with query \"delivery\"',(s:any)=>{s.anchors=s.document.inspectBodyAnchors();}],\n  ['\"Inserted after discovered anchor\" is inserted after that anchor in the source document',async(s:any)=>{const d=await Document.open(s.path);d.paragraphs[3]!.setText('Wrong');await d.save(s.path);}],\n ] as const){const bad=bindings.map(b=>b.pattern.test(step)?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);await mutate(c.state);}}:b);const result=await run(bad);expect(result.counts.cases.failed).toBeGreaterThan(0);expect(result.counts.steps.failed).toBeGreaterThan(0);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);}\n const wrong=await run(bindings,source.replace('type \"section_heading\" and text \"Introduction\"','type \"section_heading\" and text \"Wrong\"'));expect(wrong.counts.cases.failed).toBe(1);expect(wrong.counts.steps.undefined).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "Document.open",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "cleanup",
+        "count",
+        "d.paragraphs.3.setText",
+        "d.save",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "mutate",
+        "run",
+        "s.anchors.map",
+        "s.document.inspectBodyAnchors",
+        "selectSharedScenarios",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-body-anchors.test.ts:saved anchor fixtures are cleaned after both successful cases and failed insertion reads",
+      "path": "tests/unit/docx-body-anchors.test.ts",
+      "line": 77,
+      "title": "saved anchor fixtures are cleaned after both successful cases and failed insertion reads",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result!.counts.cases.failed).toBe(text===source?0:1)",
+        "expect(roots).toHaveLength(6)",
+        "expect(lstat(root)).rejects.toMatchObject({code:'ENOENT'})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 80,
+          "expression": "for(const text of [source,source.replace('shows \"Inserted after discovered anchor\" immediately','shows \"Wrong\" immediately')])"
+        },
+        {
+          "line": 81,
+          "expression": "for(const root of roots)await expect(lstat(root)).rejects.toMatchObject("
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,cleanup}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/body-anchors.ts'),{lstat}=await import('node:fs/promises');const path='workflows/docx/anchor-discovery.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),roots:string[]=[],count=(n:number)=>({implemented:n,planned:0,total:n});\n const capture=bindings.map(b=>b.pattern.test('a saved Word document has headings \"Introduction\" and \"Delivery approach\" with paragraphs \"Current intro\" and \"Current delivery\"')||b.pattern.test('a saved Word document has headings \"Introduction\" and \"Delivery approach\" and paragraphs \"Customer context paragraph\" and \"Use iterative delivery\"')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);roots.push((c.state as {root:string}).root);}}:b);\n for(const text of [source,source.replace('shows \"Inserted after discovered anchor\" immediately','shows \"Wrong\" immediately')]){let result;try{result=await executeAcceptance({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(3),cases:count(3),steps:count(16)}},capture,'anchors-cleanup');}finally{await cleanup();}expect(result!.counts.cases.failed).toBe(text===source?0:1);}\n expect(roots).toHaveLength(6);for(const root of roots)await expect(lstat(root)).rejects.toMatchObject({code:'ENOENT'});\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "cleanup",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().rejects.toMatchObject",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "fixturesRoot",
+        "join",
+        "lstat",
+        "roots.push",
+        "selectSharedScenarios",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {
