@@ -81,17 +81,18 @@ export async function outcomeMappingReport(){
  const root=process.cwd();
  // Fixed registrations prevent removing a ledger or shrinking its scope in JSON.
  const registrations=[
-  {name:'slide-order',test:'tests/unit/pptx-slide-order.test.ts',canonical:'workflows/pptx/slide-order.feature',sources:['tests/acceptance/slide-order.ts','src/pptx/index.ts','src/pptx/slide-order.ts']},
-  {name:'effective-formatting',test:'tests/unit/docx-effective-formatting.test.ts',canonical:'workflows/docx/effective-formatting.feature',sources:['tests/acceptance/effective-formatting.ts','src/docx/index.ts','src/docx/effective-formatting.ts']},
-  {name:'xml-values',test:'tests/unit/xml.test.ts',canonical:'workflows/xml/parsing.feature',sources:['tests/acceptance/core.ts','tests/acceptance/xml-values.ts','src/xml/index.ts','src/errors.ts']},
-  {name:'pptx-core',test:'tests/unit/pptx.test.ts',canonical:'workflows/native/pptx-text.feature',sources:['tests/acceptance/pptx.ts','tests/acceptance/pptx-custody.ts','src/pptx/index.ts','src/opc/package.ts','src/opc/zip.ts','scripts/acceptance.ts','scripts/fixture-inputs.ts']},
+  {name:'slide-order',tests:['tests/unit/pptx-slide-order.test.ts'],canonical:'workflows/pptx/slide-order.feature',sources:['tests/acceptance/slide-order.ts','src/pptx/index.ts','src/pptx/slide-order.ts']},
+  {name:'effective-formatting',tests:['tests/unit/docx-effective-formatting.test.ts'],canonical:'workflows/docx/effective-formatting.feature',sources:['tests/acceptance/effective-formatting.ts','src/docx/index.ts','src/docx/effective-formatting.ts']},
+  {name:'xml-values',tests:['tests/unit/xml.test.ts'],canonical:'workflows/xml/parsing.feature',sources:['tests/acceptance/core.ts','tests/acceptance/xml-values.ts','src/xml/index.ts','src/errors.ts']},
+  {name:'pptx-core',tests:['tests/unit/pptx.test.ts'],canonical:'workflows/native/pptx-text.feature',sources:['tests/acceptance/pptx.ts','tests/acceptance/pptx-custody.ts','src/pptx/index.ts','src/opc/package.ts','src/opc/zip.ts','scripts/acceptance.ts','scripts/fixture-inputs.ts']},
+  {name:'docx-model',tests:['tests/unit/docx-append-run.test.ts','tests/unit/docx-cell-properties.test.ts','tests/unit/docx-row-header.test.ts'],canonical:'workflows/docx/document-model.feature',sources:['tests/acceptance/append-run.ts','tests/acceptance/cell-properties.ts','tests/acceptance/row-header.ts','tests/acceptance/docx-model.ts','tests/acceptance/steps.ts','src/docx/index.ts','src/docx/append-run.ts','src/docx/cell-properties.ts','src/docx/row-header.ts','src/docx/run-formatting.ts','src/docx/paragraph-style.ts','src/opc/package.ts','src/xml/index.ts']},
  ];
  const sets:OutcomeMappingSet[]=[];
  for(const registration of registrations){
   const ledger=await Bun.file(join(root,`docs/behaviors/${registration.name}-mappings.json`)).json() as OutcomeMappingLedger;
-  const sources:Record<string,string>={};for(const path of [registration.test,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
+  const sources:Record<string,string>={};for(const path of [...registration.tests,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
   sources[registration.canonical]=await Bun.file(join(fixturesRoot(),registration.canonical)).text();
-  sets.push({name:registration.name,expectedScopePaths:[registration.test],ledger,features:[parseFeature(registration.canonical,sources[registration.canonical]!,{allowDuplicateCaseNames:true})],sources});
+  sets.push({name:registration.name,expectedScopePaths:registration.tests,ledger,features:[parseFeature(registration.canonical,sources[registration.canonical]!,{allowDuplicateCaseNames:true})],sources});
  }
  return reconcileOutcomeMappingSets(await inventoryNativeTests(root),sets);
 }

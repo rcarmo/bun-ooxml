@@ -4,8 +4,8 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 641,
-  "mappedDeclarations": 44,
+  "totalDeclarations": 646,
+  "mappedDeclarations": 82,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
@@ -32,7 +32,21 @@
     "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
     "scripts/acceptance.ts": "5261e255bc7ba84b861469994a1e4e307090fd222524f93826b8c5a84a3a6ac2",
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
-    "workflows/native/pptx-text.feature": "d2e710f66e78dfa0beabf5d7076d7c67fe4e686744f008a2a134122749cb5444"
+    "workflows/native/pptx-text.feature": "d2e710f66e78dfa0beabf5d7076d7c67fe4e686744f008a2a134122749cb5444",
+    "tests/unit/docx-append-run.test.ts": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144",
+    "tests/unit/docx-cell-properties.test.ts": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+    "tests/unit/docx-row-header.test.ts": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695",
+    "tests/acceptance/append-run.ts": "6ee880ca361688f7a9a5e72069034353713348f572f6e1d35b9f70906865f205",
+    "tests/acceptance/cell-properties.ts": "217e0af8281eb2ae0b7084747c18ede83b1795356e017c4a286714775b003bbc",
+    "tests/acceptance/row-header.ts": "bb004884ea1118edd242864345e0df1c8fcd10276c60d22e5f4bcee56916f6df",
+    "tests/acceptance/docx-model.ts": "a1db5a0c18219ee8440580cccaf03ea65657a027c39f7b25721e9364cdf8c91a",
+    "tests/acceptance/steps.ts": "9bcd3f6e33388710cbc8e18d0dcac8c522feeb2130953734e6aec898f77eafc7",
+    "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
+    "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
+    "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
+    "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
+    "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+    "workflows/docx/document-model.feature": "134222823c7c4fb5cf9f73c89ea753902278a1b14b2e3b39a1a22fb0fc5b472d"
   },
   "ledgers": [
     {
@@ -103,6 +117,36 @@
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/native/pptx-text.feature": "d2e710f66e78dfa0beabf5d7076d7c67fe4e686744f008a2a134122749cb5444"
       }
+    },
+    {
+      "name": "docx-model",
+      "scopePaths": [
+        "tests/unit/docx-append-run.test.ts",
+        "tests/unit/docx-cell-properties.test.ts",
+        "tests/unit/docx-row-header.test.ts"
+      ],
+      "mappedDeclarations": 38,
+      "sourceSha256": {
+        "tests/unit/docx-append-run.test.ts": "ba189b19d297415d92dec4746b0f247cfd703e7e2d36f49940a889e445b13144",
+        "tests/unit/docx-cell-properties.test.ts": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+        "tests/unit/docx-row-header.test.ts": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695",
+        "tests/acceptance/append-run.ts": "6ee880ca361688f7a9a5e72069034353713348f572f6e1d35b9f70906865f205",
+        "tests/acceptance/cell-properties.ts": "217e0af8281eb2ae0b7084747c18ede83b1795356e017c4a286714775b003bbc",
+        "tests/acceptance/row-header.ts": "bb004884ea1118edd242864345e0df1c8fcd10276c60d22e5f4bcee56916f6df",
+        "tests/acceptance/docx-model.ts": "a1db5a0c18219ee8440580cccaf03ea65657a027c39f7b25721e9364cdf8c91a",
+        "tests/acceptance/steps.ts": "9bcd3f6e33388710cbc8e18d0dcac8c522feeb2130953734e6aec898f77eafc7",
+        "src/docx/index.ts": "3ed31d9f08a2c63cbfe3457bfffba0bea4115daa349f3b4f639d3a0b05a50ffd",
+        "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
+        "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
+        "src/docx/row-header.ts": "28509818ff845ffb6885f3bec047817c4b54dca4495c8ca6982adbac39942587",
+        "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
+        "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/document-model.feature": "134222823c7c4fb5cf9f73c89ea753902278a1b14b2e3b39a1a22fb0fc5b472d"
+      }
     }
   ],
   "unmappedTestIds": [
@@ -116,33 +160,6 @@
     "bun:tests/unit/content-types.test.ts:opc content type helpers / removePartContentType removes only the matching override and never rewrites defaults",
     "bun:tests/unit/content-types.test.ts:opc content type helpers / detached overrides remain queryable for parts that do not yet exist",
     "bun:tests/unit/content-types.test.ts:opc content type helpers / invalid inputs and malformed current content types leave bytes untouched",
-    "bun:tests/unit/docx-append-run.test.ts:three appended runs remain distinct and concatenate through returned fresh paragraph handles",
-    "bun:tests/unit/docx-append-run.test.ts:per-run authoring preserves selected formatting after real path save and reopen",
-    "bun:tests/unit/docx-append-run.test.ts:append retains existing paragraph/run fragments, sibling paragraphs and unrelated member bytes",
-    "bun:tests/unit/docx-append-run.test.ts:self-closing paragraphs expand with namespace safety and empty text still appends one run",
-    "bun:tests/unit/docx-append-run.test.ts:invalid text, executable patches and conflicting formatting refuse before mutation",
-    "bun:tests/unit/docx-append-run.test.ts:unsupported, revised and lexical target topology refuses without silently flattening",
-    "bun:tests/unit/docx-append-run.test.ts:document protection and external XML changes refuse held append handles",
-    "bun:tests/unit/docx-append-run.test.ts:staged write and serialization failure preserve paragraph/cell handles and package",
-    "bun:tests/unit/docx-append-run.test.ts:table append preserves grid and expires cell snapshots, with UTF-16 payload retained",
-    "bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting",
-    "bun:tests/unit/docx-append-run.test.ts:append defaults do not borrow direct formatting from previous runs and preserve explicit null",
-    "bun:tests/unit/docx-append-run.test.ts:run append enforces complete XML output bounds before mutating a nearly full package",
-    "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
-    "bun:tests/unit/docx-cell-properties.test.ts:null removes direct properties, same-state preserves archive and returned border data is detached",
-    "bun:tests/unit/docx-cell-properties.test.ts:editing top border preserves other border fragments and unrelated cell properties exactly",
-    "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
-    "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
-    "bun:tests/unit/docx-cell-properties.test.ts:unknown, duplicate, revised or lexical cell metadata refuses before a same-value request",
-    "bun:tests/unit/docx-cell-properties.test.ts:protection and external document changes refuse without package mutation",
-    "bun:tests/unit/docx-cell-properties.test.ts:staged write and serialization failures retain the cell handle and bytes",
-    "bun:tests/unit/docx-cell-properties.test.ts:alias namespaces and UTF-16 path save preserve values and unrelated payloads",
-    "bun:tests/unit/docx-cell-properties.test.ts:missing or self-closing cell property containers accept ordered additions without changing children",
-    "bun:tests/unit/docx-cell-properties.test.ts:misordered owner properties and nested cell-property revisions refuse atomically",
-    "bun:tests/unit/docx-cell-properties.test.ts:merged or nested cells refuse property writes and no-op still checks protection",
-    "bun:tests/unit/docx-cell-properties.test.ts:two shared direct cell cases execute and altered readback predicates fail",
-    "bun:tests/unit/docx-cell-properties.test.ts:bounded width, border size and all supported direction/alignment values survive direct readback",
-    "bun:tests/unit/docx-cell-properties.test.ts:colour validation refuses trailing line endings rather than XML-normalising a requested value",
     "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
     "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
     "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
@@ -205,6 +222,11 @@
     "bun:tests/unit/docx-model-bindings.test.ts:saved table checks inspect every cell position and reject changed delivered bytes",
     "bun:tests/unit/docx-model-bindings.test.ts:DOCX model path outputs are removed after successful and failed saves",
     "bun:tests/unit/docx-model-bindings.test.ts:all eight dimension rows and the saved table exercise the requested grid sizes",
+    "bun:tests/unit/docx-model-mappings.test.ts:committed DOCX model ledger covers exactly three full native suites without new execution credit",
+    "bun:tests/unit/docx-model-mappings.test.ts:DOCX mappings distinguish aggregate acceptance assertions, native extensions and different table dimensions",
+    "bun:tests/unit/docx-model-mappings.test.ts:DOCX ledger refuses dropped suites, dropped declarations, omitted assertions and invented assertions",
+    "bun:tests/unit/docx-model-mappings.test.ts:DOCX ledger refuses stale runtime, binding and canonical pins and unrelated canonical identities",
+    "bun:tests/unit/docx-model-mappings.test.ts:DOCX mapping validation retains native dynamic review flags and leaves source evidence untouched",
     "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
     "bun:tests/unit/docx-page-layout.test.ts:page geometry changes stale paragraphs and cells while table handles remain valid",
     "bun:tests/unit/docx-page-layout.test.ts:numeric and default-orientation no-op retains exact spelling and existing handles",
@@ -264,17 +286,6 @@
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / preflights unsupported nested stories and protected packages before mutating bytes",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / passes the DOCX revisions acceptance feature with dedicated bindings",
-    "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",
-    "bun:tests/unit/docx-row-header.test.ts:all on/off lexical values read correctly and validated no-ops retain exact XML and handles",
-    "bun:tests/unit/docx-row-header.test.ts:self-closing properties and unordered trPrBase metadata retain exact sibling fragments",
-    "bun:tests/unit/docx-row-header.test.ts:invalid coordinates and non-Boolean input refuse atomically",
-    "bun:tests/unit/docx-row-header.test.ts:duplicate, decorated, wrong-namespace, revised and lexical markers refuse even removal or no-op",
-    "bun:tests/unit/docx-row-header.test.ts:unsupported row/table topology, revision and merged-cell contexts refuse before mutation",
-    "bun:tests/unit/docx-row-header.test.ts:protection and external XML changes refuse including same-value requests",
-    "bun:tests/unit/docx-row-header.test.ts:package write and serialization failure roll back bytes and retain paragraph/cell/table handles",
-    "bun:tests/unit/docx-row-header.test.ts:alias and conflicting lexical w bindings plus UTF-16 save retain expanded marker identity",
-    "bun:tests/unit/docx-row-header.test.ts:shared header getter executes and false readback or initial-state predicates fail assertions",
-    "bun:tests/unit/docx-row-header.test.ts:output bound refuses row header insertion without expiring live handles",
     "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
     "bun:tests/unit/docx-run-appearance.test.ts:appearance edits follow schema order alongside flags and sizes and preserve unrelated property bytes",
     "bun:tests/unit/docx-run-appearance.test.ts:explicit none/baseline/auto differ from null removal and same-state retains lexical spelling",
@@ -379,7 +390,7 @@
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses unknown canonical scenarios, case keys and duplicate IDs",
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects missing source pins, invented scope paths and empty outcomes/gaps",
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate rejects fabricated execution credit and preserves dynamic review flags",
-    "bun:tests/unit/outcome-mappings.test.ts:committed ledgers enumerate slide-order, effective-formatting, XML and PPTX assertions with known gaps",
+    "bun:tests/unit/outcome-mappings.test.ts:committed ledgers enumerate slide-order, effective-formatting, XML, PPTX and DOCX model assertions with known gaps",
     "bun:tests/unit/outcome-mappings.test.ts:mapping gate refuses silently omitted native assertions",
     "bun:tests/unit/outcome-mappings.test.ts:scenario-only links remain explicitly distinct from case-key links",
     "bun:tests/unit/outcome-mappings.test.ts:independent ledgers share one denominator without execution credit or dropped mappings",
@@ -1982,6 +1993,1155 @@
       "unresolved": [],
       "executionCredit": false,
       "ledger": "pptx-core"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:three appended runs remain distinct and concatenate through returned fresh paragraph handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs"
+      ],
+      "caseKeys": [
+        "@id-docx-go-paragraph-multiple-runs"
+      ],
+      "assertions": [
+        "expect(last.text).toBe('Hello World!')",
+        "expect(d.paragraphs).toHaveLength(1)",
+        "expect(last).toBe(d.paragraphs[0]!)",
+        "expect(()=>first.text).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(()=>second.appendRun('stale')).toThrow()",
+        "expect(last.directRunFlags()).toHaveLength(3)",
+        "expect(reopened.paragraphs[0]!.text).toBe('Hello World!')",
+        "expect(reopened.paragraphs[0]!.directRunFlags()).toHaveLength(3)"
+      ],
+      "outcomes": [
+        "Three independent runs concatenate to Hello World! in memory and after byte reopen; former paragraph handles refuse."
+      ],
+      "gaps": [
+        "Only the canonical concatenation path overlaps; byte reopen and stale handles extend the in-memory scenario, with no path-save or formatting assertions here.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:per-run authoring preserves selected formatting after real path save and reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "assertions": [
+        "expect(p.text).toBe('Bold Italic Colored')",
+        "expect(q.directRunFlags().map(v=>[v.bold,v.italic])).toEqual([[true,null],[null,true],[null,null]])",
+        "expect(q.directRunAppearance().map(v=>v.color)).toEqual([null,null,'FF0000'])",
+        "expect(q.directFontSizes()).toEqual([null,null,14])",
+        "expect(q.directFontNames()).toEqual([null,null,'Arial'])",
+        "expect(q.text).toBe('Bold Italic Colored')"
+      ],
+      "outcomes": [
+        "Real path save/reopen retains Bold/Italic/Colored text, direct bold/italic flags, FF0000 colour, 14-point size and Arial font slots."
+      ],
+      "gaps": [
+        "No unrelated-part custody assertion occurs in this test; saved getter arrays do not establish rendering or font availability.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:append retains existing paragraph/run fragments, sibling paragraphs and unrelated member bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml).toContain(content)",
+        "expect(xml).toContain(siblingXml)",
+        "expect(xml).toContain('xml:space=\"preserve\"')",
+        "expect(xml).toContain('&amp; &lt;雪&gt;')",
+        "expect(d.paragraphs[0]!.text).toBe('Alpha & <雪> ')",
+        "expect(d.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Append preserves the existing paragraph/run fragment and one sibling paragraph verbatim, escapes metacharacters, retains boundary spaces and compares every unrelated member."
+      ],
+      "gaps": [
+        "Different Alpha/snow input; comparisons use current package members, not disk save/reopen. No complete canonical formatting predicate is asserted.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:self-closing paragraphs expand with namespace safety and empty text still appends one run",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.text).toBe('one')",
+        "expect(p.directRunFlags()).toHaveLength(2)",
+        "expect(elements(xml,'r',W)).toHaveLength(2)",
+        "expect(elements(xml,'r','urn:foreign')).toHaveLength(0)",
+        "expect(p.directRunFlags()[0]!.bold).toBe(true)"
+      ],
+      "outcomes": [
+        "An aliased self-closing paragraph with a foreign lexical w binding gains two Word runs, including an empty run, and retains direct bold."
+      ],
+      "gaps": [
+        "Different one/empty input; namespace and empty-run extension only, no saved-output or canonical three-run formatting checks.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:invalid text, executable patches and conflicting formatting refuse before mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.appendRun(text as string)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>p.appendRun('good',patch as RunFormattingPatch)).toThrow()",
+        "expect(()=>p.appendRun('x',patch)).toThrow()",
+        "expect(called).toBe(false)",
+        "expect(p.text).toBe('Alpha')"
+      ],
+      "outcomes": [
+        "Invalid text, invalid/conflicting formatting and accessor-backed patches refuse without archive changes or getter invocation; held text survives."
+      ],
+      "gaps": [
+        "Control-only refusal extension; canonical scenarios describe successful authoring, not these bounded argument policies.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:unsupported, revised and lexical target topology refuses without silently flattening",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.appendRun('No')).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Hyperlink, field, lexical, revision and misordered paragraph-property inputs refuse append with archive bytes unchanged."
+      ],
+      "gaps": [
+        "Control-only topology extension; no successful canonical append or complete topology support is established.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:document protection and external XML changes refuse held append handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>locked.paragraphs[0]!.appendRun('x')).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(lb)",
+        "expect(()=>held.appendRun('x')).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Protected documents and externally changed document XML refuse append; package bytes after each attempted mutation are unchanged."
+      ],
+      "gaps": [
+        "Control-only protection and stale-source extension; no successful canonical concatenation or disk refusal is asserted.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:staged write and serialization failure preserve paragraph/cell handles and package",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>p.appendRun('Beta',{bold:true})).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Alpha')",
+        "expect(cell.text).toBe('Alpha')",
+        "expect(p.appendRun('Beta').text).toBe('AlphaBeta')"
+      ],
+      "outcomes": [
+        "Injected package set and serialization failures preserve bytes, paragraph and cell text; restored operations can append AlphaBeta."
+      ],
+      "gaps": [
+        "Control-only rollback extension on a one-cell table, not the canonical inputs; no exhaustive commit or filesystem fault model.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:table append preserves grid and expires cell snapshots, with UTF-16 payload retained",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(table.rows).toBe(1)",
+        "expect(table.columns).toBe(2)",
+        "expect(()=>cell.text).toThrow()",
+        "expect(table.cell(0,0).text).toBe('Alpha + 雪')",
+        "expect(table.cell(0,1).text).toBe('Other')",
+        "expect([...after.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(after.paragraphs[0]!.text).toBe('Alpha + 雪')",
+        "expect(after.paragraphs[0]!.directRunAppearance()[1]!.underline).toBe('single')"
+      ],
+      "outcomes": [
+        "A table-cell paragraph append preserves dimensions and sibling text, expires a held cell, and retains UTF-16 BOM, text and underline after byte reopen."
+      ],
+      "gaps": [
+        "UTF-16/table extension with Alpha plus snow and underline; not the canonical formatting values, and no path save is used.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(2)",
+        "expect(good.counts.cases.planned).toBeGreaterThan(0)",
+        "expect(expected.counts.cases.failed).toBe(1)",
+        "expect(expected.counts.steps.failed).toBe(1)",
+        "expect(expected.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "The two selected canonical cases pass; changed expected formatting and five post-reopen formatting corruptions each cause one assertion-step failure, not undefined or ambiguous bindings."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; semantic checks live in the pinned acceptance bindings. Corruption modifies the reopened in-memory document, not the already-saved bytes.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:append defaults do not borrow direct formatting from previous runs and preserve explicit null",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs",
+        "@id-docx-go-roundtrip-selected-formatting"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.directRunFlags().map(f=>[f.bold,f.italic])).toEqual([[true,null],[null,null],[null,true]])",
+        "expect(()=>p.appendRun('bad',{fontName:'Arial',strike:true,doubleStrike:true})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('OldPlainNew')"
+      ],
+      "outcomes": [
+        "Appended runs do not borrow previous direct bold, null leaves bold absent, italic remains independent, and conflicting formatting refuses without changing archive or held text."
+      ],
+      "gaps": [
+        "Different Old/Plain/New input; direct-default and atomic refusal extension, not canonical saved formatting or computed inheritance.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-append-run.test.ts:run append enforces complete XML output bounds before mutating a nearly full package",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-multiple-runs"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>held.appendRun('a')).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('')"
+      ],
+      "outcomes": [
+        "An append exceeding the complete XML output limit refuses with XML_EDIT_UNSAFE while preserving archive bytes and the held empty paragraph."
+      ],
+      "gaps": [
+        "Control-only output bound extension on a synthetic near-limit document; not canonical concatenation, memory-allocation timing or filesystem behavior.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(cell.directProperties()).toEqual({widthTwips:4320,verticalAlign:null,textDirection:null,shading:null,topBorder:null})",
+        "expect(cell.setProperties(props)).toEqual({changed:1})",
+        "expect(()=>cell.directProperties()).toThrow(expect.objectContaining({code:'docx-stale-table-cell'}))",
+        "expect(table.rows).toBe(2)",
+        "expect(table.columns).toBe(2)",
+        "expect(table.cell(0,0).text).toBe('Alpha')",
+        "expect(reopened.tables[0]!.cell(0,0).directProperties()).toEqual(props)",
+        "expect(xml).toContain(siblingXml)",
+        "expect(elements(parsed,'tcPr',W)[0]!.children.map(n=>n.localName)).toEqual(['tcW','tcBorders','shd','textDirection','vAlign'])",
+        "expect(attribute(width,'w',W)).toBe('2400')",
+        "expect(attribute(width,'type',W)).toBe('dxa')",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "outcomes": [
+        "Direct width, shading, alignment, direction and single top border survive byte reopen; live dimensions and selected text are checked before save. After reopen, exact sibling-cell XML and every unrelated member match, with explicit dxa width verified."
+      ],
+      "gaps": [
+        "Combined local 2x2 input differs from the one-row width/border case; byte reopen extends in-memory canonical getters and does not cover path save or rendered widths.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:null removes direct properties, same-state preserves archive and returned border data is detached",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(cell.setProperties(props)).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('Alpha')",
+        "expect(cell.directProperties().topBorder!.size).toBe(8)",
+        "expect(d.tables[0]!.cell(0,0).directProperties()).toEqual({widthTwips:null,verticalAlign:null,textDirection:null,shading:null,topBorder:null})",
+        "expect(d.tables[0]!.cell(0,0).setProperties({topBorder:null})).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(after)"
+      ],
+      "outcomes": [
+        "Identical cell-property patches retain archive and handles; returned border data is detached; null removes direct values and absent-border removal is a no-op."
+      ],
+      "gaps": [
+        "Control-only no-op, removal and detached-result extension; no canonical initial assignment values or saved-output assertions here.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:editing top border preserves other border fragments and unrelated cell properties exactly",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml).toContain(side)",
+        "expect(xml).toContain('<w:noWrap/>')",
+        "expect(xml).toContain('<w:tcMar><w:top w:w=\"40\" w:type=\"dxa\"/></w:tcMar>')",
+        "expect(d.tables[0]!.cell(0,0).directProperties().topBorder).toBeNull()"
+      ],
+      "outcomes": [
+        "Adding/removing the selected top border retains the bottom-border, noWrap and cell-margin fragments exactly."
+      ],
+      "gaps": [
+        "Selected-fragment custody extension; shading aabbcc differs from the shared value and no saved border getter or full schema interpretation is asserted.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>cell.setProperties(patch as CellPropertiesPatch)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(called).toBe(false)"
+      ],
+      "outcomes": [
+        "Invalid scalar/nested patches and executable border accessors refuse atomically without accessor invocation."
+      ],
+      "gaps": [
+        "Control-only argument extension; the shared positive getter cases do not specify these API limits or invalid inputs.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties(patch)).toThrow()",
+        "expect(()=>d.tables[0]!.cell(0,0).directProperties()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Percentage widths, themed/patterned shading, decorated/duplicate borders and misqualified/unknown property values refuse reads and writes with archive unchanged."
+      ],
+      "gaps": [
+        "Control-only metadata extension; these deliberate refusals do not establish support for the rejected property variants.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:unknown, duplicate, revised or lexical cell metadata refuses before a same-value request",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unknown, duplicate, revised, misordered and lexical cell-property metadata refuses a shading assignment without changing archive bytes."
+      ],
+      "gaps": [
+        "Control-only topology extension; the assignment is not a successful canonical shading readback.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:protection and external document changes refuse without package mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>locked.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(()=>held.setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(()=>held.directProperties()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "outcomes": [
+        "Document protection and externally changed main XML refuse shading mutation; externally changed targets also refuse inspection; package bytes are unchanged."
+      ],
+      "gaps": [
+        "Control-only protection and stale-source extension; no saved-output assertion or canonical getter success occurs.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:staged write and serialization failures retain the cell handle and bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>cell.setProperties(props)).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('Alpha')",
+        "expect(cell.directProperties().shading).toBeNull()"
+      ],
+      "outcomes": [
+        "Injected package write/serialization failures retain archive bytes, held cell text and absent shading."
+      ],
+      "gaps": [
+        "Control-only rollback extension; no successful canonical getters or filesystem failure injection.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:alias namespaces and UTF-16 path save preserve values and unrelated payloads",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(reopened.tables[0]!.cell(0,0).directProperties()).toEqual(props)",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "outcomes": [
+        "Aliased UTF-16 main XML accepts the combined property patch and preserves property values, BOM and every unrelated member through real path save/reopen."
+      ],
+      "gaps": [
+        "UTF-16/alias persistence extension using a combined local 2x2 input, not the canonical one-row width/border setup; no rendered formatting assertion.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:missing or self-closing cell property containers accept ordered additions without changing children",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(d.tables[0]!.cell(0,0).directProperties()).toEqual(props)",
+        "expect(d.tables[0]!.cell(0,0).text).toBe('Alpha')",
+        "expect((await Document.open(d.package.toBytes())).tables[0]!.cell(0,1).text).toBe('Untouched')"
+      ],
+      "outcomes": [
+        "Absent/self-closing property containers accept the combined values without changing selected text; a sibling cell retains text after byte reopen."
+      ],
+      "gaps": [
+        "Local container variants and 2x2 layout differ from canonical width/border setup; the selected property getter is checked before reopen, not after.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:misordered owner properties and nested cell-property revisions refuse atomically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>modified.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(modified.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Duplicate or misplaced owner properties, a missing grid and nested cell-property revisions refuse shading writes atomically."
+      ],
+      "gaps": [
+        "Control-only owner-topology extension; no canonical getter success or complete schema validation.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:merged or nested cells refuse property writes and no-op still checks protection",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(()=>nested.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(nested.package.toBytes()).toEqual(nb)",
+        "expect(()=>locked.tables[0]!.cell(0,0).setProperties({widthTwips:4320})).toThrow()"
+      ],
+      "outcomes": [
+        "Merged-cell access and nested-table property writes refuse; nested refusal retains bytes and a protected same-width request also refuses."
+      ],
+      "gaps": [
+        "Control-only context extension; merged/protected branches assert refusal only, without an archive equality assertion in those branches.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:two shared direct cell cases execute and altered readback predicates fail",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(2)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Both shared cell-property cases pass; altered expected shading/width predicates and removal of the assigned border cause one assertion failure each."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; semantic values are checked in pinned acceptance bindings. Corruption removes the in-memory top border; there is no saved-output assertion in these shared cases.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:bounded width, border size and all supported direction/alignment values survive direct readback",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(v.widthTwips).toBe(widthTwips)",
+        "expect(v.topBorder).toEqual({style:'single',size,color:'auto'})",
+        "expect(v.verticalAlign).toBe(verticalAlign)",
+        "expect(v.textDirection).toBe(textDirection)",
+        "expect(v.shading).toBe('auto')",
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties({shading:'FFFF00',topBorder:{style:'single',size:97,color:'000000'}})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Width and border-size endpoints and the supported alignment/direction matrix read back in memory; invalid border size refuses a combined patch without changing bytes."
+      ],
+      "gaps": [
+        "Endpoint/matrix extension differs from canonical width 2400, size eight and black border; no path save, rendered geometry or runtime expansion count inferred.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-cell-properties.test.ts:colour validation refuses trailing line endings rather than XML-normalising a requested value",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-cell-shading-getter",
+        "@id-docx-go-cell-properties-getters"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties(patch)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Trailing CR/LF colour spellings refuse shading and top-border patches, preserving archive bytes."
+      ],
+      "gaps": [
+        "Control-only lexical-argument extension; no canonical positive getter or saved-output predicate is asserted.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(table.isRowHeader(0)).toBe(false)",
+        "expect(table.isRowHeader(1)).toBe(false)",
+        "expect(table.setRowHeader(0,true)).toEqual({changed:1})",
+        "expect(table.isRowHeader(0)).toBe(true)",
+        "expect(xml(d)).toContain('w:val=\"on\"')",
+        "expect(()=>cell.text).toThrow()",
+        "expect(()=>paragraph.text).toThrow()",
+        "expect([table.rows,table.columns]).toEqual([2,2])",
+        "expect(table.cell(0,0).text).toBe('Header')",
+        "expect(table.cell(1,1).text).toBe('Body')",
+        "expect(reopened.tables[0]!.isRowHeader(0)).toBe(true)",
+        "expect(reopened.tables[0]!.isRowHeader(1)).toBe(false)",
+        "expect(reopened.tables[0]!.cell(1,1).text).toBe('Body')",
+        "expect(reopened.package.get(n)).toEqual(b)",
+        "expect(table.setRowHeader(0,false)).toEqual({changed:1})",
+        "expect(xml(d)).toContain('w:val=\"off\"')",
+        "expect(table.setRowHeader(0,null)).toEqual({changed:1})",
+        "expect(xml(d)).not.toContain('tblHeader')"
+      ],
+      "outcomes": [
+        "Direct row state changes absent/false to true; live dimensions and Header/Body text are checked before save. Real path reopen retains true/false row states, the Body cell text and unrelated members. Stale cell/paragraph handles refuse; later false/null edits disable/remove the marker."
+      ],
+      "gaps": [
+        "Local 2x2 table differs from canonical 3x2. Persistence, disable/remove and stale controls extend the in-memory scenario; no pagination or inheritance result is measured.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:all on/off lexical values read correctly and validated no-ops retain exact XML and handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(t.isRowHeader(0)).toBe(enabled)",
+        "expect(t.setRowHeader(0,enabled)).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('Header')",
+        "expect(t.setRowHeader(0,null)).toEqual({changed:0})",
+        "expect(t.setRowHeader(0,false)).toEqual({changed:1})"
+      ],
+      "outcomes": [
+        "Absent val and six Boolean spellings read correctly; validated same-value calls retain exact archive and cell handle; absent-null is a no-op while explicit false writes a marker."
+      ],
+      "gaps": [
+        "Lexical and no-op extension on local 2x2 tables, not the canonical 3x2 false-to-true sequence; SDK numeric-value compatibility is not checked by this test.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:self-closing properties and unordered trPrBase metadata retain exact sibling fragments",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(after.replace(/<w:tblHeader[^>]*\\/>/,'').replace('<w:trPr></w:trPr>','<w:trPr/>')).toBe(before)",
+        "expect(xml(d).replace('<w:trPr></w:trPr>','<w:trPr/>')).toBe(before)",
+        "expect(d.tables[0]!.isRowHeader(0)).toBe(false)",
+        "expect(d.tables[0]!.isRowHeader(1)).toBe(true)"
+      ],
+      "outcomes": [
+        "Self-closing or unordered row-property containers retain exact fragments through marker insertion/removal; an isolated second-row marker reads true while the unmarked first row reads false."
+      ],
+      "gaps": [
+        "Local 2x2 container and isolated-marker extension, not canonical 3x2. The container loop checks XML custody rather than an explicit successful row getter; pagination is not predicted.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:invalid coordinates and non-Boolean input refuse atomically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.isRowHeader(row)).toThrow()",
+        "expect(()=>t.setRowHeader(row,true)).toThrow()",
+        "expect(()=>t.setRowHeader(0,value as boolean)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Invalid row coordinates refuse reads/writes and non-Boolean inputs refuse assignment, leaving archive unchanged."
+      ],
+      "gaps": [
+        "Control-only API argument extension; canonical successful marker transition is not asserted.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:duplicate, decorated, wrong-namespace, revised and lexical markers refuse even removal or no-op",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.isRowHeader(0)).toThrow()",
+        "expect(()=>t.setRowHeader(0,val)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Invalid/decorated/duplicate/misqualified/revised/lexical marker metadata refuses reads and true/false/null edits without changing bytes."
+      ],
+      "gaps": [
+        "Control-only metadata refusal extension, not canonical valid input or a complete Word schema validator.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:unsupported row/table topology, revision and merged-cell contexts refuse before mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>d.tables[0]!.setRowHeader(0,true),change.toString()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unsupported row/table topology, missing grid, merged cells and revisions refuse marker writes atomically."
+      ],
+      "gaps": [
+        "Control-only topology extension on modified local tables, not canonical successful first-row marking.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:protection and external XML changes refuse including same-value requests",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>locked.tables[0]!.setRowHeader(0,true)).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(()=>t.setRowHeader(0,true)).toThrow()",
+        "expect(()=>t.isRowHeader(0)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(changed)",
+        "expect(()=>stale.setRowHeader(0,true)).toThrow(expect.objectContaining({code:'docx-stale-table'}))"
+      ],
+      "outcomes": [
+        "Protection blocks a same-value write; external XML changes block reads/writes without further byte changes; structural document edits stale a held table."
+      ],
+      "gaps": [
+        "Control-only protection/stale extension; structural-stale branch asserts the error without comparing archive bytes.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:package write and serialization failure roll back bytes and retain paragraph/cell/table handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>t.setRowHeader(0,true)).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(c.text).toBe('Header')",
+        "expect(p.text).toBe('Header')",
+        "expect(t.isRowHeader(0)).toBe(false)"
+      ],
+      "outcomes": [
+        "Injected package set/serialization faults roll back archive bytes while retaining table, cell and paragraph handles and an unmarked row."
+      ],
+      "gaps": [
+        "Control-only rollback extension; no successful canonical 3x2 transition or filesystem write failure is asserted.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:alias and conflicting lexical w bindings plus UTF-16 save retain expanded marker identity",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(reopened.tables[0]!.isRowHeader(0)).toBe(true)",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "outcomes": [
+        "Aliased row XML under a conflicting w namespace retains a true marker, UTF-16 BOM and all unrelated members after byte reopen."
+      ],
+      "gaps": [
+        "UTF-16/namespace extension on local 2x2 input; byte reopen, not path save, and no explicit initial false predicate or header pagination assertion.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:shared header getter executes and false readback or initial-state predicates fail assertions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "The selected canonical 3x2 header case passes; false expected readback, true expected initial state and corrupted post-write state each fail one assertion step."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; semantic state is captured and compared by the pinned acceptance bindings, without disk save or pagination assertions.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/docx-row-header.test.ts:output bound refuses row header insertion without expiring live handles",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-go-table-header-getter"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>table.setRowHeader(0,true)).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('Header')",
+        "expect(table.isRowHeader(0)).toBe(false)"
+      ],
+      "outcomes": [
+        "Exceeding the complete XML output bound refuses marker insertion with XML_EDIT_UNSAFE; bytes, held cell text and absent header state survive."
+      ],
+      "gaps": [
+        "Control-only output bound extension, not successful canonical marking or peak-memory enforcement.",
+        "Bounded source mapping only; no execution, rendering, inheritance or full-format parity credit. The pinned sources are a review set, not a transitive dependency closure."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "docx-model"
     }
   ]
 }
