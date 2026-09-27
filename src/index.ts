@@ -14,7 +14,7 @@ export { Document, Span, type TemplateInspection, type TemplateParagraph, type T
 export { inspectStories, storyParts, type RevisionView, type StoryInspection } from "./docx/story.ts";
 export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding } from "./docx/revisions.ts";
 export { trackedReplace } from "./docx/redline.ts";
-export { inspectComments, setCommentResolved, type CommentInfo, type CommentFinding, type CommentInspection } from "./docx/comments.ts";
+export { inspectComments, setCommentResolved, inspectCommentThreads, setCommentThreadResolved, type CommentInfo, type CommentFinding, type CommentInspection, type CommentThread, type CommentThreadInspection, type CommentThreadReceipt } from "./docx/comments.ts";
 export { Presentation, type NotesAnchor, type TextBoxGeometry, type TextBoxOptions, type TextBoxReceipt } from "./pptx/index.ts";
 export { Workbook, parseA1Range, type A1Range, type A1Coordinate, type A1RangeAxis } from "./xlsx/index.ts";
 export { patchOffice, type PatchRequest, type PatchReceipt, type TargetResult } from "./workflow/index.ts";

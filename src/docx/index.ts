@@ -1853,4 +1853,4 @@ export { inspectStories, storyParts, type RevisionView, type Story, type StoryIn
 export { inspectRevisions, resolveRevisions, type Revision, type RevisionFinding } from "./revisions.ts";
 // Review mutations operate on OpcPackage snapshots; reopen Document afterward.
 export { trackedReplace } from "./redline.ts";
-export { inspectComments, setCommentResolved, type CommentInfo, type CommentFinding, type CommentInspection } from "./comments.ts";
+export { inspectComments, setCommentResolved, inspectCommentThreads, setCommentThreadResolved, type CommentInfo, type CommentFinding, type CommentInspection, type CommentThread, type CommentThreadInspection, type CommentThreadReceipt } from "./comments.ts";

@@ -91,6 +91,15 @@ preceding executed identities are unchanged. The thirteen response-shape/cache
 profiles stay planned; no SOW, colour-guidance or table-purpose inference is implemented. See the
 [inspection contract](../contracts/template-inspection.md).
 
+## Existing comment threads
+
+Immutable `inspectCommentThreads` grouping and `setCommentThreadResolved` add an
+existing-extension, complete-thread policy. Fourteen native declarations cover
+exact IDs, mixed states, path reopen, byte custody, atomic refusal and encoding.
+They remain unmapped pending central contracts for this policy. The nine authored
+comment profiles stay planned; all 546 prior mapping records and 625 executed
+case identities are unchanged. See [comment threads](../contracts/comment-threads.md).
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

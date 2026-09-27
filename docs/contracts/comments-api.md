@@ -59,8 +59,9 @@ or serialization failure retains all earlier package edits unchanged. Protected
 settings refuse unless enforcement is explicitly disabled; every linked settings
 part is checked, and external or invalid settings refuse.
 
-Creation, deletion, body rewriting, anchor validation/repair and thread-wide
-resolution are outside this API. Run it before opening a format reader or reopen
+Creation, deletion, body rewriting and anchor validation/repair are outside this
+API. [Thread inspection and complete-thread resolution](comment-threads.md) use
+separate methods; `setCommentResolved` remains single-comment only. Run it before opening a format reader or reopen
 readers afterward; it does not refresh a live `Document` cache.
 
 ## Checks and limits

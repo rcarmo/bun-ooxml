@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1048,
+  "nativeDeclarations": 1062,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 821,
+  "withoutStagingCount": 835,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2519,6 +2519,76 @@
       "id": "bun:tests/unit/docx-comment-mappings.test.ts:DOCX comment reconciliation preserves evidence dynamic and deferred assertions with unknown runtime leaves",
       "path": "tests/unit/docx-comment-mappings.test.ts",
       "sourceSha256": "a2692a5c6a471db1bdd2b0d91ccb90f2378d70e24f9096b8363101cede0374cd"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:thread inspection returns two nonempty roots and exact detached replies without changing bytes",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:resolving a reply updates its complete existing thread while retaining unrelated root bodies anchors and members through path reopen",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:mixed states only change mismatched flags and repeat requests preserve exact archives while single-comment semantics remain unchanged",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:nested descendants and out-of-order extension entries resolve to the root and retain parent IDs",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:missing root metadata refuses even if selected reply already has the requested state",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:invalid arguments unsafe graphs unsupported bodies and protection refuse atomically including no-ops",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:thread inspection retains explicit unsupported findings but mutation does not silently ignore unsupported siblings",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:injected write or serialization failure restores all flags and retains prior package edits",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:thread updates retain alias namespaces lexical values and UTF8 BOM or UTF16 byte order",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:single-comment edits also retain an existing UTF8 BOM and empty thread inspection returns explicit empty arrays",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:comment source order including descendants before roots remains deterministic without changing thread ownership",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:batched flag edits preserve every unrelated character with quote entity and missing-flag variants",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:thread operation count bound refuses without returning a truncated result or mutating flags",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
+    },
+    {
+      "id": "bun:tests/unit/docx-comment-threads.test.ts:existing-extension threads do not activate authored-comment response or root-only resolution profiles",
+      "path": "tests/unit/docx-comment-threads.test.ts",
+      "sourceSha256": "1da28354156b977f845ff7bc23e3d22c8a9804b70eff5d049deea00b1bbcef23"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",

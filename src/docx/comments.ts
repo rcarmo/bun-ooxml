@@ -17,6 +17,9 @@ export type CommentInfo = {
 };
 export type CommentFinding = { part: string; kind: string };
 export type CommentInspection = { comments: CommentInfo[]; unsupported: CommentFinding[] };
+export type CommentThread = Readonly<{root:Readonly<CommentInfo>;replies:readonly Readonly<CommentInfo>[]} >;
+export type CommentThreadInspection = Readonly<{threads:readonly CommentThread[];unsupported:readonly Readonly<CommentFinding>[]} >;
+export type CommentThreadReceipt = {rootId:string;commentIds:string[];changed:number;changedParts:string[]};
 type CommentScan = CommentInspection & { extension?: string; xml?: string; entries: Map<string, XmlElement> };
 function fail(code: string, message: string): never { throw new OoxmlError('docx-comments-' + code, message); }
 
@@ -26,6 +29,48 @@ function fail(code: string, message: string): never { throw new OoxmlError('docx
 export function inspectComments(pkg: OpcPackage): CommentInspection {
   const { comments, unsupported } = scan(pkg);
   return { comments, unsupported };
+}
+
+/** Detached immutable root groups; descendants are flat, in comment-part order. */
+export function inspectCommentThreads(pkg:OpcPackage):CommentThreadInspection {
+  const state=scan(pkg),roots=threadRoots(state.comments);
+  const groups=new Map<string,{root:Readonly<CommentInfo>;replies:Readonly<CommentInfo>[]} >();
+  for(const c of state.comments)if(c.parentId===undefined)groups.set(c.id,{root:Object.freeze({...c}),replies:[]});
+  for(const c of state.comments)if(c.parentId!==undefined)groups.get(roots.get(c.id)!)!.replies.push(Object.freeze({...c}));
+  return Object.freeze({threads:Object.freeze([...groups.values()].map(g=>Object.freeze({root:g.root,replies:Object.freeze(g.replies)}))),unsupported:Object.freeze(state.unsupported.map(f=>Object.freeze({...f})))});
+}
+
+/** Resolve all existing members in the selected root's thread; never creates metadata. */
+export function setCommentThreadResolved(pkg:OpcPackage,id:string,resolved:boolean):CommentThreadReceipt {
+  if(typeof id!=='string'||!/^\d+$/.test(id)||typeof resolved!=='boolean')fail('argument','Expected a decimal comment ID and boolean state');
+  const key=decimalId(id),state=scan(pkg);
+  if(state.unsupported.length)fail('unsupported','Unsupported comment content must be reviewed before thread resolution');
+  const roots=threadRoots(state.comments),rootId=roots.get(key);
+  if(rootId===undefined)fail('target','Unknown comment ID');
+  const selected=state.comments.filter(c=>roots.get(c.id)===rootId),commentIds=selected.map(c=>c.id),selectedIds=new Set(commentIds);
+  for(const c of selected)if(!state.extension||!state.xml||!c.paragraphId||!state.entries.has(c.paragraphId))fail('missing-extension','Every thread member requires an existing linked commentEx entry');
+  assertUnprotected(pkg);
+  const changed=selected.filter(c=>c.resolved!==resolved);
+  if(!changed.length)return {rootId,commentIds,changed:0,changedParts:[]};
+  const part=state.extension!,xml=state.xml!,next=applyEdits(xml,changed.map(c=>doneEdit(xml,state.entries.get(c.paragraphId!)!,resolved)));
+  return pkg.transaction(()=>{
+    writeCommentXml(pkg,part,next);
+    const checked=scan(pkg),expected=state.comments.map(c=>selectedIds.has(c.id)?{...c,resolved}:c);
+    if(JSON.stringify(checked.comments)!==JSON.stringify(expected)||checked.unsupported.length)fail('state','Thread update changed unexpected comment metadata');
+    pkg.toBytes();
+    return {rootId,commentIds,changed:changed.length,changedParts:[part]};
+  });
+}
+
+function threadRoots(comments:CommentInfo[]):Map<string,string> {
+  if(comments.length>10000)fail('limit','At most 10000 comments are supported by thread operations');
+  const byId=new Map(comments.map(c=>[c.id,c])),roots=new Map<string,string>();
+  // scan() has already rejected missing parents and cycles.
+  for(const comment of comments){let c=comment;const chain:string[]=[];while(!roots.has(c.id)&&c.parentId!==undefined){chain.push(c.id);c=byId.get(c.parentId)!;}const root=roots.get(c.id)??c.id;roots.set(c.id,root);for(const id of chain)roots.set(id,root);}
+  return roots;
+}
+function writeCommentXml(pkg:OpcPackage,part:string,xml:string):void {
+  const bytes=pkg.get(part)!;pkg.set(part,bytes[0]===239&&bytes[1]===187&&bytes[2]===191?'\ufeff'+xml:xml);
 }
 
 /** Set only one existing commentEx done flag; no cascading thread state. */
@@ -41,7 +86,7 @@ export function setCommentResolved(pkg: OpcPackage, id: string, resolved: boolea
   const part = state.extension!, xml = state.xml!, entry = state.entries.get(comment.paragraphId!)!;
   const next = editDone(xml, entry, resolved);
   return pkg.transaction(() => {
-    pkg.set(part, next);
+    writeCommentXml(pkg, part, next);
     const checked = scan(pkg).comments.find(c => c.id === comment.id);
     if (!checked || checked.resolved !== resolved) fail('state', 'Resolution did not preserve the selected comment identity');
     // Serialization validation belongs inside the rollback boundary.
@@ -51,6 +96,9 @@ export function setCommentResolved(pkg: OpcPackage, id: string, resolved: boolea
 }
 
 function editDone(xml: string, entry: XmlElement, resolved: boolean): string {
+  return applyEdits(xml,[doneEdit(xml,entry,resolved)]);
+}
+function doneEdit(xml:string,entry:XmlElement,resolved:boolean):{start:number;end:number;value:string} {
   const opening = xml.slice(entry.start, entry.openEnd), value = resolved ? '1' : '0';
   const name = Object.keys(entry.attributes).find(key => key.split(':').at(-1) === 'done' && entry.attributeNamespaces[key] === W15);
   if (name) {
@@ -60,7 +108,7 @@ function editDone(xml: string, entry: XmlElement, resolved: boolean): string {
     for (const match of opening.matchAll(attributes)) {
       if (match[1] !== name) continue;
       const start = entry.start + match.index! + match[0].length - match[3]!.length - 1;
-      return applyEdits(xml, [{ start, end: start + match[3]!.length, value }]);
+      return { start, end: start + match[3]!.length, value };
     }
     fail('state', 'Cannot locate the existing done attribute');
   }
@@ -71,7 +119,7 @@ function editDone(xml: string, entry: XmlElement, resolved: boolean): string {
   const suffix = opening.match(/[ \t\r\n]*\/?>$/);
   if (!suffix || suffix.index === undefined) fail('state', 'Cannot locate commentEx opening boundary');
   const start = entry.start + suffix.index;
-  return applyEdits(xml, [{ start, end: start, value: ` ${identity.split(':')[0]}:done="${value}"` }]);
+  return { start, end: start, value: ` ${identity.split(':')[0]}:done="${value}"` };
 }
 
 function linkedPart(pkg: OpcPackage, type: string, mime: string): string | undefined {
