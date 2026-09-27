@@ -17,6 +17,8 @@ with bounded formula-cache invalidation. Existing XLSX
 runs support direct bold/italic overrides, [half-point font sizes](docs/contracts/font-size.md)
 and existing paragraph-style selection without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)
 adds named paragraph styles with validated base chains and direct bold/italic flags.
+[Direct paragraph properties](docs/contracts/paragraph-properties.md) set alignment,
+before/after spacing and selected pagination flags without changing text.
 [Page geometry](docs/contracts/page-layout.md) changes the final Word section's
 size and margins while preserving earlier sections and text.
 `patchOffice()` adds

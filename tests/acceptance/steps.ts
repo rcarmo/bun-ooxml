@@ -22,6 +22,7 @@ import { bindings as commentBindings } from "./comments-docx.ts";
 import { bindings as formattingBindings } from './run-formatting.ts';
 import { bindings as fontSizeBindings, cleanup as cleanupFontSize } from './font-size.ts';
 import { bindings as paragraphStyleBindings } from './paragraph-style.ts';
+import { bindings as paragraphPropertiesBindings } from './paragraph-properties.ts';
 import { bindings as styleAuthoringBindings } from './style-authoring.ts';
 import { bindings as textBoxBindings } from './text-box.ts';
 import { bindings as cellStyleBindings } from './cell-style.ts';
@@ -67,6 +68,7 @@ export const bindings: StepBinding[] = [
   ...formattingBindings,
   ...fontSizeBindings,
   ...paragraphStyleBindings,
+  ...paragraphPropertiesBindings,
   ...styleAuthoringBindings,
   ...textBoxBindings,
   ...cellStyleBindings,

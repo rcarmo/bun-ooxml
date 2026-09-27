@@ -408,6 +408,16 @@
         "@id-xlsx-go-direct-range-parsing",
         "@id-xlsx-go-direct-range-refusal"
       ]
+    },
+    {
+      "path": "references/fixtures-ooxml/workflows/docx/document-model.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-docx-go-paragraph-alignment-getter",
+        "@id-docx-go-paragraph-spacing-getters",
+        "@id-docx-go-paragraph-advanced-toggles"
+      ]
     }
   ]
 }

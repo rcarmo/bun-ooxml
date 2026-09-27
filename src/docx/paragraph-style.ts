@@ -2,7 +2,7 @@ import {OoxmlError} from '../errors.ts';
 import {applyEdits,attribute,escapeAttribute,type XmlElement} from '../xml/index.ts';
 const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 const XMLNS='http://www.w3.org/2000/xmlns/';
-const ORDER=['pStyle','keepNext','keepLines','pageBreakBefore','framePr','widowControl','numPr','suppressLineNumbers','pBdr','shd','tabs','suppressAutoHyphens','kinsoku','wordWrap','overflowPunct','topLinePunct','autoSpaceDE','autoSpaceDN','bidi','adjustRightInd','snapToGrid','spacing','ind','contextualSpacing','mirrorIndents','suppressOverlap','jc','textDirection','textAlignment','textboxTightWrap','outlineLvl','divId','cnfStyle','rPr','sectPr'];
+export const PARAGRAPH_PROPERTY_ORDER=['pStyle','keepNext','keepLines','pageBreakBefore','framePr','widowControl','numPr','suppressLineNumbers','pBdr','shd','tabs','suppressAutoHyphens','kinsoku','wordWrap','overflowPunct','topLinePunct','autoSpaceDE','autoSpaceDN','bidi','adjustRightInd','snapToGrid','spacing','ind','contextualSpacing','mirrorIndents','suppressOverlap','jc','textDirection','textAlignment','textboxTightWrap','outlineLvl','divId','cnfStyle','rPr','sectPr'];
 function fail(message:string):never{throw new OoxmlError('docx-style-unsupported',message);}
 const word=(n:XmlElement,name:string)=>n.namespaceURI===W&&n.localName===name;
 function noMixed(n:XmlElement,xml:string){if(n.selfClosing)return;let cursor=n.openEnd;for(const c of n.children){if(!/^[ \t\r\n]*$/.test(xml.slice(cursor,c.start)))fail('Mixed paragraph property content is unsupported');cursor=c.end;}if(!/^[ \t\r\n]*$/.test(xml.slice(cursor,n.closeStart)))fail('Mixed paragraph property content is unsupported');}
@@ -11,7 +11,7 @@ function inspect(xml:string,p:XmlElement){
  const properties=p.children.filter(c=>word(c,'pPr'));if(properties.length>1||properties.length&&p.children[0]!==properties[0])fail('Paragraph properties must be unique and first');
  const pr=properties[0];if(!pr)return {};
  noMixed(pr,xml);let last=-1;const seen=new Set<string>();
- for(const n of pr.children){const rank=ORDER.indexOf(n.localName);if(n.namespaceURI!==W||rank<0||rank<last||seen.has(n.localName)||revised(n))fail('Unknown, duplicate, misplaced or revised paragraph properties');seen.add(n.localName);last=rank;}
+ for(const n of pr.children){const rank=PARAGRAPH_PROPERTY_ORDER.indexOf(n.localName);if(n.namespaceURI!==W||rank<0||rank<last||seen.has(n.localName)||revised(n))fail('Unknown, duplicate, misplaced or revised paragraph properties');seen.add(n.localName);last=rank;}
  const node=pr.children.find(c=>word(c,'pStyle'));if(!node)return {pr};
  if(node.children.length||!node.selfClosing&&xml.slice(node.openEnd,node.closeStart).trim())fail('Style override cannot contain content');
  for(const k of Object.keys(node.attributes))if(node.attributeNamespaces[k]!==XMLNS&&!(k.split(':').at(-1)==='val'&&node.attributeNamespaces[k]===W))fail('Style ID attribute must use the Word namespace');

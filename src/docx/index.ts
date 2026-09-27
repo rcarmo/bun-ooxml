@@ -5,6 +5,8 @@ import {formatRunProperties,directFontSizes as readDirectFontSizes} from './run-
 import {readPageLayout,replacePageLayout,normalizePageLayout,type PageLayout} from './page-layout.ts';
 export type {PageLayout} from './page-layout.ts';
 import {directParagraphStyle,replaceParagraphStyle} from './paragraph-style.ts';
+import {readParagraphProperties,editParagraphProperties,normalizeParagraphProperties,type DirectParagraphProperties,type ParagraphPropertiesPatch} from './paragraph-properties.ts';
+export type {DirectParagraphProperties,ParagraphPropertiesPatch,ParagraphAlignment} from './paragraph-properties.ts';
 import {authorParagraphStyle,normalizeStyleOptions,type AddParagraphStyleOptions,type ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
 export type {AddParagraphStyleOptions,ParagraphStyleDefinitionReceipt} from './style-authoring.ts';
 import { OpcPackage, getContentType } from "../opc/index.ts";
@@ -223,6 +225,15 @@ export class Paragraph {
   effectiveRunFormatting(): EffectiveRunFormatting[] {
     this.ensureFresh();
     return this.documentRef.inspectParagraphFormatting(this.snapshot);
+  }
+
+  /** Direct paragraph values only; null means no direct property. */
+  directProperties(): DirectParagraphProperties {
+    this.ensureFresh(); return this.documentRef.inspectParagraphProperties(this.snapshot);
+  }
+
+  setProperties(patch: ParagraphPropertiesPatch): {changed:number} {
+    this.ensureFresh(); return this.documentRef.setParagraphProperties(this.snapshot, patch);
   }
 
   /** Direct paragraph style ID, without evaluating inheritance. */
@@ -693,6 +704,20 @@ export class Document {
     this.assertParagraphSnapshot(snapshot);
     if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
     return readDirectFontSizes(this.xml,snapshot.element);
+  }
+
+  inspectParagraphProperties(snapshot: ParagraphSnapshot): DirectParagraphProperties {
+    this.assertParagraphSnapshot(snapshot); return readParagraphProperties(this.xml,snapshot.element);
+  }
+
+  setParagraphProperties(snapshot: ParagraphSnapshot, input: ParagraphPropertiesPatch): {changed:number} {
+    this.assertParagraphSnapshot(snapshot);
+    const patch=normalizeParagraphProperties(input);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    this.assertFormattingUnprotected();
+    const next=editParagraphProperties(this.xml,snapshot.element,patch);
+    if(next===this.xml)return {changed:0};
+    this.commitParagraphProperties(next);return {changed:1};
   }
 
   paragraphStyle(snapshot: ParagraphSnapshot): string | undefined {

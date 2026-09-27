@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 548,
-  "files": 57,
+  "count": 563,
+  "files": 58,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -52,6 +52,12 @@
       "path": "tests/unit/docx-page-layout.test.ts",
       "sha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31",
       "declarations": 13,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "sha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "declarations": 15,
       "issues": []
     },
     {
@@ -415,6 +421,10 @@
       "sha256": "ac3025821bccfa73cafa39d80d6306e8f1266d9b82d25f93a1a0771db3d9572a"
     },
     {
+      "path": "tests/acceptance/paragraph-properties.ts",
+      "sha256": "c4b8f9289c44de2c14fef265318ef2bbce773d56ad4a1241e18ae025ab0d4ceb"
+    },
+    {
       "path": "tests/acceptance/paragraph-style.ts",
       "sha256": "6080b2ad12b790452f69cabaec3618245c53581cc73dd7b94f231f9e99d52a27"
     },
@@ -452,7 +462,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "d862445172f544bebb5634e646065512e120c6248f1c19e00b6d5b43401fc78e"
+      "sha256": "3be092aa1a43711453f76815e8efeca09894a4e0fb6315b0cedb8bff3fd71ae8"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -562,6 +572,13 @@
     "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
     "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
     "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:direct paragraph properties set and read all supported values without changing text",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:invalid or executable patch fields refuse atomically",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:unknown, duplicated, revised, misordered or ambiguous selected properties refuse even on no-op",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:disk save and UTF-16LE reopen retain properties and untouched parts",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:self-closing properties and empty paragraphs accept ordered insertion under a default namespace",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:late serialization and staged write failures restore package, values and held paragraph",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:nine shared direct paragraph getter cases execute with no credit for other document-model operations",
     "bun:tests/unit/docx-paragraph-style.test.ts:missing, self-closing properties and self-closing empty paragraphs accept first style child",
     "bun:tests/unit/docx-paragraph-style.test.ts:style-only update preserves UTF-16 encoding and BOM",
     "bun:tests/unit/docx-paragraph-style.test.ts:removal requests still refuse protection and invalid topology",
@@ -706,6 +723,13 @@
     "bun:tests/unit/docx-page-layout.test.ts:mirror/bookfold/gutter settings and section bidi flags refuse conservatively",
     "bun:tests/unit/docx-page-layout.test.ts:invalid metadata geometry attributes and page-size children refuse reads and mutations",
     "bun:tests/unit/docx-page-layout.test.ts:margin child elements and text refuse reads and writes without mutation",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:direct paragraph properties set and read all supported values without changing text",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:invalid or executable patch fields refuse atomically",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:unknown, duplicated, revised, misordered or ambiguous selected properties refuse even on no-op",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:disk save and UTF-16LE reopen retain properties and untouched parts",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:self-closing properties and empty paragraphs accept ordered insertion under a default namespace",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:late serialization and staged write failures restore package, values and held paragraph",
+    "bun:tests/unit/docx-paragraph-properties.test.ts:nine shared direct paragraph getter cases execute with no credit for other document-model operations",
     "bun:tests/unit/docx-paragraph-style.test.ts:missing, self-closing properties and self-closing empty paragraphs accept first style child",
     "bun:tests/unit/docx-paragraph-style.test.ts:style-only update preserves UTF-16 encoding and BOM",
     "bun:tests/unit/docx-paragraph-style.test.ts:removal requests still refuse protection and invalid topology",
@@ -4405,6 +4429,657 @@
         "q.setPageLayout",
         "xml.replace",
         "xml.replace().replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:direct paragraph properties set and read all supported values without changing text",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 17,
+      "title": "direct paragraph properties set and read all supported values without changing text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: null, spacingBefore: null, spacingAfter: null, keepLines: null, pageBreakBefore: null, widowControl: null })",
+        "expect(doc.paragraphs[0]!.setProperties({ alignment: 'both', spacingBefore: 240, spacingAfter: 120, keepLines: true, pageBreakBefore: false, widowControl: true })).toEqual({ changed: 1 })",
+        "expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: 'both', spacingBefore: 240, spacingAfter: 120, keepLines: true, pageBreakBefore: false, widowControl: true })",
+        "expect(doc.paragraphs[0]!.text).toBe('Alpha')",
+        "expect(reopened.paragraphs[0]!.directProperties()).toEqual(doc.paragraphs[0]!.directProperties())",
+        "expect(reopened.package.get(name)).toEqual(bytes)",
+        "expect(elements(parseXml(xml), 'pPr', W)[0]!.children.map(n => n.localName)).toEqual(['keepLines', 'pageBreakBefore', 'widowControl', 'spacing', 'jc'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 25,
+          "expression": "for (const [name, bytes] of before) if (name !== 'word/document.xml') expect(reopened.package.get(name)).toEqual(bytes);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture(), before = doc.package.parts;\n  expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: null, spacingBefore: null, spacingAfter: null, keepLines: null, pageBreakBefore: null, widowControl: null });\n  expect(doc.paragraphs[0]!.setProperties({ alignment: 'both', spacingBefore: 240, spacingAfter: 120, keepLines: true, pageBreakBefore: false, widowControl: true })).toEqual({ changed: 1 });\n  expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: 'both', spacingBefore: 240, spacingAfter: 120, keepLines: true, pageBreakBefore: false, widowControl: true });\n  expect(doc.paragraphs[0]!.text).toBe('Alpha');\n  const reopened = await Document.open(doc.package.toBytes());\n  expect(reopened.paragraphs[0]!.directProperties()).toEqual(doc.paragraphs[0]!.directProperties());\n  for (const [name, bytes] of before) if (name !== 'word/document.xml') expect(reopened.package.get(name)).toEqual(bytes);\n  const xml = new TextDecoder().decode(doc.package.get('word/document.xml'));\n  expect(elements(parseXml(xml), 'pPr', W)[0]!.children.map(n => n.localName)).toEqual(['keepLines', 'pageBreakBefore', 'widowControl', 'spacing', 'jc']);\n}",
+      "calls": [
+        ".decode",
+        "Document.open",
+        "doc.package.get",
+        "doc.package.toBytes",
+        "doc.paragraphs.0.directProperties",
+        "doc.paragraphs.0.setProperties",
+        "elements",
+        "elements().0.children.map",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "parseXml",
+        "reopened.package.get",
+        "reopened.paragraphs.0.directProperties"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:direct values distinguish absent, explicit zero/off and removal; no-op preserves archive and handles",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 30,
+      "title": "direct values distinguish absent, explicit zero/off and removal; no-op preserves archive and handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.directProperties()).toEqual({ alignment: 'left', spacingBefore: 0, spacingAfter: null, keepLines: true, pageBreakBefore: null, widowControl: null })",
+        "expect(p.setProperties({ keepLines: true, spacingBefore: 0, alignment: 'left' })).toEqual({ changed: 0 })",
+        "expect(p.text).toBe('Alpha')",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(p.setProperties({ keepLines: null, spacingBefore: null, alignment: null })).toEqual({ changed: 1 })",
+        "expect(doc.paragraphs[0]!.directProperties().keepLines).toBeNull()",
+        "expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBeNull()",
+        "expect(doc.paragraphs[0]!.directProperties().alignment).toBeNull()",
+        "expect(() => p.directProperties()).toThrow(expect.objectContaining({ code: 'docx-stale-paragraph' }))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture('<w:pPr><w:keepLines/><w:spacing w:before=\"0\"/><w:jc w:val=\"left\"/></w:pPr>'), p = doc.paragraphs[0]!, before = doc.package.toBytes();\n  expect(p.directProperties()).toEqual({ alignment: 'left', spacingBefore: 0, spacingAfter: null, keepLines: true, pageBreakBefore: null, widowControl: null });\n  expect(p.setProperties({ keepLines: true, spacingBefore: 0, alignment: 'left' })).toEqual({ changed: 0 });\n  expect(p.text).toBe('Alpha'); expect(doc.package.toBytes()).toEqual(before);\n  expect(p.setProperties({ keepLines: null, spacingBefore: null, alignment: null })).toEqual({ changed: 1 });\n  expect(doc.paragraphs[0]!.directProperties().keepLines).toBeNull();\n  expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBeNull();\n  expect(doc.paragraphs[0]!.directProperties().alignment).toBeNull();\n  expect(() => p.directProperties()).toThrow(expect.objectContaining({ code: 'docx-stale-paragraph' }));\n}",
+      "calls": [
+        "doc.package.toBytes",
+        "doc.paragraphs.0.directProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "p.directProperties",
+        "p.setProperties"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:spacing edits preserve unrelated line/auto attributes and other paragraph property source",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 42,
+      "title": "spacing edits preserve unrelated line/auto attributes and other paragraph property source",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain('<w:keepNext/>')",
+        "expect(xml).toContain('<w:ind w:left=\"720\"/>')",
+        "expect(xml).toContain('<w:rPr><w:b/></w:rPr>')",
+        "expect(attribute(spacing, 'line', W)).toBe('360')",
+        "expect(attribute(spacing, 'lineRule', W)).toBe('auto')",
+        "expect(attribute(spacing, 'after', W)).toBe('240')",
+        "expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBe(480)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const pr = '<w:pPr><w:keepNext/><w:spacing w:before = \\'120\\' w:after=\"240\" w:line=\"360\" w:lineRule=\"auto\"/><w:ind w:left=\"720\"/><w:jc w:val=\"right\"/><w:rPr><w:b/></w:rPr></w:pPr>';\n  const doc = await fixture(pr); doc.paragraphs[0]!.setProperties({ spacingBefore: 480, alignment: null });\n  const xml = new TextDecoder().decode(doc.package.get('word/document.xml'));\n  expect(xml).toContain('<w:keepNext/>'); expect(xml).toContain('<w:ind w:left=\"720\"/>'); expect(xml).toContain('<w:rPr><w:b/></w:rPr>');\n  const spacing = elements(parseXml(xml), 'spacing', W)[0]!;\n  expect(attribute(spacing, 'line', W)).toBe('360'); expect(attribute(spacing, 'lineRule', W)).toBe('auto'); expect(attribute(spacing, 'after', W)).toBe('240');\n  expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBe(480);\n}",
+      "calls": [
+        ".decode",
+        "attribute",
+        "doc.package.get",
+        "doc.paragraphs.0.directProperties",
+        "doc.paragraphs.0.setProperties",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "fixture",
+        "parseXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:namespace aliases and default Word namespaces retain expanded property names",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 52,
+      "title": "namespace aliases and default Word namespaces retain expanded property names",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(alias.paragraphs[0]!.directProperties().alignment).toBe('center')",
+        "expect(alias.paragraphs[0]!.directProperties().spacingBefore).toBe(10)",
+        "expect(elements(xml, 'jc', W)).toHaveLength(1)",
+        "expect(attribute(elements(xml, 'spacing', W)[0]!, 'after', W)).toBe('20')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture('<w:pPr><w:spacing w:before=\"10\"/></w:pPr>'), pkg = await OpcPackage.open(doc.package.toBytes());\n  pkg.set(pkg.mainPart(), pkg.text(pkg.mainPart()).replaceAll('xmlns:w=', 'xmlns:q=').replaceAll('w:', 'q:'));\n  const alias = await Document.open(pkg.toBytes()); alias.paragraphs[0]!.setProperties({ alignment: 'center', spacingAfter: 20 });\n  expect(alias.paragraphs[0]!.directProperties().alignment).toBe('center'); expect(alias.paragraphs[0]!.directProperties().spacingBefore).toBe(10);\n  const xml = parseXml(new TextDecoder().decode(alias.package.get('word/document.xml')));\n  expect(elements(xml, 'jc', W)).toHaveLength(1); expect(attribute(elements(xml, 'spacing', W)[0]!, 'after', W)).toBe('20');\n}",
+      "calls": [
+        ".decode",
+        "Document.open",
+        "OpcPackage.open",
+        "alias.package.get",
+        "alias.paragraphs.0.directProperties",
+        "alias.paragraphs.0.setProperties",
+        "attribute",
+        "doc.package.toBytes",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "fixture",
+        "parseXml",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replaceAll",
+        "pkg.text().replaceAll().replaceAll",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:invalid or executable patch fields refuse atomically",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 61,
+      "title": "invalid or executable patch fields refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => p.setProperties(patch as never)).toThrow()",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(called).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 65,
+          "expression": "for (const patch of bad)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture(), before = doc.package.toBytes(), p = doc.paragraphs[0]!;\n  const bad = [null, {}, { alignment: 'justify' }, { spacingBefore: -1 }, { spacingAfter: 1.5 }, { spacingAfter: Number.MAX_SAFE_INTEGER + 1 }, { keepLines: 1 }, { pageBreakBefore: 'true' }, { extra: true }, { alignment: 'left', keepLines: 'bad' }];\n  let called = false; bad.push(Object.defineProperty({}, 'alignment', { enumerable: true, get() { called = true; return 'left'; } }));\n  for (const patch of bad) { expect(() => p.setProperties(patch as never)).toThrow(); expect(doc.package.toBytes()).toEqual(before); }\n  expect(called).toBe(false);\n}",
+      "calls": [
+        "Object.defineProperty",
+        "bad.push",
+        "doc.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "p.setProperties"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:unknown, duplicated, revised, misordered or ambiguous selected properties refuse even on no-op",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 69,
+      "title": "unknown, duplicated, revised, misordered or ambiguous selected properties refuse even on no-op",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => doc.paragraphs[0]!.setProperties({ alignment: 'left' })).toThrow()",
+        "expect(doc.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 70,
+          "expression": "for (const pr of [\n    '<w:pPr><w:jc w:val=\"left\"/><w:jc w:val=\"left\"/></w:pPr>',\n    '<w:pPr><w:jc w:val=\"left\"/><w:keepLines/></w:pPr>',\n    '<w:pPr><w:pPrChange/></w:pPr>', '<w:pPr><!--barrier--><w:jc w:val=\"left\"/></w:pPr>',\n    '<w:pPr><w:jc val=\"left\"/></w:pPr>', '<w:pPr><w:jc w:val=\"start\"/></w:pPr>',\n    '<w:pPr><w:spacing w:before=\"120\" w:beforeLines=\"100\"/></w:pPr>',\n    '<w:pPr><w:spacing w:before=\"120\" w:beforeAutospacing=\"1\"/></w:pPr>',\n    '<w:pPr><w:keepLines w:val=\"maybe\"/></w:pPr>', '<w:pPr><w:spacing w:before=\"-1\"/></w:pPr>',\n    '<w:pPr><w:framePr/><w:mystery/></w:pPr>',\n  ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  for (const pr of [\n    '<w:pPr><w:jc w:val=\"left\"/><w:jc w:val=\"left\"/></w:pPr>',\n    '<w:pPr><w:jc w:val=\"left\"/><w:keepLines/></w:pPr>',\n    '<w:pPr><w:pPrChange/></w:pPr>', '<w:pPr><!--barrier--><w:jc w:val=\"left\"/></w:pPr>',\n    '<w:pPr><w:jc val=\"left\"/></w:pPr>', '<w:pPr><w:jc w:val=\"start\"/></w:pPr>',\n    '<w:pPr><w:spacing w:before=\"120\" w:beforeLines=\"100\"/></w:pPr>',\n    '<w:pPr><w:spacing w:before=\"120\" w:beforeAutospacing=\"1\"/></w:pPr>',\n    '<w:pPr><w:keepLines w:val=\"maybe\"/></w:pPr>', '<w:pPr><w:spacing w:before=\"-1\"/></w:pPr>',\n    '<w:pPr><w:framePr/><w:mystery/></w:pPr>',\n  ]) {\n    const doc = await fixture(pr), before = doc.package.toBytes();\n    expect(() => doc.paragraphs[0]!.setProperties({ alignment: 'left' })).toThrow(); expect(doc.package.toBytes()).toEqual(before);\n  }\n}",
+      "calls": [
+        "doc.package.toBytes",
+        "doc.paragraphs.0.setProperties",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:protection, unsupported text and externally changed document bytes refuse without mutation",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 85,
+      "title": "protection, unsupported text and externally changed document bytes refuse without mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => protectedDoc.paragraphs[0]!.setProperties({ keepLines: true })).toThrow()",
+        "expect(protectedDoc.package.toBytes()).toEqual(before)",
+        "expect(() => held.setProperties({ keepLines: true })).toThrow()",
+        "expect(doc.package.toBytes()).toEqual(changed)",
+        "expect(() => unsupported.paragraphs[0]!.setProperties({ keepLines: true })).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture(), pkg = await OpcPackage.open(doc.package.toBytes());\n  addPart(pkg, 'word/settings.xml', `<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`, 'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');\n  addRelationship(pkg, pkg.mainPart(), 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings', 'settings.xml');\n  const protectedDoc = await Document.open(pkg.toBytes()), before = protectedDoc.package.toBytes();\n  expect(() => protectedDoc.paragraphs[0]!.setProperties({ keepLines: true })).toThrow(); expect(protectedDoc.package.toBytes()).toEqual(before);\n  const held = doc.paragraphs[0]!; doc.package.setPart('word/document.xml', new TextEncoder().encode(new TextDecoder().decode(doc.package.get('word/document.xml')).replace('Alpha', 'Beta')));\n  const changed = doc.package.toBytes(); expect(() => held.setProperties({ keepLines: true })).toThrow(); expect(doc.package.toBytes()).toEqual(changed);\n  const other = await fixture(); other.package.setPart('word/document.xml', new TextEncoder().encode(new TextDecoder().decode(other.package.get('word/document.xml')).replace('<w:r>', '<w:hyperlink><w:r>').replace('</w:r>', '</w:r></w:hyperlink>')));\n  const unsupported = await Document.open(other.package.toBytes()); expect(() => unsupported.paragraphs[0]!.setProperties({ keepLines: true })).toThrow();\n}",
+      "calls": [
+        ".decode",
+        ".decode().replace",
+        ".decode().replace().replace",
+        ".encode",
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "doc.package.get",
+        "doc.package.setPart",
+        "doc.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "held.setProperties",
+        "other.package.get",
+        "other.package.setPart",
+        "other.package.toBytes",
+        "pkg.mainPart",
+        "pkg.toBytes",
+        "protectedDoc.package.toBytes",
+        "protectedDoc.paragraphs.0.setProperties",
+        "unsupported.paragraphs.0.setProperties"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:disk save and UTF-16LE reopen retain properties and untouched parts",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 97,
+      "title": "disk save and UTF-16LE reopen retain properties and untouched parts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(reopened.paragraphs[0]!.directProperties().spacingBefore).toBe(240)",
+        "expect(reopened.paragraphs[0]!.directProperties().keepLines).toBe(true)",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0, 2)]).toEqual([255, 254])",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 100,
+          "expression": "for (let i = 0; i < text.length; i++) view.setUint16(2 + 2 * i, text.charCodeAt(i), true);"
+        },
+        {
+          "line": 107,
+          "expression": "for (const [n, b] of before) if (n !== 'word/document.xml') expect(reopened.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture(), pkg = await OpcPackage.open(doc.package.toBytes());\n  const text = pkg.text(pkg.mainPart()).replace('UTF-8', 'UTF-16'); const bytes = new Uint8Array(2 + text.length * 2); bytes[0] = 255; bytes[1] = 254;\n  const view = new DataView(bytes.buffer); for (let i = 0; i < text.length; i++) view.setUint16(2 + 2 * i, text.charCodeAt(i), true);\n  pkg.set(pkg.mainPart(), bytes); const utf = await Document.open(pkg.toBytes()), before = utf.package.parts;\n  utf.paragraphs[0]!.setProperties({ spacingBefore: 240, keepLines: true });\n  const root = await mkdtemp(join(tmpdir(), 'docx-ppr-'));\n  try { const path = join(root, 'edited.docx'); await utf.save(path); const reopened = await Document.open(path);\n    expect(reopened.paragraphs[0]!.directProperties().spacingBefore).toBe(240); expect(reopened.paragraphs[0]!.directProperties().keepLines).toBe(true);\n    expect([...reopened.package.get('word/document.xml')!.slice(0, 2)]).toEqual([255, 254]);\n    for (const [n, b] of before) if (n !== 'word/document.xml') expect(reopened.package.get(n)).toEqual(b);\n  } finally { await rm(root, { recursive: true, force: true }); }\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "doc.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes",
+        "reopened.package.get",
+        "reopened.package.get().slice",
+        "reopened.paragraphs.0.directProperties",
+        "rm",
+        "text.charCodeAt",
+        "tmpdir",
+        "utf.paragraphs.0.setProperties",
+        "utf.save",
+        "view.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:self-closing properties and empty paragraphs accept ordered insertion under a default namespace",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 111,
+      "title": "self-closing properties and empty paragraphs accept ordered insertion under a default namespace",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(doc.paragraphs).toHaveLength(1)",
+        "expect(values.spacingAfter).toBe(0)",
+        "expect(values.keepLines).toBe(false)",
+        "expect(values.alignment).toBe('right')",
+        "expect((await Document.open(doc.package.toBytes())).paragraphs[0]!.directProperties()).toEqual(values)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 112,
+          "expression": "for (const body of [`<p xmlns=\"$"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  for (const body of [`<p xmlns=\"${W}\"/>`, `<p xmlns=\"${W}\"><pPr/><r><t>Alpha</t></r></p>`, `<p xmlns=\"${W}\"><pPr><spacing xmlns:q=\"${W}\" q:line=\"360\" q:afterAutospacing=\"0\"/></pPr><r><t>Alpha</t></r></p>`]) {\n    const d = Document.create(), pkg = await OpcPackage.open(d.package.toBytes());\n    const xml = pkg.text(pkg.mainPart()).replace('<w:body>', '<w:body>' + body); pkg.set(pkg.mainPart(), xml);\n    const doc = await Document.open(pkg.toBytes()); expect(doc.paragraphs).toHaveLength(1);\n    doc.paragraphs[0]!.setProperties({ spacingAfter: 0, keepLines: false, alignment: 'right' });\n    const values = doc.paragraphs[0]!.directProperties(); expect(values.spacingAfter).toBe(0); expect(values.keepLines).toBe(false); expect(values.alignment).toBe('right');\n    expect((await Document.open(doc.package.toBytes())).paragraphs[0]!.directProperties()).toEqual(values);\n  }\n}",
+      "calls": [
+        ".paragraphs.0.directProperties",
+        "Document.create",
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.package.toBytes",
+        "doc.paragraphs.0.directProperties",
+        "doc.paragraphs.0.setProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:late serialization and staged write failures restore package, values and held paragraph",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 122,
+      "title": "late serialization and staged write failures restore package, values and held paragraph",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => paragraph.setProperties({ alignment: 'center' })).toThrow('injected')",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(paragraph.text).toBe('Alpha')",
+        "expect(paragraph.directProperties().alignment).toBeNull()",
+        "expect(paragraph.setProperties({ alignment: 'center' })).toEqual({ changed: 1 })"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 123,
+          "expression": "for (const stage of ['set', 'toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  for (const stage of ['set', 'toBytes'] as const) {\n    const doc = await fixture(), paragraph = doc.paragraphs[0]!, before = doc.package.toBytes();\n    const pkg = (doc as unknown as { opcPackage: OpcPackage }).opcPackage;\n    const original = pkg[stage].bind(pkg);\n    if (stage === 'set') pkg.set = (name, value) => { (original as OpcPackage['set'])(name, value); throw new Error('injected write failure'); };\n    else pkg.toBytes = () => { throw new Error('injected serialization failure'); };\n    try { expect(() => paragraph.setProperties({ alignment: 'center' })).toThrow('injected'); }\n    finally { if (stage === 'set') pkg.set = original as OpcPackage['set']; else pkg.toBytes = original as OpcPackage['toBytes']; }\n    expect(doc.package.toBytes()).toEqual(before); expect(paragraph.text).toBe('Alpha'); expect(paragraph.directProperties().alignment).toBeNull();\n    expect(paragraph.setProperties({ alignment: 'center' })).toEqual({ changed: 1 });\n  }\n}",
+      "calls": [
+        "doc.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "original",
+        "paragraph.directProperties",
+        "paragraph.setProperties",
+        "pkg.undefined.bind"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:table paragraph formatting preserves grid and live table access while expiring paragraph handles",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 136,
+      "title": "table paragraph formatting preserves grid and live table access while expiring paragraph handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(table.rows).toBe(1)",
+        "expect(table.columns).toBe(2)",
+        "expect(table.cell(0, 0).text).toBe('cell')",
+        "expect(() => paragraph.text).toThrow(expect.objectContaining({ code: 'docx-stale-paragraph' }))",
+        "expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBe(120)",
+        "expect((await Document.open(doc.package.toBytes())).tables[0]!.cell(0, 1).text).toBe('other')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = Document.create(); doc.addTable(1, 2); doc.tables[0]!.cell(0, 0).text = 'cell'; doc.tables[0]!.cell(0, 1).text = 'other';\n  const table = doc.tables[0]!, paragraph = doc.paragraphs[0]!;\n  paragraph.setProperties({ spacingBefore: 120, keepLines: true });\n  expect(table.rows).toBe(1); expect(table.columns).toBe(2); expect(table.cell(0, 0).text).toBe('cell');\n  expect(() => paragraph.text).toThrow(expect.objectContaining({ code: 'docx-stale-paragraph' }));\n  expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBe(120);\n  expect((await Document.open(doc.package.toBytes())).tables[0]!.cell(0, 1).text).toBe('other');\n}",
+      "calls": [
+        ".tables.0.cell",
+        "Document.create",
+        "Document.open",
+        "doc.addTable",
+        "doc.package.toBytes",
+        "doc.paragraphs.0.directProperties",
+        "doc.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "paragraph.setProperties",
+        "table.cell"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:same-value requests still enforce protection and direct getters remain read-only",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 146,
+      "title": "same-value requests still enforce protection and direct getters remain read-only",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(doc.paragraphs[0]!.directProperties().keepLines).toBe(true)",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(() => p.paragraphs[0]!.setProperties({ keepLines: true })).toThrow(expect.objectContaining({ code: 'docx-format-protected' }))",
+        "expect(p.package.toBytes()).toEqual(protectedBytes)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture('<w:pPr><w:keepLines w:val=\"true\"/></w:pPr>');\n  const before = doc.package.toBytes(); expect(doc.paragraphs[0]!.directProperties().keepLines).toBe(true); expect(doc.package.toBytes()).toEqual(before);\n  const pkg = await OpcPackage.open(before);\n  addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');\n  addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');\n  const p = await Document.open(pkg.toBytes()), protectedBytes = p.package.toBytes();\n  expect(() => p.paragraphs[0]!.setProperties({ keepLines: true })).toThrow(expect.objectContaining({ code: 'docx-format-protected' }));\n  expect(p.package.toBytes()).toEqual(protectedBytes);\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "doc.package.toBytes",
+        "doc.paragraphs.0.directProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "p.package.toBytes",
+        "p.paragraphs.0.setProperties",
+        "pkg.mainPart",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:nine shared direct paragraph getter cases execute with no credit for other document-model operations",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 157,
+      "title": "nine shared direct paragraph getter cases execute with no credit for other document-model operations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(9)",
+        "expect(good.counts.cases.planned).toBeGreaterThan(0)",
+        "expect(text.includes(from!)).toBe(true)",
+        "expect(bad.counts.steps.failed).toBe(4)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 165,
+          "expression": "for (const [from, to] of [['its alignment getter equals <value>', 'its alignment getter equals wrong'], ['its before and after getters equal <before> and <after>', 'its before and after getters equal 999 and 999']])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/paragraph-properties.ts');\n  const path = 'workflows/docx/document-model.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  const run = (source: string) => executeAcceptance({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(3), cases: count(9), steps: count(27) } }, bindings, 'paragraph-properties-unit');\n  const good = await run(text); expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(9); expect(good.counts.cases.planned).toBeGreaterThan(0);\n  for (const [from, to] of [['its alignment getter equals <value>', 'its alignment getter equals wrong'], ['its before and after getters equal <before> and <after>', 'its before and after getters equal 999 and 999']]) {\n    expect(text.includes(from!)).toBe(true); const bad = await run(text.replace(from!, to!));\n    expect(bad.counts.steps.failed).toBe(4); expect(bad.counts.steps.undefined).toBe(0); expect(bad.counts.steps.ambiguous).toBe(0);\n  }\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "run",
+        "selectSharedScenarios",
+        "text.includes",
+        "text.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:spacing policy boundaries and partial removal preserve an unedited line-spacing leaf",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 171,
+      "title": "spacing policy boundaries and partial removal preserve an unedited line-spacing leaf",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBe(31680)",
+        "expect(doc.paragraphs[0]!.directProperties().spacingAfter).toBeNull()",
+        "expect(() => doc.paragraphs[0]!.setProperties({ spacingBefore: 31681 })).toThrow()",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(attribute(spacing, 'before', W)).toBeUndefined()",
+        "expect(attribute(spacing, 'after', W)).toBeUndefined()",
+        "expect(attribute(spacing, 'line', W)).toBe('360')",
+        "expect(attribute(spacing, 'lineRule', W)).toBe('auto')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const doc = await fixture('<w:pPr><w:spacing w:before=\"120\" w:after=\"240\" w:line=\"360\" w:lineRule=\"auto\"/></w:pPr>');\n  doc.paragraphs[0]!.setProperties({ spacingBefore: 31680, spacingAfter: null });\n  expect(doc.paragraphs[0]!.directProperties().spacingBefore).toBe(31680); expect(doc.paragraphs[0]!.directProperties().spacingAfter).toBeNull();\n  const before = doc.package.toBytes(); expect(() => doc.paragraphs[0]!.setProperties({ spacingBefore: 31681 })).toThrow(); expect(doc.package.toBytes()).toEqual(before);\n  doc.paragraphs[0]!.setProperties({ spacingBefore: null });\n  const spacing = elements(parseXml(new TextDecoder().decode(doc.package.get('word/document.xml'))), 'spacing', W)[0]!;\n  expect(attribute(spacing, 'before', W)).toBeUndefined(); expect(attribute(spacing, 'after', W)).toBeUndefined();\n  expect(attribute(spacing, 'line', W)).toBe('360'); expect(attribute(spacing, 'lineRule', W)).toBe('auto');\n}",
+      "calls": [
+        ".decode",
+        "attribute",
+        "doc.package.get",
+        "doc.package.toBytes",
+        "doc.paragraphs.0.directProperties",
+        "doc.paragraphs.0.setProperties",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "parseXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-paragraph-properties.test.ts:canonical flag predicates reject false readbacks rather than trusting setter success",
+      "path": "tests/unit/docx-paragraph-properties.test.ts",
+      "line": 182,
+      "title": "canonical flag predicates reject false readbacks rather than trusting setter success",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.counts.cases.failed).toBe(1)",
+        "expect(r.counts.steps.failed).toBe(1)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47",
+      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts');\n  const path = 'workflows/docx/document-model.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  const corrupt = bindings.map(b => b.pattern.test('KeepLines, PageBreakBefore and WidowControl are set true') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n    await b.run(c, ...captures); (c.state as { document: Document }).document.paragraphs[0]!.setProperties({ widowControl: false });\n  } } : b);\n  const r = await executeAcceptance({ root: '.', features: [selectSharedScenarios(path, text, ['@id-docx-go-paragraph-advanced-toggles'])], counts: { features: count(1), scenarios: count(1), cases: count(1), steps: count(3) } }, corrupt, 'paragraph-flags-control');\n  expect(r.counts.cases.failed).toBe(1); expect(r.counts.steps.failed).toBe(1); expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.document.paragraphs.0.setProperties",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
       ],
       "reviewReasons": [],
       "unresolved": []
