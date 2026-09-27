@@ -28,6 +28,7 @@ shading, alignment, direction and a simple top border without restructuring tabl
 Rectangular Word tables support [empty-row insertion and deletion](docs/contracts/table-rows.md).
 [Direct paragraph properties](docs/contracts/paragraph-properties.md) set alignment,
 before/after spacing and selected pagination flags without changing text.
+Single-section documents also support [direct title-page and background properties](docs/contracts/document-properties.md).
 [Page geometry](docs/contracts/page-layout.md) changes the final Word section's
 size and margins while preserving earlier sections and text.
 `patchOffice()` adds

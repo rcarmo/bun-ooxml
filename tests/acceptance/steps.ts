@@ -45,6 +45,7 @@ import { bindings as xmlByteSnapshotBindings } from './xml-byte-snapshot.ts';
 import { bindings as formulaAnalysisBindings } from './formula-analysis.ts';
 import { bindings as formulaRemapBindings } from './formula-remap.ts';
 import { bindings as corePropertiesBindings } from './core-properties.ts';
+import { bindings as documentPropertiesBindings } from './document-properties.ts';
 import { bindings as cellPropertiesBindings } from './cell-properties.ts';
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
@@ -106,6 +107,7 @@ export const bindings: StepBinding[] = [
   ...formulaAnalysisBindings,
   ...formulaRemapBindings,
   ...corePropertiesBindings,
+  ...documentPropertiesBindings,
   ...cellPropertiesBindings,
   ...createPptxBindings,
   ...createXlsxBindings,

@@ -1,4 +1,6 @@
 import { OoxmlError } from "../errors.ts";
+import {readDocumentProperties,editDocumentProperties,type DirectDocumentProperties,type DocumentPropertiesPatch} from './document-properties.ts';
+export type {DirectDocumentProperties,DocumentPropertiesPatch} from './document-properties.ts';
 import {readCoreProperties,patchCoreProperties,type CoreProperties,type CorePropertiesPatch} from '../opc/core-properties.ts';
 export type {CoreProperties,CorePropertiesPatch} from '../opc/core-properties.ts';
 import {appendParagraphRun} from './append-run.ts';
@@ -518,6 +520,17 @@ export class Document {
     return authorParagraphStyle(this.opcPackage,DOCUMENT_PART,styleId,normalized);
   }
 
+  /** Direct title-page/background metadata; requires a single final section. */
+  getDocumentProperties():DirectDocumentProperties {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
+    return readDocumentProperties(this.xml);
+  }
+  setDocumentProperties(patch:DocumentPropertiesPatch):{changed:number} {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
+    this.assertFormattingUnprotected();const result=editDocumentProperties(this.xml,patch);
+    if(!result.changed)return {changed:0};this.commitParagraphProperties(result.xml);return {changed:result.changed};
+  }
+
   /** Direct page geometry of the existing final body section. */
   getPageLayout(): PageLayout {
     if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
@@ -921,7 +934,9 @@ export class Document {
     const nextVersion=this.version+1,nextDocument=parseXml(nextXml);
     const collections=collectDocumentCollections(nextDocument,nextVersion,this.tableVersion);
     if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-format-unsafe','Formatting unexpectedly changed paragraph text');
-    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
+    const original=this.opcPackage.get(DOCUMENT_PART)!;
+    const bom=original[0]===239&&original[1]===187&&original[2]===191?'\ufeff':'';
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,bom+nextXml);this.opcPackage.toBytes();});
     this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
   }
 

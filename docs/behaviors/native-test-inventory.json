@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 752,
-  "files": 75,
+  "count": 767,
+  "files": 76,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -46,6 +46,12 @@
       "path": "tests/unit/docx-create.test.ts",
       "sha256": "e0833b836bd53c31748940ef5f6d84be837a2e508ccdd5c652dd9a3a39cb33ea",
       "declarations": 6,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "declarations": 15,
       "issues": []
     },
     {
@@ -503,6 +509,10 @@
       "sha256": "381152c34d7b7a3e99400dfff06ff8610b45a176754e538342aa2e40a47234df"
     },
     {
+      "path": "tests/acceptance/document-properties.ts",
+      "sha256": "c4f90481c1bcd8974457a8bf1a91e80573a08fa070a3315095f6c653bf50ea98"
+    },
+    {
       "path": "tests/acceptance/docx-model.ts",
       "sha256": "a1db5a0c18219ee8440580cccaf03ea65657a027c39f7b25721e9364cdf8c91a"
     },
@@ -616,7 +626,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "f6dfe4cf67cd853f424f01fc78449bb1c4d2aa47dc59f5aded1a87c581a91eb9"
+      "sha256": "c0cb2b19d45d8ebf1105291c998902949b143605eb8938f96533c648c4c343d5"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -744,6 +754,16 @@
     "bun:tests/unit/docx-core-properties.test.ts:aliased timestamp type, valid leap dates and string values remain distinct with metadata-only external changes",
     "bun:tests/unit/docx-core-properties.test.ts:canonical metadata case compares three chosen fields and detects each corrupted readback",
     "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
+    "bun:tests/unit/docx-document-properties.test.ts:direct title-page and background values persist through path reopen without changing content or unrelated members",
+    "bun:tests/unit/docx-document-properties.test.ts:all valid Boolean spellings and missing val read correctly without normalizing no-ops",
+    "bun:tests/unit/docx-document-properties.test.ts:invalid plain patches, conflicting late values and XML-unsafe colors refuse atomically",
+    "bun:tests/unit/docx-document-properties.test.ts:multiple sections, absent/final-order ambiguity and lexical or revised section metadata refuse unchanged",
+    "bun:tests/unit/docx-document-properties.test.ts:themed drawing duplicate decorated or malformed background/title metadata refuse even removal",
+    "bun:tests/unit/docx-document-properties.test.ts:root/body ambiguity and late background location refuse without destructive repair",
+    "bun:tests/unit/docx-document-properties.test.ts:existing geometry, header relationships, body XML and sibling metadata keep their original spelling",
+    "bun:tests/unit/docx-document-properties.test.ts:write and serialization faults roll back both property edits and keep snapshot handles",
+    "bun:tests/unit/docx-document-properties.test.ts:aliased UTF16 with conflicting lexical w binding retains both properties after byte reopen",
+    "bun:tests/unit/docx-document-properties.test.ts:canonical title/background getter case detects each incorrect or corrupted direct value",
     "bun:tests/unit/docx-effective-formatting.test.ts:UTF16 LE and BE preserve encoding/BOM and inspect reopened style definitions",
     "bun:tests/unit/docx-effective-formatting.test.ts:selected ancestry refuses missing bases, links, wrong namespaces and duplicate property containers",
     "bun:tests/unit/docx-effective-formatting.test.ts:complex-script text and unsupported property contexts refuse rather than guess flags",
@@ -1003,6 +1023,16 @@
     "bun:tests/unit/docx-core-properties.test.ts:aliased timestamp type, valid leap dates and string values remain distinct with metadata-only external changes",
     "bun:tests/unit/docx-core-properties.test.ts:canonical metadata case compares three chosen fields and detects each corrupted readback",
     "bun:tests/unit/docx-create.test.ts:Document.create and addParagraph / executes the DOCX create feature with dedicated bindings and optional parent aggregation",
+    "bun:tests/unit/docx-document-properties.test.ts:direct title-page and background values persist through path reopen without changing content or unrelated members",
+    "bun:tests/unit/docx-document-properties.test.ts:all valid Boolean spellings and missing val read correctly without normalizing no-ops",
+    "bun:tests/unit/docx-document-properties.test.ts:invalid plain patches, conflicting late values and XML-unsafe colors refuse atomically",
+    "bun:tests/unit/docx-document-properties.test.ts:multiple sections, absent/final-order ambiguity and lexical or revised section metadata refuse unchanged",
+    "bun:tests/unit/docx-document-properties.test.ts:themed drawing duplicate decorated or malformed background/title metadata refuse even removal",
+    "bun:tests/unit/docx-document-properties.test.ts:root/body ambiguity and late background location refuse without destructive repair",
+    "bun:tests/unit/docx-document-properties.test.ts:existing geometry, header relationships, body XML and sibling metadata keep their original spelling",
+    "bun:tests/unit/docx-document-properties.test.ts:write and serialization faults roll back both property edits and keep snapshot handles",
+    "bun:tests/unit/docx-document-properties.test.ts:aliased UTF16 with conflicting lexical w binding retains both properties after byte reopen",
+    "bun:tests/unit/docx-document-properties.test.ts:canonical title/background getter case detects each incorrect or corrupted direct value",
     "bun:tests/unit/docx-effective-formatting.test.ts:UTF16 LE and BE preserve encoding/BOM and inspect reopened style definitions",
     "bun:tests/unit/docx-effective-formatting.test.ts:selected ancestry refuses missing bases, links, wrong namespaces and duplicate property containers",
     "bun:tests/unit/docx-effective-formatting.test.ts:complex-script text and unsupported property contexts refuse rather than guess flags",
@@ -4459,6 +4489,680 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:direct title-page and background values persist through path reopen without changing content or unrelated members",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 9,
+      "title": "direct title-page and background values persist through path reopen without changing content or unrelated members",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null})",
+        "expect(d.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toEqual({changed:2})",
+        "expect(d.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'})",
+        "expect(()=>held.text).toThrow()",
+        "expect(()=>cell.text).toThrow()",
+        "expect(t.rows).toBe(1)",
+        "expect(t.cell(0,0).text).toBe('Cell')",
+        "expect(after.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'})",
+        "expect(after.paragraphs.map(p=>p.text)).toEqual(['Untouched','Cell'])",
+        "expect(after.package.get(n)).toEqual(b)",
+        "expect(tree.root.children.map(n=>n.localName)).toEqual(['background','body'])",
+        "expect(sect.children.map(n=>n.localName)).toEqual(['pgSz','pgMar','cols','titlePg','docGrid'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(after.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(),before=d.package.parts,t=d.tables[0]!,cell=t.cell(0,0),held=d.paragraphs[0]!;expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null});expect(d.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toEqual({changed:2});expect(d.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'});expect(()=>held.text).toThrow();expect(()=>cell.text).toThrow();expect(t.rows).toBe(1);expect(t.cell(0,0).text).toBe('Cell');\n const dir=await mkdtemp(join(tmpdir(),'document-properties-'));try{const path=join(dir,'appearance.docx');await d.save(path);const after=await Document.open(path);expect(after.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'});expect(after.paragraphs.map(p=>p.text)).toEqual(['Untouched','Cell']);for(const[n,b]of before)if(n!=='word/document.xml')expect(after.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n const tree=parseXml(xml(d));expect(tree.root.children.map(n=>n.localName)).toEqual(['background','body']);const sect=elements(tree,'sectPr',W)[0]!;expect(sect.children.map(n=>n.localName)).toEqual(['pgSz','pgMar','cols','titlePg','docGrid']);\n}",
+      "calls": [
+        "Document.open",
+        "after.getDocumentProperties",
+        "after.package.get",
+        "after.paragraphs.map",
+        "d.getDocumentProperties",
+        "d.save",
+        "d.setDocumentProperties",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "parseXml",
+        "rm",
+        "sect.children.map",
+        "t.cell",
+        "tmpdir",
+        "tree.root.children.map",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:null removal, explicit false and lexical same-value no-ops keep distinct direct states",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 15,
+      "title": "null removal, explicit false and lexical same-value no-ops keep distinct direct states",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.getDocumentProperties()).toEqual({titlePage:false,backgroundColor:'aAbBcC'})",
+        "expect(d.setDocumentProperties({titlePage:false,backgroundColor:'aAbBcC'})).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Untouched')",
+        "expect(d.getDocumentProperties().titlePage).toBe(false)",
+        "expect(d.setDocumentProperties({titlePage:null,backgroundColor:null})).toEqual({changed:2})",
+        "expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null})",
+        "expect(xml(d)).not.toContain('titlePg')",
+        "expect(xml(d)).not.toContain('background')",
+        "expect(d.setDocumentProperties({titlePage:false})).toEqual({changed:1})",
+        "expect(d.setDocumentProperties({backgroundColor:'auto'})).toEqual({changed:1})",
+        "expect(d.getDocumentProperties().backgroundColor).toBe('auto')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(x=>x.replace('<w:body>','<w:background w:color=\\'aAbBcC\\'/><w:body>').replace('<w:docGrid','<w:titlePg w:val=\\'off\\'/><w:docGrid')),before=d.package.toBytes(),held=d.paragraphs[0]!;expect(d.getDocumentProperties()).toEqual({titlePage:false,backgroundColor:'aAbBcC'});expect(d.setDocumentProperties({titlePage:false,backgroundColor:'aAbBcC'})).toEqual({changed:0});expect(d.package.toBytes()).toEqual(before);expect(held.text).toBe('Untouched');const values=d.getDocumentProperties();values.titlePage=true;expect(d.getDocumentProperties().titlePage).toBe(false);\n expect(d.setDocumentProperties({titlePage:null,backgroundColor:null})).toEqual({changed:2});expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null});expect(xml(d)).not.toContain('titlePg');expect(xml(d)).not.toContain('background');expect(d.setDocumentProperties({titlePage:false})).toEqual({changed:1});expect(d.getDocumentProperties().titlePage).toBe(false);expect(d.setDocumentProperties({backgroundColor:'auto'})).toEqual({changed:1});expect(d.getDocumentProperties().backgroundColor).toBe('auto');\n}",
+      "calls": [
+        "d.getDocumentProperties",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "x.replace",
+        "x.replace().replace",
+        "xml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:all valid Boolean spellings and missing val read correctly without normalizing no-ops",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 20,
+      "title": "all valid Boolean spellings and missing val read correctly without normalizing no-ops",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.getDocumentProperties().titlePage).toBe(value)",
+        "expect(d.setDocumentProperties({titlePage:value})).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 21,
+          "expression": "for(const[val,value]of [['',true],['true',true],['on',true],['1',true],['false',false],['off',false],['0',false]] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n for(const[val,value]of [['',true],['true',true],['on',true],['1',true],['false',false],['off',false],['0',false]] as const){const d=await fixture(x=>x.replace('<w:docGrid',`<w:titlePg${val?` w:val=\"${val}\"`:''}/><w:docGrid`)),before=d.package.toBytes();expect(d.getDocumentProperties().titlePage).toBe(value);expect(d.setDocumentProperties({titlePage:value})).toEqual({changed:0});expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.getDocumentProperties",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:self-closing sections and empty direct backgrounds allow guarded insertion without geometry synthesis",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 24,
+      "title": "self-closing sections and empty direct backgrounds allow guarded insertion without geometry synthesis",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null})",
+        "expect(d.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'000000'})",
+        "expect(elements(parseXml(xml(d)),'pgSz',W)).toHaveLength(0)",
+        "expect((await Document.open(d.package.toBytes())).getDocumentProperties().titlePage).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(x=>x.replace('<w:body>','<w:background/><w:body>').replace(/<w:sectPr>[^]*?<\\/w:sectPr>/,'<w:sectPr/>'));expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null});d.setDocumentProperties({titlePage:true,backgroundColor:'000000'});expect(d.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'000000'});expect(elements(parseXml(xml(d)),'pgSz',W)).toHaveLength(0);expect((await Document.open(d.package.toBytes())).getDocumentProperties().titlePage).toBe(true);\n}",
+      "calls": [
+        ".getDocumentProperties",
+        "Document.open",
+        "d.getDocumentProperties",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "fixture",
+        "parseXml",
+        "x.replace",
+        "x.replace().replace",
+        "xml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:invalid plain patches, conflicting late values and XML-unsafe colors refuse atomically",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 28,
+      "title": "invalid plain patches, conflicting late values and XML-unsafe colors refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.setDocumentProperties(patch as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(called).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 29,
+          "expression": "for(const patch of [null,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(),before=d.package.toBytes();let called=false;const getter=Object.defineProperty({},'titlePage',{enumerable:true,get(){called=true;return true;}});for(const patch of [null,{},[],getter,Object.create({titlePage:true}),{unknown:1},{titlePage:'true'},{titlePage:1},{backgroundColor:'#EEEEEE'},{backgroundColor:'red'},{backgroundColor:'EEEEEE\\n'},{titlePage:true,backgroundColor:'bad'},{[Symbol('x')]:true}]){expect(()=>d.setDocumentProperties(patch as any)).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(called).toBe(false);\n}",
+      "calls": [
+        "Object.create",
+        "Object.defineProperty",
+        "Symbol",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:multiple sections, absent/final-order ambiguity and lexical or revised section metadata refuse unchanged",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 32,
+      "title": "multiple sections, absent/final-order ambiguity and lexical or revised section metadata refuse unchanged",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.getDocumentProperties()).toThrow()",
+        "expect(()=>d.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for(const change of [\n  (x:string)=>x.replace('<w:body>','<w:body><w:p><w:pPr><w:sectPr/></w:pPr></w:p>'),\n  (x:string)=>x.replace(/<w:sectPr>[^]*?<\\/w:sectPr>/,''),\n  (x:string)=>x.replace('</w:body>','<w:sectPr/></w:body>'),\n  (x:string)=>x.replace('</w:body>','<w:p/></w:body>'),\n  (x:string)=>x.replace('<w:sectPr>','<w:sectPr><!--keep-->'),\n  (x:string)=>x.replace('</w:sectPr>','<w:sectPrChange/></w:sectPr>'),\n  (x:string)=>x.replace('<w:docGrid','<w:titlePg/><w:titlePg/><w:docGrid'),\n  (x:string)=>x.replace('<w:pgSz','<w:titlePg/><w:pgSz'),\n  (x:string)=>x.replace('<w:sectPr>','<w:sectPr><w:footnotePr><w:sectPrChange/></w:footnotePr>'),\n ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n for(const change of [\n  (x:string)=>x.replace('<w:body>','<w:body><w:p><w:pPr><w:sectPr/></w:pPr></w:p>'),\n  (x:string)=>x.replace(/<w:sectPr>[^]*?<\\/w:sectPr>/,''),\n  (x:string)=>x.replace('</w:body>','<w:sectPr/></w:body>'),\n  (x:string)=>x.replace('</w:body>','<w:p/></w:body>'),\n  (x:string)=>x.replace('<w:sectPr>','<w:sectPr><!--keep-->'),\n  (x:string)=>x.replace('</w:sectPr>','<w:sectPrChange/></w:sectPr>'),\n  (x:string)=>x.replace('<w:docGrid','<w:titlePg/><w:titlePg/><w:docGrid'),\n  (x:string)=>x.replace('<w:pgSz','<w:titlePg/><w:pgSz'),\n  (x:string)=>x.replace('<w:sectPr>','<w:sectPr><w:footnotePr><w:sectPrChange/></w:footnotePr>'),\n ]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.getDocumentProperties()).toThrow();expect(()=>d.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.getDocumentProperties",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:themed drawing duplicate decorated or malformed background/title metadata refuse even removal",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 46,
+      "title": "themed drawing duplicate decorated or malformed background/title metadata refuse even removal",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.getDocumentProperties()).toThrow()",
+        "expect(()=>d.setDocumentProperties({backgroundColor:null})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.setDocumentProperties({titlePage:null})).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 47,
+          "expression": "for(const metadata of ['<w:background w:color=\"EEEEEE\" w:themeColor=\"accent1\"/>','<w:background><w:drawing/></w:background>','<w:background w:color=\"bad\"/>','<w:background color=\"EEEEEE\"/>','<w:background/><w:background/>','<w:background><!--keep--></w:background>'])"
+        },
+        {
+          "line": 48,
+          "expression": "for(const marker of ['<w:titlePg w:val=\"yes\"/>','<w:titlePg val=\"1\"/>','<w:titlePg><w:bad/></w:titlePg>','<w:titlePg><?keep value?></w:titlePg>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n for(const metadata of ['<w:background w:color=\"EEEEEE\" w:themeColor=\"accent1\"/>','<w:background><w:drawing/></w:background>','<w:background w:color=\"bad\"/>','<w:background color=\"EEEEEE\"/>','<w:background/><w:background/>','<w:background><!--keep--></w:background>']){const d=await fixture(x=>x.replace('<w:body>',metadata+'<w:body>')),before=d.package.toBytes();expect(()=>d.getDocumentProperties()).toThrow();expect(()=>d.setDocumentProperties({backgroundColor:null})).toThrow();expect(d.package.toBytes()).toEqual(before);}\n for(const marker of ['<w:titlePg w:val=\"yes\"/>','<w:titlePg val=\"1\"/>','<w:titlePg><w:bad/></w:titlePg>','<w:titlePg><?keep value?></w:titlePg>']){const d=await fixture(x=>x.replace('<w:docGrid',marker+'<w:docGrid')),before=d.package.toBytes();expect(()=>d.setDocumentProperties({titlePage:null})).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.getDocumentProperties",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:root/body ambiguity and late background location refuse without destructive repair",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 51,
+      "title": "root/body ambiguity and late background location refuse without destructive repair",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.setDocumentProperties({backgroundColor:'EEEEEE'})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 52,
+          "expression": "for(const change of [(x:string)=>x.replace('</w:document>','<w:background/></w:document>'),(x:string)=>x.replace('</w:document>','<w:body/></w:document>'),(x:string)=>x.replace('<w:body>','<!--keep--><w:body>'),(x:string)=>x.replace('<w:document ','<q:document xmlns:q=\"urn:foreign\" ').replace('</w:document>','</q:document>')])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n for(const change of [(x:string)=>x.replace('</w:document>','<w:background/></w:document>'),(x:string)=>x.replace('</w:document>','<w:body/></w:document>'),(x:string)=>x.replace('<w:body>','<!--keep--><w:body>'),(x:string)=>x.replace('<w:document ','<q:document xmlns:q=\"urn:foreign\" ').replace('</w:document>','</q:document>')]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.setDocumentProperties({backgroundColor:'EEEEEE'})).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "x.replace",
+        "x.replace().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:existing geometry, header relationships, body XML and sibling metadata keep their original spelling",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 55,
+      "title": "existing geometry, header relationships, body XML and sibling metadata keep their original spelling",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(next).toContain(header)",
+        "expect(next.replace(/<w:background[^>]*\\/>/,'').replace(/<w:titlePg[^>]*\\/>/,'')).toBe(source)",
+        "expect(d.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 56,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const base=await fixture(),pkg=await OpcPackage.open(base.package.toBytes());addPart(pkg,'word/header1.xml',`<w:hdr xmlns:w=\"${W}\"><w:p/></w:hdr>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/header','header1.xml',{id:'rIdHeader'});const header='<w:headerReference xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" w:type=\"default\" r:id=\"rIdHeader\"/>';pkg.set(pkg.mainPart(),pkg.text(pkg.mainPart()).replace('<w:sectPr>','<w:sectPr>'+header));const d=await Document.open(pkg.toBytes()),before=d.package.parts,source=xml(d);d.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'});const next=xml(d);expect(next).toContain(header);expect(next.replace(/<w:background[^>]*\\/>/,'').replace(/<w:titlePg[^>]*\\/>/,'')).toBe(source);for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "base.package.toBytes",
+        "d.package.get",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "fixture",
+        "next.replace",
+        "next.replace().replace",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:protected and externally changed document properties refuse edits including no-ops",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 59,
+      "title": "protected and externally changed document properties refuse edits including no-ops",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(locked.getDocumentProperties().titlePage).toBeNull()",
+        "expect(()=>locked.setDocumentProperties({titlePage:null})).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(()=>d.getDocumentProperties()).toThrow()",
+        "expect(()=>d.setDocumentProperties({titlePage:true})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(p.toBytes()),before=locked.package.toBytes();expect(locked.getDocumentProperties().titlePage).toBeNull();expect(()=>locked.setDocumentProperties({titlePage:null})).toThrow();expect(locked.package.toBytes()).toEqual(before);\n d.package.setPart('word/document.xml',new TextEncoder().encode(xml(d).replace('Untouched','External')));const changed=d.package.toBytes();expect(()=>d.getDocumentProperties()).toThrow();expect(()=>d.setDocumentProperties({titlePage:true})).toThrow();expect(d.package.toBytes()).toEqual(changed);\n}",
+      "calls": [
+        ".encode",
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.getDocumentProperties",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "expect",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "locked.getDocumentProperties",
+        "locked.package.toBytes",
+        "locked.setDocumentProperties",
+        "p.mainPart",
+        "p.toBytes",
+        "xml",
+        "xml().replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:write and serialization faults roll back both property edits and keep snapshot handles",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 64,
+      "title": "write and serialization faults roll back both property edits and keep snapshot handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Untouched')",
+        "expect(cell.text).toBe('Cell')",
+        "expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 65,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),held=d.paragraphs[0]!,cell=d.tables[0]!.cell(0,0),before=d.package.toBytes(),pkg=(d as any).opcPackage as OpcPackage,original=pkg[stage].bind(pkg);if(stage==='set')pkg.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else pkg.toBytes=()=>{throw Error('injected serialize');};try{expect(()=>d.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toThrow('injected');}finally{if(stage==='set')pkg.set=original as OpcPackage['set'];else pkg.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(held.text).toBe('Untouched');expect(cell.text).toBe('Cell');expect(d.getDocumentProperties()).toEqual({titlePage:null,backgroundColor:null});}\n}",
+      "calls": [
+        "Error",
+        "d.getDocumentProperties",
+        "d.package.toBytes",
+        "d.setDocumentProperties",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "original",
+        "pkg.undefined.bind"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:aliased UTF16 with conflicting lexical w binding retains both properties after byte reopen",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 68,
+      "title": "aliased UTF16 with conflicting lexical w binding retains both properties after byte reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(after.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'})",
+        "expect([...after.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(after.package.get(n)).toEqual(p.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 69,
+          "expression": "for(let i=0;i<source.length;i++)view.setUint16(2+i*2,source.charCodeAt(i),true);"
+        },
+        {
+          "line": 69,
+          "expression": "for(const n of p.names())if(n!==p.mainPart())expect(after.package.get(n)).toEqual(p.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(x=>x.replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:').replace('<q:body>','<q:body xmlns:w=\"urn:foreign\">')),p=await OpcPackage.open(d.package.toBytes()),source=p.text(p.mainPart()).replace('UTF-8','UTF-16'),bytes=new Uint8Array(2+source.length*2);bytes[0]=255;bytes[1]=254;const view=new DataView(bytes.buffer);for(let i=0;i<source.length;i++)view.setUint16(2+i*2,source.charCodeAt(i),true);p.set(p.mainPart(),bytes);const doc=await Document.open(p.toBytes());doc.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'});const after=await Document.open(await doc.save());expect(after.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'});expect([...after.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254]);for(const n of p.names())if(n!==p.mainPart())expect(after.package.get(n)).toEqual(p.get(n));\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "after.getDocumentProperties",
+        "after.package.get",
+        "after.package.get().slice",
+        "d.package.toBytes",
+        "doc.save",
+        "doc.setDocumentProperties",
+        "expect",
+        "expect().toEqual",
+        "fixture",
+        "p.get",
+        "p.mainPart",
+        "p.names",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "source.charCodeAt",
+        "view.setUint16",
+        "x.replaceAll",
+        "x.replaceAll().replaceAll",
+        "x.replaceAll().replaceAll().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:canonical title/background getter case detects each incorrect or corrupted direct value",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 72,
+      "title": "canonical title/background getter case detects each incorrect or corrupted direct value",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 75,
+          "expression": "for(const altered of [source.replace('TitlePage getter is true','TitlePage getter is false'),source.replace('BackgroundColor getter equals EEEEEE','BackgroundColor getter equals 000000')])"
+        },
+        {
+          "line": 76,
+          "expression": "for(const patch of ["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/document-properties.ts');const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(3)}});\n const good=await executeAcceptance(inv(source),bindings,'document-properties-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);\n for(const altered of [source.replace('TitlePage getter is true','TitlePage getter is false'),source.replace('BackgroundColor getter equals EEEEEE','BackgroundColor getter equals 000000')]){const bad=await executeAcceptance(inv(altered),bindings,'document-properties-expected');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n for(const patch of [{titlePage:false},{backgroundColor:'000000'}]){const corrupted=bindings.map(b=>b.pattern.test('TitlePage is set true on that section and BackgroundColor to EEEEEE')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {document:Document}).document.setDocumentProperties(patch);}}:b);const bad=await executeAcceptance(inv(source),corrupted,'document-properties-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.document.setDocumentProperties",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "inv",
+        "join",
+        "selectSharedScenarios",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:complete XML output bounds roll back the whole two-field patch",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 79,
+      "title": "complete XML output bounds roll back the whole two-field patch",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>loaded.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}))",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Untouched')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(),source=xml(d),padding=' '.repeat(8*1024*1024-source.length-2);d.package.setPart('word/document.xml',new TextEncoder().encode(source.replace('</w:body>',padding+'</w:body>')));const loaded=await Document.open(d.package.toBytes()),before=loaded.package.toBytes(),held=loaded.paragraphs[0]!;expect(()=>loaded.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'})).toThrow(expect.objectContaining({code:'XML_EDIT_UNSAFE'}));expect(loaded.package.toBytes()).toEqual(before);expect(held.text).toBe('Untouched');\n}",
+      "calls": [
+        ".encode",
+        ".repeat",
+        "Document.open",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.setDocumentProperties",
+        "source.replace",
+        "xml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:changed UTF8-BOM main XML retains encoding marker and untouched body fragments after reopen",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "line": 83,
+      "title": "changed UTF8-BOM main XML retains encoding marker and untouched body fragments after reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...bytes.slice(0,3)]).toEqual([239,187,191])",
+        "expect(after.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'})",
+        "expect(new TextDecoder().decode(bytes).replace(/<w:background[^>]*\\/>/,'').replace(/<w:titlePg[^>]*\\/>/,'')).toBe(before)",
+        "expect([...after.package.get('word/document.xml')!.slice(0,3)]).toEqual([239,187,191])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a",
+      "body": "{\n const d=await fixture(),p=await OpcPackage.open(d.package.toBytes()),before=p.text(p.mainPart()),raw=p.get(p.mainPart())!;p.set(p.mainPart(),new Uint8Array([239,187,191,...raw]));const loaded=await Document.open(p.toBytes());loaded.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'});const after=await Document.open(loaded.package.toBytes()),bytes=after.package.get('word/document.xml')!;expect([...bytes.slice(0,3)]).toEqual([239,187,191]);expect(after.getDocumentProperties()).toEqual({titlePage:true,backgroundColor:'EEEEEE'});expect(new TextDecoder().decode(bytes).replace(/<w:background[^>]*\\/>/,'').replace(/<w:titlePg[^>]*\\/>/,'')).toBe(before);\n // The shared property commit must retain that marker on a subsequent direct edit too.\n after.paragraphs[0]!.setProperties({alignment:'center'});expect([...after.package.get('word/document.xml')!.slice(0,3)]).toEqual([239,187,191]);\n}",
+      "calls": [
+        ".decode",
+        ".decode().replace",
+        ".decode().replace().replace",
+        "Document.open",
+        "OpcPackage.open",
+        "after.getDocumentProperties",
+        "after.package.get",
+        "after.package.get().slice",
+        "after.paragraphs.0.setProperties",
+        "bytes.slice",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.setDocumentProperties",
+        "p.get",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {

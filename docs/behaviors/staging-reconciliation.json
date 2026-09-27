@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 752,
+  "nativeDeclarations": 767,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 525,
+  "withoutStagingCount": 540,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2490,6 +2490,81 @@
       "id": "bun:tests/unit/docx-core-properties.test.ts:complete core XML output bound refuses while preserving bytes and live document handles",
       "path": "tests/unit/docx-core-properties.test.ts",
       "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:direct title-page and background values persist through path reopen without changing content or unrelated members",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:null removal, explicit false and lexical same-value no-ops keep distinct direct states",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:all valid Boolean spellings and missing val read correctly without normalizing no-ops",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:self-closing sections and empty direct backgrounds allow guarded insertion without geometry synthesis",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:invalid plain patches, conflicting late values and XML-unsafe colors refuse atomically",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:multiple sections, absent/final-order ambiguity and lexical or revised section metadata refuse unchanged",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:themed drawing duplicate decorated or malformed background/title metadata refuse even removal",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:root/body ambiguity and late background location refuse without destructive repair",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:existing geometry, header relationships, body XML and sibling metadata keep their original spelling",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:protected and externally changed document properties refuse edits including no-ops",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:write and serialization faults roll back both property edits and keep snapshot handles",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:aliased UTF16 with conflicting lexical w binding retains both properties after byte reopen",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:canonical title/background getter case detects each incorrect or corrupted direct value",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:complete XML output bounds roll back the whole two-field patch",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
+    },
+    {
+      "id": "bun:tests/unit/docx-document-properties.test.ts:changed UTF8-BOM main XML retains encoding marker and untouched body fragments after reopen",
+      "path": "tests/unit/docx-document-properties.test.ts",
+      "sourceSha256": "fdd55f7e9dc26da45fa461d95d98cd7edfb050332e8029801fba73bd2152893a"
     },
     {
       "id": "bun:tests/unit/docx-effective-formatting.test.ts:effective run formatting executes 25 saved outcomes and read-only refusals",
