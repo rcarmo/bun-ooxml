@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 586,
+  "nativeDeclarations": 597,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 359,
+  "withoutStagingCount": 370,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2835,6 +2835,61 @@
       "id": "bun:tests/unit/docx-run-effects.test.ts:five shared direct flag cases execute but spec-incompatible all-effects scenario stays planned",
       "path": "tests/unit/docx-run-effects.test.ts",
       "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:fontName writes both Latin slots and reads back through saved archive without altering text or other parts",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:font override is ordered before flags and retains unrelated run property bytes",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:same decoded name is a lexical no-op and null removes the complete bounded font leaf",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:Unicode and XML metacharacters are escaped without changing a bounded font name",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:invalid names or executable patches refuse without changing package bytes",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:theme, script, hint, incomplete and unequal font slots refuse even for removal or identical request",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:late multi-run font metadata refusal leaves earlier runs and handles untouched",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:namespace aliases and UTF-16LE disk save retain matching Latin names and unrelated payloads",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:protected writes, stale source and serialization failure preserve bytes and model state",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:six shared font-name getter cases execute and corrupted slot data fails real predicates",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:font changes in table paragraphs preserve grid and staged-write rollback retains fresh handles",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360"
     },
     {
       "id": "bun:tests/unit/docx-style-authoring.test.ts:paragraph style authoring executes24 saved outcomes and atomic refusals",

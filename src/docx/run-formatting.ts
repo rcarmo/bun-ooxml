@@ -2,6 +2,7 @@ import {OoxmlError} from '../errors.ts';
 import {applyEdits,attribute,type XmlElement} from '../xml/index.ts';
 import {APPEARANCE_NAMES,APPEARANCE_KEYS,appearanceValue,appearanceFromNode,type AppearanceKey,type DirectRunAppearance,type RunAppearancePatch} from './run-appearance.ts';
 export type {DirectRunAppearance,UnderlineStyle,HighlightColor,RunVerticalAlignment} from './run-appearance.ts';
+import {fontNameValue,fontNameFromNode,fontNameXml} from './run-font.ts';
 
 const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 const XMLNS='http://www.w3.org/2000/xmlns/';
@@ -10,10 +11,10 @@ type Edit={start:number;end:number;value:string};
 const FLAG_NAMES={bold:'b',italic:'i',caps:'caps',smallCaps:'smallCaps',strike:'strike',doubleStrike:'dstrike',outline:'outline',shadow:'shadow',emboss:'emboss',imprint:'imprint',vanish:'vanish'} as const;
 type FlagKey=keyof typeof FLAG_NAMES;
 export type DirectRunFlags={ [K in FlagKey]: boolean|null };
-export type DirectRunPatch=Partial<DirectRunFlags>&RunAppearancePatch&{fontSizePt?:number|null};
+export type DirectRunPatch=Partial<DirectRunFlags>&RunAppearancePatch&{fontSizePt?:number|null;fontName?:string|null};
 const FLAG_KEYS=Object.keys(FLAG_NAMES) as FlagKey[];
-const PROPERTY_NAMES={...FLAG_NAMES,...APPEARANCE_NAMES,fontSizePt:'sz'} as const;
-const PATCH_KEYS=[...FLAG_KEYS,...APPEARANCE_KEYS,'fontSizePt'] as const;
+const PROPERTY_NAMES={...FLAG_NAMES,...APPEARANCE_NAMES,fontSizePt:'sz',fontName:'rFonts'} as const;
+const PATCH_KEYS=[...FLAG_KEYS,...APPEARANCE_KEYS,'fontSizePt','fontName'] as const;
 const appearanceKey=(key:string):key is AppearanceKey=>APPEARANCE_KEYS.includes(key as AppearanceKey);
 const CONFLICTS=[['strike','dstrike'],['caps','smallCaps'],['emboss','imprint'],['emboss','outline'],['imprint','outline'],['emboss','shadow'],['imprint','shadow']] as const;
 function fail(message:string):never{throw new OoxmlError('docx-format-unsupported',message);}
@@ -26,7 +27,7 @@ function normalizePatch(patch:DirectRunPatch):DirectRunPatch {
   if(!('value' in descriptor))throw new OoxmlError('docx-format-argument','Run-formatting properties must be plain values');
   let value=descriptor.value;
   if(value===undefined)continue;
-  if(value!==null){if(key==='fontSizePt')validateFontSize(value);else if(appearanceKey(key))value=appearanceValue(key,value,true);else if(typeof value!=='boolean')throw new OoxmlError('docx-format-argument','Run effects require boolean or null');}
+  if(value!==null){if(key==='fontSizePt')validateFontSize(value);else if(key==='fontName')value=fontNameValue(value,true);else if(appearanceKey(key))value=appearanceValue(key,value,true);else if(typeof value!=='boolean')throw new OoxmlError('docx-format-argument','Run effects require boolean or null');}
   Object.assign(result,{[key]:value});
  }
  return result;
@@ -72,11 +73,11 @@ export function formatRunProperties(xml:string,paragraph:XmlElement,patch:Direct
     let changed=false;const insertions=new Map<number,string[]>();
     for(const key of requested){
       const name=PROPERTY_NAMES[key],value=patch[key]!,node=pr?.children.find(c=>word(c,name));
-      const current=node?(key==='fontSizePt'?sizeValue(node):appearanceKey(key)?appearanceFromNode(key,node):flagValue(node)):undefined;
+      const current=node?(key==='fontSizePt'?sizeValue(node):key==='fontName'?fontNameFromNode(node):appearanceKey(key)?appearanceFromNode(key,node):flagValue(node)):undefined;
       if(value===null){if(node){edits.push({start:node.start,end:node.end,value:''});changed=true;}continue;}
       if(node&&current===value)continue;
       const encoded=key==='fontSizePt'?String((value as number)*2):appearanceKey(key)?String(value):value?'1':'0';
-      const property=`<w:${name} xmlns:w="${W}" w:val="${encoded}"/>`;
+      const property=key==='fontName'?fontNameXml(value as string):`<w:${name} xmlns:w="${W}" w:val="${encoded}"/>`;
       if(node)edits.push({start:node.start,end:node.end,value:property});
       else{
         const following=pr?.children.find(c=>ORDER.indexOf(c.localName)>ORDER.indexOf(name));
@@ -115,6 +116,14 @@ export function directRunAppearance(xml:string,paragraph:XmlElement):DirectRunAp
  return paragraph.children.filter(r=>word(r,'r')).map(run=>{
   const pr=run.children.find(c=>word(c,'rPr'));
   return Object.fromEntries(APPEARANCE_KEYS.map(key=>{const node=pr?.children.find(c=>word(c,APPEARANCE_NAMES[key]));return [key,node?appearanceFromNode(key,node):null];})) as unknown as DirectRunAppearance;
+ });
+}
+/** Matching direct ASCII/high-ANSI font names; null means no rFonts element. */
+export function directFontNames(xml:string,paragraph:XmlElement):Array<string|null>{
+ formatRunProperties(xml,paragraph,{});
+ return paragraph.children.filter(r=>word(r,'r')).map(run=>{
+  const node=run.children.find(c=>word(c,'rPr'))?.children.find(c=>word(c,'rFonts'));
+  return node?fontNameFromNode(node):null;
  });
 }
 /** Direct non-complex-script sizes in paragraph run order; null means absent. */

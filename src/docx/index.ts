@@ -1,7 +1,7 @@
 import { OoxmlError } from "../errors.ts";
 import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
 export type {EffectiveRunFormatting,EffectiveFlag,FormattingContribution} from './effective-formatting.ts';
-import {formatRunProperties,directFontSizes as readDirectFontSizes,directRunFlags as readDirectRunFlags,directRunAppearance as readDirectRunAppearance,type DirectRunFlags,type DirectRunAppearance,type DirectRunPatch} from './run-formatting.ts';
+import {formatRunProperties,directFontSizes as readDirectFontSizes,directFontNames as readDirectFontNames,directRunFlags as readDirectRunFlags,directRunAppearance as readDirectRunAppearance,type DirectRunFlags,type DirectRunAppearance,type DirectRunPatch} from './run-formatting.ts';
 export type {DirectRunFlags,DirectRunAppearance,UnderlineStyle,HighlightColor,RunVerticalAlignment} from './run-formatting.ts';
 import {readPageLayout,replacePageLayout,normalizePageLayout,type PageLayout} from './page-layout.ts';
 export type {PageLayout} from './page-layout.ts';
@@ -247,6 +247,11 @@ export class Paragraph {
   /** Direct non-complex-script sizes in run order; null means no direct size. */
   directFontSizes(): Array<number|null> {
     this.ensureFresh();return this.documentRef.inspectParagraphFontSizes(this.snapshot);
+  }
+
+  /** Matching direct ASCII/high-ANSI font names; theme/script metadata refuses. */
+  directFontNames(): Array<string|null> {
+    this.ensureFresh(); return this.documentRef.inspectParagraphFontNames(this.snapshot);
   }
 
   /** Read direct Boolean overrides in run order; null means absent. */
@@ -709,6 +714,12 @@ export class Document {
   inspectParagraphFormatting(snapshot: ParagraphSnapshot): EffectiveRunFormatting[] {
     this.assertParagraphSnapshot(snapshot);
     return inspectEffectiveFormatting(this.opcPackage,DOCUMENT_PART,snapshot.element);
+  }
+
+  inspectParagraphFontNames(snapshot: ParagraphSnapshot): Array<string|null> {
+    this.assertParagraphSnapshot(snapshot);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    return readDirectFontNames(this.xml,snapshot.element);
   }
 
   inspectParagraphRunAppearance(snapshot: ParagraphSnapshot): DirectRunAppearance[] {

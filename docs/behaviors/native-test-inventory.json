@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 586,
-  "files": 60,
+  "count": 597,
+  "files": 61,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -88,6 +88,12 @@
       "path": "tests/unit/docx-run-effects.test.ts",
       "sha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
       "declarations": 12,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "sha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "declarations": 11,
       "issues": []
     },
     {
@@ -473,6 +479,10 @@
       "sha256": "4f90228d70ff52f30ce05a3a007ef78435367ff8720f63e50674fc2fdcf63465"
     },
     {
+      "path": "tests/acceptance/run-font-name.ts",
+      "sha256": "2539426aa8f3d7b641a9179dd36190945cfd60ae446c424caef7165a1258653b"
+    },
+    {
       "path": "tests/acceptance/run-formatting.ts",
       "sha256": "019654d045f708ae5d7ba86cf08c35d13e69e28d5cc0b56f5eb604d7ff161255"
     },
@@ -482,7 +492,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "26f78920bd6478e25ee1d43a800f4ced63234cf1e5e176ff27ee7d3b1c68dbcd"
+      "sha256": "476f9097549c1857bbe24247dd9c26ecbe94e979889bb7f64845c8e1d2be4bb1"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -621,6 +631,10 @@
     "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
     "bun:tests/unit/docx-run-effects.test.ts:patch getters, prototypes, symbols and invalid values refuse before running user accessors",
     "bun:tests/unit/docx-run-effects.test.ts:namespace aliases and UTF-16 path save preserve effects and nonedited member payloads",
+    "bun:tests/unit/docx-run-font-name.test.ts:fontName writes both Latin slots and reads back through saved archive without altering text or other parts",
+    "bun:tests/unit/docx-run-font-name.test.ts:invalid names or executable patches refuse without changing package bytes",
+    "bun:tests/unit/docx-run-font-name.test.ts:theme, script, hint, incomplete and unequal font slots refuse even for removal or identical request",
+    "bun:tests/unit/docx-run-font-name.test.ts:namespace aliases and UTF-16LE disk save retain matching Latin names and unrelated payloads",
     "bun:tests/unit/docx-style-authoring.test.ts:styles-only update retains UTF16 LE and BE declarations, BOM and old definitions",
     "bun:tests/unit/docx-style-authoring.test.ts:final serialization failure rolls back new registry graph and existing registry append",
     "bun:tests/unit/docx-style-authoring.test.ts:input data rejects unknown keys, accessors and invalid XML without package changes",
@@ -783,6 +797,10 @@
     "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
     "bun:tests/unit/docx-run-effects.test.ts:patch getters, prototypes, symbols and invalid values refuse before running user accessors",
     "bun:tests/unit/docx-run-effects.test.ts:namespace aliases and UTF-16 path save preserve effects and nonedited member payloads",
+    "bun:tests/unit/docx-run-font-name.test.ts:fontName writes both Latin slots and reads back through saved archive without altering text or other parts",
+    "bun:tests/unit/docx-run-font-name.test.ts:invalid names or executable patches refuse without changing package bytes",
+    "bun:tests/unit/docx-run-font-name.test.ts:theme, script, hint, incomplete and unequal font slots refuse even for removal or identical request",
+    "bun:tests/unit/docx-run-font-name.test.ts:namespace aliases and UTF-16LE disk save retain matching Latin names and unrelated payloads",
     "bun:tests/unit/docx-style-authoring.test.ts:styles-only update retains UTF16 LE and BE declarations, BOM and old definitions",
     "bun:tests/unit/docx-style-authoring.test.ts:final serialization failure rolls back new registry graph and existing registry append",
     "bun:tests/unit/docx-style-authoring.test.ts:input data rejects unknown keys, accessors and invalid XML without package changes",
@@ -7316,6 +7334,496 @@
         "good.features.0.scenarios.find",
         "join",
         "selectSharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:fontName writes both Latin slots and reads back through saved archive without altering text or other parts",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 13,
+      "title": "fontName writes both Latin slots and reads back through saved archive without altering text or other parts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.paragraphs[0]!.directFontNames()).toEqual([null])",
+        "expect(d.paragraphs[0]!.setRunFormatting({fontName:'Times New Roman'})).toEqual({changedRuns:1})",
+        "expect(p.paragraphs[0]!.directFontNames()).toEqual(['Times New Roman'])",
+        "expect(p.paragraphs[0]!.text).toBe('Alpha')",
+        "expect(attribute(font,'ascii',W)).toBe('Times New Roman')",
+        "expect(attribute(font,'hAnsi',W)).toBe('Times New Roman')",
+        "expect(attribute(font,'eastAsia',W)).toBeUndefined()",
+        "expect(attribute(font,'cs',W)).toBeUndefined()",
+        "expect(p.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 19,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(p.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const d=await fixture(),before=d.package.parts;expect(d.paragraphs[0]!.directFontNames()).toEqual([null]);\n expect(d.paragraphs[0]!.setRunFormatting({fontName:'Times New Roman'})).toEqual({changedRuns:1});\n const p=await Document.open(d.package.toBytes());expect(p.paragraphs[0]!.directFontNames()).toEqual(['Times New Roman']);expect(p.paragraphs[0]!.text).toBe('Alpha');\n const font=elements(parseXml(new TextDecoder().decode(p.package.get('word/document.xml'))),'rFonts',W)[0]!;\n expect(attribute(font,'ascii',W)).toBe('Times New Roman');expect(attribute(font,'hAnsi',W)).toBe('Times New Roman');expect(attribute(font,'eastAsia',W)).toBeUndefined();expect(attribute(font,'cs',W)).toBeUndefined();\n for(const[n,b]of before)if(n!=='word/document.xml')expect(p.package.get(n)).toEqual(b);\n}",
+      "calls": [
+        ".decode",
+        "Document.open",
+        "attribute",
+        "d.package.toBytes",
+        "d.paragraphs.0.directFontNames",
+        "d.paragraphs.0.setRunFormatting",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "fixture",
+        "p.package.get",
+        "p.paragraphs.0.directFontNames",
+        "parseXml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:font override is ordered before flags and retains unrelated run property bytes",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 22,
+      "title": "font override is ordered before flags and retains unrelated run property bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain('<w:b/>')",
+        "expect(xml).toContain('<w:color w:val = \\'112233\\'/>')",
+        "expect(elements(parseXml(xml),'rPr',W)[0]!.children.map(n=>n.localName)).toEqual(['rFonts','b','color','sz','highlight','lang'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const d=await fixture('<w:rPr><w:b/><w:color w:val = \\'112233\\'/><w:lang w:val=\"en-US\"/></w:rPr>');\n d.paragraphs[0]!.setRunFormatting({highlight:'yellow',fontSizePt:14,fontName:'Arial'});\n const xml=new TextDecoder().decode(d.package.get('word/document.xml'));expect(xml).toContain('<w:b/>');expect(xml).toContain('<w:color w:val = \\'112233\\'/>');\n expect(elements(parseXml(xml),'rPr',W)[0]!.children.map(n=>n.localName)).toEqual(['rFonts','b','color','sz','highlight','lang']);\n}",
+      "calls": [
+        ".decode",
+        "d.package.get",
+        "d.paragraphs.0.setRunFormatting",
+        "elements",
+        "elements().0.children.map",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "fixture",
+        "parseXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:same decoded name is a lexical no-op and null removes the complete bounded font leaf",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 29,
+      "title": "same decoded name is a lexical no-op and null removes the complete bounded font leaf",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.setRunFormatting({fontName:'A&B'})).toEqual({changedRuns:0})",
+        "expect(p.text).toBe('Alpha')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.directFontNames()).toEqual(['A&B'])",
+        "expect(p.setRunFormatting({fontName:null})).toEqual({changedRuns:1})",
+        "expect(d.paragraphs[0]!.directFontNames()).toEqual([null])",
+        "expect(()=>p.directFontNames()).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))",
+        "expect(d.paragraphs[0]!.setRunFormatting({fontName:null})).toEqual({changedRuns:0})",
+        "expect(d.package.toBytes()).toEqual(after)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const leaf='<w:rFonts w:ascii = \\'A&amp;B\\' w:hAnsi=\"A&amp;B\"/>',d=await fixture('<w:rPr>'+leaf+'<w:i/></w:rPr>'),p=d.paragraphs[0]!,before=d.package.toBytes();\n expect(p.setRunFormatting({fontName:'A&B'})).toEqual({changedRuns:0});expect(p.text).toBe('Alpha');expect(d.package.toBytes()).toEqual(before);\n const values=p.directFontNames();values[0]='changed';expect(p.directFontNames()).toEqual(['A&B']);\n expect(p.setRunFormatting({fontName:null})).toEqual({changedRuns:1});expect(d.paragraphs[0]!.directFontNames()).toEqual([null]);expect(()=>p.directFontNames()).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}));\n const after=d.package.toBytes();expect(d.paragraphs[0]!.setRunFormatting({fontName:null})).toEqual({changedRuns:0});expect(d.package.toBytes()).toEqual(after);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.paragraphs.0.directFontNames",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "p.directFontNames",
+        "p.setRunFormatting"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:Unicode and XML metacharacters are escaped without changing a bounded font name",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 37,
+      "title": "Unicode and XML metacharacters are escaped without changing a bounded font name",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain('&amp;')",
+        "expect(xml).toContain('&quot;')",
+        "expect(xml).toContain('&lt;')",
+        "expect((await Document.open(d.package.toBytes())).paragraphs[0]!.directFontNames()).toEqual([value])",
+        "expect(edge.paragraphs[0]!.directFontNames()[0]!.length).toBe(255)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const value='雪 & \"quotes\" <serif> \\'face\\'',d=await fixture();d.paragraphs[0]!.setRunFormatting({fontName:value});\n const xml=new TextDecoder().decode(d.package.get('word/document.xml'));expect(xml).toContain('&amp;');expect(xml).toContain('&quot;');expect(xml).toContain('&lt;');\n expect((await Document.open(d.package.toBytes())).paragraphs[0]!.directFontNames()).toEqual([value]);\n const edge=await fixture();edge.paragraphs[0]!.setRunFormatting({fontName:'a'.repeat(255)});expect(edge.paragraphs[0]!.directFontNames()[0]!.length).toBe(255);\n}",
+      "calls": [
+        ".decode",
+        ".paragraphs.0.directFontNames",
+        ".repeat",
+        "Document.open",
+        "d.package.get",
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "edge.paragraphs.0.directFontNames",
+        "edge.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "fixture"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:invalid names or executable patches refuse without changing package bytes",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 44,
+      "title": "invalid names or executable patches refuse without changing package bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({fontName:value} as RunFormattingPatch)).toThrow(expect.objectContaining({code:'docx-format-argument'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.paragraphs[0]!.setRunFormatting(patch)).toThrow()",
+        "expect(called).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 47,
+          "expression": "for(const value of values)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const d=await fixture(),before=d.package.toBytes();let called=false;\n const values:unknown[]=['',' ',' leading','trailing ','a\\tb','a\\nb','a\\u0000b','a\\u007fb','a\\u0085b','a\\u009fb','\\ud800','a'.repeat(256),12,false];\n for(const value of values){expect(()=>d.paragraphs[0]!.setRunFormatting({fontName:value} as RunFormattingPatch)).toThrow(expect.objectContaining({code:'docx-format-argument'}));expect(d.package.toBytes()).toEqual(before);}\n const patch=Object.defineProperty({},'fontName',{enumerable:true,get(){called=true;return 'Arial';}});expect(()=>d.paragraphs[0]!.setRunFormatting(patch)).toThrow();expect(called).toBe(false);\n}",
+      "calls": [
+        ".repeat",
+        "Object.defineProperty",
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:theme, script, hint, incomplete and unequal font slots refuse even for removal or identical request",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 51,
+      "title": "theme, script, hint, incomplete and unequal font slots refuse even for removal or identical request",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.directFontNames()).toThrow(expect.objectContaining({code:'docx-format-unsupported'}))",
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({fontName:value})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(new TextDecoder().decode(d.package.get('word/document.xml'))).toContain(leaf)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 62,
+          "expression": "for(const leaf of leaves)"
+        },
+        {
+          "line": 64,
+          "expression": "for(const value of ['Arial',null])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const leaves=[\n  '<w:rFonts w:ascii=\"Arial\"/>','<w:rFonts w:hAnsi=\"Arial\"/>','<w:rFonts/>',\n  '<w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Calibri\"/>',\n  '<w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:asciiTheme=\"majorAscii\"/>',\n  '<w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:hAnsiTheme=\"majorHAnsi\"/>',\n  '<w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:eastAsia=\"Font\"/>',\n  '<w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Font\"/>',\n  '<w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:hint=\"default\"/>',\n  '<w:rFonts ascii=\"Arial\" w:hAnsi=\"Arial\"/>',\n ];\n for(const leaf of leaves){const d=await fixture('<w:rPr>'+leaf+'</w:rPr>'),before=d.package.toBytes();\n  expect(()=>d.paragraphs[0]!.directFontNames()).toThrow(expect.objectContaining({code:'docx-format-unsupported'}));\n  for(const value of ['Arial',null]){expect(()=>d.paragraphs[0]!.setRunFormatting({fontName:value})).toThrow();expect(d.package.toBytes()).toEqual(before);}\n  d.paragraphs[0]!.setRunFormatting({bold:true});expect(new TextDecoder().decode(d.package.get('word/document.xml'))).toContain(leaf);\n }\n}",
+      "calls": [
+        ".decode",
+        "d.package.get",
+        "d.package.toBytes",
+        "d.paragraphs.0.directFontNames",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:late multi-run font metadata refusal leaves earlier runs and handles untouched",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 69,
+      "title": "late multi-run font metadata refusal leaves earlier runs and handles untouched",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>held.setRunFormatting({fontName:'Arial',bold:true})).toThrow()",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('AlphaBeta')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());pkg.set(pkg.mainPart(),pkg.text(pkg.mainPart()).replace('</w:r>','</w:r><w:r><w:rPr><w:rFonts w:asciiTheme=\"majorAscii\"/></w:rPr><w:t>Beta</w:t></w:r>'));\n const doc=await Document.open(pkg.toBytes()),before=doc.package.toBytes(),held=doc.paragraphs[0]!;expect(()=>held.setRunFormatting({fontName:'Arial',bold:true})).toThrow();expect(doc.package.toBytes()).toEqual(before);expect(held.text).toBe('AlphaBeta');\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "held.setRunFormatting",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:namespace aliases and UTF-16LE disk save retain matching Latin names and unrelated payloads",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 74,
+      "title": "namespace aliases and UTF-16LE disk save retain matching Latin names and unrelated payloads",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(reopened.paragraphs[0]!.directFontNames()).toEqual(['Courier New'])",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 76,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);"
+        },
+        {
+          "line": 78,
+          "expression": "for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes()),text=pkg.text(pkg.mainPart()).replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:').replace('UTF-8','UTF-16');\n const bytes=new Uint8Array(2+text.length*2);bytes[0]=255;bytes[1]=254;const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);pkg.set(pkg.mainPart(),bytes);\n const doc=await Document.open(pkg.toBytes());doc.paragraphs[0]!.setRunFormatting({fontName:'Courier New'});const root=await mkdtemp(join(tmpdir(),'run-font-'));\n try{const path=join(root,'font.docx');await doc.save(path);const reopened=await Document.open(path);expect(reopened.paragraphs[0]!.directFontNames()).toEqual(['Courier New']);expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254]);for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.paragraphs.0.setRunFormatting",
+        "doc.save",
+        "expect",
+        "expect().toEqual",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "pkg.get",
+        "pkg.mainPart",
+        "pkg.names",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replaceAll",
+        "pkg.text().replaceAll().replaceAll",
+        "pkg.text().replaceAll().replaceAll().replace",
+        "pkg.toBytes",
+        "reopened.package.get",
+        "reopened.package.get().slice",
+        "reopened.paragraphs.0.directFontNames",
+        "rm",
+        "text.charCodeAt",
+        "tmpdir",
+        "view.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:protected writes, stale source and serialization failure preserve bytes and model state",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 81,
+      "title": "protected writes, stale source and serialization failure preserve bytes and model state",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>locked.paragraphs[0]!.setRunFormatting({fontName:'Arial'})).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(lb)",
+        "expect(()=>held.setRunFormatting({fontName:'Arial'})).toThrow('injected serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.directFontNames()).toEqual([null])",
+        "expect(()=>held.directFontNames()).toThrow()",
+        "expect(()=>held.setRunFormatting({fontName:'Arial'})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');\n const locked=await Document.open(pkg.toBytes()),lb=locked.package.toBytes();expect(()=>locked.paragraphs[0]!.setRunFormatting({fontName:'Arial'})).toThrow();expect(locked.package.toBytes()).toEqual(lb);\n const held=d.paragraphs[0]!,before=d.package.toBytes(),opc=(d as unknown as {opcPackage:OpcPackage}).opcPackage,original=opc.toBytes.bind(opc);opc.toBytes=()=>{throw Error('injected serialization');};try{expect(()=>held.setRunFormatting({fontName:'Arial'})).toThrow('injected serialization');}finally{opc.toBytes=original;}\n expect(d.package.toBytes()).toEqual(before);expect(held.directFontNames()).toEqual([null]);\n d.package.setPart('word/document.xml',new TextEncoder().encode(new TextDecoder().decode(d.package.get('word/document.xml')).replace('Alpha','Beta')));const changed=d.package.toBytes();expect(()=>held.directFontNames()).toThrow();expect(()=>held.setRunFormatting({fontName:'Arial'})).toThrow();expect(d.package.toBytes()).toEqual(changed);\n}",
+      "calls": [
+        ".decode",
+        ".decode().replace",
+        ".encode",
+        "Document.open",
+        "Error",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.get",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "held.directFontNames",
+        "held.setRunFormatting",
+        "locked.package.toBytes",
+        "locked.paragraphs.0.setRunFormatting",
+        "opc.toBytes.bind",
+        "pkg.mainPart",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:six shared font-name getter cases execute and corrupted slot data fails real predicates",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 89,
+      "title": "six shared font-name getter cases execute and corrupted slot data fails real predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(6)",
+        "expect(good.counts.cases.planned).toBeGreaterThan(0)",
+        "expect(wrong.counts.cases.failed).toBe(6)",
+        "expect(wrong.counts.steps.failed).toBe(6)",
+        "expect(wrong.counts.steps.undefined).toBe(0)",
+        "expect(wrong.counts.steps.ambiguous).toBe(0)",
+        "expect(bad.counts.cases.failed).toBe(6)",
+        "expect(bad.counts.steps.failed).toBe(6)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts');const {bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/run-font-name.ts');\n const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(6),steps:count(18)}});\n const good=await executeAcceptance(inventory(source),bindings,'run-font-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(6);expect(good.counts.cases.planned).toBeGreaterThan(0);\n const wrong=await executeAcceptance(inventory(source.replace('its font-name getter equals <font>','its font-name getter equals Wrong')),bindings,'run-font-expected-control');expect(wrong.counts.cases.failed).toBe(6);expect(wrong.counts.steps.failed).toBe(6);expect(wrong.counts.steps.undefined).toBe(0);expect(wrong.counts.steps.ambiguous).toBe(0);\n const corrupted=bindings.map(b=>b.pattern.test('its font name is set to Arial')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);(c.state as {document:Document}).document.paragraphs[0]!.setRunFormatting({fontName:'Wrong'});}}:b);\n const bad=await executeAcceptance(inventory(source),corrupted,'run-font-data-control');expect(bad.counts.cases.failed).toBe(6);expect(bad.counts.steps.failed).toBe(6);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.document.paragraphs.0.setRunFormatting",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
+        "expect().toEqual",
+        "fixturesRoot",
+        "inventory",
+        "join",
+        "selectSharedScenarios",
+        "source.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-font-name.test.ts:font changes in table paragraphs preserve grid and staged-write rollback retains fresh handles",
+      "path": "tests/unit/docx-run-font-name.test.ts",
+      "line": 99,
+      "title": "font changes in table paragraphs preserve grid and staged-write rollback retains fresh handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(table.rows).toBe(1)",
+        "expect(table.columns).toBe(2)",
+        "expect(table.cell(0,0).text).toBe('Cell')",
+        "expect(table.cell(0,1).text).toBe('Other')",
+        "expect(()=>p.directFontNames()).toThrow()",
+        "expect(()=>held.setRunFormatting({fontName:'Verdana'})).toThrow('injected write')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.directFontNames()).toEqual(['Arial'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "4cf965ffbbff779bf52eae4b6a0f8e11fbc6c573a87eb6e5f14d955569286360",
+      "body": "{\n const d=Document.create();d.addTable(1,2);d.tables[0]!.cell(0,0).text='Cell';d.tables[0]!.cell(0,1).text='Other';const table=d.tables[0]!,p=d.paragraphs[0]!;\n p.setRunFormatting({fontName:'Arial'});expect(table.rows).toBe(1);expect(table.columns).toBe(2);expect(table.cell(0,0).text).toBe('Cell');expect(table.cell(0,1).text).toBe('Other');expect(()=>p.directFontNames()).toThrow();\n const held=d.paragraphs[0]!,before=d.package.toBytes(),opc=(d as unknown as {opcPackage:OpcPackage}).opcPackage,original=opc.set.bind(opc);opc.set=(name,value)=>{original(name,value);throw Error('injected write');};\n try{expect(()=>held.setRunFormatting({fontName:'Verdana'})).toThrow('injected write');}finally{opc.set=original;}\n expect(d.package.toBytes()).toEqual(before);expect(held.directFontNames()).toEqual(['Arial']);\n}",
+      "calls": [
+        "Document.create",
+        "Error",
+        "d.addTable",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "held.directFontNames",
+        "held.setRunFormatting",
+        "opc.set.bind",
+        "original",
+        "p.directFontNames",
+        "p.setRunFormatting",
+        "table.cell"
       ],
       "reviewReasons": [],
       "unresolved": []

@@ -1,7 +1,8 @@
 # Direct paragraph run formatting
 
 `Paragraph.setRunFormatting(patch)` applies direct Boolean,
-[font-size](font-size.md) and [scalar appearance](run-appearance.md) overrides to every supported direct run in one paragraph. It returns `{ changedRuns: number }`.
+[font-size](font-size.md), [Latin font-name](run-font-name.md) and
+[scalar appearance](run-appearance.md) overrides to every supported direct run in one paragraph. It returns `{ changedRuns: number }`.
 `RunFormattingPatch` and `RunFormattingReceipt` are exported from the root and
 `./docx` entrypoints.
 
