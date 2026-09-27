@@ -1,7 +1,7 @@
 import { posix } from "node:path";
 
 import { OoxmlError } from "../errors.ts";
-import {inspectNotes,replaceNotes,type NotesAnchor} from './notes.ts';
+import {inspectNotes,replaceNotes,replaceNotesUtf8,type NotesAnchor} from './notes.ts';
 export type {NotesAnchor} from './notes.ts';
 import {appendTextBox,textBoxRequest,type TextBoxGeometry,type TextBoxOptions,type TextBoxReceipt} from './text-box.ts';
 export type {TextBoxGeometry,TextBoxOptions,TextBoxReceipt} from './text-box.ts';
@@ -414,6 +414,12 @@ export class Slide {
   replaceNotesAt(anchor:NotesAnchor,text:string):{changedParts:string[]} {
     this.assertNotesSlide();
     return replaceNotes(this.presentation.package,this.partName,anchor,text);
+  }
+
+  /** Replace existing notes from strict, owned UTF-8 text bytes. */
+  replaceNotesUtf8At(anchor:NotesAnchor,bytes:Uint8Array):{changedParts:string[]} {
+    this.assertNotesSlide();
+    return replaceNotesUtf8(this.presentation.package,this.partName,anchor,bytes);
   }
 
   private assertNotesSlide():void {

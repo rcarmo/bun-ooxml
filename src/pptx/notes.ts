@@ -66,6 +66,23 @@ export function inspectNotes(pkg:OpcPackage,slide:string):NotesAnchor {
  const paths=[...new Set(['[Content_Types].xml',m.main,slide,m.part,...pkg.names().filter(n=>n.endsWith('.rels'))])];
  anchors.set(anchor,{pkg,slide,part:m.part,epoch:epoch(pkg,m.part),bytes:new Map(paths.map(p=>[p,pkg.get(p)]))});return anchor;
 }
+const nativeBytes=Object.getPrototypeOf(Uint8Array.prototype);
+const nativeByteLength=Object.getOwnPropertyDescriptor(nativeBytes,'byteLength')!.get!;
+const nativeBuffer=Object.getOwnPropertyDescriptor(nativeBytes,'buffer')!.get!;
+function reject(code:string,message:string):never{throw new OoxmlError(code,message);}
+/** Strict UTF-8 text input, not an XML file: a leading BOM remains U+FEFF text. */
+export function replaceNotesUtf8(pkg:OpcPackage,slide:string,anchor:NotesAnchor,input:Uint8Array):{changedParts:string[]}{
+ if(!(input instanceof Uint8Array))reject('PPTX_NOTES_BYTE_SOURCE','Expected a Uint8Array notes input');
+ let length:number,storage:ArrayBufferLike;
+ try{length=nativeByteLength.call(input);storage=nativeBuffer.call(input);}catch{reject('PPTX_NOTES_BYTE_SOURCE','Expected a native byte view');}
+ if(length>8*1024*1024)reject('PPTX_NOTES_BYTE_LIMIT','Notes byte input exceeds 8 MiB');
+ if(typeof SharedArrayBuffer!=='undefined'&&storage instanceof SharedArrayBuffer)reject('PPTX_NOTES_BYTE_SOURCE','Shared mutable buffers are not supported');
+ let bytes:Uint8Array;
+ try{bytes=new Uint8Array(input);}catch{reject('PPTX_NOTES_BYTE_SOURCE','Detached or inaccessible notes bytes');}
+ let text:string;
+ try{text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes);}catch{reject('PPTX_NOTES_UTF8_INVALID','Malformed UTF-8 notes text');}
+ return replaceNotes(pkg,slide,anchor,text);
+}
 export function replaceNotes(pkg:OpcPackage,slide:string,anchor:NotesAnchor,text:string):{changedParts:string[]}{
  if(typeof text!=='string'||/[\r\t]/.test(text))throw new OoxmlError('PPTX_NOTES_TEXT_INVALID','Notes require text with LF-only line separators and no tabs');
  escapeText(text); // Includes surrogate/control-character checks before any mutation.

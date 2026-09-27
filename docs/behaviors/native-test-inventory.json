@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 800,
-  "files": 80,
+  "count": 813,
+  "files": 81,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -272,8 +272,14 @@
     },
     {
       "path": "tests/unit/pptx-notes-edit.test.ts",
-      "sha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "declarations": 14,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "sha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "declarations": 13,
       "issues": []
     },
     {
@@ -566,7 +572,7 @@
     },
     {
       "path": "tests/acceptance/notes-editing.ts",
-      "sha256": "6aa7fc9551125669bdceac320a9713d2e4a9f6719704f44ab8af4f1036d26257"
+      "sha256": "9d79581028fde05cb5538c480e673e65b303d9624854bdda0129470ca4afdeb6"
     },
     {
       "path": "tests/acceptance/opc-custody.ts",
@@ -937,6 +943,16 @@
     "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:malformed UTF8 sequences refuse as encoding errors without consuming the held target",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:valid UTF8 XML controls and line policy still refuse through the existing notes editor",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:foreign forged wrong-slide and externally changed notes targets refuse bytes including no-op input",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:byte admission rejects shared detached spoofed and oversized views before caller hooks",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:Buffer subview decoding ignores iterator slice and buffer getters and preserves adjacent bytes",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:package write and serialization faults roll back byte replacements and permit same-target retry",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:byte replacement retains UTF16 notes-part codec and non-body placeholders after reopen",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -1239,6 +1255,16 @@
     "bun:tests/unit/pptx-notes-edit.test.ts:notes edits refuse text locks, extended properties and ambiguous graph ownership",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases",
     "bun:tests/unit/pptx-notes-edit.test.ts:notes body properties and root structure reject unknown nested policy surfaces",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:malformed UTF8 sequences refuse as encoding errors without consuming the held target",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:valid UTF8 XML controls and line policy still refuse through the existing notes editor",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:foreign forged wrong-slide and externally changed notes targets refuse bytes including no-op input",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:byte admission rejects shared detached spoofed and oversized views before caller hooks",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:Buffer subview decoding ignores iterator slice and buffer getters and preserves adjacent bytes",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:package write and serialization faults roll back byte replacements and permit same-target retry",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:byte replacement retains UTF16 notes-part codec and non-body placeholders after reopen",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
+    "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -19843,7 +19869,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const bytes=await source(),p=await Presentation.open(bytes),s=p.slides[0]!,target=s.inspectNotesText();expect(target.text).toBe('Remember to emphasize the Gothic elements');\n const before=p.package.text(notes);expect(s.replaceNotesAt(target,'Updated speaker notes')).toEqual({changedParts:[notes]});expect(p.package.text(notes)).toBe(before.replace('Remember to emphasize the Gothic elements','Updated speaker notes'));\n const saved=p.package.toBytes(),after=await OpcPackage.open(saved),original=await OpcPackage.open(bytes);expect(after.names()).toEqual(original.names());for(const name of original.names())if(name!==notes)expect(after.get(name)).toEqual(original.get(name));expect((await Presentation.open(saved)).slides[0]!.inspectNotesText().text).toBe('Updated speaker notes');\n}",
       "calls": [
         ".slides.0.inspectNotesText",
@@ -19892,7 +19918,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const bytes=await source(),p=await Presentation.open(bytes),other=await Presentation.open(bytes),s=p.slides[0]!,target=s.inspectNotesText();\n expect(()=>other.slides[0]!.replaceNotesAt(target,'foreign')).toThrow();expect(()=>s.replaceNotesAt({...target},'forged')).toThrow();\n for(const text of ['bad\\0','two\\tcolumns','bad\\rline','\\ud800']){expect(()=>s.replaceNotesAt(target,text)).toThrow();expect(p.package.toBytes()).toEqual(bytes);}\n expect(s.replaceNotesAt(target,target.text)).toEqual({changedParts:[]});expect(p.package.toBytes()).toEqual(bytes);s.replaceNotesAt(target,'fresh');expect(s.inspectNotesText().text).toBe('fresh');\n}",
       "calls": [
         "Presentation.open",
@@ -19927,7 +19953,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const p=await deck(),s=p.slides[0]!,first=s.inspectNotesText(),second=s.inspectNotesText();s.replaceNotesAt(first,'');expect(()=>s.replaceNotesAt(second,'stale')).toThrow('stale');expect(s.inspectNotesText().text).toBe('');s.replaceNotesAt(s.inspectNotesText(),'refilled');expect(s.inspectNotesText().text).toBe('refilled');\n}",
       "calls": [
         "deck",
@@ -19960,7 +19986,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n for(const path of [notes,'ppt/slides/_rels/slide1.xml.rels']){const p=await deck(),s=p.slides[0]!,t=s.inspectNotesText();p.package.set(path,p.package.text(path)+' ');const before=p.package.toBytes();expect(()=>s.replaceNotesAt(t,'stale')).toThrow('stale');expect(p.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "deck",
@@ -19994,7 +20020,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const p=await deck('<a:p><a:r><a:rPr b=\"1\"/><a:t/></a:r></a:p>'),s=p.slides[0]!;s.replaceNotesAt(s.inspectNotesText(),'filled');expect(s.inspectNotesText().text).toBe('filled');expect(p.package.text(notes)).toContain('<a:rPr b=\"1\"/>');\n const spaced=await deck('<a:p><a:r><a:t xml:space=\"default\">old</a:t></a:r></a:p>');spaced.slides[0]!.replaceNotesAt(spaced.slides[0]!.inspectNotesText(),' leading ');const leaf=elements(parseXml(spaced.package.text(notes)),'t','http://schemas.openxmlformats.org/drawingml/2006/main').find(n=>n.text===' leading ')!;expect(attribute(leaf,'space','http://www.w3.org/XML/1998/namespace')).toBe('preserve');\n}",
       "calls": [
         "attribute",
@@ -20032,7 +20058,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const p=await deck('<a:p><a:pPr algn=\"ctr\"/><a:r><a:t>one</a:t></a:r><a:r><a:rPr b=\"1\"/><a:t>two</a:t></a:r></a:p>'),s=p.slides[0]!,t=s.inspectNotesText(),before=p.package.get(notes);expect(s.replaceNotesAt(t,t.text)).toEqual({changedParts:[]});expect(p.package.get(notes)).toEqual(before);s.replaceNotesAt(t,'\\n A&B \\n雪\\n');expect(s.inspectNotesText().text).toBe('\\n A&B \\n雪\\n');expect(p.package.text(notes)).not.toContain('b=\"1\"');\n}",
       "calls": [
         "deck",
@@ -20067,7 +20093,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const p=await deck('<a:p><a:pPr algn=\"ctr\"><a:buChar char=\"•\"/><a:defRPr sz=\"1200\"/></a:pPr><a:r><a:rPr b=\"1\"><a:solidFill><a:srgbClr val=\"112233\"/></a:solidFill><a:latin typeface=\"F&amp;F\"/></a:rPr><a:t>old</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p>'),s=p.slides[0]!;s.replaceNotesAt(s.inspectNotesText(),'a\\nb');for(const token of ['val=\"112233\"','typeface=\"F&amp;F\"','lang=\"en-US\"','char=\"•\"'])expect(p.package.text(notes).split(token).length-1).toBe(2);\n}",
       "calls": [
         "deck",
@@ -20100,7 +20126,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const minimal=await Presentation.open(fixturePath(F.goSlides.minimal)),bytes=minimal.package.toBytes();expect(()=>minimal.slides[0]!.inspectNotesText()).toThrow();expect(minimal.package.toBytes()).toEqual(bytes);\n const p=await deck('<a:p><a:fld id=\"x\" type=\"slidenum\"><a:t>1</a:t></a:fld></a:p>'),before=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(before);\n}",
       "calls": [
         "Presentation.open",
@@ -20137,7 +20163,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n for(const variant of ['lock','extension','shared','fragment','protection','wrong-type','body-duplicate']){\n  const p=await deck();if(variant==='lock')p.package.set(notes,p.package.text(notes).replaceAll('<a:spLocks noGrp=\"1\"/>','<a:spLocks noTextEdit=\"1\"/>'));\n  if(variant==='extension')p.package.set(notes,p.package.text(notes).replace('<a:p><a:r>','<a:p><a:pPr><a:extLst/></a:pPr><a:r>'));\n  if(variant==='shared'){const rp='ppt/slides/_rels/slide2.xml.rels';p.package.set(rp,p.package.text(rp).replace('notesSlide2.xml','notesSlide1.xml'));}\n  if(variant==='fragment'){const rp='ppt/slides/_rels/slide1.xml.rels';p.package.set(rp,p.package.text(rp).replace('notesSlide1.xml','notesSlide1.xml#fragment'));}\n  if(variant==='protection'){const main=p.package.mainPart();p.package.set(main,p.package.text(main).replace('</p:presentation>','<p:modifyVerifier/></p:presentation>'));}\n  if(variant==='wrong-type')p.package.set('[Content_Types].xml',p.package.text('[Content_Types].xml').replaceAll('application/vnd.openxmlformats-officedocument.presentationml.notesSlide+xml','application/xml'));\n  if(variant==='body-duplicate')p.package.set(notes,p.package.text(notes).replace('type=\"sldNum\"','type=\"body\"'));\n  const before=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(before);\n }\n}",
       "calls": [
         "deck",
@@ -20173,7 +20199,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const p=await deck(),s=p.slides[0]!,target=s.inspectNotesText(),before=p.package.toBytes(),original=p.package.toBytes.bind(p.package);p.package.toBytes=()=>{throw Error('serialize failed');};try{expect(()=>s.replaceNotesAt(target,'changed')).toThrow('serialize failed');}finally{p.package.toBytes=original;}expect(p.package.toBytes()).toEqual(before);s.replaceNotesAt(target,'retry');expect(s.inspectNotesText().text).toBe('retry');\n}",
       "calls": [
         "Error",
@@ -20191,22 +20217,22 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/pptx-notes-edit.test.ts:seven compatible canonical existing-notes scenarios execute saved and in-memory predicates",
+      "id": "bun:tests/unit/pptx-notes-edit.test.ts:eight canonical existing-notes scenarios execute saved and in-memory predicates",
       "path": "tests/unit/pptx-notes-edit.test.ts",
       "line": 56,
-      "title": "seven compatible canonical existing-notes scenarios execute saved and in-memory predicates",
+      "title": "eight canonical existing-notes scenarios execute saved and in-memory predicates",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
         "expect(result.failures).toEqual([])",
-        "expect(result.counts.cases.passed).toBe(7)"
+        "expect(result.counts.cases.passed).toBe(8)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
-      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,scenarioIds}=await import('../acceptance/notes-editing.ts');\n const path='workflows/native/pptx-text.feature',selected=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),scenarioIds),feature={...selected,scenarios:selected.scenarios.filter(s=>s.lifecycle==='implemented')},count=(n:number)=>({implemented:n,planned:0,total:n});\n const cases=feature.scenarios.flatMap(s=>s.cases),result=await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(7),cases:count(7),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'notes-edit-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(7);\n}",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,scenarioIds}=await import('../acceptance/notes-editing.ts');\n const path='workflows/native/pptx-text.feature',selected=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),scenarioIds),feature={...selected,scenarios:selected.scenarios.filter(s=>s.lifecycle==='implemented')},count=(n:number)=>({implemented:n,planned:0,total:n});\n const cases=feature.scenarios.flatMap(s=>s.cases),result=await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(8),cases:count(8),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'notes-edit-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(8);\n}",
       "calls": [
         "Bun.file",
         "Bun.file().text",
@@ -20246,7 +20272,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const {utf16}=await import('../fixtures/admission.ts');const p=await deck();p.package.set(notes,utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?>'+p.package.text(notes).replace(/^<\\?xml[^?]*\\?>/,'').replaceAll('a:','d:').replace('xmlns:a=','xmlns:d=')));\n const bytes=p.package.toBytes(),fresh=await Presentation.open(bytes),s=fresh.slides[0]!,text=fresh.package.text(notes),doc=parseXml(text),P='http://schemas.openxmlformats.org/presentationml/2006/main';\n const unchanged=elements(doc,'sp',P).filter(n=>!elements(n,'ph',P).some(ph=>attribute(ph,'type')==='body')).map(n=>text.slice(n.start,n.end));\n s.replaceNotesAt(s.inspectNotesText(),'first\\n second ');const saved=fresh.package.toBytes(),reopened=await Presentation.open(saved);expect(reopened.slides[0]!.inspectNotesText().text).toBe('first\\n second ');expect([...reopened.package.get(notes)!.slice(0,2)]).toEqual([255,254]);for(const fragment of unchanged)expect(reopened.package.text(notes)).toContain(fragment);\n}",
       "calls": [
         "Presentation.open",
@@ -20300,7 +20326,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n const p=await deck();p.package.set(notes,p.package.text(notes).replace('</p:notes>','<p:extLst/></p:notes>'));const before=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(before);\n const q=await deck(),main=q.package.mainPart();q.package.set(main,q.package.text(main).replace(/<p:sldId\\b[^>]*\\/>/,''));const removed=q.package.toBytes();expect(()=>q.slides[0]!.inspectNotesText()).toThrow();expect(q.package.toBytes()).toEqual(removed);\n}",
       "calls": [
         "deck",
@@ -20342,7 +20368,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a2ed16a37ae65bdb74dda1bff1aed93c6d2d3e84fa066058eb85a3fb7a8ea16b",
+      "sourceSha256": "d62e3612f9f8d5a1f733e18bede2dde0eaca0e6c597c7043372abd934e5e942b",
       "body": "{\n for(const [from,to]of [['<a:bodyPr/>','<a:bodyPr><a:scene3d/></a:bodyPr>'],['<a:lstStyle/>','<a:lstStyle><a:lvl1pPr/></a:lstStyle>'],['</p:notes>','<p:unknown/></p:notes>'],['<a:bodyPr/>','<a:bodyPr unknown=\"yes\"/>']]){\n  const p=await deck();p.package.set(notes,p.package.text(notes).replace(from!,to!));const bytes=p.package.toBytes();expect(()=>p.slides[0]!.inspectNotesText()).toThrow();expect(p.package.toBytes()).toEqual(bytes);\n }\n}",
       "calls": [
         "deck",
@@ -20354,6 +20380,588 @@
         "p.package.text().replace",
         "p.package.toBytes",
         "p.slides.0.inspectNotesText"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 9,
+      "title": "UTF8 notes replacement owns byte input, saves exact Unicode text and preserves every other member",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.replaceNotesUtf8At(target,input)).toEqual({changedParts:[part]})",
+        "expect(input).toEqual(before)",
+        "expect(s.inspectNotesText().text).toBe(value)",
+        "expect(()=>s.replaceNotesUtf8At(target,utf8('stale'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(after.slides[0]!.inspectNotesText().text).toBe(value)",
+        "expect(after.package.names()).toEqual([...parts.keys()].sort())",
+        "expect(after.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 12,
+          "expression": "for(const[n,b]of parts)if(n!==part)expect(after.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const bytes=await source(),d=await Presentation.open(bytes),s=d.slides[0]!,target=s.inspectNotesText(),value=' Leading 雪 & 😀\\nlast ',input=utf8(value),before=input.slice(),parts=new Map(d.package.names().map(n=>[n,d.package.get(n)!]));\n expect(s.replaceNotesUtf8At(target,input)).toEqual({changedParts:[part]});expect(input).toEqual(before);input.fill(0);expect(s.inspectNotesText().text).toBe(value);expect(()=>s.replaceNotesUtf8At(target,utf8('stale'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}));\n const root=await mkdtemp(join(tmpdir(),'notes-utf8-'));try{const path=join(root,'notes.pptx');await d.save(path);const after=await Presentation.open(path);expect(after.slides[0]!.inspectNotesText().text).toBe(value);expect(after.package.names()).toEqual([...parts.keys()].sort());for(const[n,b]of parts)if(n!==part)expect(after.package.get(n)).toEqual(b);}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        ".sort",
+        "Presentation.open",
+        "after.package.get",
+        "after.package.names",
+        "after.slides.0.inspectNotesText",
+        "d.package.get",
+        "d.package.names",
+        "d.package.names().map",
+        "d.save",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input.fill",
+        "input.slice",
+        "join",
+        "mkdtemp",
+        "parts.keys",
+        "rm",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "source",
+        "tmpdir",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:malformed UTF8 sequences refuse as encoding errors without consuming the held target",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 15,
+      "title": "malformed UTF8 sequences refuse as encoding errors without consuming the held target",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,input)).toThrow(expect.objectContaining({code:'PPTX_NOTES_UTF8_INVALID'}))",
+        "expect(input).toEqual(copy)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})",
+        "expect(s.replaceNotesUtf8At(t,utf8('retry'))).toEqual({changedParts:[part]})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 17,
+          "expression": "for(const raw of [[255],[128],[192,175],[226,130],[237,160,128],[244,144,128,128],[239,187,191,255]])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),before=d.package.toBytes();\n for(const raw of [[255],[128],[192,175],[226,130],[237,160,128],[244,144,128,128],[239,187,191,255]]){const input=new Uint8Array(raw),copy=input.slice();expect(()=>s.replaceNotesUtf8At(t,input)).toThrow(expect.objectContaining({code:'PPTX_NOTES_UTF8_INVALID'}));expect(input).toEqual(copy);expect(d.package.toBytes()).toEqual(before);}\n expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]});expect(d.package.toBytes()).toEqual(before);expect(s.replaceNotesUtf8At(t,utf8('retry'))).toEqual({changedParts:[part]});\n}",
+      "calls": [
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input.slice",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:valid UTF8 XML controls and line policy still refuse through the existing notes editor",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 21,
+      "title": "valid UTF8 XML controls and line policy still refuse through the existing notes editor",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,utf8(text))).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 22,
+          "expression": "for(const text of ['bad\\0','two\\tcolumns','a\\rb','a\\r\\nb','\\u0001','\\ufffe'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),before=d.package.toBytes();for(const text of ['bad\\0','two\\tcolumns','a\\rb','a\\r\\nb','\\u0001','\\ufffe']){expect(()=>s.replaceNotesUtf8At(t,utf8(text))).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]});expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:UTF8 byte no-op retains archive and handles; empty and leading BOM bytes are literal text",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 25,
+      "title": "UTF8 byte no-op retains archive and handles; empty and leading BOM bytes are literal text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(withBom))).toEqual({changedParts:[part]})",
+        "expect(s.inspectNotesText().text).toBe(withBom)",
+        "expect((await Presentation.open(d.package.toBytes())).slides[0]!.inspectNotesText().text).toBe(withBom)",
+        "expect(s.inspectNotesText().text).toBe('')",
+        "expect(s.replaceNotesUtf8At(empty,new Uint8Array())).toEqual({changedParts:[]})",
+        "expect(d.package.toBytes()).toEqual(saved)",
+        "expect(s.inspectNotesText().text).toBe('refilled')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),before=d.package.toBytes();expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]});expect(d.package.toBytes()).toEqual(before);\n const withBom='\\ufeff'+t.text;expect(s.replaceNotesUtf8At(t,utf8(withBom))).toEqual({changedParts:[part]});expect(s.inspectNotesText().text).toBe(withBom);expect((await Presentation.open(d.package.toBytes())).slides[0]!.inspectNotesText().text).toBe(withBom);\n const current=s.inspectNotesText();s.replaceNotesUtf8At(current,new Uint8Array());expect(s.inspectNotesText().text).toBe('');const empty=s.inspectNotesText(),saved=d.package.toBytes();expect(s.replaceNotesUtf8At(empty,new Uint8Array())).toEqual({changedParts:[]});expect(d.package.toBytes()).toEqual(saved);s.replaceNotesUtf8At(empty,utf8('refilled'));expect(s.inspectNotesText().text).toBe('refilled');\n}",
+      "calls": [
+        ".slides.0.inspectNotesText",
+        "Presentation.open",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:foreign forged wrong-slide and externally changed notes targets refuse bytes including no-op input",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 31,
+      "title": "foreign forged wrong-slide and externally changed notes targets refuse bytes including no-op input",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>other.slides[0]!.replaceNotesUtf8At(t,utf8('foreign'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(other.package.toBytes()).toEqual(ob)",
+        "expect(()=>s.replaceNotesUtf8At({...t},utf8(t.text))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(()=>d.slides[1]!.replaceNotesUtf8At(t,utf8('foreign'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>slide.replaceNotesUtf8At(anchor,utf8(anchor.text))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}))",
+        "expect(fresh.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for(const path of [part,'ppt/slides/_rels/slide1.xml.rels'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const d=await deck(),other=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),before=d.package.toBytes(),ob=other.package.toBytes();expect(()=>other.slides[0]!.replaceNotesUtf8At(t,utf8('foreign'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}));expect(other.package.toBytes()).toEqual(ob);expect(()=>s.replaceNotesUtf8At({...t},utf8(t.text))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}));expect(()=>d.slides[1]!.replaceNotesUtf8At(t,utf8('foreign'))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}));expect(d.package.toBytes()).toEqual(before);\n for(const path of [part,'ppt/slides/_rels/slide1.xml.rels']){const fresh=await deck(),slide=fresh.slides[0]!,anchor=slide.inspectNotesText();fresh.package.set(path,fresh.package.text(path)+' ');const changed=fresh.package.toBytes();expect(()=>slide.replaceNotesUtf8At(anchor,utf8(anchor.text))).toThrow(expect.objectContaining({code:'PPTX_NOTES_STALE'}));expect(fresh.package.toBytes()).toEqual(changed);}\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.slides.1.replaceNotesUtf8At",
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fresh.package.set",
+        "fresh.package.text",
+        "fresh.package.toBytes",
+        "other.package.toBytes",
+        "other.slides.0.replaceNotesUtf8At",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "slide.inspectNotesText",
+        "slide.replaceNotesUtf8At",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:byte admission rejects shared detached spoofed and oversized views before caller hooks",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 36,
+      "title": "byte admission rejects shared detached spoofed and oversized views before caller hooks",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,large)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_LIMIT'}))",
+        "expect(called).toBe(false)",
+        "expect(()=>s.replaceNotesUtf8At(t,shared)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_SOURCE'}))",
+        "expect(()=>s.replaceNotesUtf8At(t,input as Uint8Array)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_SOURCE'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const input of [detached,null,'text',new ArrayBuffer(4),new DataView(new ArrayBuffer(4)),[65],Object.create(Uint8Array.prototype),new Proxy(utf8('abc'),"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),before=d.package.toBytes();let called=false;\n const large=new Uint8Array(8*1024*1024+1);Object.defineProperty(large,'byteLength',{get(){called=true;return 1;}});expect(()=>s.replaceNotesUtf8At(t,large)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_LIMIT'}));expect(called).toBe(false);\n const shared=new Uint8Array(new SharedArrayBuffer(1));shared[0]=65;Object.defineProperty(shared,'buffer',{get(){called=true;return new ArrayBuffer(1);}});expect(()=>s.replaceNotesUtf8At(t,shared)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_SOURCE'}));expect(called).toBe(false);\n const detached=utf8('abc');structuredClone(detached,{transfer:[detached.buffer]});for(const input of [detached,null,'text',new ArrayBuffer(4),new DataView(new ArrayBuffer(4)),[65],Object.create(Uint8Array.prototype),new Proxy(utf8('abc'),{})])expect(()=>s.replaceNotesUtf8At(t,input as Uint8Array)).toThrow(expect.objectContaining({code:'PPTX_NOTES_BYTE_SOURCE'}));expect(d.package.toBytes()).toEqual(before);expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]});\n}",
+      "calls": [
+        "Object.create",
+        "Object.defineProperty",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "structuredClone",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:Buffer subview decoding ignores iterator slice and buffer getters and preserves adjacent bytes",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 43,
+      "title": "Buffer subview decoding ignores iterator slice and buffer getters and preserves adjacent bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.replaceNotesUtf8At(t,view)).toEqual({changedParts:[part]})",
+        "expect(s.inspectNotesText().text).toBe('雪😀')",
+        "expect(called).toBe(false)",
+        "expect(Uint8Array.from(input)).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "for(const field of ['buffer','byteLength','byteOffset'])Object.defineProperty(view,field,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),input=Buffer.from('XX雪😀YY'),view=input.subarray(2,input.length-2),before=Uint8Array.from(input);let called=false;\n for(const field of ['buffer','byteLength','byteOffset'])Object.defineProperty(view,field,{get(){called=true;throw Error('getter');}});Object.defineProperty(view,'slice',{value:()=>{throw Error('slice');}});Object.defineProperty(view,Symbol.iterator,{value:()=>{throw Error('iterator');}});\n expect(s.replaceNotesUtf8At(t,view)).toEqual({changedParts:[part]});expect(s.inspectNotesText().text).toBe('雪😀');expect(called).toBe(false);expect(Uint8Array.from(input)).toEqual(before);\n}",
+      "calls": [
+        "Buffer.from",
+        "Error",
+        "Object.defineProperty",
+        "Uint8Array.from",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "input.subarray",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:package write and serialization faults roll back byte replacements and permit same-target retry",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 49,
+      "title": "package write and serialization faults roll back byte replacements and permit same-target retry",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,utf8('changed'))).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8('retry'))).toEqual({changedParts:[part]})",
+        "expect(s.inspectNotesText().text).toBe('retry')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 50,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),before=d.package.toBytes(),pkg=d.package,original=pkg[stage].bind(pkg);if(stage==='set')pkg.set=(n,v)=>{(original as OpcPackage['set'])(n,v);throw Error('injected write');};else pkg.toBytes=()=>{throw Error('injected serialization');};try{expect(()=>s.replaceNotesUtf8At(t,utf8('changed'))).toThrow('injected');}finally{if(stage==='set')pkg.set=original as OpcPackage['set'];else pkg.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(s.replaceNotesUtf8At(t,utf8('retry'))).toEqual({changedParts:[part]});expect(s.inspectNotesText().text).toBe('retry');}\n}",
+      "calls": [
+        "Error",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "original",
+        "pkg.undefined.bind",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:byte replacement retains UTF16 notes-part codec and non-body placeholders after reopen",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 53,
+      "title": "byte replacement retains UTF16 notes-part codec and non-body placeholders after reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(after.slides[0]!.inspectNotesText().text).toBe('雪😀')",
+        "expect([...after.package.get(part)!.slice(0,2)]).toEqual([255,254])",
+        "expect(after.package.text(part)).toBe(new TextDecoder('utf-16le').decode(notes).replace(t.text,'雪😀'))",
+        "expect(after.package.get(n)).toEqual(d.package.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 55,
+          "expression": "for(const n of loaded.package.names())if(n!==part)expect(after.package.get(n)).toEqual(d.package.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const {utf16}=await import('../fixtures/admission.ts'),d=await deck(),text=d.package.text(part),notes=utf16('<?xml version=\"1.0\" encoding=\"UTF-16\"?>'+text.replace(/^<\\?xml[^?]*\\?>/,''));d.package.set(part,notes);const source=d.package.toBytes(),loaded=await Presentation.open(source),s=loaded.slides[0]!,t=s.inspectNotesText();s.replaceNotesUtf8At(t,utf8('雪😀'));\n const after=await Presentation.open(loaded.package.toBytes());expect(after.slides[0]!.inspectNotesText().text).toBe('雪😀');expect([...after.package.get(part)!.slice(0,2)]).toEqual([255,254]);expect(after.package.text(part)).toBe(new TextDecoder('utf-16le').decode(notes).replace(t.text,'雪😀'));for(const n of loaded.package.names())if(n!==part)expect(after.package.get(n)).toEqual(d.package.get(n));\n}",
+      "calls": [
+        ".decode",
+        ".decode().replace",
+        "Presentation.open",
+        "after.package.get",
+        "after.package.get().slice",
+        "after.package.text",
+        "after.slides.0.inspectNotesText",
+        "d.package.get",
+        "d.package.set",
+        "d.package.text",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "loaded.package.names",
+        "loaded.package.toBytes",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "text.replace",
+        "utf16",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:canonical foreign invalid-byte and no-op case executes all four refusals and exact archive custody",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 58,
+      "title": "canonical foreign invalid-byte and no-op case executes all four refusals and exact archive custody",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)",
+        "expect(result.counts.steps.passed).toBe(7)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),path='workflows/native/pptx-text.feature',text=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const selected=selectSharedScenarios(path,text,['@id-pptx-go-notes-refusal-and-noop-custody']),feature={...selected,scenarios:selected.scenarios.filter(s=>s.lifecycle==='implemented')};\n const result=await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(7)}},bindings,'notes-utf8-canonical');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(1);expect(result.counts.steps.passed).toBe(7);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios",
+        "selected.scenarios.filter"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:byte entry retains output-size and slide-enrollment refusal with unchanged package bytes",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 63,
+      "title": "byte entry retains output-size and slide-enrollment refusal with unchanged package bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,new Uint8Array(8*1024*1024).fill(65))).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]})",
+        "expect(()=>s.replaceNotesUtf8At(t,utf8('changed'))).toThrow(expect.objectContaining({code:'PPTX_STALE_SLIDE'}))",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText(),before=d.package.toBytes();expect(()=>s.replaceNotesUtf8At(t,new Uint8Array(8*1024*1024).fill(65))).toThrow();expect(d.package.toBytes()).toEqual(before);expect(s.replaceNotesUtf8At(t,utf8(t.text))).toEqual({changedParts:[]});\n const main=d.package.mainPart();d.package.set(main,d.package.text(main).replace(/<p:sldId\\b[^>]*\\/>/,''));const changed=d.package.toBytes();expect(()=>s.replaceNotesUtf8At(t,utf8('changed'))).toThrow(expect.objectContaining({code:'PPTX_STALE_SLIDE'}));expect(d.package.toBytes()).toEqual(changed);\n}",
+      "calls": [
+        ".fill",
+        "d.package.mainPart",
+        "d.package.set",
+        "d.package.text",
+        "d.package.text().replace",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 68,
+      "title": "late protection and unsupported notes topology refuse byte no-ops without destructive repair",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.replaceNotesUtf8At(t,utf8(t.text))).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 69,
+          "expression": "for(const variant of ['protection','field','lock'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n for(const variant of ['protection','field','lock']){const d=await deck(),s=d.slides[0]!,t=s.inspectNotesText();if(variant==='protection'){const main=d.package.mainPart();d.package.set(main,d.package.text(main).replace('</p:presentation>','<p:modifyVerifier/></p:presentation>'));}else d.package.set(part,variant==='field'?d.package.text(part).replace('<a:r><a:t>Remember','<a:r><a:fld/> <a:t>Remember'):d.package.text(part).replaceAll('<a:spLocks noGrp=\"1\"/>','<a:spLocks noTextEdit=\"1\"/>'));const before=d.package.toBytes();expect(()=>s.replaceNotesUtf8At(t,utf8(t.text))).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.package.mainPart",
+        "d.package.set",
+        "d.package.text",
+        "d.package.text().replace",
+        "d.package.text().replaceAll",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "s.inspectNotesText",
+        "s.replaceNotesUtf8At",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
+      "path": "tests/unit/pptx-notes-utf8.test.ts",
+      "line": 72,
+      "title": "compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(bindings.filter(b=>b.pattern.test(step))).toHaveLength(1)",
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 76,
+          "expression": "for(const mutate of [...[0,1,2,3].map(index=>(s:State)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "cc14c4d9780e2406bb17ca4eb67e86dd9bc13a7271ea40a1fe4649d5c1f724d7",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),path='workflows/native/pptx-text.feature',text=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const selected=selectSharedScenarios(path,text,['@id-pptx-go-notes-refusal-and-noop-custody']),feature={...selected,scenarios:selected.scenarios.filter(s=>s.lifecycle==='implemented')},inventory={root:'.',features:[feature],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(7)}};\n type State={refusals:unknown[];original:Uint8Array;deck:Presentation;foreignDeck:Presentation};\n const step='the first session attempts JSON notes text \"bad\\\\u0000\", one invalid UTF-8 byte FF, and JSON text \"two\\\\tcolumns\"';\n for(const mutate of [...[0,1,2,3].map(index=>(s:State)=>{s.refusals[index]=undefined;}),(s:State)=>{s.refusals=[];},(s:State)=>{s.refusals[2]=Error('wrong decoder');},(s:State)=>{s.deck.package.set(part,s.deck.package.text(part)+' ');},(s:State)=>{s.foreignDeck.package.set(part,s.foreignDeck.package.text(part)+' ');},(s:State)=>{s.original[0]=0;}]){\n  expect(bindings.filter(b=>b.pattern.test(step))).toHaveLength(1);const corrupt=bindings.map(b=>b.pattern.test(step)?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);mutate(c.state as State);}}:b);const result=await executeAcceptance(inventory,corrupt,'notes-refusal-control');expect(result.counts.cases.failed).toBe(1);expect(result.counts.steps.failed).toBe(1);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);\n }\n const noOp='replacing through the held target with its unchanged text succeeds';const corrupt=bindings.map(b=>b.pattern.test(noOp)?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as State;s.deck.package.set(part,s.deck.package.text(part)+' ');}}:b);const result=await executeAcceptance(inventory,corrupt,'notes-noop-control');expect(result.counts.cases.failed).toBe(1);expect(result.counts.steps.failed).toBe(1);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        ".map",
+        "Bun.file",
+        "Bun.file().text",
+        "Error",
+        "b.pattern.test",
+        "b.run",
+        "bindings.filter",
+        "bindings.map",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "fixturesRoot",
+        "join",
+        "mutate",
+        "s.deck.package.set",
+        "s.deck.package.text",
+        "s.foreignDeck.package.set",
+        "s.foreignDeck.package.text",
+        "selectSharedScenarios",
+        "selected.scenarios.filter"
       ],
       "reviewReasons": [
         "body-loop"

@@ -21,8 +21,25 @@ text locks, fields, breaks, extensions, unknown namespaces and unsupported
 paragraph/run properties refuse. The older `readNotesText()` API remains a
 separate broad read-only inspection path.
 
-Inputs are JavaScript strings with LF line separators. Tabs, CR, control
-characters and invalid Unicode refuse. A single text leaf uses an exact lexical
+`replaceNotesAt` accepts JavaScript strings with LF line separators. Tabs, CR,
+control characters and invalid Unicode refuse.
+
+`replaceNotesUtf8At(anchor, bytes)` accepts a `Uint8Array` of strict UTF-8 text.
+It checks the intrinsic view length against an 8 MiB byte limit before making an
+owned copy. Buffer subviews are supported; shared, detached, forged or non-byte
+inputs refuse. Caller iterators and `buffer`, `byteLength` or `slice` overrides do
+not control copying. Malformed sequences raise `PPTX_NOTES_UTF8_INVALID`; valid
+UTF-8 still passes the string editor's XML-character and line-separator checks.
+The input is text, not an XML file: a leading UTF-8 BOM becomes literal U+FEFF and
+is not stripped. It can therefore turn an otherwise identical replacement into
+a changed edit. Empty bytes mean empty notes.
+
+Both entry points use the same target validation and transaction. The byte limit
+bounds input size, not peak memory or escaped XML output; the XML editor separately
+checks its output limit. The package member retains its original codec even when
+the replacement arrives as UTF-8.
+
+A single text leaf uses an exact lexical
 text splice where possible. Structural replacement preserves the first
 paragraph's supported properties, the first run's properties and the first
 paragraph's ending properties. It never borrows later-run bold formatting.
@@ -47,8 +64,11 @@ compare all original member payloads. Multiline template cases separately inspec
 in-memory text and selected property fragments; no rendering or complete schema
 claim is made.
 
-Seven existing shared notes cases are bound. Their historical IDs and step text
-name Go, but the Bun bindings execute the same pinned inputs and predicates.
-The foreign/invalid-byte compound case remains planned: a JavaScript string API
-cannot exercise the raw invalid UTF-8 byte `FF` input. Bun separately tests foreign
-handles, NUL, tabs, CR and unpaired surrogates without claiming that missing case.
+Eight existing shared notes cases are bound. Their historical IDs and step text
+name Go, but the Bun bindings execute the pinned inputs and predicates. The
+foreign/invalid-byte compound case passes raw byte `FF` to `replaceNotesUtf8At`,
+checks all four refusal results and compares the complete archive after an
+identical-text no-op. Native controls separately check invalid sequences, buffer
+ownership, a leading BOM, saved Unicode readback, UTF-16 member preservation,
+rollback, stale targets and output bounds. These are Bun results, without
+cross-runtime or rendering equivalence.

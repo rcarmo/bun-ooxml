@@ -53,10 +53,10 @@ test('serialization failure rolls back notes and retains a usable target',async(
  const p=await deck(),s=p.slides[0]!,target=s.inspectNotesText(),before=p.package.toBytes(),original=p.package.toBytes.bind(p.package);p.package.toBytes=()=>{throw Error('serialize failed');};try{expect(()=>s.replaceNotesAt(target,'changed')).toThrow('serialize failed');}finally{p.package.toBytes=original;}expect(p.package.toBytes()).toEqual(before);s.replaceNotesAt(target,'retry');expect(s.inspectNotesText().text).toBe('retry');
 });
 
-test('seven compatible canonical existing-notes scenarios execute saved and in-memory predicates',async()=>{
+test('eight canonical existing-notes scenarios execute saved and in-memory predicates',async()=>{
  const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,scenarioIds}=await import('../acceptance/notes-editing.ts');
  const path='workflows/native/pptx-text.feature',selected=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),scenarioIds),feature={...selected,scenarios:selected.scenarios.filter(s=>s.lifecycle==='implemented')},count=(n:number)=>({implemented:n,planned:0,total:n});
- const cases=feature.scenarios.flatMap(s=>s.cases),result=await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(7),cases:count(7),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'notes-edit-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(7);
+ const cases=feature.scenarios.flatMap(s=>s.cases),result=await executeAcceptance({root:'.',features:[feature],counts:{features:count(1),scenarios:count(8),cases:count(8),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'notes-edit-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(8);
 });
 
 test('notes body edits preserve non-body placeholders, UTF-16 encoding and namespace aliases',async()=>{
