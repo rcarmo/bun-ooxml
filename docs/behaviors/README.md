@@ -120,6 +120,18 @@ The independent SDK schema oracle checks one source and both resolved body
 outputs, including a missing-author refusal control. See
 [run-property revisions](../contracts/run-property-revisions.md).
 
+## Paired run moves
+
+The opt-in `text-properties-and-moves` profile resolves bounded paired run moves
+within each selected story. Source/destination names pair the ranges; each
+start/end ID pair remains separate. Twelve native tests check exact accept/reject
+output across seven story parts, selection, default-profile refusal, namespace and
+encoding preservation, malformed pairs, required dates and reached rollback.
+They are unmapped pending shared cases for this policy. All 576 mapping records
+and 681 executed case identities are unchanged; 46 cases remain planned.
+The SDK oracle checks one body source and both outputs, with a missing-name
+refusal control. See [paired run moves](../contracts/run-move-revisions.md).
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

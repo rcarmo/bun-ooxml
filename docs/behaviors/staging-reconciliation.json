@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1084,
+  "nativeDeclarations": 1096,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 857,
+  "withoutStagingCount": 869,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3649,6 +3649,66 @@
       "id": "bun:tests/unit/docx-property-mappings.test.ts:property runtime, binding and native pins independently refuse missing and stale sources",
       "path": "tests/unit/docx-property-mappings.test.ts",
       "sourceSha256": "7e9f65976e7e3d9c8962441d2a54216dea4ae4abb24d282683c321ebe8ab2289"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:paired same-story moves combine with text and property revisions across seven stories with exact saved accept and reject bytes",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:previous profiles refuse moves unchanged and selected header does not resolve body or unsupported footer",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:malformed later move pairs refuse both actions before changing earlier stories",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:cross-story pairs refuse and destination-before-source ordering keeps exact source-ordered receipts",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:reached later-write serialization and validation faults roll back all paired ranges and prior edits",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:strict move profile refuses linked protection and external settings before a same-state no-op",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:move aliases local wrapper declarations and UTF8 BOM or UTF16 markers survive both actions through path reopen",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:multiple independent pairs and different paragraph placement preserve deterministic wrapper ordering",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:unsafe namespace lifts decorated run text and cross-paragraph ranges refuse unchanged",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:move namespaces compare expanded names but mismatched run segmentation and direct values refuse",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:move range starts require valid qualified dates while wrapper date is optional and valid if supplied",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
+    },
+    {
+      "id": "bun:tests/unit/docx-revision-moves.test.ts:move profile is exported without activating shared profiles or the broader multistory obligation",
+      "path": "tests/unit/docx-revision-moves.test.ts",
+      "sourceSha256": "ed0f31422d163e7cd6423a6091780a8e334bbb526bc47b1680559233526280e0"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",

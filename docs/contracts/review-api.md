@@ -19,9 +19,9 @@ tables/controls supported; unknown/fields/drawings/AlternateContent counted, nev
 silently asserted complete. Existing Document.paragraphs semantics stay unchanged.
 
 `src/docx/revisions.ts`:
-* `RevisionProfile = 'text-only'|'text-and-run-properties'`
+* `RevisionProfile = 'text-only'|'text-and-run-properties'|'text-properties-and-moves'`
 * `inspectRevisions(pkg,options?:{profile?:RevisionProfile}): {revisions:Revision[];unsupported:RevisionFinding[]}`
-* `Revision = {part:string;id:string;kind:'insertion'|'deletion'|'run-properties';author?:string;date?:string;text:string}`
+* `Revision = {part:string;id:string;kind:'insertion'|'deletion'|'run-properties'|'move-from'|'move-to';author?:string;date?:string;text:string}`
 * `RevisionFinding = {part:string;kind:string;reason:string}`
 * `resolveRevisions(pkg, action:'accept'|'reject', options?:{parts?:string[],profile?:RevisionProfile}): {resolved:number;changedParts:string[]}`
 The default `text-only` profile supports bounded run-level w:ins/w:del as direct children of w:p, plain w:r/w:t or w:delText
@@ -48,7 +48,9 @@ document comparison and paragraph/table change algebra are not implemented.
 
 The root and ./docx entrypoints export these APIs. The opt-in
 [`text-and-run-properties` profile](run-property-revisions.md) also resolves bounded
-direct run-property snapshots; default text-only refusal is unchanged.
+direct run-property snapshots. The
+[`text-properties-and-moves` profile](run-move-revisions.md) adds matched same-story
+plain-run move pairs; both earlier profiles retain their move-refusal policy.
 Author filtering, general revision snapshots, full comparison and other revision
 types are unsupported. The shared
 specification defines the supported story and revision outcomes.

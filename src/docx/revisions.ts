@@ -1,5 +1,6 @@
 import { OoxmlError } from "../errors.ts";
 import {runPropertyChangeProblem,restoredRunProperties} from './revision-properties.ts';
+import {scanRunMoves} from './revision-moves.ts';
 import { OpcPackage } from "../opc/index.ts";
 import { applyEdits, attribute, parseXml, type XmlDocument, type XmlElement } from "../xml/index.ts";
 
@@ -40,12 +41,13 @@ type ScannedStoryPart = {
   document: XmlDocument;
   revisions: SupportedRevisionEntry[];
   unsupported: RevisionFinding[];
+  moveMarkers: XmlElement[];
 };
 
 export type Revision = {
   part: string;
   id: string;
-  kind: "insertion" | "deletion" | "run-properties";
+  kind: "insertion" | "deletion" | "run-properties" | "move-from" | "move-to";
   author?: string;
   date?: string;
   text: string;
@@ -57,10 +59,10 @@ export type RevisionFinding = {
   reason: string;
 };
 
-export type RevisionProfile = 'text-only' | 'text-and-run-properties';
+export type RevisionProfile = 'text-only' | 'text-and-run-properties' | 'text-properties-and-moves';
 function revisionProfile(value:unknown):RevisionProfile {
   if(value===undefined)return 'text-only';
-  if(value!=='text-only'&&value!=='text-and-run-properties')throw new OoxmlError('docx-revisions-invalid-profile','Unknown revision profile');
+  if(value!=='text-only'&&value!=='text-and-run-properties'&&value!=='text-properties-and-moves')throw new OoxmlError('docx-revisions-invalid-profile','Unknown revision profile');
   return value;
 }
 export function inspectRevisions(pkg: OpcPackage, options:{profile?:RevisionProfile}={}): { revisions: Revision[]; unsupported: RevisionFinding[] } {
@@ -97,7 +99,7 @@ export function resolveRevisions(
     throw new OoxmlError("docx-revisions-unsupported", describeUnsupported(unsupported));
   }
 
-  if(profile==='text-and-run-properties'&&isProtected(pkg,true))throw new OoxmlError('docx-revisions-protected','Cannot resolve run-property revisions with protected or external settings');
+  if(profile!=='text-only'&&isProtected(pkg,true))throw new OoxmlError('docx-revisions-protected','Cannot resolve run-property revisions with protected or external settings');
   const resolved = scanned.reduce((sum, story) => sum + story.revisions.length, 0);
   if (resolved === 0) {
     return { resolved: 0, changedParts: [] };
@@ -127,7 +129,7 @@ export function resolveRevisions(
         parseXml(pkg.text(plan.story.part));
       }
     }
-    if(profile==='text-and-run-properties')for(const plan of plans){
+    if(profile!=='text-only')for(const plan of plans){
       const result=scanStoryPart(pkg,{part:plan.story.part,kind:plan.story.kind},profile);
       if(result.revisions.length||result.unsupported.length)throw new OoxmlError('docx-revisions-validation','Resolution left revision markup or unsupported content');
     }
@@ -212,13 +214,17 @@ function scanStoryPart(pkg: OpcPackage, story: StoryPart, profile:RevisionProfil
   const unsupported: RevisionFinding[] = [];
   const unsupportedKeys = new Set<string>();
   const ids = new Map<string, number>();
+  const moves=profile==='text-properties-and-moves'?scanRunMoves(document.elements,xml):undefined;
+  for(const reason of moves?.problems??[])pushFinding(unsupported,unsupportedKeys,story.part,'move',reason);
+  for(const entry of moves?.moves??[])revisions.push({part:story.part,id:attribute(entry.element,'id',W_NS)!,kind:entry.kind,author:attribute(entry.element,'author',W_NS),date:attribute(entry.element,'date',W_NS),text:entry.text,element:entry.element});
+  for(const element of moves?.identifiers??[]){const id=String(Number(attribute(element,'id',W_NS)));ids.set(id,(ids.get(id)??0)+1);}
 
   for (const element of document.elements) {
     if (element.namespaceURI !== W_NS) {
       continue;
     }
 
-    const propertyChange=profile==='text-and-run-properties'&&element.localName==='rPrChange';
+    const propertyChange=profile!=='text-only'&&element.localName==='rPrChange';
     if (element.localName === "ins" || element.localName === "del" || propertyChange) {
       const problem=propertyChange?runPropertyChangeProblem(element,xml):undefined;
       const support = propertyChange?(problem?{supported:false as const,kind:'format',reason:problem}:{supported:true as const}):inspectRunRevision(element,xml);
@@ -249,6 +255,7 @@ function scanStoryPart(pkg: OpcPackage, story: StoryPart, profile:RevisionProfil
     }
 
     if (MOVE_TAGS.has(element.localName)) {
+      if(moves)continue;
       pushFinding(unsupported, unsupportedKeys, story.part, "move", "move revisions are not supported", element.start);
       continue;
     }
@@ -277,7 +284,8 @@ function scanStoryPart(pkg: OpcPackage, story: StoryPart, profile:RevisionProfil
     }
   }
 
-  return { part: story.part, kind: story.kind, xml, document, revisions, unsupported };
+  revisions.sort((a,b)=>a.element.start-b.element.start);
+  return { part: story.part, kind: story.kind, xml, document, revisions, unsupported, moveMarkers:moves?.markers??[] };
 }
 
 function inspectRunRevision(element: XmlElement, xml:string):
@@ -464,8 +472,8 @@ function namespaceDeclarations(element: XmlElement): Array<[string, string]> {
 }
 
 function unwrapsRevision(revision: Revision, action: "accept" | "reject"): boolean {
-  return (action === "accept" && revision.kind === "insertion")
-    || (action === "reject" && revision.kind === "deletion");
+  return (action === "accept" && (revision.kind === "insertion" || revision.kind==='move-to'))
+    || (action === "reject" && (revision.kind === "deletion" || revision.kind==='move-from'));
 }
 
 function buildStoryEdits(
@@ -473,7 +481,11 @@ function buildStoryEdits(
   action: "accept" | "reject",
 ): Array<{ start: number; end: number; value: string }> {
   const edits: Array<{ start: number; end: number; value: string }> = [];
+  for(const marker of story.moveMarkers)edits.push({start:marker.start,end:marker.end,value:''});
   for (const revision of story.revisions) {
+    if(revision.kind==='move-from'||revision.kind==='move-to'){
+      edits.push({start:revision.element.start,end:revision.element.end,value:unwrapsRevision(revision,action)?unwrapRevision(story.xml,revision.element,false):''});continue;
+    }
     if(revision.kind==='run-properties'){
       const target=action==='accept'?revision.element:revision.element.parent!;
       edits.push({start:target.start,end:target.end,value:action==='accept'?'':restoredRunProperties(revision.element,story.xml)});

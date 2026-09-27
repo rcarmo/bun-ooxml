@@ -8,7 +8,7 @@ const APPEARANCE:Record<string,AppearanceKey>={color:'color',u:'underline',highl
 const word=(e:XmlElement|undefined,n:string)=>e?.namespaceURI===W&&e.localName===n;
 function attributes(e:XmlElement,allowed:string[]):boolean{return Object.keys(e.attributes).every(k=>e.attributeNamespaces[k]===XMLNS||(e.attributeNamespaces[k]===W&&allowed.includes(k.split(':').pop()!)));}
 function whitespace(e:XmlElement,xml:string):boolean{if(e.selfClosing)return true;let at=e.openEnd;for(const c of e.children){if(!/^[ \t\r\n]*$/.test(xml.slice(at,c.start)))return false;at=c.end;}return /^[ \t\r\n]*$/.test(xml.slice(at,e.closeStart));}
-function properties(pr:XmlElement,xml:string,change?:XmlElement):boolean{
+export function runPropertySetSupported(pr:XmlElement,xml:string,change?:XmlElement):boolean{
  if(!attributes(pr,[])||!whitespace(pr,xml))return false;const seen=new Set<string>();let last=-1;
  for(const node of pr.children){if(node===change){if(node!==pr.children.at(-1))return false;continue;}const name=node.localName,rank=ORDER.indexOf(name);if(node.namespaceURI!==W||rank<last||rank<0||seen.has(name)||node.children.length||!whitespace(node,xml))return false;seen.add(name);last=rank;
   if(FLAGS.has(name)){if(!attributes(node,['val'])||!/^(?:1|0|true|false|on|off)$/i.test(attribute(node,'val',W)??'true'))return false;}
@@ -28,7 +28,7 @@ export function runPropertyChangeProblem(change:XmlElement,xml:string):string|un
  if(!whitespace(run!,xml)||run!.children.some(c=>c!==pr&&(!word(c,'t')||c.children.length||/<!--|<!\[CDATA\[|<\?/.test(xml.slice(c.openEnd,c.closeStart)))))return 'run-property revisions require only plain text runs';
  if(attribute(change,'author',W)===undefined)return 'run-property change requires a qualified author';
  if(!attributes(change,['id','author','date'])||!whitespace(change,xml)||change.children.length!==1||!word(change.children[0],'rPr'))return 'run-property change must contain exactly one undecorated saved rPr snapshot';
- if(!properties(pr!,xml,change)||!properties(change.children[0]!,xml))return 'current or saved run properties are ambiguous, decorated, conflicting or unsupported';
+ if(!runPropertySetSupported(pr!,xml,change)||!runPropertySetSupported(change.children[0]!,xml))return 'current or saved run properties are ambiguous, decorated, conflicting or unsupported';
  return undefined;
 }
 /** Keep the saved rPr spelling; transfer bindings from ancestors removed on reject. */
