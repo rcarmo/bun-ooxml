@@ -2,8 +2,8 @@
 
 `Table.mergeRowCells(row, firstColumn, lastColumn)` merges an inclusive horizontal
 range and returns a fresh table handle. Coordinates are zero-based safe integers;
-the range must contain at least two cells. Vertical merges and splitting are
-unsupported.
+the range must contain at least two cells. [Single-column vertical merges](table-vertical-merge.md)
+have a separate method. Splitting is unsupported.
 
 ```ts
 const table = document.tables[0]!;

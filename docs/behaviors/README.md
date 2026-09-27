@@ -66,6 +66,15 @@ heading-inventory guard updates only the implemented-case count. The preceding
 551 executed identities are unchanged; only the 26 new cases were selected.
 See the [merge contract](../contracts/table-merge.md).
 
+## Vertical table authoring
+
+`Table.mergeColumnCells` adds bounded single-column vertical merging. Twelve
+native declarations verify retained cells, content, formatting and encodings,
+refusal and transactional rollback. They remain unmapped until physical vertical
+outcomes are reviewed centrally. The 516 existing mapping records and all 577
+executed case identities are unchanged; the property-setter profile stays planned.
+See the [vertical merge contract](../contracts/table-vertical-merge.md).
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

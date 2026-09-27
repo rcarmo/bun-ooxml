@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1015,
+  "nativeDeclarations": 1027,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 788,
+  "withoutStagingCount": 800,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4099,6 +4099,66 @@
       "id": "bun:tests/unit/docx-table-style.test.ts:complete output bounds refuse adding a style reference without invalidating handles",
       "path": "tests/unit/docx-table-style.test.ts",
       "sourceSha256": "1fdea43f1152ac19008155265a3888b64b6bf61c1d6b44d216df7e003e5e3b41"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical native authoring does not select incompatible shared getter or horizontal outcomes",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88"
     },
     {
       "id": "bun:tests/unit/docx-tracking-settings.test.ts:tracking author toggle follows the shared getter sequence without creating revision markup",

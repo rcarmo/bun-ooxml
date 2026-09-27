@@ -3,8 +3,9 @@
 Native rectangular DOCX/PPTX tables support creation and bounded cell edits.
 DOCX supports [bounded empty-row insertion and deletion](table-rows.md).
 DOCX also supports [bounded horizontal cell merges](table-merge.md), retaining
-first-cell content and refusing nonempty absorbed cells. Column edits, vertical
-merges, splitting and PPTX row mutations are not implemented. Existing merged tables can be inspected only when grid mapping
+first-cell content and refusing nonempty absorbed cells, and
+[single-column vertical merges](table-vertical-merge.md) with empty continuation
+cells. Column edits, splitting and PPTX row mutations are not implemented. Existing merged tables can be inspected only when grid mapping
 is unambiguous; unsafe edits refuse before mutation. No formatting reconstruction
 outside the selected table/cell.
 

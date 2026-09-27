@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1015,
-  "files": 117,
+  "count": 1027,
+  "files": 118,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -255,6 +255,12 @@
     {
       "path": "tests/unit/docx-table-style.test.ts",
       "sha256": "1fdea43f1152ac19008155265a3888b64b6bf61c1d6b44d216df7e003e5e3b41",
+      "declarations": 12,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "sha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
       "declarations": 12,
       "issues": []
     },
@@ -1214,6 +1220,17 @@
     "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
     "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
     "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
     "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
     "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
     "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
@@ -1630,6 +1647,17 @@
     "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
     "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
     "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
+    "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
     "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
     "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
     "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
@@ -20103,6 +20131,569 @@
         "source.replace",
         "t.cell",
         "t.setStyle"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 13,
+      "title": "vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(current.rows).toBe(3)",
+        "expect(current.columns).toBe(3)",
+        "expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>cell.text).toThrow()",
+        "expect(()=>paragraph.text).toThrow()",
+        "expect(()=>current.cell(row,1)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(current.cell(2,2).text).toBe('Tail')",
+        "expect(elements(tree,'tc',W)).toHaveLength(9)",
+        "expect(elements(tree,'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(withoutFlags(next)).toBe(source)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(paragraphs)",
+        "expect(read.paragraphs.map(p=>p.text)).toEqual(paragraphs)",
+        "expect(read.tables[0]!.cell(2,2).text).toBe('Tail')",
+        "expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(read.package.get(n)).toEqual(b)",
+        "expect([...read.package.parts.keys()]).toEqual([...before.keys()])"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 15,
+          "expression": "for(const row of [0,1,2])expect(()=>current.cell(row,1)).toThrow(expect.objectContaining("
+        },
+        {
+          "line": 17,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n const d=await fixture(),before=d.package.parts,source=xml(d),paragraphs=d.paragraphs.map(p=>p.text),held=d.tables[0]!,cell=held.cell(0,1),paragraph=d.paragraphs[0]!,current=held.mergeColumnCells(1,0,2);\n expect(current.rows).toBe(3);expect(current.columns).toBe(3);expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(()=>cell.text).toThrow();expect(()=>paragraph.text).toThrow();for(const row of [0,1,2])expect(()=>current.cell(row,1)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));expect(current.cell(2,2).text).toBe('Tail');\n const next=xml(d),tree=parseXml(next);expect(elements(tree,'tc',W)).toHaveLength(9);expect(elements(tree,'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);expect(withoutFlags(next)).toBe(source);expect(d.paragraphs.map(p=>p.text)).toEqual(paragraphs);\n const dir=await mkdtemp(join(tmpdir(),'vertical-merge-'));try{const path=join(dir,'merged.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs.map(p=>p.text)).toEqual(paragraphs);expect(read.tables[0]!.cell(2,2).text).toBe('Tail');expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);expect([...read.package.parts.keys()]).toEqual([...before.keys()]);}finally{await rm(dir,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "attribute",
+        "before.keys",
+        "current.cell",
+        "d.paragraphs.map",
+        "d.save",
+        "elements",
+        "elements().map",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "held.cell",
+        "held.mergeColumnCells",
+        "join",
+        "mkdtemp",
+        "parseXml",
+        "read.package.get",
+        "read.package.parts.keys",
+        "read.paragraphs.map",
+        "read.tables.0.cell",
+        "rm",
+        "tmpdir",
+        "withoutFlags",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 20,
+      "title": "middle and edge ranges preserve physical geometry and all paragraphs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.rows).toBe(3)",
+        "expect(t.columns).toBe(3)",
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(before)",
+        "expect(elements(parseXml(xml(d)),'vMerge',W)).toHaveLength(2)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 21,
+          "expression": "for(const[col,first,last]of [[0,0,1],[0,1,2],[2,0,1]])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n for(const[col,first,last]of [[0,0,1],[0,1,2],[2,0,1]]){const d=await fixture(),source=xml(d),before=d.paragraphs.map(p=>p.text),t=d.tables[0]!.mergeColumnCells(col!,first!,last!);expect(t.rows).toBe(3);expect(t.columns).toBe(3);expect(withoutFlags(xml(d))).toBe(source);expect(d.paragraphs.map(p=>p.text)).toEqual(before);expect(elements(parseXml(xml(d)),'vMerge',W)).toHaveLength(2);}\n}",
+      "calls": [
+        "d.paragraphs.map",
+        "d.tables.0.mergeColumnCells",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "fixture",
+        "parseXml",
+        "withoutFlags",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 24,
+      "title": "continuation content and decorations refuse rather than being hidden or discarded",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(3)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 25,
+          "expression": "for(const kind of ['text','space','format','paragraph-format','empty-run','lexical','attribute'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n for(const kind of ['text','space','format','paragraph-format','empty-run','lexical','attribute']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());replaceCell(p,4,raw=>kind==='text'||kind==='space'?raw.replace(/<w:p\\b[^>]*\\/>/,`<w:p><w:r><w:t xml:space=\"preserve\">${kind==='text'?'Do not hide me':' '}</w:t></w:r></w:p>`):kind==='format'?raw.replace('</w:tcPr>','<w:shd w:val=\"clear\" w:fill=\"ABCDEF\"/></w:tcPr>'):kind==='paragraph-format'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:pPr><w:keepNext/></w:pPr></w:p>'):kind==='empty-run'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:r><w:t/></w:r></w:p>'):kind==='attribute'?raw.replace('<w:tc>','<w:tc keep=\"yes\">'):raw.replace('<w:tcPr>','<!--keep--><w:tcPr>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes(),t=loaded.tables[0]!;expect(()=>t.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);expect(t.rows).toBe(3);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "loaded.package.toBytes",
+        "p.toBytes",
+        "raw.replace",
+        "replaceCell",
+        "t.mergeColumnCells"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 28,
+      "title": "invalid vertical coordinates refuse atomically without coercion",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(...args as [number,number,number])).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(invoked).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 29,
+          "expression": "for(const args of [[1,0,0],[1,2,1],[-1,0,2],[3,0,2],[1,-1,2],[1,0,3],[1,0.5,2],[NaN,0,2],['1',0,2],[1,0,Infinity],[1,0,Number.MAX_SAFE_INTEGER+1],["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();let invoked=false;for(const args of [[1,0,0],[1,2,1],[-1,0,2],[3,0,2],[1,-1,2],[1,0,3],[1,0.5,2],[NaN,0,2],['1',0,2],[1,0,Infinity],[1,0,Number.MAX_SAFE_INTEGER+1],[{valueOf(){invoked=true;return 1;}},0,2]]){expect(()=>t.mergeColumnCells(...args as [number,number,number])).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);}expect(invoked).toBe(false);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "t.mergeColumnCells"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 32,
+      "title": "whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for(const kind of ['horizontal','vertical','nested','width','revision','missing-grid','late-span'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n for(const kind of ['horizontal','vertical','nested','width','revision','missing-grid','late-span']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());if(kind==='missing-grid')p.set(p.mainPart(),p.text(p.mainPart()).replace(/<w:tblGrid>[\\s\\S]*?<\\/w:tblGrid>/,''));else replaceCell(p,8,raw=>kind==='horizontal'?raw.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2\"/>'):kind==='vertical'?raw.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val=\"restart\"/>'):kind==='nested'?raw.replace('<w:tcPr>','<w:tbl/><w:tcPr>'):kind==='width'?raw.replace('w:w=\"2880\"','w:w=\"100\"'):kind==='revision'?raw.replace('</w:tcPr>','<w:tcPrChange/></w:tcPr>'):raw.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"1junk\"/>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.tables.0.mergeColumnCells",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "raw.replace",
+        "replaceCell"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 36,
+      "title": "protected external settings and stale document handles refuse before writing vertical flags",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 37,
+          "expression": "for(const mode of ['protected','external','stale'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n for(const mode of ['protected','external','stale']){const d=await fixture(),p=pkg(d),t=d.tables[0]!;if(mode==='protected'){addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}if(mode==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});if(mode==='stale')p.set(p.mainPart(),xml(d).replace('Before','Changed'));const before=d.package.toBytes();expect(()=>t.mergeColumnCells(1,0,2)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "addPart",
+        "addRelationship",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "p.mainPart",
+        "p.set",
+        "pkg",
+        "t.mergeColumnCells",
+        "xml",
+        "xml().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 40,
+      "title": "faults after write and during serialization roll back all markers and preserve held handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.mergeColumnCells(1,0,2)).toThrow('injected')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(3)",
+        "expect(cell.text).toBe('Keep & <text>')",
+        "expect(paragraph.text).toBe('Before')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 41,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),p=pkg(d),before=p.toBytes(),t=d.tables[0]!,cell=t.cell(0,1),paragraph=d.paragraphs[0]!,original=p[stage].bind(p);if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialization');};try{expect(()=>t.mergeColumnCells(1,0,2)).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(p.toBytes()).toEqual(before);expect(t.rows).toBe(3);expect(cell.text).toBe('Keep & <text>');expect(paragraph.text).toBe('Before');}\n}",
+      "calls": [
+        "Error",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "original",
+        "p.toBytes",
+        "p.undefined.bind",
+        "pkg",
+        "t.cell",
+        "t.mergeColumnCells"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 44,
+      "title": "UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...read.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])",
+        "expect(withoutFlags(xml(read))).toBe(source)",
+        "expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue'])",
+        "expect(read.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "for(const encoding of ['bom','le','be'])"
+        },
+        {
+          "line": 45,
+          "expression": "for(let i=0;i<source.length;i++)view.setUint16(2+i*2,source.charCodeAt(i),encoding==='le');"
+        },
+        {
+          "line": 45,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n for(const encoding of ['bom','le','be']){const d=await fixture(),p=pkg(d);let source=xml(d);if(encoding==='bom')p.set(p.mainPart(),new Uint8Array([239,187,191,...new TextEncoder().encode(source)]));else{source=source.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16').replace('<q:document ','<q:document xmlns:w=\"urn:foreign\" ');const b=new Uint8Array(2+source.length*2);b.set(encoding==='le'?[255,254]:[254,255]);const view=new DataView(b.buffer);for(let i=0;i<source.length;i++)view.setUint16(2+i*2,source.charCodeAt(i),encoding==='le');p.set(p.mainPart(),b);}const loaded=await Document.open(p.toBytes()),before=loaded.package.parts;loaded.tables[0]!.mergeColumnCells(1,0,2);const read=await Document.open(await loaded.save());expect([...read.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);expect(withoutFlags(xml(read))).toBe(source);expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);}\n}",
+      "calls": [
+        ".encode",
+        "Document.open",
+        "attribute",
+        "b.set",
+        "elements",
+        "elements().map",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "loaded.save",
+        "loaded.tables.0.mergeColumnCells",
+        "p.mainPart",
+        "p.set",
+        "p.toBytes",
+        "parseXml",
+        "pkg",
+        "read.package.get",
+        "read.package.get().slice",
+        "source.charCodeAt",
+        "source.replaceAll",
+        "source.replaceAll().replaceAll",
+        "source.replaceAll().replaceAll().replace",
+        "source.replaceAll().replaceAll().replace().replace",
+        "view.setUint16",
+        "withoutFlags",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 48,
+      "title": "post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(action).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.cell(2,2).text).toBe('Tail')",
+        "expect(t.tryCell(3,1)).toBeNull()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 49,
+          "expression": "for(const action of [()=>t.cell(0,1),()=>t.tryCell(1,1),()=>t.cell(2,1),()=>t.insertRow(0),()=>t.mergeColumnCells(0,0,2),()=>t.mergeRowCells(0,0,1)])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!.mergeColumnCells(1,0,2),before=d.package.toBytes();for(const action of [()=>t.cell(0,1),()=>t.tryCell(1,1),()=>t.cell(2,1),()=>t.insertRow(0),()=>t.mergeColumnCells(0,0,2),()=>t.mergeRowCells(0,0,1)]){expect(action).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(t.cell(2,2).text).toBe('Tail');expect(t.tryCell(3,1)).toBeNull();\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.mergeColumnCells",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "t.cell",
+        "t.insertRow",
+        "t.mergeColumnCells",
+        "t.mergeRowCells",
+        "t.tryCell"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 52,
+      "title": "vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(cells(xml(d))[1]!.children[0]!.children.map(n=>n.localName)).toEqual(['tcW','vMerge','tcBorders','shd','textDirection','vAlign'])",
+        "expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 54,
+          "expression": "for(const kind of ['section','lexical','width-decoration'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n const d=await fixture();d.tables[0]!.cell(0,1).setProperties({topBorder:{style:'single',size:8,color:'123456'},textDirection:'tbRl'});const source=xml(d);d.tables[0]!.mergeColumnCells(1,0,2);expect(withoutFlags(xml(d))).toBe(source);expect(cells(xml(d))[1]!.children[0]!.children.map(n=>n.localName)).toEqual(['tcW','vMerge','tcBorders','shd','textDirection','vAlign']);\n for(const kind of ['section','lexical','width-decoration']){const d=await fixture(),p=pkg(d);replaceCell(p,8,raw=>kind==='section'?raw.replace(/<w:p\\b[^>]*>/,open=>open+'<w:pPr><w:sectPr/></w:pPr>'):kind==='lexical'?raw.replace('<w:tcPr>','<!--retain--><w:tcPr>'):raw.replace('w:type=\"dxa\"','w:type=\"dxa\" retain=\"yes\"'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "cells",
+        "cells().1.children.0.children.map",
+        "d.tables.0.cell",
+        "d.tables.0.cell().setProperties",
+        "d.tables.0.mergeColumnCells",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.tables.0.mergeColumnCells",
+        "p.toBytes",
+        "pkg",
+        "raw.replace",
+        "replaceCell",
+        "withoutFlags",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 57,
+      "title": "vertical authoring leaves all unselected tables and package members unchanged",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(withoutFlags(xml(d))).toBe(source)",
+        "expect(d.tables[1]!.cell(0,0).text).toBe('Other table')",
+        "expect([...d.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(d.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 58,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n const d=await fixture();d.addTable(1,1);d.tables[1]!.cell(0,0).text='Other table';const source=xml(d),before=d.package.parts;d.tables[0]!.mergeColumnCells(1,0,2);expect(withoutFlags(xml(d))).toBe(source);expect(d.tables[1]!.cell(0,0).text).toBe('Other table');expect([...d.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);\n}",
+      "calls": [
+        "before.keys",
+        "d.addTable",
+        "d.package.get",
+        "d.package.parts.keys",
+        "d.tables.0.mergeColumnCells",
+        "d.tables.1.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "withoutFlags",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical native authoring does not select incompatible shared getter or horizontal outcomes",
+      "path": "tests/unit/docx-table-vertical-merge.test.ts",
+      "line": 61,
+      "title": "vertical native authoring does not select incompatible shared getter or horizontal outcomes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.lifecycle).toBe('planned')",
+        "expect(s.cases).toHaveLength(1)",
+        "expect(inv.counts.cases.implemented).toBe(577)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "bb1b1e3e513cd8eabe6d10c692824499c3db7b3ed6b8c055c9cad870d8277f88",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(577);expect(inv.counts.cases.planned).toBe(46);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "inv.features.flatMap",
+        "inv.features.flatMap().find",
+        "inventoryFeatures",
+        "process.cwd"
       ],
       "reviewReasons": [],
       "unresolved": []
