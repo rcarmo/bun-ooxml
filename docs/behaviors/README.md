@@ -25,13 +25,19 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 229 scenarios / 562 cases; 525 implemented and 37 planned.
+- Shared: 229 scenarios / 562 cases; 526 implemented and 36 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 238 scenarios / 573 cases; 525 implemented and 48 planned.
+- Combined: 238 scenarios / 573 cases; 526 implemented and 47 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
-notes below describe their historical loaded counts. The executed case-key set
-and all 472 mapping records are unchanged; visibility does not award a pass.
+notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
+472 mapping records; visibility does not award a pass.
+
+The [tracking preference API](../contracts/tracking-settings.md) subsequently
+activated only `@id-docx-go-track-author-toggle`. Tests retain the original 525-case
+identity hash after removing that one explicit addition. The twelve new native
+declarations cover the getter, persistence and refusal behaviour, but have no
+bounded per-outcome mappings yet. The 472 prior records remain unchanged.
 
 ## Format and operation layout
 

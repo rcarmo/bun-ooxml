@@ -55,6 +55,10 @@ General comparison, multiple tracked targets and broader structural revisions
 are unsupported. Saved accept/reject text and unrelated payload preservation are
 checked separately from receipt counts.
 
+The saved [Word tracking preference](tracking-settings.md) and session author do
+not supply workflow revision metadata or turn ordinary Bun edits into redlines.
+`patchOffice` still requires its explicit option and validated metadata.
+
 ## Format helpers
 
 Guarded helper APIs:

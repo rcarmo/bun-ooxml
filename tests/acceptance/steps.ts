@@ -33,6 +33,7 @@ import { bindings as pageLayoutBindings } from './page-layout.ts';
 import { bindings as slideOrderBindings } from './slide-order.ts';
 import { bindings as effectiveFormattingBindings } from './effective-formatting.ts';
 import { bindings as trackedWorkflowBindings, cleanupTrackedWorkflowFixtures } from './tracked-workflow.ts';
+import { bindings as trackingSettingsBindings } from './tracking-settings.ts';
 import { bindings as createDocxBindings } from "./create-docx.ts";
 import { bindings as docxModelBindings } from './docx-model.ts';
 import { bindings as appendRunBindings } from './append-run.ts';
@@ -99,6 +100,7 @@ export const bindings: StepBinding[] = [
   ...slideOrderBindings,
   ...effectiveFormattingBindings,
   ...trackedWorkflowBindings,
+  ...trackingSettingsBindings,
   ...createDocxBindings,
   ...docxModelBindings,
   ...appendRunBindings,

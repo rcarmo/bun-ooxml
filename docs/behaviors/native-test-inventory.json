@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 963,
-  "files": 107,
+  "count": 975,
+  "files": 108,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -20,7 +20,7 @@
     },
     {
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "sha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
+      "sha256": "f0e64e62de16c3b35fd31463d5c554b0f067ba40427e2ec4c9f5f8771f4fd1dd",
       "declarations": 3,
       "issues": []
     },
@@ -247,6 +247,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "sha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "declarations": 12,
+      "issues": []
+    },
+    {
       "path": "tests/unit/docx.test.ts",
       "sha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "declarations": 10,
@@ -326,7 +332,7 @@
     },
     {
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "sha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
+      "sha256": "728a86b9cdc73dfa5690a47b874c20a8cc9e26a8263655039ba2e6490dd22565",
       "declarations": 3,
       "issues": []
     },
@@ -416,13 +422,13 @@
     },
     {
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "sha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
+      "sha256": "56cc3c19e09fc5dfda3672a4a6bf64a19710411112bcc232f39924f03c863549",
       "declarations": 3,
       "issues": []
     },
     {
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "sha256": "04a9057c8dcdc910c1abeffdc532deb7f4a95d6d970ac1dc4c6f55663fcc47f6",
       "declarations": 5,
       "issues": []
     },
@@ -458,7 +464,7 @@
     },
     {
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "sha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
+      "sha256": "4e030fc27f14d6b05f4e6ab23a8360991b5683ccb53b71da290c507e98116ab9",
       "declarations": 3,
       "issues": []
     },
@@ -470,7 +476,7 @@
     },
     {
       "path": "tests/unit/workflow-layout.test.ts",
-      "sha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
+      "sha256": "414ddac6cba81efa4d7b2120e0bd650a345a092d479a789b440ca808d9e3772a",
       "declarations": 3,
       "issues": []
     },
@@ -584,7 +590,7 @@
     },
     {
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "sha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
+      "sha256": "94e375e71a812011a50f1902152b40aa4e7ca1b57a078ac66dac7144e3487924",
       "declarations": 3,
       "issues": []
     },
@@ -816,7 +822,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a"
+      "sha256": "af1d4d004cfa10159c377b105bfd3ae061ea3c79476a4f58cb70e789e8ea8687"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -849,6 +855,10 @@
     {
       "path": "tests/acceptance/tracked-workflow.ts",
       "sha256": "24bdc885987f352536ab5ebe49d7aed9878d68e7b206f9cbde129c175ab22b7f"
+    },
+    {
+      "path": "tests/acceptance/tracking-settings.ts",
+      "sha256": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa"
     },
     {
       "path": "tests/acceptance/workflow-receipts.ts",
@@ -917,6 +927,10 @@
     {
       "path": "tests/fixtures/zip32.ts",
       "sha256": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812"
+    },
+    {
+      "path": "tests/helpers/execution-baseline.ts",
+      "sha256": "fbd155fc770ec97b37a3c55be98824ae4b0d66e1039279b2791ff402f1791028"
     },
     {
       "path": "tests/helpers/shared-scenarios.ts",
@@ -1114,6 +1128,13 @@
     "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
     "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
     "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
+    "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
+    "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
+    "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
+    "bun:tests/unit/docx-tracking-settings.test.ts:invalid authors and stale main snapshots refuse without touching settings or invoking coercion",
+    "bun:tests/unit/docx-tracking-settings.test.ts:write and serialization faults restore settings graph plus the previous session author",
+    "bun:tests/unit/docx-tracking-settings.test.ts:UTF16 settings retain encoding through enable disable and reopen",
+    "bun:tests/unit/docx-tracking-settings.test.ts:canonical toggle selects one case and detects incorrect intermediate and final values",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/formula-mappings.test.ts:formula ledger rejects omitted suites, declarations and exact assertions",
     "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
@@ -1496,6 +1517,13 @@
     "bun:tests/unit/docx-table-style.test.ts:transactional set and serialization faults retain table paragraph and cell handles",
     "bun:tests/unit/docx-table-style.test.ts:alias and UTF16/BOM edits preserve source namespace and encoding after byte reopen",
     "bun:tests/unit/docx-table-style.test.ts:canonical table-style readback rejects false initial or changed style values",
+    "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
+    "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
+    "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
+    "bun:tests/unit/docx-tracking-settings.test.ts:invalid authors and stale main snapshots refuse without touching settings or invoking coercion",
+    "bun:tests/unit/docx-tracking-settings.test.ts:write and serialization faults restore settings graph plus the previous session author",
+    "bun:tests/unit/docx-tracking-settings.test.ts:UTF16 settings retain encoding through enable disable and reopen",
+    "bun:tests/unit/docx-tracking-settings.test.ts:canonical toggle selects one case and detects incorrect intermediate and final values",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
     "bun:tests/unit/formula-mappings.test.ts:formula ledger rejects omitted suites, declarations and exact assertions",
     "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
@@ -2001,7 +2029,7 @@
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:comment/template API labels do not activate unsupported consumer scenarios",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "line": 6,
+      "line": 7,
       "title": "comment/template API labels do not activate unsupported consumer scenarios",
       "suites": [],
       "kind": "test",
@@ -2019,12 +2047,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature'])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
+      "sourceSha256": "f0e64e62de16c3b35fd31463d5c554b0f067ba40427e2ec4c9f5f8771f4fd1dd",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/comment-template-wording-migration.json')).json(),inv=await inventoryFeatures(process.cwd()),active=inv.features.flatMap(f=>f.scenarios),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)) as string[];\n expect(ids).toHaveLength(24);const observed=active.filter(s=>ids.includes(s.scenarioId));expect(observed.filter(s=>s.lifecycle==='implemented').map(s=>s.scenarioId).sort()).toEqual(['@id-xml-escaping-values','@id-xml-typed-parse-error']);expect(observed.filter(s=>(s.lifecycle??'planned')==='planned')).toHaveLength(22);\n // Catalogue completeness makes templates visible but grants no execution.\n const templates=ids.filter(id=>id.includes('template'));expect(templates).toHaveLength(13);const loaded=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(loaded.flatMap(f=>f.scenarios)).toHaveLength(13);expect(loaded.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true);\n for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature']){const f=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text());expect(f.lifecycle).toBe('planned');expect(f.scenarios.every(s=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);}\n}",
       "calls": [
         ".test",
@@ -2063,7 +2091,7 @@
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:retained weak response and comment policies are not strengthened by neutral names",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "line": 13,
+      "line": 14,
       "title": "retained weak response and comment policies are not strengthened by neutral names",
       "suites": [],
       "kind": "test",
@@ -2076,7 +2104,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
+      "sourceSha256": "f0e64e62de16c3b35fd31463d5c554b0f067ba40427e2ec4c9f5f8771f4fd1dd",
       "body": "{\n const path='workflows/docx/template-analysis.feature',f=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()),plain=f.scenarios.find(s=>s.scenarioId==='@id-python-word-template-analysis-plain-response')!;expect(plain.cases[0]!.steps.at(-1)!.text).toBe('its response is a dictionary');\n const p='workflows/docx/comments.feature',comments=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text());expect(comments.scenarios.find(s=>s.scenarioId==='@id-python-comments-filter-predicates')!.cases[0]!.steps.some(s=>s.text==='the open-filter, resolved-filter, and mine-filter results are each nonempty')).toBe(true);expect(comments.scenarios.find(s=>s.scenarioId==='@id-docx-comments-refusal')!.cases.some(c=>c.name.includes('missing-extension'))).toBe(true);\n}",
       "calls": [
         "Bun.file",
@@ -2099,15 +2127,15 @@
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:profile-only adoption preserves all default case identities and every bounded mapping record",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "line": 17,
+      "line": 18,
       "title": "profile-only adoption preserves all default case identities and every bounded mapping record",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(keys).toHaveLength(525)",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(48)",
+        "expect(originalKeys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inv.counts.cases.planned).toBe(47)",
         "expect(r.mappedDeclarations).toBe(472)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -2115,8 +2143,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(48);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "f0e64e62de16c3b35fd31463d5c554b0f067ba40427e2ec4c9f5f8771f4fd1dd",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(47);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -2131,7 +2159,8 @@
         "inventoryFeatures",
         "outcomeMappingReport",
         "process.cwd",
-        "s.cases.map"
+        "s.cases.map",
+        "withoutTrackingToggle"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -19077,6 +19106,552 @@
       "unresolved": []
     },
     {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:tracking author toggle follows the shared getter sequence without creating revision markup",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 17,
+      "title": "tracking author toggle follows the shared getter sequence without creating revision markup",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.trackChangesEnabled).toBe(false)",
+        "expect(d.trackAuthor).toBe('')",
+        "expect(d.enableTracking('Test Author').changed).toBe(1)",
+        "expect(d.trackChangesEnabled).toBe(true)",
+        "expect(d.trackAuthor).toBe('Test Author')",
+        "expect(d.trackAuthor).toBe('New Author')",
+        "expect(d.package.toBytes()).toEqual(enabled)",
+        "expect(d.disableTracking().changed).toBe(1)",
+        "expect(held.text).toBe('Retained text')",
+        "expect(internal(d).text(internal(d).mainPart())).not.toContain('trackRevisions')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const d=await fixture(),held=d.paragraphs[0]!,before=d.package.parts;\n expect(d.trackChangesEnabled).toBe(false);expect(d.trackAuthor).toBe('');\n expect(d.enableTracking('Test Author').changed).toBe(1);expect(d.trackChangesEnabled).toBe(true);expect(d.trackAuthor).toBe('Test Author');\n const enabled=d.package.toBytes();d.setTrackAuthor('New Author');expect(d.trackAuthor).toBe('New Author');expect(d.package.toBytes()).toEqual(enabled);\n expect(d.disableTracking().changed).toBe(1);expect(d.trackChangesEnabled).toBe(false);expect(d.trackAuthor).toBe('New Author');expect(held.text).toBe('Retained text');\n unchanged(d,before,['[Content_Types].xml','word/_rels/document.xml.rels']);expect(internal(d).text(internal(d).mainPart())).not.toContain('trackRevisions');\n}",
+      "calls": [
+        "d.disableTracking",
+        "d.enableTracking",
+        "d.package.toBytes",
+        "d.setTrackAuthor",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "internal",
+        "internal().mainPart",
+        "internal().text",
+        "unchanged"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:enabled setting persists through file reopen with session-only author and complete graph custody",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 26,
+      "title": "enabled setting persists through file reopen with session-only author and complete graph custody",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(links).toHaveLength(1)",
+        "expect(getContentType(p,part)).toBe(MIME)",
+        "expect(tree.root.localName).toBe('settings')",
+        "expect(flag).toHaveLength(1)",
+        "expect(attribute(flag[0]!,'val',W)).toBe('1')",
+        "expect(p.text(part)).not.toContain('Reviewer')",
+        "expect(opened.trackChangesEnabled).toBe(true)",
+        "expect(opened.trackAuthor).toBe('')",
+        "expect(opened.paragraphs[0]!.text).toBe('Retained text')",
+        "expect((await Document.open(path)).trackChangesEnabled).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const d=await fixture(),before=d.package.parts;d.enableTracking('Reviewer & <literal>');const p=internal(d),links=p.relationships(p.mainPart()).filter(r=>r.type===REL);expect(links).toHaveLength(1);const part=links[0]!.resolved!;expect(getContentType(p,part)).toBe(MIME);\n const tree=parseXml(p.text(part)),flag=elements(tree,'trackRevisions',W);expect(tree.root.localName).toBe('settings');expect(flag).toHaveLength(1);expect(attribute(flag[0]!,'val',W)).toBe('1');expect(p.text(part)).not.toContain('Reviewer');\n const dir=await mkdtemp(join(tmpdir(),'tracking-settings-'));try{const path=join(dir,'tracked.docx');await d.save(path);const opened=await Document.open(path);expect(opened.trackChangesEnabled).toBe(true);expect(opened.trackAuthor).toBe('');expect(opened.paragraphs[0]!.text).toBe('Retained text');unchanged(opened,before,['[Content_Types].xml','word/_rels/document.xml.rels']);opened.disableTracking();await opened.save(path);expect((await Document.open(path)).trackChangesEnabled).toBe(false);}finally{await rm(dir,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "attribute",
+        "d.enableTracking",
+        "d.save",
+        "elements",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "fixture",
+        "getContentType",
+        "internal",
+        "join",
+        "mkdtemp",
+        "opened.disableTracking",
+        "opened.save",
+        "p.mainPart",
+        "p.relationships",
+        "p.relationships().filter",
+        "p.text",
+        "parseXml",
+        "rm",
+        "tmpdir",
+        "unchanged"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:custom settings path and prefix retain sibling XML bytes while insertion obeys settings order",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 32,
+      "title": "custom settings path and prefix retain sibling XML bytes while insertion obeys settings order",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(internal(d).relationships('word/document.xml').filter(r=>r.type===REL).map(r=>r.resolved)).toEqual([PART])",
+        "expect(next.replace(/<w:trackRevisions[^>]*\\/>/,'')).toBe(original)",
+        "expect(parseXml(next).root.children.map(n=>n.localName)).toEqual(['zoom','revisionView','trackRevisions','doNotTrackMoves','compat'])",
+        "expect((await Document.open(d.package.toBytes())).trackChangesEnabled).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const original=`<q:settings xmlns:q=\"${W}\" xmlns:w=\"urn:foreign\"><q:zoom q:percent='90'/><q:revisionView q:markup='0'/><q:doNotTrackMoves/><q:compat><q:useWord2002TableStyleRules/></q:compat></q:settings>`;\n const d=await fixture(original),before=d.package.parts;d.enableTracking('Reviewer');expect(internal(d).relationships('word/document.xml').filter(r=>r.type===REL).map(r=>r.resolved)).toEqual([PART]);\n const next=internal(d).text(PART);expect(next.replace(/<w:trackRevisions[^>]*\\/>/,'')).toBe(original);expect(parseXml(next).root.children.map(n=>n.localName)).toEqual(['zoom','revisionView','trackRevisions','doNotTrackMoves','compat']);unchanged(d,before,[PART]);expect((await Document.open(d.package.toBytes())).trackChangesEnabled).toBe(true);\n}",
+      "calls": [
+        "Document.open",
+        "d.enableTracking",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "internal",
+        "internal().relationships",
+        "internal().relationships().filter",
+        "internal().relationships().filter().map",
+        "internal().text",
+        "next.replace",
+        "parseXml",
+        "parseXml().root.children.map",
+        "unchanged"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 38,
+      "title": "missing false state and all supported on-off spellings preserve no-op bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(empty.disableTracking()).toEqual({changed:0,changedParts:[]})",
+        "expect(empty.package.toBytes()).toEqual(before)",
+        "expect(d.trackChangesEnabled).toBe(on)",
+        "expect((on?d.enableTracking('Reviewer'):d.disableTracking()).changed).toBe(0)",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect((await Document.open(self.package.toBytes())).trackChangesEnabled).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const[val,on]of [['',true],['1',true],['true',true],['on',true],['0',false],['false',false],['off',false]] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const empty=await fixture(),before=empty.package.toBytes();expect(empty.disableTracking()).toEqual({changed:0,changedParts:[]});expect(empty.package.toBytes()).toEqual(before);\n for(const[val,on]of [['',true],['1',true],['true',true],['on',true],['0',false],['false',false],['off',false]] as const){const d=await fixture(source(`<w:trackRevisions${val?` w:val='${val}'`:''}/>`)),bytes=d.package.toBytes();expect(d.trackChangesEnabled).toBe(on);expect((on?d.enableTracking('Reviewer'):d.disableTracking()).changed).toBe(0);expect(d.package.toBytes()).toEqual(bytes);}\n const self=await fixture(`<q:settings xmlns:q=\"${W}\"/>`);self.enableTracking('Reviewer');expect((await Document.open(self.package.toBytes())).trackChangesEnabled).toBe(true);\n}",
+      "calls": [
+        "Document.open",
+        "d.disableTracking",
+        "d.enableTracking",
+        "d.package.toBytes",
+        "empty.disableTracking",
+        "empty.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "self.enableTracking",
+        "self.package.toBytes",
+        "source"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 44,
+      "title": "protection, ambiguous or malformed settings refuse before package and author changes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow()",
+        "expect(()=>d.disableTracking()).toThrow()",
+        "expect(d.trackAuthor).toBe('Previous')",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect(unlocked.trackChangesEnabled).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 51,
+          "expression": "for(const inner of bad)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const bad=[\n  '<w:documentProtection/>','<w:documentProtection w:enforcement=\"1\"/>','<w:documentProtection enforcement=\"0\"/>',\n  '<w:trackRevisions/><w:trackRevisions/>','<w:trackRevisions val=\"1\"/>','<w:trackRevisions w:val=\"yes\"/>','<w:trackRevisions other=\"keep\"/>',\n  '<w:trackRevisions><w:bad/></w:trackRevisions>','<w:trackRevisions><!--retain--></w:trackRevisions>',\n  '<w:compat/><w:trackRevisions/>','<w:unknown/>','<w:compat><w:trackRevisions/></w:compat>',\n ];\n for(const inner of bad){const d=await fixture(source(inner)),bytes=d.package.toBytes();d.setTrackAuthor('Previous');expect(()=>d.enableTracking('Next')).toThrow();expect(()=>d.disableTracking()).toThrow();expect(d.trackAuthor).toBe('Previous');expect(d.package.toBytes()).toEqual(bytes);}\n const unlocked=await fixture(source('<w:documentProtection w:enforcement=\"off\"/>'));unlocked.enableTracking('Reviewer');expect(unlocked.trackChangesEnabled).toBe(true);\n}",
+      "calls": [
+        "d.disableTracking",
+        "d.enableTracking",
+        "d.package.toBytes",
+        "d.setTrackAuthor",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "source",
+        "unlocked.enableTracking"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 55,
+      "title": "external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow()",
+        "expect(d.trackAuthor).toBe('')",
+        "expect(d.package.toBytes()).toEqual(bytes)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 56,
+          "expression": "for(const mode of ['external','duplicate','orphan','root','mime','shared','collision'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n for(const mode of ['external','duplicate','orphan','root','mime','shared','collision'] as const){const d=await fixture(mode==='external'||mode==='collision'?undefined:source('')),p=internal(d);\n  if(mode==='external')addRelationship(p,p.mainPart(),REL,'https://example.invalid/settings',{external:true});\n  if(mode==='duplicate')addRelationship(p,p.mainPart(),REL,'options/custom.xml',{id:'duplicate'});\n  if(mode==='orphan'){const relPart='word/_rels/document.xml.rels';p.set(relPart,p.text(relPart).replace(/<Relationship[^>]*Id=\"settingsRef\"[^>]*\\/>/,''));}\n  if(mode==='root')p.set(PART,`<w:document xmlns:w=\"${W}\"/>`);\n  if(mode==='mime')p.set('[Content_Types].xml',p.text('[Content_Types].xml').replace(MIME,'application/xml'));\n  if(mode==='shared')addRelationship(p,'',REL,'word/options/custom.xml');\n  if(mode==='collision')addPart(p,'word/settings.xml','opaque','application/octet-stream');\n  const bytes=d.package.toBytes();expect(()=>d.enableTracking('Next')).toThrow();expect(d.trackAuthor).toBe('');expect(d.package.toBytes()).toEqual(bytes);\n }\n}",
+      "calls": [
+        "addPart",
+        "addRelationship",
+        "d.enableTracking",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "internal",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "source"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:invalid authors and stale main snapshots refuse without touching settings or invoking coercion",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 68,
+      "title": "invalid authors and stale main snapshots refuse without touching settings or invoking coercion",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.enableTracking(value as any)).toThrow()",
+        "expect(()=>d.setTrackAuthor(value as any)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.trackAuthor).toBe('')",
+        "expect(called).toBe(false)",
+        "expect(()=>d.enableTracking('Reviewer')).toThrow()",
+        "expect(()=>d.disableTracking()).toThrow()",
+        "expect(p.toBytes()).toEqual(bytes)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 69,
+          "expression": "for(const value of ['', '  ', '\\u0000', '\\ud800', 1, null,"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const d=await fixture();let called=false;for(const value of ['', '  ', '\\u0000', '\\ud800', 1, null, {toString(){called=true;return 'Reviewer';}}]){const before=d.package.toBytes();expect(()=>d.enableTracking(value as any)).toThrow();expect(()=>d.setTrackAuthor(value as any)).toThrow();expect(d.package.toBytes()).toEqual(before);expect(d.trackAuthor).toBe('');}expect(called).toBe(false);\n const p=internal(d);p.set(p.mainPart(),p.text(p.mainPart()).replace('Retained','External'));const bytes=p.toBytes();expect(()=>d.enableTracking('Reviewer')).toThrow();expect(()=>d.disableTracking()).toThrow();expect(p.toBytes()).toEqual(bytes);\n}",
+      "calls": [
+        "d.disableTracking",
+        "d.enableTracking",
+        "d.package.toBytes",
+        "d.setTrackAuthor",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "internal",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:write and serialization faults restore settings graph plus the previous session author",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 73,
+      "title": "write and serialization faults restore settings graph plus the previous session author",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow('injected')",
+        "expect(d.trackAuthor).toBe('Previous')",
+        "expect(d.trackChangesEnabled).toBe(false)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Retained text')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 74,
+          "expression": "for(const existing of [false,true])for(const stage of ['set','toBytes'] as const)"
+        },
+        {
+          "line": 74,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n for(const existing of [false,true])for(const stage of ['set','toBytes'] as const){const d=await fixture(existing?source(''):undefined),p=internal(d),held=d.paragraphs[0]!,before=p.toBytes();d.setTrackAuthor('Previous');const original=p[stage].bind(p);\n  if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialize');};\n  try{expect(()=>d.enableTracking('Next')).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}\n  expect(d.trackAuthor).toBe('Previous');expect(d.trackChangesEnabled).toBe(false);expect(p.toBytes()).toEqual(before);expect(held.text).toBe('Retained text');\n }\n}",
+      "calls": [
+        "Error",
+        "d.enableTracking",
+        "d.setTrackAuthor",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "internal",
+        "original",
+        "p.toBytes",
+        "p.undefined.bind",
+        "source"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:UTF16 settings retain encoding through enable disable and reopen",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 81,
+      "title": "UTF16 settings retain encoding through enable disable and reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...d.package.get(PART)!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.trackChangesEnabled).toBe(true)",
+        "expect((await Document.open(reopened.package.toBytes())).trackChangesEnabled).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 82,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+2*i,text.charCodeAt(i),true);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const d=await fixture(source('<w:zoom w:percent=\"80\"/>')),p=internal(d),text='<?xml version=\"1.0\" encoding=\"UTF-16\"?>'+p.text(PART),bytes=new Uint8Array(2+text.length*2);bytes[0]=255;bytes[1]=254;const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+2*i,text.charCodeAt(i),true);p.set(PART,bytes);const before=d.package.parts;d.enableTracking('Reviewer');expect([...d.package.get(PART)!.slice(0,2)]).toEqual([255,254]);const reopened=await Document.open(d.package.toBytes());expect(reopened.trackChangesEnabled).toBe(true);reopened.disableTracking();expect((await Document.open(reopened.package.toBytes())).trackChangesEnabled).toBe(false);unchanged(reopened,before,[PART]);\n}",
+      "calls": [
+        "Document.open",
+        "d.enableTracking",
+        "d.package.get",
+        "d.package.get().slice",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "internal",
+        "p.set",
+        "p.text",
+        "reopened.disableTracking",
+        "reopened.package.toBytes",
+        "source",
+        "text.charCodeAt",
+        "unchanged",
+        "view.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:canonical toggle selects one case and detects incorrect intermediate and final values",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 85,
+      "title": "canonical toggle selects one case and detects incorrect intermediate and final values",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(bad.counts.steps.failed).toBe(1)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 88,
+          "expression": "for(const altered of [text.replace('tracking is enabled and TrackAuthor','tracking is disabled and TrackAuthor'),text.replace('TrackAuthor equals New Author','TrackAuthor equals Wrong'),text.replace('makes TrackChangesEnabled false','makes TrackChangesEnabled true')])"
+        },
+        {
+          "line": 89,
+          "expression": "for(const corrupt of [(c:any)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/tracking-settings.ts');const path='workflows/docx/tracked-workflow.feature',text=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(source:string)=>({root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}});\n const good=await executeAcceptance(inv(text),bindings,'tracking-settings-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);\n for(const altered of [text.replace('tracking is enabled and TrackAuthor','tracking is disabled and TrackAuthor'),text.replace('TrackAuthor equals New Author','TrackAuthor equals Wrong'),text.replace('makes TrackChangesEnabled false','makes TrackChangesEnabled true')]){const bad=await executeAcceptance(inv(altered),bindings,'tracking-settings-expected');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n for(const corrupt of [(c:any)=>{c.state.document.setTrackAuthor('Wrong');},(c:any)=>{c.state.document.disableTracking();}]){const changed=bindings.map(b=>b.pattern.test('tracking is enabled with Test Author and its author is changed to New Author')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);corrupt(c);}}:b);const bad=await executeAcceptance(inv(text),changed,'tracking-settings-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.document.disableTracking",
+        "c.state.document.setTrackAuthor",
+        "corrupt",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "inv",
+        "join",
+        "selectSharedScenarios",
+        "text.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:the saved preference never silently converts ordinary Bun text mutations into tracked replacements",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 92,
+      "title": "the saved preference never silently converts ordinary Bun text mutations into tracked replacements",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(opened.trackChangesEnabled).toBe(true)",
+        "expect(opened.paragraphs[0]!.text).toBe('Explicit plain edit')",
+        "expect(inspectRevisions(internal(opened))).toEqual({revisions:[],unsupported:[]})",
+        "expect(opened.trackAuthor).toBe('')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const {inspectRevisions}=await import('../../src/docx/revisions.ts');const d=await fixture();d.enableTracking('Preference author');d.paragraphs[0]!.setText('Explicit plain edit');const opened=await Document.open(await d.save());expect(opened.trackChangesEnabled).toBe(true);expect(opened.paragraphs[0]!.text).toBe('Explicit plain edit');expect(inspectRevisions(internal(opened))).toEqual({revisions:[],unsupported:[]});expect(opened.trackAuthor).toBe('');\n}",
+      "calls": [
+        "Document.open",
+        "d.enableTracking",
+        "d.paragraphs.0.setText",
+        "d.save",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "inspectRevisions",
+        "internal"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-tracking-settings.test.ts:a fault after settings relationship creation rolls back all metadata and author state",
+      "path": "tests/unit/docx-tracking-settings.test.ts",
+      "line": 96,
+      "title": "a fault after settings relationship creation rolls back all metadata and author state",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.enableTracking('Next')).toThrow('injected relationship write')",
+        "expect(d.trackAuthor).toBe('Previous')",
+        "expect(d.trackChangesEnabled).toBe(false)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(p.names()).not.toContain('word/settings.xml')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
+      "body": "{\n const d=await fixture(),p=internal(d),before=p.toBytes(),set=p.set.bind(p);d.setTrackAuthor('Previous');\n p.set=(n,v)=>{set(n,v);if(n==='word/_rels/document.xml.rels')throw Error('injected relationship write');};\n try{expect(()=>d.enableTracking('Next')).toThrow('injected relationship write');}finally{p.set=set;}\n expect(d.trackAuthor).toBe('Previous');expect(d.trackChangesEnabled).toBe(false);expect(p.toBytes()).toEqual(before);expect(p.names()).not.toContain('word/settings.xml');\n}",
+      "calls": [
+        "Error",
+        "d.enableTracking",
+        "d.setTrackAuthor",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "internal",
+        "p.names",
+        "p.set.bind",
+        "p.toBytes",
+        "set"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
       "id": "bun:tests/unit/docx.test.ts:docx Document / opens from a path or bytes and save() never rewrites the opened source path implicitly",
       "path": "tests/unit/docx.test.ts",
       "line": 28,
@@ -22975,7 +23550,7 @@
     {
       "id": "bun:tests/unit/package-neutral-bindings.test.ts:neutral package actors resolve once and retired implementation names do not bind",
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "line": 9,
+      "line": 10,
       "title": "neutral package actors resolve once and retired implementation names do not bind",
       "suites": [],
       "kind": "test",
@@ -22987,16 +23562,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const file of migration.files)for(const edit of file.stepRenames)"
         },
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const edit of file.stepRenames)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
+      "sourceSha256": "728a86b9cdc73dfa5690a47b874c20a8cc9e26a8263655039ba2e6490dd22565",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/package-wording-migration.json')).json();\n for(const file of migration.files)for(const edit of file.stepRenames){expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);}\n}",
       "calls": [
         "Bun.file",
@@ -23016,7 +23591,7 @@
     {
       "id": "bun:tests/unit/package-neutral-bindings.test.ts:all thirty-eight package and ZIP32 cases retain concrete assertions after actor migration",
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "line": 13,
+      "line": 14,
       "title": "all thirty-eight package and ZIP32 cases retain concrete assertions after actor migration",
       "suites": [],
       "kind": "test",
@@ -23030,7 +23605,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
+      "sourceSha256": "728a86b9cdc73dfa5690a47b874c20a8cc9e26a8263655039ba2e6490dd22565",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/package-wording-migration.json')).json(),ids=migration.files.flatMap((f:any)=>f.scenarios.map((s:any)=>s.id));\n const features=await sharedScenarios(ids),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(18),cases:count(38),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'package-neutral-wording');\n expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(38);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n }finally{await cleanup();}\n}",
       "calls": [
         "Bun.file",
@@ -23056,15 +23631,15 @@
     {
       "id": "bun:tests/unit/package-neutral-bindings.test.ts:package wording keeps default case identities all mapping records and planned gaps unchanged",
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "line": 20,
+      "line": 21,
       "title": "package wording keeps default case identities all mapping records and planned gaps unchanged",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(keys).toHaveLength(525)",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(48)",
+        "expect(originalKeys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inventory.counts.cases.planned).toBe(47)",
         "expect(report.mappedDeclarations).toBe(472)",
         "expect(report.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -23072,8 +23647,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(48);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "728a86b9cdc73dfa5690a47b874c20a8cc9e26a8263655039ba2e6490dd22565",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(47);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -23088,7 +23663,8 @@
         "inventoryFeatures",
         "outcomeMappingReport",
         "process.cwd",
-        "s.cases.map"
+        "s.cases.map",
+        "withoutTrackingToggle"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -27398,7 +27974,7 @@
     {
       "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "line": 9,
+      "line": 10,
       "title": "neutral action wording has exactly one binding and retired actor wording has none",
       "suites": [],
       "kind": "test",
@@ -27410,16 +27986,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const file of migration.files)for(const edit of file.stepRenames)"
         },
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const edit of file.stepRenames)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
+      "sourceSha256": "56cc3c19e09fc5dfda3672a4a6bf64a19710411112bcc232f39924f03c863549",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json();\n for(const file of migration.files)for(const edit of file.stepRenames){\n  expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);\n  expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);\n }\n}",
       "calls": [
         "Bun.file",
@@ -27439,7 +28015,7 @@
     {
       "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:all eighteen portable-profile cases execute the retained inputs and outcomes",
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "line": 16,
+      "line": 17,
       "title": "all eighteen portable-profile cases execute the retained inputs and outcomes",
       "suites": [],
       "kind": "test",
@@ -27453,7 +28029,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
+      "sourceSha256": "56cc3c19e09fc5dfda3672a4a6bf64a19710411112bcc232f39924f03c863549",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json(),ids=migration.files.flatMap((f:any)=>f.scenarios.map((s:any)=>s.id));\n const features=await sharedScenarios(ids),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(4),scenarios:count(16),cases:count(18),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'neutral-wording');\n expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(18);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -27478,15 +28054,15 @@
     {
       "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:wording and profile labels do not change default acceptance identities or credit",
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "line": 22,
+      "line": 23,
       "title": "wording and profile labels do not change default acceptance identities or credit",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(keys).toHaveLength(525)",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(48)",
+        "expect(originalKeys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inventory.counts.cases.planned).toBe(47)",
         "expect(report.mappedDeclarations).toBe(472)",
         "expect(report.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -27494,8 +28070,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(48);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "56cc3c19e09fc5dfda3672a4a6bf64a19710411112bcc232f39924f03c863549",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(47);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -27510,7 +28086,8 @@
         "inventoryFeatures",
         "outcomeMappingReport",
         "process.cwd",
-        "s.cases.map"
+        "s.cases.map",
+        "withoutTrackingToggle"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -27518,7 +28095,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 10,
+      "line": 11,
       "title": "catalogue mode includes unselected features as planned and separates shared from local obligations",
       "suites": [],
       "kind": "test",
@@ -27541,7 +28118,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "sourceSha256": "04a9057c8dcdc910c1abeffdc532deb7f4a95d6d970ac1dc4c6f55663fcc47f6",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/local.feature'),feature('local'));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3});expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1});expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2});\n const f=inv.features.find(f=>f.path===prefix+b)!;expect(f.lifecycle).toBe('planned');expect(f.runner).toBeUndefined();expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'));\n let unsupported=0;const result=await executeAcceptance(inv,[...bound,{pattern:/^(input|output) (b|local)$/,run:()=>{unsupported++;throw Error('planned ran');}}],'catalogue');expect(result.failures).toEqual([]);expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3});expect(unsupported).toBe(0);\n const report=await runAcceptance(bound,{root});expect(report.coverage).toEqual(inv.coverage);expect(report.execution.cases.planned).toBe(2);await expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         ".update",
@@ -27569,7 +28146,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 17,
+      "line": 18,
       "title": "canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "suites": [],
       "kind": "test",
@@ -27580,12 +28157,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 18,
+          "line": 19,
           "expression": "for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "sourceSha256": "04a9057c8dcdc910c1abeffdc532deb7f4a95d6d970ac1dc4c6f55663fcc47f6",
       "body": "{\n for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>{l.schemaVersion=99;},\n  (l:ReturnType<typeof ledger>)=>{l.features.pop();l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.feature=b;},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.expandedCases=2;},\n  (l:ReturnType<typeof ledger>)=>{l.features.push(a);},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.push(l.workflows[0]!);},\n  (l:ReturnType<typeof ledger>)=>{l.features[0]='workflows/docx/../../escape.feature';},\n ]){const root=await project();try{const l=ledger();mutate(l);await Bun.write(join(root,catalogue),JSON.stringify(l));await expect(inventoryFeatures(root)).rejects.toThrow();}finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -27611,7 +28188,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 29,
+      "line": 30,
       "title": "catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "suites": [],
       "kind": "test",
@@ -27622,12 +28199,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 30,
+          "line": 31,
           "expression": "for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity'])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "sourceSha256": "04a9057c8dcdc910c1abeffdc532deb7f4a95d6d970ac1dc4c6f55663fcc47f6",
       "body": "{\n for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity']){const root=await project();try{const c=config();\n if(mode==='unknown')c.features[0]!.path=prefix+'workflows/docx/c.feature';if(mode==='duplicate')c.features.push(c.features[0]!);if(mode==='orphan')await Bun.write(join(root,prefix+'workflows/docx/c.feature'),feature('c'));if(mode==='lifecycle')await Bun.write(join(root,prefix+b),feature('b').replace('@planned','@implemented @bun'));if(mode==='missing')await rm(join(root,prefix+b));if(mode==='seal')await Bun.write(join(root,prefix+'manifest.json'),JSON.stringify({files:[{path:a,role:'workflow'}]}));if(mode==='catalogue-path')c.catalogue=prefix+'../other.json';if(mode==='shadow')await Bun.write(join(root,'features/shadow.feature'),feature('b'));if(mode==='case-identity')await Bun.write(join(root,prefix+b),'@planned\\nFeature: b\\n @id-b\\n Scenario Outline: Duplicate <value>\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | same |\\n   | same |\\n');\n await Bun.write(join(root,'features/shared.json'),JSON.stringify(c));await expect(inventoryFeatures(root)).rejects.toThrow();\n }finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -27651,7 +28228,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 35,
+      "line": 36,
       "title": "empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "suites": [],
       "kind": "test",
@@ -27663,7 +28240,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "sourceSha256": "04a9057c8dcdc910c1abeffdc532deb7f4a95d6d970ac1dc4c6f55663fcc47f6",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.write",
@@ -27682,29 +28259,29 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 562 shared cases plus eleven local-only cases without new execution",
+      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 562 shared cases plus eleven local-only cases with only the reviewed tracking-toggle activation",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 38,
-      "title": "real catalogue accounts for all 562 shared cases plus eleven local-only cases without new execution",
+      "line": 39,
+      "title": "real catalogue accounts for all 562 shared cases plus eleven local-only cases with only the reviewed tracking-toggle activation",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
         "expect(inv.coverage?.catalogue).toMatchObject({features:46,scenarios:229,cases:562})",
-        "expect(inv.coverage?.shared.cases).toEqual({implemented:525,planned:37,total:562})",
+        "expect(inv.coverage?.shared.cases).toEqual({implemented:526,planned:36,total:562})",
         "expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11})",
-        "expect(inv.counts.cases).toEqual({implemented:525,planned:48,total:573})",
+        "expect(inv.counts.cases).toEqual({implemented:526,planned:47,total:573})",
         "expect(inv.counts.scenarios.total).toBe(238)",
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13)",
         "expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true)",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')"
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:46,scenarios:229,cases:562});expect(inv.coverage?.shared.cases).toEqual({implemented:525,planned:37,total:562});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11});expect(inv.counts.cases).toEqual({implemented:525,planned:48,total:573});expect(inv.counts.scenarios.total).toBe(238);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13);expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
+      "sourceSha256": "04a9057c8dcdc910c1abeffdc532deb7f4a95d6d970ac1dc4c6f55663fcc47f6",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:46,scenarios:229,cases:562});expect(inv.coverage?.shared.cases).toEqual({implemented:526,planned:36,total:562});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11});expect(inv.counts.cases).toEqual({implemented:526,planned:47,total:573});expect(inv.counts.scenarios.total).toBe(238);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13);expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
       "calls": [
         ".test",
         ".update",
@@ -27724,7 +28301,8 @@
         "process.cwd",
         "s.cases.map",
         "templates.every",
-        "templates.flatMap"
+        "templates.flatMap",
+        "withoutTrackingToggle"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -29284,7 +29862,7 @@
     {
       "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "line": 10,
+      "line": 11,
       "title": "Word actor migration binds supported cases once without restoring old runtime names",
       "suites": [],
       "kind": "test",
@@ -29296,16 +29874,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const file of m.files)for(const edit of file.stepRenames)"
         },
         {
-          "line": 11,
+          "line": 12,
           "expression": "for(const edit of file.stepRenames)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
+      "sourceSha256": "4e030fc27f14d6b05f4e6ab23a8360991b5683ccb53b71da290c507e98116ab9",
       "body": "{\n const {m,selected}=await scope();for(const file of m.files)for(const edit of file.stepRenames){expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);if(selected.includes(edit.id))expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);}\n}",
       "calls": [
         "b.pattern.test",
@@ -29321,29 +29899,29 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word wording executes the same 28 supported IDs and 65 cases while six incompatible profiles stay planned",
+      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word wording plus the reviewed tracking toggle executes 29 IDs and 66 cases with five profiles planned",
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "line": 13,
-      "title": "Word wording executes the same 28 supported IDs and 65 cases while six incompatible profiles stay planned",
+      "line": 14,
+      "title": "Word wording plus the reviewed tracking toggle executes 29 IDs and 66 cases with five profiles planned",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
         "expect(ids).toHaveLength(34)",
-        "expect(selected).toHaveLength(28)",
+        "expect(selected).toHaveLength(29)",
         "expect(ids.filter(id=>!selected.includes(id)).sort()).toEqual([...planned].sort())",
-        "expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(10)",
-        "expect(cases).toHaveLength(65)",
+        "expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(9)",
+        "expect(cases).toHaveLength(66)",
         "expect(r.failures).toEqual([])",
-        "expect(r.counts.cases.passed).toBe(65)",
+        "expect(r.counts.cases.passed).toBe(66)",
         "expect(r.counts.steps.undefined).toBe(0)",
         "expect(r.counts.steps.ambiguous).toBe(0)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
-      "body": "{\n const {ids,selected,inv}=await scope();expect(ids).toHaveLength(34);expect(selected).toHaveLength(28);expect(ids.filter(id=>!selected.includes(id)).sort()).toEqual([...planned].sort());\n expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(10);\n const features=await sharedScenarios(selected),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});expect(cases).toHaveLength(65);\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(features.length),scenarios:count(28),cases:count(65),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'word-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(65);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);}finally{await cleanup();}\n}",
+      "sourceSha256": "4e030fc27f14d6b05f4e6ab23a8360991b5683ccb53b71da290c507e98116ab9",
+      "body": "{\n const {ids,selected,inv}=await scope();expect(ids).toHaveLength(34);expect(selected).toHaveLength(29);expect(ids.filter(id=>!selected.includes(id)).sort()).toEqual([...planned].sort());\n expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(9);\n const features=await sharedScenarios(selected),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});expect(cases).toHaveLength(66);\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(features.length),scenarios:count(29),cases:count(66),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'word-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(66);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);}finally{await cleanup();}\n}",
       "calls": [
         ".sort",
         "cases.reduce",
@@ -29372,15 +29950,15 @@
     {
       "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor changes preserve default execution identities and every prior mapping record",
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "line": 19,
+      "line": 20,
       "title": "Word actor changes preserve default execution identities and every prior mapping record",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(keys).toHaveLength(525)",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(48)",
+        "expect(originalKeys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inv.counts.cases.planned).toBe(47)",
         "expect(r.mappedDeclarations).toBe(472)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -29388,8 +29966,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
-      "body": "{\n const {inv}=await scope(),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(48);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "4e030fc27f14d6b05f4e6ab23a8360991b5683ccb53b71da290c507e98116ab9",
+      "body": "{\n const {inv}=await scope(),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(47);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -29403,7 +29981,8 @@
         "inv.features.flatMap().sort",
         "outcomeMappingReport",
         "s.cases.map",
-        "scope"
+        "scope",
+        "withoutTrackingToggle"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -29475,28 +30054,28 @@
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:format regrouping retains the exact 525 implemented shared case identities",
       "path": "tests/unit/workflow-layout.test.ts",
-      "line": 8,
+      "line": 9,
       "title": "format regrouping retains the exact 525 implemented shared case identities",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(keys).toHaveLength(525)",
-        "expect(new Set(keys).size).toBe(525)",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(48)",
+        "expect(originalKeys).toHaveLength(525)",
+        "expect(new Set(originalKeys).size).toBe(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inventory.counts.cases.planned).toBe(47)",
         "expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/)"
       ],
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 13,
+          "line": 15,
           "expression": "for(const f of inventory.features.filter(f=>f.path.startsWith('references/')))"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Set(keys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(48);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/);}\n}",
+      "sourceSha256": "414ddac6cba81efa4d7b2120e0bd650a345a092d479a789b440ca808d9e3772a",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Set(originalKeys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(47);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/);}\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -29513,7 +30092,8 @@
         "inventory.features.flatMap().sort",
         "inventoryFeatures",
         "process.cwd",
-        "s.cases.map"
+        "s.cases.map",
+        "withoutTrackingToggle"
       ],
       "reviewReasons": [
         "body-loop"
@@ -29523,7 +30103,7 @@
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:multi-feature wrapper selection executes only requested identities and rejects missing ones",
       "path": "tests/unit/workflow-layout.test.ts",
-      "line": 15,
+      "line": 17,
       "title": "multi-feature wrapper selection executes only requested identities and rejects missing ones",
       "suites": [],
       "kind": "test",
@@ -29539,16 +30119,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 21,
+          "line": 23,
           "expression": "for(const f of features)for(const s of f.scenarios)expect(ledger.workflows.find((w:any)=>w.id===s.scenarioId).feature).toBe(f.path);"
         },
         {
-          "line": 21,
+          "line": 23,
           "expression": "for(const s of f.scenarios)expect(ledger.workflows.find((w:any)=>w.id===s.scenarioId).feature).toBe(f.path);"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
+      "sourceSha256": "414ddac6cba81efa4d7b2120e0bd650a345a092d479a789b440ca808d9e3772a",
       "body": "{\n const ids=['@id-office-preview-details','@id-office-docx-exact-match-counts'],features=await sharedScenarios(ids);\n expect(features).toHaveLength(2);expect(features.flatMap(f=>f.scenarios.map(s=>s.scenarioId))).toEqual(ids);\n await expect(sharedScenarios(['@id-not-in-catalogue'])).rejects.toThrow('one shared scenario owner');\n await expect(sharedScenarios([])).rejects.toThrow('nonempty unique');await expect(sharedScenarios([ids[0]!,ids[0]!])).rejects.toThrow('nonempty unique');\n const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n for(const f of features)for(const s of f.scenarios)expect(ledger.workflows.find((w:any)=>w.id===s.scenarioId).feature).toBe(f.path);\n}",
       "calls": [
         "Bun.file",
@@ -29573,7 +30153,7 @@
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:mapping relocation preserves 470 records and explicitly accounts for two wrapper count changes",
       "path": "tests/unit/workflow-layout.test.ts",
-      "line": 23,
+      "line": 25,
       "title": "mapping relocation preserves 470 records and explicitly accounts for two wrapper count changes",
       "suites": [],
       "kind": "test",
@@ -29590,7 +30170,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
+      "sourceSha256": "414ddac6cba81efa4d7b2120e0bd650a345a092d479a789b440ca808d9e3772a",
       "body": "{\n const r=await outcomeMappingReport(),ids=['bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings','bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting'];\n const unchanged=r.mappings.filter(m=>!ids.includes(m.testId));expect(unchanged).toHaveLength(470);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(unchanged)).digest('hex')).toBe('a87881cd02360bf6db2556d4cb39bc4a22bb59db90752d4fff83dd9f81960b41');\n expect(r.mappings.find(m=>m.testId===ids[0])!.assertions).toContain('expect(report.inventory.features.implemented).toBe(2)');\n expect(r.mappings.find(m=>m.testId===ids[1])!.assertions).toContain('expect(good.counts.cases.planned).toBe(0)');\n expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         ".update",
@@ -36209,7 +36789,7 @@
     {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "line": 8,
+      "line": 9,
       "title": "neutral XML and formula actors have one handler with no retired runtime alias",
       "suites": [],
       "kind": "test",
@@ -36221,16 +36801,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 9,
+          "line": 10,
           "expression": "for(const f of m.files)for(const e of f.stepRenames)"
         },
         {
-          "line": 9,
+          "line": 10,
           "expression": "for(const e of f.stepRenames)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
+      "sourceSha256": "94e375e71a812011a50f1902152b40aa4e7ca1b57a078ac66dac7144e3487924",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json();for(const f of m.files)for(const e of f.stepRenames){expect(bindings.filter(b=>b.pattern.test(e.to))).toHaveLength(1);expect(bindings.filter(b=>b.pattern.test(e.from))).toHaveLength(0);}\n}",
       "calls": [
         "Bun.file",
@@ -36250,7 +36830,7 @@
     {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:all sixty retained XML and formula cases execute exact lexical and static-reference predicates",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "line": 11,
+      "line": 12,
       "title": "all sixty retained XML and formula cases execute exact lexical and static-reference predicates",
       "suites": [],
       "kind": "test",
@@ -36264,7 +36844,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
+      "sourceSha256": "94e375e71a812011a50f1902152b40aa4e7ca1b57a078ac66dac7144e3487924",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json(),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)),features=await sharedScenarios(ids),cases=features.flatMap(f=>f.scenarios.flatMap(s=>s.cases)),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(19),cases:count(60),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'xml-formula-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(60);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -36289,15 +36869,15 @@
     {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:XML formula actor migration preserves all default case identities and bounded mapping records",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "line": 15,
+      "line": 16,
       "title": "XML formula actor migration preserves all default case identities and bounded mapping records",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(keys).toHaveLength(525)",
-        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(48)",
+        "expect(originalKeys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inv.counts.cases.planned).toBe(47)",
         "expect(r.mappedDeclarations).toBe(472)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -36305,8 +36885,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(48);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "94e375e71a812011a50f1902152b40aa4e7ca1b57a078ac66dac7144e3487924",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(47);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -36321,7 +36901,8 @@
         "inventoryFeatures",
         "outcomeMappingReport",
         "process.cwd",
-        "s.cases.map"
+        "s.cases.map",
+        "withoutTrackingToggle"
       ],
       "reviewReasons": [],
       "unresolved": []

@@ -1,5 +1,7 @@
 import { OoxmlError } from "../errors.ts";
 import {readDocumentProperties,editDocumentProperties,type DirectDocumentProperties,type DocumentPropertiesPatch} from './document-properties.ts';
+import {readTrackingEnabled,setTrackingEnabled,validateTrackAuthor,type TrackingSettingsReceipt} from './tracking-settings.ts';
+export type {TrackingSettingsReceipt} from './tracking-settings.ts';
 export type {DirectDocumentProperties,DocumentPropertiesPatch} from './document-properties.ts';
 import {readCoreProperties,patchCoreProperties,type CoreProperties,type CorePropertiesPatch} from '../opc/core-properties.ts';
 export type {CoreProperties,CorePropertiesPatch} from '../opc/core-properties.ts';
@@ -481,6 +483,7 @@ export class TableCell {
  * require a more structural edit plan.
  */
 export class Document {
+  private trackingAuthor = '';
   private version = 0;
   private tableVersion = 0;
   private xml = "";
@@ -514,6 +517,24 @@ export class Document {
   /** Creates a new minimal DOCX package without borrowed template bytes. */
   static create(): Document {
     return new Document(OpcPackage.fromParts(buildMinimalDocxParts()));
+  }
+
+  /** Session-only author metadata; reopening a document starts with an empty author. */
+  get trackAuthor():string { return this.trackingAuthor; }
+  setTrackAuthor(author:string):void { validateTrackAuthor(author);this.trackingAuthor=author; }
+  /** Saved Word tracking preference. Bun text edits still require explicit redline APIs. */
+  get trackChangesEnabled():boolean {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
+    return readTrackingEnabled(this.opcPackage);
+  }
+  enableTracking(author:string):TrackingSettingsReceipt {
+    validateTrackAuthor(author);
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
+    const result=setTrackingEnabled(this.opcPackage,true);this.trackingAuthor=author;return result;
+  }
+  disableTracking():TrackingSettingsReceipt {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document changed outside its wrapper');
+    return setTrackingEnabled(this.opcPackage,false);
   }
 
   /** Detached direct OPC core-property values; absent fields are null. */

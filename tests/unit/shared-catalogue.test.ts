@@ -1,3 +1,4 @@
+import {withoutTrackingToggle} from '../helpers/execution-baseline.ts';
 import {test,expect} from 'bun:test';
 import {mkdtemp,mkdir,rm} from 'node:fs/promises';import {join} from 'node:path';import {tmpdir} from 'node:os';
 import {inventoryFeatures,executeAcceptance} from '../../scripts/gherkin.ts';import {runAcceptance} from '../../scripts/acceptance.ts';
@@ -35,8 +36,9 @@ test('catalogue mode refuses unknown activation duplicate mappings orphan files 
 test('empty explicit activation retains the full planned catalogue but cannot pass acceptance',async()=>{
  const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}
 });
-test('real catalogue accounts for all 562 shared cases plus eleven local-only cases without new execution',async()=>{
- const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:46,scenarios:229,cases:562});expect(inv.coverage?.shared.cases).toEqual({implemented:525,planned:37,total:562});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11});expect(inv.counts.cases).toEqual({implemented:525,planned:48,total:573});expect(inv.counts.scenarios.total).toBe(238);
+test('real catalogue accounts for all 562 shared cases plus eleven local-only cases with only the reviewed tracking-toggle activation',async()=>{
+ const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:46,scenarios:229,cases:562});expect(inv.coverage?.shared.cases).toEqual({implemented:526,planned:36,total:562});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11});expect(inv.counts.cases).toEqual({implemented:526,planned:47,total:573});expect(inv.counts.scenarios.total).toBe(238);
  const templates=inv.features.filter(f=>/\/template-(analysis|cache)\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13);expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true);
- const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');
+ const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();
+ const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');
 });
