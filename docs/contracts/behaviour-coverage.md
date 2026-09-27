@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-The shared reference contains **370 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **335 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
