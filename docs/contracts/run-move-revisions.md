@@ -94,6 +94,9 @@ The independent Open XML SDK checks one body pair source and accepted/rejected
 outputs. A missing-name source must fail schema validation. This does not test
 Word's UI, independent move resolution, or multistory rendering.
 
-Shared v0.33 has no cases for this new profile; native declarations are unmapped.
-The existing shared profiles and broad multistory obligation are unchanged.
-Paragraph, section, table and more general move revisions remain unsupported.
+The [shared paired-move profile](../../references/fixtures-ooxml/contracts/run-move-revisions.md)
+adds nine scenarios / 45 cases. Bun checks independent expected XML and encoded
+bytes, exact receipts, source custody and refusal outcomes. Twelve native tests
+and two outcome tests have partial mappings with explicit gaps. All 43 earlier
+revision cases and the broad multistory obligation are unchanged. Paragraph,
+section, table and more general move revisions remain unsupported.

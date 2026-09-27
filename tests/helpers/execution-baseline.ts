@@ -3,7 +3,8 @@ const added=['persistence','custody','no-op','refusal','rollback','plain-edit','
 const mergeIds=['roundtrip','content-refusal','structure-refusal','coordinate-refusal','rollback','encoding','stale'].map(n=>'@id-docx-horizontal-merge-'+n);
 /** Keep the v0.27 execution identities stable while checking each reviewed addition. */
 export function withoutTrackingToggle(keys:string[]):string[]{
- assert.equal(keys.length,681);
+ assert.equal(keys.length,726);
+ const moves=keys.filter(k=>k.startsWith('@id-docx-paired-move-'));assert.equal(moves.length,45);assert.equal(new Set(moves).size,45);
  const properties=keys.filter(k=>k.startsWith('@id-docx-run-property-revisions-'));assert.equal(properties.length,33);assert.equal(new Set(properties).size,33);
  const threads=keys.filter(k=>k.startsWith('@id-docx-existing-thread-'));assert.equal(threads.length,23);assert.equal(new Set(threads).size,23);
  const templateIds=['values','empty','placeholders','refusal','bounds','encoding','snapshot','scope'].map(n=>'@id-docx-template-inventory-'+n),templates=keys.filter(k=>templateIds.some(id=>k===id||k.startsWith(id+'|')));
@@ -16,5 +17,5 @@ export function withoutTrackingToggle(keys:string[]):string[]{
  assert.equal(keys.filter(k=>k==='@id-docx-go-track-author-toggle').length,1);
  const settings=keys.filter(k=>added.some(id=>k===id||k.startsWith(id+'|')));
  assert.equal(settings.length,24);assert.equal(new Set(settings).size,24);
- return keys.filter(k=>k!=='@id-docx-go-track-author-toggle'&&k!=='@id-docx-go-table-cell-access'&&!settings.includes(k)&&!merges.includes(k)&&!verticals.includes(k)&&!templates.includes(k)&&!threads.includes(k)&&!properties.includes(k));
+ return keys.filter(k=>k!=='@id-docx-go-track-author-toggle'&&k!=='@id-docx-go-table-cell-access'&&!settings.includes(k)&&!merges.includes(k)&&!verticals.includes(k)&&!templates.includes(k)&&!threads.includes(k)&&!properties.includes(k)&&!moves.includes(k));
 }

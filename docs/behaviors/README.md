@@ -25,9 +25,9 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 274 scenarios / 716 cases; 681 implemented and 35 planned.
+- Shared: 283 scenarios / 761 cases; 726 implemented and 35 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 283 scenarios / 727 cases; 681 implemented and 46 planned.
+- Combined: 292 scenarios / 772 cases; 726 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -124,11 +124,15 @@ outputs, including a missing-author refusal control. See
 
 The opt-in `text-properties-and-moves` profile resolves bounded paired run moves
 within each selected story. Source/destination names pair the ranges; each
-start/end ID pair remains separate. Twelve native tests check exact accept/reject
-output across seven story parts, selection, default-profile refusal, namespace and
-encoding preservation, malformed pairs, required dates and reached rollback.
-They are unmapped pending shared cases for this policy. All 576 mapping records
-and 681 executed case identities are unchanged; 46 cases remain planned.
+start/end ID pair remains separate. Nine shared scenarios / 45 cases check exact
+accept/reject output across seven story parts, selection, earlier-profile refusal,
+namespace and encoding preservation, malformed pairs, required dates and reached
+rollback. Expected XML is built independently from the saved source. Five
+corruption controls cover position, residual markers, receipts, unrelated bytes
+and namespace loss. Twelve native tests and two outcome tests have partial
+mappings with explicit limits. Of 576 prior records, 569 are unchanged; six update
+global totals and one updates the focused property wrapper's planned neighbours.
+All 681 earlier executed case identities remain; 46 cases are still planned.
 The SDK oracle checks one body source and both outputs, with a missing-name
 refusal control. See [paired run moves](../contracts/run-move-revisions.md).
 

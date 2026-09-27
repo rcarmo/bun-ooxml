@@ -7,7 +7,7 @@
     "tests/unit/template-inventory-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-template-inspection.test.ts": "572cb77a570c39d1b4b06adbd620575a38fd1317ad1599ac13374102ffae2b1d",
+    "tests/unit/docx-template-inspection.test.ts": "30e4257038d3da856fc79b6292dda15053dc9146f67d406edd84758ba9c54f5c",
     "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
     "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -21,7 +21,7 @@
     "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
-    "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+    "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e"
@@ -267,7 +267,7 @@
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [

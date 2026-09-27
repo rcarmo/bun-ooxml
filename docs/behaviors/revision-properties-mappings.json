@@ -7,8 +7,8 @@
     "tests/unit/revision-property-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-revision-properties.test.ts": "314272932b8047759ddd48d2e245a18d1e6e0fe83e0d2ec5e83d9254781d66f7",
-    "tests/unit/revision-property-outcomes.test.ts": "06e0ff2df22a98d4c0c664410783de1185402f5cef1508d8b9fd207311af5bb0",
+    "tests/unit/docx-revision-properties.test.ts": "08c8af974f6b8162aa3457294cac75e11460526066fb4072b36e27a7358fe2be",
+    "tests/unit/revision-property-outcomes.test.ts": "f8767818a20f0f86490f18fac0e734143e6292f8e7bc78923d36c6c1dbf115dc",
     "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
     "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
     "src/docx/run-appearance.ts": "85cba4a88ba495c1633356c054ea20da3cb7861c90dcab2d9a11da133bd617c6",
@@ -22,10 +22,10 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
     "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
-    "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+    "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/docx/revisions.feature": "7e3add2e8d7b77513bce2d21cccb4f0184ce379d58351ef1d83bb296931e6fb0"
+    "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd"
   },
   "mappings": [
     {
@@ -274,7 +274,7 @@
       "assertions": [
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],
@@ -336,7 +336,7 @@
       "assertions": [
         "expect(r.failures).toEqual([])",
         "expect(r.counts.cases.passed).toBe(33)",
-        "expect(r.counts.cases.planned).toBe(10)",
+        "expect(r.counts.cases.planned).toBe(55)",
         "expect(r.counts.steps.undefined).toBe(0)",
         "expect(r.counts.steps.ambiguous).toBe(0)"
       ],

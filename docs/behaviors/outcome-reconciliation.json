@@ -4,12 +4,13 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 1096,
-  "mappedDeclarations": 576,
+  "totalDeclarations": 1101,
+  "mappedDeclarations": 590,
   "sourceSha256": {
-    "tests/unit/docx-revision-properties.test.ts": "314272932b8047759ddd48d2e245a18d1e6e0fe83e0d2ec5e83d9254781d66f7",
-    "tests/unit/revision-property-outcomes.test.ts": "06e0ff2df22a98d4c0c664410783de1185402f5cef1508d8b9fd207311af5bb0",
+    "tests/unit/docx-revision-moves.test.ts": "acd5cbebe0e8be598c226c78bcf2eba2782cdeb2f12223abe364f2b08f699bb5",
+    "tests/unit/revision-move-outcomes.test.ts": "6cac40049286bd4c472be9058bf81e0c95550591928140fe20d86a46362ed856",
     "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
+    "src/docx/revision-moves.ts": "d40da29b5c407bc4086af68c056982153c3fee752c7fa10d512c1fcddf2124a3",
     "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
     "src/docx/run-appearance.ts": "85cba4a88ba495c1633356c054ea20da3cb7861c90dcab2d9a11da133bd617c6",
     "src/docx/run-font.ts": "8b53ae33f38718d079b763676f439f0b6156b6051c5648ec2a7993f125899a93",
@@ -21,19 +22,22 @@
     "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
-    "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
-    "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+    "tests/acceptance/revision-moves.ts": "590196b22c94f0cd89bfec01587ee9fca4f8236d4cb3c09342eb3a0a146581c9",
+    "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/docx/revisions.feature": "7e3add2e8d7b77513bce2d21cccb4f0184ce379d58351ef1d83bb296931e6fb0",
-    "tests/unit/docx-comment-threads.test.ts": "4e2fc623170145b52f1fa20b6c4ff7dde1576b4f0baae434ec81b7d31af840e3",
+    "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd",
+    "tests/unit/docx-revision-properties.test.ts": "08c8af974f6b8162aa3457294cac75e11460526066fb4072b36e27a7358fe2be",
+    "tests/unit/revision-property-outcomes.test.ts": "f8767818a20f0f86490f18fac0e734143e6292f8e7bc78923d36c6c1dbf115dc",
+    "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
+    "tests/unit/docx-comment-threads.test.ts": "73c2069f2cf939350e9a3c6bb6c358f0002acf1aeb221896579012d931696a19",
     "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
     "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
     "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
     "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
     "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
     "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0",
-    "tests/unit/docx-template-inspection.test.ts": "572cb77a570c39d1b4b06adbd620575a38fd1317ad1599ac13374102ffae2b1d",
+    "tests/unit/docx-template-inspection.test.ts": "30e4257038d3da856fc79b6292dda15053dc9146f67d406edd84758ba9c54f5c",
     "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
     "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
     "src/docx/body-map.ts": "33d9c9420b790db89c0efdf81ea6f118620f3af47b97174717c6399577daecdd",
@@ -45,19 +49,19 @@
     "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
     "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
     "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e",
-    "tests/unit/docx-table-merge.test.ts": "3c5cfae1182ecf3b3ccd43448d1538774b28842ccd3c1a191c83b6e4ddb1c12b",
+    "tests/unit/docx-table-merge.test.ts": "68b02a4e8414f8caa84a305815174c6a034851b2e5e167495b390cc154565954",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-    "tests/unit/docx-table-vertical-merge.test.ts": "9bdd4d09a12805ee04347521e8ae905c97f47156995bd28180260a812f28b1b3",
+    "tests/unit/docx-table-vertical-merge.test.ts": "77f11fa4b98c06af5bd2cf48256432a6a57eefac33b959a5d50b84a0adf91ea5",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076",
     "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
     "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
     "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-    "tests/unit/docx-heading-classification.test.ts": "d8186cb9bc086bbeb269407674f057ce6ebff49c6419179c8f12981839e79908",
+    "tests/unit/docx-heading-classification.test.ts": "39c7188984d3608c4062350a7165ae9a97582eb0724f32553f303f1e2f388211",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
     "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
@@ -198,6 +202,36 @@
   },
   "ledgers": [
     {
+      "name": "revision-moves",
+      "scopePaths": [
+        "tests/unit/docx-revision-moves.test.ts",
+        "tests/unit/revision-move-outcomes.test.ts"
+      ],
+      "mappedDeclarations": 14,
+      "sourceSha256": {
+        "tests/unit/docx-revision-moves.test.ts": "acd5cbebe0e8be598c226c78bcf2eba2782cdeb2f12223abe364f2b08f699bb5",
+        "tests/unit/revision-move-outcomes.test.ts": "6cac40049286bd4c472be9058bf81e0c95550591928140fe20d86a46362ed856",
+        "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
+        "src/docx/revision-moves.ts": "d40da29b5c407bc4086af68c056982153c3fee752c7fa10d512c1fcddf2124a3",
+        "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
+        "src/docx/run-appearance.ts": "85cba4a88ba495c1633356c054ea20da3cb7861c90dcab2d9a11da133bd617c6",
+        "src/docx/run-font.ts": "8b53ae33f38718d079b763676f439f0b6156b6051c5648ec2a7993f125899a93",
+        "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
+        "src/index.ts": "a85201c203e90211dd1ffb85d009ff2c0e69785cb31d1491e4fe319b33a8a1b1",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+        "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
+        "tests/acceptance/revision-moves.ts": "590196b22c94f0cd89bfec01587ee9fca4f8236d4cb3c09342eb3a0a146581c9",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
+        "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd"
+      }
+    },
+    {
       "name": "revision-properties",
       "scopePaths": [
         "tests/unit/docx-revision-properties.test.ts",
@@ -205,8 +239,8 @@
       ],
       "mappedDeclarations": 14,
       "sourceSha256": {
-        "tests/unit/docx-revision-properties.test.ts": "314272932b8047759ddd48d2e245a18d1e6e0fe83e0d2ec5e83d9254781d66f7",
-        "tests/unit/revision-property-outcomes.test.ts": "06e0ff2df22a98d4c0c664410783de1185402f5cef1508d8b9fd207311af5bb0",
+        "tests/unit/docx-revision-properties.test.ts": "08c8af974f6b8162aa3457294cac75e11460526066fb4072b36e27a7358fe2be",
+        "tests/unit/revision-property-outcomes.test.ts": "f8767818a20f0f86490f18fac0e734143e6292f8e7bc78923d36c6c1dbf115dc",
         "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
         "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
         "src/docx/run-appearance.ts": "85cba4a88ba495c1633356c054ea20da3cb7861c90dcab2d9a11da133bd617c6",
@@ -220,10 +254,10 @@
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
         "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/docx/revisions.feature": "7e3add2e8d7b77513bce2d21cccb4f0184ce379d58351ef1d83bb296931e6fb0"
+        "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd"
       }
     },
     {
@@ -234,7 +268,7 @@
       ],
       "mappedDeclarations": 16,
       "sourceSha256": {
-        "tests/unit/docx-comment-threads.test.ts": "4e2fc623170145b52f1fa20b6c4ff7dde1576b4f0baae434ec81b7d31af840e3",
+        "tests/unit/docx-comment-threads.test.ts": "73c2069f2cf939350e9a3c6bb6c358f0002acf1aeb221896579012d931696a19",
         "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
         "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -247,7 +281,7 @@
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
         "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0"
@@ -261,7 +295,7 @@
       ],
       "mappedDeclarations": 16,
       "sourceSha256": {
-        "tests/unit/docx-template-inspection.test.ts": "572cb77a570c39d1b4b06adbd620575a38fd1317ad1599ac13374102ffae2b1d",
+        "tests/unit/docx-template-inspection.test.ts": "30e4257038d3da856fc79b6292dda15053dc9146f67d406edd84758ba9c54f5c",
         "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
         "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -275,7 +309,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e"
@@ -291,7 +325,7 @@
       ],
       "mappedDeclarations": 29,
       "sourceSha256": {
-        "tests/unit/docx-table-merge.test.ts": "3c5cfae1182ecf3b3ccd43448d1538774b28842ccd3c1a191c83b6e4ddb1c12b",
+        "tests/unit/docx-table-merge.test.ts": "68b02a4e8414f8caa84a305815174c6a034851b2e5e167495b390cc154565954",
         "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
         "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -302,12 +336,12 @@
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
         "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-        "tests/unit/docx-table-vertical-merge.test.ts": "9bdd4d09a12805ee04347521e8ae905c97f47156995bd28180260a812f28b1b3",
+        "tests/unit/docx-table-vertical-merge.test.ts": "77f11fa4b98c06af5bd2cf48256432a6a57eefac33b959a5d50b84a0adf91ea5",
         "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
         "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
       }
@@ -325,7 +359,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
@@ -338,7 +372,7 @@
       ],
       "mappedDeclarations": 8,
       "sourceSha256": {
-        "tests/unit/docx-heading-classification.test.ts": "d8186cb9bc086bbeb269407674f057ce6ebff49c6419179c8f12981839e79908",
+        "tests/unit/docx-heading-classification.test.ts": "39c7188984d3608c4062350a7165ae9a97582eb0724f32553f303f1e2f388211",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
@@ -366,7 +400,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
         "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
@@ -446,7 +480,7 @@
         "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
         "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
         "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "workflows/pptx/notes.feature": "6980daafe08bb43e7ba2f73807a402a3ebabe239f0d41bad81b7c09ca7355f41",
         "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
@@ -476,7 +510,7 @@
         "tests/acceptance/cell-properties.ts": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d",
         "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
         "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
         "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
@@ -535,7 +569,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/body-anchors.ts": "6c340f7d86eb2d0f00d74e5699f64d2631f2cabfec6f19ca3185e8326ea25505",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -560,7 +594,7 @@
         "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -804,7 +838,7 @@
         "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
         "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
@@ -826,7 +860,7 @@
         "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
         "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+        "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
@@ -1013,18 +1047,6 @@
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
     "bun:tests/unit/docx-redline.test.ts:overlapping literal occurrences refuse an ambiguous tracked target",
     "bun:tests/unit/docx-redline.test.ts:executes all saved-outcome redline feature cases",
-    "bun:tests/unit/docx-revision-moves.test.ts:paired same-story moves combine with text and property revisions across seven stories with exact saved accept and reject bytes",
-    "bun:tests/unit/docx-revision-moves.test.ts:previous profiles refuse moves unchanged and selected header does not resolve body or unsupported footer",
-    "bun:tests/unit/docx-revision-moves.test.ts:malformed later move pairs refuse both actions before changing earlier stories",
-    "bun:tests/unit/docx-revision-moves.test.ts:cross-story pairs refuse and destination-before-source ordering keeps exact source-ordered receipts",
-    "bun:tests/unit/docx-revision-moves.test.ts:reached later-write serialization and validation faults roll back all paired ranges and prior edits",
-    "bun:tests/unit/docx-revision-moves.test.ts:strict move profile refuses linked protection and external settings before a same-state no-op",
-    "bun:tests/unit/docx-revision-moves.test.ts:move aliases local wrapper declarations and UTF8 BOM or UTF16 markers survive both actions through path reopen",
-    "bun:tests/unit/docx-revision-moves.test.ts:multiple independent pairs and different paragraph placement preserve deterministic wrapper ordering",
-    "bun:tests/unit/docx-revision-moves.test.ts:unsafe namespace lifts decorated run text and cross-paragraph ranges refuse unchanged",
-    "bun:tests/unit/docx-revision-moves.test.ts:move namespaces compare expanded names but mismatched run segmentation and direct values refuse",
-    "bun:tests/unit/docx-revision-moves.test.ts:move range starts require valid qualified dates while wrapper date is optional and valid if supplied",
-    "bun:tests/unit/docx-revision-moves.test.ts:move profile is exported without activating shared profiles or the broader multistory obligation",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / discovers reachable nested story parts for inspection and selected resolution",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / preserves namespaced run properties when unwrapping and renames delText on reject",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
@@ -1200,6 +1222,9 @@
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / locally rebound r takes precedence over its parent declaration",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / shared namespace Gherkin executes all four cases with real outcomes",
+    "bun:tests/unit/revision-move-mappings.test.ts:move mappings add14partial records and45case wrapper preserving576prior rows except seven inventory assertions",
+    "bun:tests/unit/revision-move-mappings.test.ts:move mappings reject stale sources omitted declarations property-profile credit and invented assertions",
+    "bun:tests/unit/revision-move-mappings.test.ts:reviewed native move titles retain their own scenario families outcome predicates and gaps",
     "bun:tests/unit/revision-property-mappings.test.ts:property mappings add14partial records and33case wrapper preserving562prior rows except five inventory totals",
     "bun:tests/unit/revision-property-mappings.test.ts:property mappings reject stale inputs omitted declarations text-only credit and invented assertions",
     "bun:tests/unit/revision-property-mappings.test.ts:reviewed native property titles retain matching scenario families outcome predicates and explicit gaps",
@@ -1210,7 +1235,7 @@
     "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
     "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
     "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
-    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 716 shared cases plus eleven local-only cases with only reviewed activations",
+    "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 761 shared cases plus eleven local-only cases with only reviewed activations",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
@@ -1411,6 +1436,454 @@
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 reconciliation retains direct refusal predicates review flags and uncounted helper separation"
   ],
   "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:paired same-story moves combine with text and property revisions across seven stories with exact saved accept and reject bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.unsupported).toEqual([])",
+        "expect(r.revisions).toHaveLength(35)",
+        "expect(r.revisions.filter(r=>r.kind==='move-from'||r.kind==='move-to')).toEqual(parts.flatMap(part=>[{part,id:'101',kind:'move-from',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'},{part,id:'103',kind:'move-to',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'}]))",
+        "expect(p.toBytes()).toEqual(source)",
+        "expect(resolve(p,a)).toEqual({resolved:35,changedParts:parts})",
+        "expect(read.text(part)).toBe(expected(base.text(part),a))",
+        "expect(read.get(part)).toEqual(new TextEncoder().encode(expected(base.text(part),a)))",
+        "expect(inspect(read)).toEqual({revisions:[],unsupported:[]})",
+        "expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source))",
+        "expect(resolve(read,a)).toEqual({resolved:0,changedParts:[]})",
+        "expect(read.toBytes()).toEqual(now)"
+      ],
+      "outcomes": [
+        "Thirty-five revisions including exact move metadata resolve in seven stories with independent expected XML, encoded bytes, path reopen, source custody and repeat no-op."
+      ],
+      "gaps": [
+        "Native generated variants only; no independent Word move resolver or producer coverage."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:previous profiles refuse moves unchanged and selected header does not resolve body or unsupported footer",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-defaults",
+        "@id-docx-paired-move-scope"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectRevisions(p,{profile}).unsupported.some(f=>f.kind==='move')).toBe(true)",
+        "expect(()=>resolveRevisions(p,'accept',{profile})).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:5,changedParts:['word/header1.xml']})",
+        "expect(inspect(p).revisions.filter(r=>r.part===p.mainPart())).toHaveLength(5)",
+        "expect(inspect(p).unsupported.some(f=>f.part==='word/footer2.xml')).toBe(true)"
+      ],
+      "outcomes": [
+        "Both earlier profiles report/refuse moves unchanged; selected header changes five revisions while all unselected bytes and unsupported footer remain."
+      ],
+      "gaps": [
+        "Native header action is reject only; shared wrapper covers both actions with exact source save."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:malformed later move pairs refuse both actions before changing earlier stories",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml,name).not.toBe(old)",
+        "expect(inspect(p).unsupported.some(f=>f.part===part),name).toBe(true)",
+        "expect(()=>resolve(p,a),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes(),name).toEqual(before)"
+      ],
+      "outcomes": [
+        "Later malformed pair variants produce findings and typed refusal for both actions with exact archive custody."
+      ],
+      "gaps": [
+        "Native matrix exceeds18shared defectrows; no exact compiled case identities or exhaustive OOXML admission claim."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:cross-story pairs refuse and destination-before-source ordering keeps exact source-ordered receipts",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-refusal",
+        "@id-docx-paired-move-ordering"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(q).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['103','101'])",
+        "expect(resolve(q,'accept',[part]).resolved).toBe(5)",
+        "expect(q.text(part)).toBe(expected(xml,'accept'))"
+      ],
+      "outcomes": [
+        "Cross-story source/destination fragments refuse; reordered first pair retains inspection wrapper order and exact accepted XML."
+      ],
+      "gaps": [
+        "Native reorders one pair, whereas shared ordering case adds a second pair and rejects it."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:reached later-write serialization and validation faults roll back all paired ranges and prior edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow()",
+        "expect(reached).toBe(true)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).revisions).toHaveLength(35)"
+      ],
+      "outcomes": [
+        "Reached header-write, serialization and reinsertion-validation failures restore35records and the prior edited archive."
+      ],
+      "gaps": [
+        "Native checks throwing without exact validation code; shared wrapper pins that code. No filesystem crash simulation."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:strict move profile refuses linked protection and external settings before a same-state no-op",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-guards"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Already-resolved move input refuses linked protection and external settings without byte changes."
+      ],
+      "gaps": [
+        "Two native guards; malformed-settings case is asserted by shared wrapper."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move aliases local wrapper declarations and UTF8 BOM or UTF16 markers survive both actions through path reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(resolve(p,action,[part])).toEqual({resolved:5,changedParts:[part]})",
+        "expect(read.text(part)).toBe(wanted)",
+        "expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])",
+        "expect(moved.map(t=>[t.namespaceURI,t.text])).toEqual([[W,'Moved '],[W,'text']])",
+        "expect(await Bun.file(src).bytes()).toEqual(source)"
+      ],
+      "outcomes": [
+        "Both actions in three encodings retain aliased wrapper namespaces, exact XML, encoding markers, source path and unrelated bytes."
+      ],
+      "gaps": [
+        "One body alias variant; no arbitrary namespace or encoding compatibility."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:multiple independent pairs and different paragraph placement preserve deterministic wrapper ordering",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-ordering"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspect(p).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['101','103','203','201'])",
+        "expect(resolve(p,'reject',[part])).toEqual({resolved:7,changedParts:[part]})",
+        "expect(p.text(part)).toBe(expected(old,'reject').replace(from2,runs).replace(to2,''))"
+      ],
+      "outcomes": [
+        "Second destination-before-source pair retains wrapper order101,103,203,201 and exact rejected body with receipt7."
+      ],
+      "gaps": [
+        "One additional pair across two paragraphs; no cross-paragraph range support."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:unsafe namespace lifts decorated run text and cross-paragraph ranges refuse unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unsafe namespace lift, decorated run/text, cross-paragraph range and CDATA variants refuse without mutation."
+      ],
+      "gaps": [
+        "Additional native refusals not exact shared defect identities."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move namespaces compare expanded names but mismatched run segmentation and direct values refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-encoding",
+        "@id-docx-paired-move-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspect(p).unsupported).toEqual([])",
+        "expect(resolve(p,'accept',[part]).resolved).toBe(5)",
+        "expect(()=>resolve(q,'accept',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Alias-equivalent source/destination names resolve; different run segmentation, direct values or text refuse unchanged."
+      ],
+      "gaps": [
+        "Native-only semantic signature boundary; scalar values compare exactly, no computed formatting."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move range starts require valid qualified dates while wrapper date is optional and valid if supplied",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-dates"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,action,[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(resolve(p,'reject',[part]).resolved).toBe(5)"
+      ],
+      "outcomes": [
+        "Both-side/both-action missing/unqualified/invalid dates refuse; optional absent wrapper date still resolves."
+      ],
+      "gaps": [
+        "Central cases pin missing/unqualified starts only; native invalid-date and optional-wrapper outcomes exceed those cases."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move profile is exported without activating shared profiles or the broader multistory obligation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-defaults"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(root.inspectRevisions).toBe(inspectRevisions)",
+        "expect(docx.resolveRevisions).toBe(resolveRevisions)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
+        "expect(inv.counts.cases.planned).toBe(46)",
+        "expect(s.lifecycle??f.lifecycle).toBe('planned')"
+      ],
+      "outcomes": [
+        "Public exports match and broad multistory scenario remains planned with exact catalogue counts."
+      ],
+      "gaps": [
+        "Inventory/export guard only; no independent default-profile or broad multistory execution credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/revision-move-outcomes.test.ts:nine paired-move contracts execute45cases with43historical neighbours planned in the isolated run",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-roundtrip",
+        "@id-docx-paired-move-scope",
+        "@id-docx-paired-move-defaults",
+        "@id-docx-paired-move-refusal",
+        "@id-docx-paired-move-encoding",
+        "@id-docx-paired-move-rollback",
+        "@id-docx-paired-move-guards",
+        "@id-docx-paired-move-dates",
+        "@id-docx-paired-move-ordering"
+      ],
+      "caseKeys": [
+        "@id-docx-paired-move-roundtrip|{\"action\":\"accept\"}",
+        "@id-docx-paired-move-roundtrip|{\"action\":\"reject\"}",
+        "@id-docx-paired-move-scope|{\"action\":\"accept\"}",
+        "@id-docx-paired-move-scope|{\"action\":\"reject\"}",
+        "@id-docx-paired-move-defaults|{\"profile\":\"text-only\"}",
+        "@id-docx-paired-move-defaults|{\"profile\":\"text-and-run-properties\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"missing-range-end\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"missing-destination\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"duplicate-name\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"duplicate-range-id\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"duplicate-wrapper-id\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"wrong-wrapper\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"overlapping-ranges\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"unowned-wrapper\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"mismatched-text\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"mismatched-properties\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"cross-story\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"mixed-content\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"nested-revision\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"unsupported-properties\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"paragraph-mark\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"missing-author\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"decorated-marker\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"text-id-collision\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"accept\",\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"reject\",\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"accept\",\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"reject\",\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"accept\",\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"reject\",\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-paired-move-rollback|{\"stage\":\"later-write\"}",
+        "@id-docx-paired-move-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-paired-move-rollback|{\"stage\":\"post-write-validation\"}",
+        "@id-docx-paired-move-guards|{\"guard\":\"protection\"}",
+        "@id-docx-paired-move-guards|{\"guard\":\"external-settings\"}",
+        "@id-docx-paired-move-guards|{\"guard\":\"malformed-settings\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"missing-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"missing-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"missing-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"missing-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"unqualified-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"unqualified-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"unqualified-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"unqualified-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-ordering"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(45)",
+        "expect(r.counts.cases.planned).toBe(43)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Nine scenarios execute45cases with exact metadata, independent savedXML/bytes, receipts, selection, dates, faults and guards."
+      ],
+      "gaps": [
+        "Prior43neighbours are planned only in focused wrapper; no other-consumer or Word UI credit."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
+    {
+      "testId": "bun:tests/unit/revision-move-outcomes.test.ts:move outcome assertions reject wrong position residual ranges wrong receipt unrelated bytes and namespace loss",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-roundtrip",
+        "@id-docx-paired-move-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Five post-operation corruptions fail exact assertions: content position, residual marker, receipt, unrelated bytes and namespace loss."
+      ],
+      "gaps": [
+        "Negative controls are bounded post-operation mutations, not exhaustive fault injection."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "revision-moves"
+    },
     {
       "testId": "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
       "status": "partial",
@@ -1739,7 +2212,7 @@
       "assertions": [
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],
@@ -1807,7 +2280,7 @@
       "assertions": [
         "expect(r.failures).toEqual([])",
         "expect(r.counts.cases.passed).toBe(33)",
-        "expect(r.counts.cases.planned).toBe(10)",
+        "expect(r.counts.cases.planned).toBe(55)",
         "expect(r.counts.steps.undefined).toBe(0)",
         "expect(r.counts.steps.ambiguous).toBe(0)"
       ],
@@ -2225,7 +2698,7 @@
       "assertions": [
         "expect(planned).toHaveLength(9)",
         "expect(planned.every(s=>s.lifecycle==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -2641,7 +3114,7 @@
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -3107,7 +3580,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -3591,7 +4064,7 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [
@@ -4114,7 +4587,7 @@
         "expect(p.headingLevel).toBe(0)",
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
-        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
         "expect(inv.counts.cases.planned).toBe(46)"
       ],
       "outcomes": [

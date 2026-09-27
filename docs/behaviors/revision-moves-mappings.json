@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-revision-moves.test.ts",
+    "tests/unit/revision-move-outcomes.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-revision-moves.test.ts": "acd5cbebe0e8be598c226c78bcf2eba2782cdeb2f12223abe364f2b08f699bb5",
+    "tests/unit/revision-move-outcomes.test.ts": "6cac40049286bd4c472be9058bf81e0c95550591928140fe20d86a46362ed856",
+    "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
+    "src/docx/revision-moves.ts": "d40da29b5c407bc4086af68c056982153c3fee752c7fa10d512c1fcddf2124a3",
+    "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
+    "src/docx/run-appearance.ts": "85cba4a88ba495c1633356c054ea20da3cb7861c90dcab2d9a11da133bd617c6",
+    "src/docx/run-font.ts": "8b53ae33f38718d079b763676f439f0b6156b6051c5648ec2a7993f125899a93",
+    "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
+    "src/index.ts": "a85201c203e90211dd1ffb85d009ff2c0e69785cb31d1491e4fe319b33a8a1b1",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
+    "tests/acceptance/revision-moves.ts": "590196b22c94f0cd89bfec01587ee9fca4f8236d4cb3c09342eb3a0a146581c9",
+    "tests/acceptance/steps.ts": "0817efa0e4f800e72d12f9b2e0c887172328622f4128d57381aa17c35febf383",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:paired same-story moves combine with text and property revisions across seven stories with exact saved accept and reject bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.unsupported).toEqual([])",
+        "expect(r.revisions).toHaveLength(35)",
+        "expect(r.revisions.filter(r=>r.kind==='move-from'||r.kind==='move-to')).toEqual(parts.flatMap(part=>[{part,id:'101',kind:'move-from',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'},{part,id:'103',kind:'move-to',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'}]))",
+        "expect(p.toBytes()).toEqual(source)",
+        "expect(resolve(p,a)).toEqual({resolved:35,changedParts:parts})",
+        "expect(read.text(part)).toBe(expected(base.text(part),a))",
+        "expect(read.get(part)).toEqual(new TextEncoder().encode(expected(base.text(part),a)))",
+        "expect(inspect(read)).toEqual({revisions:[],unsupported:[]})",
+        "expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source))",
+        "expect(resolve(read,a)).toEqual({resolved:0,changedParts:[]})",
+        "expect(read.toBytes()).toEqual(now)"
+      ],
+      "outcomes": [
+        "Thirty-five revisions including exact move metadata resolve in seven stories with independent expected XML, encoded bytes, path reopen, source custody and repeat no-op."
+      ],
+      "gaps": [
+        "Native generated variants only; no independent Word move resolver or producer coverage."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:previous profiles refuse moves unchanged and selected header does not resolve body or unsupported footer",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-defaults",
+        "@id-docx-paired-move-scope"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectRevisions(p,{profile}).unsupported.some(f=>f.kind==='move')).toBe(true)",
+        "expect(()=>resolveRevisions(p,'accept',{profile})).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:5,changedParts:['word/header1.xml']})",
+        "expect(inspect(p).revisions.filter(r=>r.part===p.mainPart())).toHaveLength(5)",
+        "expect(inspect(p).unsupported.some(f=>f.part==='word/footer2.xml')).toBe(true)"
+      ],
+      "outcomes": [
+        "Both earlier profiles report/refuse moves unchanged; selected header changes five revisions while all unselected bytes and unsupported footer remain."
+      ],
+      "gaps": [
+        "Native header action is reject only; shared wrapper covers both actions with exact source save."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:malformed later move pairs refuse both actions before changing earlier stories",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml,name).not.toBe(old)",
+        "expect(inspect(p).unsupported.some(f=>f.part===part),name).toBe(true)",
+        "expect(()=>resolve(p,a),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes(),name).toEqual(before)"
+      ],
+      "outcomes": [
+        "Later malformed pair variants produce findings and typed refusal for both actions with exact archive custody."
+      ],
+      "gaps": [
+        "Native matrix exceeds18shared defectrows; no exact compiled case identities or exhaustive OOXML admission claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:cross-story pairs refuse and destination-before-source ordering keeps exact source-ordered receipts",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-refusal",
+        "@id-docx-paired-move-ordering"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(q).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['103','101'])",
+        "expect(resolve(q,'accept',[part]).resolved).toBe(5)",
+        "expect(q.text(part)).toBe(expected(xml,'accept'))"
+      ],
+      "outcomes": [
+        "Cross-story source/destination fragments refuse; reordered first pair retains inspection wrapper order and exact accepted XML."
+      ],
+      "gaps": [
+        "Native reorders one pair, whereas shared ordering case adds a second pair and rejects it."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:reached later-write serialization and validation faults roll back all paired ranges and prior edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow()",
+        "expect(reached).toBe(true)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).revisions).toHaveLength(35)"
+      ],
+      "outcomes": [
+        "Reached header-write, serialization and reinsertion-validation failures restore35records and the prior edited archive."
+      ],
+      "gaps": [
+        "Native checks throwing without exact validation code; shared wrapper pins that code. No filesystem crash simulation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:strict move profile refuses linked protection and external settings before a same-state no-op",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-guards"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Already-resolved move input refuses linked protection and external settings without byte changes."
+      ],
+      "gaps": [
+        "Two native guards; malformed-settings case is asserted by shared wrapper."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move aliases local wrapper declarations and UTF8 BOM or UTF16 markers survive both actions through path reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(resolve(p,action,[part])).toEqual({resolved:5,changedParts:[part]})",
+        "expect(read.text(part)).toBe(wanted)",
+        "expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])",
+        "expect(moved.map(t=>[t.namespaceURI,t.text])).toEqual([[W,'Moved '],[W,'text']])",
+        "expect(await Bun.file(src).bytes()).toEqual(source)"
+      ],
+      "outcomes": [
+        "Both actions in three encodings retain aliased wrapper namespaces, exact XML, encoding markers, source path and unrelated bytes."
+      ],
+      "gaps": [
+        "One body alias variant; no arbitrary namespace or encoding compatibility."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:multiple independent pairs and different paragraph placement preserve deterministic wrapper ordering",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-ordering"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspect(p).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['101','103','203','201'])",
+        "expect(resolve(p,'reject',[part])).toEqual({resolved:7,changedParts:[part]})",
+        "expect(p.text(part)).toBe(expected(old,'reject').replace(from2,runs).replace(to2,''))"
+      ],
+      "outcomes": [
+        "Second destination-before-source pair retains wrapper order101,103,203,201 and exact rejected body with receipt7."
+      ],
+      "gaps": [
+        "One additional pair across two paragraphs; no cross-paragraph range support."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:unsafe namespace lifts decorated run text and cross-paragraph ranges refuse unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unsafe namespace lift, decorated run/text, cross-paragraph range and CDATA variants refuse without mutation."
+      ],
+      "gaps": [
+        "Additional native refusals not exact shared defect identities."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move namespaces compare expanded names but mismatched run segmentation and direct values refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-encoding",
+        "@id-docx-paired-move-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspect(p).unsupported).toEqual([])",
+        "expect(resolve(p,'accept',[part]).resolved).toBe(5)",
+        "expect(()=>resolve(q,'accept',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Alias-equivalent source/destination names resolve; different run segmentation, direct values or text refuse unchanged."
+      ],
+      "gaps": [
+        "Native-only semantic signature boundary; scalar values compare exactly, no computed formatting."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move range starts require valid qualified dates while wrapper date is optional and valid if supplied",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-dates"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,action,[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(resolve(p,'reject',[part]).resolved).toBe(5)"
+      ],
+      "outcomes": [
+        "Both-side/both-action missing/unqualified/invalid dates refuse; optional absent wrapper date still resolves."
+      ],
+      "gaps": [
+        "Central cases pin missing/unqualified starts only; native invalid-date and optional-wrapper outcomes exceed those cases."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-moves.test.ts:move profile is exported without activating shared profiles or the broader multistory obligation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-defaults"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(root.inspectRevisions).toBe(inspectRevisions)",
+        "expect(docx.resolveRevisions).toBe(resolveRevisions)",
+        "expect(inv.counts.cases.implemented).toBe(726)",
+        "expect(inv.counts.cases.planned).toBe(46)",
+        "expect(s.lifecycle??f.lifecycle).toBe('planned')"
+      ],
+      "outcomes": [
+        "Public exports match and broad multistory scenario remains planned with exact catalogue counts."
+      ],
+      "gaps": [
+        "Inventory/export guard only; no independent default-profile or broad multistory execution credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/revision-move-outcomes.test.ts:nine paired-move contracts execute45cases with43historical neighbours planned in the isolated run",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-roundtrip",
+        "@id-docx-paired-move-scope",
+        "@id-docx-paired-move-defaults",
+        "@id-docx-paired-move-refusal",
+        "@id-docx-paired-move-encoding",
+        "@id-docx-paired-move-rollback",
+        "@id-docx-paired-move-guards",
+        "@id-docx-paired-move-dates",
+        "@id-docx-paired-move-ordering"
+      ],
+      "caseKeys": [
+        "@id-docx-paired-move-roundtrip|{\"action\":\"accept\"}",
+        "@id-docx-paired-move-roundtrip|{\"action\":\"reject\"}",
+        "@id-docx-paired-move-scope|{\"action\":\"accept\"}",
+        "@id-docx-paired-move-scope|{\"action\":\"reject\"}",
+        "@id-docx-paired-move-defaults|{\"profile\":\"text-only\"}",
+        "@id-docx-paired-move-defaults|{\"profile\":\"text-and-run-properties\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"missing-range-end\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"missing-destination\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"duplicate-name\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"duplicate-range-id\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"duplicate-wrapper-id\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"wrong-wrapper\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"overlapping-ranges\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"unowned-wrapper\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"mismatched-text\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"mismatched-properties\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"cross-story\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"mixed-content\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"nested-revision\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"unsupported-properties\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"paragraph-mark\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"missing-author\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"decorated-marker\"}",
+        "@id-docx-paired-move-refusal|{\"defect\":\"text-id-collision\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"accept\",\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"reject\",\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"accept\",\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"reject\",\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"accept\",\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-paired-move-encoding|{\"action\":\"reject\",\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-paired-move-rollback|{\"stage\":\"later-write\"}",
+        "@id-docx-paired-move-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-paired-move-rollback|{\"stage\":\"post-write-validation\"}",
+        "@id-docx-paired-move-guards|{\"guard\":\"protection\"}",
+        "@id-docx-paired-move-guards|{\"guard\":\"external-settings\"}",
+        "@id-docx-paired-move-guards|{\"guard\":\"malformed-settings\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"missing-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"missing-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"missing-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"missing-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"unqualified-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"from\",\"defect\":\"unqualified-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"unqualified-date\",\"action\":\"accept\"}",
+        "@id-docx-paired-move-dates|{\"side\":\"to\",\"defect\":\"unqualified-date\",\"action\":\"reject\"}",
+        "@id-docx-paired-move-ordering"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(45)",
+        "expect(r.counts.cases.planned).toBe(43)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Nine scenarios execute45cases with exact metadata, independent savedXML/bytes, receipts, selection, dates, faults and guards."
+      ],
+      "gaps": [
+        "Prior43neighbours are planned only in focused wrapper; no other-consumer or Word UI credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/revision-move-outcomes.test.ts:move outcome assertions reject wrong position residual ranges wrong receipt unrelated bytes and namespace loss",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-paired-move-roundtrip",
+        "@id-docx-paired-move-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Five post-operation corruptions fail exact assertions: content position, residual marker, receipt, unrelated bytes and namespace loss."
+      ],
+      "gaps": [
+        "Negative controls are bounded post-operation mutations, not exhaustive fault injection."
+      ]
+    }
+  ]
+}

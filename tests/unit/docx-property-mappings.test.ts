@@ -25,7 +25,7 @@ test('property mapping extension adds exactly 42 declarations and 226 direct exp
  expect(exact.every(r=>r.testId.includes(':canonical ')&&r.gaps.join(' ').includes('aggregate status and counts'))).toBe(true);
  const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json();
  expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(ledger.mappings.slice(0,88))).digest('hex')).toBe('34cfb0ba78d652e98d0dc50afac5241d4265b3e59cb036b4978334d0143e0dc1');
- expect(report.mappedDeclarations).toBe(576);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-576);
+ expect(report.mappedDeclarations).toBe(590);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-590);
 });
 
 test('property mappings distinguish selected fields, live custody, reopened checks and unresolved style references',async()=>{

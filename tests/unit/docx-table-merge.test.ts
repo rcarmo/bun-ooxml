@@ -56,7 +56,7 @@ test('external document drift late malformed rows and external settings refuse b
 });
 
 test('horizontal authoring does not activate the shared horizontal and vertical setter profile',async()=>{
- const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(681);expect(inv.counts.cases.planned).toBe(46);
+ const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(726);expect(inv.counts.cases.planned).toBe(46);
 });
 
 test('nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed',async()=>{
