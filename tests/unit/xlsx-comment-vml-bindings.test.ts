@@ -18,7 +18,6 @@ test('canonical XLSX comment and VML inspection checks both relationships and ex
 });
 
 function changed(step:string,mutate:(s:CommentVmlState)=>void){expect(bindings.filter(b=>b.pattern.test(step))).toHaveLength(1);return bindings.map(b=>b.pattern.test(step)?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);mutate(c.state as CommentVmlState);}}:b);}
-function fails(r:Awaited<ReturnType<typeof run>>){expect(r.counts.cases.failed).toBe(1);expect(r.counts.steps.failed).toBe(1);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);}
 function baseline(s:CommentVmlState){s.original=s.pkg.toBytes();s.input=s.original.slice();}
 
 test('each canonical relationship identity type target and comment text rejects a wrong expected value',async()=>{
@@ -29,7 +28,7 @@ test('each canonical relationship identity type target and comment text rejects 
   ['internally to xl/comments/comment1.xml','internally to xl/comments/wrong.xml'],
   ['A2 with text This is the protagonist who creates the creature.','A2 with text Wrong'],
   ["A3 with text Often mistakenly called 'Frankenstein' - that is the creator's name.",'A3 with text Wrong'],
- ])fails(await run(text=>{expect(text).toContain(from!);return text.replace(from!,to!);}));
+ ]){const result=await run(text=>{expect(text).toContain(from!);return text.replace(from!,to!);});expect(result.counts.cases.failed).toBe(1);expect(result.counts.steps.failed).toBe(1);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);}
 });
 
 test('observed comment VML results reject false external aliased duplicate missing and swapped values',async()=>{
@@ -47,7 +46,7 @@ test('observed comment VML results reject false external aliased duplicate missi
   (s:CommentVmlState)=>{s.commentRows![1]!.text='wrong';},
   (s:CommentVmlState)=>{s.commentRows![1]!.ref='A2';},
   (s:CommentVmlState)=>{s.commentRows!.push({...s.commentRows![0]!});},
- ])fails(await run(text=>text,changed(read,mutate)));
+ ]){const result=await run(text=>text,changed(read,mutate));expect(result.counts.cases.failed).toBe(1);expect(result.counts.steps.failed).toBe(1);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);}
 });
 
 test('wrong worksheet relationship and comment namespaces cannot satisfy the graph predicates',async()=>{
@@ -60,7 +59,7 @@ test('wrong worksheet relationship and comment namespaces cannot satisfy the gra
   [comments,(text:string)=>text.replace(S,'urn:wrong')],
   [comments,(text:string)=>text.replace('<commentList>','<commentList xmlns="urn:wrong">')],
   [comments,(text:string)=>text.replace('<t>','<t xmlns="urn:wrong">')],
- ] as const){fails(await run(text=>text,changed(given,s=>{const old=s.pkg.text(part),next=mutate(old);expect(next).not.toBe(old);s.pkg.set(part,next);baseline(s);})));}
+ ] as const){const result=await run(text=>text,changed(given,s=>{const old=s.pkg.text(part),next=mutate(old);expect(next).not.toBe(old);s.pkg.set(part,next);baseline(s);}));expect(result.counts.cases.failed).toBe(1);expect(result.counts.steps.failed).toBe(1);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);}
 });
 
 test('namespace aliases and rich comment text are read by expanded names without modifying their input',async()=>{
@@ -81,7 +80,7 @@ test('duplicate drawing IDs comment records and missing relationship dependencie
   (s:CommentVmlState)=>{s.pkg.set(comments,s.pkg.text(comments).replace('ref="A3"','ref="A2"'));},
   (s:CommentVmlState)=>{s.pkg.delete(vml);},
   (s:CommentVmlState)=>{s.pkg.delete(comments);},
- ])fails(await run(text=>text,changed(given,s=>{mutate(s);baseline(s);})));
+ ]){const result=await run(text=>text,changed(given,s=>{mutate(s);baseline(s);}));expect(result.counts.cases.failed).toBe(1);expect(result.counts.steps.failed).toBe(1);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);}
 });
 
 test('read-only graph predicates detect input or opaque VML payload mutation',async()=>{
@@ -89,5 +88,5 @@ test('read-only graph predicates detect input or opaque VML payload mutation',as
   (s:CommentVmlState)=>{s.input[0]=0;},
   (s:CommentVmlState)=>{s.original[0]=0;},
   (s:CommentVmlState)=>{s.pkg.set(vml,s.pkg.text(vml)+' ');},
- ])fails(await run(text=>text,changed(read,mutate)));
+ ]){const result=await run(text=>text,changed(read,mutate));expect(result.counts.cases.failed).toBe(1);expect(result.counts.steps.failed).toBe(1);expect(result.counts.steps.undefined).toBe(0);expect(result.counts.steps.ambiguous).toBe(0);}
 });

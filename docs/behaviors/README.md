@@ -65,8 +65,8 @@ controls reject wrong values, reversed order and missing or extra array members.
 
 ## Requirement mappings
 
-The slide-order, effective-formatting, XML-value, PPTX-core, DOCX-model and formula
-reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
+The slide-order, effective-formatting, XML-value, PPTX-core, DOCX-model,
+XLSX-comments and formula reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
 an input variant missing from the scenario. Each report has its own source hashes
 and required files; one cannot supply a missing reference for another.
 
@@ -140,6 +140,18 @@ inferred. Literal-punctuation and remap-refusal predicates split across native
 tests retain that distinction. Range-wrapper planned counts refer to its isolated
 selection, not the full acceptance run. No mapping establishes worksheet editing,
 formula calculation or saved-workbook behaviour.
+
+The [XLSX-comments ledger](xlsx-comments-mappings.json) maps 19 declarations and
+72 direct assertion expressions from the native inspector and binding controls.
+Only the positive canonical wrapper has an exact-case link. Its five planned
+cases refer to the isolated comment/VML feature, and its semantic checks live in
+the pinned binding. Negative tests keep failure counts in their own bodies;
+mutation callbacks and the binding-selection helper have separate nested/helper
+assertions. Some malformed dependency controls fail while serialising their
+baseline, before the inspector runs. Other controls reset that baseline to check
+semantics independently of byte preservation. Native tests compare member arrays
+when an invalid package cannot serialize. No mapping links to the five mutation
+profiles or establishes VML shape validity.
 
 Unresolved registrations, missing assertions or conflicting source records fail
 validation. The descriptions still need human review: matching an assertion's

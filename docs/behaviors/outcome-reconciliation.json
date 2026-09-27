@@ -4,8 +4,8 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 837,
-  "mappedDeclarations": 232,
+  "totalDeclarations": 842,
+  "mappedDeclarations": 251,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
@@ -73,6 +73,14 @@
     "tests/acceptance/core-properties.ts": "3e864b22bda1d611750ac30b93bcbb085819b5e958392fff774199592f01ad37",
     "tests/acceptance/document-properties.ts": "c4f90481c1bcd8974457a8bf1a91e80573a08fa070a3315095f6c653bf50ea98",
     "tests/acceptance/table-style.ts": "77d029c2b91df2fe4872356a759d0b77db10ba1b08578d9bf75a260079381571",
+    "tests/unit/xlsx-comments.test.ts": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+    "tests/unit/xlsx-comment-vml-bindings.test.ts": "34d3f45424b2b39e2486b382e56be14d6a8e65b1caa5163bb8f1aa0d1ff62960",
+    "src/xlsx/comments.ts": "f217a9393765cd52b760399357b1664515b830e8cc89bac3ac1d6785df557a12",
+    "src/index.ts": "4a149ccb9f8752e177c33d0bee8ca3e09f14c9dd5d0638753b3c01bcef26a5ec",
+    "src/xlsx/index.ts": "f4b07aca325232ee4c594f6a642782b92983cc6918bb68493d6a2d29260ebdde",
+    "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+    "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
+    "workflows/xlsx/comment-vml-custody.feature": "e93331bb775a8c84cd2ca0bf35264b8ef085f5ef9b44578e231c7ff0165e801d",
     "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de",
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
     "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
@@ -218,6 +226,31 @@
         "tests/acceptance/core-properties.ts": "3e864b22bda1d611750ac30b93bcbb085819b5e958392fff774199592f01ad37",
         "tests/acceptance/document-properties.ts": "c4f90481c1bcd8974457a8bf1a91e80573a08fa070a3315095f6c653bf50ea98",
         "tests/acceptance/table-style.ts": "77d029c2b91df2fe4872356a759d0b77db10ba1b08578d9bf75a260079381571"
+      }
+    },
+    {
+      "name": "xlsx-comments",
+      "scopePaths": [
+        "tests/unit/xlsx-comments.test.ts",
+        "tests/unit/xlsx-comment-vml-bindings.test.ts"
+      ],
+      "mappedDeclarations": 19,
+      "sourceSha256": {
+        "tests/unit/xlsx-comments.test.ts": "4aae36de2d86025a52ed4a18343b218c7324cacadf7c970cd63b7ce4be694b03",
+        "tests/unit/xlsx-comment-vml-bindings.test.ts": "34d3f45424b2b39e2486b382e56be14d6a8e65b1caa5163bb8f1aa0d1ff62960",
+        "src/xlsx/comments.ts": "f217a9393765cd52b760399357b1664515b830e8cc89bac3ac1d6785df557a12",
+        "src/index.ts": "4a149ccb9f8752e177c33d0bee8ca3e09f14c9dd5d0638753b3c01bcef26a5ec",
+        "src/xlsx/index.ts": "f4b07aca325232ee4c594f6a642782b92983cc6918bb68493d6a2d29260ebdde",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
+        "tests/acceptance/steps.ts": "6b97bd235d357ef5612d038ad2a21d0f3f2b0d41b73f69f448a2f91f5cdcbbd1",
+        "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+        "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/xlsx/comment-vml-custody.feature": "e93331bb775a8c84cd2ca0bf35264b8ef085f5ef9b44578e231c7ff0165e801d"
       }
     },
     {
@@ -682,25 +715,11 @@
     "bun:tests/unit/xlsx-cell-style.test.ts:worksheet aliases to the same part refuse instead of leaving a second cached model stale",
     "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
     "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
-    "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:canonical XLSX comment and VML inspection checks both relationships and exact comment values",
-    "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:each canonical relationship identity type target and comment text rejects a wrong expected value",
-    "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:observed comment VML results reject false external aliased duplicate missing and swapped values",
-    "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:wrong worksheet relationship and comment namespaces cannot satisfy the graph predicates",
-    "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:namespace aliases and rich comment text are read by expanded names without modifying their input",
-    "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:duplicate drawing IDs comment records and missing relationship dependencies fail independently of custody",
-    "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:read-only graph predicates detect input or opaque VML payload mutation",
-    "bun:tests/unit/xlsx-comments.test.ts:native comment inspection returns detached exact authors refs text and separate VML relationship without writes",
-    "bun:tests/unit/xlsx-comments.test.ts:empty comment graphs and comments without VML remain distinct from malformed dependencies",
-    "bun:tests/unit/xlsx-comments.test.ts:rich text alias and UTF16 comment parts read in document order without normalising original bytes",
-    "bun:tests/unit/xlsx-comments.test.ts:external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged",
-    "bun:tests/unit/xlsx-comments.test.ts:wrong expanded namespaces and part content types never fall back to local-name inspection",
-    "bun:tests/unit/xlsx-comments.test.ts:invalid duplicate and non-cell comment references or author indices refuse without partial lists",
-    "bun:tests/unit/xlsx-comments.test.ts:unknown comment content phonetics nested text and malformed rich runs refuse instead of returning partial text",
-    "bun:tests/unit/xlsx-comments.test.ts:fresh inspections observe live metadata changes and protection does not turn reads into mutations",
-    "bun:tests/unit/xlsx-comments.test.ts:bounded worksheet-comment inputs refuse oversized XML comment counts and invalid part arguments",
-    "bun:tests/unit/xlsx-comments.test.ts:VML-only and empty comment parts report their distinct graphs without manufacturing comments",
-    "bun:tests/unit/xlsx-comments.test.ts:relationship lookalike attributes and fragment targets refuse without changing part payloads",
-    "bun:tests/unit/xlsx-comments.test.ts:refused metadata can be corrected for a later inspection without changing earlier detached results",
+    "bun:tests/unit/xlsx-comment-mappings.test.ts:comment mapping ledger covers exactly 19 declarations and 72 direct expressions without mutation or execution credit",
+    "bun:tests/unit/xlsx-comment-mappings.test.ts:comment mappings distinguish direct reads, delegated control counts, malformed graph custody and opaque VML",
+    "bun:tests/unit/xlsx-comment-mappings.test.ts:comment suite declaration and exact direct assertion sets cannot silently shrink or borrow row-edit cases",
+    "bun:tests/unit/xlsx-comment-mappings.test.ts:comment runtime binding helper and canonical pins are individually required and current",
+    "bun:tests/unit/xlsx-comment-mappings.test.ts:comment reconciliation retains original evidence, dynamic flags and nested assertion separation",
     "bun:tests/unit/xlsx-create.test.ts:adding a worksheet works when the existing r alias is scoped to only the first sheet",
     "bun:tests/unit/xlsx-create.test.ts:dimension stays before sheetViews and cols when a missing cell is authored",
     "bun:tests/unit/xlsx-create.test.ts:Workbook.create / authors a minimal workbook with styles that saves and reopens through the native reader",
@@ -6800,6 +6819,545 @@
       "unresolved": [],
       "executionCredit": false,
       "ledger": "docx-model"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:native comment inspection returns detached exact authors refs text and separate VML relationship without writes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(out).toEqual({worksheetPart:sheet,commentsRelationship:{id:'comments',type:R+'/comments',part:comments},vmlRelationship:{id:'anysvml',type:R+'/vmlDrawing',part:vml},comments:[{reference:'A2',authorId:0,author:'Test Author',text:textA},{reference:'A3',authorId:0,author:'Test Author',text:textB}]})",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).comments.map(c=>c.text)).toEqual([textA,textB])",
+        "expect(inspect(p).commentsRelationship!.part).toBe(comments)",
+        "expect(inspect(after)).toEqual(inspect(p))"
+      ],
+      "outcomes": [
+        "The full native result contains exact worksheet path, separate comments/VML references and both A2/A3 texts with author metadata. Inspection retains archive bytes; mutating returned rows/references leaves fresh reads unchanged; a serialized-byte reopen returns the same result."
+      ],
+      "gaps": [
+        "Direct native extension of the canonical graph input with author, detachment and byte-reopen checks; no file save, VML shape parsing or row mutation. Only selected mutated result fields are rechecked, with whole archive equality separately asserted.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:empty comment graphs and comments without VML remain distinct from malformed dependencies",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspect(p)).toEqual({worksheetPart:sheet,commentsRelationship:null,vmlRelationship:null,comments:[]})",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(out.comments).toEqual([{reference:'XFD1048576',authorId:0,author:'A',text:'edge'}])",
+        "expect(out.vmlRelationship).toBeNull()",
+        "expect(out.commentsRelationship!.part).toBe(comments)"
+      ],
+      "outcomes": [
+        "An ordinary newly authored worksheet has empty comments and two null references without archive changes. Adding one comment dependency without VML returns the expected author and edge-grid reference, null VML and resolved comment part."
+      ],
+      "gaps": [
+        "Different generated worksheet, XFD1048576 comment and no VML. Archive equality is asserted only before comment creation; this declaration has no later byte-custody or save/reopen check.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:rich text alias and UTF16 comment parts read in document order without normalising original bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(out.comments).toEqual([{reference:'B9',authorId:0,author:'  雪 & Co  ',text:' A& 😀'},{reference:'A1',authorId:0,author:'  雪 & Co  ',text:''}])",
+        "expect(out.vmlRelationship!.id).toBe('anysvml')",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "An aliased worksheet relationship and UTF-16LE comment part return ordered rich text with snow/emoji, preserved author spaces and a second empty comment. The VML ID and complete archive bytes remain exact."
+      ],
+      "gaps": [
+        "Different B9/A1 comments and author input; no canonical A2/A3 strings. Read-only UTF-16/namespace extension with no output save, VML shape inspection or rich-format appearance check.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:external ambiguous mismatched and dangling comment or VML dependencies refuse unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.names().map(n=>[n,p.get(n)])).toEqual(before)"
+      ],
+      "outcomes": [
+        "Listed external, duplicate, mismatched, dangling and missing dependency variants refuse inspection. All current part names and payloads match captured member arrays after each attempt."
+      ],
+      "gaps": [
+        "Control-only dependency matrix; custody uses member arrays because some malformed graphs cannot serialize. Errors are generic, and no successful canonical graph or all-package orphan/cross-worksheet-owner census is asserted.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:wrong expanded namespaces and part content types never fall back to local-name inspection",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Wrong worksheet/comment roots, wrongly qualified worksheet relationship or comment ref attributes, and wrong comment/VML content types refuse without changing serialized archive bytes."
+      ],
+      "gaps": [
+        "Control-only namespace/type matrix using altered fixtures. No successful canonical graph; the reader checks this selected worksheet graph rather than every package dependency.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:invalid duplicate and non-cell comment references or author indices refuse without partial lists",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Duplicate, noncanonical, out-of-grid, ranged, absolute, qualified or spaced comment references and invalid author indices refuse without changing serialized archive bytes."
+      ],
+      "gaps": [
+        "Control-only finite reference/author-policy matrix. It does not enumerate all valid addresses/authors or establish complete SpreadsheetML schema validation.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:unknown comment content phonetics nested text and malformed rich runs refuse instead of returning partial text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unknown extensions, author/list children, phonetic text, mixed or duplicate text leaves, nested text/runs and lexical comment markup refuse with archive bytes unchanged."
+      ],
+      "gaps": [
+        "Control-only finite topology matrix; no partially returned list is exposed on these thrown calls. No full rich-text schema, rendering or phonetic interpretation.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:fresh inspections observe live metadata changes and protection does not turn reads into mutations",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspect(p).comments[0]!.text).toBe('changed')",
+        "expect(first.comments[0]!.text).toBe(textA)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).vmlRelationship!.part).toBe(vml)",
+        "expect(p.toBytes()).toEqual(opaque)"
+      ],
+      "outcomes": [
+        "A fresh read observes edited comment text after worksheet protection is added, while a prior detached result retains its old text. Read-only inspection leaves the changed archive exact; replacing VML with opaque non-XML bytes still returns its reference without altering the archive."
+      ],
+      "gaps": [
+        "Native live-read and opaque VML policy extension; it deliberately does not validate VML syntax/shapes. No protection editing/admission policy, saved output or canonical unchanged-input readback is inferred.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:bounded worksheet-comment inputs refuse oversized XML comment counts and invalid part arguments",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspect(p,part as string)).toThrow()",
+        "expect(()=>inspect(p)).toThrow(expect.objectContaining({code:'xlsx-comments-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.toBytes()).toEqual(large)"
+      ],
+      "outcomes": [
+        "Invalid worksheet-part arguments refuse. A 10001-comment list raises xlsx-comments-unsupported and an oversized comments XML part also refuses; both oversized-input branches preserve archive bytes."
+      ],
+      "gaps": [
+        "Control-only bounds extension. Invalid-argument errors are generic and have no per-attempt archive assertion. No peak-memory measurement, maximum-success count, author-count-limit test or successful canonical graph.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:VML-only and empty comment parts report their distinct graphs without manufacturing comments",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspect(p).comments).toEqual([])",
+        "expect(inspect(p).commentsRelationship).toBeNull()",
+        "expect(inspect(p).vmlRelationship!.part).toBe(vml)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(q).comments).toEqual([])",
+        "expect(inspect(q).commentsRelationship!.part).toBe(comments)",
+        "expect(q.toBytes()).toEqual(empty)"
+      ],
+      "outcomes": [
+        "Removing the comments relationship yields an empty comment list and null comments reference while retaining VML; empty authors/commentList retains a comments relationship with no records. Both resulting archives remain unchanged by inspection."
+      ],
+      "gaps": [
+        "Different VML-only and empty-comment graphs. The VML-only setup leaves an orphan comment part in the package; this inspector does not perform orphan detection. No canonical A2/A3 values or saved-file check.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:relationship lookalike attributes and fragment targets refuse without changing part payloads",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow()",
+        "expect(p.names().map(n=>[n,p.get(n)])).toEqual(before)"
+      ],
+      "outcomes": [
+        "Qualified-only and additional qualified relationship IDs, plus fragment/query targets, refuse without changing current part-name/payload arrays."
+      ],
+      "gaps": [
+        "Control-only relationship metadata variants. Custody compares member arrays, not serialization of invalid graphs; lower-level OPC errors may precede inspector policy refusal. No network requests or target dereferencing are tested.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comments.test.ts:refused metadata can be corrected for a later inspection without changing earlier detached results",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>inspect(p)).toThrow(expect.objectContaining({code:'xlsx-comments-unsupported'}))",
+        "expect(p.toBytes()).toEqual(invalid)",
+        "expect(inspect(p).comments[0]!.text).toBe('Corrected')",
+        "expect(first.comments[0]!.text).toBe(textA)"
+      ],
+      "outcomes": [
+        "An invalid author index refuses with its archive retained; correcting metadata changes the next inspected text while the earlier detached result keeps the original text."
+      ],
+      "gaps": [
+        "Native recovery/live-read extension; restoring XML is explicit caller mutation. No writer API, save/reopen or canonical graph-only execution credit.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:canonical XLSX comment and VML inspection checks both relationships and exact comment values",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)",
+        "expect(result.counts.cases.planned).toBe(5)",
+        "expect(result.counts.steps.passed).toBe(7)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "The selected canonical graph case passes all seven steps with no failures, undefined or ambiguous bindings; one case passes and five sibling policy cases are reported planned."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; exact relationship/text/custody predicates are delegated to the pinned binding and native inspector. The five planned cases belong to this isolated feature selection, not the full acceptance run. No row/VML mutation, shape validation or independent Office reader.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:each canonical relationship identity type target and comment text rejects a wrong expected value",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Each wrong expected VML ID, VML target, relationship type, comments target, A2 text or A3 text causes one failed case and step, without undefined or ambiguous bindings."
+      ],
+      "gaps": [
+        "Control-only aggregate negative runs with delegated semantics. The nested source-substring assertion ensures replacement occurred; no positive run, saved output, mutation-profile coverage or error-code guarantee here.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop",
+        "deferred-assertion"
+      ],
+      "deferredAssertions": [
+        "expect(text).toContain(from!)"
+      ],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:observed comment VML results reject false external aliased duplicate missing and swapped values",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Corrupted observed IDs, external flags, paths, relationship type and comment rows cause one failed case/step without undefined or ambiguous bindings. Empty, duplicate and relabelled comment rows are included."
+      ],
+      "gaps": [
+        "Control-only aggregate result-corruption runs with delegated semantics; these alter captured reader output after inspection rather than raw XML or runtime implementation. No independent parser or mutation-policy evidence.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:wrong worksheet relationship and comment namespaces cannot satisfy the graph predicates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong worksheet, relationship-attribute, relationship-part, comment-root/list or text-leaf namespaces cause one failed case and step without undefined or ambiguous bindings."
+      ],
+      "gaps": [
+        "Control-only aggregate namespace runs with delegated semantics. Deliberate package changes reset the custody baseline; nested assertions check the source mutation took effect. Some failures can occur in OPC baseline serialization before the reader, and no exact refusal stage/code is asserted.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop",
+        "deferred-assertion"
+      ],
+      "deferredAssertions": [
+        "expect(next).not.toBe(old)"
+      ],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:namespace aliases and rich comment text are read by expanded names without modifying their input",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)"
+      ],
+      "outcomes": [
+        "A modified input with aliased worksheet/OPC/comment namespaces and A2 split into rich runs passes the selected graph case with an empty failure list."
+      ],
+      "gaps": [
+        "Positive variant with delegated semantic assertions, not the exact published fixture bytes. The custody baseline is reset after authored changes, so preservation is checked against that variant; no formatting, row editing or VML shape interpretation.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:duplicate drawing IDs comment records and missing relationship dependencies fail independently of custody",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Duplicate legacy drawings, additional comments relationships, reused relationship IDs, repeated comment refs and deleted dependencies each yield one failed case/step without undefined or ambiguous bindings."
+      ],
+      "gaps": [
+        "Control-only aggregate runs with delegated semantics. The baseline serialization can reject duplicate relationship IDs or missing parts during Given, not necessarily the reader or a canonical Then. Successful baseline resets prevent other semantic variants failing merely on byte drift.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-comment-vml-bindings.test.ts:read-only graph predicates detect input or opaque VML payload mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-comment-vml-existing-graph"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.counts.cases.failed).toBe(1)",
+        "expect(result.counts.steps.failed).toBe(1)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Mutating the caller input, expected-original buffer or opaque VML payload after inspection causes one failed case and step without undefined or ambiguous bindings."
+      ],
+      "gaps": [
+        "Control-only aggregate custody runs with delegated predicates. The VML payload is not parsed; errors establish mismatch against captured bytes, not shape validity, rendered comments or row-edit preservation.",
+        "Source mapping only; dynamic loops, nested assertions and helper calls retain inventory review flags. No execution or full format coverage is inferred."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xlsx-comments"
     },
     {
       "testId": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",
