@@ -4,8 +4,8 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 925,
-  "mappedDeclarations": 422,
+  "totalDeclarations": 930,
+  "mappedDeclarations": 446,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
@@ -129,6 +129,12 @@
     "tests/unit/zip64.test.ts": "05a83f2006b29ab844da3c36fab6960d6fbef83d9e8ffbb2edc48dc9a4ed756b",
     "tests/acceptance/zip64.ts": "a78945e1d11f5ad32138e2ab12c1b64d4dfe8402d602460a0b9a9bbb466e5f42",
     "workflows/native/opc-zip64.feature": "18da944b62e7c88c7558627bca9fbc211a121799efbd7cefeb04051dd573af91",
+    "tests/unit/zip.test.ts": "8c9e9b209c1ad086c67a9eea2357dc14e64100d7d8d8ad6de6f5ac5a31792e57",
+    "tests/unit/zip32-bindings.test.ts": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311",
+    "tests/acceptance/zip32.ts": "b5a1bc1c1d902fc8ded2eb7724bcdd7f7986dc9ab0131ef33c98c1439c7c04a4",
+    "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
+    "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
+    "workflows/package/zip32.feature": "87248aebdebc78fae8edd2093d93cb54d37514b0cd661bf4bc6f2cb1c7b8c719",
     "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de",
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
     "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
@@ -547,6 +553,28 @@
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/native/opc-zip64.feature": "18da944b62e7c88c7558627bca9fbc211a121799efbd7cefeb04051dd573af91"
+      }
+    },
+    {
+      "name": "zip32",
+      "scopePaths": [
+        "tests/unit/zip.test.ts",
+        "tests/unit/zip32-bindings.test.ts"
+      ],
+      "mappedDeclarations": 24,
+      "sourceSha256": {
+        "tests/unit/zip.test.ts": "8c9e9b209c1ad086c67a9eea2357dc14e64100d7d8d8ad6de6f5ac5a31792e57",
+        "tests/unit/zip32-bindings.test.ts": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311",
+        "tests/acceptance/zip32.ts": "b5a1bc1c1d902fc8ded2eb7724bcdd7f7986dc9ab0131ef33c98c1439c7c04a4",
+        "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
+        "tests/acceptance/steps.ts": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a",
+        "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
+        "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/package/zip32.feature": "87248aebdebc78fae8edd2093d93cb54d37514b0cd661bf4bc6f2cb1c7b8c719"
       }
     },
     {
@@ -1049,30 +1077,11 @@
     "bun:tests/unit/xml-values-bindings.test.ts:eleven XML value cases execute with every Then asserted and other operations left planned",
     "bun:tests/unit/xml-values-bindings.test.ts:changed expected XML values and namespace-table cells fail instead of passing vacuously",
     "bun:tests/unit/xml-values-bindings.test.ts:XML value assertions reject corrupted parser, metadata and escaping results",
-    "bun:tests/unit/zip.test.ts:crc32 / matches the standard test vector",
-    "bun:tests/unit/zip.test.ts:writeZip / writes deterministic UTF-8 ZIP32 output that readZip can reopen",
-    "bun:tests/unit/zip.test.ts:writeZip / refuses ASCII case-colliding output names",
-    "bun:tests/unit/zip.test.ts:writeZip / refuses non-empty directory entries",
-    "bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment",
-    "bun:tests/unit/zip.test.ts:readZip / refuses duplicate member names",
-    "bun:tests/unit/zip.test.ts:readZip / refuses ASCII case-colliding member names",
-    "bun:tests/unit/zip.test.ts:readZip / refuses noncanonical part paths",
-    "bun:tests/unit/zip.test.ts:readZip / refuses encrypted members",
-    "bun:tests/unit/zip.test.ts:readZip / refuses unsupported compression methods",
-    "bun:tests/unit/zip.test.ts:readZip / refuses multi-disk archives",
-    "bun:tests/unit/zip.test.ts:readZip / refuses malformed ZIP64 sentinels without ZIP64 directory records",
-    "bun:tests/unit/zip.test.ts:readZip / refuses local and central metadata mismatches",
-    "bun:tests/unit/zip.test.ts:readZip / refuses CRC mismatches",
-    "bun:tests/unit/zip.test.ts:readZip / refuses declared size mismatches",
-    "bun:tests/unit/zip.test.ts:readZip / refuses deflated members that inflate past their declared size bound",
-    "bun:tests/unit/zip.test.ts:readZip / refuses undeclared trailing bytes after the archive",
-    "bun:tests/unit/zip.test.ts:readZip / enforces configured archive, count, entry, total, and ratio bounds",
-    "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
-    "bun:tests/unit/zip32-bindings.test.ts:twenty canonical ZIP32 checksum, refusal and configured-bound cases execute",
-    "bun:tests/unit/zip32-bindings.test.ts:wrong CRC, error code and message expectations fail bound ZIP32 predicates",
-    "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
-    "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
-    "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
+    "bun:tests/unit/zip32-mappings.test.ts:ZIP32 ledger enumerates 24 declarations and 106 direct expressions preserving 422 predecessor rows",
+    "bun:tests/unit/zip32-mappings.test.ts:ZIP32 mappings preserve corpus smoke BZIP2 bounds aggregate and nested-control limits",
+    "bun:tests/unit/zip32-mappings.test.ts:ZIP32 suites and literal assertions cannot shrink or borrow ZIP64 case keys",
+    "bun:tests/unit/zip32-mappings.test.ts:ZIP32 runtime fixture-builder binding and canonical source pins all reject stale or missing inputs",
+    "bun:tests/unit/zip32-mappings.test.ts:ZIP32 reconciliation preserves original direct and nested evidence review flags and unknown leaves",
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 ledger enumerates 15 declarations and 46 direct expressions preserving 407 previous mappings",
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 mapping limits helper attribution tiny signed descriptors counts budgets and missing mutation workflow",
     "bun:tests/unit/zip64-mappings.test.ts:ZIP64 scope assertions and semantic package-diff case borrowing refuse",
@@ -12428,6 +12437,709 @@
       "unresolved": [],
       "executionCredit": false,
       "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:crc32 / matches the standard test vector",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip-crc32-standard-vector"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(crc32(encoder.encode(\"123456789\"))).toBe(0xcbf43926)"
+      ],
+      "outcomes": [
+        "The standard UTF-8 123456789 vector yields unsigned CRC32 CBF43926."
+      ],
+      "gaps": [
+        "Direct primitive check, no shared runner or input-custody assertion; left scenario-only rather than inferring execution from matching one value.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / writes deterministic UTF-8 ZIP32 output that readZip can reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip-write-deterministic"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(first).toEqual(second)",
+        "expect(Array.from(reopened.keys())).toEqual([\n      \"[Content_Types].xml\",\n      \"docProps/core.xml\",\n      \"word/document.xml\",\n    ])",
+        "expect(decoder.decode(reopened.get(\"word/document.xml\")!)).toBe(\"<w:document/>\")",
+        "expect(decoder.decode(reopened.get(\"[Content_Types].xml\")!)).toBe(\"<Types/>\")"
+      ],
+      "outcomes": [
+        "Writing the same map twice produces identical bytes; reopening returns three ordered file names and exact main/content-types payload strings while omitting an empty directory entry."
+      ],
+      "gaps": [
+        "Native writer example includes an extra core-properties member whose name but not payload is asserted. UTF-8 inputs are ASCII here; no disk save, header timestamp/flags census or full OPC validity.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / refuses ASCII case-colliding output names",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-writer-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-case-collision\")",
+        "expect((error as OoxmlError).message).toContain(\"ASCII case-collides\")"
+      ],
+      "outcomes": [
+        "ASCII case-colliding output names refuse as OoxmlError with zip-case-collision and ASCII case-collides text."
+      ],
+      "gaps": [
+        "Native payloads one/two differ from shared writer a/b values. No input map/payload custody or saved output check in this declaration.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:writeZip / refuses non-empty directory entries",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-writer-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-directory-entry-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"must be empty\")"
+      ],
+      "outcomes": [
+        "A nonempty directory entry refuses as OoxmlError with zip-directory-entry-invalid and must be empty text."
+      ],
+      "gaps": [
+        "Native payload not empty differs from shared x. No map custody assertion, path save or directory filesystem operation.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip-read-valid"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(Array.from(parts.keys())).toEqual([\"[Content_Types].xml\", \"word/document.xml\"])",
+        "expect(decoder.decode(parts.get(\"[Content_Types].xml\")!)).toBe(\"<Types/>\")",
+        "expect(decoder.decode(parts.get(\"word/document.xml\")!)).toBe(\"<w:document/>\")"
+      ],
+      "outcomes": [
+        "A valid archive with empty directory, stored and deflated members, signed descriptor and declared comment decodes to two ordered file names and exact payload strings."
+      ],
+      "gaps": [
+        "Native reader example exercises one signed descriptor and declared comment; no comment re-emission, caller-byte custody or semantic XML/OPC validation.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses duplicate member names",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-duplicate-entry\")",
+        "expect((error as OoxmlError).message).toContain(\"duplicate ZIP member\")"
+      ],
+      "outcomes": [
+        "Duplicate member names refuse as OoxmlError with zip-duplicate-entry and duplicate ZIP member text."
+      ],
+      "gaps": [
+        "Native ordered pair uses one/two rather than shared a/b; no source-byte custody or independent duplicate-header comparison here.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses ASCII case-colliding member names",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-case-collision\")",
+        "expect((error as OoxmlError).message).toContain(\"ASCII case-collides\")"
+      ],
+      "outcomes": [
+        "ASCII case-colliding member names refuse as OoxmlError with zip-case-collision and ASCII case-collides text."
+      ],
+      "gaps": [
+        "Native pair uses different payloads from shared sample; no caller-byte custody or Unicode casefold policy implied.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses noncanonical part paths",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-name-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"noncanonical\")"
+      ],
+      "outcomes": [
+        "A parent-traversal member path refuses as OoxmlError with zip-name-invalid and noncanonical text."
+      ],
+      "gaps": [
+        "Native single noncanonical path, not an exhaustive path-security matrix; shared x payload differs. No source-buffer custody here.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses encrypted members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-encryption-unsupported\")",
+        "expect((error as OoxmlError).message).toContain(\"encrypted\")"
+      ],
+      "outcomes": [
+        "Encrypted general-purpose flags refuse as OoxmlError with zip-encryption-unsupported and encrypted text."
+      ],
+      "gaps": [
+        "Native secret payload differs from shared payload; this is encryption refusal, not decryption. No caller-byte preservation check.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses unsupported compression methods",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-method-unsupported\")",
+        "expect((error as OoxmlError).message).toContain(\"compression method\")"
+      ],
+      "outcomes": [
+        "Method 12 with raw stored x bytes refuses as OoxmlError with zip-method-unsupported and compression method text."
+      ],
+      "gaps": [
+        "The bytes are not a valid BZIP2 stream: this checks header-method refusal only, not BZIP2 decoding or a producer-generated fixture. No caller custody here.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses multi-disk archives",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-multi-disk-unsupported\")",
+        "expect((error as OoxmlError).message).toContain(\"multi-disk\")"
+      ],
+      "outcomes": [
+        "A nonzero end-record disk number refuses as OoxmlError with zip-multi-disk-unsupported and multi-disk text."
+      ],
+      "gaps": [
+        "Native one-field multi-disk refusal, not reading a split archive or every disk-field combination. No byte custody asserted.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses malformed ZIP64 sentinels without ZIP64 directory records",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-structure-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"ZIP64\")"
+      ],
+      "outcomes": [
+        "ZIP64 count sentinels without matching directory records refuse as OoxmlError with zip-structure-invalid and ZIP64 message text."
+      ],
+      "gaps": [
+        "Native malformed ZIP32 end-record variant, not valid ZIP64 reading/writing; no credit borrowed from the ZIP64 suite. No input-custody assertion.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses local and central metadata mismatches",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-local-metadata-mismatch\")",
+        "expect((error as OoxmlError).message).toContain(\"local and central\")"
+      ],
+      "outcomes": [
+        "A local member name differing from its central name refuses as OoxmlError with zip-local-metadata-mismatch and local and central text."
+      ],
+      "gaps": [
+        "One metadata mismatch field, not all local/central fields. Native payload x differs from shared payload; no caller-buffer check.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses CRC mismatches",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-crc-mismatch\")",
+        "expect((error as OoxmlError).message).toContain(\"CRC\")"
+      ],
+      "outcomes": [
+        "Incorrect CRC fields refuse as OoxmlError with zip-crc-mismatch and CRC text."
+      ],
+      "gaps": [
+        "Native matching shared-like CRC setup but no exact case link; fixture fields are trusted to the pinned builder and no caller-byte custody is checked here.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses declared size mismatches",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-size-mismatch\")",
+        "expect((error as OoxmlError).message).toContain(\"declared size\")"
+      ],
+      "outcomes": [
+        "A stored payload whose declared sizes all claim 99 refuses as OoxmlError with zip-size-mismatch and declared size text."
+      ],
+      "gaps": [
+        "Native finite size mismatch, not arbitrary truncated-data or allocation behavior; no caller custody or file readback.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses deflated members that inflate past their declared size bound",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-size-mismatch\")",
+        "expect((error as OoxmlError).message).toContain(\"declared size\")"
+      ],
+      "outcomes": [
+        "A deflated 4096-byte payload with declared expanded size 32 refuses as OoxmlError with zip-size-mismatch and declared size text."
+      ],
+      "gaps": [
+        "Native decompression-bound result only; does not measure allocation timing, peak memory or decompression work. No caller-buffer preservation assertion.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / refuses undeclared trailing bytes after the archive",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-end-record-missing\")",
+        "expect((error as OoxmlError).message).toContain(\"end-of-central-directory\")"
+      ],
+      "outcomes": [
+        "A newline byte appended outside the declared archive refuses as OoxmlError with zip-end-record-missing and end-of-central-directory text."
+      ],
+      "gaps": [
+        "Native undeclared-trailer example, not a general comment or trailing-data matrix. No input-custody assertion.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / enforces configured archive, count, entry, total, and ratio bounds",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-configured-bounds"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-archive-too-large\")",
+        "expect((error as OoxmlError).message).toContain(\"archive bytes\")",
+        "expect((error as OoxmlError).code).toBe(\"zip-too-many-entries\")",
+        "expect((error as OoxmlError).message).toContain(\"entry limit\")",
+        "expect((error as OoxmlError).code).toBe(\"zip-entry-too-large\")",
+        "expect((error as OoxmlError).code).toBe(\"zip-total-too-large\")",
+        "expect((error as OoxmlError).message).toContain(\"total expanded\")",
+        "expect((error as OoxmlError).code).toBe(\"zip-compression-ratio-exceeded\")",
+        "expect((error as OoxmlError).message).toContain(\"compression ratio\")"
+      ],
+      "outcomes": [
+        "Lower archive-byte, entry-count, entry-byte, total-byte and compression-ratio limits each yield the exact typed refusal code and message fragment."
+      ],
+      "gaps": [
+        "Fifteen source occurrences in this test reduce to ten deduplicated literal assertion expressions because class/code/message text repeats. The five failures are independent options but do not measure allocation timing or prove a before-expansion event trace. No caller custody here.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip.test.ts:readZip / reads every checked-in rcarmo fixture archive under default bounds",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip-read-valid"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(fixtures).toHaveLength(EXPECTED_FIXTURE_ARCHIVE_COUNT)"
+      ],
+      "outcomes": [
+        "The stable fixture list has exactly 74 paths and every archive is passed through readZip under default bounds without an uncaught failure."
+      ],
+      "gaps": [
+        "Inventory-count plus no-throw corpus smoke, not exact member/content outcome checks. Only the count is an explicit assertion; no Office semantics, roundtrip, caller-byte custody or full current asset-estate claim.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip32-bindings.test.ts:twenty canonical ZIP32 checksum, refusal and configured-bound cases execute",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip-crc32-standard-vector",
+        "@id-bun-zip32-reader-refusal",
+        "@id-bun-zip32-writer-refusal",
+        "@id-bun-zip32-configured-bounds"
+      ],
+      "caseKeys": [
+        "@id-zip-crc32-standard-vector",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"duplicate names\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"one\\\"],[\\\"word/document.xml\\\",\\\"two\\\"]]\",\"mutation\":\"none\",\"code\":\"zip-duplicate-entry\",\"message\":\"duplicate ZIP member\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"ASCII case collision\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"one\\\"],[\\\"WORD/document.xml\\\",\\\"two\\\"]]\",\"mutation\":\"none\",\"code\":\"zip-case-collision\",\"message\":\"ASCII case-collides\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"parent traversal\",\"entries_json\":\"[[\\\"../word/document.xml\\\",\\\"bad\\\"]]\",\"mutation\":\"none\",\"code\":\"zip-name-invalid\",\"message\":\"noncanonical\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"encryption flag\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"secret\\\"]]\",\"mutation\":\"general-purpose bit 0 is set in both headers\",\"code\":\"zip-encryption-unsupported\",\"message\":\"encrypted\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"unsupported method\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"x\\\"]]\",\"mutation\":\"both methods are 12 and payload bytes are stored uncompressed\",\"code\":\"zip-method-unsupported\",\"message\":\"compression method\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"multiple disks\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"x\\\"]]\",\"mutation\":\"end record disk number is 1\",\"code\":\"zip-multi-disk-unsupported\",\"message\":\"multi-disk\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"missing ZIP64 records\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"x\\\"]]\",\"mutation\":\"both end-record counts are 65535 without ZIP64 records\",\"code\":\"zip-structure-invalid\",\"message\":\"ZIP64\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"local name mismatch\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"x\\\"]]\",\"mutation\":\"local name is word/other.xml\",\"code\":\"zip-local-metadata-mismatch\",\"message\":\"local and central\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"CRC mismatch\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"payload\\\"]]\",\"mutation\":\"both CRC fields are hexadecimal DEADBEEF\",\"code\":\"zip-crc-mismatch\",\"message\":\"CRC\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"stored size mismatch\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"payload\\\"]]\",\"mutation\":\"method is STORED and all size fields are 99\",\"code\":\"zip-size-mismatch\",\"message\":\"declared size\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"deflate size overrun\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"A\\\"]]\",\"mutation\":\"payload repeats A 4096 times but both expanded sizes are 32\",\"code\":\"zip-size-mismatch\",\"message\":\"declared size\"}",
+        "@id-bun-zip32-reader-refusal|{\"variant\":\"undeclared trailing byte\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"x\\\"]]\",\"mutation\":\"a newline byte follows the complete uncommented archive\",\"code\":\"zip-end-record-missing\",\"message\":\"end-of-central-directory\"}",
+        "@id-bun-zip32-writer-refusal|{\"variant\":\"ASCII case collision\",\"entries_json\":\"[[\\\"word/document.xml\\\",\\\"one\\\"],[\\\"WORD/document.xml\\\",\\\"two\\\"]]\",\"code\":\"zip-case-collision\",\"message\":\"ASCII case-collides\"}",
+        "@id-bun-zip32-writer-refusal|{\"variant\":\"non-empty directory entry\",\"entries_json\":\"[[\\\"word/\\\",\\\"not empty\\\"]]\",\"code\":\"zip-directory-entry-invalid\",\"message\":\"must be empty\"}",
+        "@id-bun-zip32-configured-bounds|{\"limit\":\"maxArchiveBytes\",\"value\":\"archive byte length minus 1\",\"code\":\"zip-archive-too-large\",\"message\":\"archive bytes\"}",
+        "@id-bun-zip32-configured-bounds|{\"limit\":\"maxEntries\",\"value\":\"1\",\"code\":\"zip-too-many-entries\",\"message\":\"entry limit\"}",
+        "@id-bun-zip32-configured-bounds|{\"limit\":\"maxEntryBytes\",\"value\":\"8\",\"code\":\"zip-entry-too-large\",\"message\":\"entry limit\"}",
+        "@id-bun-zip32-configured-bounds|{\"limit\":\"maxTotalBytes\",\"value\":\"8\",\"code\":\"zip-total-too-large\",\"message\":\"total expanded\"}",
+        "@id-bun-zip32-configured-bounds|{\"limit\":\"maxCompressionRatio\",\"value\":\"2\",\"code\":\"zip-compression-ratio-exceeded\",\"message\":\"compression ratio\"}"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(20)",
+        "expect(result.counts.cases.planned).toBe(4)",
+        "expect(result.counts.steps.undefined).toBe(0)"
+      ],
+      "outcomes": [
+        "The selected shared batch reports zero failures, 20 passed cases, four planned siblings and no undefined steps. Pinned bindings enforce exact CRC, typed error/code/message/no-output and reader/writer input custody."
+      ],
+      "gaps": [
+        "Only aggregate outcomes are asserted by this wrapper; semantic checks are delegated. The four planned cases reflect isolated selection of the new outlines, not global nonimplementation. No path save, independent producer or allocation timing evidence.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip32-bindings.test.ts:wrong CRC, error code and message expectations fail bound ZIP32 predicates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip-crc32-standard-vector",
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(result.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Wrong CRC, error-code and error-message expectations each yield nonzero failed case/step counts with zero undefined or ambiguous steps."
+      ],
+      "gaps": [
+        "Native negative-control wrapper. The source-fragment presence check is a nested callback assertion, not one of the four direct aggregate predicates. Counts are positive lower bounds, not exact failure sites; semantic checks are delegated.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop",
+        "deferred-assertion"
+      ],
+      "deferredAssertions": [
+        "expect(s.includes(from!)).toBe(true)"
+      ],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(plain.view.getUint16(6, true)).toBe(0x800)",
+        "expect(plain.view.getUint16(8, true)).toBe(8)",
+        "expect(plain.view.getUint32(14, true)).toBe(crc32Test(encode('payload')))",
+        "expect(decode(inflateRawSync(plain.bytes.subarray(plain.data, plain.central)))).toBe('payload')",
+        "expect(encrypted.view.getUint16(6, true)).toBe(0x801)",
+        "expect(encrypted.view.getUint16(encrypted.central + 8, true)).toBe(0x801)",
+        "expect(unsupported.view.getUint16(8, true)).toBe(12)",
+        "expect(unsupported.view.getUint16(unsupported.central + 10, true)).toBe(12)",
+        "expect(decode(unsupported.bytes.subarray(unsupported.data, unsupported.central))).toBe('payload')",
+        "expect(disk.view.getUint16(disk.end + 4, true)).toBe(1)",
+        "expect(counts.view.getUint16(counts.end + 8, true)).toBe(65535)",
+        "expect(counts.view.getUint16(counts.end + 10, true)).toBe(65535)",
+        "expect(counts.central + counts.view.getUint32(counts.end + 12, true)).toBe(counts.end)",
+        "expect(decode(mismatch.bytes.subarray(30, mismatch.data))).toBe('word/other.xml')",
+        "expect(decode(mismatch.bytes.subarray(mismatch.central + 46, mismatch.central + 46 + mismatch.view.getUint16(mismatch.central + 28, true)))).toBe('word/document.xml')",
+        "expect(crc.view.getUint32(14, true)).toBe(0xdeadbeef)",
+        "expect(crc.view.getUint32(crc.central + 16, true)).toBe(0xdeadbeef)",
+        "expect(stored.view.getUint16(8, true)).toBe(0)",
+        "expect(stored.view.getUint16(stored.central + 10, true)).toBe(0)",
+        "expect(stored.view.getUint32(offset, true)).toBe(99)",
+        "expect(decode(stored.bytes.subarray(stored.data, stored.central))).toBe('payload')",
+        "expect(overrun.view.getUint32(22, true)).toBe(32)",
+        "expect(overrun.view.getUint32(overrun.central + 24, true)).toBe(32)",
+        "expect(overrun.view.getUint32(18, true)).toBe(overrun.central - overrun.data)",
+        "expect(overrun.view.getUint32(overrun.central + 20, true)).toBe(overrun.central - overrun.data)",
+        "expect(decode(inflateRawSync(overrun.bytes.subarray(overrun.data, overrun.central)))).toBe('A'.repeat(4096))",
+        "expect(overrun.view.getUint32(14, true)).toBe(crc32Test(encode('A'.repeat(4096))))",
+        "expect(overrun.view.getUint32(overrun.central + 16, true)).toBe(crc32Test(encode('A'.repeat(4096))))",
+        "expect(tail.subarray(0, -1)).toEqual(plain.bytes)",
+        "expect(tail.at(-1)).toBe(10)"
+      ],
+      "outcomes": [
+        "Fixture controls compare flags, compression methods, disk/count fields, names, CRC and sizes, inflated/raw payloads and trailing newline against each requested mutation."
+      ],
+      "gaps": [
+        "Native input-fidelity checks, not reader refusal execution. Three signature checks live in nested sample helper and are counted separately; the 30 direct expressions include a size-offset loop. Method12 stores uncompressed bytes, not BZIP2 data.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop",
+        "deferred-assertion"
+      ],
+      "deferredAssertions": [
+        "expect(view.getUint32(0, true)).toBe(0x04034b50)",
+        "expect(view.getUint32(central, true)).toBe(0x02014b50)",
+        "expect(view.getUint32(end, true)).toBe(0x06054b50)"
+      ],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(actual).toEqual(names)",
+        "expect(specs.map(s => s.name)).toEqual(names)",
+        "expect(specs.map(s => new TextDecoder().decode(s.blob))).toEqual(names.map((_, i) => String(i)))"
+      ],
+      "outcomes": [
+        "Ordered central directory names retain duplicates, case differences and parent traversal; original spec names and payload strings also remain unchanged."
+      ],
+      "gaps": [
+        "Native fixture-order/custody controls, not readZip validation. Examines central records only and does not compare complete local records or caller archives.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
+    },
+    {
+      "testId": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-bun-zip32-reader-refusal",
+        "@id-bun-zip32-writer-refusal",
+        "@id-bun-zip32-configured-bounds"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(result.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(result.counts.steps.failed).toBeGreaterThan(0)",
+        "expect(result.counts.steps.undefined).toBe(0)",
+        "expect(result.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Fabricated success, untyped errors and reader-buffer sabotage produce failed case/step counts without undefined or ambiguous bindings."
+      ],
+      "gaps": [
+        "Native aggregate controls delegate semantic predicates. Caller-buffer mutation is injected for reader steps only, not the writer input map. No exact failure-step or per-variant count assertion; no disk state involved.",
+        "Bounded source mapping only. Equivalent helper inlining preserves runtime predicates; direct/deferred separation and loop review flags remain. No new execution or general ZIP/OPC parity credit; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip32"
     },
     {
       "testId": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",

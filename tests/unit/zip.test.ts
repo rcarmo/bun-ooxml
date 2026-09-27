@@ -53,21 +53,19 @@ describe("writeZip", () => {
       ["WORD/document.xml", encoder.encode("two")],
     ]);
 
-    expectZipError(
-      () => writeZip(parts),
-      "zip-case-collision",
-      "ASCII case-collides",
-    );
+    { const error = captureZipError(() => writeZip(parts), "zip-case-collision");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-case-collision");
+    expect((error as OoxmlError).message).toContain("ASCII case-collides"); }
   });
 
   test("refuses non-empty directory entries", () => {
     const parts = new Map<string, Uint8Array>([["word/", encoder.encode("not empty")]]);
 
-    expectZipError(
-      () => writeZip(parts),
-      "zip-directory-entry-invalid",
-      "must be empty",
-    );
+    { const error = captureZipError(() => writeZip(parts), "zip-directory-entry-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-directory-entry-invalid");
+    expect((error as OoxmlError).message).toContain("must be empty"); }
   });
 });
 
@@ -101,7 +99,10 @@ describe("readZip", () => {
       { name: "word/document.xml", blob: encoder.encode("two") },
     ]);
 
-    expectZipError(() => readZip(archive), "zip-duplicate-entry", "duplicate ZIP member");
+    { const error = captureZipError(() => readZip(archive), "zip-duplicate-entry");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-duplicate-entry");
+    expect((error as OoxmlError).message).toContain("duplicate ZIP member"); }
   });
 
   test("refuses ASCII case-colliding member names", () => {
@@ -110,13 +111,19 @@ describe("readZip", () => {
       { name: "WORD/document.xml", blob: encoder.encode("two") },
     ]);
 
-    expectZipError(() => readZip(archive), "zip-case-collision", "ASCII case-collides");
+    { const error = captureZipError(() => readZip(archive), "zip-case-collision");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-case-collision");
+    expect((error as OoxmlError).message).toContain("ASCII case-collides"); }
   });
 
   test("refuses noncanonical part paths", () => {
     const archive = buildZip([{ name: "../word/document.xml", blob: encoder.encode("bad") }]);
 
-    expectZipError(() => readZip(archive), "zip-name-invalid", "noncanonical");
+    { const error = captureZipError(() => readZip(archive), "zip-name-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-name-invalid");
+    expect((error as OoxmlError).message).toContain("noncanonical"); }
   });
 
   test("refuses encrypted members", () => {
@@ -124,13 +131,19 @@ describe("readZip", () => {
       { name: "word/document.xml", blob: encoder.encode("secret"), flags: FLAG_UTF8 | 0x0001 },
     ]);
 
-    expectZipError(() => readZip(archive), "zip-encryption-unsupported", "encrypted");
+    { const error = captureZipError(() => readZip(archive), "zip-encryption-unsupported");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-encryption-unsupported");
+    expect((error as OoxmlError).message).toContain("encrypted"); }
   });
 
   test("refuses unsupported compression methods", () => {
     const archive = buildZip([{ name: "word/document.xml", blob: encoder.encode("x"), method: 12 }]);
 
-    expectZipError(() => readZip(archive), "zip-method-unsupported", "compression method");
+    { const error = captureZipError(() => readZip(archive), "zip-method-unsupported");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-method-unsupported");
+    expect((error as OoxmlError).message).toContain("compression method"); }
   });
 
   test("refuses multi-disk archives", () => {
@@ -138,7 +151,10 @@ describe("readZip", () => {
       diskNumber: 1,
     });
 
-    expectZipError(() => readZip(archive), "zip-multi-disk-unsupported", "multi-disk");
+    { const error = captureZipError(() => readZip(archive), "zip-multi-disk-unsupported");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-multi-disk-unsupported");
+    expect((error as OoxmlError).message).toContain("multi-disk"); }
   });
 
   test("refuses malformed ZIP64 sentinels without ZIP64 directory records", () => {
@@ -147,7 +163,10 @@ describe("readZip", () => {
       diskEntries: 0xffff,
     });
 
-    expectZipError(() => readZip(archive), "zip-structure-invalid", "ZIP64");
+    { const error = captureZipError(() => readZip(archive), "zip-structure-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-structure-invalid");
+    expect((error as OoxmlError).message).toContain("ZIP64"); }
   });
 
   test("refuses local and central metadata mismatches", () => {
@@ -159,7 +178,10 @@ describe("readZip", () => {
       },
     ]);
 
-    expectZipError(() => readZip(archive), "zip-local-metadata-mismatch", "local and central");
+    { const error = captureZipError(() => readZip(archive), "zip-local-metadata-mismatch");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-local-metadata-mismatch");
+    expect((error as OoxmlError).message).toContain("local and central"); }
   });
 
   test("refuses CRC mismatches", () => {
@@ -171,7 +193,10 @@ describe("readZip", () => {
       },
     ]);
 
-    expectZipError(() => readZip(archive), "zip-crc-mismatch", "CRC");
+    { const error = captureZipError(() => readZip(archive), "zip-crc-mismatch");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-crc-mismatch");
+    expect((error as OoxmlError).message).toContain("CRC"); }
   });
 
   test("refuses declared size mismatches", () => {
@@ -187,7 +212,10 @@ describe("readZip", () => {
       },
     ]);
 
-    expectZipError(() => readZip(archive), "zip-size-mismatch", "declared size");
+    { const error = captureZipError(() => readZip(archive), "zip-size-mismatch");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-size-mismatch");
+    expect((error as OoxmlError).message).toContain("declared size"); }
   });
 
   test("refuses deflated members that inflate past their declared size bound", () => {
@@ -201,13 +229,19 @@ describe("readZip", () => {
       },
     ]);
 
-    expectZipError(() => readZip(archive), "zip-size-mismatch", "declared size");
+    { const error = captureZipError(() => readZip(archive), "zip-size-mismatch");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-size-mismatch");
+    expect((error as OoxmlError).message).toContain("declared size"); }
   });
 
   test("refuses undeclared trailing bytes after the archive", () => {
     const archive = concatBytes(buildZip([{ name: "word/document.xml", blob: encoder.encode("x") }]), encoder.encode("\n"));
 
-    expectZipError(() => readZip(archive), "zip-end-record-missing", "end-of-central-directory");
+    { const error = captureZipError(() => readZip(archive), "zip-end-record-missing");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-end-record-missing");
+    expect((error as OoxmlError).message).toContain("end-of-central-directory"); }
   });
 
   test("enforces configured archive, count, entry, total, and ratio bounds", () => {
@@ -217,11 +251,26 @@ describe("readZip", () => {
       { name: "b.bin", blob: encoder.encode("bb") },
     ]);
 
-    expectZipError(() => readZip(archive, { maxArchiveBytes: archive.length - 1 }), "zip-archive-too-large", "archive bytes");
-    expectZipError(() => readZip(archive, { maxEntries: 1 }), "zip-too-many-entries", "entry limit");
-    expectZipError(() => readZip(archive, { maxEntryBytes: 8 }), "zip-entry-too-large", "entry limit");
-    expectZipError(() => readZip(archive, { maxTotalBytes: 8 }), "zip-total-too-large", "total expanded");
-    expectZipError(() => readZip(archive, { maxCompressionRatio: 2 }), "zip-compression-ratio-exceeded", "compression ratio");
+    { const error = captureZipError(() => readZip(archive, { maxArchiveBytes: archive.length - 1 }), "zip-archive-too-large");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-archive-too-large");
+    expect((error as OoxmlError).message).toContain("archive bytes"); }
+    { const error = captureZipError(() => readZip(archive, { maxEntries: 1 }), "zip-too-many-entries");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-too-many-entries");
+    expect((error as OoxmlError).message).toContain("entry limit"); }
+    { const error = captureZipError(() => readZip(archive, { maxEntryBytes: 8 }), "zip-entry-too-large");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-entry-too-large");
+    expect((error as OoxmlError).message).toContain("entry limit"); }
+    { const error = captureZipError(() => readZip(archive, { maxTotalBytes: 8 }), "zip-total-too-large");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-total-too-large");
+    expect((error as OoxmlError).message).toContain("total expanded"); }
+    { const error = captureZipError(() => readZip(archive, { maxCompressionRatio: 2 }), "zip-compression-ratio-exceeded");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-compression-ratio-exceeded");
+    expect((error as OoxmlError).message).toContain("compression ratio"); }
   });
 
   test("reads every checked-in rcarmo fixture archive under default bounds", () => {
@@ -239,18 +288,13 @@ describe("readZip", () => {
   });
 });
 
-function expectZipError(action: () => unknown, code: string, messageFragment: string): void {
+function captureZipError(action: () => unknown, code: string): unknown {
   try {
     action();
     throw new Error(`expected ${code}`);
   } catch (error) {
-    if (error instanceof Error && error.message === `expected ${code}`) {
-      throw error;
-    }
-    expect(error).toBeInstanceOf(OoxmlError);
-    const refusal = error as OoxmlError;
-    expect(refusal.code).toBe(code);
-    expect(refusal.message).toContain(messageFragment);
+    if (error instanceof Error && error.message === `expected ${code}`) throw error;
+    return error;
   }
 }
 

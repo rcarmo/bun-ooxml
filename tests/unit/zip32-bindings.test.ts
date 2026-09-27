@@ -13,12 +13,6 @@ async function run(change: (s: string) => string = s => s, activeBindings: StepB
     features: count(1), scenarios: count(4), cases: count(20), steps: count(91),
   } }, activeBindings, 'zip32-unit');
 }
-function failedPredicate(result: Awaited<ReturnType<typeof run>>) {
-  expect(result.counts.cases.failed).toBeGreaterThan(0);
-  expect(result.counts.steps.failed).toBeGreaterThan(0);
-  expect(result.counts.steps.undefined).toBe(0);
-  expect(result.counts.steps.ambiguous).toBe(0);
-}
 
 test('twenty canonical ZIP32 checksum, refusal and configured-bound cases execute', async () => {
   const result = await run();
@@ -35,7 +29,10 @@ test('wrong CRC, error code and message expectations fail bound ZIP32 predicates
     ['| CRC                      |', '| wrong message            |'],
   ]) {
     const result = await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });
-    failedPredicate(result);
+    expect(result.counts.cases.failed).toBeGreaterThan(0);
+    expect(result.counts.steps.failed).toBeGreaterThan(0);
+    expect(result.counts.steps.undefined).toBe(0);
+    expect(result.counts.steps.ambiguous).toBe(0);
   }
 });
 
@@ -124,6 +121,10 @@ test('ZIP32 predicates reject fabricated success, untyped errors and caller-buff
     const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
       await b.run(c, ...captures); mutate(c.state as State);
     } } : b);
-    failedPredicate(await run(s => s, corrupted));
+    const result = await run(s => s, corrupted);
+    expect(result.counts.cases.failed).toBeGreaterThan(0);
+    expect(result.counts.steps.failed).toBeGreaterThan(0);
+    expect(result.counts.steps.undefined).toBe(0);
+    expect(result.counts.steps.ambiguous).toBe(0);
   }
 });

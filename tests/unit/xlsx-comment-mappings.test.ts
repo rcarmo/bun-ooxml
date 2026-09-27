@@ -17,7 +17,7 @@ test('comment mapping ledger covers exactly 19 declarations and 72 direct expres
  const report=await outcomeMappingReport(),ledger=report.ledgers.find(r=>r.name==='xlsx-comments');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(19);
  const rows=report.mappings.filter(r=>r.ledger==='xlsx-comments');expect(rows).toHaveLength(19);expect(rows.reduce((n,r)=>n+r.assertions.length,0)).toBe(72);expect(rows.every(r=>r.scenarioIds.length===1&&r.scenarioIds[0]===id)).toBe(true);
  expect(rows.every(r=>r.status==='partial'&&r.executionCredit===false&&r.gaps.length&&r.outcomes.length&&r.assertions.length)).toBe(true);
- expect(rows.filter(r=>r.caseKeys.length).map(r=>r.caseKeys)).toEqual([[id]]);expect(report.mappedDeclarations).toBe(422);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-422);expect(report.runtimeLeafCount).toBeNull();
+ expect(rows.filter(r=>r.caseKeys.length).map(r=>r.caseKeys)).toEqual([[id]]);expect(report.mappedDeclarations).toBe(446);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-446);expect(report.runtimeLeafCount).toBeNull();
 });
 
 test('comment mappings distinguish direct reads, delegated control counts, malformed graph custody and opaque VML',async()=>{

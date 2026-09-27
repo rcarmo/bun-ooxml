@@ -77,6 +77,21 @@ also map separately. `tests/acceptance/xml-values.ts` executes the shared value
 inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
 
+The [ZIP32 ledger](zip32-mappings.json) maps 24 declarations and 106 direct
+assertion expressions across reader/writer tests and binding controls. One wrapper
+links to 20 shared cases; its four planned siblings describe isolated selection,
+not the full acceptance run. The other 23 records are scenario-only. All 422
+previous mappings remain unchanged.
+
+Existing refusal and aggregate-failure predicates now sit in their test bodies;
+the two suites still execute 186 assertions. Literal-expression inventory
+collapses repeated expressions, while nested fixture-signature and source-match
+checks remain separate. The 74-archive corpus loop is admission smoke, not exact
+member readback. Method 12 inputs contain plain bytes rather than BZIP2 streams.
+Bounds tests observe errors, not allocation timing. Native refusal tests do not
+check input custody; the pinned acceptance bindings do. No mapping implies
+filesystem persistence or complete OPC validity.
+
 The [ZIP64 ledger](zip64-mappings.json) maps 15 declarations and 46 direct
 assertion expressions, all at scenario level. Eleven refusal tests now carry
 their existing error-class/code/message assertions directly; moving them out of
