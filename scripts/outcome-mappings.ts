@@ -100,14 +100,16 @@ export async function outcomeMappingReport(){
   {name:'zip64',tests:['tests/unit/zip64.test.ts'],canonical:'workflows/native/opc-zip64.feature',sources:['tests/acceptance/zip64.ts','src/opc/zip.ts','src/errors.ts']},
   {name:'zip32',tests:['tests/unit/zip.test.ts','tests/unit/zip32-bindings.test.ts'],canonical:'workflows/package/zip32.feature',sources:['tests/acceptance/zip32.ts','tests/acceptance/refusal-outcomes.ts','tests/acceptance/steps.ts','tests/fixtures/zip32.ts','src/opc/zip.ts','src/errors.ts','scripts/fixture-inputs.ts']},
   {name:'opc-custody',tests:['tests/unit/package.test.ts','tests/unit/opc-custody-bindings.test.ts'],canonical:'workflows/package/preservation.feature',sources:['tests/acceptance/opc-custody.ts','tests/acceptance/refusal-outcomes.ts','tests/acceptance/steps.ts','tests/fixtures/admission.ts','src/opc/package.ts','src/opc/zip.ts','src/xml/index.ts','src/xml/encoding.ts','src/errors.ts','scripts/fixture-inputs.ts']},
+  {name:'package-admission',tests:['tests/unit/package-admission.test.ts'],canonical:['workflows/package/zip-admission.feature','workflows/package/xml-member-admission.feature'],sources:['tests/acceptance/package-admission.ts','tests/fixtures/admission.ts','src/opc/admission.ts','src/opc/package.ts','src/opc/zip.ts','src/xml/index.ts','src/xml/encoding.ts','src/index.ts','src/errors.ts','scripts/fixture-inputs.ts']},
   {name:'formula-references',tests:['tests/unit/xlsx-range.test.ts','tests/unit/xlsx-formula-analysis.test.ts','tests/unit/xlsx-formula-remap.test.ts'],canonical:'workflows/xlsx/formula-references.feature',sources:['src/xlsx/range.ts','src/xlsx/formula.ts','src/xlsx/formula-remap.ts','src/errors.ts','tests/acceptance/xlsx-range.ts','tests/acceptance/formula-analysis.ts','tests/acceptance/formula-remap.ts']},
  ];
  const sets:OutcomeMappingSet[]=[];
  for(const registration of registrations){
   const ledger=await Bun.file(join(root,`docs/behaviors/${registration.name}-mappings.json`)).json() as OutcomeMappingLedger;
   const sources:Record<string,string>={};for(const path of [...registration.tests,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
-  sources[registration.canonical]=await Bun.file(join(fixturesRoot(),registration.canonical)).text();
-  sets.push({name:registration.name,expectedScopePaths:registration.tests,ledger,features:[parseFeature(registration.canonical,sources[registration.canonical]!,{allowDuplicateCaseNames:true})],sources});
+  const canonical=typeof registration.canonical==='string'?[registration.canonical]:registration.canonical;
+  for(const path of canonical)sources[path]=await Bun.file(join(fixturesRoot(),path)).text();
+  sets.push({name:registration.name,expectedScopePaths:registration.tests,ledger,features:canonical.map(path=>parseFeature(path,sources[path]!,{allowDuplicateCaseNames:true})),sources});
  }
  return reconcileOutcomeMappingSets(await inventoryNativeTests(root),sets);
 }

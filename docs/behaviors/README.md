@@ -77,6 +77,20 @@ also map separately. `tests/acceptance/xml-values.ts` executes the shared value
 inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
 
+The [package-admission ledger](package-admission-mappings.json) maps 11
+declarations and 36 direct expressions across the shared ZIP-admission and
+XML-member-admission features. Both feature files are required source pins.
+One aggregate wrapper links to all 13 cases; the other ten records remain
+scenario-only, including positive controls that extend refusal contracts.
+All 461 prior records remain unchanged.
+
+Admission validates ZIP structure and XML syntax without requiring an OPC graph.
+The BZIP2 sample contains fixed, offline-compressed bytes, but admission rejects
+its method without decoding them. Depth and exact-budget tests assert observed
+success/refusal, not timing, memory use or an allocation trace. Encoding custody,
+opaque members and buffer subviews are bounded native extensions; no mapping
+adds filesystem, Office-schema or rendering evidence.
+
 The [ZIP32 ledger](zip32-mappings.json) maps 24 declarations and 106 direct
 assertion expressions across reader/writer tests and binding controls. One wrapper
 links to 20 shared cases; its four planned siblings describe isolated selection,

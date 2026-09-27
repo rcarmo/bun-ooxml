@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/package-admission.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/package-admission.test.ts": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
+    "tests/acceptance/package-admission.ts": "a702f05cd22cd1139a118b6d8b57a801236c7ac5a521699cdcd29bb1d0485b60",
+    "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+    "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
+    "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/package/zip-admission.feature": "28b1599e839f360929e689ff2d99e13599e000b98d6aa0d58c2e6a47b4efe696",
+    "workflows/package/xml-member-admission.feature": "19fa717632d689e7ff4e883fb2af3f31e018373dc79ddb78efecf7742ea14e91"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:admission accepts XML without an OPC graph and returns detached payloads",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-members",
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(parts.get('a.xml')).toEqual(utf8(xml))",
+        "expect(parts.get('opaque.bin')).toEqual(Uint8Array.of(0xff,0x00))",
+        "expect(bytes).toEqual(before)",
+        "expect(admitPackage(bytes).get('a.xml')).toEqual(utf8(xml))",
+        "expect(OpcPackage.open(bytes)).rejects.toMatchObject({code:'opc-content-types-missing'})"
+      ],
+      "outcomes": [
+        "Graph-free XML and opaque bytes are admitted exactly without modifying the archive; mutating an output payload does not affect caller bytes or a fresh admission. The same archive fails OpcPackage.open with missing content-types code."
+      ],
+      "gaps": [
+        "Native positive control for the refusal families, not a shared positive scenario or full OPC admission. Uses an extra binary member and no filesystem, schema or rendering checks.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:admission preserves UTF-8 BOM, UTF-16LE and UTF-16BE XML payloads exactly",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(admitPackage(bytes).get('a.xml')).toEqual(payload)",
+        "expect(bytes).toEqual(before)"
+      ],
+      "outcomes": [
+        "UTF-8 BOM and UTF-16LE/BE XML inputs are admitted with exact member bytes and unchanged caller archives."
+      ],
+      "gaps": [
+        "Native positive encoding controls, not shared unsafe-XML inputs. Three finite encodings only; no disk roundtrip, XML rewriting or graph validation.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:admission validates every XML and relationship member but keeps unrelated bytes opaque",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>admitPackage(bytes)).toThrow(OoxmlError)",
+        "expect(bytes).toEqual(before)",
+        "expect(admitPackage(admissionZip([['opaque.bin',utf8('<broken>')]])).get('opaque.bin')).toEqual(utf8('<broken>'))"
+      ],
+      "outcomes": [
+        "Malformed XML in lower/uppercase .xml and .rels names causes typed refusal and retains caller bytes; the same malformed text in an opaque binary member is admitted unchanged."
+      ],
+      "gaps": [
+        "Native suffix/opaque policy extension. Only OoxmlError class is asserted for malformed members, not exact codes or graph semantics. Positive binary sample has no XML member.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:admission refuses DTD and malformed XML with parser-specific reasons without changing bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "outcomes": [
+        "UTF-8 internal DTD, UTF-16LE DTD and malformed UTF-8 XML refuse with exact parser-specific codes and unchanged caller buffers."
+      ],
+      "gaps": [
+        "Native inputs match shared forms but do not invoke the canonical bindings positive controls or validate all declaration/DTD variants. No file save or external entity fetching evidence.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:admission rejects invalid and contradictory byte encodings rather than decoding lossily",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code:'opc-xml-encoding'}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "outcomes": [
+        "Invalid UTF-8, odd UTF-16 length, contradictory UTF declarations and unsupported ISO declaration refuse with opc-xml-encoding and exact caller-byte custody."
+      ],
+      "gaps": [
+        "Native five-input codec extension. Does not distinguish detailed reasons beyond one code or cover every encoding; no declaration repair or disk readback.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:admission resource controls have successful exact-boundary controls and typed refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-resource-limits"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(admitPackage(bytes,{maxArchiveBytes:bytes.length,maxEntries:1,maxEntryBytes:4,maxTotalBytes:4,maxCompressionRatio:1}).size).toBe(1)",
+        "expect(()=>admitPackage(bytes,limits)).toThrow(expect.objectContaining({code}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "outcomes": [
+        "A stored four-byte XML member succeeds exactly at all five configured bounds; reducing archive/count/entry/total/ratio bounds individually yields each expected refusal code without changing bytes."
+      ],
+      "gaps": [
+        "Native four-byte STORED boundary differs from shared 10007-byte DEFLATE input and limit values. It includes archive bytes absent from shared outline; no allocation timing/peak-memory or decompression-work claim.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-resource-limits"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>admitPackage(bytes,limits)).toThrow(expect.objectContaining({code:'package-admission-limit-invalid'}))"
+      ],
+      "outcomes": [
+        "Nonfinite, negative or fractional limit options refuse with package-admission-limit-invalid rather than disabling guards."
+      ],
+      "gaps": [
+        "Native option-validation extension, not the shared valid-configuration refusals. No caller-byte check or complete configuration-type matrix here.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:ordered ZIP fixtures reach typed structural refusals, with valid DEFLATE and BZIP2 method framing",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-members",
+        "@id-package-admission-unsupported-compression",
+        "@id-package-admission-resource-limits"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(readZip(deflated).get('a.xml')!.length).toBe(10007)",
+        "expect([...bzip.slice(35,35+BZIP2_A.length)]).toEqual([...BZIP2_A])",
+        "expect(()=>admitPackage(bzip)).toThrow(expect.objectContaining({code:'zip-method-unsupported'}))",
+        "expect(()=>admitPackage(bytes)).toThrow(expect.objectContaining({code}))",
+        "expect(bytes).toEqual(before)"
+      ],
+      "outcomes": [
+        "A DEFLATE positive control expands to 10007 bytes; the method12 archive contains the exact pinned BZIP2_A byte sequence and admission rejects its method. Five ordered name/directory mutations refuse with exact codes and per-input custody."
+      ],
+      "gaps": [
+        "Native BZIP2 framing is real offline fixture bytes but no BZIP2 decoding is performed. The DEFLATE check is length only, not text equality. Unsupported-method input lacks an explicit caller-byte comparison; structural branches have custody.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-members",
+        "@id-package-admission-resource-limits",
+        "@id-package-admission-unsupported-compression",
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [
+        "@id-package-admission-unsafe-members|{\"variant\":\"duplicate member names\",\"entries_json\":\"[[\\\"a.xml\\\",\\\"<a/>\\\"],[\\\"a.xml\\\",\\\"<b/>\\\"]]\"}",
+        "@id-package-admission-unsafe-members|{\"variant\":\"parent traversal name\",\"entries_json\":\"[[\\\"../a.xml\\\",\\\"<a/>\\\"]]\"}",
+        "@id-package-admission-unsafe-members|{\"variant\":\"absolute member name\",\"entries_json\":\"[[\\\"/a.xml\\\",\\\"<a/>\\\"]]\"}",
+        "@id-package-admission-unsafe-members|{\"variant\":\"backslash member name\",\"entries_json\":\"[[\\\"x\\\\\\\\a.xml\\\",\\\"<a/>\\\"]]\"}",
+        "@id-package-admission-unsafe-members|{\"variant\":\"directory entry with bytes\",\"entries_json\":\"[[\\\"a/\\\",\\\"payload\\\"]]\"}",
+        "@id-package-admission-resource-limits|{\"limit\":\"max_members\",\"value\":\"0\"}",
+        "@id-package-admission-resource-limits|{\"limit\":\"max_member_bytes\",\"value\":\"2\"}",
+        "@id-package-admission-resource-limits|{\"limit\":\"max_total_bytes\",\"value\":\"2\"}",
+        "@id-package-admission-resource-limits|{\"limit\":\"max_ratio\",\"value\":\"1\"}",
+        "@id-package-admission-unsupported-compression",
+        "@id-package-admission-unsafe-xml-members|{\"variant\":\"internal DTD with entity\",\"encoding\":\"UTF-8\",\"xml\":\"<!DOCTYPE a [<!ENTITY e \\\"text\\\">]><a>&e;</a>\"}",
+        "@id-package-admission-unsafe-xml-members|{\"variant\":\"UTF-16 DTD\",\"encoding\":\"UTF-16 with BOM\",\"xml\":\"<!DOCTYPE a><a/>\"}",
+        "@id-package-admission-unsafe-xml-members|{\"variant\":\"malformed XML\",\"encoding\":\"UTF-8\",\"xml\":\"<broken>\"}"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(13)",
+        "expect(result.counts.steps.passed).toBe(40)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures, 13 passing cases and 40 passing steps across both shared features. Pinned bindings check exact refusal codes, caller-byte custody, positive valid-archive controls and compression message text."
+      ],
+      "gaps": [
+        "Only three aggregate expressions occur here; semantic predicates are delegated. Refusals are graph-independent package admission; no caller allocation measurement, file save, OPC closure, schema or independent-reader execution inferred.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-members",
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...parts.keys()]).toEqual(['a.xml'])",
+        "expect(storage).toEqual(before)",
+        "expect(()=>admitPackage(corrupt)).toThrow(expect.objectContaining({code:'zip-crc-mismatch'}))",
+        "expect(corrupt).toEqual(snapshot)",
+        "expect(()=>admitPackage(admissionZip([['a.xml',payload]]))).toThrow(expect.objectContaining({code:'XML_DTD_FORBIDDEN'}))"
+      ],
+      "outcomes": [
+        "A subview archive omits empty directory entries and detached outputs leave its entire backing storage intact. A CRC corruption refuses with exact code and byte custody; UTF-8 external and UTF-16BE DTD samples also refuse with the DTD code."
+      ],
+      "gaps": [
+        "Native subview/CRC/DTD extension. External URI input does not independently monitor network requests; DTD branches lack caller-byte comparisons. No disk or package-graph validity claim.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-admission.test.ts:syntax-only XML validation handles deep segmented text without ancestor text materialisation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-admission-unsafe-xml-members"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(validateXml(source)).toBeUndefined()",
+        "expect(()=>validateXml('<a>'.repeat(257)+'x'+'</a>'.repeat(257))).toThrow(expect.objectContaining({code:'XML_DEPTH_LIMIT'}))",
+        "expect(()=>validateXml('<a>&unknown;</a>')).toThrow(expect.objectContaining({code:'XML_ENTITY_FORBIDDEN'}))",
+        "expect(admitPackage(bytes).get('deep.xml')).toEqual(utf8(source))",
+        "expect(parseXml('<a>x<b>y</b>z</a>').root.text).toBe('xyz')"
+      ],
+      "outcomes": [
+        "Syntax validation accepts depth256 segmented text, rejects depth257 and unknown entities with exact codes; admission returns the deep member bytes exactly, while the public parser still returns descendant text xyz."
+      ],
+      "gaps": [
+        "Native syntax-validator/depth extension, not a shared malformed seed. Success does not prove no ancestor materialization, timing or memory bounds despite the title; final parser assertion is separate from package admission. No caller-archive or file check.",
+        "Bounded source mapping only; no new execution or general XML/OPC parity credit. Literal direct/deferred assertions and dynamic review flags retained; runtime leaves unknown."
+      ]
+    }
+  ]
+}
