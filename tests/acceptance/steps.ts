@@ -59,6 +59,7 @@ import {bindings as tableMergingBindings,cleanupTableMerging} from './table-merg
 import {bindings as verticalMergingBindings,cleanupVerticalMerging} from './vertical-merging.ts';
 import {bindings as templateInventoryBindings,cleanupTemplateInventory} from './template-inventory.ts';
 import {bindings as commentThreadBindings,cleanupCommentThreads} from './comment-threads.ts';
+import {bindings as revisionPropertyBindings,cleanupRevisionProperties} from './revision-properties.ts';
 import { bindings as tablePptxBindings } from "./tables-pptx.ts";
 import { bindings as pptxBindings } from "./pptx.ts";
 import { bindings as pptxCustodyBindings } from './pptx-custody.ts';
@@ -69,7 +70,7 @@ import { bindings as xlsxCommentVmlBindings } from './xlsx-comment-vml.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupFontSize(),cleanupOpcCustody()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupFontSize(),cleanupOpcCustody()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -132,6 +133,7 @@ export const bindings: StepBinding[] = [
   ...verticalMergingBindings,
   ...templateInventoryBindings,
   ...commentThreadBindings,
+  ...revisionPropertyBindings,
   ...tablePptxBindings,
   ...pptxBindings,
   ...pptxCustodyBindings,

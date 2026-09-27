@@ -78,6 +78,9 @@ The Office oracle validates one source snapshot and its accepted/rejected body
 outputs using the independent Open XML SDK; a missing-author control must fail.
 No independent Word UI or multistory rendering comparison has been performed.
 
-Shared v0.32 has no cases for this opt-in profile. Existing shared execution and
-mapping records stay unchanged. The broader multistory requirement still includes
-unsupported move and property-change forms.
+The [shared opt-in profile](../../references/fixtures-ooxml/contracts/run-property-revisions.md)
+adds eight scenarios / 33 cases. Bun builds expected XML independently of the
+resolver and checks saved output, exact bytes, receipts and refusal outcomes.
+Twelve native tests and two outcome tests have partial mappings with explicit gaps.
+The ten earlier text-only cases are unchanged. The broader multistory requirement
+still includes unsupported move and property-change forms.

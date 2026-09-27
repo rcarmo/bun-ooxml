@@ -25,9 +25,9 @@ Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 266 scenarios / 683 cases; 648 implemented and 35 planned.
+- Shared: 274 scenarios / 716 cases; 681 implemented and 35 planned.
 - Local-only: nine scenarios / eleven cases, all planned.
-- Combined: 275 scenarios / 694 cases; 648 implemented and 46 planned.
+- Combined: 283 scenarios / 727 cases; 681 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
@@ -108,10 +108,14 @@ identities remain. See [comment threads](../contracts/comment-threads.md).
 The opt-in `text-and-run-properties` revision profile accepts current direct run
 properties or restores their complete previous snapshot on rejection. Default
 text-only inspection and resolution retain their formatting-refusal policy.
-Twelve native tests cover seven reachable stories, exact output, selected scope,
-namespace and encoding preservation, empty snapshots, malformed inputs and
-transaction rollback. They have no shared mappings yet. All 562 mapping records
-and 648 executed case identities are unchanged; 46 cases remain planned.
+Eight shared scenarios / 33 cases check seven reachable stories, complete output,
+selected scope, namespace and encoding preservation, empty snapshots, malformed
+inputs and transaction rollback. Expected XML is built from source text without
+using the resolver under test. Four corruption controls reject incorrect property,
+receipt, unrelated-member and namespace outcomes. Twelve native tests and two
+outcome tests have partial mappings with explicit limits. Of 562 earlier mapping
+records, 557 are unchanged and five update inventory totals only. All 648 earlier
+executed case identities remain; 46 cases are still planned.
 The independent SDK schema oracle checks one source and both resolved body
 outputs, including a missing-author refusal control. See
 [run-property revisions](../contracts/run-property-revisions.md).

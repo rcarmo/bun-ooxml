@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-revision-properties.test.ts",
+    "tests/unit/revision-property-outcomes.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-revision-properties.test.ts": "314272932b8047759ddd48d2e245a18d1e6e0fe83e0d2ec5e83d9254781d66f7",
+    "tests/unit/revision-property-outcomes.test.ts": "06e0ff2df22a98d4c0c664410783de1185402f5cef1508d8b9fd207311af5bb0",
+    "src/docx/revisions.ts": "12f112f18e22ded0778b023cd413788d8aafd9b2ce556301df6db098baa744dc",
+    "src/docx/revision-properties.ts": "937629402d9c37bf9eaedca6bce4f2dd14cf129c87c8269d4b25e85f35aa82ee",
+    "src/docx/run-appearance.ts": "85cba4a88ba495c1633356c054ea20da3cb7861c90dcab2d9a11da133bd617c6",
+    "src/docx/run-font.ts": "8b53ae33f38718d079b763676f439f0b6156b6051c5648ec2a7993f125899a93",
+    "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
+    "src/index.ts": "a85201c203e90211dd1ffb85d009ff2c0e69785cb31d1491e4fe319b33a8a1b1",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
+    "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
+    "tests/acceptance/steps.ts": "1e7587bbd49d8672cab19c907f634e7d06525c3af2ff5af0ddf676a47ea9fc4e",
+    "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/revisions.feature": "7e3add2e8d7b77513bce2d21cccb4f0184ce379d58351ef1d83bb296931e6fb0"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-roundtrip"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(report.unsupported).toEqual([])",
+        "expect(report.revisions).toHaveLength(21)",
+        "expect(report.revisions.filter(r=>r.kind==='run-properties').map(r=>[r.part,r.id,r.author,r.text])).toEqual(stories.map(part=>[part,'80','Editor','Stable']))",
+        "expect(p.toBytes()).toEqual(source)",
+        "expect(receipt).toEqual({resolved:21,changedParts:stories})",
+        "expect(inspect(read)).toEqual({revisions:[],unsupported:[]})",
+        "expect(xml).toContain(action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>')",
+        "expect(xml).toBe(noProps.text(part))",
+        "expect(elements(parseXml(xml),'t',W).map(t=>t.text).join('')).toContain(action==='accept'?'modernized.':'historic.')",
+        "expect(xml).not.toContain('rPrChange')",
+        "expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source))",
+        "expect(resolve(read,action)).toEqual({resolved:0,changedParts:[]})",
+        "expect(read.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Twenty-one revisions across seven stories resolve with exact receipt, old/current properties, path reopen, source custody and repeated no-op."
+      ],
+      "gaps": [
+        "Native comparison package uses the text resolver for text-only expectations; shared wrapper independently builds full expected XML."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:default text-only refusal stays unchanged and selected property profile leaves all other stories byte-identical",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-scope",
+        "@id-docx-run-property-revisions-default"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectRevisions(p).unsupported.filter(f=>f.kind==='format')).toHaveLength(7)",
+        "expect(()=>resolveRevisions(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:3,changedParts:['word/header1.xml']})",
+        "expect(inspect(p).revisions).toHaveLength(18)",
+        "expect(stories).toHaveLength(7)"
+      ],
+      "outcomes": [
+        "Default format findings and atomic refusal remain; selected header changes three revisions and preserves every unselected member."
+      ],
+      "gaps": [
+        "Native selected source has no unsupported unselected snapshot; central wrapper covers that extra boundary."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:unsafe later run-property snapshots refuse both actions without partially resolving earlier text stories",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(changed,name).not.toBe(xml)",
+        "expect(inspect(p).unsupported.length,name).toBeGreaterThan(0)",
+        "expect(()=>resolve(p,action),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(p.toBytes(),name).toEqual(before)"
+      ],
+      "outcomes": [
+        "Malformed later header snapshot variants report unsupported and both actions refuse without archive mutation."
+      ],
+      "gaps": [
+        "Native variants exceed the16 shared rows; no exact case keys or complete schema-validation claim."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:run-property snapshot namespace meaning BOM and unrelated lexical bytes survive reject in three encodings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(resolve(p,'reject',[part])).toEqual({resolved:3,changedParts:[part]})",
+        "expect(props.name).toBe('q:rPr')",
+        "expect(props.children.map(c=>[c.namespaceURI,c.localName])).toEqual([[W,'i'],[W,'color']])",
+        "expect(attribute(props.children[1]!,'val',W)).toBe('445566')",
+        "expect(read.text(part)).toContain(\"z:val='445566'\")",
+        "expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255])"
+      ],
+      "outcomes": [
+        "UTF8 BOM and UTF16 LE/BE rejection retains aliased saved properties, markers, lexical colour and other part bytes."
+      ],
+      "gaps": [
+        "Native reopen is in-memory; central wrapper adds path output and exact XML independent expectations."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:run-property profile validates protected external-settings and invalid profile requests before no-op",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-guards"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolveRevisions(p,'accept',{profile:(defect==='invalid'?'bad':profile) as typeof profile})).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Linked enforced protection, external settings and invalid profile requests refuse without byte changes."
+      ],
+      "gaps": [
+        "This declaration still contains revisions; the separate extended no-op declaration covers already-resolved input."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:reached later-write and serialization faults restore property snapshots text flags and prior unrelated edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow('injected')",
+        "expect(reached).toBe(true)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(inspect(p).revisions).toHaveLength(21)"
+      ],
+      "outcomes": [
+        "Reached header write and serialization faults restore all21 revisions and exact prior-edited archive."
+      ],
+      "gaps": [
+        "Synchronous injected faults; no process crash or filesystem persistence guarantee."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:empty previous properties restore the complete empty set and namespace shadowing stays local",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-empty"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(resolve(p,'reject',[part]).resolved).toBe(3)",
+        "expect(pr.localName).toBe('rPr')",
+        "expect(pr.children.map(c=>[c.namespaceURI,c.localName])).toEqual(saved.includes('q:i')?[[W,'i']]:[])",
+        "expect(xml).not.toContain('rPrChange')"
+      ],
+      "outcomes": [
+        "Empty saved set removes all current properties; saved alias shadows removed-ancestor alias without residual change node."
+      ],
+      "gaps": [
+        "In-memory checks; saved XML and source custody are in the shared wrapper."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:extended-profile no-op still checks linked protection and external settings without changing bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-guards"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}))",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "After resolving all revisions, linked protection, external settings and wrong-root settings refuse and retain exact bytes."
+      ],
+      "gaps": [
+        "Three concrete guards only; no arbitrary security-policy validation."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:default text revision writer also retains UTF8 BOM and extended profile refuses unknown selections and moves",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-encoding",
+        "@id-docx-run-property-revisions-default",
+        "@id-docx-run-property-revisions-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...p.get(part)!.slice(0,3)]).toEqual([239,187,191])",
+        "expect(()=>resolve(q,'accept',['word/unknown.xml'])).toThrow(expect.objectContaining({code:'docx-revisions-unknown-part'}))",
+        "expect(()=>inspectRevisions(q,{profile:'bad' as typeof profile})).toThrow(expect.objectContaining({code:'docx-revisions-invalid-profile'}))",
+        "expect(q.toBytes()).toEqual(before)",
+        "expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(q.toBytes()).toEqual(moved)"
+      ],
+      "outcomes": [
+        "Default text writer retains UTF8 BOM; unknown selection/profile and move wrapping refuse without mutation."
+      ],
+      "gaps": [
+        "Adjacent default writer and extra argument/move cases are not exact shared case identities."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:all supported direct property families restore exact previous set and malformed scalar values refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-roundtrip",
+        "@id-docx-run-property-revisions-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(resolve(p,'reject',[part]).resolved).toBe(3)",
+        "expect(p.text(part)).toContain(saved)",
+        "expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}))",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A representative font/flag/appearance/size saved set restores exactly; malformed sizes/fonts/appearance values refuse unchanged."
+      ],
+      "gaps": [
+        "Native scalar variant differs from central two-property sample; no exhaustive schema-value coverage."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:post-write validation fault rolls back and unsupported unselected properties do not expand selected scope",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-scope",
+        "@id-docx-run-property-revisions-rollback"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(resolve(p,'accept',[p.mainPart()]).resolved).toBe(3)",
+        "expect(()=>resolve(q,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-validation'}))",
+        "expect(reached).toBe(true)",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unsupported unselected header stays byte-identical; reached reinsertion fault triggers validation refusal and full rollback."
+      ],
+      "gaps": [
+        "Native selects body with unsupported header; central selected-header case uses the opposite story scope."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-revision-properties.test.ts:public entrypoints expose the opt-in profile without activating the broader shared or local revision obligations",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-default"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(root.inspectRevisions).toBe(inspectRevisions)",
+        "expect(docx.resolveRevisions).toBe(resolveRevisions)",
+        "expect(inv.counts.cases.implemented).toBe(681)",
+        "expect(inv.counts.cases.planned).toBe(46)",
+        "expect(s.lifecycle??f.lifecycle).toBe('planned')"
+      ],
+      "outcomes": [
+        "Public exports match and broader multistory obligation remains planned with catalogue totals checked."
+      ],
+      "gaps": [
+        "Inventory/export guard only; no new default-profile execution or full multistory credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/revision-property-outcomes.test.ts:eight opt-in property contracts execute33cases leaving ten earlier text cases planned in the focused run",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-roundtrip",
+        "@id-docx-run-property-revisions-scope",
+        "@id-docx-run-property-revisions-default",
+        "@id-docx-run-property-revisions-refusal",
+        "@id-docx-run-property-revisions-encoding",
+        "@id-docx-run-property-revisions-rollback",
+        "@id-docx-run-property-revisions-empty",
+        "@id-docx-run-property-revisions-guards"
+      ],
+      "caseKeys": [
+        "@id-docx-run-property-revisions-roundtrip|{\"action\":\"accept\"}",
+        "@id-docx-run-property-revisions-roundtrip|{\"action\":\"reject\"}",
+        "@id-docx-run-property-revisions-scope|{\"action\":\"accept\"}",
+        "@id-docx-run-property-revisions-scope|{\"action\":\"reject\"}",
+        "@id-docx-run-property-revisions-default",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"missing-snapshot\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"duplicate-snapshot\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"duplicate-change\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"nested-change\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"wrong-parent\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"non-text-run\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"unknown-property\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"duplicate-property\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"decorated-property\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"invalid-value\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"duplicate-id\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"property-order\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"mixed-content\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"missing-author\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"foreign-property\"}",
+        "@id-docx-run-property-revisions-refusal|{\"defect\":\"nested-insertion\"}",
+        "@id-docx-run-property-revisions-encoding|{\"encoding\":\"UTF-8-BOM\"}",
+        "@id-docx-run-property-revisions-encoding|{\"encoding\":\"UTF-16LE\"}",
+        "@id-docx-run-property-revisions-encoding|{\"encoding\":\"UTF-16BE\"}",
+        "@id-docx-run-property-revisions-rollback|{\"stage\":\"later-write\"}",
+        "@id-docx-run-property-revisions-rollback|{\"stage\":\"serialization\"}",
+        "@id-docx-run-property-revisions-rollback|{\"stage\":\"post-write-validation\"}",
+        "@id-docx-run-property-revisions-empty|{\"snapshot\":\"empty\"}",
+        "@id-docx-run-property-revisions-empty|{\"snapshot\":\"shadowed-alias\"}",
+        "@id-docx-run-property-revisions-guards|{\"guard\":\"protection\"}",
+        "@id-docx-run-property-revisions-guards|{\"guard\":\"external-settings\"}",
+        "@id-docx-run-property-revisions-guards|{\"guard\":\"malformed-settings\"}",
+        "@id-docx-run-property-revisions-guards|{\"guard\":\"invalid-profile\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(33)",
+        "expect(r.counts.cases.planned).toBe(10)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Eight central scenarios execute33 cases with independent exact XML, receipts, path custody, no-op and refusal/fault checks."
+      ],
+      "gaps": [
+        "No other-consumer or independent Word UI credit; default neighbours are planned only in this isolated wrapper."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/revision-property-outcomes.test.ts:property outcome checks reject retained current properties wrong receipt changed unselected bytes and missing namespace",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-run-property-revisions-roundtrip",
+        "@id-docx-run-property-revisions-encoding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Four corruptions fail concrete assertions: retained current property, wrong receipt, unrelated bytes and namespace meaning."
+      ],
+      "gaps": [
+        "Post-operation corruption controls only; not exhaustive mutation testing."
+      ]
+    }
+  ]
+}

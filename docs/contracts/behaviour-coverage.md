@@ -1,14 +1,14 @@
 # Behaviour coverage
 
-The shared reference contains **213 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **214 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 266 | 683 | 648 | 35 |
+| Shared catalogue | 274 | 716 | 681 | 35 |
 | Local-only obligations | 9 | 11 | 0 | 11 |
-| Combined inventory | 275 | 694 | 648 | 46 |
+| Combined inventory | 283 | 727 | 681 | 46 |
 
-The canonical denominator is **266 shared scenarios / 683 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+The canonical denominator is **274 shared scenarios / 716 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
@@ -25,7 +25,7 @@ The canonical denominator is **266 shared scenarios / 683 shared cases**. Local-
 | references/fixtures-ooxml/workflows/docx/paragraph-style.feature | mixed | 3 | 24 | 19 | 5 | 82 |
 | references/fixtures-ooxml/workflows/docx/paragraphs.feature | implemented | 6 | 16 | 16 | 0 | 49 |
 | references/fixtures-ooxml/workflows/docx/properties.feature | implemented | 1 | 1 | 1 | 0 | 7 |
-| references/fixtures-ooxml/workflows/docx/revisions.feature | implemented | 6 | 10 | 10 | 0 | 52 |
+| references/fixtures-ooxml/workflows/docx/revisions.feature | implemented | 14 | 43 | 43 | 0 | 199 |
 | references/fixtures-ooxml/workflows/docx/run-formatting.feature | mixed | 10 | 43 | 42 | 1 | 137 |
 | references/fixtures-ooxml/workflows/docx/stories.feature | implemented | 3 | 3 | 3 | 0 | 21 |
 | references/fixtures-ooxml/workflows/docx/style-authoring.feature | implemented | 2 | 24 | 24 | 0 | 86 |
