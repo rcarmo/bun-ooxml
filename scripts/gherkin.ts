@@ -110,8 +110,16 @@ export type InventoryCount = {
   total: number;
 };
 
+export type InventoryCoverage = {
+  /** Inventory accounting only; this does not assert execution or conformance. */
+  catalogue?: { path: string; sourceSha256: string; features: number; scenarios: number; cases: number };
+  shared: AcceptanceInventory['counts'];
+  localOnly: AcceptanceInventory['counts'];
+};
+
 export type AcceptanceInventory = {
   root: string;
+  coverage?: InventoryCoverage;
   features: AcceptanceFeature[];
   counts: {
     features: InventoryCount;
@@ -335,16 +343,56 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
     const text = await Bun.file(join(root, path)).text();
     features.push(parseFeature(path, text));
   }
+  let catalogue: InventoryCoverage['catalogue'];
+  const sharedPrefix='references/fixtures-ooxml/';
+  const referenceRoot=process.env.OOXML_FIXTURES_ROOT && resolve(root)===resolve(import.meta.dir,'..')
+    ? process.env.OOXML_FIXTURES_ROOT : join(root,sharedPrefix);
   const sharedConfig = Bun.file(join(root, 'features/shared.json'));
   if (await sharedConfig.exists()) {
     const shared = await sharedConfig.json();
     if (shared.schemaVersion !== 2 || !Array.isArray(shared.features)) throw new Error('Invalid shared feature mapping schema');
+    const selections=new Map<string,unknown>();
+    const safeFeature=(path:unknown):path is string=>typeof path==='string'&&/^workflows\/(?:[a-z0-9-]+\/)*[a-z0-9-]+\.feature$/.test(path);
     for (const entry of shared.features) {
-      if (typeof entry.path !== 'string' || !entry.path.startsWith('references/fixtures-ooxml/') || entry.path.split('/').includes('..') || entry.lifecycle !== 'implemented' || entry.runner !== 'bun') throw new Error('Invalid shared feature mapping');
-      const input = process.env.OOXML_FIXTURES_ROOT && root === resolve(import.meta.dir, '..')
-        ? join(process.env.OOXML_FIXTURES_ROOT, entry.path.slice('references/fixtures-ooxml/'.length)) : join(root, entry.path);
-      const text = await Bun.file(input).text();
-      features.push(selectSharedScenarios(entry.path, text, entry.scenarioIds));
+      if (!entry || typeof entry.path !== 'string' || !entry.path.startsWith(sharedPrefix) || !safeFeature(entry.path.slice(sharedPrefix.length)) || entry.lifecycle !== 'implemented' || entry.runner !== 'bun') throw new Error('Invalid shared feature mapping');
+      if(selections.has(entry.path))throw Error('Duplicate shared feature mapping');
+      selections.set(entry.path,entry.scenarioIds);
+    }
+    if(Object.hasOwn(shared,'catalogue')){
+      const cataloguePath=sharedPrefix+'ledgers/workflows.json';
+      if(shared.catalogue!==cataloguePath)throw Error('Invalid shared catalogue path');
+      const text=await Bun.file(join(referenceRoot,'ledgers/workflows.json')).text(),ledger=JSON.parse(text);
+      if(ledger.schemaVersion!==1||!Array.isArray(ledger.features)||!ledger.features.length||!Array.isArray(ledger.workflows)||!ledger.workflows.length)throw Error('Invalid shared catalogue inventory');
+      if(ledger.features.some((p:unknown)=>!safeFeature(p))||new Set(ledger.features).size!==ledger.features.length)throw Error('Invalid or duplicate catalogue feature path');
+      const discovered=await Array.fromAsync(new Bun.Glob('workflows/**/*.feature').scan({cwd:referenceRoot,onlyFiles:true}));
+      const manifest=await Bun.file(join(referenceRoot,'manifest.json')).json();
+      if(!Array.isArray(manifest.files))throw Error('Invalid catalogue manifest');
+      const sealed=manifest.files.filter((a:any)=>a.role==='workflow').map((a:any)=>a.path);
+      const exact=(paths:string[])=>paths.length===ledger.features.length&&new Set(paths).size===paths.length&&paths.every(p=>ledger.features.includes(p));
+      if(!exact(discovered)||!exact(sealed))throw Error('Shared catalogue feature membership or seal drift');
+      const owners=new Map<string,{feature:string;expandedCases:number}>();
+      for(const row of ledger.workflows){
+        if(!row||typeof row.id!=='string'||!row.id.startsWith('@id-')||owners.has(row.id)||!ledger.features.includes(row.feature)||!Number.isSafeInteger(row.expandedCases)||row.expandedCases<1)throw Error('Invalid or duplicate catalogue scenario');
+        owners.set(row.id,row);
+      }
+      for(const path of selections.keys())if(!ledger.features.includes(path.slice(sharedPrefix.length)))throw Error('Activation outside shared catalogue');
+      const found=new Set<string>();let caseCount=0;
+      for(const path of ledger.features as string[]){
+        const uri=sharedPrefix+path,source=await Bun.file(join(referenceRoot,path)).text();
+        const parsed=selections.has(uri)?selectSharedScenarios(uri,source,selections.get(uri)):parseFeature(uri,source,{allowDuplicateCaseNames:true});
+        // Unselected files must remain planned in the canonical source.
+        if(!selections.has(uri)&&parsed.lifecycle!=='planned')throw Error('Shared feature must remain planned: '+path);
+        for(const scenario of parsed.scenarios){const owner=owners.get(scenario.scenarioId);
+          if(found.has(scenario.scenarioId)||!owner||owner.feature!==path||owner.expandedCases!==scenario.cases.length)throw Error('Shared catalogue scenario ownership or case-count drift: '+scenario.scenarioId);
+          found.add(scenario.scenarioId);caseCount+=scenario.cases.length;
+        }
+        features.push(parsed);
+      }
+      if(found.size!==owners.size)throw Error('Shared catalogue scenario missing from source');
+      catalogue={path:cataloguePath,sourceSha256:sha256(text),features:ledger.features.length,scenarios:found.size,cases:caseCount};
+    }else{
+      // Small isolated test projects may intentionally select only a few files.
+      for(const [path,ids]of selections){const text=await Bun.file(join(referenceRoot,path.slice(sharedPrefix.length))).text();features.push(selectSharedScenarios(path,text,ids));}
     }
   }
   features.sort((left, right) => left.path.localeCompare(right.path));
@@ -353,6 +401,7 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
     root,
     features,
     counts: countInventory(features),
+    coverage: {catalogue,shared:countInventory(features.filter(f=>f.path.startsWith(sharedPrefix))),localOnly:countInventory(features.filter(f=>!f.path.startsWith(sharedPrefix)))},
   };
 }
 

@@ -22,6 +22,7 @@ export type AcceptanceRunReport = {
   finishedAt?: string;
   status: "running" | "passed" | "failed";
   inventory: AcceptanceInventory["counts"];
+  coverage?: AcceptanceInventory['coverage'];
   execution: AcceptanceExecution["counts"];
   features: AcceptanceFeatureReport[];
   failures: string[];
@@ -63,6 +64,7 @@ export async function runAcceptance(
   try {
     const inventory = await inventoryFeatures(root);
     report.inventory = inventory.counts;
+    report.coverage = inventory.coverage;
 
     const loaded = !bindings && inventory.counts.cases.implemented > 0
       ? await loadBindings(stepsModulePath, runId) : undefined;
@@ -194,6 +196,7 @@ if (import.meta.main) {
     console.log(
       `Acceptance ${report.status}: ${report.execution.cases.passed}/${report.inventory.cases.implemented} implemented case(s) passed; planned cases ${report.inventory.cases.planned}.`,
     );
+    if(report.coverage?.catalogue)console.log(`Inventory: ${report.coverage.shared.cases.total} shared cases (${report.coverage.shared.cases.planned} planned); ${report.coverage.localOnly.cases.total} local-only cases (${report.coverage.localOnly.cases.planned} planned).`);
   } catch (error) {
     console.error(formatError(error));
     process.exitCode = 1;

@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 958,
-  "files": 106,
+  "count": 963,
+  "files": 107,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -20,7 +20,7 @@
     },
     {
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "sha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
+      "sha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
       "declarations": 3,
       "issues": []
     },
@@ -326,7 +326,7 @@
     },
     {
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "sha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120",
+      "sha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
       "declarations": 3,
       "issues": []
     },
@@ -416,8 +416,14 @@
     },
     {
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "sha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
+      "sha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
       "declarations": 3,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "sha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "declarations": 5,
       "issues": []
     },
     {
@@ -452,7 +458,7 @@
     },
     {
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "sha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
+      "sha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
       "declarations": 3,
       "issues": []
     },
@@ -464,7 +470,7 @@
     },
     {
       "path": "tests/unit/workflow-layout.test.ts",
-      "sha256": "8ab2df2af3d8295bdedbbdbb91f56289ad4b151e80aeb2148664bc5ba9ecb9c0",
+      "sha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
       "declarations": 3,
       "issues": []
     },
@@ -578,7 +584,7 @@
     },
     {
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "sha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
+      "sha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
       "declarations": 3,
       "issues": []
     },
@@ -1179,6 +1185,8 @@
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
     "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
+    "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
+    "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
@@ -1562,6 +1570,8 @@
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
     "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
+    "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
+    "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
@@ -1999,23 +2009,25 @@
       "assertions": [
         "expect(ids).toHaveLength(24)",
         "expect(observed.filter(s=>s.lifecycle==='implemented').map(s=>s.scenarioId).sort()).toEqual(['@id-xml-escaping-values','@id-xml-typed-parse-error'])",
-        "expect(observed.filter(s=>s.lifecycle==='planned')).toHaveLength(9)",
+        "expect(observed.filter(s=>(s.lifecycle??'planned')==='planned')).toHaveLength(22)",
         "expect(templates).toHaveLength(13)",
-        "expect(active.filter(s=>templates.includes(s.scenarioId))).toEqual([])",
+        "expect(loaded.flatMap(f=>f.scenarios)).toHaveLength(13)",
+        "expect(loaded.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true)",
         "expect(f.lifecycle).toBe('planned')",
         "expect(f.scenarios.every(s=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)"
       ],
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 12,
+          "line": 11,
           "expression": "for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature'])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
-      "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/comment-template-wording-migration.json')).json(),inv=await inventoryFeatures(process.cwd()),active=inv.features.flatMap(f=>f.scenarios),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)) as string[];\n expect(ids).toHaveLength(24);const observed=active.filter(s=>ids.includes(s.scenarioId));expect(observed.filter(s=>s.lifecycle==='implemented').map(s=>s.scenarioId).sort()).toEqual(['@id-xml-escaping-values','@id-xml-typed-parse-error']);expect(observed.filter(s=>s.lifecycle==='planned')).toHaveLength(9);\n // Templates remain outside Bun's loaded execution inventory; inspect the shared\n // lifecycle directly rather than granting a pass or silently claiming binding.\n const templates=ids.filter(id=>id.includes('template'));expect(templates).toHaveLength(13);expect(active.filter(s=>templates.includes(s.scenarioId))).toEqual([]);\n for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature']){const f=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text());expect(f.lifecycle).toBe('planned');expect(f.scenarios.every(s=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);}\n}",
+      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
+      "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/comment-template-wording-migration.json')).json(),inv=await inventoryFeatures(process.cwd()),active=inv.features.flatMap(f=>f.scenarios),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)) as string[];\n expect(ids).toHaveLength(24);const observed=active.filter(s=>ids.includes(s.scenarioId));expect(observed.filter(s=>s.lifecycle==='implemented').map(s=>s.scenarioId).sort()).toEqual(['@id-xml-escaping-values','@id-xml-typed-parse-error']);expect(observed.filter(s=>(s.lifecycle??'planned')==='planned')).toHaveLength(22);\n // Catalogue completeness makes templates visible but grants no execution.\n const templates=ids.filter(id=>id.includes('template'));expect(templates).toHaveLength(13);const loaded=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(loaded.flatMap(f=>f.scenarios)).toHaveLength(13);expect(loaded.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true);\n for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature']){const f=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text());expect(f.lifecycle).toBe('planned');expect(f.scenarios.every(s=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);}\n}",
       "calls": [
+        ".test",
         "Bun.file",
         "Bun.file().json",
         "Bun.file().text",
@@ -2030,16 +2042,18 @@
         "id.includes",
         "ids.filter",
         "ids.includes",
+        "inv.features.filter",
         "inv.features.flatMap",
         "inventoryFeatures",
         "join",
+        "loaded.every",
+        "loaded.flatMap",
         "m.files.flatMap",
         "observed.filter",
         "observed.filter().map",
         "observed.filter().map().sort",
         "parseFeature",
-        "process.cwd",
-        "templates.includes"
+        "process.cwd"
       ],
       "reviewReasons": [
         "body-loop"
@@ -2049,7 +2063,7 @@
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:retained weak response and comment policies are not strengthened by neutral names",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "line": 14,
+      "line": 13,
       "title": "retained weak response and comment policies are not strengthened by neutral names",
       "suites": [],
       "kind": "test",
@@ -2062,7 +2076,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
+      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
       "body": "{\n const path='workflows/docx/template-analysis.feature',f=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()),plain=f.scenarios.find(s=>s.scenarioId==='@id-python-word-template-analysis-plain-response')!;expect(plain.cases[0]!.steps.at(-1)!.text).toBe('its response is a dictionary');\n const p='workflows/docx/comments.feature',comments=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text());expect(comments.scenarios.find(s=>s.scenarioId==='@id-python-comments-filter-predicates')!.cases[0]!.steps.some(s=>s.text==='the open-filter, resolved-filter, and mine-filter results are each nonempty')).toBe(true);expect(comments.scenarios.find(s=>s.scenarioId==='@id-docx-comments-refusal')!.cases.some(c=>c.name.includes('missing-extension'))).toBe(true);\n}",
       "calls": [
         "Bun.file",
@@ -2085,7 +2099,7 @@
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:profile-only adoption preserves all default case identities and every bounded mapping record",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "line": 18,
+      "line": 17,
       "title": "profile-only adoption preserves all default case identities and every bounded mapping record",
       "suites": [],
       "kind": "test",
@@ -2093,7 +2107,7 @@
       "assertions": [
         "expect(keys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(35)",
+        "expect(inv.counts.cases.planned).toBe(48)",
         "expect(r.mappedDeclarations).toBe(472)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -2101,8 +2115,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(35);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(48);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -22982,7 +22996,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120",
+      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/package-wording-migration.json')).json();\n for(const file of migration.files)for(const edit of file.stepRenames){expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);}\n}",
       "calls": [
         "Bun.file",
@@ -23016,7 +23030,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120",
+      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/package-wording-migration.json')).json(),ids=migration.files.flatMap((f:any)=>f.scenarios.map((s:any)=>s.id));\n const features=await sharedScenarios(ids),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(18),cases:count(38),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'package-neutral-wording');\n expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(38);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n }finally{await cleanup();}\n}",
       "calls": [
         "Bun.file",
@@ -23050,7 +23064,7 @@
       "assertions": [
         "expect(keys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(35)",
+        "expect(inventory.counts.cases.planned).toBe(48)",
         "expect(report.mappedDeclarations).toBe(472)",
         "expect(report.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -23058,8 +23072,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(35);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(48);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -27405,7 +27419,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
+      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json();\n for(const file of migration.files)for(const edit of file.stepRenames){\n  expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);\n  expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);\n }\n}",
       "calls": [
         "Bun.file",
@@ -27439,7 +27453,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
+      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json(),ids=migration.files.flatMap((f:any)=>f.scenarios.map((s:any)=>s.id));\n const features=await sharedScenarios(ids),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(4),scenarios:count(16),cases:count(18),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'neutral-wording');\n expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(18);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -27472,7 +27486,7 @@
       "assertions": [
         "expect(keys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(35)",
+        "expect(inventory.counts.cases.planned).toBe(48)",
         "expect(report.mappedDeclarations).toBe(472)",
         "expect(report.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -27480,8 +27494,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(35);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(48);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -27497,6 +27511,220 @@
         "outcomeMappingReport",
         "process.cwd",
         "s.cases.map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "line": 10,
+      "title": "catalogue mode includes unselected features as planned and separates shared from local obligations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3})",
+        "expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2})",
+        "expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1})",
+        "expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2})",
+        "expect(f.lifecycle).toBe('planned')",
+        "expect(f.runner).toBeUndefined()",
+        "expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'))",
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3})",
+        "expect(unsupported).toBe(0)",
+        "expect(report.coverage).toEqual(inv.coverage)",
+        "expect(report.execution.cases.planned).toBe(2)",
+        "expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "body": "{\n const root=await project();try{await Bun.write(join(root,'features/local.feature'),feature('local'));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3});expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1});expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2});\n const f=inv.features.find(f=>f.path===prefix+b)!;expect(f.lifecycle).toBe('planned');expect(f.runner).toBeUndefined();expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'));\n let unsupported=0;const result=await executeAcceptance(inv,[...bound,{pattern:/^(input|output) (b|local)$/,run:()=>{unsupported++;throw Error('planned ran');}}],'catalogue');expect(result.failures).toEqual([]);expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3});expect(unsupported).toBe(0);\n const report=await runAcceptance(bound,{root});expect(report.coverage).toEqual(inv.coverage);expect(report.execution.cases.planned).toBe(2);await expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "Bun.write",
+        "Error",
+        "executeAcceptance",
+        "expect",
+        "expect().rejects.toThrow",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "expect().toMatchObject",
+        "feature",
+        "inv.features.find",
+        "inventoryFeatures",
+        "join",
+        "project",
+        "rm",
+        "runAcceptance"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "line": 17,
+      "title": "canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inventoryFeatures(root)).rejects.toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 18,
+          "expression": "for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "body": "{\n for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>{l.schemaVersion=99;},\n  (l:ReturnType<typeof ledger>)=>{l.features.pop();l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.feature=b;},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.expandedCases=2;},\n  (l:ReturnType<typeof ledger>)=>{l.features.push(a);},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.push(l.workflows[0]!);},\n  (l:ReturnType<typeof ledger>)=>{l.features[0]='workflows/docx/../../escape.feature';},\n ]){const root=await project();try{const l=ledger();mutate(l);await Bun.write(join(root,catalogue),JSON.stringify(l));await expect(inventoryFeatures(root)).rejects.toThrow();}finally{await rm(root,{recursive:true,force:true});}}\n}",
+      "calls": [
+        "Bun.write",
+        "JSON.stringify",
+        "expect",
+        "expect().rejects.toThrow",
+        "inventoryFeatures",
+        "join",
+        "l.features.pop",
+        "l.features.push",
+        "l.workflows.pop",
+        "l.workflows.push",
+        "ledger",
+        "mutate",
+        "project",
+        "rm"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "line": 29,
+      "title": "catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inventoryFeatures(root)).rejects.toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 30,
+          "expression": "for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "body": "{\n for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity']){const root=await project();try{const c=config();\n if(mode==='unknown')c.features[0]!.path=prefix+'workflows/docx/c.feature';if(mode==='duplicate')c.features.push(c.features[0]!);if(mode==='orphan')await Bun.write(join(root,prefix+'workflows/docx/c.feature'),feature('c'));if(mode==='lifecycle')await Bun.write(join(root,prefix+b),feature('b').replace('@planned','@implemented @bun'));if(mode==='missing')await rm(join(root,prefix+b));if(mode==='seal')await Bun.write(join(root,prefix+'manifest.json'),JSON.stringify({files:[{path:a,role:'workflow'}]}));if(mode==='catalogue-path')c.catalogue=prefix+'../other.json';if(mode==='shadow')await Bun.write(join(root,'features/shadow.feature'),feature('b'));if(mode==='case-identity')await Bun.write(join(root,prefix+b),'@planned\\nFeature: b\\n @id-b\\n Scenario Outline: Duplicate <value>\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | same |\\n   | same |\\n');\n await Bun.write(join(root,'features/shared.json'),JSON.stringify(c));await expect(inventoryFeatures(root)).rejects.toThrow();\n }finally{await rm(root,{recursive:true,force:true});}}\n}",
+      "calls": [
+        "Bun.write",
+        "JSON.stringify",
+        "c.features.push",
+        "config",
+        "expect",
+        "expect().rejects.toThrow",
+        "feature",
+        "feature().replace",
+        "inventoryFeatures",
+        "join",
+        "project",
+        "rm"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "line": 35,
+      "title": "empty explicit activation retains the full planned catalogue but cannot pass acceptance",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2})",
+        "expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "body": "{\n const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Bun.write",
+        "JSON.stringify",
+        "config",
+        "expect",
+        "expect().rejects.toThrow",
+        "expect().toEqual",
+        "inventoryFeatures",
+        "join",
+        "project",
+        "rm",
+        "runAcceptance"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 562 shared cases plus eleven local-only cases without new execution",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "line": 38,
+      "title": "real catalogue accounts for all 562 shared cases plus eleven local-only cases without new execution",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inv.coverage?.catalogue).toMatchObject({features:46,scenarios:229,cases:562})",
+        "expect(inv.coverage?.shared.cases).toEqual({implemented:525,planned:37,total:562})",
+        "expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11})",
+        "expect(inv.counts.cases).toEqual({implemented:525,planned:48,total:573})",
+        "expect(inv.counts.scenarios.total).toBe(238)",
+        "expect(templates).toHaveLength(2)",
+        "expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13)",
+        "expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:46,scenarios:229,cases:562});expect(inv.coverage?.shared.cases).toEqual({implemented:525,planned:37,total:562});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11});expect(inv.counts.cases).toEqual({implemented:525,planned:48,total:573});expect(inv.counts.scenarios.total).toBe(238);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13);expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
+      "calls": [
+        ".test",
+        ".update",
+        ".update().digest",
+        "JSON.stringify",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toMatchObject",
+        "f.scenarios.filter",
+        "f.scenarios.filter().flatMap",
+        "inv.features.filter",
+        "inv.features.flatMap",
+        "inv.features.flatMap().sort",
+        "inventoryFeatures",
+        "process.cwd",
+        "s.cases.map",
+        "templates.every",
+        "templates.flatMap"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -29077,7 +29305,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
+      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
       "body": "{\n const {m,selected}=await scope();for(const file of m.files)for(const edit of file.stepRenames){expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);if(selected.includes(edit.id))expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);}\n}",
       "calls": [
         "b.pattern.test",
@@ -29114,7 +29342,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
+      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
       "body": "{\n const {ids,selected,inv}=await scope();expect(ids).toHaveLength(34);expect(selected).toHaveLength(28);expect(ids.filter(id=>!selected.includes(id)).sort()).toEqual([...planned].sort());\n expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(10);\n const features=await sharedScenarios(selected),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});expect(cases).toHaveLength(65);\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(features.length),scenarios:count(28),cases:count(65),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'word-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(65);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);}finally{await cleanup();}\n}",
       "calls": [
         ".sort",
@@ -29152,7 +29380,7 @@
       "assertions": [
         "expect(keys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(35)",
+        "expect(inv.counts.cases.planned).toBe(48)",
         "expect(r.mappedDeclarations).toBe(472)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -29160,8 +29388,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
-      "body": "{\n const {inv}=await scope(),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(35);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa",
+      "body": "{\n const {inv}=await scope(),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(48);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -29256,7 +29484,7 @@
         "expect(keys).toHaveLength(525)",
         "expect(new Set(keys).size).toBe(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(35)",
+        "expect(inventory.counts.cases.planned).toBe(48)",
         "expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/)"
       ],
       "deferredAssertions": [],
@@ -29267,8 +29495,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "8ab2df2af3d8295bdedbbdbb91f56289ad4b151e80aeb2148664bc5ba9ecb9c0",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Set(keys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(35);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/);}\n}",
+      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Set(keys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(48);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/);}\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -29320,7 +29548,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "8ab2df2af3d8295bdedbbdbb91f56289ad4b151e80aeb2148664bc5ba9ecb9c0",
+      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
       "body": "{\n const ids=['@id-office-preview-details','@id-office-docx-exact-match-counts'],features=await sharedScenarios(ids);\n expect(features).toHaveLength(2);expect(features.flatMap(f=>f.scenarios.map(s=>s.scenarioId))).toEqual(ids);\n await expect(sharedScenarios(['@id-not-in-catalogue'])).rejects.toThrow('one shared scenario owner');\n await expect(sharedScenarios([])).rejects.toThrow('nonempty unique');await expect(sharedScenarios([ids[0]!,ids[0]!])).rejects.toThrow('nonempty unique');\n const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n for(const f of features)for(const s of f.scenarios)expect(ledger.workflows.find((w:any)=>w.id===s.scenarioId).feature).toBe(f.path);\n}",
       "calls": [
         "Bun.file",
@@ -29362,7 +29590,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8ab2df2af3d8295bdedbbdbb91f56289ad4b151e80aeb2148664bc5ba9ecb9c0",
+      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6",
       "body": "{\n const r=await outcomeMappingReport(),ids=['bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings','bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting'];\n const unchanged=r.mappings.filter(m=>!ids.includes(m.testId));expect(unchanged).toHaveLength(470);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(unchanged)).digest('hex')).toBe('a87881cd02360bf6db2556d4cb39bc4a22bb59db90752d4fff83dd9f81960b41');\n expect(r.mappings.find(m=>m.testId===ids[0])!.assertions).toContain('expect(report.inventory.features.implemented).toBe(2)');\n expect(r.mappings.find(m=>m.testId===ids[1])!.assertions).toContain('expect(good.counts.cases.planned).toBe(0)');\n expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         ".update",
@@ -36002,7 +36230,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
+      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json();for(const f of m.files)for(const e of f.stepRenames){expect(bindings.filter(b=>b.pattern.test(e.to))).toHaveLength(1);expect(bindings.filter(b=>b.pattern.test(e.from))).toHaveLength(0);}\n}",
       "calls": [
         "Bun.file",
@@ -36036,7 +36264,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
+      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json(),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)),features=await sharedScenarios(ids),cases=features.flatMap(f=>f.scenarios.flatMap(s=>s.cases)),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(19),cases:count(60),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'xml-formula-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(60);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -36069,7 +36297,7 @@
       "assertions": [
         "expect(keys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(35)",
+        "expect(inv.counts.cases.planned).toBe(48)",
         "expect(r.mappedDeclarations).toBe(472)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -36077,8 +36305,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(35);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(48);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".update",
         ".update().digest",

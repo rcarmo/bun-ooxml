@@ -64,6 +64,21 @@ unknown or empty selections fail, and full acceptance rejects any planned case,
 including cases in a partly implemented feature. Full mode runs selected cases
 and then checks for planned gaps; it is not a side-effect-free preflight.
 
+The project also sets `catalogue` to
+`references/fixtures-ooxml/ledgers/workflows.json`: every canonical feature is
+loaded, even when it has no implemented selection. Feature paths must match both
+the physical feature tree and manifest workflow records; scenario IDs, owners
+and expanded counts must match the registry. Missing or orphaned inputs fail.
+Small isolated test projects may omit `catalogue`; the project verification gate
+requires it for this repository.
+
+Coverage and acceptance reports separate **562 shared cases** (525 implemented,
+37 planned) from **11 local-only planned cases**. The combined inventory has 573
+cases, including 48 planned. Thirteen template cases previously omitted from the
+loaded inventory are now visible with no execution credit. Catalogue membership
+checks do not replace `verifyReferences`, which verifies the pinned commit,
+manifest hashes and tracked-byte custody.
+
 Source tags stay unchanged for provenance. Bindings and reports use explicit
 scenario/case `lifecycle` fields for runtime status. A feature's result summarises
 its attempted scenarios; case counts and the CLI retain every planned gap.

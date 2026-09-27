@@ -9,7 +9,7 @@ test('format regrouping retains the exact 525 implemented shared case identities
  const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();
  expect(keys).toHaveLength(525);expect(new Set(keys).size).toBe(525);
  expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');
- expect(inventory.counts.cases.planned).toBe(35);
+ expect(inventory.counts.cases.planned).toBe(48);
  for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\/fixtures-ooxml\/workflows\/(docx|pptx|xlsx|package|xml)\/[a-z0-9-]+\.feature$/);}
 });
 test('multi-feature wrapper selection executes only requested identities and rejects missing ones',async()=>{

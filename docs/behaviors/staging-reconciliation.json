@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 958,
+  "nativeDeclarations": 963,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 731,
+  "withoutStagingCount": 736,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2158,17 +2158,17 @@
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:comment/template API labels do not activate unsupported consumer scenarios",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf"
+      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5"
     },
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:retained weak response and comment policies are not strengthened by neutral names",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf"
+      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5"
     },
     {
       "id": "bun:tests/unit/comment-template-neutrality.test.ts:profile-only adoption preserves all default case identities and every bounded mapping record",
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "sourceSha256": "8836f4a334f73fc8a2888eda6117ba8306e9214c0d4414c041c3c1f539ede1bf"
+      "sourceSha256": "8bfe25215ed628d3cf69c74fc56064e3c10f99440681245733047ddf32e46bb5"
     },
     {
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison ledgers cover 26 declarations and 74 expressions preserving 347 predecessor mappings",
@@ -4328,17 +4328,17 @@
     {
       "id": "bun:tests/unit/package-neutral-bindings.test.ts:neutral package actors resolve once and retired implementation names do not bind",
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120"
+      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e"
     },
     {
       "id": "bun:tests/unit/package-neutral-bindings.test.ts:all thirty-eight package and ZIP32 cases retain concrete assertions after actor migration",
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120"
+      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e"
     },
     {
       "id": "bun:tests/unit/package-neutral-bindings.test.ts:package wording keeps default case identities all mapping records and planned gaps unchanged",
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120"
+      "sourceSha256": "681bab0f555c9c666a16d54064887e28100a51de243253261a82251ea489db7e"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
@@ -4688,17 +4688,42 @@
     {
       "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3"
+      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09"
     },
     {
       "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:all eighteen portable-profile cases execute the retained inputs and outcomes",
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3"
+      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09"
     },
     {
       "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:wording and profile labels do not change default acceptance identities or credit",
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3"
+      "sourceSha256": "70dc732352e67a86c3b33219d63e2b9a274016535dd70e1b6dbabb3b6ea34c09"
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b"
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b"
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b"
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b"
+    },
+    {
+      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 562 shared cases plus eleven local-only cases without new execution",
+      "path": "tests/unit/shared-catalogue.test.ts",
+      "sourceSha256": "5a5cdaa8c8631b3dea75a6aa9da4e9241dbf2f122581837deb6196444502544b"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
@@ -4838,32 +4863,32 @@
     {
       "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9"
+      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa"
     },
     {
       "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word wording executes the same 28 supported IDs and 65 cases while six incompatible profiles stay planned",
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9"
+      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa"
     },
     {
       "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor changes preserve default execution identities and every prior mapping record",
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9"
+      "sourceSha256": "54a5977d4d3875aca1d5d1f425121a94ba32b549200e9ba2c7c84e607d1d17aa"
     },
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:format regrouping retains the exact 525 implemented shared case identities",
       "path": "tests/unit/workflow-layout.test.ts",
-      "sourceSha256": "8ab2df2af3d8295bdedbbdbb91f56289ad4b151e80aeb2148664bc5ba9ecb9c0"
+      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6"
     },
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:multi-feature wrapper selection executes only requested identities and rejects missing ones",
       "path": "tests/unit/workflow-layout.test.ts",
-      "sourceSha256": "8ab2df2af3d8295bdedbbdbb91f56289ad4b151e80aeb2148664bc5ba9ecb9c0"
+      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6"
     },
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:mapping relocation preserves 470 records and explicitly accounts for two wrapper count changes",
       "path": "tests/unit/workflow-layout.test.ts",
-      "sourceSha256": "8ab2df2af3d8295bdedbbdbb91f56289ad4b151e80aeb2148664bc5ba9ecb9c0"
+      "sourceSha256": "f5dca870d0c1d505e893ad339fbe864c2b0552781fd77dda61f034f3850469c6"
     },
     {
       "id": "bun:tests/unit/workflow-receipts.test.ts:retained receipt scenarios execute both exact Then predicates with no undefined bindings",
@@ -5548,17 +5573,17 @@
     {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1"
+      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696"
     },
     {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:all sixty retained XML and formula cases execute exact lexical and static-reference predicates",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1"
+      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696"
     },
     {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:XML formula actor migration preserves all default case identities and bounded mapping records",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1"
+      "sourceSha256": "f8283d8ce512210329c6ae348696795edc358113483801aeae023e17d67e6696"
     },
     {
       "id": "bun:tests/unit/xml-removal.test.ts:removing disjoint XML elements preserves all surrounding source characters",

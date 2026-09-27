@@ -18,6 +18,21 @@ The current Gherkin inventory is in
 run. A unit-test declaration may contain loops or call helpers, so its presence
 alone does not count as a tested requirement.
 
+## Complete shared inventory
+
+The project loads all 46 canonical features from the pinned workflow registry.
+Only explicitly selected scenario IDs are implemented; all others stay planned.
+Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
+path/hash. The coverage table reports the same independent denominators:
+
+- Shared: 229 scenarios / 562 cases; 525 implemented and 37 planned.
+- Local-only: nine scenarios / eleven cases, all planned.
+- Combined: 238 scenarios / 573 cases; 525 implemented and 48 planned.
+
+This closes an inventory omission of thirteen template cases. Earlier release
+notes below describe their historical loaded counts. The executed case-key set
+and all 472 mapping records are unchanged; visibility does not award a pass.
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.
@@ -75,7 +90,8 @@ Shared v0.27 completes the catalogue-wide actor/profile wording pass: comment
 and template APIs use operation labels, XML escaping/error profiles lose their
 origin prefixes, and XLSX creation keeps fixture provenance without a Bun actor.
 The changed 24 IDs / 25 cases do not add Bun bindings. Nine authored-comment cases
-stay planned; thirteen template cases remain outside Bun's loaded inventory.
+stayed planned; thirteen template cases were outside Bun's loaded inventory at
+that release and are now included as planned by the complete catalogue loader.
 Only the two already implemented XML profile IDs remain active. All 525 default
 case identities and 472 mapping records are unchanged.
 

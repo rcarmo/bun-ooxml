@@ -2,6 +2,14 @@
 
 The shared reference contains **207 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
+| Scope | Scenarios | Cases | Implemented cases | Planned cases |
+|---|---:|---:|---:|---:|
+| Shared catalogue | 229 | 562 | 525 | 37 |
+| Local-only obligations | 9 | 11 | 0 | 11 |
+| Combined inventory | 238 | 573 | 525 | 48 |
+
+The canonical denominator is **229 shared scenarios / 562 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
 | features/planned/cross-language-followups.feature | planned | 3 | 3 | 0 | 3 | 13 |
@@ -22,6 +30,8 @@ The shared reference contains **207 assets**. The table lists available tests; a
 | references/fixtures-ooxml/workflows/docx/stories.feature | implemented | 3 | 3 | 3 | 0 | 21 |
 | references/fixtures-ooxml/workflows/docx/style-authoring.feature | implemented | 2 | 24 | 24 | 0 | 86 |
 | references/fixtures-ooxml/workflows/docx/tables.feature | mixed | 14 | 24 | 22 | 2 | 104 |
+| references/fixtures-ooxml/workflows/docx/template-analysis.feature | planned | 6 | 6 | 0 | 6 | 21 |
+| references/fixtures-ooxml/workflows/docx/template-cache.feature | planned | 7 | 7 | 0 | 7 | 38 |
 | references/fixtures-ooxml/workflows/docx/text.feature | implemented | 5 | 7 | 7 | 0 | 33 |
 | references/fixtures-ooxml/workflows/docx/tracked-workflow.feature | mixed | 3 | 18 | 17 | 1 | 60 |
 | references/fixtures-ooxml/workflows/package/graph.feature | implemented | 4 | 4 | 4 | 0 | 16 |
