@@ -1,0 +1,26 @@
+import {test,expect} from 'bun:test';
+import {outcomeMappingReport,reconcileOutcomeMappingSets,type OutcomeMappingLedger} from '../../scripts/outcome-mappings.ts';
+import {inventoryTestSource} from '../../scripts/test-inventory.ts';import {parseFeature} from '../../scripts/gherkin.ts';import {fixturesRoot} from '../../scripts/fixture-inputs.ts';import {join} from 'node:path';
+const path='tests/unit/xlsx-cell-style.test.ts',canonical='workflows/xlsx/cell-style.feature',selection='@id-xlsx-cell-style-selection',refusal='@id-xlsx-cell-style-refusal';
+const pins=[path,'tests/acceptance/cell-style.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts','src/opc/package.ts','src/opc/content-types.ts','src/opc/graph.ts','src/xml/index.ts','src/errors.ts','scripts/fixture-inputs.ts','scripts/gherkin.ts','scripts/test-inventory.ts',canonical];
+async function sample(){const ledger=await Bun.file('docs/behaviors/xlsx-styles-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};for(const p of pins)sources[p]=await Bun.file(p===canonical?join(fixturesRoot(),p):p).text();return {inventory:{cases:inventoryTestSource(path,sources[path]!),unresolved:[]},sets:[{name:'xlsx-styles',expectedScopePaths:[path],ledger,features:[parseFeature(canonical,sources[canonical]!)],sources}]};}
+
+test('style mappings enumerate 16 declarations and 52 direct expressions while preserving all 279 predecessor records',async()=>{
+ const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='xlsx-styles');expect(rows).toHaveLength(16);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(52);expect(r.ledgers.find(l=>l.name==='xlsx-styles')!.scopePaths).toEqual([path]);expect(r.mappedDeclarations).toBe(295);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-295);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set([selection,refusal]));expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([27]);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>m.ledger!=='xlsx-styles'))).digest('hex')).toBe('70de36f4d9378b8df39a2d433a9972108b852d1b59868a60e0bb7f554088e792');
+});
+
+test('style mapping descriptions distinguish aggregate wrappers byte reopen disk checks and preservation-only controls',async()=>{
+ const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='xlsx-styles');expect(rows[0]!.gaps.join(' ')).toContain('aggregate');expect(rows[0]!.gaps.join(' ')).toContain('byte reopen');expect(rows[0]!.gaps.join(' ')).toContain('no disk');expect(rows[5]!.gaps.join(' ')).toContain('no style-index');expect(rows[11]!.gaps.join(' ')).toContain('absent');expect(rows[12]!.outcomes.join(' ')).toContain('disk');expect(rows[12]!.caseKeys).toEqual([]);expect(rows[14]!.gaps.join(' ')).toContain('existing');expect(rows[15]!.gaps.join(' ')).toContain('does not calculate');expect(rows.every(m=>!m.gaps.join(' ').includes('full formatting parity'))).toBe(true);
+});
+
+test('style scope and literal assertion completeness cannot shrink or borrow another scenario case',async()=>{
+ const a=await sample();a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings[1]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings[1]!.caseKeys=[`${refusal}|{"kind":"invalid-index"}`];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');const e=await sample();e.sets[0]!.ledger.mappings[1]!.assertions[0]='expect(fiction).toBe(true)';expect(()=>reconcileOutcomeMappingSets(e.inventory,e.sets)).toThrow('assertion');
+});
+
+test('all style source pins independently reject stale or missing runtime helper and shared definitions',async()=>{
+ for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}
+});
+
+test('style reconciliation retains literal evidence review flags and no inferred runtime leaf count',async()=>{
+ const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.runtimeLeafCount).toBeNull();expect(r.executionCredit).toBe(false);
+});

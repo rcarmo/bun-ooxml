@@ -66,7 +66,7 @@ controls reject wrong values, reversed order and missing or extra array members.
 ## Requirement mappings
 
 The slide-order, effective-formatting, XML-value, PPTX-core, DOCX-model,
-DOCX-anchor, XLSX-comments and formula reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
+DOCX-anchor, XLSX-comments, XLSX-styles and formula reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
 an input variant missing from the scenario. Each report has its own source hashes
 and required files; one cannot supply a missing reference for another.
 
@@ -156,6 +156,20 @@ inferred. Literal-punctuation and remap-refusal predicates split across native
 tests retain that distinction. Range-wrapper planned counts refer to its isolated
 selection, not the full acceptance run. No mapping establishes worksheet editing,
 formula calculation or saved-workbook behaviour.
+
+The [XLSX-styles ledger](xlsx-styles-mappings.json) covers 16 declarations and
+52 direct assertion expressions. One wrapper links to all 27 selection/refusal
+case keys; its two direct assertions check aggregate results, while the pinned
+bindings check semantic outcomes. Positive bindings reopen bytes, not a saved
+path. The other 15 records remain scenario-only, including a separate disk-save
+test that compares the formula cell and styles payload after reopen.
+
+The UTF-16 test checks encoding markers and cell text, but does not assert the
+reopened style index. Protected absent-index and existing-index tests are mapped
+separately: the former's zero/one requests are assignments, not same-index no-ops.
+Row and column default markup is preserved without computing its effective
+formatting. These mappings do not cover the independent SDK style reader or new
+style creation. All 279 prior mapping records remain unchanged.
 
 The [XLSX-comments ledger](xlsx-comments-mappings.json) maps 19 declarations and
 72 direct assertion expressions from the native inspector and binding controls.

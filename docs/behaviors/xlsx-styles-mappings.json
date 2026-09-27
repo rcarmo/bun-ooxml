@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/xlsx-cell-style.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/xlsx-cell-style.test.ts": "8fc14a62dd80bdca339232c5494bce772ff8a862db7e179f5b92b7a25f24effe",
+    "tests/acceptance/cell-style.ts": "6509b7a9876ec52a2df3d1405e3a6b085f999cd0a465140af1fcbb21b39a62a3",
+    "src/xlsx/index.ts": "f4b07aca325232ee4c594f6a642782b92983cc6918bb68493d6a2d29260ebdde",
+    "src/xlsx/cell-style.ts": "3c37864b0223cfec3f11454d623e78cda42b0173b728d04897d07a847bd8c92e",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/xlsx/cell-style.feature": "2b8067d70864d75a3f709bb653c12d605777eb0c87ead6270eb2014ec0e4a6ca"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:cell style selection executes27 saved outcomes and atomic refusals",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection",
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [
+        "@id-xlsx-cell-style-selection|{\"kind\":\"assign\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"replace\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"explicit-zero\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"remove\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"no-op\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"absent-removal\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"formula\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"blank\"}",
+        "@id-xlsx-cell-style-selection|{\"kind\":\"aliased\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"missing-cell\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"invalid-index\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"missing-index\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"duplicate-relationship\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"external-styles\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"wrong-mime\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"wrong-root\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"duplicate-cellxfs\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"incorrect-count\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"invalid-font\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"invalid-base\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"missing-number-format\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"protected-sheet\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"protected-workbook\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"stale-sheet\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"stale-relationship\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"malformed-old-index\"}",
+        "@id-xlsx-cell-style-refusal|{\"kind\":\"worksheet-alias\"}"
+      ],
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(27)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and exactly 27 passed cases across the two shared outlines. Pinned bindings compare requested indices and change receipts, preserve all nonworksheet payloads and selected worksheet source, and require unsafe inputs to refuse with unchanged archive and cached cell state."
+      ],
+      "gaps": [
+        "The two native expressions check aggregate results only; semantic assertions are delegated to the pinned bindings. Positive cases use byte reopen, no disk save; custody checks examine the edited live package, with byte equality for no-ops. Refusal codes are only constrained to the xlsx- prefix. The title saying saved outcomes does not establish filesystem persistence.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:style-only edits preserve cell payloads for scalar and formula topologies",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(saved.worksheet('Sheet1').getCell('A1')).toEqual({...before,styleId:'1'})",
+        "expect(saved.package.text(part)).toContain(payload)"
+      ],
+      "outcomes": [
+        "Scalar, ordinary formula, shared-formula and array-formula A1 payloads remain literal substrings after style selection and byte reopen; the full reopened cell model equals its prior model with styleId 1."
+      ],
+      "gaps": [
+        "Native finite topology extension; the plain formula is A2+1 rather than canonical Other!B1+1 and selection uses lowercase a1. Shared/array formula payloads are preserved, not evaluated or validated as complete formula groups. No path save or unrelated-member comparison in this declaration.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:null removes direct index without styles registry and explicit zero remains distinct",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection",
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.worksheet('Sheet1').setCellStyle('A1',null)).toEqual({changed:1})",
+        "expect(q.worksheet('Sheet1').getCell('A1')!.styleId).toBeUndefined()",
+        "expect(()=>q.worksheet('Sheet1').setCellStyle('A1',0)).toThrow()",
+        "expect(q.toBytes()).toEqual(before)",
+        "expect(sheet.setCellStyle('A1',0)).toEqual({changed:1})",
+        "expect(sheet.getCell('A1')!.styleId).toBe('0')",
+        "expect(sheet.setCellStyle('A1',null)).toEqual({changed:1})",
+        "expect(sheet.getCell('A1')!.styleId).toBeUndefined()"
+      ],
+      "outcomes": [
+        "Removing a direct style succeeds without a styles relationship/part and yields undefined. Explicit zero then refuses without archive changes. On a second normal workbook, explicit zero and null each report one change and retain distinct getter states."
+      ],
+      "gaps": [
+        "Native missing-registry extension; the canonical removal keeps its styles registry. The second document uses a sequence rather than separate canonical inputs, and no byte reopen or disk readback is asserted here. Explicit-zero refusal checks a generic error.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:same numeric style preserves lexical index spelling and exact original archive",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.worksheet('Sheet1').setCellStyle('A1',1)).toEqual({changed:0})",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Selecting numeric style 1 over lexical s = 0&#49; reports zero changes and returns the exact archive bytes."
+      ],
+      "gaps": [
+        "Native lexical no-op extension uses single quotes and an entity-encoded index rather than the canonical s=\"1\". No path save or independent style/rendering comparison.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:style attribute scanner handles quotes, prefixes and unrelated values containing s=",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.package.text(part)).toBe(xml.replace(\"s = '0'\",'s = \"1\"'))",
+        "expect(q.package.text(part)).toBe(xml.replace(\" s = '0'\",''))"
+      ],
+      "outcomes": [
+        "Selecting index 1 changes only the target style attribute spelling, retaining single-quoted r and namespaced note containing s=. Removing the style produces the exact original XML minus that attribute."
+      ],
+      "gaps": [
+        "Native scanner/quote extension, not the canonical aliased element-prefix case. Direct in-memory XML comparisons only; no reopen, archive custody or returned receipt assertion.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:UTF16 LE/BE worksheet declaration, BOM and target value survive style selection",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect([...saved.package.get(part)!.slice(0,2)]).toEqual(le?[255,254]:[254,255])",
+        "expect(saved.package.text(part)).toContain('encoding=\"UTF-16\"')",
+        "expect(saved.worksheet('Sheet1').getCell('A1')!.value).toBe('value π')"
+      ],
+      "outcomes": [
+        "Both UTF-16 byte orders retain their BOM, UTF-16 declaration and exact value π cell text after selection and byte reopen."
+      ],
+      "gaps": [
+        "Native encoding extension; no style-index or change-receipt assertion after reopen, no path save and no unrelated-member comparison here. The declared encoding and value checks do not independently establish all worksheet source bytes were retained.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:serialization rollback retains earlier edits, cached values and live worksheet facades",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection",
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>sheet.setCellStyle('A1',1)).toThrow('injected cell-style serialization')",
+        "expect(w.toBytes()).toEqual(before)",
+        "expect(sheet.getCell('A1')).toEqual(cell)",
+        "expect(sheet.getCell('B2')!.value).toBe(17)",
+        "expect(sheet.getCell('A1')!.styleId).toBe('1')",
+        "expect((await Workbook.open(w.toBytes())).worksheet('Sheet1').getCell('B2')!.value).toBe(18)"
+      ],
+      "outcomes": [
+        "Injected package serialization failure leaves archive bytes and cached A1 equal to the pre-attempt state, retains prior B2=17 and allows reuse of the held worksheet facade. A later style assignment reads as 1 and B2=18 survives byte reopen."
+      ],
+      "gaps": [
+        "Native rollback/lifecycle extension. The injected error is matched explicitly but is not a filesystem fault; A1 style is checked before the final byte reopen, whose only explicit getter comparison is B2=18. No disk save.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:external changes to another worksheet or workbook metadata refuse cached-model style updates",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>sheet.setCellStyle('A1',1)).toThrow('outside')",
+        "expect(w.toBytes()).toEqual(before)",
+        "expect(sheet.getCell('A1')).toEqual(old)"
+      ],
+      "outcomes": [
+        "External whitespace changes to the other worksheet, workbook or root relationships cause style selection to throw an outside error, preserving the externally changed archive and cached A1 model."
+      ],
+      "gaps": [
+        "Native stale-model extension beyond the canonical target-sheet/workbook-relationship variants. Rejecting stale data does not validate changed metadata semantically; the test does not save a path or assert an exact typed code.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:custom number formats and selected base dependencies are validated",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection",
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.worksheet('Sheet1').setCellStyle('A1',1)).toEqual({changed:1})",
+        "expect(xml.includes(old)).toBe(true)",
+        "expect(()=>d.worksheet('Sheet1').setCellStyle('A1',1)).toThrow()",
+        "expect(d.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A previously missing custom number format 164 with formatCode 0.000 permits selection and reports one change. Out-of-range base font, fill or border indices each refuse and leave the archive exact, after confirming the source base-XF fragment exists."
+      ],
+      "gaps": [
+        "Native dependency extension; the positive branch checks only the change receipt, not reopened style/text or the number format as rendered. Corruption targets the base XF rather than the shared invalid-font cell XF or invalid-base index. Generic errors only.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:wrong-namespace style indexes and malformed direct row placement refuse",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xml.includes(from)).toBe(true)",
+        "expect(()=>q.worksheet('Sheet1').setCellStyle('A1',1)).toThrow()",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A namespaced style attribute, a mismatched row number or duplicate sheetData each refuses selection without archive changes; each expected source fragment is confirmed before mutation."
+      ],
+      "gaps": [
+        "Native namespace/topology extension, not an exact shared refusal input. Does not assert error codes, cached cell state, reopened values or disk custody.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:all index argument errors refuse without changing source bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>w.worksheet('Sheet1').setCellStyle('A1',index as any)).toThrow()",
+        "expect(w.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Negative, fractional, nonfinite, wrong-type and overflow style arguments all refuse with exact archive custody after every request."
+      ],
+      "gaps": [
+        "Native argument matrix includes canonical negative index but no individual case keys are claimed. Generic errors only; no separate cached-model or saved-path assertions.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:protected no-op and removal both refuse conservatively",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>w.worksheet('Sheet1').setCellStyle('A1',value)).toThrow()",
+        "expect(w.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Sheet and workbook protection refuse null, zero and one selection requests, preserving exact archive bytes after each attempt."
+      ],
+      "gaps": [
+        "These fixtures have an absent direct index. Null is an absent-removal no-op, but zero and one would otherwise assign a style; this declaration does not test same-index protection despite its title. Existing-index protection is covered separately.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:disk save and reopen retain style selection, definitions and formula cache",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.worksheet('Sheet1').getCell('A1')).toEqual({kind:'formula',ref:'A1',styleId:'1',formula:'Other!B1+1',cached:8})",
+        "expect(q.package.get('xl/styles.xml')).toEqual(styles)"
+      ],
+      "outcomes": [
+        "A real disk save and reopen retains the exact A1 formula record with styleId 1, Other!B1+1 and cache 8; styles.xml bytes are unchanged."
+      ],
+      "gaps": [
+        "Native path readback strengthens the shared formula case, which uses byte reopen. It compares one full cell record and styles payload, not every unrelated member or a change receipt. Temporary directory removal occurs in finally but its absence is not independently asserted.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:worksheet aliases to the same part refuse instead of leaving a second cached model stale",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>q.worksheet('Sheet1').setCellStyle('A1',1)).toThrow()",
+        "expect(q.toBytes()).toEqual(before)",
+        "expect(q.worksheet('Other').getCell('A1')!.styleId).toBeUndefined()"
+      ],
+      "outcomes": [
+        "Two sheet names resolving to the same worksheet part cause selection to refuse; the archive remains exact and the second sheet A1 getter still has no direct style."
+      ],
+      "gaps": [
+        "Native alias-refusal extension using the shared worksheet-alias input. Cached target A1 equality and the xlsx- error prefix are asserted by the canonical wrapper, not here; no disk readback.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:protected cells with an existing direct style refuse same-index and removal requests",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(sheet.getCell('A1')!.styleId).toBe('1')",
+        "expect(()=>sheet.setCellStyle('A1',value)).toThrow()",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "With existing direct style 1, both sheet and workbook protection reject same-index selection and null removal, retaining exact archive bytes and styleId 1 after each request."
+      ],
+      "gaps": [
+        "Native existing-index protection extension; shared protected inputs start with an absent index. Generic errors only, with no saved-path assertion or positive mutation.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-cell-style.test.ts:same-sheet untargeted cells, row styles and column defaults remain exact",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-cell-style-selection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(q.package.text(part)).toContain(raw)",
+        "expect(q.package.text(part)).toContain('<row r=\"1\" s=\"1\" customFormat=\"1\">')",
+        "expect(q.package.text(part)).toContain('<col min=\"1\" max=\"1\" style=\"1\"/>')",
+        "expect(q.package.text(part)).toBe(before)",
+        "expect(q.worksheet('Sheet1').getCell('B2')!.value).toBe(19)"
+      ],
+      "outcomes": [
+        "Selecting explicit zero keeps an untargeted B2 cell XML slice, row style and column default markup present. Removing A1 direct style restores the entire original worksheet XML and retains B2=19."
+      ],
+      "gaps": [
+        "Native row/column-default custody extension. It does not calculate effective formatting after removal, assert returned receipts, byte-reopen the result or compare unrelated package members.",
+        "Source mapping only; loop/review flags are retained and runtime leaf count remains unknown. No new execution, computed-formatting or independent-reader credit."
+      ]
+    }
+  ]
+}
