@@ -33,6 +33,20 @@ unselected cases in the narrowly scoped run-authoring wrapper. No document
 runtime code changed. The shared `CATALOGUE.md` lists remaining runtime-specific
 API contracts and wording; file grouping alone does not resolve those differences.
 
+## Portable action wording
+
+Shared v0.23 uses runtime-neutral actions in presentation notes, presentation
+archive preservation, relationship namespaces and ZIP64. Bun bindings accept the
+new wording only. A bounded execution check runs all 16 scenarios / 18 cases;
+default acceptance remains the same 525 cases with 35 planned. All 472 mapping
+records and document-runtime sources are unchanged; affected source pins were
+renewed for the feature and binding edits.
+
+The shared wording ledger records exact substitutions. Historical IDs retain
+their origin names. Existing-notes and archive-noop profiles describe operations;
+ZIP64's exact error codes and safe-integer bound remain API compatibility policies.
+Other runtime-specific contracts listed in the shared catalogue still need review.
+
 ## Maintain the reports
 
 ```sh

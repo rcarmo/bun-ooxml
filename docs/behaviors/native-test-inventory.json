@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 943,
-  "files": 101,
+  "count": 946,
+  "files": 102,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -332,7 +332,7 @@
     },
     {
       "path": "tests/unit/pptx-custody-bindings.test.ts",
-      "sha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464",
+      "sha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01",
       "declarations": 4,
       "issues": []
     },
@@ -400,6 +400,12 @@
       "path": "tests/unit/relationship-namespaces.test.ts",
       "sha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
       "declarations": 7,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/runtime-neutral-bindings.test.ts",
+      "sha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
+      "declarations": 3,
       "issues": []
     },
     {
@@ -696,7 +702,7 @@
     },
     {
       "path": "tests/acceptance/notes-editing.ts",
-      "sha256": "9d79581028fde05cb5538c480e673e65b303d9624854bdda0129470ca4afdeb6"
+      "sha256": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6"
     },
     {
       "path": "tests/acceptance/opc-custody.ts",
@@ -728,7 +734,7 @@
     },
     {
       "path": "tests/acceptance/pptx-custody.ts",
-      "sha256": "19a5adee9d24905df90ae1787b3ffb67cb4123ea40d1913cf940ce4fbd368819"
+      "sha256": "d3814ec9b812385a1a6894e239cb5cdee6f46bed16eefe30c1d2e193472f4425"
     },
     {
       "path": "tests/acceptance/pptx.ts",
@@ -744,7 +750,7 @@
     },
     {
       "path": "tests/acceptance/relationship-namespaces.ts",
-      "sha256": "47dd2e43d059a0866ce51e7bb4f8999f3ae642a98716d6c5f74936e3eb8aceec"
+      "sha256": "4f9a793cc7dffaa571de28cb71474babfe58c823befffc7d84aaebbfbda07eb7"
     },
     {
       "path": "tests/acceptance/revisions-docx.ts",
@@ -868,7 +874,7 @@
     },
     {
       "path": "tests/acceptance/zip64.ts",
-      "sha256": "a78945e1d11f5ad32138e2ab12c1b64d4dfe8402d602460a0b9a9bbb466e5f42"
+      "sha256": "30fba94dfa454d046eccc8ff2121d267591d1cf6d5102df7f91cf795225cbd6f"
     },
     {
       "path": "tests/fixtures/admission.ts",
@@ -1146,6 +1152,7 @@
     "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
+    "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
@@ -1524,6 +1531,7 @@
     "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
     "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
+    "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
     "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
@@ -23379,7 +23387,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464",
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01",
       "body": "{\n  const result = await run(); expect(result.failures).toEqual([]); expect(result.counts.cases.passed).toBe(1); expect(result.counts.cases.planned).toBe(0);\n}",
       "calls": [
         "expect",
@@ -23402,7 +23410,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464",
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01",
       "body": "{\n  refused(await run(bindings, s => s.replace('paragraph on its first slide is Frankenstein', 'paragraph on its first slide is Wrong')));\n}",
       "calls": [
         "refused",
@@ -23431,8 +23439,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464",
-      "body": "{\n  type State = import('../acceptance/pptx-custody.ts').CustodyState;\n  const mutations: [string, (s: State) => void][] = [\n    ['Bun Presentation opens the fixture path and separately opens its archive bytes', s => { const p = s.fromBytes!.package; p.set('ppt/slides/slide1.xml', p.text('ppt/slides/slide1.xml').replace('Frankenstein', 'Wrong')); }],\n    ['the path-opened presentation is saved without edits to a new PPTX path', s => { s.saved![0] = s.saved![0]! ^ 1; }],\n    ['the path-opened presentation is saved without edits to a new PPTX path', s => { s.reopened![0] = s.reopened![0]! ^ 1; }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => { await b.run(c, ...captures); mutate(c.state as State); } } : b);\n    refused(await run(corrupted));\n  }\n}",
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01",
+      "body": "{\n  type State = import('../acceptance/pptx-custody.ts').CustodyState;\n  const mutations: [string, (s: State) => void][] = [\n    ['the presentation reader opens the fixture path and separately opens its archive bytes', s => { const p = s.fromBytes!.package; p.set('ppt/slides/slide1.xml', p.text('ppt/slides/slide1.xml').replace('Frankenstein', 'Wrong')); }],\n    ['the path-opened presentation is saved without edits to a new PPTX path', s => { s.saved![0] = s.saved![0]! ^ 1; }],\n    ['the path-opened presentation is saved without edits to a new PPTX path', s => { s.reopened![0] = s.reopened![0]! ^ 1; }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => { await b.run(c, ...captures); mutate(c.state as State); } } : b);\n    refused(await run(corrupted));\n  }\n}",
       "calls": [
         "b.pattern.test",
         "b.run",
@@ -23472,7 +23480,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464",
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01",
       "body": "{\n  const { lstat } = await import('node:fs/promises');\n  type State = import('../acceptance/pptx-custody.ts').CustodyState;\n  for (const failure of [false, true]) {\n    let captured: State | undefined;\n    const controlled = bindings.map(b => b.pattern.test('the path-opened presentation is saved without edits to a new PPTX path') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      captured = c.state as State;\n      if (failure) captured.fromPath!.save = async () => { throw new Error('injected save failure'); };\n      await b.run(c, ...captures);\n    } } : b);\n    const result = await run(controlled);\n    if (failure) refused(result); else expect(result.failures).toEqual([]);\n    expect(captured?.destination).toBeDefined();\n    await expect(lstat(captured!.destination!)).rejects.toMatchObject({ code: 'ENOENT' });\n    await expect(lstat(join(captured!.destination!, '..'))).rejects.toMatchObject({ code: 'ENOENT' });\n  }\n}",
       "calls": [
         "b.pattern.test",
@@ -27082,6 +27090,126 @@
         "join",
         "newAcceptanceRunId",
         "parseFeature"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
+      "path": "tests/unit/runtime-neutral-bindings.test.ts",
+      "line": 9,
+      "title": "neutral action wording has exactly one binding and retired actor wording has none",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1)",
+        "expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const file of migration.files)for(const edit of file.stepRenames)"
+        },
+        {
+          "line": 11,
+          "expression": "for(const edit of file.stepRenames)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
+      "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json();\n for(const file of migration.files)for(const edit of file.stepRenames){\n  expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);\n  expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);\n }\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().json",
+        "b.pattern.test",
+        "bindings.filter",
+        "expect",
+        "expect().toHaveLength",
+        "fixturesRoot",
+        "join"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:all eighteen portable-profile cases execute the retained inputs and outcomes",
+      "path": "tests/unit/runtime-neutral-bindings.test.ts",
+      "line": 16,
+      "title": "all eighteen portable-profile cases execute the retained inputs and outcomes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(18)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
+      "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json(),ids=migration.files.flatMap((f:any)=>f.scenarios.map((s:any)=>s.id));\n const features=await sharedScenarios(ids),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(4),scenarios:count(16),cases:count(18),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'neutral-wording');\n expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(18);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().json",
+        "cases.reduce",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "f.scenarios.map",
+        "features.flatMap",
+        "fixturesRoot",
+        "join",
+        "migration.files.flatMap",
+        "scenarios.flatMap",
+        "sharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:wording and profile labels do not change default acceptance identities or credit",
+      "path": "tests/unit/runtime-neutral-bindings.test.ts",
+      "line": 22,
+      "title": "wording and profile labels do not change default acceptance identities or credit",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(keys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inventory.counts.cases.planned).toBe(35)",
+        "expect(report.mappedDeclarations).toBe(472)",
+        "expect(report.executionCredit).toBe(false)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(35);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(472);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(report.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "JSON.stringify",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "f.scenarios.filter",
+        "f.scenarios.filter().flatMap",
+        "inventory.features.flatMap",
+        "inventory.features.flatMap().sort",
+        "inventoryFeatures",
+        "outcomeMappingReport",
+        "process.cwd",
+        "s.cases.map"
       ],
       "reviewReasons": [],
       "unresolved": []

@@ -24,7 +24,7 @@ test('wrong first paragraph expectation fails the bound PPTX custody assertion',
 test('PPTX custody predicates reject changed byte-opened, saved and reopened archives', async () => {
   type State = import('../acceptance/pptx-custody.ts').CustodyState;
   const mutations: [string, (s: State) => void][] = [
-    ['Bun Presentation opens the fixture path and separately opens its archive bytes', s => { const p = s.fromBytes!.package; p.set('ppt/slides/slide1.xml', p.text('ppt/slides/slide1.xml').replace('Frankenstein', 'Wrong')); }],
+    ['the presentation reader opens the fixture path and separately opens its archive bytes', s => { const p = s.fromBytes!.package; p.set('ppt/slides/slide1.xml', p.text('ppt/slides/slide1.xml').replace('Frankenstein', 'Wrong')); }],
     ['the path-opened presentation is saved without edits to a new PPTX path', s => { s.saved![0] = s.saved![0]! ^ 1; }],
     ['the path-opened presentation is saved without edits to a new PPTX path', s => { s.reopened![0] = s.reopened![0]! ^ 1; }],
   ];

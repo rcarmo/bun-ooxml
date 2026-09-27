@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 943,
+  "nativeDeclarations": 946,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 716,
+  "withoutStagingCount": 719,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4323,22 +4323,22 @@
     {
       "id": "bun:tests/unit/pptx-custody-bindings.test.ts:canonical Presentation path/byte opening and path save preserve the real archive",
       "path": "tests/unit/pptx-custody-bindings.test.ts",
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464"
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01"
     },
     {
       "id": "bun:tests/unit/pptx-custody-bindings.test.ts:wrong first paragraph expectation fails the bound PPTX custody assertion",
       "path": "tests/unit/pptx-custody-bindings.test.ts",
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464"
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01"
     },
     {
       "id": "bun:tests/unit/pptx-custody-bindings.test.ts:PPTX custody predicates reject changed byte-opened, saved and reopened archives",
       "path": "tests/unit/pptx-custody-bindings.test.ts",
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464"
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01"
     },
     {
       "id": "bun:tests/unit/pptx-custody-bindings.test.ts:PPTX custody temporary destination is removed on both successful and failed saves",
       "path": "tests/unit/pptx-custody-bindings.test.ts",
-      "sourceSha256": "11b6b08ddf843a4befbd3580397ba85cd65dd2ab1ac2ad63e332c3a9da643464"
+      "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01"
     },
     {
       "id": "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
@@ -4654,6 +4654,21 @@
       "id": "bun:tests/unit/references.test.ts:index hints cannot hide modified facts or workflow ledgers from reference validation",
       "path": "tests/unit/references.test.ts",
       "sourceSha256": "e41177546845ed70510808aa016042e18d799ea90ca4e0797aafa632369169c9"
+    },
+    {
+      "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:neutral action wording has exactly one binding and retired actor wording has none",
+      "path": "tests/unit/runtime-neutral-bindings.test.ts",
+      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3"
+    },
+    {
+      "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:all eighteen portable-profile cases execute the retained inputs and outcomes",
+      "path": "tests/unit/runtime-neutral-bindings.test.ts",
+      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3"
+    },
+    {
+      "id": "bun:tests/unit/runtime-neutral-bindings.test.ts:wording and profile labels do not change default acceptance identities or credit",
+      "path": "tests/unit/runtime-neutral-bindings.test.ts",
+      "sourceSha256": "3ac835273e048d071157853c7e80e5157a44653b62edb8e6918d8168d73fe9b3"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",

@@ -12,7 +12,7 @@ export const bindings: StepBinding[] = [
   { pattern: new RegExp('^fixture ' + F.officeSlides.titleSlide + '$'), run: async c => {
     const s = state(c); s.sourcePath = fixturePath(F.officeSlides.titleSlide); s.original = Uint8Array.from(await Bun.file(s.sourcePath).bytes());
   } },
-  { pattern: /^Bun Presentation opens the fixture path and separately opens its archive bytes$/, run: async c => {
+  { pattern: /^the presentation reader opens the fixture path and separately opens its archive bytes$/, run: async c => {
     const s = state(c); assert(s.sourcePath && s.original); s.fromPath = await Presentation.open(s.sourcePath); s.fromBytes = await Presentation.open(s.original);
   } },
   { pattern: /^the path-opened presentation's first inspected paragraph on its first slide is (.+)$/, run: (c, text) => {

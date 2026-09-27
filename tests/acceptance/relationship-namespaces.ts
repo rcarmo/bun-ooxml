@@ -19,7 +19,7 @@ export async function namespaceFixture(format:'pptx'|'xlsx',variant:'original'|'
 }
 export const bindings:StepBinding[]=[
  {pattern:/^the shared (pptx|xlsx) fixture with its relationship prefix changed to link$/,run:async(ctx,format)=>{ctx.format=format;ctx.input=await namespaceFixture(format as 'pptx'|'xlsx','alias');}},
- {pattern:/^Bun opens it edits its text and saves then reopens it$/,run:async ctx=>{
+ {pattern:/^the document editor opens it edits its text and saves then reopens it$/,run:async ctx=>{
   if(ctx.format==='pptx'){const p=await Presentation.open(ctx.input as Uint8Array);const t=p.slides[0]!.inspectText('')[0]!;p.slides[0]!.replaceTextAt(t.anchor,t.text,'Edited title');ctx.output=p.package.toBytes();ctx.reopened=await Presentation.open(ctx.output as Uint8Array);}
   else {const w=await Workbook.open(ctx.input as Uint8Array);w.worksheet('Sheet').setCellValue('A1','Edited\ncell');setCellWrapText(w,'Sheet','A1',true);ctx.output=w.package.toBytes();ctx.reopened=await Workbook.open(ctx.output as Uint8Array);}
  }},
@@ -30,7 +30,7 @@ export const bindings:StepBinding[]=[
  }},
  {pattern:/^the original relationship attribute spelling is preserved$/,run:async ctx=>{const p=await OpcPackage.open(ctx.output as Uint8Array);expect(p.text(p.mainPart())).toContain('link:id=');expect(p.text(p.mainPart())).not.toContain(' r:id=');}},
  {pattern:/^the shared (pptx|xlsx) fixture with r bound to package relationships$/,run:async(ctx,format)=>{ctx.format=format;ctx.input=await namespaceFixture(format as 'pptx'|'xlsx','wrong');ctx.before=(ctx.input as Uint8Array).slice();}},
- {pattern:/^Bun attempts to open the namespace-mismatched Office document$/,run:async ctx=>{try{if(ctx.format==='pptx')await Presentation.open(ctx.input as Uint8Array);else await Workbook.open(ctx.input as Uint8Array);}catch(e){ctx.error=e;}}},
+ {pattern:/^the document reader attempts to open the namespace-mismatched Office document$/,run:async ctx=>{try{if(ctx.format==='pptx')await Presentation.open(ctx.input as Uint8Array);else await Workbook.open(ctx.input as Uint8Array);}catch(e){ctx.error=e;}}},
  {pattern:/^the (pptx|xlsx) reader refuses with its structural error code$/,run:(ctx,format)=>{expect(ctx.error).toBeInstanceOf(OoxmlError);expect((ctx.error as OoxmlError).code).toBe(format==='pptx'?'PPTX_PRESENTATION_INVALID':'xlsx-workbook-invalid');}},
  {pattern:/^the supplied archive bytes remain unchanged$/,run:ctx=>{expect(ctx.input as Uint8Array).toEqual(ctx.before as Uint8Array);}},
 ];
