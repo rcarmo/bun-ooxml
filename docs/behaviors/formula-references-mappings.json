@@ -9,18 +9,18 @@
   ],
   "sourceSha256": {
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
-    "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
-    "tests/unit/xlsx-formula-remap.test.ts": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+    "tests/unit/xlsx-formula-analysis.test.ts": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
+    "tests/unit/xlsx-formula-remap.test.ts": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
     "src/xlsx/range.ts": "2bc8edba95ce66f3f460bdc1147c1d1113b5cf36dca64d54df479b12fc61b16e",
     "src/xlsx/formula.ts": "ef31bd3b9f1a4d8309a585c9332a41bd4801d91934aba73e4aa23d3ab4af7a53",
     "src/xlsx/formula-remap.ts": "bd714086ba36ce82cbf6af3031ada711b2e28915102e8fcf4948d965a68345ca",
     "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
-    "tests/acceptance/xlsx-range.ts": "9ea6b2fc1f9465ffc371c66b599db9b451081c6a0791acf974f648d5a7582ff0",
-    "tests/acceptance/formula-analysis.ts": "6dc9954e400d9837d132cd9f5056c8c208f7bb65005be931206c5a5b571798bd",
-    "tests/acceptance/formula-remap.ts": "e1b68aafd7323a71ecb8b6e140edb82563a90684398430a5b9e7e665fbeedb91",
+    "tests/acceptance/xlsx-range.ts": "422a195717e26e8002807af71d351819ec55220cf0932b51d83ad70b551fb023",
+    "tests/acceptance/formula-analysis.ts": "a0102dcf3858def5e17bdc642e4510b3036dfa17249dfe2f0a29e7822abfe480",
+    "tests/acceptance/formula-remap.ts": "99937575e874f9b15641c1a625076fadb52324ddf4c272a3e4a2dfbd43f11d50",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de"
+    "workflows/xlsx/formula-references.feature": "03aa16e68b314e3f2743a4c34235803e479809bc8414f3fa5e892934b045720e"
   },
   "mappings": [
     {

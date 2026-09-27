@@ -10,7 +10,7 @@ export const bindings: StepBinding[] = [
     assert(source);
     Object.assign(state(c), { source, snapshot: XmlSnapshot.parse(source) });
   } },
-  { pattern: /^Go removes the p:a subtree and the p:c element from one parsed snapshot$/, run: c => {
+  { pattern: /^the XML editor removes the p:a subtree and the p:c element from one parsed snapshot$/, run: c => {
     const s = state(c), a = s.snapshot.elements.filter(t => t.localName === 'a' && t.namespaceURI === 'u'),
       others = s.snapshot.elements.filter(t => t.localName === 'c' && t.namespaceURI === 'u');
     assert.equal(a.length, 1); assert.equal(others.length, 1);
@@ -25,7 +25,7 @@ export const bindings: StepBinding[] = [
     const s = state(c);
     assert.deepEqual(new TextEncoder().encode(s.snapshot.remove([])), new TextEncoder().encode(s.source));
   } },
-  { pattern: /^a Go removal batch selects (root|p:a and its nested p:b)$/, run: (c, selection) => {
+  { pattern: /^a removal batch selects (root|p:a and its nested p:b)$/, run: (c, selection) => {
     const s = state(c), targets = selection === 'root' ? [s.snapshot.elements[0]!] :
       s.snapshot.elements.filter(t => (t.localName === 'a' || t.localName === 'b') && t.namespaceURI === 'u');
     assert.equal(targets.length, selection === 'root' ? 1 : 2);

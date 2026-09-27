@@ -155,13 +155,13 @@ test('structured acceptance predicates reject corrupted namespaces, text, no-ops
   const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   type State = { output?: string; error?: unknown; matrix?: { output: string; noop: string }[] };
-  const matrixStep = 'Go inserts child with a flag attribute of JSON value "\\t\\r\\n & 😀" and a plain grandchild of JSON text "x\\ry\\nz" for all 4 by 5 by 5 choices';
+  const matrixStep = 'the XML editor inserts child with a flag attribute of JSON value "\\t\\r\\n & 😀" and a plain grandchild of JSON text "x\\ry\\nz" for all 4 by 5 by 5 choices';
   const mutations: [string, (s: State) => void][] = [
     [matrixStep, s => { s.matrix![0]!.output = '<r><wrong flag="v"><plain/></wrong></r>'; }],
     [matrixStep, s => { s.matrix![0]!.noop = 'wrong'; }],
-    ['a Go replacement batch selects root', s => { s.output = '<r/>'; s.error = undefined; }],
-    ['one Go structured insertion batch targets both the root and its nested a element', s => { s.error = new Error('untyped'); }],
-    ['Go replaces p:old with a bound-namespace new element containing value and an empty-namespace plain element', s => { s.output = '<root/>'; }],
+    ['a replacement batch selects root', s => { s.output = '<r/>'; s.error = undefined; }],
+    ['one structured insertion batch targets both the root and its nested a element', s => { s.error = new Error('untyped'); }],
+    ['the XML editor replaces p:old with a bound-namespace new element containing value and an empty-namespace plain element', s => { s.output = '<root/>'; }],
   ];
   for (const [step, mutate] of mutations) {
     const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => { await b.run(c, ...captures); mutate(c.state as State); } } : b);

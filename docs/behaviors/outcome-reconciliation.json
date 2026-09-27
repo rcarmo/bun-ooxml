@@ -4,7 +4,7 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 952,
+  "totalDeclarations": 955,
   "mappedDeclarations": 472,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
@@ -24,7 +24,7 @@
     "tests/acceptance/xml-values.ts": "bcad16fc6f9bf2a11fe45ccf0cab19f188540a4433b948bed294acbce5393b48",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
-    "workflows/xml/editing.feature": "1bda1a2ab45bd32e22ca9fdafaeeb2718e66148fc83af58e807a7c9ec42709d5",
+    "workflows/xml/editing.feature": "a9c308f9995d7a335b3d96054c2eb8fd8286937c95a46bd07b26428c63292ff3",
     "workflows/xml/parsing.feature": "f50e20a9ad3c776ffdc54c0cf7e9a2b13c613c375e91dfbe49ea735782bae9c2",
     "tests/unit/pptx.test.ts": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
     "tests/acceptance/pptx.ts": "7e4ab7286825d0a5aeb3cda3284bb1afa39e6a9986eca45d4432ad3eaab31e1f",
@@ -151,15 +151,15 @@
     "workflows/package/xml-member-admission.feature": "19fa717632d689e7ff4e883fb2af3f31e018373dc79ddb78efecf7742ea14e91",
     "workflows/package/zip-admission.feature": "28b1599e839f360929e689ff2d99e13599e000b98d6aa0d58c2e6a47b4efe696",
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
-    "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
-    "tests/unit/xlsx-formula-remap.test.ts": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+    "tests/unit/xlsx-formula-analysis.test.ts": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
+    "tests/unit/xlsx-formula-remap.test.ts": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
     "src/xlsx/range.ts": "2bc8edba95ce66f3f460bdc1147c1d1113b5cf36dca64d54df479b12fc61b16e",
     "src/xlsx/formula.ts": "ef31bd3b9f1a4d8309a585c9332a41bd4801d91934aba73e4aa23d3ab4af7a53",
     "src/xlsx/formula-remap.ts": "bd714086ba36ce82cbf6af3031ada711b2e28915102e8fcf4948d965a68345ca",
-    "tests/acceptance/xlsx-range.ts": "9ea6b2fc1f9465ffc371c66b599db9b451081c6a0791acf974f648d5a7582ff0",
-    "tests/acceptance/formula-analysis.ts": "6dc9954e400d9837d132cd9f5056c8c208f7bb65005be931206c5a5b571798bd",
-    "tests/acceptance/formula-remap.ts": "e1b68aafd7323a71ecb8b6e140edb82563a90684398430a5b9e7e665fbeedb91",
-    "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de"
+    "tests/acceptance/xlsx-range.ts": "422a195717e26e8002807af71d351819ec55220cf0932b51d83ad70b551fb023",
+    "tests/acceptance/formula-analysis.ts": "a0102dcf3858def5e17bdc642e4510b3036dfa17249dfe2f0a29e7822abfe480",
+    "tests/acceptance/formula-remap.ts": "99937575e874f9b15641c1a625076fadb52324ddf4c272a3e4a2dfbd43f11d50",
+    "workflows/xlsx/formula-references.feature": "03aa16e68b314e3f2743a4c34235803e479809bc8414f3fa5e892934b045720e"
   },
   "ledgers": [
     {
@@ -208,7 +208,7 @@
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/xml/editing.feature": "1bda1a2ab45bd32e22ca9fdafaeeb2718e66148fc83af58e807a7c9ec42709d5",
+        "workflows/xml/editing.feature": "a9c308f9995d7a335b3d96054c2eb8fd8286937c95a46bd07b26428c63292ff3",
         "workflows/xml/parsing.feature": "f50e20a9ad3c776ffdc54c0cf7e9a2b13c613c375e91dfbe49ea735782bae9c2"
       }
     },
@@ -662,18 +662,18 @@
       "mappedDeclarations": 31,
       "sourceSha256": {
         "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
-        "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
-        "tests/unit/xlsx-formula-remap.test.ts": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+        "tests/unit/xlsx-formula-analysis.test.ts": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
+        "tests/unit/xlsx-formula-remap.test.ts": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
         "src/xlsx/range.ts": "2bc8edba95ce66f3f460bdc1147c1d1113b5cf36dca64d54df479b12fc61b16e",
         "src/xlsx/formula.ts": "ef31bd3b9f1a4d8309a585c9332a41bd4801d91934aba73e4aa23d3ab4af7a53",
         "src/xlsx/formula-remap.ts": "bd714086ba36ce82cbf6af3031ada711b2e28915102e8fcf4948d965a68345ca",
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
-        "tests/acceptance/xlsx-range.ts": "9ea6b2fc1f9465ffc371c66b599db9b451081c6a0791acf974f648d5a7582ff0",
-        "tests/acceptance/formula-analysis.ts": "6dc9954e400d9837d132cd9f5056c8c208f7bb65005be931206c5a5b571798bd",
-        "tests/acceptance/formula-remap.ts": "e1b68aafd7323a71ecb8b6e140edb82563a90684398430a5b9e7e665fbeedb91",
+        "tests/acceptance/xlsx-range.ts": "422a195717e26e8002807af71d351819ec55220cf0932b51d83ad70b551fb023",
+        "tests/acceptance/formula-analysis.ts": "a0102dcf3858def5e17bdc642e4510b3036dfa17249dfe2f0a29e7822abfe480",
+        "tests/acceptance/formula-remap.ts": "99937575e874f9b15641c1a625076fadb52324ddf4c272a3e4a2dfbd43f11d50",
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de"
+        "workflows/xlsx/formula-references.feature": "03aa16e68b314e3f2743a4c34235803e479809bc8414f3fa5e892934b045720e"
       }
     }
   ],
@@ -1113,6 +1113,9 @@
     "bun:tests/unit/xml-byte-snapshot.test.ts:repeated edits and mutated changed output do not affect source ownership or target reuse",
     "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-byte-snapshot.test.ts:intrinsic view bounds reject spoofed length/shared storage without calling caller getters",
+    "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
+    "bun:tests/unit/xml-formula-neutral-bindings.test.ts:all sixty retained XML and formula cases execute exact lexical and static-reference predicates",
+    "bun:tests/unit/xml-formula-neutral-bindings.test.ts:XML formula actor migration preserves all default case identities and bounded mapping records",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",

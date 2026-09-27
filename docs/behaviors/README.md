@@ -63,6 +63,14 @@ tool hints are not activated by a label change. Getter names, values, saved-outp
 assertions, the 525 default identities and all 472 mappings remain unchanged.
 The shared Word wording ledger and its exact before/after guards record the edits.
 
+Shared v0.26 neutralises actors in XML snapshot editing and static formula
+references across 19 IDs / 60 cases. Exact XML bytes, JSON/table inputs, namespace
+combinations, UTF-8 reference spans, grammar refusals and string remap outputs are
+retained. The matrices still count as one canonical case each. Bindings accept
+only the new wording; corruption controls and unchanged-default-identity checks
+remain active. This adds no workbook calculation, schema or rendering coverage,
+and changes none of the 472 mapping records.
+
 ## Maintain the reports
 
 ```sh

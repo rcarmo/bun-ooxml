@@ -126,7 +126,7 @@ test('attribute duplicate refusal binding rejects fabricated success and untyped
   const feature = selectSharedScenarios(path, text, ['@id-xml-go-attribute-batch-refusal']);
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   for (const success of [true, false]) {
-    const corrupted = bindings.map(b => b.pattern.test('one Go lexical edit batch sets a of the first t element to x and to y') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
+    const corrupted = bindings.map(b => b.pattern.test('one lexical edit batch sets a of the first t element to x and to y') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
       await b.run(c, ...captures); const s = c.state as { output?: string; error?: unknown };
       s.error = success ? undefined : new Error('untyped'); if (success) s.output = '<r/>';
     } } : b);

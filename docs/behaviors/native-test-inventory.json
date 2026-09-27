@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 952,
-  "files": 104,
+  "count": 955,
+  "files": 105,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -506,13 +506,13 @@
     },
     {
       "path": "tests/unit/xlsx-formula-analysis.test.ts",
-      "sha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "declarations": 10,
       "issues": []
     },
     {
       "path": "tests/unit/xlsx-formula-remap.test.ts",
-      "sha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "declarations": 11,
       "issues": []
     },
@@ -548,7 +548,7 @@
     },
     {
       "path": "tests/unit/xml-attributes.test.ts",
-      "sha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "declarations": 14,
       "issues": []
     },
@@ -560,7 +560,7 @@
     },
     {
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "declarations": 11,
       "issues": []
     },
@@ -568,6 +568,12 @@
       "path": "tests/unit/xml-comparison.test.ts",
       "sha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
       "declarations": 14,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
+      "sha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
+      "declarations": 3,
       "issues": []
     },
     {
@@ -584,7 +590,7 @@
     },
     {
       "path": "tests/unit/xml-structure.test.ts",
-      "sha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "declarations": 16,
       "issues": []
     },
@@ -702,11 +708,11 @@
     },
     {
       "path": "tests/acceptance/formula-analysis.ts",
-      "sha256": "6dc9954e400d9837d132cd9f5056c8c208f7bb65005be931206c5a5b571798bd"
+      "sha256": "a0102dcf3858def5e17bdc642e4510b3036dfa17249dfe2f0a29e7822abfe480"
     },
     {
       "path": "tests/acceptance/formula-remap.ts",
-      "sha256": "e1b68aafd7323a71ecb8b6e140edb82563a90684398430a5b9e7e665fbeedb91"
+      "sha256": "99937575e874f9b15641c1a625076fadb52324ddf4c272a3e4a2dfbd43f11d50"
     },
     {
       "path": "tests/acceptance/graph.ts",
@@ -846,7 +852,7 @@
     },
     {
       "path": "tests/acceptance/xlsx-range.ts",
-      "sha256": "9ea6b2fc1f9465ffc371c66b599db9b451081c6a0791acf974f648d5a7582ff0"
+      "sha256": "422a195717e26e8002807af71d351819ec55220cf0932b51d83ad70b551fb023"
     },
     {
       "path": "tests/acceptance/xlsx.ts",
@@ -854,11 +860,11 @@
     },
     {
       "path": "tests/acceptance/xml-attributes.ts",
-      "sha256": "f393d944a59c9f2c77ee355011365e3fe64e2f57f38de53a3b0355591208c29f"
+      "sha256": "125f7e6fb4ae89a8805db6aa710a295f449e32be3e88dc47c7c6a2e411e66c98"
     },
     {
       "path": "tests/acceptance/xml-byte-snapshot.ts",
-      "sha256": "33d17b037c97d72ae8cac76d9a1a13a2c0b7997fce7c777d7bf0611755706d7d"
+      "sha256": "f16e2dead84bbba7b6a337bb1768619cdfe7448b4bf9e314fc6a8c585b97f87a"
     },
     {
       "path": "tests/acceptance/xml-comparison.ts",
@@ -870,11 +876,11 @@
     },
     {
       "path": "tests/acceptance/xml-removal.ts",
-      "sha256": "6c58e00c24219bc3f1f4360504cc3f7e7f797fa4ba09afb12710a03a2866de81"
+      "sha256": "fe6d36faa608cd8a6b357ba816354c8ba300dfef09423a311c78b6fec5feb326"
     },
     {
       "path": "tests/acceptance/xml-structure.ts",
-      "sha256": "0996c1465726680194fd1014a70216df8abdbc1cb3b8c24593ccc2aae6e909eb"
+      "sha256": "23c5f62ad5e6da3e0890a569b33f94d0ab903bf32f153ad88fea8f6bb58160a7"
     },
     {
       "path": "tests/acceptance/xml-values.ts",
@@ -1257,6 +1263,7 @@
     "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+    "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
@@ -1639,6 +1646,7 @@
     "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+    "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
@@ -31960,7 +31968,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n for(const[source,count]of [['IF(A1=\"B2\",\\'O\\'\\'Brien\\'!$C$4,SUM(D1:E2))',3],['\"A1\"&\"Sheet1!B2\"',0],['LOG10(A1)+1E10',1],['=-(A1+B2)^2%',2],['TRUE',0],[\"'α sheet'!A1\",1],['SUM(\")\",A1)',1],['SUM(\"%\",A1)',1],['\"=\"',0]] as const){const refs=analyzeFormulaReferences(source);expect(refs).toHaveLength(count);for(const ref of refs){expect(ref.start).toBeGreaterThanOrEqual(0);expect(ref.end).toBeGreaterThan(ref.start);expect(ref.end).toBeLessThanOrEqual(bytes(source).length);const{start,end,...range}=ref;expect(parseA1Range(slice(source,ref))).toEqual(range);}}\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -31998,7 +32006,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n const source=\"'O''Brien'!$B2:C$4\",refs=analyzeFormulaReferences(source);expect(refs).toHaveLength(1);expect(refs[0]).toEqual({start:0,end:bytes(source).length,sheet:\"O'Brien\",axis:'cell',first:{row:2,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:4,column:3,rowAbsolute:true,columnAbsolute:false}});\n const unicode='\"雪😀\" + \\'α sheet\\'!$A$1 + a3:b1',r=analyzeFormulaReferences(unicode);expect(r.map(x=>slice(unicode,x))).toEqual([\"'α sheet'!$A$1\",'a3:b1']);expect(r[0]!.start).toBe(bytes('\"雪😀\" + ').length);expect(r[1]!.first.row).toBe(3);expect(r[1]!.last.row).toBe(1);\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32033,7 +32041,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n for(const source of ['INDIRECT(A1)','A1+INDIRECT(B2)','OFFSET(A1,1,1)','Name+1','XFE1','A1048577',\"'unclosed!A1\",'@A1','A1#','A1+SUM(2','A1 \"+\" B1','A1 \":\" B2','A1+','A1 B1','A1,B2','SUM(,A1)','SUM(A1,)','SUM()','A1:B2:C3','Sheet1:Sheet2!A1','[Book]Sheet!A1','A:A','1:2','{1,2}','A1!','\"unterminated','1E+','TRUE FALSE','UNKNOWN(A1)','(A1))','(A1',\"''!A1\"]){let result:unknown;expect(()=>{result=analyzeFormulaReferences(source);}).toThrow(expect.objectContaining({code:'xlsx-formula-unsupported'}));expect(result).toBeUndefined();}\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32069,7 +32077,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n const source='=IF(NOT(FALSE),ROUND(ABS(-A1)^2%+MAX(B2,MIN(C3,D4))/AVERAGE(E5,F6),2),COUNT(G7,H8)&COUNTA(I9))';expect(analyzeFormulaReferences(source).map(r=>slice(source,r))).toEqual(['A1','B2','C3','D4','E5','F6','G7','H8','I9']);\n for(const op of ['+','-','*','/','^','&','=','<>','<=','>=','<','>']){const formula=`A1${op}B2`;expect(analyzeFormulaReferences(formula).map(r=>slice(formula,r))).toEqual(['A1','B2']);}\n expect(analyzeFormulaReferences('SUM(\"a\"\"A1\",.5,1.,1e-10,+2,-3,A1)')).toHaveLength(1);expect(analyzeFormulaReferences(' sum ( A1 , B2 ) ')).toHaveLength(2);\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32108,7 +32116,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n for(const source of [null,undefined,1,{},'', '   ','A1+\\u0000','A1+\\ud800','x'.repeat(1024*1024+1),'\"'+'雪'.repeat(400000)+'\"'])expect(()=>analyzeFormulaReferences(source as string)).toThrow();\n expect(()=>analyzeFormulaReferences('('.repeat(129)+'A1'+')'.repeat(129))).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}));expect(()=>analyzeFormulaReferences('-'.repeat(129)+'A1')).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}));expect(()=>analyzeFormulaReferences(Array(10002).fill('A1').join('+'))).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}));expect(()=>analyzeFormulaReferences(Array(50002).fill('1').join('+'))).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}));\n expect(analyzeFormulaReferences('('.repeat(50)+'A1'+')'.repeat(50))).toHaveLength(1);\n}",
       "calls": [
         ".repeat",
@@ -32165,7 +32173,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n let count=0;for(const prefix of ['', 'Main!',\"'Input Data'!\"])for(const left of ['A1','$B2','C$3','$XFD$9'])for(const right of ['A1','$B2','C$3','$XFD$9'])for(const op of ['+','-','*','/','&','>=']){const source=prefix+left+op+prefix+right,refs=analyzeFormulaReferences(source),wrapped=analyzeFormulaReferences('SUM('+source+')');expect(refs).toHaveLength(2);expect(wrapped).toHaveLength(2);for(let i=0;i<2;i++){const r=refs[i]!;const{start,end,...value}=r;expect(parseA1Range(slice(source,r))).toEqual(value);expect(wrapped[i]).toEqual({...r,start:r.start+4,end:r.end+4});}count++;}expect(count).toBe(288);\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32199,7 +32207,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n const first=analyzeFormulaReferences('A1+A1');first[0]!.first.row=99;first[0]!.last.column=99;first.push(first[0]!);const second=analyzeFormulaReferences('A1+A1');expect(second).toHaveLength(2);expect(second[0]!.first.row).toBe(1);expect(second[0]!.last.column).toBe(1);expect(first[1]!.first.row).toBe(1);expect(second[0]!.first).not.toBe(second[0]!.last);\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32238,7 +32246,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n for(const literal of ['(',')','+','-',':','%','=','A1','INDIRECT(A1)','a\"\"B2']){const formula=`SUM(\"${literal}\",A1)`;expect(analyzeFormulaReferences(formula).map(r=>slice(formula,r))).toEqual(['A1']);}\n for(const formula of ['\"+\"A1','A1\"%\"','SUM(\"(\",A1','A1 + \"closed\" B2','A1 + R1C1','A1 + Table1[Column]'])expect(()=>analyzeFormulaReferences(formula)).toThrow(expect.objectContaining({code:'xlsx-formula-unsupported'}));\n const source=\"'😀 α'!A1 + '3'!B2 + Σheet!C3\";const refs=analyzeFormulaReferences(source);expect(refs.map(r=>slice(source,r))).toEqual([\"'😀 α'!A1\",\"'3'!B2\",'Σheet!C3']);expect(refs.map(r=>r.sheet)).toEqual(['😀 α','3','Σheet']);\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32284,8 +32292,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
-      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/formula-analysis.ts'),{join}=await import('node:path');const path='workflows/xlsx/formula-references.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(4),cases:count(19),steps:count(64)}});\n const good=await executeAcceptance(inv(source),bindings,'formula-analysis-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(19);expect(good.counts.cases.planned).toBeGreaterThan(0);\n for(const[from,to]of [['it returns <count> reference records without error','it returns 99 reference records without error'],['first cell column 2 row 2','first cell column 9 row 2'],['last cell is column 3 row 4','last cell is column 3 row 9']]){const bad=await executeAcceptance(inv(source.replace(from!,to!)),bindings,'formula-expected-control');expect(bad.counts.cases.failed).toBe(from!.includes('<count>')?6:1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n for(const corruption of ['span','flags','refusal']){const altered=bindings.map(b=>b.pattern.test('the Go static formula analyser reads the source')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as {refs?:api.FormulaReference[];error?:unknown};if(corruption==='refusal'&&s.error){s.error=undefined;s.refs=[];}else if(s.refs?.length){if(corruption==='span')s.refs[0]!.end=0;else if(corruption==='flags')s.refs[0]!.first.columnAbsolute=!s.refs[0]!.first.columnAbsolute;}}}:b);const bad=await executeAcceptance(inv(source),altered,'formula-corrupt-control');expect(bad.counts.cases.failed).toBe(corruption==='span'?5:corruption==='flags'?1:9);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/formula-analysis.ts'),{join}=await import('node:path');const path='workflows/xlsx/formula-references.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(4),cases:count(19),steps:count(64)}});\n const good=await executeAcceptance(inv(source),bindings,'formula-analysis-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(19);expect(good.counts.cases.planned).toBeGreaterThan(0);\n for(const[from,to]of [['it returns <count> reference records without error','it returns 99 reference records without error'],['first cell column 2 row 2','first cell column 9 row 2'],['last cell is column 3 row 4','last cell is column 3 row 9']]){const bad=await executeAcceptance(inv(source.replace(from!,to!)),bindings,'formula-expected-control');expect(bad.counts.cases.failed).toBe(from!.includes('<count>')?6:1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n for(const corruption of ['span','flags','refusal']){const altered=bindings.map(b=>b.pattern.test('the static formula analyser reads the source')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as {refs?:api.FormulaReference[];error?:unknown};if(corruption==='refusal'&&s.error){s.error=undefined;s.refs=[];}else if(s.refs?.length){if(corruption==='span')s.refs[0]!.end=0;else if(corruption==='flags')s.refs[0]!.first.columnAbsolute=!s.refs[0]!.first.columnAbsolute;}}}:b);const bad=await executeAcceptance(inv(source),altered,'formula-corrupt-control');expect(bad.counts.cases.failed).toBe(corruption==='span'?5:corruption==='flags'?1:9);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().text",
@@ -32332,7 +32340,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+      "sourceSha256": "5db099d5f2fd2560e60cf0242d0cb99eed6595d945be2f8fa1eac307c6de93c8",
       "body": "{\n const refs=analyzeFormulaReferences(Array(10000).fill('$A$1').join('+'));expect(refs).toHaveLength(10000);expect(refs.at(-1)!.end).toBe(49999);expect(analyzeFormulaReferences('('.repeat(128)+'A1'+')'.repeat(128))).toHaveLength(1);\n for(const input of ['A1+XFE1','A1+B0','A1+$B:$B',\"A1+'[Book]Sheet'!B2\",'A1+Sheet1:Sheet2!B2','A1+SUM(A1;)','A1\\t+B2','A1\\n+B2'])expect(()=>analyzeFormulaReferences(input)).toThrow(expect.objectContaining({code:'xlsx-formula-unsupported'}));\n}",
       "calls": [
         ".repeat",
@@ -32371,7 +32379,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n for(const[axis,at,count,sheet,source,expected]of [\n  ['row',2,1,'Main','IF(A1=\"A2\",A2,Other!A2)','IF(A1=\"A2\",A3,Other!A2)'],\n  ['column',2,1,'Main',\"'O''Brien'!$b$2 + Main!c1\",\"'O''Brien'!$b$2 + Main!D1\"],\n  ['row',3,2,'Main','SUM(A5:A1)','SUM(A7:A1)'],\n  ['row',3,2,'Main','a1 + Other!b2','a1 + Other!b2'],\n  ['row',2,1,'main','Main!A1:A3','Main!A1:A4'],\n ] as const)expect(insertFormulaReferences(source,'Main',{axis,at,count,sheet})).toBe(expected);\n}",
       "calls": [
         "expect",
@@ -32403,7 +32411,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n expect(insertFormulaReferences('$b2:C$4','Main',{axis:'row',at:3,count:2,sheet:'Main'})).toBe('$B2:C$6');\n expect(insertFormulaReferences('$B$2:C4','Main',{axis:'column',at:2,count:2,sheet:'Main'})).toBe('$D$2:E4');\n expect(insertFormulaReferences('D9:B3','Main',{axis:'row',at:5,count:3,sheet:'Main'})).toBe('D12:B3');\n expect(insertFormulaReferences('A1:A1','Main',{axis:'row',at:1,count:1,sheet:'Main'})).toBe('A2:A2');\n const out=insertFormulaReferences(\"'O''Brien'!$B2:C$4\",'Other',{axis:'row',at:1,count:1,sheet:\"o'brien\"}),ref=analyzeFormulaReferences(out)[0]!;\n expect(out).toBe(\"'O''Brien'!$B3:C$5\");expect(ref.first).toEqual({row:3,column:2,rowAbsolute:false,columnAbsolute:true});expect(ref.last).toEqual({row:5,column:3,rowAbsolute:true,columnAbsolute:false});\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32430,7 +32438,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n const source=' =IF(\"雪😀A2\"=\"A2\",\\'α ! sheet\\'!$b$2 + Other!c3,\\'α ! sheet\\'!D4) ';\n expect(insertFormulaReferences(source,'Elsewhere',{axis:'column',at:2,count:1,sheet:'Α ! SHEET'})).toBe(' =IF(\"雪😀A2\"=\"A2\",\\'α ! sheet\\'!$C$2 + Other!c3,\\'α ! sheet\\'!E4) ');\n expect(insertFormulaReferences(\"'3'!a1 + 'O''Brien'!a1\",'Main',{axis:'row',at:1,count:9,sheet:'3'})).toBe(\"'3'!A10 + 'O''Brien'!a1\");\n}",
       "calls": [
         "expect",
@@ -32461,7 +32469,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n for(const source of [' a1 + Other!b2 ', 'SUM(\"A1\",12.00,TRUE)', '\"雪😀\"&\"A1\"', 'Main!a1:Z9'])expect(insertFormulaReferences(source,'Main',{axis:'row',at:100,count:1,sheet:'main'})).toBe(source);\n expect(()=>insertFormulaReferences('A1+INDIRECT(B2)','Main',{axis:'row',at:100,count:1,sheet:'Other'})).toThrow();\n expect(()=>insertFormulaReferences('A1+','Main',{axis:'row',at:100,count:1,sheet:'Other'})).toThrow();\n}",
       "calls": [
         "expect",
@@ -32496,7 +32504,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n for(const[source,axis]of [['A1+A1048576','row'],['A1+XFD1','column'],['A1:A1048576','row'],['XFD1:A1','column']] as const){const change={axis,at:1,count:1,sheet:'Main'},before=JSON.stringify(change);let result:string|undefined;expect(()=>{result=insertFormulaReferences(source,'Main',change);}).toThrow(expect.objectContaining({code:'xlsx-formula-remap-unsupported'}));expect(result).toBeUndefined();expect(JSON.stringify(change)).toBe(before);}\n expect(insertFormulaReferences('Other!XFD1048576+A1','Main',{axis:'row',at:1,count:1,sheet:'Main'})).toBe('Other!XFD1048576+A2');\n}",
       "calls": [
         "JSON.stringify",
@@ -32539,7 +32547,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n let called=false;const getter=Object.defineProperty({axis:'row',at:1,count:1},'sheet',{enumerable:true,get(){called=true;return 'Main';}});\n const good={axis:'row',at:1,count:1,sheet:'Main'};\n for(const change of [null,[],{},Object.create(good),getter,{...good,extra:1},{...good,[Symbol('x')]:1},{...good,axis:'bad'},{...good,at:0},{...good,at:1.5},{...good,at:1048577},{...good,count:0},{...good,count:NaN},{...good,count:1.5},{...good,count:Number.MAX_SAFE_INTEGER},{...good,sheet:''},{...good,sheet:'  '},{...good,sheet:'x\\n'},{...good,sheet:'[Book]Main'},{...good,sheet:'\\ud800'}])expect(()=>insertFormulaReferences('A1','Main',change as api.FormulaInsertion)).toThrow();\n for(const context of ['', ' ', 'bad\\u0000', 'A:B', 'x'.repeat(256),null])expect(()=>insertFormulaReferences('A1',context as string,good as api.FormulaInsertion)).toThrow();expect(called).toBe(false);\n const plain=Object.assign(Object.create(null),good);expect(insertFormulaReferences('A1','Main',plain)).toBe('A2');expect(plain).toEqual(good);\n}",
       "calls": [
         ".repeat",
@@ -32577,7 +32585,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n expect(insertFormulaReferences('A1048575','Main',{axis:'row',at:1048575,count:1,sheet:'Main'})).toBe('A1048576');\n expect(insertFormulaReferences('XFC1','Main',{axis:'column',at:16383,count:1,sheet:'Main'})).toBe('XFD1');\n expect(insertFormulaReferences('A1','Main',{axis:'row',at:1048576,count:1048576,sheet:'Main'})).toBe('A1');\n expect(()=>insertFormulaReferences('XFD1','Main',{axis:'column',at:16384,count:1,sheet:'Main'})).toThrow();\n expect(()=>insertFormulaReferences('A1','Main',{axis:'column',at:16385,count:1,sheet:'Main'})).toThrow();\n expect(()=>insertFormulaReferences('A1','Main',{axis:'column',at:1,count:16385,sheet:'Main'})).toThrow();\n}",
       "calls": [
         "expect",
@@ -32629,7 +32637,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n let total=0;const encoder=new TextEncoder(),decoder=new TextDecoder();for(const prefix of ['', 'Main!',\"'Input Data'!\"])for(const a of ['A1','$B2','C$3','$XFD$9'])for(const b of ['A1','$B2','C$3','$XFD$9'])for(const op of ['+','-','*','/','&','>=']){const source=prefix+a+op+prefix+b,refs=analyzeFormulaReferences(source),wrapped=analyzeFormulaReferences('SUM('+source+')');expect(refs).toHaveLength(2);expect(insertFormulaReferences(source,'Main',{axis:'row',at:100,count:1,sheet:'Main'})).toBe(source);expect(wrapped).toHaveLength(2);for(let i=0;i<2;i++){const ref=refs[i]!,token=decoder.decode(encoder.encode(source).slice(ref.start,ref.end)),one=analyzeFormulaReferences(token);expect(one).toHaveLength(1);expect(one[0]).toEqual({...ref,start:0,end:encoder.encode(token).length});expect(wrapped[i]).toEqual({...ref,start:ref.start+4,end:ref.end+4});}total++;}expect(total).toBe(288);\n}",
       "calls": [
         "analyzeFormulaReferences",
@@ -32664,7 +32672,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n const source='\"'+'x'.repeat(1024*1024-9)+'\"+A1+A9';expect(new TextEncoder().encode(source)).toHaveLength(1024*1024-1);let output:string|undefined;expect(()=>{output=insertFormulaReferences(source,'Main',{axis:'row',at:1,count:999,sheet:'Main'});}).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}));expect(output).toBeUndefined();expect(source.endsWith('+A1+A9')).toBe(true);\n}",
       "calls": [
         ".encode",
@@ -32698,7 +32706,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "body": "{\n expect(insertFormulaReferences(\"'Wow!'!a1\",'Other',{axis:'row',at:1,count:1,sheet:'wow!'})).toBe(\"'Wow!'!A2\");\n expect(insertFormulaReferences(\"'Main'!a1:a1\",'Other',{axis:'column',at:1,count:1,sheet:'MAIN'})).toBe(\"'Main'!B1:B1\");\n expect(insertFormulaReferences('Main!b2+a1','Other',{axis:'column',at:3,count:1,sheet:'main'})).toBe('Main!b2+a1');\n expect(()=>insertFormulaReferences(\"'Bad:Name'!A1\",'Main',{axis:'row',at:1,count:1,sheet:'Main'})).toThrow();\n}",
       "calls": [
         "expect",
@@ -32738,8 +32746,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
-      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/formula-remap.ts'),{join}=await import('node:path');const path='workflows/xlsx/formula-references.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(3),cases:count(13),steps:count(42)}});\n const good=await executeAcceptance(inv(source),bindings,'formula-remap-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(13);\n const bad=await executeAcceptance(inv(source.replace('the complete replacement expression equals JSON <expected_json>','the complete replacement expression equals JSON \"WRONG\"')),bindings,'remap-expected-control');expect(bad.counts.cases.failed).toBe(5);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);\n const falseSuccess=bindings.map(b=>b.pattern.test('the Go static remapper inserts row at 1 by 1 on sheet JSON \"Main\"')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as {error?:unknown;result?:string};if(s.error){s.error=undefined;s.result='';}}}:b);const falseReport=await executeAcceptance(inv(source),falseSuccess,'remap-refusal-control');expect(falseReport.counts.cases.failed).toBe(7);expect(falseReport.counts.steps.undefined).toBe(0);\n for(const mode of ['empty','slice','remap','span']){const corrupt=bindings.map(b=>b.pattern.test('the Go static analyser checks all 3 by 4 by 4 by 6 source expressions')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as {matrix:Array<{slices:api.FormulaReference[][];remapped:string;wrapped:api.FormulaReference[]}>};if(mode==='empty')s.matrix=[];else if(mode==='slice')s.matrix[0]!.slices[0]=[];else if(mode==='remap')s.matrix[0]!.remapped='WRONG';else s.matrix[0]!.wrapped[0]!.start=0;}}:b);const report=await executeAcceptance(inv(source),corrupt,'remap-matrix-control');expect(report.counts.cases.failed).toBe(1);expect(report.counts.steps.failed).toBe(1);expect(report.counts.steps.undefined).toBe(0);expect(report.counts.steps.ambiguous).toBe(0);}\n}",
+      "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/formula-remap.ts'),{join}=await import('node:path');const path='workflows/xlsx/formula-references.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(3),cases:count(13),steps:count(42)}});\n const good=await executeAcceptance(inv(source),bindings,'formula-remap-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(13);\n const bad=await executeAcceptance(inv(source.replace('the complete replacement expression equals JSON <expected_json>','the complete replacement expression equals JSON \"WRONG\"')),bindings,'remap-expected-control');expect(bad.counts.cases.failed).toBe(5);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);\n const falseSuccess=bindings.map(b=>b.pattern.test('the static remapper inserts row at 1 by 1 on sheet JSON \"Main\"')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as {error?:unknown;result?:string};if(s.error){s.error=undefined;s.result='';}}}:b);const falseReport=await executeAcceptance(inv(source),falseSuccess,'remap-refusal-control');expect(falseReport.counts.cases.failed).toBe(7);expect(falseReport.counts.steps.undefined).toBe(0);\n for(const mode of ['empty','slice','remap','span']){const corrupt=bindings.map(b=>b.pattern.test('the static analyser checks all 3 by 4 by 4 by 6 source expressions')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as {matrix:Array<{slices:api.FormulaReference[][];remapped:string;wrapped:api.FormulaReference[]}>};if(mode==='empty')s.matrix=[];else if(mode==='slice')s.matrix[0]!.slices[0]=[];else if(mode==='remap')s.matrix[0]!.remapped='WRONG';else s.matrix[0]!.wrapped[0]!.start=0;}}:b);const report=await executeAcceptance(inv(source),corrupt,'remap-matrix-control');expect(report.counts.cases.failed).toBe(1);expect(report.counts.steps.failed).toBe(1);expect(report.counts.steps.undefined).toBe(0);expect(report.counts.steps.ambiguous).toBe(0);}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().text",
@@ -34107,7 +34115,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const s = XmlSnapshot.parse(source), target = s.elements[1]!;\n  expect(s.setAttributes([{ target, name: 'a', value: \"x'y&z\" }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'x&#39;y&amp;z\\' p:n=\"old\"/><t>text</t></r>');\n  expect(s.setAttributes([{ target, name: 'p:n', value: 'new' }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'a&amp;b\\' p:n=\"new\"/><t>text</t></r>');\n  expect(s.setAttributes([{ target, name: 'fresh', value: 'value' }])).toBe('<r xmlns:p=\"urn:p\"><t a = \\'a&amp;b\\' p:n=\"old\" fresh=\"value\"/><t>text</t></r>');\n  expect(s.setAttributes([])).toBe(source);\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34134,7 +34142,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const s = XmlSnapshot.parse('<r a=\"&#65;&apos;\"/>'), target = s.elements[0]!;\n  expect(s.setAttributes([{ target, name: 'a', value: \"A'\" }])).toBe('<r a=\"&#65;&apos;\"/>');\n  expect(s.setAttributes([{ target, name: 'a', value: 'next' }])).toBe('<r a=\"next\"/>');\n  expect(s.setAttributes([])).toBe('<r a=\"&#65;&apos;\"/>');\n  expect(s.setAttributes([{ target, name: 'a', value: 'next' }])).toBe('<r a=\"next\"/>');\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34163,7 +34171,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const xml = '<r xmlns=\"u\" xmlns:p=\"v\" xmlns:q=\"v\"><c q:a=\"old\" a=\"plain\"/><d xmlns:p=\"w\" p:a=\"inner\"/></r>';\n  const s = XmlSnapshot.parse(xml), c = s.elements[1]!, d = s.elements[2]!;\n  const output = s.setAttributes([{ target: c, name: 'p:a', value: 'changed' }, { target: c, name: 'a', value: 'new' }, { target: d, name: 'p:a', value: 'local' }, { target: c, name: 'xml:lang', value: 'en' }]);\n  expect(output).toBe('<r xmlns=\"u\" xmlns:p=\"v\" xmlns:q=\"v\"><c q:a=\"changed\" a=\"new\" xml:lang=\"en\"/><d xmlns:p=\"w\" p:a=\"local\"/></r>');\n  const doc = parseXml(output); expect(attribute(doc.root.children[0]!, 'a', 'v')).toBe('changed');\n  expect(attribute(doc.root.children[0]!, 'a')).toBe('new'); expect(attribute(doc.root.children[1]!, 'a', 'w')).toBe('local');\n  expect(attribute(doc.root.children[0]!, 'lang', 'http://www.w3.org/XML/1998/namespace')).toBe('en');\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34196,7 +34204,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const xml = '<r xmlns:p=\"u\" xmlns:q=\"u\"><t a=\"old\"/></r>', s = XmlSnapshot.parse(xml), target = s.elements[1]!;\n  for (const names of [['a', 'a'], ['p:new', 'q:new']]) {\n    expect(() => s.setAttributes(names.map(name => ({ target, name, value: 'new' })))).toThrow(code('XML_ATTRIBUTE_DUPLICATE'));\n    expect(s.setAttributes([])).toBe(xml);\n  }\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34232,7 +34240,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const s = XmlSnapshot.parse('<r/>'), target = s.elements[0]!;\n  for (const name of ['xmlns', 'xmlns:p', 'unbound:a', ':a', 'a:', 'a:b:c', '1name', 'a b', 'a=\"x\"', '', 'a\\u0000b']) {\n    expect(() => s.setAttributes([{ target, name, value: 'v' }])).toThrow(code('XML_ATTRIBUTE_NAME'));\n  }\n  expect(s.setAttributes([{ target, name: '雪', value: 'v' }])).toBe('<r 雪=\"v\"/>');\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34265,7 +34273,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const s = XmlSnapshot.parse('<r a=\\'old\\' b=\"old\"/>'), target = s.elements[0]!;\n  const value = '\\'\"<&>\\t\\r\\n😀';\n  const output = s.setAttributes([{ target, name: 'a', value }, { target, name: 'b', value }, { target, name: 'c', value }]);\n  const root = parseXml(output).root;\n  expect(root.attributes.a).toBe(value); expect(root.attributes.b).toBe(value); expect(root.attributes.c).toBe(value);\n  expect(output).toContain(\"a='&#39;\\\"&lt;&amp;&gt;&#x9;&#xD;&#xA;😀'\");\n  expect(output).toContain('b=\"\\'&quot;&lt;&amp;&gt;&#x9;&#xD;&#xA;😀\"');\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34300,7 +34308,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const s = XmlSnapshot.parse(source), other = XmlSnapshot.parse(source), target = s.elements[1]!;\n  for (const bad of [other.elements[1], { ...target }, null, undefined]) {\n    expect(() => s.setAttributes([{ target: bad as typeof target, name: 'a', value: 'x' }])).toThrow(code('XML_ATTRIBUTE_TARGET'));\n  }\n  const patches = Object.freeze([Object.freeze({ target, name: 'a', value: 'next' })]);\n  const output = s.setAttributes(patches); expect(patches[0]!.value).toBe('next');\n  expect(() => XmlSnapshot.parse(output).setAttributes(patches)).toThrow(code('XML_ATTRIBUTE_TARGET'));\n  expect(s.setAttributes([])).toBe(source);\n}",
       "calls": [
         "Object.freeze",
@@ -34340,7 +34348,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const s = XmlSnapshot.parse(source), target = s.elements[1]!;\n  for (const value of ['\\u0000', '\\ud800', null, 123]) {\n    let output: string | undefined;\n    expect(() => { output = s.setAttributes([{ target, name: 'fresh', value: 'good' }, { target, name: 'a', value: value as string }]); }).toThrow(OoxmlError);\n    expect(output).toBeUndefined(); expect(s.setAttributes([])).toBe(source);\n  }\n  expect(() => s.setAttributes(null as never)).toThrow(code('XML_ATTRIBUTE_PATCH'));\n  expect(() => s.setAttributes([null] as never)).toThrow(code('XML_ATTRIBUTE_PATCH'));\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34370,7 +34378,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const xml = '<?xml version=\"1.0\"?>\\r\\n<?pi keep?><r a=\"old>text\">😀<!--keep--><c a=\\'old\\' /> tail\\r\\n</r>';\n  const s = XmlSnapshot.parse(xml);\n  expect(s.setAttributes([{ target: s.elements[1]!, name: 'a', value: '雪' }, { target: s.elements[0]!, name: 'a', value: 'new>text' }])).toBe(xml.replace('old>text', 'new&gt;text').replace(\"a='old'\", \"a='雪'\"));\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34400,7 +34408,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const s = XmlSnapshot.parse('<r/>'), target = s.elements[0]!;\n  const patches = [{ target, name: 'a', value: 'v' }];\n  patches[Symbol.iterator] = function* () { throw new Error('do not iterate'); };\n  expect(s.setAttributes(patches)).toBe('<r a=\"v\"/>');\n  expect(() => s.setAttributes([{ target, name: 'a', value: '&'.repeat(2 * 1024 * 1024) }])).toThrow(code('XML_ATTRIBUTE_LIMIT'));\n  expect(() => s.setAttributes(new Array(100001).fill(patches[0]))).toThrow(code('XML_ATTRIBUTE_LIMIT'));\n  expect(s.setAttributes([])).toBe('<r/>');\n}",
       "calls": [
         ".fill",
@@ -34429,7 +34437,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const name = '\\ufeffname', xml = `<r ${name} = 'old' tail=\"keep\"/>`, s = XmlSnapshot.parse(xml);\n  expect(s.setAttributes([{ target: s.elements[0]!, name, value: 'new' }])).toBe(`<r ${name} = 'new' tail=\"keep\"/>`);\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -34454,7 +34462,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const xml = '<r ' + Array.from({ length: 1500 }, (_, i) => `a${i}=\"old\"`).join(' ') + '/>';\n  const s = XmlSnapshot.parse(xml), target = s.elements[0]!;\n  const output = s.setAttributes(Array.from({ length: 1500 }, (_, i) => ({ target, name: `a${i}`, value: `new${i}` })));\n  expect(output).toBe('<r ' + Array.from({ length: 1500 }, (_, i) => `a${i}=\"new${i}\"`).join(' ') + '/>');\n}",
       "calls": [
         "Array.from",
@@ -34487,7 +34495,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
       "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-attributes.ts');\n  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  const run = (source: string) => executeAcceptance({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(2), cases: count(4), steps: count(12) } }, bindings, 'xml-attributes-unit');\n  const good = await run(text); expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(4); expect(good.counts.cases.planned).toBe(12);\n  const bad = await run(text.replace('Then the complete output bytes equal <output>', 'Then the complete output bytes equal wrong'));\n  expect(bad.counts.cases.failed).toBe(3); expect(bad.counts.steps.failed).toBe(3); expect(bad.counts.steps.undefined).toBe(0); expect(bad.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -34528,8 +34536,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "05b4998ef98cd63947ee99ced382ceab27324947b8b277438adcc2b37769258a",
-      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts');\n  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const feature = selectSharedScenarios(path, text, ['@id-xml-go-attribute-batch-refusal']);\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  for (const success of [true, false]) {\n    const corrupted = bindings.map(b => b.pattern.test('one Go lexical edit batch sets a of the first t element to x and to y') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); const s = c.state as { output?: string; error?: unknown };\n      s.error = success ? undefined : new Error('untyped'); if (success) s.output = '<r/>';\n    } } : b);\n    const result = await executeAcceptance({ root: '.', features: [feature], counts: { features: count(1), scenarios: count(1), cases: count(1), steps: count(3) } }, corrupted, 'xml-attribute-refusal-control');\n    expect(result.counts.cases.failed).toBe(1); expect(result.counts.steps.failed).toBe(1); expect(result.counts.steps.undefined).toBe(0); expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
+      "sourceSha256": "3a2ef4527d2a21eac26446434af447b2621a9b5831ab5ee5165520639dd0ef04",
+      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts');\n  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const feature = selectSharedScenarios(path, text, ['@id-xml-go-attribute-batch-refusal']);\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  for (const success of [true, false]) {\n    const corrupted = bindings.map(b => b.pattern.test('one lexical edit batch sets a of the first t element to x and to y') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); const s = c.state as { output?: string; error?: unknown };\n      s.error = success ? undefined : new Error('untyped'); if (success) s.output = '<r/>';\n    } } : b);\n    const result = await executeAcceptance({ root: '.', features: [feature], counts: { features: count(1), scenarios: count(1), cases: count(1), steps: count(3) } }, corrupted, 'xml-attribute-refusal-control');\n    expect(result.counts.cases.failed).toBe(1); expect(result.counts.steps.failed).toBe(1); expect(result.counts.steps.undefined).toBe(0); expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "Bun.file",
         "Bun.file().text",
@@ -35040,7 +35048,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n const source=utf8('<r><leaf id=\"a\">one</leaf><leaf id=\"b\">two</leaf></r>'),before=new Uint8Array(source),snapshot=XmlByteSnapshot.parse(source);expect(source).toEqual(before);expect(snapshot.remove([])).toEqual(before);expect(snapshot.elements.map(n=>n.localName)).toEqual(['r','leaf','leaf']);expect(Object.isFrozen(snapshot)).toBe(true);expect(Object.isFrozen(snapshot.elements)).toBe(true);expect(snapshot.elements.every(Object.isFrozen)).toBe(true);\n source.fill(32);const copy=snapshot.remove([]);copy.fill(0);expect(snapshot.remove([])).toEqual(before);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><leaf id=\"b\">two</leaf></r>'));expect(snapshot.remove([])).toEqual(before);\n}",
       "calls": [
         "Object.isFrozen",
@@ -35084,7 +35092,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n for(const kind of ['utf8','le','be'] as const)for(const bom of kind==='utf8'?[false,true]:[true]){const declaration=kind==='utf8'?'UTF-8':kind==='le'?'UTF-16LE':'UTF-16BE',source=`<?xml version=\"1.0\" encoding=\"${declaration}\"?>\\r\\n<r xmlns:q='urn:q'>雪😀\\r\\n<q:drop a='&amp;'/>\\t<keep> e&#x301; </keep><!--tail--></r>`,input=encoded(source,kind,bom),before=new Uint8Array(input),snapshot=XmlByteSnapshot.parse(input),drop=snapshot.elements.find(n=>n.localName==='drop')!;expect(snapshot.remove([])).toEqual(input);expect(snapshot.remove([drop])).toEqual(encoded(source.replace(\"<q:drop a='&amp;'/>\",''),kind,bom));expect(input).toEqual(before);expect(source.slice(drop.start,drop.end)).toBe(\"<q:drop a='&amp;'/>\");}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -35125,7 +35133,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n for(const kind of ['le','be'] as const)for(const declaration of ['', '<?xml version=\"1.0\" encoding=\"UTF-16\"?>']){const text=declaration+'<r><drop/><keep/></r>',bytes=encoded(text,kind),snapshot=XmlByteSnapshot.parse(bytes);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(encoded(declaration+'<r><keep/></r>',kind));}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -35162,7 +35170,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n const input=utf8('<r><a><b/></a><c/></r>'),before=new Uint8Array(input),s=XmlByteSnapshot.parse(input),other=XmlByteSnapshot.parse(input),string=XmlSnapshot.parse(new TextDecoder().decode(input));for(const targets of [[s.elements[0]!],[s.elements[1]!,s.elements[2]!],[s.elements[3]!,s.elements[3]!],[other.elements[3]!],[string.elements[3]!],[{...s.elements[3]!}]]){expect(()=>s.remove(targets)).toThrow();expect(s.remove([])).toEqual(before);expect(input).toEqual(before);}\n const unsafe=XmlByteSnapshot.parse(utf8('<r>]]<a/>></r>'));expect(()=>unsafe.remove([unsafe.elements[1]!])).toThrow(expect.objectContaining({code:'XML_REMOVAL_UNSAFE'}));expect(unsafe.remove([])).toEqual(utf8('<r>]]<a/>></r>'));\n}",
       "calls": [
         ".decode",
@@ -35206,7 +35214,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n for(const value of [null,'<r/>',new ArrayBuffer(4),new DataView(new ArrayBuffer(4)),[60,114,47,62]])expect(()=>XmlByteSnapshot.parse(value as unknown as Uint8Array)).toThrow();\n const cases=[new Uint8Array([0xff]),new Uint8Array([0xc0,0xaf]),new Uint8Array([0xff,0xfe,60]),encoded('<r>\\ud800</r>','le'),encoded('<r>\\udfff</r>','be'),utf8('<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><r/>'),utf8('<?xml version=\"1.0\" encoding=\"UTF-16\"?><r/>'),encoded('<?xml version=\"1.0\" encoding=\"UTF-8\"?><r/>','le'),encoded('<?xml version=\"1.0\" encoding=\"UTF-16LE\"?><r/>','be'),encoded('<r/>','le',false),utf8('<!DOCTYPE r><r/>'),utf8('<r>')];\n for(const input of cases){const before=new Uint8Array(input);expect(()=>XmlByteSnapshot.parse(input)).toThrow();expect(input).toEqual(before);}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -35237,7 +35245,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n const source=utf8('XX<r><drop/><keep/></r>YY'),view=source.subarray(2,source.length-2),before=new Uint8Array(view);Object.defineProperty(view,'slice',{value:()=>{throw Error('slice called');}});Object.defineProperty(view,Symbol.iterator,{value:()=>{throw Error('iterator called');}});const s=XmlByteSnapshot.parse(view);expect(s.remove([])).toEqual(before);expect(s.remove([s.elements[1]!])).toEqual(utf8('<r><keep/></r>'));expect(new Uint8Array(view)).toEqual(before);\n}",
       "calls": [
         "Error",
@@ -35268,7 +35276,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n expect(()=>XmlByteSnapshot.parse(new Uint8Array(32*1024*1024+1))).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}));expect(()=>XmlByteSnapshot.parse(utf8('<r>'+ 'x'.repeat(8*1024*1024)+'</r>'))).toThrow(expect.objectContaining({code:'XML_INPUT_TOO_LARGE'}));const input=utf8('<r>雪😀<a/></r>'),s=XmlByteSnapshot.parse(input);expect(s.remove([s.elements[1]!])).toEqual(utf8('<r>雪😀</r>'));\n}",
       "calls": [
         ".repeat",
@@ -35304,7 +35312,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n const shared=new Uint8Array(new SharedArrayBuffer(8));shared.set(utf8('<r/>'));expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));const bytes=utf8('<r/>');structuredClone(bytes,{transfer:[bytes.buffer]});expect(()=>XmlByteSnapshot.parse(bytes)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));\n for(const kind of ['utf8','le','be'] as const){const value=encoded('\\ufeff<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><r/>',kind);expect(()=>XmlByteSnapshot.parse(value)).toThrow(expect.objectContaining({code:'XML_BYTE_ENCODING'}));}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -35338,7 +35346,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n const source=utf8('<r><a/><b/></r>'),snapshot=XmlByteSnapshot.parse(source),result=snapshot.remove([snapshot.elements[1]!]);result.fill(0);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><b/></r>'));expect(snapshot.remove([snapshot.elements[2]!])).toEqual(utf8('<r><a/></r>'));expect(snapshot.remove([])).toEqual(source);\n const selected=[snapshot.elements[1]!];selected[Symbol.iterator]=function*(){yield snapshot.elements[0]!;return undefined;};expect(snapshot.remove(selected)).toEqual(utf8('<r><b/></r>'));\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -35375,8 +35383,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
-      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/editing.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};\n const good=await executeAcceptance(inv,bindings,'xml-byte-seed');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);\n for(const field of ['input','output']){const badBindings=bindings.map(b=>b.pattern.test('Go parses a caller-owned byte slice and performs an empty edit')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {input:Uint8Array;output:Uint8Array})[field as 'input'|'output'].fill(0);}}:b);const bad=await executeAcceptance(inv,badBindings,'xml-byte-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/editing.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};\n const good=await executeAcceptance(inv,bindings,'xml-byte-seed');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);\n for(const field of ['input','output']){const badBindings=bindings.map(b=>b.pattern.test('the XML editor parses a caller-owned byte slice and performs an empty edit')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {input:Uint8Array;output:Uint8Array})[field as 'input'|'output'].fill(0);}}:b);const bad=await executeAcceptance(inv,badBindings,'xml-byte-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().text",
@@ -35416,7 +35424,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2af63691352240f2f3881f9cfcc45195b4da0394c69c9637dace4a83a82a10be",
+      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa",
       "body": "{\n let called=false;const large=new Uint8Array(32*1024*1024+1);Object.defineProperty(large,'byteLength',{get(){called=true;return 4;}});expect(()=>XmlByteSnapshot.parse(large)).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}));expect(called).toBe(false);\n const shared=new Uint8Array(new SharedArrayBuffer(4));shared.set(utf8('<r/>'));Object.defineProperty(shared,'buffer',{get(){called=true;return new ArrayBuffer(4);}});expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));expect(called).toBe(false);\n const buffer=Buffer.from('<r><drop/></r>'),s=XmlByteSnapshot.parse(buffer);buffer.fill(0);expect(s.remove([])).toEqual(utf8('<r><drop/></r>'));expect(s.remove([s.elements[1]!])).toEqual(utf8('<r></r>'));\n}",
       "calls": [
         "Buffer.from",
@@ -35824,6 +35832,126 @@
         "eq",
         "expect",
         "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
+      "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
+      "line": 8,
+      "title": "neutral XML and formula actors have one handler with no retired runtime alias",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(bindings.filter(b=>b.pattern.test(e.to))).toHaveLength(1)",
+        "expect(bindings.filter(b=>b.pattern.test(e.from))).toHaveLength(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 9,
+          "expression": "for(const f of m.files)for(const e of f.stepRenames)"
+        },
+        {
+          "line": 9,
+          "expression": "for(const e of f.stepRenames)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
+      "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json();for(const f of m.files)for(const e of f.stepRenames){expect(bindings.filter(b=>b.pattern.test(e.to))).toHaveLength(1);expect(bindings.filter(b=>b.pattern.test(e.from))).toHaveLength(0);}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().json",
+        "b.pattern.test",
+        "bindings.filter",
+        "expect",
+        "expect().toHaveLength",
+        "fixturesRoot",
+        "join"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:all sixty retained XML and formula cases execute exact lexical and static-reference predicates",
+      "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
+      "line": 11,
+      "title": "all sixty retained XML and formula cases execute exact lexical and static-reference predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(60)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
+      "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json(),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)),features=await sharedScenarios(ids),cases=features.flatMap(f=>f.scenarios.flatMap(s=>s.cases)),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(19),cases:count(60),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'xml-formula-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(60);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().json",
+        "cases.reduce",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "f.scenarios.flatMap",
+        "f.scenarios.map",
+        "features.flatMap",
+        "fixturesRoot",
+        "join",
+        "m.files.flatMap",
+        "sharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:XML formula actor migration preserves all default case identities and bounded mapping records",
+      "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
+      "line": 15,
+      "title": "XML formula actor migration preserves all default case identities and bounded mapping records",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(keys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inv.counts.cases.planned).toBe(35)",
+        "expect(r.mappedDeclarations).toBe(472)",
+        "expect(r.executionCredit).toBe(false)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "f1a27a7dfaa2e6229bfd5e5bf559c279af9a929b5d233e58034f5f57a766b9c1",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(35);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "JSON.stringify",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "f.scenarios.filter",
+        "f.scenarios.filter().flatMap",
+        "inv.features.flatMap",
+        "inv.features.flatMap().sort",
+        "inventoryFeatures",
+        "outcomeMappingReport",
+        "process.cwd",
+        "s.cases.map"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -36374,7 +36502,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const source = '<root xmlns=\"u\" xmlns:n1=\"occupied\"><a x = \\'keep\\' /><b>keep</b></root>';\n  const s = XmlSnapshot.parse(source);\n  const output = s.appendChildren([{ target: s.elements[1]!, children: [{ name: { localName: 'x', namespaceURI: 'new' }, attributes: [{ name: { localName: 'a', namespaceURI: 'other' }, value: 'value' }], children: [element('plain', '', ['text'])] }] }]);\n  const d = parseXml(output), a = d.root.children[0]!, x = a.children[0]!;\n  expect(output).toStartWith('<root xmlns=\"u\" xmlns:n1=\"occupied\"><a x = \\'keep\\' >');\n  expect(output).toEndWith('</a><b>keep</b></root>');\n  expect([x.localName, x.namespaceURI]).toEqual(['x', 'new']);\n  expect(attribute(x, 'a', 'other')).toBe('value');\n  expect([x.children[0]!.localName, x.children[0]!.namespaceURI, x.children[0]!.text]).toEqual(['plain', '', 'text']);\n  expect(s.appendChildren([])).toBe(source);\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -36407,7 +36535,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const source = '<root xmlns=\"outer\" xmlns:p=\"bound\"><!--a--><p:old xmlns:p=\"inner\" x=\\'1\\'><p:child/></p:old> tail <last/></root>';\n  const s = XmlSnapshot.parse(source);\n  const output = s.replaceElements([{ target: s.elements[1]!, children: [element('new', 'bound', ['value']), element('plain')] }]);\n  expect(output).toBe('<root xmlns=\"outer\" xmlns:p=\"bound\"><!--a--><p:new>value</p:new><plain xmlns=\"\"/> tail <last/></root>');\n  expect(s.replaceElements([])).toBe(source);\n  expect(s.remove([])).toBe(source);\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -36451,7 +36579,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const roots = ['<r/>', '<r xmlns=\"u\"/>', '<p:r xmlns:p=\"u\"/>', '<r xmlns=\"u\" xmlns:n1=\"v\" xmlns:n2=\"occupied\"/>'];\n  const namespaces = ['', 'u', 'v', 'fresh', 'http://www.w3.org/XML/1998/namespace'];\n  for (const source of roots) for (const ens of namespaces) for (const ans of namespaces) {\n    const s = XmlSnapshot.parse(source), rootBefore = parseXml(source).root;\n    const value = '\\t\\r\\n & 😀', text = 'x\\ry\\nz';\n    const output = s.appendChildren([{ target: s.elements[0]!, children: [{ name: { localName: 'child', namespaceURI: ens }, attributes: [{ name: { localName: 'flag', namespaceURI: ans }, value }], children: [element('plain', '', [text])] }] }]);\n    const root = parseXml(output).root, child = root.children[0]!, grandchild = child.children[0]!;\n    expect([root.localName, root.namespaceURI]).toEqual([rootBefore.localName, rootBefore.namespaceURI]);\n    expect([child.localName, child.namespaceURI]).toEqual(['child', ens]);\n    expect(attribute(child, 'flag', ans)).toBe(value);\n    expect([grandchild.localName, grandchild.namespaceURI, grandchild.text]).toEqual(['plain', '', text]);\n    expect(s.appendChildren([])).toBe(source);\n  }\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -36493,7 +36621,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const source = '<r><a><b/></a><c/></r>', s = XmlSnapshot.parse(source);\n  expect(() => s.replaceElements([{ target: s.elements[0]!, children: [] }])).toThrow(code('XML_STRUCTURE_ROOT'));\n  for (const method of ['appendChildren', 'replaceElements'] as const) {\n    for (const indexes of [[1, 1], [1, 2], [2, 1]]) {\n      expect(() => s[method](indexes.map(i => ({ target: s.elements[i]!, children: [] })))).toThrow(code('XML_STRUCTURE_OVERLAP'));\n      expect(s[method]([])).toBe(source);\n    }\n  }\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -36526,7 +36654,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const source = '<r>😀<a/>\\r\\n<!--gap--><b>old</b>tail</r>', s = XmlSnapshot.parse(source);\n  expect(s.appendChildren([{ target: s.elements[2]!, children: [' & more'] }, { target: s.elements[1]!, children: [element('c')] }])).toBe('<r>😀<a><c/></a>\\r\\n<!--gap--><b>old &amp; more</b>tail</r>');\n  expect(s.replaceElements([{ target: s.elements[2]!, children: [] }, { target: s.elements[1]!, children: [element('c')] }])).toBe('<r>😀<c/>\\r\\n<!--gap-->tail</r>');\n  expect(s.appendChildren([{ target: s.elements[1]!, children: [] }])).toBe(source);\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -36555,7 +36683,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const s = XmlSnapshot.parse('<r xmlns:p=\"u\"><a xmlns:p=\"v\"/><b/></r>');\n  const out = s.appendChildren([{ target: s.elements[1]!, children: [element('x', 'u'), element('x', 'v'), element('x', '')] }]);\n  const nodes = parseXml(out).root.children[0]!.children;\n  expect(nodes.map(n => n.namespaceURI)).toEqual(['u', 'v', '']);\n  expect(out).toContain('<p:x/>'); expect(out).toEndWith('</a><b/></r>');\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -36592,7 +36720,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const s = XmlSnapshot.parse('<r><a/></r>'), foreign = XmlSnapshot.parse('<r><a/></r>');\n  for (const target of [foreign.elements[1], { ...s.elements[1]! }, null]) expect(() => s.appendChildren([{ target: target as never, children: [] }])).toThrow(code('XML_STRUCTURE_TARGET'));\n  const children = [element('x')]; children[Symbol.iterator] = function* () { throw Error('do not iterate'); };\n  const patches = [{ target: s.elements[1]!, children }]; patches[Symbol.iterator] = function* () { throw Error('do not iterate'); };\n  expect(s.appendChildren(Object.freeze(patches))).toBe('<r><a><x/></a></r>');\n  expect(() => XmlSnapshot.parse('<r><a/></r>').replaceElements(patches)).toThrow(code('XML_STRUCTURE_TARGET'));\n}",
       "calls": [
         "Error",
@@ -36632,7 +36760,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const s = XmlSnapshot.parse('<r><a/></r>'), target = s.elements[1]!;\n  const invalid: unknown[] = [element('p:x'), element('1bad'), element('x', 'http://www.w3.org/2000/xmlns/'),\n    { name: { localName: 'x', namespaceURI: '' }, attributes: [{ name: { localName: 'xmlns', namespaceURI: '' }, value: 'u' }] },\n    { name: { localName: 'x', namespaceURI: '' }, attributes: ['a', 'a'].map(localName => ({ name: { localName, namespaceURI: 'u' }, value: 'v' })) },\n    element('x', '', ['\\ud800']), element('x', '', ['\\u0000']), null, 12, { name: { localName: 'x', namespaceURI: '' }, children: [undefined] }];\n  for (const child of invalid) {\n    let output: string | undefined;\n    expect(() => { output = s.appendChildren([{ target, children: [element('good'), child as XmlContent] }]); }).toThrow();\n    expect(output).toBeUndefined(); expect(s.appendChildren([])).toBe('<r><a/></r>');\n  }\n}",
       "calls": [
         ".map",
@@ -36674,7 +36802,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const s = XmlSnapshot.parse('<r/>'), target = s.elements[0]!;\n  const cycle: any = { name: { localName: 'x', namespaceURI: '' }, children: [] }; cycle.children.push(cycle);\n  expect(() => s.appendChildren([{ target, children: [cycle] }])).toThrow(code('XML_STRUCTURE_CYCLE'));\n  let nested = element('x'); for (let i = 0; i < 256; i++) nested = element('x', '', [nested]);\n  for (const children of [[nested], new Array(100001).fill(element('x')), ['&'.repeat(2 * 1024 * 1024)]]) {\n    expect(() => s.appendChildren([{ target, children }])).toThrow(code('XML_STRUCTURE_LIMIT'));\n  }\n  expect(() => s.appendChildren(new Array(100001).fill({ target, children: [] }))).toThrow(code('XML_STRUCTURE_LIMIT'));\n}",
       "calls": [
         ".fill",
@@ -36708,7 +36836,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const xml = '<r>]]<a/>>tail</r>', s = XmlSnapshot.parse(xml);\n  expect(() => s.replaceElements([{ target: s.elements[1]!, children: [] }])).toThrow(code('XML_STRUCTURE_UNSAFE'));\n  expect(s.replaceElements([])).toBe(xml);\n  expect(s.replaceElements([{ target: s.elements[1]!, children: ['>'] }])).toBe('<r>]]&gt;>tail</r>');\n}",
       "calls": [
         "XmlSnapshot.parse",
@@ -36738,7 +36866,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const s = XmlSnapshot.parse('<r xmlns:n1=\"occupied\" xmlns:n2=\"also\"/>');\n  const attributes = Array.from({ length: 1500 }, (_, i) => ({ name: { localName: 'flag', namespaceURI: `urn:${i}` }, value: String(i) }));\n  const output = s.appendChildren([{ target: s.elements[0]!, children: [{ name: { localName: 'child', namespaceURI: 'new' }, attributes }] }]);\n  expect(output).toContain('<n3:child');\n  const child = parseXml(output).root.children[0]!;\n  expect(attribute(child, 'flag', 'urn:0')).toBe('0'); expect(attribute(child, 'flag', 'urn:1499')).toBe('1499');\n  expect(child.namespaceURI).toBe('new');\n}",
       "calls": [
         "Array.from",
@@ -36770,7 +36898,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const limit = 8 * 1024 * 1024, source = '<r/>', s = XmlSnapshot.parse(source);\n  // <r> + text + </r> has seven code units of markup.\n  const text = 'a'.repeat(limit - 7);\n  expect(s.appendChildren([{ target: s.elements[0]!, children: [text] }]).length).toBe(limit);\n  expect(() => s.appendChildren([{ target: s.elements[0]!, children: [text + 'a'] }])).toThrow(code('XML_STRUCTURE_LIMIT'));\n  expect(() => s.appendChildren([{ target: s.elements[0]!, children: [element('x', '\"'.repeat(limit / 2))] }])).toThrow(code('XML_STRUCTURE_LIMIT'));\n}",
       "calls": [
         ".repeat",
@@ -36800,7 +36928,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const xml = '<r>'.repeat(255) + '<a/>' + '</r>'.repeat(255), s = XmlSnapshot.parse(xml);\n  expect(() => s.appendChildren([{ target: s.elements[255]!, children: [element('x')] }])).toThrow(code('XML_STRUCTURE_LIMIT'));\n  const shared = element('x', 'u', ['<&\\r']); const root = XmlSnapshot.parse('<r/>');\n  const output = root.appendChildren([{ target: root.elements[0]!, children: [shared, shared] }]);\n  expect(parseXml(output).root.children.map(n => [n.localName, n.namespaceURI, n.text])).toEqual([['x', 'u', '<&\\r'], ['x', 'u', '<&\\r']]);\n}",
       "calls": [
         ".repeat",
@@ -36838,7 +36966,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { executeAcceptance, selectSharedScenarios } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-structure.ts');\n  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  const inventory = (source: string) => ({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(5), cases: count(7), steps: count(30) } });\n  const good = await executeAcceptance(inventory(text), bindings, 'xml-structure-unit');\n  expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(7); expect(good.counts.cases.planned).toBe(9);\n  const bad = await executeAcceptance(inventory(text.replace('the grandchild text equals JSON \"x\\\\ry\\\\nz\"', 'the grandchild text equals JSON \"wrong\"')), bindings, 'xml-structure-value-control');\n  expect(bad.counts.cases.failed).toBe(1); expect(bad.counts.steps.failed).toBe(1); expect(bad.counts.steps.undefined).toBe(0); expect(bad.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -36879,8 +37007,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
-      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { executeAcceptance, selectSharedScenarios } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-structure.ts');\n  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  type State = { output?: string; error?: unknown; matrix?: { output: string; noop: string }[] };\n  const matrixStep = 'Go inserts child with a flag attribute of JSON value \"\\\\t\\\\r\\\\n & 😀\" and a plain grandchild of JSON text \"x\\\\ry\\\\nz\" for all 4 by 5 by 5 choices';\n  const mutations: [string, (s: State) => void][] = [\n    [matrixStep, s => { s.matrix![0]!.output = '<r><wrong flag=\"v\"><plain/></wrong></r>'; }],\n    [matrixStep, s => { s.matrix![0]!.noop = 'wrong'; }],\n    ['a Go replacement batch selects root', s => { s.output = '<r/>'; s.error = undefined; }],\n    ['one Go structured insertion batch targets both the root and its nested a element', s => { s.error = new Error('untyped'); }],\n    ['Go replaces p:old with a bound-namespace new element containing value and an empty-namespace plain element', s => { s.output = '<root/>'; }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => { await b.run(c, ...captures); mutate(c.state as State); } } : b);\n    const result = await executeAcceptance({ root: '.', features: [selectSharedScenarios(path, text, scenarioIds)], counts: { features: count(1), scenarios: count(5), cases: count(7), steps: count(30) } }, corrupted, 'structure-controls');\n    expect(result.counts.cases.failed).toBeGreaterThan(0); expect(result.counts.steps.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.undefined).toBe(0); expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
+      "body": "{\n  const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');\n  const { executeAcceptance, selectSharedScenarios } = await import('../../scripts/gherkin.ts');\n  const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-structure.ts');\n  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();\n  const count = (n: number) => ({ implemented: n, planned: 0, total: n });\n  type State = { output?: string; error?: unknown; matrix?: { output: string; noop: string }[] };\n  const matrixStep = 'the XML editor inserts child with a flag attribute of JSON value \"\\\\t\\\\r\\\\n & 😀\" and a plain grandchild of JSON text \"x\\\\ry\\\\nz\" for all 4 by 5 by 5 choices';\n  const mutations: [string, (s: State) => void][] = [\n    [matrixStep, s => { s.matrix![0]!.output = '<r><wrong flag=\"v\"><plain/></wrong></r>'; }],\n    [matrixStep, s => { s.matrix![0]!.noop = 'wrong'; }],\n    ['a replacement batch selects root', s => { s.output = '<r/>'; s.error = undefined; }],\n    ['one structured insertion batch targets both the root and its nested a element', s => { s.error = new Error('untyped'); }],\n    ['the XML editor replaces p:old with a bound-namespace new element containing value and an empty-namespace plain element', s => { s.output = '<root/>'; }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => { await b.run(c, ...captures); mutate(c.state as State); } } : b);\n    const result = await executeAcceptance({ root: '.', features: [selectSharedScenarios(path, text, scenarioIds)], counts: { features: count(1), scenarios: count(5), cases: count(7), steps: count(30) } }, corrupted, 'structure-controls');\n    expect(result.counts.cases.failed).toBeGreaterThan(0); expect(result.counts.steps.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.undefined).toBe(0); expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "Bun.file",
         "Bun.file().text",
@@ -36918,7 +37046,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "e58058d154c9de5255c5e578fca879ed2f4fc5361b138715aa5434b3139f12f8",
+      "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "body": "{\n  const source = '<r ' + Array.from({ length: 1500 }, (_, i) => `xmlns:p${i}=\"urn:${i}\"`).join(' ') + '/>';\n  const s = XmlSnapshot.parse(source);\n  expect(() => s.appendChildren([{ target: s.elements[0]!, children: new Array(700).fill(element('child')) }])).toThrow(code('XML_STRUCTURE_LIMIT'));\n  expect(s.appendChildren([])).toBe(source);\n  expect(parseXml(s.appendChildren([{ target: s.elements[0]!, children: [element('child')] }])).root.children[0]!.localName).toBe('child');\n}",
       "calls": [
         ".fill",
