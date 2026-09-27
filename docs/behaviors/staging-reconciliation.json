@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 720,
+  "nativeDeclarations": 731,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 493,
+  "withoutStagingCount": 504,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4230,6 +4230,61 @@
       "id": "bun:tests/unit/xlsx-formula-analysis.test.ts:reference and nesting boundary values succeed without widening unsupported axis or sheet syntax",
       "path": "tests/unit/xlsx-formula-analysis.test.ts",
       "sourceSha256": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:static insertions rewrite exact shared expressions without touching literals or unrelated sheets",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:absolute coordinates shift structurally while relative flags and reversed endpoints remain independent",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:UTF8 edits preserve quoted qualifier spelling and every non-reference byte across multiple changes",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:unaffected references and no-reference expressions retain exact spelling but still undergo analysis",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:late row and column overflow throw with no partial replacement and unchanged options",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:invalid arguments, inherited fields and executable patches refuse without invoking accessors",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:grid edge insertions obey coordinate thresholds and bounded counts",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:finite 288-expression matrix reparses slices, preserves unaffected expressions and shifts wrapped spans",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:output growth refuses at UTF8 byte bound without returning a partial formula",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:qualified single cells remain single and colon/bang characters in quoted sheet names cannot alter range shape",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-formula-remap.test.ts:canonical remap and matrix cases reject wrong output, false success and each missing matrix outcome",
+      "path": "tests/unit/xlsx-formula-remap.test.ts",
+      "sourceSha256": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022"
     },
     {
       "id": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",

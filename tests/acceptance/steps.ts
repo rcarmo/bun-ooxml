@@ -43,6 +43,7 @@ import { bindings as tableRowsBindings } from './table-rows.ts';
 import { bindings as rowTextsBindings } from './row-texts.ts';
 import { bindings as xmlByteSnapshotBindings } from './xml-byte-snapshot.ts';
 import { bindings as formulaAnalysisBindings } from './formula-analysis.ts';
+import { bindings as formulaRemapBindings } from './formula-remap.ts';
 import { bindings as cellPropertiesBindings } from './cell-properties.ts';
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
@@ -102,6 +103,7 @@ export const bindings: StepBinding[] = [
   ...rowTextsBindings,
   ...xmlByteSnapshotBindings,
   ...formulaAnalysisBindings,
+  ...formulaRemapBindings,
   ...cellPropertiesBindings,
   ...createPptxBindings,
   ...createXlsxBindings,

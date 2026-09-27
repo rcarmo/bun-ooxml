@@ -4,7 +4,7 @@ import {analyzeFormulaReferences,type FormulaReference,OoxmlError} from '../../s
 type State={source?:string;refs?:FormulaReference[];error?:unknown};const state=(c:Record<string,unknown>)=>c.state as State;
 export const scenarioIds=['@id-xlsx-go-formula-analysis-counts','@id-xlsx-go-formula-quoted-sheet-flags','@id-xlsx-go-formula-analysis-refusal','@id-xlsx-go-formula-literal-punctuation'];
 export const bindings:StepBinding[]=[
- {pattern:/^the formula source is JSON (.+)$/,run:(c,json)=>{const source:unknown=JSON.parse(json!);assert.equal(typeof source,'string');state(c).source=source as string;}},
+ {pattern:/^the formula source is JSON ("(?:[^"\\]|\\.)*")$/,run:(c,json)=>{const source:unknown=JSON.parse(json!);assert.equal(typeof source,'string');state(c).source=source as string;}},
  {pattern:/^the Go static formula analyser reads the source$/,run:c=>{const s=state(c);assert(s.source!==undefined);s.refs=undefined;s.error=undefined;try{s.refs=analyzeFormulaReferences(s.source);}catch(error){s.error=error;}}},
  {pattern:/^it returns (\d+) reference records without error$/,run:(c,count)=>{const s=state(c);assert.equal(s.error,undefined);assert(s.refs);assert.equal(s.refs.length,Number(count));}},
  {pattern:/^every reference has a nonempty byte span inside the original source$/,run:c=>{const s=state(c);assert(s.refs&&s.source!==undefined);const length=new TextEncoder().encode(s.source).length;for(const ref of s.refs){assert(Number.isInteger(ref.start)&&ref.start>=0);assert(Number.isInteger(ref.end)&&ref.end>ref.start&&ref.end<=length);}}},

@@ -56,7 +56,8 @@ General Word Compare, move/format/table revisions, comment authoring, slide impo
 merged-table restructuring, chart authoring, structural spreadsheet edits and
 formula calculation are unsupported. [Direct A1 range parsing](docs/contracts/a1-ranges.md)
 is available independently. [Static formula reference analysis](docs/contracts/formula-analysis.md)
-extracts bounded A1 references and UTF-8 source spans; neither API rewrites references or evaluates formulas.
+extracts bounded A1 references and UTF-8 source spans. [String-level insertion remapping](docs/contracts/formula-remap.md)
+shifts supported references without editing a workbook; none of these APIs evaluates formulas.
 See [supported operations and limits](docs/contracts/port-scope.md).
 
 ```ts

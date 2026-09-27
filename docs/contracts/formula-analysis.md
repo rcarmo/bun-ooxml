@@ -60,9 +60,10 @@ Four existing shared scenarios supply 19 cases for reference counts and spans,
 quoted-sheet flags, unsupported input and literal punctuation. The accepted
 punctuation cases check parse success, without a full reference-value predicate.
 Native tests separately compare exact reference slices and a finite 288-expression
-matrix. The compound shared matrix remains planned because it also requires
-insertion remapping, which this API does not provide. No calculation, remapping,
-saved-workbook, rendering or cross-runtime parity credit follows from analysis.
+matrix. [String-level insertion remapping](formula-remap.md) uses this analyzer
+and separately binds the compound shared matrix. Analysis alone does not change
+references or establish calculation, saved-workbook, rendering or cross-runtime
+parity.
 
 The shared [static formula profile](../../references/fixtures-ooxml/contracts/go-formula-references.md)
 defines these API examples. The supported grammar is an editor policy, not a

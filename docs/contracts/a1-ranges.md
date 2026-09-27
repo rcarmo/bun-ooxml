@@ -36,5 +36,6 @@ rewrite formulas or calculate values.
 The two selected shared scenarios have 13 cases. Their positive cases check only
 sheet, axis and first coordinate; native tests additionally check both endpoints
 and absolute flags. [Static formula analysis](formula-analysis.md) separately
-extracts cell/rectangle references from a bounded expression grammar. Remapping
-and the compound analysis/remapping matrix remain planned.
+extracts cell/rectangle references from a bounded expression grammar.
+[String-level insertion remapping](formula-remap.md) separately handles supported
+row/column shifts; it does not mutate worksheets.

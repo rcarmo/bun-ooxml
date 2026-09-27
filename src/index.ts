@@ -2,6 +2,7 @@
 export { OoxmlError } from "./errors.ts";
 export { xmlEquivalent } from './xml/comparison.ts';
 export { analyzeFormulaReferences, type FormulaReference } from './xlsx/formula.ts';
+export { insertFormulaReferences, type FormulaInsertion } from './xlsx/formula-remap.ts';
 export { XmlByteSnapshot } from './xml/bytes.ts';
 export { XmlSnapshot, type XmlRemovalTarget, type XmlAttributePatch, type XmlExpandedName, type XmlStructuredAttribute, type XmlContent, type XmlStructurePatch } from './xml/removal.ts';
 export { admitPackage } from "./opc/admission.ts";
