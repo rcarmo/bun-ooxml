@@ -1,4 +1,6 @@
 import { OoxmlError } from "../errors.ts";
+import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
+export type {DirectCellProperties,CellPropertiesPatch,CellTopBorder} from './cell-properties.ts';
 import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
 export type {EffectiveRunFormatting,EffectiveFlag,FormattingContribution} from './effective-formatting.ts';
 import {formatRunProperties,directFontSizes as readDirectFontSizes,directFontNames as readDirectFontNames,directRunFlags as readDirectRunFlags,directRunAppearance as readDirectRunAppearance,type DirectRunFlags,type DirectRunAppearance,type DirectRunPatch} from './run-formatting.ts';
@@ -372,6 +374,14 @@ export class TableCell {
     this.ensureFresh();
     this.ensureSupported();
     return this.snapshot.paragraphs.map((paragraph) => paragraph.text).join("\n");
+  }
+
+  directProperties(): DirectCellProperties {
+    this.ensureFresh(); this.ensureSupported(); return this.documentRef.inspectCellProperties(this.snapshot);
+  }
+
+  setProperties(patch: CellPropertiesPatch): {changed:number} {
+    this.ensureFresh(); this.ensureSupported(); return this.documentRef.setCellProperties(this.snapshot,patch);
   }
 
   set text(value: string) {
@@ -813,6 +823,26 @@ export class Document {
       fail("docx-table-missing", `Missing DOCX table ${table.index + 1}`);
     }
     return liveTable;
+  }
+
+  private checkedCellProperties(cell:TableCellSnapshot):TableCellSnapshot {
+    if(this.version!==cell.version||this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-table-cell','Cell properties target is stale');
+    const live=this.resolveTableCell(cell);
+    if(live!==cell)fail('docx-stale-table-cell','Cell properties target is not the current snapshot');
+    if(live.unsupported)fail('docx-table-cell-unsupported','Cell properties require supported text topology');
+    return live;
+  }
+
+  inspectCellProperties(cell:TableCellSnapshot):DirectCellProperties {
+    return readCellProperties(this.xml,this.checkedCellProperties(cell).element);
+  }
+
+  setCellProperties(cell:TableCellSnapshot,input:CellPropertiesPatch):{changed:number} {
+    const live=this.checkedCellProperties(cell),patch=normalizeCellProperties(input);
+    this.assertFormattingUnprotected();
+    const next=editCellProperties(this.xml,live.element,patch);
+    if(next===this.xml)return {changed:0};
+    this.commitParagraphProperties(next);return {changed:1};
   }
 
   replaceTableCellText(cell: TableCellSnapshot, text: string): void {

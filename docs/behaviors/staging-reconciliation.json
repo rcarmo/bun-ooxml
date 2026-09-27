@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 603,
+  "nativeDeclarations": 618,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 376,
+  "withoutStagingCount": 391,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2186,6 +2186,81 @@
     }
   ],
   "withoutStaging": [
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:null removes direct properties, same-state preserves archive and returned border data is detached",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:editing top border preserves other border fragments and unrelated cell properties exactly",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:unknown, duplicate, revised or lexical cell metadata refuses before a same-value request",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:protection and external document changes refuse without package mutation",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:staged write and serialization failures retain the cell handle and bytes",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:alias namespaces and UTF-16 path save preserve values and unrelated payloads",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:missing or self-closing cell property containers accept ordered additions without changing children",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:misordered owner properties and nested cell-property revisions refuse atomically",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:merged or nested cells refuse property writes and no-op still checks protection",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:two shared direct cell cases execute and altered readback predicates fail",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:bounded width, border size and all supported direction/alignment values survive direct readback",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:colour validation refuses trailing line endings rather than XML-normalising a requested value",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2"
+    },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
       "path": "tests/unit/docx-comments.test.ts",

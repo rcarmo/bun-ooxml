@@ -19,6 +19,8 @@ strike-through and selected text effects, [direct colour, underline and highligh
 [half-point font sizes](docs/contracts/font-size.md), [direct Latin font names](docs/contracts/run-font-name.md)
 and existing paragraph-style selection without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)
 adds named paragraph styles with validated base chains and direct bold/italic flags.
+[Direct Word cell properties](docs/contracts/cell-properties.md) set preferred width,
+shading, alignment, direction and a simple top border without restructuring tables.
 [Direct paragraph properties](docs/contracts/paragraph-properties.md) set alignment,
 before/after spacing and selected pagination flags without changing text.
 [Page geometry](docs/contracts/page-layout.md) changes the final Word section's

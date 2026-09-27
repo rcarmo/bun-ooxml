@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 603,
-  "files": 62,
+  "count": 618,
+  "files": 63,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -16,6 +16,12 @@
       "path": "tests/unit/content-types.test.ts",
       "sha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
       "declarations": 7,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "sha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "declarations": 15,
       "issues": []
     },
     {
@@ -385,6 +391,10 @@
       "sha256": "b37fb553a0663b04f40175f9db09bc1a155cd5c409af66edd859cb82c40e6736"
     },
     {
+      "path": "tests/acceptance/cell-properties.ts",
+      "sha256": "217e0af8281eb2ae0b7084747c18ede83b1795356e017c4a286714775b003bbc"
+    },
+    {
       "path": "tests/acceptance/cell-style.ts",
       "sha256": "6509b7a9876ec52a2df3d1405e3a6b085f999cd0a465140af1fcbb21b39a62a3"
     },
@@ -502,7 +512,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "30286e3ca908f6929e616480868a0f6210c0b106b1adc9ae91871b2efce58d74"
+      "sha256": "a9359a8ccc336a788b316683f4f16dd37f2bd66eb3d6f95f49d47b5cae50cf29"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -587,6 +597,17 @@
   ],
   "dynamicCases": [
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+    "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
+    "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
+    "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
+    "bun:tests/unit/docx-cell-properties.test.ts:unknown, duplicate, revised or lexical cell metadata refuses before a same-value request",
+    "bun:tests/unit/docx-cell-properties.test.ts:staged write and serialization failures retain the cell handle and bytes",
+    "bun:tests/unit/docx-cell-properties.test.ts:alias namespaces and UTF-16 path save preserve values and unrelated payloads",
+    "bun:tests/unit/docx-cell-properties.test.ts:missing or self-closing cell property containers accept ordered additions without changing children",
+    "bun:tests/unit/docx-cell-properties.test.ts:misordered owner properties and nested cell-property revisions refuse atomically",
+    "bun:tests/unit/docx-cell-properties.test.ts:two shared direct cell cases execute and altered readback predicates fail",
+    "bun:tests/unit/docx-cell-properties.test.ts:bounded width, border size and all supported direction/alignment values survive direct readback",
+    "bun:tests/unit/docx-cell-properties.test.ts:colour validation refuses trailing line endings rather than XML-normalising a requested value",
     "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
     "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
     "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
@@ -757,6 +778,17 @@
   ],
   "reviewRequired": [
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
+    "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
+    "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
+    "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
+    "bun:tests/unit/docx-cell-properties.test.ts:unknown, duplicate, revised or lexical cell metadata refuses before a same-value request",
+    "bun:tests/unit/docx-cell-properties.test.ts:staged write and serialization failures retain the cell handle and bytes",
+    "bun:tests/unit/docx-cell-properties.test.ts:alias namespaces and UTF-16 path save preserve values and unrelated payloads",
+    "bun:tests/unit/docx-cell-properties.test.ts:missing or self-closing cell property containers accept ordered additions without changing children",
+    "bun:tests/unit/docx-cell-properties.test.ts:misordered owner properties and nested cell-property revisions refuse atomically",
+    "bun:tests/unit/docx-cell-properties.test.ts:two shared direct cell cases execute and altered readback predicates fail",
+    "bun:tests/unit/docx-cell-properties.test.ts:bounded width, border size and all supported direction/alignment values survive direct readback",
+    "bun:tests/unit/docx-cell-properties.test.ts:colour validation refuses trailing line endings rather than XML-normalising a requested value",
     "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
     "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
     "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
@@ -1299,6 +1331,682 @@
         "setPartContentType"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 10,
+      "title": "direct cell properties survive reopen without changing text, grid, sibling cells or other package parts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(cell.directProperties()).toEqual({widthTwips:4320,verticalAlign:null,textDirection:null,shading:null,topBorder:null})",
+        "expect(cell.setProperties(props)).toEqual({changed:1})",
+        "expect(()=>cell.directProperties()).toThrow(expect.objectContaining({code:'docx-stale-table-cell'}))",
+        "expect(table.rows).toBe(2)",
+        "expect(table.columns).toBe(2)",
+        "expect(table.cell(0,0).text).toBe('Alpha')",
+        "expect(reopened.tables[0]!.cell(0,0).directProperties()).toEqual(props)",
+        "expect(xml).toContain(siblingXml)",
+        "expect(elements(parsed,'tcPr',W)[0]!.children.map(n=>n.localName)).toEqual(['tcW','tcBorders','shd','textDirection','vAlign'])",
+        "expect(attribute(width,'w',W)).toBe('2400')",
+        "expect(attribute(width,'type',W)).toBe('dxa')",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 20,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(reopened.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture(),before=d.package.parts,table=d.tables[0]!,cell=table.cell(0,0),xmlBefore=new TextDecoder().decode(before.get('word/document.xml'));\n const sibling=elements(parseXml(xmlBefore),'tc',W)[1]!,siblingXml=xmlBefore.slice(sibling.start,sibling.end);\n expect(cell.directProperties()).toEqual({widthTwips:4320,verticalAlign:null,textDirection:null,shading:null,topBorder:null});\n expect(cell.setProperties(props)).toEqual({changed:1});expect(()=>cell.directProperties()).toThrow(expect.objectContaining({code:'docx-stale-table-cell'}));\n expect(table.rows).toBe(2);expect(table.columns).toBe(2);expect(table.cell(0,0).text).toBe('Alpha');\n const reopened=await Document.open(d.package.toBytes());expect(reopened.tables[0]!.cell(0,0).directProperties()).toEqual(props);\n const xml=new TextDecoder().decode(reopened.package.get('word/document.xml'));expect(xml).toContain(siblingXml);\n const parsed=parseXml(xml);expect(elements(parsed,'tcPr',W)[0]!.children.map(n=>n.localName)).toEqual(['tcW','tcBorders','shd','textDirection','vAlign']);\n const width=elements(parsed,'tcW',W)[0]!;expect(attribute(width,'w',W)).toBe('2400');expect(attribute(width,'type',W)).toBe('dxa');\n for(const[n,b]of before)if(n!=='word/document.xml')expect(reopened.package.get(n)).toEqual(b);\n}",
+      "calls": [
+        ".decode",
+        "Document.open",
+        "attribute",
+        "before.get",
+        "cell.directProperties",
+        "cell.setProperties",
+        "d.package.toBytes",
+        "elements",
+        "elements().0.children.map",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "parseXml",
+        "reopened.package.get",
+        "reopened.tables.0.cell",
+        "reopened.tables.0.cell().directProperties",
+        "table.cell",
+        "xmlBefore.slice"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:null removes direct properties, same-state preserves archive and returned border data is detached",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 23,
+      "title": "null removes direct properties, same-state preserves archive and returned border data is detached",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(cell.setProperties(props)).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('Alpha')",
+        "expect(cell.directProperties().topBorder!.size).toBe(8)",
+        "expect(d.tables[0]!.cell(0,0).directProperties()).toEqual({widthTwips:null,verticalAlign:null,textDirection:null,shading:null,topBorder:null})",
+        "expect(d.tables[0]!.cell(0,0).setProperties({topBorder:null})).toEqual({changed:0})",
+        "expect(d.package.toBytes()).toEqual(after)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture();d.tables[0]!.cell(0,0).setProperties(props);const cell=d.tables[0]!.cell(0,0),before=d.package.toBytes();\n expect(cell.setProperties(props)).toEqual({changed:0});expect(d.package.toBytes()).toEqual(before);expect(cell.text).toBe('Alpha');\n const value=cell.directProperties();value.topBorder!.size=16;expect(cell.directProperties().topBorder!.size).toBe(8);\n cell.setProperties({widthTwips:null,verticalAlign:null,textDirection:null,shading:null,topBorder:null});expect(d.tables[0]!.cell(0,0).directProperties()).toEqual({widthTwips:null,verticalAlign:null,textDirection:null,shading:null,topBorder:null});\n const after=d.package.toBytes();expect(d.tables[0]!.cell(0,0).setProperties({topBorder:null})).toEqual({changed:0});expect(d.package.toBytes()).toEqual(after);\n}",
+      "calls": [
+        "cell.directProperties",
+        "cell.setProperties",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "d.tables.0.cell().directProperties",
+        "d.tables.0.cell().setProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:editing top border preserves other border fragments and unrelated cell properties exactly",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 31,
+      "title": "editing top border preserves other border fragments and unrelated cell properties exactly",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain(side)",
+        "expect(xml).toContain('<w:noWrap/>')",
+        "expect(xml).toContain('<w:tcMar><w:top w:w=\"40\" w:type=\"dxa\"/></w:tcMar>')",
+        "expect(d.tables[0]!.cell(0,0).directProperties().topBorder).toBeNull()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const side='<w:bottom w:val = \\'dashed\\' w:sz=\"12\" w:color=\"123456\"/>';\n const pr=`<w:tcPr><w:tcW w:w=\"4320\" w:type=\"dxa\"/><w:tcBorders>${side}</w:tcBorders><w:noWrap/><w:tcMar><w:top w:w=\"40\" w:type=\"dxa\"/></w:tcMar></w:tcPr>`;\n const d=await fixture(pr);d.tables[0]!.cell(0,0).setProperties({topBorder:props.topBorder,shading:'aabbcc'});\n let xml=new TextDecoder().decode(d.package.get('word/document.xml'));expect(xml).toContain(side);expect(xml).toContain('<w:noWrap/>');expect(xml).toContain('<w:tcMar><w:top w:w=\"40\" w:type=\"dxa\"/></w:tcMar>');\n d.tables[0]!.cell(0,0).setProperties({topBorder:null});xml=new TextDecoder().decode(d.package.get('word/document.xml'));expect(xml).toContain(side);expect(d.tables[0]!.cell(0,0).directProperties().topBorder).toBeNull();\n}",
+      "calls": [
+        ".decode",
+        "d.package.get",
+        "d.tables.0.cell",
+        "d.tables.0.cell().directProperties",
+        "d.tables.0.cell().setProperties",
+        "expect",
+        "expect().toBeNull",
+        "expect().toContain",
+        "fixture"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:invalid and executable nested patches refuse without invoking accessors or mutation",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 39,
+      "title": "invalid and executable nested patches refuse without invoking accessors or mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>cell.setProperties(patch as CellPropertiesPatch)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(called).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 43,
+          "expression": "for(const patch of bad)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture(),cell=d.tables[0]!.cell(0,0),before=d.package.toBytes();let called=false;\n const bad:unknown[]=[null,{}, {widthTwips:-1},{widthTwips:31681},{widthTwips:1.5},{verticalAlign:'both'},{textDirection:'sideways'},{shading:'#FFFF00'},{shading:'yellow'},{topBorder:{style:'double',size:8,color:'000000'}},{topBorder:{style:'single',size:1,color:'000000'}},{topBorder:{style:'single',size:97,color:'000000'}},{topBorder:{style:'single',size:8,color:'bad'}},{topBorder:{style:'single',size:8,color:'000000',extra:1}},{shading:'FFFF00',widthTwips:'bad'}];\n bad.push({topBorder:Object.defineProperty({size:8,color:'000000'},'style',{enumerable:true,get(){called=true;return 'single';}})});\n for(const patch of bad){expect(()=>cell.setProperties(patch as CellPropertiesPatch)).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(called).toBe(false);\n}",
+      "calls": [
+        "Object.defineProperty",
+        "bad.push",
+        "cell.setProperties",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 46,
+      "title": "selected percentage widths, themed shading and decorated top borders refuse rather than dropping metadata",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties(patch)).toThrow()",
+        "expect(()=>d.tables[0]!.cell(0,0).directProperties()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 55,
+          "expression": "for(const[leaf,patch]of cases)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const cases:[string,CellPropertiesPatch][]=[\n ['<w:tcW w:w=\"5000\" w:type=\"pct\"/>',{widthTwips:2400}],\n ['<w:shd w:val=\"clear\" w:fill=\"FFFF00\" w:themeFill=\"accent1\"/>',{shading:'FFFF00'}],\n ['<w:shd w:val=\"pct20\" w:fill=\"FFFF00\"/>',{shading:null}],\n ['<w:tcBorders><w:top w:val=\"single\" w:sz=\"8\" w:color=\"000000\" w:shadow=\"1\"/></w:tcBorders>',{topBorder:null}],\n ['<w:tcBorders><w:top w:val=\"single\" w:sz=\"8\" w:color=\"000000\"/><w:top w:val=\"single\" w:sz=\"8\" w:color=\"000000\"/></w:tcBorders>',{topBorder:null}],\n ['<w:vAlign val=\"center\"/>',{verticalAlign:'center'}],['<w:textDirection w:val=\"unknown\"/>',{textDirection:null}],\n ];\n for(const[leaf,patch]of cases){const d=await fixture('<w:tcPr>'+leaf+'</w:tcPr>'),before=d.package.toBytes();expect(()=>d.tables[0]!.cell(0,0).setProperties(patch)).toThrow();expect(()=>d.tables[0]!.cell(0,0).directProperties()).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "d.tables.0.cell().directProperties",
+        "d.tables.0.cell().setProperties",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:unknown, duplicate, revised or lexical cell metadata refuses before a same-value request",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 58,
+      "title": "unknown, duplicate, revised or lexical cell metadata refuses before a same-value request",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 59,
+          "expression": "for(const pr of ['<w:tcPr><w:mystery/></w:tcPr>','<w:tcPr><w:tcPrChange/></w:tcPr>','<w:tcPr><w:vAlign w:val=\"center\"/><w:shd w:val=\"clear\" w:fill=\"FFFF00\"/></w:tcPr>','<w:tcPr><!--barrier--><w:shd w:val=\"clear\" w:fill=\"FFFF00\"/></w:tcPr>','<w:tcPr/><w:tcPr/>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n for(const pr of ['<w:tcPr><w:mystery/></w:tcPr>','<w:tcPr><w:tcPrChange/></w:tcPr>','<w:tcPr><w:vAlign w:val=\"center\"/><w:shd w:val=\"clear\" w:fill=\"FFFF00\"/></w:tcPr>','<w:tcPr><!--barrier--><w:shd w:val=\"clear\" w:fill=\"FFFF00\"/></w:tcPr>','<w:tcPr/><w:tcPr/>']){\n  const d=await fixture(pr),before=d.package.toBytes();expect(()=>d.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow();expect(d.package.toBytes()).toEqual(before);\n }\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "d.tables.0.cell().setProperties",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:protection and external document changes refuse without package mutation",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 64,
+      "title": "protection and external document changes refuse without package mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>locked.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(()=>held.setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(()=>held.directProperties()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');\n const locked=await Document.open(pkg.toBytes()),before=locked.package.toBytes();expect(()=>locked.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow();expect(locked.package.toBytes()).toEqual(before);\n const held=d.tables[0]!.cell(0,0);d.package.setPart('word/document.xml',new TextEncoder().encode(new TextDecoder().decode(d.package.get('word/document.xml')).replace('Alpha','Beta')));const changed=d.package.toBytes();expect(()=>held.setProperties({shading:'FFFF00'})).toThrow();expect(()=>held.directProperties()).toThrow();expect(d.package.toBytes()).toEqual(changed);\n}",
+      "calls": [
+        ".decode",
+        ".decode().replace",
+        ".encode",
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.get",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "held.directProperties",
+        "held.setProperties",
+        "locked.package.toBytes",
+        "locked.tables.0.cell",
+        "locked.tables.0.cell().setProperties",
+        "pkg.mainPart",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:staged write and serialization failures retain the cell handle and bytes",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 70,
+      "title": "staged write and serialization failures retain the cell handle and bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>cell.setProperties(props)).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('Alpha')",
+        "expect(cell.directProperties().shading).toBeNull()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 71,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),cell=d.tables[0]!.cell(0,0),before=d.package.toBytes(),pkg=(d as unknown as {opcPackage:OpcPackage}).opcPackage,original=pkg[stage].bind(pkg);\n  if(stage==='set')pkg.set=(n,v)=>{(original as OpcPackage['set'])(n,v);throw Error('injected write');};else pkg.toBytes=()=>{throw Error('injected serialize');};\n  try{expect(()=>cell.setProperties(props)).toThrow('injected');}finally{if(stage==='set')pkg.set=original as OpcPackage['set'];else pkg.toBytes=original as OpcPackage['toBytes'];}\n  expect(d.package.toBytes()).toEqual(before);expect(cell.text).toBe('Alpha');expect(cell.directProperties().shading).toBeNull();\n }\n}",
+      "calls": [
+        "Error",
+        "cell.directProperties",
+        "cell.setProperties",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "original",
+        "pkg.undefined.bind"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:alias namespaces and UTF-16 path save preserve values and unrelated payloads",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 78,
+      "title": "alias namespaces and UTF-16 path save preserve values and unrelated payloads",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(reopened.tables[0]!.cell(0,0).directProperties()).toEqual(props)",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 79,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);"
+        },
+        {
+          "line": 81,
+          "expression": "for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes()),text=pkg.text(pkg.mainPart()).replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:').replace('UTF-8','UTF-16');const bytes=new Uint8Array(2+text.length*2);bytes[0]=255;bytes[1]=254;const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);pkg.set(pkg.mainPart(),bytes);\n const doc=await Document.open(pkg.toBytes());doc.tables[0]!.cell(0,0).setProperties(props);const root=await mkdtemp(join(tmpdir(),'cell-properties-'));\n try{const path=join(root,'table.docx');await doc.save(path);const reopened=await Document.open(path);expect(reopened.tables[0]!.cell(0,0).directProperties()).toEqual(props);expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254]);for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.save",
+        "doc.tables.0.cell",
+        "doc.tables.0.cell().setProperties",
+        "expect",
+        "expect().toEqual",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "pkg.get",
+        "pkg.mainPart",
+        "pkg.names",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replaceAll",
+        "pkg.text().replaceAll().replaceAll",
+        "pkg.text().replaceAll().replaceAll().replace",
+        "pkg.toBytes",
+        "reopened.package.get",
+        "reopened.package.get().slice",
+        "reopened.tables.0.cell",
+        "reopened.tables.0.cell().directProperties",
+        "rm",
+        "text.charCodeAt",
+        "tmpdir",
+        "view.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:missing or self-closing cell property containers accept ordered additions without changing children",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 84,
+      "title": "missing or self-closing cell property containers accept ordered additions without changing children",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.tables[0]!.cell(0,0).directProperties()).toEqual(props)",
+        "expect(d.tables[0]!.cell(0,0).text).toBe('Alpha')",
+        "expect((await Document.open(d.package.toBytes())).tables[0]!.cell(0,1).text).toBe('Untouched')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 85,
+          "expression": "for(const pr of ['', '<w:tcPr/>','<w:tcPr><w:tcBorders/></w:tcPr>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n for(const pr of ['', '<w:tcPr/>','<w:tcPr><w:tcBorders/></w:tcPr>']){const d=await fixture(pr);d.tables[0]!.cell(0,0).setProperties(props);expect(d.tables[0]!.cell(0,0).directProperties()).toEqual(props);expect(d.tables[0]!.cell(0,0).text).toBe('Alpha');expect((await Document.open(d.package.toBytes())).tables[0]!.cell(0,1).text).toBe('Untouched');}\n}",
+      "calls": [
+        ".tables.0.cell",
+        "Document.open",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "d.tables.0.cell().directProperties",
+        "d.tables.0.cell().setProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:misordered owner properties and nested cell-property revisions refuse atomically",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 88,
+      "title": "misordered owner properties and nested cell-property revisions refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>modified.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(modified.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 89,
+          "expression": "for(const change of [\n  (xml:string)=>xml.replace('<w:tr>','<w:tr><w:trPr/>').replace('</w:tr>','<w:trPr/></w:tr>'),\n  (xml:string)=>xml.replace('</w:tbl>','<w:tblPr/></w:tbl>'),\n  (xml:string)=>xml.replace(/<w:tblGrid>[^]*?<\\/w:tblGrid>/,''),\n  (xml:string)=>xml.replace('</w:tcPr>','<w:tcMar><w:tcPrChange/></w:tcMar></w:tcPr>'),\n ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n for(const change of [\n  (xml:string)=>xml.replace('<w:tr>','<w:tr><w:trPr/>').replace('</w:tr>','<w:trPr/></w:tr>'),\n  (xml:string)=>xml.replace('</w:tbl>','<w:tblPr/></w:tbl>'),\n  (xml:string)=>xml.replace(/<w:tblGrid>[^]*?<\\/w:tblGrid>/,''),\n  (xml:string)=>xml.replace('</w:tcPr>','<w:tcMar><w:tcPrChange/></w:tcMar></w:tcPr>'),\n ]){const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());pkg.set(pkg.mainPart(),change(pkg.text(pkg.mainPart())));const modified=await Document.open(pkg.toBytes()),before=modified.package.toBytes();expect(()=>modified.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow();expect(modified.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "change",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "modified.package.toBytes",
+        "modified.tables.0.cell",
+        "modified.tables.0.cell().setProperties",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.toBytes",
+        "xml.replace",
+        "xml.replace().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:merged or nested cells refuse property writes and no-op still checks protection",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 97,
+      "title": "merged or nested cells refuse property writes and no-op still checks protection",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(()=>nested.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow()",
+        "expect(nested.package.toBytes()).toEqual(nb)",
+        "expect(()=>locked.tables[0]!.cell(0,0).setProperties({widthTwips:4320})).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture('<w:tcPr><w:tcW w:w=\"4320\" w:type=\"dxa\"/><w:vMerge w:val=\"restart\"/></w:tcPr>');expect(()=>d.tables[0]!.cell(0,0)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));\n const normal=await fixture(),pkg=await OpcPackage.open(normal.package.toBytes());pkg.set(pkg.mainPart(),pkg.text(pkg.mainPart()).replace('</w:tc>','<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w=\"100\"/></w:tblGrid><w:tr><w:tc><w:p/></w:tc></w:tr></w:tbl></w:tc>'));const nested=await Document.open(pkg.toBytes()),nb=nested.package.toBytes();expect(()=>nested.tables[0]!.cell(0,0).setProperties({shading:'FFFF00'})).toThrow();expect(nested.package.toBytes()).toEqual(nb);\n const protectedPkg=await OpcPackage.open(normal.package.toBytes());addPart(protectedPkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(protectedPkg,protectedPkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(protectedPkg.toBytes());expect(()=>locked.tables[0]!.cell(0,0).setProperties({widthTwips:4320})).toThrow();\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "locked.tables.0.cell",
+        "locked.tables.0.cell().setProperties",
+        "nested.package.toBytes",
+        "nested.tables.0.cell",
+        "nested.tables.0.cell().setProperties",
+        "normal.package.toBytes",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes",
+        "protectedPkg.mainPart",
+        "protectedPkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:two shared direct cell cases execute and altered readback predicates fail",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 103,
+      "title": "two shared direct cell cases execute and altered readback predicates fail",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(2)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 107,
+          "expression": "for(const[from,to]of [['its shading getter equals FFFF00','its shading getter equals 000000'],['width equals 2400, width type dxa, alignment center and direction tbRl','width equals 999, width type pct, alignment top and direction lrTb']])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts');const {bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/cell-properties.ts');const path='workflows/docx/document-model.feature',text=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inv=(s:string)=>({root:'.',features:[selectSharedScenarios(path,s,scenarioIds)],counts:{features:count(1),scenarios:count(2),cases:count(2),steps:count(8)}});\n const good=await executeAcceptance(inv(text),bindings,'cell-properties-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(2);\n for(const[from,to]of [['its shading getter equals FFFF00','its shading getter equals 000000'],['width equals 2400, width type dxa, alignment center and direction tbRl','width equals 999, width type pct, alignment top and direction lrTb']]){const bad=await executeAcceptance(inv(text.replace(from!,to!)),bindings,'cell-properties-control');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n const corrupt=bindings.map(b=>b.pattern.test('a top border with single style, size eight and colour 000000 is assigned')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);(c.state as {document:Document}).document.tables[0]!.cell(0,0).setProperties({topBorder:null});}}:b);\n const bad=await executeAcceptance(inv(text),corrupt,'cell-border-control');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.document.tables.0.cell",
+        "c.state.document.tables.0.cell().setProperties",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "inv",
+        "join",
+        "selectSharedScenarios",
+        "text.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:bounded width, border size and all supported direction/alignment values survive direct readback",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 112,
+      "title": "bounded width, border size and all supported direction/alignment values survive direct readback",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(v.widthTwips).toBe(widthTwips)",
+        "expect(v.topBorder).toEqual({style:'single',size,color:'auto'})",
+        "expect(v.verticalAlign).toBe(verticalAlign)",
+        "expect(v.textDirection).toBe(textDirection)",
+        "expect(v.shading).toBe('auto')",
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties({shading:'FFFF00',topBorder:{style:'single',size:97,color:'000000'}})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 114,
+          "expression": "for(const widthTwips of [0,31680])for(const size of [2,96])"
+        },
+        {
+          "line": 114,
+          "expression": "for(const size of [2,96])"
+        },
+        {
+          "line": 115,
+          "expression": "for(const verticalAlign of ['top','center','bottom'] as const)for(const textDirection of ['lrTb','tbRl','btLr'] as const)"
+        },
+        {
+          "line": 115,
+          "expression": "for(const textDirection of ['lrTb','tbRl','btLr'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture();\n for(const widthTwips of [0,31680])for(const size of [2,96]){d.tables[0]!.cell(0,0).setProperties({widthTwips,topBorder:{style:'single',size,color:'auto'}});const v=d.tables[0]!.cell(0,0).directProperties();expect(v.widthTwips).toBe(widthTwips);expect(v.topBorder).toEqual({style:'single',size,color:'auto'});}\n for(const verticalAlign of ['top','center','bottom'] as const)for(const textDirection of ['lrTb','tbRl','btLr'] as const){d.tables[0]!.cell(0,0).setProperties({verticalAlign,textDirection,shading:'auto'});const v=d.tables[0]!.cell(0,0).directProperties();expect(v.verticalAlign).toBe(verticalAlign);expect(v.textDirection).toBe(textDirection);expect(v.shading).toBe('auto');}\n const before=d.package.toBytes();expect(()=>d.tables[0]!.cell(0,0).setProperties({shading:'FFFF00',topBorder:{style:'single',size:97,color:'000000'}})).toThrow();expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "d.tables.0.cell().directProperties",
+        "d.tables.0.cell().setProperties",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-cell-properties.test.ts:colour validation refuses trailing line endings rather than XML-normalising a requested value",
+      "path": "tests/unit/docx-cell-properties.test.ts",
+      "line": 119,
+      "title": "colour validation refuses trailing line endings rather than XML-normalising a requested value",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.tables[0]!.cell(0,0).setProperties(patch)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 121,
+          "expression": "for(const color of ['FFFF00\\n','auto\\r','000000\\r\\n'])for(const patch of ["
+        },
+        {
+          "line": 121,
+          "expression": "for(const patch of ["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "36901201b11c336fa3a1ca9fd3947d7c5cd2a96f2386fcd22e8656eecf7bcdf2",
+      "body": "{\n const d=await fixture(),before=d.package.toBytes();\n for(const color of ['FFFF00\\n','auto\\r','000000\\r\\n'])for(const patch of [{shading:color},{topBorder:{style:'single' as const,size:8,color}}]){\n  expect(()=>d.tables[0]!.cell(0,0).setProperties(patch)).toThrow();expect(d.package.toBytes()).toEqual(before);\n }\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "d.tables.0.cell().setProperties",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {

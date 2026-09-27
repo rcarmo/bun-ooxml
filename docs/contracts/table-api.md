@@ -12,7 +12,9 @@ text payload while retaining the first paragraph and run properties. Empty cells
 valid tblPr/tblGrid/tr/tc/tcPr/p structure, bounded dimensions, table handles refuse
 on structural document edits and cell handles refuse after any mutation. Newlines
 normalise CRLF/CR and become paragraphs. The first paragraph/run properties are
-retained with their namespace declarations. Full style inheritance and merging are unsupported.
+retained with their namespace declarations. `TableCell.directProperties()` and
+`setProperties()` provide [bounded direct cell formatting](cell-properties.md)
+without replacing text or changing the grid. Full style inheritance and merging are unsupported.
 
 PPTX: `Slide.addTable(rows,columns,{x,y,width,height}): Table` with integer EMU geometry.
 `Slide.tables: Table[]`, same rows/columns/cell text API. Native graphicFrame/a:tbl,
