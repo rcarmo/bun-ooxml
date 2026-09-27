@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/docx-comments.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/docx-comments.test.ts": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95",
+    "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
+    "src/docx/comments.ts": "eca35561548bf0bed07f01231bb4342066915b2523bc1252896428ea29706ab6",
+    "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
+    "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
+    "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/docx/comments.feature": "7c1d435624140439a68e0b70801b7e0c19be4e28008dcb66d9e9c1acb33dc9e0"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-inspection",
+        "@id-docx-comments-resolution",
+        "@id-docx-comments-noop",
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [
+        "@id-docx-comments-inspection",
+        "@id-docx-comments-resolution",
+        "@id-docx-comments-noop",
+        "@id-docx-comments-refusal|{\"case\":\"missing-extension\"}",
+        "@id-docx-comments-refusal|{\"case\":\"duplicate-id\"}",
+        "@id-docx-comments-refusal|{\"case\":\"duplicate-para\"}",
+        "@id-docx-comments-refusal|{\"case\":\"missing-parent\"}",
+        "@id-docx-comments-refusal|{\"case\":\"cycle\"}",
+        "@id-docx-comments-refusal|{\"case\":\"invalid-done\"}",
+        "@id-docx-comments-refusal|{\"case\":\"wrong-mime\"}",
+        "@id-docx-comments-refusal|{\"case\":\"external-link\"}",
+        "@id-docx-comments-refusal|{\"case\":\"protected\"}",
+        "@id-docx-comments-refusal|{\"case\":\"revision-body\"}",
+        "@id-docx-comments-refusal|{\"case\":\"orphan-entry\"}"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(14)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and 14 passed existing-comment cases. Pinned bindings compare all three comment records, resolve receipt, root done and unchanged reply state/link after byte reopen, single changed extension part, member restoration after reopening and unchanged archives on no-op/refusal."
+      ],
+      "gaps": [
+        "Only two aggregate assertions occur here; semantic checks are delegated. save/reopen wording means byte reopen, not a path save. The final reopen restores every member payload, not necessarily original ZIP bytes. Refusal checks require OoxmlError class, not a specific code. Nine Python-profile scenarios are filtered out, not executed; no comment authoring, filtering or reply-to-root mutation policy is claimed.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:renamed extension prefixes and multiline comments preserve exact unrelated bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.text(ex)).toBe(before.replace('thread:paraId=\"3395B541\" thread:done=\"0\"','thread:paraId=\"3395B541\" thread:done=\"1\"'))",
+        "expect(inspectComments(reopened).comments[1]!.resolved).toBe(true)"
+      ],
+      "outcomes": [
+        "Renaming the extension prefix to thread still permits a done-only change matching the entire expected extension string, and the target reads resolved after byte reopen."
+      ],
+      "gaps": [
+        "Despite the title, this declaration does not compare unrelated members or introduce multiline bodies. It asserts the extension string and one reopened state only, without a path save or reply-state check.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:unsupported comment body is reported read-only and no resolution mutates it",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-inspection",
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectComments(p).unsupported.length).toBeGreaterThan(0)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()"
+      ],
+      "outcomes": [
+        "An unsupported revision-bearing comment body produces a nonempty unsupported list without changing the archive; resolution refuses and retains the same bytes."
+      ],
+      "gaps": [
+        "Native read-versus-write policy extension. It does not compare finding kind/location or all comment text; the refusal is generic, not an exact typed code or saved-path check.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:unknown IDs and runtime nonboolean arguments leave package unchanged",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentResolved(p,id,true)).toThrow()",
+        "expect(()=>setCommentResolved(p,'1','false' as unknown as boolean)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Three missing/negative/absent IDs and a string false passed as the Boolean argument all refuse; the archive is exact after the series."
+      ],
+      "gaps": [
+        "Native ID/type matrix. Custody is compared once after all requests, not after each, and no typed code or filesystem state is checked.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:attribute edits preserve quote style, spacing, entities and unrelated attribute text",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(setCommentResolved(p,'1',true)).toEqual({changed:1,changedParts:[part]})",
+        "expect(p.text(part)).toBe(xml.replace(\"w15:done = '&#48;'\",\"w15:done = '1'\"))",
+        "expect(inspectComments(reopened).comments.find(c=>c.id==='1')?.resolved).toBe(true)",
+        "expect(p.get(name)).toEqual(original.get(name))"
+      ],
+      "outcomes": [
+        "A done-only edit reports one changed extension part, preserves quote/space spelling and a note containing done-like text, resolves the target after byte reopen and retains all nonextension members in the resulting package."
+      ],
+      "gaps": [
+        "Native lexical extension. The member loop iterates resulting names without separately asserting the same names set; equality therefore does not alone detect removals. No path save or root/reply policy change.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:missing done flag uses an attribute prefix under a default element namespace",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-noop",
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(setCommentResolved(p,'1',false).changed).toBe(0)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(setCommentResolved(p,'1',true).changed).toBe(1)",
+        "expect(p.text(part)).toBe(xml.replace('q:paraId=\"3395B541\"/>','q:paraId=\"3395B541\" q:done=\"1\"/>'))",
+        "expect(inspectComments(await OpcPackage.open(p.toBytes())).comments.find(c=>c.id==='1')?.resolved).toBe(true)"
+      ],
+      "outcomes": [
+        "With no done flag and default element namespace, false reports zero changes and retains exact bytes. True reports one change, adds a qualified done attribute at the expected location and reads resolved after byte reopen."
+      ],
+      "gaps": [
+        "Native missing-attribute/default-namespace extension, not creation of a missing commentsExtended part. No full nonextension-member comparison or disk save after the positive edit.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:same boolean state retains on/off spelling and exact archive bytes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-noop"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(setCommentResolved(p,'1',state)).toEqual({changed:0,changedParts:[]})",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Existing on/true/off/false lexical states requested unchanged return changed=0 and empty changedParts, retaining exact archive bytes for each input."
+      ],
+      "gaps": [
+        "Native Boolean spelling matrix includes both true and false no-ops; shared case starts open. No file save or resolved/filter response API is asserted.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:serialization failure rolls back the done flag while retaining earlier edits",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-resolution",
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow('injected serialization failure')",
+        "expect(p.text(part)).toBe(xml)",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Injected serialization failure restores exact extension text and full preattempt archive while retaining an earlier main-part comment edit."
+      ],
+      "gaps": [
+        "Native rollback extension, not filesystem failure. The test does not retry resolution or assert a fresh inspection afterward; preserved prior edits follow from archive equality.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:misqualified done or parent metadata refuses instead of being ignored",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Wrong-namespace done or parent attributes each cause resolution to refuse without archive changes."
+      ],
+      "gaps": [
+        "Native metadata namespace matrix. Source replacements are not separately checked for effectiveness; generic errors only, no inspectable-state or saved-file comparison.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:resolution refuses every enforcing settings part and accepts only explicit disabled protection",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-refusal",
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(settings).toBeDefined()",
+        "expect(setCommentResolved(p,'1',true).changed).toBe(1)",
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Absent, empty, true/on and unexpected enforcement states refuse with byte custody; false/0/OFF permit one changed flag. A later enforcing element overrides an earlier disabled element and refuses unchanged."
+      ],
+      "gaps": [
+        "Native protection matrix. Allowed branches check a changed receipt only, not reopened resolved state or nonextension custody; title does not establish coverage of every possible settings part. No path save or exact error code.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:inspection results are detached and cannot bypass package custody",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-inspection"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(second.comments[1]!.resolved).toBe(false)",
+        "expect(second.comments[2]!.parentId).toBe('1')",
+        "expect(second.comments[0]!.text).toBe('This is a great opening')",
+        "expect(second.unsupported).toEqual([])",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Mutating returned resolved, parent, text and unsupported fields does not affect a second inspection: original fields and empty findings remain, with archive bytes unchanged."
+      ],
+      "gaps": [
+        "Native detached-snapshot extension. It samples returned fields rather than testing every aliasing possibility, authoring operation or filtered response. No file save.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:comment paragraph newlines and tabs are read without rewriting bodies",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-inspection",
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectComments(p).comments[0]!.text).toBe('This is a great opening\\ttab\\nline')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(p.text(part)).toBe(xml)",
+        "expect((await OpcPackage.open(p.toBytes())).text(part)).toBe(xml)"
+      ],
+      "outcomes": [
+        "Inserted tab and break markup reads as exact tab/newline text without writes. Resolving a different comment preserves the modified comments XML both live and after byte reopen."
+      ],
+      "gaps": [
+        "Native control-character/body custody extension changes comment 0 text but resolves comment 1. It does not assert the new target done value in this declaration or compare all other members; no path save.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:non-self-closing entries retain boundary whitespace exactly",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.text(part)).toBe(xml.replace('w15:paraId=\"3395B541\" \\n >','w15:paraId=\"3395B541\" w15:done=\"1\" \\n >'))",
+        "expect(inspectComments(p).comments[1]!.resolved).toBe(true)"
+      ],
+      "outcomes": [
+        "A non-self-closing target extension entry keeps boundary spaces and CRLF exactly while adding done=1, and live inspection reports resolved."
+      ],
+      "gaps": [
+        "Native lexical extension. No byte reopen, path save, change receipt or unrelated-member comparison in this declaration.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:multiple comments settings and external settings refuse before mutation",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>setCommentResolved(q,'1',true)).toThrow()",
+        "expect(q.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "An additional enforcing settings part and an external settings relationship each cause resolution to refuse with exact archive custody."
+      ],
+      "gaps": [
+        "Native protection/dependency extension. Generic errors only; despite the title it does not add multiple comments parts or enumerate every settings arrangement. No saved-path comparison.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:UTF-16 extension encoding and BOM survive a done-only edit",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(p.get(part)).toEqual(encode(xml.replace('w15:paraId=\"3395B541\" w15:done=\"0\"','w15:paraId=\"3395B541\" w15:done=\"1\"')))",
+        "expect(inspectComments(await OpcPackage.open(p.toBytes())).comments[1]!.resolved).toBe(true)"
+      ],
+      "outcomes": [
+        "UTF-16LE extension output equals the exact independently encoded expected done-only XML, and the target reads resolved after byte reopen."
+      ],
+      "gaps": [
+        "UTF-16LE only, not BE. No path save or unrelated-part comparison; exact extension bytes include its BOM but do not establish broader codec support.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:misqualified comment IDs and paragraph metadata refuse the whole resolution",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>setCommentResolved(p,'1',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "Unqualified comment ID or paragraph-ID metadata each makes whole resolution refuse with archive custody."
+      ],
+      "gaps": [
+        "Native metadata namespace extension. Neither mutation is independently checked against the original source; generic errors only, no postfailure inspection or disk save.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:incomplete extended metadata remains inspectable but absent targets cannot be resolved",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-inspection",
+        "@id-docx-comments-refusal",
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectComments(p).comments).toHaveLength(3)",
+        "expect(()=>setCommentResolved(p,'0',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(setCommentResolved(p,'1',true).changed).toBe(1)"
+      ],
+      "outcomes": [
+        "Removing comment 0 extension metadata still leaves three inspectable comments; resolving that absent target refuses unchanged, while resolving comment 1 reports one change."
+      ],
+      "gaps": [
+        "Native incomplete-existing-extension policy. It does not create missing metadata or borrow Python commentsIds fallback; positive branch checks only the receipt, not reopened state. No path save.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:public entrypoints save and reopen the resolved flag without changing comment bodies",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-resolution"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(api.inspectComments).toBe(docx.inspectComments)",
+        "expect(api.setCommentResolved).toBe(docx.setCommentResolved)",
+        "expect(api.inspectComments(q).comments[1]!.resolved).toBe(true)",
+        "expect(q.get('word/comments.xml')).toEqual(comments)"
+      ],
+      "outcomes": [
+        "Public root/docx exports are identical; resolving comment 1 then saving and opening a real disk path yields true and exact original comments.xml bytes."
+      ],
+      "gaps": [
+        "Native path readback checks the target flag and one body part, not every member, reply state, archive-byte equality or returned receipt. Directory cleanup runs in finally without independently asserting absence.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-docx-comments-inspection",
+        "@id-docx-comments-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(inspectComments(p)).toEqual({comments:[],unsupported:[]})",
+        "expect(()=>setCommentResolved(p,'0',true)).toThrow()",
+        "expect(p.toBytes()).toEqual(before)"
+      ],
+      "outcomes": [
+        "A newly created document without comment parts returns empty comments/findings, refuses resolution and retains exact archive bytes."
+      ],
+      "gaps": [
+        "Native empty-package boundary. One custody comparison follows both operations; no metadata creation, authoring behavior or filesystem save is tested.",
+        "Existing-extension-only bounded source mapping; direct/deferred assertion separation and loop review flags retained, runtime leaves unknown. No new execution, Python-profile or rendered-comment credit."
+      ]
+    }
+  ]
+}

@@ -58,9 +58,9 @@ test('mapping gate rejects fabricated execution credit and preserves dynamic rev
 test('committed ledgers enumerate slide-order, effective-formatting, XML, PPTX and DOCX model assertions with known gaps',async()=>{
  const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');
  const report=await outcomeMappingReport();
- expect(report.mappedDeclarations).toBe(373);
- expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-373);
- expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['docx-anchors',28],['xlsx-comments',19],['xlsx-styles',16],['pptx-text-boxes',11],['docx-page-layout',13],['docx-paragraph-styles',17],['docx-style-authoring',11],['xml-comparison',14],['package-comparison',12],['formula-references',31]]);
+ expect(report.mappedDeclarations).toBe(392);
+ expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-392);
+ expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',33],['docx-model',130],['docx-anchors',28],['xlsx-comments',19],['xlsx-styles',16],['pptx-text-boxes',11],['docx-page-layout',13],['docx-paragraph-styles',17],['docx-style-authoring',11],['xml-comparison',14],['package-comparison',12],['docx-comments',19],['formula-references',31]]);
  expect(report.mappings[0]!.caseKeys).toHaveLength(21);
  expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);
  expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);

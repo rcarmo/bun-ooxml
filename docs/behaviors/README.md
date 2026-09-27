@@ -224,6 +224,22 @@ Row and column default markup is preserved without computing its effective
 formatting. These mappings do not cover the independent SDK style reader or new
 style creation. All 279 prior mapping records remain unchanged.
 
+The [DOCX-comments ledger](docx-comments-mappings.json) maps 19 declarations
+and 60 direct expressions. One aggregate wrapper links to the 14 existing-comment
+cases; the other 18 records are scenario-only. All 373 previous records remain
+unchanged. None links to the nine Python comment-authoring, filtering or
+reply-to-root workflows, which have different policies.
+
+The binding opens the pinned file, then reopens edited bytes in memory. It checks
+that only the existing extension part changes, the reply stays open with its
+parent link intact, and reopening the target restores member payloads. This does
+not assert restored ZIP bytes. A separate native disk test checks the saved done
+flag and comments body part, not every package member. Refusal bindings require
+an `OoxmlError` instance and exact archive custody, without a specific error code.
+Native codec coverage is UTF-16LE only; unsupported bodies remain inspectable as
+findings, while resolution refuses. No mapping implies comment creation or
+rendered-comment equivalence.
+
 The [XLSX-comments ledger](xlsx-comments-mappings.json) maps 19 declarations and
 72 direct assertion expressions from the native inspector and binding controls.
 Only the positive canonical wrapper has an exact-case link. Its five planned
