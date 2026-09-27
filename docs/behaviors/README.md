@@ -77,6 +77,22 @@ also map separately. `tests/acceptance/xml-values.ts` executes the shared value
 inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
 
+The [ZIP64 ledger](zip64-mappings.json) maps 15 declarations and 46 direct
+assertion expressions, all at scenario level. Eleven refusal tests now carry
+their existing error-class/code/message assertions directly; moving them out of
+the helper preserves the suite's 50 runtime assertions. The two writer tests
+still use a layout helper with two signature assertions per call, separate from
+their direct expressions. All 407 earlier mapping records are unchanged.
+
+Most inputs are tiny archives with forced ZIP64 metadata. The 65,535-entry test
+uses empty payloads and checks the count plus first/last values; it is not a
+multi-gigabyte data or offset test. Signed 64-bit descriptors are exercised, but
+other builder branches do not imply coverage. There is no native wrapper or
+caller-budget refusal in this suite, and the forced writer test does not rewrite
+a changed member as the shared roundtrip requires. Structural refusals are
+associated with directory preflight scenarios as extensions, not exact cases.
+No mapping claims allocation timing, file persistence or full ZIP64 parity.
+
 The [OPC graph ledger](opc-graph-mappings.json) maps 15 declarations and 56
 direct expressions from graph-edit and byte/content-type diff tests. All links
 are scenario-only: neither suite contains a shared acceptance wrapper. All 392

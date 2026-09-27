@@ -4,8 +4,8 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 920,
-  "mappedDeclarations": 407,
+  "totalDeclarations": 925,
+  "mappedDeclarations": 422,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
@@ -126,6 +126,9 @@
     "tests/unit/package-diff.test.ts": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
     "tests/acceptance/graph.ts": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f",
     "workflows/native/opc-graph.feature": "20f2ca5d050d96372286a8b03920bcc301709504a4578d6e7bde212c2411e3fe",
+    "tests/unit/zip64.test.ts": "05a83f2006b29ab844da3c36fab6960d6fbef83d9e8ffbb2edc48dc9a4ed756b",
+    "tests/acceptance/zip64.ts": "a78945e1d11f5ad32138e2ab12c1b64d4dfe8402d602460a0b9a9bbb466e5f42",
+    "workflows/native/opc-zip64.feature": "18da944b62e7c88c7558627bca9fbc211a121799efbd7cefeb04051dd573af91",
     "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de",
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
     "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
@@ -528,6 +531,22 @@
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/native/opc-graph.feature": "20f2ca5d050d96372286a8b03920bcc301709504a4578d6e7bde212c2411e3fe"
+      }
+    },
+    {
+      "name": "zip64",
+      "scopePaths": [
+        "tests/unit/zip64.test.ts"
+      ],
+      "mappedDeclarations": 15,
+      "sourceSha256": {
+        "tests/unit/zip64.test.ts": "05a83f2006b29ab844da3c36fab6960d6fbef83d9e8ffbb2edc48dc9a4ed756b",
+        "tests/acceptance/zip64.ts": "a78945e1d11f5ad32138e2ab12c1b64d4dfe8402d602460a0b9a9bbb466e5f42",
+        "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/native/opc-zip64.feature": "18da944b62e7c88c7558627bca9fbc211a121799efbd7cefeb04051dd573af91"
       }
     },
     {
@@ -1054,21 +1073,11 @@
     "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
     "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
     "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses an undeclared gap before the ZIP64 end record",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads an empty deflate payload under a nonzero native inflate cap",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads ZIP64 members that use per-entry extras and 64-bit data descriptors",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses malformed ZIP64 locators",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 central counts that cannot fit the declared central span",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 offsets beyond Number.MAX_SAFE_INTEGER",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses unsupported ZIP64 extensible data sectors",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses missing central ZIP64 extras for sentinel fields",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses duplicate central ZIP64 extras rather than guessing",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses truncated central ZIP64 extras",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 local and central size mismatches",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 data descriptor mismatches",
-    "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses CRC mismatches in ZIP64 archives",
-    "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / writes forced tiny ZIP64 output that readZip can reopen",
-    "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / automatically emits ZIP64 EOCD records for 65535 tiny entries"
+    "bun:tests/unit/zip64-mappings.test.ts:ZIP64 ledger enumerates 15 declarations and 46 direct expressions preserving 407 previous mappings",
+    "bun:tests/unit/zip64-mappings.test.ts:ZIP64 mapping limits helper attribution tiny signed descriptors counts budgets and missing mutation workflow",
+    "bun:tests/unit/zip64-mappings.test.ts:ZIP64 scope assertions and semantic package-diff case borrowing refuse",
+    "bun:tests/unit/zip64-mappings.test.ts:ZIP64 source pins reject stale or absent suite runtime binding and shared inputs",
+    "bun:tests/unit/zip64-mappings.test.ts:ZIP64 reconciliation retains direct refusal predicates review flags and uncounted helper separation"
   ],
   "mappings": [
     {
@@ -12026,6 +12035,399 @@
       "unresolved": [],
       "executionCredit": false,
       "ledger": "opc-graph"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses an undeclared gap before the ZIP64 end record",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-structure-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"central-directory\")"
+      ],
+      "outcomes": [
+        "An undeclared byte gap before the ZIP64 end record refuses as OoxmlError with zip-structure-invalid and central-directory message text."
+      ],
+      "gaps": [
+        "Native directory-layout extension, not the shared impossible-count input. Tiny forced ZIP64 input with adjusted locator; no caller-buffer custody, allocation timing or disk save assertion.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads an empty deflate payload under a nonzero native inflate cap",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-parity-zip64"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(readZip(archive.bytes).get('empty.xml')).toEqual(new Uint8Array())"
+      ],
+      "outcomes": [
+        "A synthesized ZIP64 archive containing one empty deflated member decodes to the exact empty Uint8Array."
+      ],
+      "gaps": [
+        "Native empty-deflate extension; does not inspect the internal inflate cap despite its title, rewrite a changed member or preserve a second member. No caller-byte custody or file save.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / reads ZIP64 members that use per-entry extras and 64-bit data descriptors",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-parity-zip64"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(Array.from(parts.keys())).toEqual([\"[Content_Types].xml\", \"word/document.xml\"])",
+        "expect(decoder.decode(parts.get(\"[Content_Types].xml\")!)).toBe(\"<Types/>\")",
+        "expect(decoder.decode(parts.get(\"word/document.xml\")!)).toBe(\"<w:document/>\")"
+      ],
+      "outcomes": [
+        "Two synthesized stored members with per-entry ZIP64 extras and signed 64-bit descriptors decode to exact ordered names and text payloads."
+      ],
+      "gaps": [
+        "Only signed 64-bit descriptors are exercised here; builder support for unsigned or 32-bit descriptors is not test coverage. Inputs are tiny ZIP members, not an OPC/schema-valid Word file; no changed-member rewrite, caller custody or disk save.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses malformed ZIP64 locators",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-structure-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"ZIP64 locator\")"
+      ],
+      "outcomes": [
+        "A locator signature overwritten with zero refuses as OoxmlError with zip-structure-invalid and ZIP64 locator message text."
+      ],
+      "gaps": [
+        "Native malformed-locator extension, not a count or unsafe-offset value test. One signature mutation only; no caller-byte preservation or filesystem comparison.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 central counts that cannot fit the declared central span",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-structure-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"count exceeds\")"
+      ],
+      "outcomes": [
+        "A one-member directory declaring 10001 entries with a caller cap of 20000 refuses as OoxmlError with zip-structure-invalid and count exceeds text."
+      ],
+      "gaps": [
+        "Native impossible-count variant differs from shared 100000/1000000 values. Error precedence is observed, not allocation timing, peak memory or every pre-expansion implementation step. No input-custody assertion.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 offsets beyond Number.MAX_SAFE_INTEGER",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-unsafe-offset"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-zip64-unsupported\")",
+        "expect((error as OoxmlError).message).toContain(\"safe integer\")"
+      ],
+      "outcomes": [
+        "A locator end-record offset of Number.MAX_SAFE_INTEGER+1 refuses as OoxmlError with zip-zip64-unsupported and safe integer message text."
+      ],
+      "gaps": [
+        "Native exact unsafe-value refusal uses a one-member builder archive rather than the shared two-member writer archive. Only the locator offset is corrupted; no all-offset-field matrix, huge payload allocation or custody assertion.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses unsupported ZIP64 extensible data sectors",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-zip64-unsupported\")",
+        "expect((error as OoxmlError).message).toContain(\"extensible\")"
+      ],
+      "outcomes": [
+        "A three-byte ZIP64 extensible data sector refuses as OoxmlError with zip-zip64-unsupported and extensible message text."
+      ],
+      "gaps": [
+        "Native unsupported-directory-metadata extension, not a shared count mutation. Does not claim all extensible-sector semantics or general ZIP64 compatibility; no caller custody.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses missing central ZIP64 extras for sentinel fields",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-structure-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"missing required ZIP64 extra\")"
+      ],
+      "outcomes": [
+        "Replacing the central ZIP64 extra tag while sentinel fields remain refuses as OoxmlError with zip-structure-invalid and missing required ZIP64 extra text."
+      ],
+      "gaps": [
+        "Native central-extra preflight extension. Only central extras are tested here, not the builder optional missing-local branch or caller-buffer custody.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses duplicate central ZIP64 extras rather than guessing",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-zip64-unsupported\")",
+        "expect((error as OoxmlError).message).toContain(\"duplicate ZIP64 extra\")"
+      ],
+      "outcomes": [
+        "Two central ZIP64 extra records refuse as OoxmlError with zip-zip64-unsupported and duplicate ZIP64 extra text."
+      ],
+      "gaps": [
+        "Native central ambiguity extension. The builder also supports duplicate local extras, but this declaration never selects that branch. No input-custody or file evidence.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses truncated central ZIP64 extras",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-structure-invalid\")",
+        "expect((error as OoxmlError).message).toContain(\"truncated ZIP64 extra\")"
+      ],
+      "outcomes": [
+        "Shrinking the central ZIP64 extra length to eight bytes refuses as OoxmlError with zip-structure-invalid and truncated ZIP64 extra text."
+      ],
+      "gaps": [
+        "Native central-extra boundary extension, not shared impossible-count input. One truncation value only; no complete malformed-length matrix or caller custody.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 local and central size mismatches",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-local-metadata-mismatch\")",
+        "expect((error as OoxmlError).message).toContain(\"local and central\")"
+      ],
+      "outcomes": [
+        "Changing a local ZIP64 uncompressed size to 99 while central size remains original refuses as OoxmlError with zip-local-metadata-mismatch and local and central text."
+      ],
+      "gaps": [
+        "Native local/central consistency extension. The test changes one size field, not all metadata or actual payload size; no caller-buffer custody or disk save.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses ZIP64 data descriptor mismatches",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-zip64-preflight-count"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-local-metadata-mismatch\")",
+        "expect((error as OoxmlError).message).toContain(\"local and central\")"
+      ],
+      "outcomes": [
+        "Changing the signed ZIP64 descriptor compressed size to 99 refuses as OoxmlError with zip-local-metadata-mismatch and local and central text."
+      ],
+      "gaps": [
+        "Native descriptor consistency extension changes compressed size only. No unsigned descriptor, uncompressed-size/CRC-field matrix, input-custody or file check in this declaration.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 readZip / refuses CRC mismatches in ZIP64 archives",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-parity-zip64"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(error).toBeInstanceOf(OoxmlError)",
+        "expect((error as OoxmlError).code).toBe(\"zip-crc-mismatch\")",
+        "expect((error as OoxmlError).message).toContain(\"CRC\")"
+      ],
+      "outcomes": [
+        "Flipping one stored payload byte in a ZIP64 archive refuses as OoxmlError with zip-crc-mismatch and CRC message text."
+      ],
+      "gaps": [
+        "Native payload-integrity extension associated with bounded roundtrip behavior, not an exact shared positive case. It changes stored data, not a compressed stream; no input-custody assertion.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / writes forced tiny ZIP64 output that readZip can reopen",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-parity-zip64"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(layout.isZip64).toBe(true)",
+        "expect(layout.totalEntries).toBe(2)",
+        "expect(decoder.decode(reopened.get(\"word/document.xml\")!)).toBe(\"<w:document/>\")",
+        "expect(decoder.decode(reopened.get(\"[Content_Types].xml\")!)).toBe(\"<Types/>\")"
+      ],
+      "outcomes": [
+        "Forcing tiny two-member ZIP64 output yields a ZIP64 layout with count two and both original payloads decode exactly after writing."
+      ],
+      "gaps": [
+        "The two locator/end-record signature checks are in describeZip64Archive helper, not the four direct expressions. There is no changed-member rewrite or unrelated-member sentinel mutation as required by the shared workflow; no OPC validity, disk save or multi-gigabyte claim.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
+    },
+    {
+      "testId": "bun:tests/unit/zip64.test.ts:ZIP64 writeZip / automatically emits ZIP64 EOCD records for 65535 tiny entries",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-parity-zip64"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(layout.isZip64).toBe(true)",
+        "expect(layout.totalEntries).toBe(count)",
+        "expect(reopened.size).toBe(count)",
+        "expect(reopened.get(\"tiny/0000.bin\")).toEqual(new Uint8Array())",
+        "expect(reopened.get(`tiny/${(count - 1).toString(36).padStart(4, \"0\")}.bin`)).toEqual(new Uint8Array())"
+      ],
+      "outcomes": [
+        "Writing 65535 empty members automatically yields ZIP64 metadata and the expected total count; readZip with explicit budgets returns that many members and exact first/last empty payloads."
+      ],
+      "gaps": [
+        "Native entry-count boundary uses empty members, not large data sizes/offsets. Two signature assertions live in the layout helper; intermediate payloads are not individually compared. This is permitted-budget success, not the shared resource-limit refusal, allocation timing or large-payload stress.",
+        "Scenario-level association only. Refusal predicates remain direct after equivalent helper inlining; capture helper rejects unexpected success. No native acceptance wrapper, new execution, runtime-leaf or general ZIP64 parity credit."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "zip64"
     },
     {
       "testId": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",

@@ -70,7 +70,10 @@ describe("ZIP64 readZip", () => {
     const end=original.length-22-20-56;
     const gap=new Uint8Array(original.length+1);gap.set(original.subarray(0,end));gap[end]=0x42;gap.set(original.subarray(end),end+1);
     new DataView(gap.buffer).setBigUint64(gap.length-22-20+8,BigInt(end+1),true);
-    expectZipError(()=>readZip(gap),"zip-structure-invalid","central-directory");
+    const error = captureZipError(()=>readZip(gap), "zip-structure-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-structure-invalid");
+    expect((error as OoxmlError).message).toContain("central-directory");
   });
   test("reads an empty deflate payload under a nonzero native inflate cap",()=>{
     const archive=buildZip64Archive([{name:'empty.xml',blob:new Uint8Array(),method:8}]);
@@ -93,7 +96,10 @@ describe("ZIP64 readZip", () => {
     const broken = archive.bytes.slice();
     new DataView(broken.buffer, broken.byteOffset, broken.byteLength).setUint32(archive.locatorOffset, 0, true);
 
-    expectZipError(() => readZip(broken), "zip-structure-invalid", "ZIP64 locator");
+    const error = captureZipError(() => readZip(broken), "zip-structure-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-structure-invalid");
+    expect((error as OoxmlError).message).toContain("ZIP64 locator");
   });
 
   test("refuses ZIP64 central counts that cannot fit the declared central span", () => {
@@ -103,11 +109,10 @@ describe("ZIP64 readZip", () => {
     setUint64(view, archive.zip64EocdOffset + 24, 10_001n);
     setUint64(view, archive.zip64EocdOffset + 32, 10_001n);
 
-    expectZipError(
-      () => readZip(broken, { maxEntries: 20_000 }),
-      "zip-structure-invalid",
-      "count exceeds",
-    );
+    const error = captureZipError(() => readZip(broken, { maxEntries: 20_000 }), "zip-structure-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-structure-invalid");
+    expect((error as OoxmlError).message).toContain("count exceeds");
   });
 
   test("refuses ZIP64 offsets beyond Number.MAX_SAFE_INTEGER", () => {
@@ -116,7 +121,10 @@ describe("ZIP64 readZip", () => {
     const view = new DataView(broken.buffer, broken.byteOffset, broken.byteLength);
     setUint64(view, archive.locatorOffset + 8, MAX_SAFE_BIGINT + 1n);
 
-    expectZipError(() => readZip(broken), "zip-zip64-unsupported", "safe integer");
+    const error = captureZipError(() => readZip(broken), "zip-zip64-unsupported");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-zip64-unsupported");
+    expect((error as OoxmlError).message).toContain("safe integer");
   });
 
   test("refuses unsupported ZIP64 extensible data sectors", () => {
@@ -125,7 +133,10 @@ describe("ZIP64 readZip", () => {
       { extensibleData: encoder.encode("ext") },
     );
 
-    expectZipError(() => readZip(archive.bytes), "zip-zip64-unsupported", "extensible");
+    const error = captureZipError(() => readZip(archive.bytes), "zip-zip64-unsupported");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-zip64-unsupported");
+    expect((error as OoxmlError).message).toContain("extensible");
   });
 
   test("refuses missing central ZIP64 extras for sentinel fields", () => {
@@ -134,7 +145,10 @@ describe("ZIP64 readZip", () => {
     const view = new DataView(broken.buffer, broken.byteOffset, broken.byteLength);
     view.setUint16(archive.entries[0]!.centralExtraOffset, 0xaaaa, true);
 
-    expectZipError(() => readZip(broken), "zip-structure-invalid", "missing required ZIP64 extra");
+    const error = captureZipError(() => readZip(broken), "zip-structure-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-structure-invalid");
+    expect((error as OoxmlError).message).toContain("missing required ZIP64 extra");
   });
 
   test("refuses duplicate central ZIP64 extras rather than guessing", () => {
@@ -142,7 +156,10 @@ describe("ZIP64 readZip", () => {
       { name: "word/document.xml", blob: encoder.encode("x"), duplicateCentralZip64Extra: true },
     ]);
 
-    expectZipError(() => readZip(archive.bytes), "zip-zip64-unsupported", "duplicate ZIP64 extra");
+    const error = captureZipError(() => readZip(archive.bytes), "zip-zip64-unsupported");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-zip64-unsupported");
+    expect((error as OoxmlError).message).toContain("duplicate ZIP64 extra");
   });
 
   test("refuses truncated central ZIP64 extras", () => {
@@ -151,7 +168,10 @@ describe("ZIP64 readZip", () => {
     const view = new DataView(broken.buffer, broken.byteOffset, broken.byteLength);
     view.setUint16(archive.entries[0]!.centralExtraOffset + 2, 8, true);
 
-    expectZipError(() => readZip(broken), "zip-structure-invalid", "truncated ZIP64 extra");
+    const error = captureZipError(() => readZip(broken), "zip-structure-invalid");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-structure-invalid");
+    expect((error as OoxmlError).message).toContain("truncated ZIP64 extra");
   });
 
   test("refuses ZIP64 local and central size mismatches", () => {
@@ -160,7 +180,10 @@ describe("ZIP64 readZip", () => {
     const view = new DataView(broken.buffer, broken.byteOffset, broken.byteLength);
     setUint64(view, archive.entries[0]!.localExtraOffset + 4, 99n);
 
-    expectZipError(() => readZip(broken), "zip-local-metadata-mismatch", "local and central");
+    const error = captureZipError(() => readZip(broken), "zip-local-metadata-mismatch");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-local-metadata-mismatch");
+    expect((error as OoxmlError).message).toContain("local and central");
   });
 
   test("refuses ZIP64 data descriptor mismatches", () => {
@@ -172,7 +195,10 @@ describe("ZIP64 readZip", () => {
     const view = new DataView(broken.buffer, broken.byteOffset, broken.byteLength);
     setUint64(view, entry.descriptorOffset + 12, 99n);
 
-    expectZipError(() => readZip(broken), "zip-local-metadata-mismatch", "local and central");
+    const error = captureZipError(() => readZip(broken), "zip-local-metadata-mismatch");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-local-metadata-mismatch");
+    expect((error as OoxmlError).message).toContain("local and central");
   });
 
   test("refuses CRC mismatches in ZIP64 archives", () => {
@@ -181,7 +207,10 @@ describe("ZIP64 readZip", () => {
     const dataOffset=archive.entries[0]!.dataOffset;
     broken[dataOffset] = broken[dataOffset]! ^ 0x01;
 
-    expectZipError(() => readZip(broken), "zip-crc-mismatch", "CRC");
+    const error = captureZipError(() => readZip(broken), "zip-crc-mismatch");
+    expect(error).toBeInstanceOf(OoxmlError);
+    expect((error as OoxmlError).code).toBe("zip-crc-mismatch");
+    expect((error as OoxmlError).message).toContain("CRC");
   });
 });
 
@@ -225,18 +254,13 @@ describe("ZIP64 writeZip", () => {
   });
 });
 
-function expectZipError(action: () => unknown, code: string, messageFragment: string): void {
+function captureZipError(action: () => unknown, code: string): unknown {
   try {
     action();
     throw new Error(`expected ${code}`);
   } catch (error) {
-    if (error instanceof Error && error.message === `expected ${code}`) {
-      throw error;
-    }
-    expect(error).toBeInstanceOf(OoxmlError);
-    const refusal = error as OoxmlError;
-    expect(refusal.code).toBe(code);
-    expect(refusal.message).toContain(messageFragment);
+    if (error instanceof Error && error.message === `expected ${code}`) throw error;
+    return error;
   }
 }
 
