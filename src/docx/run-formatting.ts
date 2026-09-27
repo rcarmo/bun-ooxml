@@ -5,17 +5,37 @@ const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 const XMLNS='http://www.w3.org/2000/xmlns/';
 const ORDER=['rStyle','rFonts','b','bCs','i','iCs','caps','smallCaps','strike','dstrike','outline','shadow','emboss','imprint','noProof','snapToGrid','vanish','webHidden','color','spacing','w','kern','position','sz','szCs','highlight','u','effect','bdr','shd','fitText','vertAlign','rtl','cs','em','lang','eastAsianLayout','specVanish','oMath'];
 type Edit={start:number;end:number;value:string};
-export type DirectRunPatch={bold?:boolean|null;italic?:boolean|null;fontSizePt?:number|null};
-const fail=(message:string):never=>{throw new OoxmlError('docx-format-unsupported',message);};
+const FLAG_NAMES={bold:'b',italic:'i',caps:'caps',smallCaps:'smallCaps',strike:'strike',doubleStrike:'dstrike',outline:'outline',shadow:'shadow',emboss:'emboss',imprint:'imprint',vanish:'vanish'} as const;
+type FlagKey=keyof typeof FLAG_NAMES;
+export type DirectRunFlags={ [K in FlagKey]: boolean|null };
+export type DirectRunPatch=Partial<DirectRunFlags>&{fontSizePt?:number|null};
+const FLAG_KEYS=Object.keys(FLAG_NAMES) as FlagKey[];
+const PATCH_KEYS=[...FLAG_KEYS,'fontSizePt'] as const;
+const CONFLICTS=[['strike','dstrike'],['caps','smallCaps'],['emboss','imprint'],['emboss','outline'],['imprint','outline'],['emboss','shadow'],['imprint','shadow']] as const;
+function fail(message:string):never{throw new OoxmlError('docx-format-unsupported',message);}
+function normalizePatch(patch:DirectRunPatch):DirectRunPatch {
+ if(!patch||typeof patch!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(patch)))throw new OoxmlError('docx-format-argument','Expected a plain run-formatting patch');
+ const result:DirectRunPatch={};
+ for(const key of Reflect.ownKeys(patch)){
+  if(typeof key!=='string'||!PATCH_KEYS.includes(key as typeof PATCH_KEYS[number]))throw new OoxmlError('docx-format-argument','Unknown run-formatting property');
+  const descriptor=Object.getOwnPropertyDescriptor(patch,key)!;
+  if(!('value' in descriptor))throw new OoxmlError('docx-format-argument','Run-formatting properties must be plain values');
+  const value=descriptor.value;
+  if(value===undefined)continue;
+  if(value!==null){if(key==='fontSizePt')validateFontSize(value);else if(typeof value!=='boolean')throw new OoxmlError('docx-format-argument','Run effects require boolean or null');}
+  Object.assign(result,{[key]:value});
+ }
+ return result;
+}
+function assertCompatible(names:Set<string>):void {
+ for(const [a,b] of CONFLICTS)if(names.has(a)&&names.has(b))fail(`Incompatible direct run properties: ${a} and ${b}; remove one with null`);
+}
 const word=(node:XmlElement,name:string)=>node.namespaceURI===W&&node.localName===name;
 
-/** Preserve the original XML except selected b/i/sz elements or a missing rPr. */
+/** Preserve source outside selected Boolean/size elements or a missing rPr. */
 export function formatRunProperties(xml:string,paragraph:XmlElement,patch:DirectRunPatch):{xml:string;changedRuns:number}{
-  if(!patch||typeof patch!=='object'||Array.isArray(patch)||Object.keys(patch).some(k=>!['bold','italic','fontSizePt'].includes(k))||[patch.bold,patch.italic].some(v=>v!==undefined&&v!==null&&typeof v!=='boolean')){
-    throw new OoxmlError('docx-format-argument','Expected boolean/null bold/italic and half-point fontSizePt overrides');
-  }
-  if(patch.fontSizePt!==undefined&&patch.fontSizePt!==null)validateFontSize(patch.fontSizePt);
-  const requested=(['bold','italic','fontSizePt'] as const).filter(k=>patch[k]!==undefined);
+  patch=normalizePatch(patch);
+  const requested=PATCH_KEYS.filter(k=>patch[k]!==undefined).sort((a,b)=>ORDER.indexOf(a==='fontSizePt'?'sz':FLAG_NAMES[a])-ORDER.indexOf(b==='fontSizePt'?'sz':FLAG_NAMES[b]));
   const edits:Edit[]=[];let changedRuns=0;
   assertWhitespaceGaps(paragraph,xml);
   const properties=paragraph.children.filter(c=>word(c,'pPr'));
@@ -36,14 +56,18 @@ export function formatRunProperties(xml:string,paragraph:XmlElement,patch:Direct
         const rank=ORDER.indexOf(node.localName);
         if(node.namespaceURI!==W||rank<0||seen.has(node.localName)||rank<last||node.children.length)fail('Ambiguous, revised or unsupported run properties');
         seen.add(node.localName);last=rank;
-        if(node.localName==='b'||node.localName==='i')flagValue(node);
+        if(Object.values(FLAG_NAMES).includes(node.localName as typeof FLAG_NAMES[FlagKey]))flagValue(node);
         if(requested.includes('fontSizePt')&&node.localName==='sz')sizeValue(node);
         if(!node.selfClosing&&xml.slice(node.openEnd,node.closeStart).trim())fail('Run properties must not contain text or markup');
       }
     }
+    const present=new Set(pr?.children.map(n=>n.localName)??[]);
+    assertCompatible(present);
+    for(const key of requested){const name=key==='fontSizePt'?'sz':FLAG_NAMES[key];if(patch[key]===null)present.delete(name);else present.add(name);}
+    assertCompatible(present);
     let changed=false;const insertions=new Map<number,string[]>();
     for(const key of requested){
-      const name=key==='bold'?'b':key==='italic'?'i':'sz',value=patch[key]!,node=pr?.children.find(c=>word(c,name));
+      const name=key==='fontSizePt'?'sz':FLAG_NAMES[key],value=patch[key]!,node=pr?.children.find(c=>word(c,name));
       const current=node?(key==='fontSizePt'?sizeValue(node):flagValue(node)):undefined;
       if(value===null){if(node){edits.push({start:node.start,end:node.end,value:''});changed=true;}continue;}
       if(node&&current===value)continue;
@@ -72,6 +96,14 @@ export function formatRunProperties(xml:string,paragraph:XmlElement,patch:Direct
     changedRuns++;
   }
   return {xml:edits.length?applyEdits(xml,edits):xml,changedRuns};
+}
+/** Direct Boolean overrides in run order; no style inheritance or defaults. */
+export function directRunFlags(xml:string,paragraph:XmlElement):DirectRunFlags[]{
+ formatRunProperties(xml,paragraph,{});
+ return paragraph.children.filter(r=>word(r,'r')).map(run=>{
+  const pr=run.children.find(c=>word(c,'rPr'));
+  return Object.fromEntries(FLAG_KEYS.map(key=>{const node=pr?.children.find(c=>word(c,FLAG_NAMES[key]));return [key,node?flagValue(node):null];})) as DirectRunFlags;
+ });
 }
 /** Direct non-complex-script sizes in paragraph run order; null means absent. */
 export function directFontSizes(xml:string,paragraph:XmlElement):Array<number|null>{

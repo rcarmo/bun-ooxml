@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 563,
-  "files": 58,
+  "count": 575,
+  "files": 59,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -76,6 +76,12 @@
       "path": "tests/unit/docx-revisions.test.ts",
       "sha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
       "declarations": 7,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "declarations": 12,
       "issues": []
     },
     {
@@ -453,6 +459,10 @@
       "sha256": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9"
     },
     {
+      "path": "tests/acceptance/run-effects.ts",
+      "sha256": "4f90228d70ff52f30ce05a3a007ef78435367ff8720f63e50674fc2fdcf63465"
+    },
+    {
       "path": "tests/acceptance/run-formatting.ts",
       "sha256": "019654d045f708ae5d7ba86cf08c35d13e69e28d5cc0b56f5eb604d7ff161255"
     },
@@ -462,7 +472,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "3be092aa1a43711453f76815e8efeca09894a4e0fb6315b0cedb8bff3fd71ae8"
+      "sha256": "b2b5bea134824fdd76a503eac232014d619c7379d0c61964a493faf734b210df"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -590,6 +600,11 @@
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+    "bun:tests/unit/docx-run-effects.test.ts:direct boolean getter distinguishes absent/off/on and each new effect survives reopen",
+    "bun:tests/unit/docx-run-effects.test.ts:spec-incompatible direct effect pairs refuse atomically and null can remove a conflicting property",
+    "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
+    "bun:tests/unit/docx-run-effects.test.ts:patch getters, prototypes, symbols and invalid values refuse before running user accessors",
+    "bun:tests/unit/docx-run-effects.test.ts:namespace aliases and UTF-16 path save preserve effects and nonedited member payloads",
     "bun:tests/unit/docx-style-authoring.test.ts:styles-only update retains UTF16 LE and BE declarations, BOM and old definitions",
     "bun:tests/unit/docx-style-authoring.test.ts:final serialization failure rolls back new registry graph and existing registry append",
     "bun:tests/unit/docx-style-authoring.test.ts:input data rejects unknown keys, accessors and invalid XML without package changes",
@@ -741,6 +756,11 @@
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+    "bun:tests/unit/docx-run-effects.test.ts:direct boolean getter distinguishes absent/off/on and each new effect survives reopen",
+    "bun:tests/unit/docx-run-effects.test.ts:spec-incompatible direct effect pairs refuse atomically and null can remove a conflicting property",
+    "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
+    "bun:tests/unit/docx-run-effects.test.ts:patch getters, prototypes, symbols and invalid values refuse before running user accessors",
+    "bun:tests/unit/docx-run-effects.test.ts:namespace aliases and UTF-16 path save preserve effects and nonedited member payloads",
     "bun:tests/unit/docx-style-authoring.test.ts:styles-only update retains UTF16 LE and BE declarations, BOM and old definitions",
     "bun:tests/unit/docx-style-authoring.test.ts:final serialization failure rolls back new registry graph and existing registry append",
     "bun:tests/unit/docx-style-authoring.test.ts:input data rejects unknown keys, accessors and invalid XML without package changes",
@@ -6286,6 +6306,511 @@
         "expect().toEqual",
         "makeAcceptanceRoot",
         "runAcceptance"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:direct boolean getter distinguishes absent/off/on and each new effect survives reopen",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 16,
+      "title": "direct boolean getter distinguishes absent/off/on and each new effect survives reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.paragraphs[0]!.directRunFlags()[0]![effect]).toBeNull()",
+        "expect(d.paragraphs[0]!.setRunFormatting({ [effect]: true })).toEqual({ changedRuns: 1 })",
+        "expect(reopened.paragraphs[0]!.directRunFlags()[0]![effect]).toBe(true)",
+        "expect(reopened.paragraphs[0]!.text).toBe('Alpha')",
+        "expect(reopened.package.get(name)).toEqual(bytes)",
+        "expect(reopened.paragraphs[0]!.directRunFlags()[0]![effect]).toBe(false)",
+        "expect(reopened.paragraphs[0]!.directRunFlags()[0]![effect]).toBeNull()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 17,
+          "expression": "for (const effect of effects)"
+        },
+        {
+          "line": 22,
+          "expression": "for (const [name, bytes] of original) if(name !== 'word/document.xml') expect(reopened.package.get(name)).toEqual(bytes);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n for (const effect of effects) {\n  const d = await fixture(), original = d.package.parts;\n  expect(d.paragraphs[0]!.directRunFlags()[0]![effect]).toBeNull();\n  expect(d.paragraphs[0]!.setRunFormatting({ [effect]: true })).toEqual({ changedRuns: 1 });\n  const reopened = await Document.open(d.package.toBytes()); expect(reopened.paragraphs[0]!.directRunFlags()[0]![effect]).toBe(true); expect(reopened.paragraphs[0]!.text).toBe('Alpha');\n  for (const [name, bytes] of original) if(name !== 'word/document.xml') expect(reopened.package.get(name)).toEqual(bytes);\n  reopened.paragraphs[0]!.setRunFormatting({ [effect]: false }); expect(reopened.paragraphs[0]!.directRunFlags()[0]![effect]).toBe(false);\n  reopened.paragraphs[0]!.setRunFormatting({ [effect]: null }); expect(reopened.paragraphs[0]!.directRunFlags()[0]![effect]).toBeNull();\n }\n}",
+      "calls": [
+        "Document.open",
+        "d.package.toBytes",
+        "d.paragraphs.0.directRunFlags",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "fixture",
+        "reopened.package.get",
+        "reopened.paragraphs.0.directRunFlags",
+        "reopened.paragraphs.0.setRunFormatting"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:valid compound edits follow schema order regardless of input field order and retain unrelated properties",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 28,
+      "title": "valid compound edits follow schema order regardless of input field order and retain unrelated properties",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(pr.children.map(n => n.localName)).toEqual(['rFonts','b','i','caps','strike','shadow','vanish','color','sz','u'])",
+        "expect(attribute(pr.children[0]!, 'ascii', W)).toBe('Arial')",
+        "expect(attribute(elements(xml,'color',W)[0]!, 'val', W)).toBe('112233')",
+        "expect(d.paragraphs[0]!.directRunFlags()[0]).toEqual({bold:true,italic:false,caps:true,smallCaps:null,strike:true,doubleStrike:null,outline:null,shadow:true,emboss:null,imprint:null,vanish:true})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d = await fixture('<w:rPr><w:rFonts w:ascii=\"Arial\"/><w:color w:val=\"112233\"/><w:u w:val=\"single\"/></w:rPr>');\n d.paragraphs[0]!.setRunFormatting({ fontSizePt: 14, vanish: true, shadow: true, strike: true, caps: true, italic: false, bold: true });\n const xml = parseXml(new TextDecoder().decode(d.package.get('word/document.xml'))), pr = elements(xml, 'rPr', W)[0]!;\n expect(pr.children.map(n => n.localName)).toEqual(['rFonts','b','i','caps','strike','shadow','vanish','color','sz','u']);\n expect(attribute(pr.children[0]!, 'ascii', W)).toBe('Arial'); expect(attribute(elements(xml,'color',W)[0]!, 'val', W)).toBe('112233');\n expect(d.paragraphs[0]!.directRunFlags()[0]).toEqual({bold:true,italic:false,caps:true,smallCaps:null,strike:true,doubleStrike:null,outline:null,shadow:true,emboss:null,imprint:null,vanish:true});\n}",
+      "calls": [
+        ".decode",
+        "attribute",
+        "d.package.get",
+        "d.paragraphs.0.directRunFlags",
+        "d.paragraphs.0.setRunFormatting",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "parseXml",
+        "pr.children.map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:same-state/no-op preserves lexical spelling and fresh handle; real effect edit expires old handles",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 37,
+      "title": "same-state/no-op preserves lexical spelling and fresh handle; real effect edit expires old handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.setRunFormatting({ strike:true, shadow:false })).toEqual({changedRuns:0})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.text).toBe('Alpha')",
+        "expect(p.directRunFlags()[0]!.strike).toBe(true)",
+        "expect(()=>p.directRunFlags()).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d = await fixture('<w:rPr><w:strike w:val=\"on\"/><w:shadow w:val=\"off\"/></w:rPr>'), p=d.paragraphs[0]!, before=d.package.toBytes();\n expect(p.setRunFormatting({ strike:true, shadow:false })).toEqual({changedRuns:0}); expect(d.package.toBytes()).toEqual(before); expect(p.text).toBe('Alpha');\n const returned=p.directRunFlags();returned[0]!.strike=false;expect(p.directRunFlags()[0]!.strike).toBe(true);\n p.setRunFormatting({ strike:null });expect(()=>p.directRunFlags()).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}));\n}",
+      "calls": [
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "p.directRunFlags",
+        "p.setRunFormatting"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:spec-incompatible direct effect pairs refuse atomically and null can remove a conflicting property",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 44,
+      "title": "spec-incompatible direct effect pairs refuse atomically and null can remove a conflicting property",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({[a]:true,[b]:true})).toThrow(expect.objectContaining({code:'docx-format-unsupported'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({[b]:true})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(current)",
+        "expect(d.paragraphs[0]!.directRunFlags()[0]![a]).toBeNull()",
+        "expect(d.paragraphs[0]!.directRunFlags()[0]![b]).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 46,
+          "expression": "for(const [a,b] of pairs)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const pairs = [['strike','doubleStrike'],['caps','smallCaps'],['emboss','imprint'],['emboss','outline'],['imprint','outline'],['emboss','shadow'],['imprint','shadow']] as const;\n for(const [a,b] of pairs){const d=await fixture(),before=d.package.toBytes();\n  expect(()=>d.paragraphs[0]!.setRunFormatting({[a]:true,[b]:true})).toThrow(expect.objectContaining({code:'docx-format-unsupported'}));expect(d.package.toBytes()).toEqual(before);\n  d.paragraphs[0]!.setRunFormatting({[a]:true});const current=d.package.toBytes();\n  expect(()=>d.paragraphs[0]!.setRunFormatting({[b]:true})).toThrow();expect(d.package.toBytes()).toEqual(current);\n  d.paragraphs[0]!.setRunFormatting({[a]:null,[b]:true});expect(d.paragraphs[0]!.directRunFlags()[0]![a]).toBeNull();expect(d.paragraphs[0]!.directRunFlags()[0]![b]).toBe(true);\n }\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.paragraphs.0.directRunFlags",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 54,
+      "title": "malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({strike:true})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 55,
+          "expression": "for(const pr of ['<w:rPr><w:strike val=\"true\"/></w:rPr>','<w:rPr><w:shadow w:val=\"maybe\"/></w:rPr>','<w:rPr><w:caps/><w:caps/></w:rPr>','<w:rPr><w:vanish/><w:strike/></w:rPr>','<w:rPr><w:rPrChange/></w:rPr>','<w:rPr><!--keep--><w:strike/></w:rPr>','<w:rPr><w:strike/><w:dstrike/></w:rPr>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n for(const pr of ['<w:rPr><w:strike val=\"true\"/></w:rPr>','<w:rPr><w:shadow w:val=\"maybe\"/></w:rPr>','<w:rPr><w:caps/><w:caps/></w:rPr>','<w:rPr><w:vanish/><w:strike/></w:rPr>','<w:rPr><w:rPrChange/></w:rPr>','<w:rPr><!--keep--><w:strike/></w:rPr>','<w:rPr><w:strike/><w:dstrike/></w:rPr>']) {\n  const d=await fixture(pr),before=d.package.toBytes();expect(()=>d.paragraphs[0]!.setRunFormatting({strike:true})).toThrow();expect(d.package.toBytes()).toEqual(before);\n }\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:patch getters, prototypes, symbols and invalid values refuse before running user accessors",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 60,
+      "title": "patch getters, prototypes, symbols and invalid values refuse before running user accessors",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting(patch as RunFormattingPatch)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(read).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 64,
+          "expression": "for(const patch of patches)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d=await fixture(),before=d.package.toBytes();let read=false;\n const patches:unknown[]=[{strike:1},{shadow:'true'},{bold:true,vanish:'bad'},Object.create({bold:true}),{[Symbol('x')]:true}];\n patches.push(Object.defineProperty({},'strike',{enumerable:true,get(){read=true;return true;}}));\n for(const patch of patches){expect(()=>d.paragraphs[0]!.setRunFormatting(patch as RunFormattingPatch)).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(read).toBe(false);\n}",
+      "calls": [
+        "Object.create",
+        "Object.defineProperty",
+        "Symbol",
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "patches.push"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:namespace aliases and UTF-16 path save preserve effects and nonedited member payloads",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 67,
+      "title": "namespace aliases and UTF-16 path save preserve effects and nonedited member payloads",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(reopened.paragraphs[0]!.directRunFlags()[0]!.shadow).toBe(true)",
+        "expect(reopened.paragraphs[0]!.directRunFlags()[0]!.strike).toBe(true)",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 70,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);"
+        },
+        {
+          "line": 72,
+          "expression": "for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());\n const text=pkg.text(pkg.mainPart()).replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:').replace('UTF-8','UTF-16');\n const b=new Uint8Array(2+text.length*2);b[0]=255;b[1]=254;const view=new DataView(b.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);pkg.set(pkg.mainPart(),b);\n const doc=await Document.open(pkg.toBytes());doc.paragraphs[0]!.setRunFormatting({shadow:true,strike:true});const root=await mkdtemp(join(tmpdir(),'docx-effects-'));\n try{const path=join(root,'effects.docx');await doc.save(path);const reopened=await Document.open(path);expect(reopened.paragraphs[0]!.directRunFlags()[0]!.shadow).toBe(true);expect(reopened.paragraphs[0]!.directRunFlags()[0]!.strike).toBe(true);expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254]);for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.paragraphs.0.setRunFormatting",
+        "doc.save",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "pkg.get",
+        "pkg.mainPart",
+        "pkg.names",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replaceAll",
+        "pkg.text().replaceAll().replaceAll",
+        "pkg.text().replaceAll().replaceAll().replace",
+        "pkg.toBytes",
+        "reopened.package.get",
+        "reopened.package.get().slice",
+        "reopened.paragraphs.0.directRunFlags",
+        "rm",
+        "text.charCodeAt",
+        "tmpdir",
+        "view.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:protected requests and staged serialization failures preserve bytes and handles",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 75,
+      "title": "protected requests and staged serialization failures preserve bytes and handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>locked.paragraphs[0]!.setRunFormatting({strike:true})).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(beforeLocked)",
+        "expect(()=>held.setRunFormatting({strike:true})).toThrow('injected serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.directRunFlags()[0]!.strike).toBeNull()",
+        "expect(held.text).toBe('Alpha')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');\n const locked=await Document.open(pkg.toBytes()),beforeLocked=locked.package.toBytes();expect(()=>locked.paragraphs[0]!.setRunFormatting({strike:true})).toThrow();expect(locked.package.toBytes()).toEqual(beforeLocked);\n const opc=(d as unknown as {opcPackage:OpcPackage}).opcPackage,save=opc.toBytes.bind(opc),before=d.package.toBytes(),held=d.paragraphs[0]!;\n opc.toBytes=()=>{throw Error('injected serialization');};try{expect(()=>held.setRunFormatting({strike:true})).toThrow('injected serialization');}finally{opc.toBytes=save;}\n expect(d.package.toBytes()).toEqual(before);expect(held.directRunFlags()[0]!.strike).toBeNull();expect(held.text).toBe('Alpha');\n}",
+      "calls": [
+        "Document.open",
+        "Error",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "held.directRunFlags",
+        "held.setRunFormatting",
+        "locked.package.toBytes",
+        "locked.paragraphs.0.setRunFormatting",
+        "opc.toBytes.bind",
+        "pkg.mainPart",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:late multi-run conflict refuses the whole paragraph and requested removals can switch effects",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 83,
+      "title": "late multi-run conflict refuses the whole paragraph and requested removals can switch effects",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>doc.paragraphs[0]!.setRunFormatting({strike:true})).toThrow()",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(doc.paragraphs[0]!.text).toBe('AlphaBeta')",
+        "expect(doc.paragraphs[0]!.setRunFormatting({doubleStrike:null,strike:true})).toEqual({changedRuns:2})",
+        "expect(doc.paragraphs[0]!.directRunFlags().map(f=>[f.strike,f.doubleStrike])).toEqual([[true,null],[true,null]])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());\n pkg.set(pkg.mainPart(),pkg.text(pkg.mainPart()).replace('</w:r>','</w:r><w:r><w:rPr><w:dstrike/></w:rPr><w:t>Beta</w:t></w:r>'));\n const doc=await Document.open(pkg.toBytes()),before=doc.package.toBytes();\n expect(()=>doc.paragraphs[0]!.setRunFormatting({strike:true})).toThrow();expect(doc.package.toBytes()).toEqual(before);expect(doc.paragraphs[0]!.text).toBe('AlphaBeta');\n expect(doc.paragraphs[0]!.setRunFormatting({doubleStrike:null,strike:true})).toEqual({changedRuns:2});\n expect(doc.paragraphs[0]!.directRunFlags().map(f=>[f.strike,f.doubleStrike])).toEqual([[true,null],[true,null]]);\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.package.toBytes",
+        "doc.paragraphs.0.directRunFlags",
+        "doc.paragraphs.0.directRunFlags().map",
+        "doc.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:explicit false also participates in conservative conflict refusal and getter rejects invalid pairs",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 92,
+      "title": "explicit false also participates in conservative conflict refusal and getter rejects invalid pairs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting({smallCaps:false})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>invalid.paragraphs[0]!.directRunFlags()).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d=await fixture('<w:rPr><w:caps w:val=\"0\"/></w:rPr>'),before=d.package.toBytes();\n expect(()=>d.paragraphs[0]!.setRunFormatting({smallCaps:false})).toThrow();expect(d.package.toBytes()).toEqual(before);\n const invalid=await fixture('<w:rPr><w:caps w:val=\"0\"/><w:smallCaps w:val=\"0\"/></w:rPr>');\n expect(()=>invalid.paragraphs[0]!.directRunFlags()).toThrow();\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "invalid.paragraphs.0.directRunFlags"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:effect getters reject stale external XML and formatting preserves live table grid",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 99,
+      "title": "effect getters reject stale external XML and formatting preserves live table grid",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(table.rows).toBe(1)",
+        "expect(table.columns).toBe(1)",
+        "expect(table.cell(0,0).text).toBe('Cell')",
+        "expect(()=>held.directRunFlags()).toThrow()",
+        "expect(()=>p.directRunFlags()).toThrow()",
+        "expect(()=>p.setRunFormatting({shadow:true})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const d=Document.create();d.addTable(1,1);d.tables[0]!.cell(0,0).text='Cell';const table=d.tables[0]!,held=d.paragraphs[0]!;\n held.setRunFormatting({vanish:true});expect(table.rows).toBe(1);expect(table.columns).toBe(1);expect(table.cell(0,0).text).toBe('Cell');expect(()=>held.directRunFlags()).toThrow();\n const p=d.paragraphs[0]!,xml=new TextDecoder().decode(d.package.get('word/document.xml'));d.package.setPart('word/document.xml',new TextEncoder().encode(xml.replace('Cell','Changed')));\n const before=d.package.toBytes();expect(()=>p.directRunFlags()).toThrow();expect(()=>p.setRunFormatting({shadow:true})).toThrow();expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        ".decode",
+        ".encode",
+        "Document.create",
+        "d.addTable",
+        "d.package.get",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "held.directRunFlags",
+        "held.setRunFormatting",
+        "p.directRunFlags",
+        "p.setRunFormatting",
+        "table.cell",
+        "xml.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:five shared direct flag cases execute but spec-incompatible all-effects scenario stays planned",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "line": 106,
+      "title": "five shared direct flag cases execute but spec-incompatible all-effects scenario stays planned",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(5)",
+        "expect(good.features[0]!.scenarios.find(s=>s.scenarioId==='@id-docx-go-run-effects-getters')!.result).toBe('planned')",
+        "expect(bad.counts.cases.failed).toBe(5)",
+        "expect(bad.counts.steps.failed).toBe(5)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts');\n const {bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/run-effects.ts');\n const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});\n const inventory={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(5),steps:count(15)}};\n const good=await executeAcceptance(inventory,bindings,'run-effects-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(5);\n expect(good.features[0]!.scenarios.find(s=>s.scenarioId==='@id-docx-go-run-effects-getters')!.result).toBe('planned');\n const corrupt=bindings.map(b=>b.pattern.test('bold is set to true, italic to true and strike to true')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);(c.state as {document:Document}).document.paragraphs[0]!.setRunFormatting({strike:captures[2]!=='true'});}}:b);\n const bad=await executeAcceptance(inventory,corrupt,'run-effects-negative');expect(bad.counts.cases.failed).toBe(5);expect(bad.counts.steps.failed).toBe(5);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.document.paragraphs.0.setRunFormatting",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "good.features.0.scenarios.find",
+        "join",
+        "selectSharedScenarios"
       ],
       "reviewReasons": [],
       "unresolved": []

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 563,
+  "nativeDeclarations": 575,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 336,
+  "withoutStagingCount": 348,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2720,6 +2720,66 @@
       "id": "bun:tests/unit/docx-paragraph-style.test.ts:same-style request still refuses document protection without touching handles",
       "path": "tests/unit/docx-paragraph-style.test.ts",
       "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:direct boolean getter distinguishes absent/off/on and each new effect survives reopen",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:valid compound edits follow schema order regardless of input field order and retain unrelated properties",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:same-state/no-op preserves lexical spelling and fresh handle; real effect edit expires old handles",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:spec-incompatible direct effect pairs refuse atomically and null can remove a conflicting property",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:patch getters, prototypes, symbols and invalid values refuse before running user accessors",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:namespace aliases and UTF-16 path save preserve effects and nonedited member payloads",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:protected requests and staged serialization failures preserve bytes and handles",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:late multi-run conflict refuses the whole paragraph and requested removals can switch effects",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:explicit false also participates in conservative conflict refusal and getter rejects invalid pairs",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:effect getters reject stale external XML and formatting preserves live table grid",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-effects.test.ts:five shared direct flag cases execute but spec-incompatible all-effects scenario stays planned",
+      "path": "tests/unit/docx-run-effects.test.ts",
+      "sourceSha256": "d9407d329ecc33178178b3bf5e8d24a4fe950ceb54a6fbf19e06721c2f716b78"
     },
     {
       "id": "bun:tests/unit/docx-style-authoring.test.ts:paragraph style authoring executes24 saved outcomes and atomic refusals",

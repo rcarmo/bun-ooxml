@@ -1,7 +1,8 @@
 import { OoxmlError } from "../errors.ts";
 import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
 export type {EffectiveRunFormatting,EffectiveFlag,FormattingContribution} from './effective-formatting.ts';
-import {formatRunProperties,directFontSizes as readDirectFontSizes} from './run-formatting.ts';
+import {formatRunProperties,directFontSizes as readDirectFontSizes,directRunFlags as readDirectRunFlags,type DirectRunFlags,type DirectRunPatch} from './run-formatting.ts';
+export type {DirectRunFlags} from './run-formatting.ts';
 import {readPageLayout,replacePageLayout,normalizePageLayout,type PageLayout} from './page-layout.ts';
 export type {PageLayout} from './page-layout.ts';
 import {directParagraphStyle,replaceParagraphStyle} from './paragraph-style.ts';
@@ -34,7 +35,7 @@ export type AddParagraphOptions = {
 };
 
 /** Direct overrides only: null removes the property, false is explicit off. */
-export type RunFormattingPatch = { bold?: boolean | null; italic?: boolean | null; fontSizePt?: number | null };
+export type RunFormattingPatch = DirectRunPatch;
 export type RunFormattingReceipt = { changedRuns: number };
 
 type NormalizedAddParagraphOptions = {
@@ -248,7 +249,12 @@ export class Paragraph {
     this.ensureFresh();return this.documentRef.inspectParagraphFontSizes(this.snapshot);
   }
 
-  /** Apply direct bold/italic/font size to every supported direct run. */
+  /** Read direct Boolean overrides in run order; null means absent. */
+  directRunFlags(): DirectRunFlags[] {
+    this.ensureFresh(); return this.documentRef.inspectParagraphRunFlags(this.snapshot);
+  }
+
+  /** Apply direct Boolean/font size overrides to every supported direct run. */
   setRunFormatting(patch: RunFormattingPatch): RunFormattingReceipt {
     this.ensureFresh();
     return this.documentRef.formatParagraphRuns(this.snapshot, patch);
@@ -698,6 +704,12 @@ export class Document {
   inspectParagraphFormatting(snapshot: ParagraphSnapshot): EffectiveRunFormatting[] {
     this.assertParagraphSnapshot(snapshot);
     return inspectEffectiveFormatting(this.opcPackage,DOCUMENT_PART,snapshot.element);
+  }
+
+  inspectParagraphRunFlags(snapshot: ParagraphSnapshot): DirectRunFlags[] {
+    this.assertParagraphSnapshot(snapshot);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    return readDirectRunFlags(this.xml,snapshot.element);
   }
 
   inspectParagraphFontSizes(snapshot: ParagraphSnapshot): Array<number|null> {
