@@ -55,12 +55,12 @@ test('mapping gate rejects fabricated execution credit and preserves dynamic rev
  expect(r.mappings[0].reviewReasons).toEqual(['body-loop']);expect(r.runtimeLeafCount).toBe(null);
 });
 
-test('committed ledgers enumerate slide-order, effective-formatting and XML assertions with known gaps',async()=>{
+test('committed ledgers enumerate slide-order, effective-formatting, XML and PPTX assertions with known gaps',async()=>{
  const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');
  const report=await outcomeMappingReport();
- expect(report.mappedDeclarations).toBe(38);
- expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-38);
- expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13]]);
+ expect(report.mappedDeclarations).toBe(44);
+ expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-44);
+ expect(report.ledgers.map(l=>[l.name,l.mappedDeclarations])).toEqual([['slide-order',13],['effective-formatting',12],['xml-values',13],['pptx-core',6]]);
  expect(report.mappings[0]!.caseKeys).toHaveLength(21);
  expect(report.mappings.find(m=>m.ledger==='effective-formatting')!.caseKeys).toHaveLength(25);
  expect(report.mappings.every(m=>m.gaps.length>0&&m.outcomes.length>0&&m.assertions.length>0&&m.executionCredit===false)).toBe(true);
@@ -154,4 +154,19 @@ test('XML ledger retains partial links for different fixtures and split edit pre
  expect(implicit.assertions).toContain("expect(attribute(doc.root, 'lang', XML_NS)).toBe('en')");
  expect(implicit.assertions.some(a=>a.startsWith('expect(XML_NS)'))).toBe(false);
  expect(xml.every(m=>m.executionCredit===false&&m.gaps.length>0)).toBe(true);
+});
+
+test('PPTX core mappings separate aggregate acceptance, bounded custody and newer notes operations', async () => {
+ const {outcomeMappingReport}=await import('../../scripts/outcome-mappings.ts');
+ const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='pptx-core');
+ expect(rows).toHaveLength(6);
+ expect(rows[0]!.scenarioIds).toHaveLength(4);expect(rows[0]!.assertions).toHaveLength(3);
+ expect(rows[0]!.gaps.join(' ')).toContain('aggregate status and counts');
+ const cross=rows.find(m=>m.testId.endsWith('replaces exact anchored text across runs and preserves untouched members'))!;
+ expect(cross.gaps.join(' ')).toContain('Only two unrelated saved members');
+ const noop=rows.find(m=>m.scenarioIds.includes('@id-pptx-bun-open-save-noop'))!;
+ expect(noop.caseKeys).toEqual(['@id-pptx-bun-open-save-noop']);
+ expect(noop.gaps.join(' ')).toContain('byte-open disk save');
+ expect(rows.every(m=>m.executionCredit===false&&m.status==='partial')).toBe(true);
+ expect(rows.flatMap(m=>m.scenarioIds).some(id=>id.includes('go-notes')||id.includes('slide-order'))).toBe(false);
 });

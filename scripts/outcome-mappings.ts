@@ -84,6 +84,7 @@ export async function outcomeMappingReport(){
   {name:'slide-order',test:'tests/unit/pptx-slide-order.test.ts',canonical:'workflows/pptx/slide-order.feature',sources:['tests/acceptance/slide-order.ts','src/pptx/index.ts','src/pptx/slide-order.ts']},
   {name:'effective-formatting',test:'tests/unit/docx-effective-formatting.test.ts',canonical:'workflows/docx/effective-formatting.feature',sources:['tests/acceptance/effective-formatting.ts','src/docx/index.ts','src/docx/effective-formatting.ts']},
   {name:'xml-values',test:'tests/unit/xml.test.ts',canonical:'workflows/xml/parsing.feature',sources:['tests/acceptance/core.ts','tests/acceptance/xml-values.ts','src/xml/index.ts','src/errors.ts']},
+  {name:'pptx-core',test:'tests/unit/pptx.test.ts',canonical:'workflows/native/pptx-text.feature',sources:['tests/acceptance/pptx.ts','tests/acceptance/pptx-custody.ts','src/pptx/index.ts','src/opc/package.ts','src/opc/zip.ts','scripts/acceptance.ts','scripts/fixture-inputs.ts']},
  ];
  const sets:OutcomeMappingSet[]=[];
  for(const registration of registrations){

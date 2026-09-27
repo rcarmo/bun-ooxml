@@ -53,8 +53,8 @@ Concurrent path replacement is outside these tests.
 
 ## Requirement mappings
 
-The slide-order, effective-formatting and XML-value reports associate literal
-assertions with shared scenarios. They also list gaps, such as an untested result field or
+The slide-order, effective-formatting, XML-value and PPTX-core reports associate
+literal assertions with shared scenarios. They also list gaps, such as an untested result field or
 an input variant missing from the scenario. Each report has its own source hashes
 and required files; one cannot supply a missing reference for another.
 
@@ -64,6 +64,15 @@ scenario, so it stays scenario-only. Positive and negative edit declarations
 also map separately. `tests/acceptance/xml-values.ts` executes the shared value
 inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
+
+The PPTX-core ledger maps `tests/unit/pptx.test.ts` to the original four text/notes
+scenarios and one path/byte-open/no-op-save scenario. Its aggregate acceptance
+test checks report status and counts; the delegated step assertions are recorded
+separately in source. Cross-run editing compares two unrelated saved payloads,
+without a complete saved-member comparison. The no-op acceptance case saves to
+a real temporary path and compares both its file bytes and reopened archive with
+the original fixture. Rendering and newer notes-editing operations have separate
+tests.
 
 Unresolved registrations, missing assertions or conflicting source records fail
 validation. The descriptions still need human review: matching an assertion's

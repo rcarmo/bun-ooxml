@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/pptx.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/pptx.test.ts": "ec2a2c0cf5bfd04929973c3d54f82584384141dfda789dc7aa4b48b3b387da7f",
+    "tests/acceptance/pptx.ts": "7e4ab7286825d0a5aeb3cda3284bb1afa39e6a9986eca45d4432ad3eaab31e1f",
+    "tests/acceptance/pptx-custody.ts": "19a5adee9d24905df90ae1787b3ffb67cb4123ea40d1913cf940ce4fbd368819",
+    "src/pptx/index.ts": "bb196b29cd35f295c8c22f3c5839fce7883b5ccc5c7cb2cca37c4724e32d9a59",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+    "scripts/acceptance.ts": "5261e255bc7ba84b861469994a1e4e307090fd222524f93826b8c5a84a3a6ac2",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/native/pptx-text.feature": "d2e710f66e78dfa0beabf5d7076d7c67fe4e686744f008a2a134122749cb5444"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-order-notes-read",
+        "@id-pptx-readable-unsupported-topology",
+        "@id-pptx-cross-run-replace",
+        "@id-pptx-stale-anchor-refusal"
+      ],
+      "caseKeys": [
+        "@id-pptx-order-notes-read",
+        "@id-pptx-readable-unsupported-topology",
+        "@id-pptx-cross-run-replace",
+        "@id-pptx-stale-anchor-refusal"
+      ],
+      "assertions": [
+        "expect(report.status).toBe(\"passed\")",
+        "expect(report.inventory.features.implemented).toBe(1)",
+        "expect(report.execution.cases.passed).toBe(4)"
+      ],
+      "outcomes": [
+        "The isolated shared-feature project selects exactly four original PPTX scenarios; runAcceptance returns passed, one implemented feature and four passing cases."
+      ],
+      "gaps": [
+        "Direct assertions inspect aggregate status and counts, not individual Then values. Outcome checks reside in the pinned acceptance bindings; this declaration gives no independent assertion credit to newer notes or no-op scenarios."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-order-notes-read"
+      ],
+      "caseKeys": [
+        "@id-pptx-order-notes-read"
+      ],
+      "assertions": [
+        "expect(result.titles).toEqual([\n      \"Chapter 5\",\n      \"Frankenstein Lecture Series\",\n      \"Chapter 4\",\n      \"Chapter 2\",\n      \"Chapter 3\",\n    ])",
+        "expect(result.notes).toEqual([\n      \"Key themes:\\ncreation, responsibility, isolation\\n\\nVisible date: 2026-03-12\",\n      \"Compare to Prometheus myth\",\n    ])",
+        "expect(result.orderedDiff).toEqual({\n      added: [],\n      changed: [],\n      removed: [],\n    })",
+        "expect(result.orderedBytesAfterRead).toEqual(result.orderedBytes)",
+        "expect(result.minimalError.code).toBe(\"PPTX_NOTES_MISSING\")",
+        "expect(result.minimalBytesAfterRefusal).toEqual(result.minimalSource)",
+        "expect(result.minimalNames.some((name) => name.startsWith(\"ppt/notesSlides/\"))).toBeFalse()"
+      ],
+      "outcomes": [
+        "Five expected slide titles follow relationship order; two notes strings include the expected blank line and visible date. Ordered package diff is empty and whole archive bytes match. Missing notes throw PPTX_NOTES_MISSING with unchanged archive and no created notes parts."
+      ],
+      "gaps": [
+        "Only first and last slides have notes text asserted; the test does not enumerate every paragraph, notes field or package. Rendering and write support are untested here."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / exposes line breaks and field text in inspectText and refuses editing that topology atomically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-readable-unsupported-topology"
+      ],
+      "caseKeys": [
+        "@id-pptx-readable-unsupported-topology"
+      ],
+      "assertions": [
+        "expect(result.paragraphText).toBe(\"Chapter\\n7 Notes\")",
+        "expect(result.paragraphRuns).toEqual([\n      { text: \"Chapter\", attrs: { b: \"1\" } },\n      { text: \"\\n\", attrs: { lang: \"en-US\" } },\n      { text: \"7\", attrs: { i: \"1\" } },\n      { text: \" Notes\", attrs: { u: \"sng\" } },\n    ])",
+        "expect(result.error.code).toBe(\"PPTX_UNSUPPORTED_TEXT_TOPOLOGY\")",
+        "expect(result.diffAfterRefusal).toEqual({\n      added: [],\n      changed: [],\n      removed: [],\n    })",
+        "expect(result.bytesAfterRefusal).toEqual(result.sourceBytes)"
+      ],
+      "outcomes": [
+        "Paragraph Chapter LF 7 Notes and four text/run-attribute entries match exactly. Attempted anchored editing returns PPTX_UNSUPPORTED_TEXT_TOPOLOGY, empty package diff and unchanged source archive bytes."
+      ],
+      "gaps": [
+        "One synthetic paragraph from the real template is asserted; broader field types, formatting inheritance and rendering are outside this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / replaces exact anchored text across runs and preserves untouched members",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-cross-run-replace"
+      ],
+      "caseKeys": [
+        "@id-pptx-cross-run-replace"
+      ],
+      "assertions": [
+        "expect(result.reopenedTitle).toBe(\"Friendstein\")",
+        "expect(result.changedParts).toEqual({\n      added: [],\n      changed: [\"ppt/slides/slide1.xml\"],\n      removed: [],\n    })",
+        "expect(result.customMemberBytes).toEqual(encoder.encode(\"keep-me-safe\"))",
+        "expect(result.docPropsBytes).toEqual(expectedDocProps)",
+        "expect(result.titleRuns).toEqual([\n      { text: \"Fr\", attrs: { b: \"1\" } },\n      { text: \"iend\", attrs: { b: \"1\" } },\n      { text: \"stein\", attrs: { u: \"sng\" } },\n    ])"
+      ],
+      "outcomes": [
+        "A path save and reopen reads Friendstein; in-memory diff lists only slide1.xml changed. Saved custom/data.bin and docProps/app.xml bytes match, and saved title runs retain the exact asserted starting-run formatting."
+      ],
+      "gaps": [
+        "Only two unrelated saved members are compared; the in-memory changed-part list is not a complete saved-archive member diff. Other run properties and rendering are not asserted."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / refuses stale anchors atomically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-stale-anchor-refusal"
+      ],
+      "caseKeys": [
+        "@id-pptx-stale-anchor-refusal"
+      ],
+      "assertions": [
+        "expect(result.error.code).toBe(\"PPTX_STALE_ANCHOR\")",
+        "expect(result.reopenedTitle).toBe(\"Creature\")",
+        "expect(result.bytesAfterRefusal).toEqual(result.bytesAfterSuccess)"
+      ],
+      "outcomes": [
+        "A reused anchor throws PPTX_STALE_ANCHOR; post-refusal bytes equal the preceding successful edit, and reopening reads Creature."
+      ],
+      "gaps": [
+        "One held anchor and one title are tested; foreign handles, other cache changes and all untouched member comparisons are outside this declaration."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/pptx.test.ts:pptx slice / opens from path and bytes and saves a no-op deck byte-identically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-pptx-bun-open-save-noop"
+      ],
+      "caseKeys": [
+        "@id-pptx-bun-open-save-noop"
+      ],
+      "assertions": [
+        "expect(fromPath.slides[0]?.inspectText(\"unit.open.path\")[0]?.text).toBe(\"Frankenstein\")",
+        "expect(fromBytes.package.toBytes()).toEqual(sourceBytes)",
+        "expect(Uint8Array.from(await Bun.file(output).bytes())).toEqual(sourceBytes)"
+      ],
+      "outcomes": [
+        "The pinned title-slide fixture opens by path and bytes. The first path-inspected title is Frankenstein, byte-open serialization equals the input, and a path save delivers exact original archive bytes."
+      ],
+      "gaps": [
+        "One no-op presentation is tested. The native declaration reads saved bytes but does not reopen the saved path; the separate acceptance binding adds that check. Path-open toBytes and byte-open disk save are not independently asserted. No edited-presentation serialization or rendering claim."
+      ]
+    }
+  ]
+}
