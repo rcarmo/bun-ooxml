@@ -77,6 +77,27 @@ also map separately. `tests/acceptance/xml-values.ts` executes the shared value
 inputs and checks each result; negative controls corrupt values and metadata to
 check that these assertions fail. The ledger itself does not execute tests.
 
+The [XML-comparison ledger](xml-comparison-mappings.json) maps 14 declarations
+and 42 direct expressions. The [package-comparison ledger](package-comparison-mappings.json)
+maps 12 declarations and 32 expressions. Their two aggregate wrappers link to
+ten XML cases and one package case; the other 24 records remain scenario-only.
+All 347 prior records are unchanged.
+
+XML equivalence is conservative: namespace-sensitive values, significant text,
+comments and processing instructions remain meaningful. Unsafe identical inputs
+can compare false. This is not canonical XML, schema validation or signature
+verification. Package comparison first admits both archives, then classifies
+member payloads; it does not require an OPC graph. Exact payload equality stays
+separate from XML equivalence and from ZIP-byte equality. The existing OPC byte
+diff still reports prefix-only rewrites as changed.
+
+The package binding checks four lists, not `unchanged`. Native controls check
+additional classifications and input custody. The category-union test has only
+one member per populated category, so it does not independently test within-list
+sorting. The XML depth test provides accepted/refused boundary examples, not
+timing or allocation evidence. No mapping establishes filesystem readback or
+Office rendering.
+
 The [PPTX-core ledger](pptx-core-mappings.json) maps three suites to text, notes
 and no-op-save scenarios. The six original `pptx.test.ts` records are unchanged.
 Cross-run editing compares two unrelated saved payloads; the no-op acceptance

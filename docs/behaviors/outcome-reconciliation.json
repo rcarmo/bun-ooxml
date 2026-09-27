@@ -4,8 +4,8 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 905,
-  "mappedDeclarations": 347,
+  "totalDeclarations": 910,
+  "mappedDeclarations": 373,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
@@ -107,6 +107,17 @@
     "tests/acceptance/style-authoring.ts": "e3439546d2576bbfd267d2dc5a6be41612d25ca25a32d3712c970db614fdf3fe",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "workflows/docx/style-authoring.feature": "d4d4224f70d7b18dc963a7bf6e2fd194cf64f5757652e1ce47df9f47ab32502e",
+    "tests/unit/xml-comparison.test.ts": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+    "tests/acceptance/xml-comparison.ts": "5a3f7a3058f4682b2cd5421da64be76d213fd67b966aa45dfa1bb720a2f75f3b",
+    "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
+    "src/xml/comparison.ts": "19a2252c38a7fa20b539dce9af4fc06a39c95f27204c1c46a73e66065424609e",
+    "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
+    "workflows/xml/comparison.feature": "b700a3da8670cb048aa3f836c193f4533908730c185847f63e167e59c48f5e93",
+    "tests/unit/package-comparison.test.ts": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+    "tests/acceptance/package-comparison.ts": "d68481c2680ca81e709289ce7942128a3bb1e831faeac1c9902bedb457547adc",
+    "src/opc/comparison.ts": "95584fd6df9b349d4f0a6ec39d3edc54790f11cbbbb0ab8ddf83d4a5a33d410f",
+    "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
+    "workflows/package/semantic-diff.feature": "eebe822867a6f83d77351a0590dd81d7e929dc13f2d1add0bfcbbc44c5e90ca7",
     "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de",
     "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
     "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
@@ -415,6 +426,56 @@
       }
     },
     {
+      "name": "xml-comparison",
+      "scopePaths": [
+        "tests/unit/xml-comparison.test.ts"
+      ],
+      "mappedDeclarations": 14,
+      "sourceSha256": {
+        "tests/unit/xml-comparison.test.ts": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+        "tests/acceptance/xml-comparison.ts": "5a3f7a3058f4682b2cd5421da64be76d213fd67b966aa45dfa1bb720a2f75f3b",
+        "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
+        "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+        "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "src/xml/comparison.ts": "19a2252c38a7fa20b539dce9af4fc06a39c95f27204c1c46a73e66065424609e",
+        "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+        "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/xml/comparison.feature": "b700a3da8670cb048aa3f836c193f4533908730c185847f63e167e59c48f5e93"
+      }
+    },
+    {
+      "name": "package-comparison",
+      "scopePaths": [
+        "tests/unit/package-comparison.test.ts"
+      ],
+      "mappedDeclarations": 12,
+      "sourceSha256": {
+        "tests/unit/package-comparison.test.ts": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+        "tests/acceptance/package-comparison.ts": "d68481c2680ca81e709289ce7942128a3bb1e831faeac1c9902bedb457547adc",
+        "src/opc/comparison.ts": "95584fd6df9b349d4f0a6ec39d3edc54790f11cbbbb0ab8ddf83d4a5a33d410f",
+        "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
+        "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+        "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
+        "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+        "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
+        "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
+        "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+        "src/xml/comparison.ts": "19a2252c38a7fa20b539dce9af4fc06a39c95f27204c1c46a73e66065424609e",
+        "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
+        "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+        "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+        "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+        "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+        "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+        "workflows/package/semantic-diff.feature": "eebe822867a6f83d77351a0590dd81d7e929dc13f2d1add0bfcbbc44c5e90ca7"
+      }
+    },
+    {
       "name": "formula-references",
       "scopePaths": [
         "tests/unit/xlsx-range.test.ts",
@@ -443,6 +504,11 @@
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / workflow refuses and preserves an existing output when the workbook has array followers",
     "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / executes every cache boundary Given/When/Then",
+    "bun:tests/unit/comparison-mappings.test.ts:comparison ledgers cover 26 declarations and 74 expressions preserving 347 predecessor mappings",
+    "bun:tests/unit/comparison-mappings.test.ts:comparison mapping gaps preserve aggregate wrappers QName policies resource and unchanged-list limits",
+    "bun:tests/unit/comparison-mappings.test.ts:comparison scopes declarations literal assertions and canonical case ownership cannot shrink or cross features",
+    "bun:tests/unit/comparison-mappings.test.ts:comparison runtime binding fixture-builder and canonical pins fail independently when stale or absent",
+    "bun:tests/unit/comparison-mappings.test.ts:comparison reconciliation preserves inputs direct and deferred assertions dynamic flags and unknown leaves",
     "bun:tests/unit/content-types.test.ts:opc content type helpers / getContentType resolves defaults and overrides across namespace prefixes",
     "bun:tests/unit/content-types.test.ts:opc content type helpers / setPartContentType is an exact no-op when a default already yields the requested type",
     "bun:tests/unit/content-types.test.ts:opc content type helpers / adds an override to a self-closing prefixed root without rewriting names",
@@ -702,18 +768,6 @@
     "bun:tests/unit/package-admission.test.ts:all thirteen shared admission cases execute concrete refusals with positive controls",
     "bun:tests/unit/package-admission.test.ts:admission checks CRC, refuses external DTDs and handles archive views without borrowing backing bytes",
     "bun:tests/unit/package-admission.test.ts:syntax-only XML validation handles deep segmented text without ancestor text materialisation",
-    "bun:tests/unit/package-comparison.test.ts:archive comparison separates equivalent XML, changed binary, additions and removals without requiring an OPC graph",
-    "bun:tests/unit/package-comparison.test.ts:exact payload equality is unchanged even when ZIP storage or metadata differ",
-    "bun:tests/unit/package-comparison.test.ts:only XML suffixes receive equivalence checks and semantically significant XML stays changed",
-    "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
-    "bun:tests/unit/package-comparison.test.ts:each archive passes ZIP integrity and independent resource budgets before classification",
-    "bun:tests/unit/package-comparison.test.ts:UTF encoding differences can be equivalent but namespace-sensitive values cannot",
-    "bun:tests/unit/package-comparison.test.ts:category lists are sorted, disjoint, exhaustive and detached across comparisons",
-    "bun:tests/unit/package-comparison.test.ts:empty archives and empty directory members do not invent file differences",
-    "bun:tests/unit/package-comparison.test.ts:existing OPC byte/content-type diff retains its behavior for XML whitespace changes",
-    "bun:tests/unit/package-comparison.test.ts:the exact shared package semantic-diff case compares concrete table inputs",
-    "bun:tests/unit/package-comparison.test.ts:duplicate member names cannot collapse into a misleading set report",
-    "bun:tests/unit/package-comparison.test.ts:prefix-only XML goes into the new equivalence list but stays changed in OPC byte diff",
     "bun:tests/unit/package-diff.test.ts:diffPackages / raw fixture no-op diffs are empty, preserve exact source bytes, and return detached reports",
     "bun:tests/unit/package-diff.test.ts:diffPackages / ignores ZIP metadata-only changes",
     "bun:tests/unit/package-diff.test.ts:diffPackages / reports opaque payload edits with hashes, lengths, content types, and detached part records",
@@ -910,20 +964,6 @@
     "bun:tests/unit/xml-byte-snapshot.test.ts:repeated edits and mutated changed output do not affect source ownership or target reuse",
     "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-byte-snapshot.test.ts:intrinsic view bounds reject spoofed length/shared storage without calling caller getters",
-    "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
-    "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
-    "bun:tests/unit/xml-comparison.test.ts:OPC relationship order is ignored only for unambiguous relation collections",
-    "bun:tests/unit/xml-comparison.test.ts:prefix-valued attributes retain bindings including inherited and implicit namespaces",
-    "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
-    "bun:tests/unit/xml-comparison.test.ts:comparison supports matching UTF encodings without changing either input",
-    "bun:tests/unit/xml-comparison.test.ts:comparison retains standalone intent and refuses unsupported XML versions",
-    "bun:tests/unit/xml-comparison.test.ts:MC prefix lists and nested rebinding are not lost during namespace normalization",
-    "bun:tests/unit/xml-comparison.test.ts:all ten shared comparator cases execute with exact booleans and input custody",
-    "bun:tests/unit/xml-comparison.test.ts:deep segmented comparison is bounded without repeated ancestor text and depth violations return false",
-    "bun:tests/unit/xml-comparison.test.ts:unprefixed xsi:type values retain the default namespace that resolves their QName",
-    "bun:tests/unit/xml-comparison.test.ts:MC Choice Requires prefix lists retain bindings even without colon-valued attributes",
-    "bun:tests/unit/xml-comparison.test.ts:MC MustUnderstand lists and QName-like text retain in-scope namespace bindings",
-    "bun:tests/unit/xml-comparison.test.ts:processing instruction spacing is retained rather than trimmed by parser events",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
@@ -10305,6 +10345,709 @@
       "unresolved": [],
       "executionCredit": false,
       "ledger": "docx-style-authoring"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-significant-content"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<a xmlns=\"u\" z=\"2\" x=\"&amp;\"/>','<p:a xmlns:p=\"u\" x=\"&#38;\" z=\"2\"></p:a>')).toBe(true)",
+        "expect(eq('<a xmlns:p=\"u\" p:x=\"yes\"/>','<a xmlns:q=\"u\" q:x=\"yes\"/>')).toBe(true)",
+        "expect(eq('<a x=\"yes\"/>','<a xmlns:p=\"u\" p:x=\"yes\"/>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Expanded element/attribute names and decoded attribute values compare equivalent despite prefix, attribute-order, entity and empty-element spelling differences; qualifying a formerly unqualified attribute compares false."
+      ],
+      "gaps": [
+        "Native general-element extension does not execute the combined OPC-order shared input. No input-custody assertion here, no canonical XML output or schema equivalence claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-significant-content",
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(a!,b!)).toBe(false)",
+        "expect(eq('<a>x<![CDATA[&y]]>z</a>','<a>x&amp;yz</a>')).toBe(true)",
+        "expect(eq('<a>one\\r\\ntwo</a>','<a>one\\ntwo</a>')).toBe(true)",
+        "expect(eq('<a>&#13;</a>','<a>\\r</a>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Moving tails, swapping children, changing comment or PI target/data, and changing text whitespace compare false. CDATA/entity text and CRLF/LF spellings compare true, while character-reference CR differs from a literal normalized CR."
+      ],
+      "gaps": [
+        "Finite native matrix mixes shared-like and additional inputs; no exact case keys assigned. It checks Boolean results only, with no input-byte custody or general lexical normalization proof.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:OPC relationship order is ignored only for unambiguous relation collections",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-significant-content"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}${a}</Relationships>`)).toBe(true)",
+        "expect(eq(`<Relationships xmlns=\"other\">${a}${b}</Relationships>`,`<Relationships xmlns=\"other\">${b}${a}</Relationships>`)).toBe(false)",
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`,`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`)).toBe(false)",
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}text${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}text${a}</Relationships>`)).toBe(false)"
+      ],
+      "outcomes": [
+        "Reordered unambiguous OPC-namespace relationships compare true; reordered other-namespace collections, duplicate IDs and mixed-text relationship collections compare false."
+      ],
+      "gaps": [
+        "Native relationship elements omit Type, so comparator acceptance is not OPC graph/schema validation. Only the first pair tests order-insensitivity; duplicate/mixed inputs return false even without a general invalid-package claim. No byte custody here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:prefix-valued attributes retain bindings including inherited and implicit namespaces",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:p=\"v\" value=\"p:x\"/>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\"><b value=\"p:x\"/></a>','<a xmlns:p=\"v\"><b value=\"p:x\"/></a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:q=\"u\" value=\"q:x\"/>')).toBe(false)",
+        "expect(eq('<a value=\"xml:lang\"/>','<a value=\"xml:lang\"/>')).toBe(true)"
+      ],
+      "outcomes": [
+        "Changed direct or inherited bindings behind the same prefix-valued attribute compare false; spelling the value with a different prefix also compares false even for the same URI. The implicit xml prefix compares true with itself."
+      ],
+      "gaps": [
+        "Native QName-like value policy extension uses u/v rather than the shared urn values. Lexically different attribute values remain different; this is not general QName-value canonicalization. No input-custody assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-unsafe-input"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(x,x)).toBe(false)",
+        "expect(xmlEquivalent(Uint8Array.of(255),Uint8Array.of(255))).toBe(false)",
+        "expect(eq('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a/>','<a/>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Malformed XML, DTDs, duplicate attributes and an unbound QName-like value compare false even against themselves; invalid UTF-8 bytes and a conflicting declared encoding also compare false."
+      ],
+      "gaps": [
+        "Native unsafe-input matrix includes shared malformed text and related DTD input but differs in entity content. False is a conservative refusal, not an error-code diagnosis. No package-admission or input-byte custody assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:comparison supports matching UTF encodings without changing either input",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xmlEquivalent(a,b)).toBe(true)",
+        "expect(a).toEqual(beforeA)",
+        "expect(b).toEqual(beforeB)"
+      ],
+      "outcomes": [
+        "Equivalent snow text in UTF-16LE and UTF-8 compares true and both caller buffers remain byte-identical."
+      ],
+      "gaps": [
+        "Native encoding/custody extension, not a shared UTF-8 pair. No UTF-16BE case here, file save/reopen, archive semantics or general transcoding claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:comparison retains standalone intent and refuses unsupported XML versions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-significant-content",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<?xml version=\"1.0\"?><a/>','<a/>')).toBe(true)",
+        "expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<a/>')).toBe(false)",
+        "expect(eq('<?xml version=\"1.1\"?><a/>','<?xml version=\"1.1\"?><a/>')).toBe(false)",
+        "expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<?xml-standalone yes?><a/>')).toBe(false)"
+      ],
+      "outcomes": [
+        "An ordinary XML1.0 declaration can compare equal to absence; standalone=yes versus absence differs, XML1.1 compares false against itself, and a similarly named PI cannot substitute for standalone intent."
+      ],
+      "gaps": [
+        "Native declaration policy extension beyond shared inputs. Boolean results only; no general XML1.1 parser, canonical XML or signature validation claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:MC prefix lists and nested rebinding are not lost during namespace normalization",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"u\" mc:Ignorable=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"v\" mc:Ignorable=\"p\"/>`)).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\"><b xmlns:p=\"v\" value=\"p:x\"/></a>','<a xmlns:p=\"u\"><b value=\"p:x\"/></a>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Rebinding mc:Ignorable prefix tokens or rebinding a prefix used in a nested attribute changes comparison to false."
+      ],
+      "gaps": [
+        "Native markup-compatibility namespace-preservation extension. It does not execute MC fallback/selection or infer application compatibility; no caller-buffer check.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:all ten shared comparator cases execute with exact booleans and input custody",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-significant-content",
+        "@id-xml-comparison-prefix-attribute-binding",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-significant-content|{\"variant\":\"text whitespace\",\"left\":\"<a><b> x </b></a>\",\"right\":\"<a><b>x</b></a>\"}",
+        "@id-xml-comparison-significant-content|{\"variant\":\"child order\",\"left\":\"<a><b/><c/></a>\",\"right\":\"<a><c/><b/></a>\"}",
+        "@id-xml-comparison-significant-content|{\"variant\":\"attribute value\",\"left\":\"<a v=\\\"1\\\"/>\",\"right\":\"<a v=\\\"2\\\"/>\"}",
+        "@id-xml-comparison-prefix-attribute-binding",
+        "@id-xml-comparison-unsafe-input|{\"variant\":\"DTD-bearing\",\"input\":\"<!DOCTYPE a [<!ENTITY e \\\"text\\\">]><a>&e;</a>\"}",
+        "@id-xml-comparison-unsafe-input|{\"variant\":\"malformed XML\",\"input\":\"broken\"}",
+        "@id-xml-comparison-processing-instructions-and-comments|{\"variant\":\"prolog PI target\",\"left\":\"<?one x?><a/>\",\"right\":\"<?two x?><a/>\"}",
+        "@id-xml-comparison-processing-instructions-and-comments|{\"variant\":\"in-document PI target\",\"left\":\"<a><?one x?></a>\",\"right\":\"<a><?two x?></a>\"}",
+        "@id-xml-comparison-processing-instructions-and-comments|{\"variant\":\"prolog comment content\",\"left\":\"<!--old--><a/>\",\"right\":\"<!--new--><a/>\"}"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(10)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and exactly ten passed shared cases; pinned bindings compare the requested Boolean and retain both UTF-8 input buffers."
+      ],
+      "gaps": [
+        "Only aggregate result/count assertions occur in this declaration; semantic and custody checks are delegated. No file/OPC graph, transport, canonicalization, rendering or independent-reader evidence is provided.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:deep segmented comparison is bounded without repeated ancestor text and depth violations return false",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-unsafe-input"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(source,source)).toBe(true)",
+        "expect(eq(deep,deep)).toBe(false)"
+      ],
+      "outcomes": [
+        "A 256-level segmented XML document compares true against itself; a 257-level input compares false."
+      ],
+      "gaps": [
+        "Native accepted/refused depth boundary. It does not assert elapsed timing, allocations, peak memory or prove absence of repeated ancestor work merely from success; no source custody here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:unprefixed xsi:type values retain the default namespace that resolves their QName",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:one\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`,`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:two\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`)).toBe(false)"
+      ],
+      "outcomes": [
+        "Unprefixed xsi:type Type values under different default namespaces compare false although the element namespace stays fixed."
+      ],
+      "gaps": [
+        "Native schema-instance QName-context policy, not schema validation or type resolution. No positive counterpart or buffer custody asserted here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:MC Choice Requires prefix lists retain bindings even without colon-valued attributes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" Requires=\"p\"/>`,`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" Requires=\"p\"/>`)).toBe(false)"
+      ],
+      "outcomes": [
+        "MC Choice Requires tokens with identical text but different bound URIs compare false."
+      ],
+      "gaps": [
+        "Native MC prefix-list extension; it does not choose a branch, process fallback or prove rendered compatibility. No input-custody assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:MC MustUnderstand lists and QName-like text retain in-scope namespace bindings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-significant-content"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" mc:MustUnderstand=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" mc:MustUnderstand=\"p\"/>`)).toBe(false)",
+        "expect(eq(`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`,`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`)).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\">p:x</a>','<a xmlns:p=\"urn:two\">p:x</a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\"><b>p<![CDATA[:x]]></b></a>','<a xmlns:p=\"urn:two\"><b>p:x</b></a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\">p<![CDATA[:x]]></a>','<a xmlns:p=\"urn:one\">p:x</a>')).toBe(true)"
+      ],
+      "outcomes": [
+        "Changed MustUnderstand bindings, missing tokens and changed bindings behind QName-like text compare false. Splitting a QName-like value across text/CDATA does not hide a changed binding, and same-binding segmented text compares true."
+      ],
+      "gaps": [
+        "Native conservative namespace-sensitive text/MC policy, not schema typing or application execution. Literal colon-looking text is treated conservatively even without a known QName type; no buffer custody here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:processing instruction spacing is retained rather than trimmed by parser events",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<?p x?><a/>','<?p  x?><a/>')).toBe(false)",
+        "expect(eq('<a><?p\\tx?></a>','<a><?p x?></a>')).toBe(false)",
+        "expect(eq('<?p?><a/>','<?p ?><a/>')).toBe(false)",
+        "expect(eq('<?p\\r\\nx?><a/>','<?p\\nx?><a/>')).toBe(true)"
+      ],
+      "outcomes": [
+        "PI separator changes, tab versus space and empty versus space-only data compare false; CRLF versus LF line endings compare true."
+      ],
+      "gaps": [
+        "Native processing-instruction data/spacing extension beyond shared target changes. No general whitespace-insensitive policy, input-custody or package comparison assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "xml-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:archive comparison separates equivalent XML, changed binary, additions and removals without requiring an OPC graph",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:['c.bin'],removed:['removed.bin'],changed:['b.bin'],equivalent_xml:['a.xml'],unchanged:[]})",
+        "expect(before).toEqual(b)",
+        "expect(after).toEqual(a)"
+      ],
+      "outcomes": [
+        "Graph-free archives classify a.xml as equivalent XML, b.bin as changed, c.bin as added and removed.bin as removed, with empty unchanged and exact caller-buffer custody."
+      ],
+      "gaps": [
+        "Native input adds a removed member unlike the shared no-removal case. There is no OPC graph requirement or Office document interpretation; categories concern admitted member payloads, not rendered semantics.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:exact payload equality is unchanged even when ZIP storage or metadata differ",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(before).not.toEqual(after)",
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:['a.xml','opaque.bin']})"
+      ],
+      "outcomes": [
+        "Stored versus deflated/reordered archives are explicitly byte-different while equal a.xml and opaque.bin payloads are both unchanged and all other lists empty."
+      ],
+      "gaps": [
+        "Native ZIP storage/order extension. It does not individually mutate timestamps or every ZIP metadata field; input hashes/custody are not asserted here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:only XML suffixes receive equivalence checks and semantically significant XML stays changed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['comment.xml','same.bin','value.xml'],equivalent_xml:['ITEM.XML','_rels/.rels'],unchanged:[]})"
+      ],
+      "outcomes": [
+        "Only XML/relationship suffixes receive equivalence: uppercase ITEM.XML and _rels/.rels are equivalent, while identically structured same.bin remains changed and significant whitespace/comment changes stay changed."
+      ],
+      "gaps": [
+        "Native extension demonstrates case-insensitive suffix policy, not MIME or OPC graph validation; the .rels payload is generic XML. No file save or input-buffer custody in this declaration.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>comparePackageArchives(before!,after!)).toThrow(expect.objectContaining({code:'XML_DTD_FORBIDDEN'}))",
+        "expect(before).toEqual(b)",
+        "expect(after).toEqual(a)"
+      ],
+      "outcomes": [
+        "DTD-bearing XML in identical, newly added or removed inputs throws XML_DTD_FORBIDDEN before a report is returned; both input buffers remain exact after each refusal."
+      ],
+      "gaps": [
+        "Native admission-control matrix. Throws are package admission, distinct from standalone xmlEquivalent returning false. No partial report, schema validation or disk custody claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:each archive passes ZIP integrity and independent resource budgets before classification",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>comparePackageArchives(valid,corrupt)).toThrow(expect.objectContaining({code:'zip-crc-mismatch'}))",
+        "expect(()=>comparePackageArchives(valid,large,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}))",
+        "expect(()=>comparePackageArchives(large,valid,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}))",
+        "expect(comparePackageArchives(valid,valid,{maxEntries:1,maxEntryBytes:4,maxTotalBytes:4}).unchanged).toEqual(['a.xml'])",
+        "expect(()=>comparePackageArchives(valid,valid,{maxEntries:NaN})).toThrow(expect.objectContaining({code:'package-admission-limit-invalid'}))"
+      ],
+      "outcomes": [
+        "A corrupted second archive throws zip-crc-mismatch; entry-count overflow on either side throws zip-too-many-entries. Exact entry/total-byte budgets permit a valid archive and NaN maxEntries throws package-admission-limit-invalid."
+      ],
+      "gaps": [
+        "Native finite admission/budget matrix, not a measurement of timing/allocation or a proof of every limit independently. CRC corruption is tested on the second archive only; no caller-buffer comparison here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:UTF encoding differences can be equivalent but namespace-sensitive values cannot",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['q.xml'],equivalent_xml:['text.xml'],unchanged:[]})"
+      ],
+      "outcomes": [
+        "UTF-16LE versus UTF-8 snow-text XML is equivalent while changed namespace bindings in a QName-like attribute remain changed, with exact expected category arrays."
+      ],
+      "gaps": [
+        "Native codec/namespace-value extension; no BE, input-buffer custody, OPC relationship semantics or saved-file claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:category lists are sorted, disjoint, exhaustive and detached across comparisons",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(new Set(all).size).toBe(all.length)",
+        "expect([...all].sort()).toEqual(['a.xml','b.bin','m.bin','r.bin','z.bin'])",
+        "expect(reverse.added).toEqual(result.removed)",
+        "expect(reverse.removed).toEqual(result.added)",
+        "expect(reverse.changed).toEqual(result.changed)",
+        "expect(reverse.equivalent_xml).toEqual(result.equivalent_xml)",
+        "expect(comparePackageArchives(before,after).changed).toEqual(['m.bin'])"
+      ],
+      "outcomes": [
+        "The union of categories is duplicate-free and covers five member names. Reversing inputs swaps additions/removals and retains changed/equivalent lists; mutating a returned changed list does not affect a new result."
+      ],
+      "gaps": [
+        "Every populated category has a single member in this test, so its title does not independently prove within-list sorting. Reverse unchanged is not compared; no mutation of the other returned arrays or caller bytes is tested.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:empty archives and empty directory members do not invent file differences",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(empty,directory)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:[]})"
+      ],
+      "outcomes": [
+        "An empty archive and an archive containing only an empty directory member produce five empty category arrays."
+      ],
+      "gaps": [
+        "Native empty/directory extension. No nonempty-directory, invalid-directory, physical filesystem or general archive-fidelity claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:existing OPC byte/content-type diff retains its behavior for XML whitespace changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(diffPackages(before,after).changed).toContain('word/document.xml')",
+        "expect(comparePackageArchives(original,changed).changed).toContain('word/document.xml')"
+      ],
+      "outcomes": [
+        "Adding whitespace inside the main Word document element makes both the existing OPC diff and archive comparator include word/document.xml as changed."
+      ],
+      "gaps": [
+        "Native coexistence regression checks list inclusion, not exact full category reports. The comparator deliberately retains this whitespace; no document rendering, saved path or caller-buffer equality asserted.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:the exact shared package semantic-diff case compares concrete table inputs",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)",
+        "expect(result.counts.steps.passed).toBe(7)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures, one passed shared case and all seven steps passed. Pinned bindings construct exact ordered table inputs, compare four expected lists and preserve both input buffers."
+      ],
+      "gaps": [
+        "Only aggregate result/count assertions occur here; semantic checks are delegated. The shared scenario does not compare unchanged, although the native first test checks that list. ZIP_STORED graph-free inputs do not establish OPC validity or save/reopen behavior.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "explicit-case-keys",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:duplicate member names cannot collapse into a misleading set report",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>comparePackageArchives(bad,good)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}))",
+        "expect(()=>comparePackageArchives(good,bad)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}))"
+      ],
+      "outcomes": [
+        "Duplicate member names on either side throw zip-duplicate-entry rather than collapsing to a report."
+      ],
+      "gaps": [
+        "Native ZIP admission extension; it does not assert input-buffer custody, differing duplicate payload policies or the error message.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:prefix-only XML goes into the new equivalence list but stays changed in OPC byte diff",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(original,modified).equivalent_xml).toEqual(['word/document.xml'])",
+        "expect(diffPackages(await OpcPackage.open(original),await OpcPackage.open(modified)).changed).toEqual(['word/document.xml'])"
+      ],
+      "outcomes": [
+        "A Word main-part prefix-only rewrite is exactly the sole equivalent_xml entry in the archive comparator but the sole changed entry in the existing OPC byte diff."
+      ],
+      "gaps": [
+        "Native algorithm-separation regression. It does not compare all other archive category arrays or physical saved files; lexical equivalence is not general Word semantic or rendering equivalence.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ],
+      "linkGranularity": "scenario-only",
+      "reviewReasons": [],
+      "deferredAssertions": [],
+      "unresolved": [],
+      "executionCredit": false,
+      "ledger": "package-comparison"
     },
     {
       "testId": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",

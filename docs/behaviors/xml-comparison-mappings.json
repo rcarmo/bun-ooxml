@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/xml-comparison.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/xml-comparison.test.ts": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
+    "tests/acceptance/xml-comparison.ts": "5a3f7a3058f4682b2cd5421da64be76d213fd67b966aa45dfa1bb720a2f75f3b",
+    "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
+    "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+    "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/xml/comparison.ts": "19a2252c38a7fa20b539dce9af4fc06a39c95f27204c1c46a73e66065424609e",
+    "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/xml/comparison.feature": "b700a3da8670cb048aa3f836c193f4533908730c185847f63e167e59c48f5e93"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-significant-content"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<a xmlns=\"u\" z=\"2\" x=\"&amp;\"/>','<p:a xmlns:p=\"u\" x=\"&#38;\" z=\"2\"></p:a>')).toBe(true)",
+        "expect(eq('<a xmlns:p=\"u\" p:x=\"yes\"/>','<a xmlns:q=\"u\" q:x=\"yes\"/>')).toBe(true)",
+        "expect(eq('<a x=\"yes\"/>','<a xmlns:p=\"u\" p:x=\"yes\"/>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Expanded element/attribute names and decoded attribute values compare equivalent despite prefix, attribute-order, entity and empty-element spelling differences; qualifying a formerly unqualified attribute compares false."
+      ],
+      "gaps": [
+        "Native general-element extension does not execute the combined OPC-order shared input. No input-custody assertion here, no canonical XML output or schema equivalence claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-significant-content",
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(a!,b!)).toBe(false)",
+        "expect(eq('<a>x<![CDATA[&y]]>z</a>','<a>x&amp;yz</a>')).toBe(true)",
+        "expect(eq('<a>one\\r\\ntwo</a>','<a>one\\ntwo</a>')).toBe(true)",
+        "expect(eq('<a>&#13;</a>','<a>\\r</a>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Moving tails, swapping children, changing comment or PI target/data, and changing text whitespace compare false. CDATA/entity text and CRLF/LF spellings compare true, while character-reference CR differs from a literal normalized CR."
+      ],
+      "gaps": [
+        "Finite native matrix mixes shared-like and additional inputs; no exact case keys assigned. It checks Boolean results only, with no input-byte custody or general lexical normalization proof.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:OPC relationship order is ignored only for unambiguous relation collections",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-significant-content"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}${a}</Relationships>`)).toBe(true)",
+        "expect(eq(`<Relationships xmlns=\"other\">${a}${b}</Relationships>`,`<Relationships xmlns=\"other\">${b}${a}</Relationships>`)).toBe(false)",
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`,`<Relationships xmlns=\"${ns}\">${a}${a}</Relationships>`)).toBe(false)",
+        "expect(eq(`<Relationships xmlns=\"${ns}\">${a}text${b}</Relationships>`,`<Relationships xmlns=\"${ns}\">${b}text${a}</Relationships>`)).toBe(false)"
+      ],
+      "outcomes": [
+        "Reordered unambiguous OPC-namespace relationships compare true; reordered other-namespace collections, duplicate IDs and mixed-text relationship collections compare false."
+      ],
+      "gaps": [
+        "Native relationship elements omit Type, so comparator acceptance is not OPC graph/schema validation. Only the first pair tests order-insensitivity; duplicate/mixed inputs return false even without a general invalid-package claim. No byte custody here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:prefix-valued attributes retain bindings including inherited and implicit namespaces",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:p=\"v\" value=\"p:x\"/>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\"><b value=\"p:x\"/></a>','<a xmlns:p=\"v\"><b value=\"p:x\"/></a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\" value=\"p:x\"/>','<a xmlns:q=\"u\" value=\"q:x\"/>')).toBe(false)",
+        "expect(eq('<a value=\"xml:lang\"/>','<a value=\"xml:lang\"/>')).toBe(true)"
+      ],
+      "outcomes": [
+        "Changed direct or inherited bindings behind the same prefix-valued attribute compare false; spelling the value with a different prefix also compares false even for the same URI. The implicit xml prefix compares true with itself."
+      ],
+      "gaps": [
+        "Native QName-like value policy extension uses u/v rather than the shared urn values. Lexically different attribute values remain different; this is not general QName-value canonicalization. No input-custody assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-unsafe-input"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(x,x)).toBe(false)",
+        "expect(xmlEquivalent(Uint8Array.of(255),Uint8Array.of(255))).toBe(false)",
+        "expect(eq('<?xml version=\"1.0\" encoding=\"UTF-16\"?><a/>','<a/>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Malformed XML, DTDs, duplicate attributes and an unbound QName-like value compare false even against themselves; invalid UTF-8 bytes and a conflicting declared encoding also compare false."
+      ],
+      "gaps": [
+        "Native unsafe-input matrix includes shared malformed text and related DTD input but differs in entity content. False is a conservative refusal, not an error-code diagnosis. No package-admission or input-byte custody assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:comparison supports matching UTF encodings without changing either input",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(xmlEquivalent(a,b)).toBe(true)",
+        "expect(a).toEqual(beforeA)",
+        "expect(b).toEqual(beforeB)"
+      ],
+      "outcomes": [
+        "Equivalent snow text in UTF-16LE and UTF-8 compares true and both caller buffers remain byte-identical."
+      ],
+      "gaps": [
+        "Native encoding/custody extension, not a shared UTF-8 pair. No UTF-16BE case here, file save/reopen, archive semantics or general transcoding claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:comparison retains standalone intent and refuses unsupported XML versions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-significant-content",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<?xml version=\"1.0\"?><a/>','<a/>')).toBe(true)",
+        "expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<a/>')).toBe(false)",
+        "expect(eq('<?xml version=\"1.1\"?><a/>','<?xml version=\"1.1\"?><a/>')).toBe(false)",
+        "expect(eq('<?xml version=\"1.0\" standalone=\"yes\"?><a/>','<?xml-standalone yes?><a/>')).toBe(false)"
+      ],
+      "outcomes": [
+        "An ordinary XML1.0 declaration can compare equal to absence; standalone=yes versus absence differs, XML1.1 compares false against itself, and a similarly named PI cannot substitute for standalone intent."
+      ],
+      "gaps": [
+        "Native declaration policy extension beyond shared inputs. Boolean results only; no general XML1.1 parser, canonical XML or signature validation claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:MC prefix lists and nested rebinding are not lost during namespace normalization",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"u\" mc:Ignorable=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"v\" mc:Ignorable=\"p\"/>`)).toBe(false)",
+        "expect(eq('<a xmlns:p=\"u\"><b xmlns:p=\"v\" value=\"p:x\"/></a>','<a xmlns:p=\"u\"><b value=\"p:x\"/></a>')).toBe(false)"
+      ],
+      "outcomes": [
+        "Rebinding mc:Ignorable prefix tokens or rebinding a prefix used in a nested attribute changes comparison to false."
+      ],
+      "gaps": [
+        "Native markup-compatibility namespace-preservation extension. It does not execute MC fallback/selection or infer application compatibility; no caller-buffer check.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:all ten shared comparator cases execute with exact booleans and input custody",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-significant-content",
+        "@id-xml-comparison-prefix-attribute-binding",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [
+        "@id-xml-comparison-prefix-and-opc-order",
+        "@id-xml-comparison-significant-content|{\"variant\":\"text whitespace\",\"left\":\"<a><b> x </b></a>\",\"right\":\"<a><b>x</b></a>\"}",
+        "@id-xml-comparison-significant-content|{\"variant\":\"child order\",\"left\":\"<a><b/><c/></a>\",\"right\":\"<a><c/><b/></a>\"}",
+        "@id-xml-comparison-significant-content|{\"variant\":\"attribute value\",\"left\":\"<a v=\\\"1\\\"/>\",\"right\":\"<a v=\\\"2\\\"/>\"}",
+        "@id-xml-comparison-prefix-attribute-binding",
+        "@id-xml-comparison-unsafe-input|{\"variant\":\"DTD-bearing\",\"input\":\"<!DOCTYPE a [<!ENTITY e \\\"text\\\">]><a>&e;</a>\"}",
+        "@id-xml-comparison-unsafe-input|{\"variant\":\"malformed XML\",\"input\":\"broken\"}",
+        "@id-xml-comparison-processing-instructions-and-comments|{\"variant\":\"prolog PI target\",\"left\":\"<?one x?><a/>\",\"right\":\"<?two x?><a/>\"}",
+        "@id-xml-comparison-processing-instructions-and-comments|{\"variant\":\"in-document PI target\",\"left\":\"<a><?one x?></a>\",\"right\":\"<a><?two x?></a>\"}",
+        "@id-xml-comparison-processing-instructions-and-comments|{\"variant\":\"prolog comment content\",\"left\":\"<!--old--><a/>\",\"right\":\"<!--new--><a/>\"}"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(10)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures and exactly ten passed shared cases; pinned bindings compare the requested Boolean and retain both UTF-8 input buffers."
+      ],
+      "gaps": [
+        "Only aggregate result/count assertions occur in this declaration; semantic and custody checks are delegated. No file/OPC graph, transport, canonicalization, rendering or independent-reader evidence is provided.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:deep segmented comparison is bounded without repeated ancestor text and depth violations return false",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-unsafe-input"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(source,source)).toBe(true)",
+        "expect(eq(deep,deep)).toBe(false)"
+      ],
+      "outcomes": [
+        "A 256-level segmented XML document compares true against itself; a 257-level input compares false."
+      ],
+      "gaps": [
+        "Native accepted/refused depth boundary. It does not assert elapsed timing, allocations, peak memory or prove absence of repeated ancestor work merely from success; no source custody here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:unprefixed xsi:type values retain the default namespace that resolves their QName",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:one\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`,`<e:r xmlns:e=\"urn:element\" xmlns=\"urn:two\" xmlns:xsi=\"${xsi}\" xsi:type=\"Type\"/>`)).toBe(false)"
+      ],
+      "outcomes": [
+        "Unprefixed xsi:type Type values under different default namespaces compare false although the element namespace stays fixed."
+      ],
+      "gaps": [
+        "Native schema-instance QName-context policy, not schema validation or type resolution. No positive counterpart or buffer custody asserted here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:MC Choice Requires prefix lists retain bindings even without colon-valued attributes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" Requires=\"p\"/>`,`<mc:Choice xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" Requires=\"p\"/>`)).toBe(false)"
+      ],
+      "outcomes": [
+        "MC Choice Requires tokens with identical text but different bound URIs compare false."
+      ],
+      "gaps": [
+        "Native MC prefix-list extension; it does not choose a branch, process fallback or prove rendered compatibility. No input-custody assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:MC MustUnderstand lists and QName-like text retain in-scope namespace bindings",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-prefix-attribute-binding",
+        "@id-xml-comparison-unsafe-input",
+        "@id-xml-comparison-significant-content"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq(`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:one\" mc:MustUnderstand=\"p\"/>`,`<a xmlns:mc=\"${mc}\" xmlns:p=\"urn:two\" mc:MustUnderstand=\"p\"/>`)).toBe(false)",
+        "expect(eq(`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`,`<a xmlns:mc=\"${mc}\" mc:MustUnderstand=\"missing\"/>`)).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\">p:x</a>','<a xmlns:p=\"urn:two\">p:x</a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\"><b>p<![CDATA[:x]]></b></a>','<a xmlns:p=\"urn:two\"><b>p:x</b></a>')).toBe(false)",
+        "expect(eq('<a xmlns:p=\"urn:one\">p<![CDATA[:x]]></a>','<a xmlns:p=\"urn:one\">p:x</a>')).toBe(true)"
+      ],
+      "outcomes": [
+        "Changed MustUnderstand bindings, missing tokens and changed bindings behind QName-like text compare false. Splitting a QName-like value across text/CDATA does not hide a changed binding, and same-binding segmented text compares true."
+      ],
+      "gaps": [
+        "Native conservative namespace-sensitive text/MC policy, not schema typing or application execution. Literal colon-looking text is treated conservatively even without a known QName type; no buffer custody here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xml-comparison.test.ts:processing instruction spacing is retained rather than trimmed by parser events",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xml-comparison-processing-instructions-and-comments"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(eq('<?p x?><a/>','<?p  x?><a/>')).toBe(false)",
+        "expect(eq('<a><?p\\tx?></a>','<a><?p x?></a>')).toBe(false)",
+        "expect(eq('<?p?><a/>','<?p ?><a/>')).toBe(false)",
+        "expect(eq('<?p\\r\\nx?><a/>','<?p\\nx?><a/>')).toBe(true)"
+      ],
+      "outcomes": [
+        "PI separator changes, tab versus space and empty versus space-only data compare false; CRLF versus LF line endings compare true."
+      ],
+      "gaps": [
+        "Native processing-instruction data/spacing extension beyond shared target changes. No general whitespace-insensitive policy, input-custody or package comparison assertion.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/package-comparison.test.ts"
+  ],
+  "sourceSha256": {
+    "tests/unit/package-comparison.test.ts": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
+    "tests/acceptance/package-comparison.ts": "d68481c2680ca81e709289ce7942128a3bb1e831faeac1c9902bedb457547adc",
+    "src/opc/comparison.ts": "95584fd6df9b349d4f0a6ec39d3edc54790f11cbbbb0ab8ddf83d4a5a33d410f",
+    "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
+    "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
+    "src/opc/diff.ts": "c22bf4e25ff60a1fbbff25e7255167cf28de0128ca89beb1232808afb43c84cb",
+    "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
+    "src/docx/index.ts": "5106c5cd5178397c9e39bc5b636e8f22c327a375e4005f24e62e066d154747d8",
+    "src/index.ts": "7737ef9a03dfbbb3ea2c530cc98b37cd4d1c57024983d19f8a278623b70b5c81",
+    "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
+    "src/xml/comparison.ts": "19a2252c38a7fa20b539dce9af4fc06a39c95f27204c1c46a73e66065424609e",
+    "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
+    "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
+    "workflows/package/semantic-diff.feature": "eebe822867a6f83d77351a0590dd81d7e929dc13f2d1add0bfcbbc44c5e90ca7"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:archive comparison separates equivalent XML, changed binary, additions and removals without requiring an OPC graph",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:['c.bin'],removed:['removed.bin'],changed:['b.bin'],equivalent_xml:['a.xml'],unchanged:[]})",
+        "expect(before).toEqual(b)",
+        "expect(after).toEqual(a)"
+      ],
+      "outcomes": [
+        "Graph-free archives classify a.xml as equivalent XML, b.bin as changed, c.bin as added and removed.bin as removed, with empty unchanged and exact caller-buffer custody."
+      ],
+      "gaps": [
+        "Native input adds a removed member unlike the shared no-removal case. There is no OPC graph requirement or Office document interpretation; categories concern admitted member payloads, not rendered semantics.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:exact payload equality is unchanged even when ZIP storage or metadata differ",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(before).not.toEqual(after)",
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:['a.xml','opaque.bin']})"
+      ],
+      "outcomes": [
+        "Stored versus deflated/reordered archives are explicitly byte-different while equal a.xml and opaque.bin payloads are both unchanged and all other lists empty."
+      ],
+      "gaps": [
+        "Native ZIP storage/order extension. It does not individually mutate timestamps or every ZIP metadata field; input hashes/custody are not asserted here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:only XML suffixes receive equivalence checks and semantically significant XML stays changed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['comment.xml','same.bin','value.xml'],equivalent_xml:['ITEM.XML','_rels/.rels'],unchanged:[]})"
+      ],
+      "outcomes": [
+        "Only XML/relationship suffixes receive equivalence: uppercase ITEM.XML and _rels/.rels are equivalent, while identically structured same.bin remains changed and significant whitespace/comment changes stay changed."
+      ],
+      "gaps": [
+        "Native extension demonstrates case-insensitive suffix policy, not MIME or OPC graph validation; the .rels payload is generic XML. No file save or input-buffer custody in this declaration.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>comparePackageArchives(before!,after!)).toThrow(expect.objectContaining({code:'XML_DTD_FORBIDDEN'}))",
+        "expect(before).toEqual(b)",
+        "expect(after).toEqual(a)"
+      ],
+      "outcomes": [
+        "DTD-bearing XML in identical, newly added or removed inputs throws XML_DTD_FORBIDDEN before a report is returned; both input buffers remain exact after each refusal."
+      ],
+      "gaps": [
+        "Native admission-control matrix. Throws are package admission, distinct from standalone xmlEquivalent returning false. No partial report, schema validation or disk custody claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:each archive passes ZIP integrity and independent resource budgets before classification",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>comparePackageArchives(valid,corrupt)).toThrow(expect.objectContaining({code:'zip-crc-mismatch'}))",
+        "expect(()=>comparePackageArchives(valid,large,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}))",
+        "expect(()=>comparePackageArchives(large,valid,{maxEntries:1})).toThrow(expect.objectContaining({code:'zip-too-many-entries'}))",
+        "expect(comparePackageArchives(valid,valid,{maxEntries:1,maxEntryBytes:4,maxTotalBytes:4}).unchanged).toEqual(['a.xml'])",
+        "expect(()=>comparePackageArchives(valid,valid,{maxEntries:NaN})).toThrow(expect.objectContaining({code:'package-admission-limit-invalid'}))"
+      ],
+      "outcomes": [
+        "A corrupted second archive throws zip-crc-mismatch; entry-count overflow on either side throws zip-too-many-entries. Exact entry/total-byte budgets permit a valid archive and NaN maxEntries throws package-admission-limit-invalid."
+      ],
+      "gaps": [
+        "Native finite admission/budget matrix, not a measurement of timing/allocation or a proof of every limit independently. CRC corruption is tested on the second archive only; no caller-buffer comparison here.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:UTF encoding differences can be equivalent but namespace-sensitive values cannot",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(before,after)).toEqual({added:[],removed:[],changed:['q.xml'],equivalent_xml:['text.xml'],unchanged:[]})"
+      ],
+      "outcomes": [
+        "UTF-16LE versus UTF-8 snow-text XML is equivalent while changed namespace bindings in a QName-like attribute remain changed, with exact expected category arrays."
+      ],
+      "gaps": [
+        "Native codec/namespace-value extension; no BE, input-buffer custody, OPC relationship semantics or saved-file claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:category lists are sorted, disjoint, exhaustive and detached across comparisons",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(new Set(all).size).toBe(all.length)",
+        "expect([...all].sort()).toEqual(['a.xml','b.bin','m.bin','r.bin','z.bin'])",
+        "expect(reverse.added).toEqual(result.removed)",
+        "expect(reverse.removed).toEqual(result.added)",
+        "expect(reverse.changed).toEqual(result.changed)",
+        "expect(reverse.equivalent_xml).toEqual(result.equivalent_xml)",
+        "expect(comparePackageArchives(before,after).changed).toEqual(['m.bin'])"
+      ],
+      "outcomes": [
+        "The union of categories is duplicate-free and covers five member names. Reversing inputs swaps additions/removals and retains changed/equivalent lists; mutating a returned changed list does not affect a new result."
+      ],
+      "gaps": [
+        "Every populated category has a single member in this test, so its title does not independently prove within-list sorting. Reverse unchanged is not compared; no mutation of the other returned arrays or caller bytes is tested.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:empty archives and empty directory members do not invent file differences",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(empty,directory)).toEqual({added:[],removed:[],changed:[],equivalent_xml:[],unchanged:[]})"
+      ],
+      "outcomes": [
+        "An empty archive and an archive containing only an empty directory member produce five empty category arrays."
+      ],
+      "gaps": [
+        "Native empty/directory extension. No nonempty-directory, invalid-directory, physical filesystem or general archive-fidelity claim.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:existing OPC byte/content-type diff retains its behavior for XML whitespace changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(diffPackages(before,after).changed).toContain('word/document.xml')",
+        "expect(comparePackageArchives(original,changed).changed).toContain('word/document.xml')"
+      ],
+      "outcomes": [
+        "Adding whitespace inside the main Word document element makes both the existing OPC diff and archive comparator include word/document.xml as changed."
+      ],
+      "gaps": [
+        "Native coexistence regression checks list inclusion, not exact full category reports. The comparator deliberately retains this whitespace; no document rendering, saved path or caller-buffer equality asserted.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:the exact shared package semantic-diff case compares concrete table inputs",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(1)",
+        "expect(result.counts.steps.passed).toBe(7)"
+      ],
+      "outcomes": [
+        "The wrapper reports no failures, one passed shared case and all seven steps passed. Pinned bindings construct exact ordered table inputs, compare four expected lists and preserve both input buffers."
+      ],
+      "gaps": [
+        "Only aggregate result/count assertions occur here; semantic checks are delegated. The shared scenario does not compare unchanged, although the native first test checks that list. ZIP_STORED graph-free inputs do not establish OPC validity or save/reopen behavior.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:duplicate member names cannot collapse into a misleading set report",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>comparePackageArchives(bad,good)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}))",
+        "expect(()=>comparePackageArchives(good,bad)).toThrow(expect.objectContaining({code:'zip-duplicate-entry'}))"
+      ],
+      "outcomes": [
+        "Duplicate member names on either side throw zip-duplicate-entry rather than collapsing to a report."
+      ],
+      "gaps": [
+        "Native ZIP admission extension; it does not assert input-buffer custody, differing duplicate payload policies or the error message.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/package-comparison.test.ts:prefix-only XML goes into the new equivalence list but stays changed in OPC byte diff",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-package-diff-equivalent-xml-and-binary-changes"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(comparePackageArchives(original,modified).equivalent_xml).toEqual(['word/document.xml'])",
+        "expect(diffPackages(await OpcPackage.open(original),await OpcPackage.open(modified)).changed).toEqual(['word/document.xml'])"
+      ],
+      "outcomes": [
+        "A Word main-part prefix-only rewrite is exactly the sole equivalent_xml entry in the archive comparator but the sole changed entry in the existing OPC byte diff."
+      ],
+      "gaps": [
+        "Native algorithm-separation regression. It does not compare all other archive category arrays or physical saved files; lexical equivalence is not general Word semantic or rendering equivalence.",
+        "Bounded source mapping: no new execution, general semantic completeness or canonical-XML credit. Direct/deferred assertions and loop review flags retained; runtime leaves unknown."
+      ]
+    }
+  ]
+}
