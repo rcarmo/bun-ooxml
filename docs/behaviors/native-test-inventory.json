@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 790,
-  "files": 79,
+  "count": 800,
+  "files": 80,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -418,6 +418,12 @@
       "path": "tests/unit/xml-attributes.test.ts",
       "sha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571",
       "declarations": 14,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "declarations": 10,
       "issues": []
     },
     {
@@ -999,6 +1005,16 @@
     "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
     "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
     "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte attribute batches preserve each codec BOM declaration alias quotes and untouched fragments",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte append expands self-closing nodes and escapes authored text in surviving namespace scope",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte replacement drops target-local bindings but retains the parent scope and other lexical bytes",
+    "bun:tests/unit/xml-byte-edits.test.ts:empty and semantic no-op byte edits return exact detached buffers while validating their targets",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte edits own caller bytes and changed outputs and reuse original handles across operation kinds",
+    "bun:tests/unit/xml-byte-edits.test.ts:foreign copied string and byte targets refuse every new operation without invalidating owned handles",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte batches preserve attribute and structure atomic refusals for late invalid data and overlapping targets",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte patches keep complete output and nesting limits enforced before encoding",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte edits ignore overridden patch iterators and honour Buffer subview ownership",
+    "bun:tests/unit/xml-byte-edits.test.ts:encoded edits can be reparsed for a sequential pipeline without accepting old handles",
     "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
     "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
     "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
@@ -1293,6 +1309,16 @@
     "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
     "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
     "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte attribute batches preserve each codec BOM declaration alias quotes and untouched fragments",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte append expands self-closing nodes and escapes authored text in surviving namespace scope",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte replacement drops target-local bindings but retains the parent scope and other lexical bytes",
+    "bun:tests/unit/xml-byte-edits.test.ts:empty and semantic no-op byte edits return exact detached buffers while validating their targets",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte edits own caller bytes and changed outputs and reuse original handles across operation kinds",
+    "bun:tests/unit/xml-byte-edits.test.ts:foreign copied string and byte targets refuse every new operation without invalidating owned handles",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte batches preserve attribute and structure atomic refusals for late invalid data and overlapping targets",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte patches keep complete output and nesting limits enforced before encoding",
+    "bun:tests/unit/xml-byte-edits.test.ts:byte edits ignore overridden patch iterators and honour Buffer subview ownership",
+    "bun:tests/unit/xml-byte-edits.test.ts:encoded edits can be reparsed for a sequential pipeline without accepting old handles",
     "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
     "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
     "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
@@ -28194,6 +28220,477 @@
         "fixturesRoot",
         "join",
         "selectSharedScenarios"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte attribute batches preserve each codec BOM declaration alias quotes and untouched fragments",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 15,
+      "title": "byte attribute batches preserve each codec BOM declaration alias quotes and untouched fragments",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(out).toEqual(encode(source.replace(\"q:id = 'old'\",\"q:id = 'A&amp;B雪😀'\").replace('keep=\"&#x41;\"/','keep=\"&#x41;\" fresh=\"&lt;new&gt;\"/'),c))",
+        "expect(attribute(node,'id','urn:q')).toBe('A&B雪😀')",
+        "expect(node.attributes.fresh).toBe('<new>')",
+        "expect(input).toEqual(before)",
+        "expect(s.remove([])).toEqual(before)",
+        "expect(XmlByteSnapshot.parse(out).remove([])).toEqual(out)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 16,
+          "expression": "for(const c of codecs)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n for(const c of codecs){const source=declaration(c)+`<r xmlns:q='urn:q' xmlns:z='urn:q'>雪😀<q:a q:id = 'old' keep=\"&#x41;\"/><tail/></r>`,input=encode(source,c),before=input.slice(),s=XmlByteSnapshot.parse(input),target=s.elements[1]!;\n  const out=s.setAttributes([{target,name:'z:id',value:'A&B雪😀'},{target,name:'fresh',value:'<new>'}]);\n  expect(out).toEqual(encode(source.replace(\"q:id = 'old'\",\"q:id = 'A&amp;B雪😀'\").replace('keep=\"&#x41;\"/','keep=\"&#x41;\" fresh=\"&lt;new&gt;\"/'),c));\n  const tree=parseXml(decode(out,c)),node=elements(tree,'a','urn:q')[0]!;expect(attribute(node,'id','urn:q')).toBe('A&B雪😀');expect(node.attributes.fresh).toBe('<new>');\n  expect(input).toEqual(before);expect(s.remove([])).toEqual(before);expect(XmlByteSnapshot.parse(out).remove([])).toEqual(out);\n }\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "XmlByteSnapshot.parse().remove",
+        "attribute",
+        "declaration",
+        "decode",
+        "elements",
+        "encode",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "input.slice",
+        "parseXml",
+        "s.remove",
+        "s.setAttributes",
+        "source.replace",
+        "source.replace().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte append expands self-closing nodes and escapes authored text in surviving namespace scope",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 24,
+      "title": "byte append expands self-closing nodes and escapes authored text in surviving namespace scope",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(out).toEqual(encode(source.replace('<slot/>','<slot><q:child q:id=\"雪&amp;\"> A&amp;B😀 </q:child><plain xmlns=\"\"/></slot>'),c))",
+        "expect(elements(tree,'child','urn:q')[0]!.text).toBe(' A&B😀 ')",
+        "expect(elements(tree,'plain','')).toHaveLength(1)",
+        "expect(s.remove([])).toEqual(encode(source,c))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 25,
+          "expression": "for(const c of codecs)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n for(const c of codecs){const source=declaration(c)+`<r xmlns='urn:r' xmlns:q='urn:q'><slot/><!--keep--><tail a='&#65;'/></r>`,s=XmlByteSnapshot.parse(encode(source,c));\n  const out=s.appendChildren([{target:s.elements[1]!,children:[{name:name('child','urn:q'),attributes:[{name:name('id','urn:q'),value:'雪&'}],children:[' A&B😀 ']},{name:name('plain')}]}]);\n  expect(out).toEqual(encode(source.replace('<slot/>','<slot><q:child q:id=\"雪&amp;\"> A&amp;B😀 </q:child><plain xmlns=\"\"/></slot>'),c));\n  const tree=parseXml(decode(out,c));expect(elements(tree,'child','urn:q')[0]!.text).toBe(' A&B😀 ');expect(elements(tree,'plain','')).toHaveLength(1);expect(s.remove([])).toEqual(encode(source,c));\n }\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "declaration",
+        "decode",
+        "elements",
+        "encode",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "name",
+        "parseXml",
+        "s.appendChildren",
+        "s.remove",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte replacement drops target-local bindings but retains the parent scope and other lexical bytes",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 32,
+      "title": "byte replacement drops target-local bindings but retains the parent scope and other lexical bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(out).toEqual(encode(source.replace('<q:old xmlns:q=\"urn:removed\"/>','<n1:new xmlns:n1=\"urn:removed\">雪😀</n1:new><q:sibling/>'),c))",
+        "expect(parsed.elements.map(n=>[n.localName,n.namespaceURI])).toEqual([['r',''],['new','urn:removed'],['sibling','urn:parent'],['keep','']])",
+        "expect(s.remove([])).toEqual(encode(source,c))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 33,
+          "expression": "for(const c of codecs)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n for(const c of codecs){const source=declaration(c)+`<r xmlns:q='urn:parent'><q:old xmlns:q=\"urn:removed\"/><keep a='&amp;'/></r>`,s=XmlByteSnapshot.parse(encode(source,c));\n  const out=s.replaceElements([{target:s.elements[1]!,children:[{name:name('new','urn:removed'),children:['雪😀']},{name:name('sibling','urn:parent')}]}]);\n  expect(out).toEqual(encode(source.replace('<q:old xmlns:q=\"urn:removed\"/>','<n1:new xmlns:n1=\"urn:removed\">雪😀</n1:new><q:sibling/>'),c));\n  const parsed=XmlByteSnapshot.parse(out);expect(parsed.elements.map(n=>[n.localName,n.namespaceURI])).toEqual([['r',''],['new','urn:removed'],['sibling','urn:parent'],['keep','']]);expect(s.remove([])).toEqual(encode(source,c));\n }\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "declaration",
+        "encode",
+        "expect",
+        "expect().toEqual",
+        "name",
+        "parsed.elements.map",
+        "s.remove",
+        "s.replaceElements",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:empty and semantic no-op byte edits return exact detached buffers while validating their targets",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 40,
+      "title": "empty and semantic no-op byte edits return exact detached buffers while validating their targets",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(out).toEqual(before)",
+        "expect(out.buffer).not.toBe(before.buffer)",
+        "expect(s.remove([])).toEqual(before)",
+        "expect(()=>s.appendChildren([{target:{...s.elements[1]!},children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_TARGET'}))",
+        "expect(()=>s.replaceElements([{target:s.elements[0]!,children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_ROOT'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 41,
+          "expression": "for(const c of codecs)"
+        },
+        {
+          "line": 43,
+          "expression": "for(const out of outputs)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n for(const c of codecs){const source=declaration(c)+`<r a = 'A&#x26;B'><leaf/></r>`,before=encode(source,c),s=XmlByteSnapshot.parse(before);\n  const outputs=[s.setAttributes([]),s.setAttributes([{target:s.elements[0]!,name:'a',value:'A&B'}]),s.appendChildren([]),s.appendChildren([{target:s.elements[1]!,children:[]}]),s.replaceElements([]),s.replaceElements([{target:s.elements[1]!,children:[{name:name('leaf')}]}])];\n  for(const out of outputs){expect(out).toEqual(before);expect(out.buffer).not.toBe(before.buffer);out.fill(0);expect(s.remove([])).toEqual(before);}\n  expect(()=>s.appendChildren([{target:{...s.elements[1]!},children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_TARGET'}));expect(()=>s.replaceElements([{target:s.elements[0]!,children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_ROOT'}));\n }\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "declaration",
+        "encode",
+        "expect",
+        "expect().not.toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "name",
+        "out.fill",
+        "s.appendChildren",
+        "s.remove",
+        "s.replaceElements",
+        "s.setAttributes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte edits own caller bytes and changed outputs and reuse original handles across operation kinds",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 48,
+      "title": "byte edits own caller bytes and changed outputs and reuse original handles across operation kinds",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(out).toEqual(encode(expected[i]!,c))",
+        "expect(op()).toEqual(encode(expected[i]!,c))",
+        "expect(s.remove([])).toEqual(before)",
+        "expect(s.remove([a])).toEqual(encode(source.replace('<a/>',''),c))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 49,
+          "expression": "for(const c of codecs)"
+        },
+        {
+          "line": 51,
+          "expression": "for(const [i,op]of ops.entries())"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n for(const c of codecs){const source=declaration(c)+'<r><a/><b/></r>',input=encode(source,c),before=input.slice(),s=XmlByteSnapshot.parse(input),a=s.elements[1]!,b=s.elements[2]!;input.fill(0);structuredClone(input,{transfer:[input.buffer]});\n  const ops=[()=>s.setAttributes([{target:a,name:'id',value:'雪'}]),()=>s.appendChildren([{target:a,children:['😀']}]),()=>s.replaceElements([{target:b,children:[{name:name('new')}]}])],expected=[source.replace('<a/>','<a id=\"雪\"/>'),source.replace('<a/>','<a>😀</a>'),source.replace('<b/>','<new/>')];\n  for(const [i,op]of ops.entries()){const out=op();expect(out).toEqual(encode(expected[i]!,c));out.fill(0);expect(op()).toEqual(encode(expected[i]!,c));expect(s.remove([])).toEqual(before);}\n  expect(s.remove([a])).toEqual(encode(source.replace('<a/>',''),c));\n }\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "declaration",
+        "encode",
+        "expect",
+        "expect().toEqual",
+        "input.fill",
+        "input.slice",
+        "name",
+        "op",
+        "ops.entries",
+        "out.fill",
+        "s.appendChildren",
+        "s.remove",
+        "s.replaceElements",
+        "s.setAttributes",
+        "source.replace",
+        "structuredClone"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:foreign copied string and byte targets refuse every new operation without invalidating owned handles",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 56,
+      "title": "foreign copied string and byte targets refuse every new operation without invalidating owned handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.setAttributes([{target,name:'a',value:'b'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_TARGET'}))",
+        "expect(()=>s[op]([{target,children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_TARGET'}))",
+        "expect(s.remove([])).toEqual(before)",
+        "expect(input).toEqual(before)",
+        "expect(s.setAttributes([{target:s.elements[1]!,name:'a',value:'b'}])).toEqual(encode('<r><a a=\"b\"/></r>','le'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 58,
+          "expression": "for(const target of [other.elements[1]!,string.elements[1]!,"
+        },
+        {
+          "line": 60,
+          "expression": "for(const op of ['appendChildren','replaceElements'] as const)expect(()=>s[op](["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n const input=encode('<r><a/></r>','le'),before=input.slice(),s=XmlByteSnapshot.parse(input),other=XmlByteSnapshot.parse(input),string=XmlSnapshot.parse('<r><a/></r>');\n for(const target of [other.elements[1]!,string.elements[1]!,{...s.elements[1]!}]){\n  expect(()=>s.setAttributes([{target,name:'a',value:'b'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_TARGET'}));\n  for(const op of ['appendChildren','replaceElements'] as const)expect(()=>s[op]([{target,children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_TARGET'}));\n  expect(s.remove([])).toEqual(before);expect(input).toEqual(before);\n }\n expect(s.setAttributes([{target:s.elements[1]!,name:'a',value:'b'}])).toEqual(encode('<r><a a=\"b\"/></r>','le'));\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "XmlSnapshot.parse",
+        "encode",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "input.slice",
+        "s.remove",
+        "s.setAttributes",
+        "s.undefined"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte batches preserve attribute and structure atomic refusals for late invalid data and overlapping targets",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 66,
+      "title": "byte batches preserve attribute and structure atomic refusals for late invalid data and overlapping targets",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.setAttributes([{target:a,name:'ok',value:'first'},{target:c,...patch}])).toThrow()",
+        "expect(s.remove([])).toEqual(input)",
+        "expect(()=>s.setAttributes([{target:a,name:'q:id',value:'1'},{target:a,name:'z:id',value:'2'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_DUPLICATE'}))",
+        "expect(()=>s[op]([{target:a,children:['valid first']},{target:c,children}])).toThrow()",
+        "expect(()=>s[op](targets.map(target=>({target,children:[]})))).toThrow(expect.objectContaining({code:'XML_STRUCTURE_OVERLAP'}))",
+        "expect(()=>unsafe.replaceElements([{target:unsafe.elements[1]!,children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_UNSAFE'}))",
+        "expect(unsafe.remove([])).toEqual(encode('<r>]]<a/>></r>','bom8'))",
+        "expect(input).toEqual(encode(source,'be'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 68,
+          "expression": "for(const patch of ["
+        },
+        {
+          "line": 71,
+          "expression": "for(const op of ['appendChildren','replaceElements'] as const)"
+        },
+        {
+          "line": 72,
+          "expression": "for(const children of [[cyclic],['\\ud800'],["
+        },
+        {
+          "line": 73,
+          "expression": "for(const targets of [[a,a],[a,b]])expect(()=>s[op](targets.map(target=>("
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n const source='<r xmlns:q=\"urn:q\" xmlns:z=\"urn:q\"><a><b/></a><c/></r>',input=encode(source,'be'),s=XmlByteSnapshot.parse(input),a=s.elements[1]!,b=s.elements[2]!,c=s.elements[3]!;\n for(const patch of [{name:'xmlns:p',value:'urn:p'},{name:'unbound:a',value:'x'},{name:'bad',value:'\\u0000'},{name:'bad',value:'\\ud800'}]){expect(()=>s.setAttributes([{target:a,name:'ok',value:'first'},{target:c,...patch}])).toThrow();expect(s.remove([])).toEqual(input);}\n expect(()=>s.setAttributes([{target:a,name:'q:id',value:'1'},{target:a,name:'z:id',value:'2'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_DUPLICATE'}));\n const cyclic={name:name('cycle'),children:[] as XmlContent[]};cyclic.children.push(cyclic);\n for(const op of ['appendChildren','replaceElements'] as const){\n  for(const children of [[cyclic],['\\ud800'],[{name:name('a:b')}],[{name:name('x'),attributes:[{name:name('id'),value:'1'},{name:name('id'),value:'2'}]}]]){expect(()=>s[op]([{target:a,children:['valid first']},{target:c,children}])).toThrow();expect(s.remove([])).toEqual(input);}\n  for(const targets of [[a,a],[a,b]])expect(()=>s[op](targets.map(target=>({target,children:[]})))).toThrow(expect.objectContaining({code:'XML_STRUCTURE_OVERLAP'}));\n }\n const unsafe=XmlByteSnapshot.parse(encode('<r>]]<a/>></r>','bom8'));expect(()=>unsafe.replaceElements([{target:unsafe.elements[1]!,children:[]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_UNSAFE'}));expect(unsafe.remove([])).toEqual(encode('<r>]]<a/>></r>','bom8'));expect(input).toEqual(encode(source,'be'));\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "cyclic.children.push",
+        "encode",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "name",
+        "s.remove",
+        "s.setAttributes",
+        "s.undefined",
+        "targets.map",
+        "unsafe.remove",
+        "unsafe.replaceElements"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte patches keep complete output and nesting limits enforced before encoding",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 78,
+      "title": "byte patches keep complete output and nesting limits enforced before encoding",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.setAttributes([{target,name:'id',value:'too long'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_LIMIT'}))",
+        "expect(()=>s[op]([{target,children:['too long for output']}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_LIMIT'}))",
+        "expect(s.remove([])).toEqual(input)",
+        "expect(()=>deep.appendChildren([{target:deep.elements[255]!,children:[{name:name('child')}]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_LIMIT'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 81,
+          "expression": "for(const op of ['appendChildren','replaceElements'] as const)expect(()=>s[op](["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n const source='<r><a/> '+' '.repeat(8*1024*1024-12)+'</r>',input=encode(source,'le'),s=XmlByteSnapshot.parse(input),target=s.elements[1]!;\n expect(()=>s.setAttributes([{target,name:'id',value:'too long'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_LIMIT'}));\n for(const op of ['appendChildren','replaceElements'] as const)expect(()=>s[op]([{target,children:['too long for output']}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_LIMIT'}));\n expect(s.remove([])).toEqual(input);\n const deep=XmlByteSnapshot.parse(encode('<r>'.repeat(256)+'</r>'.repeat(256),'utf8'));expect(()=>deep.appendChildren([{target:deep.elements[255]!,children:[{name:name('child')}]}])).toThrow(expect.objectContaining({code:'XML_STRUCTURE_LIMIT'}));\n}",
+      "calls": [
+        ".repeat",
+        "XmlByteSnapshot.parse",
+        "deep.appendChildren",
+        "encode",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "name",
+        "s.remove",
+        "s.setAttributes",
+        "s.undefined"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte edits ignore overridden patch iterators and honour Buffer subview ownership",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 86,
+      "title": "byte edits ignore overridden patch iterators and honour Buffer subview ownership",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.setAttributes(attrs)).toEqual(encode('<r><a x=\"y\"/></r>','utf8'))",
+        "expect(s[op](patches)).toEqual(encode(op==='appendChildren'?'<r><a>ok</a></r>':'<r>ok</r>','utf8'))",
+        "expect(s.remove([])).toEqual(encode('<r><a/></r>','utf8'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 89,
+          "expression": "for(const op of ['appendChildren','replaceElements'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n const backing=Buffer.from('XX<r><a/></r>YY'),view=backing.subarray(2,backing.length-2),s=XmlByteSnapshot.parse(view);backing.fill(0);\n const attrs:XmlAttributePatch[]=[{target:s.elements[1]!,name:'x',value:'y'}];attrs[Symbol.iterator]=()=>{throw Error('iterator');};expect(s.setAttributes(attrs)).toEqual(encode('<r><a x=\"y\"/></r>','utf8'));\n for(const op of ['appendChildren','replaceElements'] as const){const children:XmlContent[]=['ok'];children[Symbol.iterator]=()=>{throw Error('child iterator');};const patches:XmlStructurePatch[]=[{target:s.elements[1]!,children}];patches[Symbol.iterator]=()=>{throw Error('patch iterator');};expect(s[op](patches)).toEqual(encode(op==='appendChildren'?'<r><a>ok</a></r>':'<r>ok</r>','utf8'));}\n expect(s.remove([])).toEqual(encode('<r><a/></r>','utf8'));\n}",
+      "calls": [
+        "Buffer.from",
+        "Error",
+        "XmlByteSnapshot.parse",
+        "backing.fill",
+        "backing.subarray",
+        "encode",
+        "expect",
+        "expect().toEqual",
+        "s.remove",
+        "s.setAttributes",
+        "s.undefined"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:encoded edits can be reparsed for a sequential pipeline without accepting old handles",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "line": 93,
+      "title": "encoded edits can be reparsed for a sequential pipeline without accepting old handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>two.setAttributes([{target:s.elements[1]!,name:'id',value:'2'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_TARGET'}))",
+        "expect(out).toEqual(encode(declaration(c)+'<r><a id=\"1\">new</a></r>',c))",
+        "expect(s.remove([])).toEqual(encode(declaration(c)+'<r><a/></r>',c))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 94,
+          "expression": "for(const c of codecs)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe",
+      "body": "{\n for(const c of codecs){const s=XmlByteSnapshot.parse(encode(declaration(c)+'<r><a/></r>',c)),one=XmlByteSnapshot.parse(s.setAttributes([{target:s.elements[1]!,name:'id',value:'1'}])),two=XmlByteSnapshot.parse(one.appendChildren([{target:one.elements[1]!,children:[{name:name('b'),children:['雪😀']}]}]));\n  expect(()=>two.setAttributes([{target:s.elements[1]!,name:'id',value:'2'}])).toThrow(expect.objectContaining({code:'XML_ATTRIBUTE_TARGET'}));\n  const out=two.replaceElements([{target:two.elements[2]!,children:['new']}]);expect(out).toEqual(encode(declaration(c)+'<r><a id=\"1\">new</a></r>',c));expect(s.remove([])).toEqual(encode(declaration(c)+'<r><a/></r>',c));\n }\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "declaration",
+        "encode",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "name",
+        "one.appendChildren",
+        "s.remove",
+        "s.setAttributes",
+        "two.replaceElements",
+        "two.setAttributes"
       ],
       "reviewReasons": [
         "body-loop"

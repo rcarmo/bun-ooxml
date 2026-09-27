@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 790,
+  "nativeDeclarations": 800,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 563,
+  "withoutStagingCount": 573,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4700,6 +4700,56 @@
       "id": "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
       "path": "tests/unit/xml-attributes.test.ts",
       "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte attribute batches preserve each codec BOM declaration alias quotes and untouched fragments",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte append expands self-closing nodes and escapes authored text in surviving namespace scope",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte replacement drops target-local bindings but retains the parent scope and other lexical bytes",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:empty and semantic no-op byte edits return exact detached buffers while validating their targets",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte edits own caller bytes and changed outputs and reuse original handles across operation kinds",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:foreign copied string and byte targets refuse every new operation without invalidating owned handles",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte batches preserve attribute and structure atomic refusals for late invalid data and overlapping targets",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte patches keep complete output and nesting limits enforced before encoding",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:byte edits ignore overridden patch iterators and honour Buffer subview ownership",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-edits.test.ts:encoded edits can be reparsed for a sequential pipeline without accepting old handles",
+      "path": "tests/unit/xml-byte-edits.test.ts",
+      "sourceSha256": "ec62be8e906b3a1513de2b8a69e0dd9103138a82a2e65bb027fdd9f12ea83ffe"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshot owns caller input and empty-removal output with frozen handles",

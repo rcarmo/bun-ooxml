@@ -1,5 +1,5 @@
 import {OoxmlError} from '../errors.ts';
-import {XmlSnapshot,type XmlRemovalTarget} from './removal.ts';
+import {XmlSnapshot,type XmlRemovalTarget,type XmlAttributePatch,type XmlStructurePatch} from './removal.ts';
 const MAX_BYTES=32*1024*1024;
 type Encoding='utf-8'|'utf-16le'|'utf-16be';
 const typedArray=Object.getPrototypeOf(Uint8Array.prototype);
@@ -7,7 +7,7 @@ const byteLength=Object.getOwnPropertyDescriptor(typedArray,'byteLength')!.get!;
 const buffer=Object.getOwnPropertyDescriptor(typedArray,'buffer')!.get!;
 function fail(code:string,message:string):never{throw new OoxmlError(code,message);}
 
-/** Owned XML bytes with reusable string-offset handles and encoding-preserving removal. */
+/** Owned XML bytes with reusable string-offset handles and encoding-preserving edits. */
 export class XmlByteSnapshot {
  readonly elements:readonly XmlRemovalTarget[];
  readonly #bytes:Uint8Array;
@@ -38,9 +38,14 @@ export class XmlByteSnapshot {
   Object.freeze(this);
  }
  static parse(input:Uint8Array):XmlByteSnapshot{return new XmlByteSnapshot(input);}
+ /** Each operation returns detached bytes and retains this snapshot's original handles. */
+ setAttributes(patches:readonly XmlAttributePatch[]):Uint8Array{return this.#encode(this.#snapshot.setAttributes(patches));}
+ appendChildren(patches:readonly XmlStructurePatch[]):Uint8Array{return this.#encode(this.#snapshot.appendChildren(patches));}
+ replaceElements(patches:readonly XmlStructurePatch[]):Uint8Array{return this.#encode(this.#snapshot.replaceElements(patches));}
  /** New detached output; empty removal preserves the original byte sequence. */
- remove(targets:readonly XmlRemovalTarget[]):Uint8Array{
-  const text=this.#snapshot.remove(targets);
+ remove(targets:readonly XmlRemovalTarget[]):Uint8Array{return this.#encode(this.#snapshot.remove(targets));}
+ // Only syntax-validated, size-bounded output from the private string snapshot reaches this encoder.
+ #encode(text:string):Uint8Array{
   if(text===this.#text)return this.#bytes.slice();
   if(this.#encoding==='utf-8'){
    const payload=new TextEncoder().encode(text),out=new Uint8Array(this.#bom+payload.length);

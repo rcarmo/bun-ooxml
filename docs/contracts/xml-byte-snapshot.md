@@ -1,8 +1,10 @@
 # XML byte snapshots
 
 `XmlByteSnapshot.parse(bytes)` copies a `Uint8Array` into an immutable snapshot.
-`remove(targets)` returns a new, detached byte array with selected XML subtrees
-removed. Both caller input and the snapshot remain unchanged.
+Its `remove(targets)`, `setAttributes(patches)`, `appendChildren(patches)` and
+`replaceElements(patches)` methods return new, detached byte arrays. Both caller
+input and the snapshot remain unchanged. The patch types and validation rules
+match the [string-snapshot API](xml-removal.md).
 
 ```ts
 import { XmlByteSnapshot } from 'bun-ooxml';
@@ -28,7 +30,9 @@ accepts either UTF-16 BOM. Unsupported codecs, BOM-less UTF-16, malformed byte
 sequences, duplicate leading BOMs and conflicting declarations refuse. No
 replacement characters are introduced during decoding.
 
-An empty removal returns an exact copy of the original bytes. Changed output
+An empty batch or validated same-text result returns an exact copy of the original
+bytes. Empty child arrays still validate target ownership; replacing the root
+refuses even with empty content. Changed output
 retains the original encoding, BOM, declaration and spelling of all surviving
 source characters. Re-encoding does not normalise entities, whitespace, namespace
 prefixes or quotes. Mutating the caller buffer or either an empty or changed
@@ -46,12 +50,21 @@ snapshot metadata, and editing allocates output.
 
 Every removal validates the joined XML, including text that would become an
 illegal `]]>` sequence. The original snapshot can be reused after success or
-failure. This byte API currently exposes subtree removal only; attribute and
-structured-content edits remain on the string API. It does not read/write OPC
-packages, validate OOXML schemas or repair relationships to removed content.
+failure. Attribute and structured-content edits use the same guarded string
+editors before encoding the output. They retain the existing QName, ownership,
+duplicate, overlap, depth, cycle and complete-output limits. Root attributes and
+child appends are allowed; root replacement is not. Each call starts from the
+original snapshot, so sequential edits require parsing the preceding output and
+using its newly issued handles.
+
+These methods do not read/write OPC packages, validate OOXML schemas or repair
+relationships to removed content.
 
 The shared byte-input case checks one UTF-8 parse/no-op and caller-byte custody.
 Native tests separately cover changed removal, caller/result mutation, both UTF-16
-endiannesses, BOMs, malformed inputs and bounds. The binding executes Bun even
+endiannesses, BOMs, malformed inputs and bounds. Further native tests exercise
+attribute edits, namespace-aware appends/replacements, sequential reparsing,
+no-op output isolation and late batch refusal. They add no canonical case coverage.
+The binding executes Bun even
 though the historical scenario text names its Go API profile; no Go execution or
 cross-runtime equivalence is inferred.

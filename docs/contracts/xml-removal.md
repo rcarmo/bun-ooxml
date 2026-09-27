@@ -29,10 +29,11 @@ limits of 8 Mi UTF-16 code units, 256 levels and 100,000 elements. Snapshot pars
 and output validation do not accumulate descendant text at every ancestor.
 
 This API accepts JavaScript strings; [XmlByteSnapshot](xml-byte-snapshot.md)
-provides owned UTF-8/UTF-16 byte input and encoding-preserving removal.
-Neither API decodes or saves package members,
-validate an OOXML schema, update relationships or resolve references to deleted
+provides owned UTF-8/UTF-16 byte input and encoding-preserving removal, attribute
+updates and structured-content edits. Neither API saves package members,
+validates an OOXML schema, updates relationships or resolves references to deleted
 content. Use the format-level editors when those checks are needed. Parse a new
 snapshot to edit the returned string further; original handles remain tied to
 the original source. The same handles also support
-[source-preserving attribute updates](xml-attributes.md).
+[source-preserving attribute updates](xml-attributes.md) and
+[structured insertion/replacement](xml-structure.md).

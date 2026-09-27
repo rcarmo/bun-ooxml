@@ -57,8 +57,10 @@ limit of 1,000,000 entry visits per batch. These are bounded API policies; they 
 not establish peak-memory or throughput guarantees. The final document also
 passes the existing parser's element-count limit.
 
-These APIs operate on JavaScript strings. They do not validate OOXML schemas,
-resolve references, reconcile package relationships or save files. The shared
-namespace case exercises 100 combinations within one acceptance case; it does not
-represent 100 independent specification requirements. The byte-input seed case
-remains unimplemented because snapshots accept strings.
+`XmlSnapshot` operates on JavaScript strings. [XmlByteSnapshot](xml-byte-snapshot.md)
+exposes the same operations on owned UTF-8/UTF-16 input and returns detached bytes
+in the original encoding. Neither API validates OOXML schemas, resolves references,
+reconciles package relationships or saves files. The shared namespace case exercises
+100 combinations within one acceptance case; it does not represent 100 independent
+specification requirements. The separate byte-input seed executes parse/no-op custody
+only; changed byte-structure edits have native tests.

@@ -44,5 +44,7 @@ as [subtree removal](xml-removal.md), without accumulating descendant text at ea
 ancestor. Namespace scope walks are bounded by the parser's depth limit; no
 peak-memory or throughput guarantee is established.
 
-This operation edits XML strings. It does not remove attributes, create namespace
-bindings, validate an OOXML schema, update references or save package members.
+`XmlSnapshot` returns an XML string. [XmlByteSnapshot](xml-byte-snapshot.md) exposes
+the same patches on owned byte input and returns detached bytes in the original
+encoding. Neither method removes attributes, creates namespace bindings, validates
+an OOXML schema, updates references or saves package members.
