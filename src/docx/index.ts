@@ -1,8 +1,8 @@
 import { OoxmlError } from "../errors.ts";
 import {inspectEffectiveFormatting,type EffectiveRunFormatting} from './effective-formatting.ts';
 export type {EffectiveRunFormatting,EffectiveFlag,FormattingContribution} from './effective-formatting.ts';
-import {formatRunProperties,directFontSizes as readDirectFontSizes,directRunFlags as readDirectRunFlags,type DirectRunFlags,type DirectRunPatch} from './run-formatting.ts';
-export type {DirectRunFlags} from './run-formatting.ts';
+import {formatRunProperties,directFontSizes as readDirectFontSizes,directRunFlags as readDirectRunFlags,directRunAppearance as readDirectRunAppearance,type DirectRunFlags,type DirectRunAppearance,type DirectRunPatch} from './run-formatting.ts';
+export type {DirectRunFlags,DirectRunAppearance,UnderlineStyle,HighlightColor,RunVerticalAlignment} from './run-formatting.ts';
 import {readPageLayout,replacePageLayout,normalizePageLayout,type PageLayout} from './page-layout.ts';
 export type {PageLayout} from './page-layout.ts';
 import {directParagraphStyle,replaceParagraphStyle} from './paragraph-style.ts';
@@ -254,7 +254,12 @@ export class Paragraph {
     this.ensureFresh(); return this.documentRef.inspectParagraphRunFlags(this.snapshot);
   }
 
-  /** Apply direct Boolean/font size overrides to every supported direct run. */
+  /** Direct scalar overrides in run order; theme-dependent values refuse. */
+  directRunAppearance(): DirectRunAppearance[] {
+    this.ensureFresh(); return this.documentRef.inspectParagraphRunAppearance(this.snapshot);
+  }
+
+  /** Apply direct formatting overrides to every supported direct run. */
   setRunFormatting(patch: RunFormattingPatch): RunFormattingReceipt {
     this.ensureFresh();
     return this.documentRef.formatParagraphRuns(this.snapshot, patch);
@@ -704,6 +709,12 @@ export class Document {
   inspectParagraphFormatting(snapshot: ParagraphSnapshot): EffectiveRunFormatting[] {
     this.assertParagraphSnapshot(snapshot);
     return inspectEffectiveFormatting(this.opcPackage,DOCUMENT_PART,snapshot.element);
+  }
+
+  inspectParagraphRunAppearance(snapshot: ParagraphSnapshot): DirectRunAppearance[] {
+    this.assertParagraphSnapshot(snapshot);
+    if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
+    return readDirectRunAppearance(this.xml,snapshot.element);
   }
 
   inspectParagraphRunFlags(snapshot: ParagraphSnapshot): DirectRunFlags[] {

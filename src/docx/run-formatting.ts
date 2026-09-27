@@ -1,5 +1,7 @@
 import {OoxmlError} from '../errors.ts';
 import {applyEdits,attribute,type XmlElement} from '../xml/index.ts';
+import {APPEARANCE_NAMES,APPEARANCE_KEYS,appearanceValue,appearanceFromNode,type AppearanceKey,type DirectRunAppearance,type RunAppearancePatch} from './run-appearance.ts';
+export type {DirectRunAppearance,UnderlineStyle,HighlightColor,RunVerticalAlignment} from './run-appearance.ts';
 
 const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 const XMLNS='http://www.w3.org/2000/xmlns/';
@@ -8,9 +10,11 @@ type Edit={start:number;end:number;value:string};
 const FLAG_NAMES={bold:'b',italic:'i',caps:'caps',smallCaps:'smallCaps',strike:'strike',doubleStrike:'dstrike',outline:'outline',shadow:'shadow',emboss:'emboss',imprint:'imprint',vanish:'vanish'} as const;
 type FlagKey=keyof typeof FLAG_NAMES;
 export type DirectRunFlags={ [K in FlagKey]: boolean|null };
-export type DirectRunPatch=Partial<DirectRunFlags>&{fontSizePt?:number|null};
+export type DirectRunPatch=Partial<DirectRunFlags>&RunAppearancePatch&{fontSizePt?:number|null};
 const FLAG_KEYS=Object.keys(FLAG_NAMES) as FlagKey[];
-const PATCH_KEYS=[...FLAG_KEYS,'fontSizePt'] as const;
+const PROPERTY_NAMES={...FLAG_NAMES,...APPEARANCE_NAMES,fontSizePt:'sz'} as const;
+const PATCH_KEYS=[...FLAG_KEYS,...APPEARANCE_KEYS,'fontSizePt'] as const;
+const appearanceKey=(key:string):key is AppearanceKey=>APPEARANCE_KEYS.includes(key as AppearanceKey);
 const CONFLICTS=[['strike','dstrike'],['caps','smallCaps'],['emboss','imprint'],['emboss','outline'],['imprint','outline'],['emboss','shadow'],['imprint','shadow']] as const;
 function fail(message:string):never{throw new OoxmlError('docx-format-unsupported',message);}
 function normalizePatch(patch:DirectRunPatch):DirectRunPatch {
@@ -20,9 +24,9 @@ function normalizePatch(patch:DirectRunPatch):DirectRunPatch {
   if(typeof key!=='string'||!PATCH_KEYS.includes(key as typeof PATCH_KEYS[number]))throw new OoxmlError('docx-format-argument','Unknown run-formatting property');
   const descriptor=Object.getOwnPropertyDescriptor(patch,key)!;
   if(!('value' in descriptor))throw new OoxmlError('docx-format-argument','Run-formatting properties must be plain values');
-  const value=descriptor.value;
+  let value=descriptor.value;
   if(value===undefined)continue;
-  if(value!==null){if(key==='fontSizePt')validateFontSize(value);else if(typeof value!=='boolean')throw new OoxmlError('docx-format-argument','Run effects require boolean or null');}
+  if(value!==null){if(key==='fontSizePt')validateFontSize(value);else if(appearanceKey(key))value=appearanceValue(key,value,true);else if(typeof value!=='boolean')throw new OoxmlError('docx-format-argument','Run effects require boolean or null');}
   Object.assign(result,{[key]:value});
  }
  return result;
@@ -32,10 +36,10 @@ function assertCompatible(names:Set<string>):void {
 }
 const word=(node:XmlElement,name:string)=>node.namespaceURI===W&&node.localName===name;
 
-/** Preserve source outside selected Boolean/size elements or a missing rPr. */
+/** Preserve source outside selected direct properties or a missing rPr. */
 export function formatRunProperties(xml:string,paragraph:XmlElement,patch:DirectRunPatch):{xml:string;changedRuns:number}{
   patch=normalizePatch(patch);
-  const requested=PATCH_KEYS.filter(k=>patch[k]!==undefined).sort((a,b)=>ORDER.indexOf(a==='fontSizePt'?'sz':FLAG_NAMES[a])-ORDER.indexOf(b==='fontSizePt'?'sz':FLAG_NAMES[b]));
+  const requested=PATCH_KEYS.filter(k=>patch[k]!==undefined).sort((a,b)=>ORDER.indexOf(PROPERTY_NAMES[a])-ORDER.indexOf(PROPERTY_NAMES[b]));
   const edits:Edit[]=[];let changedRuns=0;
   assertWhitespaceGaps(paragraph,xml);
   const properties=paragraph.children.filter(c=>word(c,'pPr'));
@@ -63,15 +67,15 @@ export function formatRunProperties(xml:string,paragraph:XmlElement,patch:Direct
     }
     const present=new Set(pr?.children.map(n=>n.localName)??[]);
     assertCompatible(present);
-    for(const key of requested){const name=key==='fontSizePt'?'sz':FLAG_NAMES[key];if(patch[key]===null)present.delete(name);else present.add(name);}
+    for(const key of requested){const name=PROPERTY_NAMES[key];if(patch[key]===null)present.delete(name);else present.add(name);}
     assertCompatible(present);
     let changed=false;const insertions=new Map<number,string[]>();
     for(const key of requested){
-      const name=key==='fontSizePt'?'sz':FLAG_NAMES[key],value=patch[key]!,node=pr?.children.find(c=>word(c,name));
-      const current=node?(key==='fontSizePt'?sizeValue(node):flagValue(node)):undefined;
+      const name=PROPERTY_NAMES[key],value=patch[key]!,node=pr?.children.find(c=>word(c,name));
+      const current=node?(key==='fontSizePt'?sizeValue(node):appearanceKey(key)?appearanceFromNode(key,node):flagValue(node)):undefined;
       if(value===null){if(node){edits.push({start:node.start,end:node.end,value:''});changed=true;}continue;}
       if(node&&current===value)continue;
-      const encoded=key==='fontSizePt'?String((value as number)*2):value?'1':'0';
+      const encoded=key==='fontSizePt'?String((value as number)*2):appearanceKey(key)?String(value):value?'1':'0';
       const property=`<w:${name} xmlns:w="${W}" w:val="${encoded}"/>`;
       if(node)edits.push({start:node.start,end:node.end,value:property});
       else{
@@ -103,6 +107,14 @@ export function directRunFlags(xml:string,paragraph:XmlElement):DirectRunFlags[]
  return paragraph.children.filter(r=>word(r,'r')).map(run=>{
   const pr=run.children.find(c=>word(c,'rPr'));
   return Object.fromEntries(FLAG_KEYS.map(key=>{const node=pr?.children.find(c=>word(c,FLAG_NAMES[key]));return [key,node?flagValue(node):null];})) as DirectRunFlags;
+ });
+}
+/** Direct bounded scalar properties; no theme, inherited or default values. */
+export function directRunAppearance(xml:string,paragraph:XmlElement):DirectRunAppearance[]{
+ formatRunProperties(xml,paragraph,{});
+ return paragraph.children.filter(r=>word(r,'r')).map(run=>{
+  const pr=run.children.find(c=>word(c,'rPr'));
+  return Object.fromEntries(APPEARANCE_KEYS.map(key=>{const node=pr?.children.find(c=>word(c,APPEARANCE_NAMES[key]));return [key,node?appearanceFromNode(key,node):null];})) as unknown as DirectRunAppearance;
  });
 }
 /** Direct non-complex-script sizes in paragraph run order; null means absent. */

@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 575,
-  "files": 59,
+  "count": 586,
+  "files": 60,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -76,6 +76,12 @@
       "path": "tests/unit/docx-revisions.test.ts",
       "sha256": "1c56ca3ad1f41185d18f17fb7721c33661c481b53abf92fd43be6b23a65e6268",
       "declarations": 7,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "declarations": 11,
       "issues": []
     },
     {
@@ -459,6 +465,10 @@
       "sha256": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9"
     },
     {
+      "path": "tests/acceptance/run-appearance.ts",
+      "sha256": "71697a727d84549b28413381f563604d37d8859766453fbbe06ba85f5c88d7c8"
+    },
+    {
       "path": "tests/acceptance/run-effects.ts",
       "sha256": "4f90228d70ff52f30ce05a3a007ef78435367ff8720f63e50674fc2fdcf63465"
     },
@@ -472,7 +482,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "b2b5bea134824fdd76a503eac232014d619c7379d0c61964a493faf734b210df"
+      "sha256": "26f78920bd6478e25ee1d43a800f4ced63234cf1e5e176ff27ee7d3b1c68dbcd"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -600,6 +610,12 @@
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+    "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
+    "bun:tests/unit/docx-run-appearance.test.ts:all supported highlight names and underline styles read back without applying style inheritance",
+    "bun:tests/unit/docx-run-appearance.test.ts:invalid scalar values, missing values, injection and executable patches refuse atomically",
+    "bun:tests/unit/docx-run-appearance.test.ts:selected theme colours, decorated underlines and malformed scalar leaves refuse even for removal or same-value",
+    "bun:tests/unit/docx-run-appearance.test.ts:namespace aliases and UTF-16 path saves retain scalar values and other parts",
+    "bun:tests/unit/docx-run-appearance.test.ts:fifteen shared appearance getter cases execute and changed expectations fail predicates",
     "bun:tests/unit/docx-run-effects.test.ts:direct boolean getter distinguishes absent/off/on and each new effect survives reopen",
     "bun:tests/unit/docx-run-effects.test.ts:spec-incompatible direct effect pairs refuse atomically and null can remove a conflicting property",
     "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
@@ -756,6 +772,12 @@
     "bun:tests/unit/docx-redline.test.ts:text boxes and content controls refuse rather than redlining hidden unsupported stories",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / invalid revision IDs and lexical text between run children refuse atomically",
     "bun:tests/unit/docx-revisions.test.ts:docx revisions / missing enforcement/edit and duplicate protection declarations cannot bypass refusal",
+    "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
+    "bun:tests/unit/docx-run-appearance.test.ts:all supported highlight names and underline styles read back without applying style inheritance",
+    "bun:tests/unit/docx-run-appearance.test.ts:invalid scalar values, missing values, injection and executable patches refuse atomically",
+    "bun:tests/unit/docx-run-appearance.test.ts:selected theme colours, decorated underlines and malformed scalar leaves refuse even for removal or same-value",
+    "bun:tests/unit/docx-run-appearance.test.ts:namespace aliases and UTF-16 path saves retain scalar values and other parts",
+    "bun:tests/unit/docx-run-appearance.test.ts:fifteen shared appearance getter cases execute and changed expectations fail predicates",
     "bun:tests/unit/docx-run-effects.test.ts:direct boolean getter distinguishes absent/off/on and each new effect survives reopen",
     "bun:tests/unit/docx-run-effects.test.ts:spec-incompatible direct effect pairs refuse atomically and null can remove a conflicting property",
     "bun:tests/unit/docx-run-effects.test.ts:malformed effect metadata, revisions and unsupported run topology refuse even for no-op",
@@ -6306,6 +6328,489 @@
         "expect().toEqual",
         "makeAcceptanceRoot",
         "runAcceptance"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 13,
+      "title": "direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.paragraphs[0]!.directRunAppearance()).toEqual([{color:null,underline:null,highlight:null,verticalAlign:null}])",
+        "expect(d.paragraphs[0]!.setRunFormatting({color:'#ff0000',underline:'wave',highlight:'darkBlue',verticalAlign:'superscript'})).toEqual({changedRuns:1})",
+        "expect(d.paragraphs[0]!.directRunAppearance()).toEqual([expected])",
+        "expect(reopened.paragraphs[0]!.directRunAppearance()).toEqual([expected])",
+        "expect(reopened.paragraphs[0]!.text).toBe('Alpha')",
+        "expect(reopened.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 18,
+          "expression": "for(const [n,b]of before)if(n!=='word/document.xml')expect(reopened.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=await fixture(),before=d.package.parts;expect(d.paragraphs[0]!.directRunAppearance()).toEqual([{color:null,underline:null,highlight:null,verticalAlign:null}]);\n expect(d.paragraphs[0]!.setRunFormatting({color:'#ff0000',underline:'wave',highlight:'darkBlue',verticalAlign:'superscript'})).toEqual({changedRuns:1});\n const expected={color:'ff0000',underline:'wave',highlight:'darkBlue',verticalAlign:'superscript'} as const;\n expect(d.paragraphs[0]!.directRunAppearance()).toEqual([expected]);const reopened=await Document.open(d.package.toBytes());expect(reopened.paragraphs[0]!.directRunAppearance()).toEqual([expected]);expect(reopened.paragraphs[0]!.text).toBe('Alpha');\n for(const [n,b]of before)if(n!=='word/document.xml')expect(reopened.package.get(n)).toEqual(b);\n}",
+      "calls": [
+        "Document.open",
+        "d.package.toBytes",
+        "d.paragraphs.0.directRunAppearance",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "reopened.package.get",
+        "reopened.paragraphs.0.directRunAppearance"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:appearance edits follow schema order alongside flags and sizes and preserve unrelated property bytes",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 21,
+      "title": "appearance edits follow schema order alongside flags and sizes and preserve unrelated property bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain('<w:rFonts w:ascii = \\'Arial\\'/>')",
+        "expect(xml).toContain('<w:lang w:val=\"en-US\"/>')",
+        "expect(elements(parseXml(xml),'rPr',W)[0]!.children.map(n=>n.localName)).toEqual(['rFonts','b','shadow','color','sz','highlight','u','vertAlign','lang'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=await fixture('<w:rPr><w:rFonts w:ascii = \\'Arial\\'/><w:lang w:val=\"en-US\"/></w:rPr>');\n d.paragraphs[0]!.setRunFormatting({verticalAlign:'subscript',underline:'double',highlight:'yellow',fontSizePt:14,color:'ABCDEF',shadow:true,bold:true});\n const xml=new TextDecoder().decode(d.package.get('word/document.xml'));expect(xml).toContain('<w:rFonts w:ascii = \\'Arial\\'/>');expect(xml).toContain('<w:lang w:val=\"en-US\"/>');\n expect(elements(parseXml(xml),'rPr',W)[0]!.children.map(n=>n.localName)).toEqual(['rFonts','b','shadow','color','sz','highlight','u','vertAlign','lang']);\n}",
+      "calls": [
+        ".decode",
+        "d.package.get",
+        "d.paragraphs.0.setRunFormatting",
+        "elements",
+        "elements().0.children.map",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "fixture",
+        "parseXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:explicit none/baseline/auto differ from null removal and same-state retains lexical spelling",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 28,
+      "title": "explicit none/baseline/auto differ from null removal and same-state retains lexical spelling",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.setRunFormatting({color:'#ff0000',highlight:'none',underline:'none',verticalAlign:'baseline'})).toEqual({changedRuns:0})",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(p.directRunAppearance()[0]!.color).toBe('ff0000')",
+        "expect(d.paragraphs[0]!.directRunAppearance()[0]!.color).toBe('auto')",
+        "expect(()=>p.directRunAppearance()).toThrow()",
+        "expect(d.paragraphs[0]!.directRunAppearance()).toEqual([{color:null,underline:null,highlight:null,verticalAlign:null}])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=await fixture('<w:rPr><w:color w:val = \\'ff0000\\'/><w:highlight w:val=\"none\"/><w:u w:val=\"none\"/><w:vertAlign w:val=\"baseline\"/></w:rPr>'),p=d.paragraphs[0]!,before=d.package.toBytes();\n expect(p.setRunFormatting({color:'#ff0000',highlight:'none',underline:'none',verticalAlign:'baseline'})).toEqual({changedRuns:0});expect(d.package.toBytes()).toEqual(before);\n const values=p.directRunAppearance();values[0]!.color='changed';expect(p.directRunAppearance()[0]!.color).toBe('ff0000');\n p.setRunFormatting({color:'auto'});expect(d.paragraphs[0]!.directRunAppearance()[0]!.color).toBe('auto');expect(()=>p.directRunAppearance()).toThrow();\n d.paragraphs[0]!.setRunFormatting({color:null,highlight:null,underline:null,verticalAlign:null});expect(d.paragraphs[0]!.directRunAppearance()).toEqual([{color:null,underline:null,highlight:null,verticalAlign:null}]);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.paragraphs.0.directRunAppearance",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "p.directRunAppearance",
+        "p.setRunFormatting"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:all supported highlight names and underline styles read back without applying style inheritance",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 36,
+      "title": "all supported highlight names and underline styles read back without applying style inheritance",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect((await Document.open(d.package.toBytes())).paragraphs[0]!.directRunAppearance()[0]!.highlight).toBe(highlight)",
+        "expect(d.paragraphs[0]!.directRunAppearance()[0]!.underline).toBe(underline)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 37,
+          "expression": "for(const highlight of ['black','blue','cyan','green','magenta','red','yellow','white','darkBlue','darkCyan','darkGreen','darkMagenta','darkRed','darkYellow','darkGray','lightGray','none'] as const)"
+        },
+        {
+          "line": 38,
+          "expression": "for(const underline of ['none','single','double','thick','dotted','dash','wave'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n for(const highlight of ['black','blue','cyan','green','magenta','red','yellow','white','darkBlue','darkCyan','darkGreen','darkMagenta','darkRed','darkYellow','darkGray','lightGray','none'] as const){const d=await fixture();d.paragraphs[0]!.setRunFormatting({highlight});expect((await Document.open(d.package.toBytes())).paragraphs[0]!.directRunAppearance()[0]!.highlight).toBe(highlight);}\n for(const underline of ['none','single','double','thick','dotted','dash','wave'] as const){const d=await fixture();d.paragraphs[0]!.setRunFormatting({underline});expect(d.paragraphs[0]!.directRunAppearance()[0]!.underline).toBe(underline);}\n}",
+      "calls": [
+        ".paragraphs.0.directRunAppearance",
+        "Document.open",
+        "d.package.toBytes",
+        "d.paragraphs.0.directRunAppearance",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "fixture"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:invalid scalar values, missing values, injection and executable patches refuse atomically",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 41,
+      "title": "invalid scalar values, missing values, injection and executable patches refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting(patch as RunFormattingPatch)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(called).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 45,
+          "expression": "for(const patch of patches)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=await fixture(),before=d.package.toBytes();let called=false;\n const patches:unknown[]=[{color:'red'},{color:'FFF'},{color:'#auto'},{color:'11223344'},{color:'\"/><x/>'},{underline:'wavy'},{highlight:'Yellow'},{verticalAlign:'super'},{color:123},{color:'123456',underline:true}];\n patches.push(Object.defineProperty({},'color',{enumerable:true,get(){called=true;return '123456';}}));\n for(const patch of patches){expect(()=>d.paragraphs[0]!.setRunFormatting(patch as RunFormattingPatch)).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(called).toBe(false);\n}",
+      "calls": [
+        "Object.defineProperty",
+        "d.package.toBytes",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "patches.push"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:selected theme colours, decorated underlines and malformed scalar leaves refuse even for removal or same-value",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 48,
+      "title": "selected theme colours, decorated underlines and malformed scalar leaves refuse even for removal or same-value",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.paragraphs[0]!.setRunFormatting(patch)).toThrow()",
+        "expect(()=>d.paragraphs[0]!.directRunAppearance()).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(xml).toContain('<w:color w:val=\"FF0000\" w:themeColor=\"accent1\"/>')",
+        "expect(xml).toContain('<w:u w:val=\"single\" w:color=\"00FF00\"/>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 57,
+          "expression": "for(const [leaf,patch]of rows)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const rows:[string,RunFormattingPatch][]=[\n  ['<w:color w:val=\"FF0000\" w:themeColor=\"accent1\"/>',{color:'FF0000'}],\n  ['<w:color w:val=\"FF0000\" w:themeTint=\"80\"/>',{color:null}],\n  ['<w:u w:val=\"single\" w:color=\"FF0000\"/>',{underline:'single'}],\n  ['<w:u w:val=\"single\" w:themeColor=\"accent1\"/>',{underline:null}],\n  ['<w:highlight w:val=\"bogus\"/>',{highlight:null}],['<w:vertAlign val=\"baseline\"/>',{verticalAlign:'baseline'}],\n  ['<w:color/>',{color:'auto'}],['<w:u/>',{underline:'single'}],['<w:vertAlign w:val=\"up\"/>',{verticalAlign:null}],\n ];\n for(const [leaf,patch]of rows){const d=await fixture('<w:rPr>'+leaf+'</w:rPr>'),before=d.package.toBytes();expect(()=>d.paragraphs[0]!.setRunFormatting(patch)).toThrow();expect(()=>d.paragraphs[0]!.directRunAppearance()).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const untouched=await fixture('<w:rPr><w:color w:val=\"FF0000\" w:themeColor=\"accent1\"/><w:u w:val=\"single\" w:color=\"00FF00\"/></w:rPr>');\n untouched.paragraphs[0]!.setRunFormatting({bold:true});const xml=new TextDecoder().decode(untouched.package.get('word/document.xml'));expect(xml).toContain('<w:color w:val=\"FF0000\" w:themeColor=\"accent1\"/>');expect(xml).toContain('<w:u w:val=\"single\" w:color=\"00FF00\"/>');\n}",
+      "calls": [
+        ".decode",
+        "d.package.toBytes",
+        "d.paragraphs.0.directRunAppearance",
+        "d.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "untouched.package.get",
+        "untouched.paragraphs.0.setRunFormatting"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:late multi-run scalar refusal leaves all prior runs unchanged",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 62,
+      "title": "late multi-run scalar refusal leaves all prior runs unchanged",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>doc.paragraphs[0]!.setRunFormatting({color:'123456'})).toThrow()",
+        "expect(doc.package.toBytes()).toEqual(before)",
+        "expect(doc.paragraphs[0]!.text).toBe('AlphaBeta')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());pkg.set(pkg.mainPart(),pkg.text(pkg.mainPart()).replace('</w:r>','</w:r><w:r><w:rPr><w:color w:val=\"auto\" w:themeColor=\"accent1\"/></w:rPr><w:t>Beta</w:t></w:r>'));\n const doc=await Document.open(pkg.toBytes()),before=doc.package.toBytes();expect(()=>doc.paragraphs[0]!.setRunFormatting({color:'123456'})).toThrow();expect(doc.package.toBytes()).toEqual(before);expect(doc.paragraphs[0]!.text).toBe('AlphaBeta');\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.package.toBytes",
+        "doc.paragraphs.0.setRunFormatting",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:namespace aliases and UTF-16 path saves retain scalar values and other parts",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 67,
+      "title": "namespace aliases and UTF-16 path saves retain scalar values and other parts",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(reopened.paragraphs[0]!.directRunAppearance()[0]).toEqual({color:'123456',underline:'dash',highlight:null,verticalAlign:'subscript'})",
+        "expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254])",
+        "expect(reopened.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 69,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);"
+        },
+        {
+          "line": 71,
+          "expression": "for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes()),text=pkg.text(pkg.mainPart()).replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:').replace('UTF-8','UTF-16');\n const bytes=new Uint8Array(2+text.length*2);bytes[0]=255;bytes[1]=254;const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);pkg.set(pkg.mainPart(),bytes);\n const doc=await Document.open(pkg.toBytes());doc.paragraphs[0]!.setRunFormatting({color:'123456',underline:'dash',verticalAlign:'subscript'});const root=await mkdtemp(join(tmpdir(),'run-appearance-'));\n try{const path=join(root,'appearance.docx');await doc.save(path);const reopened=await Document.open(path);expect(reopened.paragraphs[0]!.directRunAppearance()[0]).toEqual({color:'123456',underline:'dash',highlight:null,verticalAlign:'subscript'});expect([...reopened.package.get('word/document.xml')!.slice(0,2)]).toEqual([255,254]);for(const n of pkg.names())if(n!==pkg.mainPart())expect(reopened.package.get(n)).toEqual(pkg.get(n));}finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "doc.paragraphs.0.setRunFormatting",
+        "doc.save",
+        "expect",
+        "expect().toEqual",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "pkg.get",
+        "pkg.mainPart",
+        "pkg.names",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replaceAll",
+        "pkg.text().replaceAll().replaceAll",
+        "pkg.text().replaceAll().replaceAll().replace",
+        "pkg.toBytes",
+        "reopened.package.get",
+        "reopened.package.get().slice",
+        "reopened.paragraphs.0.directRunAppearance",
+        "rm",
+        "text.charCodeAt",
+        "tmpdir",
+        "view.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:protection, stale source and serialization failure preserve bytes and handle state",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 74,
+      "title": "protection, stale source and serialization failure preserve bytes and handle state",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>locked.paragraphs[0]!.setRunFormatting({color:'123456'})).toThrow()",
+        "expect(locked.package.toBytes()).toEqual(lb)",
+        "expect(()=>held.setRunFormatting({highlight:'cyan'})).toThrow('injected serialization')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.directRunAppearance()[0]!.highlight).toBeNull()",
+        "expect(()=>held.directRunAppearance()).toThrow()",
+        "expect(()=>held.setRunFormatting({color:'123456'})).toThrow()",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');\n const locked=await Document.open(pkg.toBytes()),lb=locked.package.toBytes();expect(()=>locked.paragraphs[0]!.setRunFormatting({color:'123456'})).toThrow();expect(locked.package.toBytes()).toEqual(lb);\n const held=d.paragraphs[0]!,before=d.package.toBytes(),opc=(d as unknown as {opcPackage:OpcPackage}).opcPackage,original=opc.toBytes.bind(opc);opc.toBytes=()=>{throw Error('injected serialization');};try{expect(()=>held.setRunFormatting({highlight:'cyan'})).toThrow('injected serialization');}finally{opc.toBytes=original;}\n expect(d.package.toBytes()).toEqual(before);expect(held.directRunAppearance()[0]!.highlight).toBeNull();\n d.package.setPart('word/document.xml',new TextEncoder().encode(new TextDecoder().decode(d.package.get('word/document.xml')).replace('Alpha','Beta')));const changed=d.package.toBytes();expect(()=>held.directRunAppearance()).toThrow();expect(()=>held.setRunFormatting({color:'123456'})).toThrow();expect(d.package.toBytes()).toEqual(changed);\n}",
+      "calls": [
+        ".decode",
+        ".decode().replace",
+        ".encode",
+        "Document.open",
+        "Error",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.get",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "held.directRunAppearance",
+        "held.setRunFormatting",
+        "locked.package.toBytes",
+        "locked.paragraphs.0.setRunFormatting",
+        "opc.toBytes.bind",
+        "pkg.mainPart",
+        "pkg.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:fifteen shared appearance getter cases execute and changed expectations fail predicates",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 82,
+      "title": "fifteen shared appearance getter cases execute and changed expectations fail predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(15)",
+        "expect(good.counts.cases.planned).toBeGreaterThan(0)",
+        "expect(text.includes(from)).toBe(true)",
+        "expect(bad.counts.cases.failed).toBe(n)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 87,
+          "expression": "for(const [from,to,n]of [['its in-memory colour getter equals <want>','its in-memory colour getter equals wrong',3],['Underline is true and UnderlineStyle equals <style>','Underline is true and UnderlineStyle equals wrong',6],['the Highlight getter equals <colour>','the Highlight getter equals wrong',5]] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts');\n const {bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/run-appearance.ts');const path='workflows/docx/document-model.feature',text=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});\n const run=(source:string)=>executeAcceptance({root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(4),cases:count(15),steps:count(46)}},bindings,'run-appearance-unit');\n const good=await run(text);expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(15);expect(good.counts.cases.planned).toBeGreaterThan(0);\n for(const [from,to,n]of [['its in-memory colour getter equals <want>','its in-memory colour getter equals wrong',3],['Underline is true and UnderlineStyle equals <style>','Underline is true and UnderlineStyle equals wrong',6],['the Highlight getter equals <colour>','the Highlight getter equals wrong',5]] as const){expect(text.includes(from)).toBe(true);const bad=await run(text.replace(from,to));expect(bad.counts.cases.failed).toBe(n);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n const corrupted=bindings.map(b=>b.pattern.test('Superscript is enabled on the first and Subscript on the second')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{await b.run(c,...captures);(c.state as {document:Document}).document.paragraphs[1]!.setRunFormatting({verticalAlign:'baseline'});}}:b);\n const bad=await executeAcceptance({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(4),cases:count(15),steps:count(46)}},corrupted,'run-vertical-control');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.document.paragraphs.1.setRunFormatting",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "run",
+        "selectSharedScenarios",
+        "text.includes",
+        "text.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:scalar edits preserve table grid and source body text, expire handles and share staged-write rollback",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "line": 92,
+      "title": "scalar edits preserve table grid and source body text, expire handles and share staged-write rollback",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(table.rows).toBe(1)",
+        "expect(table.columns).toBe(2)",
+        "expect(table.cell(0,0).text).toBe('Cell')",
+        "expect(table.cell(0,1).text).toBe('Other')",
+        "expect(()=>p.directRunAppearance()).toThrow()",
+        "expect(()=>fresh.setRunFormatting({underline:'dotted'})).toThrow('injected write')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(fresh.directRunAppearance()[0]!.underline).toBeNull()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188",
+      "body": "{\n const d=Document.create();d.addTable(1,2);d.tables[0]!.cell(0,0).text='Cell';d.tables[0]!.cell(0,1).text='Other';const table=d.tables[0]!,p=d.paragraphs[0]!;\n p.setRunFormatting({color:'AABBCC',highlight:'cyan'});expect(table.rows).toBe(1);expect(table.columns).toBe(2);expect(table.cell(0,0).text).toBe('Cell');expect(table.cell(0,1).text).toBe('Other');expect(()=>p.directRunAppearance()).toThrow();\n const fresh=d.paragraphs[0]!,before=d.package.toBytes(),opc=(d as unknown as {opcPackage:OpcPackage}).opcPackage,set=opc.set.bind(opc);opc.set=(name,value)=>{set(name,value);throw Error('injected write');};\n try{expect(()=>fresh.setRunFormatting({underline:'dotted'})).toThrow('injected write');}finally{opc.set=set;}\n expect(d.package.toBytes()).toEqual(before);expect(fresh.directRunAppearance()[0]!.underline).toBeNull();\n}",
+      "calls": [
+        "Document.create",
+        "Error",
+        "d.addTable",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fresh.directRunAppearance",
+        "fresh.setRunFormatting",
+        "opc.set.bind",
+        "p.directRunAppearance",
+        "p.setRunFormatting",
+        "set",
+        "table.cell"
       ],
       "reviewReasons": [],
       "unresolved": []

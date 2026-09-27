@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 575,
+  "nativeDeclarations": 586,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 348,
+  "withoutStagingCount": 359,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2720,6 +2720,61 @@
       "id": "bun:tests/unit/docx-paragraph-style.test.ts:same-style request still refuses document protection without touching handles",
       "path": "tests/unit/docx-paragraph-style.test.ts",
       "sourceSha256": "62170b03afe8a91b9585c71b3ecbae984dc61559d2dc8a462a1342e47b903bbf"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:appearance edits follow schema order alongside flags and sizes and preserve unrelated property bytes",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:explicit none/baseline/auto differ from null removal and same-state retains lexical spelling",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:all supported highlight names and underline styles read back without applying style inheritance",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:invalid scalar values, missing values, injection and executable patches refuse atomically",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:selected theme colours, decorated underlines and malformed scalar leaves refuse even for removal or same-value",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:late multi-run scalar refusal leaves all prior runs unchanged",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:namespace aliases and UTF-16 path saves retain scalar values and other parts",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:protection, stale source and serialization failure preserve bytes and handle state",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:fifteen shared appearance getter cases execute and changed expectations fail predicates",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
+    },
+    {
+      "id": "bun:tests/unit/docx-run-appearance.test.ts:scalar edits preserve table grid and source body text, expire handles and share staged-write rollback",
+      "path": "tests/unit/docx-run-appearance.test.ts",
+      "sourceSha256": "7b721a85f530425b70c800951ea4a32edcdf4a8c7f1cd039bac9fd8ed7b47188"
     },
     {
       "id": "bun:tests/unit/docx-run-effects.test.ts:direct boolean getter distinguishes absent/off/on and each new effect survives reopen",

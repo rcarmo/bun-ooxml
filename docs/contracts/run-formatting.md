@@ -1,7 +1,7 @@
 # Direct paragraph run formatting
 
-`Paragraph.setRunFormatting(patch)` applies direct Boolean and
-[font-size](font-size.md) overrides to every supported direct run in one paragraph. It returns `{ changedRuns: number }`.
+`Paragraph.setRunFormatting(patch)` applies direct Boolean,
+[font-size](font-size.md) and [scalar appearance](run-appearance.md) overrides to every supported direct run in one paragraph. It returns `{ changedRuns: number }`.
 `RunFormattingPatch` and `RunFormattingReceipt` are exported from the root and
 `./docx` entrypoints.
 
@@ -28,7 +28,7 @@ substring formatting and run splitting are unsupported.
 ## Preservation and handles
 
 Text and all package parts outside the main document remain byte-identical.
-Unrelated run-property elements retain their original bytes. Selected Boolean/size
+Unrelated run-property elements retain their original bytes. Selected formatting
 elements may be replaced by namespace-qualified elements; additions follow Word
 run-property order. Source encoding/BOM and namespace identity survive save/reopen.
 
