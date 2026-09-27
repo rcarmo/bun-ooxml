@@ -45,7 +45,8 @@ XML comparison for the documented preservation profile.
 [`XmlSnapshot`](docs/contracts/xml-removal.md) removes disjoint XML subtrees,
 [sets attributes](docs/contracts/xml-attributes.md), and
 [inserts or replaces structured content](docs/contracts/xml-structure.md) without
-rewriting surrounding source characters.
+rewriting surrounding source characters. [`XmlByteSnapshot`](docs/contracts/xml-byte-snapshot.md)
+provides owned byte input and encoding-preserving subtree removal.
 [`comparePackageArchives()`](docs/contracts/package-comparison.md) separates
 those equivalent XML payloads from binary changes, additions and removals.
 ZIP, XML and OPC code use Bun's built-in file, hash and compression implementations. There are no

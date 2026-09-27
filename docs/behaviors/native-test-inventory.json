@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 699,
-  "files": 70,
+  "count": 710,
+  "files": 71,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -373,6 +373,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "declarations": 11,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xml-comparison.test.ts",
       "sha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff",
       "declarations": 14,
@@ -574,7 +580,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "05a7a305c58497a58eeb891e59a869626da490ba32a81c4b3b3d3ea90cf74c14"
+      "sha256": "19b919c0d4e653a6f32d606972d372e93669e55fbb63bb8dddb56315ad58f548"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -619,6 +625,10 @@
     {
       "path": "tests/acceptance/xml-attributes.ts",
       "sha256": "f393d944a59c9f2c77ee355011365e3fe64e2f57f38de53a3b0355591208c29f"
+    },
+    {
+      "path": "tests/acceptance/xml-byte-snapshot.ts",
+      "sha256": "33d17b037c97d72ae8cac76d9a1a13a2c0b7997fce7c777d7bf0611755706d7d"
     },
     {
       "path": "tests/acceptance/xml-comparison.ts",
@@ -864,6 +874,12 @@
     "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
     "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
     "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:invalid byte types, malformed encodings, unsupported declarations and BOM mismatches refuse without mutation",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:shared buffers, detached buffers and duplicate BOMs cannot bypass admission or encoding declarations",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -1099,6 +1115,12 @@
     "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
     "bun:tests/unit/xml-attributes.test.ts:invalid values and late invalid patches refuse with no partial output",
     "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:invalid byte types, malformed encodings, unsupported declarations and BOM mismatches refuse without mutation",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:shared buffers, detached buffers and duplicate BOMs cannot bypass admission or encoding declarations",
+    "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
@@ -24550,6 +24572,421 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshot owns caller input and empty-removal output with frozen handles",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 7,
+      "title": "byte snapshot owns caller input and empty-removal output with frozen handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(source).toEqual(before)",
+        "expect(snapshot.remove([])).toEqual(before)",
+        "expect(snapshot.elements.map(n=>n.localName)).toEqual(['r','leaf','leaf'])",
+        "expect(Object.isFrozen(snapshot)).toBe(true)",
+        "expect(Object.isFrozen(snapshot.elements)).toBe(true)",
+        "expect(snapshot.elements.every(Object.isFrozen)).toBe(true)",
+        "expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><leaf id=\"b\">two</leaf></r>'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n const source=utf8('<r><leaf id=\"a\">one</leaf><leaf id=\"b\">two</leaf></r>'),before=new Uint8Array(source),snapshot=XmlByteSnapshot.parse(source);expect(source).toEqual(before);expect(snapshot.remove([])).toEqual(before);expect(snapshot.elements.map(n=>n.localName)).toEqual(['r','leaf','leaf']);expect(Object.isFrozen(snapshot)).toBe(true);expect(Object.isFrozen(snapshot.elements)).toBe(true);expect(snapshot.elements.every(Object.isFrozen)).toBe(true);\n source.fill(32);const copy=snapshot.remove([]);copy.fill(0);expect(snapshot.remove([])).toEqual(before);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><leaf id=\"b\">two</leaf></r>'));expect(snapshot.remove([])).toEqual(before);\n}",
+      "calls": [
+        "Object.isFrozen",
+        "XmlByteSnapshot.parse",
+        "copy.fill",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "snapshot.elements.every",
+        "snapshot.elements.map",
+        "snapshot.remove",
+        "source.fill",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 12,
+      "title": "UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.remove([])).toEqual(input)",
+        "expect(snapshot.remove([drop])).toEqual(encoded(source.replace(\"<q:drop a='&amp;'/>\",''),kind,bom))",
+        "expect(input).toEqual(before)",
+        "expect(source.slice(drop.start,drop.end)).toBe(\"<q:drop a='&amp;'/>\")"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 13,
+          "expression": "for(const kind of ['utf8','le','be'] as const)for(const bom of kind==='utf8'?[false,true]:[true])"
+        },
+        {
+          "line": 13,
+          "expression": "for(const bom of kind==='utf8'?[false,true]:[true])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n for(const kind of ['utf8','le','be'] as const)for(const bom of kind==='utf8'?[false,true]:[true]){const declaration=kind==='utf8'?'UTF-8':kind==='le'?'UTF-16LE':'UTF-16BE',source=`<?xml version=\"1.0\" encoding=\"${declaration}\"?>\\r\\n<r xmlns:q='urn:q'>雪😀\\r\\n<q:drop a='&amp;'/>\\t<keep> e&#x301; </keep><!--tail--></r>`,input=encoded(source,kind,bom),before=new Uint8Array(input),snapshot=XmlByteSnapshot.parse(input),drop=snapshot.elements.find(n=>n.localName==='drop')!;expect(snapshot.remove([])).toEqual(input);expect(snapshot.remove([drop])).toEqual(encoded(source.replace(\"<q:drop a='&amp;'/>\",''),kind,bom));expect(input).toEqual(before);expect(source.slice(drop.start,drop.end)).toBe(\"<q:drop a='&amp;'/>\");}\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "encoded",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "snapshot.elements.find",
+        "snapshot.remove",
+        "source.replace",
+        "source.slice"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 16,
+      "title": "generic UTF16 declarations and no declarations preserve BOM endian identity",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.remove([snapshot.elements[1]!])).toEqual(encoded(declaration+'<r><keep/></r>',kind))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 17,
+          "expression": "for(const kind of ['le','be'] as const)for(const declaration of ['', '<?xml version=\"1.0\" encoding=\"UTF-16\"?>'])"
+        },
+        {
+          "line": 17,
+          "expression": "for(const declaration of ['', '<?xml version=\"1.0\" encoding=\"UTF-16\"?>'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n for(const kind of ['le','be'] as const)for(const declaration of ['', '<?xml version=\"1.0\" encoding=\"UTF-16\"?>']){const text=declaration+'<r><drop/><keep/></r>',bytes=encoded(text,kind),snapshot=XmlByteSnapshot.parse(bytes);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(encoded(declaration+'<r><keep/></r>',kind));}\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "encoded",
+        "expect",
+        "expect().toEqual",
+        "snapshot.remove"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 20,
+      "title": "removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.remove(targets)).toThrow()",
+        "expect(s.remove([])).toEqual(before)",
+        "expect(input).toEqual(before)",
+        "expect(()=>unsafe.remove([unsafe.elements[1]!])).toThrow(expect.objectContaining({code:'XML_REMOVAL_UNSAFE'}))",
+        "expect(unsafe.remove([])).toEqual(utf8('<r>]]<a/>></r>'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 21,
+          "expression": "for(const targets of [[s.elements[0]!],[s.elements[1]!,s.elements[2]!],[s.elements[3]!,s.elements[3]!],[other.elements[3]!],[string.elements[3]!],["
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n const input=utf8('<r><a><b/></a><c/></r>'),before=new Uint8Array(input),s=XmlByteSnapshot.parse(input),other=XmlByteSnapshot.parse(input),string=XmlSnapshot.parse(new TextDecoder().decode(input));for(const targets of [[s.elements[0]!],[s.elements[1]!,s.elements[2]!],[s.elements[3]!,s.elements[3]!],[other.elements[3]!],[string.elements[3]!],[{...s.elements[3]!}]]){expect(()=>s.remove(targets)).toThrow();expect(s.remove([])).toEqual(before);expect(input).toEqual(before);}\n const unsafe=XmlByteSnapshot.parse(utf8('<r>]]<a/>></r>'));expect(()=>unsafe.remove([unsafe.elements[1]!])).toThrow(expect.objectContaining({code:'XML_REMOVAL_UNSAFE'}));expect(unsafe.remove([])).toEqual(utf8('<r>]]<a/>></r>'));\n}",
+      "calls": [
+        ".decode",
+        "XmlByteSnapshot.parse",
+        "XmlSnapshot.parse",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "s.remove",
+        "unsafe.remove",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:invalid byte types, malformed encodings, unsupported declarations and BOM mismatches refuse without mutation",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 25,
+      "title": "invalid byte types, malformed encodings, unsupported declarations and BOM mismatches refuse without mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>XmlByteSnapshot.parse(value as unknown as Uint8Array)).toThrow()",
+        "expect(()=>XmlByteSnapshot.parse(input)).toThrow()",
+        "expect(input).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 26,
+          "expression": "for(const value of [null,'<r/>',new ArrayBuffer(4),new DataView(new ArrayBuffer(4)),[60,114,47,62]])expect(()=>XmlByteSnapshot.parse(value as unknown as Uint8Array)).toThrow();"
+        },
+        {
+          "line": 28,
+          "expression": "for(const input of cases)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n for(const value of [null,'<r/>',new ArrayBuffer(4),new DataView(new ArrayBuffer(4)),[60,114,47,62]])expect(()=>XmlByteSnapshot.parse(value as unknown as Uint8Array)).toThrow();\n const cases=[new Uint8Array([0xff]),new Uint8Array([0xc0,0xaf]),new Uint8Array([0xff,0xfe,60]),encoded('<r>\\ud800</r>','le'),encoded('<r>\\udfff</r>','be'),utf8('<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><r/>'),utf8('<?xml version=\"1.0\" encoding=\"UTF-16\"?><r/>'),encoded('<?xml version=\"1.0\" encoding=\"UTF-8\"?><r/>','le'),encoded('<?xml version=\"1.0\" encoding=\"UTF-16LE\"?><r/>','be'),encoded('<r/>','le',false),utf8('<!DOCTYPE r><r/>'),utf8('<r>')];\n for(const input of cases){const before=new Uint8Array(input);expect(()=>XmlByteSnapshot.parse(input)).toThrow();expect(input).toEqual(before);}\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "encoded",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte subviews exclude adjacent data and ignore caller iterator/slice overrides",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 31,
+      "title": "byte subviews exclude adjacent data and ignore caller iterator/slice overrides",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.remove([])).toEqual(before)",
+        "expect(s.remove([s.elements[1]!])).toEqual(utf8('<r><keep/></r>'))",
+        "expect(new Uint8Array(view)).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n const source=utf8('XX<r><drop/><keep/></r>YY'),view=source.subarray(2,source.length-2),before=new Uint8Array(view);Object.defineProperty(view,'slice',{value:()=>{throw Error('slice called');}});Object.defineProperty(view,Symbol.iterator,{value:()=>{throw Error('iterator called');}});const s=XmlByteSnapshot.parse(view);expect(s.remove([])).toEqual(before);expect(s.remove([s.elements[1]!])).toEqual(utf8('<r><keep/></r>'));expect(new Uint8Array(view)).toEqual(before);\n}",
+      "calls": [
+        "Error",
+        "Object.defineProperty",
+        "XmlByteSnapshot.parse",
+        "expect",
+        "expect().toEqual",
+        "s.remove",
+        "source.subarray",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshots enforce byte and decoded XML limits while permitting multibyte non-ASCII input",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 35,
+      "title": "byte snapshots enforce byte and decoded XML limits while permitting multibyte non-ASCII input",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>XmlByteSnapshot.parse(new Uint8Array(32*1024*1024+1))).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}))",
+        "expect(()=>XmlByteSnapshot.parse(utf8('<r>'+ 'x'.repeat(8*1024*1024)+'</r>'))).toThrow(expect.objectContaining({code:'XML_INPUT_TOO_LARGE'}))",
+        "expect(s.remove([s.elements[1]!])).toEqual(utf8('<r>雪😀</r>'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n expect(()=>XmlByteSnapshot.parse(new Uint8Array(32*1024*1024+1))).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}));expect(()=>XmlByteSnapshot.parse(utf8('<r>'+ 'x'.repeat(8*1024*1024)+'</r>'))).toThrow(expect.objectContaining({code:'XML_INPUT_TOO_LARGE'}));const input=utf8('<r>雪😀<a/></r>'),s=XmlByteSnapshot.parse(input);expect(s.remove([s.elements[1]!])).toEqual(utf8('<r>雪😀</r>'));\n}",
+      "calls": [
+        ".repeat",
+        "XmlByteSnapshot.parse",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "s.remove",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:shared buffers, detached buffers and duplicate BOMs cannot bypass admission or encoding declarations",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 39,
+      "title": "shared buffers, detached buffers and duplicate BOMs cannot bypass admission or encoding declarations",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}))",
+        "expect(()=>XmlByteSnapshot.parse(bytes)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}))",
+        "expect(()=>XmlByteSnapshot.parse(value)).toThrow(expect.objectContaining({code:'XML_BYTE_ENCODING'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 41,
+          "expression": "for(const kind of ['utf8','le','be'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n const shared=new Uint8Array(new SharedArrayBuffer(8));shared.set(utf8('<r/>'));expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));const bytes=utf8('<r/>');structuredClone(bytes,{transfer:[bytes.buffer]});expect(()=>XmlByteSnapshot.parse(bytes)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));\n for(const kind of ['utf8','le','be'] as const){const value=encoded('\\ufeff<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><r/>',kind);expect(()=>XmlByteSnapshot.parse(value)).toThrow(expect.objectContaining({code:'XML_BYTE_ENCODING'}));}\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "encoded",
+        "expect",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "shared.set",
+        "structuredClone",
+        "utf8"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:repeated edits and mutated changed output do not affect source ownership or target reuse",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 44,
+      "title": "repeated edits and mutated changed output do not affect source ownership or target reuse",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><b/></r>'))",
+        "expect(snapshot.remove([snapshot.elements[2]!])).toEqual(utf8('<r><a/></r>'))",
+        "expect(snapshot.remove([])).toEqual(source)",
+        "expect(snapshot.remove(selected)).toEqual(utf8('<r><b/></r>'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n const source=utf8('<r><a/><b/></r>'),snapshot=XmlByteSnapshot.parse(source),result=snapshot.remove([snapshot.elements[1]!]);result.fill(0);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><b/></r>'));expect(snapshot.remove([snapshot.elements[2]!])).toEqual(utf8('<r><a/></r>'));expect(snapshot.remove([])).toEqual(source);\n const selected=[snapshot.elements[1]!];selected[Symbol.iterator]=function*(){yield snapshot.elements[0]!;return undefined;};expect(snapshot.remove(selected)).toEqual(utf8('<r><b/></r>'));\n}",
+      "calls": [
+        "XmlByteSnapshot.parse",
+        "expect",
+        "expect().toEqual",
+        "result.fill",
+        "snapshot.remove",
+        "utf8"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 49,
+      "title": "canonical byte seed checks input and no-op output independently with corruption controls",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 52,
+          "expression": "for(const field of ['input','output'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/parsing.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};\n const good=await executeAcceptance(inv,bindings,'xml-byte-seed');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);\n for(const field of ['input','output']){const badBindings=bindings.map(b=>b.pattern.test('Go parses a caller-owned byte slice and performs an empty edit')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {input:Uint8Array;output:Uint8Array})[field as 'input'|'output'].fill(0);}}:b);const bad=await executeAcceptance(inv,badBindings,'xml-byte-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "c.state.undefined.fill",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "join",
+        "selectSharedScenarios"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:intrinsic view bounds reject spoofed length/shared storage without calling caller getters",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "line": 55,
+      "title": "intrinsic view bounds reject spoofed length/shared storage without calling caller getters",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>XmlByteSnapshot.parse(large)).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}))",
+        "expect(called).toBe(false)",
+        "expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}))",
+        "expect(s.remove([])).toEqual(utf8('<r><drop/></r>'))",
+        "expect(s.remove([s.elements[1]!])).toEqual(utf8('<r></r>'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd",
+      "body": "{\n let called=false;const large=new Uint8Array(32*1024*1024+1);Object.defineProperty(large,'byteLength',{get(){called=true;return 4;}});expect(()=>XmlByteSnapshot.parse(large)).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}));expect(called).toBe(false);\n const shared=new Uint8Array(new SharedArrayBuffer(4));shared.set(utf8('<r/>'));Object.defineProperty(shared,'buffer',{get(){called=true;return new ArrayBuffer(4);}});expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));expect(called).toBe(false);\n const buffer=Buffer.from('<r><drop/></r>'),s=XmlByteSnapshot.parse(buffer);buffer.fill(0);expect(s.remove([])).toEqual(utf8('<r><drop/></r>'));expect(s.remove([s.elements[1]!])).toEqual(utf8('<r></r>'));\n}",
+      "calls": [
+        "Buffer.from",
+        "Object.defineProperty",
+        "XmlByteSnapshot.parse",
+        "buffer.fill",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "s.remove",
+        "shared.set",
+        "utf8"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {

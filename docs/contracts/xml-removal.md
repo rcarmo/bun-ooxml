@@ -28,7 +28,9 @@ raises `XML_REMOVAL_UNSAFE` without returning output. Parsing enforces the exist
 limits of 8 Mi UTF-16 code units, 256 levels and 100,000 elements. Snapshot parsing
 and output validation do not accumulate descendant text at every ancestor.
 
-The API accepts JavaScript strings. It does not decode or save package members,
+This API accepts JavaScript strings; [XmlByteSnapshot](xml-byte-snapshot.md)
+provides owned UTF-8/UTF-16 byte input and encoding-preserving removal.
+Neither API decodes or saves package members,
 validate an OOXML schema, update relationships or resolve references to deleted
 content. Use the format-level editors when those checks are needed. Parse a new
 snapshot to edit the returned string further; original handles remain tied to

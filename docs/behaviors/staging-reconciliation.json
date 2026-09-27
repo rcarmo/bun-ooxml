@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 699,
+  "nativeDeclarations": 710,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 472,
+  "withoutStagingCount": 483,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4300,6 +4300,61 @@
       "id": "bun:tests/unit/xml-attributes.test.ts:attribute duplicate refusal binding rejects fabricated success and untyped errors",
       "path": "tests/unit/xml-attributes.test.ts",
       "sourceSha256": "570786a604fd62cd53c42cf48df91bd28922f36b4d4ef676ca940424ae920571"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshot owns caller input and empty-removal output with frozen handles",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:invalid byte types, malformed encodings, unsupported declarations and BOM mismatches refuse without mutation",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte subviews exclude adjacent data and ignore caller iterator/slice overrides",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshots enforce byte and decoded XML limits while permitting multibyte non-ASCII input",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:shared buffers, detached buffers and duplicate BOMs cannot bypass admission or encoding declarations",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:repeated edits and mutated changed output do not affect source ownership or target reuse",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
+    },
+    {
+      "id": "bun:tests/unit/xml-byte-snapshot.test.ts:intrinsic view bounds reject spoofed length/shared storage without calling caller getters",
+      "path": "tests/unit/xml-byte-snapshot.test.ts",
+      "sourceSha256": "87200df4e26c6e7a2bc1205201cbf07038f880547ddbf794310e708afda9e8dd"
     },
     {
       "id": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",

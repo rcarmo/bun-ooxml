@@ -1,6 +1,7 @@
 /** Bun-native OOXML entry points. See docs/agents/usage.md for safe edit workflows. */
 export { OoxmlError } from "./errors.ts";
 export { xmlEquivalent } from './xml/comparison.ts';
+export { XmlByteSnapshot } from './xml/bytes.ts';
 export { XmlSnapshot, type XmlRemovalTarget, type XmlAttributePatch, type XmlExpandedName, type XmlStructuredAttribute, type XmlContent, type XmlStructurePatch } from './xml/removal.ts';
 export { admitPackage } from "./opc/admission.ts";
 export { comparePackageArchives, type PackageComparison } from './opc/comparison.ts';
