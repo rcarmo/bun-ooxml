@@ -4,7 +4,7 @@ import {inventoryTestSource} from '../../scripts/test-inventory.ts';
 import {parseFeature} from '../../scripts/gherkin.ts';
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {join} from 'node:path';
-const paths=['tests/unit/docx-append-run.test.ts','tests/unit/docx-cell-properties.test.ts','tests/unit/docx-row-header.test.ts','tests/unit/docx-paragraph-text.test.ts','tests/unit/docx-insert-paragraph.test.ts','tests/unit/docx-table-rows.test.ts','tests/unit/docx-row-texts.test.ts'];
+const paths=['tests/unit/docx-append-run.test.ts','tests/unit/docx-cell-properties.test.ts','tests/unit/docx-row-header.test.ts','tests/unit/docx-paragraph-text.test.ts','tests/unit/docx-insert-paragraph.test.ts','tests/unit/docx-table-rows.test.ts','tests/unit/docx-row-texts.test.ts','tests/unit/docx-core-properties.test.ts','tests/unit/docx-document-properties.test.ts','tests/unit/docx-table-style.test.ts'];
 const canonical='workflows/docx/document-model.feature';
 async function sample(){
  const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};
@@ -14,13 +14,13 @@ async function sample(){
  return {inventory,sets:[{name:'docx-model',expectedScopePaths:paths,ledger,features,sources}]};
 }
 
-test('committed DOCX model ledger covers exactly seven full native suites without new execution credit',async()=>{
+test('committed DOCX model ledger covers exactly ten full native suites without new execution credit',async()=>{
  const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='docx-model');
- expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(88);
- const mappings=report.mappings.filter(m=>m.ledger==='docx-model');expect(mappings).toHaveLength(88);
+ expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(130);
+ const mappings=report.mappings.filter(m=>m.ledger==='docx-model');expect(mappings).toHaveLength(130);
  expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true);
- expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(163);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-163);
- expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters']));
+ expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(205);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-205);
+ expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters','@id-docx-go-core-properties-getters','@id-docx-go-section-title-background-getters','@id-docx-go-table-style-getter']));
 });
 
 test('DOCX mappings distinguish aggregate acceptance assertions, native extensions and different table dimensions',async()=>{
@@ -36,7 +36,7 @@ test('DOCX mappings distinguish aggregate acceptance assertions, native extensio
  expect(cell.outcomes.join(' ')).toContain('live dimensions and selected text are checked before save');
  expect(cell.outcomes.join(' ')).toContain('After reopen, exact sibling-cell XML and every unrelated member match');
  const outputLimits=rows.filter(m=>m.testId.includes('output bound'));
- expect(outputLimits).toHaveLength(5);expect(outputLimits.every(m=>m.caseKeys.length===0&&m.gaps.join(' ').includes('Control-only'))).toBe(true);
+ expect(outputLimits).toHaveLength(8);expect(outputLimits.every(m=>m.caseKeys.length===0&&m.gaps.join(' ').includes('Control-only'))).toBe(true);
  const formatting=rows.find(m=>m.testId.endsWith('per-run authoring preserves selected formatting after real path save and reopen'))!;
  expect(formatting.caseKeys).toEqual(['@id-docx-go-roundtrip-selected-formatting']);expect(formatting.gaps.join(' ')).toContain('No unrelated-part');
  const utf16=rows.filter(m=>m.testId.includes('UTF-16'));expect(utf16).toHaveLength(7);expect(utf16.every(m=>m.caseKeys.length===0&&m.gaps.join(' ').includes('UTF-16'))).toBe(true);
@@ -60,16 +60,16 @@ test('DOCX ledger refuses stale runtime, binding and canonical pins and unrelate
 
 test('DOCX mapping validation retains native dynamic review flags and leaves source evidence untouched',async()=>{
  const a=await sample(),before=JSON.stringify(a),report=reconcileOutcomeMappingSets(a.inventory,a.sets);
- expect(report.mappings).toHaveLength(88);expect(JSON.stringify(a)).toBe(before);
+ expect(report.mappings).toHaveLength(130);expect(JSON.stringify(a)).toBe(before);
  expect(report.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(c=>c.assertions));
  expect(report.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(c=>c.reviewReasons));
  expect(report.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(c=>c.deferredAssertions));
  expect(report.mappings.some(m=>m.reviewReasons.length>0)).toBe(true);
- const ownCases=report.mappings.filter(m=>m.caseKeys.length>0);expect(ownCases).toHaveLength(9);
+ const ownCases=report.mappings.filter(m=>m.caseKeys.length>0);expect(ownCases).toHaveLength(12);
 });
 
 test('expanded DOCX mappings retain input, save timing and delegated predicate gaps',async()=>{
- const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model').slice(38);
+ const report=await outcomeMappingReport(),rows=report.mappings.filter(m=>m.ledger==='docx-model').slice(38,88);
  expect(rows).toHaveLength(50);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(262);
  const groups=['docx-paragraph-text.test.ts','docx-insert-paragraph.test.ts','docx-table-rows.test.ts','docx-row-texts.test.ts'];
  expect(groups.map(path=>rows.filter(m=>m.testId.includes(path)).length)).toEqual([13,13,14,10]);

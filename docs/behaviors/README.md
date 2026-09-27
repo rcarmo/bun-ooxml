@@ -86,11 +86,12 @@ a real temporary path and compares both its file bytes and reopened archive with
 the original fixture. Rendering and newer notes-editing operations have separate
 tests.
 
-The [DOCX-model ledger](docx-model-mappings.json) records all 88 declarations and
-457 direct assertion expressions in seven suites: append-run, cell properties,
-row headers, paragraph text, body insertion, table-row edits and row-text reads.
-They link to nine existing document-model scenarios. Two direct run tests and
-seven acceptance-wrapper tests link to exact case keys. The other 79 mappings
+The [DOCX-model ledger](docx-model-mappings.json) records all 130 declarations and
+683 direct assertion expressions in ten suites: append-run, cell properties,
+row headers, paragraph text, body insertion, table-row edits, row-text reads,
+core properties, document properties and table styles. They link to twelve
+existing document-model scenarios. Two direct run tests and ten acceptance-wrapper
+tests link to exact case keys. The other 118 mappings
 link at scenario level because they use different inputs or add refusal,
 preservation, encoding and resource-limit checks. Every mapping retains partial
 status and lists its gaps.
@@ -107,6 +108,18 @@ after reopen. The paragraph-text loop reuses one paragraph across values, while
 the shared outline creates independent targets. These differences stay explicit.
 Neither exact-case links nor complete suite enumeration add execution credit. Dynamic loops retain their review flags, and the runtime leaf count is
 unknown. The source pins cover the reviewed files, not their transitive imports.
+
+The core-property scenario supplies fifteen fields but compares only title,
+creator and subject from a cached getter result. Its native path-roundtrip test
+compares all fifteen; relationship and content-type checks occur before save.
+The document-property scenario checks direct title-page and background values
+in memory. Its native tests add path readback, encoding, custody and refusal
+checks. The table-style scenario compares captured strings before and after
+assignment, converting an absent ID to an empty string. The native API returns
+`undefined` for absence and writes a reference without resolving a style or
+predicting its appearance. None of these three shared getter scenarios saves or
+reopens a file. Their wrapper tests assert aggregate results and failure counts;
+separate native tests provide the saved-file checks.
 
 The [formula ledger](formula-references-mappings.json) records 31 declarations
 and 127 direct assertion expressions from the range, analysis and remapping
