@@ -7,7 +7,8 @@ is unambiguous; unsafe edits refuse before mutation. No formatting reconstructio
 outside the selected table/cell.
 
 DOCX: `Document.addTable(rows:number, columns:number): Table`, `Document.tables: Table[]`.
-Table `rows:number`, `columns:number`, `cell(row,col): TableCell`. TableCell `text:string`
+Table `rows:number`, `columns:number`, `cell(row,col): TableCell` and
+[`rowTexts(row): string[]`](row-texts.md) for detached cell text in column order. TableCell `text:string`
 (get/set), supports direct simple paragraphs/runs only; setter may replace the cell
 text payload while retaining the first paragraph and run properties. Empty cells valid. Added table goes before sectPr,
 valid tblPr/tblGrid/tr/tc/tcPr/p structure, bounded dimensions, table handles refuse

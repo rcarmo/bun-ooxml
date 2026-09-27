@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 686,
-  "files": 69,
+  "count": 696,
+  "files": 70,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -118,6 +118,12 @@
       "path": "tests/unit/docx-row-header.test.ts",
       "sha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695",
       "declarations": 11,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "declarations": 10,
       "issues": []
     },
     {
@@ -543,6 +549,10 @@
       "sha256": "bb004884ea1118edd242864345e0df1c8fcd10276c60d22e5f4bcee56916f6df"
     },
     {
+      "path": "tests/acceptance/row-texts.ts",
+      "sha256": "6c38bd5ee2a4320de7d5c096c4e108d896cbff20d46431ec8352f4fae577faae"
+    },
+    {
       "path": "tests/acceptance/run-appearance.ts",
       "sha256": "71697a727d84549b28413381f563604d37d8859766453fbbe06ba85f5c88d7c8"
     },
@@ -564,7 +574,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "5c1c730c57409dde79f7cca230c010b89c604154ff86949ab69a552f734c3f71"
+      "sha256": "05a7a305c58497a58eeb891e59a869626da490ba32a81c4b3b3d3ea90cf74c14"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -742,6 +752,11 @@
     "bun:tests/unit/docx-row-header.test.ts:package write and serialization failure roll back bytes and retain paragraph/cell/table handles",
     "bun:tests/unit/docx-row-header.test.ts:alias and conflicting lexical w bindings plus UTF-16 save retain expanded marker identity",
     "bun:tests/unit/docx-row-header.test.ts:shared header getter executes and false readback or initial-state predicates fail assertions",
+    "bun:tests/unit/docx-row-texts.test.ts:empty, multi-paragraph, Unicode and escaped cell values read consistently after disk save",
+    "bun:tests/unit/docx-row-texts.test.ts:invalid row coordinates refuse atomically and do not change existing cell range policy",
+    "bun:tests/unit/docx-row-texts.test.ts:merged, ragged, nested or field-bearing selected cells refuse rather than return partial row text",
+    "bun:tests/unit/docx-row-texts.test.ts:aliased UTF-16 row inspection and byte reopen preserve all package members",
+    "bun:tests/unit/docx-row-texts.test.ts:canonical four-cell and first-row predicates reject wrong cells, row order and omitted row members",
     "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
     "bun:tests/unit/docx-run-appearance.test.ts:all supported highlight names and underline styles read back without applying style inheritance",
     "bun:tests/unit/docx-run-appearance.test.ts:invalid scalar values, missing values, injection and executable patches refuse atomically",
@@ -963,6 +978,11 @@
     "bun:tests/unit/docx-row-header.test.ts:package write and serialization failure roll back bytes and retain paragraph/cell/table handles",
     "bun:tests/unit/docx-row-header.test.ts:alias and conflicting lexical w bindings plus UTF-16 save retain expanded marker identity",
     "bun:tests/unit/docx-row-header.test.ts:shared header getter executes and false readback or initial-state predicates fail assertions",
+    "bun:tests/unit/docx-row-texts.test.ts:empty, multi-paragraph, Unicode and escaped cell values read consistently after disk save",
+    "bun:tests/unit/docx-row-texts.test.ts:invalid row coordinates refuse atomically and do not change existing cell range policy",
+    "bun:tests/unit/docx-row-texts.test.ts:merged, ragged, nested or field-bearing selected cells refuse rather than return partial row text",
+    "bun:tests/unit/docx-row-texts.test.ts:aliased UTF-16 row inspection and byte reopen preserve all package members",
+    "bun:tests/unit/docx-row-texts.test.ts:canonical four-cell and first-row predicates reject wrong cells, row order and omitted row members",
     "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
     "bun:tests/unit/docx-run-appearance.test.ts:all supported highlight names and underline styles read back without applying style inheritance",
     "bun:tests/unit/docx-run-appearance.test.ts:invalid scalar values, missing values, injection and executable patches refuse atomically",
@@ -9825,6 +9845,423 @@
         "table.isRowHeader",
         "table.setRowHeader",
         "text.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:row texts read exact cells in column order and detach results without archive mutation",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 8,
+      "title": "row texts read exact cells in column order and detach results without archive mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(first).toEqual(['A1','B1'])",
+        "expect(t.rowTexts(1)).toEqual(['A2','B2'])",
+        "expect(t.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(cell.text).toBe('A1')",
+        "expect(p.text).toBe('A1')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!,cell=t.cell(0,0),p=d.paragraphs[0]!,before=d.package.toBytes();const first=t.rowTexts(0);expect(first).toEqual(['A1','B1']);expect(t.rowTexts(1)).toEqual(['A2','B2']);first[0]='mutated';first.push('extra');expect(t.rowTexts(0)).toEqual(['A1','B1']);expect(d.package.toBytes()).toEqual(before);expect(cell.text).toBe('A1');expect(p.text).toBe('A1');\n}",
+      "calls": [
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "first.push",
+        "fixture",
+        "t.cell",
+        "t.rowTexts"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:empty, multi-paragraph, Unicode and escaped cell values read consistently after disk save",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 12,
+      "title": "empty, multi-paragraph, Unicode and escaped cell values read consistently after disk save",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.rowTexts(0)).toEqual(['','  雪 & < >  \\nSecond'])",
+        "expect(after.tables[0]!.rowTexts(0)).toEqual(['','  雪 & < >  \\nSecond'])",
+        "expect(after.tables[0]!.rowTexts(1)).toEqual(['A2','B2'])",
+        "expect(after.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 13,
+          "expression": "for(const[n,b]of before)expect(after.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!;t.cell(0,0).text='';t.cell(0,1).text='  雪 & < >  \\nSecond';expect(t.rowTexts(0)).toEqual(['','  雪 & < >  \\nSecond']);const before=d.package.parts,dir=await mkdtemp(join(tmpdir(),'row-texts-'));try{const path=join(dir,'rows.docx');await d.save(path);const after=await Document.open(path);expect(after.tables[0]!.rowTexts(0)).toEqual(['','  雪 & < >  \\nSecond']);expect(after.tables[0]!.rowTexts(1)).toEqual(['A2','B2']);for(const[n,b]of before)expect(after.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "after.package.get",
+        "after.tables.0.rowTexts",
+        "d.save",
+        "expect",
+        "expect().toEqual",
+        "fixture",
+        "join",
+        "mkdtemp",
+        "rm",
+        "t.cell",
+        "t.rowTexts",
+        "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:row text inspection tracks cell edits through live tables but refuses structural staleness and external changes",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 16,
+      "title": "row text inspection tracks cell edits through live tables but refuses structural staleness and external changes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.rowTexts(0)).toEqual(['Changed','B1'])",
+        "expect(()=>t.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>live.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!;t.cell(0,0).text='Changed';expect(t.rowTexts(0)).toEqual(['Changed','B1']);t.setRowHeader(0,true);expect(t.rowTexts(0)).toEqual(['Changed','B1']);d.insertParagraph(0,'Before');expect(()=>t.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-stale-table'}));\n const live=d.tables[0]!,xml=new TextDecoder().decode(d.package.get('word/document.xml'));d.package.setPart('word/document.xml',new TextEncoder().encode(xml.replace('Changed','External')));const before=d.package.toBytes();expect(()=>live.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        ".decode",
+        ".encode",
+        "d.insertParagraph",
+        "d.package.get",
+        "d.package.setPart",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "live.rowTexts",
+        "t.cell",
+        "t.rowTexts",
+        "t.setRowHeader",
+        "xml.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:invalid row coordinates refuse atomically and do not change existing cell range policy",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 21,
+      "title": "invalid row coordinates refuse atomically and do not change existing cell range policy",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.rowTexts(row)).toThrow(RangeError)",
+        "expect(()=>t.cell(-1,0)).toThrow(RangeError)",
+        "expect(()=>t.cell(2,0)).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 22,
+          "expression": "for(const row of [-1,2,0.5,NaN,Infinity,'0' as unknown as number])expect(()=>t.rowTexts(row)).toThrow(RangeError);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();for(const row of [-1,2,0.5,NaN,Infinity,'0' as unknown as number])expect(()=>t.rowTexts(row)).toThrow(RangeError);expect(()=>t.cell(-1,0)).toThrow(RangeError);expect(()=>t.cell(2,0)).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "t.cell",
+        "t.rowTexts"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:merged, ragged, nested or field-bearing selected cells refuse rather than return partial row text",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 25,
+      "title": "merged, ragged, nested or field-bearing selected cells refuse rather than return partial row text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.tables[0]!.rowTexts(0)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 26,
+          "expression": "for(const change of [\n  (x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge/>'),\n  (x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2\"/>'),\n  (x:string)=>x.replace('</w:tr>','<w:tc><w:p/></w:tc></w:tr>'),\n  (x:string)=>x.replace('<w:t>B1</w:t>','<w:fldChar w:fldCharType=\"begin\"/>'),\n  (x:string)=>x.replace('</w:tc>','<w:tbl><w:tblGrid><w:gridCol w:w=\"100\"/></w:tblGrid><w:tr><w:tc><w:p/></w:tc></w:tr></w:tbl></w:tc>'),\n ])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n for(const change of [\n  (x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge/>'),\n  (x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2\"/>'),\n  (x:string)=>x.replace('</w:tr>','<w:tc><w:p/></w:tc></w:tr>'),\n  (x:string)=>x.replace('<w:t>B1</w:t>','<w:fldChar w:fldCharType=\"begin\"/>'),\n  (x:string)=>x.replace('</w:tc>','<w:tbl><w:tblGrid><w:gridCol w:w=\"100\"/></w:tblGrid><w:tr><w:tc><w:p/></w:tc></w:tr></w:tbl></w:tc>'),\n ]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.tables[0]!.rowTexts(0)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.rowTexts",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:read-only row text remains available under protection and does not expire handles",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 35,
+      "title": "read-only row text remains available under protection and does not expire handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(locked.package.toBytes()).toEqual(before)",
+        "expect(c.text).toBe('A1')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const d=await fixture(),pkg=await OpcPackage.open(d.package.toBytes());addPart(pkg,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(pkg,pkg.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(pkg.toBytes()),before=locked.package.toBytes(),t=locked.tables[0]!,c=t.cell(0,0);expect(t.rowTexts(0)).toEqual(['A1','B1']);expect(locked.package.toBytes()).toEqual(before);expect(c.text).toBe('A1');\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixture",
+        "locked.package.toBytes",
+        "pkg.mainPart",
+        "pkg.toBytes",
+        "t.cell",
+        "t.rowTexts"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:aliased UTF-16 row inspection and byte reopen preserve all package members",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 39,
+      "title": "aliased UTF-16 row inspection and byte reopen preserve all package members",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(loaded.tables[0]!.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(loaded.package.toBytes()).toEqual(source)",
+        "expect(after.tables[0]!.rowTexts(1)).toEqual(['A2','B2'])",
+        "expect(after.package.get(n)).toEqual(pkg.get(n))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);"
+        },
+        {
+          "line": 40,
+          "expression": "for(const n of pkg.names())expect(after.package.get(n)).toEqual(pkg.get(n));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const d=await fixture(x=>x.replaceAll('xmlns:w=','xmlns:q=').replaceAll('w:','q:')),pkg=await OpcPackage.open(d.package.toBytes()),text=pkg.text(pkg.mainPart()).replace('UTF-8','UTF-16'),bytes=new Uint8Array(2+text.length*2);bytes[0]=255;bytes[1]=254;const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),true);pkg.set(pkg.mainPart(),bytes);const source=pkg.toBytes(),loaded=await Document.open(source);expect(loaded.tables[0]!.rowTexts(0)).toEqual(['A1','B1']);expect(loaded.package.toBytes()).toEqual(source);const after=await Document.open(await loaded.save());expect(after.tables[0]!.rowTexts(1)).toEqual(['A2','B2']);for(const n of pkg.names())expect(after.package.get(n)).toEqual(pkg.get(n));\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "after.package.get",
+        "after.tables.0.rowTexts",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.save",
+        "loaded.tables.0.rowTexts",
+        "pkg.get",
+        "pkg.mainPart",
+        "pkg.names",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.toBytes",
+        "text.charCodeAt",
+        "view.setUint16",
+        "x.replaceAll",
+        "x.replaceAll().replaceAll"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:canonical four-cell and first-row predicates reject wrong cells, row order and omitted row members",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 43,
+      "title": "canonical four-cell and first-row predicates reject wrong cells, row order and omitted row members",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(1)",
+        "expect(bad.counts.cases.failed).toBe(1)",
+        "expect(bad.counts.steps.failed).toBe(1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(reversed.counts.cases.failed).toBe(1)",
+        "expect(reversed.counts.steps.failed).toBe(1)",
+        "expect(reversed.counts.steps.undefined).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 46,
+          "expression": "for(let index=0;index<4;index++)"
+        },
+        {
+          "line": 48,
+          "expression": "for(const values of [['A1'],['A1','B1','extra']])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/row-texts.ts');const path='workflows/docx/document-model.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}});\n const good=await executeAcceptance(inv(source),bindings,'row-texts-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);\n for(let index=0;index<4;index++){const values=['A1','B1','A2','B2'];values[index]='WRONG';const altered=source.replace('the four cell text getters equal A1, B1, A2 and B2 in those positions',`the four cell text getters equal ${values[0]}, ${values[1]}, ${values[2]} and ${values[3]} in those positions`),bad=await executeAcceptance(inv(altered),bindings,'row-texts-cell-control');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n const reversed=await executeAcceptance(inv(source.replace('FirstRowText returns exactly A1 and B1','FirstRowText returns exactly B1 and A1')),bindings,'row-texts-order-control');expect(reversed.counts.cases.failed).toBe(1);expect(reversed.counts.steps.failed).toBe(1);expect(reversed.counts.steps.undefined).toBe(0);\n for(const values of [['A1'],['A1','B1','extra']]){const corrupt=bindings.map(b=>b.pattern.test('its cells are set by row to A1, B1, A2 and B2')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {document:Document}).document.tables[0]!.rowTexts=()=>values;}}:b);const bad=await executeAcceptance(inv(source),corrupt,'row-texts-array-control');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().text",
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturesRoot",
+        "inv",
+        "join",
+        "selectSharedScenarios",
+        "source.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:selected-row inspection does not flatten unsupported cells in other rows or reinterpret lexical text markup",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 51,
+      "title": "selected-row inspection does not flatten unsupported cells in other rows or reinterpret lexical text markup",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.tables[0]!.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(()=>d.tables[0]!.rowTexts(1)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const d=await fixture(x=>x.replace('<w:t>B2</w:t>','<w:fldChar w:fldCharType=\"begin\"/>').replace('<w:t>A1</w:t>','<w:t>A<!--retained-->1</w:t>')),before=d.package.toBytes();expect(d.tables[0]!.rowTexts(0)).toEqual(['A1','B1']);expect(()=>d.tables[0]!.rowTexts(1)).toThrow();expect(d.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "d.package.toBytes",
+        "d.tables.0.rowTexts",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "x.replace",
+        "x.replace().replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:inferred grids read supported cells but an empty unresolved row is not a successful empty result",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "line": 55,
+      "title": "inferred grids read supported cells but an empty unresolved row is not a successful empty result",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inferred.tables[0]!.rowTexts(0)).toEqual(['A1','B1'])",
+        "expect(inferred.package.toBytes()).toEqual(ib)",
+        "expect(()=>empty.tables[0]!.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-table-unsupported'}))",
+        "expect(empty.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e",
+      "body": "{\n const inferred=await fixture(x=>x.replace(/<w:tblGrid>[^]*?<\\/w:tblGrid>/,'')),ib=inferred.package.toBytes();expect(inferred.tables[0]!.rowTexts(0)).toEqual(['A1','B1']);expect(inferred.package.toBytes()).toEqual(ib);\n const d=Document.create();d.addTable(1,1);const pkg=await OpcPackage.open(d.package.toBytes());pkg.set(pkg.mainPart(),pkg.text(pkg.mainPart()).replace(/<w:tblGrid>[^]*?<\\/w:tblGrid>/,'').replace(/<w:tr>[^]*?<\\/w:tr>/,'<w:tr/>'));const empty=await Document.open(pkg.toBytes()),before=empty.package.toBytes();expect(()=>empty.tables[0]!.rowTexts(0)).toThrow(expect.objectContaining({code:'docx-table-unsupported'}));expect(empty.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "Document.create",
+        "Document.open",
+        "OpcPackage.open",
+        "d.addTable",
+        "d.package.toBytes",
+        "empty.package.toBytes",
+        "empty.tables.0.rowTexts",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "inferred.package.toBytes",
+        "inferred.tables.0.rowTexts",
+        "pkg.mainPart",
+        "pkg.set",
+        "pkg.text",
+        "pkg.text().replace",
+        "pkg.text().replace().replace",
+        "pkg.toBytes",
+        "x.replace"
       ],
       "reviewReasons": [],
       "unresolved": []

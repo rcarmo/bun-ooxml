@@ -59,7 +59,9 @@ Bun throws on out-of-range cell access, so the shared nil-return policy stays
 planned, along with merge-property operations. The row-count case uses bounded
 empty-row append/insertion/deletion, checks 3/4/3 in memory and verifies an invalid
 deletion error. Separate native tests check row text/order and package custody
-after save/reopen.
+after save/reopen. The first-row text case separately compares every cell in a
+2x2 table and requires the first-row result to contain exactly two ordered values;
+controls reject wrong values, reversed order and missing or extra array members.
 
 ## Requirement mappings
 

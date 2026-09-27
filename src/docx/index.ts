@@ -350,6 +350,9 @@ export class Table {
     return table.columns;
   }
 
+  /** Detached cell texts in column order; no mutation or formatting evaluation. */
+  rowTexts(index: number): string[] {return this.documentRef.inspectRowTexts(this.liveTable(),index);}
+
   /** Insert an empty row without copying row/cell formatting; return a fresh table. */
   insertRow(index: number): Table {return this.documentRef.mutateTableRow(this.liveTable(),index,'insert');}
 
@@ -906,6 +909,19 @@ export class Document {
     if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-format-unsafe','Formatting unexpectedly changed paragraph text');
     this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
     this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+  }
+
+  inspectRowTexts(snapshot:TableSnapshot,index:number):string[] {
+    this.assertRowHeaderTarget(snapshot,index);
+    if(snapshot.columns<1)fail('docx-table-unsupported','Row text requires at least one resolved cell');
+    const result:string[]=[];
+    for(let column=0;column<snapshot.columns;column++){
+      const entry=snapshot.cells[index]?.[column];
+      if(!entry)fail('docx-table-unsupported','Row text cannot resolve every cell');
+      if(entry.kind==='merged')fail('docx-table-merged-cell','Row text does not flatten merged cells');
+      result.push(new TableCell(this,entry.cell).text);
+    }
+    return result;
   }
 
   mutateTableRow(snapshot:TableSnapshot,index:number,operation:'insert'|'delete'):Table {

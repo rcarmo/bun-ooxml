@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 686,
+  "nativeDeclarations": 696,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 459,
+  "withoutStagingCount": 469,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3095,6 +3095,56 @@
       "id": "bun:tests/unit/docx-row-header.test.ts:output bound refuses row header insertion without expiring live handles",
       "path": "tests/unit/docx-row-header.test.ts",
       "sourceSha256": "d1d8c8997be035273264bd9d1c99d6a29253620e9b48579366e30b41a6848695"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:row texts read exact cells in column order and detach results without archive mutation",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:empty, multi-paragraph, Unicode and escaped cell values read consistently after disk save",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:row text inspection tracks cell edits through live tables but refuses structural staleness and external changes",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:invalid row coordinates refuse atomically and do not change existing cell range policy",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:merged, ragged, nested or field-bearing selected cells refuse rather than return partial row text",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:read-only row text remains available under protection and does not expire handles",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:aliased UTF-16 row inspection and byte reopen preserve all package members",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:canonical four-cell and first-row predicates reject wrong cells, row order and omitted row members",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:selected-row inspection does not flatten unsupported cells in other rows or reinterpret lexical text markup",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
+    },
+    {
+      "id": "bun:tests/unit/docx-row-texts.test.ts:inferred grids read supported cells but an empty unresolved row is not a successful empty result",
+      "path": "tests/unit/docx-row-texts.test.ts",
+      "sourceSha256": "2385a2b96c65c64f147760a3c5c6317e300f703144ffc933b4671f1546cc500e"
     },
     {
       "id": "bun:tests/unit/docx-run-appearance.test.ts:direct appearance reads absent fields, normalises hash colour and preserves scalar values after reopen",
