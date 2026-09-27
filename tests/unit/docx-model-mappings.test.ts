@@ -19,7 +19,7 @@ test('committed DOCX model ledger covers exactly seven full native suites withou
  expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(88);
  const mappings=report.mappings.filter(m=>m.ledger==='docx-model');expect(mappings).toHaveLength(88);
  expect(mappings.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length&&m.assertions.length)).toBe(true);
- expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(132);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-132);
+ expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();expect(report.mappedDeclarations).toBe(163);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-163);
  expect(new Set(mappings.flatMap(m=>m.scenarioIds))).toEqual(new Set(['@id-docx-go-paragraph-multiple-runs','@id-docx-go-roundtrip-selected-formatting','@id-docx-go-cell-shading-getter','@id-docx-go-cell-properties-getters','@id-docx-go-table-header-getter','@id-docx-go-paragraph-text-getter','@id-docx-go-body-insert-order','@id-docx-go-table-row-counts','@id-docx-go-table-cell-text-getters']));
 });
 

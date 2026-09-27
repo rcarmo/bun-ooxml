@@ -1,0 +1,776 @@
+{
+  "schemaVersion": 1,
+  "consumer": "bun",
+  "executionCredit": false,
+  "scopePaths": [
+    "tests/unit/xlsx-range.test.ts",
+    "tests/unit/xlsx-formula-analysis.test.ts",
+    "tests/unit/xlsx-formula-remap.test.ts"
+  ],
+  "sourceSha256": {
+    "workflows/xlsx/formula-references.feature": "6e5c0ca867e38fb1d82eaf96d61a272fecbc4a19052e1e8ed8bf47868ad527de",
+    "tests/unit/xlsx-range.test.ts": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
+    "tests/unit/xlsx-formula-analysis.test.ts": "0efe2e4df43e5c129eeb1a511d7823f6d9bb1d94aa5f122b2f0f94451e7d0d1a",
+    "tests/unit/xlsx-formula-remap.test.ts": "c3b9b5fa789c5c50cb035e55c9a1ebf7a9e656dda73e11af3566469d1c8e9022",
+    "src/xlsx/range.ts": "2bc8edba95ce66f3f460bdc1147c1d1113b5cf36dca64d54df479b12fc61b16e",
+    "src/xlsx/formula.ts": "ef31bd3b9f1a4d8309a585c9332a41bd4801d91934aba73e4aa23d3ab4af7a53",
+    "src/xlsx/formula-remap.ts": "bd714086ba36ce82cbf6af3031ada711b2e28915102e8fcf4948d965a68345ca",
+    "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
+    "tests/acceptance/xlsx-range.ts": "9ea6b2fc1f9465ffc371c66b599db9b451081c6a0791acf974f648d5a7582ff0",
+    "tests/acceptance/formula-analysis.ts": "6dc9954e400d9837d132cd9f5056c8c208f7bb65005be931206c5a5b571798bd",
+    "tests/acceptance/formula-remap.ts": "e1b68aafd7323a71ecb8b6e140edb82563a90684398430a5b9e7e665fbeedb91",
+    "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
+    "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407"
+  },
+  "mappings": [
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(parseA1Range(\"'O''Brien'!$B2:C$4\")).toEqual({sheet:\"O'Brien\",axis:'cell',first:{row:2,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:4,column:3,rowAbsolute:true,columnAbsolute:false}})",
+        "expect(parseA1Range('a3:B1')).toEqual({sheet:'',axis:'cell',first:{row:3,column:1,rowAbsolute:false,columnAbsolute:false},last:{row:1,column:2,rowAbsolute:false,columnAbsolute:false}})",
+        "expect(single.first).toEqual({row:1048576,column:16384,rowAbsolute:false,columnAbsolute:false})",
+        "expect(single.last).toEqual(single.first)",
+        "expect(single.last).not.toBe(single.first)"
+      ],
+      "outcomes": [
+        "Direct quoted mixed-absolute and reversed cell ranges retain full coordinates; XFD1048576 has equal detached endpoints."
+      ],
+      "gaps": [
+        "Inputs extend or differ from shared range rows; shared positive predicates check only sheet, axis and first coordinate. No formula-expression analysis or workbook validity is asserted.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:whole row and column references retain zero for the missing coordinate",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(parseA1Range('$B:$B')).toEqual({sheet:'',axis:'column',first:{row:0,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:0,column:2,rowAbsolute:false,columnAbsolute:true}})",
+        "expect(parseA1Range('$3:$1')).toEqual({sheet:'',axis:'row',first:{row:3,column:0,rowAbsolute:true,columnAbsolute:false},last:{row:1,column:0,rowAbsolute:true,columnAbsolute:false}})",
+        "expect(parseA1Range(\"'3'!1:1\").sheet).toBe('3')",
+        "expect(parseA1Range('Sheet!$A$1').sheet).toBe('Sheet')"
+      ],
+      "outcomes": [
+        "Whole columns and reversed whole rows retain zero for the missing axis and independent flags; numeric quoted and simple qualified sheets decode correctly."
+      ],
+      "gaps": [
+        "Covers only a subset of the six positive inputs; the numeric/simple sheet checks do not assert their axes or coordinates here.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(parseA1Range(source).sheet).toBe(name)",
+        "expect(parseA1Range('Sheet_1!a1').sheet).toBe('Sheet_1')"
+      ],
+      "outcomes": [
+        "Quoted spaces, Unicode, doubled apostrophes and embedded bang sheet names decode, as does an unquoted underscore name."
+      ],
+      "gaps": [
+        "Different qualifier examples; only sheet strings are asserted, without complete reference coordinates or workbook membership.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:unsupported syntax refuses as one typed error without accepting partial input",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-refusal"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"mixed endpoint\",\"source_json\":\"\\\"A:B1\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"formula expression\",\"source_json\":\"\\\"SUM(A1)\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"external book\",\"source_json\":\"\\\"[Book]Sheet!A1\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"sheet span\",\"source_json\":\"\\\"Sheet1:Sheet2!A1\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"spill reference\",\"source_json\":\"\\\"A1#\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"union\",\"source_json\":\"\\\"A1,B2\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"invalid whole axis\",\"source_json\":\"\\\"XFE:XFE\\\"\"}"
+      ],
+      "assertions": [
+        "expect(()=>parseA1Range(source)).toThrow(OoxmlError)",
+        "expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}))"
+      ],
+      "outcomes": [
+        "All seven shared refusal strings plus additional invalid direct-range forms raise OoxmlError with xlsx-range-unsupported."
+      ],
+      "gaps": [
+        "Additional malformed/whitespace cases are native policy controls. A thrown parse has no partial return, but this test directly asserts error class/code rather than a captured result variable.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}))"
+      ],
+      "outcomes": [
+        "External/3D punctuation, unsafe sheet characters, invalid Unicode and unquoted spaces refuse with the typed range error."
+      ],
+      "gaps": [
+        "Control-only sheet-policy extension, not the complete canonical refusal table or formula-reference grammar.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing",
+        "@id-xlsx-go-direct-range-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>parseA1Range(source as string)).toThrow(OoxmlError)",
+        "expect(parseA1Range('A1:XFD1048576').last).toEqual({row:1048576,column:16384,rowAbsolute:false,columnAbsolute:false})"
+      ],
+      "outcomes": [
+        "Oversized coordinates, inputs and invalid types refuse; the maximum rectangle endpoint reads its exact row/column and absolute flags."
+      ],
+      "gaps": [
+        "Control-only resource/grid extension with a boundary success; error class is checked without a code per item or evidence about allocation timing.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:returned coordinates are detached and no parser state leaks between calls",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(parseA1Range('A1:B2').first.row).toBe(1)",
+        "expect(parseA1Range('A1:B2').last.column).toBe(2)"
+      ],
+      "outcomes": [
+        "Mutating returned first/last coordinates does not affect new parses of the same range."
+      ],
+      "gaps": [
+        "Control-only detached-result extension; only selected coordinate values are asserted, without a shared case result or concurrency claim.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:thirteen existing direct-range canonical cases execute without activating formula analysis",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing",
+        "@id-xlsx-go-direct-range-refusal"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-direct-range-parsing|{\"variant\":\"absolute column\",\"source_json\":\"\\\"$B:$B\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"column\",\"row\":\"0\",\"col\":\"2\"}",
+        "@id-xlsx-go-direct-range-parsing|{\"variant\":\"reversed whole rows\",\"source_json\":\"\\\"$3:$1\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"row\",\"row\":\"3\",\"col\":\"0\"}",
+        "@id-xlsx-go-direct-range-parsing|{\"variant\":\"quoted column\",\"source_json\":\"\\\"'O''Brien'!$B:$B\\\"\",\"sheet_json\":\"\\\"O'Brien\\\"\",\"axis\":\"column\",\"row\":\"0\",\"col\":\"2\"}",
+        "@id-xlsx-go-direct-range-parsing|{\"variant\":\"reversed rectangle\",\"source_json\":\"\\\"A3:B1\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"cell\",\"row\":\"3\",\"col\":\"1\"}",
+        "@id-xlsx-go-direct-range-parsing|{\"variant\":\"sheet absolute cell\",\"source_json\":\"\\\"Sheet!$A$1\\\"\",\"sheet_json\":\"\\\"Sheet\\\"\",\"axis\":\"cell\",\"row\":\"1\",\"col\":\"1\"}",
+        "@id-xlsx-go-direct-range-parsing|{\"variant\":\"numeric sheet name\",\"source_json\":\"\\\"'3'!1:1\\\"\",\"sheet_json\":\"\\\"3\\\"\",\"axis\":\"row\",\"row\":\"1\",\"col\":\"0\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"mixed endpoint\",\"source_json\":\"\\\"A:B1\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"formula expression\",\"source_json\":\"\\\"SUM(A1)\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"external book\",\"source_json\":\"\\\"[Book]Sheet!A1\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"sheet span\",\"source_json\":\"\\\"Sheet1:Sheet2!A1\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"spill reference\",\"source_json\":\"\\\"A1#\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"union\",\"source_json\":\"\\\"A1,B2\\\"\"}",
+        "@id-xlsx-go-direct-range-refusal|{\"variant\":\"invalid whole axis\",\"source_json\":\"\\\"XFE:XFE\\\"\"}"
+      ],
+      "assertions": [
+        "expect(result.failures).toEqual([])",
+        "expect(result.counts.cases.passed).toBe(13)",
+        "expect(result.counts.cases.planned).toBe(32)"
+      ],
+      "outcomes": [
+        "The selected direct-range acceptance subset passes 13 cases with no failures and leaves 32 other cases planned in that isolated selection."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; semantic predicates are in pinned bindings. Its local planned count does not describe the current full acceptance run.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:bounded UTF-8 input refuses oversize Unicode sheet qualifiers",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(source.length).toBeLessThan(1048576)",
+        "expect(()=>parseA1Range(source)).toThrow(expect.objectContaining({code:'xlsx-range-unsupported'}))"
+      ],
+      "outcomes": [
+        "A Unicode qualifier below the UTF-16 length limit but above the UTF-8 byte limit refuses with xlsx-range-unsupported."
+      ],
+      "gaps": [
+        "Control-only byte-limit extension; no successful canonical parsing or peak-memory measurement.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-direct-range-parsing"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(parsed.first).toEqual({row,column,rowAbsolute:ra,columnAbsolute:ca})",
+        "expect(parsed.last).toEqual(parsed.first)"
+      ],
+      "outcomes": [
+        "A finite coordinate-boundary and independent-dollar-flag matrix returns the expected first and last endpoints."
+      ],
+      "gaps": [
+        "Different native matrix, with no sheet qualifier or canonical row expansion mapping; no formula/remap or workbook validation.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:static formula analysis counts references without interpreting strings, functions or exponents as cells",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-analysis-counts",
+        "@id-xlsx-go-formula-literal-punctuation"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"mixed formula\",\"source_json\":\"\\\"IF(A1=\\\\\\\"B2\\\\\\\",'O''Brien'!$C$4,SUM(D1:E2))\\\"\",\"count\":\"3\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"only strings\",\"source_json\":\"\\\"\\\\\\\"A1\\\\\\\"&\\\\\\\"Sheet1!B2\\\\\\\"\\\"\",\"count\":\"0\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"numeric exponent\",\"source_json\":\"\\\"LOG10(A1)+1E10\\\"\",\"count\":\"1\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"unary arithmetic\",\"source_json\":\"\\\"=-(A1+B2)^2%\\\"\",\"count\":\"2\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"boolean literal\",\"source_json\":\"\\\"TRUE\\\"\",\"count\":\"0\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"Unicode sheet\",\"source_json\":\"\\\"'α sheet'!A1\\\"\",\"count\":\"1\"}"
+      ],
+      "assertions": [
+        "expect(refs).toHaveLength(count)",
+        "expect(ref.start).toBeGreaterThanOrEqual(0)",
+        "expect(ref.end).toBeGreaterThan(ref.start)",
+        "expect(ref.end).toBeLessThanOrEqual(bytes(source).length)",
+        "expect(parseA1Range(slice(source,ref))).toEqual(range)"
+      ],
+      "outcomes": [
+        "All six shared count expressions return their expected reference counts; three accepted punctuation expressions also pass. Each returned span is bounded and its byte slice reparses as the complete direct range value."
+      ],
+      "gaps": [
+        "Accepted literal-punctuation rows are only part of that scenario; refused punctuation is covered elsewhere. Zero-reference span loops are vacuous by design; no formula evaluation or function arity is checked.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:quoted sheet names and independent flags retain exact UTF8 byte spans and reversed endpoints",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-quoted-sheet-flags"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-formula-quoted-sheet-flags"
+      ],
+      "assertions": [
+        "expect(refs).toHaveLength(1)",
+        "expect(refs[0]).toEqual({start:0,end:bytes(source).length,sheet:\"O'Brien\",axis:'cell',first:{row:2,column:2,rowAbsolute:false,columnAbsolute:true},last:{row:4,column:3,rowAbsolute:true,columnAbsolute:false}})",
+        "expect(r.map(x=>slice(unicode,x))).toEqual([\"'α sheet'!$A$1\",'a3:b1'])",
+        "expect(r[0]!.start).toBe(bytes('\"雪😀\" + ').length)",
+        "expect(r[1]!.first.row).toBe(3)",
+        "expect(r[1]!.last.row).toBe(1)"
+      ],
+      "outcomes": [
+        "The exact quoted O'Brien expression returns one full-byte-span record with decoded sheet and independent first/last absolute flags; a Unicode-prefix example checks token slices and reversed row endpoints."
+      ],
+      "gaps": [
+        "Extra Unicode/reversed cases extend the shared input; they do not establish every Unicode sheet name, workbook resolution or rewrite behavior.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:unsupported or incomplete grammar throws without returning earlier references",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-analysis-refusal",
+        "@id-xlsx-go-formula-literal-punctuation"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"dynamic function\",\"source_json\":\"\\\"INDIRECT(A1)\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"unresolved name\",\"source_json\":\"\\\"Name+1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"out-of-grid column\",\"source_json\":\"\\\"XFE1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"out-of-grid row\",\"source_json\":\"\\\"A1048577\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"open quoted sheet\",\"source_json\":\"\\\"'unclosed!A1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"unsupported spill\",\"source_json\":\"\\\"@A1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"unfinished function\",\"source_json\":\"\\\"A1+SUM(2\\\"\"}"
+      ],
+      "assertions": [
+        "expect(()=>{result=analyzeFormulaReferences(source);}).toThrow(expect.objectContaining({code:'xlsx-formula-unsupported'}))",
+        "expect(result).toBeUndefined()"
+      ],
+      "outcomes": [
+        "All seven shared unsupported analysis strings plus malformed/adjacent cases throw xlsx-formula-unsupported without assigning a partial result."
+      ],
+      "gaps": [
+        "Only the two refused punctuation examples overlap that separate scenario. Native extra inputs add conservative grammar policy, not full Excel syntax coverage.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:bounded expression operators and nested supported functions preserve reference order",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-analysis-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(analyzeFormulaReferences(source).map(r=>slice(source,r))).toEqual(['A1','B2','C3','D4','E5','F6','G7','H8','I9'])",
+        "expect(analyzeFormulaReferences(formula).map(r=>slice(formula,r))).toEqual(['A1','B2'])",
+        "expect(analyzeFormulaReferences('SUM(\"a\"\"A1\",.5,1.,1e-10,+2,-3,A1)')).toHaveLength(1)",
+        "expect(analyzeFormulaReferences(' sum ( A1 , B2 ) ')).toHaveLength(2)"
+      ],
+      "outcomes": [
+        "Nested allowed calls and every supported binary operator retain reference order; doubled-quote strings, number forms and spaced lowercase calls retain expected counts."
+      ],
+      "gaps": [
+        "Different grammar examples; tests check reference extraction, not operator evaluation, Excel precedence semantics, argument arity or shared-case equality.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:invalid source types and Unicode, byte, token, reference and nesting limits refuse deterministically",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-analysis-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>analyzeFormulaReferences(source as string)).toThrow()",
+        "expect(()=>analyzeFormulaReferences('('.repeat(129)+'A1'+')'.repeat(129))).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}))",
+        "expect(()=>analyzeFormulaReferences('-'.repeat(129)+'A1')).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}))",
+        "expect(()=>analyzeFormulaReferences(Array(10002).fill('A1').join('+'))).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}))",
+        "expect(()=>analyzeFormulaReferences(Array(50002).fill('1').join('+'))).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}))",
+        "expect(analyzeFormulaReferences('('.repeat(50)+'A1'+')'.repeat(50))).toHaveLength(1)"
+      ],
+      "outcomes": [
+        "Invalid sources, Unicode and control input refuse; excessive recursion, unary nesting, reference count and token count use the limit code; a 50-level expression succeeds."
+      ],
+      "gaps": [
+        "Control-only bounds extension; input refusal loop does not assert a code for every item, and no peak-memory timing or canonical successful expression is inferred.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:finite expression matrix slices reparse and SUM wrapping shifts only byte positions",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-reference-properties"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(refs).toHaveLength(2)",
+        "expect(wrapped).toHaveLength(2)",
+        "expect(parseA1Range(slice(source,r))).toEqual(value)",
+        "expect(wrapped[i]).toEqual({...r,start:r.start+4,end:r.end+4})",
+        "expect(count).toBe(288)"
+      ],
+      "outcomes": [
+        "The 288-expression native matrix yields two references, reparsable direct-range slices and matching SUM-wrapped records with four-byte span shifts."
+      ],
+      "gaps": [
+        "This test does not call the remapper, so the compound canonical unaffected-insertion predicate is missing. It is a finite matrix, not a fuzz campaign.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:returned references and coordinate objects are independent across calls and endpoints",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-analysis-counts"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(second).toHaveLength(2)",
+        "expect(second[0]!.first.row).toBe(1)",
+        "expect(second[0]!.last.column).toBe(1)",
+        "expect(first[1]!.first.row).toBe(1)",
+        "expect(second[0]!.first).not.toBe(second[0]!.last)"
+      ],
+      "outcomes": [
+        "Returned arrays and coordinate objects are independent across calls, records and single-cell endpoints."
+      ],
+      "gaps": [
+        "Control-only result-isolation extension using A1+A1; no shared input/count table, package mutation or evaluation.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:literal punctuation and doubled quotes never become syntax or hidden dependency records",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-literal-punctuation",
+        "@id-xlsx-go-formula-quoted-sheet-flags"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(analyzeFormulaReferences(formula).map(r=>slice(formula,r))).toEqual(['A1'])",
+        "expect(()=>analyzeFormulaReferences(formula)).toThrow(expect.objectContaining({code:'xlsx-formula-unsupported'}))",
+        "expect(refs.map(r=>slice(source,r))).toEqual([\"'😀 α'!A1\",\"'3'!B2\",'Σheet!C3'])",
+        "expect(refs.map(r=>r.sheet)).toEqual(['😀 α','3','Σheet'])"
+      ],
+      "outcomes": [
+        "Quoted punctuation and doubled quotes stay literal while A1 remains the only dependency; adjacent/incomplete forms refuse; Unicode quoted and unquoted sheet spans decode exactly."
+      ],
+      "gaps": [
+        "Different punctuation/Unicode matrix extends the shared rows; full absolute flags and all original canonical predicates are not asserted here.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:canonical formula analysis cases detect false counts, corrupted flags/spans and fabricated refusal success",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-analysis-counts",
+        "@id-xlsx-go-formula-quoted-sheet-flags",
+        "@id-xlsx-go-formula-analysis-refusal",
+        "@id-xlsx-go-formula-literal-punctuation"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"mixed formula\",\"source_json\":\"\\\"IF(A1=\\\\\\\"B2\\\\\\\",'O''Brien'!$C$4,SUM(D1:E2))\\\"\",\"count\":\"3\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"only strings\",\"source_json\":\"\\\"\\\\\\\"A1\\\\\\\"&\\\\\\\"Sheet1!B2\\\\\\\"\\\"\",\"count\":\"0\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"numeric exponent\",\"source_json\":\"\\\"LOG10(A1)+1E10\\\"\",\"count\":\"1\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"unary arithmetic\",\"source_json\":\"\\\"=-(A1+B2)^2%\\\"\",\"count\":\"2\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"boolean literal\",\"source_json\":\"\\\"TRUE\\\"\",\"count\":\"0\"}",
+        "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"Unicode sheet\",\"source_json\":\"\\\"'α sheet'!A1\\\"\",\"count\":\"1\"}",
+        "@id-xlsx-go-formula-quoted-sheet-flags",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"dynamic function\",\"source_json\":\"\\\"INDIRECT(A1)\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"unresolved name\",\"source_json\":\"\\\"Name+1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"out-of-grid column\",\"source_json\":\"\\\"XFE1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"out-of-grid row\",\"source_json\":\"\\\"A1048577\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"open quoted sheet\",\"source_json\":\"\\\"'unclosed!A1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"unsupported spill\",\"source_json\":\"\\\"@A1\\\"\"}",
+        "@id-xlsx-go-formula-analysis-refusal|{\"variant\":\"unfinished function\",\"source_json\":\"\\\"A1+SUM(2\\\"\"}",
+        "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"adjacent string operator\",\"source_json\":\"\\\"A1 \\\\\\\"+\\\\\\\" B1\\\"\",\"result\":\"refused with zero references\"}",
+        "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"adjacent string range\",\"source_json\":\"\\\"A1 \\\\\\\":\\\\\\\" B2\\\"\",\"result\":\"refused with zero references\"}",
+        "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted close in SUM\",\"source_json\":\"\\\"SUM(\\\\\\\")\\\\\\\",A1)\\\"\",\"result\":\"accepted without error\"}",
+        "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted percent in SUM\",\"source_json\":\"\\\"SUM(\\\\\\\"%\\\\\\\",A1)\\\"\",\"result\":\"accepted without error\"}",
+        "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted equality only\",\"source_json\":\"\\\"\\\\\\\"=\\\\\\\"\\\"\",\"result\":\"accepted without error\"}"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(19)",
+        "expect(good.counts.cases.planned).toBeGreaterThan(0)",
+        "expect(bad.counts.cases.failed).toBe(from!.includes('<count>')?6:1)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(bad.counts.cases.failed).toBe(corruption==='span'?5:corruption==='flags'?1:9)"
+      ],
+      "outcomes": [
+        "Nineteen selected shared cases pass; false expected counts/coordinates, invalid spans, altered absolute flags and fabricated refusal success trigger assertion failures."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; shared semantic predicates live in pinned bindings. Accepted punctuation cases check successful analysis only, not every returned reference.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-analysis.test.ts:reference and nesting boundary values succeed without widening unsupported axis or sheet syntax",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-formula-analysis-counts",
+        "@id-xlsx-go-formula-analysis-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(refs).toHaveLength(10000)",
+        "expect(refs.at(-1)!.end).toBe(49999)",
+        "expect(analyzeFormulaReferences('('.repeat(128)+'A1'+')'.repeat(128))).toHaveLength(1)",
+        "expect(()=>analyzeFormulaReferences(input)).toThrow(expect.objectContaining({code:'xlsx-formula-unsupported'}))"
+      ],
+      "outcomes": [
+        "Exactly 10000 references and 128 parenthesis levels succeed; final byte endpoint is checked, and unsupported axis/sheet/whitespace examples refuse."
+      ],
+      "gaps": [
+        "Control-only boundary and grammar extension; the long expression is repetitive, not a performance benchmark or full shared scenario mapping.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:static insertions rewrite exact shared expressions without touching literals or unrelated sheets",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-exact"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"2\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"IF(A1=\\\\\\\"A2\\\\\\\",A2,Other!A2)\\\"\",\"expected_json\":\"\\\"IF(A1=\\\\\\\"A2\\\\\\\",A3,Other!A2)\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"column\",\"at\":\"2\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"'O''Brien'!$b$2 + Main!c1\\\"\",\"expected_json\":\"\\\"'O''Brien'!$b$2 + Main!D1\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"3\",\"count\":\"2\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"SUM(A5:A1)\\\"\",\"expected_json\":\"\\\"SUM(A7:A1)\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"3\",\"count\":\"2\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"a1 + Other!b2\\\"\",\"expected_json\":\"\\\"a1 + Other!b2\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"2\",\"count\":\"1\",\"change_sheet_json\":\"\\\"main\\\"\",\"source_json\":\"\\\"Main!A1:A3\\\"\",\"expected_json\":\"\\\"Main!A1:A4\\\"\"}"
+      ],
+      "assertions": [
+        "expect(insertFormulaReferences(source,'Main',{axis,at,count,sheet})).toBe(expected)"
+      ],
+      "outcomes": [
+        "All five canonical insertion rows return the exact complete replacement expression, retaining string literals, unaffected sheets and no-op spelling."
+      ],
+      "gaps": [
+        "These are string comparisons only; no worksheet insertion, cache invalidation, saved package, evaluation or full formula grammar assertion.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:absolute coordinates shift structurally while relative flags and reversed endpoints remain independent",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-exact"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(insertFormulaReferences('$b2:C$4','Main',{axis:'row',at:3,count:2,sheet:'Main'})).toBe('$B2:C$6')",
+        "expect(insertFormulaReferences('$B$2:C4','Main',{axis:'column',at:2,count:2,sheet:'Main'})).toBe('$D$2:E4')",
+        "expect(insertFormulaReferences('D9:B3','Main',{axis:'row',at:5,count:3,sheet:'Main'})).toBe('D12:B3')",
+        "expect(insertFormulaReferences('A1:A1','Main',{axis:'row',at:1,count:1,sheet:'Main'})).toBe('A2:A2')",
+        "expect(out).toBe(\"'O''Brien'!$B3:C$5\")",
+        "expect(ref.first).toEqual({row:3,column:2,rowAbsolute:false,columnAbsolute:true})",
+        "expect(ref.last).toEqual({row:5,column:3,rowAbsolute:true,columnAbsolute:false})"
+      ],
+      "outcomes": [
+        "Absolute coordinates shift structurally; mixed flags and reversed endpoints remain independent, repeated endpoints remain a range, and a changed quoted qualifier retains its spelling."
+      ],
+      "gaps": [
+        "Different native examples extend canonical rows; no-op or malformed input behavior and workbook semantics are not covered in this declaration.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:UTF8 edits preserve quoted qualifier spelling and every non-reference byte across multiple changes",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-exact"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(insertFormulaReferences(source,'Elsewhere',{axis:'column',at:2,count:1,sheet:'Α ! SHEET'})).toBe(' =IF(\"雪😀A2\"=\"A2\",\\'α ! sheet\\'!$C$2 + Other!c3,\\'α ! sheet\\'!E4) ')",
+        "expect(insertFormulaReferences(\"'3'!a1 + 'O''Brien'!a1\",'Main',{axis:'row',at:1,count:9,sheet:'3'})).toBe(\"'3'!A10 + 'O''Brien'!a1\")"
+      ],
+      "outcomes": [
+        "Unicode/emoji literals and sheet names, spaces and unrelated sheet references retain their complete expression spelling while changed coordinates shift and uppercase."
+      ],
+      "gaps": [
+        "Different qualifiers test JavaScript lowercase matching, not locale-specific Excel identity, all Unicode normalization forms or saved-workbook edits.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:unaffected references and no-reference expressions retain exact spelling but still undergo analysis",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-exact",
+        "@id-xlsx-go-static-remap-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(insertFormulaReferences(source,'Main',{axis:'row',at:100,count:1,sheet:'main'})).toBe(source)",
+        "expect(()=>insertFormulaReferences('A1+INDIRECT(B2)','Main',{axis:'row',at:100,count:1,sheet:'Other'})).toThrow()",
+        "expect(()=>insertFormulaReferences('A1+','Main',{axis:'row',at:100,count:1,sheet:'Other'})).toThrow()"
+      ],
+      "outcomes": [
+        "Unaffected expressions return exact original strings, while a late dynamic function and incomplete expression still refuse even on a nonmatching target sheet."
+      ],
+      "gaps": [
+        "Dynamic refusal uses a different source/target than the canonical row. Throws are asserted without specific codes or a captured partial-output variable here.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:late row and column overflow throw with no partial replacement and unchanged options",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>{result=insertFormulaReferences(source,'Main',change);}).toThrow(expect.objectContaining({code:'xlsx-formula-remap-unsupported'}))",
+        "expect(result).toBeUndefined()",
+        "expect(JSON.stringify(change)).toBe(before)",
+        "expect(insertFormulaReferences('Other!XFD1048576+A1','Main',{axis:'row',at:1,count:1,sheet:'Main'})).toBe('Other!XFD1048576+A2')"
+      ],
+      "outcomes": [
+        "Late row/column overflow in multi-reference and reversed-range inputs throws the remap code without assigning output or changing options; an unrelated edge reference remains untouched."
+      ],
+      "gaps": [
+        "Different multi-reference sources extend the canonical single-cell overflow rows. No package rollback or physical worksheet bounds are asserted.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:invalid arguments, inherited fields and executable patches refuse without invoking accessors",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(()=>insertFormulaReferences('A1','Main',change as api.FormulaInsertion)).toThrow()",
+        "expect(()=>insertFormulaReferences('A1',context as string,good as api.FormulaInsertion)).toThrow()",
+        "expect(called).toBe(false)",
+        "expect(insertFormulaReferences('A1','Main',plain)).toBe('A2')",
+        "expect(plain).toEqual(good)"
+      ],
+      "outcomes": [
+        "Invalid/inherited/accessor-backed insertion data and invalid context names refuse without invoking the getter; a null-prototype valid patch succeeds and retains its field values."
+      ],
+      "gaps": [
+        "Control-only argument profile extension. Selected canonical invalid fields overlap but the complete refusal scenario is split across declarations, and dynamic/overflow cases are elsewhere.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:grid edge insertions obey coordinate thresholds and bounded counts",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-exact",
+        "@id-xlsx-go-static-remap-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(insertFormulaReferences('A1048575','Main',{axis:'row',at:1048575,count:1,sheet:'Main'})).toBe('A1048576')",
+        "expect(insertFormulaReferences('XFC1','Main',{axis:'column',at:16383,count:1,sheet:'Main'})).toBe('XFD1')",
+        "expect(insertFormulaReferences('A1','Main',{axis:'row',at:1048576,count:1048576,sheet:'Main'})).toBe('A1')",
+        "expect(()=>insertFormulaReferences('XFD1','Main',{axis:'column',at:16384,count:1,sheet:'Main'})).toThrow()",
+        "expect(()=>insertFormulaReferences('A1','Main',{axis:'column',at:16385,count:1,sheet:'Main'})).toThrow()",
+        "expect(()=>insertFormulaReferences('A1','Main',{axis:'column',at:1,count:16385,sheet:'Main'})).toThrow()"
+      ],
+      "outcomes": [
+        "Coordinates immediately below grid edges shift to the last valid coordinate, unaffected references retain spelling under a large insertion, and edge/argument overflow refuses."
+      ],
+      "gaps": [
+        "Boundary-policy extension; at+count is not a worksheet size check, and these strings do not match the complete canonical exact/refusal tables.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:finite 288-expression matrix reparses slices, preserves unaffected expressions and shifts wrapped spans",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-reference-properties"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-static-reference-properties"
+      ],
+      "assertions": [
+        "expect(refs).toHaveLength(2)",
+        "expect(insertFormulaReferences(source,'Main',{axis:'row',at:100,count:1,sheet:'Main'})).toBe(source)",
+        "expect(wrapped).toHaveLength(2)",
+        "expect(one).toHaveLength(1)",
+        "expect(one[0]).toEqual({...ref,start:0,end:encoder.encode(token).length})",
+        "expect(wrapped[i]).toEqual({...ref,start:ref.start+4,end:ref.end+4})",
+        "expect(total).toBe(288)"
+      ],
+      "outcomes": [
+        "All 288 matrix expressions have two references whose slices reanalyse as one matching record; row insertion at 100 is exact no-op and SUM wrapping shifts only byte spans."
+      ],
+      "gaps": [
+        "One finite shared case with 288 loop iterations, not a fuzz campaign or 288 canonical cases. All matrix remaps are unaffected; changed rewriting uses separate tests.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:output growth refuses at UTF8 byte bound without returning a partial formula",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(new TextEncoder().encode(source)).toHaveLength(1024*1024-1)",
+        "expect(()=>{output=insertFormulaReferences(source,'Main',{axis:'row',at:1,count:999,sheet:'Main'});}).toThrow(expect.objectContaining({code:'xlsx-formula-limit'}))",
+        "expect(output).toBeUndefined()",
+        "expect(source.endsWith('+A1+A9')).toBe(true)"
+      ],
+      "outcomes": [
+        "A near-1-MiB formula that would grow past the UTF-8 output limit throws xlsx-formula-limit without assigning output; the original suffix remains intact."
+      ],
+      "gaps": [
+        "Control-only output-size extension, not canonical coordinate overflow or peak-memory enforcement.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:qualified single cells remain single and colon/bang characters in quoted sheet names cannot alter range shape",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-exact",
+        "@id-xlsx-go-static-remap-refusal"
+      ],
+      "caseKeys": [],
+      "assertions": [
+        "expect(insertFormulaReferences(\"'Wow!'!a1\",'Other',{axis:'row',at:1,count:1,sheet:'wow!'})).toBe(\"'Wow!'!A2\")",
+        "expect(insertFormulaReferences(\"'Main'!a1:a1\",'Other',{axis:'column',at:1,count:1,sheet:'MAIN'})).toBe(\"'Main'!B1:B1\")",
+        "expect(insertFormulaReferences('Main!b2+a1','Other',{axis:'column',at:3,count:1,sheet:'main'})).toBe('Main!b2+a1')",
+        "expect(()=>insertFormulaReferences(\"'Bad:Name'!A1\",'Main',{axis:'row',at:1,count:1,sheet:'Main'})).toThrow()"
+      ],
+      "outcomes": [
+        "A quoted sheet containing bang remains intact, repeated endpoints keep range syntax, and unaffected references retain lowercase; invalid colon-bearing sheets refuse."
+      ],
+      "gaps": [
+        "Different qualifier/shape examples; no schema, sheet registry or complete canonical predicate assertion.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    },
+    {
+      "testId": "bun:tests/unit/xlsx-formula-remap.test.ts:canonical remap and matrix cases reject wrong output, false success and each missing matrix outcome",
+      "status": "partial",
+      "scenarioIds": [
+        "@id-xlsx-go-static-remap-exact",
+        "@id-xlsx-go-static-remap-refusal",
+        "@id-xlsx-go-static-reference-properties"
+      ],
+      "caseKeys": [
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"2\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"IF(A1=\\\\\\\"A2\\\\\\\",A2,Other!A2)\\\"\",\"expected_json\":\"\\\"IF(A1=\\\\\\\"A2\\\\\\\",A3,Other!A2)\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"column\",\"at\":\"2\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"'O''Brien'!$b$2 + Main!c1\\\"\",\"expected_json\":\"\\\"'O''Brien'!$b$2 + Main!D1\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"3\",\"count\":\"2\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"SUM(A5:A1)\\\"\",\"expected_json\":\"\\\"SUM(A7:A1)\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"3\",\"count\":\"2\",\"change_sheet_json\":\"\\\"Main\\\"\",\"source_json\":\"\\\"a1 + Other!b2\\\"\",\"expected_json\":\"\\\"a1 + Other!b2\\\"\"}",
+        "@id-xlsx-go-static-remap-exact|{\"axis\":\"row\",\"at\":\"2\",\"count\":\"1\",\"change_sheet_json\":\"\\\"main\\\"\",\"source_json\":\"\\\"Main!A1:A3\\\"\",\"expected_json\":\"\\\"Main!A1:A4\\\"\"}",
+        "@id-xlsx-go-static-remap-refusal|{\"variant\":\"invalid axis\",\"source_json\":\"\\\"A1+B1\\\"\",\"axis\":\"bad\",\"at\":\"1\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\"}",
+        "@id-xlsx-go-static-remap-refusal|{\"variant\":\"zero coordinate\",\"source_json\":\"\\\"A1+B1\\\"\",\"axis\":\"row\",\"at\":\"0\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\"}",
+        "@id-xlsx-go-static-remap-refusal|{\"variant\":\"zero count\",\"source_json\":\"\\\"A1+B1\\\"\",\"axis\":\"column\",\"at\":\"1\",\"count\":\"0\",\"change_sheet_json\":\"\\\"Main\\\"\"}",
+        "@id-xlsx-go-static-remap-refusal|{\"variant\":\"blank sheet\",\"source_json\":\"\\\"A1+B1\\\"\",\"axis\":\"row\",\"at\":\"1\",\"count\":\"1\",\"change_sheet_json\":\"\\\"\\\"\"}",
+        "@id-xlsx-go-static-remap-refusal|{\"variant\":\"row overflow\",\"source_json\":\"\\\"A1048576\\\"\",\"axis\":\"row\",\"at\":\"1\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\"}",
+        "@id-xlsx-go-static-remap-refusal|{\"variant\":\"column overflow\",\"source_json\":\"\\\"XFD1\\\"\",\"axis\":\"column\",\"at\":\"1\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\"}",
+        "@id-xlsx-go-static-remap-refusal|{\"variant\":\"dynamic reference\",\"source_json\":\"\\\"INDIRECT(A1)\\\"\",\"axis\":\"row\",\"at\":\"1\",\"count\":\"1\",\"change_sheet_json\":\"\\\"Main\\\"\"}",
+        "@id-xlsx-go-static-reference-properties"
+      ],
+      "assertions": [
+        "expect(good.failures).toEqual([])",
+        "expect(good.counts.cases.passed).toBe(13)",
+        "expect(bad.counts.cases.failed).toBe(5)",
+        "expect(bad.counts.steps.undefined).toBe(0)",
+        "expect(bad.counts.steps.ambiguous).toBe(0)",
+        "expect(falseReport.counts.cases.failed).toBe(7)",
+        "expect(falseReport.counts.steps.undefined).toBe(0)",
+        "expect(report.counts.cases.failed).toBe(1)",
+        "expect(report.counts.steps.failed).toBe(1)",
+        "expect(report.counts.steps.undefined).toBe(0)",
+        "expect(report.counts.steps.ambiguous).toBe(0)"
+      ],
+      "outcomes": [
+        "Thirteen selected shared cases pass; wrong complete outputs, fabricated invalid-insertion success and empty/corrupt slice/remap/wrapped-span matrix results each cause expected assertion failures."
+      ],
+      "gaps": [
+        "This wrapper asserts aggregate status and counts; exact expressions and all 288 matrix outcomes are checked in pinned bindings. Error returns use exceptions/no returned expression in Bun, not a Go error/result pair.",
+        "Source-pinned bounded mapping only; no execution, calculation, remapping of workbook objects or full-format parity credit. The source set is not a transitive dependency closure."
+      ]
+    }
+  ]
+}

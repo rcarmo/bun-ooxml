@@ -65,8 +65,8 @@ controls reject wrong values, reversed order and missing or extra array members.
 
 ## Requirement mappings
 
-The slide-order, effective-formatting, XML-value, PPTX-core and DOCX-model reports associate
-literal assertions with shared scenarios. They also list gaps, such as an untested result field or
+The slide-order, effective-formatting, XML-value, PPTX-core, DOCX-model and formula
+reports associate literal assertions with shared scenarios. They also list gaps, such as an untested result field or
 an input variant missing from the scenario. Each report has its own source hashes
 and required files; one cannot supply a missing reference for another.
 
@@ -107,6 +107,17 @@ after reopen. The paragraph-text loop reuses one paragraph across values, while
 the shared outline creates independent targets. These differences stay explicit.
 Neither exact-case links nor complete suite enumeration add execution credit. Dynamic loops retain their review flags, and the runtime leaf count is
 unknown. The source pins cover the reviewed files, not their transitive imports.
+
+The [formula ledger](formula-references-mappings.json) records 31 declarations
+and 127 direct assertion expressions from the range, analysis and remapping
+suites. Nine mappings link to exact case keys, including three acceptance
+wrappers. The other 22 link at scenario level. The analysis-only 288-expression
+matrix lacks the shared remapping predicate; the remapper's matrix checks all
+three outcomes. Both are finite loops, with no fuzzing or runtime-leaf count
+inferred. Literal-punctuation and remap-refusal predicates split across native
+tests retain that distinction. Range-wrapper planned counts refer to its isolated
+selection, not the full acceptance run. No mapping establishes worksheet editing,
+formula calculation or saved-workbook behaviour.
 
 Unresolved registrations, missing assertions or conflicting source records fail
 validation. The descriptions still need human review: matching an assertion's
