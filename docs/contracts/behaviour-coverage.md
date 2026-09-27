@@ -1,14 +1,14 @@
 # Behaviour coverage
 
-The shared reference contains **335 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **336 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 301 | 788 | 729 | 59 |
+| Shared catalogue | 302 | 789 | 729 | 60 |
 | Local-only obligations | 0 | 0 | 0 | 0 |
-| Combined inventory | 301 | 788 | 729 | 59 |
+| Combined inventory | 302 | 789 | 729 | 60 |
 
-The canonical denominator is **301 shared scenarios / 788 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+The canonical denominator is **302 shared scenarios / 789 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
@@ -58,6 +58,7 @@ The canonical denominator is **301 shared scenarios / 788 shared cases**. Local-
 | references/fixtures-ooxml/workflows/pptx/text-box.feature | implemented | 2 | 23 | 23 | 0 | 77 |
 | references/fixtures-ooxml/workflows/pptx/text.feature | implemented | 3 | 3 | 3 | 0 | 9 |
 | references/fixtures-ooxml/workflows/xlsx/cache-completeness.feature | planned | 1 | 1 | 0 | 1 | 4 |
+| references/fixtures-ooxml/workflows/xlsx/calculation-chain-lifecycle.feature | planned | 1 | 1 | 0 | 1 | 14 |
 | references/fixtures-ooxml/workflows/xlsx/calculation-engine.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/xlsx/cell-style.feature | implemented | 3 | 28 | 28 | 0 | 101 |
 | references/fixtures-ooxml/workflows/xlsx/cells.feature | implemented | 7 | 7 | 7 | 0 | 26 |

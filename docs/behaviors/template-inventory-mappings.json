@@ -7,7 +7,7 @@
     "tests/unit/template-inventory-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-template-inspection.test.ts": "219cd44662d5f0037f7940995a1fec4c9ad8a86817bfbe9ed3c4302e39b57c26",
+    "tests/unit/docx-template-inspection.test.ts": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
     "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
     "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -268,7 +268,7 @@
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(59)"
+        "expect(inv.counts.cases.planned).toBe(60)"
       ],
       "outcomes": [
         "Protectedread permitted and prior13response/cachecases stayplanned; inventorytotalasserted."

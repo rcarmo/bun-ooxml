@@ -6,7 +6,7 @@
     "tests/unit/docx-heading-classification.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-heading-classification.test.ts": "a2e7c8528706e54c41ad9e4d9f6cdbba875f24f8ac90057c778ab91db0472f1d",
+    "tests/unit/docx-heading-classification.test.ts": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
     "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
@@ -180,7 +180,7 @@
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(59)"
+        "expect(inv.counts.cases.planned).toBe(60)"
       ],
       "outcomes": [
         "Empty string assignment refuses; null removes style and reads undefined/false/zero; all five shared getter cases remain planned and acceptance totals are unchanged."

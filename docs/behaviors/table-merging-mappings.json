@@ -9,7 +9,7 @@
     "tests/unit/vertical-merge-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-table-merge.test.ts": "5f7814a393dff97af5a4dc2c2cd7b86578f6e3d346745261889005b0a0d18a61",
+    "tests/unit/docx-table-merge.test.ts": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -25,7 +25,7 @@
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-    "tests/unit/docx-table-vertical-merge.test.ts": "b6121e50c67bbd353a97daf0561287a5f77113621338bf297f2c9fd6e609f4d8",
+    "tests/unit/docx-table-vertical-merge.test.ts": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
   },
@@ -264,7 +264,7 @@
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(59)"
+        "expect(inv.counts.cases.planned).toBe(60)"
       ],
       "outcomes": [
         "Historical setter/vertical profile stays planned with one case and current global inventory totals."
@@ -624,7 +624,7 @@
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(59)"
+        "expect(inv.counts.cases.planned).toBe(60)"
       ],
       "outcomes": [
         "Historical setter/verticalprofile remains planned and inventory totals are explicitlychecked."

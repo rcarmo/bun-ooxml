@@ -7,7 +7,7 @@
     "tests/unit/revision-property-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-revision-properties.test.ts": "f55b1c12d951c154ef9424400c77ca9c94f9b78e67ef9fad77b8d336731d9b43",
+    "tests/unit/docx-revision-properties.test.ts": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
     "tests/unit/revision-property-outcomes.test.ts": "f8767818a20f0f86490f18fac0e734143e6292f8e7bc78923d36c6c1dbf115dc",
     "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
     "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
@@ -275,7 +275,7 @@
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(59)",
+        "expect(inv.counts.cases.planned).toBe(60)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],
       "outcomes": [
