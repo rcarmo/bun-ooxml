@@ -56,7 +56,10 @@ sizes and a nine-cell table saved to disk and reopened. The size cases inspect
 in-memory getters; only the saved-table case checks disk readback. Controls alter
 each saved cell position independently and verify temporary-directory cleanup.
 Bun throws on out-of-range cell access, so the shared nil-return policy stays
-planned, along with row restructuring and merge-property operations.
+planned, along with merge-property operations. The row-count case uses bounded
+empty-row append/insertion/deletion, checks 3/4/3 in memory and verifies an invalid
+deletion error. Separate native tests check row text/order and package custody
+after save/reopen.
 
 ## Requirement mappings
 

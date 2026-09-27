@@ -2,6 +2,7 @@ import { OoxmlError } from "../errors.ts";
 import {appendParagraphRun} from './append-run.ts';
 import {replaceParagraphText} from './paragraph-text.ts';
 import {bodyInsertionTarget,insertBodyParagraph} from './body-insertion.ts';
+import {editTableRow} from './table-rows.ts';
 import {readRowHeader,editRowHeader} from './row-header.ts';
 import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
 export type {DirectCellProperties,CellPropertiesPatch,CellTopBorder} from './cell-properties.ts';
@@ -348,6 +349,14 @@ export class Table {
     const table = this.liveTable();
     return table.columns;
   }
+
+  /** Insert an empty row without copying row/cell formatting; return a fresh table. */
+  insertRow(index: number): Table {return this.documentRef.mutateTableRow(this.liveTable(),index,'insert');}
+
+  appendRow(): Table {const table=this.liveTable();return this.documentRef.mutateTableRow(table,table.rows,'insert');}
+
+  /** Delete one row, retaining at least one row, and return a fresh table. */
+  deleteRow(index: number): Table {return this.documentRef.mutateTableRow(this.liveTable(),index,'delete');}
 
   /** Inspect the direct row marker, not effective pagination or style inheritance. */
   isRowHeader(row: number): boolean {
@@ -897,6 +906,24 @@ export class Document {
     if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-format-unsafe','Formatting unexpectedly changed paragraph text');
     this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
     this.xml=nextXml;this.version=nextVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+  }
+
+  mutateTableRow(snapshot:TableSnapshot,index:number,operation:'insert'|'delete'):Table {
+    if(snapshot.version!==this.tableVersion||this.tableSnapshots[snapshot.index]!==snapshot)fail('docx-stale-table','Table snapshot is stale');
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-table','Document XML changed outside the table handle');
+    if(snapshot.unsupported)fail('docx-table-unsupported',`Table contains unsupported topology: ${snapshot.unsupported}`);
+    if(operation!=='insert'&&operation!=='delete')fail('docx-table-rows-unsupported','Unknown row operation');
+    this.assertFormattingUnprotected();
+    const edit=editTableRow(this.xml,snapshot.element,index,operation),nextVersion=this.version+1,nextTableVersion=this.tableVersion+1,nextDocument=parseXml(edit.xml);
+    const collections=collectDocumentCollections(nextDocument,nextVersion,nextTableVersion);
+    const expected=this.paragraphSnapshots.filter(p=>!edit.removed||p.element.start<edit.removed.start||p.element.end>edit.removed.end).map(p=>p.text);
+    if(operation==='insert'){const position=this.paragraphSnapshots.filter(p=>p.element.start<edit.start).length;expected.splice(position,0,...Array(snapshot.columns).fill(''));}
+    if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(expected))fail('docx-table-rows-unsafe','Row edit changed unexpected paragraph text');
+    const grids=(tables:TableSnapshot[])=>tables.map(t=>[t.rows,t.columns]);const dimensions=grids(this.tableSnapshots);dimensions[snapshot.index]=[snapshot.rows+(operation==='insert'?1:-1),snapshot.columns];
+    if(JSON.stringify(grids(collections.tables.tables))!==JSON.stringify(dimensions))fail('docx-table-rows-unsafe','Row edit changed unexpected table dimensions');
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,edit.xml);this.opcPackage.toBytes();});
+    this.xml=edit.xml;this.version=nextVersion;this.tableVersion=nextTableVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+    return this.tableHandles[snapshot.index]!;
   }
 
   private assertRowHeaderTarget(snapshot:TableSnapshot,row:number):void {

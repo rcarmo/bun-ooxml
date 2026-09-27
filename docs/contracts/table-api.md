@@ -1,7 +1,8 @@
 # Rectangular tables
 
 Native rectangular DOCX/PPTX tables support creation and bounded cell edits.
-Merge/split and row/column structural mutations are not implemented. Existing merged tables can be inspected only when grid mapping
+DOCX supports [bounded empty-row insertion and deletion](table-rows.md).
+Column edits, merge/split and PPTX row mutations are not implemented. Existing merged tables can be inspected only when grid mapping
 is unambiguous; unsafe edits refuse before mutation. No formatting reconstruction
 outside the selected table/cell.
 

@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 672,
+  "nativeDeclarations": 686,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 445,
+  "withoutStagingCount": 459,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3320,6 +3320,76 @@
       "id": "bun:tests/unit/docx-style-authoring.test.ts:disk save reopen retains authored base and flags without dirtying document text",
       "path": "tests/unit/docx-style-authoring.test.ts",
       "sourceSha256": "ed4ba59d31c46e71b7c94196ce4812b59a2cd8572e3c564247b66ae709706ad4"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:append insert delete return fresh tables and retain row order after real path save",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:new rows use explicit grid widths and preserve all old row fragments and unrelated members",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:deleting a row removes its multiple paragraphs and leaves all other bodies and tables intact",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:row mutations expire all held paragraph span cell and table snapshots",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:invalid indexes, last-row deletion and row limits refuse without mutation",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:merged nested revised field and lexical tables refuse insertion and deletion before mutation",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:missing ambiguous malformed or unsupported grid widths refuse even a deletion",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:protection and external XML changes refuse row mutation while preserving current package bytes",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:set and serialization fault injections roll back insert and delete without expiring handles",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:alias and UTF-16 row edits survive byte reopen without namespace capture",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:inserted rows do not borrow header, height, shading or direct run formatting from neighbours",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:section-bearing paragraphs and extension attributes refuse row deletion and insertion",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:row insertion output bound refuses without mutating package or handles",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-rows.test.ts:canonical row-count binding catches every wrong count and fabricated successful deletion",
+      "path": "tests/unit/docx-table-rows.test.ts",
+      "sourceSha256": "1a18ad165b0ac6431828da50781332c0c64bafb985f499a211135776cadc8831"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",

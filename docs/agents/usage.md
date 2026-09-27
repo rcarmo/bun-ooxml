@@ -166,9 +166,12 @@ stale on slide changes: reacquire them from `slide.tables` before the next edit.
 DOCX cell replacement retains cell properties and first paragraph/run formatting;
 newlines become paragraphs (CRLF/CR normalise to LF). PPTX edits require one plain
 supported paragraph and retain first-run formatting. Arbitrary multi-paragraph,
-nested table, merged grid, field/drawing or other unsafe topology refuses. There
-is no row/column insertion, merging or splitting. Reopen after save
-and assert cell values; visual Office fidelity is not independently verified.
+nested table, merged grid, field/drawing or other unsafe topology refuses.
+DOCX tables also support [empty-row insertion and deletion](../contracts/table-rows.md):
+`table = table.insertRow(index)`, `table.appendRow()` and `table.deleteRow(index)`
+return fresh table handles and expire prior handles. Column edits, merging,
+splitting and PPTX row mutations are unsupported. Reopen after save and assert
+cell values; the Office smoke test does not establish general visual fidelity.
 
 ## DOCX
 

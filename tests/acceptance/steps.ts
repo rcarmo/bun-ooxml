@@ -39,6 +39,7 @@ import { bindings as appendRunBindings } from './append-run.ts';
 import { bindings as rowHeaderBindings } from './row-header.ts';
 import { bindings as paragraphTextBindings } from './paragraph-text.ts';
 import { bindings as bodyInsertionBindings } from './body-insertion.ts';
+import { bindings as tableRowsBindings } from './table-rows.ts';
 import { bindings as cellPropertiesBindings } from './cell-properties.ts';
 import { bindings as createPptxBindings } from "./create-pptx.ts";
 import { bindings as createXlsxBindings } from "./create-xlsx.ts";
@@ -94,6 +95,7 @@ export const bindings: StepBinding[] = [
   ...rowHeaderBindings,
   ...paragraphTextBindings,
   ...bodyInsertionBindings,
+  ...tableRowsBindings,
   ...cellPropertiesBindings,
   ...createPptxBindings,
   ...createXlsxBindings,
