@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 659,
+  "nativeDeclarations": 672,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 432,
+  "withoutStagingCount": 445,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2630,6 +2630,71 @@
       "id": "bun:tests/unit/docx-formatting.test.ts:malformed bold or italic refuses even when the other flag is requested",
       "path": "tests/unit/docx-formatting.test.ts",
       "sourceSha256": "a1f4c49b43c018f4e1a125747978c0c322eac6ddcf2f300ce11c57da9e7406b2"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:insert at start, middle and end returns correct flattened paragraph and survives path reopen",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:body index counts tables not table-cell paragraphs; insertion preserves old fragments and unrelated members",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:empty insertion is structural and expires paragraphs, spans, table and cell handles",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:invalid indexes, text and executable options refuse atomically without accessors",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:style references require existing paragraph definitions and retain styles bytes after insertion",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:unknown body children, duplicate or misplaced sections, lexical barriers and foreign roots refuse",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:protection and external source changes refuse insertion without clobbering package edits",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:staged write and serialization faults preserve archive and all held handles",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:aliased UTF-16 bodies under foreign w bindings retain insertion and original children after save",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:self-closing and sectionless bodies support bounded insertion without inventing sections",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:body-order canonical case rejects incorrect counts and every reordered paragraph expectation",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:complete XML output bounds refuse insertion and preserve existing handles",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
+    },
+    {
+      "id": "bun:tests/unit/docx-insert-paragraph.test.ts:untouched fields and earlier section properties remain exact when inserting a separate body block",
+      "path": "tests/unit/docx-insert-paragraph.test.ts",
+      "sourceSha256": "18be38e0518553c16f6e90e6e570c7a5716776275710e2377447c3a2ed8cce57"
     },
     {
       "id": "bun:tests/unit/docx-model-bindings.test.ts:ten existing DOCX document-model cases execute without activating incompatible table policies",

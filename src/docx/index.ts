@@ -1,6 +1,7 @@
 import { OoxmlError } from "../errors.ts";
 import {appendParagraphRun} from './append-run.ts';
 import {replaceParagraphText} from './paragraph-text.ts';
+import {bodyInsertionTarget,insertBodyParagraph} from './body-insertion.ts';
 import {readRowHeader,editRowHeader} from './row-header.ts';
 import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
 export type {DirectCellProperties,CellPropertiesPatch,CellTopBorder} from './cell-properties.ts';
@@ -561,6 +562,37 @@ export class Document {
       fail("docx-document-invalid", "DOCX paragraph append did not materialise the authored paragraph");
     }
     return paragraph;
+  }
+
+  /** Insert at a top-level body block index (paragraphs/tables, excluding final sectPr). */
+  insertParagraph(index: number, text: string, options?: AddParagraphOptions): Paragraph {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document XML changed outside this handle');
+    this.assertFormattingUnprotected();
+    if(typeof text!=='string'||text.length>1024*1024||/[\t\r\n]/.test(text))fail('docx-invalid-argument','Inserted text must be a string of at most 1 Mi UTF-16 units without tabs or line breaks');
+    // Copy plain data before the legacy creation normalizer can access values.
+    const values:Record<string,unknown>={};
+    if(options!==undefined){
+      if(!options||typeof options!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(options)))fail('docx-invalid-argument','Insertion options must be plain data');
+      for(const key of Reflect.ownKeys(options)){
+        if(typeof key!=='string'||!['bold','italic','style'].includes(key))fail('docx-invalid-argument','Unknown insertion option');
+        const descriptor=Object.getOwnPropertyDescriptor(options,key)!;if(!('value' in descriptor))fail('docx-invalid-argument','Insertion options cannot contain accessors');values[key]=descriptor.value;
+      }
+    }
+    const normalized=normalizeAddParagraphOptions(values as AddParagraphOptions);
+    if(normalized.style)this.assertSupportedParagraphStyle(normalized.style);
+    const target=bodyInsertionTarget(this.xml,this.xmlDocument,index),fragment=buildParagraphXml(text,normalized);
+    const nextXml=insertBodyParagraph(this.xml,target,fragment),nextVersion=this.version+1,nextTableVersion=this.tableVersion+1,nextDocument=parseXml(nextXml);
+    const collections=collectDocumentCollections(nextDocument,nextVersion,nextTableVersion);
+    const position=target.body.selfClosing?target.body.start+(this.xml.slice(target.body.start,target.body.end).replace(/\/>$/,'>').length):target.start;
+    const authored=collections.paragraphs.paragraphs.find(p=>p.element.start===position&&p.element.parent?.localName==='body'&&p.element.parent.namespaceURI===W_NS);
+    if(!authored||authored.text!==text)fail('docx-insert-unsafe','Inserted paragraph did not materialise');
+    const remaining=collections.paragraphs.paragraphs.filter(p=>p!==authored);
+    if(JSON.stringify(remaining.map(p=>p.text))!==JSON.stringify(this.paragraphSnapshots.map(p=>p.text)))fail('docx-insert-unsafe','Insertion changed existing paragraph text');
+    const grids=(tables:TableSnapshot[])=>tables.map(t=>[t.rows,t.columns]);
+    if(JSON.stringify(grids(collections.tables.tables))!==JSON.stringify(grids(this.tableSnapshots)))fail('docx-insert-unsafe','Insertion changed table dimensions');
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,nextXml);this.opcPackage.toBytes();});
+    this.xml=nextXml;this.version=nextVersion;this.tableVersion=nextTableVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+    return this.paragraphHandles[authored.index]!;
   }
 
   /**

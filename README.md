@@ -16,6 +16,7 @@ with bounded formula-cache invalidation. Existing XLSX
 [cell-style selection](docs/contracts/cell-style.md) preserves values, formulas and caches. Word
 paragraphs can [append independently formatted runs](docs/contracts/append-run.md)
 or [replace their whole text](docs/contracts/paragraph-text.md) while retaining existing run properties.
+Documents can [insert paragraphs at a body index](docs/contracts/body-insertion.md) without rewriting existing blocks.
 Existing runs support [direct Boolean formatting](docs/contracts/run-formatting.md), including
 strike-through and selected text effects, [direct colour, underline and highlighting](docs/contracts/run-appearance.md),
 [half-point font sizes](docs/contracts/font-size.md), [direct Latin font names](docs/contracts/run-font-name.md)
