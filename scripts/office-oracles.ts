@@ -8,11 +8,12 @@ import {join,resolve} from 'node:path';
 import {Document,Presentation,Workbook,OpcPackage} from '../src/index.ts';
 import {parseXml,elements} from '../src/xml/index.ts';
 import {runOracleCommand} from './oracle-process.ts';
+import {authorStyleSample,verifyStyleReadback,styleFaults,corruptStyleSample,verifyStyleRefusal} from './xlsx-style-oracle.ts';
 
 const root=resolve(import.meta.dir,'..'),out=join(root,'artifacts/office-oracles');
 const sandbox=await mkdtemp(join(tmpdir(),'bun-office-oracles-'));
 const sha=(bytes:Uint8Array)=>new Bun.CryptoHasher('sha256').update(bytes).digest('hex');
-const report:any={schemaVersion:1,status:'running',sources:{},runtime:'Bun-only; external programs used here solely as test oracles',versions:{},commands:[],inputs:[],schema:null,negativeControl:null,rendering:[],calculation:null,limits:['Three authored samples, not all fixtures or format operations','PDF page/text assertions do not establish visual fidelity or font equivalence','LibreOffice is not Microsoft Office','One arithmetic formula recalculated externally; no Bun calculation credit']};
+const report:any={schemaVersion:1,status:'running',sources:{},runtime:'Bun-only; external programs used here solely as test oracles',versions:{},commands:[],inputs:[],schema:null,negativeControl:null,rendering:[],calculation:null,limits:['Three rendering samples and one introduced-style workbook, not all fixtures or format operations','PDF page/text assertions do not establish visual fidelity or font equivalence','LibreOffice is not Microsoft Office','One arithmetic formula recalculated externally; no Bun calculation credit']};
 await mkdir(out,{recursive:true});
 async function command(args:string[],seconds=90){
  const result=await runOracleCommand(args,root,seconds*1000);report.commands.push(result);
@@ -21,7 +22,7 @@ async function command(args:string[],seconds=90){
 const check=(condition:unknown,message:string)=>{if(!condition)throw Error(message);};
 async function ok(args:string[],seconds=90){const r=await command(args,seconds);check(r.exit===0,`${args[0]} failed: ${r.stderr}`);return r;}
 try{
- for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/opc/core-properties.ts','src/docx/style-authoring.ts','src/docx/page-layout.ts','src/docx/document-properties.ts','src/docx/effective-formatting.ts','src/docx/row-header.ts','src/docx/paragraph-properties.ts','src/docx/paragraph-text.ts','src/docx/append-run.ts','src/docx/body-insertion.ts','src/docx/table-rows.ts','src/docx/table-style.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/pptx/slide-order.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
+ for(const source of ['scripts/office-oracles.ts','scripts/oracle-process.ts','tests/oracles/schema/Program.cs','tests/oracles/schema/SpreadsheetStyleReader.cs','scripts/xlsx-style-oracle.ts','src/workflow/index.ts','src/xlsx/styles.ts','tests/oracles/schema/SchemaCheck.csproj','tests/oracles/schema/packages.lock.json','src/docx/index.ts','src/opc/core-properties.ts','src/docx/style-authoring.ts','src/docx/page-layout.ts','src/docx/document-properties.ts','src/docx/effective-formatting.ts','src/docx/row-header.ts','src/docx/paragraph-properties.ts','src/docx/paragraph-text.ts','src/docx/append-run.ts','src/docx/body-insertion.ts','src/docx/table-rows.ts','src/docx/table-style.ts','src/pptx/index.ts','src/pptx/text-box.ts','src/pptx/slide-order.ts','src/xlsx/index.ts','src/xlsx/cell-style.ts'])report.sources[source]=sha(await Bun.file(join(root,source)).bytes());
  report.versions.dotnet=(await ok(['dotnet','--version'])).stdout.trim();
  report.versions.libreoffice=(await ok(['libreoffice','--version'])).stdout.trim();
  const poppler=await ok(['pdftotext','-v']);report.versions.poppler=(poppler.stderr||poppler.stdout).trim();
@@ -48,6 +49,16 @@ try{
  for(const path of paths)report.inputs.push({file:path.split('/').at(-1),sha256:sha(await Bun.file(path).bytes())});
  const validation=await command(['dotnet',validator,...paths]);report.schema=JSON.parse(validation.stdout);check(validation.exit===0&&report.schema.status==='passed'&&report.schema.results.length===3&&report.schema.results.every((r:any)=>Array.isArray(r.errors)&&r.errors.length===0&&!r.exception&&!r.truncated),'Authored sample schema validation failed');
  const sdkCore=report.schema.results.find((r:any)=>r.file==='word.docx')?.coreProperties;check(sdkCore&&Object.entries(coreExpected).every(([key,value])=>sdkCore[key]===value),'SDK core-property readback mismatch');report.coreProperties={expected:coreExpected,observed:sdkCore,status:'passed',scope:'Fifteen supplied metadata fields read by the SDK; no automatic Office author/timestamp update claim'};
+ const styleSample=await authorStyleSample(out),styleBytes=await Bun.file(styleSample.output).bytes();
+ const styleValidation=await command(['dotnet',validator,styleSample.output]);check(styleValidation.exit===0,'Independent style reader failed');
+ const styleEvidence=JSON.parse(styleValidation.stdout),observedStyles=verifyStyleReadback(styleEvidence,styleSample.output,styleSample.sha256);
+ report.styleReadback={status:'running',reader:{name:styleEvidence.validator,version:styleEvidence.version,profile:styleEvidence.profile},writer:{name:'bun-ooxml',version:JSON.parse(await Bun.file(join(root,'package.json')).text()).version,runtime:Bun.version},sourceSha256:styleSample.sourceSha256,outputSha256:styleSample.sha256,observed:observedStyles,controls:[],scope:'Saved explicit cell XFs and their referenced dependency indices, not effective formatting or rendering; optional oracle only, no default Gherkin execution credit'};
+ for(const fault of styleFaults){
+  const bad=await corruptStyleSample(styleBytes,fault),path=join(sandbox,`style-negative-${fault.name}.xlsx`);await Bun.write(path,bad);
+  const result=await command(['dotnet',validator,path]),evidence=JSON.parse(result.stdout);check(result.exit===1,'Corrupt style reader unexpectedly succeeded');verifyStyleRefusal(evidence,path,sha(bad),fault.error);check(sha(await Bun.file(path).bytes())===sha(bad),'Style refusal changed input');
+  report.styleReadback.controls.push({name:fault.name,sha256:sha(bad),status:'passed',readerResult:evidence});
+ }
+ check(sha(await Bun.file(styleSample.source).bytes())===styleSample.sourceSha256&&sha(await Bun.file(styleSample.output).bytes())===styleSample.sha256,'Style reader changed saved inputs');report.styleReadback.status='passed';
  const broken=await OpcPackage.open(await Bun.file(paths[1]!).bytes());broken.set('ppt/viewProps.xml',broken.text('ppt/viewProps.xml').replace(/<p:normalViewPr>[\s\S]*?<\/p:normalViewPr>/,'<p:normalViewPr/>'));const badPath=join(sandbox,'negative.pptx');await Bun.write(badPath,broken.toBytes());const negative=await command(['dotnet',validator,badPath]);report.negativeControl=JSON.parse(negative.stdout);check(negative.exit===1&&report.negativeControl.results[0]?.errors?.some((e:any)=>e.part==='/ppt/viewProps.xml'&&e.Id==='Sch_IncompleteContentExpectingComplex'),'Negative control did not catch missing view metadata');
  const expected=[{pages:1,text:['Native Word oracle','Inserted body paragraph.','A second paragraph.','Answer','42','BOLDMARK','TOGGLEMARK','PLAINMARK','BOTHMARK']},{pages:2,text:['Native slide oracle','Second slide oracle','Positioned oracle box','Answer','42']},{pages:1,text:['21','22','43']}];
  for(const [i,path] of paths.entries()){
@@ -74,6 +85,6 @@ try{
  const recalcPath=join(roundtrip,'book.xlsx'),recalc=await Workbook.open(recalcPath),answer=recalc.worksheet('Sheet1').getCell('A3');check(answer?.kind==='formula'&&answer.formula==='SUM(A1:A2)'&&answer.cached===43,'External formula roundtrip did not calculate43');
  const recalcBytes=await Bun.file(recalcPath).bytes();await Bun.write(join(out,'recalculated.xlsx'),recalcBytes);report.calculation={producer:report.versions.libreoffice,formula:'SUM(A1:A2)',inputs:[21,22],originalCache:999,inputCache:null,expected:43,observed:answer?.cached,outputSha256:sha(recalcBytes),status:'passed',bunCalculation:false};
  for(const [i,path]of paths.entries())check(sha(await Bun.file(path).bytes())===report.inputs[i].sha256,'Oracle changed original input');
- report.status='passed';console.log('Independent schema3/3, negative control, PDF page/text3/3 and arithmetic roundtrip passed');
+ report.status='passed';console.log('Independent schema3/3, introduced-style readback with six refusal controls, PDF page/text3/3 and arithmetic roundtrip passed');
 }catch(error){report.status='failed';report.error=String(error);throw error;}
 finally{await Bun.write(join(out,'report.json'),JSON.stringify(report,null,2)+'\n');await rm(sandbox,{recursive:true,force:true});}

@@ -36,7 +36,8 @@ foreach (var input in args)
             modified = properties.Modified?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
             lastPrinted = properties.LastPrinted?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
         };
-        result = new { file = Path.GetFileName(path), sha256 = before, errors, truncated = errors.Length > 200, coreProperties };
+        var spreadsheetStyles = package is SpreadsheetDocument spreadsheet ? SpreadsheetStyleReader.Read(spreadsheet) : null;
+        result = new { file = Path.GetFileName(path), sha256 = before, errors, truncated = errors.Length > 200, coreProperties, spreadsheetStyles };
     }
     catch (Exception e)
     {

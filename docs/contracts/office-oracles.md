@@ -1,7 +1,7 @@
 # Independent authored-file checks
 
-`make office-oracles` generates three small native Office files and checks them
-with independent tools. These development checks are separate from the Bun-only
+`make office-oracles` generates three small native Office rendering samples and
+one XLSX style-edit sample, then checks them with independent tools. These development checks are separate from the Bun-only
 production APIs and `make check`. CI uploads their inputs,
 PDFs, extracted text, recalculated workbook and JSON report.
 
@@ -49,9 +49,36 @@ explicit cache removal.
 Applications may choose different recalculation policies; flags alone do not prove
 that cached answers are fresh.
 
+## Saved XLSX style readback
+
+The extra workbook starts with one cell XF. A native `patchOffice` multiline
+edit saves a new wrap-enabled XF to `style-wrapped.xlsx`, leaving
+`style-source.xlsx` unchanged. Native checks reopen the file, require two XFs
+and compare every unrelated member payload. The SDK opens the saved output
+read-only and enumerates all three cells across two sheets, including explicit
+style zero and an omitted style index. Its typed objects resolve each cell XF,
+font, fill, border, base XF and number-format reference. Bun checks every reported
+cell address, text, index and direct wrap value against the expected sample.
+
+Six separately saved corrupt copies use out-of-range cell, font, fill, border and
+base-XF indices or a missing custom number format. Each must produce its specific
+reader error and preserve the corrupt input bytes. Some dependency controls
+change both the cell XF and base XF; they are not isolated base-inheritance tests.
+Protocol unit tests reject missing cells, wrong values, stale hashes, invalid
+versions and unrelated error messages. Those unit tests use synthetic reports;
+only `make office-oracles` runs the independent SDK reader.
+
+The report records reader identity/version separately from the Bun writer, hashes
+of source and saved output, observed cell data and refusal results. This checks
+explicit stored references, not computed formatting, row/column styles, visual
+wrapping, locale-specific built-in number formats or general workbook validity.
+The reader is development-only. The broader independent-style-reader Gherkin
+obligation remains planned; this optional check does not mark it executed by the
+default acceptance runner.
+
 ## Limits
 
-These checks cover three generated samples. They do not cover the full fixture
+These checks cover four generated samples. They do not cover the full fixture
 corpus, arbitrary layout inheritance, revisions/comments, pivots, charts or formula
 grammar. Microsoft Word/PowerPoint/Excel rendering, pixel comparison and broad
 calculation accuracy are unverified.
@@ -61,6 +88,7 @@ a 4 MiB output cap and a bounded post-kill drain. The timeout test starts a real
 descendant holding the pipes and checks that it cannot write a delayed marker.
 These independent checks do not run on Windows.
 
-Sources: `scripts/office-oracles.ts`, `scripts/oracle-process.ts`, `tests/oracles/schema/`, and the two native
+Sources: `scripts/office-oracles.ts`, `scripts/xlsx-style-oracle.ts`,
+`scripts/oracle-process.ts`, `tests/oracles/schema/`, and the two native
 regressions in `tests/unit/pptx-create.test.ts`. Results are written to
 `artifacts/office-oracles/report.json`, including failed runs.

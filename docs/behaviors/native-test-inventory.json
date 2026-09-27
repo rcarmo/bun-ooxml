@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 886,
-  "files": 89,
+  "count": 890,
+  "files": 90,
   "sources": [
     {
       "path": "tests/unit/cache-boundaries.test.ts",
@@ -454,6 +454,12 @@
       "path": "tests/unit/xlsx-range.test.ts",
       "sha256": "9bb6ed879ca1ca4523567da935ddd07ef5833cfd375a8229193523c7276b44bd",
       "declarations": 10,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/xlsx-style-oracle.test.ts",
+      "sha256": "9a5279a967e1fcba2d2e88ec779de598128160c6211f2315397027a312227848",
+      "declarations": 4,
       "issues": []
     },
     {
@@ -1108,6 +1114,10 @@
     "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
     "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
     "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:independent style-reader protocol requires all saved cells, exact dependencies, text and version",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:independent style-reader protocol rejects absent or extra cells and incomplete or stale evidence",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:style refusal protocol requires specific reader failure and matching custody identity",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:style oracle fixture saves a new wrap XF with native readback and unchanged source and unrelated members",
     "bun:tests/unit/xml-attributes.test.ts:duplicate expanded attributes refuse atomically even for same values or different prefixes",
     "bun:tests/unit/xml-attributes.test.ts:namespace declarations, unbound prefixes and malformed attribute QNames refuse",
     "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
@@ -1458,6 +1468,10 @@
     "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
     "bun:tests/unit/xlsx-range.test.ts:row and column overflow, invalid argument types and excessive input refuse before work",
     "bun:tests/unit/xlsx-range.test.ts:boundary coordinate combinations retain both independent absolute flags",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:independent style-reader protocol requires all saved cells, exact dependencies, text and version",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:independent style-reader protocol rejects absent or extra cells and incomplete or stale evidence",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:style refusal protocol requires specific reader failure and matching custody identity",
+    "bun:tests/unit/xlsx-style-oracle.test.ts:style oracle fixture saves a new wrap XF with native readback and unchanged source and unrelated members",
     "bun:tests/unit/xml-attributes.test.ts:duplicate expanded attributes refuse atomically even for same values or different prefixes",
     "bun:tests/unit/xml-attributes.test.ts:namespace declarations, unbound prefixes and malformed attribute QNames refuse",
     "bun:tests/unit/xml-attributes.test.ts:foreign, forged and stale targets refuse without changing snapshot or patch inputs",
@@ -30926,6 +30940,169 @@
         "expect",
         "expect().toEqual",
         "parseA1Range"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-style-oracle.test.ts:independent style-reader protocol requires all saved cells, exact dependencies, text and version",
+      "path": "tests/unit/xlsx-style-oracle.test.ts",
+      "line": 6,
+      "title": "independent style-reader protocol requires all saved cells, exact dependencies, text and version",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(verifyStyleReadback(r,path,hash)).toEqual(r.results[0]!.spreadsheetStyles)",
+        "expect(JSON.stringify(r)).toBe(before)",
+        "expect(()=>verifyStyleReadback(bad,path,hash)).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 8,
+          "expression": "for(const field of ['sheet','address','value','styleIndex','explicitStyleIndex','wrapText','fontId','fillId','borderId','numberFormatId','baseStyleIndex'])for(let i=0;i<3;i++)"
+        },
+        {
+          "line": 8,
+          "expression": "for(let i=0;i<3;i++)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9a5279a967e1fcba2d2e88ec779de598128160c6211f2315397027a312227848",
+      "body": "{\n const r=report(),before=JSON.stringify(r);expect(verifyStyleReadback(r,path,hash)).toEqual(r.results[0]!.spreadsheetStyles);expect(JSON.stringify(r)).toBe(before);\n for(const field of ['sheet','address','value','styleIndex','explicitStyleIndex','wrapText','fontId','fillId','borderId','numberFormatId','baseStyleIndex'])for(let i=0;i<3;i++){const bad=report();(bad.results[0]!.spreadsheetStyles.cells[i] as any)[field]='wrong';expect(()=>verifyStyleReadback(bad,path,hash)).toThrow();}\n}",
+      "calls": [
+        "JSON.stringify",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "report",
+        "verifyStyleReadback"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-style-oracle.test.ts:independent style-reader protocol rejects absent or extra cells and incomplete or stale evidence",
+      "path": "tests/unit/xlsx-style-oracle.test.ts",
+      "line": 10,
+      "title": "independent style-reader protocol rejects absent or extra cells and incomplete or stale evidence",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>verifyStyleReadback(bad,path,hash)).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const mutate of [(r:any)=>delete r.schemaVersion,(r:any)=>r.schemaVersion=2,(r:any)=>r.results[0].spreadsheetStyles.cells.pop(),(r:any)=>r.results[0].spreadsheetStyles.cells.push(styleCells[0]),(r:any)=>r.results[0].spreadsheetStyles.cellFormatCount=1,(r:any)=>delete r.results[0].spreadsheetStyles,(r:any)=>r.results[0].errors.push("
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9a5279a967e1fcba2d2e88ec779de598128160c6211f2315397027a312227848",
+      "body": "{\n for(const mutate of [(r:any)=>delete r.schemaVersion,(r:any)=>r.schemaVersion=2,(r:any)=>r.results[0].spreadsheetStyles.cells.pop(),(r:any)=>r.results[0].spreadsheetStyles.cells.push(styleCells[0]),(r:any)=>r.results[0].spreadsheetStyles.cellFormatCount=1,(r:any)=>delete r.results[0].spreadsheetStyles,(r:any)=>r.results[0].errors.push({Id:'invalid'}),(r:any)=>r.results[0].truncated=true,(r:any)=>r.results[0].exception='fail',(r:any)=>r.results[0].sha256='stale',(r:any)=>r.results[0].file='wrong.xlsx',(r:any)=>r.results.push(r.results[0]),(r:any)=>r.validator='Bun',(r:any)=>r.version='',(r:any)=>r.version='3.5.10',(r:any)=>r.profile='unknown',(r:any)=>r.status='failed']){const bad=report();mutate(bad);expect(()=>verifyStyleReadback(bad,path,hash)).toThrow();}\n}",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "mutate",
+        "r.results.0.errors.push",
+        "r.results.0.spreadsheetStyles.cells.pop",
+        "r.results.0.spreadsheetStyles.cells.push",
+        "r.results.push",
+        "report",
+        "verifyStyleReadback"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-style-oracle.test.ts:style refusal protocol requires specific reader failure and matching custody identity",
+      "path": "tests/unit/xlsx-style-oracle.test.ts",
+      "line": 13,
+      "title": "style refusal protocol requires specific reader failure and matching custody identity",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>verifyStyleRefusal(refusal(),path,hash,'cell format index 999')).not.toThrow()",
+        "expect(()=>verifyStyleRefusal(bad,path,hash,'cell format index 999')).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 16,
+          "expression": "for(const mutate of [(r:any)=>delete r.schemaVersion,(r:any)=>r.schemaVersion=2,(r:any)=>r.status='passed',(r:any)=>r.results[0].exception='OPC failed',(r:any)=>r.results[0].exception='styles: different error',(r:any)=>r.results[0].spreadsheetStyles="
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9a5279a967e1fcba2d2e88ec779de598128160c6211f2315397027a312227848",
+      "body": "{\n const refusal=()=>({schemaVersion:1,validator:'DocumentFormat.OpenXml',version:'3.5.1+sample',profile:'Office2019',status:'failed',results:[{file:'style-wrapped.xlsx',sha256:hash,exception:'styles: cell format index 999 out of range 2'}]});\n expect(()=>verifyStyleRefusal(refusal(),path,hash,'cell format index 999')).not.toThrow();\n for(const mutate of [(r:any)=>delete r.schemaVersion,(r:any)=>r.schemaVersion=2,(r:any)=>r.status='passed',(r:any)=>r.results[0].exception='OPC failed',(r:any)=>r.results[0].exception='styles: different error',(r:any)=>r.results[0].spreadsheetStyles={},(r:any)=>r.results[0].sha256='stale',(r:any)=>r.results[0].file='other.xlsx',(r:any)=>r.results=[],(r:any)=>r.version='',(r:any)=>r.validator='bun']){const bad=refusal();mutate(bad);expect(()=>verifyStyleRefusal(bad,path,hash,'cell format index 999')).toThrow();}\n}",
+      "calls": [
+        "expect",
+        "expect().not.toThrow",
+        "expect().toThrow",
+        "mutate",
+        "refusal",
+        "verifyStyleRefusal"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-style-oracle.test.ts:style oracle fixture saves a new wrap XF with native readback and unchanged source and unrelated members",
+      "path": "tests/unit/xlsx-style-oracle.test.ts",
+      "line": 18,
+      "title": "style oracle fixture saves a new wrap XF with native readback and unchanged source and unrelated members",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.receipt.status).toBe('committed')",
+        "expect(result.sourceSha256).not.toBe(result.sha256)",
+        "expect(await Bun.file(result.output).exists()).toBe(true)",
+        "expect(sha(bad)).not.toBe(result.sha256)",
+        "expect(sha(bytes)).toBe(result.sha256)",
+        "expect(corruptStyleSample(bytes,{...styleFaults[0]!,from:'not-present'})).rejects.toThrow('Control must alter')",
+        "expect(lstat(dir)).rejects.toMatchObject({code:'ENOENT'})"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 19,
+          "expression": "for(const fault of styleFaults)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "9a5279a967e1fcba2d2e88ec779de598128160c6211f2315397027a312227848",
+      "body": "{\n const dir=await mkdtemp(join(tmpdir(),'xlsx-style-oracle-'));try{const result=await authorStyleSample(dir);expect(result.receipt.status).toBe('committed');expect(result.sourceSha256).not.toBe(result.sha256);expect(await Bun.file(result.output).exists()).toBe(true);const bytes=await Bun.file(result.output).bytes();for(const fault of styleFaults){const bad=await corruptStyleSample(bytes,fault);expect(sha(bad)).not.toBe(result.sha256);expect(sha(bytes)).toBe(result.sha256);}await expect(corruptStyleSample(bytes,{...styleFaults[0]!,from:'not-present'})).rejects.toThrow('Control must alter');}finally{await rm(dir,{recursive:true,force:true});}await expect(lstat(dir)).rejects.toMatchObject({code:'ENOENT'});\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().bytes",
+        "Bun.file().exists",
+        "authorStyleSample",
+        "corruptStyleSample",
+        "expect",
+        "expect().not.toBe",
+        "expect().rejects.toMatchObject",
+        "expect().rejects.toThrow",
+        "expect().toBe",
+        "join",
+        "lstat",
+        "mkdtemp",
+        "rm",
+        "sha",
+        "tmpdir"
       ],
       "reviewReasons": [
         "body-loop"
