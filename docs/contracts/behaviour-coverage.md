@@ -1,21 +1,19 @@
 # Behaviour coverage
 
-The shared reference contains **215 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **366 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 283 | 761 | 726 | 35 |
-| Local-only obligations | 9 | 11 | 0 | 11 |
+| Shared catalogue | 292 | 772 | 726 | 46 |
+| Local-only obligations | 0 | 0 | 0 | 0 |
 | Combined inventory | 292 | 772 | 726 | 46 |
 
-The canonical denominator is **283 shared scenarios / 761 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
+The canonical denominator is **292 shared scenarios / 772 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
-| features/planned/cross-language-followups.feature | planned | 3 | 3 | 0 | 3 | 13 |
-| features/planned/full-port.feature | planned | 5 | 7 | 0 | 7 | 28 |
-| features/planned/office-mutation-additions.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/docx/anchor-discovery.feature | mixed | 5 | 5 | 4 | 1 | 23 |
+| references/fixtures-ooxml/workflows/docx/comment-content-type.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 21 | 46 | 37 | 9 | 210 |
 | references/fixtures-ooxml/workflows/docx/creation.feature | implemented | 5 | 9 | 9 | 0 | 50 |
 | references/fixtures-ooxml/workflows/docx/effective-formatting.feature | implemented | 2 | 25 | 25 | 0 | 84 |
@@ -25,6 +23,7 @@ The canonical denominator is **283 shared scenarios / 761 shared cases**. Local-
 | references/fixtures-ooxml/workflows/docx/paragraph-style.feature | mixed | 3 | 24 | 19 | 5 | 82 |
 | references/fixtures-ooxml/workflows/docx/paragraphs.feature | implemented | 6 | 16 | 16 | 0 | 49 |
 | references/fixtures-ooxml/workflows/docx/properties.feature | implemented | 1 | 1 | 1 | 0 | 7 |
+| references/fixtures-ooxml/workflows/docx/review-integration.feature | planned | 2 | 2 | 0 | 2 | 9 |
 | references/fixtures-ooxml/workflows/docx/revisions.feature | implemented | 23 | 88 | 88 | 0 | 396 |
 | references/fixtures-ooxml/workflows/docx/run-formatting.feature | mixed | 10 | 43 | 42 | 1 | 137 |
 | references/fixtures-ooxml/workflows/docx/stories.feature | implemented | 3 | 3 | 3 | 0 | 21 |
@@ -36,6 +35,7 @@ The canonical denominator is **283 shared scenarios / 761 shared cases**. Local-
 | references/fixtures-ooxml/workflows/docx/text.feature | implemented | 5 | 7 | 7 | 0 | 33 |
 | references/fixtures-ooxml/workflows/docx/tracked-workflow.feature | implemented | 3 | 18 | 18 | 0 | 60 |
 | references/fixtures-ooxml/workflows/docx/tracking-settings.feature | implemented | 7 | 24 | 24 | 0 | 101 |
+| references/fixtures-ooxml/workflows/office/full-coverage.feature | planned | 1 | 3 | 0 | 3 | 12 |
 | references/fixtures-ooxml/workflows/package/graph.feature | implemented | 4 | 4 | 4 | 0 | 16 |
 | references/fixtures-ooxml/workflows/package/preservation.feature | implemented | 10 | 14 | 14 | 0 | 119 |
 | references/fixtures-ooxml/workflows/package/relationship-namespaces.feature | implemented | 2 | 4 | 4 | 0 | 16 |
@@ -48,10 +48,13 @@ The canonical denominator is **283 shared scenarios / 761 shared cases**. Local-
 | references/fixtures-ooxml/workflows/pptx/mutation-safety.feature | implemented | 3 | 6 | 6 | 0 | 45 |
 | references/fixtures-ooxml/workflows/pptx/notes.feature | implemented | 9 | 9 | 9 | 0 | 43 |
 | references/fixtures-ooxml/workflows/pptx/preservation.feature | implemented | 1 | 1 | 1 | 0 | 6 |
+| references/fixtures-ooxml/workflows/pptx/slide-import.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/pptx/slide-order.feature | implemented | 2 | 21 | 21 | 0 | 70 |
 | references/fixtures-ooxml/workflows/pptx/tables.feature | implemented | 4 | 5 | 5 | 0 | 15 |
 | references/fixtures-ooxml/workflows/pptx/text-box.feature | implemented | 2 | 23 | 23 | 0 | 77 |
 | references/fixtures-ooxml/workflows/pptx/text.feature | implemented | 3 | 3 | 3 | 0 | 9 |
+| references/fixtures-ooxml/workflows/xlsx/cache-completeness.feature | planned | 1 | 1 | 0 | 1 | 4 |
+| references/fixtures-ooxml/workflows/xlsx/calculation-engine.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/xlsx/cell-style.feature | implemented | 3 | 28 | 28 | 0 | 101 |
 | references/fixtures-ooxml/workflows/xlsx/cells.feature | implemented | 7 | 7 | 7 | 0 | 26 |
 | references/fixtures-ooxml/workflows/xlsx/comment-vml-custody.feature | mixed | 6 | 6 | 1 | 5 | 29 |
@@ -59,6 +62,8 @@ The canonical denominator is **283 shared scenarios / 761 shared cases**. Local-
 | references/fixtures-ooxml/workflows/xlsx/formula-cache.feature | implemented | 4 | 5 | 5 | 0 | 30 |
 | references/fixtures-ooxml/workflows/xlsx/formula-references.feature | implemented | 9 | 45 | 45 | 0 | 152 |
 | references/fixtures-ooxml/workflows/xlsx/mutation-safety.feature | implemented | 2 | 6 | 6 | 0 | 45 |
+| references/fixtures-ooxml/workflows/xlsx/structural-edits.feature | planned | 1 | 1 | 0 | 1 | 4 |
+| references/fixtures-ooxml/workflows/xlsx/style-readback.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/xml/comparison.feature | implemented | 5 | 10 | 10 | 0 | 40 |
 | references/fixtures-ooxml/workflows/xml/editing.feature | implemented | 11 | 16 | 16 | 0 | 59 |
 | references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 6 | 0 | 19 |

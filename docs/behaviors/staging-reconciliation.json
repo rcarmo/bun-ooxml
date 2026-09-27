@@ -5323,27 +5323,27 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4"
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4"
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4"
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4"
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df"
     },
     {
-      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 761 shared cases plus eleven local-only cases with only reviewed activations",
+      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 772 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4"
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
@@ -5578,17 +5578,17 @@
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:format regrouping retains the exact 525 implemented shared case identities",
       "path": "tests/unit/workflow-layout.test.ts",
-      "sourceSha256": "0675ea98aaf2b0b8e66435eee02345cb7f98ef765070d8e20005059a3a6d328a"
+      "sourceSha256": "fa0d6fb406f44a9f8af1cad9c1598929f1f4059e8cd00e3fcaa174ccd7e5cf02"
     },
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:multi-feature wrapper selection executes only requested identities and rejects missing ones",
       "path": "tests/unit/workflow-layout.test.ts",
-      "sourceSha256": "0675ea98aaf2b0b8e66435eee02345cb7f98ef765070d8e20005059a3a6d328a"
+      "sourceSha256": "fa0d6fb406f44a9f8af1cad9c1598929f1f4059e8cd00e3fcaa174ccd7e5cf02"
     },
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:mapping relocation preserves 470 records and explicitly accounts for two wrapper count changes",
       "path": "tests/unit/workflow-layout.test.ts",
-      "sourceSha256": "0675ea98aaf2b0b8e66435eee02345cb7f98ef765070d8e20005059a3a6d328a"
+      "sourceSha256": "fa0d6fb406f44a9f8af1cad9c1598929f1f4059e8cd00e3fcaa174ccd7e5cf02"
     },
     {
       "id": "bun:tests/unit/workflow-receipts.test.ts:retained receipt scenarios execute both exact Then predicates with no undefined bindings",

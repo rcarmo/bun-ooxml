@@ -20,13 +20,13 @@ alone does not count as a tested requirement.
 
 ## Complete shared inventory
 
-The project loads all 48 canonical features from the pinned workflow registry.
+The project loads all 56 canonical features from the pinned workflow registry.
 Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 283 scenarios / 761 cases; 726 implemented and 35 planned.
-- Local-only: nine scenarios / eleven cases, all planned.
+- Shared: 292 scenarios / 772 cases; 726 implemented and 46 planned.
+- Local-only: zero scenarios or cases. The eleven former local cases are now shared planned contracts.
 - Combined: 292 scenarios / 772 cases; 726 implemented and 46 planned.
 
 This closes an inventory omission of thirteen template cases. Earlier release

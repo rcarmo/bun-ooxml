@@ -88,5 +88,5 @@ scenarios use shared fixture copies.
 They compare source bytes, an existing destination and directory entries, then
 reopen the source. Negative controls corrupt receipt fields or files and require
 assertion failures; temporary files are removed after successful and failed cases.
-The separate [independent spreadsheet style-reader check](../../features/planned/office-mutation-additions.feature)
+The separate [independent spreadsheet style-reader check](../../references/fixtures-ooxml/workflows/xlsx/style-readback.feature)
 is not implemented by these cases.

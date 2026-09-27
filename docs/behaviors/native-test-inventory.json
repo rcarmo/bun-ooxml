@@ -530,7 +530,7 @@
     },
     {
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4",
+      "sha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df",
       "declarations": 5,
       "issues": []
     },
@@ -626,7 +626,7 @@
     },
     {
       "path": "tests/unit/workflow-layout.test.ts",
-      "sha256": "0675ea98aaf2b0b8e66435eee02345cb7f98ef765070d8e20005059a3a6d328a",
+      "sha256": "fa0d6fb406f44a9f8af1cad9c1598929f1f4059e8cd00e3fcaa174ccd7e5cf02",
       "declarations": 3,
       "issues": []
     },
@@ -33559,7 +33559,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4",
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/local.feature'),feature('local'));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3});expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1});expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2});\n const f=inv.features.find(f=>f.path===prefix+b)!;expect(f.lifecycle).toBe('planned');expect(f.runner).toBeUndefined();expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'));\n let unsupported=0;const result=await executeAcceptance(inv,[...bound,{pattern:/^(input|output) (b|local)$/,run:()=>{unsupported++;throw Error('planned ran');}}],'catalogue');expect(result.failures).toEqual([]);expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3});expect(unsupported).toBe(0);\n const report=await runAcceptance(bound,{root});expect(report.coverage).toEqual(inv.coverage);expect(report.execution.cases.planned).toBe(2);await expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         ".update",
@@ -33603,7 +33603,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4",
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df",
       "body": "{\n for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>{l.schemaVersion=99;},\n  (l:ReturnType<typeof ledger>)=>{l.features.pop();l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.feature=b;},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.expandedCases=2;},\n  (l:ReturnType<typeof ledger>)=>{l.features.push(a);},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.push(l.workflows[0]!);},\n  (l:ReturnType<typeof ledger>)=>{l.features[0]='workflows/docx/../../escape.feature';},\n ]){const root=await project();try{const l=ledger();mutate(l);await Bun.write(join(root,catalogue),JSON.stringify(l));await expect(inventoryFeatures(root)).rejects.toThrow();}finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -33645,7 +33645,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4",
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df",
       "body": "{\n for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity']){const root=await project();try{const c=config();\n if(mode==='unknown')c.features[0]!.path=prefix+'workflows/docx/c.feature';if(mode==='duplicate')c.features.push(c.features[0]!);if(mode==='orphan')await Bun.write(join(root,prefix+'workflows/docx/c.feature'),feature('c'));if(mode==='lifecycle')await Bun.write(join(root,prefix+b),feature('b').replace('@planned','@implemented @bun'));if(mode==='missing')await rm(join(root,prefix+b));if(mode==='seal')await Bun.write(join(root,prefix+'manifest.json'),JSON.stringify({files:[{path:a,role:'workflow'}]}));if(mode==='catalogue-path')c.catalogue=prefix+'../other.json';if(mode==='shadow')await Bun.write(join(root,'features/shadow.feature'),feature('b'));if(mode==='case-identity')await Bun.write(join(root,prefix+b),'@planned\\nFeature: b\\n @id-b\\n Scenario Outline: Duplicate <value>\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | same |\\n   | same |\\n');\n await Bun.write(join(root,'features/shared.json'),JSON.stringify(c));await expect(inventoryFeatures(root)).rejects.toThrow();\n }finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -33681,7 +33681,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4",
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.write",
@@ -33700,17 +33700,17 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 761 shared cases plus eleven local-only cases with only reviewed activations",
+      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 772 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
       "line": 39,
-      "title": "real catalogue accounts for all 761 shared cases plus eleven local-only cases with only reviewed activations",
+      "title": "real catalogue accounts for all 772 shared cases with former local obligations centralised with only reviewed activations",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(inv.coverage?.catalogue).toMatchObject({features:48,scenarios:283,cases:761})",
-        "expect(inv.coverage?.shared.cases).toEqual({implemented:726,planned:35,total:761})",
-        "expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11})",
+        "expect(inv.coverage?.catalogue).toMatchObject({features:56,scenarios:292,cases:772})",
+        "expect(inv.coverage?.shared.cases).toEqual({implemented:726,planned:46,total:772})",
+        "expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:0,total:0})",
         "expect(inv.counts.cases).toEqual({implemented:726,planned:46,total:772})",
         "expect(inv.counts.scenarios.total).toBe(292)",
         "expect(templates).toHaveLength(2)",
@@ -33721,8 +33721,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2d2b6b6ae274bd244d00f3061b152acdee1fec358a034087513a6d2c6b2261e4",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:48,scenarios:283,cases:761});expect(inv.coverage?.shared.cases).toEqual({implemented:726,planned:35,total:761});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:11,total:11});expect(inv.counts.cases).toEqual({implemented:726,planned:46,total:772});expect(inv.counts.scenarios.total).toBe(292);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
+      "sourceSha256": "898683d603623e65fa291ee2039188caa81793f65453ed3a9c80eda3e3cb94df",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:56,scenarios:292,cases:772});expect(inv.coverage?.shared.cases).toEqual({implemented:726,planned:46,total:772});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:0,total:0});expect(inv.counts.cases).toEqual({implemented:726,planned:46,total:772});expect(inv.counts.scenarios.total).toBe(292);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
       "calls": [
         ".test",
         ".update",
@@ -36164,7 +36164,7 @@
         "expect(new Set(originalKeys).size).toBe(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
         "expect(inventory.counts.cases.planned).toBe(46)",
-        "expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/)"
+        "expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml|office)\\/[a-z0-9-]+\\.feature$/)"
       ],
       "deferredAssertions": [],
       "loops": [
@@ -36174,8 +36174,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0675ea98aaf2b0b8e66435eee02345cb7f98ef765070d8e20005059a3a6d328a",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Set(originalKeys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(46);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml)\\/[a-z0-9-]+\\.feature$/);}\n}",
+      "sourceSha256": "fa0d6fb406f44a9f8af1cad9c1598929f1f4059e8cd00e3fcaa174ccd7e5cf02",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Set(originalKeys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(46);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml|office)\\/[a-z0-9-]+\\.feature$/);}\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -36228,7 +36228,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0675ea98aaf2b0b8e66435eee02345cb7f98ef765070d8e20005059a3a6d328a",
+      "sourceSha256": "fa0d6fb406f44a9f8af1cad9c1598929f1f4059e8cd00e3fcaa174ccd7e5cf02",
       "body": "{\n const ids=['@id-office-preview-details','@id-office-docx-exact-match-counts'],features=await sharedScenarios(ids);\n expect(features).toHaveLength(2);expect(features.flatMap(f=>f.scenarios.map(s=>s.scenarioId))).toEqual(ids);\n await expect(sharedScenarios(['@id-not-in-catalogue'])).rejects.toThrow('one shared scenario owner');\n await expect(sharedScenarios([])).rejects.toThrow('nonempty unique');await expect(sharedScenarios([ids[0]!,ids[0]!])).rejects.toThrow('nonempty unique');\n const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n for(const f of features)for(const s of f.scenarios)expect(ledger.workflows.find((w:any)=>w.id===s.scenarioId).feature).toBe(f.path);\n}",
       "calls": [
         "Bun.file",
@@ -36270,7 +36270,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0675ea98aaf2b0b8e66435eee02345cb7f98ef765070d8e20005059a3a6d328a",
+      "sourceSha256": "fa0d6fb406f44a9f8af1cad9c1598929f1f4059e8cd00e3fcaa174ccd7e5cf02",
       "body": "{\n const r=await outcomeMappingReport(),ids=['bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings','bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting'];\n const unchanged=r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger)&&!ids.includes(m.testId));expect(unchanged).toHaveLength(470);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(unchanged)).digest('hex')).toBe('a87881cd02360bf6db2556d4cb39bc4a22bb59db90752d4fff83dd9f81960b41');\n expect(r.mappings.find(m=>m.testId===ids[0])!.assertions).toContain('expect(report.inventory.features.implemented).toBe(2)');\n expect(r.mappings.find(m=>m.testId===ids[1])!.assertions).toContain('expect(good.counts.cases.planned).toBe(0)');\n expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         ".includes",

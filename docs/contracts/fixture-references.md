@@ -72,15 +72,13 @@ and expanded counts must match the registry. Missing or orphaned inputs fail.
 Small isolated test projects may omit `catalogue`; the project verification gate
 requires it for this repository.
 
-Coverage and acceptance reports separate **660 shared cases** (625 implemented,
-35 planned) from **11 local-only planned cases**. The combined inventory has 671
-cases, including 46 planned. After the complete-inventory correction, the
-tracking-author toggle, 24 settings persistence/refusal cases, one nullable-cell
-access case, 52 physical-merge cases and 22 concrete template-inventory cases
-were activated. Thirteen template cases previously omitted from the
-loaded inventory are now visible with no execution credit. Catalogue membership
-checks do not replace `verifyReferences`, which verifies the pinned commit,
-manifest hashes and tracked-byte custody.
+Coverage and acceptance reports now include **772 shared cases** (726 implemented,
+46 planned). The eleven former local-only planned cases moved into eight canonical
+format/operation workflows; no local `.feature` copies or local-only cases remain.
+Their predicates and case identities are preserved except the calculation actor's
+runtime-neutral wording. The thirty-five earlier shared planned cases remain
+planned. Catalogue membership checks do not replace `verifyReferences`, which
+verifies the pinned commit, manifest hashes and tracked-byte custody.
 
 Source tags stay unchanged for provenance. Bindings and reports use explicit
 scenario/case `lifecycle` fields for runtime status. A feature's result summarises
