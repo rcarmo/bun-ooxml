@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 842,
+  "nativeDeclarations": 853,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 615,
+  "withoutStagingCount": 626,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2917,6 +2917,61 @@
       "sourceSha256": "e56ae0edc4ed87a9952ab12a80fbc8e3acc1cac902ae57a170bef3607cbba1e9"
     },
     {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:all ten direct outline levels survive independent path roundtrips without changing text or other parts",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:absent null explicit nine and zero stay distinct and lexical no-ops preserve handles",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:outline insertion respects property order and keeps direct styles and unrelated XML fragments",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:missing and self-closing paragraph properties allow direct outline edits without style synthesis",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:invalid outline values and a late invalid field refuse the complete patch with bytes and handles intact",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:duplicate misordered malformed lexical or wrongly qualified outline metadata refuses reads writes and removal",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:protected no-op external main changes and field-bearing paragraphs refuse outline mutation",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:outline edits retain table grid and sibling text but expire paragraph cell and span snapshots",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:set and serialization faults roll back outline edits with live paragraph and cell handles",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:namespace aliases UTF8 BOM and UTF16 codecs survive outline edits and byte reopen",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
+      "id": "bun:tests/unit/docx-outline-level.test.ts:complete output bounds refuse new outline metadata without invalidating the held paragraph",
+      "path": "tests/unit/docx-outline-level.test.ts",
+      "sourceSha256": "b5b624b3f2196ec1f3ea5d2d48b5f2744b7fadf8b8d154bbd0851ba81d252193"
+    },
+    {
       "id": "bun:tests/unit/docx-page-layout.test.ts:final section geometry executes22 saved outcomes and atomic refusals",
       "path": "tests/unit/docx-page-layout.test.ts",
       "sourceSha256": "f665597e7e7ba6b4f52123ec75df64ed345271074202c7c68f184feff9f61a31"
@@ -2984,77 +3039,77 @@
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:direct paragraph properties set and read all supported values without changing text",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:direct values distinguish absent, explicit zero/off and removal; no-op preserves archive and handles",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:spacing edits preserve unrelated line/auto attributes and other paragraph property source",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:namespace aliases and default Word namespaces retain expanded property names",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:invalid or executable patch fields refuse atomically",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:unknown, duplicated, revised, misordered or ambiguous selected properties refuse even on no-op",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:protection, unsupported text and externally changed document bytes refuse without mutation",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:disk save and UTF-16LE reopen retain properties and untouched parts",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:self-closing properties and empty paragraphs accept ordered insertion under a default namespace",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:late serialization and staged write failures restore package, values and held paragraph",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:table paragraph formatting preserves grid and live table access while expiring paragraph handles",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:same-value requests still enforce protection and direct getters remain read-only",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:nine shared direct paragraph getter cases execute with no credit for other document-model operations",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:spacing policy boundaries and partial removal preserve an unedited line-spacing leaf",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-properties.test.ts:canonical flag predicates reject false readbacks rather than trusting setter success",
       "path": "tests/unit/docx-paragraph-properties.test.ts",
-      "sourceSha256": "5a306873751a5aba37cd8b3bcfac6984d9cf615a90beedc5bc638a6d97c19a47"
+      "sourceSha256": "3e8086dfcbb0b36edf8e4e0d0a839b9d475d5eb869e57e0781fcb45212d2a6a6"
     },
     {
       "id": "bun:tests/unit/docx-paragraph-style.test.ts:paragraph style selection executes19 saved outcome and refusal cases",

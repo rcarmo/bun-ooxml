@@ -1,7 +1,7 @@
 # Direct paragraph properties
 
-`Paragraph.directProperties()` reads direct alignment, before/after spacing and
-three paragraph flags. `setProperties(patch)` changes those properties without
+`Paragraph.directProperties()` reads direct alignment, before/after spacing,
+three paragraph flags and `outlineLevel`. `setProperties(patch)` changes those properties without
 changing paragraph text or unrelated package parts.
 
 ```ts
@@ -21,6 +21,13 @@ from 0 through 31680; 20 twips equal one point. The flags accept booleans. For e
 field, `null` removes the direct property and `undefined` preserves it. An empty
 patch refuses. The getter returns `null` for absent properties, including absent
 flags; it does not apply style inheritance or default pagination behaviour.
+
+`outlineLevel` accepts integer OOXML values 0–9. Values 0–8 represent outline
+levels 1–9; 9 explicitly means no outline level. An absent property reads `null`,
+distinct from explicit `9`. The getter does not infer heading status from a style
+ID or resolve inherited outline levels. Outline metadata does not itself change
+appearance; consumers may use it for document outlines or tables of contents.
+This API does not build a TOC.
 
 A changed edit returns `{ changed: 1 }` and expires held paragraph handles. An
 identical request returns `{ changed: 0 }`, retains handles and preserves exact
@@ -45,7 +52,8 @@ inheritance.
 
 ECMA-376 Part 1, fifth edition (October 2016), defines `jc` in §17.3.1.13,
 `keepLines` in §17.3.1.14, `pageBreakBefore` in §17.3.1.23, `spacing` in §17.3.1.33
-and `widowControl` in §17.3.1.44. The complete PDF is in the
+and `widowControl` in §17.3.1.44. Section 17.3.1.20 defines `outlineLvl` and its
+0–9 values. The complete PDF is in the
 [shared specification index](../../references/fixtures-ooxml/specs/ecma-376/README.md).
 
 The standard includes more alignment and spacing forms than this API accepts.
@@ -56,6 +64,9 @@ reports only whether the direct property exists and what it says.
 
 The selected shared scenarios check four alignments, four before/after pairs and
 one three-flag combination in memory. Native tests separately check save/reopen,
-UTF-16, table custody, rollback and refusal. One generated sample passes Open XML
+UTF-16, table custody, rollback and refusal. Outline tests independently save and
+reopen all ten values, distinguish absent/removed/explicit non-outline states,
+and check lexical no-ops, ordering, malformed metadata, UTF-8 BOMs and both UTF-16
+byte orders. They add no canonical heading-style coverage. One generated sample passes Open XML
 SDK's Office2019 validation profile. Neither those getter cases nor that schema
 check establish Word rendering or pagination parity.

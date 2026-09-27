@@ -16,9 +16,9 @@ async function fixture(properties = '', text = 'Alpha') {
 
 test('direct paragraph properties set and read all supported values without changing text', async () => {
   const doc = await fixture(), before = doc.package.parts;
-  expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: null, spacingBefore: null, spacingAfter: null, keepLines: null, pageBreakBefore: null, widowControl: null });
+  expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: null, spacingBefore: null, spacingAfter: null, keepLines: null, pageBreakBefore: null, widowControl: null, outlineLevel: null });
   expect(doc.paragraphs[0]!.setProperties({ alignment: 'both', spacingBefore: 240, spacingAfter: 120, keepLines: true, pageBreakBefore: false, widowControl: true })).toEqual({ changed: 1 });
-  expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: 'both', spacingBefore: 240, spacingAfter: 120, keepLines: true, pageBreakBefore: false, widowControl: true });
+  expect(doc.paragraphs[0]!.directProperties()).toEqual({ alignment: 'both', spacingBefore: 240, spacingAfter: 120, keepLines: true, pageBreakBefore: false, widowControl: true, outlineLevel: null });
   expect(doc.paragraphs[0]!.text).toBe('Alpha');
   const reopened = await Document.open(doc.package.toBytes());
   expect(reopened.paragraphs[0]!.directProperties()).toEqual(doc.paragraphs[0]!.directProperties());
@@ -29,7 +29,7 @@ test('direct paragraph properties set and read all supported values without chan
 
 test('direct values distinguish absent, explicit zero/off and removal; no-op preserves archive and handles', async () => {
   const doc = await fixture('<w:pPr><w:keepLines/><w:spacing w:before="0"/><w:jc w:val="left"/></w:pPr>'), p = doc.paragraphs[0]!, before = doc.package.toBytes();
-  expect(p.directProperties()).toEqual({ alignment: 'left', spacingBefore: 0, spacingAfter: null, keepLines: true, pageBreakBefore: null, widowControl: null });
+  expect(p.directProperties()).toEqual({ alignment: 'left', spacingBefore: 0, spacingAfter: null, keepLines: true, pageBreakBefore: null, widowControl: null, outlineLevel: null });
   expect(p.setProperties({ keepLines: true, spacingBefore: 0, alignment: 'left' })).toEqual({ changed: 0 });
   expect(p.text).toBe('Alpha'); expect(doc.package.toBytes()).toEqual(before);
   expect(p.setProperties({ keepLines: null, spacingBefore: null, alignment: null })).toEqual({ changed: 1 });

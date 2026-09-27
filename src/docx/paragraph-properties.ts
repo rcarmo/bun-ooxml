@@ -10,13 +10,16 @@ export interface DirectParagraphProperties {
   keepLines: boolean | null;
   pageBreakBefore: boolean | null;
   widowControl: boolean | null;
+  /** Direct OOXML value: 0–8 are outline levels 1–9; 9 means no outline. */
+  outlineLevel: number | null;
 }
 export type ParagraphPropertiesPatch = Partial<DirectParagraphProperties>;
-const keys = ['alignment', 'spacingBefore', 'spacingAfter', 'keepLines', 'pageBreakBefore', 'widowControl'] as const;
+const keys = ['alignment', 'spacingBefore', 'spacingAfter', 'keepLines', 'pageBreakBefore', 'widowControl', 'outlineLevel'] as const;
 function fail(message: string): never { throw new OoxmlError('docx-paragraph-properties-unsupported', message); }
 const word = (n: XmlElement, name: string) => n.namespaceURI === W && n.localName === name;
 const alignments = ['left', 'center', 'right', 'both'];
 function twips(value: unknown): number { if (typeof value !== 'number' || !Number.isInteger(value) || value < 0 || value > 31680) fail('Spacing must be integer twips from 0 through 31680'); return value; }
+function outlineLevel(value: unknown): number { if (typeof value !== 'number' || !Number.isInteger(value) || value < 0 || value > 9) fail('Outline level must be an integer from 0 through 9'); return value; }
 export function normalizeParagraphProperties(patch: ParagraphPropertiesPatch): ParagraphPropertiesPatch {
   if (!patch || typeof patch !== 'object' || ![Object.prototype, null].includes(Object.getPrototypeOf(patch))) fail('Expected a plain paragraph-property patch');
   const result: ParagraphPropertiesPatch = {};
@@ -29,6 +32,7 @@ export function normalizeParagraphProperties(patch: ParagraphPropertiesPatch): P
     if (value !== null) {
       if (key === 'alignment') { if (!alignments.includes(value)) fail('Unsupported alignment'); }
       else if (key.startsWith('spacing')) twips(value);
+      else if (key === 'outlineLevel') outlineLevel(value);
       else if (typeof value !== 'boolean') fail('Paragraph flags require boolean or null');
     }
     Object.assign(result, { [key]: value });
@@ -40,10 +44,10 @@ function inspect(xml: string, p: XmlElement) {
   directParagraphStyle(xml, p); // Unique, first, ordered pPr; no unknown/revised children.
   const pr = p.children.find(n => word(n, 'pPr'));
   if (pr) for (const name of Object.keys(pr.attributes)) if (pr.attributeNamespaces[name] !== XMLNS) fail('Paragraph-property attributes are unsupported');
-  const properties: DirectParagraphProperties = { alignment: null, spacingBefore: null, spacingAfter: null, keepLines: null, pageBreakBefore: null, widowControl: null };
+  const properties: DirectParagraphProperties = { alignment: null, spacingBefore: null, spacingAfter: null, keepLines: null, pageBreakBefore: null, widowControl: null, outlineLevel: null };
   const nodes = new Map<string, XmlElement>(), spacing = new Map<string, string>();
   for (const node of pr?.children ?? []) {
-    if (!['jc', 'spacing', 'keepLines', 'pageBreakBefore', 'widowControl'].includes(node.localName)) continue;
+    if (!['jc', 'spacing', 'keepLines', 'pageBreakBefore', 'widowControl', 'outlineLvl'].includes(node.localName)) continue;
     nodes.set(node.localName, node);
     if (node.children.length || (!node.selfClosing && !/^[ \t\r\n]*$/.test(xml.slice(node.openEnd, node.closeStart)))) fail('Selected paragraph properties must be empty leaves');
     const allowed = node.localName === 'spacing' ? ['before', 'after', 'line', 'lineRule', 'beforeAutospacing', 'afterAutospacing'] : ['val'];
@@ -55,6 +59,7 @@ function inspect(xml: string, p: XmlElement) {
     }
     const value = attribute(node, 'val', W);
     if (node.localName === 'jc') { if (!value || !alignments.includes(value)) fail('Unsupported direct alignment'); properties.alignment = value as ParagraphAlignment; }
+    else if (node.localName === 'outlineLvl') { if (value === undefined || !/^\d+$/.test(value)) fail('Invalid direct outline level'); properties.outlineLevel = outlineLevel(Number(value)); }
     else if (node.localName !== 'spacing') {
       if (value !== undefined && !['true', 'false', 'on', 'off', '1', '0'].includes(value)) fail('Invalid direct on/off value');
       properties[node.localName as 'keepLines' | 'pageBreakBefore' | 'widowControl'] = value === undefined || ['true', 'on', '1'].includes(value);
@@ -85,7 +90,7 @@ export function editParagraphProperties(xml: string, p: XmlElement, patch: Parag
     if (key.startsWith('spacing')) {
       const name = key === 'spacingBefore' ? 'before' : 'after';
       if (value === null) spacing.delete(name); else spacing.set(name, String(value));
-    } else replacements.set(key === 'alignment' ? 'jc' : key, leaf(key === 'alignment' ? 'jc' : key, value === null ? null : typeof value === 'boolean' ? value ? '1' : '0' : String(value)));
+    } else { const name = key === 'alignment' ? 'jc' : key === 'outlineLevel' ? 'outlineLvl' : key; replacements.set(name, leaf(name, value === null ? null : typeof value === 'boolean' ? value ? '1' : '0' : String(value))); }
   }
   if (changed.some(k => k.startsWith('spacing'))) replacements.set('spacing', spacing.size ? `<w:spacing xmlns:w="${W}"${[...spacing].map(([name, value]) => ` w:${name}="${escapeAttribute(value)}"`).join('')}/>` : '');
   for (const [name, value] of replacements) {
