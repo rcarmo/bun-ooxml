@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 731,
+  "nativeDeclarations": 746,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 504,
+  "withoutStagingCount": 519,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -2415,6 +2415,81 @@
       "id": "bun:tests/unit/docx-comments.test.ts:a document without comment parts remains unchanged when inspected or refused",
       "path": "tests/unit/docx-comments.test.ts",
       "sourceSha256": "bba148f8703fb3d757811919b44dfb0b49520037736fcec282a9b34e3870ed95"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:all fifteen core fields survive real path save/reopen with exact unrelated payload custody",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:same-value patches retain archive and lexical values while detached getter data and null removals remain independent",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:aliased properties at nondefault path preserve unselected fragments and qualified timestamp type",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:self-closing root, empty strings and XML metacharacters preserve distinct absent/empty values",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:invalid patches, timestamps and executable fields refuse without partial creation",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:duplicate unknown decorated revised lexical and wrongly qualified metadata refuse even no-op or removal",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:ambiguous relationships, wrong types and orphan core parts refuse without adopting unrelated metadata",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:UTF16 core member retains endian/BOM and main-document handles across saved edits",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:creation and update faults roll back all metadata while preserving main handles",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:protected writes and external document changes refuse, while metadata reads remain nonmutating",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:late relationship and content-type creation failures roll back every new part",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:aliased timestamp type, valid leap dates and string values remain distinct with metadata-only external changes",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:canonical metadata case compares three chosen fields and detects each corrupted readback",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:changed UTF8-BOM core metadata retains BOM and exact untouched field bytes after reopen",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
+    },
+    {
+      "id": "bun:tests/unit/docx-core-properties.test.ts:complete core XML output bound refuses while preserving bytes and live document handles",
+      "path": "tests/unit/docx-core-properties.test.ts",
+      "sourceSha256": "8ce98bdfc2a84ca7c3138c9df8222687e31967131ff5acbe749d5dcbf3b658fd"
     },
     {
       "id": "bun:tests/unit/docx-effective-formatting.test.ts:effective run formatting executes 25 saved outcomes and read-only refusals",

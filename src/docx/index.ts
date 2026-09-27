@@ -1,4 +1,6 @@
 import { OoxmlError } from "../errors.ts";
+import {readCoreProperties,patchCoreProperties,type CoreProperties,type CorePropertiesPatch} from '../opc/core-properties.ts';
+export type {CoreProperties,CorePropertiesPatch} from '../opc/core-properties.ts';
 import {appendParagraphRun} from './append-run.ts';
 import {replaceParagraphText} from './paragraph-text.ts';
 import {bodyInsertionTarget,insertBodyParagraph} from './body-insertion.ts';
@@ -493,6 +495,18 @@ export class Document {
   /** Creates a new minimal DOCX package without borrowed template bytes. */
   static create(): Document {
     return new Document(OpcPackage.fromParts(buildMinimalDocxParts()));
+  }
+
+  /** Detached direct OPC core-property values; absent fields are null. */
+  getCoreProperties():CoreProperties {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document XML changed outside this handle');
+    return readCoreProperties(this.opcPackage);
+  }
+
+  /** Patch core metadata without changing main-document snapshots. */
+  setCoreProperties(patch:CorePropertiesPatch):{changed:number} {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document XML changed outside this handle');
+    this.assertFormattingUnprotected();return patchCoreProperties(this.opcPackage,patch);
   }
 
   /** Author a named paragraph style without computing inherited formatting. */

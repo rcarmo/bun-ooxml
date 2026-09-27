@@ -26,7 +26,17 @@ foreach (var input in args)
         var errors = new OpenXmlValidator(FileFormatVersions.Office2019).Validate(package)
             .Take(201).Select(e => new { e.Id, e.Description, part = e.Part?.Uri.ToString(), xpath = e.Path?.XPath }).ToArray();
         if (errors.Length > 0) failed = true;
-        result = new { file = Path.GetFileName(path), sha256 = before, errors, truncated = errors.Length > 200 };
+        var properties = package.PackageProperties;
+        var coreProperties = new {
+            title = properties.Title, creator = properties.Creator, subject = properties.Subject,
+            description = properties.Description, keywords = properties.Keywords, category = properties.Category,
+            language = properties.Language, contentStatus = properties.ContentStatus, identifier = properties.Identifier,
+            lastModifiedBy = properties.LastModifiedBy, revision = properties.Revision, version = properties.Version,
+            created = properties.Created?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
+            modified = properties.Modified?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
+            lastPrinted = properties.LastPrinted?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+        };
+        result = new { file = Path.GetFileName(path), sha256 = before, errors, truncated = errors.Length > 200, coreProperties };
     }
     catch (Exception e)
     {
