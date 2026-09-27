@@ -11,6 +11,7 @@ import {bodyInsertionTarget,insertBodyParagraph} from './body-insertion.ts';
 import {bodyMap,type BodyMap} from './body-map.ts';
 export type {BodyMap,BodyPlaceholder} from './body-map.ts';
 import {editTableRow} from './table-rows.ts';
+import {mergeRowCells as mergeRowXml} from './table-merge.ts';
 import {readTableStyle,editTableStyle} from './table-style.ts';
 import {readRowHeader,editRowHeader} from './row-header.ts';
 import {readCellProperties,editCellProperties,normalizeCellProperties,type DirectCellProperties,type CellPropertiesPatch} from './cell-properties.ts';
@@ -381,6 +382,11 @@ export class Table {
 
   /** Detached cell texts in column order; no mutation or formatting evaluation. */
   rowTexts(index: number): string[] {return this.documentRef.inspectRowTexts(this.liveTable(),index);}
+
+  /** Merge a horizontal range, retaining the first cell and refusing nonempty absorbed cells. */
+  mergeRowCells(row:number,firstColumn:number,lastColumn:number):Table {
+    return this.documentRef.mergeTableRowCells(this.liveTable(),row,firstColumn,lastColumn);
+  }
 
   /** Insert an empty row without copying row/cell formatting; return a fresh table. */
   insertRow(index: number): Table {return this.documentRef.mutateTableRow(this.liveTable(),index,'insert');}
@@ -1052,6 +1058,23 @@ export class Document {
       result.push(new TableCell(this,entry.cell).text);
     }
     return result;
+  }
+
+  mergeTableRowCells(snapshot:TableSnapshot,row:number,first:number,last:number):Table {
+    const live=this.resolveTable(snapshot);
+    if(live!==snapshot)fail('docx-stale-table','Merge target is no longer current');
+    if(snapshot.unsupported)fail('docx-table-unsupported','Merge requires an unambiguous table grid');
+    this.assertFormattingUnprotected();
+    const result=mergeRowXml(this.xml,snapshot.element,row,first,last),nextVersion=this.version+1,nextTableVersion=this.tableVersion+1;
+    const nextDocument=parseXml(result.xml),collections=collectDocumentCollections(nextDocument,nextVersion,nextTableVersion);
+    const expected=this.paragraphSnapshots.filter(p=>!result.removedParagraphStarts.includes(p.element.start)).map(p=>p.text);
+    if(JSON.stringify(collections.paragraphs.paragraphs.map(p=>p.text))!==JSON.stringify(expected))fail('docx-table-merge-unsafe','Merge changed retained paragraph text');
+    const grids=(tables:TableSnapshot[])=>tables.map(t=>[t.rows,t.columns]);
+    if(JSON.stringify(grids(collections.tables.tables))!==JSON.stringify(grids(this.tableSnapshots)))fail('docx-table-merge-unsafe','Merge changed table dimensions');
+    const original=this.opcPackage.get(DOCUMENT_PART)!,bom=original[0]===239&&original[1]===187&&original[2]===191?'\ufeff':'';
+    this.opcPackage.transaction(()=>{this.opcPackage.set(DOCUMENT_PART,bom+result.xml);this.opcPackage.toBytes();});
+    this.xml=result.xml;this.version=nextVersion;this.tableVersion=nextTableVersion;this.xmlDocument=nextDocument;this.applyDocumentCollections(collections);
+    return this.tableHandles[snapshot.index]!;
   }
 
   mutateTableRow(snapshot:TableSnapshot,index:number,operation:'insert'|'delete'):Table {

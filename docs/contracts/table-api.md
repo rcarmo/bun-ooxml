@@ -2,7 +2,9 @@
 
 Native rectangular DOCX/PPTX tables support creation and bounded cell edits.
 DOCX supports [bounded empty-row insertion and deletion](table-rows.md).
-Column edits, merge/split and PPTX row mutations are not implemented. Existing merged tables can be inspected only when grid mapping
+DOCX also supports [bounded horizontal cell merges](table-merge.md), retaining
+first-cell content and refusing nonempty absorbed cells. Column edits, vertical
+merges, splitting and PPTX row mutations are not implemented. Existing merged tables can be inspected only when grid mapping
 is unambiguous; unsafe edits refuse before mutation. No formatting reconstruction
 outside the selected table/cell.
 
@@ -21,7 +23,7 @@ without replacing text or changing the grid. `Table.isRowHeader(row)` and
 `setRowHeader(row, boolean | null)` inspect and edit [direct row-header markers](row-header.md).
 They do not predict rendered page repetition. `Table.styleId` and `setStyle(id | null)`
 read or edit a [direct table-style reference](table-style.md) without creating or
-resolving the style definition. Full style inheritance and merging are unsupported.
+resolving the style definition. Full style inheritance is unsupported.
 
 ### Nullable DOCX cell access
 

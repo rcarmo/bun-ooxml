@@ -54,6 +54,14 @@ unchanged and one heading-inventory guard updates only its two global count
 assertions. Tests preserve the earlier execution baseline after excluding exactly
 the reviewed additions.
 
+## Horizontal table authoring
+
+`Table.mergeRowCells` adds bounded horizontal authoring with content-loss
+refusals and save/reopen tests. It does not satisfy the shared individual span and
+vertical-merge setter profile. Twelve native declarations remain unmapped until
+physical merge outcomes are reviewed centrally; the 501 prior mapping records
+and all 551 executed case identities stay unchanged. See the [merge contract](../contracts/table-merge.md).
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

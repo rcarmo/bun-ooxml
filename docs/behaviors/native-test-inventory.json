@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 998,
-  "files": 114,
+  "count": 1010,
+  "files": 115,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -238,6 +238,12 @@
       "path": "tests/unit/docx-style-mappings.test.ts",
       "sha256": "9088ab3149df33499d72c35db39b99dadc126134940f614770742040b9efdbc1",
       "declarations": 5,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "declarations": 12,
       "issues": []
     },
     {
@@ -1165,6 +1171,16 @@
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style scope assertions and case ownership cannot silently shrink or cross features",
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style runtime helper and canonical pins are individually mandatory and fresh",
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style reconciliation preserves evidence nested assertions flags and unknown runtime leaves",
+    "bun:tests/unit/docx-table-merge.test.ts:horizontal merge retains first cell text explicit grid and other row through file reopen",
+    "bun:tests/unit/docx-table-merge.test.ts:first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation",
+    "bun:tests/unit/docx-table-merge.test.ts:invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically",
+    "bun:tests/unit/docx-table-merge.test.ts:existing merges malformed grids width mismatches and protected documents refuse even disjoint requests",
+    "bun:tests/unit/docx-table-merge.test.ts:write and serialization faults roll back topology bytes and all held handles",
+    "bun:tests/unit/docx-table-merge.test.ts:merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles",
+    "bun:tests/unit/docx-table-merge.test.ts:middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits",
+    "bun:tests/unit/docx-table-merge.test.ts:malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged",
+    "bun:tests/unit/docx-table-merge.test.ts:external document drift late malformed rows and external settings refuse before topology changes",
+    "bun:tests/unit/docx-table-merge.test.ts:nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed",
     "bun:tests/unit/docx-table-rows.test.ts:new rows use explicit grid widths and preserve all old row fragments and unrelated members",
     "bun:tests/unit/docx-table-rows.test.ts:invalid indexes, last-row deletion and row limits refuse without mutation",
     "bun:tests/unit/docx-table-rows.test.ts:merged nested revised field and lexical tables refuse insertion and deletion before mutation",
@@ -1568,6 +1584,16 @@
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style scope assertions and case ownership cannot silently shrink or cross features",
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style runtime helper and canonical pins are individually mandatory and fresh",
     "bun:tests/unit/docx-style-mappings.test.ts:DOCX style reconciliation preserves evidence nested assertions flags and unknown runtime leaves",
+    "bun:tests/unit/docx-table-merge.test.ts:horizontal merge retains first cell text explicit grid and other row through file reopen",
+    "bun:tests/unit/docx-table-merge.test.ts:first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation",
+    "bun:tests/unit/docx-table-merge.test.ts:invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically",
+    "bun:tests/unit/docx-table-merge.test.ts:existing merges malformed grids width mismatches and protected documents refuse even disjoint requests",
+    "bun:tests/unit/docx-table-merge.test.ts:write and serialization faults roll back topology bytes and all held handles",
+    "bun:tests/unit/docx-table-merge.test.ts:merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles",
+    "bun:tests/unit/docx-table-merge.test.ts:middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits",
+    "bun:tests/unit/docx-table-merge.test.ts:malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged",
+    "bun:tests/unit/docx-table-merge.test.ts:external document drift late malformed rows and external settings refuse before topology changes",
+    "bun:tests/unit/docx-table-merge.test.ts:nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed",
     "bun:tests/unit/docx-table-rows.test.ts:new rows use explicit grid widths and preserve all old row fragments and unrelated members",
     "bun:tests/unit/docx-table-rows.test.ts:invalid indexes, last-row deletion and row limits refuse without mutation",
     "bun:tests/unit/docx-table-rows.test.ts:merged nested revised field and lexical tables refuse insertion and deletion before mutation",
@@ -18251,6 +18277,600 @@
         "r.mappings.map",
         "reconcileOutcomeMappingSets",
         "sample"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:horizontal merge retains first cell text explicit grid and other row through file reopen",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 9,
+      "title": "horizontal merge retains first cell text explicit grid and other row through file reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(merged.rows).toBe(2)",
+        "expect(merged.columns).toBe(4)",
+        "expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(()=>cell.text).toThrow()",
+        "expect(()=>paragraph.text).toThrow()",
+        "expect(merged.cell(0,3).text).toBe('')",
+        "expect(merged.cell(1,3).text).toBe('Tail')",
+        "expect(()=>merged.cell(0,c)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}))",
+        "expect(cells).toHaveLength(2)",
+        "expect(elements(parseXml(next.xml),'gridSpan',W).map(n=>attribute(n,'val',W))).toEqual(['3'])",
+        "expect(attribute(width,'w',W)).toBe('6480')",
+        "expect(next.xml).toContain(source.xml.slice(grid.start,grid.end))",
+        "expect(next.xml).toContain(source.xml.slice(otherRow.start,otherRow.end))",
+        "expect(read.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','Tail','After'])",
+        "expect(read.tables[0]!.rows).toBe(2)",
+        "expect(read.tables[0]!.columns).toBe(4)",
+        "expect([...read.package.parts.keys()]).toEqual([...before.keys()])",
+        "expect(read.package.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const c of [0,1,2])expect(()=>merged.cell(0,c)).toThrow(expect.objectContaining("
+        },
+        {
+          "line": 13,
+          "expression": "for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n const d=await fixture(),before=d.package.parts,held=d.tables[0]!,cell=held.cell(0,0),paragraph=d.paragraphs[0]!,source=tableXml(d),grid=source.table.children.find(n=>n.localName==='tblGrid')!,otherRow=source.table.children.filter(n=>n.localName==='tr')[1]!,merged=held.mergeRowCells(0,0,2);\n expect(merged.rows).toBe(2);expect(merged.columns).toBe(4);expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(()=>cell.text).toThrow();expect(()=>paragraph.text).toThrow();expect(merged.cell(0,3).text).toBe('');expect(merged.cell(1,3).text).toBe('Tail');for(const c of [0,1,2])expect(()=>merged.cell(0,c)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));\n const next=tableXml(d),rows=next.table.children.filter(n=>n.localName==='tr'),cells=rows[0]!.children.filter(n=>n.localName==='tc');expect(cells).toHaveLength(2);expect(elements(parseXml(next.xml),'gridSpan',W).map(n=>attribute(n,'val',W))).toEqual(['3']);const width=cells[0]!.children[0]!.children.find(n=>n.localName==='tcW')!;expect(attribute(width,'w',W)).toBe('6480');expect(next.xml).toContain(source.xml.slice(grid.start,grid.end));expect(next.xml).toContain(source.xml.slice(otherRow.start,otherRow.end));\n const dir=await mkdtemp(join(tmpdir(),'docx-merge-'));try{const path=join(dir,'merged.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','Tail','After']);expect(read.tables[0]!.rows).toBe(2);expect(read.tables[0]!.columns).toBe(4);expect([...read.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Document.open",
+        "attribute",
+        "before.keys",
+        "cells.0.children.0.children.find",
+        "d.save",
+        "elements",
+        "elements().map",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "held.cell",
+        "held.mergeRowCells",
+        "join",
+        "merged.cell",
+        "mkdtemp",
+        "next.table.children.filter",
+        "parseXml",
+        "read.package.get",
+        "read.package.parts.keys",
+        "read.paragraphs.map",
+        "rm",
+        "rows.0.children.filter",
+        "source.table.children.filter",
+        "source.table.children.find",
+        "source.xml.slice",
+        "tableXml",
+        "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 16,
+      "title": "first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(tableXml(d).xml).toContain('ABCDEF')",
+        "expect(tableXml(d).xml).toContain('center')",
+        "expect(tableXml(d).xml).toContain('Keep &amp; &lt;text&gt;')",
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)",
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow()",
+        "expect(bad.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 18,
+          "expression": "for(const kind of ['text','space','format','paragraph-format','run','attribute','lexical'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n const d=await fixture();d.tables[0]!.cell(0,0).setProperties({shading:'ABCDEF',verticalAlign:'center'});d.tables[0]!.mergeRowCells(0,0,1);expect(tableXml(d).xml).toContain('ABCDEF');expect(tableXml(d).xml).toContain('center');expect(tableXml(d).xml).toContain('Keep &amp; &lt;text&gt;');\n for(const kind of ['text','space','format','paragraph-format','run','attribute','lexical']){const bad=await fixture(),t=bad.tables[0]!;if(kind==='text'||kind==='space')t.cell(0,1).text=kind==='text'?'Do not lose me':' ';else if(kind==='format')t.cell(0,1).setProperties({shading:'ABCDEF'});else{const p=await OpcPackage.open(bad.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[1]!,raw=xml.slice(cell.start,cell.end),replacement=kind==='paragraph-format'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:pPr><w:keepNext/></w:pPr></w:p>'):kind==='run'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:r><w:t></w:t></w:r></w:p>'):kind==='attribute'?raw.replace('<w:tc>','<w:tc data=\"retained\">'):raw.replace('<w:tcPr>','<!--keep--><w:tcPr>');p.set(p.mainPart(),xml.slice(0,cell.start)+replacement+xml.slice(cell.end));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);continue;}const before=bad.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(bad.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "bad.package.toBytes",
+        "d.tables.0.cell",
+        "d.tables.0.cell().setProperties",
+        "d.tables.0.mergeRowCells",
+        "elements",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.tables.0.mergeRowCells",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "parseXml",
+        "raw.replace",
+        "t.cell",
+        "t.cell().setProperties",
+        "t.mergeRowCells",
+        "tableXml",
+        "xml.slice"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 21,
+      "title": "invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.mergeRowCells(...args as [number,number,number])).toThrow(RangeError)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.cell(0,0).text).toBe('Keep & <text>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 22,
+          "expression": "for(const args of [[0,0,0],[0,2,1],[-1,0,1],[2,0,1],[0,-1,1],[0,0,4],[0,0.5,2],[NaN,0,1],[0,0,Infinity],['0',0,1],[0,0,Number.MAX_SAFE_INTEGER+1]])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();for(const args of [[0,0,0],[0,2,1],[-1,0,1],[2,0,1],[0,-1,1],[0,0,4],[0,0.5,2],[NaN,0,1],[0,0,Infinity],['0',0,1],[0,0,Number.MAX_SAFE_INTEGER+1]]){expect(()=>t.mergeRowCells(...args as [number,number,number])).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);}expect(t.cell(0,0).text).toBe('Keep & <text>');\n}",
+      "calls": [
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "t.cell",
+        "t.mergeRowCells"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:existing merges malformed grids width mismatches and protected documents refuse even disjoint requests",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 25,
+      "title": "existing merges malformed grids width mismatches and protected documents refuse even disjoint requests",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.tables[0]!.mergeRowCells(1,0,1)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>locked.tables[0]!.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-format-protected'}))",
+        "expect(locked.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 26,
+          "expression": "for(const change of [(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val=\"restart\"/>'),(x:string)=>x.replace(/<w:tblGrid>[\\s\\S]*?<\\/w:tblGrid>/,''),(x:string)=>x.replace('<w:gridCol w:w=\"2160\"/>','<w:gridCol w:w=\"bad\"/>'),(x:string)=>x.replace('w:w=\"2160\" w:type=\"dxa\"','w:w=\"100\" w:type=\"dxa\"'),(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2junk\"/>')])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n for(const change of [(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val=\"restart\"/>'),(x:string)=>x.replace(/<w:tblGrid>[\\s\\S]*?<\\/w:tblGrid>/,''),(x:string)=>x.replace('<w:gridCol w:w=\"2160\"/>','<w:gridCol w:w=\"bad\"/>'),(x:string)=>x.replace('w:w=\"2160\" w:type=\"dxa\"','w:w=\"100\" w:type=\"dxa\"'),(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2junk\"/>')]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.tables[0]!.mergeRowCells(1,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(p.toBytes()),before=locked.package.toBytes();expect(()=>locked.tables[0]!.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-format-protected'}));expect(locked.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addPart",
+        "addRelationship",
+        "d.package.toBytes",
+        "d.tables.0.mergeRowCells",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "locked.package.toBytes",
+        "locked.tables.0.mergeRowCells",
+        "p.mainPart",
+        "p.toBytes",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:write and serialization faults roll back topology bytes and all held handles",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 30,
+      "title": "write and serialization faults roll back topology bytes and all held handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.mergeRowCells(0,0,2)).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(2)",
+        "expect(cell.text).toBe('Keep & <text>')",
+        "expect(paragraph.text).toBe('Before')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 31,
+          "expression": "for(const stage of ['set','toBytes'] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),t=d.tables[0]!,cell=t.cell(0,0),paragraph=d.paragraphs[0]!,before=d.package.toBytes(),p=(d as any).opcPackage as OpcPackage,original=p[stage].bind(p);if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialize');};try{expect(()=>t.mergeRowCells(0,0,2)).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(t.rows).toBe(2);expect(cell.text).toBe('Keep & <text>');expect(paragraph.text).toBe('Before');}\n}",
+      "calls": [
+        "Error",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "original",
+        "p.undefined.bind",
+        "t.cell",
+        "t.mergeRowCells"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 34,
+      "title": "merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...loaded.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:[255,254])",
+        "expect(read.paragraphs.some(p=>p.text==='Keep & <text>')).toBe(true)",
+        "expect(read.tables[0]!.columns).toBe(4)",
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 35,
+          "expression": "for(const encoding of ['bom','utf16'])"
+        },
+        {
+          "line": 35,
+          "expression": "for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),true);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n for(const encoding of ['bom','utf16']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(encoding==='utf16'){xml=xml.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16');const bytes=new Uint8Array(2+xml.length*2);bytes.set([255,254]);const view=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),true);p.set(p.mainPart(),bytes);}else p.set(p.mainPart(),new Uint8Array([239,187,191,...new TextEncoder().encode(xml)]));const loaded=await Document.open(p.toBytes()),t=loaded.tables[0]!;t.mergeRowCells(0,0,2);expect([...loaded.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:[255,254]);const read=await Document.open(await loaded.save());expect(read.paragraphs.some(p=>p.text==='Keep & <text>')).toBe(true);expect(read.tables[0]!.columns).toBe(4);expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));}\n}",
+      "calls": [
+        ".encode",
+        "Document.open",
+        "OpcPackage.open",
+        "bytes.set",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "loaded.package.get",
+        "loaded.package.get().slice",
+        "loaded.save",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "read.paragraphs.some",
+        "t.mergeRowCells",
+        "view.setUint16",
+        "xml.charCodeAt",
+        "xml.replaceAll",
+        "xml.replaceAll().replaceAll",
+        "xml.replaceAll().replaceAll().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 38,
+      "title": "middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(t.columns).toBe(4)",
+        "expect(t.cell(0,0).text).toBe('Keep & <text>')",
+        "expect(t.cell(1,3).text).toBe('Tail')",
+        "expect(()=>t.insertRow(0)).toThrow()",
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(t.rows).toBe(1)",
+        "expect(elements(parseXml(xml.xml),'tc',W)).toHaveLength(1)",
+        "expect(attribute(elements(parseXml(xml.xml),'gridSpan',W)[0]!,'val',W)).toBe('4')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 39,
+          "expression": "for(const[first,last]of [[1,2],[0,2]])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n for(const[first,last]of [[1,2],[0,2]]){const d=await fixture(),old=d.tables[0]!,t=old.mergeRowCells(1,first!,last!);const before=d.package.toBytes();expect(t.columns).toBe(4);expect(t.cell(0,0).text).toBe('Keep & <text>');expect(t.cell(1,3).text).toBe('Tail');expect(()=>t.insertRow(0)).toThrow();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const d=Document.create();d.addTable(1,4);const t=d.tables[0]!.mergeRowCells(0,0,3);expect(t.rows).toBe(1);expect(t.columns).toBe(4);const xml=tableXml(d);expect(elements(parseXml(xml.xml),'tc',W)).toHaveLength(1);expect(attribute(elements(parseXml(xml.xml),'gridSpan',W)[0]!,'val',W)).toBe('4');\n}",
+      "calls": [
+        "Document.create",
+        "attribute",
+        "d.addTable",
+        "d.package.toBytes",
+        "d.tables.0.mergeRowCells",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "fixture",
+        "old.mergeRowCells",
+        "parseXml",
+        "t.cell",
+        "t.insertRow",
+        "t.mergeRowCells",
+        "tableXml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:unselected cells and tables retain payloads and empty paragraphs are removed only from selected coordinates",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 43,
+      "title": "unselected cells and tables retain payloads and empty paragraphs are removed only from selected coordinates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(after).toContain(other)",
+        "expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','','Tail','After','Other table'])",
+        "expect(d.tables[1]!.cell(0,0).text).toBe('Other table')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n const d=await fixture();d.addTable(1,1);d.tables[1]!.cell(0,0).text='Other table';const source=tableXml(d).xml,all=elements(parseXml(source),'tbl',W),other=source.slice(all[1]!.start,all[1]!.end);d.tables[0]!.mergeRowCells(0,1,2);const after=tableXml(d).xml;expect(after).toContain(other);expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','','Tail','After','Other table']);expect(d.tables[1]!.cell(0,0).text).toBe('Other table');\n}",
+      "calls": [
+        "d.addTable",
+        "d.paragraphs.map",
+        "d.tables.0.mergeRowCells",
+        "d.tables.1.cell",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "fixture",
+        "parseXml",
+        "source.slice",
+        "tableXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 47,
+      "title": "malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,2)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 48,
+          "expression": "for(const kind of ['decorated-width','section','sum'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n for(const kind of ['decorated-width','section','sum']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(kind==='decorated-width'){const cells=elements(parseXml(xml),'tc',W),n=cells[1]!,raw=xml.slice(n.start,n.end);xml=xml.slice(0,n.start)+raw.replace('w:type=\"dxa\"','w:type=\"dxa\" other=\"keep\"')+xml.slice(n.end);}else if(kind==='sum')xml=xml.replaceAll('2160','20000');\n if(kind==='section'){const first=elements(parseXml(xml),'tc',W)[0]!,raw=xml.slice(first.start,first.end),changed=raw.replace(/<w:p\\b[^>]*>/,open=>open+'<w:pPr><w:sectPr/></w:pPr>');xml=xml.slice(0,first.start)+changed+xml.slice(first.end);}\n p.set(p.mainPart(),xml);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "elements",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.tables.0.mergeRowCells",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "parseXml",
+        "raw.replace",
+        "xml.replaceAll",
+        "xml.slice"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:external document drift late malformed rows and external settings refuse before topology changes",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 53,
+      "title": "external document drift late malformed rows and external settings refuse before topology changes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}))",
+        "expect(d.package.toBytes()).toEqual(bytes)",
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 55,
+          "expression": "for(const kind of ['late-row','external-settings'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n const d=await fixture(),t=d.tables[0]!,p=(d as any).opcPackage as OpcPackage;p.set(p.mainPart(),p.text(p.mainPart()).replace('Before','Changed'));const bytes=d.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(d.package.toBytes()).toEqual(bytes);\n for(const kind of ['late-row','external-settings']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());if(kind==='external-settings')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});else{const xml=p.text(p.mainPart()),last=elements(parseXml(xml),'tc',W).at(-1)!;p.set(p.mainPart(),xml.slice(0,last.start)+xml.slice(last.start,last.end).replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"1\"/>')+xml.slice(last.end));}const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "addRelationship",
+        "d.package.toBytes",
+        "elements",
+        "elements().at",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.tables.0.mergeRowCells",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "parseXml",
+        "t.mergeRowCells",
+        "xml.slice",
+        "xml.slice().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:horizontal authoring does not activate the shared horizontal and vertical setter profile",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 58,
+      "title": "horizontal authoring does not activate the shared horizontal and vertical setter profile",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.lifecycle).toBe('planned')",
+        "expect(s.cases).toHaveLength(1)",
+        "expect(inv.counts.cases.implemented).toBe(551)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(551);expect(inv.counts.cases.planned).toBe(46);\n}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "inv.features.flatMap",
+        "inv.features.flatMap().find",
+        "inventoryFeatures",
+        "process.cwd"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "line": 62,
+      "title": "nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 63,
+          "expression": "for(const index of [0,7])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28",
+      "body": "{\n for(const index of [0,7]){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[index]!;p.set(p.mainPart(),xml.slice(0,cell.openEnd)+'<w:tbl/>'+xml.slice(cell.openEnd));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "OpcPackage.open",
+        "d.package.toBytes",
+        "elements",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixture",
+        "loaded.package.toBytes",
+        "loaded.tables.0.mergeRowCells",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "parseXml",
+        "xml.slice"
       ],
       "reviewReasons": [
         "body-loop"

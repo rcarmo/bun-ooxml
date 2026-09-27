@@ -1,0 +1,64 @@
+import {test,expect} from 'bun:test';
+import {mkdtemp,rm} from 'node:fs/promises';import {join} from 'node:path';import {tmpdir} from 'node:os';
+import {Document,OpcPackage} from '../../src/index.ts';import {addPart,addRelationship} from '../../src/opc/index.ts';
+import {parseXml,elements,attribute} from '../../src/xml/index.ts';
+const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+async function fixture(change?:(xml:string)=>string){const d=Document.create();d.addParagraph('Before');d.addTable(2,4);d.tables[0]!.cell(0,0).text='Keep & <text>';d.tables[0]!.cell(1,3).text='Tail';d.addParagraph('After');const p=await OpcPackage.open(d.package.toBytes());addPart(p,'customXml/opaque.bin',new Uint8Array([0,255,42]),'application/octet-stream');if(change)p.set(p.mainPart(),change(p.text(p.mainPart())));return Document.open(p.toBytes());}
+function tableXml(d:Document){const xml=new TextDecoder('utf-8').decode(d.package.get('word/document.xml')),tree=parseXml(xml);return {xml,table:elements(tree,'tbl',W)[0]!};}
+
+test('horizontal merge retains first cell text explicit grid and other row through file reopen',async()=>{
+ const d=await fixture(),before=d.package.parts,held=d.tables[0]!,cell=held.cell(0,0),paragraph=d.paragraphs[0]!,source=tableXml(d),grid=source.table.children.find(n=>n.localName==='tblGrid')!,otherRow=source.table.children.filter(n=>n.localName==='tr')[1]!,merged=held.mergeRowCells(0,0,2);
+ expect(merged.rows).toBe(2);expect(merged.columns).toBe(4);expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(()=>cell.text).toThrow();expect(()=>paragraph.text).toThrow();expect(merged.cell(0,3).text).toBe('');expect(merged.cell(1,3).text).toBe('Tail');for(const c of [0,1,2])expect(()=>merged.cell(0,c)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));
+ const next=tableXml(d),rows=next.table.children.filter(n=>n.localName==='tr'),cells=rows[0]!.children.filter(n=>n.localName==='tc');expect(cells).toHaveLength(2);expect(elements(parseXml(next.xml),'gridSpan',W).map(n=>attribute(n,'val',W))).toEqual(['3']);const width=cells[0]!.children[0]!.children.find(n=>n.localName==='tcW')!;expect(attribute(width,'w',W)).toBe('6480');expect(next.xml).toContain(source.xml.slice(grid.start,grid.end));expect(next.xml).toContain(source.xml.slice(otherRow.start,otherRow.end));
+ const dir=await mkdtemp(join(tmpdir(),'docx-merge-'));try{const path=join(dir,'merged.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','Tail','After']);expect(read.tables[0]!.rows).toBe(2);expect(read.tables[0]!.columns).toBe(4);expect([...read.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test('first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation',async()=>{
+ const d=await fixture();d.tables[0]!.cell(0,0).setProperties({shading:'ABCDEF',verticalAlign:'center'});d.tables[0]!.mergeRowCells(0,0,1);expect(tableXml(d).xml).toContain('ABCDEF');expect(tableXml(d).xml).toContain('center');expect(tableXml(d).xml).toContain('Keep &amp; &lt;text&gt;');
+ for(const kind of ['text','space','format','paragraph-format','run','attribute','lexical']){const bad=await fixture(),t=bad.tables[0]!;if(kind==='text'||kind==='space')t.cell(0,1).text=kind==='text'?'Do not lose me':' ';else if(kind==='format')t.cell(0,1).setProperties({shading:'ABCDEF'});else{const p=await OpcPackage.open(bad.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[1]!,raw=xml.slice(cell.start,cell.end),replacement=kind==='paragraph-format'?raw.replace(/<w:p\b[^>]*\/>/,'<w:p><w:pPr><w:keepNext/></w:pPr></w:p>'):kind==='run'?raw.replace(/<w:p\b[^>]*\/>/,'<w:p><w:r><w:t></w:t></w:r></w:p>'):kind==='attribute'?raw.replace('<w:tc>','<w:tc data="retained">'):raw.replace('<w:tcPr>','<!--keep--><w:tcPr>');p.set(p.mainPart(),xml.slice(0,cell.start)+replacement+xml.slice(cell.end));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);continue;}const before=bad.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(bad.package.toBytes()).toEqual(before);}
+});
+
+test('invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically',async()=>{
+ const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();for(const args of [[0,0,0],[0,2,1],[-1,0,1],[2,0,1],[0,-1,1],[0,0,4],[0,0.5,2],[NaN,0,1],[0,0,Infinity],['0',0,1],[0,0,Number.MAX_SAFE_INTEGER+1]]){expect(()=>t.mergeRowCells(...args as [number,number,number])).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);}expect(t.cell(0,0).text).toBe('Keep & <text>');
+});
+
+test('existing merges malformed grids width mismatches and protected documents refuse even disjoint requests',async()=>{
+ for(const change of [(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val="restart"/>'),(x:string)=>x.replace(/<w:tblGrid>[\s\S]*?<\/w:tblGrid>/,''),(x:string)=>x.replace('<w:gridCol w:w="2160"/>','<w:gridCol w:w="bad"/>'),(x:string)=>x.replace('w:w="2160" w:type="dxa"','w:w="100" w:type="dxa"'),(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val="2junk"/>')]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.tables[0]!.mergeRowCells(1,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}
+ const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());addPart(p,'word/settings.xml',`<w:settings xmlns:w="${W}"><w:documentProtection w:enforcement="1"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(p.toBytes()),before=locked.package.toBytes();expect(()=>locked.tables[0]!.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-format-protected'}));expect(locked.package.toBytes()).toEqual(before);
+});
+
+test('write and serialization faults roll back topology bytes and all held handles',async()=>{
+ for(const stage of ['set','toBytes'] as const){const d=await fixture(),t=d.tables[0]!,cell=t.cell(0,0),paragraph=d.paragraphs[0]!,before=d.package.toBytes(),p=(d as any).opcPackage as OpcPackage,original=p[stage].bind(p);if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialize');};try{expect(()=>t.mergeRowCells(0,0,2)).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(t.rows).toBe(2);expect(cell.text).toBe('Keep & <text>');expect(paragraph.text).toBe('Before');}
+});
+
+test('merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles',async()=>{
+ for(const encoding of ['bom','utf16']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(encoding==='utf16'){xml=xml.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16');const bytes=new Uint8Array(2+xml.length*2);bytes.set([255,254]);const view=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),true);p.set(p.mainPart(),bytes);}else p.set(p.mainPart(),new Uint8Array([239,187,191,...new TextEncoder().encode(xml)]));const loaded=await Document.open(p.toBytes()),t=loaded.tables[0]!;t.mergeRowCells(0,0,2);expect([...loaded.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:[255,254]);const read=await Document.open(await loaded.save());expect(read.paragraphs.some(p=>p.text==='Keep & <text>')).toBe(true);expect(read.tables[0]!.columns).toBe(4);expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));}
+});
+
+test('middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits',async()=>{
+ for(const[first,last]of [[1,2],[0,2]]){const d=await fixture(),old=d.tables[0]!,t=old.mergeRowCells(1,first!,last!);const before=d.package.toBytes();expect(t.columns).toBe(4);expect(t.cell(0,0).text).toBe('Keep & <text>');expect(t.cell(1,3).text).toBe('Tail');expect(()=>t.insertRow(0)).toThrow();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}
+ const d=Document.create();d.addTable(1,4);const t=d.tables[0]!.mergeRowCells(0,0,3);expect(t.rows).toBe(1);expect(t.columns).toBe(4);const xml=tableXml(d);expect(elements(parseXml(xml.xml),'tc',W)).toHaveLength(1);expect(attribute(elements(parseXml(xml.xml),'gridSpan',W)[0]!,'val',W)).toBe('4');
+});
+
+test('unselected cells and tables retain payloads and empty paragraphs are removed only from selected coordinates',async()=>{
+ const d=await fixture();d.addTable(1,1);d.tables[1]!.cell(0,0).text='Other table';const source=tableXml(d).xml,all=elements(parseXml(source),'tbl',W),other=source.slice(all[1]!.start,all[1]!.end);d.tables[0]!.mergeRowCells(0,1,2);const after=tableXml(d).xml;expect(after).toContain(other);expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','','Tail','After','Other table']);expect(d.tables[1]!.cell(0,0).text).toBe('Other table');
+});
+
+test('malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged',async()=>{
+ for(const kind of ['decorated-width','section','sum']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(kind==='decorated-width'){const cells=elements(parseXml(xml),'tc',W),n=cells[1]!,raw=xml.slice(n.start,n.end);xml=xml.slice(0,n.start)+raw.replace('w:type="dxa"','w:type="dxa" other="keep"')+xml.slice(n.end);}else if(kind==='sum')xml=xml.replaceAll('2160','20000');
+ if(kind==='section'){const first=elements(parseXml(xml),'tc',W)[0]!,raw=xml.slice(first.start,first.end),changed=raw.replace(/<w:p\b[^>]*>/,open=>open+'<w:pPr><w:sectPr/></w:pPr>');xml=xml.slice(0,first.start)+changed+xml.slice(first.end);}
+ p.set(p.mainPart(),xml);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}
+});
+
+test('external document drift late malformed rows and external settings refuse before topology changes',async()=>{
+ const d=await fixture(),t=d.tables[0]!,p=(d as any).opcPackage as OpcPackage;p.set(p.mainPart(),p.text(p.mainPart()).replace('Before','Changed'));const bytes=d.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(d.package.toBytes()).toEqual(bytes);
+ for(const kind of ['late-row','external-settings']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());if(kind==='external-settings')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});else{const xml=p.text(p.mainPart()),last=elements(parseXml(xml),'tc',W).at(-1)!;p.set(p.mainPart(),xml.slice(0,last.start)+xml.slice(last.start,last.end).replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val="1"/>')+xml.slice(last.end));}const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}
+});
+
+test('horizontal authoring does not activate the shared horizontal and vertical setter profile',async()=>{
+ const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(551);expect(inv.counts.cases.planned).toBe(46);
+});
+
+test('nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed',async()=>{
+ for(const index of [0,7]){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[index]!;p.set(p.mainPart(),xml.slice(0,cell.openEnd)+'<w:tbl/>'+xml.slice(cell.openEnd));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}
+});

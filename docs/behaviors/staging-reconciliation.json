@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 998,
+  "nativeDeclarations": 1010,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 771,
+  "withoutStagingCount": 783,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -3909,6 +3909,66 @@
       "id": "bun:tests/unit/docx-style-mappings.test.ts:DOCX style reconciliation preserves evidence nested assertions flags and unknown runtime leaves",
       "path": "tests/unit/docx-style-mappings.test.ts",
       "sourceSha256": "9088ab3149df33499d72c35db39b99dadc126134940f614770742040b9efdbc1"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:horizontal merge retains first cell text explicit grid and other row through file reopen",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:existing merges malformed grids width mismatches and protected documents refuse even disjoint requests",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:write and serialization faults roll back topology bytes and all held handles",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:unselected cells and tables retain payloads and empty paragraphs are removed only from selected coordinates",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:external document drift late malformed rows and external settings refuse before topology changes",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:horizontal authoring does not activate the shared horizontal and vertical setter profile",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
+    },
+    {
+      "id": "bun:tests/unit/docx-table-merge.test.ts:nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed",
+      "path": "tests/unit/docx-table-merge.test.ts",
+      "sourceSha256": "1225a220aced8399c7ae467bf555cac35dff518a1c2a2f10030d0c132e21fe28"
     },
     {
       "id": "bun:tests/unit/docx-table-rows.test.ts:append insert delete return fresh tables and retain row order after real path save",
