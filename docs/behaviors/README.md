@@ -47,6 +47,14 @@ their origin names. Existing-notes and archive-noop profiles describe operations
 ZIP64's exact error codes and safe-integer bound remain API compatibility policies.
 Other runtime-specific contracts listed in the shared catalogue still need review.
 
+Shared v0.24 also neutralises package custody and ZIP32 actor names across 18
+scenarios / 38 cases. Exact `OoxmlError`, code/message strings and option keys
+remain API compatibility predicates; synchronous callback/thenable behaviour is
+explicitly JavaScript-specific. No assertion or runtime code changed. New bindings
+reject the retired actor wording, and existing corrupt-buffer, false-success,
+callback-flag, thenable-identity and destination checks still run. All 472 mapping
+records and the 525 default case identities are unchanged.
+
 ## Maintain the reports
 
 ```sh

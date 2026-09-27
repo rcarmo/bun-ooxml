@@ -31,7 +31,7 @@ test('OPC refusal archives contain the exact background and named mutation', asy
   const { readZip } = await import('../../src/opc/zip.ts');
   const { parseXml } = await import('../../src/xml/index.ts');
   const snapshots: Uint8Array[] = [];
-  const checking = bindings.map(b => b.pattern.test('Bun OpcPackage opens its archive bytes') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
+  const checking = bindings.map(b => b.pattern.test('the package editor opens its archive bytes') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
     await b.run(c, ...captures);
     const s = c.state as { archive: Uint8Array }; snapshots.push(s.archive.slice());
   } } : b);
@@ -61,8 +61,8 @@ test('OPC refusal archives contain the exact background and named mutation', asy
 test('OPC predicates reject changed package bytes, callback flags, thenable identity and saved members', async () => {
   type State = import('../acceptance/opc-custody.ts').CustodyState;
   const mutations: [string, (s: State) => void][] = [
-    ['Bun OpcPackage opens its archive bytes', s => { s.error = undefined; s.output = {}; }],
-    ['Bun OpcPackage opens its archive bytes', s => { s.error = new Error('untyped'); }],
+    ['the package editor opens its archive bytes', s => { s.error = undefined; s.output = {}; }],
+    ['the package editor opens its archive bytes', s => { s.error = new Error('untyped'); }],
     ["every byte in the array returned by get for word/document.xml is overwritten with zero", s => { s.pkg!.set('word/document.xml', '<document>Wrong</document>'); }],
     ["every byte in the array returned by get for word/document.xml is overwritten with zero", s => { s.original![0] = s.original![0]! ^ 1; }],
     ['its serialized archive is read through the ZIP layer', s => { s.member![0] = 0; }],

@@ -8,8 +8,8 @@
   ],
   "sourceSha256": {
     "tests/unit/package.test.ts": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
-    "tests/unit/opc-custody-bindings.test.ts": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
-    "tests/acceptance/opc-custody.ts": "565a06a9d96174e33e32e5c2d7226192a55342c83c49db4c66dfc0856eacd3ba",
+    "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
+    "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
     "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
     "tests/acceptance/steps.ts": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a",
     "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
@@ -21,7 +21,7 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/package/preservation.feature": "eb3cd4f4d534549b8b8d53dc2c3cb75a9e5c35d614effbb5f446623c0db4e4b1"
+    "workflows/package/preservation.feature": "1a2c653871f6bd830da4ca37f2b9c355c3885463234101b55a403786aedbba5a"
   },
   "mappings": [
     {

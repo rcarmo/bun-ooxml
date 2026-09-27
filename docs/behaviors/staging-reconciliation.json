@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 946,
+  "nativeDeclarations": 949,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 719,
+  "withoutStagingCount": 722,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4008,32 +4008,32 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969"
+      "sourceSha256": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969"
+      "sourceSha256": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969"
+      "sourceSha256": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969"
+      "sourceSha256": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969"
+      "sourceSha256": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969"
+      "sourceSha256": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40"
     },
     {
       "id": "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody ledger enumerates 15 declarations and 66 expressions preserving 446 predecessor records",
@@ -4309,6 +4309,21 @@
       "id": "bun:tests/unit/package-comparison.test.ts:prefix-only XML goes into the new equivalence list but stays changed in OPC byte diff",
       "path": "tests/unit/package-comparison.test.ts",
       "sourceSha256": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa"
+    },
+    {
+      "id": "bun:tests/unit/package-neutral-bindings.test.ts:neutral package actors resolve once and retired implementation names do not bind",
+      "path": "tests/unit/package-neutral-bindings.test.ts",
+      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120"
+    },
+    {
+      "id": "bun:tests/unit/package-neutral-bindings.test.ts:all thirty-eight package and ZIP32 cases retain concrete assertions after actor migration",
+      "path": "tests/unit/package-neutral-bindings.test.ts",
+      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120"
+    },
+    {
+      "id": "bun:tests/unit/package-neutral-bindings.test.ts:package wording keeps default case identities all mapping records and planned gaps unchanged",
+      "path": "tests/unit/package-neutral-bindings.test.ts",
+      "sourceSha256": "57265cc0b25fe059f535914842dd6c23e8c33ed2e531b6da51975c7c3787c120"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
@@ -5653,27 +5668,27 @@
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:twenty canonical ZIP32 checksum, refusal and configured-bound cases execute",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311"
+      "sourceSha256": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:wrong CRC, error code and message expectations fail bound ZIP32 predicates",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311"
+      "sourceSha256": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311"
+      "sourceSha256": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311"
+      "sourceSha256": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311"
+      "sourceSha256": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff"
     },
     {
       "id": "bun:tests/unit/zip32-mappings.test.ts:ZIP32 ledger enumerates 24 declarations and 106 direct expressions preserving 422 predecessor rows",

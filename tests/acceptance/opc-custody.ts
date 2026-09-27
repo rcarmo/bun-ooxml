@@ -71,11 +71,11 @@ export const bindings: StepBinding[] = [
       default: throw new Error('Unknown OPC sample mutation: ' + mutation);
     }
   } },
-  { pattern: /^Bun OpcPackage opens its archive bytes$/, run: async c => {
+  { pattern: /^the package editor opens its archive bytes$/, run: async c => {
     const s = state(c); s.archive = archive(s); retainSource(s);
     try { s.output = await OpcPackage.open(s.archive); } catch (error) { s.error = error; }
   } },
-  { pattern: /^Bun OpcPackage (?:opens|has opened) the base archive bytes$/, run: async c => { await open(state(c)); } },
+  { pattern: /^the package editor (?:opens|has opened) the base archive bytes$/, run: async c => { await open(state(c)); } },
   { pattern: /^every byte in the caller's original archive array is overwritten with zero$/, run: c => { const s = state(c); assert(s.archive); s.archive.fill(0); assert(s.archive.every(b => b === 0)); } },
   { pattern: /^every byte in the array returned by get for word\/document.xml is overwritten with zero$/, run: c => { const b = pkg(state(c)).get(doc); assert(b && b.length > 0); b.fill(0); assert(b.every(v => v === 0)); } },
   { pattern: /^a fresh get of word\/document.xml contains the UTF-8 text (.+)$/, run: (c, text) => { const b = pkg(state(c)).get(doc); assert(b); assert(new TextDecoder('utf-8', { fatal: true }).decode(b).includes(text!)); } },
@@ -84,7 +84,7 @@ export const bindings: StepBinding[] = [
     assert.deepEqual((await OpcPackage.open(s.saved)).toBytes(), s.original);
   } },
   { pattern: /^word\/document.xml instead has a little-endian BOM and UTF-16LE text (.+)$/, run: (c, text) => { state(c).payload = utf16(text!); } },
-  { pattern: /^Bun OpcPackage opens the package and sets word\/document.xml to its decoded text with Alpha replaced by Beta$/, run: async c => { const s = state(c); await open(s); const text = pkg(s).text(doc); assert(text.includes('Alpha')); pkg(s).set(doc, text.replace('Alpha', 'Beta')); } },
+  { pattern: /^the package editor opens the package and sets word\/document.xml to its decoded text with Alpha replaced by Beta$/, run: async c => { const s = state(c); await open(s); const text = pkg(s).text(doc); assert(text.includes('Alpha')); pkg(s).set(doc, text.replace('Alpha', 'Beta')); } },
   { pattern: /^its serialized archive is read through the ZIP layer$/, run: c => { const s = state(c); s.saved = pkg(s).toBytes(); s.member = readZip(s.saved).get(doc); assert(s.member); savedCustody(s); } },
   { pattern: /^the saved document member starts with hexadecimal bytes ([A-Fa-f0-9 ]+)$/, run: (c, bytes) => { const s = state(c); assert(s.member); const expected = bytes!.split(' ').map(b => parseInt(b, 16)); assert.deepEqual([...s.member.slice(0, expected.length)], expected); } },
   { pattern: /^decoding the member as UTF-16LE contains Beta and encoding="UTF-16"$/, run: async c => {
@@ -103,7 +103,7 @@ export const bindings: StepBinding[] = [
   { pattern: /^the transaction returns the same object by identity without invoking then$/, run: c => { const s = state(c); assert(s.thenable); assert.equal(s.transactionResult, s.thenable); assert.equal(s.thenCalls, 0); } },
   { pattern: /^the document text contains Beta$/, run: async c => { const s = state(c); assert(pkg(s).text(doc).includes('Beta')); s.saved = pkg(s).toBytes(); savedCustody(s); assert((await OpcPackage.open(s.saved)).text(doc).includes('Beta')); assert.equal(s.thenCalls, 0); } },
   { pattern: /^(?:an existing|a regular) destination file contains the base package archive bytes$/, run: async c => { await destination(state(c)); } },
-  { pattern: /^Bun OpcPackage has opened those bytes and deleted word\/document.xml$/, run: async c => { const s = state(c); await open(s); pkg(s).delete(doc); assert.equal(pkg(s).get(doc), undefined); } },
+  { pattern: /^the package editor has opened those bytes and deleted word\/document.xml$/, run: async c => { const s = state(c); await open(s); pkg(s).delete(doc); assert.equal(pkg(s).get(doc), undefined); } },
   { pattern: /^a symlink points to that file$/, run: async c => { const s = state(c); assert(s.destination); s.link = s.destination + '.link'; await symlink(s.destination, s.link); } },
   { pattern: /^(?:the package is saved to the existing destination|the unchanged package is saved through the symlink path)$/, run: async c => {
     const s = state(c); assert(s.destination); retainSource(s);

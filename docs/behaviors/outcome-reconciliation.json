@@ -4,7 +4,7 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 946,
+  "totalDeclarations": 949,
   "mappedDeclarations": 472,
   "sourceSha256": {
     "tests/unit/pptx-slide-order.test.ts": "81d046d0c71daa77bd4fbd867a663035e37898143a4ee3acd870a9ea27528a79",
@@ -137,15 +137,15 @@
     "tests/acceptance/zip64.ts": "30fba94dfa454d046eccc8ff2121d267591d1cf6d5102df7f91cf795225cbd6f",
     "workflows/package/zip64.feature": "f103ace071e647ffee092085a1c4b58e9b7be2cb4cb7553c3558c53f3be5c69a",
     "tests/unit/zip.test.ts": "8c9e9b209c1ad086c67a9eea2357dc14e64100d7d8d8ad6de6f5ac5a31792e57",
-    "tests/unit/zip32-bindings.test.ts": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311",
-    "tests/acceptance/zip32.ts": "b5a1bc1c1d902fc8ded2eb7724bcdd7f7986dc9ab0131ef33c98c1439c7c04a4",
+    "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
+    "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
     "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
     "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
-    "workflows/package/zip32.feature": "87248aebdebc78fae8edd2093d93cb54d37514b0cd661bf4bc6f2cb1c7b8c719",
+    "workflows/package/zip32.feature": "932bdcb2a1fb0866ec07c3e64d92b54b39dafa06f83e4c405fb48e80634ef24c",
     "tests/unit/package.test.ts": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
-    "tests/unit/opc-custody-bindings.test.ts": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
-    "tests/acceptance/opc-custody.ts": "565a06a9d96174e33e32e5c2d7226192a55342c83c49db4c66dfc0856eacd3ba",
-    "workflows/package/preservation.feature": "eb3cd4f4d534549b8b8d53dc2c3cb75a9e5c35d614effbb5f446623c0db4e4b1",
+    "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
+    "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
+    "workflows/package/preservation.feature": "1a2c653871f6bd830da4ca37f2b9c355c3885463234101b55a403786aedbba5a",
     "tests/unit/package-admission.test.ts": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
     "tests/acceptance/package-admission.ts": "a702f05cd22cd1139a118b6d8b57a801236c7ac5a521699cdcd29bb1d0485b60",
     "workflows/package/xml-member-admission.feature": "19fa717632d689e7ff4e883fb2af3f31e018373dc79ddb78efecf7742ea14e91",
@@ -590,8 +590,8 @@
       "mappedDeclarations": 24,
       "sourceSha256": {
         "tests/unit/zip.test.ts": "8c9e9b209c1ad086c67a9eea2357dc14e64100d7d8d8ad6de6f5ac5a31792e57",
-        "tests/unit/zip32-bindings.test.ts": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311",
-        "tests/acceptance/zip32.ts": "b5a1bc1c1d902fc8ded2eb7724bcdd7f7986dc9ab0131ef33c98c1439c7c04a4",
+        "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
+        "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
         "tests/acceptance/steps.ts": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a",
         "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
@@ -600,7 +600,7 @@
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/package/zip32.feature": "87248aebdebc78fae8edd2093d93cb54d37514b0cd661bf4bc6f2cb1c7b8c719"
+        "workflows/package/zip32.feature": "932bdcb2a1fb0866ec07c3e64d92b54b39dafa06f83e4c405fb48e80634ef24c"
       }
     },
     {
@@ -612,8 +612,8 @@
       "mappedDeclarations": 15,
       "sourceSha256": {
         "tests/unit/package.test.ts": "d7f9988a71f2450ccc1d7b441c8ca61a791db58a590bc6150a3bb3811249fbac",
-        "tests/unit/opc-custody-bindings.test.ts": "b43a8cbdcf7523c621396421166be0365f8dde8a23737bb55d40c93c20063969",
-        "tests/acceptance/opc-custody.ts": "565a06a9d96174e33e32e5c2d7226192a55342c83c49db4c66dfc0856eacd3ba",
+        "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
+        "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
         "tests/acceptance/steps.ts": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
@@ -625,7 +625,7 @@
         "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
         "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/package/preservation.feature": "eb3cd4f4d534549b8b8d53dc2c3cb75a9e5c35d614effbb5f446623c0db4e4b1"
+        "workflows/package/preservation.feature": "1a2c653871f6bd830da4ca37f2b9c355c3885463234101b55a403786aedbba5a"
       }
     },
     {
@@ -919,6 +919,9 @@
     "bun:tests/unit/outcome-mappings.test.ts:standalone mapping validation refuses unresolved declaration records",
     "bun:tests/unit/outcome-mappings.test.ts:XML ledger retains partial links for different fixtures and split edit predicates",
     "bun:tests/unit/outcome-mappings.test.ts:original PPTX mappings retain aggregate acceptance and bounded custody separately from newer notes records",
+    "bun:tests/unit/package-neutral-bindings.test.ts:neutral package actors resolve once and retired implementation names do not bind",
+    "bun:tests/unit/package-neutral-bindings.test.ts:all thirty-eight package and ZIP32 cases retain concrete assertions after actor migration",
+    "bun:tests/unit/package-neutral-bindings.test.ts:package wording keeps default case identities all mapping records and planned gaps unchanged",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / authors a minimal presentation whose master, layout and theme links reopen through the native reader",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / appends to a compatible deck without disturbing first-slide bytes until the earlier anchor edits them",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / refuses invalid arguments and unsafe title-layout selection atomically",

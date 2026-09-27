@@ -112,11 +112,11 @@ test('ordered ZIP32 fixture pairs keep duplicates, case differences and noncanon
 
 test('ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation', async () => {
   type State = { error?: unknown; output?: unknown; archive?: Uint8Array };
-  const steps = ['Bun readZip reads the sample with default limits', 'Bun writeZip writes the entries with default options', 'Bun readZip reads the archive with only maxEntries set to 1'];
+  const steps = ['the ZIP reader reads the sample with default limits', 'the ZIP writer writes the entries with default options', 'the ZIP reader reads the archive with only maxEntries set to 1'];
   for (const step of steps) for (const mutate of [
     (s: State) => { s.error = undefined; s.output = new Map(); },
     (s: State) => { s.error = new Error('untyped'); },
-    ...(step.includes('readZip') ? [(s: State) => { if (s.archive) s.archive[0] = s.archive[0]! ^ 1; }] : []),
+    ...(step.includes('the ZIP reader') ? [(s: State) => { if (s.archive) s.archive[0] = s.archive[0]! ^ 1; }] : []),
   ]) {
     const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {
       await b.run(c, ...captures); mutate(c.state as State);

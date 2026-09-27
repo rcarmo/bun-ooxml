@@ -8,8 +8,8 @@
   ],
   "sourceSha256": {
     "tests/unit/zip.test.ts": "8c9e9b209c1ad086c67a9eea2357dc14e64100d7d8d8ad6de6f5ac5a31792e57",
-    "tests/unit/zip32-bindings.test.ts": "076ceeba5c4cccf7649c52047644f4361d21c107ddf895cfcd422cfe189aa311",
-    "tests/acceptance/zip32.ts": "b5a1bc1c1d902fc8ded2eb7724bcdd7f7986dc9ab0131ef33c98c1439c7c04a4",
+    "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
+    "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
     "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
     "tests/acceptance/steps.ts": "2d8858bfa42d8ec3b7f6a83bcd322cf67d11a20eb761a0a997fe8884ebb5894a",
     "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
@@ -18,7 +18,7 @@
     "scripts/fixture-inputs.ts": "8f05ee041c84916499becf81e0959ccd9f42adaa375ad74c31d3f0f471906119",
     "scripts/gherkin.ts": "8f918de4db66d4af2996ed3ff5e3224c39f6a35867635337b007915b05df4735",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-    "workflows/package/zip32.feature": "87248aebdebc78fae8edd2093d93cb54d37514b0cd661bf4bc6f2cb1c7b8c719"
+    "workflows/package/zip32.feature": "932bdcb2a1fb0866ec07c3e64d92b54b39dafa06f83e4c405fb48e80634ef24c"
   },
   "mappings": [
     {
