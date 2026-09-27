@@ -10,7 +10,7 @@ export type ModelState={document:Document;body?:XmlElement;paragraphCount?:numbe
 const state=(c:Record<string,unknown>)=>c.state as ModelState;
 export const scenarioIds=['@id-docx-go-new-empty-body','@id-docx-go-table-dimensions-getters','@id-docx-go-roundtrip-table-text'];
 export const bindings:StepBinding[]=[
- {pattern:/^a new Go Word document$/,run:c=>{state(c).document=Document.create();}},
+ {pattern:/^a new Word document$/,run:c=>{state(c).document=Document.create();}},
  {pattern:/^its body paragraphs and tables are enumerated$/,run:c=>{
   const s=state(c),bytes=s.document.package.get('word/document.xml');assert(bytes);const xml=parseXml(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
   assert.equal(xml.root.namespaceURI,W);assert.equal(xml.root.localName,'document');const bodies=xml.root.children.filter(n=>n.namespaceURI===W&&n.localName==='body');assert.equal(bodies.length,1);
@@ -23,7 +23,7 @@ export const bindings:StepBinding[]=[
  {pattern:/^RowCount equals (\d+) and ColumnCount equals (\d+) in memory$/,run:(c,rows,cols)=>{
   const tables=state(c).document.tables;assert.equal(tables.length,1);assert.equal(tables[0]!.rows,Number(rows));assert.equal(tables[0]!.columns,Number(cols));
  }},
- {pattern:/^a new Go Word table with three rows and three columns$/,run:c=>{const s=state(c);s.document=Document.create();s.document.addTable(3,3);}},
+ {pattern:/^a new Word table with three rows and three columns$/,run:c=>{const s=state(c);s.document=Document.create();s.document.addTable(3,3);}},
  {pattern:/^its cells contain Header1, Header2, Header3, A1, B1, C1, A2, B2 and C2 in row order$/,run:c=>{
   const s=state(c);s.expected=['Header1','Header2','Header3','A1','B1','C1','A2','B2','C2'];const table=s.document.tables[0];assert(table);assert.equal(table.rows,3);assert.equal(table.columns,3);
   for(let i=0;i<s.expected.length;i++)table.cell(Math.floor(i/3),i%3).text=s.expected[i]!;

@@ -10,7 +10,7 @@ export const scenarioIds=['@id-docx-go-paragraph-multiple-runs','@id-docx-go-rou
 export const bindings:StepBinding[]=[
  {pattern:/^runs containing Hello-space, World and exclamation are appended in order$/,run:c=>{const s=state(c);for(const text of ['Hello ','World','!'])s.document.paragraphs[0]!.appendRun(text);}},
  {pattern:/^the paragraph has three runs and its text equals Hello World!$/,run:c=>{const p=state(c).document.paragraphs[0]!;assert.equal(p.directRunFlags().length,3);assert.equal(p.text,'Hello World!');}},
- {pattern:/^a new Go Word paragraph with three runs Bold-space, Italic-space and Colored$/,run:c=>{
+ {pattern:/^a new Word paragraph with three runs Bold-space, Italic-space and Colored$/,run:c=>{
   const s=state(c);s.document=Document.create();let p=s.document.addParagraph('');
   p=p.appendRun('Bold ',{bold:true});p=p.appendRun('Italic ',{italic:true});p=p.appendRun('Colored',{color:'FF0000',fontSizePt:14,fontName:'Arial'});
   assert.equal(p.text,'Bold Italic Colored');assert.equal(p.directRunFlags().length,3);

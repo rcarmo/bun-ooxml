@@ -5,7 +5,7 @@ type State = { document: Document; error?: unknown };
 const state = (c: Record<string, unknown>) => c.state as State;
 export const scenarioIds = ['@id-docx-go-paragraph-alignment-getter', '@id-docx-go-paragraph-spacing-getters', '@id-docx-go-paragraph-advanced-toggles'];
 export const bindings: StepBinding[] = [
-  { pattern: /^a new Go Word paragraph$/, run: c => { const d = Document.create(); d.addParagraph(''); state(c).document = d; } },
+  { pattern: /^a new Word paragraph$/, run: c => { const d = Document.create(); d.addParagraph(''); state(c).document = d; } },
   { pattern: /^its alignment is set to (\S+)$/, run: (c, value) => { state(c).document.paragraphs[0]!.setProperties({ alignment: value as ParagraphAlignment }); } },
   { pattern: /^its alignment getter equals (\S+)$/, run: (c, value) => { assert.equal(state(c).document.paragraphs[0]!.directProperties().alignment, value); } },
   { pattern: /^spacing before is set to (\d+) and after to (\d+)$/, run: (c, before, after) => { state(c).document.paragraphs[0]!.setProperties({ spacingBefore: Number(before), spacingAfter: Number(after) }); } },

@@ -55,6 +55,14 @@ reject the retired actor wording, and existing corrupt-buffer, false-success,
 callback-flag, thenable-identity and destination checks still run. All 472 mapping
 records and the 525 default case identities are unchanged.
 
+Shared v0.25 neutralises Word setup wording and replaces source-runtime profile
+labels for 34 IDs / 75 cases. Bun still selects 28 of those IDs / 65 cases; the
+remaining six profiles / ten cases stay planned. Heading classification, nil
+cell access, simultaneous in-memory effects, merge getters, tracking toggles and
+tool hints are not activated by a label change. Getter names, values, saved-output
+assertions, the 525 default identities and all 472 mappings remain unchanged.
+The shared Word wording ledger and its exact before/after guards record the edits.
+
 ## Maintain the reports
 
 ```sh

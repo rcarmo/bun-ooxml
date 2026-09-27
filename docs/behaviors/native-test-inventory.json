@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 949,
-  "files": 103,
+  "count": 952,
+  "files": 104,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -445,6 +445,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/word-neutral-bindings.test.ts",
+      "sha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
+      "declarations": 3,
+      "issues": []
+    },
+    {
       "path": "tests/unit/workflow-acceptance.test.ts",
       "sha256": "79f91b086d739f63bf18a1bcc87cce5bb0f4bd8be122931351dadde361117d59",
       "declarations": 1,
@@ -628,7 +634,7 @@
   "testSupport": [
     {
       "path": "tests/acceptance/append-run.ts",
-      "sha256": "6ee880ca361688f7a9a5e72069034353713348f572f6e1d35b9f70906865f205"
+      "sha256": "8d1fa7168cc986390f3646fc55e5333283cbb771b41e5f6f985ad2306be89a46"
     },
     {
       "path": "tests/acceptance/body-anchors.ts",
@@ -636,7 +642,7 @@
     },
     {
       "path": "tests/acceptance/body-insertion.ts",
-      "sha256": "cd864da15106a74c0416c037da45981b0647a932ce9be919ac7b0e62b99f0eb1"
+      "sha256": "3d834a1ac027b68d1fbda26781f7b15973751ab29c0b4eead329b8d334880c2a"
     },
     {
       "path": "tests/acceptance/cache-boundaries.ts",
@@ -644,7 +650,7 @@
     },
     {
       "path": "tests/acceptance/cell-properties.ts",
-      "sha256": "217e0af8281eb2ae0b7084747c18ede83b1795356e017c4a286714775b003bbc"
+      "sha256": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d"
     },
     {
       "path": "tests/acceptance/cell-style.ts",
@@ -676,11 +682,11 @@
     },
     {
       "path": "tests/acceptance/document-properties.ts",
-      "sha256": "c4f90481c1bcd8974457a8bf1a91e80573a08fa070a3315095f6c653bf50ea98"
+      "sha256": "c9394a823862725de7a8f67463560074dacc61cc52fed72977c084242b96e2f3"
     },
     {
       "path": "tests/acceptance/docx-model.ts",
-      "sha256": "a1db5a0c18219ee8440580cccaf03ea65657a027c39f7b25721e9364cdf8c91a"
+      "sha256": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce"
     },
     {
       "path": "tests/acceptance/docx.ts",
@@ -728,7 +734,7 @@
     },
     {
       "path": "tests/acceptance/paragraph-properties.ts",
-      "sha256": "c4b8f9289c44de2c14fef265318ef2bbce773d56ad4a1241e18ae025ab0d4ceb"
+      "sha256": "16bfe2a8bc4af655d7d42043478f5b8bf8b09da3313bb4073a965c1b7c7a9fb1"
     },
     {
       "path": "tests/acceptance/paragraph-style.ts",
@@ -764,19 +770,19 @@
     },
     {
       "path": "tests/acceptance/row-header.ts",
-      "sha256": "bb004884ea1118edd242864345e0df1c8fcd10276c60d22e5f4bcee56916f6df"
+      "sha256": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6"
     },
     {
       "path": "tests/acceptance/row-texts.ts",
-      "sha256": "6c38bd5ee2a4320de7d5c096c4e108d896cbff20d46431ec8352f4fae577faae"
+      "sha256": "7e970db034c35d0e398e00012f99b66d67bd143feea60d252e75da8c63ae1a1e"
     },
     {
       "path": "tests/acceptance/run-appearance.ts",
-      "sha256": "71697a727d84549b28413381f563604d37d8859766453fbbe06ba85f5c88d7c8"
+      "sha256": "5eeae4bd9f98b09ee074ad5632edf853279d1362bb00d929382d9df136cc3345"
     },
     {
       "path": "tests/acceptance/run-effects.ts",
-      "sha256": "4f90228d70ff52f30ce05a3a007ef78435367ff8720f63e50674fc2fdcf63465"
+      "sha256": "f52a79c08e8cd9b3afd3caed79bbe78afc339dd1f0f02ededd442ef55ff6c14d"
     },
     {
       "path": "tests/acceptance/run-font-name.ts",
@@ -804,11 +810,11 @@
     },
     {
       "path": "tests/acceptance/table-rows.ts",
-      "sha256": "0d0136c14054ffc15acef82400201022e2cc350f7eee1faa820201b8d08dcca5"
+      "sha256": "428362a65ff56d8d48bc522f28cbb6c69fbfee9dae2b7d504639b25ba9953f32"
     },
     {
       "path": "tests/acceptance/table-style.ts",
-      "sha256": "77d029c2b91df2fe4872356a759d0b77db10ba1b08578d9bf75a260079381571"
+      "sha256": "11e2b549ae7a8c52338780bcfd81139681c57d7d8887abfa9025304f2ca2f39f"
     },
     {
       "path": "tests/acceptance/tables-docx.ts",
@@ -1171,6 +1177,7 @@
     "bun:tests/unit/test-inventory.test.ts:transparent TypeScript expressions cannot hide imported registration aliases",
     "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
     "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
+    "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
     "bun:tests/unit/workflow-layout.test.ts:format regrouping retains the exact 525 implemented shared case identities",
     "bun:tests/unit/workflow-layout.test.ts:multi-feature wrapper selection executes only requested identities and rejects missing ones",
     "bun:tests/unit/workflow-receipts.test.ts:preview Then assertions reject incorrect target value count status and fabricated commit claims",
@@ -1552,6 +1559,7 @@
     "bun:tests/unit/test-inventory.test.ts:transparent TypeScript expressions cannot hide imported registration aliases",
     "bun:tests/unit/tracked-workflow.test.ts:tracked no-op still validates metadata and refuses unsupported topology",
     "bun:tests/unit/tracked-workflow.test.ts:malformed settings root and runtime metadata do not bypass tracked preflight",
+    "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
     "bun:tests/unit/workflow-layout.test.ts:format regrouping retains the exact 525 implemented shared case identities",
     "bun:tests/unit/workflow-layout.test.ts:multi-feature wrapper selection executes only requested identities and rejects missing ones",
     "bun:tests/unit/workflow-receipts.test.ts:preview Then assertions reject incorrect target value count status and fabricated commit claims",
@@ -28891,6 +28899,133 @@
         "serialize.call",
         "setupTrackedWorkflow",
         "writeFileSync"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
+      "path": "tests/unit/word-neutral-bindings.test.ts",
+      "line": 10,
+      "title": "Word actor migration binds supported cases once without restoring old runtime names",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0)",
+        "expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const file of m.files)for(const edit of file.stepRenames)"
+        },
+        {
+          "line": 11,
+          "expression": "for(const edit of file.stepRenames)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
+      "body": "{\n const {m,selected}=await scope();for(const file of m.files)for(const edit of file.stepRenames){expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);if(selected.includes(edit.id))expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);}\n}",
+      "calls": [
+        "b.pattern.test",
+        "bindings.filter",
+        "expect",
+        "expect().toHaveLength",
+        "scope",
+        "selected.includes"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word wording executes the same 28 supported IDs and 65 cases while six incompatible profiles stay planned",
+      "path": "tests/unit/word-neutral-bindings.test.ts",
+      "line": 13,
+      "title": "Word wording executes the same 28 supported IDs and 65 cases while six incompatible profiles stay planned",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(ids).toHaveLength(34)",
+        "expect(selected).toHaveLength(28)",
+        "expect(ids.filter(id=>!selected.includes(id)).sort()).toEqual([...planned].sort())",
+        "expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(10)",
+        "expect(cases).toHaveLength(65)",
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(65)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
+      "body": "{\n const {ids,selected,inv}=await scope();expect(ids).toHaveLength(34);expect(selected).toHaveLength(28);expect(ids.filter(id=>!selected.includes(id)).sort()).toEqual([...planned].sort());\n expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(10);\n const features=await sharedScenarios(selected),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});expect(cases).toHaveLength(65);\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(features.length),scenarios:count(28),cases:count(65),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'word-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(65);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);}finally{await cleanup();}\n}",
+      "calls": [
+        ".sort",
+        "cases.reduce",
+        "cleanup",
+        "count",
+        "executeAcceptance",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "features.flatMap",
+        "ids.filter",
+        "ids.filter().sort",
+        "inv.features.flatMap",
+        "inv.features.flatMap().filter",
+        "inv.features.flatMap().filter().reduce",
+        "planned.includes",
+        "scenarios.flatMap",
+        "scope",
+        "selected.includes",
+        "sharedScenarios"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor changes preserve default execution identities and every prior mapping record",
+      "path": "tests/unit/word-neutral-bindings.test.ts",
+      "line": 19,
+      "title": "Word actor changes preserve default execution identities and every prior mapping record",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(keys).toHaveLength(525)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
+        "expect(inv.counts.cases.planned).toBe(35)",
+        "expect(r.mappedDeclarations).toBe(472)",
+        "expect(r.executionCredit).toBe(false)",
+        "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9",
+      "body": "{\n const {inv}=await scope(),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();expect(keys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(keys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(35);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(472);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings)).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "JSON.stringify",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "f.scenarios.filter",
+        "f.scenarios.filter().flatMap",
+        "inv.features.flatMap",
+        "inv.features.flatMap().sort",
+        "outcomeMappingReport",
+        "s.cases.map",
+        "scope"
       ],
       "reviewReasons": [],
       "unresolved": []

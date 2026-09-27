@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 949,
+  "nativeDeclarations": 952,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 722,
+  "withoutStagingCount": 725,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4819,6 +4819,21 @@
       "id": "bun:tests/unit/tracked-workflow.test.ts:destination change after staging refuses without publishing staged revisions",
       "path": "tests/unit/tracked-workflow.test.ts",
       "sourceSha256": "96c57a3cb9eb69405cf6db194b70257a8503bb4018d8db9127dc919d02866056"
+    },
+    {
+      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor migration binds supported cases once without restoring old runtime names",
+      "path": "tests/unit/word-neutral-bindings.test.ts",
+      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9"
+    },
+    {
+      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word wording executes the same 28 supported IDs and 65 cases while six incompatible profiles stay planned",
+      "path": "tests/unit/word-neutral-bindings.test.ts",
+      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9"
+    },
+    {
+      "id": "bun:tests/unit/word-neutral-bindings.test.ts:Word actor changes preserve default execution identities and every prior mapping record",
+      "path": "tests/unit/word-neutral-bindings.test.ts",
+      "sourceSha256": "001d1c5fc8762d0dedd23945a98a68a62c46dee8fef422a215e58db4072f39e9"
     },
     {
       "id": "bun:tests/unit/workflow-layout.test.ts:format regrouping retains the exact 525 implemented shared case identities",
