@@ -1,66 +1,23 @@
 # bun-ooxml
 
-Bun-native TypeScript for creating and editing Word documents, PowerPoint decks and
-Excel workbooks. Edits run inside the Bun process and preserve untouched Office
-package parts.
+Create and edit DOCX, PPTX and XLSX files from TypeScript running on Bun. The package writes Office Open XML archives in-process, without launching Office or LibreOffice, and aims to leave package parts outside an edit untouched. It is useful when a document change needs an exact target, a saved file and a check that unrelated content survived.
 
-Authoring supports DOCX paragraphs/tables, PPTX title slides/tables and XLSX sheets/cells
-entirely in Bun. Slides also accept [positioned text boxes](docs/contracts/text-box.md)
-with explicit geometry and optional direct bold/italic flags.
-[Effective bold/italic inspection](docs/contracts/effective-formatting.md) resolves
-a bounded paragraph-style cascade with provenance and explicit unsupported contexts.
-[Slide reordering](docs/contracts/slide-order.md) preserves slide identities and
-package parts. Existing-file edits include guarded cross-run replacement, slide
-text, [existing speaker notes](docs/contracts/notes-editing.md) and cell edits
-with bounded formula-cache invalidation. Existing XLSX
-[cell-style selection](docs/contracts/cell-style.md) preserves values, formulas and caches. Word
-paragraphs can [append independently formatted runs](docs/contracts/append-run.md)
-or [replace their whole text](docs/contracts/paragraph-text.md) while retaining existing run properties.
-Documents can [insert paragraphs at a body index](docs/contracts/body-insertion.md) without rewriting existing blocks,
-and [read or patch core metadata](docs/contracts/core-properties.md) without changing document handles.
-Existing runs support [direct Boolean formatting](docs/contracts/run-formatting.md), including
-strike-through and selected text effects, [direct colour, underline and highlighting](docs/contracts/run-appearance.md),
-[half-point font sizes](docs/contracts/font-size.md), [direct Latin font names](docs/contracts/run-font-name.md)
-and existing paragraph-style selection without text or style-graph changes. Bounded [style authoring](docs/contracts/style-authoring.md)
-adds named paragraph styles with validated base chains and direct bold/italic flags.
-[Direct Word cell properties](docs/contracts/cell-properties.md) set preferred width,
-shading, alignment, direction and a simple top border without restructuring tables.
-Rectangular Word tables support [empty-row insertion and deletion](docs/contracts/table-rows.md).
-[Direct paragraph properties](docs/contracts/paragraph-properties.md) set alignment,
-before/after spacing and selected pagination flags without changing text.
-Single-section documents also support [direct title-page and background properties](docs/contracts/document-properties.md).
-[Page geometry](docs/contracts/page-layout.md) changes the final Word section's
-size and margins while preserving earlier sections and text.
-`patchOffice()` adds
-read-only previews, all-targets-required batches, guarded saves and per-target
-receipts. It can track one unique Word replacement with explicit author/date and
-report saved revision IDs separately from preview counts. Guarded OPC graph
-helpers add/detach parts and relationships; package diffs identify payload and
-content-type changes. Package-level Word review APIs inspect linked stories,
-resolve supported run-level revisions and author bounded tracked replacements.
-Existing comment threads can be inspected and individual resolution flags changed
-without touching comment bodies or anchors.
-[`admitPackage()`](docs/contracts/package-admission.md) validates bounded ZIP
-structure and XML members without requiring a complete OPC graph.
-[`xmlEquivalent()`](docs/contracts/xml-comparison.md) provides conservative
-XML comparison for the documented preservation profile.
-[`XmlSnapshot`](docs/contracts/xml-removal.md) removes disjoint XML subtrees,
-[sets attributes](docs/contracts/xml-attributes.md), and
-[inserts or replaces structured content](docs/contracts/xml-structure.md) without
-rewriting surrounding source characters. [`XmlByteSnapshot`](docs/contracts/xml-byte-snapshot.md)
-provides owned byte input and encoding-preserving subtree removal.
-[`comparePackageArchives()`](docs/contracts/package-comparison.md) separates
-those equivalent XML payloads from binary changes, additions and removals.
-ZIP, XML and OPC code use Bun's built-in file, hash and compression implementations. There are no
-runtime package dependencies or Office subprocesses.
+This is a bounded editor, not a general-purpose Office replacement. Word Compare, slide imports, chart authoring, merged-table restructuring, structural spreadsheet edits and formula calculation are not implemented. [Supported operations and limits][scope] has the current detail.
 
-General Word Compare, move/format/table revisions, comment authoring, slide imports,
-merged-table restructuring, chart authoring, structural spreadsheet edits and
-formula calculation are unsupported. [Direct A1 range parsing](docs/contracts/a1-ranges.md)
-is available independently. [Static formula reference analysis](docs/contracts/formula-analysis.md)
-extracts bounded A1 references and UTF-8 source spans. [String-level insertion remapping](docs/contracts/formula-remap.md)
-shifts supported references without editing a workbook; none of these APIs evaluates formulas.
-See [supported operations and limits](docs/contracts/port-scope.md).
+## Try it
+
+Use Bun 1.4.1 or newer. Clone with the shared fixtures submodule, then install and run the examples:
+
+```bash
+git clone --recurse-submodules https://github.com/rcarmo/bun-ooxml.git
+cd bun-ooxml
+bun install --frozen-lockfile
+bun run examples/create-office.ts
+```
+
+The example creates a document, a presentation and a workbook, reopens each file and checks its content. For editing existing files, see [`examples/agent-edit.ts`](examples/agent-edit.ts) and the [usage guide][usage]. If you cloned without `--recurse-submodules`, run `git submodule update --init --recursive`; missing fixture inputs fail instead of being fabricated.
+
+A guarded Word text edit can be as small as this:
 
 ```ts
 import { Document } from "bun-ooxml";
@@ -72,39 +29,49 @@ matches[0]!.replace("thirty business days");
 await document.save("contract-edited.docx");
 ```
 
-Use the [native workflow API](docs/contracts/workflow-api.md) for preview/strict/safe
-batches. The [usage guide](docs/agents/usage.md) covers refusals, target lifetimes
-and save/reopen checks.
+Save to a new path, reopen the result and inspect the affected parts before using it elsewhere. The [workflow API][workflow] adds previews, strict batches, guarded saves and per-target receipts when a single edit is too simple for the job.
 
-## Specification
+## What you can edit
 
-The shared [`fixtures-ooxml` specification][fixtures] defines expected behaviour,
-MIME types, namespaces and relationship facts. Its workflows and fixtures provide
-the reference for validation. Fixtures are stored under
-`fixtures/<format>/<scenario-group>/` and resolved by stable manifest ID. See
-[shared references](docs/contracts/fixture-references.md).
+Word supports document creation, paragraphs, runs and tables; existing-file edits include [text and run formatting][run], [paragraph and page properties][page], [style authoring][styles], [core metadata][metadata] and selected table properties. Linked-story review, bounded tracked replacements and existing comment-thread inspection cover specific review tasks. They do not implement general Word Compare or comment authoring.
 
-## Development
+PowerPoint supports presentations with title slides, tables and [positioned text boxes][textbox]. Existing decks support [slide reordering][slides], slide text and [speaker-note edits][notes]. [Effective bold and italic inspection][formatting] follows a bounded paragraph-style cascade and reports unsupported contexts.
 
-Requires Bun 1.4.1 or newer. `make install` installs development tools; `make check`
-runs type checks, test-inventory and mapping checks, shared-reference validation,
-unit tests, Gherkin acceptance tests and examples. See the
-[test catalogue](docs/behaviors/README.md) for details. `make parity` also requires
-all specified behaviour to be implemented; it currently fails because some
-operations are unsupported.
+Excel supports sheets and cells, existing-file cell edits and [cell-style selection][cellstyle] that keeps values, formulas and caches. [A1 range parsing][ranges], [formula reference analysis][formula] and [string-level reference remapping][remap] operate on references; none calculates a workbook.
 
-`make office-oracles` separately checks three authored files with Open XML SDK,
-LibreOffice and Poppler. It catches schema errors, missing PDF text and one
-external calculation round trip. See [independent checks](docs/contracts/office-oracles.md)
-for prerequisites and limits; these tools are never production dependencies.
-`make property-campaign` runs fixed-seed XML/ZIP/Office properties and five bounded
-timing workloads. [Campaign scope](docs/contracts/property-campaign.md) describes
-replay inputs, refusal accounting and measurement limits.
+At the package level, [`admitPackage()`][admission] checks bounded ZIP structures and XML members. Guarded OPC graph edits add or detach parts and relationships; [package diffs][diff] separate equivalent XML from changed binary members, additions and removals. The [XML snapshot APIs][xml] make bounded, source-preserving changes. ZIP, XML and OPC runtime code uses Bun's file, hash and compression APIs; there are no runtime package dependencies or Office subprocesses.
 
-Clone with `--recurse-submodules` or run `git submodule update --init --recursive`
-to obtain the shared specification and fixtures. Fixtures are read-only; missing
-inputs fail rather than generating fallbacks.
+## Contracts and checks
 
-MIT. See [third-party notices](THIRD_PARTY_NOTICES.md) for licences and fixture provenance.
+The [`fixtures-ooxml` repository][fixtures] supplies shared workflow contracts, format facts and read-only fixtures. This repository pins it as a Git submodule and resolves fixture inputs by stable manifest ID. A shared scenario describes an expected outcome; it does not by itself prove that the Bun implementation executes it. The [test catalogue][tests] lists the native bindings and their current status.
 
+```bash
+make check
+```
+
+This runs type checks, inventory and mapping validation, unit tests, Gherkin acceptance tests and the examples. `make parity` also demands implementation of every specified behaviour, so it currently fails on unsupported operations. The separate `make office-oracles` target checks three authored files with Open XML SDK, LibreOffice and Poppler; those tools are development-only. `make property-campaign` runs fixed-seed XML/ZIP/Office properties and bounded timing workloads. See [independent checks][oracles] and [campaign scope][campaign] for prerequisites and limits.
+
+MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md) list licences and fixture provenance.
+
+[scope]: docs/contracts/port-scope.md
+[usage]: docs/agents/usage.md
+[workflow]: docs/contracts/workflow-api.md
+[run]: docs/contracts/run-formatting.md
+[page]: docs/contracts/page-layout.md
+[styles]: docs/contracts/style-authoring.md
+[metadata]: docs/contracts/core-properties.md
+[textbox]: docs/contracts/text-box.md
+[slides]: docs/contracts/slide-order.md
+[notes]: docs/contracts/notes-editing.md
+[formatting]: docs/contracts/effective-formatting.md
+[cellstyle]: docs/contracts/cell-style.md
+[ranges]: docs/contracts/a1-ranges.md
+[formula]: docs/contracts/formula-analysis.md
+[remap]: docs/contracts/formula-remap.md
+[admission]: docs/contracts/package-admission.md
+[diff]: docs/contracts/package-comparison.md
+[xml]: docs/contracts/xml-byte-snapshot.md
 [fixtures]: https://github.com/rcarmo/fixtures-ooxml
+[tests]: docs/behaviors/README.md
+[oracles]: docs/contracts/office-oracles.md
+[campaign]: docs/contracts/property-campaign.md
