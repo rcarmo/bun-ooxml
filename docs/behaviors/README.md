@@ -78,6 +78,17 @@ global implemented count. All 577 earlier executed identities and the horizontal
 case fingerprints are unchanged; the property-setter profile stays planned.
 See the [vertical merge contract](../contracts/table-vertical-merge.md).
 
+## Concrete template inventory
+
+`Document.inspectTemplate()` reads body/table text, direct-outline sections,
+rectangular table values and literal placeholders with location offsets. It
+returns immutable snapshots and refuses unsupported inputs without mutation.
+Fourteen native declarations remain unmapped pending central concrete-output
+contracts. The existing response-shape/cache profiles stay planned; no SOW,
+colour-guidance or table-purpose inference is implemented. The 530 existing
+mapping records and 603 executed case identities are unchanged. See the
+[inspection contract](../contracts/template-inspection.md).
+
 ## Format and operation layout
 
 Shared v0.22 groups features under DOCX, PPTX, XLSX, package and XML operations.

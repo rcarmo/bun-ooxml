@@ -9,6 +9,8 @@ import {appendParagraphRun} from './append-run.ts';
 import {replaceParagraphText} from './paragraph-text.ts';
 import {bodyInsertionTarget,insertBodyParagraph} from './body-insertion.ts';
 import {bodyMap,type BodyMap} from './body-map.ts';
+import {inspectTemplateXml,type TemplateInspection} from './template-inspection.ts';
+export type {TemplateInspection,TemplateParagraph,TemplateSection,TemplateTable,TemplatePlaceholder} from './template-inspection.ts';
 export type {BodyMap,BodyPlaceholder} from './body-map.ts';
 import {editTableRow} from './table-rows.ts';
 import {mergeRowCells as mergeRowXml,mergeColumnCells as mergeColumnXml} from './table-merge.ts';
@@ -696,6 +698,12 @@ export class Document {
     const anchors=this.inspectBodyAnchors();
     const {body}=bodyInsertionTarget(this.xml,this.xmlDocument,0);
     return bodyMap(anchors,body.children.filter(n=>isWord(n,'tbl')).length);
+  }
+
+  /** Read-only concrete body/table inventory; no semantic template classification. */
+  inspectTemplate():TemplateInspection {
+    if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-document','Document XML changed outside this handle');
+    return inspectTemplateXml(this.xml,this.xmlDocument);
   }
 
   /** Insert after a captured body paragraph; all structural snapshot handles expire on success. */

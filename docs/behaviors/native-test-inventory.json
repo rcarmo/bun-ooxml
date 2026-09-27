@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1030,
-  "files": 120,
+  "count": 1044,
+  "files": 121,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -268,6 +268,12 @@
       "path": "tests/unit/docx-tables.test.ts",
       "sha256": "b9823a427d339d9e7a9a51dfb55cdb9b6e2dc1f1c902891d2b652e146dcaaf7e",
       "declarations": 9,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "declarations": 14,
       "issues": []
     },
     {
@@ -1247,6 +1253,12 @@
     "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
     "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
     "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
+    "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
+    "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
+    "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
+    "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
+    "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
+    "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
     "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
     "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
     "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
@@ -1676,6 +1688,12 @@
     "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
     "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
     "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
+    "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
+    "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
+    "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
+    "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
+    "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
+    "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
     "bun:tests/unit/docx-tracking-settings.test.ts:missing false state and all supported on-off spellings preserve no-op bytes",
     "bun:tests/unit/docx-tracking-settings.test.ts:protection, ambiguous or malformed settings refuse before package and author changes",
     "bun:tests/unit/docx-tracking-settings.test.ts:external duplicate orphan wrong-root wrong-type and shared settings graphs refuse unchanged",
@@ -21083,6 +21101,600 @@
         "runAcceptance"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:template inspection returns concrete sections placeholders locations and table text without mutating archive",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 7,
+      "title": "template inspection returns concrete sections placeholders locations and table text without mutating archive",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.scope).toBe('main-body-and-tables')",
+        "expect(r.counts).toEqual({paragraphs:8,sections:2,tables:1,placeholders:3})",
+        "expect(r.paragraphs.map(p=>p.text)).toEqual(['Statement for <Customer>','Use <Project> and [TBD].','Role','Hours','<Role>','40','Delivery','No placeholder'])",
+        "expect(r.sections).toEqual([{paragraphIndex:0,bodyIndex:0,text:'Statement for <Customer>',level:1},{paragraphIndex:6,bodyIndex:3,text:'Delivery',level:2}])",
+        "expect(r.tables).toEqual([{index:0,bodyIndex:2,rows:2,columns:2,cells:[['Role','Hours'],['<Role>','40']]}])",
+        "expect(r.paragraphs[4]!.table).toEqual({index:0,row:1,column:0,paragraph:0})",
+        "expect(r.placeholders).toEqual([{paragraphIndex:0,bodyIndex:0,start:14,end:24,text:'<Customer>',name:'Customer'},{paragraphIndex:1,bodyIndex:1,start:4,end:13,text:'<Project>',name:'Project'},{paragraphIndex:4,bodyIndex:2,start:0,end:6,text:'<Role>',name:'Role'}])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(held.text).toBe('Statement for <Customer>')",
+        "expect(t.cell(1,1).text).toBe('40')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=await sample(),before=d.package.toBytes(),t=d.tables[0]!,held=d.paragraphs[0]!,r=d.inspectTemplate();expect(r.scope).toBe('main-body-and-tables');expect(r.counts).toEqual({paragraphs:8,sections:2,tables:1,placeholders:3});expect(r.paragraphs.map(p=>p.text)).toEqual(['Statement for <Customer>','Use <Project> and [TBD].','Role','Hours','<Role>','40','Delivery','No placeholder']);\n expect(r.sections).toEqual([{paragraphIndex:0,bodyIndex:0,text:'Statement for <Customer>',level:1},{paragraphIndex:6,bodyIndex:3,text:'Delivery',level:2}]);expect(r.tables).toEqual([{index:0,bodyIndex:2,rows:2,columns:2,cells:[['Role','Hours'],['<Role>','40']]}]);expect(r.paragraphs[4]!.table).toEqual({index:0,row:1,column:0,paragraph:0});expect(r.placeholders).toEqual([{paragraphIndex:0,bodyIndex:0,start:14,end:24,text:'<Customer>',name:'Customer'},{paragraphIndex:1,bodyIndex:1,start:4,end:13,text:'<Project>',name:'Project'},{paragraphIndex:4,bodyIndex:2,start:0,end:6,text:'<Role>',name:'Role'}]);expect(d.package.toBytes()).toEqual(before);expect(held.text).toBe('Statement for <Customer>');expect(t.cell(1,1).text).toBe('40');\n}",
+      "calls": [
+        "d.inspectTemplate",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "r.paragraphs.map",
+        "sample",
+        "t.cell"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 12,
+      "title": "inspection persists through path reopen and results are detached and deeply immutable",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(r)",
+        "expect(read.package.get(n)).toEqual(b)",
+        "expect(Object.isFrozen(value)).toBe(true)",
+        "expect(r.paragraphs.at(-1)!.text).toBe('No placeholder')",
+        "expect(r.counts.placeholders).toBe(3)",
+        "expect(d.inspectTemplate().counts.placeholders).toBe(4)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 13,
+          "expression": "for(const[n,b]of before)expect(read.package.get(n)).toEqual(b);"
+        },
+        {
+          "line": 14,
+          "expression": "for(const value of [r,r.counts,r.paragraphs,r.paragraphs[4],r.paragraphs[4]!.table,r.sections,r.sections[0],r.tables,r.tables[0],r.tables[0]!.cells,r.tables[0]!.cells[0],r.placeholders,r.placeholders[0]])expect(Object.isFrozen(value)).toBe(true);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=await sample(),before=d.package.parts,r=d.inspectTemplate(),dir=await mkdtemp(join(tmpdir(),'template-inspect-'));try{const path=join(dir,'template.docx');await d.save(path);const read=await Document.open(path);expect(read.inspectTemplate()).toEqual(r);for(const[n,b]of before)expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n for(const value of [r,r.counts,r.paragraphs,r.paragraphs[4],r.paragraphs[4]!.table,r.sections,r.sections[0],r.tables,r.tables[0],r.tables[0]!.cells,r.tables[0]!.cells[0],r.placeholders,r.placeholders[0]])expect(Object.isFrozen(value)).toBe(true);\n d.paragraphs.at(-1)!.setText('Changed <New>');expect(r.paragraphs.at(-1)!.text).toBe('No placeholder');expect(r.counts.placeholders).toBe(3);expect(d.inspectTemplate().counts.placeholders).toBe(4);\n}",
+      "calls": [
+        "Document.open",
+        "Object.isFrozen",
+        "d.inspectTemplate",
+        "d.paragraphs.at",
+        "d.paragraphs.at().setText",
+        "d.save",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "join",
+        "mkdtemp",
+        "r.paragraphs.at",
+        "read.inspectTemplate",
+        "read.package.get",
+        "rm",
+        "sample",
+        "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:plain and empty documents return useful empty inventories without inventing classifications",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 18,
+      "title": "plain and empty documents return useful empty inventories without inventing classifications",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.inspectTemplate().counts).toEqual({paragraphs:0,sections:0,tables:0,placeholders:0})",
+        "expect(r.sections).toEqual([])",
+        "expect(r.paragraphs[0]!.styleId).toBe('Heading1')",
+        "expect(r.paragraphs[0]!.outlineLevel).toBeNull()",
+        "expect(r.placeholders.map(p=>p.name)).toEqual(['Customer'])",
+        "expect(Object.keys(r).sort()).toEqual(['counts','paragraphs','placeholders','scope','sections','tables'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=Document.create();expect(d.inspectTemplate().counts).toEqual({paragraphs:0,sections:0,tables:0,placeholders:0});d.addParagraphStyle('Heading1',{name:'Heading 1'});d.addParagraph('Blue <Customer>',{style:'Heading1'}).setRunFormatting({color:'0000FF'});const r=d.inspectTemplate();expect(r.sections).toEqual([]);expect(r.paragraphs[0]!.styleId).toBe('Heading1');expect(r.paragraphs[0]!.outlineLevel).toBeNull();expect(r.placeholders.map(p=>p.name)).toEqual(['Customer']);expect(Object.keys(r).sort()).toEqual(['counts','paragraphs','placeholders','scope','sections','tables']);\n}",
+      "calls": [
+        "Document.create",
+        "Object.keys",
+        "Object.keys().sort",
+        "d.addParagraph",
+        "d.addParagraph().setRunFormatting",
+        "d.addParagraphStyle",
+        "d.inspectTemplate",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toEqual",
+        "r.placeholders.map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:placeholders span plain runs but never paragraphs and retain Unicode UTF16 offsets and occurrence order",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 22,
+      "title": "placeholders span plain runs but never paragraphs and retain Unicode UTF16 offsets and occurrence order",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual([{start:3,end:13,name:'Customer'},{start:14,end:24,name:'Customer'}])",
+        "expect(d.inspectBodyMap().placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name})))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=Document.create();d.addParagraph('😀 <Cus').appendRun('tomer> <Customer> <<nested>> <> < > [TBD]');d.addParagraph('<line\\nbreak>');d.addParagraph('<unfinished');d.addParagraph('ending>');const r=d.inspectTemplate();expect(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual([{start:3,end:13,name:'Customer'},{start:14,end:24,name:'Customer'}]);expect(d.inspectBodyMap().placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name})));\n}",
+      "calls": [
+        "Document.create",
+        "d.addParagraph",
+        "d.addParagraph().appendRun",
+        "d.inspectBodyMap",
+        "d.inspectBodyMap().placeholders.map",
+        "d.inspectTemplate",
+        "expect",
+        "expect().toEqual",
+        "r.placeholders.map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:table cell paragraphs have distinct locations and cannot create cross-paragraph placeholders or sections",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 26,
+      "title": "table cell paragraphs have distinct locations and cannot create cross-paragraph placeholders or sections",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.tables[0]!.cells).toEqual([['<A>\\n<B>\\n<split\\nend>']])",
+        "expect(r.paragraphs.map(p=>p.table!.paragraph)).toEqual([0,1,2,3])",
+        "expect(r.placeholders.map(p=>[p.paragraphIndex,p.name])).toEqual([[0,'A'],[1,'B']])",
+        "expect(r.sections).toEqual([])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=Document.create();d.addTable(1,1);d.tables[0]!.cell(0,0).text='<A>\\n<B>\\n<split\\nend>';const r=d.inspectTemplate();expect(r.tables[0]!.cells).toEqual([['<A>\\n<B>\\n<split\\nend>']]);expect(r.paragraphs.map(p=>p.table!.paragraph)).toEqual([0,1,2,3]);expect(r.placeholders.map(p=>[p.paragraphIndex,p.name])).toEqual([[0,'A'],[1,'B']]);expect(r.sections).toEqual([]);\n}",
+      "calls": [
+        "Document.create",
+        "d.addTable",
+        "d.inspectTemplate",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toEqual",
+        "r.paragraphs.map",
+        "r.placeholders.map"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 30,
+      "title": "unsupported late body and cell content refuses the whole inspection with unchanged bytes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>loaded.inspectTemplate()).toThrow()",
+        "expect(loaded.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 31,
+          "expression": "for(const kind of ['field','hyperlink','sdt','nested','merge','bad-grid','bad-outline'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n for(const kind of ['field','hyperlink','sdt','nested','merge','bad-grid','bad-outline']){const d=await sample(),p=pkg(d);let x=p.text(p.mainPart());if(kind==='field')x=x.replace('No placeholder','No placeholder</w:t><w:instrText>DATE</w:instrText><w:t>');if(kind==='hyperlink')x=x.replace('</w:body>','<w:p><w:hyperlink><w:r><w:t>Hidden</w:t></w:r></w:hyperlink></w:p></w:body>');if(kind==='sdt')x=x.replace('<w:body>','<w:body><w:sdt><w:sdtContent><w:p/></w:sdtContent></w:sdt>');if(kind==='nested')x=x.replace('<w:tcPr>','<w:tbl/><w:tcPr>');if(kind==='merge')x=x.replace('<w:tcPr>','<w:tcPr><w:vMerge/>');if(kind==='bad-grid')x=x.replace(/<w:gridCol[^>]*\\/>/,'');if(kind==='bad-outline')x=x.replace('w:val=\"0\"','w:val=\"invalid\"');p.set(p.mainPart(),x);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.inspectTemplate()).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "loaded.inspectTemplate",
+        "loaded.package.toBytes",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "pkg",
+        "sample",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:stale external document edits refuse and no header story or macro text is silently included",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 34,
+      "title": "stale external document edits refuse and no header story or macro text is silently included",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.inspectTemplate().placeholders.map(p=>p.name)).toEqual(['Customer','Project','Role'])",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-stale-document'}))",
+        "expect(d.package.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/header1.xml',`<w:hdr xmlns:w=\"${W}\"><w:p><w:r><w:t>&lt;Header&gt;</w:t></w:r></w:p></w:hdr>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/header','header1.xml');const before=d.package.toBytes();expect(d.inspectTemplate().placeholders.map(p=>p.name)).toEqual(['Customer','Project','Role']);expect(d.package.toBytes()).toEqual(before);p.set(p.mainPart(),p.text(p.mainPart()).replace('No placeholder','External'));const changed=p.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-stale-document'}));expect(d.package.toBytes()).toEqual(changed);\n}",
+      "calls": [
+        "addPart",
+        "addRelationship",
+        "d.inspectTemplate",
+        "d.inspectTemplate().placeholders.map",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "pkg",
+        "sample"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 38,
+      "title": "aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(expected)",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 39,
+          "expression": "for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),false);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=await sample(),expected=d.inspectTemplate(),p=pkg(d);const text=p.text(p.mainPart()).replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16').replace('<q:document ','<q:document xmlns:w=\"urn:foreign\" '),bytes=new Uint8Array(2+text.length*2);bytes.set([254,255]);const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),false);p.set(p.mainPart(),bytes);const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(read.inspectTemplate()).toEqual(expected);expect(read.package.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "Document.open",
+        "bytes.set",
+        "d.inspectTemplate",
+        "expect",
+        "expect().toEqual",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replaceAll",
+        "p.text().replaceAll().replaceAll",
+        "p.text().replaceAll().replaceAll().replace",
+        "p.text().replaceAll().replaceAll().replace().replace",
+        "p.toBytes",
+        "pkg",
+        "read.inspectTemplate",
+        "read.package.toBytes",
+        "sample",
+        "text.charCodeAt",
+        "view.setUint16"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:global placeholder and paragraph bounds refuse instead of returning a truncated successful report",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 42,
+      "title": "global placeholder and paragraph bounds refuse instead of returning a truncated successful report",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>loaded.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(loaded.package.toBytes()).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=Document.create();d.addParagraph('<A>'.repeat(10001));const before=d.package.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(d.package.toBytes()).toEqual(before);\n const base=Document.create(),p=pkg(base);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:body>','<w:body>'+'<w:p/>'.repeat(10001)));const loaded=await Document.open(p.toBytes()),b=loaded.package.toBytes();expect(()=>loaded.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(loaded.package.toBytes()).toEqual(b);\n}",
+      "calls": [
+        ".repeat",
+        "Document.create",
+        "Document.open",
+        "d.addParagraph",
+        "d.inspectTemplate",
+        "d.package.toBytes",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "loaded.inspectTemplate",
+        "loaded.package.toBytes",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "pkg"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 47,
+      "title": "grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(changed).not.toBe(source)",
+        "expect(e).toBeInstanceOf(Error)",
+        "expect(()=>read.inspectTemplate()).toThrow()",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 48,
+          "expression": "for(const change of [(x:string)=>x.replace('<w:tblGrid>','<w:tblGrid><!--keep-->'),(x:string)=>x.replace('<w:gridCol ','<w:gridCol other=\"x\" '),(x:string)=>x.replace('xmlns:w=\"'+W+'\"','xmlns:w=\"urn:foreign\"'),(x:string)=>x.replace(/<w:pPr\\b[^>]*>/,open=>open+'<w:outlineLvl w:val=\"1\"/>')])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n for(const change of [(x:string)=>x.replace('<w:tblGrid>','<w:tblGrid><!--keep-->'),(x:string)=>x.replace('<w:gridCol ','<w:gridCol other=\"x\" '),(x:string)=>x.replace('xmlns:w=\"'+W+'\"','xmlns:w=\"urn:foreign\"'),(x:string)=>x.replace(/<w:pPr\\b[^>]*>/,open=>open+'<w:outlineLvl w:val=\"1\"/>')]){const d=await sample(),p=pkg(d);const source=p.text(p.mainPart()),changed=change(source);expect(changed).not.toBe(source);p.set(p.mainPart(),changed);let read:Document;try{read=await Document.open(p.toBytes());}catch(e){expect(e).toBeInstanceOf(Error);continue;}const before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow();expect(read.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "change",
+        "expect",
+        "expect().not.toBe",
+        "expect().toBeInstanceOf",
+        "expect().toEqual",
+        "expect().toThrow",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "pkg",
+        "read.inspectTemplate",
+        "read.package.toBytes",
+        "sample",
+        "x.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:table count and aggregate placeholder limits apply across cells with no successful truncation",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 51,
+      "title": "table count and aggregate placeholder limits apply across cells with no successful truncation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}))",
+        "expect(read.package.toBytes()).toEqual(bytes)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=Document.create();d.addTable(1,2);d.tables[0]!.cell(0,0).text='<A>'.repeat(5001);d.tables[0]!.cell(0,1).text='<B>'.repeat(5000);const before=d.package.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(d.package.toBytes()).toEqual(before);\n const base=Document.create();base.addTable(1,1);const p=pkg(base),source=p.text(p.mainPart()),table=source.match(/<w:tbl\\b[^]*?<\\/w:tbl>/)![0];p.set(p.mainPart(),source.replace(table,table.repeat(1001)));const read=await Document.open(p.toBytes()),bytes=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(read.package.toBytes()).toEqual(bytes);\n}",
+      "calls": [
+        ".repeat",
+        "Document.create",
+        "Document.open",
+        "base.addTable",
+        "d.addTable",
+        "d.inspectTemplate",
+        "d.package.toBytes",
+        "d.tables.0.cell",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "pkg",
+        "read.inspectTemplate",
+        "read.package.toBytes",
+        "source.match",
+        "source.replace",
+        "table.repeat"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:read-only inspection permits protected input and leaves all template response/cache scenarios planned",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 56,
+      "title": "read-only inspection permits protected input and leaves all template response/cache scenarios planned",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(d.inspectTemplate().counts.placeholders).toBe(3)",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(templates).toHaveLength(2)",
+        "expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13)",
+        "expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true)",
+        "expect(inv.counts.cases.implemented).toBe(603)",
+        "expect(inv.counts.cases.planned).toBe(46)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const before=d.package.toBytes();expect(d.inspectTemplate().counts.placeholders).toBe(3);expect(d.package.toBytes()).toEqual(before);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios)).toHaveLength(13);expect(templates.every(f=>f.lifecycle==='planned'&&!f.runner)).toBe(true);expect(inv.counts.cases.implemented).toBe(603);expect(inv.counts.cases.planned).toBe(46);\n}",
+      "calls": [
+        ".test",
+        "addPart",
+        "addRelationship",
+        "d.inspectTemplate",
+        "d.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "inv.features.filter",
+        "inventoryFeatures",
+        "p.mainPart",
+        "pkg",
+        "process.cwd",
+        "sample",
+        "templates.every",
+        "templates.flatMap"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 61,
+      "title": "row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(source).not.toBe(p.text(p.mainPart()))",
+        "expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-unsupported'}))",
+        "expect(read.package.toBytes()).toEqual(before)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 62,
+          "expression": "for(const defect of ['before','after','late-before','width','missing-width'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n for(const defect of ['before','after','late-before','width','missing-width']){const d=await sample(),p=pkg(d);let source=p.text(p.mainPart());if(defect==='before'||defect==='after')source=source.replace('<w:tr>',`<w:tr><w:trPr><w:${defect==='before'?'gridBefore':'gridAfter'} w:val=\"1\"/></w:trPr>`);else if(defect==='late-before'){const at=source.lastIndexOf('<w:tr>');source=source.slice(0,at)+source.slice(at).replace('<w:tr>','<w:tr><w:trPr><w:gridBefore w:val=\"1\"/></w:trPr>');}else if(defect==='width')source=source.replace('w:w=\"4320\" w:type=\"dxa\"','w:w=\"100\" w:type=\"dxa\"');else source=source.replace(/<w:tcW[^>]*\\/>/,'');expect(source).not.toBe(p.text(p.mainPart()));p.set(p.mainPart(),source);const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-unsupported'}));expect(read.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "expect",
+        "expect().not.toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.toBytes",
+        "pkg",
+        "read.inspectTemplate",
+        "read.package.toBytes",
+        "sample",
+        "source.lastIndexOf",
+        "source.replace",
+        "source.slice",
+        "source.slice().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "line": 65,
+      "title": "explicit zero row offsets retain correct positions and invalid offset spellings refuse",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(read.inspectTemplate()).toEqual(expected)",
+        "expect(read.package.toBytes()).toEqual(before)",
+        "expect(()=>read.inspectTemplate()).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 67,
+          "expression": "for(const value of ['-1','0junk','', '1.5'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a",
+      "body": "{\n const d=await sample(),expected=d.inspectTemplate(),p=pkg(d);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:tr>','<w:tr><w:trPr><w:gridBefore w:val=\"0\"/><w:gridAfter w:val=\"00\"/></w:trPr>'));const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(read.inspectTemplate()).toEqual(expected);expect(read.package.toBytes()).toEqual(before);\n for(const value of ['-1','0junk','', '1.5']){const d=await sample(),p=pkg(d);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:tr>',`<w:tr><w:trPr><w:gridBefore w:val=\"${value}\"/></w:trPr>`));const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow();expect(read.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        "Document.open",
+        "d.inspectTemplate",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "p.mainPart",
+        "p.set",
+        "p.text",
+        "p.text().replace",
+        "p.toBytes",
+        "pkg",
+        "read.inspectTemplate",
+        "read.package.toBytes",
+        "sample"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {

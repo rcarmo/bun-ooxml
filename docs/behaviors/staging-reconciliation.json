@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1030,
+  "nativeDeclarations": 1044,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 803,
+  "withoutStagingCount": 817,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4159,6 +4159,76 @@
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical native authoring does not select incompatible shared getter or horizontal outcomes",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
       "sourceSha256": "a517b0b476b9902ba618ff4196dbeeceb5c0590412b698766d5fc5e7080a3602"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:template inspection returns concrete sections placeholders locations and table text without mutating archive",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:plain and empty documents return useful empty inventories without inventing classifications",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:placeholders span plain runs but never paragraphs and retain Unicode UTF16 offsets and occurrence order",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:table cell paragraphs have distinct locations and cannot create cross-paragraph placeholders or sections",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:stale external document edits refuse and no header story or macro text is silently included",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:global placeholder and paragraph bounds refuse instead of returning a truncated successful report",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:table count and aggregate placeholder limits apply across cells with no successful truncation",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:read-only inspection permits protected input and leaves all template response/cache scenarios planned",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
+    },
+    {
+      "id": "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
+      "path": "tests/unit/docx-template-inspection.test.ts",
+      "sourceSha256": "03b76b60123790cef1426d279255f1b16a5d521f4d239c106c53efca3396cb2a"
     },
     {
       "id": "bun:tests/unit/docx-tracking-settings.test.ts:tracking author toggle follows the shared getter sequence without creating revision markup",

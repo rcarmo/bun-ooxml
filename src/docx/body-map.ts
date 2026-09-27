@@ -20,17 +20,23 @@ export function bodyMap(anchors:readonly BodyAnchor[],tables:number):BodyMap {
  let sections=0;
  for(const anchor of anchors){
   if(anchor.type==='section_heading')sections++;
-  const text=anchor.text;let start=-1,depth=0,nested=false;
-  for(let at=0;at<text.length;at++){
+  for(const occurrence of literalPlaceholders(anchor.text)){
+   if(placeholders.length===10000)throw new OoxmlError('docx-body-map-limit','At most 10000 body placeholder occurrences are supported');
+   placeholders.push(Object.freeze({bodyIndex:anchor.bodyIndex,...occurrence}));
+  }
+ }
+ return Object.freeze({counts:Object.freeze({sections,tables,placeholders:placeholders.length,anchors:anchors.length}),anchors,placeholders:Object.freeze(placeholders)});
+}
+/** Shared literal scanner; offsets are UTF-16 units in one decoded paragraph. */
+export function* literalPlaceholders(text:string):Generator<Omit<BodyPlaceholder,'bodyIndex'>> {
+ let start=-1,depth=0,nested=false;
+ for(let at=0;at<text.length;at++){
    if(text[at]==='<'){if(depth===0){start=at;nested=false;}else nested=true;depth++;}
    else if(text[at]==='>'&&depth>0){
     if(--depth!==0)continue;
     if(nested||at-start<=1||at-start-1>256)continue;
     const name=text.slice(start+1,at);if(!name.trim()||/[\r\n\t]/.test(name))continue;
-    if(placeholders.length===10000)throw new OoxmlError('docx-body-map-limit','At most 10000 body placeholder occurrences are supported');
-    placeholders.push(Object.freeze({bodyIndex:anchor.bodyIndex,start,end:at+1,text:text.slice(start,at+1),name}));
+    yield {start,end:at+1,text:text.slice(start,at+1),name};
    }
-  }
  }
- return Object.freeze({counts:Object.freeze({sections,tables,placeholders:placeholders.length,anchors:anchors.length}),anchors,placeholders:Object.freeze(placeholders)});
 }
