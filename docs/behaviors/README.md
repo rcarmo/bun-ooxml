@@ -29,7 +29,7 @@ path/hash. The coverage table reports the same independent denominators:
 - Local-only: zero scenarios or cases. The eleven former local cases are now shared planned contracts.
 - Combined: 302 scenarios / 789 cases; 729 implemented and 60 planned.
 
-The owned nonstandard XLSX calculation-chain case remains planned for Bun. Shared v0.47 records five bounded Python XLSX source-test mappings without execution credit. Shared v0.48 records Go's separately run cross-sheet cache binding in place of native CACHE-001; Bun's 729 executed cases are unchanged. The earlier inventory update closed an omission of thirteen template cases. Earlier release
+The owned nonstandard XLSX calculation-chain case remains planned for Bun. Shared v0.47 records five bounded Python XLSX source-test mappings without execution credit. Shared v0.48 records Go's separately run cross-sheet cache binding in place of native CACHE-001. Shared v0.49 records Python's separately run owned-chain binding (one case, 14 steps); Bun's 729 executed cases are unchanged. The earlier inventory update closed an omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
 472 mapping records; visibility does not award a pass.
 
