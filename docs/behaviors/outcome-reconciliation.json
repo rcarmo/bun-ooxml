@@ -4,7 +4,7 @@
   "executionCredit": false,
   "runtimeLeafCount": null,
   "scope": "Independent source-pinned partial ledgers; integrity only, no test execution or semantic completeness inferred",
-  "totalDeclarations": 1103,
+  "totalDeclarations": 1106,
   "mappedDeclarations": 590,
   "sourceSha256": {
     "tests/unit/docx-revision-moves.test.ts": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
@@ -1208,6 +1208,9 @@
     "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses multi-paragraph subtitle placeholders",
     "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses placeholder paragraphs with break and field topology",
     "bun:tests/unit/pptx-placeholders.test.ts:pptx placeholder resolution / refuses empty title placeholders until empty replacement is supported",
+    "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
+    "bun:tests/unit/pptx-retained-visibility.test.ts:qualified marker cannot masquerade as the unqualified CT_Slide attribute",
+    "bun:tests/unit/pptx-retained-visibility.test.ts:changed slide identity, relationship target and missing part fail closed",
     "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / round-trips saved table geometry sums and text after reopen",
     "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / preserves simple table cell formatting when replacing text and reopening",
     "bun:tests/unit/pptx-tables.test.ts:pptx Presentation tables / stale table cell handles refuse atomically after slide mutation",

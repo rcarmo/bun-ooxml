@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1103,
+  "nativeDeclarations": 1106,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 876,
+  "withoutStagingCount": 879,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -5099,6 +5099,21 @@
       "id": "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
       "path": "tests/unit/pptx-notes-utf8.test.ts",
       "sourceSha256": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63"
+    },
+    {
+      "id": "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
+      "path": "tests/unit/pptx-retained-visibility.test.ts",
+      "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-retained-visibility.test.ts:qualified marker cannot masquerade as the unqualified CT_Slide attribute",
+      "path": "tests/unit/pptx-retained-visibility.test.ts",
+      "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-retained-visibility.test.ts:changed slide identity, relationship target and missing part fail closed",
+      "path": "tests/unit/pptx-retained-visibility.test.ts",
+      "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b"
     },
     {
       "id": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",

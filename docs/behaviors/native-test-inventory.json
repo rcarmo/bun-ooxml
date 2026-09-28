@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1103,
-  "files": 133,
+  "count": 1106,
+  "files": 134,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -454,6 +454,12 @@
       "path": "tests/unit/pptx-placeholders.test.ts",
       "sha256": "64d4a8c4fb46fcf5e390d54eda2c5aab55ca76967fcdc868d6ec72a6b15e8590",
       "declarations": 8,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-retained-visibility.test.ts",
+      "sha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b",
+      "declarations": 3,
       "issues": []
     },
     {
@@ -1125,6 +1131,10 @@
     {
       "path": "tests/unit/mapping-history.ts",
       "sha256": "d2961e8f2428045ffcf534fd345c507ff2fd53323e47b7a61f5b197ec0778d21"
+    },
+    {
+      "path": "tests/unit/pptx-retained-visibility.ts",
+      "sha256": "e74163c5fe07dad2fd77751dfb8965cf837d91e0a5121a85b4274c7b0bb6a27b"
     }
   ],
   "dynamicCases": [
@@ -1445,6 +1455,7 @@
     "bun:tests/unit/pptx-notes-utf8.test.ts:byte replacement retains UTF16 notes-part codec and non-body placeholders after reopen",
     "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
     "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
+    "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -1921,6 +1932,7 @@
     "bun:tests/unit/pptx-notes-utf8.test.ts:byte replacement retains UTF16 notes-part codec and non-body placeholders after reopen",
     "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
     "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
+    "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -31019,6 +31031,95 @@
         "findPlaceholderText",
         "required",
         "rewriteSlide",
+        "xml.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
+      "path": "tests/unit/pptx-retained-visibility.test.ts",
+      "line": 11,
+      "title": "retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result).toEqual({ slideIds: ['256', '257', '258', '259'], relationships: [...relationships], parts: [1, 2, 3, 4].map(n => `ppt/slides/slide${n}.xml`) })",
+        "expect(await read(id)).toEqual(original)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 12,
+          "expression": "for (const [role, id, relationships] of [\n    ['source', source, ['rId7', 'rId8', 'rId9', 'rId10']],\n    ['control', control, ['rId2', 'rId3', 'rId4', 'rId5']],\n  ] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b",
+      "body": "{\n  for (const [role, id, relationships] of [\n    ['source', source, ['rId7', 'rId8', 'rId9', 'rId10']],\n    ['control', control, ['rId2', 'rId3', 'rId4', 'rId5']],\n  ] as const) {\n    const original = await read(id);\n    const result = await inspectRetainedVisibility(original, role);\n    expect(result).toEqual({ slideIds: ['256', '257', '258', '259'], relationships: [...relationships], parts: [1, 2, 3, 4].map(n => `ppt/slides/slide${n}.xml`) });\n    expect(await read(id)).toEqual(original);\n  }\n}",
+      "calls": [
+        ".map",
+        "expect",
+        "expect().toEqual",
+        "inspectRetainedVisibility",
+        "read"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-retained-visibility.test.ts:qualified marker cannot masquerade as the unqualified CT_Slide attribute",
+      "path": "tests/unit/pptx-retained-visibility.test.ts",
+      "line": 33,
+      "title": "qualified marker cannot masquerade as the unqualified CT_Slide attribute",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inspectRetainedVisibility(unqualified, 'source')).rejects.toThrow()",
+        "expect(inspectRetainedVisibility(controlMarker, 'control')).rejects.toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b",
+      "body": "{\n  const part = 'ppt/slides/slide3.xml';\n  const unqualified = await corrupt(source, part, xml => xml.replace('p:show=\"0\"', 'show=\"0\"'));\n  await expect(inspectRetainedVisibility(unqualified, 'source')).rejects.toThrow();\n  const controlMarker = await corrupt(control, part, xml => xml.replace('<p:sld ', '<p:sld p:show=\"0\" '));\n  await expect(inspectRetainedVisibility(controlMarker, 'control')).rejects.toThrow();\n}",
+      "calls": [
+        "corrupt",
+        "expect",
+        "expect().rejects.toThrow",
+        "inspectRetainedVisibility",
+        "xml.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-retained-visibility.test.ts:changed slide identity, relationship target and missing part fail closed",
+      "path": "tests/unit/pptx-retained-visibility.test.ts",
+      "line": 41,
+      "title": "changed slide identity, relationship target and missing part fail closed",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inspectRetainedVisibility(changedId, 'source')).rejects.toThrow()",
+        "expect(inspectRetainedVisibility(changedTarget, 'source')).rejects.toThrow()",
+        "expect(corrupt(source, 'ppt/_rels/presentation.xml.rels', xml => xml.replace('Target=\"slides/slide4.xml\"', 'Target=\"slides/missing.xml\"'))).rejects.toThrow('Missing target')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b",
+      "body": "{\n  const changedId = await corrupt(source, 'ppt/presentation.xml', xml => xml.replace('id=\"256\"', 'id=\"600\"'));\n  await expect(inspectRetainedVisibility(changedId, 'source')).rejects.toThrow();\n  const changedTarget = await corrupt(source, 'ppt/_rels/presentation.xml.rels', xml => xml.replace('Target=\"slides/slide1.xml\"', 'Target=\"slides/slide4.xml\"'));\n  await expect(inspectRetainedVisibility(changedTarget, 'source')).rejects.toThrow();\n  await expect(corrupt(source, 'ppt/_rels/presentation.xml.rels', xml => xml.replace('Target=\"slides/slide4.xml\"', 'Target=\"slides/missing.xml\"'))).rejects.toThrow('Missing target');\n}",
+      "calls": [
+        "corrupt",
+        "expect",
+        "expect().rejects.toThrow",
+        "inspectRetainedVisibility",
         "xml.replace"
       ],
       "reviewReasons": [],
