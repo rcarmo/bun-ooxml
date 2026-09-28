@@ -7,7 +7,7 @@
   "totalDeclarations": 1112,
   "mappedDeclarations": 590,
   "sourceSha256": {
-    "tests/unit/docx-revision-moves.test.ts": "9e31a9fccd201c4970f46614dd5a07b15f7a0987b7e3051415a3a7279c6ab74a",
+    "tests/unit/docx-revision-moves.test.ts": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
     "tests/unit/revision-move-outcomes.test.ts": "6cac40049286bd4c472be9058bf81e0c95550591928140fe20d86a46362ed856",
     "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
     "src/docx/revision-moves.ts": "d40da29b5c407bc4086af68c056982153c3fee752c7fa10d512c1fcddf2124a3",
@@ -23,21 +23,21 @@
     "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
     "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
     "tests/acceptance/revision-moves.ts": "590196b22c94f0cd89bfec01587ee9fca4f8236d4cb3c09342eb3a0a146581c9",
-    "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+    "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd",
-    "tests/unit/docx-revision-properties.test.ts": "a4de14c2e0f3ff7bb57f46f595ad4945483e7736be5cc227f67c4109af76ac31",
+    "tests/unit/docx-revision-properties.test.ts": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
     "tests/unit/revision-property-outcomes.test.ts": "f8767818a20f0f86490f18fac0e734143e6292f8e7bc78923d36c6c1dbf115dc",
     "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
-    "tests/unit/docx-comment-threads.test.ts": "c266f8588e021c6f2ec62e1bd2d9662d680570b2cc471174c7f9420d54df4aba",
+    "tests/unit/docx-comment-threads.test.ts": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
     "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
     "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
     "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
     "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
     "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
     "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0",
-    "tests/unit/docx-template-inspection.test.ts": "a5651f5f6dfb707b880a69d0e59a59cd9d428fbe70950f11a9ae00ec490ee963",
+    "tests/unit/docx-template-inspection.test.ts": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
     "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
     "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
     "src/docx/body-map.ts": "33d9c9420b790db89c0efdf81ea6f118620f3af47b97174717c6399577daecdd",
@@ -49,19 +49,19 @@
     "src/docx/run-formatting.ts": "d0f475ab45c34213b706f93131b50677899643ca1424ea4a371166cd3015eb7f",
     "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
     "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e",
-    "tests/unit/docx-table-merge.test.ts": "d8b5e7b4e2c2b928a7c37f91dd74ebe39942b5ebdb77b1ecfe832fa05be3f0bd",
+    "tests/unit/docx-table-merge.test.ts": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-    "tests/unit/docx-table-vertical-merge.test.ts": "14b165f617dfa640e39a9bd6a8de66dabfa4afe4eab2c053f2af912db19630f7",
+    "tests/unit/docx-table-vertical-merge.test.ts": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076",
     "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
     "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
     "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-    "tests/unit/docx-heading-classification.test.ts": "eafea314ea8322a58c5544d3d59e47ece99ec540d2e3b5786bea2f349b1eb958",
+    "tests/unit/docx-heading-classification.test.ts": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
     "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
     "tests/unit/docx-tracking-settings.test.ts": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c",
@@ -212,7 +212,7 @@
       ],
       "mappedDeclarations": 14,
       "sourceSha256": {
-        "tests/unit/docx-revision-moves.test.ts": "9e31a9fccd201c4970f46614dd5a07b15f7a0987b7e3051415a3a7279c6ab74a",
+        "tests/unit/docx-revision-moves.test.ts": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
         "tests/unit/revision-move-outcomes.test.ts": "6cac40049286bd4c472be9058bf81e0c95550591928140fe20d86a46362ed856",
         "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
         "src/docx/revision-moves.ts": "d40da29b5c407bc4086af68c056982153c3fee752c7fa10d512c1fcddf2124a3",
@@ -228,7 +228,7 @@
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
         "tests/acceptance/revision-moves.ts": "590196b22c94f0cd89bfec01587ee9fca4f8236d4cb3c09342eb3a0a146581c9",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd"
@@ -242,7 +242,7 @@
       ],
       "mappedDeclarations": 14,
       "sourceSha256": {
-        "tests/unit/docx-revision-properties.test.ts": "a4de14c2e0f3ff7bb57f46f595ad4945483e7736be5cc227f67c4109af76ac31",
+        "tests/unit/docx-revision-properties.test.ts": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
         "tests/unit/revision-property-outcomes.test.ts": "f8767818a20f0f86490f18fac0e734143e6292f8e7bc78923d36c6c1dbf115dc",
         "src/docx/revisions.ts": "1e03c52f8a8de1f21e5d8c01726d73b1a041014c8fec6a46b3653e823c440d85",
         "src/docx/revision-properties.ts": "ec50a48a1849f8814752f64320ddf90bb0bc762f7d07bf76c0a6d311efb5c11b",
@@ -257,7 +257,7 @@
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "tests/acceptance/revisions-docx.ts": "49ccac5d56ebb03f2e00e22810c5797eaae7952c106ce23c4c7a5514d2e3ffc9",
         "tests/acceptance/revision-properties.ts": "b8c5abc8fa49035695d68454d1783a1d5315c5e3dd7ddf6cda36e370685487cc",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd"
@@ -271,7 +271,7 @@
       ],
       "mappedDeclarations": 16,
       "sourceSha256": {
-        "tests/unit/docx-comment-threads.test.ts": "c266f8588e021c6f2ec62e1bd2d9662d680570b2cc471174c7f9420d54df4aba",
+        "tests/unit/docx-comment-threads.test.ts": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
         "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
         "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -284,7 +284,7 @@
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
         "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0"
@@ -298,7 +298,7 @@
       ],
       "mappedDeclarations": 16,
       "sourceSha256": {
-        "tests/unit/docx-template-inspection.test.ts": "a5651f5f6dfb707b880a69d0e59a59cd9d428fbe70950f11a9ae00ec490ee963",
+        "tests/unit/docx-template-inspection.test.ts": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
         "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
         "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -312,7 +312,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e"
@@ -328,7 +328,7 @@
       ],
       "mappedDeclarations": 29,
       "sourceSha256": {
-        "tests/unit/docx-table-merge.test.ts": "d8b5e7b4e2c2b928a7c37f91dd74ebe39942b5ebdb77b1ecfe832fa05be3f0bd",
+        "tests/unit/docx-table-merge.test.ts": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
         "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
         "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -339,12 +339,12 @@
         "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
         "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-        "tests/unit/docx-table-vertical-merge.test.ts": "14b165f617dfa640e39a9bd6a8de66dabfa4afe4eab2c053f2af912db19630f7",
+        "tests/unit/docx-table-vertical-merge.test.ts": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
         "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
         "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
       }
@@ -362,7 +362,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
@@ -375,7 +375,7 @@
       ],
       "mappedDeclarations": 8,
       "sourceSha256": {
-        "tests/unit/docx-heading-classification.test.ts": "eafea314ea8322a58c5544d3d59e47ece99ec540d2e3b5786bea2f349b1eb958",
+        "tests/unit/docx-heading-classification.test.ts": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
         "src/docx/paragraph-style.ts": "50368be010cdecee2e47bb97cd91383cb970411481f7b5443899389d8f86e65f",
         "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
@@ -403,7 +403,7 @@
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/tracking-settings.ts": "3059681f4874e8ed542a9f02e4d8c83a969ef48800d5ede9f8b8003541ff86aa",
         "tests/acceptance/tracking-outcomes.ts": "4e4c264b42e6470db856fb2d7487d60eeecf264902e55eab3dc8b69c56830a80",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
         "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
@@ -483,7 +483,7 @@
         "tests/unit/pptx-notes-utf8.test.ts": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63",
         "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
         "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "workflows/pptx/notes.feature": "181044e6ee3fabbdb8096b626965155e7db97764bb64223e0968dc50dd5e3daa",
         "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
@@ -513,7 +513,7 @@
         "tests/acceptance/cell-properties.ts": "b210fcddce244b78df131843907a10243cd0b4b27e80cc2a529bdd96f839036d",
         "tests/acceptance/row-header.ts": "9cf74cd86c340917fa6976436dfd63138c417dab6e2194ad0a0cf64b157739a6",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
         "src/docx/append-run.ts": "798182764354d2a31b70f10f5ac9601499048b850d1aaa74516aa257cbba0cdd",
         "src/docx/cell-properties.ts": "a03c53b4bb7f4c234a2019f6f1b0d8b860b2752a6993dbd3679121385bca6c36",
@@ -572,7 +572,7 @@
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/body-anchors.ts": "6c340f7d86eb2d0f00d74e5699f64d2631f2cabfec6f19ca3185e8326ea25505",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -597,7 +597,7 @@
         "src/opc/content-types.ts": "8b5a29bd09d80b0b981b492d06e8ceabe55d5411e1438a74fed7058b80ad97e3",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
         "tests/acceptance/xlsx-comment-vml.ts": "54b311d1f21f590d9c679778e3cf896aa26ad72ded0acc807e53aa10698f3d4b",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -841,7 +841,7 @@
         "tests/unit/zip32-bindings.test.ts": "60724d4375ed8024bc8dc026772de864567c68346584a44f264132533b0f3dff",
         "tests/acceptance/zip32.ts": "41b89dd3100301030f8bb6b800da15627fe42a6d114f4f52bddeaef082b15ded",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
         "src/errors.ts": "5473bf529974c7cbb59279cecb18f712ef6d8c2ef247f9806f1fbbbf9a7ae6b6",
@@ -865,7 +865,7 @@
         "tests/unit/opc-custody-bindings.test.ts": "1bd445fc279c25b5792e905cc26c662ea4502361716ca98af00d5f8e5afdba40",
         "tests/acceptance/opc-custody.ts": "20e574048384806634e50a1e4390fc721817a2fa10c54733be1b4da582d12b85",
         "tests/acceptance/refusal-outcomes.ts": "4d384aef94270c2d0fd55c1660e1bf04583c1b934300913acc35b5bd9a685e78",
-        "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+        "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/opc/zip.ts": "9d31ba50795fe9e37ccdeac892736ffba960e9c68a431411a76e2c7032d7d9ea",
@@ -1775,8 +1775,8 @@
       "assertions": [
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)",
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],
       "outcomes": [
@@ -2229,8 +2229,8 @@
       "assertions": [
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)",
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],
       "outcomes": [
@@ -2715,8 +2715,8 @@
       "assertions": [
         "expect(planned).toHaveLength(9)",
         "expect(planned.every(s=>s.lifecycle==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "All nine authored-comment profiles remain planned; complete catalogue totals asserted."
@@ -3131,8 +3131,8 @@
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "Protectedread permitted and prior13response/cachecases stayplanned; inventorytotalasserted."
@@ -3597,8 +3597,8 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "Historical setter/vertical profile stays planned with one case and current global inventory totals."
@@ -4081,8 +4081,8 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "Historical setter/verticalprofile remains planned and inventory totals are explicitlychecked."
@@ -4604,8 +4604,8 @@
         "expect(p.headingLevel).toBe(0)",
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "Empty string assignment refuses; null removes style and reads undefined/false/zero; all five shared getter cases remain planned and acceptance totals are unchanged."

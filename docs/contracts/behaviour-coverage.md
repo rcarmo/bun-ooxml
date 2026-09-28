@@ -4,9 +4,9 @@ The shared reference contains **344 assets**. The table lists available tests; a
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 304 | 791 | 731 | 60 |
+| Shared catalogue | 304 | 791 | 732 | 59 |
 | Local-only obligations | 0 | 0 | 0 | 0 |
-| Combined inventory | 304 | 791 | 731 | 60 |
+| Combined inventory | 304 | 791 | 732 | 59 |
 
 The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
@@ -69,7 +69,7 @@ The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-
 | references/fixtures-ooxml/workflows/xlsx/formula-references.feature | implemented | 9 | 45 | 45 | 0 | 152 |
 | references/fixtures-ooxml/workflows/xlsx/mutation-safety.feature | implemented | 2 | 6 | 6 | 0 | 45 |
 | references/fixtures-ooxml/workflows/xlsx/structural-edits.feature | planned | 1 | 1 | 0 | 1 | 4 |
-| references/fixtures-ooxml/workflows/xlsx/style-readback.feature | planned | 1 | 1 | 0 | 1 | 4 |
+| references/fixtures-ooxml/workflows/xlsx/style-readback.feature | implemented | 1 | 1 | 1 | 0 | 4 |
 | references/fixtures-ooxml/workflows/xml/comparison.feature | implemented | 5 | 10 | 10 | 0 | 40 |
 | references/fixtures-ooxml/workflows/xml/editing.feature | implemented | 11 | 16 | 16 | 0 | 59 |
 | references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 6 | 0 | 19 |

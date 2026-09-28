@@ -7,7 +7,7 @@
     "tests/unit/comment-thread-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-comment-threads.test.ts": "c266f8588e021c6f2ec62e1bd2d9662d680570b2cc471174c7f9420d54df4aba",
+    "tests/unit/docx-comment-threads.test.ts": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
     "tests/unit/comment-thread-outcomes.test.ts": "6807fc87184a04de8f6dceff4b941557fb467b6ff9a9a625903c978a59411414",
     "src/docx/comments.ts": "9d0f3fe59f1f839f8d43bca9f32cd5a18f63ce45b84cd82e36be316282e5bd8e",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -20,7 +20,7 @@
     "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
     "tests/acceptance/comments-docx.ts": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d",
     "tests/acceptance/comment-threads.ts": "77e88723f6bf09129f2342652f326c7d3621210a72da57d1e390234d16f5b26d",
-    "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+    "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0"
@@ -311,8 +311,8 @@
       "assertions": [
         "expect(planned).toHaveLength(9)",
         "expect(planned.every(s=>s.lifecycle==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "All nine authored-comment profiles remain planned; complete catalogue totals asserted."

@@ -7,7 +7,7 @@
     "tests/unit/template-inventory-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-template-inspection.test.ts": "a5651f5f6dfb707b880a69d0e59a59cd9d428fbe70950f11a9ae00ec490ee963",
+    "tests/unit/docx-template-inspection.test.ts": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
     "tests/unit/template-inventory-outcomes.test.ts": "dd849dea35141dae1164919162739733617b47429354a96a0394ec2f61d381bf",
     "src/docx/template-inspection.ts": "dc9b245b08283120b21347c86a8655770c9d9e70ad190529e231a909ce7c11e6",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
@@ -21,7 +21,7 @@
     "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "tests/acceptance/template-inventory.ts": "543ef799344ec187ab7a4b124a150d5267fbce09482986fd033102a22e9eb67d",
-    "tests/acceptance/steps.ts": "fbc7aedd805292a613cfdbb1af7d8e4f84bff10d08e7bbd84e6c7bd6aa1ab1a7",
+    "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e"
@@ -267,8 +267,8 @@
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
-        "expect(inv.counts.cases.implemented).toBe(731)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.implemented).toBe(732)",
+        "expect(inv.counts.cases.planned).toBe(59)"
       ],
       "outcomes": [
         "Protectedread permitted and prior13response/cachecases stayplanned; inventorytotalasserted."

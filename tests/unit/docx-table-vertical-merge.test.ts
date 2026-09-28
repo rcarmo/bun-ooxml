@@ -59,5 +59,5 @@ test('vertical authoring leaves all unselected tables and package members unchan
 });
 
 test('vertical native authoring does not select incompatible shared getter or horizontal outcomes',async()=>{
- const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(731);expect(inv.counts.cases.planned).toBe(60);
+ const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);
 });

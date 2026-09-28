@@ -3,6 +3,14 @@
   "catalogue": "references/fixtures-ooxml/ledgers/workflows.json",
   "features": [
     {
+      "path": "references/fixtures-ooxml/workflows/xlsx/style-readback.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-office-xlsx-independent-style-reader"
+      ]
+    },
+    {
       "path": "references/fixtures-ooxml/workflows/xlsx/calculation-chain-lifecycle.feature",
       "lifecycle": "implemented",
       "runner": "bun",

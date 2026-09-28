@@ -31,6 +31,7 @@ import { bindings as paragraphPropertiesBindings } from './paragraph-properties.
 import { bindings as styleAuthoringBindings } from './style-authoring.ts';
 import { bindings as textBoxBindings } from './text-box.ts';
 import { bindings as cellStyleBindings } from './cell-style.ts';
+import {bindings as xlsxStyleReadbackBindings,cleanup as cleanupXlsxStyleReadback} from './xlsx-style-readback.ts';
 import { bindings as pageLayoutBindings } from './page-layout.ts';
 import { bindings as slideOrderBindings } from './slide-order.ts';
 import { bindings as effectiveFormattingBindings } from './effective-formatting.ts';
@@ -74,7 +75,7 @@ import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import {bindings as ownedChainBindings,cleanup as cleanupOwnedChains} from './owned-chain.ts';
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains(),cleanupXlsxStyleReadback()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -109,6 +110,7 @@ export const bindings: StepBinding[] = [
   ...styleAuthoringBindings,
   ...textBoxBindings,
   ...cellStyleBindings,
+  ...xlsxStyleReadbackBindings,
   ...pageLayoutBindings,
   ...slideOrderBindings,
   ...effectiveFormattingBindings,
