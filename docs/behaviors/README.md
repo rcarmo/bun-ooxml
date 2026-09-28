@@ -18,6 +18,15 @@ The current Gherkin inventory is in
 run. A unit-test declaration may contain loops or call helpers, so its presence
 alone does not count as a tested requirement.
 
+The current static inventory has 1,112 declarations in 136 unit-test files.
+Its parser flags 474 declarations with body loops and 479 for expansion or
+assertion review; none has an unresolved registration. The staging report
+locates 227 historical rows and 885 declarations without staging. Separate
+outcome ledgers map 590 declarations and list 522 unmapped IDs. A mapping is
+a bounded source association, not an expanded runtime case. The acceptance
+runner measures shared Gherkin cases separately; integration and Office checks
+use separate reports. These inventories do not establish full format parity.
+
 ## Complete shared inventory
 
 The project loads all 62 canonical features from the pinned workflow registry.
