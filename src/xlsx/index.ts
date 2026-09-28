@@ -7,6 +7,8 @@ export {insertFormulaReferences,type FormulaInsertion} from './formula-remap.ts'
 import { OoxmlError } from "../errors.ts";
 import { OpcPackage, relationshipPath, sameBytes } from "../opc/package.ts";
 import {selectCellStyle} from './cell-style.ts';
+import {inspectOwnedChain} from './owned-chain.ts';
+import {removeRelationship,removePart} from '../opc/graph.ts';
 import {
   attribute,
   applyEdits,
@@ -251,7 +253,7 @@ export class Workbook {
    * Edits are transactional. Unsupported formula topologies refuse before any ZIP
    * member changes, preserving byte identity for later saves.
    */
-  writeCell(sheetName: string, reference: string, value: ScalarCellValue): void {
+  writeCell(sheetName: string, reference: string, value: ScalarCellValue, options:{calculationPolicy?:'invalidate-dependent-formula-caches'}={}): void {
     const normalizedReference = normalizeCellReference(reference);
     const sheet = this.requireSheet(sheetName);
     const cell = sheet.cells.get(normalizedReference);
@@ -260,10 +262,17 @@ export class Workbook {
     const valueEdits = cell
       ? buildValueEdits(cell, value)
       : buildMissingCellEdits(sheet, normalizedReference, value);
-    // A value edit can invalidate formula caches, but this editor cannot retire
-    // workbook-owned calculation-order metadata. Refuse before changing any part.
-    if (this.package.relationships(this.workbookPart).some((rel) => rel.type === `${OFFICE_REL_NS}/calcChain`)) {
+    // Only the explicit policy permits retiring workbook-owned calculation-order
+    // metadata. Validate it at runtime for JavaScript callers as well.
+    if (options.calculationPolicy !== undefined && options.calculationPolicy !== 'invalidate-dependent-formula-caches') {
+      throw new OoxmlError('xlsx-calculation-chain-unsupported', 'Unsupported dependent-cache invalidation policy');
+    }
+    const chainOwned=this.package.relationships(this.workbookPart).some((rel) => rel.type === `${OFFICE_REL_NS}/calcChain`);
+    if(chainOwned&&!options.calculationPolicy) {
       throw new OoxmlError("xlsx-calculation-chain-unsupported", "Cannot invalidate a workbook-owned calculation chain");
+    }
+    if(options.calculationPolicy&&!chainOwned) {
+      throw new OoxmlError("xlsx-calculation-chain-unsupported", "Dependent-cache policy requires an owned calculation chain");
     }
     // Array/data-table followers may have cached values without their own <f>.
     // Clearing only anchors would silently leave those answers stale. Until the
@@ -280,6 +289,7 @@ export class Workbook {
     const formulasPresent = [...this.sheetsByName.values()].some((model) =>
       [...model.cells.values()].some((entry) => entry.formulaElement !== undefined)
     );
+    const chain=options.calculationPolicy?inspectOwnedChain(this.package,this.workbookPart,[...this.sheetsByName.values()].map(s=>({name:s.name,part:s.part,document:s.document,refs:new Set(s.cells.keys())})),sheetName,normalizedReference):undefined;
 
     this.package.transaction(() => {
       for (const model of this.sheetsByName.values()) {
@@ -288,7 +298,7 @@ export class Workbook {
           edits.push(...valueEdits);
         }
         if (formulasPresent) {
-          edits.push(...buildFormulaCacheInvalidationEdits(model));
+          edits.push(...buildFormulaCacheInvalidationEdits(model,chain?.affected));
         }
         if (edits.length > 0) {
           const nextXml = applyEdits(model.xml, edits);
@@ -302,6 +312,11 @@ export class Workbook {
           this.package.set(this.workbookPart, encoder.encode(nextWorkbookXml));
         }
       }
+      if (chain) {
+        removeRelationship(this.package, this.workbookPart, chain.relationshipId);
+        removePart(this.package, chain.part);
+      }
+      this.package.toBytes();
     });
 
     this.reload();
@@ -404,8 +419,8 @@ export class Worksheet {
    * Shared and array formulas are refused before mutation because replacing those
    * XML structures safely would require a full formula topology editor.
    */
-  setCellValue(reference: string, value: ScalarCellValue): void {
-    this.workbookRef.writeCell(this.name, reference, value);
+  setCellValue(reference: string, value: ScalarCellValue, options:{calculationPolicy?:'invalidate-dependent-formula-caches'}={}): void {
+    this.workbookRef.writeCell(this.name, reference, value, options);
   }
 }
 
@@ -823,9 +838,10 @@ function unsupportedWorksheetStructure(sheetName: string, detail: string): Ooxml
   );
 }
 
-function buildFormulaCacheInvalidationEdits(sheet: WorksheetModel): CellEdit[] {
+function buildFormulaCacheInvalidationEdits(sheet: WorksheetModel,affected?:ReadonlySet<string>): CellEdit[] {
   const edits: CellEdit[] = [];
   for (const parsed of sheet.cells.values()) {
+    if (affected&&!affected.has(`${sheet.name}!${parsed.ref}`))continue;
     if (!parsed.formulaElement || !parsed.valueElement) {
       continue;
     }

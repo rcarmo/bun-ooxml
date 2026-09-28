@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1108,
-  "files": 135,
+  "count": 1112,
+  "files": 136,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -688,6 +688,12 @@
       "path": "tests/unit/xlsx-formula-remap.test.ts",
       "sha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "declarations": 11,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "sha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c",
+      "declarations": 4,
       "issues": []
     },
     {
@@ -1557,6 +1563,8 @@
     "bun:tests/unit/xlsx-formula-remap.test.ts:invalid arguments, inherited fields and executable patches refuse without invoking accessors",
     "bun:tests/unit/xlsx-formula-remap.test.ts:finite 288-expression matrix reparses slices, preserves unaffected expressions and shifts wrapped spans",
     "bun:tests/unit/xlsx-formula-remap.test.ts:canonical remap and matrix cases reject wrong output, false success and each missing matrix outcome",
+    "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in dependent invalidation removes one owned chain and preserves independent cache",
+    "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in incomplete or ambiguous chain graphs refuse atomically",
     "bun:tests/unit/xlsx-range.test.ts:quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
     "bun:tests/unit/xlsx-range.test.ts:unsupported syntax refuses as one typed error without accepting partial input",
     "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
@@ -2036,6 +2044,8 @@
     "bun:tests/unit/xlsx-formula-remap.test.ts:invalid arguments, inherited fields and executable patches refuse without invoking accessors",
     "bun:tests/unit/xlsx-formula-remap.test.ts:finite 288-expression matrix reparses slices, preserves unaffected expressions and shifts wrapped spans",
     "bun:tests/unit/xlsx-formula-remap.test.ts:canonical remap and matrix cases reject wrong output, false success and each missing matrix outcome",
+    "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in dependent invalidation removes one owned chain and preserves independent cache",
+    "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in incomplete or ambiguous chain graphs refuse atomically",
     "bun:tests/unit/xlsx-range.test.ts:quoted sheets support spaces, doubled apostrophes and Unicode without resolving a workbook",
     "bun:tests/unit/xlsx-range.test.ts:unsupported syntax refuses as one typed error without accepting partial input",
     "bun:tests/unit/xlsx-range.test.ts:sheet qualifier policy refuses external, invalid and unsafe name forms",
@@ -39950,6 +39960,218 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in dependent invalidation removes one owned chain and preserves independent cache",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "line": 41,
+      "title": "opt-in dependent invalidation removes one owned chain and preserves independent cache",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.error).toBeUndefined()",
+        "expect(result.status).toBe('committed')",
+        "expect(result.committedChanges).toBe(1)",
+        "expect(result.calculationState).toBe('recalculation-required')",
+        "expect([...await Bun.file(input).bytes()]).toEqual([...source])",
+        "expect(reopened.readCell('Input','A1')).toMatchObject({kind:'number',value:10})",
+        "expect(reopened.readCell('Calc','A1')).toMatchObject({kind:'formula',formula:'Input!A1*2',cached:null})",
+        "expect(reopened.readCell('Calc','B1')).toMatchObject({kind:'formula',formula:'A1+1',cached:null})",
+        "expect(reopened.readCell('Calc','C1')).toMatchObject({kind:'formula',formula:'42',cached:42})",
+        "expect(savedFormula(source,'xl/worksheets/sheet2.xml','A1')).toEqual({formula:'Input!A1*2',dataOnly:'2'})",
+        "expect(savedFormula(source,'xl/worksheets/sheet2.xml','B1')).toEqual({formula:'A1+1',dataOnly:'3'})",
+        "expect(savedFormula(bytes,'xl/worksheets/sheet2.xml','A1')).toEqual({formula:'Input!A1*2',dataOnly:null})",
+        "expect(savedFormula(bytes,'xl/worksheets/sheet2.xml','B1')).toEqual({formula:'A1+1',dataOnly:null})",
+        "expect(savedFormula(bytes,'xl/worksheets/sheet2.xml','C1')).toEqual({formula:'42',dataOnly:'42'})",
+        "expect(after.get(name)).toEqual(before.get(name))",
+        "expect([...after.keys()].sort()).toEqual([...before.keys()].filter(name=>name!==chain).sort())",
+        "expect(after.has(chain)).toBe(false)",
+        "expect(decode.decode(after.get(rel)!)).not.toContain(relationship)",
+        "expect(decode.decode(after.get(types)!)).not.toContain(contentType)",
+        "expect(decode.decode(after.get('xl/workbook.xml')!)).toContain('forceFullCalc=\"1\"')",
+        "expect(decode.decode(after.get('xl/workbook.xml')!)).toContain('fullCalcOnLoad=\"1\"')",
+        "expect(pkg.relationships('xl/workbook.xml').filter(r=>r.type===relationship)).toHaveLength(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 58,
+          "expression": "for(const name of before.keys())if(!allowed.has(name)&&name!==chain)expect(after.get(name)).toEqual(before.get(name));"
+        },
+        {
+          "line": 64,
+          "expression": "for(const name of pkg.names())pkg.get(name);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c",
+      "body": "{\n const source=await ownedChainSource(),root=await mkdtemp(join(tmpdir(),'bun-chain-positive-'));\n try{\n  const input=join(root,'input.xlsx'),output=join(root,'out.xlsx');await Bun.write(input,source);\n  const result=await patchOffice({source:input,output,mode:'safe',calculationPolicy:'invalidate-dependent-formula-caches',changes:[{target:'Input!A1',value:10}]});\n  expect(result.error).toBeUndefined();expect(result.status).toBe('committed');expect(result.committedChanges).toBe(1);expect(result.calculationState).toBe('recalculation-required');\n  expect([...await Bun.file(input).bytes()]).toEqual([...source]);\n  const bytes=Uint8Array.from(await Bun.file(output).bytes()),reopened=await Workbook.open(bytes),before=readZip(source),after=readZip(bytes);\n  expect(reopened.readCell('Input','A1')).toMatchObject({kind:'number',value:10});\n  expect(reopened.readCell('Calc','A1')).toMatchObject({kind:'formula',formula:'Input!A1*2',cached:null});\n  expect(reopened.readCell('Calc','B1')).toMatchObject({kind:'formula',formula:'A1+1',cached:null});\n  expect(reopened.readCell('Calc','C1')).toMatchObject({kind:'formula',formula:'42',cached:42});\n  expect(savedFormula(source,'xl/worksheets/sheet2.xml','A1')).toEqual({formula:'Input!A1*2',dataOnly:'2'});\n  expect(savedFormula(source,'xl/worksheets/sheet2.xml','B1')).toEqual({formula:'A1+1',dataOnly:'3'});\n  expect(savedFormula(bytes,'xl/worksheets/sheet2.xml','A1')).toEqual({formula:'Input!A1*2',dataOnly:null});\n  expect(savedFormula(bytes,'xl/worksheets/sheet2.xml','B1')).toEqual({formula:'A1+1',dataOnly:null});\n  expect(savedFormula(bytes,'xl/worksheets/sheet2.xml','C1')).toEqual({formula:'42',dataOnly:'42'});\n  for(const name of before.keys())if(!allowed.has(name)&&name!==chain)expect(after.get(name)).toEqual(before.get(name));\n  expect([...after.keys()].sort()).toEqual([...before.keys()].filter(name=>name!==chain).sort());\n  expect(after.has(chain)).toBe(false);expect(decode.decode(after.get(rel)!)).not.toContain(relationship);\n  expect(decode.decode(after.get(types)!)).not.toContain(contentType);\n  expect(decode.decode(after.get('xl/workbook.xml')!)).toContain('forceFullCalc=\"1\"');\n  expect(decode.decode(after.get('xl/workbook.xml')!)).toContain('fullCalcOnLoad=\"1\"');\n  const pkg=await OpcPackage.open(bytes);for(const name of pkg.names())pkg.get(name);\n  expect(pkg.relationships('xl/workbook.xml').filter(r=>r.type===relationship)).toHaveLength(0);\n }finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        ".filter",
+        ".filter().sort",
+        ".sort",
+        "Bun.file",
+        "Bun.file().bytes",
+        "Bun.write",
+        "OpcPackage.open",
+        "Uint8Array.from",
+        "Workbook.open",
+        "after.get",
+        "after.has",
+        "after.keys",
+        "allowed.has",
+        "before.get",
+        "before.keys",
+        "decode.decode",
+        "expect",
+        "expect().not.toContain",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "expect().toMatchObject",
+        "join",
+        "mkdtemp",
+        "ownedChainSource",
+        "patchOffice",
+        "pkg.get",
+        "pkg.names",
+        "pkg.relationships",
+        "pkg.relationships().filter",
+        "readZip",
+        "reopened.readCell",
+        "rm",
+        "savedFormula",
+        "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in incomplete or ambiguous chain graphs refuse atomically",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "line": 69,
+      "title": "opt-in incomplete or ambiguous chain graphs refuse atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain(find)",
+        "expect(()=>wb.worksheet('Input').setCellValue('A1',10,{calculationPolicy:'invalidate-dependent-formula-caches'})).toThrow(expect.objectContaining({code:'xlsx-calculation-chain-unsupported'}))",
+        "expect(wb.toBytes()).toEqual(changed)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 71,
+          "expression": "for(const [part,find,replacement] of [\n  ['xl/worksheets/sheet2.xml','Input!A1*2','SUM(UnknownName)'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f>C1</s:f>'],\n  ['xl/worksheets/sheet2.xml','Input!A1*2','Input!Z9*2'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f>A1:C1</s:f>'],\n  [rel,'Target=\"chains/order.xml\"','TargetMode=\"External\" Target=\"chains/order.xml\"'],\n  [types,contentType,'application/xml'],\n  [chain,'i=\"2\"','i=\"99\"'],\n  [chain,'<c r=\"B1\" i=\"2\"/>','<c r=\"B1\" i=\"2\"/><c r=\"B1\" i=\"2\"/>'],\n  ['xl/workbook.xml','</s:workbook>','<s:definedNames><s:definedName name=\"Invisible\">Input!A1</s:definedName></s:definedNames></s:workbook>'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f t=\"shared\">42</s:f>'],\n  ['xl/worksheets/sheet2.xml','<s:f>Input!A1*2</s:f>','<s:f>B1*2</s:f>'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f>C1</s:f>'],\n ] as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c",
+      "body": "{\n const source=await ownedChainSource();\n for(const [part,find,replacement] of [\n  ['xl/worksheets/sheet2.xml','Input!A1*2','SUM(UnknownName)'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f>C1</s:f>'],\n  ['xl/worksheets/sheet2.xml','Input!A1*2','Input!Z9*2'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f>A1:C1</s:f>'],\n  [rel,'Target=\"chains/order.xml\"','TargetMode=\"External\" Target=\"chains/order.xml\"'],\n  [types,contentType,'application/xml'],\n  [chain,'i=\"2\"','i=\"99\"'],\n  [chain,'<c r=\"B1\" i=\"2\"/>','<c r=\"B1\" i=\"2\"/><c r=\"B1\" i=\"2\"/>'],\n  ['xl/workbook.xml','</s:workbook>','<s:definedNames><s:definedName name=\"Invisible\">Input!A1</s:definedName></s:definedNames></s:workbook>'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f t=\"shared\">42</s:f>'],\n  ['xl/worksheets/sheet2.xml','<s:f>Input!A1*2</s:f>','<s:f>B1*2</s:f>'],\n  ['xl/worksheets/sheet2.xml','<s:f>42</s:f>','<s:f>C1</s:f>'],\n ] as const){\n  const parts=readZip(source),xml=decode.decode(parts.get(part)!);expect(xml).toContain(find);\n  parts.set(part,encode.encode(xml.replace(find,replacement)));\n  const changed=writeZip(parts),wb=await Workbook.open(changed);\n  expect(()=>wb.worksheet('Input').setCellValue('A1',10,{calculationPolicy:'invalidate-dependent-formula-caches'})).toThrow(expect.objectContaining({code:'xlsx-calculation-chain-unsupported'}));\n  expect(wb.toBytes()).toEqual(changed);\n }\n}",
+      "calls": [
+        "Workbook.open",
+        "decode.decode",
+        "encode.encode",
+        "expect",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "ownedChainSource",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "wb.toBytes",
+        "wb.worksheet",
+        "wb.worksheet().setCellValue",
+        "writeZip",
+        "xml.replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:direct API refuses an unrecognised policy without touching the workbook",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "line": 93,
+      "title": "direct API refuses an unrecognised policy without touching the workbook",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>wb.worksheet('Input').setCellValue('A1',10,{calculationPolicy:'invalid' as 'invalidate-dependent-formula-caches'})).toThrow(expect.objectContaining({code:'xlsx-calculation-chain-unsupported'}))",
+        "expect(wb.toBytes()).toEqual(source)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c",
+      "body": "{\n const source=await ownedChainSource(),wb=await Workbook.open(source);\n expect(()=>wb.worksheet('Input').setCellValue('A1',10,{calculationPolicy:'invalid' as 'invalidate-dependent-formula-caches'})).toThrow(expect.objectContaining({code:'xlsx-calculation-chain-unsupported'}));\n expect(wb.toBytes()).toEqual(source);\n}",
+      "calls": [
+        "Workbook.open",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "ownedChainSource",
+        "wb.toBytes",
+        "wb.worksheet",
+        "wb.worksheet().setCellValue"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:unsupported dependency graph preserves source and existing output in workflow",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "line": 99,
+      "title": "unsupported dependency graph preserves source and existing output in workflow",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.status).toBe('refused')",
+        "expect(result.error?.code).toBe('xlsx-calculation-chain-unsupported')",
+        "expect(result.committedChanges).toBe(0)",
+        "expect([...await Bun.file(input).bytes()]).toEqual([...source])",
+        "expect([...await Bun.file(output).bytes()]).toEqual([...oldOutput])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c",
+      "body": "{\n const parts=readZip(await ownedChainSource()),sheet='xl/worksheets/sheet2.xml';\n parts.set(sheet,encode.encode(decode.decode(parts.get(sheet)!).replace('Input!A1*2','Input!Z9*2')));\n const source=writeZip(parts),root=await mkdtemp(join(tmpdir(),'bun-chain-refusal-'));\n try{\n  const input=join(root,'input.xlsx'),output=join(root,'out.xlsx'),oldOutput=encode.encode('existing output');\n  await Bun.write(input,source);await Bun.write(output,'existing output');\n  const result=await patchOffice({source:input,output,mode:'safe',calculationPolicy:'invalidate-dependent-formula-caches',changes:[{target:'Input!A1',value:10}]});\n  expect(result.status).toBe('refused');expect(result.error?.code).toBe('xlsx-calculation-chain-unsupported');expect(result.committedChanges).toBe(0);\n  expect([...await Bun.file(input).bytes()]).toEqual([...source]);\n  expect([...await Bun.file(output).bytes()]).toEqual([...oldOutput]);\n }finally{await rm(root,{recursive:true,force:true});}\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().bytes",
+        "Bun.write",
+        "decode.decode",
+        "decode.decode().replace",
+        "encode.encode",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "join",
+        "mkdtemp",
+        "ownedChainSource",
+        "parts.get",
+        "parts.set",
+        "patchOffice",
+        "readZip",
+        "rm",
+        "tmpdir",
+        "writeZip"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {

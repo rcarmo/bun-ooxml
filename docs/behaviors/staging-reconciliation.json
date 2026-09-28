@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1108,
+  "nativeDeclarations": 1112,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 881,
+  "withoutStagingCount": 885,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -5944,6 +5944,26 @@
       "id": "bun:tests/unit/xlsx-formula-remap.test.ts:canonical remap and matrix cases reject wrong output, false success and each missing matrix outcome",
       "path": "tests/unit/xlsx-formula-remap.test.ts",
       "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in dependent invalidation removes one owned chain and preserves independent cache",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:opt-in incomplete or ambiguous chain graphs refuse atomically",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:direct API refuses an unrecognised policy without touching the workbook",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-opt-in.test.ts:unsupported dependency graph preserves source and existing output in workflow",
+      "path": "tests/unit/xlsx-owned-chain-opt-in.test.ts",
+      "sourceSha256": "d1c8195b97b6a241020aa3014456e11f3d1a933e40165e90da43c201a354666c"
     },
     {
       "id": "bun:tests/unit/xlsx-owned-chain-refusal.test.ts:owned nonstandard chain value edit refuses before stale metadata can survive",

@@ -20,7 +20,7 @@ export interface PatchRequest {
   multilineWrap?:boolean;
   trackChanges?:boolean;
   revisionMetadata?:{author:string;date:string};
-  calculationPolicy?:"invalidate-without-recalculation";
+  calculationPolicy?:"invalidate-without-recalculation"|"invalidate-dependent-formula-caches";
   expectedSourceSha256?:string;
   expectedDestinationSha256?:string|null;
 }
@@ -88,7 +88,7 @@ export async function patchOffice(request:PatchRequest):Promise<PatchReceipt> {
         for(const change of request.changes) {
           const result:TargetResult={...change,matched:0,status:"matched"};receipt.results.push(result);
           try {
-            const target=tracked?resolveTrackedDocx(tracked,change,result,request.revisionMetadata!):doc?resolveDocx(doc,change,result):deck?resolvePptx(deck,change,result):resolveXlsx(book!,change,result,request.multilineWrap===true);
+            const target=tracked?resolveTrackedDocx(tracked,change,result,request.revisionMetadata!):doc?resolveDocx(doc,change,result):deck?resolvePptx(deck,change,result):resolveXlsx(book!,change,result,request.multilineWrap===true,request.calculationPolicy);
             if(keys.has(target.key))refuse("workflow-overlapping-targets",`Repeated target ${change.target}`);
             if(target.range&&targets.some(t=>t.range&&t.range.paragraph===target.range!.paragraph&&t.range.start<target.range!.end&&target.range!.start<t.range.end))refuse("workflow-overlapping-targets","Overlapping text ranges refuse");
             keys.add(target.key);targets.push(target);
@@ -189,7 +189,7 @@ function resolvePptx(deck:Presentation,change:PatchRequest["changes"][number],re
     if(texts[resolved.anchor.paragraphIndex]?.text!==value)refuse("workflow-verification-failed","PPTX requested text missing after save");
   }};
 }
-function resolveXlsx(book:Workbook,change:PatchRequest["changes"][number],result:TargetResult,wrap:boolean):Target {
+function resolveXlsx(book:Workbook,change:PatchRequest["changes"][number],result:TargetResult,wrap:boolean,calculationPolicy:PatchRequest['calculationPolicy']):Target {
   const split=change.target.lastIndexOf("!");
   const sheetName=split>=0?change.target.slice(0,split):book.sheetnames[0]!;
   const address=(split>=0?change.target.slice(split+1):change.target).toUpperCase();
@@ -203,7 +203,7 @@ function resolveXlsx(book:Workbook,change:PatchRequest["changes"][number],result
   const value=change.value;
   return {key:`${sheetName}!${address}`,result,invalidatesCalculation:!Object.is(cell.value,value),apply:()=>{
     const before=book.package.toBytes();
-    if(!Object.is(cell.value,value))book.worksheet(sheetName).setCellValue(address,value);
+    if(!Object.is(cell.value,value))book.worksheet(sheetName).setCellValue(address,value,calculationPolicy==='invalidate-dependent-formula-caches'?{calculationPolicy}:{});
     if(wrap&&typeof change.value==="string"&&change.value.includes("\n"))setCellWrapText(book,sheetName,address,true);
     return sha(book.package.toBytes())!==sha(before);
   },verify:async bytes=>{
@@ -221,7 +221,7 @@ function validateRequest(r:PatchRequest):void {
     if(!r.revisionMetadata||typeof r.revisionMetadata.author!=='string'||typeof r.revisionMetadata.date!=='string')refuse('workflow-request-invalid','Tracked changes require explicit author and UTC date');
   }
   if(r.changes.length>1000)refuse("workflow-request-limit","At most 1000 targets per batch");
-  if(r.calculationPolicy!==undefined&&r.calculationPolicy!=="invalidate-without-recalculation")refuse("workflow-policy-unsupported","Only cache invalidation without recalculation is available");
+  if(r.calculationPolicy!==undefined&&!['invalidate-without-recalculation','invalidate-dependent-formula-caches'].includes(r.calculationPolicy))refuse("workflow-policy-unsupported","Unsupported formula-cache invalidation policy");
   for(const c of r.changes)if(!c||typeof c.target!=="string"||!c.target||!(c.value===null||typeof c.value==="string"||typeof c.value==="boolean"||typeof c.value==="number"&&Number.isFinite(c.value)))refuse("workflow-request-invalid","Invalid target/value");
 }
 async function canonicalPath(path:string):Promise<string>{const absolute=resolve(path);try{if((await lstat(absolute)).isSymbolicLink())refuse("workflow-symlink","Leaf symlink paths refuse");}catch(e){if((e as NodeJS.ErrnoException).code!=="ENOENT")throw e;}return join(await realpath(dirname(absolute)),basename(absolute));}

@@ -45,7 +45,13 @@ Targets are exact DOCX body/table text, `slide:1/title` or `slide:1/subtitle`, a
 XLSX `multilineWrap: true` clones/reuses the correct xf and preserves its dependencies.
 `calculationPolicy: 'invalidate-without-recalculation'` clears cached values on
 worksheet formula-bearing cells and reports recalculation required without producing
-an answer. Array/data-table result ranges refuse value edits before any write. `expectedDestinationSha256`
+an answer. For a workbook-owned calculation chain, use the explicit
+`calculationPolicy: 'invalidate-dependent-formula-caches'` to clear only formula
+caches dependent on the edited cell, remove the chain, and request full
+recalculation. This opt-in accepts only a single internally owned chain and a
+complete static dependency graph; ambiguous or unsupported graphs refuse with
+`xlsx-calculation-chain-unsupported` before writing. Array/data-table result
+ranges refuse value edits before any write. `expectedDestinationSha256`
 can guard an existing output; null requires the output to be absent.
 
 Only this API's writers share its process-local path locks. External editors can
@@ -371,13 +377,17 @@ Supported simple cells can be written or added to ordinary worksheets. Unsafe
 row/cell order and unsupported structures refuse insertion. Numeric, boolean, inline and
 shared-string values can be read; formulas expose stored cached values. The API
 preserves the target cell style index. Shared and array formula overwrites refuse.
-After an input edit, the API clears `<v>` contents only on worksheet cells
-carrying `<f>`, across all loaded worksheets, and requests recalculation on open.
+By default, an input edit clears `<v>` contents on formula-bearing worksheet
+cells across all loaded worksheets and requests recalculation on open. With the
+explicit dependent-cache policy, only dependent formula caches are cleared.
 Array/data-table formulas may have result followers without `<f>`; value edits in
 such workbooks refuse atomically with `xlsx-cache-topology-unsupported`. Workbooks
-with a workbook-owned calculation-chain relationship refuse value edits with
-`xlsx-calculation-chain-unsupported` before any package part changes. Style-only
-edits do not need that invalidation and preserve caches.
+with a workbook-owned calculation-chain relationship refuse value edits by
+default with `xlsx-calculation-chain-unsupported` before any package part changes.
+The explicit dependent-cache policy validates the chain ownership and formula
+graph, clears only affected formula caches, removes the chain relationship, part
+and content-type override, and requests full recalculation. It refuses incomplete
+graphs atomically. Style-only edits preserve caches and chain metadata.
 
 Chart caches, external-link caches and other opaque derived values are preserved,
 not refreshed or certified. Calculation-chain metadata is left untouched on
