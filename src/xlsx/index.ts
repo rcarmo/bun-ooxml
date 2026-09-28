@@ -260,6 +260,11 @@ export class Workbook {
     const valueEdits = cell
       ? buildValueEdits(cell, value)
       : buildMissingCellEdits(sheet, normalizedReference, value);
+    // A value edit can invalidate formula caches, but this editor cannot retire
+    // workbook-owned calculation-order metadata. Refuse before changing any part.
+    if (this.package.relationships(this.workbookPart).some((rel) => rel.type === `${OFFICE_REL_NS}/calcChain`)) {
+      throw new OoxmlError("xlsx-calculation-chain-unsupported", "Cannot invalidate a workbook-owned calculation chain");
+    }
     // Array/data-table followers may have cached values without their own <f>.
     // Clearing only anchors would silently leave those answers stale. Until the
     // range engine owns every result cell, refuse the whole value edit up front.

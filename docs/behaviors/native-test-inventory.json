@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1106,
-  "files": 134,
+  "count": 1108,
+  "files": 135,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -688,6 +688,12 @@
       "path": "tests/unit/xlsx-formula-remap.test.ts",
       "sha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5",
       "declarations": 11,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/xlsx-owned-chain-refusal.test.ts",
+      "sha256": "03c539d05cd48d8187c028c16bcecf901fede3ab80d025853a456ea2d2449249",
+      "declarations": 2,
       "issues": []
     },
     {
@@ -39944,6 +39950,81 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-refusal.test.ts:owned nonstandard chain value edit refuses before stale metadata can survive",
+      "path": "tests/unit/xlsx-owned-chain-refusal.test.ts",
+      "line": 36,
+      "title": "owned nonstandard chain value edit refuses before stale metadata can survive",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(workbook.readCell('Input', 'A1')).toMatchObject({ kind: 'number', value: 1 })",
+        "expect(workbook.readCell('Calc', 'A1')).toMatchObject({ kind: 'formula', cached: 2 })",
+        "expect(workbook.readCell('Calc', 'B1')).toMatchObject({ kind: 'formula', cached: 3 })",
+        "expect(workbook.readCell('Calc', 'C1')).toMatchObject({ kind: 'formula', cached: 42 })",
+        "expect(() => workbook.worksheet('Input').setCellValue('A1', 10)).toThrow(expect.objectContaining({ code: 'xlsx-calculation-chain-unsupported' }))",
+        "expect(workbook.toBytes()).toEqual(source)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03c539d05cd48d8187c028c16bcecf901fede3ab80d025853a456ea2d2449249",
+      "body": "{\n  const source = await ownedChainInput(), workbook = await Workbook.open(source);\n  expect(workbook.readCell('Input', 'A1')).toMatchObject({ kind: 'number', value: 1 });\n  expect(workbook.readCell('Calc', 'A1')).toMatchObject({ kind: 'formula', cached: 2 });\n  expect(workbook.readCell('Calc', 'B1')).toMatchObject({ kind: 'formula', cached: 3 });\n  expect(workbook.readCell('Calc', 'C1')).toMatchObject({ kind: 'formula', cached: 42 });\n  expect(() => workbook.worksheet('Input').setCellValue('A1', 10)).toThrow(expect.objectContaining({ code: 'xlsx-calculation-chain-unsupported' }));\n  expect(workbook.readCell('Input', 'A1')).toMatchObject({ kind: 'number', value: 1 });\n  expect(workbook.toBytes()).toEqual(source);\n}",
+      "calls": [
+        "Workbook.open",
+        "expect",
+        "expect().toEqual",
+        "expect().toMatchObject",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "ownedChainInput",
+        "workbook.readCell",
+        "workbook.toBytes",
+        "workbook.worksheet",
+        "workbook.worksheet().setCellValue"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-refusal.test.ts:owned chain workflow refusal preserves source and an existing destination",
+      "path": "tests/unit/xlsx-owned-chain-refusal.test.ts",
+      "line": 47,
+      "title": "owned chain workflow refusal preserves source and an existing destination",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(result.status).toBe('refused')",
+        "expect(result.committedChanges).toBe(0)",
+        "expect(result.error?.code).toBe('xlsx-calculation-chain-unsupported')",
+        "expect([...await Bun.file(source).bytes()]).toEqual([...bytes])",
+        "expect(await Bun.file(output).text()).toBe('old output')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "03c539d05cd48d8187c028c16bcecf901fede3ab80d025853a456ea2d2449249",
+      "body": "{\n  const root = await mkdtemp(join(tmpdir(), 'bun-owned-chain-'));\n  try {\n    const source = join(root, 'source.xlsx'), output = join(root, 'output.xlsx'), bytes = await ownedChainInput();\n    await Bun.write(source, bytes); await Bun.write(output, 'old output');\n    const result = await patchOffice({ source, output, mode: 'safe', changes: [{ target: 'Input!A1', value: 10 }] });\n    expect(result.status).toBe('refused'); expect(result.committedChanges).toBe(0);\n    expect(result.error?.code).toBe('xlsx-calculation-chain-unsupported');\n    expect([...await Bun.file(source).bytes()]).toEqual([...bytes]);\n    expect(await Bun.file(output).text()).toBe('old output');\n  } finally { await rm(root, { recursive: true, force: true }); }\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().bytes",
+        "Bun.file().text",
+        "Bun.write",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "join",
+        "mkdtemp",
+        "ownedChainInput",
+        "patchOffice",
+        "rm",
+        "tmpdir"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {

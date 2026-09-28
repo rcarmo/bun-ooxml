@@ -374,11 +374,14 @@ preserves the target cell style index. Shared and array formula overwrites refus
 After an input edit, the API clears `<v>` contents only on worksheet cells
 carrying `<f>`, across all loaded worksheets, and requests recalculation on open.
 Array/data-table formulas may have result followers without `<f>`; value edits in
-such workbooks refuse atomically with `xlsx-cache-topology-unsupported`. Style-only
+such workbooks refuse atomically with `xlsx-cache-topology-unsupported`. Workbooks
+with a workbook-owned calculation-chain relationship refuse value edits with
+`xlsx-calculation-chain-unsupported` before any package part changes. Style-only
 edits do not need that invalidation and preserve caches.
 
-Chart caches, external-link caches, other opaque derived values and calculation
-chains are preserved, not refreshed or certified. A recalculation flag or receipt
+Chart caches, external-link caches and other opaque derived values are preserved,
+not refreshed or certified. Calculation-chain metadata is left untouched on
+read-only and style-only operations. A recalculation flag or receipt
 does not establish their freshness. This API does not calculate formulas. A missing
 cached value is not zero, a current answer or a successful calculation.
 

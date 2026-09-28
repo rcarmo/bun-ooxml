@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1106,
+  "nativeDeclarations": 1108,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 879,
+  "withoutStagingCount": 881,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -5944,6 +5944,16 @@
       "id": "bun:tests/unit/xlsx-formula-remap.test.ts:canonical remap and matrix cases reject wrong output, false success and each missing matrix outcome",
       "path": "tests/unit/xlsx-formula-remap.test.ts",
       "sourceSha256": "08f1d1c1efde46c5fa607d47d63dabc59132669364430fae8bc307098cc2bea5"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-refusal.test.ts:owned nonstandard chain value edit refuses before stale metadata can survive",
+      "path": "tests/unit/xlsx-owned-chain-refusal.test.ts",
+      "sourceSha256": "03c539d05cd48d8187c028c16bcecf901fede3ab80d025853a456ea2d2449249"
+    },
+    {
+      "id": "bun:tests/unit/xlsx-owned-chain-refusal.test.ts:owned chain workflow refusal preserves source and an existing destination",
+      "path": "tests/unit/xlsx-owned-chain-refusal.test.ts",
+      "sourceSha256": "03c539d05cd48d8187c028c16bcecf901fede3ab80d025853a456ea2d2449249"
     },
     {
       "id": "bun:tests/unit/xlsx-range.test.ts:direct cell and rectangle ranges preserve coordinates, absolute flags and endpoint order",
