@@ -18,6 +18,6 @@ test('retained weak response and comment policies are not strengthened by neutra
 });
 test('profile-only adoption preserves all default case identities and every bounded mapping record',async()=>{
  const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();
- const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(61);
+ const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(60);
  const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');
 });

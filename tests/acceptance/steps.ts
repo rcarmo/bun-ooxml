@@ -1,6 +1,7 @@
 import type { StepBinding } from "../../scripts/gherkin.ts";
 import { bindings as coreBindings } from "./core.ts";
 import { bindings as packageAdmissionBindings } from './package-admission.ts';
+import {bindings as physicalOverlapBindings} from './physical-overlap.ts';
 import { bindings as packageComparisonBindings } from './package-comparison.ts';
 import { bindings as refusalBindings } from './refusal-outcomes.ts';
 import { bindings as opcCustodyBindings, cleanup as cleanupOpcCustody } from './opc-custody.ts';
@@ -78,6 +79,7 @@ export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cle
 export const bindings: StepBinding[] = [
   ...coreBindings,
   ...packageAdmissionBindings,
+  ...physicalOverlapBindings,
   ...packageComparisonBindings,
   ...refusalBindings,
   ...opcCustodyBindings,

@@ -4,9 +4,9 @@ The shared reference contains **344 assets**. The table lists available tests; a
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
-| Shared catalogue | 304 | 791 | 730 | 61 |
+| Shared catalogue | 304 | 791 | 731 | 60 |
 | Local-only obligations | 0 | 0 | 0 | 0 |
-| Combined inventory | 304 | 791 | 730 | 61 |
+| Combined inventory | 304 | 791 | 731 | 60 |
 
 The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
@@ -44,7 +44,7 @@ The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-
 | references/fixtures-ooxml/workflows/package/relationship-namespaces.feature | implemented | 2 | 4 | 4 | 0 | 16 |
 | references/fixtures-ooxml/workflows/package/semantic-diff.feature | implemented | 1 | 1 | 1 | 0 | 7 |
 | references/fixtures-ooxml/workflows/package/xml-member-admission.feature | implemented | 1 | 3 | 3 | 0 | 9 |
-| references/fixtures-ooxml/workflows/package/zip-admission.feature | mixed | 4 | 11 | 10 | 1 | 38 |
+| references/fixtures-ooxml/workflows/package/zip-admission.feature | implemented | 4 | 11 | 11 | 0 | 38 |
 | references/fixtures-ooxml/workflows/package/zip32.feature | implemented | 8 | 24 | 24 | 0 | 116 |
 | references/fixtures-ooxml/workflows/package/zip64.feature | implemented | 4 | 4 | 4 | 0 | 13 |
 | references/fixtures-ooxml/workflows/pptx/creation.feature | implemented | 3 | 3 | 3 | 0 | 9 |
