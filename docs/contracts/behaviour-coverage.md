@@ -54,7 +54,7 @@ The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-
 | references/fixtures-ooxml/workflows/pptx/preservation.feature | implemented | 1 | 1 | 1 | 0 | 6 |
 | references/fixtures-ooxml/workflows/pptx/slide-import.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/pptx/slide-order.feature | implemented | 2 | 21 | 21 | 0 | 70 |
-| references/fixtures-ooxml/workflows/pptx/slide-visibility.feature | planned | 2 | 2 | 0 | 2 | 14 |
+| references/fixtures-ooxml/workflows/pptx/slide-visibility.feature | planned | 2 | 2 | 0 | 2 | 16 |
 | references/fixtures-ooxml/workflows/pptx/tables.feature | implemented | 4 | 5 | 5 | 0 | 15 |
 | references/fixtures-ooxml/workflows/pptx/text-box.feature | implemented | 2 | 23 | 23 | 0 | 77 |
 | references/fixtures-ooxml/workflows/pptx/text.feature | implemented | 3 | 3 | 3 | 0 | 9 |
