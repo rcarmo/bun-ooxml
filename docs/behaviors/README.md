@@ -20,16 +20,16 @@ alone does not count as a tested requirement.
 
 ## Complete shared inventory
 
-The project loads all 61 canonical features from the pinned workflow registry.
+The project loads all 62 canonical features from the pinned workflow registry.
 Only explicitly selected scenario IDs are implemented; all others stay planned.
 Acceptance JSON includes `coverage.shared`, `coverage.localOnly` and the catalogue
 path/hash. The coverage table reports the same independent denominators:
 
-- Shared: 302 scenarios / 789 cases; 729 implemented and 60 planned.
+- Shared: 304 scenarios / 791 cases; 729 implemented and 62 planned.
 - Local-only: zero scenarios or cases. The eleven former local cases are now shared planned contracts.
-- Combined: 302 scenarios / 789 cases; 729 implemented and 60 planned.
+- Combined: 304 scenarios / 791 cases; 729 implemented and 62 planned.
 
-The owned nonstandard XLSX calculation-chain case remains planned for Bun. Shared v0.47 records five bounded Python XLSX source-test mappings without execution credit. Shared v0.48 records Go's separately run cross-sheet cache binding in place of native CACHE-001. Shared v0.49 records Python's separately run owned-chain binding (one case, 14 steps); Bun's 729 executed cases are unchanged. The earlier inventory update closed an omission of thirteen template cases. Earlier release
+The owned nonstandard XLSX calculation-chain case remains planned for Bun. Shared v0.47 records five bounded Python XLSX source-test mappings without execution credit. Shared v0.48 records Go's separately run cross-sheet cache binding in place of native CACHE-001. Shared v0.49 records Python's separately run owned-chain binding (one case, 14 steps). Shared v0.50 adds two planned PPTX slide-visibility cases: package-level retained inputs and a missing PowerPoint-confirmed positive. Bun's 729 executed cases are unchanged. The earlier inventory update closed an omission of thirteen template cases. Earlier release
 notes below describe their historical loaded counts. That inventory change preserved the executed case-key set and all
 472 mapping records; visibility does not award a pass.
 

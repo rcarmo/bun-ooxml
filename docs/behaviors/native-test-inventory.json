@@ -20,7 +20,7 @@
     },
     {
       "path": "tests/unit/comment-template-neutrality.test.ts",
-      "sha256": "57ea700b31f90ec3eca465a569ecf9e3a03542d363b8aa7433ffe93170b3886b",
+      "sha256": "472670e50257f759c76b3bf7e97a22ef353bd127b8c85f921e1314c219e63a83",
       "declarations": 3,
       "issues": []
     },
@@ -86,7 +86,7 @@
     },
     {
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "declarations": 14,
       "issues": []
     },
@@ -134,7 +134,7 @@
     },
     {
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "declarations": 8,
       "issues": []
     },
@@ -206,13 +206,13 @@
     },
     {
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "declarations": 12,
       "issues": []
     },
     {
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "declarations": 12,
       "issues": []
     },
@@ -272,7 +272,7 @@
     },
     {
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "declarations": 12,
       "issues": []
     },
@@ -290,7 +290,7 @@
     },
     {
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "declarations": 12,
       "issues": []
     },
@@ -302,7 +302,7 @@
     },
     {
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "declarations": 14,
       "issues": []
     },
@@ -356,7 +356,7 @@
     },
     {
       "path": "tests/unit/nullable-cell-mappings.test.ts",
-      "sha256": "dfdb0148442285d3d4ad211fcfb73dab199ca86f653a815b063d812ba3d909f3",
+      "sha256": "d51c18855334b3d2b3ba1b1df5d6d460ac6655ad9b740f4da58eb1a9db8b0a69",
       "declarations": 2,
       "issues": []
     },
@@ -410,7 +410,7 @@
     },
     {
       "path": "tests/unit/package-neutral-bindings.test.ts",
-      "sha256": "0a730e94e0d40f0acd6319f97b60d18463c4a1cb84d972cd6d5279a4a5725e02",
+      "sha256": "4980632a186fab4d05f29a3d9907161e10a4d318d8486b0f6207450a5c6d6271",
       "declarations": 3,
       "issues": []
     },
@@ -524,13 +524,13 @@
     },
     {
       "path": "tests/unit/runtime-neutral-bindings.test.ts",
-      "sha256": "9d20d04073e8c5bd0a0cda9c8cdb5de0c71f7ad41eb04dbef71e91a6f41696e6",
+      "sha256": "70e47d4f2672b92c83a1b203eeb4165c6915c030fbc2ea8d84c9f807b4cb56a1",
       "declarations": 3,
       "issues": []
     },
     {
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sha256": "7659cab8ccea5c34c72f72259fd59e0879a7da26dac1d323043ded30720543fc",
+      "sha256": "da539138eb8e00a46d568fa9b1f743b34db0b713423a8f55f4e03e123355670a",
       "declarations": 5,
       "issues": []
     },
@@ -614,7 +614,7 @@
     },
     {
       "path": "tests/unit/word-neutral-bindings.test.ts",
-      "sha256": "52e31fa93d7edc6fd59547c3aef8db447aefef2bb29c5684232493e06b1d6858",
+      "sha256": "8158417db68b7f23ce1fcec5464914c1a0f9801dc906361ed0fd17b6c9816834",
       "declarations": 3,
       "issues": []
     },
@@ -626,7 +626,7 @@
     },
     {
       "path": "tests/unit/workflow-layout.test.ts",
-      "sha256": "f6e22e6932c10f19f084989707e90ff8dc25bad1715656e130d6a99ed6b985f5",
+      "sha256": "db658a4b5987ff386ddbd40f4c7a3ff9a247128006b9673c66e2de8c96cf023b",
       "declarations": 3,
       "issues": []
     },
@@ -740,7 +740,7 @@
     },
     {
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
-      "sha256": "dc882aa587bc10998e57407bed6d9a28eafbdf1f5ec9e33511e53efc01204469",
+      "sha256": "48f43e19a9bd0d152d1f2cb189c28b3fe3d5044d5ba52c21e3680b80e70b1a34",
       "declarations": 3,
       "issues": []
     },
@@ -1124,7 +1124,7 @@
     },
     {
       "path": "tests/unit/mapping-history.ts",
-      "sha256": "270510236b0be5e4dbddf567703b9d6a7a4804cdc1a0aa15fb3e260c1aff0d55"
+      "sha256": "d2961e8f2428045ffcf534fd345c507ff2fd53323e47b7a61f5b197ec0778d21"
     }
   ],
   "dynamicCases": [
@@ -2414,7 +2414,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "57ea700b31f90ec3eca465a569ecf9e3a03542d363b8aa7433ffe93170b3886b",
+      "sourceSha256": "472670e50257f759c76b3bf7e97a22ef353bd127b8c85f921e1314c219e63a83",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/comment-template-wording-migration.json')).json(),inv=await inventoryFeatures(process.cwd()),active=inv.features.flatMap(f=>f.scenarios),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)) as string[];\n expect(ids).toHaveLength(24);const observed=active.filter(s=>ids.includes(s.scenarioId));expect(observed.filter(s=>s.lifecycle==='implemented').map(s=>s.scenarioId).sort()).toEqual(['@id-xml-escaping-values','@id-xml-typed-parse-error']);expect(observed.filter(s=>(s.lifecycle??'planned')==='planned')).toHaveLength(22);\n // Catalogue completeness makes templates visible but grants no execution.\n const templates=ids.filter(id=>id.includes('template'));expect(templates).toHaveLength(13);const loaded=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(loaded.flatMap(f=>f.scenarios).filter(s=>templates.includes(s.scenarioId))).toHaveLength(13);expect(loaded.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>templates.includes(s.scenarioId)).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n for(const p of ['workflows/docx/template-analysis.feature','workflows/docx/template-cache.feature']){const f=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text(),{allowDuplicateCaseNames:true});expect(f.lifecycle).toBe('planned');expect(f.scenarios.every(s=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);}\n}",
       "calls": [
         ".test",
@@ -2468,7 +2468,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "57ea700b31f90ec3eca465a569ecf9e3a03542d363b8aa7433ffe93170b3886b",
+      "sourceSha256": "472670e50257f759c76b3bf7e97a22ef353bd127b8c85f921e1314c219e63a83",
       "body": "{\n const path='workflows/docx/template-analysis.feature',f=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text(),{allowDuplicateCaseNames:true}),plain=f.scenarios.find(s=>s.scenarioId==='@id-python-word-template-analysis-plain-response')!;expect(plain.cases[0]!.steps.at(-1)!.text).toBe('its response is a dictionary');\n const p='workflows/docx/comments.feature',comments=parseFeature(p,await Bun.file(join(fixturesRoot(),p)).text(),{allowDuplicateCaseNames:true});expect(comments.scenarios.find(s=>s.scenarioId==='@id-python-comments-filter-predicates')!.cases[0]!.steps.some(s=>s.text==='the open-filter, resolved-filter, and mine-filter results are each nonempty')).toBe(true);expect(comments.scenarios.find(s=>s.scenarioId==='@id-docx-comments-refusal')!.cases.some(c=>c.name.includes('missing-extension'))).toBe(true);\n}",
       "calls": [
         "Bun.file",
@@ -2499,7 +2499,7 @@
       "assertions": [
         "expect(originalKeys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(60)",
+        "expect(inv.counts.cases.planned).toBe(62)",
         "expect(r.mappedDeclarations).toBe(590)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -2507,8 +2507,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "57ea700b31f90ec3eca465a569ecf9e3a03542d363b8aa7433ffe93170b3886b",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(60);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "472670e50257f759c76b3bf7e97a22ef353bd127b8c85f921e1314c219e63a83",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(62);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -6024,7 +6024,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture(),before=p.toBytes(),r=inspectCommentThreads(p);expect(r.unsupported).toEqual([]);expect(r.threads.map(t=>[t.root.id,t.replies.map(c=>c.id)])).toEqual([['0',[]],['1',['2']]]);expect(r.threads[1]!.root.text).toBe('Classical hubris');expect(r.threads[1]!.replies[0]!.text).toBe('(this is a threaded reply)');expect(r.threads[1]!.replies[0]!.parentId).toBe('1');for(const v of [r,r.threads,r.threads[0],r.threads[1]!.root,r.threads[1]!.replies,r.threads[1]!.replies[0],r.unsupported])expect(Object.isFrozen(v)).toBe(true);expect(p.toBytes()).toEqual(before);setCommentResolved(p,'1',true);expect(r.threads[1]!.root.resolved).toBe(false);expect(inspectCommentThreads(p).threads[1]!.root.resolved).toBe(true);\n}",
       "calls": [
         "Object.isFrozen",
@@ -6075,7 +6075,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture(),before=await OpcPackage.open(p.toBytes());expect(setCommentThreadResolved(p,'02',true)).toEqual({rootId:'1',commentIds:['1','2'],changed:2,changedParts:[EX]});expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',true,'1']]);expect(p.text(C)).toBe(before.text(C));expect(p.text(p.mainPart())).toBe(before.text(before.mainPart()));expect(p.names()).toEqual(before.names());for(const n of before.names())if(n!==EX)expect(p.get(n)).toEqual(before.get(n));\n const dir=await mkdtemp(join(tmpdir(),'comment-thread-'));try{const file=join(dir,'resolved.docx');await p.save(file);const read=await OpcPackage.open(file);expect(states(read)).toEqual(states(p));expect(inspectCommentThreads(read).threads[1]!.replies).toHaveLength(1);expect(setCommentThreadResolved(read,'1',false)).toEqual({rootId:'1',commentIds:['1','2'],changed:2,changedParts:[EX]});await read.save(file);const reopened=await OpcPackage.open(file);for(const n of before.names())expect(reopened.get(n)).toEqual(before.get(n));}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "OpcPackage.open",
@@ -6128,7 +6128,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture();setCommentResolved(p,'1',true);expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',false,'1']]);expect(setCommentThreadResolved(p,'2',true).changed).toBe(1);const before=p.toBytes();expect(setCommentThreadResolved(p,'1',true)).toEqual({rootId:'1',commentIds:['1','2'],changed:0,changedParts:[]});expect(p.toBytes()).toEqual(before);expect(setCommentThreadResolved(p,'0',true).commentIds).toEqual(['0']);expect(states(p)).toEqual([['0',true,null],['1',true,null],['2',true,'1']]);\n}",
       "calls": [
         "commentFixture",
@@ -6160,7 +6160,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await nested();const source=p.text(EX),entries=[...source.matchAll(/<w15:commentEx\\b[^>]*\\/>/g)].map(m=>m[0]);p.set(EX,source.replace(/<w15:commentEx\\b[^>]*\\/>/g,'').replace('</w15:commentsEx>',entries.reverse().join('')+'</w15:commentsEx>'));const before=p.text(C);expect(inspectCommentThreads(p).threads.map(t=>[t.root.id,t.replies.map(r=>[r.id,r.parentId])])).toEqual([['0',[]],['1',[['2','1'],['3','2']]]]);expect(setCommentThreadResolved(p,'3',true)).toEqual({rootId:'1',commentIds:['1','2','3'],changed:3,changedParts:[EX]});expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',true,'1'],['3',true,'2']]);expect(p.text(C)).toBe(before);\n}",
       "calls": [
         ".map",
@@ -6200,7 +6200,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture();p.set(EX,p.text(EX).replace(/<w15:commentEx\\b[^>]*w15:paraId=\"3395B541\"[^>]*\\/>/,''));const before=p.toBytes();expect(()=>setCommentThreadResolved(p,'2',false)).toThrow(expect.objectContaining({code:'docx-comments-missing-extension'}));expect(p.toBytes()).toEqual(before);expect(inspectCommentThreads(p).threads[1]!.root.id).toBe('1');\n}",
       "calls": [
         "commentFixture",
@@ -6244,7 +6244,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture(),before=p.toBytes();for(const [id,value]of [[null,true],['',true],['-1',true],['1.5',true],['9007199254740992',true],['99',true],['1','true']]){expect(()=>setCommentThreadResolved(p,id as string,value as boolean)).toThrow();expect(p.toBytes()).toEqual(before);}\n for(const kind of ['missing-extension','duplicate-id','duplicate-para','missing-parent','cycle','invalid-done','wrong-mime','external-link','protected','revision-body','orphan-entry']){const p=await commentFixture(kind),before=p.toBytes();expect(()=>setCommentThreadResolved(p,'2',false)).toThrow();expect(p.toBytes()).toEqual(before);}\n}",
       "calls": [
         "commentFixture",
@@ -6277,7 +6277,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture('revision-body'),before=p.toBytes(),r=inspectCommentThreads(p);expect(r.threads).toHaveLength(2);expect(r.unsupported.length).toBeGreaterThan(0);expect(Object.isFrozen(r.unsupported[0])).toBe(true);expect(()=>setCommentThreadResolved(p,'2',true)).toThrow(expect.objectContaining({code:'docx-comments-unsupported'}));expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "Object.isFrozen",
@@ -6318,7 +6318,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n for(const stage of ['set','toBytes'] as const){const p=await nested();p.set(p.mainPart(),p.text(p.mainPart()).replace('</w:body>','<w:p><w:r><w:t>Prior</w:t></w:r></w:p></w:body>'));const before=p.toBytes(),original=p[stage].bind(p);let reached=false;if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);reached=true;throw Error('injected write');};else p.toBytes=()=>{reached=true;throw Error('injected serialization');};try{expect(()=>setCommentThreadResolved(p,'3',true)).toThrow('injected');expect(reached).toBe(true);}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(p.toBytes()).toEqual(before);expect(states(p)).toEqual([['0',false,null],['1',false,null],['2',false,'1'],['3',false,'2']]);}\n}",
       "calls": [
         "Error",
@@ -6373,7 +6373,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n for(const encoding of ['bom','le','be']){const p=await nested();let x=p.text(EX).replaceAll('w15:','q:').replace('xmlns:w15=','xmlns:q=').replace('q:done=\"0\"',\"q:done = 'false'\");if(encoding==='bom')p.set(EX,new Uint8Array([239,187,191,...new TextEncoder().encode(x)]));else{x=x.replace('UTF-8','UTF-16');const b=new Uint8Array(2+x.length*2);b.set(encoding==='le'?[255,254]:[254,255]);const v=new DataView(b.buffer);for(let i=0;i<x.length;i++)v.setUint16(2+2*i,x.charCodeAt(i),encoding==='le');p.set(EX,b);}const before=await OpcPackage.open(p.toBytes());expect(setCommentThreadResolved(p,'3',true).changed).toBe(3);const read=await OpcPackage.open(p.toBytes());expect(states(read).map(s=>s[1])).toEqual([false,true,true,true]);expect([...read.get(EX)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);expect(read.text(EX)).toContain(\"q:done = 'false'\");for(const n of before.names())if(n!==EX)expect(read.get(n)).toEqual(before.get(n));}\n}",
       "calls": [
         ".encode",
@@ -6423,7 +6423,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture(),bytes=p.get(EX)!;p.set(EX,new Uint8Array([239,187,191,...bytes]));setCommentResolved(p,'1',true);expect([...p.get(EX)!.slice(0,3)]).toEqual([239,187,191]);const {Document}=await import('../../src/index.ts'),empty=await OpcPackage.open(Document.create().package.toBytes()),before=empty.toBytes();expect(inspectCommentThreads(empty)).toEqual({threads:[],unsupported:[]});expect(empty.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.create",
@@ -6460,7 +6460,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await nested(),source=p.text(C),chunks=[...source.matchAll(/<w:comment\\b[^]*?<\\/w:comment>/g)].map(m=>m[0]);expect(chunks).toHaveLength(4);p.set(C,source.replace(/<w:comment\\b[^]*?<\\/w:comment>/g,'').replace('</w:comments>',[chunks[3],chunks[2],chunks[0],chunks[1]].join('')+'</w:comments>'));const before=p.toBytes(),r=inspectCommentThreads(p);expect(r.threads.map(t=>[t.root.id,t.replies.map(c=>c.id)])).toEqual([['0',[]],['1',['3','2']]]);expect(p.toBytes()).toEqual(before);expect(setCommentThreadResolved(p,'3',true).commentIds).toEqual(['3','2','1']);expect(inspectComments(p).comments.map(c=>[c.id,c.resolved])).toEqual([['3',true],['2',true],['0',false],['1',true]]);\n}",
       "calls": [
         ".join",
@@ -6501,7 +6501,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await nested(),before=p.text(EX);let source=before.replace('w15:done=\"0\"','w15:done = \\'off\\'');source=source.replace('w15:paraId=\"3395B541\" w15:done=\"0\"','w15:paraId=\"3395B541\" w15:done=\"&#48;\"');source=source.replace('w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\" w15:done=\"0\"','w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\"');p.set(EX,source);expect(setCommentThreadResolved(p,'2',true).changed).toBe(3);let expected=source.replace('w15:done=\"&#48;\"','w15:done=\"1\"').replace('w15:paraId=\"0E00AF3F\" w15:paraIdParent=\"3395B541\" w15:done=\"0\"','w15:paraId=\"0E00AF3F\" w15:paraIdParent=\"3395B541\" w15:done=\"1\"').replace('w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\"/>','w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\" w15:done=\"1\"/>');expect(p.text(EX)).toBe(expected);expect(p.text(EX)).toContain(\"w15:done = 'off'\");\n}",
       "calls": [
         "before.replace",
@@ -6535,7 +6535,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
       "body": "{\n const p=await commentFixture();p.set(C,`<w:comments xmlns:w=\"${W}\">${Array.from({length:10001},(_,id)=>`<w:comment w:id=\"${id}\"><w:p/></w:comment>`).join('')}</w:comments>`);p.delete(EX);const rel='word/_rels/document.xml.rels';p.set(rel,p.text(rel).replace(/<Relationship\\b[^>]*Type=\"[^\"]*\\/commentsExtended\"[^>]*\\/>/,''));const before=p.toBytes();expect(()=>inspectCommentThreads(p)).toThrow(expect.objectContaining({code:'docx-comments-limit'}));expect(()=>setCommentThreadResolved(p,'0',false)).toThrow(expect.objectContaining({code:'docx-comments-limit'}));expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "Array.from",
@@ -6568,13 +6568,13 @@
         "expect(planned).toHaveLength(9)",
         "expect(planned.every(s=>s.lifecycle==='planned')).toBe(true)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.planned).toBe(62)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c8f255326e06532eb12392e94ea7541613b777560741ff8bfab9106d6a492b1c",
-      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(60);\n}",
+      "sourceSha256": "88bc9d24fde4729398c117a9a18795432847d56e88016fc44a5e879da9f3f245",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -10628,7 +10628,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "body": "{\n for(let level=1;level<=9;level++){const d=await styled('Heading'+level),p=d.paragraphs[0]!,before=d.package.toBytes();expect(p.styleId).toBe('Heading'+level);expect(p.isHeading).toBe(true);expect(p.headingLevel).toBe(level);expect(d.package.toBytes()).toEqual(before);expect(p.text).toBe('Heading text');}\n}",
       "calls": [
         "d.package.toBytes",
@@ -10664,7 +10664,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "body": "{\n for(const id of [null,'Normal','Title','heading1','HEADING1','Heading0','Heading10','Heading01','Heading1Suffix','Heading 1','CustomHeading']){const d=await styled(id),before=d.package.toBytes(),p=d.paragraphs[0]!;expect(p.styleId).toBe(id??undefined);expect(p.isHeading).toBe(false);expect(p.headingLevel).toBe(0);expect(d.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "d.package.toBytes",
@@ -10697,7 +10697,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "body": "{\n const d=Document.create();d.addParagraphStyle('Heading1',{name:'First heading'});d.addParagraphStyle('Custom',{name:'Heading 1',basedOn:'Heading1'});d.addParagraph('Custom paragraph',{style:'Custom'}).setProperties({outlineLevel:0});\n let p=d.paragraphs[0]!;expect(p.headingLevel).toBe(0);expect(p.isHeading).toBe(false);expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('section_heading');\n p.setStyle('Heading1');p=d.paragraphs[0]!;p.setProperties({outlineLevel:9});p=d.paragraphs[0]!;expect(p.headingLevel).toBe(1);expect(p.isHeading).toBe(true);expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('paragraph');\n}",
       "calls": [
         "Document.create",
@@ -10736,7 +10736,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "body": "{\n const d=await styled('Heading9'),before=d.package.parts,dir=await mkdtemp(join(tmpdir(),'heading-classification-'));try{const path=join(dir,'heading.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs[0]!.headingLevel).toBe(9);expect(read.paragraphs[0]!.isHeading).toBe(true);expect(read.paragraphs[0]!.styleId).toBe('Heading9');expect(read.paragraphs[0]!.text).toBe('Heading text');for(const[n,b]of before)expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "Document.open",
@@ -10775,7 +10775,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "body": "{\n const d=await styled('Heading1'),held=d.paragraphs[0]!;held.setStyle(null);expect(()=>held.headingLevel).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}));expect(()=>held.isHeading).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}));expect(d.paragraphs[0]!.headingLevel).toBe(0);\n const fresh=d.paragraphs[0]!,before=new TextDecoder().decode(d.package.get('word/document.xml'));d.package.setPart('word/document.xml',new TextEncoder().encode(before.replace('Heading text','External text')));const bytes=d.package.toBytes();expect(()=>fresh.isHeading).toThrow();expect(()=>fresh.headingLevel).toThrow();expect(d.package.toBytes()).toEqual(bytes);\n}",
       "calls": [
         ".decode",
@@ -10818,7 +10818,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "body": "{\n const d=Document.create();d.addParagraph('Imported');const base=await OpcPackage.open(d.package.toBytes());\n for(const metadata of ['<w:pStyle w:val=\"Heading3\"/>','<w:pStyle w:val=\"Heading1\"/><w:pStyle w:val=\"Heading2\"/>','<w:pStyle val=\"Heading1\"/>']){const p=await OpcPackage.open(base.toBytes());p.set(p.mainPart(),p.text(p.mainPart()).replace(/<w:p(?:\\s[^>]*)?>/,open=>open+'<w:pPr>'+metadata+'</w:pPr>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();if(metadata.includes('Heading3')){expect(loaded.paragraphs[0]!.headingLevel).toBe(3);expect(loaded.paragraphs[0]!.isHeading).toBe(true);}else{expect(()=>loaded.paragraphs[0]!.headingLevel).toThrow();expect(()=>loaded.paragraphs[0]!.isHeading).toThrow();}expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.create",
@@ -10865,7 +10865,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
       "body": "{\n const d=await styled('Heading2'),p=await OpcPackage.open(d.package.toBytes());const text=p.text(p.mainPart()).replaceAll('w:','q:').replace('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16');const bytes=new Uint8Array(2+text.length*2);bytes.set([255,254]);const v=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)v.setUint16(2+i*2,text.charCodeAt(i),true);p.set(p.mainPart(),bytes);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(loaded.paragraphs[0]!.headingLevel).toBe(2);expect(loaded.paragraphs[0]!.isHeading).toBe(true);expect(loaded.package.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.open",
@@ -10910,13 +10910,13 @@
         "expect(profile.lifecycle).toBe('planned')",
         "expect(profile.cases).toHaveLength(5)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.planned).toBe(62)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "10f1353463666d4f4bab92bdb1a1b87ac60935e66f53f26182f03fefbec484b3",
-      "body": "{\n const d=await styled('Heading1'),held=d.paragraphs[0]!,before=d.package.toBytes();expect(()=>held.setStyle('')).toThrow(expect.objectContaining({code:'docx-style-argument'}));expect(d.package.toBytes()).toEqual(before);expect(held.headingLevel).toBe(1);held.setStyle(null);const p=d.paragraphs[0]!;expect(p.styleId).toBeUndefined();expect(p.isHeading).toBe(false);expect(p.headingLevel).toBe(0);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),profile=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-paragraph-style-getters')!;expect(profile.lifecycle).toBe('planned');expect(profile.cases).toHaveLength(5);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(60);\n}",
+      "sourceSha256": "fbce41c3cdf9a071c3f3a240e5e305afcdb5c3884281c8ac5c151bae00b11151",
+      "body": "{\n const d=await styled('Heading1'),held=d.paragraphs[0]!,before=d.package.toBytes();expect(()=>held.setStyle('')).toThrow(expect.objectContaining({code:'docx-style-argument'}));expect(d.package.toBytes()).toEqual(before);expect(held.headingLevel).toBe(1);held.setStyle(null);const p=d.paragraphs[0]!;expect(p.styleId).toBeUndefined();expect(p.isHeading).toBe(false);expect(p.headingLevel).toBe(0);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),profile=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-paragraph-style-getters')!;expect(profile.lifecycle).toBe('planned');expect(profile.cases).toHaveLength(5);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);\n}",
       "calls": [
         "d.package.toBytes",
         "expect",
@@ -15841,7 +15841,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{for(const a of ['accept','reject'] as const){const {p,parts}=await input(),source=p.toBytes(),base=await OpcPackage.open(source),r=inspect(p);expect(r.unsupported).toEqual([]);expect(r.revisions).toHaveLength(35);expect(r.revisions.filter(r=>r.kind==='move-from'||r.kind==='move-to')).toEqual(parts.flatMap(part=>[{part,id:'101',kind:'move-from',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'},{part,id:'103',kind:'move-to',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'}]));expect(p.toBytes()).toEqual(source);const dir=await mkdtemp(join(tmpdir(),'move-review-'));try{const src=join(dir,'source.docx'),out=join(dir,'output.docx');await Bun.write(src,source);expect(resolve(p,a)).toEqual({resolved:35,changedParts:parts});await p.save(out);const read=await OpcPackage.open(out);for(const part of parts){expect(read.text(part)).toBe(expected(base.text(part),a));expect(read.get(part)).toEqual(new TextEncoder().encode(expected(base.text(part),a)));}await custody(read,base,parts);expect(inspect(read)).toEqual({revisions:[],unsupported:[]});expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source));const now=read.toBytes();expect(resolve(read,a)).toEqual({resolved:0,changedParts:[]});expect(read.toBytes()).toEqual(now);}finally{await rm(dir,{recursive:true,force:true});}}}",
       "calls": [
         ".encode",
@@ -15901,7 +15901,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{const {p}=await input();p.set('word/footer2.xml',p.text('word/footer2.xml').replace('w:name=\"move-one\"','w:name=\"unpaired\"'));const before=p.toBytes(),base=await OpcPackage.open(before);for(const profile of ['text-only','text-and-run-properties'] as const){expect(inspectRevisions(p,{profile}).unsupported.some(f=>f.kind==='move')).toBe(true);expect(()=>resolveRevisions(p,'accept',{profile})).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);}expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:5,changedParts:['word/header1.xml']});await custody(p,base,['word/header1.xml']);expect(inspect(p).revisions.filter(r=>r.part===p.mainPart())).toHaveLength(5);expect(inspect(p).unsupported.some(f=>f.part==='word/footer2.xml')).toBe(true);}",
       "calls": [
         "OpcPackage.open",
@@ -15957,7 +15957,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{const defects:[string,(s:string)=>string][]=[\n['missing-end',s=>s.replace('<w:moveFromRangeEnd w:id=\"100\"/>','')],['missing-to',s=>s.replace(to,'')],['duplicate-name',s=>s.replace(to,to+to.replaceAll('102','104').replaceAll('103','105'))],['duplicate-range-id',s=>s.replaceAll('102','100')],['duplicate-wrapper-id',s=>s.replace('w:id=\"103\"','w:id=\"101\"')],['text-id-collision',s=>s.replace('w:id=\"101\"','w:id=\"3\"')],['range-text-id-collision',s=>s.replaceAll('100','3')],['wrong-wrapper',s=>s.replace(from,from.replaceAll('w:moveFrom w:','w:moveTo w:').replace('</w:moveFrom>','</w:moveTo>'))],['nested-ranges',s=>s.replace(from,from.replace('</w:moveFrom>',to+'</w:moveFrom>'))],['unmatched-wrapper',s=>s.replace(to,to+`<w:moveFrom w:id=\"190\"${meta}>${runs}</w:moveFrom>`)],['mismatched-text',s=>s.replace(to,to.replace('>text<','>changed<'))],['mismatched-properties',s=>s.replace(to,to.replace('<w:b/>','<w:i/>'))],['mixed',s=>s.replace(from,from.replace('<w:moveFrom w:', 'UNOWNED<w:moveFrom w:'))],['nested-revision',s=>s.replace(from,from.replace('<w:r>',`<w:ins w:id=\"150\"${meta}><w:r>`).replace('</w:r>','</w:r></w:ins>'))],['unknown-property',s=>s.replace(from,from.replace('<w:b/>','<w:glow/>'))],['paragraph-mark',s=>s.replace(from,'<w:pPr>'+from+'</w:pPr>')],['missing-author',s=>s.replace(from,from.replace(' w:author=\"Reviewer\"',''))],['decorated-marker',s=>s.replace('w:name=\"move-one\"','w:name=\"move-one\" w:colFirst=\"0\"')],['foreign',s=>s.replace(from,from.replace('<w:t xml:','<q:t xmlns:q=\"urn:other\" xml:').replace('</w:t>','</q:t>'))],['empty-name',s=>s.replaceAll('w:name=\"move-one\"','w:name=\"\"')],['range-content',s=>s.replace('<w:moveFromRangeEnd w:id=\"100\"/>','<w:moveFromRangeEnd w:id=\"100\">bad</w:moveFromRangeEnd>')],\n];for(const [name,change]of defects)for(const a of ['accept','reject'] as const){const {p}=await input(),part='word/header1.xml',old=p.text(part),xml=change(old);expect(xml,name).not.toBe(old);p.set(part,xml);const before=p.toBytes();expect(inspect(p).unsupported.some(f=>f.part===part),name).toBe(true);expect(()=>resolve(p,a),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes(),name).toEqual(before);}}",
       "calls": [
         "change",
@@ -16007,7 +16007,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{const {p}=await input();p.set(p.mainPart(),p.text(p.mainPart()).replace(to,''));p.set('word/header1.xml',p.text('word/header1.xml').replace(from,''));const before=p.toBytes();expect(()=>resolve(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);const {p:q}=await input(),part=q.mainPart();q.set(part,q.text(part).replace(from,'FROMTEMP').replace(to,from).replace('FROMTEMP',to));expect(inspect(q).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['103','101']);const xml=q.text(part);expect(resolve(q,'accept',[part]).resolved).toBe(5);expect(q.text(part)).toBe(expected(xml,'accept'));}",
       "calls": [
         "expect",
@@ -16059,7 +16059,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{for(const stage of ['write','serialize','validation']){const {p}=await input();p.set(p.mainPart(),p.text(p.mainPart()).replace('</w:body>','<w:p><w:r><w:t>Prior</w:t></w:r></w:p></w:body>'));const before=p.toBytes(),set=p.set.bind(p),serialize=p.toBytes.bind(p);let reached=false;if(stage==='serialize')p.toBytes=()=>{reached=true;throw Error('injected serialize');};else p.set=(n,v)=>{set(n,v);if(n==='word/header1.xml'){reached=true;if(stage==='write')throw Error('injected write');set(n,p.text(n).replace('</w:p>',from+to+'</w:p>'));}};try{expect(()=>resolve(p,'reject')).toThrow();expect(reached).toBe(true);}finally{p.set=set;p.toBytes=serialize;}expect(p.toBytes()).toEqual(before);expect(inspect(p).revisions).toHaveLength(35);}}",
       "calls": [
         "Error",
@@ -16105,7 +16105,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{for(const guard of ['protected','external']){const {p}=await input();resolve(p,'accept');if(guard==='external')addRelationship(p,p.mainPart(),REL+'settings','https://example.invalid/settings',{external:true});else{p.set('word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),REL+'settings','settings.xml');}const before=p.toBytes();expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}));expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "addRelationship",
@@ -16155,7 +16155,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{for(const encoding of ['bom','le','be'])for(const action of ['accept','reject'] as const){const {p}=await input(),part=p.mainPart(),aliased=runs.replaceAll('w:','q:'),fromAlias=from.replace(`<w:moveFrom w:id=\"101\"${meta}>${runs}`,`<w:moveFrom xmlns:q=\"${W}\" w:id=\"101\"${meta}>${aliased}`),toAlias=to.replace(`<w:moveTo w:id=\"103\"${meta}>${runs}`,`<w:moveTo xmlns:q=\"${W}\" w:id=\"103\"${meta}>${aliased}`);let xml=p.text(part).replace(from,fromAlias).replace(to,toAlias);if(encoding!=='bom')xml=xml.replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"');const bytes=new Uint8Array((encoding==='bom'?3:2)+(encoding==='bom'?new TextEncoder().encode(xml).length:xml.length*2));bytes.set(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);if(encoding==='bom')bytes.set(new TextEncoder().encode(xml),3);else{const view=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),encoding==='le');}p.set(part,bytes);const base=await OpcPackage.open(p.toBytes()),dir=await mkdtemp(join(tmpdir(),'move-encoding-'));try{const src=join(dir,'source.docx'),out=join(dir,'output.docx');await p.save(src);const source=await Bun.file(src).bytes();expect(resolve(p,action,[part])).toEqual({resolved:5,changedParts:[part]});await p.save(out);const read=await OpcPackage.open(out),lifted=aliased.replaceAll('<q:r>',`<q:r xmlns:q=\"${W}\">`),wanted=expected(xml.replace(fromAlias,from).replace(toAlias,to),action).replace(runs,lifted);expect(read.text(part)).toBe(wanted);expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);const moved=elements(parseXml(read.text(part)),'t',W).filter(e=>e.text==='Moved '||e.text==='text');expect(moved.map(t=>[t.namespaceURI,t.text])).toEqual([[W,'Moved '],[W,'text']]);await custody(read,base,[part]);expect(await Bun.file(src).bytes()).toEqual(source);}finally{await rm(dir,{recursive:true,force:true});}}}",
       "calls": [
         ".encode",
@@ -16219,7 +16219,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{const {p}=await input(),part=p.mainPart(),from2=from.replaceAll('move-one','move-two').replaceAll('100','200').replaceAll('101','201'),to2=to.replaceAll('move-one','move-two').replaceAll('102','202').replaceAll('103','203');p.set(part,p.text(part).replace('</w:body>','<w:p>'+to2+'</w:p><w:p>'+from2+'</w:p></w:body>'));const old=p.text(part);expect(inspect(p).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['101','103','203','201']);expect(resolve(p,'reject',[part])).toEqual({resolved:7,changedParts:[part]});expect(p.text(part)).toBe(expected(old,'reject').replace(from2,runs).replace(to2,''));}",
       "calls": [
         "expect",
@@ -16268,7 +16268,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{const faults=[(s:string)=>s.replace(from,from.replace('<w:moveFrom w:',`<w:moveFrom xmlns:q=\"${W}\" w:`).replace('<w:r>','<w:r xmlns:q=\"urn:shadow\">')),(s:string)=>s.replace(from,from.replace('<w:r>','<w:r w:rsidR=\"12345678\">')),(s:string)=>s.replace(from,from.replace('xml:space=\"preserve\"','xml:space=\"invalid\"')),(s:string)=>s.replace(from,from.replace('<w:moveFromRangeEnd','</w:p><w:p><w:moveFromRangeEnd')),(s:string)=>s.replace(from,from.replace('>Moved <','><![CDATA[Moved ]]><'))];for(const fault of faults){const {p}=await input(),part=p.mainPart();p.set(part,fault(p.text(part)));const before=p.toBytes();expect(()=>resolve(p,'reject',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "expect",
@@ -16313,7 +16313,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{const {p}=await input(),part=p.mainPart(),aliased=runs.replaceAll('w:','q:');p.set(part,p.text(part).replace(to,to.replace(`<w:moveTo w:id=\"103\"${meta}>${runs}`,`<w:moveTo xmlns:q=\"${W}\" w:id=\"103\"${meta}>${aliased}`)));expect(inspect(p).unsupported).toEqual([]);expect(resolve(p,'accept',[part]).resolved).toBe(5);for(const altered of [runs.replace('<w:b/>','<w:b w:val=\"0\"/>'),'<w:r><w:t>Moved text</w:t></w:r>',runs.replace('Moved ','Different ')]){const q=(await input()).p;q.set(part,q.text(part).replace(to,to.replace(runs,altered)));const before=q.toBytes();expect(()=>resolve(q,'accept',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(before);}}",
       "calls": [
         "expect",
@@ -16370,7 +16370,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
       "body": "{for(const mutate of [(s:string)=>s.replace(' w:date=\"2026-09-27T00:00:00Z\"',''),(s:string)=>s.replace('w:date=\"2026-09-27T00:00:00Z\"','date=\"2026-09-27T00:00:00Z\"'),(s:string)=>s.replaceAll('2026-09-27T00:00:00Z','not-a-date'),(s:string)=>s.replaceAll('2026-09-27T00:00:00Z','2026-02-30T00:00:00Z')])for(const side of [from,to])for(const action of ['accept','reject'] as const){const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace(side,mutate(side)));const before=p.toBytes();expect(()=>resolve(p,action,[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);}const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace('<w:moveFrom w:id=\"101\"'+meta+'>','<w:moveFrom w:id=\"101\" w:author=\"Reviewer\">'));expect(resolve(p,'reject',[part]).resolved).toBe(5);}",
       "calls": [
         "expect",
@@ -16406,14 +16406,14 @@
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(60)",
+        "expect(inv.counts.cases.planned).toBe(62)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "943a5687f80088e59fe4ab1ab42e05b83cff990674c9474225ad025248b1ea74",
-      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(60);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
+      "sourceSha256": "6f76888deeac3daa873e864dc48c8b63903c2e6ac65dd6bc2b047cfed2637492",
+      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -16461,7 +16461,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{for(const action of ['accept','reject'] as const){const {p,stories}=await input(),source=p.toBytes(),baseline=await OpcPackage.open(source),report=inspect(p);expect(report.unsupported).toEqual([]);expect(report.revisions).toHaveLength(21);expect(report.revisions.filter(r=>r.kind==='run-properties').map(r=>[r.part,r.id,r.author,r.text])).toEqual(stories.map(part=>[part,'80','Editor','Stable']));expect(p.toBytes()).toEqual(source);const dir=await mkdtemp(join(tmpdir(),'property-review-'));try{const src=join(dir,'source.docx'),out=join(dir,'output.docx');await Bun.write(src,source);const receipt=resolve(p,action);expect(receipt).toEqual({resolved:21,changedParts:stories});await p.save(out);const read=await OpcPackage.open(out);expect(inspect(read)).toEqual({revisions:[],unsupported:[]});for(const part of stories){const original=baseline.text(part),xml=read.text(part);expect(xml).toContain(action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>');const noProps=await OpcPackage.open(source);noProps.set(part,original.replace(properties,action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>'));resolveRevisions(noProps,action,{parts:[part]});expect(xml).toBe(noProps.text(part));expect(elements(parseXml(xml),'t',W).map(t=>t.text).join('')).toContain(action==='accept'?'modernized.':'historic.');expect(xml).not.toContain('rPrChange');}await bytesEqual(read,baseline,stories);expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source));const before=read.toBytes();expect(resolve(read,action)).toEqual({resolved:0,changedParts:[]});expect(read.toBytes()).toEqual(before);}finally{await rm(dir,{recursive:true,force:true});}}}",
       "calls": [
         "Bun.file",
@@ -16524,7 +16524,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{const {p,stories}=await input(),before=p.toBytes(),base=await OpcPackage.open(before);expect(inspectRevisions(p).unsupported.filter(f=>f.kind==='format')).toHaveLength(7);expect(()=>resolveRevisions(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:3,changedParts:['word/header1.xml']});await bytesEqual(p,base,['word/header1.xml']);expect(inspect(p).revisions).toHaveLength(18);expect(stories).toHaveLength(7);}",
       "calls": [
         "OpcPackage.open",
@@ -16571,7 +16571,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{const defects:[string,(s:string)=>string][]=[\n ['missing',s=>s.replace('<w:rPr>'+previous+'</w:rPr>','')],\n ['duplicate-snapshot',s=>s.replace(previous,previous+'</w:rPr><w:rPr>')],\n ['duplicate-change',s=>s.replace(change,change+change.replace('80','81'))],\n ['nested',s=>s.replace(previous,previous+change.replace('80','81'))],\n ['wrong-parent',s=>s.replace(properties,properties.replace(change,'')+change)],\n ['drawing',s=>s.replace('<w:t>Stable</w:t>','<w:drawing/>')],\n ['unknown',s=>s.replace('<w:i/>','<w:glow/>')],\n ['duplicate-property',s=>s.replace('<w:i/>','<w:i/><w:i/>')],\n ['decorated',s=>s.replace('<w:i/>','<w:i vendor=\"x\"/>')],\n ['invalid',s=>s.replace('<w:i/>','<w:i w:val=\"maybe\"/>')],\n ['duplicate-id',s=>s.replace('w:id=\"80\"',s.match(/w:id=\"\\d+\"/)![0])],\n ['bad-order',s=>s.replace(previous,'<w:color w:val=\"445566\"/><w:i/>')],\n ['mixed',s=>s.replace(previous,'UNOWNED'+previous)],\n ['nested-text',s=>s.replace('<w:rPr>'+previous+'</w:rPr>','<w:rPr><w:ins w:id=\"81\"/></w:rPr>')],\n ['foreign',s=>s.replace('<w:i/>','<x:i xmlns:x=\"urn:other\"/>')],\n ['missing-author',s=>s.replace(' w:author=\"Editor\"','')],\n ['unqualified-author',s=>s.replace('w:author=\"Editor\"','author=\"Editor\"')],\n ['paragraph-mark',s=>s.replace(run,'<w:pPr>'+properties+'</w:pPr>')],\n ['comment',s=>s.replace(previous,'<!--unowned-->'+previous)],\n ['conflicting-flags',s=>s.replace('<w:i/>','<w:caps/><w:smallCaps/>')],\n ['nested-insertion',s=>s.replace(run,'<w:ins w:id=\"90\" w:author=\"Editor\">'+run+'</w:ins>')],\n ];for(const [name,defect]of defects)for(const action of ['accept','reject'] as const){const {p}=await input(),part='word/header1.xml',xml=p.text(part),changed=defect(xml);expect(changed,name).not.toBe(xml);p.set(part,changed);const before=p.toBytes();expect(inspect(p).unsupported.length,name).toBeGreaterThan(0);expect(()=>resolve(p,action),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes(),name).toEqual(before);}}",
       "calls": [
         "change.replace",
@@ -16625,7 +16625,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{for(const encoding of ['bom','le','be']){const {p}=await input(),part=p.mainPart();let xml=p.text(part).replace(properties,`<w:rPr xmlns:z=\"${W}\">${current}<w:rPrChange xmlns:q=\"${W}\" w:id=\"80\" w:author=\"Editor\"><q:rPr><q:i/><z:color z:val='445566'/></q:rPr></w:rPrChange></w:rPr>`);if(encoding==='bom')p.set(part,new Uint8Array([239,187,191,...new TextEncoder().encode(xml)]));else{xml=xml.replace(/encoding=\"UTF-8\"/i,'encoding=\"UTF-16\"');const bytes=new Uint8Array(2+xml.length*2);bytes.set(encoding==='le'?[255,254]:[254,255]);const v=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),encoding==='le');p.set(part,bytes);}const baseline=await OpcPackage.open(p.toBytes());expect(resolve(p,'reject',[part])).toEqual({resolved:3,changedParts:[part]});const read=await OpcPackage.open(p.toBytes());const parsed=parseXml(read.text(part)),props=elements(parsed,'rPr',W).find(n=>n.children.some(c=>c.localName==='i'))!;expect(props.name).toBe('q:rPr');expect(props.children.map(c=>[c.namespaceURI,c.localName])).toEqual([[W,'i'],[W,'color']]);expect(attribute(props.children[1]!,'val',W)).toBe('445566');expect(read.text(part)).toContain(\"z:val='445566'\");expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);await bytesEqual(read,baseline,[part]);}}",
       "calls": [
         ".encode",
@@ -16681,7 +16681,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{for(const defect of ['protected','external','invalid']){const {p}=await input();if(defect==='protected'){p.set('word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}if(defect==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});const before=p.toBytes();expect(()=>resolveRevisions(p,'accept',{profile:(defect==='invalid'?'bad':profile) as typeof profile})).toThrow();expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "addRelationship",
@@ -16721,7 +16721,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{for(const stage of ['write','serialize']){const {p}=await input();p.set(p.mainPart(),p.text(p.mainPart()).replace('</w:body>','<w:p><w:r><w:t>Prior edit</w:t></w:r></w:p></w:body>'));const before=p.toBytes(),set=p.set.bind(p),serialize=p.toBytes.bind(p);let reached=false;if(stage==='write')p.set=(n,v)=>{set(n,v);if(n==='word/header1.xml'){reached=true;throw Error('injected property write');}};else p.toBytes=()=>{reached=true;throw Error('injected property serialize');};try{expect(()=>resolve(p,'reject')).toThrow('injected');expect(reached).toBe(true);}finally{p.set=set;p.toBytes=serialize;}expect(p.toBytes()).toEqual(before);expect(inspect(p).revisions).toHaveLength(21);}}",
       "calls": [
         "Error",
@@ -16769,7 +16769,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{for(const saved of ['<w:rPr/>',`<w:rPr xmlns:q=\"${W}\"><q:i/></w:rPr>`]){const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace(change,`<w:rPrChange xmlns:q=\"urn:outer\" w:id=\"80\" w:author=\"Editor\">${saved}</w:rPrChange>`));expect(resolve(p,'reject',[part]).resolved).toBe(3);const xml=p.text(part),r=elements(parseXml(xml),'r',W).find(r=>r.children.some(t=>t.localName==='t'&&t.text==='Stable'))!,pr=r.children[0]!;expect(pr.localName).toBe('rPr');expect(pr.children.map(c=>[c.namespaceURI,c.localName])).toEqual(saved.includes('q:i')?[[W,'i']]:[]);expect(xml).not.toContain('rPrChange');}}",
       "calls": [
         "elements",
@@ -16814,7 +16814,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{for(const defect of ['protected','external','wrong-root']){const {p}=await input();resolve(p,'accept');if(defect==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});else{p.set('word/settings.xml',defect==='wrong-root'?`<w:notSettings xmlns:w=\"${W}\"/>`:`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}const before=p.toBytes();expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}));expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "addRelationship",
@@ -16852,7 +16852,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{const p=await openRevisionFixture('all-stories'),part=p.mainPart();p.set(part,new Uint8Array([239,187,191,...new TextEncoder().encode(p.text(part))]));resolveRevisions(p,'accept',{parts:[part]});expect([...p.get(part)!.slice(0,3)]).toEqual([239,187,191]);const q=(await input()).p,before=q.toBytes();expect(()=>resolve(q,'accept',['word/unknown.xml'])).toThrow(expect.objectContaining({code:'docx-revisions-unknown-part'}));expect(()=>inspectRevisions(q,{profile:'bad' as typeof profile})).toThrow(expect.objectContaining({code:'docx-revisions-invalid-profile'}));expect(q.toBytes()).toEqual(before);q.set(part,q.text(part).replace(run,'<w:moveFrom w:id=\"90\" w:author=\"Editor\">'+run+'</w:moveFrom>'));const moved=q.toBytes();expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(moved);}",
       "calls": [
         ".encode",
@@ -16900,7 +16900,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{const saved='<w:rPr><w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\"/><w:b w:val=\"0\"/><w:bCs/><w:i/><w:iCs/><w:strike/><w:shadow/><w:vanish/><w:color w:val=\"auto\"/><w:sz w:val=\"28\"/><w:szCs w:val=\"24\"/><w:highlight w:val=\"yellow\"/><w:u w:val=\"double\"/><w:vertAlign w:val=\"superscript\"/></w:rPr>';const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace('<w:rPr>'+previous+'</w:rPr>',saved));expect(resolve(p,'reject',[part]).resolved).toBe(3);expect(p.text(part)).toContain(saved);for(const invalid of [saved.replace('w:val=\"28\"','w:val=\"0\"'),saved.replace('w:val=\"24\"','w:val=\"1.5\"'),saved.replace('w:hAnsi=\"Arial\"','w:hAnsi=\"Calibri\"'),saved.replace('w:val=\"yellow\"','w:val=\"purple\"'),saved.replace('w:val=\"double\"','w:val=\"unknown\"'),saved.replace('w:val=\"auto\"','w:themeColor=\"accent1\"')]){const q=(await input()).p;q.set(part,q.text(part).replace('<w:rPr>'+previous+'</w:rPr>',invalid));const before=q.toBytes();expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(before);}}",
       "calls": [
         "expect",
@@ -16943,7 +16943,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
       "body": "{const {p}=await input(),part='word/header1.xml';p.set(part,p.text(part).replace('<w:i/>','<w:unknown/>'));const baseline=await OpcPackage.open(p.toBytes());expect(resolve(p,'accept',[p.mainPart()]).resolved).toBe(3);await bytesEqual(p,baseline,[p.mainPart()]);const q=(await input()).p,before=q.toBytes(),set=q.set.bind(q);let reached=false;q.set=(n,v)=>{set(n,v);if(n===part){reached=true;set(n,q.text(n).replace('<w:rPr>'+previous+'</w:rPr>',properties));}};try{expect(()=>resolve(q,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-validation'}));expect(reached).toBe(true);}finally{q.set=set;}expect(q.toBytes()).toEqual(before);}",
       "calls": [
         "OpcPackage.open",
@@ -16981,14 +16981,14 @@
         "expect(root.inspectRevisions).toBe(inspectRevisions)",
         "expect(docx.resolveRevisions).toBe(resolveRevisions)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(60)",
+        "expect(inv.counts.cases.planned).toBe(62)",
         "expect(s.lifecycle??f.lifecycle).toBe('planned')"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f047b719ab595b0d0f0db44d3cbf18c86bad69ac93ddeb66e3cff9b4efe473e7",
-      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(60);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
+      "sourceSha256": "9f245ff7e43771cc9caaecef9af76372cdf761cde67e79aa2ac75674a19e6848",
+      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -20589,7 +20589,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n const d=await fixture(),before=d.package.parts,held=d.tables[0]!,cell=held.cell(0,0),paragraph=d.paragraphs[0]!,source=tableXml(d),grid=source.table.children.find(n=>n.localName==='tblGrid')!,otherRow=source.table.children.filter(n=>n.localName==='tr')[1]!,merged=held.mergeRowCells(0,0,2);\n expect(merged.rows).toBe(2);expect(merged.columns).toBe(4);expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(()=>cell.text).toThrow();expect(()=>paragraph.text).toThrow();expect(merged.cell(0,3).text).toBe('');expect(merged.cell(1,3).text).toBe('Tail');for(const c of [0,1,2])expect(()=>merged.cell(0,c)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));\n const next=tableXml(d),rows=next.table.children.filter(n=>n.localName==='tr'),cells=rows[0]!.children.filter(n=>n.localName==='tc');expect(cells).toHaveLength(2);expect(elements(parseXml(next.xml),'gridSpan',W).map(n=>attribute(n,'val',W))).toEqual(['3']);const width=cells[0]!.children[0]!.children.find(n=>n.localName==='tcW')!;expect(attribute(width,'w',W)).toBe('6480');expect(next.xml).toContain(source.xml.slice(grid.start,grid.end));expect(next.xml).toContain(source.xml.slice(otherRow.start,otherRow.end));\n const dir=await mkdtemp(join(tmpdir(),'docx-merge-'));try{const path=join(dir,'merged.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','Tail','After']);expect(read.tables[0]!.rows).toBe(2);expect(read.tables[0]!.columns).toBe(4);expect([...read.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "Document.open",
@@ -20655,7 +20655,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n const d=await fixture();d.tables[0]!.cell(0,0).setProperties({shading:'ABCDEF',verticalAlign:'center'});d.tables[0]!.mergeRowCells(0,0,1);expect(tableXml(d).xml).toContain('ABCDEF');expect(tableXml(d).xml).toContain('center');expect(tableXml(d).xml).toContain('Keep &amp; &lt;text&gt;');\n for(const kind of ['text','space','format','paragraph-format','run','attribute','lexical']){const bad=await fixture(),t=bad.tables[0]!;if(kind==='text'||kind==='space')t.cell(0,1).text=kind==='text'?'Do not lose me':' ';else if(kind==='format')t.cell(0,1).setProperties({shading:'ABCDEF'});else{const p=await OpcPackage.open(bad.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[1]!,raw=xml.slice(cell.start,cell.end),replacement=kind==='paragraph-format'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:pPr><w:keepNext/></w:pPr></w:p>'):kind==='run'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:r><w:t></w:t></w:r></w:p>'):kind==='attribute'?raw.replace('<w:tc>','<w:tc data=\"retained\">'):raw.replace('<w:tcPr>','<!--keep--><w:tcPr>');p.set(p.mainPart(),xml.slice(0,cell.start)+replacement+xml.slice(cell.end));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);continue;}const before=bad.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(bad.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -20710,7 +20710,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();for(const args of [[0,0,0],[0,2,1],[-1,0,1],[2,0,1],[0,-1,1],[0,0,4],[0,0.5,2],[NaN,0,1],[0,0,Infinity],['0',0,1],[0,0,Number.MAX_SAFE_INTEGER+1]]){expect(()=>t.mergeRowCells(...args as [number,number,number])).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);}expect(t.cell(0,0).text).toBe('Keep & <text>');\n}",
       "calls": [
         "d.package.toBytes",
@@ -20749,7 +20749,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n for(const change of [(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val=\"restart\"/>'),(x:string)=>x.replace(/<w:tblGrid>[\\s\\S]*?<\\/w:tblGrid>/,''),(x:string)=>x.replace('<w:gridCol w:w=\"2160\"/>','<w:gridCol w:w=\"bad\"/>'),(x:string)=>x.replace('w:w=\"2160\" w:type=\"dxa\"','w:w=\"100\" w:type=\"dxa\"'),(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2junk\"/>')]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.tables[0]!.mergeRowCells(1,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(p.toBytes()),before=locked.package.toBytes();expect(()=>locked.tables[0]!.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-format-protected'}));expect(locked.package.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.open",
@@ -20797,7 +20797,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),t=d.tables[0]!,cell=t.cell(0,0),paragraph=d.paragraphs[0]!,before=d.package.toBytes(),p=(d as any).opcPackage as OpcPackage,original=p[stage].bind(p);if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialize');};try{expect(()=>t.mergeRowCells(0,0,2)).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(t.rows).toBe(2);expect(cell.text).toBe('Keep & <text>');expect(paragraph.text).toBe('Before');}\n}",
       "calls": [
         "Error",
@@ -20843,7 +20843,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n for(const encoding of ['bom','utf16']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(encoding==='utf16'){xml=xml.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16');const bytes=new Uint8Array(2+xml.length*2);bytes.set([255,254]);const view=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),true);p.set(p.mainPart(),bytes);}else p.set(p.mainPart(),new Uint8Array([239,187,191,...new TextEncoder().encode(xml)]));const loaded=await Document.open(p.toBytes()),t=loaded.tables[0]!;t.mergeRowCells(0,0,2);expect([...loaded.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:[255,254]);const read=await Document.open(await loaded.save());expect(read.paragraphs.some(p=>p.text==='Keep & <text>')).toBe(true);expect(read.tables[0]!.columns).toBe(4);expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));}\n}",
       "calls": [
         ".encode",
@@ -20904,7 +20904,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n for(const[first,last]of [[1,2],[0,2]]){const d=await fixture(),old=d.tables[0]!,t=old.mergeRowCells(1,first!,last!);const before=d.package.toBytes();expect(t.columns).toBe(4);expect(t.cell(0,0).text).toBe('Keep & <text>');expect(t.cell(1,3).text).toBe('Tail');expect(()=>t.insertRow(0)).toThrow();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const d=Document.create();d.addTable(1,4);const t=d.tables[0]!.mergeRowCells(0,0,3);expect(t.rows).toBe(1);expect(t.columns).toBe(4);const xml=tableXml(d);expect(elements(parseXml(xml.xml),'tc',W)).toHaveLength(1);expect(attribute(elements(parseXml(xml.xml),'gridSpan',W)[0]!,'val',W)).toBe('4');\n}",
       "calls": [
         "Document.create",
@@ -20947,7 +20947,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n const d=await fixture();d.addTable(1,1);d.tables[1]!.cell(0,0).text='Other table';const source=tableXml(d).xml,all=elements(parseXml(source),'tbl',W),other=source.slice(all[1]!.start,all[1]!.end);d.tables[0]!.mergeRowCells(0,1,2);const after=tableXml(d).xml;expect(after).toContain(other);expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','','Tail','After','Other table']);expect(d.tables[1]!.cell(0,0).text).toBe('Other table');\n}",
       "calls": [
         "d.addTable",
@@ -20987,7 +20987,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n for(const kind of ['decorated-width','section','sum']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(kind==='decorated-width'){const cells=elements(parseXml(xml),'tc',W),n=cells[1]!,raw=xml.slice(n.start,n.end);xml=xml.slice(0,n.start)+raw.replace('w:type=\"dxa\"','w:type=\"dxa\" other=\"keep\"')+xml.slice(n.end);}else if(kind==='sum')xml=xml.replaceAll('2160','20000');\n if(kind==='section'){const first=elements(parseXml(xml),'tc',W)[0]!,raw=xml.slice(first.start,first.end),changed=raw.replace(/<w:p\\b[^>]*>/,open=>open+'<w:pPr><w:sectPr/></w:pPr>');xml=xml.slice(0,first.start)+changed+xml.slice(first.end);}\n p.set(p.mainPart(),xml);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -21036,7 +21036,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n const d=await fixture(),t=d.tables[0]!,p=(d as any).opcPackage as OpcPackage;p.set(p.mainPart(),p.text(p.mainPart()).replace('Before','Changed'));const bytes=d.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(d.package.toBytes()).toEqual(bytes);\n for(const kind of ['late-row','external-settings']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());if(kind==='external-settings')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});else{const xml=p.text(p.mainPart()),last=elements(parseXml(xml),'tc',W).at(-1)!;p.set(p.mainPart(),xml.slice(0,last.start)+xml.slice(last.start,last.end).replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"1\"/>')+xml.slice(last.end));}const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -21079,13 +21079,13 @@
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.planned).toBe(62)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
-      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(60);\n}",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -21118,7 +21118,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "42d18dc3465fc396fef2ed9a75cadc8a049b74abeca30c1504aa13d0fea37088",
+      "sourceSha256": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
       "body": "{\n for(const index of [0,7]){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[index]!;p.set(p.mainPart(),xml.slice(0,cell.openEnd)+'<w:tbl/>'+xml.slice(cell.openEnd));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -22389,7 +22389,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n const d=await fixture(),before=d.package.parts,source=xml(d),paragraphs=d.paragraphs.map(p=>p.text),held=d.tables[0]!,cell=held.cell(0,1),paragraph=d.paragraphs[0]!,current=held.mergeColumnCells(1,0,2);\n expect(current.rows).toBe(3);expect(current.columns).toBe(3);expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(()=>cell.text).toThrow();expect(()=>paragraph.text).toThrow();for(const row of [0,1,2])expect(()=>current.cell(row,1)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));expect(current.cell(2,2).text).toBe('Tail');\n const next=xml(d),tree=parseXml(next);expect(elements(tree,'tc',W)).toHaveLength(9);expect(elements(tree,'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);expect(withoutFlags(next)).toBe(source);expect(d.paragraphs.map(p=>p.text)).toEqual(paragraphs);\n const dir=await mkdtemp(join(tmpdir(),'vertical-merge-'));try{const path=join(dir,'merged.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs.map(p=>p.text)).toEqual(paragraphs);expect(read.tables[0]!.cell(2,2).text).toBe('Tail');expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);expect([...read.package.parts.keys()]).toEqual([...before.keys()]);}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "Document.open",
@@ -22449,7 +22449,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n for(const[col,first,last]of [[0,0,1],[0,1,2],[2,0,1]]){const d=await fixture(),source=xml(d),before=d.paragraphs.map(p=>p.text),t=d.tables[0]!.mergeColumnCells(col!,first!,last!);expect(t.rows).toBe(3);expect(t.columns).toBe(3);expect(withoutFlags(xml(d))).toBe(source);expect(d.paragraphs.map(p=>p.text)).toEqual(before);expect(elements(parseXml(xml(d)),'vMerge',W)).toHaveLength(2);}\n}",
       "calls": [
         "d.paragraphs.map",
@@ -22490,7 +22490,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n for(const kind of ['text','space','format','paragraph-format','empty-run','lexical','attribute']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());replaceCell(p,4,raw=>kind==='text'||kind==='space'?raw.replace(/<w:p\\b[^>]*\\/>/,`<w:p><w:r><w:t xml:space=\"preserve\">${kind==='text'?'Do not hide me':' '}</w:t></w:r></w:p>`):kind==='format'?raw.replace('</w:tcPr>','<w:shd w:val=\"clear\" w:fill=\"ABCDEF\"/></w:tcPr>'):kind==='paragraph-format'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:pPr><w:keepNext/></w:pPr></w:p>'):kind==='empty-run'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:r><w:t/></w:r></w:p>'):kind==='attribute'?raw.replace('<w:tc>','<w:tc keep=\"yes\">'):raw.replace('<w:tcPr>','<!--keep--><w:tcPr>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes(),t=loaded.tables[0]!;expect(()=>t.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);expect(t.rows).toBe(3);}\n}",
       "calls": [
         "Document.open",
@@ -22533,7 +22533,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();let invoked=false;for(const args of [[1,0,0],[1,2,1],[-1,0,2],[3,0,2],[1,-1,2],[1,0,3],[1,0.5,2],[NaN,0,2],['1',0,2],[1,0,Infinity],[1,0,Number.MAX_SAFE_INTEGER+1],[{valueOf(){invoked=true;return 1;}},0,2]]){expect(()=>t.mergeColumnCells(...args as [number,number,number])).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);}expect(invoked).toBe(false);\n}",
       "calls": [
         "d.package.toBytes",
@@ -22569,7 +22569,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n for(const kind of ['horizontal','vertical','nested','width','revision','missing-grid','late-span']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());if(kind==='missing-grid')p.set(p.mainPart(),p.text(p.mainPart()).replace(/<w:tblGrid>[\\s\\S]*?<\\/w:tblGrid>/,''));else replaceCell(p,8,raw=>kind==='horizontal'?raw.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2\"/>'):kind==='vertical'?raw.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val=\"restart\"/>'):kind==='nested'?raw.replace('<w:tcPr>','<w:tbl/><w:tcPr>'):kind==='width'?raw.replace('w:w=\"2880\"','w:w=\"100\"'):kind==='revision'?raw.replace('</w:tcPr>','<w:tcPrChange/></w:tcPr>'):raw.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"1junk\"/>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -22614,7 +22614,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n for(const mode of ['protected','external','stale']){const d=await fixture(),p=pkg(d),t=d.tables[0]!;if(mode==='protected'){addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}if(mode==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});if(mode==='stale')p.set(p.mainPart(),xml(d).replace('Before','Changed'));const before=d.package.toBytes();expect(()=>t.mergeColumnCells(1,0,2)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "addPart",
@@ -22659,7 +22659,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),p=pkg(d),before=p.toBytes(),t=d.tables[0]!,cell=t.cell(0,1),paragraph=d.paragraphs[0]!,original=p[stage].bind(p);if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialization');};try{expect(()=>t.mergeColumnCells(1,0,2)).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(p.toBytes()).toEqual(before);expect(t.rows).toBe(3);expect(cell.text).toBe('Keep & <text>');expect(paragraph.text).toBe('Before');}\n}",
       "calls": [
         "Error",
@@ -22710,7 +22710,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n for(const encoding of ['bom','le','be']){const d=await fixture(),p=pkg(d);let source=xml(d);if(encoding==='bom')p.set(p.mainPart(),new Uint8Array([239,187,191,...new TextEncoder().encode(source)]));else{source=source.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16').replace('<q:document ','<q:document xmlns:w=\"urn:foreign\" ');const b=new Uint8Array(2+source.length*2);b.set(encoding==='le'?[255,254]:[254,255]);const view=new DataView(b.buffer);for(let i=0;i<source.length;i++)view.setUint16(2+i*2,source.charCodeAt(i),encoding==='le');p.set(p.mainPart(),b);}const loaded=await Document.open(p.toBytes()),before=loaded.package.parts;loaded.tables[0]!.mergeColumnCells(1,0,2);const read=await Document.open(await loaded.save());expect([...read.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);expect(withoutFlags(xml(read))).toBe(source);expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);}\n}",
       "calls": [
         ".encode",
@@ -22768,7 +22768,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n const d=await fixture(),t=d.tables[0]!.mergeColumnCells(1,0,2),before=d.package.toBytes();for(const action of [()=>t.cell(0,1),()=>t.tryCell(1,1),()=>t.cell(2,1),()=>t.insertRow(0),()=>t.mergeColumnCells(0,0,2),()=>t.mergeRowCells(0,0,1)]){expect(action).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(t.cell(2,2).text).toBe('Tail');expect(t.tryCell(3,1)).toBeNull();\n}",
       "calls": [
         "d.package.toBytes",
@@ -22812,7 +22812,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n const d=await fixture();d.tables[0]!.cell(0,1).setProperties({topBorder:{style:'single',size:8,color:'123456'},textDirection:'tbRl'});const source=xml(d);d.tables[0]!.mergeColumnCells(1,0,2);expect(withoutFlags(xml(d))).toBe(source);expect(cells(xml(d))[1]!.children[0]!.children.map(n=>n.localName)).toEqual(['tcW','vMerge','tcBorders','shd','textDirection','vAlign']);\n for(const kind of ['section','lexical','width-decoration']){const d=await fixture(),p=pkg(d);replaceCell(p,8,raw=>kind==='section'?raw.replace(/<w:p\\b[^>]*>/,open=>open+'<w:pPr><w:sectPr/></w:pPr>'):kind==='lexical'?raw.replace('<w:tcPr>','<!--retain--><w:tcPr>'):raw.replace('w:type=\"dxa\"','w:type=\"dxa\" retain=\"yes\"'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -22862,7 +22862,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
       "body": "{\n const d=await fixture();d.addTable(1,1);d.tables[1]!.cell(0,0).text='Other table';const source=xml(d),before=d.package.parts;d.tables[0]!.mergeColumnCells(1,0,2);expect(withoutFlags(xml(d))).toBe(source);expect(d.tables[1]!.cell(0,0).text).toBe('Other table');expect([...d.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);\n}",
       "calls": [
         "before.keys",
@@ -22895,13 +22895,13 @@
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.planned).toBe(62)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "24bacada87a2d5ba0e6d8dad0ff581008063843f71d6529444ae880c4bfde14c",
-      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(60);\n}",
+      "sourceSha256": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -23304,7 +23304,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=await sample(),before=d.package.toBytes(),t=d.tables[0]!,held=d.paragraphs[0]!,r=d.inspectTemplate();expect(r.scope).toBe('main-body-and-tables');expect(r.counts).toEqual({paragraphs:8,sections:2,tables:1,placeholders:3});expect(r.paragraphs.map(p=>p.text)).toEqual(['Statement for <Customer>','Use <Project> and [TBD].','Role','Hours','<Role>','40','Delivery','No placeholder']);\n expect(r.sections).toEqual([{paragraphIndex:0,bodyIndex:0,text:'Statement for <Customer>',level:1},{paragraphIndex:6,bodyIndex:3,text:'Delivery',level:2}]);expect(r.tables).toEqual([{index:0,bodyIndex:2,rows:2,columns:2,cells:[['Role','Hours'],['<Role>','40']]}]);expect(r.paragraphs[4]!.table).toEqual({index:0,row:1,column:0,paragraph:0});expect(r.placeholders).toEqual([{paragraphIndex:0,bodyIndex:0,start:14,end:24,text:'<Customer>',name:'Customer'},{paragraphIndex:1,bodyIndex:1,start:4,end:13,text:'<Project>',name:'Project'},{paragraphIndex:4,bodyIndex:2,start:0,end:6,text:'<Role>',name:'Role'}]);expect(d.package.toBytes()).toEqual(before);expect(held.text).toBe('Statement for <Customer>');expect(t.cell(1,1).text).toBe('40');\n}",
       "calls": [
         "d.inspectTemplate",
@@ -23347,7 +23347,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=await sample(),before=d.package.parts,r=d.inspectTemplate(),dir=await mkdtemp(join(tmpdir(),'template-inspect-'));try{const path=join(dir,'template.docx');await d.save(path);const read=await Document.open(path);expect(read.inspectTemplate()).toEqual(r);for(const[n,b]of before)expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n for(const value of [r,r.counts,r.paragraphs,r.paragraphs[4],r.paragraphs[4]!.table,r.sections,r.sections[0],r.tables,r.tables[0],r.tables[0]!.cells,r.tables[0]!.cells[0],r.placeholders,r.placeholders[0]])expect(Object.isFrozen(value)).toBe(true);\n d.paragraphs.at(-1)!.setText('Changed <New>');expect(r.paragraphs.at(-1)!.text).toBe('No placeholder');expect(r.counts.placeholders).toBe(3);expect(d.inspectTemplate().counts.placeholders).toBe(4);\n}",
       "calls": [
         "Document.open",
@@ -23392,7 +23392,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=Document.create();expect(d.inspectTemplate().counts).toEqual({paragraphs:0,sections:0,tables:0,placeholders:0});d.addParagraphStyle('Heading1',{name:'Heading 1'});d.addParagraph('Blue <Customer>',{style:'Heading1'}).setRunFormatting({color:'0000FF'});const r=d.inspectTemplate();expect(r.sections).toEqual([]);expect(r.paragraphs[0]!.styleId).toBe('Heading1');expect(r.paragraphs[0]!.outlineLevel).toBeNull();expect(r.placeholders.map(p=>p.name)).toEqual(['Customer']);expect(Object.keys(r).sort()).toEqual(['counts','paragraphs','placeholders','scope','sections','tables']);\n}",
       "calls": [
         "Document.create",
@@ -23426,7 +23426,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=Document.create();d.addParagraph('😀 <Cus').appendRun('tomer> <Customer> <<nested>> <> < > [TBD]');d.addParagraph('<line\\nbreak>');d.addParagraph('<unfinished');d.addParagraph('ending>');const r=d.inspectTemplate();expect(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual([{start:3,end:13,name:'Customer'},{start:14,end:24,name:'Customer'}]);expect(d.inspectBodyMap().placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name})));\n}",
       "calls": [
         "Document.create",
@@ -23459,7 +23459,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=Document.create();d.addTable(1,1);d.tables[0]!.cell(0,0).text='<A>\\n<B>\\n<split\\nend>';const r=d.inspectTemplate();expect(r.tables[0]!.cells).toEqual([['<A>\\n<B>\\n<split\\nend>']]);expect(r.paragraphs.map(p=>p.table!.paragraph)).toEqual([0,1,2,3]);expect(r.placeholders.map(p=>[p.paragraphIndex,p.name])).toEqual([[0,'A'],[1,'B']]);expect(r.sections).toEqual([]);\n}",
       "calls": [
         "Document.create",
@@ -23494,7 +23494,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n for(const kind of ['field','hyperlink','sdt','nested','merge','bad-grid','bad-outline']){const d=await sample(),p=pkg(d);let x=p.text(p.mainPart());if(kind==='field')x=x.replace('No placeholder','No placeholder</w:t><w:instrText>DATE</w:instrText><w:t>');if(kind==='hyperlink')x=x.replace('</w:body>','<w:p><w:hyperlink><w:r><w:t>Hidden</w:t></w:r></w:hyperlink></w:p></w:body>');if(kind==='sdt')x=x.replace('<w:body>','<w:body><w:sdt><w:sdtContent><w:p/></w:sdtContent></w:sdt>');if(kind==='nested')x=x.replace('<w:tcPr>','<w:tbl/><w:tcPr>');if(kind==='merge')x=x.replace('<w:tcPr>','<w:tcPr><w:vMerge/>');if(kind==='bad-grid')x=x.replace(/<w:gridCol[^>]*\\/>/,'');if(kind==='bad-outline')x=x.replace('w:val=\"0\"','w:val=\"invalid\"');p.set(p.mainPart(),x);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.inspectTemplate()).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -23533,7 +23533,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/header1.xml',`<w:hdr xmlns:w=\"${W}\"><w:p><w:r><w:t>&lt;Header&gt;</w:t></w:r></w:p></w:hdr>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/header','header1.xml');const before=d.package.toBytes();expect(d.inspectTemplate().placeholders.map(p=>p.name)).toEqual(['Customer','Project','Role']);expect(d.package.toBytes()).toEqual(before);p.set(p.mainPart(),p.text(p.mainPart()).replace('No placeholder','External'));const changed=p.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-stale-document'}));expect(d.package.toBytes()).toEqual(changed);\n}",
       "calls": [
         "addPart",
@@ -23576,7 +23576,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=await sample(),expected=d.inspectTemplate(),p=pkg(d);const text=p.text(p.mainPart()).replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16').replace('<q:document ','<q:document xmlns:w=\"urn:foreign\" '),bytes=new Uint8Array(2+text.length*2);bytes.set([254,255]);const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),false);p.set(p.mainPart(),bytes);const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(read.inspectTemplate()).toEqual(expected);expect(read.package.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.open",
@@ -23621,7 +23621,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=Document.create();d.addParagraph('<A>'.repeat(10001));const before=d.package.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(d.package.toBytes()).toEqual(before);\n const base=Document.create(),p=pkg(base);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:body>','<w:body>'+'<w:p/>'.repeat(10001)));const loaded=await Document.open(p.toBytes()),b=loaded.package.toBytes();expect(()=>loaded.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(loaded.package.toBytes()).toEqual(b);\n}",
       "calls": [
         ".repeat",
@@ -23668,7 +23668,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n for(const change of [(x:string)=>x.replace('<w:tblGrid>','<w:tblGrid><!--keep-->'),(x:string)=>x.replace('<w:gridCol ','<w:gridCol other=\"x\" '),(x:string)=>x.replace('xmlns:w=\"'+W+'\"','xmlns:w=\"urn:foreign\"'),(x:string)=>x.replace(/<w:pPr\\b[^>]*>/,open=>open+'<w:outlineLvl w:val=\"1\"/>')]){const d=await sample(),p=pkg(d);const source=p.text(p.mainPart()),changed=change(source);expect(changed).not.toBe(source);p.set(p.mainPart(),changed);let read:Document;try{read=await Document.open(p.toBytes());}catch(e){expect(e).toBeInstanceOf(Error);continue;}const before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow();expect(read.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -23710,7 +23710,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=Document.create();d.addTable(1,2);d.tables[0]!.cell(0,0).text='<A>'.repeat(5001);d.tables[0]!.cell(0,1).text='<B>'.repeat(5000);const before=d.package.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(d.package.toBytes()).toEqual(before);\n const base=Document.create();base.addTable(1,1);const p=pkg(base),source=p.text(p.mainPart()),table=source.match(/<w:tbl\\b[^]*?<\\/w:tbl>/)![0];p.set(p.mainPart(),source.replace(table,table.repeat(1001)));const read=await Document.open(p.toBytes()),bytes=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(read.package.toBytes()).toEqual(bytes);\n}",
       "calls": [
         ".repeat",
@@ -23754,13 +23754,13 @@
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
         "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(60)"
+        "expect(inv.counts.cases.planned).toBe(62)"
       ],
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
-      "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const before=d.package.toBytes();expect(d.inspectTemplate().counts.placeholders).toBe(3);expect(d.package.toBytes()).toEqual(before);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(60);\n}",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
+      "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const before=d.package.toBytes();expect(d.inspectTemplate().counts.placeholders).toBe(3);expect(d.package.toBytes()).toEqual(before);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);\n}",
       "calls": [
         ".test",
         "addPart",
@@ -23807,7 +23807,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n for(const defect of ['before','after','late-before','width','missing-width']){const d=await sample(),p=pkg(d);let source=p.text(p.mainPart());if(defect==='before'||defect==='after')source=source.replace('<w:tr>',`<w:tr><w:trPr><w:${defect==='before'?'gridBefore':'gridAfter'} w:val=\"1\"/></w:trPr>`);else if(defect==='late-before'){const at=source.lastIndexOf('<w:tr>');source=source.slice(0,at)+source.slice(at).replace('<w:tr>','<w:tr><w:trPr><w:gridBefore w:val=\"1\"/></w:trPr>');}else if(defect==='width')source=source.replace('w:w=\"4320\" w:type=\"dxa\"','w:w=\"100\" w:type=\"dxa\"');else source=source.replace(/<w:tcW[^>]*\\/>/,'');expect(source).not.toBe(p.text(p.mainPart()));p.set(p.mainPart(),source);const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-unsupported'}));expect(read.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -23855,7 +23855,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "230941e32628ff6a2381a2c37fd3fad31968252d53e424eabe4d446b8164cc5a",
+      "sourceSha256": "80f1555b638ece8092d577690e6b1e576608af6d3743b6686d3ac012b6c8395f",
       "body": "{\n const d=await sample(),expected=d.inspectTemplate(),p=pkg(d);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:tr>','<w:tr><w:trPr><w:gridBefore w:val=\"0\"/><w:gridAfter w:val=\"00\"/></w:trPr>'));const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(read.inspectTemplate()).toEqual(expected);expect(read.package.toBytes()).toEqual(before);\n for(const value of ['-1','0junk','', '1.5']){const d=await sample(),p=pkg(d);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:tr>',`<w:tr><w:trPr><w:gridBefore w:val=\"${value}\"/></w:trPr>`));const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow();expect(read.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -26119,7 +26119,7 @@
         "expect(r.mappings.every(m=>m.status==='partial'&&m.gaps.length>0)).toBe(true)",
         "expect(old).toHaveLength(494)",
         "expect(adjusted.assertions).toContain('expect(inv.counts.cases.implemented).toBe(729)')",
-        "expect(adjusted.assertions).toContain('expect(inv.counts.cases.planned).toBe(60)')",
+        "expect(adjusted.assertions).toContain('expect(inv.counts.cases.planned).toBe(62)')",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(old))).digest('hex')).toBe('61f08e53ee37c013c54851a6429a2b3452234365a52b6b6979250961a906fda0')",
         "expect(all.mappedDeclarations).toBe(590)",
         "expect(all.executionCredit).toBe(false)"
@@ -26127,8 +26127,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "dfdb0148442285d3d4ad211fcfb73dab199ca86f653a815b063d812ba3d909f3",
-      "body": "{\n const x=await input(),r=reconcileOutcomeMappings(x.inventory,x.ledger,x.features,x.sources);expect(r.mappedDeclarations).toBe(7);expect(r.mappings.filter(m=>m.caseKeys.length).map(m=>m.caseKeys)).toEqual([['@id-docx-go-table-cell-access']]);expect(r.mappings.every(m=>m.status==='partial'&&m.gaps.length>0)).toBe(true);\n const all=await outcomeMappingReport(),old=structuredClone(all.mappings.filter(m=>!['nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger)));expect(old).toHaveLength(494);const adjusted=old.find(m=>m.testId==='bun:tests/unit/docx-heading-classification.test.ts:empty style retains strict Bun policy and all five shared getter-profile cases stay planned')!;expect(adjusted.assertions).toContain('expect(inv.counts.cases.implemented).toBe(729)');expect(adjusted.assertions).toContain('expect(inv.counts.cases.planned).toBe(60)');adjusted.assertions=adjusted.assertions.map(a=>a.replace('counts.cases.implemented).toBe(729)','counts.cases.implemented).toBe(550)').replace('counts.cases.planned).toBe(60)','counts.cases.planned).toBe(47)'));\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(old))).digest('hex')).toBe('61f08e53ee37c013c54851a6429a2b3452234365a52b6b6979250961a906fda0');expect(all.mappedDeclarations).toBe(590);expect(all.executionCredit).toBe(false);\n}",
+      "sourceSha256": "d51c18855334b3d2b3ba1b1df5d6d460ac6655ad9b740f4da58eb1a9db8b0a69",
+      "body": "{\n const x=await input(),r=reconcileOutcomeMappings(x.inventory,x.ledger,x.features,x.sources);expect(r.mappedDeclarations).toBe(7);expect(r.mappings.filter(m=>m.caseKeys.length).map(m=>m.caseKeys)).toEqual([['@id-docx-go-table-cell-access']]);expect(r.mappings.every(m=>m.status==='partial'&&m.gaps.length>0)).toBe(true);\n const all=await outcomeMappingReport(),old=structuredClone(all.mappings.filter(m=>!['nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger)));expect(old).toHaveLength(494);const adjusted=old.find(m=>m.testId==='bun:tests/unit/docx-heading-classification.test.ts:empty style retains strict Bun policy and all five shared getter-profile cases stay planned')!;expect(adjusted.assertions).toContain('expect(inv.counts.cases.implemented).toBe(729)');expect(adjusted.assertions).toContain('expect(inv.counts.cases.planned).toBe(62)');adjusted.assertions=adjusted.assertions.map(a=>a.replace('counts.cases.implemented).toBe(729)','counts.cases.implemented).toBe(550)').replace('counts.cases.planned).toBe(62)','counts.cases.planned).toBe(47)'));\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(old))).digest('hex')).toBe('61f08e53ee37c013c54851a6429a2b3452234365a52b6b6979250961a906fda0');expect(all.mappedDeclarations).toBe(590);expect(all.executionCredit).toBe(false);\n}",
       "calls": [
         ".includes",
         ".update",
@@ -26175,7 +26175,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "dfdb0148442285d3d4ad211fcfb73dab199ca86f653a815b063d812ba3d909f3",
+      "sourceSha256": "d51c18855334b3d2b3ba1b1df5d6d460ac6655ad9b740f4da58eb1a9db8b0a69",
       "body": "{\n const x=await input();for(const change of [(l:OutcomeMappingLedger)=>l.mappings.pop(),(l:OutcomeMappingLedger)=>l.mappings[0]!.assertions.pop(),(l:OutcomeMappingLedger)=>{l.sourceSha256['src/docx/index.ts']='0'.repeat(64);},(l:OutcomeMappingLedger)=>{l.mappings[0]!.caseKeys=['unknown'];}]){const l=structuredClone(x.ledger);change(l);expect(()=>reconcileOutcomeMappings(x.inventory,l,x.features,x.sources)).toThrow();}\n}",
       "calls": [
         ".repeat",
@@ -28593,7 +28593,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "0a730e94e0d40f0acd6319f97b60d18463c4a1cb84d972cd6d5279a4a5725e02",
+      "sourceSha256": "4980632a186fab4d05f29a3d9907161e10a4d318d8486b0f6207450a5c6d6271",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/package-wording-migration.json')).json();\n for(const file of migration.files)for(const edit of file.stepRenames){expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);}\n}",
       "calls": [
         "Bun.file",
@@ -28627,7 +28627,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0a730e94e0d40f0acd6319f97b60d18463c4a1cb84d972cd6d5279a4a5725e02",
+      "sourceSha256": "4980632a186fab4d05f29a3d9907161e10a4d318d8486b0f6207450a5c6d6271",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/package-wording-migration.json')).json(),ids=migration.files.flatMap((f:any)=>f.scenarios.map((s:any)=>s.id));\n const features=await sharedScenarios(ids),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(18),cases:count(38),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'package-neutral-wording');\n expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(38);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n }finally{await cleanup();}\n}",
       "calls": [
         "Bun.file",
@@ -28661,7 +28661,7 @@
       "assertions": [
         "expect(originalKeys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(60)",
+        "expect(inventory.counts.cases.planned).toBe(62)",
         "expect(report.mappedDeclarations).toBe(590)",
         "expect(report.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -28669,8 +28669,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "0a730e94e0d40f0acd6319f97b60d18463c4a1cb84d972cd6d5279a4a5725e02",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(60);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(590);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "4980632a186fab4d05f29a3d9907161e10a4d318d8486b0f6207450a5c6d6271",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(62);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(590);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -33451,7 +33451,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "9d20d04073e8c5bd0a0cda9c8cdb5de0c71f7ad41eb04dbef71e91a6f41696e6",
+      "sourceSha256": "70e47d4f2672b92c83a1b203eeb4165c6915c030fbc2ea8d84c9f807b4cb56a1",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json();\n for(const file of migration.files)for(const edit of file.stepRenames){\n  expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);\n  expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);\n }\n}",
       "calls": [
         "Bun.file",
@@ -33485,7 +33485,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9d20d04073e8c5bd0a0cda9c8cdb5de0c71f7ad41eb04dbef71e91a6f41696e6",
+      "sourceSha256": "70e47d4f2672b92c83a1b203eeb4165c6915c030fbc2ea8d84c9f807b4cb56a1",
       "body": "{\n const migration=await Bun.file(join(fixturesRoot(),'ledgers/runtime-wording-migration.json')).json(),ids=migration.files.flatMap((f:any)=>f.scenarios.map((s:any)=>s.id));\n const features=await sharedScenarios(ids),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(4),scenarios:count(16),cases:count(18),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'neutral-wording');\n expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(18);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -33518,7 +33518,7 @@
       "assertions": [
         "expect(originalKeys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(60)",
+        "expect(inventory.counts.cases.planned).toBe(62)",
         "expect(report.mappedDeclarations).toBe(590)",
         "expect(report.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -33526,8 +33526,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "9d20d04073e8c5bd0a0cda9c8cdb5de0c71f7ad41eb04dbef71e91a6f41696e6",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(60);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(590);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "70e47d4f2672b92c83a1b203eeb4165c6915c030fbc2ea8d84c9f807b4cb56a1",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inventory.counts.cases.planned).toBe(62);\n const report=await outcomeMappingReport();expect(report.mappedDeclarations).toBe(590);expect(report.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(report.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -33577,7 +33577,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "7659cab8ccea5c34c72f72259fd59e0879a7da26dac1d323043ded30720543fc",
+      "sourceSha256": "da539138eb8e00a46d568fa9b1f743b34db0b713423a8f55f4e03e123355670a",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/local.feature'),feature('local'));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3});expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1});expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2});\n const f=inv.features.find(f=>f.path===prefix+b)!;expect(f.lifecycle).toBe('planned');expect(f.runner).toBeUndefined();expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'));\n let unsupported=0;const result=await executeAcceptance(inv,[...bound,{pattern:/^(input|output) (b|local)$/,run:()=>{unsupported++;throw Error('planned ran');}}],'catalogue');expect(result.failures).toEqual([]);expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3});expect(unsupported).toBe(0);\n const report=await runAcceptance(bound,{root});expect(report.coverage).toEqual(inv.coverage);expect(report.execution.cases.planned).toBe(2);await expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         ".update",
@@ -33621,7 +33621,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "7659cab8ccea5c34c72f72259fd59e0879a7da26dac1d323043ded30720543fc",
+      "sourceSha256": "da539138eb8e00a46d568fa9b1f743b34db0b713423a8f55f4e03e123355670a",
       "body": "{\n for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>{l.schemaVersion=99;},\n  (l:ReturnType<typeof ledger>)=>{l.features.pop();l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.feature=b;},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.expandedCases=2;},\n  (l:ReturnType<typeof ledger>)=>{l.features.push(a);},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.push(l.workflows[0]!);},\n  (l:ReturnType<typeof ledger>)=>{l.features[0]='workflows/docx/../../escape.feature';},\n ]){const root=await project();try{const l=ledger();mutate(l);await Bun.write(join(root,catalogue),JSON.stringify(l));await expect(inventoryFeatures(root)).rejects.toThrow();}finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -33663,7 +33663,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "7659cab8ccea5c34c72f72259fd59e0879a7da26dac1d323043ded30720543fc",
+      "sourceSha256": "da539138eb8e00a46d568fa9b1f743b34db0b713423a8f55f4e03e123355670a",
       "body": "{\n for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity']){const root=await project();try{const c=config();\n if(mode==='unknown')c.features[0]!.path=prefix+'workflows/docx/c.feature';if(mode==='duplicate')c.features.push(c.features[0]!);if(mode==='orphan')await Bun.write(join(root,prefix+'workflows/docx/c.feature'),feature('c'));if(mode==='lifecycle')await Bun.write(join(root,prefix+b),feature('b').replace('@planned','@implemented @bun'));if(mode==='missing')await rm(join(root,prefix+b));if(mode==='seal')await Bun.write(join(root,prefix+'manifest.json'),JSON.stringify({files:[{path:a,role:'workflow'}]}));if(mode==='catalogue-path')c.catalogue=prefix+'../other.json';if(mode==='shadow')await Bun.write(join(root,'features/shadow.feature'),feature('b'));if(mode==='case-identity')await Bun.write(join(root,prefix+b),'@planned\\nFeature: b\\n @id-b\\n Scenario Outline: Duplicate <value>\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | same |\\n   | same |\\n');\n await Bun.write(join(root,'features/shared.json'),JSON.stringify(c));await expect(inventoryFeatures(root)).rejects.toThrow();\n }finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -33699,7 +33699,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "7659cab8ccea5c34c72f72259fd59e0879a7da26dac1d323043ded30720543fc",
+      "sourceSha256": "da539138eb8e00a46d568fa9b1f743b34db0b713423a8f55f4e03e123355670a",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.write",
@@ -33718,19 +33718,19 @@
       "unresolved": []
     },
     {
-      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 789 shared cases with former local obligations centralised with only reviewed activations",
+      "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
       "line": 39,
-      "title": "real catalogue accounts for all 789 shared cases with former local obligations centralised with only reviewed activations",
+      "title": "real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(inv.coverage?.catalogue).toMatchObject({features:61,scenarios:302,cases:789})",
-        "expect(inv.coverage?.shared.cases).toEqual({implemented:729,planned:60,total:789})",
+        "expect(inv.coverage?.catalogue).toMatchObject({features:62,scenarios:304,cases:791})",
+        "expect(inv.coverage?.shared.cases).toEqual({implemented:729,planned:62,total:791})",
         "expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:0,total:0})",
-        "expect(inv.counts.cases).toEqual({implemented:729,planned:60,total:789})",
-        "expect(inv.counts.scenarios.total).toBe(302)",
+        "expect(inv.counts.cases).toEqual({implemented:729,planned:62,total:791})",
+        "expect(inv.counts.scenarios.total).toBe(304)",
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
@@ -33739,8 +33739,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "7659cab8ccea5c34c72f72259fd59e0879a7da26dac1d323043ded30720543fc",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:61,scenarios:302,cases:789});expect(inv.coverage?.shared.cases).toEqual({implemented:729,planned:60,total:789});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:0,total:0});expect(inv.counts.cases).toEqual({implemented:729,planned:60,total:789});expect(inv.counts.scenarios.total).toBe(302);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
+      "sourceSha256": "da539138eb8e00a46d568fa9b1f743b34db0b713423a8f55f4e03e123355670a",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual({implemented:729,planned:62,total:791});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:0,total:0});expect(inv.counts.cases).toEqual({implemented:729,planned:62,total:791});expect(inv.counts.scenarios.total).toBe(304);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
       "calls": [
         ".test",
         ".update",
@@ -36003,7 +36003,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "52e31fa93d7edc6fd59547c3aef8db447aefef2bb29c5684232493e06b1d6858",
+      "sourceSha256": "8158417db68b7f23ce1fcec5464914c1a0f9801dc906361ed0fd17b6c9816834",
       "body": "{\n const {m,selected}=await scope();for(const file of m.files)for(const edit of file.stepRenames){expect(bindings.filter(b=>b.pattern.test(edit.from))).toHaveLength(0);if(selected.includes(edit.id))expect(bindings.filter(b=>b.pattern.test(edit.to))).toHaveLength(1);}\n}",
       "calls": [
         "b.pattern.test",
@@ -36040,7 +36040,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "52e31fa93d7edc6fd59547c3aef8db447aefef2bb29c5684232493e06b1d6858",
+      "sourceSha256": "8158417db68b7f23ce1fcec5464914c1a0f9801dc906361ed0fd17b6c9816834",
       "body": "{\n const {ids,selected,inv}=await scope();expect(ids).toHaveLength(34);expect(selected).toHaveLength(30);expect(ids.filter(id=>!selected.includes(id)).sort()).toEqual([...planned].sort());\n expect(inv.features.flatMap(f=>f.scenarios).filter(s=>planned.includes(s.scenarioId)).reduce((n,s)=>n+s.cases.length,0)).toBe(8);\n const features=await sharedScenarios(selected),scenarios=features.flatMap(f=>f.scenarios),cases=scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});expect(cases).toHaveLength(67);\n try{const r=await executeAcceptance({root:'.',features,counts:{features:count(features.length),scenarios:count(30),cases:count(67),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'word-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(67);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);}finally{await cleanup();}\n}",
       "calls": [
         ".sort",
@@ -36078,7 +36078,7 @@
       "assertions": [
         "expect(originalKeys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(60)",
+        "expect(inv.counts.cases.planned).toBe(62)",
         "expect(r.mappedDeclarations).toBe(590)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -36086,8 +36086,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "52e31fa93d7edc6fd59547c3aef8db447aefef2bb29c5684232493e06b1d6858",
-      "body": "{\n const {inv}=await scope(),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(60);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "8158417db68b7f23ce1fcec5464914c1a0f9801dc906361ed0fd17b6c9816834",
+      "body": "{\n const {inv}=await scope(),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(62);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".includes",
         ".update",
@@ -36186,7 +36186,7 @@
         "expect(originalKeys).toHaveLength(525)",
         "expect(new Set(originalKeys).size).toBe(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inventory.counts.cases.planned).toBe(60)",
+        "expect(inventory.counts.cases.planned).toBe(62)",
         "expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml|office)\\/[a-z0-9-]+\\.feature$/)"
       ],
       "deferredAssertions": [],
@@ -36197,8 +36197,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f6e22e6932c10f19f084989707e90ff8dc25bad1715656e130d6a99ed6b985f5",
-      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Set(originalKeys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(60);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml|office)\\/[a-z0-9-]+\\.feature$/);}\n}",
+      "sourceSha256": "db658a4b5987ff386ddbd40f4c7a3ff9a247128006b9673c66e2de8c96cf023b",
+      "body": "{\n const inventory=await inventoryFeatures(process.cwd()),keys=inventory.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);\n expect(originalKeys).toHaveLength(525);expect(new Set(originalKeys).size).toBe(525);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n expect(inventory.counts.cases.planned).toBe(62);\n for(const f of inventory.features.filter(f=>f.path.startsWith('references/'))){expect(f.path).toMatch(/^references\\/fixtures-ooxml\\/workflows\\/(docx|pptx|xlsx|package|xml|office)\\/[a-z0-9-]+\\.feature$/);}\n}",
       "calls": [
         ".update",
         ".update().digest",
@@ -36251,7 +36251,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f6e22e6932c10f19f084989707e90ff8dc25bad1715656e130d6a99ed6b985f5",
+      "sourceSha256": "db658a4b5987ff386ddbd40f4c7a3ff9a247128006b9673c66e2de8c96cf023b",
       "body": "{\n const ids=['@id-office-preview-details','@id-office-docx-exact-match-counts'],features=await sharedScenarios(ids);\n expect(features).toHaveLength(2);expect(features.flatMap(f=>f.scenarios.map(s=>s.scenarioId))).toEqual(ids);\n await expect(sharedScenarios(['@id-not-in-catalogue'])).rejects.toThrow('one shared scenario owner');\n await expect(sharedScenarios([])).rejects.toThrow('nonempty unique');await expect(sharedScenarios([ids[0]!,ids[0]!])).rejects.toThrow('nonempty unique');\n const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n for(const f of features)for(const s of f.scenarios)expect(ledger.workflows.find((w:any)=>w.id===s.scenarioId).feature).toBe(f.path);\n}",
       "calls": [
         "Bun.file",
@@ -36293,7 +36293,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f6e22e6932c10f19f084989707e90ff8dc25bad1715656e130d6a99ed6b985f5",
+      "sourceSha256": "db658a4b5987ff386ddbd40f4c7a3ff9a247128006b9673c66e2de8c96cf023b",
       "body": "{\n const r=await outcomeMappingReport(),ids=['bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings','bun:tests/unit/docx-append-run.test.ts:two shared run-authoring cases execute through real save/reopen and reject corrupted saved formatting'];\n const unchanged=r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger)&&!ids.includes(m.testId));expect(unchanged).toHaveLength(470);\n expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(unchanged))).digest('hex')).toBe('a87881cd02360bf6db2556d4cb39bc4a22bb59db90752d4fff83dd9f81960b41');\n expect(r.mappings.find(m=>m.testId===ids[0])!.assertions).toContain('expect(report.inventory.features.implemented).toBe(2)');\n expect(r.mappings.find(m=>m.testId===ids[1])!.assertions).toContain('expect(good.counts.cases.planned).toBe(0)');\n expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         ".includes",
@@ -42935,7 +42935,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "dc882aa587bc10998e57407bed6d9a28eafbdf1f5ec9e33511e53efc01204469",
+      "sourceSha256": "48f43e19a9bd0d152d1f2cb189c28b3fe3d5044d5ba52c21e3680b80e70b1a34",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json();for(const f of m.files)for(const e of f.stepRenames){expect(bindings.filter(b=>b.pattern.test(e.to))).toHaveLength(1);expect(bindings.filter(b=>b.pattern.test(e.from))).toHaveLength(0);}\n}",
       "calls": [
         "Bun.file",
@@ -42969,7 +42969,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "dc882aa587bc10998e57407bed6d9a28eafbdf1f5ec9e33511e53efc01204469",
+      "sourceSha256": "48f43e19a9bd0d152d1f2cb189c28b3fe3d5044d5ba52c21e3680b80e70b1a34",
       "body": "{\n const m=await Bun.file(join(fixturesRoot(),'ledgers/xml-formula-wording-migration.json')).json(),ids=m.files.flatMap((f:any)=>f.scenarios.map((r:any)=>r.id)),features=await sharedScenarios(ids),cases=features.flatMap(f=>f.scenarios.flatMap(s=>s.cases)),count=(n:number)=>({implemented:n,planned:0,total:n});\n const r=await executeAcceptance({root:'.',features,counts:{features:count(2),scenarios:count(19),cases:count(60),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}},bindings,'xml-formula-neutral');expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(60);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);\n}",
       "calls": [
         "Bun.file",
@@ -43002,7 +43002,7 @@
       "assertions": [
         "expect(originalKeys).toHaveLength(525)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01')",
-        "expect(inv.counts.cases.planned).toBe(60)",
+        "expect(inv.counts.cases.planned).toBe(62)",
         "expect(r.mappedDeclarations).toBe(590)",
         "expect(r.executionCredit).toBe(false)",
         "expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742')"
@@ -43010,8 +43010,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "dc882aa587bc10998e57407bed6d9a28eafbdf1f5ec9e33511e53efc01204469",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(60);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
+      "sourceSha256": "48f43e19a9bd0d152d1f2cb189c28b3fe3d5044d5ba52c21e3680b80e70b1a34",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd()),keys=inv.features.flatMap(f=>f.scenarios.filter(s=>s.lifecycle==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(originalKeys).toHaveLength(525);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');expect(inv.counts.cases.planned).toBe(62);\n const r=await outcomeMappingReport();expect(r.mappedDeclarations).toBe(590);expect(r.executionCredit).toBe(false);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(beforeSharedPlannedExpansion(r.mappings.filter(m=>!['tracking-settings','heading-classification','nullable-cell','table-merging','template-inventory','comment-threads','revision-properties','revision-moves'].includes(m.ledger))))).digest('hex')).toBe('bc95c58ea9ff443697c4458ae733ed9a62eb53f436a948ee265cdd825a064742');\n}",
       "calls": [
         ".includes",
         ".update",
