@@ -60,5 +60,5 @@ test('thread operation count bound refuses without returning a truncated result 
 });
 
 test('existing-extension threads do not activate authored-comment response or root-only resolution profiles',async()=>{
- const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);
+ const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(730);expect(inv.counts.cases.planned).toBe(61);
 });

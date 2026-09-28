@@ -9,7 +9,7 @@
     "tests/unit/vertical-merge-outcomes.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-table-merge.test.ts": "9ba975b07d4b2e0da9800e174aa4d6181278967267ecae3423733d9e2fe26019",
+    "tests/unit/docx-table-merge.test.ts": "a1b7653eab295917c3432aafa986597c818e9777044820b5fc29177033150291",
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
@@ -20,12 +20,12 @@
     "src/opc/graph.ts": "50a5a9ac11fcdff86b8711dbcffc7c4bfca6224c16fe20b69d45e756a715a027",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-    "tests/acceptance/steps.ts": "416a345851e9d0252efb6976c0fc6701183ec399d89cdbb5701322eae407dfcb",
+    "tests/acceptance/steps.ts": "6a3308736e43ea30f5345e60ab16d6407b14881d9124dc4613805220e434694a",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
     "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
     "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
-    "tests/unit/docx-table-vertical-merge.test.ts": "a37a4f43a662e63ab1494f8036719ff0d2f348f4eeabd7221d5e79e9856f8c6d",
+    "tests/unit/docx-table-vertical-merge.test.ts": "2ca8f7e13d747402c40cb7bfb7cba0effe957aa8b9ba5eadc8ab3223f6e2a9ce",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076"
   },
@@ -263,8 +263,8 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(62)"
+        "expect(inv.counts.cases.implemented).toBe(730)",
+        "expect(inv.counts.cases.planned).toBe(61)"
       ],
       "outcomes": [
         "Historical setter/vertical profile stays planned with one case and current global inventory totals."
@@ -623,8 +623,8 @@
       "assertions": [
         "expect(s.lifecycle).toBe('planned')",
         "expect(s.cases).toHaveLength(1)",
-        "expect(inv.counts.cases.implemented).toBe(729)",
-        "expect(inv.counts.cases.planned).toBe(62)"
+        "expect(inv.counts.cases.implemented).toBe(730)",
+        "expect(inv.counts.cases.planned).toBe(61)"
       ],
       "outcomes": [
         "Historical setter/verticalprofile remains planned and inventory totals are explicitlychecked."

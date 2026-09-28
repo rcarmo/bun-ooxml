@@ -70,9 +70,10 @@ import { bindings as xlsxBindings } from "./xlsx.ts";
 import { bindings as xlsxRangeBindings } from './xlsx-range.ts';
 import { bindings as xlsxCommentVmlBindings } from './xlsx-comment-vml.ts';
 import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
+import {bindings as ownedChainBindings,cleanup as cleanupOwnedChains} from './owned-chain.ts';
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains()]);}
 
 export const bindings: StepBinding[] = [
   ...coreBindings,
@@ -146,6 +147,7 @@ export const bindings: StepBinding[] = [
   ...xlsxRangeBindings,
   ...xlsxCommentVmlBindings,
   ...cacheBoundaryBindings,
+  ...ownedChainBindings,
   ...workflowBindings,
   ...workflowReceiptBindings,
 ];

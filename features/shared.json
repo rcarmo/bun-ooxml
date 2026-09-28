@@ -3,6 +3,14 @@
   "catalogue": "references/fixtures-ooxml/ledgers/workflows.json",
   "features": [
     {
+      "path": "references/fixtures-ooxml/workflows/xlsx/calculation-chain-lifecycle.feature",
+      "lifecycle": "implemented",
+      "runner": "bun",
+      "scenarioIds": [
+        "@id-xlsx-owned-calculation-chain-invalidation"
+      ]
+    },
+    {
       "path": "references/fixtures-ooxml/workflows/pptx/mutation-safety.feature",
       "lifecycle": "implemented",
       "runner": "bun",

@@ -39,5 +39,5 @@ test('aliased UTF16 direct style reads without editing encoding or root namespac
 
 test('empty style retains strict Bun policy and all five shared getter-profile cases stay planned',async()=>{
  const d=await styled('Heading1'),held=d.paragraphs[0]!,before=d.package.toBytes();expect(()=>held.setStyle('')).toThrow(expect.objectContaining({code:'docx-style-argument'}));expect(d.package.toBytes()).toEqual(before);expect(held.headingLevel).toBe(1);held.setStyle(null);const p=d.paragraphs[0]!;expect(p.styleId).toBeUndefined();expect(p.isHeading).toBe(false);expect(p.headingLevel).toBe(0);
- const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),profile=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-paragraph-style-getters')!;expect(profile.lifecycle).toBe('planned');expect(profile.cases).toHaveLength(5);expect(inv.counts.cases.implemented).toBe(729);expect(inv.counts.cases.planned).toBe(62);
+ const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),profile=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-paragraph-style-getters')!;expect(profile.lifecycle).toBe('planned');expect(profile.cases).toHaveLength(5);expect(inv.counts.cases.implemented).toBe(730);expect(inv.counts.cases.planned).toBe(61);
 });
