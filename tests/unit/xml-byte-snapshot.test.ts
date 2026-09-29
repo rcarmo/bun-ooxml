@@ -48,7 +48,20 @@ test('repeated edits and mutated changed output do not affect source ownership o
 
 test('canonical byte seed checks input and no-op output independently with corruption controls',async()=>{
  const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/editing.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};
- const good=await executeAcceptance(inv,bindings,'xml-byte-seed');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);
+ const selected=inv.features[0]!.scenarios.find(s=>s.scenarioId==='@id-xml-go-immutable-leaf-seed')!;
+ expect(selected.name).toBe('A seeded immutable parse and no-op leave the caller bytes and parsed snapshot intact');expect(selected.location.line).toBe(107);
+ expect(selected.tags).toContain('@profile-lexical-snapshot-api');expect(selected.cases).toHaveLength(1);
+ expect(selected.cases[0]!.steps.map(s=>s.text)).toEqual([
+  'the XML source is <r><t>hello</t></r>',
+  'the XML editor parses a caller-owned byte slice and performs an empty edit',
+  'the caller input bytes still equal the original XML source',
+  'the empty edit returns the exact original source bytes',
+ ]);
+ const good=await executeAcceptance(inv,bindings,'xml-byte-seed');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);expect(good.counts.steps.passed).toBe(4);
+ const literal=utf8('<r><t>hello</t></r>'),caller=new Uint8Array(literal),snapshot=XmlByteSnapshot.parse(caller),first=snapshot.remove([]);
+ expect(first).toEqual(literal);first.fill(0);expect(caller).toEqual(literal);expect(snapshot.remove([])).toEqual(literal);
+ caller.fill(0);expect(snapshot.remove([])).toEqual(literal);
+ expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r></r>'));
  for(const field of ['input','output']){const badBindings=bindings.map(b=>b.pattern.test('the XML editor parses a caller-owned byte slice and performs an empty edit')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {input:Uint8Array;output:Uint8Array})[field as 'input'|'output'].fill(0);}}:b);const bad=await executeAcceptance(inv,badBindings,'xml-byte-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}
 });
 

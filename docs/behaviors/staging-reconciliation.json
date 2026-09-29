@@ -6193,57 +6193,57 @@
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshot owns caller input and empty-removal output with frozen handles",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:invalid byte types, malformed encodings, unsupported declarations and BOM mismatches refuse without mutation",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte subviews exclude adjacent data and ignore caller iterator/slice overrides",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshots enforce byte and decoded XML limits while permitting multibyte non-ASCII input",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:shared buffers, detached buffers and duplicate BOMs cannot bypass admission or encoding declarations",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:repeated edits and mutated changed output do not affect source ownership or target reuse",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:intrinsic view bounds reject spoofed length/shared storage without calling caller getters",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "aa0073c936a892e4c3f7415f67d0f40f8b166b904db30f6807e2ca047d2ec5fa"
+      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
     },
     {
       "id": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
