@@ -660,7 +660,7 @@ export const bindings: StepBinding[] = [
           },
           {
             name: "zip64",
-            expectedCode: "zip-zip64-unsupported",
+            expectedCode: "zip-structure-invalid",
             archive: buildZip([{ name: "word/document.xml", blob: encoder.encode("x") }], {
               totalEntries: 0xffff,
               diskEntries: 0xffff,
@@ -1059,6 +1059,8 @@ function requireZipState(state: CoreState, mode: ZipState["mode"]): ZipState {
 function assertZipRefusal(state: CoreState, name: string, expectedCode: string): void {
   const zip = requireZipState(state, "unsafe");
   const results = requireDefined(zip.unsafeResults, "Missing unsafe ZIP results");
+  const fixture = requireDefined(requireDefined(zip.unsafeCases, "Missing unsafe ZIP cases").find(item => item.name === name), `Missing ${name} ZIP fixture`);
+  assert.equal(fixture.expectedCode, expectedCode, `${name} ZIP fixture expectation drift`);
   assert.equal(refusalCode(results.get(name)), expectedCode, `${name} ZIP refusal code mismatch`);
 }
 
