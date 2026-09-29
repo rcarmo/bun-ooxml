@@ -784,6 +784,25 @@ export const bindings: StepBinding[] = [
       for (const item of results) {
         assert.equal(refusalCode(item.error), item.expectedCode, `${item.name} refusal code mismatch`);
       }
+      // Invalid compressed bytes distinguish early limit refusal from any attempted inflate.
+      const invalid = buildZip([
+        { name: "a.bin", blob: encoder.encode("A".repeat(4096)), data: new Uint8Array(8).fill(0xff) },
+        { name: "b.bin", blob: encoder.encode("bb") },
+      ]);
+      const before = invalid.slice();
+      assert.equal(refusalCode(capture(() => readZip(invalid))), "zip-data-invalid");
+      const controls = [
+        { name: "archive size", limits: { maxArchiveBytes: invalid.length - 1 } },
+        { name: "entry count", limits: { maxEntries: 1 } },
+        { name: "entry size", limits: { maxEntryBytes: 8 } },
+        { name: "total expanded size", limits: { maxTotalBytes: 8 } },
+        { name: "compression ratio", limits: { maxCompressionRatio: 2 } },
+      ];
+      for (const [index, control] of controls.entries()) {
+        assert.equal(control.name, results[index]?.name);
+        assert.equal(refusalCode(capture(() => readZip(invalid, control.limits))), results[index]!.expectedCode, `${control.name} must refuse before invalid DEFLATE is attempted`);
+        assertBytesEqual(invalid, before, `${control.name} caller archive`);
+      }
     },
   },
   {
