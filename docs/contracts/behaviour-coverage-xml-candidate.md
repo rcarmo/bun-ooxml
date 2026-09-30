@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-The shared reference contains **345 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **346 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
@@ -39,13 +39,13 @@ The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-
 | references/fixtures-ooxml/workflows/office/full-coverage.feature | planned | 1 | 3 | 0 | 3 | 12 |
 | references/fixtures-ooxml/workflows/package/admission-limit-configuration.feature | implemented | 1 | 2 | 2 | 0 | 12 |
 | references/fixtures-ooxml/workflows/package/data-descriptor-integrity.feature | implemented | 1 | 1 | 1 | 0 | 8 |
-| references/fixtures-ooxml/workflows/package/graph.feature | implemented | 4 | 4 | 4 | 0 | 16 |
-| references/fixtures-ooxml/workflows/package/preservation.feature | implemented | 10 | 14 | 14 | 0 | 119 |
+| references/fixtures-ooxml/workflows/package/graph.feature | implemented | 4 | 4 | 4 | 0 | 17 |
+| references/fixtures-ooxml/workflows/package/preservation.feature | implemented | 10 | 14 | 14 | 0 | 120 |
 | references/fixtures-ooxml/workflows/package/relationship-namespaces.feature | implemented | 2 | 4 | 4 | 0 | 16 |
 | references/fixtures-ooxml/workflows/package/semantic-diff.feature | implemented | 1 | 1 | 1 | 0 | 7 |
 | references/fixtures-ooxml/workflows/package/xml-member-admission.feature | implemented | 1 | 3 | 3 | 0 | 9 |
 | references/fixtures-ooxml/workflows/package/zip-admission.feature | implemented | 4 | 11 | 11 | 0 | 38 |
-| references/fixtures-ooxml/workflows/package/zip32.feature | implemented | 8 | 24 | 24 | 0 | 116 |
+| references/fixtures-ooxml/workflows/package/zip32.feature | implemented | 8 | 24 | 24 | 0 | 118 |
 | references/fixtures-ooxml/workflows/package/zip64.feature | implemented | 4 | 4 | 4 | 0 | 13 |
 | references/fixtures-ooxml/workflows/pptx/creation.feature | implemented | 3 | 3 | 3 | 0 | 9 |
 | references/fixtures-ooxml/workflows/pptx/layout-recommendation.feature | planned | 2 | 6 | 0 | 6 | 39 |

@@ -29,7 +29,7 @@ test('wrong CRC, error code and message expectations fail bound ZIP32 predicates
     ['zip-crc-mismatch', 'zip-wrong-code'],
     generalized?['reason <code>','reason zip-wrong-reason']:['| CRC                      |', '| wrong message            |'],
   ]) {
-    const result = await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });
+    const result = await run(s => { expect(s.includes(from!)).toBe(true); return s.replaceAll(from!, to!); });
     expect(result.counts.cases.failed).toBeGreaterThan(0);
     expect(result.counts.steps.failed).toBeGreaterThan(0);
     expect(result.counts.steps.undefined).toBe(0);

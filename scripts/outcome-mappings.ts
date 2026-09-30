@@ -84,9 +84,10 @@ export async function applyCandidateMappingSeals(ledger: OutcomeMappingLedger) {
  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??'').json();
  if(pin.mode!=='candidate')throw Error('Explicit candidate pin required');
  await(candidateVerification??=verifyReferences(process.cwd()));
- const reviewed=await Promise.all(['xml-runtime-candidate.json','cell-runtime-candidate.json','package-runtime-candidate.json','transaction-runtime-candidate.json','xml-lexical-alignment-candidate.json'].map(p=>Bun.file(join(process.cwd(),'docs/behaviors',p)).json()));
+ const reviewed=await Promise.all(['xml-runtime-candidate.json','cell-runtime-candidate.json','package-runtime-candidate.json','transaction-runtime-candidate.json','xml-lexical-alignment-candidate.json','package-alignment-candidate.json'].map(p=>Bun.file(join(process.cwd(),'docs/behaviors',p)).json()));
  const m=reviewed.find(r=>r.commit===pin.commit&&r.manifestSha256===pin.manifestSha256);
  if(!m)throw Error('Unreviewed runtime-generalization candidate');
+ for(const [path,seal]of Object.entries(m.featureSeals??{}))if(Object.hasOwn(ledger.sourceSha256,path))ledger.sourceSha256[path]=seal as string;
  for(const [path,seal]of [['workflows/xml/parsing.feature',m.featureSha256],['workflows/xml/names.feature',m.namesFeatureSha256],['workflows/xml/editing.feature',m.editingFeatureSha256],['workflows/docx/tables.feature',m.tablesFeatureSha256],['workflows/package/preservation.feature',m.packageFeatureSha256],['workflows/package/zip32.feature',m.zipFeatureSha256]])if(seal&&Object.hasOwn(ledger.sourceSha256,path))ledger.sourceSha256[path]=seal;
 }
 export async function outcomeMappingReport(){

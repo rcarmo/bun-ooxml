@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1121,
+  "nativeDeclarations": 1124,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 894,
+  "withoutStagingCount": 897,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -1086,7 +1086,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentSourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1097,7 +1097,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentSourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1106,7 +1106,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentSourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1115,7 +1115,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentSourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1124,7 +1124,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentSourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1133,7 +1133,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentSourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1144,7 +1144,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "currentSourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -2198,27 +2198,27 @@
     {
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison ledgers cover 26 declarations and 74 expressions preserving 347 predecessor mappings",
       "path": "tests/unit/comparison-mappings.test.ts",
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3"
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb"
     },
     {
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison mapping gaps preserve aggregate wrappers QName policies resource and unchanged-list limits",
       "path": "tests/unit/comparison-mappings.test.ts",
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3"
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb"
     },
     {
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison scopes declarations literal assertions and canonical case ownership cannot shrink or cross features",
       "path": "tests/unit/comparison-mappings.test.ts",
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3"
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb"
     },
     {
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison runtime binding fixture-builder and canonical pins fail independently when stale or absent",
       "path": "tests/unit/comparison-mappings.test.ts",
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3"
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb"
     },
     {
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison reconciliation preserves inputs direct and deferred assertions dynamic flags and unknown leaves",
       "path": "tests/unit/comparison-mappings.test.ts",
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3"
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb"
     },
     {
       "id": "bun:tests/unit/docx-anchor-mappings.test.ts:anchor mapping ledger accounts for 28 declarations and 122 direct assertions with prior mappings untouched",
@@ -4648,27 +4648,27 @@
     {
       "id": "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph ledger enumerates 15 declarations and 56 expressions preserving 392 previous mappings",
       "path": "tests/unit/opc-graph-mappings.test.ts",
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae"
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6"
     },
     {
       "id": "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph mapping limits byte reopen narrow payload checks live removals and direct diff construction",
       "path": "tests/unit/opc-graph-mappings.test.ts",
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae"
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6"
     },
     {
       "id": "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph scope and literal assertions cannot shrink or borrow semantic diff cases",
       "path": "tests/unit/opc-graph-mappings.test.ts",
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae"
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6"
     },
     {
       "id": "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph runtime fixture and canonical source pins fail independently when stale or absent",
       "path": "tests/unit/opc-graph-mappings.test.ts",
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae"
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6"
     },
     {
       "id": "bun:tests/unit/opc-graph-mappings.test.ts:OPC graph reconciliation retains original evidence direct deferred assertions flags and unknown runtime leaves",
       "path": "tests/unit/opc-graph-mappings.test.ts",
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae"
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6"
     },
     {
       "id": "bun:tests/unit/oracle-process.test.ts:oracle runner captures success and rejects missing commands",
@@ -4834,6 +4834,21 @@
       "id": "bun:tests/unit/package-admission.test.ts:syntax-only XML validation handles deep segmented text without ancestor text materialisation",
       "path": "tests/unit/package-admission.test.ts",
       "sourceSha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02"
+    },
+    {
+      "id": "bun:tests/unit/package-alignment-bindings.test.ts:candidate contract retains complete feature seals and exact reviewed Office case-identity migrations without credit",
+      "path": "tests/unit/package-alignment-bindings.test.ts",
+      "sourceSha256": "891d189594e86dbbf7aa37b588e294a979ea65e95c1e1421d4d46c98bb74e032"
+    },
+    {
+      "id": "bun:tests/unit/package-alignment-comparison.test.ts:valid OPC relationship Type URIs are literals, not unknown QName prefixes",
+      "path": "tests/unit/package-alignment-comparison.test.ts",
+      "sourceSha256": "b34f7e8002815966c6348ade58efd34539a32a7b0643eacffccd5afab914dcce"
+    },
+    {
+      "id": "bun:tests/unit/package-alignment-comparison.test.ts:relationship External Target URIs also compare literally; mode and Type differences remain significant",
+      "path": "tests/unit/package-alignment-comparison.test.ts",
+      "sourceSha256": "b34f7e8002815966c6348ade58efd34539a32a7b0643eacffccd5afab914dcce"
     },
     {
       "id": "bun:tests/unit/package-comparison.test.ts:archive comparison separates equivalent XML, changed binary, additions and removals without requiring an OPC graph",
@@ -6528,27 +6543,27 @@
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:twenty canonical ZIP32 checksum, refusal and configured-bound cases execute",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8"
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:wrong CRC, error code and message expectations fail bound ZIP32 predicates",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8"
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 refusal fixtures encode the specified local, central and end-record mutations",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8"
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:ordered ZIP32 fixture pairs keep duplicates, case differences and noncanonical names",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8"
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:ZIP32 predicates reject fabricated success, untyped errors and caller-buffer mutation",
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8"
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede"
     },
     {
       "id": "bun:tests/unit/zip32-mappings.test.ts:ZIP32 ledger enumerates 24 declarations and 106 direct expressions preserving 422 predecessor rows",

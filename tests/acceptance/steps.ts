@@ -1,5 +1,6 @@
 import type { StepBinding } from "../../scripts/gherkin.ts";
 import { bindings as coreBindings } from "./core.ts";
+import {withPackageAlignment} from './package-alignment.ts';
 import { bindings as packageAdmissionBindings } from './package-admission.ts';
 import {bindings as physicalOverlapBindings} from './physical-overlap.ts';
 import { bindings as packageComparisonBindings } from './package-comparison.ts';
@@ -78,7 +79,7 @@ import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflo
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
 export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains(),cleanupXlsxStyleReadback()]);}
 
-export const bindings: StepBinding[] = [
+export const historicalBindings: StepBinding[] = [
   ...coreBindings,
   ...packageAdmissionBindings,
   ...physicalOverlapBindings,
@@ -157,5 +158,6 @@ export const bindings: StepBinding[] = [
   ...workflowBindings,
   ...workflowReceiptBindings,
 ];
+export const bindings=withPackageAlignment(historicalBindings);
 
 export default bindings;

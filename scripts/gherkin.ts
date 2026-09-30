@@ -22,6 +22,7 @@ import {
 } from "@cucumber/messages";
 import { createHash, randomUUID } from "node:crypto";
 import { join, resolve } from "node:path";
+import {verifyReferences} from './references.ts';
 
 export type StepBinding = {
   pattern: RegExp;
@@ -347,6 +348,8 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
   const sharedPrefix='references/fixtures-ooxml/';
   const referenceRoot=process.env.OOXML_FIXTURES_ROOT && resolve(root)===resolve(import.meta.dir,'..')
     ? process.env.OOXML_FIXTURES_ROOT : join(root,sharedPrefix);
+  // Candidate admission is an exact clean reference check, not a commit whitelist.
+  if(process.env.OOXML_FIXTURES_ROOT&&resolve(root)===resolve(import.meta.dir,'..'))await verifyReferences(root);
   const sharedConfig = Bun.file(join(root, 'features/shared.json'));
   if (await sharedConfig.exists()) {
     const shared = await sharedConfig.json();

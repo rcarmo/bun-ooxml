@@ -8,7 +8,8 @@ import {setCellWrapText} from "../../src/xlsx/styles.ts";
 import {OoxmlError} from "../../src/errors.ts";
 import {assertPreservedOutput,loadMutationFixtures,type FixtureManifest} from '../../scripts/shared-fixtures.ts';
 import {parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from "../../scripts/gherkin.ts";
-import {bindings,namespaceFixture} from "../acceptance/relationship-namespaces.ts";
+import {namespaceFixture} from "../acceptance/relationship-namespaces.ts";
+import {bindings} from '../acceptance/steps.ts';
 const pkg='http://schemas.openxmlformats.org/package/2006/relationships';
 describe('expanded Office relationship attribute identity',()=>{
  test('PPTX accepts a renamed relationship prefix and preserves it on save',async()=>{

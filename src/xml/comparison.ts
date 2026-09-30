@@ -33,7 +33,10 @@ function model(bytes:Uint8Array):Token[]{
     const local=name.includes(':')?name.slice(name.indexOf(':')+1):name;
     attributes.push([uri,local,value]);
     const prefixList=uri===MC&&(local==='Ignorable'||local==='MustUnderstand')||node.namespaceURI===MC&&node.localName==='Choice'&&uri===''&&local==='Requires';
-    if(value.includes(':')||prefixList||uri===XSI&&local==='type'){
+    // OPC defines Type and Target as URI strings, not QName-valued attributes.
+    // All other colon-valued attributes retain the conservative binding check.
+    const relationshipUri=node.namespaceURI===REL&&node.localName==='Relationship'&&uri===''&&(local==='Type'||local==='Target');
+    if(!relationshipUri&&(value.includes(':')||prefixList||uri===XSI&&local==='type')){
      sensitive=true;
      // Unknown QName-like values are conservatively incomparable, not resolved by guessing.
      if(value.includes(':'))for(const word of value.split(/\s+/)){const prefix=word.split(':')[0]!;if(word.includes(':')&&!namespaces.has(prefix))throw new OoxmlError('xml-comparison-namespace','Unknown prefix-valued attribute binding');}

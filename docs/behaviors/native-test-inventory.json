@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1121,
-  "files": 141,
+  "count": 1124,
+  "files": 143,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -38,7 +38,7 @@
     },
     {
       "path": "tests/unit/comparison-mappings.test.ts",
-      "sha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3",
+      "sha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb",
       "declarations": 5,
       "issues": []
     },
@@ -374,7 +374,7 @@
     },
     {
       "path": "tests/unit/opc-graph-mappings.test.ts",
-      "sha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae",
+      "sha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6",
       "declarations": 5,
       "issues": []
     },
@@ -394,6 +394,18 @@
       "path": "tests/unit/package-admission.test.ts",
       "sha256": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
       "declarations": 11,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/package-alignment-bindings.test.ts",
+      "sha256": "891d189594e86dbbf7aa37b588e294a979ea65e95c1e1421d4d46c98bb74e032",
+      "declarations": 1,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/package-alignment-comparison.test.ts",
+      "sha256": "b34f7e8002815966c6348ade58efd34539a32a7b0643eacffccd5afab914dcce",
+      "declarations": 2,
       "issues": []
     },
     {
@@ -512,7 +524,7 @@
     },
     {
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "sha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "declarations": 7,
       "issues": []
     },
@@ -830,7 +842,7 @@
     },
     {
       "path": "tests/unit/zip32-bindings.test.ts",
-      "sha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8",
+      "sha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede",
       "declarations": 5,
       "issues": []
     },
@@ -963,6 +975,10 @@
       "sha256": "d23dd1248f77c6ce76ac56c21b7b8358bc08873767b51f1235799e4f7faae6de"
     },
     {
+      "path": "tests/acceptance/package-alignment.ts",
+      "sha256": "0aaadaccae30ecca602fd712175e44f3c3f09d4cb25bd1d7f1815abeaeca9d18"
+    },
+    {
       "path": "tests/acceptance/package-comparison.ts",
       "sha256": "d68481c2680ca81e709289ce7942128a3bb1e831faeac1c9902bedb457547adc"
     },
@@ -1048,7 +1064,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "3405007af2602e3dd9398bae6e26ce7ae894ce975bb1edcdfbd2cb6881c4713b"
+      "sha256": "1abe6611facdba49b7a2432ecc01012ed1b0601ae75ba9beb1e889264366a1e7"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -1180,7 +1196,7 @@
     },
     {
       "path": "tests/helpers/execution-baseline.ts",
-      "sha256": "3afde613155c0c6f0465e41d005f46b0c36d71b164672deb6ff83c3ca85304cf"
+      "sha256": "18af1ffbbc86496d27d96bc774d95d9d046c6e24edd2b16779dfabe6a0e90307"
     },
     {
       "path": "tests/helpers/shared-scenarios.ts",
@@ -2853,7 +2869,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3",
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb",
       "body": "{\n const r=await outcomeMappingReport();for(const d of definitions){const rows=r.mappings.filter(m=>m.ledger===d.name);expect(rows).toHaveLength(d.count);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(d.assertions);expect(r.ledgers.find(l=>l.name===d.name)!.scopePaths).toEqual([d.path]);expect(rows.filter(m=>m.caseKeys.length).map(m=>m.caseKeys.length)).toEqual([d.cases]);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);}expect(r.mappedDeclarations).toBe(590);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-590);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','formula-references'].includes(m.ledger)))).digest('hex')).toBe('3305a748dafe7016415e00c7242f6af878205e13d68ffb1b7bbbf20567be5378');\n}",
       "calls": [
         ".includes",
@@ -2902,7 +2918,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3",
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb",
       "body": "{\n const r=await outcomeMappingReport(),xml=r.mappings.filter(m=>m.ledger==='xml-comparison'),pkg=r.mappings.filter(m=>m.ledger==='package-comparison');expect(xml[0]!.caseKeys).toEqual([]);expect(xml[2]!.gaps.join(' ')).toContain('Type');expect(xml[8]!.gaps.join(' ')).toContain('aggregate');expect(xml[9]!.gaps.join(' ')).toContain('timing');expect(xml[12]!.gaps.join(' ')).toContain('not schema');expect(pkg[0]!.gaps.join(' ')).toContain('no OPC');expect(pkg[6]!.gaps.join(' ')).toContain('single');expect(pkg[9]!.gaps.join(' ')).toContain('unchanged');expect(pkg[9]!.gaps.join(' ')).toContain('aggregate');expect(pkg[11]!.outcomes.join(' ')).toContain('byte diff');expect(pkg.every(m=>m.gaps.join(' ').includes('no new execution'))).toBe(true);\n}",
       "calls": [
         "expect",
@@ -2948,7 +2964,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3",
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb",
       "body": "{\n for(const d of definitions){const a=await sample(d);a.sets[0]!.ledger.scopePaths=[];expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample(d);b.sets[0]!.ledger.mappings.pop();expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample(d);c.sets[0]!.ledger.mappings[0]!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const e=await sample(d);e.sets[0]!.ledger.mappings[0]!.caseKeys=['@id-docx-final-section-layout|{\"kind\":\"landscape\"}'];expect(()=>reconcileOutcomeMappingSets(e.inventory,e.sets)).toThrow('case');}\n}",
       "calls": [
         "b.sets.0.ledger.mappings.pop",
@@ -2988,7 +3004,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3",
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb",
       "body": "{\n for(const d of definitions)for(const p of [d.path,...d.sources,d.canonical]){const a=await sample(d);expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample(d);delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -3027,7 +3043,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "80501e473e70827f4a1283d67f751f144f5ce2992a40f9877ec31884e125e0f3",
+      "sourceSha256": "a9302281284e7fbcec36c86eb0db5d7f5ef61e3e21d405d1c7cae620dc2983eb",
       "body": "{\n for(const d of definitions){const a=await sample(d),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();}\n}",
       "calls": [
         "JSON.stringify",
@@ -26766,7 +26782,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae",
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6",
       "body": "{\n const r=await outcomeMappingReport(),rows=r.mappings.filter(m=>m.ledger==='opc-graph');expect(rows).toHaveLength(15);expect(rows.reduce((n,m)=>n+m.assertions.length,0)).toBe(56);expect(r.ledgers.find(l=>l.name==='opc-graph')!.scopePaths).toEqual(paths);expect(rows.every(m=>m.caseKeys.length===0)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds))).toEqual(new Set(ids));expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.gaps.length&&m.outcomes.length)).toBe(true);expect(r.mappedDeclarations).toBe(590);expect(r.unmappedTestIds.length).toBe(r.totalDeclarations-590);expect(r.runtimeLeafCount).toBeNull();expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(r.mappings.filter(m=>['slide-order','effective-formatting','xml-values','pptx-core','docx-model','docx-anchors','xlsx-comments','xlsx-styles','pptx-text-boxes','docx-page-layout','docx-paragraph-styles','docx-style-authoring','xml-comparison','package-comparison','docx-comments','formula-references'].includes(m.ledger)))).digest('hex')).toBe('061c0d3b8ea7d4d3a38607be923b791ea7be2144bd6b3592cb22cc20787748fe');\n}",
       "calls": [
         ".includes",
@@ -26810,7 +26826,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae",
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6",
       "body": "{\n const rows=(await outcomeMappingReport()).mappings.filter(m=>m.ledger==='opc-graph');expect(rows[0]!.gaps.join(' ')).toContain('byte reopen');expect(rows[0]!.gaps.join(' ')).toContain('new payload');expect(rows[3]!.gaps.join(' ')).toContain('encoding');expect(rows[7]!.gaps.join(' ')).toContain('external');expect(rows[9]!.gaps.join(' ')).toContain('live');expect(rows[11]!.gaps.join(' ')).toContain('ZIP comment');expect(rows[13]!.gaps.join(' ')).toContain('set/delete');expect(rows[14]!.gaps.join(' ')).toContain('custom/payload.bin');expect(rows.every(m=>m.gaps.join(' ').includes('no semantic XML'))).toBe(true);\n}",
       "calls": [
         ".mappings.filter",
@@ -26854,7 +26870,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae",
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6",
       "body": "{\n for(const p of paths){const a=await sample();a.sets[0]!.ledger.scopePaths=a.sets[0]!.ledger.scopePaths.filter(x=>x!==p);expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('scope');const b=await sample();b.sets[0]!.ledger.mappings.splice(b.sets[0]!.ledger.mappings.findIndex(m=>m.testId.includes(p)),1);expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('Missing scoped');const c=await sample();c.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.assertions.pop();expect(()=>reconcileOutcomeMappingSets(c.inventory,c.sets)).toThrow('assertion');const d=await sample();d.sets[0]!.ledger.mappings.find(m=>m.testId.includes(p))!.caseKeys=['@id-package-diff-equivalent-xml-and-binary-changes'];expect(()=>reconcileOutcomeMappingSets(d.inventory,d.sets)).toThrow('case');}\n}",
       "calls": [
         "a.sets.0.ledger.scopePaths.filter",
@@ -26895,7 +26911,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae",
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6",
       "body": "{\n for(const p of pins){const a=await sample();expect(Object.hasOwn(a.sets[0]!.ledger.sourceSha256,p)).toBe(true);a.sets[0]!.sources[p]+=' ';expect(()=>reconcileOutcomeMappingSets(a.inventory,a.sets)).toThrow('Stale source');const b=await sample();delete b.sets[0]!.ledger.sourceSha256[p];expect(()=>reconcileOutcomeMappingSets(b.inventory,b.sets)).toThrow('pin');}\n}",
       "calls": [
         "Object.hasOwn",
@@ -26929,7 +26945,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "cedb1189ae475e3cbbe23aefea4607430324d068754e2ad00d25d751ac8702ae",
+      "sourceSha256": "1b58522a1cab787907cea9a87925138c10b478953d374491d25077826af7c9c6",
       "body": "{\n const a=await sample(),before=JSON.stringify(a),r=reconcileOutcomeMappingSets(a.inventory,a.sets);expect(JSON.stringify(a)).toBe(before);expect(r.mappings.map(m=>m.assertions)).toEqual(a.inventory.cases.map(m=>m.assertions));expect(r.mappings.map(m=>m.deferredAssertions)).toEqual(a.inventory.cases.map(m=>m.deferredAssertions));expect(r.mappings.map(m=>m.reviewReasons)).toEqual(a.inventory.cases.map(m=>m.reviewReasons));expect(r.executionCredit).toBe(false);expect(r.runtimeLeafCount).toBeNull();\n}",
       "calls": [
         "JSON.stringify",
@@ -28081,6 +28097,99 @@
         "parseXml",
         "utf8",
         "validateXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-alignment-bindings.test.ts:candidate contract retains complete feature seals and exact reviewed Office case-identity migrations without credit",
+      "path": "tests/unit/package-alignment-bindings.test.ts",
+      "line": 39,
+      "title": "candidate contract retains complete feature seals and exact reviewed Office case-identity migrations without credit",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(candidate.schemaVersion).toBe(2)",
+        "expect(candidate.featureCount).toBe(62)",
+        "expect(candidate.executionCredit).toBe(false)",
+        "expect(candidate.cases).toBe(27)",
+        "expect(candidate.steps).toBe(127)",
+        "expect(candidate.scenarioIds).toHaveLength(20)",
+        "expect(Object.keys(candidate.featureSeals)).toHaveLength(62)",
+        "expect(candidate.caseIdentityMigration).toHaveLength(4)",
+        "expect(candidate.caseIdentityMigration.every(r=>r.after!==r.before)).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "891d189594e86dbbf7aa37b588e294a979ea65e95c1e1421d4d46c98bb74e032",
+      "body": "{\n expect(candidate.schemaVersion).toBe(2);expect(candidate.featureCount).toBe(62);expect(candidate.executionCredit).toBe(false);expect(candidate.cases).toBe(27);expect(candidate.steps).toBe(127);expect(candidate.scenarioIds).toHaveLength(20);expect(Object.keys(candidate.featureSeals)).toHaveLength(62);expect(candidate.caseIdentityMigration).toHaveLength(4);expect(candidate.caseIdentityMigration.every(r=>r.after!==r.before)).toBe(true);\n}",
+      "calls": [
+        "Object.keys",
+        "candidate.caseIdentityMigration.every",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-alignment-comparison.test.ts:valid OPC relationship Type URIs are literals, not unknown QName prefixes",
+      "path": "tests/unit/package-alignment-comparison.test.ts",
+      "line": 6,
+      "title": "valid OPC relationship Type URIs are literals, not unknown QName prefixes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(compare(a,b)).toBe(true)",
+        "expect(compare(a,b.replace('urn:test/b','urn:test/c'))).toBe(false)",
+        "expect(compare(a,b.replace('b.xml','c.xml'))).toBe(false)",
+        "expect(compare(a,b.replace('Id=\"r2\"','Id=\"r1\"'))).toBe(false)",
+        "expect(compare('<a value=\"urn:test/a\"/>','<a value=\"urn:test/a\"/>')).toBe(false)",
+        "expect(compare('<a xmlns:p=\"urn:one\" value=\"p:x\"/>','<a xmlns:p=\"urn:two\" value=\"p:x\"/>')).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "b34f7e8002815966c6348ade58efd34539a32a7b0643eacffccd5afab914dcce",
+      "body": "{\n const a=`<Relationships xmlns=\"${ns}\"><Relationship Id=\"r1\" Type=\"urn:test/a\" Target=\"a.xml\"/><Relationship Id=\"r2\" Type=\"urn:test/b\" Target=\"b.xml\"/></Relationships>`;\n const b=`<p:Relationships xmlns:p=\"${ns}\"><p:Relationship Target=\"b.xml\" Type=\"urn:test/b\" Id=\"r2\"/><p:Relationship Target=\"a.xml\" Type=\"urn:test/a\" Id=\"r1\"/></p:Relationships>`;\n expect(compare(a,b)).toBe(true);\n expect(compare(a,b.replace('urn:test/b','urn:test/c'))).toBe(false);\n expect(compare(a,b.replace('b.xml','c.xml'))).toBe(false);\n expect(compare(a,b.replace('Id=\"r2\"','Id=\"r1\"'))).toBe(false);\n expect(compare('<a value=\"urn:test/a\"/>','<a value=\"urn:test/a\"/>')).toBe(false);\n expect(compare('<a xmlns:p=\"urn:one\" value=\"p:x\"/>','<a xmlns:p=\"urn:two\" value=\"p:x\"/>')).toBe(false);\n}",
+      "calls": [
+        "b.replace",
+        "compare",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/package-alignment-comparison.test.ts:relationship External Target URIs also compare literally; mode and Type differences remain significant",
+      "path": "tests/unit/package-alignment-comparison.test.ts",
+      "line": 16,
+      "title": "relationship External Target URIs also compare literally; mode and Type differences remain significant",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(compare(a,b)).toBe(true)",
+        "expect(compare(a,b.replace('External','Internal'))).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "b34f7e8002815966c6348ade58efd34539a32a7b0643eacffccd5afab914dcce",
+      "body": "{\n const a=`<Relationships xmlns=\"${ns}\"><Relationship Id=\"r1\" Type=\"https://example.org/relation\" Target=\"https://example.org/item\" TargetMode=\"External\"/></Relationships>`;\n const b=a.replace('<Relationships xmlns=', '<p:Relationships xmlns:p=').replace('<Relationship Id=', '<p:Relationship Id=').replace('</Relationships>','</p:Relationships>');\n expect(compare(a,b)).toBe(true);\n expect(compare(a,b.replace('External','Internal'))).toBe(false);\n}",
+      "calls": [
+        "a.replace",
+        "a.replace().replace",
+        "a.replace().replace().replace",
+        "b.replace",
+        "compare",
+        "expect",
+        "expect().toBe"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -33049,7 +33158,7 @@
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / PPTX accepts a renamed relationship prefix and preserves it on save",
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "line": 14,
+      "line": 15,
       "title": "PPTX accepts a renamed relationship prefix and preserves it on save",
       "suites": [
         "expanded Office relationship attribute identity"
@@ -33064,7 +33173,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "body": "{\n  const bytes=await namespaceFixture('pptx','alias');const deck=await Presentation.open(bytes);\n  expect(deck.slides.length).toBe(1);expect(deck.package.text(deck.package.mainPart())).toContain('link:id=');\n  expect(deck.package.toBytes()).toEqual(bytes);\n }",
       "calls": [
         "Presentation.open",
@@ -33083,7 +33192,7 @@
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / XLSX accepts a locally scoped prefix alias through value and style edits",
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "line": 19,
+      "line": 20,
       "title": "XLSX accepts a locally scoped prefix alias through value and style edits",
       "suites": [
         "expanded Office relationship attribute identity"
@@ -33098,7 +33207,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "body": "{\n  const bytes=await namespaceFixture('xlsx','alias');const book=await Workbook.open(bytes);\n  book.worksheet('Sheet').setCellValue('A1','wrapped\\nvalue');setCellWrapText(book,'Sheet','A1',true);\n  const reopened=await Workbook.open(book.package.toBytes());expect(reopened.worksheet('Sheet').getCell('A1')?.value).toBe('wrapped\\nvalue');expect(reopened.package.text(reopened.package.mainPart())).toContain('link:id=');\n  const manifest=await loadMutationFixtures();\n  await expect(assertPreservedOutput(book.package.toBytes(),manifest.fixtures.find(f=>f.id==='default-style.xlsx')!)).resolves.toBeUndefined();\n }",
       "calls": [
         "Workbook.open",
@@ -33125,7 +33234,7 @@
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / wrong URI and unqualified id refuse even with the familiar r spelling",
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "line": 26,
+      "line": 27,
       "title": "wrong URI and unqualified id refuse even with the familiar r spelling",
       "suites": [
         "expanded Office relationship attribute identity"
@@ -33138,16 +33247,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 27,
+          "line": 28,
           "expression": "for(const format of ['pptx','xlsx'] as const)for(const variant of ['wrong','unqualified'] as const)"
         },
         {
-          "line": 27,
+          "line": 28,
           "expression": "for(const variant of ['wrong','unqualified'] as const)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "body": "{\n  for(const format of ['pptx','xlsx'] as const)for(const variant of ['wrong','unqualified'] as const){\n   const bytes=await namespaceFixture(format,variant);\n   await expect(format==='pptx'?Presentation.open(bytes):Workbook.open(bytes)).rejects.toBeInstanceOf(OoxmlError);\n  }\n }",
       "calls": [
         "Presentation.open",
@@ -33164,7 +33273,7 @@
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / worksheet relationship type must use the exact officeDocument URI, not merely its suffix",
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "line": 32,
+      "line": 33,
       "title": "worksheet relationship type must use the exact officeDocument URI, not merely its suffix",
       "suites": [
         "expanded Office relationship attribute identity"
@@ -33177,7 +33286,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "body": "{\n  const bytes=await namespaceFixture('xlsx','original');const p=await OpcPackage.open(bytes);\n  const path='xl/_rels/workbook.xml.rels';p.set(path,p.text(path).replace('http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet','urn:foreign/worksheet'));\n  await expect(Workbook.open(p.toBytes())).rejects.toBeInstanceOf(OoxmlError);\n }",
       "calls": [
         "OpcPackage.open",
@@ -33196,7 +33305,7 @@
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / locally rebound r takes precedence over its parent declaration",
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "line": 37,
+      "line": 38,
       "title": "locally rebound r takes precedence over its parent declaration",
       "suites": [
         "expanded Office relationship attribute identity"
@@ -33209,7 +33318,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "body": "{\n  const original=await namespaceFixture('pptx','original');const package_=await OpcPackage.open(original);const part=package_.mainPart();\n  package_.set(part,package_.text(part).replace('<p:sldId ',`<p:sldId xmlns:r=\"${pkg}\" `));\n  await expect(Presentation.open(package_.toBytes())).rejects.toThrow('does not resolve to an internal slide relationship');\n }",
       "calls": [
         "OpcPackage.open",
@@ -33229,7 +33338,7 @@
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / foreign lookalike id cannot override the real relationship alias",
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "line": 42,
+      "line": 43,
       "title": "foreign lookalike id cannot override the real relationship alias",
       "suites": [
         "expanded Office relationship attribute identity"
@@ -33243,12 +33352,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 43,
+          "line": 44,
           "expression": "for(const format of ['pptx','xlsx'] as const)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "body": "{\n  for(const format of ['pptx','xlsx'] as const){\n   const bytes=await namespaceFixture(format,'alias');const p=await OpcPackage.open(bytes);const main=p.mainPart();\n   p.set(main,p.text(main).replace(/link:id=\"([^\"]+)\"/,`xmlns:r=\"${pkg}\" r:id=\"bogus\" link:id=\"$1\"`));\n   if(format==='pptx')expect((await Presentation.open(p.toBytes())).slides.length).toBe(1);\n   else expect((await Workbook.open(p.toBytes())).sheetnames).toEqual(['Sheet']);\n  }\n }",
       "calls": [
         "OpcPackage.open",
@@ -33272,7 +33381,7 @@
     {
       "id": "bun:tests/unit/relationship-namespaces.test.ts:expanded Office relationship attribute identity / shared namespace Gherkin executes all four cases with real outcomes",
       "path": "tests/unit/relationship-namespaces.test.ts",
-      "line": 50,
+      "line": 51,
       "title": "shared namespace Gherkin executes all four cases with real outcomes",
       "suites": [
         "expanded Office relationship attribute identity"
@@ -33286,7 +33395,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "8b428825d468b98f9420371657916d0adf6fcb64431bfff9643262a82c686007",
+      "sourceSha256": "ffb3d7642e69c5e3cd11af018ac0b61dfb28c60a709be788e460116b11a2a6ec",
       "body": "{\n  const path='references/fixtures-ooxml/workflows/package/relationship-namespaces.feature';const feature=parseFeature(path,(await Bun.file(join(fixturesRoot(), \"workflows/package/relationship-namespaces.feature\")).text()).replace(/^@planned/m, '@implemented @bun'));\n  const inventory:AcceptanceInventory={root:'.',features:[feature],counts:{features:{implemented:1,planned:0,total:1},scenarios:{implemented:2,planned:0,total:2},cases:{implemented:4,planned:0,total:4},steps:{implemented:16,planned:0,total:16}}};\n  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(4);\n }",
       "calls": [
         ".replace",
@@ -46177,7 +46286,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8",
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede",
       "body": "{\n  const result = await run();\n  expect(result.failures).toEqual([]);\n  expect(result.counts.cases.passed).toBe(20);\n  expect(result.counts.cases.planned).toBe(4);\n  expect(result.counts.steps.undefined).toBe(0);\n}",
       "calls": [
         "expect",
@@ -46212,15 +46321,15 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8",
-      "body": "{\n  for (const [from, to] of [\n    ['hexadecimal CBF43926', 'hexadecimal DEADBEEF'],\n    ['zip-crc-mismatch', 'zip-wrong-code'],\n    generalized?['reason <code>','reason zip-wrong-reason']:['| CRC                      |', '| wrong message            |'],\n  ]) {\n    const result = await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });\n    expect(result.counts.cases.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.undefined).toBe(0);\n    expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede",
+      "body": "{\n  for (const [from, to] of [\n    ['hexadecimal CBF43926', 'hexadecimal DEADBEEF'],\n    ['zip-crc-mismatch', 'zip-wrong-code'],\n    generalized?['reason <code>','reason zip-wrong-reason']:['| CRC                      |', '| wrong message            |'],\n  ]) {\n    const result = await run(s => { expect(s.includes(from!)).toBe(true); return s.replaceAll(from!, to!); });\n    expect(result.counts.cases.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.undefined).toBe(0);\n    expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "expect",
         "expect().toBe",
         "expect().toBeGreaterThan",
         "run",
         "s.includes",
-        "s.replace"
+        "s.replaceAll"
       ],
       "reviewReasons": [
         "body-loop",
@@ -46280,7 +46389,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8",
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede",
       "body": "{\n  const { readerSample } = await import('../acceptance/zip32.ts');\n  const { inflateRawSync } = await import('node:zlib');\n  const { crc32Test } = await import('../fixtures/zip32.ts');\n  const encode = (s: string) => new TextEncoder().encode(s), decode = (b: Uint8Array) => new TextDecoder().decode(b);\n  const sample = (mutation: string, value = 'payload') => {\n    const bytes = readerSample([{ name: 'word/document.xml', blob: encode(value) }], mutation);\n    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);\n    const end = bytes.length - 22, central = view.getUint32(end + 16, true);\n    const data = 30 + view.getUint16(26, true) + view.getUint16(28, true);\n    expect(view.getUint32(0, true)).toBe(0x04034b50);\n    expect(view.getUint32(central, true)).toBe(0x02014b50);\n    expect(view.getUint32(end, true)).toBe(0x06054b50);\n    return { bytes, view, end, central, data };\n  };\n  const plain = sample('none');\n  expect(plain.view.getUint16(6, true)).toBe(0x800);\n  expect(plain.view.getUint16(8, true)).toBe(8);\n  expect(plain.view.getUint32(14, true)).toBe(crc32Test(encode('payload')));\n  expect(decode(inflateRawSync(plain.bytes.subarray(plain.data, plain.central)))).toBe('payload');\n  const encrypted = sample('general-purpose bit 0 is set in both headers');\n  expect(encrypted.view.getUint16(6, true)).toBe(0x801);\n  expect(encrypted.view.getUint16(encrypted.central + 8, true)).toBe(0x801);\n  const unsupported = sample('both methods are 12 and payload bytes are stored uncompressed');\n  expect(unsupported.view.getUint16(8, true)).toBe(12);\n  expect(unsupported.view.getUint16(unsupported.central + 10, true)).toBe(12);\n  expect(decode(unsupported.bytes.subarray(unsupported.data, unsupported.central))).toBe('payload');\n  const disk = sample('end record disk number is 1');\n  expect(disk.view.getUint16(disk.end + 4, true)).toBe(1);\n  const counts = sample('both end-record counts are 65535 without ZIP64 records');\n  expect(counts.view.getUint16(counts.end + 8, true)).toBe(65535);\n  expect(counts.view.getUint16(counts.end + 10, true)).toBe(65535);\n  expect(counts.central + counts.view.getUint32(counts.end + 12, true)).toBe(counts.end);\n  const mismatch = sample('local name is word/other.xml');\n  expect(decode(mismatch.bytes.subarray(30, mismatch.data))).toBe('word/other.xml');\n  expect(decode(mismatch.bytes.subarray(mismatch.central + 46, mismatch.central + 46 + mismatch.view.getUint16(mismatch.central + 28, true)))).toBe('word/document.xml');\n  const crc = sample('both CRC fields are hexadecimal DEADBEEF');\n  expect(crc.view.getUint32(14, true)).toBe(0xdeadbeef);\n  expect(crc.view.getUint32(crc.central + 16, true)).toBe(0xdeadbeef);\n  const stored = sample('method is STORED and all size fields are 99');\n  expect(stored.view.getUint16(8, true)).toBe(0);\n  expect(stored.view.getUint16(stored.central + 10, true)).toBe(0);\n  for (const offset of [18, 22, stored.central + 20, stored.central + 24]) expect(stored.view.getUint32(offset, true)).toBe(99);\n  expect(decode(stored.bytes.subarray(stored.data, stored.central))).toBe('payload');\n  const overrun = sample('payload repeats A 4096 times but both expanded sizes are 32', 'A');\n  expect(overrun.view.getUint32(22, true)).toBe(32);\n  expect(overrun.view.getUint32(overrun.central + 24, true)).toBe(32);\n  expect(overrun.view.getUint32(18, true)).toBe(overrun.central - overrun.data);\n  expect(overrun.view.getUint32(overrun.central + 20, true)).toBe(overrun.central - overrun.data);\n  expect(decode(inflateRawSync(overrun.bytes.subarray(overrun.data, overrun.central)))).toBe('A'.repeat(4096));\n  expect(overrun.view.getUint32(14, true)).toBe(crc32Test(encode('A'.repeat(4096))));\n  expect(overrun.view.getUint32(overrun.central + 16, true)).toBe(crc32Test(encode('A'.repeat(4096))));\n  const tail = readerSample([{ name: 'word/document.xml', blob: encode('payload') }], 'a newline byte follows the complete uncommented archive');\n  expect(tail.subarray(0, -1)).toEqual(plain.bytes); expect(tail.at(-1)).toBe(10);\n}",
       "calls": [
         ".decode",
@@ -46348,7 +46457,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8",
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede",
       "body": "{\n  const { readerSample } = await import('../acceptance/zip32.ts');\n  for (const names of [['word/document.xml', 'word/document.xml'], ['word/document.xml', 'WORD/document.xml'], ['../word/document.xml']]) {\n    const specs = names.map((name, i) => ({ name, blob: new TextEncoder().encode(String(i)) }));\n    const bytes = readerSample(specs, 'none'), view = new DataView(bytes.buffer);\n    let cursor = view.getUint32(bytes.length - 6, true);\n    const actual: string[] = [];\n    for (let i = 0; i < names.length; i++) {\n      const size = view.getUint16(cursor + 28, true);\n      actual.push(new TextDecoder().decode(bytes.subarray(cursor + 46, cursor + 46 + size)));\n      cursor += 46 + size;\n    }\n    expect(actual).toEqual(names);\n    expect(specs.map(s => s.name)).toEqual(names);\n    expect(specs.map(s => new TextDecoder().decode(s.blob))).toEqual(names.map((_, i) => String(i)));\n  }\n}",
       "calls": [
         ".decode",
@@ -46395,7 +46504,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "ab33bace62f56a656d130ec69a3572e292ec1078c625b5f4f24b1ccee299f1f8",
+      "sourceSha256": "0e4ca78b7de76bc9d65a41b42ca2c5c807a53e433528c11ebd203c0acffe4ede",
       "body": "{\n  type State = { error?: unknown; output?: unknown; archive?: Uint8Array };\n  const steps = ['the ZIP reader reads the sample with default limits', 'the ZIP writer writes the entries with default options', 'the ZIP reader reads the archive with only maxEntries set to 1'];\n  for (const step of steps) for (const mutate of [\n    (s: State) => { s.error = undefined; s.output = new Map(); },\n    (s: State) => { s.error = new Error('untyped'); },\n    ...(step.includes('the ZIP reader') ? [(s: State) => { if (s.archive) s.archive[0] = s.archive[0]! ^ 1; }] : []),\n  ]) {\n    const corrupted = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); mutate(c.state as State);\n    } } : b);\n    const result = await run(s => s, corrupted);\n    expect(result.counts.cases.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.failed).toBeGreaterThan(0);\n    expect(result.counts.steps.undefined).toBe(0);\n    expect(result.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "b.pattern.test",

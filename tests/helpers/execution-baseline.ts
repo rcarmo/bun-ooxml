@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import lexicalAlignment from '../../docs/behaviors/xml-lexical-alignment-candidate.json';
+import packageAlignment from '../../docs/behaviors/package-alignment-candidate.json';
 const added=['persistence','custody','no-op','refusal','rollback','plain-edit','author-refusal'].map(n=>'@id-docx-tracking-settings-'+n);
 const mergeIds=['roundtrip','content-refusal','structure-refusal','coordinate-refusal','rollback','encoding','stale'].map(n=>'@id-docx-horizontal-merge-'+n);
 /** Keep the v0.27 execution identities stable while checking each reviewed addition. */
 export function withoutTrackingToggle(keys:string[]):string[]{
  assert.equal(keys.length,732);
  // Exact reviewed outline-row additions are reversed solely for this historical identity check.
+ keys=keys.map(k=>packageAlignment.caseIdentityMigration.find(r=>r.after===k)?.before??k);
  keys=keys.map(k=>lexicalAlignment.caseIdentityMigration.find(r=>r.after===k)?.before??k);
  const styleReader:string[]=keys.filter(k=>k==='@id-office-xlsx-independent-style-reader');assert.equal(styleReader.length,1);
  const overlap:string[]=keys.filter(k=>k==='@id-zip-physical-member-overlap-refusal');assert.equal(overlap.length,1);
