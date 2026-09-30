@@ -53,13 +53,13 @@
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-    "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+    "workflows/docx/tables.feature": "89446d3c98ce6ae75a7ff887f0964cf4cc0f4cfcca1f36edabf43762de353aae",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
     "tests/unit/docx-table-vertical-merge.test.ts": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
     "tests/acceptance/vertical-merging.ts": "26e2ecd9d4c737423f78af06230dac0afc38d0ca9b82ec2d236e93a62e73d076",
-    "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
-    "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
+    "tests/unit/docx-nullable-cell.test.ts": "0104ff52d9d65d48e6903370757be14fcf0e6086dc36e40b40660e20b68bd632",
+    "tests/acceptance/nullable-cell.ts": "f38530b1e907d582dbdee91429d2acff2b60f9cfe69bbcedfbc8364aaaca82e4",
     "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
     "tests/unit/docx-heading-classification.test.ts": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
     "src/docx/style-authoring.ts": "e95d53f634164e506e28ce7d3fb0621273728a73af74bda1b08edea88e3fa609",
@@ -342,7 +342,7 @@
         "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+        "workflows/docx/tables.feature": "89446d3c98ce6ae75a7ff887f0964cf4cc0f4cfcca1f36edabf43762de353aae",
         "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
         "tests/unit/docx-table-vertical-merge.test.ts": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
         "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
@@ -356,16 +356,16 @@
       ],
       "mappedDeclarations": 7,
       "sourceSha256": {
-        "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
+        "tests/unit/docx-nullable-cell.test.ts": "0104ff52d9d65d48e6903370757be14fcf0e6086dc36e40b40660e20b68bd632",
         "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
         "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
         "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
-        "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
+        "tests/acceptance/nullable-cell.ts": "f38530b1e907d582dbdee91429d2acff2b60f9cfe69bbcedfbc8364aaaca82e4",
         "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
         "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
         "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
+        "workflows/docx/tables.feature": "89446d3c98ce6ae75a7ff887f0964cf4cc0f4cfcca1f36edabf43762de353aae"
       }
     },
     {
@@ -549,7 +549,7 @@
         "workflows/docx/paragraphs.feature": "7c448d5863f64ef188b3cb2ec1c9a82fb4a8a2c7c5104058ccf21ad2561e6856",
         "workflows/docx/properties.feature": "59757333a4894b19364fd2b40fd2f1ceaafa19c21f357b4b9ef764bf2197be04",
         "workflows/docx/run-formatting.feature": "7af8ef3a85775d91a2025e033fd818dbda4bf8799210b294544b4ae1743536a1",
-        "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+        "workflows/docx/tables.feature": "89446d3c98ce6ae75a7ff887f0964cf4cc0f4cfcca1f36edabf43762de353aae",
         "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d"
       }
     },
@@ -4376,13 +4376,16 @@
         "expect(bad.counts.steps.undefined).toBe(0)",
         "expect(bad.counts.steps.ambiguous).toBe(0)",
         "expect(boundary.counts.cases.failed).toBe(1)",
-        "expect(boundary.counts.steps.undefined).toBe(0)"
+        "expect(boundary.counts.steps.undefined).toBe(0)",
+        "expect(wrong.counts.cases.failed).toBe(1)",
+        "expect(custody.counts.cases.failed).toBe(1)",
+        "expect(custody.counts.steps.undefined).toBe(0)"
       ],
       "outcomes": [
-        "One shared nullable-cell scenario executes; missing fifth cell and fabricated boundary cell controls fail without undefined bindings."
+        "Published legacy nullable case retained; candidate explicit14-coordinate lookup checks exact text/absence and document XML custody with wrong-cell/boundary/custody fault controls."
       ],
       "gaps": [
-        "Scenario checks nine object-presence results and four null boundaries only; save/reopen remains separate native evidence."
+        "Candidate contract adoption is explicitly source-gated; published pin remains v0.152; no new execution credit inferred from mapping integrity."
       ],
       "linkGranularity": "explicit-case-keys",
       "reviewReasons": [],

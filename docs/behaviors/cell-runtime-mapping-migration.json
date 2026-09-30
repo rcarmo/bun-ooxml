@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "f380fa44ed5933479c20847cc467de4f87e76a4a",
+  "executionCredit": false,
+  "changes": [
+    {
+      "testId": "bun:tests/unit/docx-nullable-cell.test.ts:shared nullable profile executes one case and detects missing in-range cells or fabricated boundary cells",
+      "before": {
+        "testId": "bun:tests/unit/docx-nullable-cell.test.ts:shared nullable profile executes one case and detects missing in-range cells or fabricated boundary cells",
+        "status": "partial",
+        "scenarioIds": [
+          "@id-docx-go-table-cell-access"
+        ],
+        "caseKeys": [
+          "@id-docx-go-table-cell-access"
+        ],
+        "assertions": [
+          "expect(good.failures).toEqual([])",
+          "expect(good.counts.cases.passed).toBe(1)",
+          "expect(bad.counts.cases.failed).toBe(1)",
+          "expect(bad.counts.steps.undefined).toBe(0)",
+          "expect(bad.counts.steps.ambiguous).toBe(0)",
+          "expect(boundary.counts.cases.failed).toBe(1)",
+          "expect(boundary.counts.steps.undefined).toBe(0)"
+        ],
+        "outcomes": [
+          "One shared nullable-cell scenario executes; missing fifth cell and fabricated boundary cell controls fail without undefined bindings."
+        ],
+        "gaps": [
+          "Scenario checks nine object-presence results and four null boundaries only; save/reopen remains separate native evidence."
+        ]
+      },
+      "after": {
+        "testId": "bun:tests/unit/docx-nullable-cell.test.ts:shared nullable profile executes one case and detects missing in-range cells or fabricated boundary cells",
+        "status": "partial",
+        "scenarioIds": [
+          "@id-docx-go-table-cell-access"
+        ],
+        "caseKeys": [
+          "@id-docx-go-table-cell-access"
+        ],
+        "assertions": [
+          "expect(good.failures).toEqual([])",
+          "expect(good.counts.cases.passed).toBe(1)",
+          "expect(bad.counts.cases.failed).toBe(1)",
+          "expect(bad.counts.steps.undefined).toBe(0)",
+          "expect(bad.counts.steps.ambiguous).toBe(0)",
+          "expect(boundary.counts.cases.failed).toBe(1)",
+          "expect(boundary.counts.steps.undefined).toBe(0)",
+          "expect(wrong.counts.cases.failed).toBe(1)",
+          "expect(custody.counts.cases.failed).toBe(1)",
+          "expect(custody.counts.steps.undefined).toBe(0)"
+        ],
+        "outcomes": [
+          "Published legacy nullable case retained; candidate explicit14-coordinate lookup checks exact text/absence and document XML custody with wrong-cell/boundary/custody fault controls."
+        ],
+        "gaps": [
+          "Candidate contract adoption is explicitly source-gated; published pin remains v0.152; no new execution credit inferred from mapping integrity."
+        ]
+      }
+    }
+  ]
+}

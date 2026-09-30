@@ -121,10 +121,12 @@ export async function outcomeMappingReport(){
  const sets:OutcomeMappingSet[]=[];
  for(const registration of registrations){
   const ledger=await Bun.file(join(root,`docs/behaviors/${registration.name}-mappings.json`)).json() as OutcomeMappingLedger;
-  if (candidatePin && registration.name === 'xml-values') {
-    const migration = await Bun.file(join(root,'docs/behaviors/xml-runtime-candidate.json')).json();
-    if (candidatePin.commit !== migration.commit || candidatePin.manifestSha256 !== migration.manifestSha256) throw Error('Unreviewed XML runtime candidate');
-    ledger.sourceSha256['workflows/xml/parsing.feature'] = migration.featureSha256;
+  if (candidatePin) {
+    const reviewed = await Promise.all(['xml-runtime-candidate.json','cell-runtime-candidate.json'].map(p=>Bun.file(join(root,'docs/behaviors',p)).json()));
+    const migration = reviewed.find(m=>m.commit===candidatePin.commit&&m.manifestSha256===candidatePin.manifestSha256);
+    if (!migration) throw Error('Unreviewed runtime-generalization candidate');
+    if (Object.hasOwn(ledger.sourceSha256,'workflows/xml/parsing.feature')) ledger.sourceSha256['workflows/xml/parsing.feature'] = migration.featureSha256;
+    if (migration.tablesFeatureSha256 && Object.hasOwn(ledger.sourceSha256,'workflows/docx/tables.feature')) ledger.sourceSha256['workflows/docx/tables.feature'] = migration.tablesFeatureSha256;
   }
   const sources:Record<string,string>={};for(const path of [...registration.tests,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
   const canonical=typeof registration.canonical==='string'?[registration.canonical]:registration.canonical;

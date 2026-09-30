@@ -1,3 +1,4 @@
+import cellMigration from '../../docs/behaviors/cell-runtime-mapping-migration.json';
 // Historical mapping fingerprints precede the planned-case expansion and
 // negative-budget and descriptor bindings. Restore only the reviewed global
 // inventory assertions and two reclassified partial associations; keep every
@@ -5,7 +6,13 @@
 const admissionId='bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds';
 const descriptorId='bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment';
 export function beforeSharedPlannedExpansion<T extends {testId:string;assertions:string[];scenarioIds:string[];gaps:string[]}>(rows:T[]):T[]{
- return rows.map(row=>{
+ return rows.map(current=>{
+  const change=cellMigration.changes.find(r=>r.testId===current.testId);
+  let row=current;
+  if(change){
+   for(const key of ['assertions','outcomes','gaps','scenarioIds','caseKeys'] as const)if(JSON.stringify((current as any)[key])!==JSON.stringify(change.after[key]))throw Error('Unreviewed cell runtime mapping: '+key);
+   row={...current,assertions:change.before.assertions,...('outcomes' in current?{outcomes:change.before.outcomes}:{}),gaps:change.before.gaps} as T;
+  }
   const restored={...row,assertions:row.assertions.map(a=>a.replace('expect(inv.counts.cases.planned).toBe(59)','expect(inv.counts.cases.planned).toBe(46)').replace('expect(inv.counts.cases.implemented).toBe(732)','expect(inv.counts.cases.implemented).toBe(726)'))};
   if(row.testId===admissionId){
    if(JSON.stringify(row.scenarioIds)!==JSON.stringify(['@id-package-admission-negative-budget']))throw Error('Admission source association drift');

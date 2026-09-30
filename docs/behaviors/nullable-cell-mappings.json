@@ -6,11 +6,11 @@
     "tests/unit/docx-nullable-cell.test.ts"
   ],
   "sourceSha256": {
-    "tests/unit/docx-nullable-cell.test.ts": "4dd008fe76c923a2ee67a8098923e294490ef79f4dfc4f5476118e4fe6d7b1cb",
+    "tests/unit/docx-nullable-cell.test.ts": "0104ff52d9d65d48e6903370757be14fcf0e6086dc36e40b40660e20b68bd632",
     "src/docx/index.ts": "746cb6736a89e2e8064114f0a7b494d052c62fdb6da542c6b5ee3ff739e7be35",
     "src/opc/package.ts": "306ca932515aa1d6d09c3ba2962e872bc249c4800218dd1ad7fae24d92a4296e",
     "src/xml/index.ts": "9ef401e125b2192bb1c7b390b350f35618df7fcb473f8602ad255c89edd15ba0",
-    "tests/acceptance/nullable-cell.ts": "7949122771d972ede110af0a2a81fdf21129539b4adc7856c4810ce4c863a14e",
+    "tests/acceptance/nullable-cell.ts": "f38530b1e907d582dbdee91429d2acff2b60f9cfe69bbcedfbc8364aaaca82e4",
     "tests/acceptance/docx-model.ts": "cd44534e88a9f48e43207b139b100069c742aa649ffbfe3cc7d24f65e4d112ce",
     "tests/acceptance/steps.ts": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03",
     "scripts/gherkin.ts": "a4d38a99fe9d200f1266f94a53a41745329bcb765835c2d11b17ef131daa702c",
@@ -163,13 +163,16 @@
         "expect(bad.counts.steps.undefined).toBe(0)",
         "expect(bad.counts.steps.ambiguous).toBe(0)",
         "expect(boundary.counts.cases.failed).toBe(1)",
-        "expect(boundary.counts.steps.undefined).toBe(0)"
+        "expect(boundary.counts.steps.undefined).toBe(0)",
+        "expect(wrong.counts.cases.failed).toBe(1)",
+        "expect(custody.counts.cases.failed).toBe(1)",
+        "expect(custody.counts.steps.undefined).toBe(0)"
       ],
       "outcomes": [
-        "One shared nullable-cell scenario executes; missing fifth cell and fabricated boundary cell controls fail without undefined bindings."
+        "Published legacy nullable case retained; candidate explicit14-coordinate lookup checks exact text/absence and document XML custody with wrong-cell/boundary/custody fault controls."
       ],
       "gaps": [
-        "Scenario checks nine object-presence results and four null boundaries only; save/reopen remains separate native evidence."
+        "Candidate contract adoption is explicitly source-gated; published pin remains v0.152; no new execution credit inferred from mapping integrity."
       ]
     }
   ]
