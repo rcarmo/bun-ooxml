@@ -102,6 +102,14 @@ export class OpcPackage {
       return operation();
     } catch (error) { this.parts = before; throw error; }
   }
+  /** Explicit portable execution policy. Returned values are opaque and are
+   * never awaited/evaluated; deferred operations are refused before invocation. */
+  transactionWithMode<T>(mode: "immediate" | "deferred", operation: () => T): T {
+    if (mode === "deferred") throw new OoxmlError("opc-deferred-transaction", "Deferred transactions are unsupported");
+    if (mode !== "immediate") throw new OoxmlError("opc-invalid-transaction-mode", "Invalid transaction mode");
+    if (operation.constructor.name === "AsyncFunction") throw new OoxmlError("opc-async-transaction", "Transactions require synchronous edits");
+    return this.transaction(() => { const result = operation(); this.validate(); return result; });
+  }
   toBytes(): Uint8Array {
     this.validate();
     const diff = this.diff();

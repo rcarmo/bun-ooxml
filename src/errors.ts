@@ -5,7 +5,7 @@ export function classifyXmlParseFailure(error: unknown): "malformed-xml" | undef
 }
 
 const sharedPackageReasons = new Set([
-  'opc-part-name-invalid','opc-target-invalid','opc-content-types-invalid','opc-relationship-target-missing','opc-relationship-duplicate','opc-symlink-destination',
+  'opc-part-name-invalid','opc-target-invalid','opc-content-types-invalid','opc-relationship-target-missing','opc-relationship-duplicate','opc-symlink-destination','opc-deferred-transaction',
   'zip-duplicate-entry','zip-case-collision','zip-name-invalid','zip-encryption-unsupported','zip-method-unsupported','zip-multi-disk-unsupported','zip-structure-invalid','zip-local-metadata-mismatch','zip-crc-mismatch','zip-size-mismatch','zip-end-record-missing','zip-directory-entry-invalid',
   'zip-archive-too-large','zip-too-many-entries','zip-entry-too-large','zip-total-too-large','zip-compression-ratio-exceeded',
 ]);

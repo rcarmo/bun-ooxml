@@ -6,6 +6,7 @@ type State = { error?: unknown; output?: unknown; archive?: Uint8Array; before?:
 const state = (c: Record<string, unknown>) => c.state as State;
 /** Shared result predicates; archive/before are optional caller-buffer custody checks. */
 export const bindings: StepBinding[] = [
+  {pattern:/^the transaction refuses with reason (\S+) and no result$/,run:(c,reason)=>{const s=state(c);assert.equal(classifyPackageFailure(s.error),reason);assert.equal(s.output,undefined);}},
   {pattern:/^(?:opening refuses with reason (\S+) and no package result|reading refuses with reason (\S+) and no member payload result|writing refuses with reason (\S+) and no archive result|saving refuses with reason (\S+) before destination replacement)$/,run:(c,...reasons)=>{
     const s=state(c),reason=reasons.find(Boolean);assert(reason);assert.equal(classifyPackageFailure(s.error),reason);assert.equal(s.output,undefined);
   }},

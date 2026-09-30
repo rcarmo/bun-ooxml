@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/rcarmo/fixtures-ooxml",
+  "mode": "candidate",
+  "commit": "bb1ae7d8859963c1699fed45453f7d1ff2999222",
+  "manifestSha256": "9d3ebdcfa686e04dcacc13bc11b062126135beb8bbd5046e47edc2f898b8212e",
+  "featureSha256": "fa342c6f1ac982c6f99b915dab54196501798af745b1cc4db143cecbaea48783",
+  "tablesFeatureSha256": "89446d3c98ce6ae75a7ff887f0964cf4cc0f4cfcca1f36edabf43762de353aae",
+  "packageFeatureSha256": "0232a5f99dbb48d2e03fbb36adf3e5b22b7f0da448d3046b4e90dcdcc2a4e90b",
+  "zipFeatureSha256": "ecf7356093c73b6d170177e30df4c63ea449788c285583a32dbea41942ccf4da",
+  "scenarioIds": ["@id-bun-opc-async-transaction-refusal","@id-bun-opc-thenable-transaction-result"],
+  "caseCount": 2,
+  "stepCount": 20,
+  "executionCredit": false
+}

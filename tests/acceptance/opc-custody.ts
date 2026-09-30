@@ -92,6 +92,16 @@ export const bindings: StepBinding[] = [
     assert(text.includes('Beta')); assert(text.includes('encoding="UTF-16"')); assert(!text.includes('Alpha'));
     assert.equal((await OpcPackage.open(s.saved)).text(doc), text);
   } },
+  {pattern:/^a deferred transaction is requested with a callback that would replace Alpha with Beta and set a ran flag$/,run:c=>{
+    const s=state(c);s.ran=false;retainSource(s);try{s.output=pkg(s).transactionWithMode('deferred',()=>{s.ran=true;pkg(s).set(doc,pkg(s).text(doc).replace('Alpha','Beta'));});}catch(error){s.error=error;}
+  }},
+  {pattern:/^the current package archive and caller source bytes remain unchanged$/,run:c=>{const s=state(c);assert(s.archive&&s.before&&s.original);assert.deepEqual(s.archive,s.before);assert.deepEqual(pkg(s).toBytes(),s.original);}},
+  {pattern:/^an opaque token has an evaluation hook that throws if invoked$/,run:c=>{const s=state(c);s.thenCalls=0;s.thenable={then:()=>{s.thenCalls!++;throw Error('must not be evaluated');}};}},
+  {pattern:/^an immediate transaction replaces Alpha with Beta and returns that token$/,run:c=>{const s=state(c);assert(s.thenable);s.transactionResult=pkg(s).transactionWithMode('immediate',()=>{pkg(s).set(doc,pkg(s).text(doc).replace('Alpha','Beta'));return s.thenable;});}},
+  {pattern:/^the returned token has the original identity and its evaluation count is (zero|one)$/,run:(c,count)=>{const s=state(c);assert(s.thenable);assert.equal(s.transactionResult,s.thenable);assert.equal(s.thenCalls,count==='zero'?0:1);}},
+  {pattern:/^saving and reopening reads Beta with every unrelated member payload unchanged$/,run:async c=>{
+    const s=state(c);assert(s.original);const root=await mkdtemp(join(tmpdir(),'portable-transaction-'));roots.add(root);const file=join(root,'saved.docx');await pkg(s).save(file);s.saved=Uint8Array.from(await Bun.file(file).bytes());savedCustody(s);assert((await OpcPackage.open(s.saved)).text(doc).includes('Beta'));assert.equal(s.thenCalls,0);assert.deepEqual(s.archive,s.original);
+  }},
   { pattern: /^its transaction is called with an async callback that would replace Alpha with Beta and set a ran flag$/, run: c => {
     const s = state(c); s.ran = false; retainSource(s);
     try { s.output = pkg(s).transaction(async () => { s.ran = true; pkg(s).set(doc, pkg(s).text(doc).replace('Alpha', 'Beta')); }); }

@@ -4,6 +4,7 @@ import { fixturesRoot } from '../../scripts/fixture-inputs.ts';
 import { executeAcceptance, selectSharedScenarios, type StepBinding } from '../../scripts/gherkin.ts';
 import { bindings, cleanup } from '../acceptance/steps.ts';
 
+const portable=(await Bun.file(join(fixturesRoot(),'workflows/package/preservation.feature')).text()).includes('@profile-portable-transactions');
 const ids = ['@id-bun-opc-open-refusal', '@id-bun-opc-detached-byte-copies', '@id-bun-opc-preserve-utf16le-edit', '@id-bun-opc-async-transaction-refusal', '@id-bun-opc-thenable-transaction-result', '@id-bun-opc-save-invalid-target-custody', '@id-bun-opc-symlink-destination-refusal'];
 async function run(change: (s: string) => string = s => s, activeBindings: StepBinding[] = bindings) {
   const path = 'workflows/package/preservation.feature';
@@ -17,8 +18,8 @@ test('eleven canonical OPC custody cases execute, including backgrounds and save
 });
 test('changed OPC error-code, message, content and BOM predicates fail', async () => {
   for (const [from, to] of [
-    ['code opc-async-transaction', 'code opc-wrong-code'],
-    ['message contains synchronous edits', 'message contains wrong message'],
+    portable?['reason opc-deferred-transaction','reason opc-wrong-code']:['code opc-async-transaction', 'code opc-wrong-code'],
+    portable?['evaluation count is zero','evaluation count is one']:['message contains synchronous edits', 'message contains wrong message'],
     ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],
     ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],
   ]) { const r=await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });
@@ -67,10 +68,10 @@ test('OPC predicates reject changed package bytes, callback flags, thenable iden
     ["every byte in the array returned by get for word/document.xml is overwritten with zero", s => { s.original![0] = s.original![0]! ^ 1; }],
     ['its serialized archive is read through the ZIP layer', s => { s.member![0] = 0; }],
     ['its serialized archive is read through the ZIP layer', s => { s.member = new Uint8Array([255, 254, 65, 0]); }],
-    ['its transaction is called with an async callback that would replace Alpha with Beta and set a ran flag', s => { s.ran = true; }],
-    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.transactionResult = {}; }],
-    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.thenCalls = 1; }],
-    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.pkg!.set('word/document.xml', '<document>Alpha</document>'); }],
+    [portable?'a deferred transaction is requested with a callback that would replace Alpha with Beta and set a ran flag':'its transaction is called with an async callback that would replace Alpha with Beta and set a ran flag', s => { s.ran = true; }],
+    [portable?'an immediate transaction replaces Alpha with Beta and returns that token':'a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.transactionResult = {}; }],
+    [portable?'an immediate transaction replaces Alpha with Beta and returns that token':'a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.thenCalls = 1; }],
+    [portable?'an immediate transaction replaces Alpha with Beta and returns that token':'a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.pkg!.set('word/document.xml', '<document>Alpha</document>'); }],
   ];
   for (const [step, mutate] of mutations) {
     const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {

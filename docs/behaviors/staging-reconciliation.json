@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1114,
+  "nativeDeclarations": 1116,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 887,
+  "withoutStagingCount": 889,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4593,32 +4593,32 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335"
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335"
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335"
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335"
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335"
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94"
     },
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335"
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94"
     },
     {
       "id": "bun:tests/unit/opc-custody-mappings.test.ts:OPC custody ledger enumerates 15 declarations and 66 expressions preserving 446 predecessor records",
@@ -4914,6 +4914,16 @@
       "id": "bun:tests/unit/package-runtime-generalization.test.ts:native package/ZIP positive siblings succeed and classification never relies on diagnostic text",
       "path": "tests/unit/package-runtime-generalization.test.ts",
       "sourceSha256": "0a28cd1aad08968484743d1c009cfb52bc80974ac03d7165dc37dc19c0319e57"
+    },
+    {
+      "id": "bun:tests/unit/portable-transactions.test.ts:deferred execution refuses before callback while immediate returns an opaque token unevaluated",
+      "path": "tests/unit/portable-transactions.test.ts",
+      "sourceSha256": "3026ce48ddd3db1a78dcb9f9db874cafec1f88a33d80628aa82c8ae7ff04286b"
+    },
+    {
+      "id": "bun:tests/unit/portable-transactions.test.ts:portable immediate transaction rolls back callback and validation failure and retains async guard",
+      "path": "tests/unit/portable-transactions.test.ts",
+      "sourceSha256": "3026ce48ddd3db1a78dcb9f9db874cafec1f88a33d80628aa82c8ae7ff04286b"
     },
     {
       "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",

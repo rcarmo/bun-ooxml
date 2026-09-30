@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1114,
-  "files": 138,
+  "count": 1116,
+  "files": 139,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -362,7 +362,7 @@
     },
     {
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "sha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335",
+      "sha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
       "declarations": 6,
       "issues": []
     },
@@ -424,6 +424,12 @@
       "path": "tests/unit/package.test.ts",
       "sha256": "be4729004809760771958250588a6903aee227fbb1ec26598f1126bb72eea3c1",
       "declarations": 9,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/portable-transactions.test.ts",
+      "sha256": "3026ce48ddd3db1a78dcb9f9db874cafec1f88a33d80628aa82c8ae7ff04286b",
+      "declarations": 2,
       "issues": []
     },
     {
@@ -934,7 +940,7 @@
     },
     {
       "path": "tests/acceptance/opc-custody.ts",
-      "sha256": "00cca958c144fb4bc2c5dd49b22b1f4080c95cede7d0b2905de826bed3c07878"
+      "sha256": "0a0fec688d768cce0460cdc2d26981a752cdba9bea2fa61465c9a32ae0654a3f"
     },
     {
       "path": "tests/acceptance/owned-chain.ts",
@@ -982,7 +988,7 @@
     },
     {
       "path": "tests/acceptance/refusal-outcomes.ts",
-      "sha256": "8bc838631dc21fdc3c00e2eb950a577b838ab3257a039e3a979177f434ffa4fd"
+      "sha256": "d700d6bf7bb7dd964b1d92679cd72b55997782cb2b78896a8e761949f6e19f5f"
     },
     {
       "path": "tests/acceptance/relationship-namespaces.ts",
@@ -1468,6 +1474,7 @@
     "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
     "bun:tests/unit/package-neutral-bindings.test.ts:neutral package actors resolve once and retired implementation names do not bind",
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
+    "bun:tests/unit/portable-transactions.test.ts:deferred execution refuses before callback while immediate returns an opaque token unevaluated",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
     "bun:tests/unit/pptx-custody-bindings.test.ts:PPTX custody predicates reject changed byte-opened, saved and reopened archives",
@@ -1946,6 +1953,7 @@
     "bun:tests/unit/package-comparison.test.ts:input admission refuses unsafe XML anywhere even if identical, added or removed",
     "bun:tests/unit/package-neutral-bindings.test.ts:neutral package actors resolve once and retired implementation names do not bind",
     "bun:tests/unit/package.test.ts:OpcPackage / preserves exact bytes for every no-op fixture archive in the rcarmo corpora",
+    "bun:tests/unit/portable-transactions.test.ts:deferred execution refuses before callback while immediate returns an opaque token unevaluated",
     "bun:tests/unit/pptx-create.test.ts:Presentation.create and addTextSlide / executes the PPTX create feature with dedicated bindings and optional parent aggregation",
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
     "bun:tests/unit/pptx-custody-bindings.test.ts:wrong first paragraph expectation fails the bound PPTX custody assertion",
@@ -26253,7 +26261,7 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 15,
+      "line": 16,
       "title": "eleven canonical OPC custody cases execute, including backgrounds and save-path outcomes",
       "suites": [],
       "kind": "test",
@@ -26266,7 +26274,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335",
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
       "body": "{\n  const r = await run(); expect(r.failures).toEqual([]); expect(r.counts.cases.passed).toBe(11); expect(r.counts.cases.planned).toBe(3);\n}",
       "calls": [
         "expect",
@@ -26280,7 +26288,7 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:changed OPC error-code, message, content and BOM predicates fail",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 18,
+      "line": 19,
       "title": "changed OPC error-code, message, content and BOM predicates fail",
       "suites": [],
       "kind": "test",
@@ -26296,13 +26304,13 @@
       ],
       "loops": [
         {
-          "line": 19,
-          "expression": "for (const [from, to] of [\n    ['code opc-async-transaction', 'code opc-wrong-code'],\n    ['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ])"
+          "line": 20,
+          "expression": "for (const [from, to] of [\n    portable?['reason opc-deferred-transaction','reason opc-wrong-code']:['code opc-async-transaction', 'code opc-wrong-code'],\n    portable?['evaluation count is zero','evaluation count is one']:['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335",
-      "body": "{\n  for (const [from, to] of [\n    ['code opc-async-transaction', 'code opc-wrong-code'],\n    ['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ]) { const r=await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
+      "body": "{\n  for (const [from, to] of [\n    portable?['reason opc-deferred-transaction','reason opc-wrong-code']:['code opc-async-transaction', 'code opc-wrong-code'],\n    portable?['evaluation count is zero','evaluation count is one']:['message contains synchronous edits', 'message contains wrong message'],\n    ['contains the UTF-8 text Alpha', 'contains the UTF-8 text Wrong'],\n    ['starts with hexadecimal bytes FF FE', 'starts with hexadecimal bytes FE FF'],\n  ]) { const r=await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -26320,7 +26328,7 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC refusal archives contain the exact background and named mutation",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 30,
+      "line": 31,
       "title": "OPC refusal archives contain the exact background and named mutation",
       "suites": [],
       "kind": "test",
@@ -26338,12 +26346,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 39,
+          "line": 40,
           "expression": "for (let i = 0; i < snapshots.length; i++)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335",
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
       "body": "{\n  const { readZip } = await import('../../src/opc/zip.ts');\n  const { parseXml } = await import('../../src/xml/index.ts');\n  const snapshots: Uint8Array[] = [];\n  const checking = bindings.map(b => b.pattern.test('the package editor opens its archive bytes') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n    await b.run(c, ...captures);\n    const s = c.state as { archive: Uint8Array }; snapshots.push(s.archive.slice());\n  } } : b);\n  const result = await run(s => s, checking); expect(result.failures).toEqual([]); expect(snapshots).toHaveLength(5);\n  for (let i = 0; i < snapshots.length; i++) {\n    const parts = readZip(snapshots[i]!);\n    const document = i === 0 ? 'word/%66oo.xml' : 'word/document.xml';\n    expect([...parts.keys()]).toEqual(['[Content_Types].xml', '_rels/.rels', document]);\n    const decode = (name: string) => new TextDecoder('utf-8', { fatal: true }).decode(parts.get(name)!);\n    expect(decode(document)).toBe('<?xml version=\"1.0\" encoding=\"UTF-8\"?><document>Alpha</document>');\n    const ct = parseXml(decode('[Content_Types].xml')).root;\n    expect(ct.namespaceURI).toBe('http://schemas.openxmlformats.org/package/2006/content-types');\n    expect(ct.children.map(n => [n.localName, { ...n.attributes }])).toEqual([\n      ['Default', { Extension: 'rels', ContentType: 'application/vnd.openxmlformats-package.relationships+xml' }],\n      ['Default', { Extension: i === 2 ? 'rels' : 'xml', ContentType: 'application/xml' }],\n      ['Override', { PartName: '/' + document, ContentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml' }],\n    ]);\n    const rels = parseXml(decode('_rels/.rels')).root;\n    expect(rels.namespaceURI).toBe('http://schemas.openxmlformats.org/package/2006/relationships');\n    expect(rels.children.map(n => [n.localName, { ...n.attributes }])).toEqual(Array.from({ length: i === 4 ? 2 : 1 }, () => ['Relationship', {\n      Id: 'rId1', Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument',\n      Target: i < 2 ? 'word/%66oo.xml' : i === 3 ? 'word/missing.xml' : 'word/document.xml',\n    }]));\n  }\n}",
       "calls": [
         ".decode",
@@ -26374,7 +26382,7 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 61,
+      "line": 62,
       "title": "OPC predicates reject changed package bytes, callback flags, thenable identity and saved members",
       "suites": [],
       "kind": "test",
@@ -26388,13 +26396,13 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 75,
+          "line": 76,
           "expression": "for (const [step, mutate] of mutations)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335",
-      "body": "{\n  type State = import('../acceptance/opc-custody.ts').CustodyState;\n  const mutations: [string, (s: State) => void][] = [\n    ['the package editor opens its archive bytes', s => { s.error = undefined; s.output = {}; }],\n    ['the package editor opens its archive bytes', s => { s.error = new Error('untyped'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.pkg!.set('word/document.xml', '<document>Wrong</document>'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.original![0] = s.original![0]! ^ 1; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member![0] = 0; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member = new Uint8Array([255, 254, 65, 0]); }],\n    ['its transaction is called with an async callback that would replace Alpha with Beta and set a ran flag', s => { s.ran = true; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.transactionResult = {}; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.thenCalls = 1; }],\n    ['a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.pkg!.set('word/document.xml', '<document>Alpha</document>'); }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); mutate(c.state as State);\n    } } : b);\n    const r=await run(s => s, corrupt);\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
+      "body": "{\n  type State = import('../acceptance/opc-custody.ts').CustodyState;\n  const mutations: [string, (s: State) => void][] = [\n    ['the package editor opens its archive bytes', s => { s.error = undefined; s.output = {}; }],\n    ['the package editor opens its archive bytes', s => { s.error = new Error('untyped'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.pkg!.set('word/document.xml', '<document>Wrong</document>'); }],\n    [\"every byte in the array returned by get for word/document.xml is overwritten with zero\", s => { s.original![0] = s.original![0]! ^ 1; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member![0] = 0; }],\n    ['its serialized archive is read through the ZIP layer', s => { s.member = new Uint8Array([255, 254, 65, 0]); }],\n    [portable?'a deferred transaction is requested with a callback that would replace Alpha with Beta and set a ran flag':'its transaction is called with an async callback that would replace Alpha with Beta and set a ran flag', s => { s.ran = true; }],\n    [portable?'an immediate transaction replaces Alpha with Beta and returns that token':'a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.transactionResult = {}; }],\n    [portable?'an immediate transaction replaces Alpha with Beta and returns that token':'a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.thenCalls = 1; }],\n    [portable?'an immediate transaction replaces Alpha with Beta and returns that token':'a synchronous transaction replaces Alpha with Beta and returns that thenable object', s => { s.pkg!.set('word/document.xml', '<document>Alpha</document>'); }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); mutate(c.state as State);\n    } } : b);\n    const r=await run(s => s, corrupt);\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "b.pattern.test",
         "b.run",
@@ -26414,7 +26422,7 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC destination assertions detect overwritten files and replaced symlinks",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 85,
+      "line": 86,
       "title": "OPC destination assertions detect overwritten files and replaced symlinks",
       "suites": [],
       "kind": "test",
@@ -26428,12 +26436,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 88,
+          "line": 89,
           "expression": "for (const [step, mutate] of [\n    ['the package is saved to the existing destination', async (s: State) =>"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335",
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
       "body": "{\n  const { unlink } = await import('node:fs/promises');\n  type State = import('../acceptance/opc-custody.ts').CustodyState;\n  for (const [step, mutate] of [\n    ['the package is saved to the existing destination', async (s: State) => { await Bun.write(s.destination!, 'changed'); }],\n    ['the unchanged package is saved through the symlink path', async (s: State) => { await Bun.write(s.destination!, 'changed'); }],\n    ['the unchanged package is saved through the symlink path', async (s: State) => { await unlink(s.link!); await Bun.write(s.link!, s.original!); }],\n  ] as const) {\n    const corrupt = bindings.map(b => b.pattern.test(step) ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n      await b.run(c, ...captures); const s = c.state as State;\n      // The save binding covers both destinations; restrict this mutation to the requested one.\n      if (Boolean(s.link) === step.includes('symlink')) await mutate(s);\n    } } : b);\n    const r=await run(s => s, corrupt);\n    expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n    expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  }\n}",
       "calls": [
         "Boolean",
@@ -26457,7 +26465,7 @@
     {
       "id": "bun:tests/unit/opc-custody-bindings.test.ts:OPC temporary destinations are cleaned after success and predicate failure",
       "path": "tests/unit/opc-custody-bindings.test.ts",
-      "line": 104,
+      "line": 105,
       "title": "OPC temporary destinations are cleaned after success and predicate failure",
       "suites": [],
       "kind": "test",
@@ -26475,12 +26483,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 116,
+          "line": 117,
           "expression": "for (const path of paths)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "924667ceaa8c51a93850b550294cde2296d23258242a1723a74068a7f37d5335",
+      "sourceSha256": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
       "body": "{\n  const { lstat } = await import('node:fs/promises');\n  const paths: string[] = [];\n  const checking = bindings.map(b => b.pattern.test('an existing destination file contains the base package archive bytes') ? { ...b, run: async (c: Record<string, unknown>, ...captures: string[]) => {\n    await b.run(c, ...captures); paths.push((c.state as { destination: string }).destination);\n  } } : b);\n  expect((await run(s => s, checking)).failures).toEqual([]);\n  const generalized=(await Bun.file(join(fixturesRoot(),'workflows/package/preservation.feature')).text()).includes('@profile-package-refusal-reasons');\n  const r=await run(s => generalized?s.replace('reason opc-relationship-target-missing before','reason opc-wrong-code before'):s.replace('message contains Missing target', 'message contains wrong'), checking);\n  expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);\n  expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);\n  expect(paths).toHaveLength(4);\n  for (const path of paths) {\n    await expect(lstat(path)).rejects.toMatchObject({ code: 'ENOENT' });\n    await expect(lstat(join(path, '..'))).rejects.toMatchObject({ code: 'ENOENT' });\n  }\n}",
       "calls": [
         ".includes",
@@ -29130,6 +29138,94 @@
       "reviewReasons": [
         "body-loop"
       ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/portable-transactions.test.ts:deferred execution refuses before callback while immediate returns an opaque token unevaluated",
+      "path": "tests/unit/portable-transactions.test.ts",
+      "line": 9,
+      "title": "deferred execution refuses before callback while immediate returns an opaque token unevaluated",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>p.transactionWithMode('deferred',()=>{ran=true;p.set('word/document.xml','<document>Beta</document>');})).toThrow(expect.objectContaining({code:'opc-deferred-transaction'}))",
+        "expect(ran).toBe(false)",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(bytes).toEqual(before)",
+        "expect(returned).toBe(token)",
+        "expect(calls).toBe(0)",
+        "expect(reopened.text('word/document.xml')).toBe('<document>Beta</document>')",
+        "expect(reopened.get(name)).toEqual((await OpcPackage.open(before)).get(name))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 16,
+          "expression": "for(const name of ['[Content_Types].xml','_rels/.rels'])expect(reopened.get(name)).toEqual((await OpcPackage.open(before)).get(name));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "3026ce48ddd3db1a78dcb9f9db874cafec1f88a33d80628aa82c8ae7ff04286b",
+      "body": "{\n const bytes=source(),before=bytes.slice(),p=await OpcPackage.open(bytes);let ran=false,calls=0;\n expect(()=>p.transactionWithMode('deferred',()=>{ran=true;p.set('word/document.xml','<document>Beta</document>');})).toThrow(expect.objectContaining({code:'opc-deferred-transaction'}));\n expect(ran).toBe(false);expect(p.toBytes()).toEqual(before);expect(bytes).toEqual(before);\n const token={evaluate(){calls++;throw Error('not evaluated');},then(){calls++;throw Error('not awaited');}};\n const returned=p.transactionWithMode('immediate',()=>{p.set('word/document.xml','<document>Beta</document>');return token;});\n expect(returned).toBe(token);expect(calls).toBe(0);const saved=p.toBytes(),reopened=await OpcPackage.open(saved);expect(reopened.text('word/document.xml')).toBe('<document>Beta</document>');\n for(const name of ['[Content_Types].xml','_rels/.rels'])expect(reopened.get(name)).toEqual((await OpcPackage.open(before)).get(name));\n expect(bytes).toEqual(before);\n}",
+      "calls": [
+        ".get",
+        "Error",
+        "OpcPackage.open",
+        "bytes.slice",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "p.set",
+        "p.toBytes",
+        "p.transactionWithMode",
+        "reopened.get",
+        "reopened.text",
+        "source"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/portable-transactions.test.ts:portable immediate transaction rolls back callback and validation failure and retains async guard",
+      "path": "tests/unit/portable-transactions.test.ts",
+      "line": 19,
+      "title": "portable immediate transaction rolls back callback and validation failure and retains async guard",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>p.transactionWithMode('immediate',()=>{p.set('word/document.xml','<document>Beta</document>');throw Error('callback');})).toThrow('callback')",
+        "expect(p.toBytes()).toEqual(before)",
+        "expect(()=>p.transactionWithMode('immediate',()=>{p.delete('word/document.xml');return {}; })).toThrow(expect.objectContaining({code:'opc-relationship-target-missing'}))",
+        "expect(()=>p.transactionWithMode('immediate',async()=>{ran=true;})).toThrow(expect.objectContaining({code:'opc-async-transaction'}))",
+        "expect(ran).toBe(false)",
+        "expect(()=>p.transactionWithMode('invalid' as any,()=>{})).toThrow(OoxmlError)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "3026ce48ddd3db1a78dcb9f9db874cafec1f88a33d80628aa82c8ae7ff04286b",
+      "body": "{\n const p=await OpcPackage.open(source()),before=p.toBytes();\n expect(()=>p.transactionWithMode('immediate',()=>{p.set('word/document.xml','<document>Beta</document>');throw Error('callback');})).toThrow('callback');expect(p.toBytes()).toEqual(before);\n expect(()=>p.transactionWithMode('immediate',()=>{p.delete('word/document.xml');return {}; })).toThrow(expect.objectContaining({code:'opc-relationship-target-missing'}));expect(p.toBytes()).toEqual(before);\n let ran=false;expect(()=>p.transactionWithMode('immediate',async()=>{ran=true;})).toThrow(expect.objectContaining({code:'opc-async-transaction'}));expect(ran).toBe(false);expect(p.toBytes()).toEqual(before);\n expect(()=>p.transactionWithMode('invalid' as any,()=>{})).toThrow(OoxmlError);expect(p.toBytes()).toEqual(before);\n}",
+      "calls": [
+        "Error",
+        "OpcPackage.open",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "p.delete",
+        "p.set",
+        "p.toBytes",
+        "p.transactionWithMode",
+        "source"
+      ],
+      "reviewReasons": [],
       "unresolved": []
     },
     {
