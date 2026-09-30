@@ -109,6 +109,9 @@ export const bindings: StepBinding[] = [
     const s = state(c); assert(s.destination); retainSource(s);
     try { s.output = await pkg(s).save(s.link ?? s.destination); } catch (error) { s.error = error; }
   } },
+  {pattern:/^the symlink still points to the original regular destination without a successful save receipt$/,run:async c=>{
+    const s=state(c);assert(s.error);assert.equal(s.output,undefined);assert(s.link&&s.destination);assert((await lstat(s.link)).isSymbolicLink());assert.equal(await readlink(s.link),s.destination);
+  }},
   { pattern: /^the (?:regular )?destination file bytes equal the original archive bytes$/, run: async c => {
     const s = state(c); assert(s.destination && s.original); assert.deepEqual(Uint8Array.from(await Bun.file(s.destination).bytes()), s.original);
     assert.deepEqual((await OpcPackage.open(s.destination)).toBytes(), s.original);

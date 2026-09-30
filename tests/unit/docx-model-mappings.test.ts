@@ -1,3 +1,4 @@
+import {applyCandidateMappingSeals} from '../../scripts/outcome-mappings.ts';
 import {test,expect} from 'bun:test';
 import {outcomeMappingReport,reconcileOutcomeMappingSets,type OutcomeMappingLedger} from '../../scripts/outcome-mappings.ts';
 import {inventoryTestSource} from '../../scripts/test-inventory.ts';
@@ -10,7 +11,7 @@ const canonical=["workflows/docx/page-layout.feature","workflows/docx/paragraphs
 async function sample(){
  const ledger=await Bun.file('docs/behaviors/docx-model-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};
  for(const path of Object.keys(ledger.sourceSha256))sources[path]=await Bun.file(canonical.includes(path)?join(fixturesRoot(),path):path).text();
- if(process.env.OOXML_FIXTURES_ROOT){await verifyReferences(process.cwd());const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN!).json(),review=await Bun.file('docs/behaviors/cell-runtime-candidate.json').json();if(pin.commit!==review.commit||pin.manifestSha256!==review.manifestSha256)throw Error('Unreviewed cell candidate');ledger.sourceSha256['workflows/docx/tables.feature']=review.tablesFeatureSha256;}
+ await applyCandidateMappingSeals(ledger);
  const inventory={cases:paths.flatMap(path=>inventoryTestSource(path,sources[path]!)),unresolved:[]};
  const features=canonical.map(p=>parseFeature(p,sources[p]!,{allowDuplicateCaseNames:true}));
  return {inventory,sets:[{name:'docx-model',expectedScopePaths:paths,ledger,features,sources}]};

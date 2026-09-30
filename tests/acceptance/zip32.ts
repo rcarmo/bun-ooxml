@@ -4,7 +4,7 @@ import { crc32, readZip, writeZip, type ZipLimits } from '../../src/opc/zip.ts';
 import { buildZip, type ZipMemberSpec } from '../fixtures/zip32.ts';
 
 const encoder = new TextEncoder();
-type State = { entries?: ZipMemberSpec[]; archive?: Uint8Array; before?: Uint8Array; output?: unknown; error?: unknown; checksum?: number; checksumInput?: Uint8Array };
+type State = { entryBefore?: [string,Uint8Array][]; entries?: ZipMemberSpec[]; archive?: Uint8Array; before?: Uint8Array; output?: unknown; error?: unknown; checksum?: number; checksumInput?: Uint8Array };
 const state = (c: Record<string, unknown>) => c.state as State;
 export const scenarioIds = ['@id-zip-crc32-standard-vector', '@id-bun-zip32-reader-refusal', '@id-bun-zip32-writer-refusal', '@id-bun-zip32-configured-bounds'];
 export function readerSample(entries: ZipMemberSpec[], mutation: string): Uint8Array {
@@ -46,9 +46,11 @@ export const bindings: StepBinding[] = [
   { pattern: /^the ZIP writer writes the entries with default options$/, run: c => {
     const s = state(c); assert(s.entries);
     const input = new Map(s.entries.map(e => [e.name, e.blob!])), before = [...input].map(([n, b]) => [n, b.slice()]);
+    s.entryBefore=s.entries.map(e=>[e.name,e.blob!.slice()]);
     try { s.output = writeZip(input); } catch (error) { s.error = error; }
     assert.deepEqual([...input], before);
   } },
+  {pattern:/^the ordered caller entry names and payload bytes remain unchanged$/,run:c=>{const s=state(c);assert(s.entries&&s.entryBefore);assert.deepEqual(s.entries.map(e=>[e.name,e.blob]),s.entryBefore);}},
   { pattern: /^a raw-DEFLATE ZIP32 archive contains a.bin with 4096 A bytes followed by b.bin with two b bytes$/, run: c => {
     const s = state(c); s.archive = buildZip([{ name: 'a.bin', blob: encoder.encode('A'.repeat(4096)) }, { name: 'b.bin', blob: encoder.encode('bb') }]);
     const control = readZip(s.archive); assert.deepEqual([...control.keys()], ['a.bin', 'b.bin']);

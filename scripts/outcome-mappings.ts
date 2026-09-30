@@ -79,6 +79,16 @@ export function reconcileOutcomeMappingSets(inventory:NativeTestInventory,sets:O
   ledgers:reports.map(({name,report})=>({name,scopePaths:sets.find(s=>s.name===name)!.ledger.scopePaths,mappedDeclarations:report.mappedDeclarations,sourceSha256:report.sourceSha256})),
   unmappedTestIds:inventory.cases.filter(c=>!seen.has(c.id)).map(c=>c.id),mappings};
 }
+export async function applyCandidateMappingSeals(ledger: OutcomeMappingLedger) {
+ if(!process.env.OOXML_FIXTURES_ROOT)return;
+ const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??'').json();
+ if(pin.mode!=='candidate')throw Error('Explicit candidate pin required');
+ await(candidateVerification??=verifyReferences(process.cwd()));
+ const reviewed=await Promise.all(['xml-runtime-candidate.json','cell-runtime-candidate.json','package-runtime-candidate.json'].map(p=>Bun.file(join(process.cwd(),'docs/behaviors',p)).json()));
+ const m=reviewed.find(r=>r.commit===pin.commit&&r.manifestSha256===pin.manifestSha256);
+ if(!m)throw Error('Unreviewed runtime-generalization candidate');
+ for(const [path,seal]of [['workflows/xml/parsing.feature',m.featureSha256],['workflows/docx/tables.feature',m.tablesFeatureSha256],['workflows/package/preservation.feature',m.packageFeatureSha256],['workflows/package/zip32.feature',m.zipFeatureSha256]])if(seal&&Object.hasOwn(ledger.sourceSha256,path))ledger.sourceSha256[path]=seal;
+}
 export async function outcomeMappingReport(){
  const root=process.cwd();
  const candidatePin = process.env.OOXML_FIXTURES_ROOT ? await Bun.file(process.env.OOXML_REFERENCE_PIN ?? '').json() : undefined;
@@ -121,13 +131,7 @@ export async function outcomeMappingReport(){
  const sets:OutcomeMappingSet[]=[];
  for(const registration of registrations){
   const ledger=await Bun.file(join(root,`docs/behaviors/${registration.name}-mappings.json`)).json() as OutcomeMappingLedger;
-  if (candidatePin) {
-    const reviewed = await Promise.all(['xml-runtime-candidate.json','cell-runtime-candidate.json'].map(p=>Bun.file(join(root,'docs/behaviors',p)).json()));
-    const migration = reviewed.find(m=>m.commit===candidatePin.commit&&m.manifestSha256===candidatePin.manifestSha256);
-    if (!migration) throw Error('Unreviewed runtime-generalization candidate');
-    if (Object.hasOwn(ledger.sourceSha256,'workflows/xml/parsing.feature')) ledger.sourceSha256['workflows/xml/parsing.feature'] = migration.featureSha256;
-    if (migration.tablesFeatureSha256 && Object.hasOwn(ledger.sourceSha256,'workflows/docx/tables.feature')) ledger.sourceSha256['workflows/docx/tables.feature'] = migration.tablesFeatureSha256;
-  }
+  await applyCandidateMappingSeals(ledger);
   const sources:Record<string,string>={};for(const path of [...registration.tests,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
   const canonical=typeof registration.canonical==='string'?[registration.canonical]:registration.canonical;
   for(const path of canonical)sources[path]=await Bun.file(join(fixturesRoot(),path)).text();

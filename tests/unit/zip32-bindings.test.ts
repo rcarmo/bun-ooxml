@@ -4,6 +4,7 @@ import { fixturesRoot } from '../../scripts/fixture-inputs.ts';
 import { executeAcceptance, selectSharedScenarios, type StepBinding } from '../../scripts/gherkin.ts';
 import { bindings } from '../acceptance/steps.ts';
 
+const generalized=(await Bun.file(join(fixturesRoot(),'workflows/package/zip32.feature')).text()).includes('@profile-zip32-refusal-reasons');
 const ids = ['@id-zip-crc32-standard-vector', '@id-bun-zip32-reader-refusal', '@id-bun-zip32-writer-refusal', '@id-bun-zip32-configured-bounds'];
 async function run(change: (s: string) => string = s => s, activeBindings: StepBinding[] = bindings) {
   const path = 'workflows/package/zip32.feature';
@@ -26,7 +27,7 @@ test('wrong CRC, error code and message expectations fail bound ZIP32 predicates
   for (const [from, to] of [
     ['hexadecimal CBF43926', 'hexadecimal DEADBEEF'],
     ['zip-crc-mismatch', 'zip-wrong-code'],
-    ['| CRC                      |', '| wrong message            |'],
+    generalized?['reason <code>','reason zip-wrong-reason']:['| CRC                      |', '| wrong message            |'],
   ]) {
     const result = await run(s => { expect(s.includes(from!)).toBe(true); return s.replace(from!, to!); });
     expect(result.counts.cases.failed).toBeGreaterThan(0);

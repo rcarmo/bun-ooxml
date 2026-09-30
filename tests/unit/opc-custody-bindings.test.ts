@@ -108,7 +108,8 @@ test('OPC temporary destinations are cleaned after success and predicate failure
     await b.run(c, ...captures); paths.push((c.state as { destination: string }).destination);
   } } : b);
   expect((await run(s => s, checking)).failures).toEqual([]);
-  const r=await run(s => s.replace('message contains Missing target', 'message contains wrong'), checking);
+  const generalized=(await Bun.file(join(fixturesRoot(),'workflows/package/preservation.feature')).text()).includes('@profile-package-refusal-reasons');
+  const r=await run(s => generalized?s.replace('reason opc-relationship-target-missing before','reason opc-wrong-code before'):s.replace('message contains Missing target', 'message contains wrong'), checking);
   expect(r.counts.cases.failed).toBeGreaterThan(0); expect(r.counts.steps.failed).toBeGreaterThan(0);
   expect(r.counts.steps.undefined).toBe(0); expect(r.counts.steps.ambiguous).toBe(0);
   expect(paths).toHaveLength(4);
