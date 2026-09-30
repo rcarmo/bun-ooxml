@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1116,
+  "nativeDeclarations": 1121,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 889,
+  "withoutStagingCount": 894,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -1653,7 +1653,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentSourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1662,7 +1662,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentSourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1671,7 +1671,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentSourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1682,7 +1682,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentSourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1693,7 +1693,7 @@
       "stagingPath": "docs/behaviors/staging-xml-format-guards.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "currentSourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -6208,57 +6208,57 @@
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshot owns caller input and empty-removal output with frozen handles",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:UTF8 BOM and UTF16 endian encodings retain exact untouched source and declarations after removal",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:generic UTF16 declarations and no declarations preserve BOM endian identity",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:removal failures reject root, overlap, duplicates and foreign or forged string/byte handles atomically",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:invalid byte types, malformed encodings, unsupported declarations and BOM mismatches refuse without mutation",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte subviews exclude adjacent data and ignore caller iterator/slice overrides",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:byte snapshots enforce byte and decoded XML limits while permitting multibyte non-ASCII input",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:shared buffers, detached buffers and duplicate BOMs cannot bypass admission or encoding declarations",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:repeated edits and mutated changed output do not affect source ownership or target reuse",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-byte-snapshot.test.ts:intrinsic view bounds reject spoofed length/shared storage without calling caller getters",
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649"
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a"
     },
     {
       "id": "bun:tests/unit/xml-comparison.test.ts:XML comparison uses expanded names and decoded values, not prefix spelling",
@@ -6331,6 +6331,26 @@
       "sourceSha256": "c36f66744a5c9a897263f98094370cdbe34198b58ff5496a9c88df389c24d5ff"
     },
     {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / parseXml accepts the exact configured depth and refuses the next level",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5"
+    },
+    {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / inspectXmlEvents accepts the exact configured node count and refuses one more element",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5"
+    },
+    {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / validateXml accepts the exact configured source length and counts UTF-16 code units",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5"
+    },
+    {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / rejects invalid configured limits",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5"
+    },
+    {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
       "sourceSha256": "6ebb825c87aa35ef9ab7f1c405f02c7c284efb3b785f47c9e302b2a9f89900d4"
@@ -6344,6 +6364,11 @@
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:XML formula actor migration preserves all default case identities and bounded mapping records",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
       "sourceSha256": "6ebb825c87aa35ef9ab7f1c405f02c7c284efb3b785f47c9e302b2a9f89900d4"
+    },
+    {
+      "id": "bun:tests/unit/xml-lexical-alignment-bindings.test.ts:production XML category mappings refuse unrelated errors and comments/CDATA do not create a DTD",
+      "path": "tests/unit/xml-lexical-alignment-bindings.test.ts",
+      "sourceSha256": "25bc82d7d83bfea1f50a3cc49348828d9945bdd21c7ffe99b7d3dca3c9f770e7"
     },
     {
       "id": "bun:tests/unit/xml-removal.test.ts:removing disjoint XML elements preserves all surrounding source characters",

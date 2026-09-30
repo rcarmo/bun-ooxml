@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "mode": "candidate",
+  "repository": "https://github.com/rcarmo/fixtures-ooxml",
+  "commit": "6b601a4252a90759c2e73c31cc9d8d10e6bca0bd",
+  "manifestSha256": "6504c9e64974644c85ff098a8f540c084bbe7ec9a756b44c8de594d897a24072",
+  "featureSha256": "e5f72d944248f84a89f60cf498d1cba642217259c362486ab279eef697a61b90",
+  "namesFeatureSha256": "7b3f71e3c806eb1fc50274bd5c9442324b6e4cc16c6994cd85842129f5ef3a3a",
+  "editingFeatureSha256": "0f7b19a36ba4fd7f47f1b2d692afe7f745210a073f29b26d0056909457353769",
+  "tablesFeatureSha256": "89446d3c98ce6ae75a7ff887f0964cf4cc0f4cfcca1f36edabf43762de353aae",
+  "packageFeatureSha256": "0232a5f99dbb48d2e03fbb36adf3e5b22b7f0da448d3046b4e90dcdcc2a4e90b",
+  "zipFeatureSha256": "ecf7356093c73b6d170177e30df4c63ea449788c285583a32dbea41942ccf4da",
+  "scenarioIds": [
+    "@id-xml-parse-offsets",
+    "@id-xml-normalise-line-endings",
+    "@id-xml-invalid-qname-components",
+    "@id-xml-unicode-qname-components",
+    "@id-xml-outside-root-nbsp",
+    "@id-xml-parse-refusals",
+    "@id-xml-parse-bounds",
+    "@id-xml-escaping-values",
+    "@id-xml-escaping-invalid-character",
+    "@id-xml-apply-edits",
+    "@id-xml-go-immutable-leaf-seed",
+    "@id-xml-go-attribute-splice-custody",
+    "@id-xml-go-attribute-batch-refusal",
+    "@id-xml-go-element-removal-custody",
+    "@id-xml-go-element-removal-refusal",
+    "@id-xml-go-child-insertion-custody",
+    "@id-xml-go-child-insertion-refusal",
+    "@id-xml-go-child-namespace-matrix",
+    "@id-xml-go-element-replacement-custody",
+    "@id-xml-go-element-replacement-refusal"
+  ],
+  "cases": 29,
+  "steps": 112,
+  "executionCredit": false,
+  "caseIdentityMigration": [
+    {
+      "after": "@id-xml-invalid-qname-components|{\"component\":\"element-local\",\"source_json\":\"\\\"<p:1 xmlns:p=\\\\\\\"urn:test\\\\\\\"/>\\\"\"}",
+      "before": "@id-xml-invalid-qname-components|{\"component\":\"element-local\"}"
+    },
+    {
+      "after": "@id-xml-invalid-qname-components|{\"component\":\"attribute-local\",\"source_json\":\"\\\"<r xmlns:p=\\\\\\\"urn:test\\\\\\\" p:1=\\\\\\\"x\\\\\\\"/>\\\"\"}",
+      "before": "@id-xml-invalid-qname-components|{\"component\":\"attribute-local\"}"
+    },
+    {
+      "after": "@id-xml-invalid-qname-components|{\"component\":\"declared-prefix\",\"source_json\":\"\\\"<r xmlns:1=\\\\\\\"urn:test\\\\\\\"/>\\\"\"}",
+      "before": "@id-xml-invalid-qname-components|{\"component\":\"declared-prefix\"}"
+    },
+    {
+      "after": "@id-xml-outside-root-nbsp|{\"position\":\"before\",\"source_json\":\"\\\"\\\\u00a0<r/>\\\"\"}",
+      "before": "@id-xml-outside-root-nbsp|{\"position\":\"before\"}"
+    },
+    {
+      "after": "@id-xml-outside-root-nbsp|{\"position\":\"after\",\"source_json\":\"\\\"<r/>\\\\u00a0\\\"\"}",
+      "before": "@id-xml-outside-root-nbsp|{\"position\":\"after\"}"
+    }
+  ]
+}

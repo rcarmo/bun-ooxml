@@ -4,6 +4,17 @@ export function classifyXmlParseFailure(error: unknown): "malformed-xml" | undef
   return error instanceof OoxmlError && ["XML_MALFORMED", "XML_MISMATCHED_TAG"].includes(error.code) ? "malformed-xml" : undefined;
 }
 
+const xmlOperationCategories: Readonly<Record<string,string>> = Object.freeze({
+  XML_MALFORMED: 'malformed-xml', XML_DTD_FORBIDDEN: 'dtd-forbidden', XML_ENTITY_FORBIDDEN: 'entity-forbidden',
+  XML_DUPLICATE_ATTRIBUTE: 'duplicate-attribute', XML_UNBOUND_PREFIX: 'unbound-prefix', XML_MISMATCHED_TAG: 'mismatched-tag',
+  XML_INVALID_CHAR: 'invalid-character', XML_DEPTH_LIMIT: 'depth-limit', XML_NODE_LIMIT: 'node-limit', XML_INPUT_TOO_LARGE: 'input-too-large',
+  XML_LIMIT_INVALID: 'invalid-limit', XML_EDIT_OVERLAP: 'edit-overlap', XML_EDIT_UNSAFE: 'edit-unsafe',
+});
+/** Exact structured lexical-operation categories; never classify messages or unrelated errors. */
+export function classifyXmlOperationFailure(error: unknown): string | undefined {
+  return error instanceof OoxmlError && Object.hasOwn(xmlOperationCategories,error.code) ? xmlOperationCategories[error.code] : undefined;
+}
+
 const sharedPackageReasons = new Set([
   'opc-part-name-invalid','opc-target-invalid','opc-content-types-invalid','opc-relationship-target-missing','opc-relationship-duplicate','opc-symlink-destination','opc-deferred-transaction',
   'zip-duplicate-entry','zip-case-collision','zip-name-invalid','zip-encryption-unsupported','zip-method-unsupported','zip-multi-disk-unsupported','zip-structure-invalid','zip-local-metadata-mismatch','zip-crc-mismatch','zip-size-mismatch','zip-end-record-missing','zip-directory-entry-invalid',

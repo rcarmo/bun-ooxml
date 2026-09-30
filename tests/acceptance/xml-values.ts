@@ -5,7 +5,7 @@ import { attribute, escapeAttribute, escapeText, parseXml, type XmlDocument } fr
 
 type State = { source?: string; originalSource?: string; value?: string; document?: XmlDocument; escaped?: string; error?: unknown };
 const state = (c: Record<string, unknown>) => c.state as State;
-function root(c: Record<string, unknown>) { const s = state(c); assert.equal(s.error, undefined); assert(s.document); return s.document.root; }
+function root(c: Record<string, unknown>) { const s = (c.lexical as State | undefined) ?? state(c); assert.equal(s.error, undefined); assert(s.document); return s.document.root; }
 function jsonString(source: string | undefined) { assert(source !== undefined); const value: unknown = JSON.parse(source); assert.equal(typeof value, 'string'); return value as string; }
 export const scenarioIds = [
   '@id-xml-entity-values', '@id-xml-stylesheet-processing-instruction',
@@ -20,7 +20,8 @@ export const bindings: StepBinding[] = [
     const s = state(c); assert(s.source !== undefined);
     try { s.document = parseXml(s.source); } catch (error) { s.error = error; }
   } },
-  { pattern: /^the root attribute (\S+) equals JSON (.+)$/, run: (c, name, json) => {
+  { pattern: /^the root attribute a equals JSON (.+) and the child expanded attribute urn:x\/b equals JSON (.+)$/, run: (c,a,b) => {const r=root(c);assert.equal(r.attributes.a,jsonString(a));assert.equal(attribute(r.children[0]!,'b','urn:x'),jsonString(b));} },
+  { pattern: /^the root attribute (\S+) equals JSON ((?!.* and the child expanded attribute).+)$/, run: (c, name, json) => {
     const r = root(c); assert(Object.hasOwn(r.attributes, name!)); assert.equal(r.attributes[name!], jsonString(json));
   } },
   { pattern: /^the root text equals JSON (.+)$/, run: (c, json) => { assert.equal(root(c).text, jsonString(json)); } },

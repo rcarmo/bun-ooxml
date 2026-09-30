@@ -6,6 +6,7 @@ import { bindings as packageComparisonBindings } from './package-comparison.ts';
 import { bindings as refusalBindings } from './refusal-outcomes.ts';
 import { bindings as opcCustodyBindings, cleanup as cleanupOpcCustody } from './opc-custody.ts';
 import { bindings as xmlNameBindings } from "./xml-names.ts";
+import { bindings as xmlLexicalAlignmentBindings } from './xml-lexical-alignment.ts';
 import { bindings as xmlComparisonBindings } from './xml-comparison.ts';
 import { bindings as xmlRemovalBindings } from './xml-removal.ts';
 import { bindings as xmlValuesBindings } from './xml-values.ts';
@@ -85,6 +86,7 @@ export const bindings: StepBinding[] = [
   ...refusalBindings,
   ...opcCustodyBindings,
   ...xmlNameBindings,
+  ...xmlLexicalAlignmentBindings,
   ...xmlComparisonBindings,
   ...xmlRemovalBindings,
   ...xmlValuesBindings,

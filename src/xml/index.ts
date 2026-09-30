@@ -23,6 +23,8 @@ export interface XmlElement {
   parent?: XmlElement;
   root: XmlElement;
   text: string;
+  /** Decoded text and CDATA directly owned by this element, excluding descendant text. */
+  directText: string;
   start: number;
   openEnd: number;
   closeStart: number;
@@ -40,14 +42,32 @@ type QualifiedName = {
   localName: string;
 };
 
-export function parseXml(text: string): XmlDocument {
-  return scanXml(text, true);
+export interface XmlParserLimits {
+  maxDepth?: number;
+  maxNodes?: number;
+  maxSourceUnits?: number;
+}
+
+type ResolvedXmlParserLimits = {
+  maxDepth: number;
+  maxNodes: number;
+  maxSourceUnits: number;
+};
+
+const DEFAULT_XML_PARSER_LIMITS: ResolvedXmlParserLimits = {
+  maxDepth: MAX_DEPTH,
+  maxNodes: MAX_NODES,
+  maxSourceUnits: MAX_INPUT_LENGTH,
+};
+
+export function parseXml(text: string, limits?: XmlParserLimits): XmlDocument {
+  return scanXml(text, true, resolveXmlParserLimits(limits));
 }
 
 /** Apply the same XML syntax/namespace/resource checks without retaining
  * descendant text for every ancestor. Intended for non-editing admission. */
-export function validateXml(text: string): void {
-  scanXml(text, false);
+export function validateXml(text: string, limits?: XmlParserLimits): void {
+  scanXml(text, false, resolveXmlParserLimits(limits));
 }
 
 export interface XmlEventSink {
@@ -58,11 +78,13 @@ export interface XmlEventSink {
   instruction(target: string, value: string): void;
 }
 /** Syntax-checked events in source order, including comments and PIs outside the root. */
-export function inspectXmlEvents(text:string, sink:XmlEventSink):void { scanXml(text,false,sink); }
+export function inspectXmlEvents(text:string, sink:XmlEventSink, limits?: XmlParserLimits):void {
+  scanXml(text, false, resolveXmlParserLimits(limits), sink);
+}
 
-function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDocument {
-  if (text.length > MAX_INPUT_LENGTH) {
-    fail("XML_INPUT_TOO_LARGE", `XML input exceeds ${MAX_INPUT_LENGTH} UTF-16 code units`);
+function scanXml(text: string, collectText: boolean, limits: ResolvedXmlParserLimits, sink?:XmlEventSink): XmlDocument {
+  if (text.length > limits.maxSourceUnits) {
+    fail("XML_INPUT_TOO_LARGE", `XML input exceeds ${limits.maxSourceUnits} UTF-16 code units`);
   }
 
   validateXmlStringChars(text);
@@ -73,6 +95,7 @@ function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDoc
   const preorder: XmlElement[] = [];
   const stack: XmlElement[] = [];
   const textBuffers = new Map<XmlElement, string[]>();
+  const directTextBuffers = new Map<XmlElement, string[]>();
   const namespaceStack: Map<string, string>[] = [new Map([["xml", XML_NS]])];
 
   const readName = (context: string): string => {
@@ -99,6 +122,12 @@ function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDoc
       return;
     }
 
+    const owner = stack.at(-1);
+    if (owner) {
+      let direct = directTextBuffers.get(owner);
+      if (!direct) { direct = []; directTextBuffers.set(owner,direct); }
+      direct.push(value);
+    }
     for (const element of stack) {
       let buffer = textBuffers.get(element);
       if (!buffer) {
@@ -160,6 +189,7 @@ function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDoc
     if (segments) {
       element.text = segments.join("");
     }
+    element.directText = directTextBuffers.get(element)?.join("") ?? "";
   }
 
   return { elements: preorder, root };
@@ -357,8 +387,8 @@ function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDoc
     index += 1;
     const name = readName("element");
 
-    if (stack.length + 1 > MAX_DEPTH) {
-      fail("XML_DEPTH_LIMIT", `XML nesting depth exceeds ${MAX_DEPTH}`);
+    if (stack.length + 1 > limits.maxDepth) {
+      fail("XML_DEPTH_LIMIT", `XML nesting depth exceeds ${limits.maxDepth}`);
     }
 
     const rawAttributes = new Set<string>();
@@ -463,8 +493,8 @@ function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDoc
     }
 
     nodeCount += 1;
-    if (nodeCount > MAX_NODES) {
-      fail("XML_NODE_LIMIT", `XML node count exceeds ${MAX_NODES}`);
+    if (nodeCount > limits.maxNodes) {
+      fail("XML_NODE_LIMIT", `XML node count exceeds ${limits.maxNodes}`);
     }
 
     const parent = stack[stack.length - 1];
@@ -478,6 +508,7 @@ function scanXml(text: string, collectText: boolean, sink?:XmlEventSink): XmlDoc
       parent,
       root: undefined as unknown as XmlElement,
       text: "",
+      directText: "",
       start,
       openEnd,
       closeStart: openEnd,
@@ -622,6 +653,31 @@ export function applyEdits(
   }
 
   return result;
+}
+
+function resolveXmlParserLimits(limits?: XmlParserLimits): ResolvedXmlParserLimits {
+  if (limits === undefined) {
+    return DEFAULT_XML_PARSER_LIMITS;
+  }
+  if (!limits || typeof limits !== "object") {
+    fail("XML_LIMIT_INVALID", "XML parser limits must be an object");
+  }
+
+  return {
+    maxDepth: resolveXmlParserLimit(limits.maxDepth, "maxDepth", MAX_DEPTH),
+    maxNodes: resolveXmlParserLimit(limits.maxNodes, "maxNodes", MAX_NODES),
+    maxSourceUnits: resolveXmlParserLimit(limits.maxSourceUnits, "maxSourceUnits", MAX_INPUT_LENGTH),
+  };
+}
+
+function resolveXmlParserLimit(value: number | undefined, name: keyof XmlParserLimits, fallback: number): number {
+  if (value === undefined) {
+    return fallback;
+  }
+  if (typeof value !== "number" || !Number.isSafeInteger(value) || value <= 0) {
+    fail("XML_LIMIT_INVALID", `${name} must be a positive safe integer`);
+  }
+  return value;
 }
 
 function isDocument(value: XmlDocument | XmlElement): value is XmlDocument {

@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1116,
-  "files": 139,
+  "count": 1121,
+  "files": 141,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -758,7 +758,7 @@
     },
     {
       "path": "tests/unit/xml-byte-snapshot.test.ts",
-      "sha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "declarations": 11,
       "issues": []
     },
@@ -769,14 +769,26 @@
       "issues": []
     },
     {
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "sha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5",
+      "declarations": 4,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
       "sha256": "6ebb825c87aa35ef9ab7f1c405f02c7c284efb3b785f47c9e302b2a9f89900d4",
       "declarations": 3,
       "issues": []
     },
     {
+      "path": "tests/unit/xml-lexical-alignment-bindings.test.ts",
+      "sha256": "25bc82d7d83bfea1f50a3cc49348828d9945bdd21c7ffe99b7d3dca3c9f770e7",
+      "declarations": 1,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xml-names.test.ts",
-      "sha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "sha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "declarations": 5,
       "issues": []
     },
@@ -1036,7 +1048,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "4dcc3453020bc2696c97adfb3806e563d1dff03e0194ee69d574e1def11c0d03"
+      "sha256": "3405007af2602e3dd9398bae6e26ce7ae894ce975bb1edcdfbd2cb6881c4713b"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -1127,6 +1139,10 @@
       "sha256": "5a3f7a3058f4682b2cd5421da64be76d213fd67b966aa45dfa1bb720a2f75f3b"
     },
     {
+      "path": "tests/acceptance/xml-lexical-alignment.ts",
+      "sha256": "328f1cb4b5d974b60d6ad0a86dc17030365c97c55848ebaab013b05b66f1abba"
+    },
+    {
       "path": "tests/acceptance/xml-names.ts",
       "sha256": "f03469e1441b8ca40564690f6bec79a3d4cbb60a138432a23cca9607cfead688"
     },
@@ -1140,7 +1156,7 @@
     },
     {
       "path": "tests/acceptance/xml-values.ts",
-      "sha256": "f18bdfcb45226e5537db906fa3d955c9b593e94874670c2364ec68f402cc1810"
+      "sha256": "066d2f26b73c1efecdddbd4a2106d95bfc9b4c4c1657012eb79759b69c95e05e"
     },
     {
       "path": "tests/acceptance/zip32.ts",
@@ -1164,7 +1180,7 @@
     },
     {
       "path": "tests/helpers/execution-baseline.ts",
-      "sha256": "737aae7e44c4d2e86eb269352bd90bba4a3112713618af1f13b2f72ea0e4451a"
+      "sha256": "3afde613155c0c6f0465e41d005f46b0c36d71b164672deb6ff83c3ca85304cf"
     },
     {
       "path": "tests/helpers/shared-scenarios.ts",
@@ -1630,7 +1646,9 @@
     "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+    "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / rejects invalid configured limits",
     "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
+    "bun:tests/unit/xml-lexical-alignment-bindings.test.ts:production XML category mappings refuse unrelated errors and comments/CDATA do not create a DTD",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
@@ -2112,7 +2130,9 @@
     "bun:tests/unit/xml-byte-snapshot.test.ts:canonical byte seed checks input and no-op output independently with corruption controls",
     "bun:tests/unit/xml-comparison.test.ts:comparison preserves text, tails, child order and markup content",
     "bun:tests/unit/xml-comparison.test.ts:malformed, DTD, encoding conflicts and missing QName bindings never compare true",
+    "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / rejects invalid configured limits",
     "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
+    "bun:tests/unit/xml-lexical-alignment-bindings.test.ts:production XML category mappings refuse unrelated errors and comments/CDATA do not create a DTD",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
     "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
@@ -42698,7 +42718,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n const source=utf8('<r><leaf id=\"a\">one</leaf><leaf id=\"b\">two</leaf></r>'),before=new Uint8Array(source),snapshot=XmlByteSnapshot.parse(source);expect(source).toEqual(before);expect(snapshot.remove([])).toEqual(before);expect(snapshot.elements.map(n=>n.localName)).toEqual(['r','leaf','leaf']);expect(Object.isFrozen(snapshot)).toBe(true);expect(Object.isFrozen(snapshot.elements)).toBe(true);expect(snapshot.elements.every(Object.isFrozen)).toBe(true);\n source.fill(32);const copy=snapshot.remove([]);copy.fill(0);expect(snapshot.remove([])).toEqual(before);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><leaf id=\"b\">two</leaf></r>'));expect(snapshot.remove([])).toEqual(before);\n}",
       "calls": [
         "Object.isFrozen",
@@ -42742,7 +42762,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n for(const kind of ['utf8','le','be'] as const)for(const bom of kind==='utf8'?[false,true]:[true]){const declaration=kind==='utf8'?'UTF-8':kind==='le'?'UTF-16LE':'UTF-16BE',source=`<?xml version=\"1.0\" encoding=\"${declaration}\"?>\\r\\n<r xmlns:q='urn:q'>雪😀\\r\\n<q:drop a='&amp;'/>\\t<keep> e&#x301; </keep><!--tail--></r>`,input=encoded(source,kind,bom),before=new Uint8Array(input),snapshot=XmlByteSnapshot.parse(input),drop=snapshot.elements.find(n=>n.localName==='drop')!;expect(snapshot.remove([])).toEqual(input);expect(snapshot.remove([drop])).toEqual(encoded(source.replace(\"<q:drop a='&amp;'/>\",''),kind,bom));expect(input).toEqual(before);expect(source.slice(drop.start,drop.end)).toBe(\"<q:drop a='&amp;'/>\");}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -42783,7 +42803,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n for(const kind of ['le','be'] as const)for(const declaration of ['', '<?xml version=\"1.0\" encoding=\"UTF-16\"?>']){const text=declaration+'<r><drop/><keep/></r>',bytes=encoded(text,kind),snapshot=XmlByteSnapshot.parse(bytes);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(encoded(declaration+'<r><keep/></r>',kind));}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -42820,7 +42840,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n const input=utf8('<r><a><b/></a><c/></r>'),before=new Uint8Array(input),s=XmlByteSnapshot.parse(input),other=XmlByteSnapshot.parse(input),string=XmlSnapshot.parse(new TextDecoder().decode(input));for(const targets of [[s.elements[0]!],[s.elements[1]!,s.elements[2]!],[s.elements[3]!,s.elements[3]!],[other.elements[3]!],[string.elements[3]!],[{...s.elements[3]!}]]){expect(()=>s.remove(targets)).toThrow();expect(s.remove([])).toEqual(before);expect(input).toEqual(before);}\n const unsafe=XmlByteSnapshot.parse(utf8('<r>]]<a/>></r>'));expect(()=>unsafe.remove([unsafe.elements[1]!])).toThrow(expect.objectContaining({code:'XML_REMOVAL_UNSAFE'}));expect(unsafe.remove([])).toEqual(utf8('<r>]]<a/>></r>'));\n}",
       "calls": [
         ".decode",
@@ -42864,7 +42884,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n for(const value of [null,'<r/>',new ArrayBuffer(4),new DataView(new ArrayBuffer(4)),[60,114,47,62]])expect(()=>XmlByteSnapshot.parse(value as unknown as Uint8Array)).toThrow();\n const cases=[new Uint8Array([0xff]),new Uint8Array([0xc0,0xaf]),new Uint8Array([0xff,0xfe,60]),encoded('<r>\\ud800</r>','le'),encoded('<r>\\udfff</r>','be'),utf8('<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><r/>'),utf8('<?xml version=\"1.0\" encoding=\"UTF-16\"?><r/>'),encoded('<?xml version=\"1.0\" encoding=\"UTF-8\"?><r/>','le'),encoded('<?xml version=\"1.0\" encoding=\"UTF-16LE\"?><r/>','be'),encoded('<r/>','le',false),utf8('<!DOCTYPE r><r/>'),utf8('<r>')];\n for(const input of cases){const before=new Uint8Array(input);expect(()=>XmlByteSnapshot.parse(input)).toThrow();expect(input).toEqual(before);}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -42895,7 +42915,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n const source=utf8('XX<r><drop/><keep/></r>YY'),view=source.subarray(2,source.length-2),before=new Uint8Array(view);Object.defineProperty(view,'slice',{value:()=>{throw Error('slice called');}});Object.defineProperty(view,Symbol.iterator,{value:()=>{throw Error('iterator called');}});const s=XmlByteSnapshot.parse(view);expect(s.remove([])).toEqual(before);expect(s.remove([s.elements[1]!])).toEqual(utf8('<r><keep/></r>'));expect(new Uint8Array(view)).toEqual(before);\n}",
       "calls": [
         "Error",
@@ -42926,7 +42946,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n expect(()=>XmlByteSnapshot.parse(new Uint8Array(32*1024*1024+1))).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}));expect(()=>XmlByteSnapshot.parse(utf8('<r>'+ 'x'.repeat(8*1024*1024)+'</r>'))).toThrow(expect.objectContaining({code:'XML_INPUT_TOO_LARGE'}));const input=utf8('<r>雪😀<a/></r>'),s=XmlByteSnapshot.parse(input);expect(s.remove([s.elements[1]!])).toEqual(utf8('<r>雪😀</r>'));\n}",
       "calls": [
         ".repeat",
@@ -42962,7 +42982,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n const shared=new Uint8Array(new SharedArrayBuffer(8));shared.set(utf8('<r/>'));expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));const bytes=utf8('<r/>');structuredClone(bytes,{transfer:[bytes.buffer]});expect(()=>XmlByteSnapshot.parse(bytes)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));\n for(const kind of ['utf8','le','be'] as const){const value=encoded('\\ufeff<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><r/>',kind);expect(()=>XmlByteSnapshot.parse(value)).toThrow(expect.objectContaining({code:'XML_BYTE_ENCODING'}));}\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -42996,7 +43016,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n const source=utf8('<r><a/><b/></r>'),snapshot=XmlByteSnapshot.parse(source),result=snapshot.remove([snapshot.elements[1]!]);result.fill(0);expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r><b/></r>'));expect(snapshot.remove([snapshot.elements[2]!])).toEqual(utf8('<r><a/></r>'));expect(snapshot.remove([])).toEqual(source);\n const selected=[snapshot.elements[1]!];selected[Symbol.iterator]=function*(){yield snapshot.elements[0]!;return undefined;};expect(snapshot.remove(selected)).toEqual(utf8('<r><b/></r>'));\n}",
       "calls": [
         "XmlByteSnapshot.parse",
@@ -43019,7 +43039,7 @@
       "lifecycle": "normal",
       "assertions": [
         "expect(selected.name).toBe('A seeded immutable parse and no-op leave the caller bytes and parsed snapshot intact')",
-        "expect(selected.location.line).toBe(107)",
+        "expect(selected.location.line).toBe(source.includes('these disjoint UTF-16 half-open replacements')?116:107)",
         "expect(selected.tags).toContain('@profile-lexical-snapshot-api')",
         "expect(selected.cases).toHaveLength(1)",
         "expect(selected.cases[0]!.steps.map(s=>s.text)).toEqual([\n  'the XML source is <r><t>hello</t></r>',\n  'the XML editor parses a caller-owned byte slice and performs an empty edit',\n  'the caller input bytes still equal the original XML source',\n  'the empty edit returns the exact original source bytes',\n ])",
@@ -43043,8 +43063,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
-      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/editing.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};\n const selected=inv.features[0]!.scenarios.find(s=>s.scenarioId==='@id-xml-go-immutable-leaf-seed')!;\n expect(selected.name).toBe('A seeded immutable parse and no-op leave the caller bytes and parsed snapshot intact');expect(selected.location.line).toBe(107);\n expect(selected.tags).toContain('@profile-lexical-snapshot-api');expect(selected.cases).toHaveLength(1);\n expect(selected.cases[0]!.steps.map(s=>s.text)).toEqual([\n  'the XML source is <r><t>hello</t></r>',\n  'the XML editor parses a caller-owned byte slice and performs an empty edit',\n  'the caller input bytes still equal the original XML source',\n  'the empty edit returns the exact original source bytes',\n ]);\n const good=await executeAcceptance(inv,bindings,'xml-byte-seed');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);expect(good.counts.steps.passed).toBe(4);\n const literal=utf8('<r><t>hello</t></r>'),caller=new Uint8Array(literal),snapshot=XmlByteSnapshot.parse(caller),first=snapshot.remove([]);\n expect(first).toEqual(literal);first.fill(0);expect(caller).toEqual(literal);expect(snapshot.remove([])).toEqual(literal);\n caller.fill(0);expect(snapshot.remove([])).toEqual(literal);\n expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r></r>'));\n for(const field of ['input','output']){const badBindings=bindings.map(b=>b.pattern.test('the XML editor parses a caller-owned byte slice and performs an empty edit')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {input:Uint8Array;output:Uint8Array})[field as 'input'|'output'].fill(0);}}:b);const bad=await executeAcceptance(inv,badBindings,'xml-byte-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
+      "body": "{\n const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/editing.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};\n const selected=inv.features[0]!.scenarios.find(s=>s.scenarioId==='@id-xml-go-immutable-leaf-seed')!;\n expect(selected.name).toBe('A seeded immutable parse and no-op leave the caller bytes and parsed snapshot intact');expect(selected.location.line).toBe(source.includes('these disjoint UTF-16 half-open replacements')?116:107);\n expect(selected.tags).toContain('@profile-lexical-snapshot-api');expect(selected.cases).toHaveLength(1);\n expect(selected.cases[0]!.steps.map(s=>s.text)).toEqual([\n  'the XML source is <r><t>hello</t></r>',\n  'the XML editor parses a caller-owned byte slice and performs an empty edit',\n  'the caller input bytes still equal the original XML source',\n  'the empty edit returns the exact original source bytes',\n ]);\n const good=await executeAcceptance(inv,bindings,'xml-byte-seed');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(1);expect(good.counts.steps.passed).toBe(4);\n const literal=utf8('<r><t>hello</t></r>'),caller=new Uint8Array(literal),snapshot=XmlByteSnapshot.parse(caller),first=snapshot.remove([]);\n expect(first).toEqual(literal);first.fill(0);expect(caller).toEqual(literal);expect(snapshot.remove([])).toEqual(literal);\n caller.fill(0);expect(snapshot.remove([])).toEqual(literal);\n expect(snapshot.remove([snapshot.elements[1]!])).toEqual(utf8('<r></r>'));\n for(const field of ['input','output']){const badBindings=bindings.map(b=>b.pattern.test('the XML editor parses a caller-owned byte slice and performs an empty edit')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);(c.state as {input:Uint8Array;output:Uint8Array})[field as 'input'|'output'].fill(0);}}:b);const bad=await executeAcceptance(inv,badBindings,'xml-byte-corrupt');expect(bad.counts.cases.failed).toBe(1);expect(bad.counts.steps.failed).toBe(1);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);}\n}",
       "calls": [
         "Bun.file",
         "Bun.file().text",
@@ -43068,6 +43088,7 @@
         "selectSharedScenarios",
         "selected.cases.0.steps.map",
         "snapshot.remove",
+        "source.includes",
         "utf8"
       ],
       "reviewReasons": [
@@ -43093,7 +43114,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "91b038939e780d19c07e34a91294c43127c113c4e30bab0174179888229ce649",
+      "sourceSha256": "979b35517c625d73f72298243769069b82f78d2aabd4c8d61726e7c1f7a94e8a",
       "body": "{\n let called=false;const large=new Uint8Array(32*1024*1024+1);Object.defineProperty(large,'byteLength',{get(){called=true;return 4;}});expect(()=>XmlByteSnapshot.parse(large)).toThrow(expect.objectContaining({code:'XML_BYTE_LIMIT'}));expect(called).toBe(false);\n const shared=new Uint8Array(new SharedArrayBuffer(4));shared.set(utf8('<r/>'));Object.defineProperty(shared,'buffer',{get(){called=true;return new ArrayBuffer(4);}});expect(()=>XmlByteSnapshot.parse(shared)).toThrow(expect.objectContaining({code:'XML_BYTE_SOURCE'}));expect(called).toBe(false);\n const buffer=Buffer.from('<r><drop/></r>'),s=XmlByteSnapshot.parse(buffer);buffer.fill(0);expect(s.remove([])).toEqual(utf8('<r><drop/></r>'));expect(s.remove([s.elements[1]!])).toEqual(utf8('<r></r>'));\n}",
       "calls": [
         "Buffer.from",
@@ -43506,6 +43527,136 @@
       "unresolved": []
     },
     {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / parseXml accepts the exact configured depth and refuses the next level",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "line": 11,
+      "title": "parseXml accepts the exact configured depth and refuses the next level",
+      "suites": [
+        "configured XML parser limits"
+      ],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parseXml(exact, { maxDepth: 4 }).root.localName).toBe(\"n\")",
+        "expect(() => parseXml(tooDeep, { maxDepth: 4 })).toThrow(\n      expect.objectContaining({ code: \"XML_DEPTH_LIMIT\" }),\n    )"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5",
+      "body": "{\n    const exact = `${\"<n>\".repeat(4)}${\"</n>\".repeat(4)}`;\n    const tooDeep = `${\"<n>\".repeat(5)}${\"</n>\".repeat(5)}`;\n\n    expect(parseXml(exact, { maxDepth: 4 }).root.localName).toBe(\"n\");\n    expect(() => parseXml(tooDeep, { maxDepth: 4 })).toThrow(\n      expect.objectContaining({ code: \"XML_DEPTH_LIMIT\" }),\n    );\n  }",
+      "calls": [
+        ".repeat",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "parseXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / inspectXmlEvents accepts the exact configured node count and refuses one more element",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "line": 21,
+      "title": "inspectXmlEvents accepts the exact configured node count and refuses one more element",
+      "suites": [
+        "configured XML parser limits"
+      ],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(seen).toEqual([\"r\", \"n\", \"n\", \"n\", \"n\", \"n\"])",
+        "expect(() => inspectXmlEvents(`<r>${\"<n/>\".repeat(6)}</r>`, sink, { maxNodes: 6 })).toThrow(\n      expect.objectContaining({ code: \"XML_NODE_LIMIT\" }),\n    )"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5",
+      "body": "{\n    const seen: string[] = [];\n    const sink: XmlEventSink = {\n      start(node) { seen.push(node.name); },\n      end() {},\n      text() {},\n      comment() {},\n      instruction() {},\n    };\n\n    inspectXmlEvents(`<r>${\"<n/>\".repeat(5)}</r>`, sink, { maxNodes: 6 });\n    expect(seen).toEqual([\"r\", \"n\", \"n\", \"n\", \"n\", \"n\"]);\n    expect(() => inspectXmlEvents(`<r>${\"<n/>\".repeat(6)}</r>`, sink, { maxNodes: 6 })).toThrow(\n      expect.objectContaining({ code: \"XML_NODE_LIMIT\" }),\n    );\n  }",
+      "calls": [
+        ".repeat",
+        "expect",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "inspectXmlEvents",
+        "seen.push"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / validateXml accepts the exact configured source length and counts UTF-16 code units",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "line": 38,
+      "title": "validateXml accepts the exact configured source length and counts UTF-16 code units",
+      "suites": [
+        "configured XML parser limits"
+      ],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(() => validateXml(exact, { maxSourceUnits: 64 })).not.toThrow()",
+        "expect(() => validateXml(tooLong, { maxSourceUnits: 64 })).toThrow(\n      expect.objectContaining({ code: \"XML_INPUT_TOO_LARGE\" }),\n    )",
+        "expect(() => validateXml(\"<r>π</r>\", { maxSourceUnits: 8 })).not.toThrow()",
+        "expect(() => validateXml(\"<r>😀</r>\", { maxSourceUnits: 8 })).toThrow(\n      expect.objectContaining({ code: \"XML_INPUT_TOO_LARGE\" }),\n    )",
+        "expect(() => validateXml(`<r>${\"x\".repeat(57)}\\u0001</r>`, { maxSourceUnits: 64 })).toThrow(\n      expect.objectContaining({ code: \"XML_INPUT_TOO_LARGE\" }),\n    )"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5",
+      "body": "{\n    const exact = `<r>${\"x\".repeat(57)}</r>`;\n    const tooLong = `<r>${\"x\".repeat(58)}</r>`;\n\n    expect(() => validateXml(exact, { maxSourceUnits: 64 })).not.toThrow();\n    expect(() => validateXml(tooLong, { maxSourceUnits: 64 })).toThrow(\n      expect.objectContaining({ code: \"XML_INPUT_TOO_LARGE\" }),\n    );\n    expect(() => validateXml(\"<r>π</r>\", { maxSourceUnits: 8 })).not.toThrow();\n    expect(() => validateXml(\"<r>😀</r>\", { maxSourceUnits: 8 })).toThrow(\n      expect.objectContaining({ code: \"XML_INPUT_TOO_LARGE\" }),\n    );\n    expect(() => validateXml(`<r>${\"x\".repeat(57)}\\u0001</r>`, { maxSourceUnits: 64 })).toThrow(\n      expect.objectContaining({ code: \"XML_INPUT_TOO_LARGE\" }),\n    );\n  }",
+      "calls": [
+        ".repeat",
+        "expect",
+        "expect().not.toThrow",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "validateXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/xml-configured-limits.test.ts:configured XML parser limits / rejects invalid configured limits",
+      "path": "tests/unit/xml-configured-limits.test.ts",
+      "line": 55,
+      "title": "rejects invalid configured limits",
+      "suites": [
+        "configured XML parser limits"
+      ],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(run).toThrow(expect.objectContaining({ code: \"XML_LIMIT_INVALID\" }))"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 75,
+          "expression": "for (const run of cases)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "1212425fccdc1917ff285d0af6a922bc45247f782581ace24822de69f9cbaab5",
+      "body": "{\n    const sink: XmlEventSink = {\n      start() {},\n      end() {},\n      text() {},\n      comment() {},\n      instruction() {},\n    };\n\n    const cases: Array<() => void> = [\n      () => parseXml(\"<r/>\", { maxDepth: 0 }),\n      () => parseXml(\"<r/>\", { maxDepth: -1 }),\n      () => parseXml(\"<r/>\", { maxDepth: 1.5 }),\n      () => validateXml(\"<r/>\", { maxNodes: Number.NaN }),\n      () => validateXml(\"<r/>\", { maxNodes: Number.POSITIVE_INFINITY }),\n      () => inspectXmlEvents(\"<r/>\", sink, { maxSourceUnits: 0 }),\n      () => inspectXmlEvents(\"<r/>\", sink, { maxSourceUnits: 1.1 }),\n      () => parseXml(\"<r/>\", null as unknown as never),\n    ];\n\n    for (const run of cases) {\n      expect(run).toThrow(expect.objectContaining({ code: \"XML_LIMIT_INVALID\" }));\n    }\n  }",
+      "calls": [
+        "expect",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "inspectXmlEvents",
+        "parseXml",
+        "validateXml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
       "id": "bun:tests/unit/xml-formula-neutral-bindings.test.ts:neutral XML and formula actors have one handler with no retired runtime alias",
       "path": "tests/unit/xml-formula-neutral-bindings.test.ts",
       "line": 10,
@@ -43630,9 +43781,51 @@
       "unresolved": []
     },
     {
+      "id": "bun:tests/unit/xml-lexical-alignment-bindings.test.ts:production XML category mappings refuse unrelated errors and comments/CDATA do not create a DTD",
+      "path": "tests/unit/xml-lexical-alignment-bindings.test.ts",
+      "line": 17,
+      "title": "production XML category mappings refuse unrelated errors and comments/CDATA do not create a DTD",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(classifyXmlOperationFailure(new Error('XML_MALFORMED'))).toBeUndefined()",
+        "expect(classifyXmlOperationFailure(new OoxmlError('OTHER','DTD'))).toBeUndefined()",
+        "expect(classifyXmlOperationFailure(new OoxmlError('XML_MISMATCHED_TAG','irrelevant'))).toBe('mismatched-tag')",
+        "expect(parseXml(s).root.name).toBe('r')",
+        "expect(direct.root.directText).toBe('abcde')",
+        "expect(direct.root.text).toBe('abcnestedde')",
+        "expect(direct.root.children[0]!.directText).toBe('nested')",
+        "expect(applyEdits(source,[{start:5,end:8,value:'two'}])).toBe('<r>😀two</r>')",
+        "expect(source).toBe('<r>😀one</r>')"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 17,
+          "expression": "for(const s of ['<!--<!DOCTYPE r>--><r/>','<r><![CDATA[<!DOCTYPE r>]]></r>'])expect(parseXml(s).root.name).toBe('r');"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "25bc82d7d83bfea1f50a3cc49348828d9945bdd21c7ffe99b7d3dca3c9f770e7",
+      "body": "{expect(classifyXmlOperationFailure(new Error('XML_MALFORMED'))).toBeUndefined();expect(classifyXmlOperationFailure(new OoxmlError('OTHER','DTD'))).toBeUndefined();expect(classifyXmlOperationFailure(new OoxmlError('XML_MISMATCHED_TAG','irrelevant'))).toBe('mismatched-tag');for(const s of ['<!--<!DOCTYPE r>--><r/>','<r><![CDATA[<!DOCTYPE r>]]></r>'])expect(parseXml(s).root.name).toBe('r');const direct=parseXml('<r>a<!--c-->b<?pi x?>c<x>nested</x>d<![CDATA[e]]></r>');expect(direct.root.directText).toBe('abcde');expect(direct.root.text).toBe('abcnestedde');expect(direct.root.children[0]!.directText).toBe('nested');const source='<r>😀one</r>';expect(applyEdits(source,[{start:5,end:8,value:'two'}])).toBe('<r>😀two</r>');expect(source).toBe('<r>😀one</r>');}",
+      "calls": [
+        "applyEdits",
+        "classifyXmlOperationFailure",
+        "expect",
+        "expect().toBe",
+        "expect().toBeUndefined",
+        "parseXml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 8,
+      "line": 10,
       "title": "rejects numeric, punctuation and combining-mark leading local names and declared prefixes",
       "suites": [
         "XML QName component admission"
@@ -43645,12 +43838,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 9,
+          "line": 11,
           "expression": "for(const xml of ['<p:1 xmlns:p=\"urn:p\"/>','<p:-x xmlns:p=\"urn:p\"/>','<p:.x xmlns:p=\"urn:p\"/>','<p:\\u0301x xmlns:p=\"urn:p\"/>','<r xmlns:p=\"urn:p\" p:1=\"x\"/>','<r xmlns:1=\"urn:p\"/>','<r xmlns:-p=\"urn:p\"/>','<r xmlns:p:q=\"urn:p\"/>'])expect(()=>parseXml(xml)).toThrow();"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "sourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "body": "{\n  for(const xml of ['<p:1 xmlns:p=\"urn:p\"/>','<p:-x xmlns:p=\"urn:p\"/>','<p:.x xmlns:p=\"urn:p\"/>','<p:\\u0301x xmlns:p=\"urn:p\"/>','<r xmlns:p=\"urn:p\" p:1=\"x\"/>','<r xmlns:1=\"urn:p\"/>','<r xmlns:-p=\"urn:p\"/>','<r xmlns:p:q=\"urn:p\"/>'])expect(()=>parseXml(xml)).toThrow();\n }",
       "calls": [
         "expect",
@@ -43665,7 +43858,7 @@
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / retains legal Unicode NCNames and exact source offsets",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 11,
+      "line": 13,
       "title": "retains legal Unicode NCNames and exact source offsets",
       "suites": [
         "XML QName component admission"
@@ -43680,12 +43873,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 12,
+          "line": 14,
           "expression": "for(const name of ['π','名','é','𐐀','a1','_x','a-b','a.b','a\\u0301'])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "sourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "body": "{\n  for(const name of ['π','名','é','𐐀','a1','_x','a-b','a.b','a\\u0301']){const xml=`<π:${name} xmlns:π=\"urn:n\" π:${name}=\"yes\"/>`;const d=parseXml(xml);expect(d.root.localName).toBe(name);expect(attribute(d.root,name,'urn:n')).toBe('yes');expect(xml.slice(d.root.start,d.root.end)).toBe(xml);}\n }",
       "calls": [
         "attribute",
@@ -43702,7 +43895,7 @@
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / outside-root XML whitespace is lexical and NBSP is never whitespace",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 14,
+      "line": 16,
       "title": "outside-root XML whitespace is lexical and NBSP is never whitespace",
       "suites": [
         "XML QName component admission"
@@ -43716,12 +43909,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 15,
+          "line": 17,
           "expression": "for(const source of ['\\u00a0<r/>','<r/>\\u00a0','&#32;<r/>','<r/>&#x20;'])expect(()=>parseXml(source)).toThrow();"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "sourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "body": "{\n  for(const source of ['\\u00a0<r/>','<r/>\\u00a0','&#32;<r/>','<r/>&#x20;'])expect(()=>parseXml(source)).toThrow();\n  expect(parseXml(' \\r\\n\\t<r/> \\r\\n\\t').root.localName).toBe('r');\n }",
       "calls": [
         "expect",
@@ -43737,7 +43930,7 @@
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / literal whitespace normalises before character reference decoding",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 18,
+      "line": 20,
       "title": "literal whitespace normalises before character reference decoding",
       "suites": [
         "XML QName component admission"
@@ -43751,7 +43944,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "sourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "body": "{\n  const d=parseXml('<r a=\"x\\r\\ny\\tz&#9;&#10;&#13;\">a\\r\\nb\\rc<![CDATA[d\\r\\ne\\rf]]></r>');\n  expect(d.root.attributes.a).toBe('x y z\\t\\n\\r');expect(d.root.text).toBe('a\\nb\\ncd\\ne\\nf');\n }",
       "calls": [
         "expect",
@@ -43764,7 +43957,7 @@
     {
       "id": "bun:tests/unit/xml-names.test.ts:XML QName component admission / executes the six QName/whitespace acceptance cases",
       "path": "tests/unit/xml-names.test.ts",
-      "line": 22,
+      "line": 24,
       "title": "executes the six QName/whitespace acceptance cases",
       "suites": [
         "XML QName component admission"
@@ -43778,7 +43971,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "7bb0f4255d7312b842df897e5ab5104883364265bc00cbd2f93585286d9e85da",
+      "sourceSha256": "5d59b78bf5b848cdd6b57b289e22be0902129a964cc90b1a67b9eee0dda36f73",
       "body": "{\n  const path='workflows/xml/names.feature',text=await Bun.file(join(fixturesRoot(),path)).text();\n  const f=parseFeature('references/fixtures-ooxml/'+path,text.replace(/^@planned/m,'@implemented @bun'));const cases=f.scenarios.flatMap(s=>s.cases);const count=(n:number)=>({implemented:n,planned:0,total:n});\n  const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(cases.reduce((n,c)=>n+c.steps.length,0))}};\n  const result=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(6);\n }",
       "calls": [
         "Bun.file",

@@ -1,6 +1,6 @@
 # Behaviour coverage
 
-The shared reference contains **344 assets**. The table lists available tests; artifacts/acceptance.json records their results.
+The shared reference contains **345 assets**. The table lists available tests; artifacts/acceptance.json records their results.
 
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
@@ -71,9 +71,9 @@ The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-
 | references/fixtures-ooxml/workflows/xlsx/structural-edits.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/xlsx/style-readback.feature | implemented | 1 | 1 | 1 | 0 | 4 |
 | references/fixtures-ooxml/workflows/xml/comparison.feature | implemented | 5 | 10 | 10 | 0 | 40 |
-| references/fixtures-ooxml/workflows/xml/editing.feature | implemented | 11 | 16 | 16 | 0 | 59 |
-| references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 6 | 0 | 19 |
-| references/fixtures-ooxml/workflows/xml/parsing.feature | implemented | 14 | 15 | 15 | 0 | 60 |
+| references/fixtures-ooxml/workflows/xml/editing.feature | implemented | 11 | 16 | 16 | 0 | 61 |
+| references/fixtures-ooxml/workflows/xml/names.feature | implemented | 3 | 6 | 6 | 0 | 20 |
+| references/fixtures-ooxml/workflows/xml/parsing.feature | implemented | 14 | 15 | 15 | 0 | 64 |
 
 Specifications and shared tests are in `references/fixtures-ooxml`.
 Run `make check` to execute implemented scenarios. Planned scenarios are not run.

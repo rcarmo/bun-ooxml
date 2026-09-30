@@ -3,7 +3,9 @@ import {join} from 'node:path';
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {parseXml,attribute} from '../../src/xml/index.ts';
 import {parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from '../../scripts/gherkin.ts';
-import {bindings} from '../acceptance/xml-names.ts';
+import {bindings as namesBindings} from '../acceptance/xml-names.ts';
+import {bindings as lexicalBindings} from '../acceptance/xml-lexical-alignment.ts';
+const bindings=[...namesBindings,...lexicalBindings];
 describe('XML QName component admission',()=>{
  test('rejects numeric, punctuation and combining-mark leading local names and declared prefixes',()=>{
   for(const xml of ['<p:1 xmlns:p="urn:p"/>','<p:-x xmlns:p="urn:p"/>','<p:.x xmlns:p="urn:p"/>','<p:\u0301x xmlns:p="urn:p"/>','<r xmlns:p="urn:p" p:1="x"/>','<r xmlns:1="urn:p"/>','<r xmlns:-p="urn:p"/>','<r xmlns:p:q="urn:p"/>'])expect(()=>parseXml(xml)).toThrow();
