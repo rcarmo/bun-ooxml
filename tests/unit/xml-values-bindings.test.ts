@@ -5,6 +5,7 @@ import { executeAcceptance, selectSharedScenarios, type StepBinding } from '../.
 import type { XmlDocument } from '../../src/xml/index.ts';
 import { bindings } from '../acceptance/steps.ts';
 
+const generalized = (await Bun.file(join(fixturesRoot(), 'workflows/xml/parsing.feature')).text()).includes('@profile-xml-model-safety');
 const ids = [
   '@id-xml-entity-values', '@id-xml-stylesheet-processing-instruction',
   '@id-xml-expanded-attribute-lookup', '@id-xml-implicit-xml-prefix',
@@ -24,7 +25,7 @@ async function run(sourceChange: (source: string) => string = s => s, activeBind
   const feature = selectSharedScenarios(path, sourceChange(await Bun.file(join(fixturesRoot(), path)).text()), ids);
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   return executeAcceptance({ root: '.', features: [feature], counts: {
-    features: count(1), scenarios: count(10), cases: count(11), steps: count(39),
+    features: count(1), scenarios: count(10), cases: count(11), steps: count(generalized ? 42 : 39),
   } }, activeBindings, 'xml-values-unit');
 }
 
@@ -69,7 +70,9 @@ test('XML value assertions reject corrupted parser, metadata and escaping result
       if (s.document) s.document.root.attributeNamespaces = Object.assign(Object.create(null), s.document.root.attributeNamespaces);
     }],
     ['the XML values input is parsed', s => {
-      if (s.document) s.document.root.attributeNamespaces = Object.freeze({ ...s.document.root.attributeNamespaces });
+      if (s.document) s.document.root.attributeNamespaces = generalized
+        ? Object.freeze({ ...s.document.root.attributeNamespaces, 'a:id': 'urn:wrong' })
+        : Object.freeze({ ...s.document.root.attributeNamespaces });
     }],
     ['the XML values input is parsed', s => { if (s.error) s.error = new Error('untyped'); }],
     ['the value is escaped for XML text content', s => { if (s.error) { s.error = undefined; s.escaped = ''; } }],

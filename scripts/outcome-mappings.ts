@@ -5,6 +5,8 @@ import {inventoryNativeTests,type TestCaseRecord} from './test-inventory.ts';
 type NativeTestInventory={cases:TestCaseRecord[];unresolved:readonly unknown[]};
 import {parseFeature,type AcceptanceFeature} from './gherkin.ts';
 import {fixturesRoot} from './fixture-inputs.ts';
+import {verifyReferences} from './references.ts';
+let candidateVerification: Promise<number> | undefined;
 export interface OutcomeMappingLedger {
  schemaVersion:1; consumer:'bun'; executionCredit:false;
  scopePaths:string[]; sourceSha256:Record<string,string>;
@@ -79,6 +81,11 @@ export function reconcileOutcomeMappingSets(inventory:NativeTestInventory,sets:O
 }
 export async function outcomeMappingReport(){
  const root=process.cwd();
+ const candidatePin = process.env.OOXML_FIXTURES_ROOT ? await Bun.file(process.env.OOXML_REFERENCE_PIN ?? '').json() : undefined;
+ if (candidatePin) {
+   if (candidatePin.mode !== 'candidate') throw Error('Outcome migration requires explicit candidate pin');
+   await (candidateVerification ??= verifyReferences(root));
+ }
  // Fixed registrations prevent removing a ledger or shrinking its scope in JSON.
  const registrations=[
   {name:'revision-moves',tests:['tests/unit/docx-revision-moves.test.ts','tests/unit/revision-move-outcomes.test.ts'],canonical:['workflows/docx/revisions.feature'],sources:['src/docx/revisions.ts','src/docx/revision-moves.ts','src/docx/revision-properties.ts','src/docx/run-appearance.ts','src/docx/run-font.ts','src/docx/index.ts','src/index.ts','src/opc/package.ts','src/opc/graph.ts','src/xml/index.ts','src/errors.ts','scripts/fixture-inputs.ts','tests/acceptance/revisions-docx.ts','tests/acceptance/revision-moves.ts','tests/acceptance/steps.ts']},
@@ -114,6 +121,11 @@ export async function outcomeMappingReport(){
  const sets:OutcomeMappingSet[]=[];
  for(const registration of registrations){
   const ledger=await Bun.file(join(root,`docs/behaviors/${registration.name}-mappings.json`)).json() as OutcomeMappingLedger;
+  if (candidatePin && registration.name === 'xml-values') {
+    const migration = await Bun.file(join(root,'docs/behaviors/xml-runtime-candidate.json')).json();
+    if (candidatePin.commit !== migration.commit || candidatePin.manifestSha256 !== migration.manifestSha256) throw Error('Unreviewed XML runtime candidate');
+    ledger.sourceSha256['workflows/xml/parsing.feature'] = migration.featureSha256;
+  }
   const sources:Record<string,string>={};for(const path of [...registration.tests,...registration.sources,'scripts/gherkin.ts','scripts/test-inventory.ts'])sources[path]=await Bun.file(join(root,path)).text();
   const canonical=typeof registration.canonical==='string'?[registration.canonical]:registration.canonical;
   for(const path of canonical)sources[path]=await Bun.file(join(fixturesRoot(),path)).text();
@@ -122,7 +134,7 @@ export async function outcomeMappingReport(){
  return reconcileOutcomeMappingSets(await inventoryNativeTests(root),sets);
 }
 if(import.meta.main){
- const output=JSON.stringify(await outcomeMappingReport(),null,2)+'\n',path='docs/behaviors/outcome-reconciliation.json';
+ const output=JSON.stringify(await outcomeMappingReport(),null,2)+'\n',path=process.env.OOXML_FIXTURES_ROOT?'docs/behaviors/outcome-reconciliation-xml-candidate.json':'docs/behaviors/outcome-reconciliation.json';
  if(process.argv.includes('--check')){if(!await Bun.file(path).exists()||await Bun.file(path).text()!==output)throw Error('Outcome mapping report drift; review pins and regenerate');}
  else await Bun.write(path,output);
  const report=JSON.parse(output);console.log(`${report.mappedDeclarations}/${report.totalDeclarations} declarations have bounded mappings; ${report.unmappedTestIds.length} unmapped; no new execution credit`);

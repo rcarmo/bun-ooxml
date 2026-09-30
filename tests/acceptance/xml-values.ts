@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import type { AcceptanceStep, StepBinding } from '../../scripts/gherkin.ts';
-import { OoxmlError } from '../../src/errors.ts';
+import { OoxmlError, classifyXmlParseFailure } from '../../src/errors.ts';
 import { attribute, escapeAttribute, escapeText, parseXml, type XmlDocument } from '../../src/xml/index.ts';
 
-type State = { source?: string; value?: string; document?: XmlDocument; escaped?: string; error?: unknown };
+type State = { source?: string; originalSource?: string; value?: string; document?: XmlDocument; escaped?: string; error?: unknown };
 const state = (c: Record<string, unknown>) => c.state as State;
 function root(c: Record<string, unknown>) { const s = state(c); assert.equal(s.error, undefined); assert(s.document); return s.document.root; }
 function jsonString(source: string | undefined) { assert(source !== undefined); const value: unknown = JSON.parse(source); assert.equal(typeof value, 'string'); return value as string; }
@@ -15,7 +15,7 @@ export const scenarioIds = [
   '@id-xml-escaping-whitespace-roundtrip', '@id-xml-typed-parse-error',
 ];
 export const bindings: StepBinding[] = [
-  { pattern: /^XML values input encoded as JSON (.+)$/, run: (c, json) => { state(c).source = jsonString(json); } },
+  { pattern: /^XML values input encoded as JSON (.+)$/, run: (c, json) => { state(c).source = jsonString(json); state(c).originalSource = state(c).source; } },
   { pattern: /^the XML values input is parsed$/, run: c => {
     const s = state(c); assert(s.source !== undefined);
     try { s.document = parseXml(s.source); } catch (error) { s.error = error; }
@@ -41,6 +41,41 @@ export const bindings: StepBinding[] = [
       assert.equal(attribute(nodes[0]!, local!, namespace!), expected === null ? undefined : expected);
     }
   } },
+  { pattern: /^the root attributes are exactly __proto__=polluted and constructor=safe$/, run: c => {
+    const attrs = root(c).attributes;
+    assert.deepEqual(Object.keys(attrs).sort(), ['__proto__', 'constructor']);
+    assert(Object.hasOwn(attrs, '__proto__')); assert(Object.hasOwn(attrs, 'constructor'));
+    assert.equal(attrs.__proto__, 'polluted'); assert.equal(attrs.constructor, 'safe');
+    // Retain Bun's native guard in addition to the portable outcomes.
+    assert.equal(Object.getPrototypeOf(attrs), null);
+  } },
+  { pattern: /^the root remains r with no text and no children$/, run: c => {
+    const r = root(c); assert.equal(r.name, 'r'); assert.equal(r.text, ''); assert.deepEqual(r.children, []);
+  } },
+  { pattern: /^fresh attribute reads and the original XML source are unchanged$/, run: c => {
+    const r = root(c); assert.equal(attribute(r, '__proto__'), 'polluted'); assert.equal(attribute(r, 'constructor'), 'safe');
+    assert.equal(state(c).source, state(c).originalSource);
+  } },
+  { pattern: /^changing a returned namespace snapshot to urn:changed and deleting a:id are attempted$/, run: c => {
+    const r = root(c), snapshot = r.attributeNamespaces;
+    const check = () => { assert.equal(root(c).attributeNamespaces['a:id'], 'urn:a'); assert.equal(attribute(root(c), 'id', 'urn:a'), 'outer'); };
+    // Each attempt may refuse or affect a detached copy, never the original model.
+    Reflect.set(snapshot, 'a:id', 'urn:changed'); check();
+    Reflect.deleteProperty(snapshot, 'a:id'); check();
+    assert.equal(r.name, 'r'); assert.equal(r.text, ''); assert.deepEqual(r.children, []);
+    assert.equal(state(c).source, state(c).originalSource);
+  } },
+  { pattern: /^fresh namespace and attribute reads still return urn:a and outer$/, run: c => {
+    assert.equal(root(c).attributeNamespaces['a:id'], 'urn:a'); assert.equal(attribute(root(c), 'id', 'urn:a'), 'outer');
+  } },
+  { pattern: /^the parsed root structure and original XML source are unchanged$/, run: c => {
+    const r = root(c); assert.equal(r.name, 'r'); assert.equal(r.text, ''); assert.deepEqual(r.children, []);
+    assert.equal(state(c).source, state(c).originalSource);
+  } },
+  { pattern: /^parsing fails with category malformed-xml and no document result$/, run: c => {
+    const s = state(c); assert.equal(classifyXmlParseFailure(s.error), 'malformed-xml'); assert.equal(s.document, undefined);
+  } },
+  { pattern: /^the original XML source is unchanged$/, run: c => { assert.equal(state(c).source, state(c).originalSource); } },
   { pattern: /^the root attribute map has a null prototype$/, run: c => { assert.equal(Object.getPrototypeOf(root(c).attributes), null); } },
   { pattern: /^(\S+) is an own attribute with value (\S+)$/, run: (c, name, value) => {
     const attrs = root(c).attributes; assert(Object.hasOwn(attrs, name!)); assert.equal(attrs[name!], value);

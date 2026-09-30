@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1112,
-  "files": 136,
+  "count": 1113,
+  "files": 137,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -775,6 +775,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/xml-runtime-generalization.test.ts",
+      "sha256": "e825dc7fdaa9c84230e87fe430c36b76100c207322dbdb5689d1f8006099f104",
+      "declarations": 1,
+      "issues": []
+    },
+    {
       "path": "tests/unit/xml-structure.test.ts",
       "sha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979",
       "declarations": 16,
@@ -782,7 +788,7 @@
     },
     {
       "path": "tests/unit/xml-values-bindings.test.ts",
-      "sha256": "f07af0db9a10a0e30b43b80dcc09b0e8f0f8bce21399e3d5074b74a66bf50e83",
+      "sha256": "79c5c29f8c64b0ff13583674524b801f4f0583beaea74a98800c6afd9ebcfa46",
       "declarations": 3,
       "issues": []
     },
@@ -1122,7 +1128,7 @@
     },
     {
       "path": "tests/acceptance/xml-values.ts",
-      "sha256": "bcad16fc6f9bf2a11fe45ccf0cab19f188540a4433b948bed294acbce5393b48"
+      "sha256": "f18bdfcb45226e5537db906fa3d955c9b593e94874670c2364ec68f402cc1810"
     },
     {
       "path": "tests/acceptance/zip32.ts",
@@ -43998,6 +44004,55 @@
       "unresolved": []
     },
     {
+      "id": "bun:tests/unit/xml-runtime-generalization.test.ts:native parser safety controls preserve stronger Bun guarantees and classify only known syntax failures",
+      "path": "tests/unit/xml-runtime-generalization.test.ts",
+      "line": 39,
+      "title": "native parser safety controls preserve stronger Bun guarantees and classify only known syntax failures",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(classifyXmlParseFailure(new Error('other'))).toBeUndefined()",
+        "expect(classifyXmlParseFailure(new OoxmlError('OTHER','other'))).toBeUndefined()",
+        "expect(classifyXmlParseFailure(new OoxmlError('XML_INPUT_TOO_LARGE','resource'))).toBeUndefined()",
+        "expect(parseXml('<a/>').root.name).toBe('a')",
+        "expect(classifyXmlParseFailure(err)).toBe('malformed-xml')",
+        "expect(Object.getPrototypeOf(attrs)).toBeNull()",
+        "expect(Object.keys(attrs).sort()).toEqual(['__proto__','constructor'])",
+        "expect(Object.hasOwn(attrs,'constructor')).toBe(true)",
+        "expect(Object.isFrozen(m)).toBe(true)",
+        "expect(Object.getPrototypeOf(m)).toBeNull()",
+        "expect(Reflect.set(m,'a:id','urn:changed')).toBe(false)",
+        "expect(attribute(r,'id','urn:a')).toBe('outer')",
+        "expect(Reflect.deleteProperty(m,'a:id')).toBe(false)",
+        "expect(r.attributeNamespaces['a:id']).toBe('urn:a')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "e825dc7fdaa9c84230e87fe430c36b76100c207322dbdb5689d1f8006099f104",
+      "body": "{\n  expect(classifyXmlParseFailure(new Error('other'))).toBeUndefined();\n  expect(classifyXmlParseFailure(new OoxmlError('OTHER','other'))).toBeUndefined();\n  expect(classifyXmlParseFailure(new OoxmlError('XML_INPUT_TOO_LARGE','resource'))).toBeUndefined();\n  expect(parseXml('<a/>').root.name).toBe('a');\n  let err:unknown;try{parseXml('<a></b>');}catch(e){err=e;}\n  expect(classifyXmlParseFailure(err)).toBe('malformed-xml');\n  const attrs=parseXml('<r __proto__=\"polluted\" constructor=\"safe\"/>').root.attributes;\n  expect(Object.getPrototypeOf(attrs)).toBeNull();expect(Object.keys(attrs).sort()).toEqual(['__proto__','constructor']);\n  expect(Object.hasOwn(attrs,'constructor')).toBe(true);\n  const r=parseXml('<r xmlns:a=\"urn:a\" a:id=\"outer\"/>').root,m=r.attributeNamespaces;\n  expect(Object.isFrozen(m)).toBe(true);expect(Object.getPrototypeOf(m)).toBeNull();\n  expect(Reflect.set(m,'a:id','urn:changed')).toBe(false);expect(attribute(r,'id','urn:a')).toBe('outer');\n  expect(Reflect.deleteProperty(m,'a:id')).toBe(false);expect(r.attributeNamespaces['a:id']).toBe('urn:a');\n}",
+      "calls": [
+        "Object.getPrototypeOf",
+        "Object.hasOwn",
+        "Object.isFrozen",
+        "Object.keys",
+        "Object.keys().sort",
+        "Reflect.deleteProperty",
+        "Reflect.set",
+        "attribute",
+        "classifyXmlParseFailure",
+        "expect",
+        "expect().toBe",
+        "expect().toBeNull",
+        "expect().toBeUndefined",
+        "expect().toEqual",
+        "parseXml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
       "id": "bun:tests/unit/xml-structure.test.ts:structured insertion preserves parent tag spelling, tail, comments and siblings",
       "path": "tests/unit/xml-structure.test.ts",
       "line": 7,
@@ -44581,7 +44636,7 @@
     {
       "id": "bun:tests/unit/xml-values-bindings.test.ts:eleven XML value cases execute with every Then asserted and other operations left planned",
       "path": "tests/unit/xml-values-bindings.test.ts",
-      "line": 31,
+      "line": 32,
       "title": "eleven XML value cases execute with every Then asserted and other operations left planned",
       "suites": [],
       "kind": "test",
@@ -44596,7 +44651,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f07af0db9a10a0e30b43b80dcc09b0e8f0f8bce21399e3d5074b74a66bf50e83",
+      "sourceSha256": "79c5c29f8c64b0ff13583674524b801f4f0583beaea74a98800c6afd9ebcfa46",
       "body": "{\n  const result = await run();\n  expect(result.failures).toEqual([]);\n  expect(result.counts.cases.passed).toBe(11);\n  expect(result.counts.cases.planned).toBe(4);\n  const executed = result.features.flatMap(f => f.scenarios.flatMap(s => s.cases)).filter(c => c.lifecycle === 'implemented');\n  expect(executed).toHaveLength(11);\n  expect(executed.every(c => c.steps.every(s => s.status === 'passed'))).toBe(true);\n}",
       "calls": [
         "c.steps.every",
@@ -44616,7 +44671,7 @@
     {
       "id": "bun:tests/unit/xml-values-bindings.test.ts:changed expected XML values and namespace-table cells fail instead of passing vacuously",
       "path": "tests/unit/xml-values-bindings.test.ts",
-      "line": 41,
+      "line": 42,
       "title": "changed expected XML values and namespace-table cells fail instead of passing vacuously",
       "suites": [],
       "kind": "test",
@@ -44627,12 +44682,12 @@
       ],
       "loops": [
         {
-          "line": 54,
+          "line": 55,
           "expression": "for (const [before, after] of changes)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f07af0db9a10a0e30b43b80dcc09b0e8f0f8bce21399e3d5074b74a66bf50e83",
+      "sourceSha256": "79c5c29f8c64b0ff13583674524b801f4f0583beaea74a98800c6afd9ebcfa46",
       "body": "{\n  const changes: [string, string][] = [\n    ['root attribute a equals JSON \"\\\\\\\"\\'\"', 'root attribute a equals JSON \"wrong\"'],\n    ['root text equals JSON \"AA&<>\"', 'root text equals JSON \"wrong\"'],\n    ['root qualified name equals r', 'root qualified name equals wrong'],\n    ['root namespace URI equals JSON \"\"', 'root namespace URI equals JSON \"wrong\"'],\n    ['root attribute xml:lang equals JSON \"en\"', 'root attribute xml:lang equals JSON \"wrong\"'],\n    ['implicit xml namespace URI is http://www.w3.org/XML/1998/namespace', 'implicit xml namespace URI is urn:wrong'],\n    ['namespace recorded for a:id is urn:a', 'namespace recorded for a:id is urn:wrong'],\n    ['| root    | id    | urn:default                                    | null', '| root    | id    | urn:default                                    | \"wrong\"'],\n    ['escaped string equals JSON <escaped_json>', 'escaped string equals JSON \"wrong\"'],\n    ['decoded text and attribute both equal JSON \"x\\\\r\\\\n\\\\ty\"', 'decoded text and attribute both equal JSON \"wrong\"'],\n  ];\n  for (const [before, after] of changes) {\n    const result = await run(source => { expect(source.includes(before)).toBe(true); return source.replace(before, after); });\n    assertFailedPredicates(result);\n  }\n}",
       "calls": [
         "assertFailedPredicates",
@@ -44652,7 +44707,7 @@
     {
       "id": "bun:tests/unit/xml-values-bindings.test.ts:XML value assertions reject corrupted parser, metadata and escaping results",
       "path": "tests/unit/xml-values-bindings.test.ts",
-      "line": 60,
+      "line": 61,
       "title": "XML value assertions reject corrupted parser, metadata and escaping results",
       "suites": [],
       "kind": "test",
@@ -44661,13 +44716,13 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 77,
+          "line": 80,
           "expression": "for (const [step, mutate] of mutations)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f07af0db9a10a0e30b43b80dcc09b0e8f0f8bce21399e3d5074b74a66bf50e83",
-      "body": "{\n  type State = { document?: XmlDocument; error?: unknown; escaped?: string };\n  const mutations: [string, (s: State) => void][] = [\n    ['the XML values input is parsed', s => { if (s.document) s.document.root.attributes = { ...s.document.root.attributes }; }],\n    ['the XML values input is parsed', s => {\n      if (s.document) Object.setPrototypeOf(s.document.root.attributes, { constructor: 'safe' });\n      if (s.document) Reflect.deleteProperty(s.document.root.attributes, 'constructor');\n    }],\n    ['the XML values input is parsed', s => {\n      if (s.document) s.document.root.attributeNamespaces = Object.assign(Object.create(null), s.document.root.attributeNamespaces);\n    }],\n    ['the XML values input is parsed', s => {\n      if (s.document) s.document.root.attributeNamespaces = Object.freeze({ ...s.document.root.attributeNamespaces });\n    }],\n    ['the XML values input is parsed', s => { if (s.error) s.error = new Error('untyped'); }],\n    ['the value is escaped for XML text content', s => { if (s.error) { s.error = undefined; s.escaped = ''; } }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupted = bindings.map(binding => binding.pattern.test(step) ? {\n      ...binding, run: async (context: Record<string, unknown>, ...captures: string[]) => {\n        await binding.run(context, ...captures); mutate(context.state as State);\n      },\n    } : binding);\n    const result = await run(s => s, corrupted);\n    assertFailedPredicates(result);\n  }\n}",
+      "sourceSha256": "79c5c29f8c64b0ff13583674524b801f4f0583beaea74a98800c6afd9ebcfa46",
+      "body": "{\n  type State = { document?: XmlDocument; error?: unknown; escaped?: string };\n  const mutations: [string, (s: State) => void][] = [\n    ['the XML values input is parsed', s => { if (s.document) s.document.root.attributes = { ...s.document.root.attributes }; }],\n    ['the XML values input is parsed', s => {\n      if (s.document) Object.setPrototypeOf(s.document.root.attributes, { constructor: 'safe' });\n      if (s.document) Reflect.deleteProperty(s.document.root.attributes, 'constructor');\n    }],\n    ['the XML values input is parsed', s => {\n      if (s.document) s.document.root.attributeNamespaces = Object.assign(Object.create(null), s.document.root.attributeNamespaces);\n    }],\n    ['the XML values input is parsed', s => {\n      if (s.document) s.document.root.attributeNamespaces = generalized\n        ? Object.freeze({ ...s.document.root.attributeNamespaces, 'a:id': 'urn:wrong' })\n        : Object.freeze({ ...s.document.root.attributeNamespaces });\n    }],\n    ['the XML values input is parsed', s => { if (s.error) s.error = new Error('untyped'); }],\n    ['the value is escaped for XML text content', s => { if (s.error) { s.error = undefined; s.escaped = ''; } }],\n  ];\n  for (const [step, mutate] of mutations) {\n    const corrupted = bindings.map(binding => binding.pattern.test(step) ? {\n      ...binding, run: async (context: Record<string, unknown>, ...captures: string[]) => {\n        await binding.run(context, ...captures); mutate(context.state as State);\n      },\n    } : binding);\n    const result = await run(s => s, corrupted);\n    assertFailedPredicates(result);\n  }\n}",
       "calls": [
         "Object.assign",
         "Object.create",

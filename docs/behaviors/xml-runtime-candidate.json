@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/rcarmo/fixtures-ooxml",
+  "mode": "candidate",
+  "commit": "ee47f750184bf3dc0bc396632a5373f3d673b563",
+  "manifestSha256": "be0c8c157fbcfe6125c7584cdfb79759c6a387dd7922ca4b0560ed9c92f957d4",
+  "featureSha256": "fa342c6f1ac982c6f99b915dab54196501798af745b1cc4db143cecbaea48783",
+  "scenarioIds": [
+    "@id-xml-prototype-safe-attributes",
+    "@id-xml-immutable-namespace-metadata",
+    "@id-xml-typed-parse-error"
+  ],
+  "caseCount": 3,
+  "stepCount": 15,
+  "executionCredit": false
+}

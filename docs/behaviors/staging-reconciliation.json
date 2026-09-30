@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1112,
+  "nativeDeclarations": 1113,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 885,
+  "withoutStagingCount": 886,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -6386,6 +6386,11 @@
       "sourceSha256": "f508476fbccefb07ab26656a25274083ddfc03a984cbc7630111bcb72a3f155f"
     },
     {
+      "id": "bun:tests/unit/xml-runtime-generalization.test.ts:native parser safety controls preserve stronger Bun guarantees and classify only known syntax failures",
+      "path": "tests/unit/xml-runtime-generalization.test.ts",
+      "sourceSha256": "e825dc7fdaa9c84230e87fe430c36b76100c207322dbdb5689d1f8006099f104"
+    },
+    {
       "id": "bun:tests/unit/xml-structure.test.ts:structured insertion preserves parent tag spelling, tail, comments and siblings",
       "path": "tests/unit/xml-structure.test.ts",
       "sourceSha256": "1056241b27122cba862f53bf8dad7e85fb1032a81792fbf3f149eeed9e118979"
@@ -6468,17 +6473,17 @@
     {
       "id": "bun:tests/unit/xml-values-bindings.test.ts:eleven XML value cases execute with every Then asserted and other operations left planned",
       "path": "tests/unit/xml-values-bindings.test.ts",
-      "sourceSha256": "f07af0db9a10a0e30b43b80dcc09b0e8f0f8bce21399e3d5074b74a66bf50e83"
+      "sourceSha256": "79c5c29f8c64b0ff13583674524b801f4f0583beaea74a98800c6afd9ebcfa46"
     },
     {
       "id": "bun:tests/unit/xml-values-bindings.test.ts:changed expected XML values and namespace-table cells fail instead of passing vacuously",
       "path": "tests/unit/xml-values-bindings.test.ts",
-      "sourceSha256": "f07af0db9a10a0e30b43b80dcc09b0e8f0f8bce21399e3d5074b74a66bf50e83"
+      "sourceSha256": "79c5c29f8c64b0ff13583674524b801f4f0583beaea74a98800c6afd9ebcfa46"
     },
     {
       "id": "bun:tests/unit/xml-values-bindings.test.ts:XML value assertions reject corrupted parser, metadata and escaping results",
       "path": "tests/unit/xml-values-bindings.test.ts",
-      "sourceSha256": "f07af0db9a10a0e30b43b80dcc09b0e8f0f8bce21399e3d5074b74a66bf50e83"
+      "sourceSha256": "79c5c29f8c64b0ff13583674524b801f4f0583beaea74a98800c6afd9ebcfa46"
     },
     {
       "id": "bun:tests/unit/zip32-bindings.test.ts:twenty canonical ZIP32 checksum, refusal and configured-bound cases execute",
