@@ -4,6 +4,7 @@ import {withPackageAlignment} from './package-alignment.ts';
 import {bindings as pptxNext20Bindings,cleanup as cleanupPptxNext20} from './pptx-next20.ts';
 import {bindings as pptxManipulationBindings,cleanup as cleanupPptxManipulation} from './pptx-manipulation.ts';
 import {bindings as pptxFormattingBindings,cleanup as cleanupPptxFormatting} from './pptx-formatting.ts';
+import {bindings as retainedStyleWordBindings,cleanup as cleanupRetainedStyleWord} from './retained-style-word.ts';
 import { bindings as packageAdmissionBindings } from './package-admission.ts';
 import {bindings as physicalOverlapBindings} from './physical-overlap.ts';
 import { bindings as packageComparisonBindings } from './package-comparison.ts';
@@ -80,7 +81,7 @@ import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import {bindings as ownedChainBindings,cleanup as cleanupOwnedChains} from './owned-chain.ts';
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains(),cleanupXlsxStyleReadback(),cleanupPptxNext20(),cleanupPptxManipulation(),cleanupPptxFormatting()]);}
+export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains(),cleanupXlsxStyleReadback(),cleanupPptxNext20(),cleanupPptxManipulation(),cleanupPptxFormatting(),cleanupRetainedStyleWord()]);}
 
 export const historicalBindings: StepBinding[] = [
   ...coreBindings,
@@ -161,6 +162,6 @@ export const historicalBindings: StepBinding[] = [
   ...workflowBindings,
   ...workflowReceiptBindings,
 ];
-export const bindings=[...withPackageAlignment(historicalBindings),...pptxNext20Bindings,...pptxManipulationBindings,...pptxFormattingBindings];
+export const bindings=[...withPackageAlignment(historicalBindings),...pptxNext20Bindings,...pptxManipulationBindings,...pptxFormattingBindings,...retainedStyleWordBindings];
 
 export default bindings;

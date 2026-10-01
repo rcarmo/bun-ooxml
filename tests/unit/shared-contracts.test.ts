@@ -7,6 +7,7 @@ import {inventoryFeatures,parseFeature} from "../../scripts/gherkin.ts";
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import pptxPin from '../../docs/behaviors/pptx-manipulation-candidate.json';
 import formattingPin from '../../docs/behaviors/pptx-formatting-candidate.json';
+import retainedPin from '../../docs/behaviors/retained-style-word-candidate.json';
 const root=join(import.meta.dir,"../..");
 describe("shared mutation inventory and custody",()=>{
   test("checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",async()=>{
@@ -15,7 +16,7 @@ describe("shared mutation inventory and custody",()=>{
     const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));
     expect(canonical).toHaveLength(8);
     const inventory=await inventoryFeatures(root);
-    const migrated=!!process.env.OOXML_REFERENCE_PIN&&[pptxPin.commit,formattingPin.commit].includes((await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit);
+    const migrated=!!process.env.OOXML_REFERENCE_PIN&&[pptxPin.commit,formattingPin.commit,retainedPin.commit].includes((await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit);
     const local=inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'));expect(local.map(f=>f.path)).toEqual(migrated?[]:['features/pptx/manipulation-next20.feature']);if(!migrated)expect(local[0]!.scenarios).toHaveLength(20);
     for(const path of canonical){
       const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);

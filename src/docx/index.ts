@@ -1,4 +1,6 @@
 import { OoxmlError } from "../errors.ts";
+import {patchRetainedWordRun,patchRetainedWordParagraph,type RetainedWordRunPatch,type RetainedWordParagraphPatch} from './retained-formatting.ts';
+export type {RetainedWordRunPatch,RetainedWordParagraphPatch} from './retained-formatting.ts';
 import {readDocumentProperties,editDocumentProperties,type DirectDocumentProperties,type DocumentPropertiesPatch} from './document-properties.ts';
 import {readTrackingEnabled,setTrackingEnabled,validateTrackAuthor,type TrackingSettingsReceipt} from './tracking-settings.ts';
 export type {TrackingSettingsReceipt} from './tracking-settings.ts';
@@ -276,6 +278,10 @@ export class Paragraph {
   setProperties(patch: ParagraphPropertiesPatch): {changed:number} {
     this.ensureFresh(); return this.documentRef.setParagraphProperties(this.snapshot, patch);
   }
+
+  /** Guarded single-run edits; legacy formatRuns retains its all-runs policy. */
+  patchRetainedRun(run:number,patch:RetainedWordRunPatch):{changed:number} {this.ensureFresh();return this.documentRef.patchRetainedRun(this.snapshot,run,patch);}
+  patchRetainedProperties(patch:RetainedWordParagraphPatch):{changed:number} {this.ensureFresh();return this.documentRef.patchRetainedProperties(this.snapshot,patch);}
 
   /** Direct paragraph style ID, without evaluating inheritance. */
   get styleId(): string | undefined { this.ensureFresh(); return this.documentRef.paragraphStyle(this.snapshot); }
@@ -988,6 +994,15 @@ export class Document {
     return {changed:1};
   }
 
+  patchRetainedRun(snapshot:ParagraphSnapshot,run:number,patch:RetainedWordRunPatch):{changed:number} {
+    this.assertParagraphSnapshot(snapshot);if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();this.assertRetainedFormattingUnprotected();
+    const next=patchRetainedWordRun(this.xml,snapshot.element,run,patch);if(next===this.xml)return {changed:0};this.commitParagraphProperties(next);return {changed:1};
+  }
+  patchRetainedProperties(snapshot:ParagraphSnapshot,patch:RetainedWordParagraphPatch):{changed:number} {
+    this.assertParagraphSnapshot(snapshot);if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();this.assertRetainedFormattingUnprotected();
+    const next=patchRetainedWordParagraph(this.xml,snapshot.element,patch);if(next===this.xml)return {changed:0};this.commitParagraphProperties(next);return {changed:1};
+  }
+
   formatParagraphRuns(snapshot: ParagraphSnapshot, patch: RunFormattingPatch): RunFormattingReceipt {
     this.assertParagraphSnapshot(snapshot);
     if(!snapshot.searchable)throw new Paragraph(this,snapshot).failure();
@@ -1029,6 +1044,14 @@ export class Document {
 
   private assertParagraphSnapshot(snapshot: ParagraphSnapshot): void {
     if(snapshot.version!==this.version||this.paragraphSnapshots[snapshot.index]!==snapshot||this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-paragraph','DOCX paragraph formatting handle is stale');
+  }
+
+  private assertRetainedFormattingUnprotected():void {
+    this.assertFormattingUnprotected();
+    for(const rel of this.opcPackage.relationships(DOCUMENT_PART).filter(r=>r.type.endsWith('/settings'))){
+      if(rel.external||!rel.resolved)fail('docx-format-unsafe','External settings refuse retained formatting');
+      const root=parseXml(this.opcPackage.text(rel.resolved));if(elements(root,'trackRevisions',W_NS).length)fail('docx-format-protected','Tracking enabled');
+    }
   }
 
   private assertFormattingUnprotected(): void {

@@ -12,6 +12,8 @@ import {inspectTextShapes,patchShapeText,appendShapeBullet,clearShapeText,setSha
 export type {TextShape} from './shape-text.ts';
 import {patchShapeGeometry,patchTextRun,patchParagraph,slideVisibility,patchSlideVisibility,type ShapeGeometryPatch,type DirectTextRunPatch,type DirectParagraphPatch} from './formatting.ts';
 export type {ShapeGeometryPatch,DirectTextRunPatch,DirectParagraphPatch} from './formatting.ts';
+import {patchShapeStyle,patchTextFrame,patchRetainedRunEffects,type ShapeStylePatch,type TextFramePatch,type RetainedRunEffectsPatch} from './retained-style.ts';
+export type {ShapeStylePatch,TextFramePatch,RetainedRunEffectsPatch} from './retained-style.ts';
 import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
 
 const PRESENTATION_NS = "http://schemas.openxmlformats.org/presentationml/2006/main";
@@ -318,6 +320,9 @@ export class Slide {
   setShapeAutofit(shapeId:number,mode:'shrink'|'none'|'resize'):{changed:number} {return this.editShapeText(xml=>setShapeAutofit(xml,shapeId,mode));}
   get hidden():boolean {this.assertNotesSlide();return slideVisibility(this.presentation.package.text(this.partName));}
   setHidden(hidden:boolean):{changed:number} {return this.editShapeText(xml=>patchSlideVisibility(xml,hidden));}
+  patchShapeStyle(shapeId:number,patch:ShapeStylePatch):{changed:number} {return this.editShapeText(xml=>patchShapeStyle(xml,shapeId,patch));}
+  patchTextFrame(shapeId:number,patch:TextFramePatch):{changed:number} {return this.editShapeText(xml=>patchTextFrame(xml,shapeId,patch));}
+  patchRetainedRunEffects(shapeId:number,paragraph:number,run:number,patch:RetainedRunEffectsPatch):{changed:number} {return this.editShapeText(xml=>patchRetainedRunEffects(xml,shapeId,paragraph,run,patch));}
   patchShapeGeometry(shapeId:number,patch:ShapeGeometryPatch):{changed:number} {return this.editShapeText(xml=>patchShapeGeometry(xml,shapeId,patch));}
   patchTextRun(shapeId:number,paragraph:number,run:number,patch:DirectTextRunPatch):{changed:number} {return this.editShapeText(xml=>patchTextRun(xml,shapeId,paragraph,run,patch));}
   patchParagraph(shapeId:number,paragraph:number,patch:DirectParagraphPatch):{changed:number} {return this.editShapeText(xml=>patchParagraph(xml,shapeId,paragraph,patch));}
