@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
+import {withoutPptxNext20} from './pptx-next20-identities.ts';
 import lexicalAlignment from '../../docs/behaviors/xml-lexical-alignment-candidate.json';
 import packageAlignment from '../../docs/behaviors/package-alignment-candidate.json';
 const added=['persistence','custody','no-op','refusal','rollback','plain-edit','author-refusal'].map(n=>'@id-docx-tracking-settings-'+n);
 const mergeIds=['roundtrip','content-refusal','structure-refusal','coordinate-refusal','rollback','encoding','stale'].map(n=>'@id-docx-horizontal-merge-'+n);
 /** Keep the v0.27 execution identities stable while checking each reviewed addition. */
 export function withoutTrackingToggle(keys:string[]):string[]{
+ keys=withoutPptxNext20(keys);
  assert.equal(keys.length,732);
  // Exact reviewed outline-row additions are reversed solely for this historical identity check.
  keys=keys.map(k=>packageAlignment.caseIdentityMigration.find(r=>r.after===k)?.before??k);

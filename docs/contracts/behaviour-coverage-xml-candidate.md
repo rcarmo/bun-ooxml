@@ -5,13 +5,14 @@ The shared reference contains **346 assets**. The table lists available tests; a
 | Scope | Scenarios | Cases | Implemented cases | Planned cases |
 |---|---:|---:|---:|---:|
 | Shared catalogue | 304 | 791 | 732 | 59 |
-| Local-only obligations | 0 | 0 | 0 | 0 |
-| Combined inventory | 304 | 791 | 732 | 59 |
+| Local-only obligations | 20 | 20 | 20 | 0 |
+| Combined inventory | 324 | 811 | 752 | 59 |
 
 The canonical denominator is **304 shared scenarios / 791 shared cases**. Local-only obligations are additional and are not included in that denominator. Unselected canonical features remain planned; inventory presence is not execution evidence.
 
 | Feature | Lifecycle | Scenarios | Expanded cases | Implemented cases | Planned cases | Steps |
 |---|---|---:|---:|---:|---:|---:|
+| features/pptx/manipulation-next20.feature | implemented | 20 | 20 | 20 | 0 | 100 |
 | references/fixtures-ooxml/workflows/docx/anchor-discovery.feature | mixed | 5 | 5 | 4 | 1 | 23 |
 | references/fixtures-ooxml/workflows/docx/comment-content-type.feature | planned | 1 | 1 | 0 | 1 | 4 |
 | references/fixtures-ooxml/workflows/docx/comments.feature | mixed | 21 | 46 | 37 | 9 | 210 |

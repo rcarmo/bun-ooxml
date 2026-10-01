@@ -13,7 +13,7 @@ describe("shared mutation inventory and custody",()=>{
     const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));
     expect(canonical).toHaveLength(8);
     const inventory=await inventoryFeatures(root);
-    expect(inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'))).toEqual([]);
+    const local=inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'));expect(local.map(f=>f.path)).toEqual(['features/pptx/manipulation-next20.feature']);expect(local[0]!.scenarios).toHaveLength(20);
     for(const path of canonical){
       const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);
       expect(shared).toHaveLength(1);

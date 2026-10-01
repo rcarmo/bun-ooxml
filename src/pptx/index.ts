@@ -8,6 +8,8 @@ export type {TextBoxGeometry,TextBoxOptions,TextBoxReceipt} from './text-box.ts'
 import { addPart, addRelationship, nextPartName } from "../opc/graph.ts";
 import { OpcPackage, relationshipPath, sameBytes, type Relationship } from "../opc/package.ts";
 import {permutation,reorderSlideList} from './slide-order.ts';
+import {inspectTextShapes,patchShapeText,appendShapeBullet,clearShapeText,setShapeAutofit,type TextShape} from './shape-text.ts';
+export type {TextShape} from './shape-text.ts';
 import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
 
 const PRESENTATION_NS = "http://schemas.openxmlformats.org/presentationml/2006/main";
@@ -247,6 +249,21 @@ export class Presentation {
     return slide;
   }
 
+  /** Insert an owned title slide at an exact zero-based position, atomically. */
+  insertTextSlide(index:number,title:string,subtitle?:string):Slide {
+    if(!Number.isInteger(index)||index<0||index>this.slideHandles.length)throw new OoxmlError('PPTX_ORDER_UNSUPPORTED','Insertion index must be within the current slide list');
+    this.assertOrderSnapshot();
+    // Reuse the existing custody guard before adding any part, even for append.
+    permutation(this.slideHandles.map((_,i)=>i),this.slideHandles.length);
+    reorderSlideList(this.package,this.mainPartName,this.slideHandles.map(s=>s.partName),this.slideHandles.map((_,i)=>i));
+    const handles=[...this.slideHandles],versions=new Map(this.slideVersions),snapshot=new Map(this.orderSnapshot);
+    try{return this.package.transaction(()=>{
+      const slide=this.addTextSlide(title,subtitle),last=this.slideHandles.length-1;
+      const order=handles.map((_,i)=>i);order.splice(index,0,last);
+      this.reorderSlides(order);return slide;
+    });}catch(error){this.slideHandles=handles;this.slideVersions.clear();for(const[k,v]of versions)this.slideVersions.set(k,v);this.orderSnapshot=snapshot;throw error;}
+  }
+
   async save(path: string): Promise<void> {
     await this.package.save(path);
   }
@@ -281,6 +298,22 @@ export class Slide {
     return collectSlideTables(this.presentation.package.text(this.partName), this.partName)
       .map((table, tableIndex) => new Table(this, tableIndex, version, table.shapeId));
   }
+
+  /** Detached direct text-shape values; IDs are used instead of fuzzy shape names. */
+  inspectTextShapes():TextShape[] {this.assertNotesSlide();return inspectTextShapes(this.presentation.package.text(this.partName));}
+
+  private editShapeText(operation:(xml:string)=>string):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package,main=pkg.mainPart();
+    if(elements(parseXml(pkg.text(main)),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses shape edits');
+    const before=pkg.text(this.partName),next=operation(before);
+    if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});
+    this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+  setShapeText(shapeId:number,text:string,append=false):{changed:number} {return this.editShapeText(xml=>patchShapeText(xml,shapeId,text,append));}
+  addBullet(shapeId:number,text:string,level=0,boldLabel?:string):{changed:number} {return this.editShapeText(xml=>appendShapeBullet(xml,shapeId,text,level,boldLabel));}
+  clearShapeText(shapeId:number):{changed:number} {return this.editShapeText(xml=>clearShapeText(xml,shapeId));}
+  setShapeAutofit(shapeId:number,mode:'shrink'|'none'|'resize'):{changed:number} {return this.editShapeText(xml=>setShapeAutofit(xml,shapeId,mode));}
 
   /** Append a slide-space text box. Newline sequences become separate paragraphs. */
   addTextBox(text: string, geometry: TextBoxGeometry, options: TextBoxOptions = {}): TextBoxReceipt {

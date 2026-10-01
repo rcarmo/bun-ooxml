@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1124,
-  "files": 143,
+  "count": 1135,
+  "files": 145,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -86,7 +86,7 @@
     },
     {
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "declarations": 14,
       "issues": []
     },
@@ -134,7 +134,7 @@
     },
     {
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "declarations": 8,
       "issues": []
     },
@@ -206,13 +206,13 @@
     },
     {
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "declarations": 12,
       "issues": []
     },
     {
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "declarations": 12,
       "issues": []
     },
@@ -272,7 +272,7 @@
     },
     {
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "declarations": 12,
       "issues": []
     },
@@ -290,7 +290,7 @@
     },
     {
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "declarations": 12,
       "issues": []
     },
@@ -302,7 +302,7 @@
     },
     {
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "declarations": 14,
       "issues": []
     },
@@ -457,6 +457,12 @@
       "issues": []
     },
     {
+      "path": "tests/unit/pptx-next20-bindings.test.ts",
+      "sha256": "b49a3e0330058d3b0a7568ffca249f2221e7c459a79c2d259ea807cbaf6beb75",
+      "declarations": 3,
+      "issues": []
+    },
+    {
       "path": "tests/unit/pptx-notes-edit.test.ts",
       "sha256": "5ff23ff0307da42b6d404538ab89188070f1b52a14219d3ca48c94a111e09832",
       "declarations": 14,
@@ -484,6 +490,12 @@
       "path": "tests/unit/pptx-retained-visibility.test.ts",
       "sha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b",
       "declarations": 3,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "declarations": 8,
       "issues": []
     },
     {
@@ -560,13 +572,13 @@
     },
     {
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069",
+      "sha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6",
       "declarations": 5,
       "issues": []
     },
     {
       "path": "tests/unit/shared-contracts.test.ts",
-      "sha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "sha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "declarations": 5,
       "issues": []
     },
@@ -1007,6 +1019,10 @@
       "sha256": "d3814ec9b812385a1a6894e239cb5cdee6f46bed16eefe30c1d2e193472f4425"
     },
     {
+      "path": "tests/acceptance/pptx-next20.ts",
+      "sha256": "ffe8ef184fb974aacc13abb932485b2166cd45b94a6fda9ac43718a47ce425a3"
+    },
+    {
       "path": "tests/acceptance/pptx.ts",
       "sha256": "7e4ab7286825d0a5aeb3cda3284bb1afa39e6a9986eca45d4432ad3eaab31e1f"
     },
@@ -1064,7 +1080,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "1abe6611facdba49b7a2432ecc01012ed1b0601ae75ba9beb1e889264366a1e7"
+      "sha256": "00b42ee5a12977d52155c5f1036f2f4a93fc42ed86614ac3d54e49976f2e0737"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -1196,7 +1212,11 @@
     },
     {
       "path": "tests/helpers/execution-baseline.ts",
-      "sha256": "18af1ffbbc86496d27d96bc774d95d9d046c6e24edd2b16779dfabe6a0e90307"
+      "sha256": "8ef7500ab65d9ccbd855a3d364129a35441061617f427f054c1ecacd36a97052"
+    },
+    {
+      "path": "tests/helpers/pptx-next20-identities.ts",
+      "sha256": "e6b4934218406ff6125f385f3c39a741317245f5d7be6fac956fda1a75f4314e"
     },
     {
       "path": "tests/helpers/shared-scenarios.ts",
@@ -1511,6 +1531,8 @@
     "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
     "bun:tests/unit/pptx-custody-bindings.test.ts:PPTX custody predicates reject changed byte-opened, saved and reopened archives",
     "bun:tests/unit/pptx-custody-bindings.test.ts:PPTX custody temporary destination is removed on both successful and failed saves",
+    "bun:tests/unit/pptx-next20-bindings.test.ts:twenty source capture identities and their immutable feature bytes remain separate from local execution credit",
+    "bun:tests/unit/pptx-next20-bindings.test.ts:restored paragraph and custody predicates reject lost production edits and false caller copies",
     "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
     "bun:tests/unit/pptx-notes-edit.test.ts:foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
     "bun:tests/unit/pptx-notes-edit.test.ts:direct notes mutation and relationship mutation invalidate captured targets",
@@ -1531,6 +1553,10 @@
     "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
     "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
     "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:bullet levels and label flags are exact, invalid arguments refuse atomically without anchor version change",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:aliases preserve custody, rich fields/comments/duplicate IDs and text locks refuse before a replacement result",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:positioned insertion preserves held slide identities, handles empty decks and rolls back all parts/metadata on serialization fault",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:shape edit retains UTF16 BOM/declaration and source archive, only one decoded payload changes",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -1993,6 +2019,8 @@
     "bun:tests/unit/pptx-custody-bindings.test.ts:wrong first paragraph expectation fails the bound PPTX custody assertion",
     "bun:tests/unit/pptx-custody-bindings.test.ts:PPTX custody predicates reject changed byte-opened, saved and reopened archives",
     "bun:tests/unit/pptx-custody-bindings.test.ts:PPTX custody temporary destination is removed on both successful and failed saves",
+    "bun:tests/unit/pptx-next20-bindings.test.ts:twenty source capture identities and their immutable feature bytes remain separate from local execution credit",
+    "bun:tests/unit/pptx-next20-bindings.test.ts:restored paragraph and custody predicates reject lost production edits and false caller copies",
     "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
     "bun:tests/unit/pptx-notes-edit.test.ts:foreign, invalid and forged targets refuse atomically; exact no-op preserves bytes and target",
     "bun:tests/unit/pptx-notes-edit.test.ts:direct notes mutation and relationship mutation invalidate captured targets",
@@ -2013,6 +2041,10 @@
     "bun:tests/unit/pptx-notes-utf8.test.ts:late protection and unsupported notes topology refuse byte no-ops without destructive repair",
     "bun:tests/unit/pptx-notes-utf8.test.ts:compound notes assertions detect each missing refusal, wrong decoding error and changed archive",
     "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:bullet levels and label flags are exact, invalid arguments refuse atomically without anchor version change",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:aliases preserve custody, rich fields/comments/duplicate IDs and text locks refuse before a replacement result",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:positioned insertion preserves held slide identities, handles empty decks and rolls back all parts/metadata on serialization fault",
+    "bun:tests/unit/pptx-shape-text-native.test.ts:shape edit retains UTF16 BOM/declaration and source archive, only one decoded payload changes",
     "bun:tests/unit/pptx-slide-order.test.ts:UTF16 LE/BE presentation metadata preserves BOM and all other payloads",
     "bun:tests/unit/pptx-slide-order.test.ts:slide entries retain exact quote spelling, local aliases and whitespace slots",
     "bun:tests/unit/pptx-slide-order.test.ts:permutations reject sparse/getter/nonarray/extended data without invoking getters",
@@ -6120,7 +6152,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture(),before=p.toBytes(),r=inspectCommentThreads(p);expect(r.unsupported).toEqual([]);expect(r.threads.map(t=>[t.root.id,t.replies.map(c=>c.id)])).toEqual([['0',[]],['1',['2']]]);expect(r.threads[1]!.root.text).toBe('Classical hubris');expect(r.threads[1]!.replies[0]!.text).toBe('(this is a threaded reply)');expect(r.threads[1]!.replies[0]!.parentId).toBe('1');for(const v of [r,r.threads,r.threads[0],r.threads[1]!.root,r.threads[1]!.replies,r.threads[1]!.replies[0],r.unsupported])expect(Object.isFrozen(v)).toBe(true);expect(p.toBytes()).toEqual(before);setCommentResolved(p,'1',true);expect(r.threads[1]!.root.resolved).toBe(false);expect(inspectCommentThreads(p).threads[1]!.root.resolved).toBe(true);\n}",
       "calls": [
         "Object.isFrozen",
@@ -6171,7 +6203,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture(),before=await OpcPackage.open(p.toBytes());expect(setCommentThreadResolved(p,'02',true)).toEqual({rootId:'1',commentIds:['1','2'],changed:2,changedParts:[EX]});expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',true,'1']]);expect(p.text(C)).toBe(before.text(C));expect(p.text(p.mainPart())).toBe(before.text(before.mainPart()));expect(p.names()).toEqual(before.names());for(const n of before.names())if(n!==EX)expect(p.get(n)).toEqual(before.get(n));\n const dir=await mkdtemp(join(tmpdir(),'comment-thread-'));try{const file=join(dir,'resolved.docx');await p.save(file);const read=await OpcPackage.open(file);expect(states(read)).toEqual(states(p));expect(inspectCommentThreads(read).threads[1]!.replies).toHaveLength(1);expect(setCommentThreadResolved(read,'1',false)).toEqual({rootId:'1',commentIds:['1','2'],changed:2,changedParts:[EX]});await read.save(file);const reopened=await OpcPackage.open(file);for(const n of before.names())expect(reopened.get(n)).toEqual(before.get(n));}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "OpcPackage.open",
@@ -6224,7 +6256,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture();setCommentResolved(p,'1',true);expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',false,'1']]);expect(setCommentThreadResolved(p,'2',true).changed).toBe(1);const before=p.toBytes();expect(setCommentThreadResolved(p,'1',true)).toEqual({rootId:'1',commentIds:['1','2'],changed:0,changedParts:[]});expect(p.toBytes()).toEqual(before);expect(setCommentThreadResolved(p,'0',true).commentIds).toEqual(['0']);expect(states(p)).toEqual([['0',true,null],['1',true,null],['2',true,'1']]);\n}",
       "calls": [
         "commentFixture",
@@ -6256,7 +6288,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await nested();const source=p.text(EX),entries=[...source.matchAll(/<w15:commentEx\\b[^>]*\\/>/g)].map(m=>m[0]);p.set(EX,source.replace(/<w15:commentEx\\b[^>]*\\/>/g,'').replace('</w15:commentsEx>',entries.reverse().join('')+'</w15:commentsEx>'));const before=p.text(C);expect(inspectCommentThreads(p).threads.map(t=>[t.root.id,t.replies.map(r=>[r.id,r.parentId])])).toEqual([['0',[]],['1',[['2','1'],['3','2']]]]);expect(setCommentThreadResolved(p,'3',true)).toEqual({rootId:'1',commentIds:['1','2','3'],changed:3,changedParts:[EX]});expect(states(p)).toEqual([['0',false,null],['1',true,null],['2',true,'1'],['3',true,'2']]);expect(p.text(C)).toBe(before);\n}",
       "calls": [
         ".map",
@@ -6296,7 +6328,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture();p.set(EX,p.text(EX).replace(/<w15:commentEx\\b[^>]*w15:paraId=\"3395B541\"[^>]*\\/>/,''));const before=p.toBytes();expect(()=>setCommentThreadResolved(p,'2',false)).toThrow(expect.objectContaining({code:'docx-comments-missing-extension'}));expect(p.toBytes()).toEqual(before);expect(inspectCommentThreads(p).threads[1]!.root.id).toBe('1');\n}",
       "calls": [
         "commentFixture",
@@ -6340,7 +6372,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture(),before=p.toBytes();for(const [id,value]of [[null,true],['',true],['-1',true],['1.5',true],['9007199254740992',true],['99',true],['1','true']]){expect(()=>setCommentThreadResolved(p,id as string,value as boolean)).toThrow();expect(p.toBytes()).toEqual(before);}\n for(const kind of ['missing-extension','duplicate-id','duplicate-para','missing-parent','cycle','invalid-done','wrong-mime','external-link','protected','revision-body','orphan-entry']){const p=await commentFixture(kind),before=p.toBytes();expect(()=>setCommentThreadResolved(p,'2',false)).toThrow();expect(p.toBytes()).toEqual(before);}\n}",
       "calls": [
         "commentFixture",
@@ -6373,7 +6405,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture('revision-body'),before=p.toBytes(),r=inspectCommentThreads(p);expect(r.threads).toHaveLength(2);expect(r.unsupported.length).toBeGreaterThan(0);expect(Object.isFrozen(r.unsupported[0])).toBe(true);expect(()=>setCommentThreadResolved(p,'2',true)).toThrow(expect.objectContaining({code:'docx-comments-unsupported'}));expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "Object.isFrozen",
@@ -6414,7 +6446,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n for(const stage of ['set','toBytes'] as const){const p=await nested();p.set(p.mainPart(),p.text(p.mainPart()).replace('</w:body>','<w:p><w:r><w:t>Prior</w:t></w:r></w:p></w:body>'));const before=p.toBytes(),original=p[stage].bind(p);let reached=false;if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);reached=true;throw Error('injected write');};else p.toBytes=()=>{reached=true;throw Error('injected serialization');};try{expect(()=>setCommentThreadResolved(p,'3',true)).toThrow('injected');expect(reached).toBe(true);}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(p.toBytes()).toEqual(before);expect(states(p)).toEqual([['0',false,null],['1',false,null],['2',false,'1'],['3',false,'2']]);}\n}",
       "calls": [
         "Error",
@@ -6469,7 +6501,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n for(const encoding of ['bom','le','be']){const p=await nested();let x=p.text(EX).replaceAll('w15:','q:').replace('xmlns:w15=','xmlns:q=').replace('q:done=\"0\"',\"q:done = 'false'\");if(encoding==='bom')p.set(EX,new Uint8Array([239,187,191,...new TextEncoder().encode(x)]));else{x=x.replace('UTF-8','UTF-16');const b=new Uint8Array(2+x.length*2);b.set(encoding==='le'?[255,254]:[254,255]);const v=new DataView(b.buffer);for(let i=0;i<x.length;i++)v.setUint16(2+2*i,x.charCodeAt(i),encoding==='le');p.set(EX,b);}const before=await OpcPackage.open(p.toBytes());expect(setCommentThreadResolved(p,'3',true).changed).toBe(3);const read=await OpcPackage.open(p.toBytes());expect(states(read).map(s=>s[1])).toEqual([false,true,true,true]);expect([...read.get(EX)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);expect(read.text(EX)).toContain(\"q:done = 'false'\");for(const n of before.names())if(n!==EX)expect(read.get(n)).toEqual(before.get(n));}\n}",
       "calls": [
         ".encode",
@@ -6519,7 +6551,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture(),bytes=p.get(EX)!;p.set(EX,new Uint8Array([239,187,191,...bytes]));setCommentResolved(p,'1',true);expect([...p.get(EX)!.slice(0,3)]).toEqual([239,187,191]);const {Document}=await import('../../src/index.ts'),empty=await OpcPackage.open(Document.create().package.toBytes()),before=empty.toBytes();expect(inspectCommentThreads(empty)).toEqual({threads:[],unsupported:[]});expect(empty.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.create",
@@ -6556,7 +6588,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await nested(),source=p.text(C),chunks=[...source.matchAll(/<w:comment\\b[^]*?<\\/w:comment>/g)].map(m=>m[0]);expect(chunks).toHaveLength(4);p.set(C,source.replace(/<w:comment\\b[^]*?<\\/w:comment>/g,'').replace('</w:comments>',[chunks[3],chunks[2],chunks[0],chunks[1]].join('')+'</w:comments>'));const before=p.toBytes(),r=inspectCommentThreads(p);expect(r.threads.map(t=>[t.root.id,t.replies.map(c=>c.id)])).toEqual([['0',[]],['1',['3','2']]]);expect(p.toBytes()).toEqual(before);expect(setCommentThreadResolved(p,'3',true).commentIds).toEqual(['3','2','1']);expect(inspectComments(p).comments.map(c=>[c.id,c.resolved])).toEqual([['3',true],['2',true],['0',false],['1',true]]);\n}",
       "calls": [
         ".join",
@@ -6597,7 +6629,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await nested(),before=p.text(EX);let source=before.replace('w15:done=\"0\"','w15:done = \\'off\\'');source=source.replace('w15:paraId=\"3395B541\" w15:done=\"0\"','w15:paraId=\"3395B541\" w15:done=\"&#48;\"');source=source.replace('w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\" w15:done=\"0\"','w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\"');p.set(EX,source);expect(setCommentThreadResolved(p,'2',true).changed).toBe(3);let expected=source.replace('w15:done=\"&#48;\"','w15:done=\"1\"').replace('w15:paraId=\"0E00AF3F\" w15:paraIdParent=\"3395B541\" w15:done=\"0\"','w15:paraId=\"0E00AF3F\" w15:paraIdParent=\"3395B541\" w15:done=\"1\"').replace('w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\"/>','w15:paraId=\"12345678\" w15:paraIdParent=\"0E00AF3F\" w15:done=\"1\"/>');expect(p.text(EX)).toBe(expected);expect(p.text(EX)).toContain(\"w15:done = 'off'\");\n}",
       "calls": [
         "before.replace",
@@ -6631,7 +6663,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
       "body": "{\n const p=await commentFixture();p.set(C,`<w:comments xmlns:w=\"${W}\">${Array.from({length:10001},(_,id)=>`<w:comment w:id=\"${id}\"><w:p/></w:comment>`).join('')}</w:comments>`);p.delete(EX);const rel='word/_rels/document.xml.rels';p.set(rel,p.text(rel).replace(/<Relationship\\b[^>]*Type=\"[^\"]*\\/commentsExtended\"[^>]*\\/>/,''));const before=p.toBytes();expect(()=>inspectCommentThreads(p)).toThrow(expect.objectContaining({code:'docx-comments-limit'}));expect(()=>setCommentThreadResolved(p,'0',false)).toThrow(expect.objectContaining({code:'docx-comments-limit'}));expect(p.toBytes()).toEqual(before);\n}",
       "calls": [
         "Array.from",
@@ -6669,8 +6701,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa",
-      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -10724,7 +10756,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "body": "{\n for(let level=1;level<=9;level++){const d=await styled('Heading'+level),p=d.paragraphs[0]!,before=d.package.toBytes();expect(p.styleId).toBe('Heading'+level);expect(p.isHeading).toBe(true);expect(p.headingLevel).toBe(level);expect(d.package.toBytes()).toEqual(before);expect(p.text).toBe('Heading text');}\n}",
       "calls": [
         "d.package.toBytes",
@@ -10760,7 +10792,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "body": "{\n for(const id of [null,'Normal','Title','heading1','HEADING1','Heading0','Heading10','Heading01','Heading1Suffix','Heading 1','CustomHeading']){const d=await styled(id),before=d.package.toBytes(),p=d.paragraphs[0]!;expect(p.styleId).toBe(id??undefined);expect(p.isHeading).toBe(false);expect(p.headingLevel).toBe(0);expect(d.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "d.package.toBytes",
@@ -10793,7 +10825,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "body": "{\n const d=Document.create();d.addParagraphStyle('Heading1',{name:'First heading'});d.addParagraphStyle('Custom',{name:'Heading 1',basedOn:'Heading1'});d.addParagraph('Custom paragraph',{style:'Custom'}).setProperties({outlineLevel:0});\n let p=d.paragraphs[0]!;expect(p.headingLevel).toBe(0);expect(p.isHeading).toBe(false);expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('section_heading');\n p.setStyle('Heading1');p=d.paragraphs[0]!;p.setProperties({outlineLevel:9});p=d.paragraphs[0]!;expect(p.headingLevel).toBe(1);expect(p.isHeading).toBe(true);expect(d.inspectBodyAnchors('Custom')[0]!.type).toBe('paragraph');\n}",
       "calls": [
         "Document.create",
@@ -10832,7 +10864,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "body": "{\n const d=await styled('Heading9'),before=d.package.parts,dir=await mkdtemp(join(tmpdir(),'heading-classification-'));try{const path=join(dir,'heading.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs[0]!.headingLevel).toBe(9);expect(read.paragraphs[0]!.isHeading).toBe(true);expect(read.paragraphs[0]!.styleId).toBe('Heading9');expect(read.paragraphs[0]!.text).toBe('Heading text');for(const[n,b]of before)expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "Document.open",
@@ -10871,7 +10903,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "body": "{\n const d=await styled('Heading1'),held=d.paragraphs[0]!;held.setStyle(null);expect(()=>held.headingLevel).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}));expect(()=>held.isHeading).toThrow(expect.objectContaining({code:'docx-stale-paragraph'}));expect(d.paragraphs[0]!.headingLevel).toBe(0);\n const fresh=d.paragraphs[0]!,before=new TextDecoder().decode(d.package.get('word/document.xml'));d.package.setPart('word/document.xml',new TextEncoder().encode(before.replace('Heading text','External text')));const bytes=d.package.toBytes();expect(()=>fresh.isHeading).toThrow();expect(()=>fresh.headingLevel).toThrow();expect(d.package.toBytes()).toEqual(bytes);\n}",
       "calls": [
         ".decode",
@@ -10914,7 +10946,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "body": "{\n const d=Document.create();d.addParagraph('Imported');const base=await OpcPackage.open(d.package.toBytes());\n for(const metadata of ['<w:pStyle w:val=\"Heading3\"/>','<w:pStyle w:val=\"Heading1\"/><w:pStyle w:val=\"Heading2\"/>','<w:pStyle val=\"Heading1\"/>']){const p=await OpcPackage.open(base.toBytes());p.set(p.mainPart(),p.text(p.mainPart()).replace(/<w:p(?:\\s[^>]*)?>/,open=>open+'<w:pPr>'+metadata+'</w:pPr>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();if(metadata.includes('Heading3')){expect(loaded.paragraphs[0]!.headingLevel).toBe(3);expect(loaded.paragraphs[0]!.isHeading).toBe(true);}else{expect(()=>loaded.paragraphs[0]!.headingLevel).toThrow();expect(()=>loaded.paragraphs[0]!.isHeading).toThrow();}expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.create",
@@ -10961,7 +10993,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
       "body": "{\n const d=await styled('Heading2'),p=await OpcPackage.open(d.package.toBytes());const text=p.text(p.mainPart()).replaceAll('w:','q:').replace('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16');const bytes=new Uint8Array(2+text.length*2);bytes.set([255,254]);const v=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)v.setUint16(2+i*2,text.charCodeAt(i),true);p.set(p.mainPart(),bytes);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(loaded.paragraphs[0]!.headingLevel).toBe(2);expect(loaded.paragraphs[0]!.isHeading).toBe(true);expect(loaded.package.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.open",
@@ -11011,8 +11043,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c",
-      "body": "{\n const d=await styled('Heading1'),held=d.paragraphs[0]!,before=d.package.toBytes();expect(()=>held.setStyle('')).toThrow(expect.objectContaining({code:'docx-style-argument'}));expect(d.package.toBytes()).toEqual(before);expect(held.headingLevel).toBe(1);held.setStyle(null);const p=d.paragraphs[0]!;expect(p.styleId).toBeUndefined();expect(p.isHeading).toBe(false);expect(p.headingLevel).toBe(0);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),profile=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-paragraph-style-getters')!;expect(profile.lifecycle).toBe('planned');expect(profile.cases).toHaveLength(5);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955",
+      "body": "{\n const d=await styled('Heading1'),held=d.paragraphs[0]!,before=d.package.toBytes();expect(()=>held.setStyle('')).toThrow(expect.objectContaining({code:'docx-style-argument'}));expect(d.package.toBytes()).toEqual(before);expect(held.headingLevel).toBe(1);held.setStyle(null);const p=d.paragraphs[0]!;expect(p.styleId).toBeUndefined();expect(p.isHeading).toBe(false);expect(p.headingLevel).toBe(0);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),profile=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-paragraph-style-getters')!;expect(profile.lifecycle).toBe('planned');expect(profile.cases).toHaveLength(5);inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
       "calls": [
         "d.package.toBytes",
         "expect",
@@ -15942,7 +15974,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{for(const a of ['accept','reject'] as const){const {p,parts}=await input(),source=p.toBytes(),base=await OpcPackage.open(source),r=inspect(p);expect(r.unsupported).toEqual([]);expect(r.revisions).toHaveLength(35);expect(r.revisions.filter(r=>r.kind==='move-from'||r.kind==='move-to')).toEqual(parts.flatMap(part=>[{part,id:'101',kind:'move-from',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'},{part,id:'103',kind:'move-to',author:'Reviewer',date:'2026-09-27T00:00:00Z',text:'Moved text'}]));expect(p.toBytes()).toEqual(source);const dir=await mkdtemp(join(tmpdir(),'move-review-'));try{const src=join(dir,'source.docx'),out=join(dir,'output.docx');await Bun.write(src,source);expect(resolve(p,a)).toEqual({resolved:35,changedParts:parts});await p.save(out);const read=await OpcPackage.open(out);for(const part of parts){expect(read.text(part)).toBe(expected(base.text(part),a));expect(read.get(part)).toEqual(new TextEncoder().encode(expected(base.text(part),a)));}await custody(read,base,parts);expect(inspect(read)).toEqual({revisions:[],unsupported:[]});expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source));const now=read.toBytes();expect(resolve(read,a)).toEqual({resolved:0,changedParts:[]});expect(read.toBytes()).toEqual(now);}finally{await rm(dir,{recursive:true,force:true});}}}",
       "calls": [
         ".encode",
@@ -16002,7 +16034,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{const {p}=await input();p.set('word/footer2.xml',p.text('word/footer2.xml').replace('w:name=\"move-one\"','w:name=\"unpaired\"'));const before=p.toBytes(),base=await OpcPackage.open(before);for(const profile of ['text-only','text-and-run-properties'] as const){expect(inspectRevisions(p,{profile}).unsupported.some(f=>f.kind==='move')).toBe(true);expect(()=>resolveRevisions(p,'accept',{profile})).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);}expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:5,changedParts:['word/header1.xml']});await custody(p,base,['word/header1.xml']);expect(inspect(p).revisions.filter(r=>r.part===p.mainPart())).toHaveLength(5);expect(inspect(p).unsupported.some(f=>f.part==='word/footer2.xml')).toBe(true);}",
       "calls": [
         "OpcPackage.open",
@@ -16058,7 +16090,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{const defects:[string,(s:string)=>string][]=[\n['missing-end',s=>s.replace('<w:moveFromRangeEnd w:id=\"100\"/>','')],['missing-to',s=>s.replace(to,'')],['duplicate-name',s=>s.replace(to,to+to.replaceAll('102','104').replaceAll('103','105'))],['duplicate-range-id',s=>s.replaceAll('102','100')],['duplicate-wrapper-id',s=>s.replace('w:id=\"103\"','w:id=\"101\"')],['text-id-collision',s=>s.replace('w:id=\"101\"','w:id=\"3\"')],['range-text-id-collision',s=>s.replaceAll('100','3')],['wrong-wrapper',s=>s.replace(from,from.replaceAll('w:moveFrom w:','w:moveTo w:').replace('</w:moveFrom>','</w:moveTo>'))],['nested-ranges',s=>s.replace(from,from.replace('</w:moveFrom>',to+'</w:moveFrom>'))],['unmatched-wrapper',s=>s.replace(to,to+`<w:moveFrom w:id=\"190\"${meta}>${runs}</w:moveFrom>`)],['mismatched-text',s=>s.replace(to,to.replace('>text<','>changed<'))],['mismatched-properties',s=>s.replace(to,to.replace('<w:b/>','<w:i/>'))],['mixed',s=>s.replace(from,from.replace('<w:moveFrom w:', 'UNOWNED<w:moveFrom w:'))],['nested-revision',s=>s.replace(from,from.replace('<w:r>',`<w:ins w:id=\"150\"${meta}><w:r>`).replace('</w:r>','</w:r></w:ins>'))],['unknown-property',s=>s.replace(from,from.replace('<w:b/>','<w:glow/>'))],['paragraph-mark',s=>s.replace(from,'<w:pPr>'+from+'</w:pPr>')],['missing-author',s=>s.replace(from,from.replace(' w:author=\"Reviewer\"',''))],['decorated-marker',s=>s.replace('w:name=\"move-one\"','w:name=\"move-one\" w:colFirst=\"0\"')],['foreign',s=>s.replace(from,from.replace('<w:t xml:','<q:t xmlns:q=\"urn:other\" xml:').replace('</w:t>','</q:t>'))],['empty-name',s=>s.replaceAll('w:name=\"move-one\"','w:name=\"\"')],['range-content',s=>s.replace('<w:moveFromRangeEnd w:id=\"100\"/>','<w:moveFromRangeEnd w:id=\"100\">bad</w:moveFromRangeEnd>')],\n];for(const [name,change]of defects)for(const a of ['accept','reject'] as const){const {p}=await input(),part='word/header1.xml',old=p.text(part),xml=change(old);expect(xml,name).not.toBe(old);p.set(part,xml);const before=p.toBytes();expect(inspect(p).unsupported.some(f=>f.part===part),name).toBe(true);expect(()=>resolve(p,a),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes(),name).toEqual(before);}}",
       "calls": [
         "change",
@@ -16108,7 +16140,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{const {p}=await input();p.set(p.mainPart(),p.text(p.mainPart()).replace(to,''));p.set('word/header1.xml',p.text('word/header1.xml').replace(from,''));const before=p.toBytes();expect(()=>resolve(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);const {p:q}=await input(),part=q.mainPart();q.set(part,q.text(part).replace(from,'FROMTEMP').replace(to,from).replace('FROMTEMP',to));expect(inspect(q).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['103','101']);const xml=q.text(part);expect(resolve(q,'accept',[part]).resolved).toBe(5);expect(q.text(part)).toBe(expected(xml,'accept'));}",
       "calls": [
         "expect",
@@ -16160,7 +16192,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{for(const stage of ['write','serialize','validation']){const {p}=await input();p.set(p.mainPart(),p.text(p.mainPart()).replace('</w:body>','<w:p><w:r><w:t>Prior</w:t></w:r></w:p></w:body>'));const before=p.toBytes(),set=p.set.bind(p),serialize=p.toBytes.bind(p);let reached=false;if(stage==='serialize')p.toBytes=()=>{reached=true;throw Error('injected serialize');};else p.set=(n,v)=>{set(n,v);if(n==='word/header1.xml'){reached=true;if(stage==='write')throw Error('injected write');set(n,p.text(n).replace('</w:p>',from+to+'</w:p>'));}};try{expect(()=>resolve(p,'reject')).toThrow();expect(reached).toBe(true);}finally{p.set=set;p.toBytes=serialize;}expect(p.toBytes()).toEqual(before);expect(inspect(p).revisions).toHaveLength(35);}}",
       "calls": [
         "Error",
@@ -16206,7 +16238,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{for(const guard of ['protected','external']){const {p}=await input();resolve(p,'accept');if(guard==='external')addRelationship(p,p.mainPart(),REL+'settings','https://example.invalid/settings',{external:true});else{p.set('word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),REL+'settings','settings.xml');}const before=p.toBytes();expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}));expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "addRelationship",
@@ -16256,7 +16288,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{for(const encoding of ['bom','le','be'])for(const action of ['accept','reject'] as const){const {p}=await input(),part=p.mainPart(),aliased=runs.replaceAll('w:','q:'),fromAlias=from.replace(`<w:moveFrom w:id=\"101\"${meta}>${runs}`,`<w:moveFrom xmlns:q=\"${W}\" w:id=\"101\"${meta}>${aliased}`),toAlias=to.replace(`<w:moveTo w:id=\"103\"${meta}>${runs}`,`<w:moveTo xmlns:q=\"${W}\" w:id=\"103\"${meta}>${aliased}`);let xml=p.text(part).replace(from,fromAlias).replace(to,toAlias);if(encoding!=='bom')xml=xml.replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"');const bytes=new Uint8Array((encoding==='bom'?3:2)+(encoding==='bom'?new TextEncoder().encode(xml).length:xml.length*2));bytes.set(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);if(encoding==='bom')bytes.set(new TextEncoder().encode(xml),3);else{const view=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),encoding==='le');}p.set(part,bytes);const base=await OpcPackage.open(p.toBytes()),dir=await mkdtemp(join(tmpdir(),'move-encoding-'));try{const src=join(dir,'source.docx'),out=join(dir,'output.docx');await p.save(src);const source=await Bun.file(src).bytes();expect(resolve(p,action,[part])).toEqual({resolved:5,changedParts:[part]});await p.save(out);const read=await OpcPackage.open(out),lifted=aliased.replaceAll('<q:r>',`<q:r xmlns:q=\"${W}\">`),wanted=expected(xml.replace(fromAlias,from).replace(toAlias,to),action).replace(runs,lifted);expect(read.text(part)).toBe(wanted);expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);const moved=elements(parseXml(read.text(part)),'t',W).filter(e=>e.text==='Moved '||e.text==='text');expect(moved.map(t=>[t.namespaceURI,t.text])).toEqual([[W,'Moved '],[W,'text']]);await custody(read,base,[part]);expect(await Bun.file(src).bytes()).toEqual(source);}finally{await rm(dir,{recursive:true,force:true});}}}",
       "calls": [
         ".encode",
@@ -16320,7 +16352,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{const {p}=await input(),part=p.mainPart(),from2=from.replaceAll('move-one','move-two').replaceAll('100','200').replaceAll('101','201'),to2=to.replaceAll('move-one','move-two').replaceAll('102','202').replaceAll('103','203');p.set(part,p.text(part).replace('</w:body>','<w:p>'+to2+'</w:p><w:p>'+from2+'</w:p></w:body>'));const old=p.text(part);expect(inspect(p).revisions.filter(r=>r.part===part&&r.kind.startsWith('move')).map(r=>r.id)).toEqual(['101','103','203','201']);expect(resolve(p,'reject',[part])).toEqual({resolved:7,changedParts:[part]});expect(p.text(part)).toBe(expected(old,'reject').replace(from2,runs).replace(to2,''));}",
       "calls": [
         "expect",
@@ -16369,7 +16401,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{const faults=[(s:string)=>s.replace(from,from.replace('<w:moveFrom w:',`<w:moveFrom xmlns:q=\"${W}\" w:`).replace('<w:r>','<w:r xmlns:q=\"urn:shadow\">')),(s:string)=>s.replace(from,from.replace('<w:r>','<w:r w:rsidR=\"12345678\">')),(s:string)=>s.replace(from,from.replace('xml:space=\"preserve\"','xml:space=\"invalid\"')),(s:string)=>s.replace(from,from.replace('<w:moveFromRangeEnd','</w:p><w:p><w:moveFromRangeEnd')),(s:string)=>s.replace(from,from.replace('>Moved <','><![CDATA[Moved ]]><'))];for(const fault of faults){const {p}=await input(),part=p.mainPart();p.set(part,fault(p.text(part)));const before=p.toBytes();expect(()=>resolve(p,'reject',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "expect",
@@ -16414,7 +16446,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{const {p}=await input(),part=p.mainPart(),aliased=runs.replaceAll('w:','q:');p.set(part,p.text(part).replace(to,to.replace(`<w:moveTo w:id=\"103\"${meta}>${runs}`,`<w:moveTo xmlns:q=\"${W}\" w:id=\"103\"${meta}>${aliased}`)));expect(inspect(p).unsupported).toEqual([]);expect(resolve(p,'accept',[part]).resolved).toBe(5);for(const altered of [runs.replace('<w:b/>','<w:b w:val=\"0\"/>'),'<w:r><w:t>Moved text</w:t></w:r>',runs.replace('Moved ','Different ')]){const q=(await input()).p;q.set(part,q.text(part).replace(to,to.replace(runs,altered)));const before=q.toBytes();expect(()=>resolve(q,'accept',[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(before);}}",
       "calls": [
         "expect",
@@ -16471,7 +16503,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
       "body": "{for(const mutate of [(s:string)=>s.replace(' w:date=\"2026-09-27T00:00:00Z\"',''),(s:string)=>s.replace('w:date=\"2026-09-27T00:00:00Z\"','date=\"2026-09-27T00:00:00Z\"'),(s:string)=>s.replaceAll('2026-09-27T00:00:00Z','not-a-date'),(s:string)=>s.replaceAll('2026-09-27T00:00:00Z','2026-02-30T00:00:00Z')])for(const side of [from,to])for(const action of ['accept','reject'] as const){const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace(side,mutate(side)));const before=p.toBytes();expect(()=>resolve(p,action,[part])).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);}const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace('<w:moveFrom w:id=\"101\"'+meta+'>','<w:moveFrom w:id=\"101\" w:author=\"Reviewer\">'));expect(resolve(p,'reject',[part]).resolved).toBe(5);}",
       "calls": [
         "expect",
@@ -16513,8 +16545,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802",
-      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40",
+      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -16562,7 +16594,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{for(const action of ['accept','reject'] as const){const {p,stories}=await input(),source=p.toBytes(),baseline=await OpcPackage.open(source),report=inspect(p);expect(report.unsupported).toEqual([]);expect(report.revisions).toHaveLength(21);expect(report.revisions.filter(r=>r.kind==='run-properties').map(r=>[r.part,r.id,r.author,r.text])).toEqual(stories.map(part=>[part,'80','Editor','Stable']));expect(p.toBytes()).toEqual(source);const dir=await mkdtemp(join(tmpdir(),'property-review-'));try{const src=join(dir,'source.docx'),out=join(dir,'output.docx');await Bun.write(src,source);const receipt=resolve(p,action);expect(receipt).toEqual({resolved:21,changedParts:stories});await p.save(out);const read=await OpcPackage.open(out);expect(inspect(read)).toEqual({revisions:[],unsupported:[]});for(const part of stories){const original=baseline.text(part),xml=read.text(part);expect(xml).toContain(action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>');const noProps=await OpcPackage.open(source);noProps.set(part,original.replace(properties,action==='accept'?'<w:rPr>'+current+'</w:rPr>':'<w:rPr>'+previous+'</w:rPr>'));resolveRevisions(noProps,action,{parts:[part]});expect(xml).toBe(noProps.text(part));expect(elements(parseXml(xml),'t',W).map(t=>t.text).join('')).toContain(action==='accept'?'modernized.':'historic.');expect(xml).not.toContain('rPrChange');}await bytesEqual(read,baseline,stories);expect(await Bun.file(src).bytes()).toEqual(Uint8Array.from(source));const before=read.toBytes();expect(resolve(read,action)).toEqual({resolved:0,changedParts:[]});expect(read.toBytes()).toEqual(before);}finally{await rm(dir,{recursive:true,force:true});}}}",
       "calls": [
         "Bun.file",
@@ -16625,7 +16657,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{const {p,stories}=await input(),before=p.toBytes(),base=await OpcPackage.open(before);expect(inspectRevisions(p).unsupported.filter(f=>f.kind==='format')).toHaveLength(7);expect(()=>resolveRevisions(p,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes()).toEqual(before);expect(resolve(p,'reject',['word/header1.xml'])).toEqual({resolved:3,changedParts:['word/header1.xml']});await bytesEqual(p,base,['word/header1.xml']);expect(inspect(p).revisions).toHaveLength(18);expect(stories).toHaveLength(7);}",
       "calls": [
         "OpcPackage.open",
@@ -16672,7 +16704,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{const defects:[string,(s:string)=>string][]=[\n ['missing',s=>s.replace('<w:rPr>'+previous+'</w:rPr>','')],\n ['duplicate-snapshot',s=>s.replace(previous,previous+'</w:rPr><w:rPr>')],\n ['duplicate-change',s=>s.replace(change,change+change.replace('80','81'))],\n ['nested',s=>s.replace(previous,previous+change.replace('80','81'))],\n ['wrong-parent',s=>s.replace(properties,properties.replace(change,'')+change)],\n ['drawing',s=>s.replace('<w:t>Stable</w:t>','<w:drawing/>')],\n ['unknown',s=>s.replace('<w:i/>','<w:glow/>')],\n ['duplicate-property',s=>s.replace('<w:i/>','<w:i/><w:i/>')],\n ['decorated',s=>s.replace('<w:i/>','<w:i vendor=\"x\"/>')],\n ['invalid',s=>s.replace('<w:i/>','<w:i w:val=\"maybe\"/>')],\n ['duplicate-id',s=>s.replace('w:id=\"80\"',s.match(/w:id=\"\\d+\"/)![0])],\n ['bad-order',s=>s.replace(previous,'<w:color w:val=\"445566\"/><w:i/>')],\n ['mixed',s=>s.replace(previous,'UNOWNED'+previous)],\n ['nested-text',s=>s.replace('<w:rPr>'+previous+'</w:rPr>','<w:rPr><w:ins w:id=\"81\"/></w:rPr>')],\n ['foreign',s=>s.replace('<w:i/>','<x:i xmlns:x=\"urn:other\"/>')],\n ['missing-author',s=>s.replace(' w:author=\"Editor\"','')],\n ['unqualified-author',s=>s.replace('w:author=\"Editor\"','author=\"Editor\"')],\n ['paragraph-mark',s=>s.replace(run,'<w:pPr>'+properties+'</w:pPr>')],\n ['comment',s=>s.replace(previous,'<!--unowned-->'+previous)],\n ['conflicting-flags',s=>s.replace('<w:i/>','<w:caps/><w:smallCaps/>')],\n ['nested-insertion',s=>s.replace(run,'<w:ins w:id=\"90\" w:author=\"Editor\">'+run+'</w:ins>')],\n ];for(const [name,defect]of defects)for(const action of ['accept','reject'] as const){const {p}=await input(),part='word/header1.xml',xml=p.text(part),changed=defect(xml);expect(changed,name).not.toBe(xml);p.set(part,changed);const before=p.toBytes();expect(inspect(p).unsupported.length,name).toBeGreaterThan(0);expect(()=>resolve(p,action),name).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(p.toBytes(),name).toEqual(before);}}",
       "calls": [
         "change.replace",
@@ -16726,7 +16758,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{for(const encoding of ['bom','le','be']){const {p}=await input(),part=p.mainPart();let xml=p.text(part).replace(properties,`<w:rPr xmlns:z=\"${W}\">${current}<w:rPrChange xmlns:q=\"${W}\" w:id=\"80\" w:author=\"Editor\"><q:rPr><q:i/><z:color z:val='445566'/></q:rPr></w:rPrChange></w:rPr>`);if(encoding==='bom')p.set(part,new Uint8Array([239,187,191,...new TextEncoder().encode(xml)]));else{xml=xml.replace(/encoding=\"UTF-8\"/i,'encoding=\"UTF-16\"');const bytes=new Uint8Array(2+xml.length*2);bytes.set(encoding==='le'?[255,254]:[254,255]);const v=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),encoding==='le');p.set(part,bytes);}const baseline=await OpcPackage.open(p.toBytes());expect(resolve(p,'reject',[part])).toEqual({resolved:3,changedParts:[part]});const read=await OpcPackage.open(p.toBytes());const parsed=parseXml(read.text(part)),props=elements(parsed,'rPr',W).find(n=>n.children.some(c=>c.localName==='i'))!;expect(props.name).toBe('q:rPr');expect(props.children.map(c=>[c.namespaceURI,c.localName])).toEqual([[W,'i'],[W,'color']]);expect(attribute(props.children[1]!,'val',W)).toBe('445566');expect(read.text(part)).toContain(\"z:val='445566'\");expect([...read.get(part)!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);await bytesEqual(read,baseline,[part]);}}",
       "calls": [
         ".encode",
@@ -16782,7 +16814,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{for(const defect of ['protected','external','invalid']){const {p}=await input();if(defect==='protected'){p.set('word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}if(defect==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});const before=p.toBytes();expect(()=>resolveRevisions(p,'accept',{profile:(defect==='invalid'?'bad':profile) as typeof profile})).toThrow();expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "addRelationship",
@@ -16822,7 +16854,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{for(const stage of ['write','serialize']){const {p}=await input();p.set(p.mainPart(),p.text(p.mainPart()).replace('</w:body>','<w:p><w:r><w:t>Prior edit</w:t></w:r></w:p></w:body>'));const before=p.toBytes(),set=p.set.bind(p),serialize=p.toBytes.bind(p);let reached=false;if(stage==='write')p.set=(n,v)=>{set(n,v);if(n==='word/header1.xml'){reached=true;throw Error('injected property write');}};else p.toBytes=()=>{reached=true;throw Error('injected property serialize');};try{expect(()=>resolve(p,'reject')).toThrow('injected');expect(reached).toBe(true);}finally{p.set=set;p.toBytes=serialize;}expect(p.toBytes()).toEqual(before);expect(inspect(p).revisions).toHaveLength(21);}}",
       "calls": [
         "Error",
@@ -16870,7 +16902,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{for(const saved of ['<w:rPr/>',`<w:rPr xmlns:q=\"${W}\"><q:i/></w:rPr>`]){const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace(change,`<w:rPrChange xmlns:q=\"urn:outer\" w:id=\"80\" w:author=\"Editor\">${saved}</w:rPrChange>`));expect(resolve(p,'reject',[part]).resolved).toBe(3);const xml=p.text(part),r=elements(parseXml(xml),'r',W).find(r=>r.children.some(t=>t.localName==='t'&&t.text==='Stable'))!,pr=r.children[0]!;expect(pr.localName).toBe('rPr');expect(pr.children.map(c=>[c.namespaceURI,c.localName])).toEqual(saved.includes('q:i')?[[W,'i']]:[]);expect(xml).not.toContain('rPrChange');}}",
       "calls": [
         "elements",
@@ -16915,7 +16947,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{for(const defect of ['protected','external','wrong-root']){const {p}=await input();resolve(p,'accept');if(defect==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});else{p.set('word/settings.xml',defect==='wrong-root'?`<w:notSettings xmlns:w=\"${W}\"/>`:`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`);addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}const before=p.toBytes();expect(()=>resolve(p,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-protected'}));expect(p.toBytes()).toEqual(before);}}",
       "calls": [
         "addRelationship",
@@ -16953,7 +16985,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{const p=await openRevisionFixture('all-stories'),part=p.mainPart();p.set(part,new Uint8Array([239,187,191,...new TextEncoder().encode(p.text(part))]));resolveRevisions(p,'accept',{parts:[part]});expect([...p.get(part)!.slice(0,3)]).toEqual([239,187,191]);const q=(await input()).p,before=q.toBytes();expect(()=>resolve(q,'accept',['word/unknown.xml'])).toThrow(expect.objectContaining({code:'docx-revisions-unknown-part'}));expect(()=>inspectRevisions(q,{profile:'bad' as typeof profile})).toThrow(expect.objectContaining({code:'docx-revisions-invalid-profile'}));expect(q.toBytes()).toEqual(before);q.set(part,q.text(part).replace(run,'<w:moveFrom w:id=\"90\" w:author=\"Editor\">'+run+'</w:moveFrom>'));const moved=q.toBytes();expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(moved);}",
       "calls": [
         ".encode",
@@ -17001,7 +17033,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{const saved='<w:rPr><w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\"/><w:b w:val=\"0\"/><w:bCs/><w:i/><w:iCs/><w:strike/><w:shadow/><w:vanish/><w:color w:val=\"auto\"/><w:sz w:val=\"28\"/><w:szCs w:val=\"24\"/><w:highlight w:val=\"yellow\"/><w:u w:val=\"double\"/><w:vertAlign w:val=\"superscript\"/></w:rPr>';const {p}=await input(),part=p.mainPart();p.set(part,p.text(part).replace('<w:rPr>'+previous+'</w:rPr>',saved));expect(resolve(p,'reject',[part]).resolved).toBe(3);expect(p.text(part)).toContain(saved);for(const invalid of [saved.replace('w:val=\"28\"','w:val=\"0\"'),saved.replace('w:val=\"24\"','w:val=\"1.5\"'),saved.replace('w:hAnsi=\"Arial\"','w:hAnsi=\"Calibri\"'),saved.replace('w:val=\"yellow\"','w:val=\"purple\"'),saved.replace('w:val=\"double\"','w:val=\"unknown\"'),saved.replace('w:val=\"auto\"','w:themeColor=\"accent1\"')]){const q=(await input()).p;q.set(part,q.text(part).replace('<w:rPr>'+previous+'</w:rPr>',invalid));const before=q.toBytes();expect(()=>resolve(q,'accept')).toThrow(expect.objectContaining({code:'docx-revisions-unsupported'}));expect(q.toBytes()).toEqual(before);}}",
       "calls": [
         "expect",
@@ -17044,7 +17076,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
       "body": "{const {p}=await input(),part='word/header1.xml';p.set(part,p.text(part).replace('<w:i/>','<w:unknown/>'));const baseline=await OpcPackage.open(p.toBytes());expect(resolve(p,'accept',[p.mainPart()]).resolved).toBe(3);await bytesEqual(p,baseline,[p.mainPart()]);const q=(await input()).p,before=q.toBytes(),set=q.set.bind(q);let reached=false;q.set=(n,v)=>{set(n,v);if(n===part){reached=true;set(n,q.text(n).replace('<w:rPr>'+previous+'</w:rPr>',properties));}};try{expect(()=>resolve(q,'reject')).toThrow(expect.objectContaining({code:'docx-revisions-validation'}));expect(reached).toBe(true);}finally{q.set=set;}expect(q.toBytes()).toEqual(before);}",
       "calls": [
         "OpcPackage.open",
@@ -17088,8 +17120,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f",
-      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f",
+      "body": "{const root=await import('../../src/index.ts'),docx=await import('../../src/docx/index.ts');expect(root.inspectRevisions).toBe(inspectRevisions);expect(docx.resolveRevisions).toBe(resolveRevisions);const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd());inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);const f=inv.features.find(f=>f.scenarios.some(s=>s.scenarioId==='@id-docx-review-multistory-resolution'))!,s=f.scenarios.find(s=>s.scenarioId==='@id-docx-review-multistory-resolution')!;expect(s.lifecycle??f.lifecycle).toBe('planned');}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -20690,7 +20722,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n const d=await fixture(),before=d.package.parts,held=d.tables[0]!,cell=held.cell(0,0),paragraph=d.paragraphs[0]!,source=tableXml(d),grid=source.table.children.find(n=>n.localName==='tblGrid')!,otherRow=source.table.children.filter(n=>n.localName==='tr')[1]!,merged=held.mergeRowCells(0,0,2);\n expect(merged.rows).toBe(2);expect(merged.columns).toBe(4);expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(()=>cell.text).toThrow();expect(()=>paragraph.text).toThrow();expect(merged.cell(0,3).text).toBe('');expect(merged.cell(1,3).text).toBe('Tail');for(const c of [0,1,2])expect(()=>merged.cell(0,c)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));\n const next=tableXml(d),rows=next.table.children.filter(n=>n.localName==='tr'),cells=rows[0]!.children.filter(n=>n.localName==='tc');expect(cells).toHaveLength(2);expect(elements(parseXml(next.xml),'gridSpan',W).map(n=>attribute(n,'val',W))).toEqual(['3']);const width=cells[0]!.children[0]!.children.find(n=>n.localName==='tcW')!;expect(attribute(width,'w',W)).toBe('6480');expect(next.xml).toContain(source.xml.slice(grid.start,grid.end));expect(next.xml).toContain(source.xml.slice(otherRow.start,otherRow.end));\n const dir=await mkdtemp(join(tmpdir(),'docx-merge-'));try{const path=join(dir,'merged.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','Tail','After']);expect(read.tables[0]!.rows).toBe(2);expect(read.tables[0]!.columns).toBe(4);expect([...read.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "Document.open",
@@ -20756,7 +20788,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n const d=await fixture();d.tables[0]!.cell(0,0).setProperties({shading:'ABCDEF',verticalAlign:'center'});d.tables[0]!.mergeRowCells(0,0,1);expect(tableXml(d).xml).toContain('ABCDEF');expect(tableXml(d).xml).toContain('center');expect(tableXml(d).xml).toContain('Keep &amp; &lt;text&gt;');\n for(const kind of ['text','space','format','paragraph-format','run','attribute','lexical']){const bad=await fixture(),t=bad.tables[0]!;if(kind==='text'||kind==='space')t.cell(0,1).text=kind==='text'?'Do not lose me':' ';else if(kind==='format')t.cell(0,1).setProperties({shading:'ABCDEF'});else{const p=await OpcPackage.open(bad.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[1]!,raw=xml.slice(cell.start,cell.end),replacement=kind==='paragraph-format'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:pPr><w:keepNext/></w:pPr></w:p>'):kind==='run'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:r><w:t></w:t></w:r></w:p>'):kind==='attribute'?raw.replace('<w:tc>','<w:tc data=\"retained\">'):raw.replace('<w:tcPr>','<!--keep--><w:tcPr>');p.set(p.mainPart(),xml.slice(0,cell.start)+replacement+xml.slice(cell.end));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);continue;}const before=bad.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(bad.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -20811,7 +20843,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();for(const args of [[0,0,0],[0,2,1],[-1,0,1],[2,0,1],[0,-1,1],[0,0,4],[0,0.5,2],[NaN,0,1],[0,0,Infinity],['0',0,1],[0,0,Number.MAX_SAFE_INTEGER+1]]){expect(()=>t.mergeRowCells(...args as [number,number,number])).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);}expect(t.cell(0,0).text).toBe('Keep & <text>');\n}",
       "calls": [
         "d.package.toBytes",
@@ -20850,7 +20882,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n for(const change of [(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val=\"restart\"/>'),(x:string)=>x.replace(/<w:tblGrid>[\\s\\S]*?<\\/w:tblGrid>/,''),(x:string)=>x.replace('<w:gridCol w:w=\"2160\"/>','<w:gridCol w:w=\"bad\"/>'),(x:string)=>x.replace('w:w=\"2160\" w:type=\"dxa\"','w:w=\"100\" w:type=\"dxa\"'),(x:string)=>x.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2junk\"/>')]){const d=await fixture(change),before=d.package.toBytes();expect(()=>d.tables[0]!.mergeRowCells(1,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const locked=await Document.open(p.toBytes()),before=locked.package.toBytes();expect(()=>locked.tables[0]!.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-format-protected'}));expect(locked.package.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.open",
@@ -20898,7 +20930,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),t=d.tables[0]!,cell=t.cell(0,0),paragraph=d.paragraphs[0]!,before=d.package.toBytes(),p=(d as any).opcPackage as OpcPackage,original=p[stage].bind(p);if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialize');};try{expect(()=>t.mergeRowCells(0,0,2)).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(d.package.toBytes()).toEqual(before);expect(t.rows).toBe(2);expect(cell.text).toBe('Keep & <text>');expect(paragraph.text).toBe('Before');}\n}",
       "calls": [
         "Error",
@@ -20944,7 +20976,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n for(const encoding of ['bom','utf16']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(encoding==='utf16'){xml=xml.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16');const bytes=new Uint8Array(2+xml.length*2);bytes.set([255,254]);const view=new DataView(bytes.buffer);for(let i=0;i<xml.length;i++)view.setUint16(2+i*2,xml.charCodeAt(i),true);p.set(p.mainPart(),bytes);}else p.set(p.mainPart(),new Uint8Array([239,187,191,...new TextEncoder().encode(xml)]));const loaded=await Document.open(p.toBytes()),t=loaded.tables[0]!;t.mergeRowCells(0,0,2);expect([...loaded.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:[255,254]);const read=await Document.open(await loaded.save());expect(read.paragraphs.some(p=>p.text==='Keep & <text>')).toBe(true);expect(read.tables[0]!.columns).toBe(4);expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));}\n}",
       "calls": [
         ".encode",
@@ -21005,7 +21037,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n for(const[first,last]of [[1,2],[0,2]]){const d=await fixture(),old=d.tables[0]!,t=old.mergeRowCells(1,first!,last!);const before=d.package.toBytes();expect(t.columns).toBe(4);expect(t.cell(0,0).text).toBe('Keep & <text>');expect(t.cell(1,3).text).toBe('Tail');expect(()=>t.insertRow(0)).toThrow();expect(()=>t.mergeRowCells(0,0,1)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n const d=Document.create();d.addTable(1,4);const t=d.tables[0]!.mergeRowCells(0,0,3);expect(t.rows).toBe(1);expect(t.columns).toBe(4);const xml=tableXml(d);expect(elements(parseXml(xml.xml),'tc',W)).toHaveLength(1);expect(attribute(elements(parseXml(xml.xml),'gridSpan',W)[0]!,'val',W)).toBe('4');\n}",
       "calls": [
         "Document.create",
@@ -21048,7 +21080,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n const d=await fixture();d.addTable(1,1);d.tables[1]!.cell(0,0).text='Other table';const source=tableXml(d).xml,all=elements(parseXml(source),'tbl',W),other=source.slice(all[1]!.start,all[1]!.end);d.tables[0]!.mergeRowCells(0,1,2);const after=tableXml(d).xml;expect(after).toContain(other);expect(d.paragraphs.map(p=>p.text)).toEqual(['Before','Keep & <text>','','','','','','Tail','After','Other table']);expect(d.tables[1]!.cell(0,0).text).toBe('Other table');\n}",
       "calls": [
         "d.addTable",
@@ -21088,7 +21120,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n for(const kind of ['decorated-width','section','sum']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());let xml=p.text(p.mainPart());if(kind==='decorated-width'){const cells=elements(parseXml(xml),'tc',W),n=cells[1]!,raw=xml.slice(n.start,n.end);xml=xml.slice(0,n.start)+raw.replace('w:type=\"dxa\"','w:type=\"dxa\" other=\"keep\"')+xml.slice(n.end);}else if(kind==='sum')xml=xml.replaceAll('2160','20000');\n if(kind==='section'){const first=elements(parseXml(xml),'tc',W)[0]!,raw=xml.slice(first.start,first.end),changed=raw.replace(/<w:p\\b[^>]*>/,open=>open+'<w:pPr><w:sectPr/></w:pPr>');xml=xml.slice(0,first.start)+changed+xml.slice(first.end);}\n p.set(p.mainPart(),xml);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -21137,7 +21169,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n const d=await fixture(),t=d.tables[0]!,p=(d as any).opcPackage as OpcPackage;p.set(p.mainPart(),p.text(p.mainPart()).replace('Before','Changed'));const bytes=d.package.toBytes();expect(()=>t.mergeRowCells(0,0,1)).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(d.package.toBytes()).toEqual(bytes);\n for(const kind of ['late-row','external-settings']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());if(kind==='external-settings')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});else{const xml=p.text(p.mainPart()),last=elements(parseXml(xml),'tc',W).at(-1)!;p.set(p.mainPart(),xml.slice(0,last.start)+xml.slice(last.start,last.end).replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"1\"/>')+xml.slice(last.end));}const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -21185,8 +21217,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
-      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -21219,7 +21251,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42",
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7",
       "body": "{\n for(const index of [0,7]){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes()),xml=p.text(p.mainPart()),cell=elements(parseXml(xml),'tc',W)[index]!;p.set(p.mainPart(),xml.slice(0,cell.openEnd)+'<w:tbl/>'+xml.slice(cell.openEnd));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeRowCells(0,0,1)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -22490,7 +22522,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n const d=await fixture(),before=d.package.parts,source=xml(d),paragraphs=d.paragraphs.map(p=>p.text),held=d.tables[0]!,cell=held.cell(0,1),paragraph=d.paragraphs[0]!,current=held.mergeColumnCells(1,0,2);\n expect(current.rows).toBe(3);expect(current.columns).toBe(3);expect(()=>held.rows).toThrow(expect.objectContaining({code:'docx-stale-table'}));expect(()=>cell.text).toThrow();expect(()=>paragraph.text).toThrow();for(const row of [0,1,2])expect(()=>current.cell(row,1)).toThrow(expect.objectContaining({code:'docx-table-merged-cell'}));expect(current.cell(2,2).text).toBe('Tail');\n const next=xml(d),tree=parseXml(next);expect(elements(tree,'tc',W)).toHaveLength(9);expect(elements(tree,'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);expect(withoutFlags(next)).toBe(source);expect(d.paragraphs.map(p=>p.text)).toEqual(paragraphs);\n const dir=await mkdtemp(join(tmpdir(),'vertical-merge-'));try{const path=join(dir,'merged.docx');await d.save(path);const read=await Document.open(path);expect(read.paragraphs.map(p=>p.text)).toEqual(paragraphs);expect(read.tables[0]!.cell(2,2).text).toBe('Tail');expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);expect([...read.package.parts.keys()]).toEqual([...before.keys()]);}finally{await rm(dir,{recursive:true,force:true});}\n}",
       "calls": [
         "Document.open",
@@ -22550,7 +22582,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n for(const[col,first,last]of [[0,0,1],[0,1,2],[2,0,1]]){const d=await fixture(),source=xml(d),before=d.paragraphs.map(p=>p.text),t=d.tables[0]!.mergeColumnCells(col!,first!,last!);expect(t.rows).toBe(3);expect(t.columns).toBe(3);expect(withoutFlags(xml(d))).toBe(source);expect(d.paragraphs.map(p=>p.text)).toEqual(before);expect(elements(parseXml(xml(d)),'vMerge',W)).toHaveLength(2);}\n}",
       "calls": [
         "d.paragraphs.map",
@@ -22591,7 +22623,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n for(const kind of ['text','space','format','paragraph-format','empty-run','lexical','attribute']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());replaceCell(p,4,raw=>kind==='text'||kind==='space'?raw.replace(/<w:p\\b[^>]*\\/>/,`<w:p><w:r><w:t xml:space=\"preserve\">${kind==='text'?'Do not hide me':' '}</w:t></w:r></w:p>`):kind==='format'?raw.replace('</w:tcPr>','<w:shd w:val=\"clear\" w:fill=\"ABCDEF\"/></w:tcPr>'):kind==='paragraph-format'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:pPr><w:keepNext/></w:pPr></w:p>'):kind==='empty-run'?raw.replace(/<w:p\\b[^>]*\\/>/,'<w:p><w:r><w:t/></w:r></w:p>'):kind==='attribute'?raw.replace('<w:tc>','<w:tc keep=\"yes\">'):raw.replace('<w:tcPr>','<!--keep--><w:tcPr>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes(),t=loaded.tables[0]!;expect(()=>t.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);expect(t.rows).toBe(3);}\n}",
       "calls": [
         "Document.open",
@@ -22634,7 +22666,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n const d=await fixture(),t=d.tables[0]!,before=d.package.toBytes();let invoked=false;for(const args of [[1,0,0],[1,2,1],[-1,0,2],[3,0,2],[1,-1,2],[1,0,3],[1,0.5,2],[NaN,0,2],['1',0,2],[1,0,Infinity],[1,0,Number.MAX_SAFE_INTEGER+1],[{valueOf(){invoked=true;return 1;}},0,2]]){expect(()=>t.mergeColumnCells(...args as [number,number,number])).toThrow(RangeError);expect(d.package.toBytes()).toEqual(before);}expect(invoked).toBe(false);\n}",
       "calls": [
         "d.package.toBytes",
@@ -22670,7 +22702,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n for(const kind of ['horizontal','vertical','nested','width','revision','missing-grid','late-span']){const d=await fixture(),p=await OpcPackage.open(d.package.toBytes());if(kind==='missing-grid')p.set(p.mainPart(),p.text(p.mainPart()).replace(/<w:tblGrid>[\\s\\S]*?<\\/w:tblGrid>/,''));else replaceCell(p,8,raw=>kind==='horizontal'?raw.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"2\"/>'):kind==='vertical'?raw.replace('<w:tcPr>','<w:tcPr><w:vMerge w:val=\"restart\"/>'):kind==='nested'?raw.replace('<w:tcPr>','<w:tbl/><w:tcPr>'):kind==='width'?raw.replace('w:w=\"2880\"','w:w=\"100\"'):kind==='revision'?raw.replace('</w:tcPr>','<w:tcPrChange/></w:tcPr>'):raw.replace('<w:tcPr>','<w:tcPr><w:gridSpan w:val=\"1junk\"/>'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -22715,7 +22747,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n for(const mode of ['protected','external','stale']){const d=await fixture(),p=pkg(d),t=d.tables[0]!;if(mode==='protected'){addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');}if(mode==='external')addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','https://example.invalid/settings',{external:true});if(mode==='stale')p.set(p.mainPart(),xml(d).replace('Before','Changed'));const before=d.package.toBytes();expect(()=>t.mergeColumnCells(1,0,2)).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "addPart",
@@ -22760,7 +22792,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n for(const stage of ['set','toBytes'] as const){const d=await fixture(),p=pkg(d),before=p.toBytes(),t=d.tables[0]!,cell=t.cell(0,1),paragraph=d.paragraphs[0]!,original=p[stage].bind(p);if(stage==='set')p.set=(n,v)=>{original(n as never,v as never);throw Error('injected write');};else p.toBytes=()=>{throw Error('injected serialization');};try{expect(()=>t.mergeColumnCells(1,0,2)).toThrow('injected');}finally{if(stage==='set')p.set=original as OpcPackage['set'];else p.toBytes=original as OpcPackage['toBytes'];}expect(p.toBytes()).toEqual(before);expect(t.rows).toBe(3);expect(cell.text).toBe('Keep & <text>');expect(paragraph.text).toBe('Before');}\n}",
       "calls": [
         "Error",
@@ -22811,7 +22843,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n for(const encoding of ['bom','le','be']){const d=await fixture(),p=pkg(d);let source=xml(d);if(encoding==='bom')p.set(p.mainPart(),new Uint8Array([239,187,191,...new TextEncoder().encode(source)]));else{source=source.replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16').replace('<q:document ','<q:document xmlns:w=\"urn:foreign\" ');const b=new Uint8Array(2+source.length*2);b.set(encoding==='le'?[255,254]:[254,255]);const view=new DataView(b.buffer);for(let i=0;i<source.length;i++)view.setUint16(2+i*2,source.charCodeAt(i),encoding==='le');p.set(p.mainPart(),b);}const loaded=await Document.open(p.toBytes()),before=loaded.package.parts;loaded.tables[0]!.mergeColumnCells(1,0,2);const read=await Document.open(await loaded.save());expect([...read.package.get('word/document.xml')!.slice(0,encoding==='bom'?3:2)]).toEqual(encoding==='bom'?[239,187,191]:encoding==='le'?[255,254]:[254,255]);expect(withoutFlags(xml(read))).toBe(source);expect(elements(parseXml(xml(read)),'vMerge',W).map(n=>attribute(n,'val',W))).toEqual(['restart','continue','continue']);for(const[n,b]of before)if(n!=='word/document.xml')expect(read.package.get(n)).toEqual(b);}\n}",
       "calls": [
         ".encode",
@@ -22869,7 +22901,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n const d=await fixture(),t=d.tables[0]!.mergeColumnCells(1,0,2),before=d.package.toBytes();for(const action of [()=>t.cell(0,1),()=>t.tryCell(1,1),()=>t.cell(2,1),()=>t.insertRow(0),()=>t.mergeColumnCells(0,0,2),()=>t.mergeRowCells(0,0,1)]){expect(action).toThrow();expect(d.package.toBytes()).toEqual(before);}expect(t.cell(2,2).text).toBe('Tail');expect(t.tryCell(3,1)).toBeNull();\n}",
       "calls": [
         "d.package.toBytes",
@@ -22913,7 +22945,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n const d=await fixture();d.tables[0]!.cell(0,1).setProperties({topBorder:{style:'single',size:8,color:'123456'},textDirection:'tbRl'});const source=xml(d);d.tables[0]!.mergeColumnCells(1,0,2);expect(withoutFlags(xml(d))).toBe(source);expect(cells(xml(d))[1]!.children[0]!.children.map(n=>n.localName)).toEqual(['tcW','vMerge','tcBorders','shd','textDirection','vAlign']);\n for(const kind of ['section','lexical','width-decoration']){const d=await fixture(),p=pkg(d);replaceCell(p,8,raw=>kind==='section'?raw.replace(/<w:p\\b[^>]*>/,open=>open+'<w:pPr><w:sectPr/></w:pPr>'):kind==='lexical'?raw.replace('<w:tcPr>','<!--retain--><w:tcPr>'):raw.replace('w:type=\"dxa\"','w:type=\"dxa\" retain=\"yes\"'));const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.tables[0]!.mergeColumnCells(1,0,2)).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -22963,7 +22995,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
       "body": "{\n const d=await fixture();d.addTable(1,1);d.tables[1]!.cell(0,0).text='Other table';const source=xml(d),before=d.package.parts;d.tables[0]!.mergeColumnCells(1,0,2);expect(withoutFlags(xml(d))).toBe(source);expect(d.tables[1]!.cell(0,0).text).toBe('Other table');expect([...d.package.parts.keys()]).toEqual([...before.keys()]);for(const[n,b]of before)if(n!=='word/document.xml')expect(d.package.get(n)).toEqual(b);\n}",
       "calls": [
         "before.keys",
@@ -23001,8 +23033,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544",
-      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac",
+      "body": "{\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
       "calls": [
         "expect",
         "expect().toBe",
@@ -23405,7 +23437,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=await sample(),before=d.package.toBytes(),t=d.tables[0]!,held=d.paragraphs[0]!,r=d.inspectTemplate();expect(r.scope).toBe('main-body-and-tables');expect(r.counts).toEqual({paragraphs:8,sections:2,tables:1,placeholders:3});expect(r.paragraphs.map(p=>p.text)).toEqual(['Statement for <Customer>','Use <Project> and [TBD].','Role','Hours','<Role>','40','Delivery','No placeholder']);\n expect(r.sections).toEqual([{paragraphIndex:0,bodyIndex:0,text:'Statement for <Customer>',level:1},{paragraphIndex:6,bodyIndex:3,text:'Delivery',level:2}]);expect(r.tables).toEqual([{index:0,bodyIndex:2,rows:2,columns:2,cells:[['Role','Hours'],['<Role>','40']]}]);expect(r.paragraphs[4]!.table).toEqual({index:0,row:1,column:0,paragraph:0});expect(r.placeholders).toEqual([{paragraphIndex:0,bodyIndex:0,start:14,end:24,text:'<Customer>',name:'Customer'},{paragraphIndex:1,bodyIndex:1,start:4,end:13,text:'<Project>',name:'Project'},{paragraphIndex:4,bodyIndex:2,start:0,end:6,text:'<Role>',name:'Role'}]);expect(d.package.toBytes()).toEqual(before);expect(held.text).toBe('Statement for <Customer>');expect(t.cell(1,1).text).toBe('40');\n}",
       "calls": [
         "d.inspectTemplate",
@@ -23448,7 +23480,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=await sample(),before=d.package.parts,r=d.inspectTemplate(),dir=await mkdtemp(join(tmpdir(),'template-inspect-'));try{const path=join(dir,'template.docx');await d.save(path);const read=await Document.open(path);expect(read.inspectTemplate()).toEqual(r);for(const[n,b]of before)expect(read.package.get(n)).toEqual(b);}finally{await rm(dir,{recursive:true,force:true});}\n for(const value of [r,r.counts,r.paragraphs,r.paragraphs[4],r.paragraphs[4]!.table,r.sections,r.sections[0],r.tables,r.tables[0],r.tables[0]!.cells,r.tables[0]!.cells[0],r.placeholders,r.placeholders[0]])expect(Object.isFrozen(value)).toBe(true);\n d.paragraphs.at(-1)!.setText('Changed <New>');expect(r.paragraphs.at(-1)!.text).toBe('No placeholder');expect(r.counts.placeholders).toBe(3);expect(d.inspectTemplate().counts.placeholders).toBe(4);\n}",
       "calls": [
         "Document.open",
@@ -23493,7 +23525,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=Document.create();expect(d.inspectTemplate().counts).toEqual({paragraphs:0,sections:0,tables:0,placeholders:0});d.addParagraphStyle('Heading1',{name:'Heading 1'});d.addParagraph('Blue <Customer>',{style:'Heading1'}).setRunFormatting({color:'0000FF'});const r=d.inspectTemplate();expect(r.sections).toEqual([]);expect(r.paragraphs[0]!.styleId).toBe('Heading1');expect(r.paragraphs[0]!.outlineLevel).toBeNull();expect(r.placeholders.map(p=>p.name)).toEqual(['Customer']);expect(Object.keys(r).sort()).toEqual(['counts','paragraphs','placeholders','scope','sections','tables']);\n}",
       "calls": [
         "Document.create",
@@ -23527,7 +23559,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=Document.create();d.addParagraph('😀 <Cus').appendRun('tomer> <Customer> <<nested>> <> < > [TBD]');d.addParagraph('<line\\nbreak>');d.addParagraph('<unfinished');d.addParagraph('ending>');const r=d.inspectTemplate();expect(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual([{start:3,end:13,name:'Customer'},{start:14,end:24,name:'Customer'}]);expect(d.inspectBodyMap().placeholders.map(p=>({start:p.start,end:p.end,name:p.name}))).toEqual(r.placeholders.map(p=>({start:p.start,end:p.end,name:p.name})));\n}",
       "calls": [
         "Document.create",
@@ -23560,7 +23592,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=Document.create();d.addTable(1,1);d.tables[0]!.cell(0,0).text='<A>\\n<B>\\n<split\\nend>';const r=d.inspectTemplate();expect(r.tables[0]!.cells).toEqual([['<A>\\n<B>\\n<split\\nend>']]);expect(r.paragraphs.map(p=>p.table!.paragraph)).toEqual([0,1,2,3]);expect(r.placeholders.map(p=>[p.paragraphIndex,p.name])).toEqual([[0,'A'],[1,'B']]);expect(r.sections).toEqual([]);\n}",
       "calls": [
         "Document.create",
@@ -23595,7 +23627,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n for(const kind of ['field','hyperlink','sdt','nested','merge','bad-grid','bad-outline']){const d=await sample(),p=pkg(d);let x=p.text(p.mainPart());if(kind==='field')x=x.replace('No placeholder','No placeholder</w:t><w:instrText>DATE</w:instrText><w:t>');if(kind==='hyperlink')x=x.replace('</w:body>','<w:p><w:hyperlink><w:r><w:t>Hidden</w:t></w:r></w:hyperlink></w:p></w:body>');if(kind==='sdt')x=x.replace('<w:body>','<w:body><w:sdt><w:sdtContent><w:p/></w:sdtContent></w:sdt>');if(kind==='nested')x=x.replace('<w:tcPr>','<w:tbl/><w:tcPr>');if(kind==='merge')x=x.replace('<w:tcPr>','<w:tcPr><w:vMerge/>');if(kind==='bad-grid')x=x.replace(/<w:gridCol[^>]*\\/>/,'');if(kind==='bad-outline')x=x.replace('w:val=\"0\"','w:val=\"invalid\"');p.set(p.mainPart(),x);const loaded=await Document.open(p.toBytes()),before=loaded.package.toBytes();expect(()=>loaded.inspectTemplate()).toThrow();expect(loaded.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -23634,7 +23666,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/header1.xml',`<w:hdr xmlns:w=\"${W}\"><w:p><w:r><w:t>&lt;Header&gt;</w:t></w:r></w:p></w:hdr>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/header','header1.xml');const before=d.package.toBytes();expect(d.inspectTemplate().placeholders.map(p=>p.name)).toEqual(['Customer','Project','Role']);expect(d.package.toBytes()).toEqual(before);p.set(p.mainPart(),p.text(p.mainPart()).replace('No placeholder','External'));const changed=p.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-stale-document'}));expect(d.package.toBytes()).toEqual(changed);\n}",
       "calls": [
         "addPart",
@@ -23677,7 +23709,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=await sample(),expected=d.inspectTemplate(),p=pkg(d);const text=p.text(p.mainPart()).replaceAll('w:','q:').replaceAll('xmlns:w=','xmlns:q=').replace('UTF-8','UTF-16').replace('<q:document ','<q:document xmlns:w=\"urn:foreign\" '),bytes=new Uint8Array(2+text.length*2);bytes.set([254,255]);const view=new DataView(bytes.buffer);for(let i=0;i<text.length;i++)view.setUint16(2+i*2,text.charCodeAt(i),false);p.set(p.mainPart(),bytes);const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(read.inspectTemplate()).toEqual(expected);expect(read.package.toBytes()).toEqual(before);\n}",
       "calls": [
         "Document.open",
@@ -23722,7 +23754,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=Document.create();d.addParagraph('<A>'.repeat(10001));const before=d.package.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(d.package.toBytes()).toEqual(before);\n const base=Document.create(),p=pkg(base);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:body>','<w:body>'+'<w:p/>'.repeat(10001)));const loaded=await Document.open(p.toBytes()),b=loaded.package.toBytes();expect(()=>loaded.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(loaded.package.toBytes()).toEqual(b);\n}",
       "calls": [
         ".repeat",
@@ -23769,7 +23801,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n for(const change of [(x:string)=>x.replace('<w:tblGrid>','<w:tblGrid><!--keep-->'),(x:string)=>x.replace('<w:gridCol ','<w:gridCol other=\"x\" '),(x:string)=>x.replace('xmlns:w=\"'+W+'\"','xmlns:w=\"urn:foreign\"'),(x:string)=>x.replace(/<w:pPr\\b[^>]*>/,open=>open+'<w:outlineLvl w:val=\"1\"/>')]){const d=await sample(),p=pkg(d);const source=p.text(p.mainPart()),changed=change(source);expect(changed).not.toBe(source);p.set(p.mainPart(),changed);let read:Document;try{read=await Document.open(p.toBytes());}catch(e){expect(e).toBeInstanceOf(Error);continue;}const before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow();expect(read.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -23811,7 +23843,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=Document.create();d.addTable(1,2);d.tables[0]!.cell(0,0).text='<A>'.repeat(5001);d.tables[0]!.cell(0,1).text='<B>'.repeat(5000);const before=d.package.toBytes();expect(()=>d.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(d.package.toBytes()).toEqual(before);\n const base=Document.create();base.addTable(1,1);const p=pkg(base),source=p.text(p.mainPart()),table=source.match(/<w:tbl\\b[^]*?<\\/w:tbl>/)![0];p.set(p.mainPart(),source.replace(table,table.repeat(1001)));const read=await Document.open(p.toBytes()),bytes=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-limit'}));expect(read.package.toBytes()).toEqual(bytes);\n}",
       "calls": [
         ".repeat",
@@ -23860,8 +23892,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
-      "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const before=d.package.toBytes();expect(d.inspectTemplate().counts.placeholders).toBe(3);expect(d.package.toBytes()).toEqual(before);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
+      "body": "{\n const d=await sample(),p=pkg(d);addPart(p,'word/settings.xml',`<w:settings xmlns:w=\"${W}\"><w:documentProtection w:enforcement=\"1\"/></w:settings>`,'application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml');addRelationship(p,p.mainPart(),'http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings','settings.xml');const before=d.package.toBytes();expect(d.inspectTemplate().counts.placeholders).toBe(3);expect(d.package.toBytes()).toEqual(before);\n const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);\n}",
       "calls": [
         ".test",
         "addPart",
@@ -23908,7 +23940,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n for(const defect of ['before','after','late-before','width','missing-width']){const d=await sample(),p=pkg(d);let source=p.text(p.mainPart());if(defect==='before'||defect==='after')source=source.replace('<w:tr>',`<w:tr><w:trPr><w:${defect==='before'?'gridBefore':'gridAfter'} w:val=\"1\"/></w:trPr>`);else if(defect==='late-before'){const at=source.lastIndexOf('<w:tr>');source=source.slice(0,at)+source.slice(at).replace('<w:tr>','<w:tr><w:trPr><w:gridBefore w:val=\"1\"/></w:trPr>');}else if(defect==='width')source=source.replace('w:w=\"4320\" w:type=\"dxa\"','w:w=\"100\" w:type=\"dxa\"');else source=source.replace(/<w:tcW[^>]*\\/>/,'');expect(source).not.toBe(p.text(p.mainPart()));p.set(p.mainPart(),source);const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow(expect.objectContaining({code:'docx-template-unsupported'}));expect(read.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -23956,7 +23988,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab",
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9",
       "body": "{\n const d=await sample(),expected=d.inspectTemplate(),p=pkg(d);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:tr>','<w:tr><w:trPr><w:gridBefore w:val=\"0\"/><w:gridAfter w:val=\"00\"/></w:trPr>'));const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(read.inspectTemplate()).toEqual(expected);expect(read.package.toBytes()).toEqual(before);\n for(const value of ['-1','0junk','', '1.5']){const d=await sample(),p=pkg(d);p.set(p.mainPart(),p.text(p.mainPart()).replace('<w:tr>',`<w:tr><w:trPr><w:gridBefore w:val=\"${value}\"/></w:trPr>`));const read=await Document.open(p.toBytes()),before=read.package.toBytes();expect(()=>read.inspectTemplate()).toThrow();expect(read.package.toBytes()).toEqual(before);}\n}",
       "calls": [
         "Document.open",
@@ -29731,6 +29763,120 @@
       "unresolved": []
     },
     {
+      "id": "bun:tests/unit/pptx-next20-bindings.test.ts:twenty PPTX manipulation cases run production saves, reopen and custody predicates",
+      "path": "tests/unit/pptx-next20-bindings.test.ts",
+      "line": 9,
+      "title": "twenty PPTX manipulation cases run production saves, reopen and custody predicates",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.failures).toEqual([])",
+        "expect(r.counts.cases.passed).toBe(20)",
+        "expect(r.counts.cases.total).toBe(20)",
+        "expect(r.counts.steps.undefined).toBe(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)",
+        "expect(r.counts.steps.passed).toBe(100)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "b49a3e0330058d3b0a7568ffca249f2221e7c459a79c2d259ea807cbaf6beb75",
+      "body": "{const r=await runPptxNext20();expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(20);expect(r.counts.cases.total).toBe(20);expect(r.counts.steps.undefined).toBe(0);expect(r.counts.steps.ambiguous).toBe(0);expect(r.counts.steps.passed).toBe(100);}",
+      "calls": [
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "runPptxNext20"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-next20-bindings.test.ts:twenty source capture identities and their immutable feature bytes remain separate from local execution credit",
+      "path": "tests/unit/pptx-next20-bindings.test.ts",
+      "line": 10,
+      "title": "twenty source capture identities and their immutable feature bytes remain separate from local execution credit",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(sources.executionCredit).toBe(false)",
+        "expect(sources.records).toHaveLength(20)",
+        "expect(new Set(sources.records.map(r=>r.sourceId)).size).toBe(20)",
+        "expect(feature.scenarios.map(s=>s.scenarioId)).toEqual(sources.records.map(r=>r.localId))",
+        "expect(new Bun.CryptoHasher('sha256').update(text).digest('hex')).toBe(r.sourceSha256)",
+        "expect(text).toContain(r.sourceBlock)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 13,
+          "expression": "for(const r of sources.records)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "b49a3e0330058d3b0a7568ffca249f2221e7c459a79c2d259ea807cbaf6beb75",
+      "body": "{\n expect(sources.executionCredit).toBe(false);expect(sources.records).toHaveLength(20);expect(new Set(sources.records.map(r=>r.sourceId)).size).toBe(20);\n const feature=parseFeature(path,await Bun.file(path).text());expect(feature.scenarios.map(s=>s.scenarioId)).toEqual(sources.records.map(r=>r.localId));\n for(const r of sources.records){const text=await Bun.file(join(fixturesRoot(),r.sourceFeature)).text();expect(new Bun.CryptoHasher('sha256').update(text).digest('hex')).toBe(r.sourceSha256);expect(text).toContain(r.sourceBlock);}\n}",
+      "calls": [
+        ".update",
+        ".update().digest",
+        "Bun.file",
+        "Bun.file().text",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "feature.scenarios.map",
+        "fixturesRoot",
+        "join",
+        "parseFeature",
+        "sources.records.map"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-next20-bindings.test.ts:restored paragraph and custody predicates reject lost production edits and false caller copies",
+      "path": "tests/unit/pptx-next20-bindings.test.ts",
+      "line": 15,
+      "title": "restored paragraph and custody predicates reject lost production edits and false caller copies",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(r.counts.cases.failed).toBeGreaterThan(0)",
+        "expect(r.counts.steps.ambiguous).toBe(0)",
+        "expect(r.counts.steps.undefined).toBe(0)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 16,
+          "expression": "for(const fault of ['lost-edit','caller-mutation'])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "b49a3e0330058d3b0a7568ffca249f2221e7c459a79c2d259ea807cbaf6beb75",
+      "body": "{\n for(const fault of ['lost-edit','caller-mutation']){const active=bindings.map(b=>b.pattern.test('the production manipulation is performed for patch-title')?{...b,run:async(c:Record<string,unknown>,...captures:string[])=>{if(fault==='lost-edit'&&captures[0]==='patch-title')return;await b.run(c,...captures);if(fault==='caller-mutation')(c.state as {input:Uint8Array}).input[0]=0;}}:b);const r=await runPptxNext20(active);expect(r.counts.cases.failed).toBeGreaterThan(0);expect(r.counts.steps.ambiguous).toBe(0);expect(r.counts.steps.undefined).toBe(0);}\n}",
+      "calls": [
+        "b.pattern.test",
+        "b.run",
+        "bindings.map",
+        "expect",
+        "expect().toBe",
+        "expect().toBeGreaterThan",
+        "runPptxNext20"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
       "id": "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
       "path": "tests/unit/pptx-notes-edit.test.ts",
       "line": 8,
@@ -31439,6 +31585,360 @@
         "xml.replace"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:shape text retains Unicode, XML values, CR, whitespace and empty LF paragraphs on saved reopen",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 9,
+      "title": "shape text retains Unicode, XML values, CR, whitespace and empty LF paragraphs on saved reopen",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(title(q).text).toBe('\\n snow 雪 & <value> 😀\\n\\nend\\r')",
+        "expect(q.slides[0]!.inspectTextShapes().filter(s=>s.shapeId!==id)).toEqual(others)",
+        "expect(q.package.text(part).slice(0,newShape.start)).toBe(before.slice(0,oldShape.start))",
+        "expect(q.package.text(part).slice(newShape.end)).toBe(before.slice(oldShape.end))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n const d=deck(),id=title(d).shapeId,part=d.slides[0]!.partName,before=d.package.text(part),others=d.slides[0]!.inspectTextShapes().filter(s=>s.shapeId!==id);\n d.slides[0]!.setShapeText(id,'\\n snow 雪 & <value> 😀\\r\\n\\nend\\r');\n const q=await Presentation.open(d.package.toBytes());expect(title(q).text).toBe('\\n snow 雪 & <value> 😀\\n\\nend\\r');expect(q.slides[0]!.inspectTextShapes().filter(s=>s.shapeId!==id)).toEqual(others);\n const old=parseXml(before),now=parseXml(q.package.text(part)),oldShape=elements(old,'sp',P)[0]!,newShape=elements(now,'sp',P)[0]!;expect(q.package.text(part).slice(0,newShape.start)).toBe(before.slice(0,oldShape.start));expect(q.package.text(part).slice(newShape.end)).toBe(before.slice(oldShape.end));\n}",
+      "calls": [
+        "Presentation.open",
+        "before.slice",
+        "d.package.text",
+        "d.package.toBytes",
+        "d.slides.0.inspectTextShapes",
+        "d.slides.0.inspectTextShapes().filter",
+        "d.slides.0.setShapeText",
+        "deck",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "parseXml",
+        "q.package.text",
+        "q.package.text().slice",
+        "q.slides.0.inspectTextShapes",
+        "q.slides.0.inspectTextShapes().filter",
+        "title"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:append and clear preserve exact bodyPr and lstStyle; detached inspections cannot mutate live text",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 15,
+      "title": "append and clear preserve exact bodyPr and lstStyle; detached inspections cannot mutate live text",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(title(d).text).toBe('Original\\nSecond')",
+        "expect(title(d).text).toBe('')",
+        "expect(updated).toContain(original.slice(pr.start,pr.end))",
+        "expect(updated).toContain(original.slice(lst.start,lst.end))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n const d=deck(),s=d.slides[0]!,id=title(d).shapeId,part=s.partName;const original=d.package.text(part);const pr=elements(parseXml(original),'bodyPr',A)[0]!,lst=elements(parseXml(original),'lstStyle',A)[0]!;\n s.setShapeText(id,'Second',true);expect(title(d).text).toBe('Original\\nSecond');const values=s.inspectTextShapes();values[0]!.paragraphs[0]!.text='bad';expect(title(d).text).toBe('Original\\nSecond');s.clearShapeText(id);expect(title(d).text).toBe('');const updated=d.package.text(part);expect(updated).toContain(original.slice(pr.start,pr.end));expect(updated).toContain(original.slice(lst.start,lst.end));\n}",
+      "calls": [
+        "d.package.text",
+        "deck",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "original.slice",
+        "parseXml",
+        "s.clearShapeText",
+        "s.inspectTextShapes",
+        "s.setShapeText",
+        "title"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:bullet levels and label flags are exact, invalid arguments refuse atomically without anchor version change",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 19,
+      "title": "bullet levels and label flags are exact, invalid arguments refuse atomically without anchor version change",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(title(d).text).toBe('Label: & value')",
+        "expect(title(d).paragraphs[0]!.level).toBe(8)",
+        "expect(operation).toThrow()",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.currentSlideVersion(s.partName)).toBe(version)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 21,
+          "expression": "for(const operation of [()=>s.addBullet(id,'bad',9),()=>s.addBullet(id,'bad',-1),()=>s.addBullet(id,'a\\nb'),()=>s.setShapeText(id,'\\u0000'),()=>s.setShapeText(999,'bad'),()=>s.setShapeAutofit(id,'toString' as any),()=>s.setShapeText(id,'bad',1 as any)])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n const d=deck(),s=d.slides[0]!,id=title(d).shapeId;s.clearShapeText(id);s.addBullet(id,'& value',8,'Label');expect(title(d).text).toBe('Label: & value');expect(title(d).paragraphs[0]!.level).toBe(8);\n const before=d.package.toBytes(),version=d.currentSlideVersion(s.partName);for(const operation of [()=>s.addBullet(id,'bad',9),()=>s.addBullet(id,'bad',-1),()=>s.addBullet(id,'a\\nb'),()=>s.setShapeText(id,'\\u0000'),()=>s.setShapeText(999,'bad'),()=>s.setShapeAutofit(id,'toString' as any),()=>s.setShapeText(id,'bad',1 as any)]){expect(operation).toThrow();expect(d.package.toBytes()).toEqual(before);expect(d.currentSlideVersion(s.partName)).toBe(version);}\n}",
+      "calls": [
+        "d.currentSlideVersion",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "s.addBullet",
+        "s.clearShapeText",
+        "s.setShapeAutofit",
+        "s.setShapeText",
+        "title"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:autofit preserves existing attributes and unrelated shape properties, replaces exactly one fit child",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 23,
+      "title": "autofit preserves existing attributes and unrelated shape properties, replaces exactly one fit child",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(next).toContain('wrap=\"square\" anchor=\"ctr\"')",
+        "expect(elements(parseXml(next),'noAutofit',A)).toHaveLength(0)",
+        "expect(elements(parseXml(next),'normAutofit',A)).toHaveLength(1)",
+        "expect(elements(parseXml(next),'spAutoFit',A)).toHaveLength(1)",
+        "expect(inspectTextShapes(next)[0]!.text).toBe('Original')",
+        "expect(()=>setShapeAutofit(xml.replace('<a:noAutofit/>','<a:noAutofit/><a:spAutoFit/>'),id,'none')).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n const d=deck(),id=title(d).shapeId,part=d.slides[0]!.partName;let xml=d.package.text(part).replace('<a:bodyPr/>','<a:bodyPr wrap=\"square\" anchor=\"ctr\"><a:noAutofit/></a:bodyPr>');let next=setShapeAutofit(xml,id,'shrink');expect(next).toContain('wrap=\"square\" anchor=\"ctr\"');expect(elements(parseXml(next),'noAutofit',A)).toHaveLength(0);expect(elements(parseXml(next),'normAutofit',A)).toHaveLength(1);next=setShapeAutofit(next,id,'resize');expect(elements(parseXml(next),'spAutoFit',A)).toHaveLength(1);expect(inspectTextShapes(next)[0]!.text).toBe('Original');\n expect(()=>setShapeAutofit(xml.replace('<a:noAutofit/>','<a:noAutofit/><a:spAutoFit/>'),id,'none')).toThrow();\n}",
+      "calls": [
+        "d.package.text",
+        "d.package.text().replace",
+        "deck",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toHaveLength",
+        "expect().toThrow",
+        "inspectTextShapes",
+        "parseXml",
+        "setShapeAutofit",
+        "title",
+        "xml.replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:aliases preserve custody, rich fields/comments/duplicate IDs and text locks refuse before a replacement result",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 27,
+      "title": "aliases preserve custody, rich fields/comments/duplicate IDs and text locks refuse before a replacement result",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(inspectTextShapes(changed)[0]!.text).toBe('New')",
+        "expect(()=>patchShapeText(source,id,'Changed')).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 29,
+          "expression": "for(const source of mutations)expect(()=>patchShapeText(source,id,'Changed')).toThrow();"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n const d=deck(),id=title(d).shapeId,xml=d.package.text(d.slides[0]!.partName);const alias=xml.replaceAll('xmlns:a=','xmlns:z=').replace(/(<\\/?|\\s)a:/g,'$1z:');const changed=patchShapeText(alias,id,'New');expect(inspectTextShapes(changed)[0]!.text).toBe('New');\n const mutations=[xml.replace('<a:r><a:t>Original</a:t></a:r>','<a:fld id=\"field\"><a:t>Original</a:t></a:fld>'),xml.replace('<a:r><a:t>Original</a:t></a:r>','<!--keep--><a:r><a:t>Original</a:t></a:r>'),xml.replace('<a:t>Original</a:t>','<a:t>Original<!--keep--></a:t>'),xml.replace('<a:t>Original</a:t>','<a:t><a:x/>Original</a:t>'),xml.replace('noGrp=\"1\"','noTextEdit=\"1\"'),xml.replace('id=\"3\"','id=\"2\"')];for(const source of mutations)expect(()=>patchShapeText(source,id,'Changed')).toThrow();\n}",
+      "calls": [
+        "d.package.text",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "inspectTextShapes",
+        "patchShapeText",
+        "title",
+        "xml.replace",
+        "xml.replaceAll",
+        "xml.replaceAll().replace"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:shape edit invalidates text/table anchors and production serialization failure rolls back package and version",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 31,
+      "title": "shape edit invalidates text/table anchors and production serialization failure rolls back package and version",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>table.cell(0,0)).toThrow('stale')",
+        "expect(()=>s.replaceTextAt(anchor,'Original','bad')).toThrow('stale')",
+        "expect(()=>s.setShapeText(id,'Lost')).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.currentSlideVersion(s.partName)).toBe(version)",
+        "expect(title(d).text).toBe('Changed')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n const d=deck(),s=d.slides[0]!,id=title(d).shapeId;s.addTable(1,1,{x:0,y:0,width:100,height:100});const table=s.tables[0]!,anchor=s.inspectText('before')[0]!.anchor;s.setShapeText(id,'Changed');expect(()=>table.cell(0,0)).toThrow('stale');expect(()=>s.replaceTextAt(anchor,'Original','bad')).toThrow('stale');\n const before=d.package.toBytes(),version=d.currentSlideVersion(s.partName),original=OpcPackage.prototype.toBytes;OpcPackage.prototype.toBytes=function(){throw Error('injected serialization');};try{expect(()=>s.setShapeText(id,'Lost')).toThrow('injected');}finally{OpcPackage.prototype.toBytes=original;}expect(d.package.toBytes()).toEqual(before);expect(d.currentSlideVersion(s.partName)).toBe(version);expect(title(d).text).toBe('Changed');\n}",
+      "calls": [
+        "Error",
+        "d.currentSlideVersion",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "s.addTable",
+        "s.inspectText",
+        "s.replaceTextAt",
+        "s.setShapeText",
+        "table.cell",
+        "title"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:positioned insertion preserves held slide identities, handles empty decks and rolls back all parts/metadata on serialization fault",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 35,
+      "title": "positioned insertion preserves held slide identities, handles empty decks and rolls back all parts/metadata on serialization fault",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(held.index).toBe(1)",
+        "expect((await Presentation.open(d.package.toBytes())).slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['First','Updated'])",
+        "expect(empty.insertTextSlide(0,'only').index).toBe(0)",
+        "expect(()=>d.insertTextSlide(1,'bad')).toThrow('injected')",
+        "expect(d.package.toBytes()).toEqual(before)",
+        "expect(d.slides).toEqual(handles)",
+        "expect(()=>d.insertTextSlide(n,'bad')).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 37,
+          "expression": "for(const n of [-1,2.5,99])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n const d=deck(),held=d.slides[0]!,anchor=held.inspectText('before')[0]!.anchor;d.insertTextSlide(0,'First','subtitle');expect(held.index).toBe(1);held.replaceTextAt(anchor,'Original','Updated');expect((await Presentation.open(d.package.toBytes())).slides.map(s=>s.inspectText('saved')[0]!.text)).toEqual(['First','Updated']);const empty=Presentation.create();expect(empty.insertTextSlide(0,'only').index).toBe(0);\n const before=d.package.toBytes(),handles=d.slides,original=OpcPackage.prototype.toBytes;let calls=0;OpcPackage.prototype.toBytes=function(){calls++;if(calls>=2)throw Error('injected insertion');return original.call(this);};try{expect(()=>d.insertTextSlide(1,'bad')).toThrow('injected');}finally{OpcPackage.prototype.toBytes=original;}expect(d.package.toBytes()).toEqual(before);expect(d.slides).toEqual(handles);expect(held.index).toBe(1);for(const n of [-1,2.5,99]){expect(()=>d.insertTextSlide(n,'bad')).toThrow();expect(d.package.toBytes()).toEqual(before);}\n}",
+      "calls": [
+        ".slides.map",
+        "Error",
+        "Presentation.create",
+        "Presentation.open",
+        "d.insertTextSlide",
+        "d.package.toBytes",
+        "deck",
+        "empty.insertTextSlide",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "held.inspectText",
+        "held.replaceTextAt",
+        "original.call",
+        "s.inspectText"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:shape edit retains UTF16 BOM/declaration and source archive, only one decoded payload changes",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "line": 39,
+      "title": "shape edit retains UTF16 BOM/declaration and source archive, only one decoded payload changes",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect([...saved.package.get(part)!.slice(0,2)]).toEqual(le?[255,254]:[254,255])",
+        "expect(saved.package.text(part)).toContain('encoding=\"UTF-16\"')",
+        "expect(title(saved).text).toBe('雪')",
+        "expect(saved.package.get(n)).toEqual(b)",
+        "expect((await Presentation.open(source)).package.toBytes()).toEqual(source)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 40,
+          "expression": "for(const le of [true,false])"
+        },
+        {
+          "line": 40,
+          "expression": "for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),le);"
+        },
+        {
+          "line": 40,
+          "expression": "for(const[n,b]of old)if(n!==part)expect(saved.package.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e",
+      "body": "{\n for(const le of [true,false]){const d=deck(),s=d.slides[0]!,part=s.partName,xml=d.package.text(part).replace('encoding=\"UTF-8\"','encoding=\"UTF-16\"'),bytes=new Uint8Array(2+xml.length*2),v=new DataView(bytes.buffer);v.setUint16(0,0xfeff,le);for(let i=0;i<xml.length;i++)v.setUint16(2+i*2,xml.charCodeAt(i),le);d.package.set(part,bytes);const source=d.package.toBytes(),q=await Presentation.open(source),old=new Map(q.package.names().map(n=>[n,q.package.get(n)!]));q.slides[0]!.setShapeText(title(q).shapeId,'雪');const saved=await Presentation.open(q.package.toBytes());expect([...saved.package.get(part)!.slice(0,2)]).toEqual(le?[255,254]:[254,255]);expect(saved.package.text(part)).toContain('encoding=\"UTF-16\"');expect(title(saved).text).toBe('雪');for(const[n,b]of old)if(n!==part)expect(saved.package.get(n)).toEqual(b);expect((await Presentation.open(source)).package.toBytes()).toEqual(source);}\n}",
+      "calls": [
+        ".package.toBytes",
+        "Presentation.open",
+        "d.package.set",
+        "d.package.text",
+        "d.package.text().replace",
+        "d.package.toBytes",
+        "deck",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "q.package.get",
+        "q.package.names",
+        "q.package.names().map",
+        "q.package.toBytes",
+        "q.slides.0.setShapeText",
+        "saved.package.get",
+        "saved.package.get().slice",
+        "saved.package.text",
+        "title",
+        "v.setUint16",
+        "xml.charCodeAt"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {
@@ -33994,7 +34494,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069",
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/local.feature'),feature('local'));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3});expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1});expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2});\n const f=inv.features.find(f=>f.path===prefix+b)!;expect(f.lifecycle).toBe('planned');expect(f.runner).toBeUndefined();expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'));\n let unsupported=0;const result=await executeAcceptance(inv,[...bound,{pattern:/^(input|output) (b|local)$/,run:()=>{unsupported++;throw Error('planned ran');}}],'catalogue');expect(result.failures).toEqual([]);expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3});expect(unsupported).toBe(0);\n const report=await runAcceptance(bound,{root});expect(report.coverage).toEqual(inv.coverage);expect(report.execution.cases.planned).toBe(2);await expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         ".update",
@@ -34038,7 +34538,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069",
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6",
       "body": "{\n for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>{l.schemaVersion=99;},\n  (l:ReturnType<typeof ledger>)=>{l.features.pop();l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.feature=b;},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.expandedCases=2;},\n  (l:ReturnType<typeof ledger>)=>{l.features.push(a);},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.push(l.workflows[0]!);},\n  (l:ReturnType<typeof ledger>)=>{l.features[0]='workflows/docx/../../escape.feature';},\n ]){const root=await project();try{const l=ledger();mutate(l);await Bun.write(join(root,catalogue),JSON.stringify(l));await expect(inventoryFeatures(root)).rejects.toThrow();}finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -34080,7 +34580,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069",
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6",
       "body": "{\n for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity']){const root=await project();try{const c=config();\n if(mode==='unknown')c.features[0]!.path=prefix+'workflows/docx/c.feature';if(mode==='duplicate')c.features.push(c.features[0]!);if(mode==='orphan')await Bun.write(join(root,prefix+'workflows/docx/c.feature'),feature('c'));if(mode==='lifecycle')await Bun.write(join(root,prefix+b),feature('b').replace('@planned','@implemented @bun'));if(mode==='missing')await rm(join(root,prefix+b));if(mode==='seal')await Bun.write(join(root,prefix+'manifest.json'),JSON.stringify({files:[{path:a,role:'workflow'}]}));if(mode==='catalogue-path')c.catalogue=prefix+'../other.json';if(mode==='shadow')await Bun.write(join(root,'features/shadow.feature'),feature('b'));if(mode==='case-identity')await Bun.write(join(root,prefix+b),'@planned\\nFeature: b\\n @id-b\\n Scenario Outline: Duplicate <value>\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | same |\\n   | same |\\n');\n await Bun.write(join(root,'features/shared.json'),JSON.stringify(c));await expect(inventoryFeatures(root)).rejects.toThrow();\n }finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -34116,7 +34616,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069",
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.write",
@@ -34145,9 +34645,9 @@
       "assertions": [
         "expect(inv.coverage?.catalogue).toMatchObject({features:62,scenarios:304,cases:791})",
         "expect(inv.coverage?.shared.cases).toEqual({implemented:732,planned:59,total:791})",
-        "expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:0,total:0})",
-        "expect(inv.counts.cases).toEqual({implemented:732,planned:59,total:791})",
-        "expect(inv.counts.scenarios.total).toBe(304)",
+        "expect(inv.coverage?.localOnly.cases).toEqual({implemented:20,planned:0,total:20})",
+        "expect(inv.counts.cases).toEqual({implemented:752,planned:59,total:811})",
+        "expect(inv.counts.scenarios.total).toBe(324)",
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
@@ -34156,8 +34656,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069",
-      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual({implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:0,total:0});expect(inv.counts.cases).toEqual({implemented:732,planned:59,total:791});expect(inv.counts.scenarios.total).toBe(304);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6",
+      "body": "{\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject({features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual({implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual({implemented:20,planned:0,total:20});expect(inv.counts.cases).toEqual({implemented:752,planned:59,total:811});expect(inv.counts.scenarios.total).toBe(324);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
       "calls": [
         ".test",
         ".update",
@@ -34199,7 +34699,8 @@
       "assertions": [
         "expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6})",
         "expect(canonical).toHaveLength(8)",
-        "expect(inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'))).toEqual([])",
+        "expect(local.map(f=>f.path)).toEqual(['features/pptx/manipulation-next20.feature'])",
+        "expect(local[0]!.scenarios).toHaveLength(20)",
         "expect(shared).toHaveLength(1)",
         "expect(shared[0]!.lifecycle).toBe('implemented')",
         "expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1)"
@@ -34216,8 +34717,8 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
-      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    expect(inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'))).toEqual([]);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }",
+      "sourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
+      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    const local=inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'));expect(local.map(f=>f.path)).toEqual(['features/pptx/manipulation-next20.feature']);expect(local[0]!.scenarios).toHaveLength(20);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }",
       "calls": [
         ".includes",
         "Bun.file",
@@ -34235,6 +34736,7 @@
         "inventoryFeatures",
         "join",
         "ledger.features.filter",
+        "local.map",
         "parseFeature",
         "parseFeature().scenarios.map",
         "verifySharedContracts"
@@ -34262,7 +34764,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "sourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "body": "{\n    expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}');\n    expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}');\n    expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}));\n  }",
       "calls": [
         "expect",
@@ -34294,7 +34796,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "sourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "body": "{\n    expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ]);\n    for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\"{}\"]],[[\"target\",\"value_json\"],[\"A1\",\"1e999\"]]])expect(()=>parseBatchTable(table)).toThrow();\n  }",
       "calls": [
         "expect",
@@ -34324,7 +34826,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "sourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "body": "{\n    const compile=(value:string)=>parseFeature('features/planned/example.feature',`@planned\nFeature: JSON escaping\n  @id-json-escaping\n  Scenario: Typed newline\n    When a batch is prepared:\n      | target | value_json |\n      | A1 | ${value} |\n    Then the typed value contains a newline\n`).scenarios[0]!.cases[0]!.steps[0]!.argument!.dataTable!;\n    expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow();\n    expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}]);\n  }",
       "calls": [
         "compile",
@@ -34364,7 +34866,7 @@
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "sourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "body": "{\n    const temp=await mkdtemp(join(tmpdir(),\"bun-shared-contracts-\"));\n    try {\n      await cp(join(root,\"features\"),join(temp,\"features\"),{recursive:true});\n      await cp(fixturesRoot(),join(temp,\"references/fixtures-ooxml\"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});\n      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/manifest.json')).json();\n      const contract=await Bun.file(join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json')).json();\n      const fixture=manifest.files.find((f:any)=>f.id===contract.fixtures[0].assetId);\n      for(const [file,expectedError] of [\n        ...contract.features.map((p:string)=>['references/fixtures-ooxml/'+p,'Shared contract artifact drift']),\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ]) {\n        const path=join(temp,file!);const original=await Bun.file(path).bytes();\n        const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;\n        await Bun.write(path,modified);await expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);\n      }\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n      // Re-seal the deliberately corrupted policy so these controls exercise\n      // schema and selection validation, not just byte-hash rejection.\n      const contractPath=join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json'),manifestPath=join(temp,'references/fixtures-ooxml/manifest.json');\n      for(const mutate of [\n        (c:any)=>{c.features=[];},\n        (c:any)=>{c.features.push(c.features[0]);},\n        (c:any)=>{c.features.pop();},\n        (c:any)=>{c.features[0]='../escape.feature';},\n        (c:any)=>{c.feature='workflows/mutation-safety.feature';},\n        (c:any)=>{c.features.push('workflows/docx/creation.feature');},\n        (c:any)=>{c.scenarioIds[0]='@id-office-preview-details';},\n        (c:any)=>{c.scenarioIds[0]=c.scenarioIds[1];},\n      ]){\n        const modified=structuredClone(contract);mutate(modified);const text=JSON.stringify(modified),copy=structuredClone(manifest),asset=copy.files.find((a:any)=>a.path==='contracts/mutation-safety.json');\n        asset.sha256=new Bun.CryptoHasher('sha256').update(text).digest('hex');asset.bytes=Buffer.byteLength(text);\n        await Bun.write(contractPath,text);await Bun.write(manifestPath,JSON.stringify(copy));await expect(verifySharedContracts(temp)).rejects.toThrow();\n      }\n      await Bun.write(contractPath,JSON.stringify(contract));const original=structuredClone(manifest),asset=original.files.find((a:any)=>a.path==='contracts/mutation-safety.json');asset.sha256=new Bun.CryptoHasher('sha256').update(JSON.stringify(contract)).digest('hex');await Bun.write(manifestPath,JSON.stringify(original));\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    } finally {await rm(temp,{recursive:true,force:true});}\n  }",
       "calls": [
         ".update",

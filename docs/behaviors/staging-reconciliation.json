@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1124,
+  "nativeDeclarations": 1135,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 897,
+  "withoutStagingCount": 908,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -1153,7 +1153,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "currentSourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1164,7 +1164,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "currentSourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1173,7 +1173,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "currentSourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1184,7 +1184,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "currentSourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1193,7 +1193,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "1b211a03586271ecfff29dbe59e37b2996799d18a775634d062e5f825e22625b",
+      "currentSourceSha256": "81f62d867dacc6100db16a7f7a89f79fae809c218aeeb6565359bb7e9b6ad51a",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -2548,72 +2548,72 @@
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:thread inspection returns two nonempty roots and exact detached replies without changing bytes",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:resolving a reply updates its complete existing thread while retaining unrelated root bodies anchors and members through path reopen",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:mixed states only change mismatched flags and repeat requests preserve exact archives while single-comment semantics remain unchanged",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:nested descendants and out-of-order extension entries resolve to the root and retain parent IDs",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:missing root metadata refuses even if selected reply already has the requested state",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:invalid arguments unsafe graphs unsupported bodies and protection refuse atomically including no-ops",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:thread inspection retains explicit unsupported findings but mutation does not silently ignore unsupported siblings",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:injected write or serialization failure restores all flags and retains prior package edits",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:thread updates retain alias namespaces lexical values and UTF8 BOM or UTF16 byte order",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:single-comment edits also retain an existing UTF8 BOM and empty thread inspection returns explicit empty arrays",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:comment source order including descendants before roots remains deterministic without changing thread ownership",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:batched flag edits preserve every unrelated character with quote entity and missing-flag variants",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:thread operation count bound refuses without returning a truncated result or mutating flags",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comment-threads.test.ts:existing-extension threads do not activate authored-comment response or root-only resolution profiles",
       "path": "tests/unit/docx-comment-threads.test.ts",
-      "sourceSha256": "fb7c2bdc693ca0020670b978a7aec0ab4e0344fc0462f13893392731471368aa"
+      "sourceSha256": "76e0d3bc1cfc0ff7a7ce9ceea5e1762b60136da03fcda5cc305bfe12e65cad18"
     },
     {
       "id": "bun:tests/unit/docx-comments.test.ts:all existing comment Gherkin cases assert saved outcomes",
@@ -3078,42 +3078,42 @@
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:direct Heading1 through Heading9 classify by identifier without changing package bytes",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:absent ordinary and misleading style IDs do not infer a heading",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:direct style classification does not compute base-style outline or body-anchor semantics",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:style classification survives path save reopen without changing text or unrelated members",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:changed or externally modified paragraph handles refuse classification instead of serving cached headings",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:classification reads literal imported IDs without requiring style definitions but refuses ambiguous direct metadata",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:aliased UTF16 direct style reads without editing encoding or root namespace bindings",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-heading-classification.test.ts:empty style retains strict Bun policy and all five shared getter-profile cases stay planned",
       "path": "tests/unit/docx-heading-classification.test.ts",
-      "sourceSha256": "4dc95554126f9c607f38e8a9958e0d476e4b22fc6cb89cef5bb044d4837be61c"
+      "sourceSha256": "f5f2736b995382ceb0b6a5cf94fb99aa74f90e925460cb86fd3745586bd42955"
     },
     {
       "id": "bun:tests/unit/docx-insert-paragraph.test.ts:insert at start, middle and end returns correct flattened paragraph and survives path reopen",
@@ -3653,122 +3653,122 @@
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:paired same-story moves combine with text and property revisions across seven stories with exact saved accept and reject bytes",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:previous profiles refuse moves unchanged and selected header does not resolve body or unsupported footer",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:malformed later move pairs refuse both actions before changing earlier stories",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:cross-story pairs refuse and destination-before-source ordering keeps exact source-ordered receipts",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:reached later-write serialization and validation faults roll back all paired ranges and prior edits",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:strict move profile refuses linked protection and external settings before a same-state no-op",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:move aliases local wrapper declarations and UTF8 BOM or UTF16 markers survive both actions through path reopen",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:multiple independent pairs and different paragraph placement preserve deterministic wrapper ordering",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:unsafe namespace lifts decorated run text and cross-paragraph ranges refuse unchanged",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:move namespaces compare expanded names but mismatched run segmentation and direct values refuse",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:move range starts require valid qualified dates while wrapper date is optional and valid if supplied",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-moves.test.ts:move profile is exported without activating shared profiles or the broader multistory obligation",
       "path": "tests/unit/docx-revision-moves.test.ts",
-      "sourceSha256": "4b437c30850f8e6b7f4f13e1635814406ccf69dcf2e78a62f945e0054b19a802"
+      "sourceSha256": "a519569840c89c626540484b48c733b8df5283ab3e488706df15b027e683cf40"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:opt-in run-property profile resolves exact current or saved properties and text in all seven reachable stories through path reopen",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:default text-only refusal stays unchanged and selected property profile leaves all other stories byte-identical",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:unsafe later run-property snapshots refuse both actions without partially resolving earlier text stories",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:run-property snapshot namespace meaning BOM and unrelated lexical bytes survive reject in three encodings",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:run-property profile validates protected external-settings and invalid profile requests before no-op",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:reached later-write and serialization faults restore property snapshots text flags and prior unrelated edits",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:empty previous properties restore the complete empty set and namespace shadowing stays local",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:extended-profile no-op still checks linked protection and external settings without changing bytes",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:default text revision writer also retains UTF8 BOM and extended profile refuses unknown selections and moves",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:all supported direct property families restore exact previous set and malformed scalar values refuse",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:post-write validation fault rolls back and unsupported unselected properties do not expand selected scope",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-revision-properties.test.ts:public entrypoints expose the opt-in profile without activating the broader shared or local revision obligations",
       "path": "tests/unit/docx-revision-properties.test.ts",
-      "sourceSha256": "f468d1da143dd32a23d8fe679d266138584682a16e7d928c3d0ae0088f2ab15f"
+      "sourceSha256": "d81fea8e66f336d0ed757b8fe9ec160f03b574ad911b8ebbf7f3f7e8a534223f"
     },
     {
       "id": "bun:tests/unit/docx-row-header.test.ts:direct row header toggles preserve text, dimensions and other members after path save/reopen",
@@ -4128,62 +4128,62 @@
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:horizontal merge retains first cell text explicit grid and other row through file reopen",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:first-cell formatting is retained but nonempty or decorated absorbed cells refuse without mutation",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:invalid singleton reversed out-of-range or noninteger merge coordinates refuse atomically",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:existing merges malformed grids width mismatches and protected documents refuse even disjoint requests",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:write and serialization faults roll back topology bytes and all held handles",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:merging preserves UTF8 BOM and aliased UTF16 text while refusing old table handles",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:middle and full-row merges retain correct grid coordinates and never enable existing merged-cell edits",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:unselected cells and tables retain payloads and empty paragraphs are removed only from selected coordinates",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:malformed widths and discarded width decoration section paragraphs and excessive width sums refuse unchanged",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:external document drift late malformed rows and external settings refuse before topology changes",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:horizontal authoring does not activate the shared horizontal and vertical setter profile",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-merge.test.ts:nested cells refuse even outside the selected merge so unsupported subtrees are never reindexed",
       "path": "tests/unit/docx-table-merge.test.ts",
-      "sourceSha256": "c66cb4edc57b150663e92c3d7e7c40f4c1ae26e7c63dd574173d4476610f7c42"
+      "sourceSha256": "5011f61dc7b0812b9ba0ad913a3cbbc3c87f1dd3af3d33e98b3122078437aeb7"
     },
     {
       "id": "bun:tests/unit/docx-table-rows.test.ts:append insert delete return fresh tables and retain row order after real path save",
@@ -4318,132 +4318,132 @@
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical merge saves restart and explicit continue markers without removing cells text widths or formatting",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:middle and edge ranges preserve physical geometry and all paragraphs",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:continuation content and decorations refuse rather than being hidden or discarded",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:invalid vertical coordinates refuse atomically without coercion",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:whole-table existing merges nested cells invalid widths and revised metadata refuse even outside selected column",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:protected external settings and stale document handles refuse before writing vertical flags",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:faults after write and during serialization roll back all markers and preserve held handles",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:UTF8 BOM and aliased UTF16 LE and BE retain exact sibling XML and flag namespaces after reopen",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:post-merge editable coordinates row changes and repeat merges refuse while unrelated cells remain readable",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical owner formatting follows schema order and complete table admission refuses section or lexical barriers",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical authoring leaves all unselected tables and package members unchanged",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-table-vertical-merge.test.ts:vertical native authoring does not select incompatible shared getter or horizontal outcomes",
       "path": "tests/unit/docx-table-vertical-merge.test.ts",
-      "sourceSha256": "866839d5650fd64f4d7a07050b9d5ce4ef0d4e295480da116e37bb06cabc4544"
+      "sourceSha256": "ec11b4a3899e4ed46cb88319b6a63f95ace1d9cf8035cb3de5931e5b3a0effac"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:template inspection returns concrete sections placeholders locations and table text without mutating archive",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:inspection persists through path reopen and results are detached and deeply immutable",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:plain and empty documents return useful empty inventories without inventing classifications",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:placeholders span plain runs but never paragraphs and retain Unicode UTF16 offsets and occurrence order",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:table cell paragraphs have distinct locations and cannot create cross-paragraph placeholders or sections",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:unsupported late body and cell content refuses the whole inspection with unchanged bytes",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:stale external document edits refuse and no header story or macro text is silently included",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:aliased UTF16BE inspection preserves exact source bytes and namespace meaning",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:global placeholder and paragraph bounds refuse instead of returning a truncated successful report",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:grid lexical decorations wrong namespaces and late property ambiguity refuse read-only",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:table count and aggregate placeholder limits apply across cells with no successful truncation",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:read-only inspection permits protected input and leaves all template response/cache scenarios planned",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:row offsets and mismatched or absent cell widths refuse rather than reporting false rectangular coordinates",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-template-inspection.test.ts:explicit zero row offsets retain correct positions and invalid offset spellings refuse",
       "path": "tests/unit/docx-template-inspection.test.ts",
-      "sourceSha256": "bbfe4fb17a3bdd9e6239241a17d3c0c9b0f01e7687d5576b1290bfefb0e000ab"
+      "sourceSha256": "b902dd8e176df8fbbd12c831885b797bcbf2f3056baaacaa8b021a3a2ec2d2b9"
     },
     {
       "id": "bun:tests/unit/docx-tracking-settings.test.ts:tracking author toggle follows the shared getter sequence without creating revision markup",
@@ -4971,6 +4971,21 @@
       "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01"
     },
     {
+      "id": "bun:tests/unit/pptx-next20-bindings.test.ts:twenty PPTX manipulation cases run production saves, reopen and custody predicates",
+      "path": "tests/unit/pptx-next20-bindings.test.ts",
+      "sourceSha256": "b49a3e0330058d3b0a7568ffca249f2221e7c459a79c2d259ea807cbaf6beb75"
+    },
+    {
+      "id": "bun:tests/unit/pptx-next20-bindings.test.ts:twenty source capture identities and their immutable feature bytes remain separate from local execution credit",
+      "path": "tests/unit/pptx-next20-bindings.test.ts",
+      "sourceSha256": "b49a3e0330058d3b0a7568ffca249f2221e7c459a79c2d259ea807cbaf6beb75"
+    },
+    {
+      "id": "bun:tests/unit/pptx-next20-bindings.test.ts:restored paragraph and custody predicates reject lost production edits and false caller copies",
+      "path": "tests/unit/pptx-next20-bindings.test.ts",
+      "sourceSha256": "b49a3e0330058d3b0a7568ffca249f2221e7c459a79c2d259ea807cbaf6beb75"
+    },
+    {
       "id": "bun:tests/unit/pptx-notes-edit.test.ts:existing notes replacement changes only its notes payload and reopens exact text",
       "path": "tests/unit/pptx-notes-edit.test.ts",
       "sourceSha256": "5ff23ff0307da42b6d404538ab89188070f1b52a14219d3ca48c94a111e09832"
@@ -5144,6 +5159,46 @@
       "id": "bun:tests/unit/pptx-retained-visibility.test.ts:changed slide identity, relationship target and missing part fail closed",
       "path": "tests/unit/pptx-retained-visibility.test.ts",
       "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:shape text retains Unicode, XML values, CR, whitespace and empty LF paragraphs on saved reopen",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:append and clear preserve exact bodyPr and lstStyle; detached inspections cannot mutate live text",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:bullet levels and label flags are exact, invalid arguments refuse atomically without anchor version change",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:autofit preserves existing attributes and unrelated shape properties, replaces exactly one fit child",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:aliases preserve custody, rich fields/comments/duplicate IDs and text locks refuse before a replacement result",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:shape edit invalidates text/table anchors and production serialization failure rolls back package and version",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:positioned insertion preserves held slide identities, handles empty decks and rolls back all parts/metadata on serialization fault",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-text-native.test.ts:shape edit retains UTF16 BOM/declaration and source archive, only one decoded payload changes",
+      "path": "tests/unit/pptx-shape-text-native.test.ts",
+      "sourceSha256": "304fba7b0bc2d3f5808a14759d295e2d3000879902d458920059b080c0eba51e"
     },
     {
       "id": "bun:tests/unit/pptx-slide-order.test.ts:slide permutations execute21 saved outcomes and atomic refusals",
@@ -5368,27 +5423,27 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069"
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069"
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069"
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069"
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "879e0d4d05afad7639fe293bc18b6c7f0bc93c158f6bab8f6d4feb2b53b4a069"
+      "sourceSha256": "346e619ef5de18e03662f83c2ed533e44c5920ed7af6131f17e994b6c9a212d6"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
