@@ -1,6 +1,8 @@
 import { OoxmlError } from "../errors.ts";
 import {patchRetainedWordRun,patchRetainedWordParagraph,type RetainedWordRunPatch,type RetainedWordParagraphPatch} from './retained-formatting.ts';
 export type {RetainedWordRunPatch,RetainedWordParagraphPatch} from './retained-formatting.ts';
+import {patchRetainedWordTable,type RetainedWordTablePatch} from './retained-table.ts';
+export type {RetainedWordTablePatch} from './retained-table.ts';
 import {readDocumentProperties,editDocumentProperties,type DirectDocumentProperties,type DocumentPropertiesPatch} from './document-properties.ts';
 import {readTrackingEnabled,setTrackingEnabled,validateTrackAuthor,type TrackingSettingsReceipt} from './tracking-settings.ts';
 export type {TrackingSettingsReceipt} from './tracking-settings.ts';
@@ -373,6 +375,7 @@ export class Table {
     private readonly documentRef: Document,
     private readonly snapshot: TableSnapshot,
   ) {}
+  private retainedConsumed=false;
 
   get rows(): number {
     const table = this.liveTable();
@@ -413,6 +416,8 @@ export class Table {
   isRowHeader(row: number): boolean {
     return this.documentRef.getRowHeader(this.liveTable(),row);
   }
+
+  patchRetained(row:number,column:number,patch:RetainedWordTablePatch):{changed:number} {if(this.retainedConsumed)fail('docx-stale-table','Retained table target consumed');const result=this.documentRef.patchRetainedTable(this.liveTable(),row,column,patch);if(result.changed)this.retainedConsumed=true;return result;}
 
   /** Boolean writes an explicit marker; null removes it. Table handles remain usable. */
   setRowHeader(row: number, value: boolean | null): {changed: number} {
@@ -1149,6 +1154,11 @@ export class Document {
     if(this.opcPackage.text(DOCUMENT_PART)!==this.xml)fail('docx-stale-table','Document XML changed outside the table handle');
     if(!Number.isInteger(row)||row<0||row>=snapshot.rows)throw new RangeError('DOCX table row is out of range');
     if(snapshot.unsupported)fail('docx-table-unsupported',`Table contains unsupported topology: ${snapshot.unsupported}`);
+  }
+
+  patchRetainedTable(snapshot:TableSnapshot,row:number,column:number,patch:RetainedWordTablePatch):{changed:number} {
+    this.assertRowHeaderTarget(snapshot,row);this.assertRetainedFormattingUnprotected();
+    const next=patchRetainedWordTable(this.xml,snapshot.index,row,column,patch);if(next===this.xml)return {changed:0};this.commitParagraphProperties(next);return {changed:1};
   }
 
   getRowHeader(snapshot:TableSnapshot,row:number):boolean {

@@ -3,6 +3,7 @@ import {mkdtemp,rm} from 'node:fs/promises';import {join} from 'node:path';impor
 import {Presentation} from '../../src/pptx/index.ts';import {Document} from '../../src/docx/index.ts';import {OpcPackage} from '../../src/opc/index.ts';
 import {parseXml,elements,attribute,type XmlElement} from '../../src/xml/index.ts';import {fixturePath,fixturesRoot} from '../../scripts/fixture-inputs.ts';import type {StepBinding} from '../../scripts/gherkin.ts';
 import {omitOpeningAttributes} from '../helpers/xml-formatting-custody.ts';
+import {routed as routeRetainedTable} from './retained-table.ts';
 const A='http://schemas.openxmlformats.org/drawingml/2006/main',P='http://schemas.openxmlformats.org/presentationml/2006/main',W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 const dirs=new Set<string>();export async function cleanup(){for(const d of dirs)await rm(d,{recursive:true,force:true});dirs.clear();}
 type State={record:any;input:Uint8Array;before:Uint8Array;members:Map<string,Uint8Array>;doc:Presentation|Document;held:any;pkg?:OpcPackage;saved?:Presentation|Document;error?:any;output?:Uint8Array};const state=(c:Record<string,unknown>)=>c.retainedState as State;
@@ -30,4 +31,5 @@ const bindings:StepBinding[]=[
  {pattern:/^actual caller input, original identities, relationships and content-type graph are unchanged$/,run:async c=>{const s=state(c);assert.deepEqual(s.input,s.before);const before=await OpcPackage.open(s.before);for(const n of before.names())if(n.endsWith('.rels')||n==='[Content_Types].xml')assert(Buffer.from(before.get(n)!).equals(Buffer.from(s.pkg!.get(n)!)));}},
  {pattern:/^refusal reason invalid-style preserves session bytes and held target usability before save$/,run:c=>{const s=state(c);assert.deepEqual(s.doc.package.toBytes(),s.before);assert.deepEqual(s.output,s.before);assert.equal((s.doc as Presentation).slides[1],s.held);assert.equal(s.held.patchTextRun(4,0,0,{bold:true}).changed,0);assert.deepEqual(s.doc.package.toBytes(),s.before);}}
 ];
-export {bindings};
+const routedBindings=bindings.map(b=>({...b,run:(c:Record<string,unknown>,...args:string[])=>((c.scenario as {id:string}).id.startsWith('@id-pptx-table-properties-')||(c.scenario as {id:string}).id.startsWith('@id-docx-table-properties-'))?routeRetainedTable(b.pattern,c,...args):b.run(c,...args)}));
+export {routedBindings as bindings};

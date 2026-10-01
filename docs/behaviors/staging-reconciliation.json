@@ -1153,7 +1153,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "021c90fbb058332511c24430539cf51238bec1f90d4c3a8ab7fe762a0a65c714",
+      "currentSourceSha256": "99005f737368d5426457e28bf97adf151c79302b36af2def4810d10afaaa8f23",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1164,7 +1164,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "021c90fbb058332511c24430539cf51238bec1f90d4c3a8ab7fe762a0a65c714",
+      "currentSourceSha256": "99005f737368d5426457e28bf97adf151c79302b36af2def4810d10afaaa8f23",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1173,7 +1173,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "021c90fbb058332511c24430539cf51238bec1f90d4c3a8ab7fe762a0a65c714",
+      "currentSourceSha256": "99005f737368d5426457e28bf97adf151c79302b36af2def4810d10afaaa8f23",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1184,7 +1184,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "021c90fbb058332511c24430539cf51238bec1f90d4c3a8ab7fe762a0a65c714",
+      "currentSourceSha256": "99005f737368d5426457e28bf97adf151c79302b36af2def4810d10afaaa8f23",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1193,7 +1193,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "021c90fbb058332511c24430539cf51238bec1f90d4c3a8ab7fe762a0a65c714",
+      "currentSourceSha256": "99005f737368d5426457e28bf97adf151c79302b36af2def4810d10afaaa8f23",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -5433,27 +5433,27 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "ce16eea3d8a4e72f64a9755a8b140ee5a5a40462db3f9c7d8a20a4f7a18771dd"
+      "sourceSha256": "cff087f600ac21d78627ebda96802dcefeebde2564e0c3cbb1d5b2eb34881c13"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "ce16eea3d8a4e72f64a9755a8b140ee5a5a40462db3f9c7d8a20a4f7a18771dd"
+      "sourceSha256": "cff087f600ac21d78627ebda96802dcefeebde2564e0c3cbb1d5b2eb34881c13"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "ce16eea3d8a4e72f64a9755a8b140ee5a5a40462db3f9c7d8a20a4f7a18771dd"
+      "sourceSha256": "cff087f600ac21d78627ebda96802dcefeebde2564e0c3cbb1d5b2eb34881c13"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "ce16eea3d8a4e72f64a9755a8b140ee5a5a40462db3f9c7d8a20a4f7a18771dd"
+      "sourceSha256": "cff087f600ac21d78627ebda96802dcefeebde2564e0c3cbb1d5b2eb34881c13"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "ce16eea3d8a4e72f64a9755a8b140ee5a5a40462db3f9c7d8a20a4f7a18771dd"
+      "sourceSha256": "cff087f600ac21d78627ebda96802dcefeebde2564e0c3cbb1d5b2eb34881c13"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",

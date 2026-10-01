@@ -2,9 +2,11 @@ import assert from 'node:assert/strict';
 import sharedPin from '../../docs/behaviors/pptx-manipulation-candidate.json';
 import formattingPin from '../../docs/behaviors/pptx-formatting-candidate.json';
 import retainedPin from '../../docs/behaviors/retained-style-word-candidate.json';
+import tablePin from '../../docs/behaviors/retained-table-properties-candidate.json';
 export const pptxNext20Kinds=['patch-title','patch-body','patch-subtitle','append-title','bullet-default','bullet-sequence','bullet-level','bullet-bold-label','clear-bullets','autofit-shrink','autofit-none','autofit-resize','insert-start','insert-middle','reorder','reorder-refusal','table-values','table-geometry','set-notes','notes-readback'];
 export const pptxNext20Ids=pptxNext20Kinds.map(k=>'@id-bun-pptx-next20-'+k);
 export function withoutPptxNext20(keys:string[]):string[]{
+ const table=keys.filter(k=>k.startsWith('@id-pptx-table-properties-')||k.startsWith('@id-docx-table-properties-'));if(table.length){assert.equal(table.length,40);assert.deepEqual([...table].sort(),[...tablePin.selectedScenarioIds].sort());keys=keys.filter(k=>!table.includes(k));}
  const retained=keys.filter(k=>k.startsWith('@id-pptx-retained-')||k.startsWith('@id-docx-retained-'));if(retained.length){assert.equal(retained.length,40);assert.deepEqual([...retained].sort(),[...retainedPin.selectedScenarioIds].sort());keys=keys.filter(k=>!retained.includes(k));}
  const formatting=keys.filter(k=>k.startsWith('@id-pptx-formatting-'));if(formatting.length){assert.equal(formatting.length,20);assert.deepEqual([...formatting].sort(),[...formattingPin.selectedScenarioIds].sort());keys=keys.filter(k=>!formatting.includes(k));}
  const shared=keys.filter(k=>k.startsWith('@id-pptx-manipulation-'));if(shared.length){assert.equal(shared.length,20);assert.deepEqual([...shared].sort(),[...sharedPin.selectedScenarioIds].sort());keys=keys.filter(k=>!shared.includes(k));}

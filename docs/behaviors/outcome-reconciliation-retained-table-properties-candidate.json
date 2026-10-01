@@ -53,7 +53,7 @@
     "tests/unit/table-merge-outcomes.test.ts": "b900fe458f1741694a29258e710613f17abed77f684aa0c6a39644a47d53ab93",
     "src/docx/table-merge.ts": "6a8346be89c9eec82e627a8bc5aca98afe60be5787a49179540feb2ffac9af03",
     "tests/acceptance/table-merging.ts": "27bd91c6ecddc9741615b82e74211b05fd22b549556adebc6692b598ec856a58",
-    "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+    "workflows/docx/tables.feature": "31148e56a491e9713c1912a92d8ce32a1f3da1dc41579cc5ded7c71609ce2471",
     "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
     "tests/unit/docx-table-vertical-merge.test.ts": "ad6caaa05d9455f70f4d6f7747d84808f0425c5c8491efeaf61c80e997de6eab",
     "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
@@ -75,7 +75,7 @@
     "tests/acceptance/slide-order.ts": "491bd4bb6ef7c459b225019cc25373c6069a71f48131046beb4cf4b01d303e7b",
     "src/pptx/index.ts": "7725ab3c58c5cd520cacf8c0ed41ae54a18c12f601c923167f8c6c69af3411ce",
     "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
-    "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e",
+    "workflows/pptx/slide-order.feature": "c05b9cffb791fd1e526ae2c931b795456bca35a74584641a781ed2cfa9222e52",
     "tests/unit/docx-effective-formatting.test.ts": "f10b510ddd9aba24f8df8d76ea38ab74801c4f16c1da24bf6e33ae43195c7e12",
     "tests/acceptance/effective-formatting.ts": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f",
     "src/docx/effective-formatting.ts": "a1bbdb5ab9a0bddbb88357947021546c1d12aa4ef883ac8aa94a8b15c77d6580",
@@ -83,8 +83,8 @@
     "tests/unit/xml.test.ts": "ed4aa6c8d7fee17f424c9d60d1a0f5f2e642ef4849c49e55cfdd7875879fa217",
     "tests/acceptance/core.ts": "ac13be80cacdd4490e22ddd3439e2241fbc45b412bd0eb3430dfe575bab0f08f",
     "tests/acceptance/xml-values.ts": "066d2f26b73c1efecdddbd4a2106d95bfc9b4c4c1657012eb79759b69c95e05e",
-    "workflows/xml/editing.feature": "a9c308f9995d7a335b3d96054c2eb8fd8286937c95a46bd07b26428c63292ff3",
-    "workflows/xml/parsing.feature": "350edcdfa0dc1206f9f5165cae93ba41c12b6974ee21e71cd3329ed2a82438ff",
+    "workflows/xml/editing.feature": "0f7b19a36ba4fd7f47f1b2d692afe7f745210a073f29b26d0056909457353769",
+    "workflows/xml/parsing.feature": "e5f72d944248f84a89f60cf498d1cba642217259c362486ab279eef697a61b90",
     "tests/unit/pptx.test.ts": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
     "tests/acceptance/pptx.ts": "7e4ab7286825d0a5aeb3cda3284bb1afa39e6a9986eca45d4432ad3eaab31e1f",
     "tests/acceptance/pptx-custody.ts": "d3814ec9b812385a1a6894e239cb5cdee6f46bed16eefe30c1d2e193472f4425",
@@ -95,9 +95,9 @@
     "src/pptx/notes.ts": "47870e17f779b55c8288e2861eb878fef5f72ebba324d63c64c148dda42e0eb0",
     "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
     "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
-    "workflows/pptx/notes.feature": "181044e6ee3fabbdb8096b626965155e7db97764bb64223e0968dc50dd5e3daa",
+    "workflows/pptx/notes.feature": "edde465c627e5fef5f048d8ad9da72db6a5e030b73838b14e056c87b3c2cbafd",
     "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
-    "workflows/pptx/text.feature": "30fb7380fc0a133c5b710cd843493ebcaee781d2000c23eabb3bff0290b373a8",
+    "workflows/pptx/text.feature": "42dae34ee08a7783b17e27bc5a5a8e906ed2ca06bf77fcecedfc3fa087dc5608",
     "tests/unit/docx-append-run.test.ts": "5e8c4d90103340a77727d32557f23af3a96420fadb9b862588eee7aebf96c1ff",
     "tests/unit/docx-cell-properties.test.ts": "0ef875b25cdac171bad5c0581d017c3359d16271fa5e146643a386de80939388",
     "tests/unit/docx-row-header.test.ts": "5c886da4e41d973a5c9760e8ec3fb07b2ccc12e2b4be4d1c483f4f75b7bb8f8a",
@@ -126,9 +126,9 @@
     "tests/acceptance/document-properties.ts": "c9394a823862725de7a8f67463560074dacc61cc52fed72977c084242b96e2f3",
     "tests/acceptance/table-style.ts": "11e2b549ae7a8c52338780bcfd81139681c57d7d8887abfa9025304f2ca2f39f",
     "workflows/docx/page-layout.feature": "8d2e42e828beec30c47698dee64c6bc35380f7d9e0b1a3f3b7aeb36ceb921596",
-    "workflows/docx/paragraphs.feature": "7c448d5863f64ef188b3cb2ec1c9a82fb4a8a2c7c5104058ccf21ad2561e6856",
+    "workflows/docx/paragraphs.feature": "f79050eb42d870be02aed473e74e2479c0c9054e0c1c53ebbdf4f6a93f5b530f",
     "workflows/docx/properties.feature": "59757333a4894b19364fd2b40fd2f1ceaafa19c21f357b4b9ef764bf2197be04",
-    "workflows/docx/run-formatting.feature": "7af8ef3a85775d91a2025e033fd818dbda4bf8799210b294544b4ae1743536a1",
+    "workflows/docx/run-formatting.feature": "7e8ee86821bccfd14e6f33d290cb9fd809c11c1791d4eaa3f654fc3f38d90614",
     "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d",
     "tests/unit/docx-body-anchors.test.ts": "7f33968a21639d69925a16464dd8de3361b3ee019ffb60054d44810e12ce10d3",
     "tests/unit/docx-body-map.test.ts": "72e9671abcb36f27c7105a58a3cb5083db49697dc04e046fec37057c6f0ad277",
@@ -161,7 +161,7 @@
     "src/opc/admission.ts": "648b86844c8580075fa94608d23da590cc073225fe8641471c226b2d6712b00d",
     "src/xml/comparison.ts": "80bd9731638425144e6c748c73be91a0ad6ca40f2636a10bd10ec27898d62fd8",
     "src/xml/encoding.ts": "47f7f3a46acfda41620a021f8582b8706656cec13627433b1895579afb05867e",
-    "workflows/xml/comparison.feature": "b700a3da8670cb048aa3f836c193f4533908730c185847f63e167e59c48f5e93",
+    "workflows/xml/comparison.feature": "eb6440d3a548ba0d86ff576fc65a97d57df68c423ae17abf779eef8c423c9233",
     "tests/unit/package-comparison.test.ts": "5eb4ac3abb47bc05d3a29ab1c29435b85890c51fb0b710d3b1fcbf75b6d805aa",
     "tests/acceptance/package-comparison.ts": "d68481c2680ca81e709289ce7942128a3bb1e831faeac1c9902bedb457547adc",
     "src/opc/comparison.ts": "95584fd6df9b349d4f0a6ec39d3edc54790f11cbbbb0ab8ddf83d4a5a33d410f",
@@ -171,7 +171,7 @@
     "tests/unit/graph.test.ts": "cd185f7026f63ed0ad203f478634479abce8e2fcb8f3e953e9dc4338aa4038e3",
     "tests/unit/package-diff.test.ts": "b60e5da0628e1c3bc03b6b88e89c5aed549fdcd03728c55b74b48a06c050fd2b",
     "tests/acceptance/graph.ts": "2b9d6d50fa569eaac708b42b50be1e8348c80d0e4ab17b041b2ffab514d5f53f",
-    "workflows/package/graph.feature": "953cab35e20019a234ed4d1aa2f1575a065f3c7768f74fb0a0269bf70b3c4d4e",
+    "workflows/package/graph.feature": "76148d827e7cdc4ee5b4529dd093e3f0ca066b00fad63b3431db5c0c574c5ecd",
     "tests/unit/zip64.test.ts": "05a83f2006b29ab844da3c36fab6960d6fbef83d9e8ffbb2edc48dc9a4ed756b",
     "tests/acceptance/zip64.ts": "30fba94dfa454d046eccc8ff2121d267591d1cf6d5102df7f91cf795225cbd6f",
     "workflows/package/zip64.feature": "f103ace071e647ffee092085a1c4b58e9b7be2cb4cb7553c3558c53f3be5c69a",
@@ -180,13 +180,13 @@
     "tests/acceptance/zip32.ts": "eca3d5b566b6b0139873140151764be2a00c768188092435d8a9ca663421e3d9",
     "tests/acceptance/refusal-outcomes.ts": "d700d6bf7bb7dd964b1d92679cd72b55997782cb2b78896a8e761949f6e19f5f",
     "tests/fixtures/zip32.ts": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812",
-    "workflows/package/zip32.feature": "932bdcb2a1fb0866ec07c3e64d92b54b39dafa06f83e4c405fb48e80634ef24c",
+    "workflows/package/zip32.feature": "8db7070f38041a107a27f2114280971dd29a890c82387dbe31342df7909513ca",
     "tests/acceptance/data-descriptor-integrity.ts": "b694c317696ad23a927f1bf38abd46bcee53ef9744bf9339164475a08de05cf9",
     "workflows/package/data-descriptor-integrity.feature": "c0c855a3f4dd74e15fd59aa03572bb7f8c752544fd9bb64b6f082e14388c9370",
     "tests/unit/package.test.ts": "be4729004809760771958250588a6903aee227fbb1ec26598f1126bb72eea3c1",
     "tests/unit/opc-custody-bindings.test.ts": "c8f144b72b38632741b25f7d90fead4bb1070b41f13f579a7bf926b5b0cd2f94",
     "tests/acceptance/opc-custody.ts": "0a0fec688d768cce0460cdc2d26981a752cdba9bea2fa61465c9a32ae0654a3f",
-    "workflows/package/preservation.feature": "1a2c653871f6bd830da4ca37f2b9c355c3885463234101b55a403786aedbba5a",
+    "workflows/package/preservation.feature": "89ea7dbf321a87bbadac00eae8bcebed89364756f1ec449379dd0080afa8dff6",
     "tests/unit/package-admission.test.ts": "93034e444fbb5a91e15b4ed2c3b208955b6d98b5f8fba92329f95d2b8a341c02",
     "tests/acceptance/package-admission.ts": "d23dd1248f77c6ce76ac56c21b7b8358bc08873767b51f1235799e4f7faae6de",
     "workflows/package/xml-member-admission.feature": "19fa717632d689e7ff4e883fb2af3f31e018373dc79ddb78efecf7742ea14e91",
@@ -342,7 +342,7 @@
         "tests/acceptance/steps.ts": "449f8328d6221f0ee70b069faf53ecbbaef84a1efc4dde421000932c1a6d6676",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+        "workflows/docx/tables.feature": "31148e56a491e9713c1912a92d8ce32a1f3da1dc41579cc5ded7c71609ce2471",
         "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
         "tests/unit/docx-table-vertical-merge.test.ts": "ad6caaa05d9455f70f4d6f7747d84808f0425c5c8491efeaf61c80e997de6eab",
         "tests/unit/vertical-merge-outcomes.test.ts": "4b2ac0deae1fda920c115f93ceac24753652384a0ff086aa87e63ebdf4ed2042",
@@ -365,7 +365,7 @@
         "tests/acceptance/steps.ts": "449f8328d6221f0ee70b069faf53ecbbaef84a1efc4dde421000932c1a6d6676",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d"
+        "workflows/docx/tables.feature": "31148e56a491e9713c1912a92d8ce32a1f3da1dc41579cc5ded7c71609ce2471"
       }
     },
     {
@@ -423,7 +423,7 @@
         "src/pptx/slide-order.ts": "12a92f73645f58317400eefb280dacc17bf472afc87bedbe36f6347da12d1dbe",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/pptx/slide-order.feature": "6fd4c56131a68b47e47d91c286967127ab410026966f3132f9caf244bde7369e"
+        "workflows/pptx/slide-order.feature": "c05b9cffb791fd1e526ae2c931b795456bca35a74584641a781ed2cfa9222e52"
       }
     },
     {
@@ -456,8 +456,8 @@
         "src/errors.ts": "2ae03d5e3328de2275c7eeb38afb9572d3325f0d29f374f523e9c061c16c68f2",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/xml/editing.feature": "a9c308f9995d7a335b3d96054c2eb8fd8286937c95a46bd07b26428c63292ff3",
-        "workflows/xml/parsing.feature": "350edcdfa0dc1206f9f5165cae93ba41c12b6974ee21e71cd3329ed2a82438ff"
+        "workflows/xml/editing.feature": "0f7b19a36ba4fd7f47f1b2d692afe7f745210a073f29b26d0056909457353769",
+        "workflows/xml/parsing.feature": "e5f72d944248f84a89f60cf498d1cba642217259c362486ab279eef697a61b90"
       }
     },
     {
@@ -485,9 +485,9 @@
         "tests/acceptance/notes-editing.ts": "e1f1ac3b4ab9848b4d3f27a3ffb346ab0794b3b99da8b9448b409302715c22c6",
         "tests/acceptance/steps.ts": "449f8328d6221f0ee70b069faf53ecbbaef84a1efc4dde421000932c1a6d6676",
         "tests/fixtures/admission.ts": "9321a276eff6b021a2f96662f45c6fcfbf51cc1071afd57a8331f18309fee16e",
-        "workflows/pptx/notes.feature": "181044e6ee3fabbdb8096b626965155e7db97764bb64223e0968dc50dd5e3daa",
+        "workflows/pptx/notes.feature": "edde465c627e5fef5f048d8ad9da72db6a5e030b73838b14e056c87b3c2cbafd",
         "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
-        "workflows/pptx/text.feature": "30fb7380fc0a133c5b710cd843493ebcaee781d2000c23eabb3bff0290b373a8"
+        "workflows/pptx/text.feature": "42dae34ee08a7783b17e27bc5a5a8e906ed2ca06bf77fcecedfc3fa087dc5608"
       }
     },
     {
@@ -546,10 +546,10 @@
         "tests/acceptance/document-properties.ts": "c9394a823862725de7a8f67463560074dacc61cc52fed72977c084242b96e2f3",
         "tests/acceptance/table-style.ts": "11e2b549ae7a8c52338780bcfd81139681c57d7d8887abfa9025304f2ca2f39f",
         "workflows/docx/page-layout.feature": "8d2e42e828beec30c47698dee64c6bc35380f7d9e0b1a3f3b7aeb36ceb921596",
-        "workflows/docx/paragraphs.feature": "7c448d5863f64ef188b3cb2ec1c9a82fb4a8a2c7c5104058ccf21ad2561e6856",
+        "workflows/docx/paragraphs.feature": "f79050eb42d870be02aed473e74e2479c0c9054e0c1c53ebbdf4f6a93f5b530f",
         "workflows/docx/properties.feature": "59757333a4894b19364fd2b40fd2f1ceaafa19c21f357b4b9ef764bf2197be04",
-        "workflows/docx/run-formatting.feature": "7af8ef3a85775d91a2025e033fd818dbda4bf8799210b294544b4ae1743536a1",
-        "workflows/docx/tables.feature": "858a813b0f9ea0ac315ae1034057da288a510c638849f558f242d0ce4aa41f0d",
+        "workflows/docx/run-formatting.feature": "7e8ee86821bccfd14e6f33d290cb9fd809c11c1791d4eaa3f654fc3f38d90614",
+        "workflows/docx/tables.feature": "31148e56a491e9713c1912a92d8ce32a1f3da1dc41579cc5ded7c71609ce2471",
         "tests/helpers/shared-scenarios.ts": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d"
       }
     },
@@ -736,7 +736,7 @@
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/xml/comparison.feature": "b700a3da8670cb048aa3f836c193f4533908730c185847f63e167e59c48f5e93"
+        "workflows/xml/comparison.feature": "eb6440d3a548ba0d86ff576fc65a97d57df68c423ae17abf779eef8c423c9233"
       }
     },
     {
@@ -810,7 +810,7 @@
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/package/graph.feature": "953cab35e20019a234ed4d1aa2f1575a065f3c7768f74fb0a0269bf70b3c4d4e"
+        "workflows/package/graph.feature": "76148d827e7cdc4ee5b4529dd093e3f0ca066b00fad63b3431db5c0c574c5ecd"
       }
     },
     {
@@ -848,7 +848,7 @@
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/package/zip32.feature": "932bdcb2a1fb0866ec07c3e64d92b54b39dafa06f83e4c405fb48e80634ef24c",
+        "workflows/package/zip32.feature": "8db7070f38041a107a27f2114280971dd29a890c82387dbe31342df7909513ca",
         "tests/acceptance/data-descriptor-integrity.ts": "b694c317696ad23a927f1bf38abd46bcee53ef9744bf9339164475a08de05cf9",
         "workflows/package/data-descriptor-integrity.feature": "c0c855a3f4dd74e15fd59aa03572bb7f8c752544fd9bb64b6f082e14388c9370"
       }
@@ -875,7 +875,7 @@
         "scripts/fixture-inputs.ts": "ee2c428c2ee29aa651cf32d1b006572cf181dd1d14010cc0a91c9328a901814d",
         "scripts/gherkin.ts": "b42f40b0407e653f165f288e0a58dc3abc8c70645e1ef93d7755584e896aaa5f",
         "scripts/test-inventory.ts": "6983c3f8fc1b744ea254bbf994b2ae514cde10d2e381e5755cc8f30f1b8b4407",
-        "workflows/package/preservation.feature": "1a2c653871f6bd830da4ca37f2b9c355c3885463234101b55a403786aedbba5a"
+        "workflows/package/preservation.feature": "89ea7dbf321a87bbadac00eae8bcebed89364756f1ec449379dd0080afa8dff6"
       }
     },
     {

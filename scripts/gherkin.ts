@@ -26,6 +26,7 @@ import {verifyReferences} from './references.ts';
 import pptxManipulationPin from '../docs/behaviors/pptx-manipulation-candidate.json';
 import pptxFormattingPin from '../docs/behaviors/pptx-formatting-candidate.json';
 import retainedStyleWordPin from '../docs/behaviors/retained-style-word-candidate.json';
+import retainedTablePin from '../docs/behaviors/retained-table-properties-candidate.json';
 
 export type StepBinding = {
   pattern: RegExp;
@@ -356,10 +357,11 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
   const candidatePin=process.env.OOXML_FIXTURES_ROOT&&resolve(root)===resolve(import.meta.dir,'..')
     ? await Bun.file(process.env.OOXML_REFERENCE_PIN!).json() : undefined;
   const formattingCandidate=candidatePin?.commit===pptxFormattingPin.commit;
-  const retainedCandidate=candidatePin?.commit===retainedStyleWordPin.commit;
+  const tableCandidate=candidatePin?.commit===retainedTablePin.commit;
+  const retainedCandidate=tableCandidate||candidatePin?.commit===retainedStyleWordPin.commit;
   const pptxCandidate=candidatePin?.commit===pptxManipulationPin.commit||formattingCandidate||retainedCandidate;
   if(pptxCandidate){
-    const expected=retainedCandidate?retainedStyleWordPin:formattingCandidate?pptxFormattingPin:pptxManipulationPin;
+    const expected=tableCandidate?retainedTablePin:retainedCandidate?retainedStyleWordPin:formattingCandidate?pptxFormattingPin:pptxManipulationPin;
     if(JSON.stringify(candidatePin.selectedScenarioIds)!==JSON.stringify(expected.selectedScenarioIds))throw Error('PPTX candidate selection drift');
     // Migrate the predecessor local lane only for the sealed shared candidate.
     const local=features.findIndex(f=>f.path==='features/pptx/manipulation-next20.feature');
@@ -394,7 +396,7 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
         owners.set(row.id,row);
       }
       for(const path of selections.keys())if(!ledger.features.includes(path.slice(sharedPrefix.length)))throw Error('Activation outside shared catalogue');
-      if(pptxCandidate){for(const id of [...pptxManipulationPin.selectedScenarioIds,...((formattingCandidate||retainedCandidate)?pptxFormattingPin.selectedScenarioIds:[]),...(retainedCandidate?retainedStyleWordPin.selectedScenarioIds:[])]){
+      if(pptxCandidate){for(const id of [...pptxManipulationPin.selectedScenarioIds,...((formattingCandidate||retainedCandidate)?pptxFormattingPin.selectedScenarioIds:[]),...(retainedCandidate?retainedStyleWordPin.selectedScenarioIds:[]),...(tableCandidate?retainedTablePin.selectedScenarioIds:[])]){
         const owner=owners.get(id);if(!owner)throw Error('Missing PPTX candidate scenario: '+id);
         const uri=sharedPrefix+owner.feature,ids=selections.get(uri) as string[]|undefined;
         selections.set(uri,[...(ids??[]),id]);

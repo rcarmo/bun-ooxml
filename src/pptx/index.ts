@@ -14,6 +14,8 @@ import {patchShapeGeometry,patchTextRun,patchParagraph,slideVisibility,patchSlid
 export type {ShapeGeometryPatch,DirectTextRunPatch,DirectParagraphPatch} from './formatting.ts';
 import {patchShapeStyle,patchTextFrame,patchRetainedRunEffects,type ShapeStylePatch,type TextFramePatch,type RetainedRunEffectsPatch} from './retained-style.ts';
 export type {ShapeStylePatch,TextFramePatch,RetainedRunEffectsPatch} from './retained-style.ts';
+import {patchRetainedPptxTable,type RetainedPptxTablePatch} from './retained-table.ts';
+export type {RetainedPptxTablePatch} from './retained-table.ts';
 import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
 
 const PRESENTATION_NS = "http://schemas.openxmlformats.org/presentationml/2006/main";
@@ -400,6 +402,10 @@ export class Slide {
     return table;
   }
 
+  patchRetainedTable(tableIndex:number,version:number,shapeId:number,row:number,column:number,patch:RetainedPptxTablePatch):{changed:number} {
+    this.resolveTableHandle(tableIndex,version,shapeId);return this.editShapeText(xml=>patchRetainedPptxTable(xml,shapeId,row,column,patch));
+  }
+
   setTableCellText(
     tableIndex: number,
     version: number,
@@ -574,6 +580,8 @@ export class Table {
     assertTableIndex(column, table.gridColumns.length, "column");
     this.slideRef.setTableCellText(this.tableIndex, this.version, this.shapeId, row, column, value);
   }
+
+  patchRetained(row:number,column:number,patch:RetainedPptxTablePatch):{changed:number} {this.resolve();return this.slideRef.patchRetainedTable(this.tableIndex,this.version,this.shapeId,row,column,patch);}
 
   private resolve(): ResolvedSlideTable {
     return this.slideRef.resolveTableHandle(this.tableIndex, this.version, this.shapeId);
