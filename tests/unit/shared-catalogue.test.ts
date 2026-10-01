@@ -1,5 +1,6 @@
 import {withoutTrackingToggle} from '../helpers/execution-baseline.ts';
 import pptxPin from '../../docs/behaviors/pptx-manipulation-candidate.json';
+import formattingPin from '../../docs/behaviors/pptx-formatting-candidate.json';
 import {test,expect} from 'bun:test';
 import {mkdtemp,mkdir,rm} from 'node:fs/promises';import {join} from 'node:path';import {tmpdir} from 'node:os';
 import {inventoryFeatures,executeAcceptance} from '../../scripts/gherkin.ts';import {runAcceptance} from '../../scripts/acceptance.ts';
@@ -38,8 +39,8 @@ test('empty explicit activation retains the full planned catalogue but cannot pa
  const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}
 });
 test('real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations',async()=>{
- const migrated=!!process.env.OOXML_REFERENCE_PIN&&(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit===pptxPin.commit;
- const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject(migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual(migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual(migrated?{implemented:0,planned:0,total:0}:{implemented:20,planned:0,total:20});expect(inv.counts.cases).toEqual({implemented:752,planned:59,total:811});expect(inv.counts.scenarios.total).toBe(324);
+ const commit=process.env.OOXML_REFERENCE_PIN?(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit:undefined,formatted=commit===formattingPin.commit,migrated=commit===pptxPin.commit||formatted;
+ const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject(formatted?{features:67,scenarios:344,cases:831}:migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual(formatted?{implemented:772,planned:59,total:831}:migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual(migrated?{implemented:0,planned:0,total:0}:{implemented:20,planned:0,total:20});expect(inv.counts.cases).toEqual(formatted?{implemented:772,planned:59,total:831}:{implemented:752,planned:59,total:811});expect(inv.counts.scenarios.total).toBe(formatted?344:324);
  const templates=inv.features.filter(f=>/\/template-(analysis|cache)\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);
  const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();
  const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');

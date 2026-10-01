@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1136,
-  "files": 146,
+  "count": 1137,
+  "files": 148,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -457,6 +457,18 @@
       "issues": []
     },
     {
+      "path": "tests/unit/pptx-formatting-bindings.test.ts",
+      "sha256": "a7cf08b1399d4c15caa253ae828627665060a41c44b8d156f94a553877ae3848",
+      "declarations": 1,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-formatting-native.test.ts",
+      "sha256": "0fa92efbc9a186d9c9217646228185d411d9ff32e241e1178b7bc554b742d38c",
+      "declarations": 0,
+      "issues": []
+    },
+    {
       "path": "tests/unit/pptx-manipulation-bindings.test.ts",
       "sha256": "6c6a217824a119b397747bd871caa4ef7869386309de6b372cb2f7e13c44de0e",
       "declarations": 1,
@@ -578,13 +590,13 @@
     },
     {
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sha256": "39c5cc2cdf847af9988618e0bae83c5c3d94ad22947dab401f67100630547bd5",
+      "sha256": "0f3073804bbf3888ea9a290d8380a70a46a5a1e087e3e12f00e2941618f91a71",
       "declarations": 5,
       "issues": []
     },
     {
       "path": "tests/unit/shared-contracts.test.ts",
-      "sha256": "2944ac29d7b477229847c9266ce7e1a918d1497cc4f83a62ddd1f1bff53762e1",
+      "sha256": "ea8303ec895a3dc59bfcee4982028f6608bcdba8a4c003401565f8fa6f6341db",
       "declarations": 5,
       "issues": []
     },
@@ -1025,6 +1037,10 @@
       "sha256": "d3814ec9b812385a1a6894e239cb5cdee6f46bed16eefe30c1d2e193472f4425"
     },
     {
+      "path": "tests/acceptance/pptx-formatting.ts",
+      "sha256": "d1e5d73cb2987d5c1df47a2ae966d3bfd72688564d9bb97c07d570ba33e83c5e"
+    },
+    {
       "path": "tests/acceptance/pptx-manipulation.ts",
       "sha256": "9cdc4b20d0269fff298803c1a1ba1ea1aabdf1be74f376ffe59a431dc3293109"
     },
@@ -1090,7 +1106,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "b6db0e374673a80f525f140aa1a640ff1c5b53cdf88b2068fef380da5fb57803"
+      "sha256": "1f567ad09a21df32f1b7675ae552620b567fe494f6f2af3363fa78f8cf5a2672"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -1226,15 +1242,19 @@
     },
     {
       "path": "tests/helpers/pptx-next20-identities.ts",
-      "sha256": "21769da677619026e646bdba7be67c739f8d3b8ea85feb0bec9db2cc38484546"
+      "sha256": "5b65a0e80003180bfeb68938989bc25e76be4875684e3b359c24a75ae91fb96c"
     },
     {
       "path": "tests/helpers/pptx-shared-predecessor.ts",
-      "sha256": "7d359a695635d9b532218c10c010068ffd34a0ad057d671d6121c1a46f3924cf"
+      "sha256": "18f920b63bd51687bab5e4cdf0047cee5dc8eeddd4de784c186761b138209e8e"
     },
     {
       "path": "tests/helpers/shared-scenarios.ts",
       "sha256": "d260c99bcedb89261d8cf5be2e886502c37d7e0e4ce7db236540ebc83476761d"
+    },
+    {
+      "path": "tests/helpers/xml-formatting-custody.ts",
+      "sha256": "7671f5ad3a81e4d2f1816fa8d0ee567f6f509a05779dcc0283d3d67fa4d04d64"
     },
     {
       "path": "tests/unit/mapping-history.ts",
@@ -29785,6 +29805,35 @@
       "unresolved": []
     },
     {
+      "id": "bun:tests/unit/pptx-formatting-bindings.test.ts:directformatting candidate seals67features20caseIDs and no execution credit",
+      "path": "tests/unit/pptx-formatting-bindings.test.ts",
+      "line": 8,
+      "title": "directformatting candidate seals67features20caseIDs and no execution credit",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(pin.schemaVersion).toBe(2)",
+        "expect(pin.featureCount).toBe(67)",
+        "expect(Object.keys(pin.featureSeals)).toHaveLength(67)",
+        "expect(pin.selectedScenarioIds).toHaveLength(20)",
+        "expect(pin.executionCredit).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "a7cf08b1399d4c15caa253ae828627665060a41c44b8d156f94a553877ae3848",
+      "body": "{expect(pin.schemaVersion).toBe(2);expect(pin.featureCount).toBe(67);expect(Object.keys(pin.featureSeals)).toHaveLength(67);expect(pin.selectedScenarioIds).toHaveLength(20);expect(pin.executionCredit).toBe(false);}",
+      "calls": [
+        "Object.keys",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
       "id": "bun:tests/unit/pptx-manipulation-bindings.test.ts:PPTX candidate retains complete feature seals and exact source/localidentity migrations without credit",
       "path": "tests/unit/pptx-manipulation-bindings.test.ts",
       "line": 16,
@@ -34523,7 +34572,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 12,
+      "line": 13,
       "title": "catalogue mode includes unselected features as planned and separates shared from local obligations",
       "suites": [],
       "kind": "test",
@@ -34546,7 +34595,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "39c5cc2cdf847af9988618e0bae83c5c3d94ad22947dab401f67100630547bd5",
+      "sourceSha256": "0f3073804bbf3888ea9a290d8380a70a46a5a1e087e3e12f00e2941618f91a71",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/local.feature'),feature('local'));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3});expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1});expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2});\n const f=inv.features.find(f=>f.path===prefix+b)!;expect(f.lifecycle).toBe('planned');expect(f.runner).toBeUndefined();expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'));\n let unsupported=0;const result=await executeAcceptance(inv,[...bound,{pattern:/^(input|output) (b|local)$/,run:()=>{unsupported++;throw Error('planned ran');}}],'catalogue');expect(result.failures).toEqual([]);expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3});expect(unsupported).toBe(0);\n const report=await runAcceptance(bound,{root});expect(report.coverage).toEqual(inv.coverage);expect(report.execution.cases.planned).toBe(2);await expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         ".update",
@@ -34574,7 +34623,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 19,
+      "line": 20,
       "title": "canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "suites": [],
       "kind": "test",
@@ -34585,12 +34634,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 20,
+          "line": 21,
           "expression": "for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "39c5cc2cdf847af9988618e0bae83c5c3d94ad22947dab401f67100630547bd5",
+      "sourceSha256": "0f3073804bbf3888ea9a290d8380a70a46a5a1e087e3e12f00e2941618f91a71",
       "body": "{\n for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>{l.schemaVersion=99;},\n  (l:ReturnType<typeof ledger>)=>{l.features.pop();l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.feature=b;},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.expandedCases=2;},\n  (l:ReturnType<typeof ledger>)=>{l.features.push(a);},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.push(l.workflows[0]!);},\n  (l:ReturnType<typeof ledger>)=>{l.features[0]='workflows/docx/../../escape.feature';},\n ]){const root=await project();try{const l=ledger();mutate(l);await Bun.write(join(root,catalogue),JSON.stringify(l));await expect(inventoryFeatures(root)).rejects.toThrow();}finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -34616,7 +34665,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 31,
+      "line": 32,
       "title": "catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "suites": [],
       "kind": "test",
@@ -34627,12 +34676,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 32,
+          "line": 33,
           "expression": "for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity'])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "39c5cc2cdf847af9988618e0bae83c5c3d94ad22947dab401f67100630547bd5",
+      "sourceSha256": "0f3073804bbf3888ea9a290d8380a70a46a5a1e087e3e12f00e2941618f91a71",
       "body": "{\n for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity']){const root=await project();try{const c=config();\n if(mode==='unknown')c.features[0]!.path=prefix+'workflows/docx/c.feature';if(mode==='duplicate')c.features.push(c.features[0]!);if(mode==='orphan')await Bun.write(join(root,prefix+'workflows/docx/c.feature'),feature('c'));if(mode==='lifecycle')await Bun.write(join(root,prefix+b),feature('b').replace('@planned','@implemented @bun'));if(mode==='missing')await rm(join(root,prefix+b));if(mode==='seal')await Bun.write(join(root,prefix+'manifest.json'),JSON.stringify({files:[{path:a,role:'workflow'}]}));if(mode==='catalogue-path')c.catalogue=prefix+'../other.json';if(mode==='shadow')await Bun.write(join(root,'features/shadow.feature'),feature('b'));if(mode==='case-identity')await Bun.write(join(root,prefix+b),'@planned\\nFeature: b\\n @id-b\\n Scenario Outline: Duplicate <value>\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | same |\\n   | same |\\n');\n await Bun.write(join(root,'features/shared.json'),JSON.stringify(c));await expect(inventoryFeatures(root)).rejects.toThrow();\n }finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -34656,7 +34705,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 37,
+      "line": 38,
       "title": "empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "suites": [],
       "kind": "test",
@@ -34668,7 +34717,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "39c5cc2cdf847af9988618e0bae83c5c3d94ad22947dab401f67100630547bd5",
+      "sourceSha256": "0f3073804bbf3888ea9a290d8380a70a46a5a1e087e3e12f00e2941618f91a71",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.write",
@@ -34689,17 +34738,17 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 40,
+      "line": 41,
       "title": "real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "suites": [],
       "kind": "test",
       "lifecycle": "normal",
       "assertions": [
-        "expect(inv.coverage?.catalogue).toMatchObject(migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791})",
-        "expect(inv.coverage?.shared.cases).toEqual(migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791})",
+        "expect(inv.coverage?.catalogue).toMatchObject(formatted?{features:67,scenarios:344,cases:831}:migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791})",
+        "expect(inv.coverage?.shared.cases).toEqual(formatted?{implemented:772,planned:59,total:831}:migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791})",
         "expect(inv.coverage?.localOnly.cases).toEqual(migrated?{implemented:0,planned:0,total:0}:{implemented:20,planned:0,total:20})",
-        "expect(inv.counts.cases).toEqual({implemented:752,planned:59,total:811})",
-        "expect(inv.counts.scenarios.total).toBe(324)",
+        "expect(inv.counts.cases).toEqual(formatted?{implemented:772,planned:59,total:831}:{implemented:752,planned:59,total:811})",
+        "expect(inv.counts.scenarios.total).toBe(formatted?344:324)",
         "expect(templates).toHaveLength(2)",
         "expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13)",
         "expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true)",
@@ -34708,8 +34757,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "39c5cc2cdf847af9988618e0bae83c5c3d94ad22947dab401f67100630547bd5",
-      "body": "{\n const migrated=!!process.env.OOXML_REFERENCE_PIN&&(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit===pptxPin.commit;\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject(migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual(migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual(migrated?{implemented:0,planned:0,total:0}:{implemented:20,planned:0,total:20});expect(inv.counts.cases).toEqual({implemented:752,planned:59,total:811});expect(inv.counts.scenarios.total).toBe(324);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
+      "sourceSha256": "0f3073804bbf3888ea9a290d8380a70a46a5a1e087e3e12f00e2941618f91a71",
+      "body": "{\n const commit=process.env.OOXML_REFERENCE_PIN?(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit:undefined,formatted=commit===formattingPin.commit,migrated=commit===pptxPin.commit||formatted;\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject(formatted?{features:67,scenarios:344,cases:831}:migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual(formatted?{implemented:772,planned:59,total:831}:migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual(migrated?{implemented:0,planned:0,total:0}:{implemented:20,planned:0,total:20});expect(inv.counts.cases).toEqual(formatted?{implemented:772,planned:59,total:831}:{implemented:752,planned:59,total:811});expect(inv.counts.scenarios.total).toBe(formatted?344:324);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
       "calls": [
         ".test",
         ".update",
@@ -34743,7 +34792,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 11,
+      "line": 12,
       "title": "checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
       "suites": [
         "shared mutation inventory and custody"
@@ -34762,17 +34811,17 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 19,
+          "line": 20,
           "expression": "for(const path of canonical)"
         },
         {
-          "line": 24,
+          "line": 25,
           "expression": "for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2944ac29d7b477229847c9266ce7e1a918d1497cc4f83a62ddd1f1bff53762e1",
-      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    const migrated=!!process.env.OOXML_REFERENCE_PIN&&(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit===pptxPin.commit;\n    const local=inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'));expect(local.map(f=>f.path)).toEqual(migrated?[]:['features/pptx/manipulation-next20.feature']);if(!migrated)expect(local[0]!.scenarios).toHaveLength(20);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }",
+      "sourceSha256": "ea8303ec895a3dc59bfcee4982028f6608bcdba8a4c003401565f8fa6f6341db",
+      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    const migrated=!!process.env.OOXML_REFERENCE_PIN&&[pptxPin.commit,formattingPin.commit].includes((await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit);\n    const local=inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'));expect(local.map(f=>f.path)).toEqual(migrated?[]:['features/pptx/manipulation-next20.feature']);if(!migrated)expect(local[0]!.scenarios).toHaveLength(20);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }",
       "calls": [
         ".includes",
         "Bun.file",
@@ -34803,7 +34852,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 27,
+      "line": 28,
       "title": "stable identity excludes path, UUID and example insertion order",
       "suites": [
         "shared mutation inventory and custody"
@@ -34818,7 +34867,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2944ac29d7b477229847c9266ce7e1a918d1497cc4f83a62ddd1f1bff53762e1",
+      "sourceSha256": "ea8303ec895a3dc59bfcee4982028f6608bcdba8a4c003401565f8fa6f6341db",
       "body": "{\n    expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}');\n    expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}');\n    expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}));\n  }",
       "calls": [
         "expect",
@@ -34831,7 +34880,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 32,
+      "line": 33,
       "title": "typed mutation inputs preserve strings, numeric values and significant whitespace",
       "suites": [
         "shared mutation inventory and custody"
@@ -34845,12 +34894,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 36,
+          "line": 37,
           "expression": "for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\""
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2944ac29d7b477229847c9266ce7e1a918d1497cc4f83a62ddd1f1bff53762e1",
+      "sourceSha256": "ea8303ec895a3dc59bfcee4982028f6608bcdba8a4c003401565f8fa6f6341db",
       "body": "{\n    expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ]);\n    for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\"{}\"]],[[\"target\",\"value_json\"],[\"A1\",\"1e999\"]]])expect(()=>parseBatchTable(table)).toThrow();\n  }",
       "calls": [
         "expect",
@@ -34866,7 +34915,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 38,
+      "line": 39,
       "title": "Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "suites": [
         "shared mutation inventory and custody"
@@ -34880,7 +34929,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "2944ac29d7b477229847c9266ce7e1a918d1497cc4f83a62ddd1f1bff53762e1",
+      "sourceSha256": "ea8303ec895a3dc59bfcee4982028f6608bcdba8a4c003401565f8fa6f6341db",
       "body": "{\n    const compile=(value:string)=>parseFeature('features/planned/example.feature',`@planned\nFeature: JSON escaping\n  @id-json-escaping\n  Scenario: Typed newline\n    When a batch is prepared:\n      | target | value_json |\n      | A1 | ${value} |\n    Then the typed value contains a newline\n`).scenarios[0]!.cases[0]!.steps[0]!.argument!.dataTable!;\n    expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow();\n    expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}]);\n  }",
       "calls": [
         "compile",
@@ -34896,7 +34945,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 52,
+      "line": 53,
       "title": "rejects feature, fixture and policy tampering while leaving original fixtures untouched",
       "suites": [
         "shared mutation inventory and custody"
@@ -34911,16 +34960,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 60,
+          "line": 61,
           "expression": "for(const [file,expectedError] of [\n        ...contract.features.map((p:string)=>['references/fixtures-ooxml/'+p,'Shared contract artifact drift']),\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ])"
         },
         {
-          "line": 73,
+          "line": 74,
           "expression": "for(const mutate of [\n        (c:any)=>"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "2944ac29d7b477229847c9266ce7e1a918d1497cc4f83a62ddd1f1bff53762e1",
+      "sourceSha256": "ea8303ec895a3dc59bfcee4982028f6608bcdba8a4c003401565f8fa6f6341db",
       "body": "{\n    const temp=await mkdtemp(join(tmpdir(),\"bun-shared-contracts-\"));\n    try {\n      await cp(join(root,\"features\"),join(temp,\"features\"),{recursive:true});\n      await cp(fixturesRoot(),join(temp,\"references/fixtures-ooxml\"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});\n      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/manifest.json')).json();\n      const contract=await Bun.file(join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json')).json();\n      const fixture=manifest.files.find((f:any)=>f.id===contract.fixtures[0].assetId);\n      for(const [file,expectedError] of [\n        ...contract.features.map((p:string)=>['references/fixtures-ooxml/'+p,'Shared contract artifact drift']),\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ]) {\n        const path=join(temp,file!);const original=await Bun.file(path).bytes();\n        const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;\n        await Bun.write(path,modified);await expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);\n      }\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n      // Re-seal the deliberately corrupted policy so these controls exercise\n      // schema and selection validation, not just byte-hash rejection.\n      const contractPath=join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json'),manifestPath=join(temp,'references/fixtures-ooxml/manifest.json');\n      for(const mutate of [\n        (c:any)=>{c.features=[];},\n        (c:any)=>{c.features.push(c.features[0]);},\n        (c:any)=>{c.features.pop();},\n        (c:any)=>{c.features[0]='../escape.feature';},\n        (c:any)=>{c.feature='workflows/mutation-safety.feature';},\n        (c:any)=>{c.features.push('workflows/docx/creation.feature');},\n        (c:any)=>{c.scenarioIds[0]='@id-office-preview-details';},\n        (c:any)=>{c.scenarioIds[0]=c.scenarioIds[1];},\n      ]){\n        const modified=structuredClone(contract);mutate(modified);const text=JSON.stringify(modified),copy=structuredClone(manifest),asset=copy.files.find((a:any)=>a.path==='contracts/mutation-safety.json');\n        asset.sha256=new Bun.CryptoHasher('sha256').update(text).digest('hex');asset.bytes=Buffer.byteLength(text);\n        await Bun.write(contractPath,text);await Bun.write(manifestPath,JSON.stringify(copy));await expect(verifySharedContracts(temp)).rejects.toThrow();\n      }\n      await Bun.write(contractPath,JSON.stringify(contract));const original=structuredClone(manifest),asset=original.files.find((a:any)=>a.path==='contracts/mutation-safety.json');asset.sha256=new Bun.CryptoHasher('sha256').update(JSON.stringify(contract)).digest('hex');await Bun.write(manifestPath,JSON.stringify(original));\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    } finally {await rm(temp,{recursive:true,force:true});}\n  }",
       "calls": [
         ".update",

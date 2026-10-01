@@ -10,6 +10,8 @@ import { OpcPackage, relationshipPath, sameBytes, type Relationship } from "../o
 import {permutation,reorderSlideList} from './slide-order.ts';
 import {inspectTextShapes,patchShapeText,appendShapeBullet,clearShapeText,setShapeAutofit,type TextShape} from './shape-text.ts';
 export type {TextShape} from './shape-text.ts';
+import {patchShapeGeometry,patchTextRun,patchParagraph,slideVisibility,patchSlideVisibility,type ShapeGeometryPatch,type DirectTextRunPatch,type DirectParagraphPatch} from './formatting.ts';
+export type {ShapeGeometryPatch,DirectTextRunPatch,DirectParagraphPatch} from './formatting.ts';
 import { attribute, applyEdits, elements, escapeAttribute, escapeText, parseXml, type XmlElement } from "../xml/index.ts";
 
 const PRESENTATION_NS = "http://schemas.openxmlformats.org/presentationml/2006/main";
@@ -314,6 +316,11 @@ export class Slide {
   addBullet(shapeId:number,text:string,level=0,boldLabel?:string):{changed:number} {return this.editShapeText(xml=>appendShapeBullet(xml,shapeId,text,level,boldLabel));}
   clearShapeText(shapeId:number):{changed:number} {return this.editShapeText(xml=>clearShapeText(xml,shapeId));}
   setShapeAutofit(shapeId:number,mode:'shrink'|'none'|'resize'):{changed:number} {return this.editShapeText(xml=>setShapeAutofit(xml,shapeId,mode));}
+  get hidden():boolean {this.assertNotesSlide();return slideVisibility(this.presentation.package.text(this.partName));}
+  setHidden(hidden:boolean):{changed:number} {return this.editShapeText(xml=>patchSlideVisibility(xml,hidden));}
+  patchShapeGeometry(shapeId:number,patch:ShapeGeometryPatch):{changed:number} {return this.editShapeText(xml=>patchShapeGeometry(xml,shapeId,patch));}
+  patchTextRun(shapeId:number,paragraph:number,run:number,patch:DirectTextRunPatch):{changed:number} {return this.editShapeText(xml=>patchTextRun(xml,shapeId,paragraph,run,patch));}
+  patchParagraph(shapeId:number,paragraph:number,patch:DirectParagraphPatch):{changed:number} {return this.editShapeText(xml=>patchParagraph(xml,shapeId,paragraph,patch));}
 
   /** Append a slide-space text box. Newline sequences become separate paragraphs. */
   addTextBox(text: string, geometry: TextBoxGeometry, options: TextBoxOptions = {}): TextBoxReceipt {
