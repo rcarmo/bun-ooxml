@@ -23,6 +23,7 @@ import {
 import { createHash, randomUUID } from "node:crypto";
 import { join, resolve } from "node:path";
 import {verifyReferences} from './references.ts';
+import pptxManipulationPin from '../docs/behaviors/pptx-manipulation-candidate.json';
 
 export type StepBinding = {
   pattern: RegExp;
@@ -350,6 +351,15 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
     ? process.env.OOXML_FIXTURES_ROOT : join(root,sharedPrefix);
   // Candidate admission is an exact clean reference check, not a commit whitelist.
   if(process.env.OOXML_FIXTURES_ROOT&&resolve(root)===resolve(import.meta.dir,'..'))await verifyReferences(root);
+  const candidatePin=process.env.OOXML_FIXTURES_ROOT&&resolve(root)===resolve(import.meta.dir,'..')
+    ? await Bun.file(process.env.OOXML_REFERENCE_PIN!).json() : undefined;
+  const pptxCandidate=candidatePin?.commit===pptxManipulationPin.commit;
+  if(pptxCandidate){
+    if(JSON.stringify(candidatePin.selectedScenarioIds)!==JSON.stringify(pptxManipulationPin.selectedScenarioIds))throw Error('PPTX candidate selection drift');
+    // Migrate the predecessor local lane only for the sealed shared candidate.
+    const local=features.findIndex(f=>f.path==='features/pptx/manipulation-next20.feature');
+    if(local<0)throw Error('Missing PPTX predecessor lane');features.splice(local,1);
+  }
   const sharedConfig = Bun.file(join(root, 'features/shared.json'));
   if (await sharedConfig.exists()) {
     const shared = await sharedConfig.json();
@@ -379,6 +389,11 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
         owners.set(row.id,row);
       }
       for(const path of selections.keys())if(!ledger.features.includes(path.slice(sharedPrefix.length)))throw Error('Activation outside shared catalogue');
+      if(pptxCandidate){for(const id of pptxManipulationPin.selectedScenarioIds){
+        const owner=owners.get(id);if(!owner)throw Error('Missing PPTX candidate scenario: '+id);
+        const uri=sharedPrefix+owner.feature,ids=selections.get(uri) as string[]|undefined;
+        selections.set(uri,[...(ids??[]),id]);
+      }}
       const found=new Set<string>();let caseCount=0;
       for(const path of ledger.features as string[]){
         const uri=sharedPrefix+path,source=await Bun.file(join(referenceRoot,path)).text();

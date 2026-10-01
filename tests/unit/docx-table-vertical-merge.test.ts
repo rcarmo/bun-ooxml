@@ -1,3 +1,4 @@
+import {historicalSharedCases} from "../helpers/pptx-shared-predecessor.ts";
 import {test,expect} from 'bun:test';
 import {mkdtemp,rm} from 'node:fs/promises';import {join} from 'node:path';import {tmpdir} from 'node:os';
 import {Document,OpcPackage} from '../../src/index.ts';import {addPart,addRelationship} from '../../src/opc/index.ts';
@@ -59,5 +60,5 @@ test('vertical authoring leaves all unselected tables and package members unchan
 });
 
 test('vertical native authoring does not select incompatible shared getter or horizontal outcomes',async()=>{
- const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);
+ const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),s=inv.features.flatMap(f=>f.scenarios).find(s=>s.scenarioId==='@id-docx-go-table-merge-properties')!;expect(s.lifecycle).toBe('planned');expect(s.cases).toHaveLength(1);inv.counts.cases=historicalSharedCases(inv);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);
 });

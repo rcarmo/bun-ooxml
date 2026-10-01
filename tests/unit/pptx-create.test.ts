@@ -3,6 +3,7 @@ import {Presentation} from '../../src/pptx/index.ts';
 import {parseXml,elements} from '../../src/xml/index.ts';
 const PRESENTATION_NS='http://schemas.openxmlformats.org/presentationml/2006/main';
 import { describe, expect, test } from "bun:test";
+import {predecessorPptxFeature} from '../helpers/pptx-shared-predecessor.ts';
 import { join, resolve } from "node:path";
 
 import { bindings as createBindings, runAppendPreservationScenario, runCreateMinimalScenario, runCreateRefusalScenario } from "../acceptance/create-pptx.ts";
@@ -148,7 +149,7 @@ describe("Presentation.create and addTextSlide", () => {
 
   test("executes the PPTX create feature with dedicated bindings and optional parent aggregation", async () => {
     const featurePath = "references/fixtures-ooxml/workflows/pptx/creation.feature";
-    const feature = parseFeature(featurePath, (await Bun.file(join(fixturesRoot(), "workflows/pptx/creation.feature")).text()).replace(/^@planned/m, '@implemented @bun'));
+    const feature = parseFeature(featurePath, (await predecessorPptxFeature('workflows/pptx/creation.feature',await Bun.file(join(fixturesRoot(), "workflows/pptx/creation.feature")).text())).replace(/^@planned/m, '@implemented @bun'));
     const inventory = inventoryFor(feature);
 
     for (const bindings of [createBindings, parentBindings]) {

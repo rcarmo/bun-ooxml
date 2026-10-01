@@ -1,5 +1,7 @@
 ## Twenty local PPTX manipulation cases
 
+This section records the completed local predecessor at `69c8169`. The same source cases now have concrete cross-runtime contracts at shared `5dc02ae`; see [the shared candidate](pptx-manipulation-shared.md). The default pin retains the local lane. The explicit shared candidate replaces it with the 20 canonical cases, without executing both copies in one inventory.
+
 Bun now edits direct plain-text shapes, appends explicit bullets, sets DrawingML autofit modes and inserts an owned title slide at an exact position. Twenty local cases align staged Python captures with concrete Bun operations; each saves and reopens the package or checks an atomic refusal. Existing reorder, table and notes APIs supply six of the cases.
 
 The selection is 20 cases and 100 steps. [`pptx-manipulation-next20-sources.json`](pptx-manipulation-next20-sources.json) retains every original capture ID, source block, line, file hash and local ID. The source features remain unchanged. These local contracts have no shared execution credit or profile adoption; the shared catalogue remains 304 IDs and 791 cases, with its 732 implemented Bun cases unchanged. The new feature adds 20 local-only cases.

@@ -1,3 +1,4 @@
+import {historicalSharedCases} from "../helpers/pptx-shared-predecessor.ts";
 import {test,expect} from 'bun:test';import {mkdtemp,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';
 import {OpcPackage} from '../../src/opc/index.ts';import {inspectComments,setCommentResolved,inspectCommentThreads,setCommentThreadResolved} from '../../src/docx/comments.ts';import {commentFixture} from '../acceptance/comments-docx.ts';
 const EX='word/commentsExtended.xml',C='word/comments.xml',W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
@@ -60,5 +61,5 @@ test('thread operation count bound refuses without returning a truncated result 
 });
 
 test('existing-extension threads do not activate authored-comment response or root-only resolution profiles',async()=>{
- const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);inv.counts.cases=inv.coverage!.shared.cases;expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);
+ const {inventoryFeatures}=await import('../../scripts/gherkin.ts'),inv=await inventoryFeatures(process.cwd()),f=inv.features.find(f=>f.path.endsWith('/docx/comments.feature'))!,planned=f.scenarios.filter(s=>s.scenarioId.startsWith('@id-python-comments-'));expect(planned).toHaveLength(9);expect(planned.every(s=>s.lifecycle==='planned')).toBe(true);inv.counts.cases=historicalSharedCases(inv);expect(inv.counts.cases.implemented).toBe(732);expect(inv.counts.cases.planned).toBe(59);
 });

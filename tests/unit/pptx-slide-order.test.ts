@@ -1,10 +1,11 @@
 import {test,expect} from 'bun:test';
+import {predecessorPptxFeature} from '../helpers/pptx-shared-predecessor.ts';
 import {parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from '../../scripts/gherkin.ts';
 import {bindings} from '../acceptance/slide-order.ts';
 import {join} from 'node:path';
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 test('slide permutations execute21 saved outcomes and atomic refusals',async()=>{
- const path='workflows/pptx/slide-order.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await Bun.file(join(fixturesRoot(),path)).text()).replace(/^@planned/m,'@implemented @bun')),rows=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const path='workflows/pptx/slide-order.feature',f=parseFeature('references/fixtures-ooxml/'+path,(await predecessorPptxFeature(path,await Bun.file(join(fixturesRoot(),path)).text())).replace(/^@planned/m,'@implemented @bun')),rows=f.scenarios.flatMap(s=>s.cases),count=(n:number)=>({implemented:n,planned:0,total:n});
  const inv:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(rows.length),steps:count(rows.reduce((n,c)=>n+c.steps.length,0))}};
  const r=await executeAcceptance(inv,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(21);
 });

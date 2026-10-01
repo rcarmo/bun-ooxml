@@ -1,4 +1,5 @@
 import {test,expect} from 'bun:test';
+import {predecessorPptxFeature} from '../helpers/pptx-shared-predecessor.ts';
 import {outcomeMappingReport,reconcileOutcomeMappingSets,type OutcomeMappingLedger} from '../../scripts/outcome-mappings.ts';
 import {inventoryTestSource} from '../../scripts/test-inventory.ts';
 import {parseFeature} from '../../scripts/gherkin.ts';
@@ -9,7 +10,7 @@ const pins=['src/pptx/notes.ts','tests/acceptance/notes-editing.ts','tests/accep
 const canonical=["workflows/pptx/notes.feature","workflows/pptx/preservation.feature","workflows/pptx/text.feature"];
 async function sample(){
  const ledger=await Bun.file('docs/behaviors/pptx-core-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};
- for(const path of new Set([...Object.keys(ledger.sourceSha256),...paths,...pins]))sources[path]=await Bun.file(canonical.includes(path)?join(fixturesRoot(),path):path).text();
+ for(const path of new Set([...Object.keys(ledger.sourceSha256),...paths,...pins])){const text=await Bun.file(canonical.includes(path)?join(fixturesRoot(),path):path).text();sources[path]=canonical.includes(path)?await predecessorPptxFeature(path,text):text;}
  const inventory={cases:paths.flatMap(p=>inventoryTestSource(p,sources[p]!)),unresolved:[]};
  return {inventory,sets:[{name:'pptx-core',expectedScopePaths:paths,ledger,features:canonical.map(p=>parseFeature(p,sources[p]!,{allowDuplicateCaseNames:true})),sources}]};
 }
