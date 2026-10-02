@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import {test,expect} from 'bun:test';
 import * as api from '../../src/index.ts';
 const {XmlByteSnapshot,XmlSnapshot}=api;
@@ -47,7 +48,7 @@ test('repeated edits and mutated changed output do not affect source ownership o
 });
 
 test('canonical byte seed checks input and no-op output independently with corruption controls',async()=>{
- const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/editing.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};
+ const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/xml-byte-snapshot.ts'),{join}=await import('node:path');const path='workflows/xml/editing.feature',source=await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(),path)).text()),count=(n:number)=>({implemented:n,planned:0,total:n});const inv={root:'.',features:[selectSharedScenarios(path,source,scenarioIds)],counts:{features:count(1),scenarios:count(1),cases:count(1),steps:count(4)}};
  const selected=inv.features[0]!.scenarios.find(s=>s.scenarioId==='@id-xml-go-immutable-leaf-seed')!;
  expect(selected.name).toBe('A seeded immutable parse and no-op leave the caller bytes and parsed snapshot intact');expect(selected.location.line).toBe(source.includes('these disjoint UTF-16 half-open replacements')?116:107);
  expect(selected.tags).toContain('@profile-lexical-snapshot-api');expect(selected.cases).toHaveLength(1);

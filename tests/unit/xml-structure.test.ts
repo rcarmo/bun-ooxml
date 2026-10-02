@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import { expect, test } from 'bun:test';
 import { XmlSnapshot, type XmlContent } from '../../src/index.ts';
 import { parseXml, attribute } from '../../src/xml/index.ts';
@@ -139,7 +140,7 @@ test('seven canonical structured-edit cases execute without activating the byte-
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { executeAcceptance, selectSharedScenarios } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-structure.ts');
-  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/xml/editing.feature', text = await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(), path)).text());
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   const inventory = (source: string) => ({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(5), cases: count(7), steps: count(30) } });
   const good = await executeAcceptance(inventory(text), bindings, 'xml-structure-unit');
@@ -152,7 +153,7 @@ test('structured acceptance predicates reject corrupted namespaces, text, no-ops
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { executeAcceptance, selectSharedScenarios } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-structure.ts');
-  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/xml/editing.feature', text = await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(), path)).text());
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   type State = { output?: string; error?: unknown; matrix?: { output: string; noop: string }[] };
   const matrixStep = 'the XML editor inserts child with a flag attribute of JSON value "\\t\\r\\n & 😀" and a plain grandchild of JSON text "x\\ry\\nz" for all 4 by 5 by 5 choices';

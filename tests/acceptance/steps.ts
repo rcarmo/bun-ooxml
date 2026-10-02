@@ -84,6 +84,8 @@ import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflo
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
 export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains(),cleanupXlsxStyleReadback(),cleanupPptxNext20(),cleanupPptxManipulation(),cleanupPptxFormatting(),cleanupRetainedStyleWord(),cleanupRetainedTable()]);}
 
+import {withUniformApi18} from './uniform-api18.ts';
+
 export const historicalBindings: StepBinding[] = [
   ...coreBindings,
   ...packageAdmissionBindings,
@@ -163,6 +165,6 @@ export const historicalBindings: StepBinding[] = [
   ...workflowBindings,
   ...workflowReceiptBindings,
 ];
-export const bindings=[...withPackageAlignment(historicalBindings),...pptxNext20Bindings,...pptxManipulationBindings,...pptxFormattingBindings,...retainedStyleWordBindings,...retainedTableBindings.filter(b=>b.pattern.source.startsWith('^refusal reason invalid-table-properties'))];
+export const bindings=withUniformApi18([...withPackageAlignment(historicalBindings),...pptxNext20Bindings,...pptxManipulationBindings,...pptxFormattingBindings,...retainedStyleWordBindings,...retainedTableBindings.filter(b=>b.pattern.source.startsWith('^refusal reason invalid-table-properties'))]);
 
 export default bindings;

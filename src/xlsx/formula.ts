@@ -6,8 +6,12 @@ const FUNCTIONS=new Set(['IF','SUM','LOG10','ABS','MIN','MAX','AVERAGE','COUNT',
 const PRECEDENCE:Record<string,number>={'=':1,'<>':1,'<':1,'>':1,'<=':1,'>=':1,'&':2,'+':3,'-':3,'*':4,'/':4,'^':5};
 function fail(message:string):never{throw new OoxmlError('xlsx-formula-unsupported',message);}
 function limit(message:string):never{throw new OoxmlError('xlsx-formula-limit',message);}
-/** Conservative static A1 grammar. No evaluation, names, dynamic references or workbook access. */
-export function analyzeFormulaReferences(source:string):FormulaReference[]{
+const PROFILE_ARITIES:Record<string,readonly [number,number]>={IF:[2,3],SUM:[1,255],MIN:[1,255],MAX:[1,255],AVERAGE:[1,255],COUNT:[1,255],COUNTA:[1,255],AND:[1,255],OR:[1,255],LOG10:[1,1],ABS:[1,1],NOT:[1,1],ROUND:[2,2]};
+/** Conservative legacy static A1 grammar. No evaluation or workbook access. */
+export function analyzeFormulaReferences(source:string):FormulaReference[]{return analyze(source,false);}
+/** The additive profile shares the lexer, with sealed function arity checks. */
+export function analyzeProfileFormulaReferences(source:string):FormulaReference[]{return analyze(source,true);}
+function analyze(source:string,profile:boolean):FormulaReference[]{
  if(typeof source!=='string'||!source.length||!source.isWellFormed())fail('Expected a well-formed nonempty formula string');
  if(source.length>1024*1024)limit('Formula exceeds 1 MiB input limit');
  if(/[\u0000-\u001f\u007f-\u009f]/.test(source))fail('Control characters are unsupported');
@@ -47,7 +51,8 @@ export function analyzeFormulaReferences(source:string):FormulaReference[]{
   else if(token.text==='('){cursor++;expression(1,depth+1);if(current().text!==')')fail('Unclosed expression');cursor++;}
   else if(token.kind==='name'){
    if(!FUNCTIONS.has(token.text))fail('Unsupported function');cursor++;if(current().text!=='(')fail('Expected function call');cursor++;
-   expression(1,depth+1);while(current().text===','){cursor++;expression(1,depth+1);}if(current().text!==')')fail('Unclosed function');cursor++;
+   let count=1;expression(1,depth+1);while(current().text===','){cursor++;expression(1,depth+1);count++;}if(current().text!==')')fail('Unclosed function');cursor++;
+   if(profile){const arity=PROFILE_ARITIES[token.text]!;if(count<arity[0]||count>arity[1])fail('Unsupported function arity');}
   }else if(token.kind==='value'||token.kind==='reference'){
    cursor++;if(token.range){if(refs.length>=10000)limit('Formula exceeds 10000 references');refs.push({...token.range,start:offsets[token.start]!,end:offsets[token.end]!});}
   }else fail('Expected expression operand');

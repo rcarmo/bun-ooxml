@@ -96,7 +96,7 @@ export class XmlSnapshot {
     // removing <a/> from ]]<a/>> creates the forbidden text sequence ]]>.
     try { validateXml(output); }
     catch (error) {
-      throw new OoxmlError('XML_REMOVAL_UNSAFE', `Removal produced invalid XML: ${error instanceof Error ? error.message : String(error)}`);
+      throw new OoxmlError('XML_REMOVAL_UNSAFE', `Removal produced invalid XML: ${error instanceof Error ? error.message : String(error)}`, {cause:error});
     }
     return output;
   }

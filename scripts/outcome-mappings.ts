@@ -84,9 +84,12 @@ export async function applyCandidateMappingSeals(ledger: OutcomeMappingLedger) {
  const pin=await Bun.file(process.env.OOXML_REFERENCE_PIN??'').json();
  if(pin.mode!=='candidate')throw Error('Explicit candidate pin required');
  await(candidateVerification??=verifyReferences(process.cwd()));
- const reviewed=await Promise.all(['xml-runtime-candidate.json','cell-runtime-candidate.json','package-runtime-candidate.json','transaction-runtime-candidate.json','xml-lexical-alignment-candidate.json','package-alignment-candidate.json','pptx-manipulation-candidate.json','pptx-formatting-candidate.json','retained-style-word-candidate.json','retained-table-properties-candidate.json'].map(p=>Bun.file(join(process.cwd(),'docs/behaviors',p)).json()));
+ const reviewed=await Promise.all(['xml-runtime-candidate.json','cell-runtime-candidate.json','package-runtime-candidate.json','transaction-runtime-candidate.json','xml-lexical-alignment-candidate.json','package-alignment-candidate.json','pptx-manipulation-candidate.json','pptx-formatting-candidate.json','retained-style-word-candidate.json','retained-table-properties-candidate.json','uniform-api18-candidate.json'].map(p=>Bun.file(join(process.cwd(),'docs/behaviors',p)).json()));
  const m=reviewed.find(r=>r.commit===pin.commit&&r.manifestSha256===pin.manifestSha256);
  if(!m)throw Error('Unreviewed runtime-generalization candidate');
+ // Exact outline operand migration updates mapping identities only, retaining
+ // partial status, gaps and native assertions; it does not grant execution.
+ for(const mapping of ledger.mappings)mapping.caseKeys=mapping.caseKeys.map(key=>m.caseIdentityMigration?.find((r:any)=>r.before===key)?.after??key);
  for(const [path,seal]of Object.entries(m.featureSeals??{}))if(Object.hasOwn(ledger.sourceSha256,path))ledger.sourceSha256[path]=seal as string;
  for(const [path,seal]of [['workflows/xml/parsing.feature',m.featureSha256],['workflows/xml/names.feature',m.namesFeatureSha256],['workflows/xml/editing.feature',m.editingFeatureSha256],['workflows/docx/tables.feature',m.tablesFeatureSha256],['workflows/package/preservation.feature',m.packageFeatureSha256],['workflows/package/zip32.feature',m.zipFeatureSha256]])if(seal&&Object.hasOwn(ledger.sourceSha256,path))ledger.sourceSha256[path]=seal;
 }
@@ -142,8 +145,8 @@ export async function outcomeMappingReport(){
 }
 if(import.meta.main){
  const selected=process.env.OOXML_REFERENCE_PIN?(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).selectedScenarioIds:[];
- const tableCandidate=selected?.includes('@id-pptx-table-properties-cell-fill'),retainedCandidate=selected?.includes('@id-pptx-retained-shape-solid-fill'),formattingCandidate=selected?.includes('@id-pptx-formatting-hide'),pptxCandidate=selected?.includes('@id-pptx-manipulation-patch-title');
- const output=JSON.stringify(await outcomeMappingReport(),null,2)+'\n',path=tableCandidate?'docs/behaviors/outcome-reconciliation-retained-table-properties-candidate.json':retainedCandidate?'docs/behaviors/outcome-reconciliation-retained-style-word-candidate.json':formattingCandidate?'docs/behaviors/outcome-reconciliation-pptx-formatting-candidate.json':pptxCandidate?'docs/behaviors/outcome-reconciliation-pptx-candidate.json':process.env.OOXML_FIXTURES_ROOT?'docs/behaviors/outcome-reconciliation-xml-candidate.json':'docs/behaviors/outcome-reconciliation.json';
+ const uniformCandidate=selected?.includes('@id-xml-go-attribute-splice-custody'),tableCandidate=selected?.includes('@id-pptx-table-properties-cell-fill'),retainedCandidate=selected?.includes('@id-pptx-retained-shape-solid-fill'),formattingCandidate=selected?.includes('@id-pptx-formatting-hide'),pptxCandidate=selected?.includes('@id-pptx-manipulation-patch-title');
+ const output=JSON.stringify(await outcomeMappingReport(),null,2)+'\n',path=uniformCandidate?'docs/behaviors/outcome-reconciliation-uniform-api18-candidate.json':tableCandidate?'docs/behaviors/outcome-reconciliation-retained-table-properties-candidate.json':retainedCandidate?'docs/behaviors/outcome-reconciliation-retained-style-word-candidate.json':formattingCandidate?'docs/behaviors/outcome-reconciliation-pptx-formatting-candidate.json':pptxCandidate?'docs/behaviors/outcome-reconciliation-pptx-candidate.json':process.env.OOXML_FIXTURES_ROOT?'docs/behaviors/outcome-reconciliation-xml-candidate.json':'docs/behaviors/outcome-reconciliation.json';
  if(process.argv.includes('--check')){if(!await Bun.file(path).exists()||await Bun.file(path).text()!==output)throw Error('Outcome mapping report drift; review pins and regenerate');}
  else await Bun.write(path,output);
  const report=JSON.parse(output);console.log(`${report.mappedDeclarations}/${report.totalDeclarations} declarations have bounded mappings; ${report.unmappedTestIds.length} unmapped; no new execution credit`);

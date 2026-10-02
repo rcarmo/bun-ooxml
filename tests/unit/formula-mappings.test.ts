@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import {test,expect} from 'bun:test';
 import {outcomeMappingReport,reconcileOutcomeMappingSets,type OutcomeMappingLedger} from '../../scripts/outcome-mappings.ts';
 import {inventoryTestSource} from '../../scripts/test-inventory.ts';
@@ -6,7 +7,7 @@ import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {join} from 'node:path';
 const paths=['tests/unit/xlsx-range.test.ts','tests/unit/xlsx-formula-analysis.test.ts','tests/unit/xlsx-formula-remap.test.ts'];
 const canonical='workflows/xlsx/formula-references.feature';
-async function sample(){const ledger=await Bun.file('docs/behaviors/formula-references-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};for(const p of Object.keys(ledger.sourceSha256))sources[p]=await Bun.file(p===canonical?join(fixturesRoot(),p):p).text();return {inventory:{cases:paths.flatMap(p=>inventoryTestSource(p,sources[p]!)),unresolved:[]},sets:[{name:'formula-references',expectedScopePaths:paths,ledger,sources,features:[parseFeature(canonical,sources[canonical]!,{allowDuplicateCaseNames:true})]}]};}
+async function sample(){const ledger=await Bun.file('docs/behaviors/formula-references-mappings.json').json() as OutcomeMappingLedger,sources:Record<string,string>={};for(const p of Object.keys(ledger.sourceSha256))sources[p]=p===canonical?await beforeUniformApi18Feature(p,await Bun.file(join(fixturesRoot(),p)).text()):await Bun.file(p).text();return {inventory:{cases:paths.flatMap(p=>inventoryTestSource(p,sources[p]!)),unresolved:[]},sets:[{name:'formula-references',expectedScopePaths:paths,ledger,sources,features:[parseFeature(canonical,sources[canonical]!,{allowDuplicateCaseNames:true})]}]};}
 
 test('formula ledger enumerates all three native suites without changing execution credit or runtime leaf denominator',async()=>{
  const report=await outcomeMappingReport(),ledger=report.ledgers.find(l=>l.name==='formula-references');expect(ledger).toBeDefined();expect(ledger!.scopePaths).toEqual(paths);expect(ledger!.mappedDeclarations).toBe(31);expect(report.mappedDeclarations).toBe(590);expect(report.unmappedTestIds.length).toBe(report.totalDeclarations-590);expect(report.executionCredit).toBe(false);expect(report.runtimeLeafCount).toBeNull();const rows=report.mappings.filter(m=>m.ledger==='formula-references');expect(rows).toHaveLength(31);expect(rows.every(m=>m.status==='partial'&&m.executionCredit===false&&m.assertions.length&&m.outcomes.length&&m.gaps.length)).toBe(true);expect(new Set(rows.flatMap(m=>m.scenarioIds)).size).toBe(9);

@@ -27,6 +27,7 @@ import pptxManipulationPin from '../docs/behaviors/pptx-manipulation-candidate.j
 import pptxFormattingPin from '../docs/behaviors/pptx-formatting-candidate.json';
 import retainedStyleWordPin from '../docs/behaviors/retained-style-word-candidate.json';
 import retainedTablePin from '../docs/behaviors/retained-table-properties-candidate.json';
+import uniformApi18Pin from '../docs/behaviors/uniform-api18-candidate.json';
 
 export type StepBinding = {
   pattern: RegExp;
@@ -357,11 +358,12 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
   const candidatePin=process.env.OOXML_FIXTURES_ROOT&&resolve(root)===resolve(import.meta.dir,'..')
     ? await Bun.file(process.env.OOXML_REFERENCE_PIN!).json() : undefined;
   const formattingCandidate=candidatePin?.commit===pptxFormattingPin.commit;
-  const tableCandidate=candidatePin?.commit===retainedTablePin.commit;
+  const uniformCandidate=candidatePin?.commit===uniformApi18Pin.commit;
+  const tableCandidate=uniformCandidate||candidatePin?.commit===retainedTablePin.commit;
   const retainedCandidate=tableCandidate||candidatePin?.commit===retainedStyleWordPin.commit;
   const pptxCandidate=candidatePin?.commit===pptxManipulationPin.commit||formattingCandidate||retainedCandidate;
   if(pptxCandidate){
-    const expected=tableCandidate?retainedTablePin:retainedCandidate?retainedStyleWordPin:formattingCandidate?pptxFormattingPin:pptxManipulationPin;
+    const expected=uniformCandidate?uniformApi18Pin:tableCandidate?retainedTablePin:retainedCandidate?retainedStyleWordPin:formattingCandidate?pptxFormattingPin:pptxManipulationPin;
     if(JSON.stringify(candidatePin.selectedScenarioIds)!==JSON.stringify(expected.selectedScenarioIds))throw Error('PPTX candidate selection drift');
     // Migrate the predecessor local lane only for the sealed shared candidate.
     const local=features.findIndex(f=>f.path==='features/pptx/manipulation-next20.feature');

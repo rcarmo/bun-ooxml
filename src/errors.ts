@@ -26,8 +26,8 @@ export function classifyPackageFailure(error: unknown): string | undefined {
 }
 
 export class OoxmlError extends Error {
-  constructor(readonly code: string, message: string) {
-    super(message);
+  constructor(readonly code: string, message: string, options?: ErrorOptions) {
+    super(message, options);
     this.name = "OoxmlError";
   }
 }

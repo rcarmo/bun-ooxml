@@ -59,7 +59,7 @@ export function editStructure(source: string, patches: readonly XmlStructurePatc
   for (const edit of edits) { parts.push(source.slice(cursor, edit.start), edit.value); cursor = edit.end; }
   parts.push(source.slice(cursor)); const output = parts.join('');
   try { validateXml(output); }
-  catch (error) { fail('XML_STRUCTURE_UNSAFE', `Structured edit produced invalid XML: ${error instanceof Error ? error.message : String(error)}`); }
+  catch (error) { throw new OoxmlError('XML_STRUCTURE_UNSAFE', `Structured edit produced invalid XML: ${error instanceof Error ? error.message : String(error)}`, {cause:error}); }
   return output;
 }
 

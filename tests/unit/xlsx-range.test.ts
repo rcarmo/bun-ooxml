@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import {test,expect} from 'bun:test';
 import {parseA1Range,OoxmlError} from '../../src/index.ts';
 
@@ -33,7 +34,7 @@ test('returned coordinates are detached and no parser state leaks between calls'
 
 test('thirteen existing direct-range canonical cases execute without activating formula analysis',async()=>{
  const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{join}=await import('node:path'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings,scenarioIds}=await import('../acceptance/xlsx-range.ts');
- const path='workflows/xlsx/formula-references.feature',f=selectSharedScenarios(path,await Bun.file(join(fixturesRoot(),path)).text(),scenarioIds),count=(n:number)=>({implemented:n,planned:0,total:n});
+ const path='workflows/xlsx/formula-references.feature',f=selectSharedScenarios(path,await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(),path)).text()),scenarioIds),count=(n:number)=>({implemented:n,planned:0,total:n});
  const result=await executeAcceptance({root:'.',features:[f],counts:{features:count(1),scenarios:count(2),cases:count(13),steps:count(45)}},bindings,'range-unit');expect(result.failures).toEqual([]);expect(result.counts.cases.passed).toBe(13);expect(result.counts.cases.planned).toBe(32);
 });
 test('bounded UTF-8 input refuses oversize Unicode sheet qualifiers',()=>{

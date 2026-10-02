@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import { expect, test } from 'bun:test';
 import { OoxmlError, XmlSnapshot } from '../../src/index.ts';
 import { parseXml } from '../../src/xml/index.ts';
@@ -107,7 +108,7 @@ test('three canonical XML removal cases execute while unrelated shared operation
   const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');
   const { bindings, scenarioIds } = await import('../acceptance/xml-removal.ts');
   const path = 'workflows/xml/editing.feature';
-  const feature = selectSharedScenarios(path, await Bun.file(join(fixturesRoot(), path)).text(), scenarioIds);
+  const feature = selectSharedScenarios(path, await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(), path)).text()), scenarioIds);
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   const result = await executeAcceptance({ root: '.', features: [feature], counts: {
     features: count(1), scenarios: count(2), cases: count(3), steps: count(10),

@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import {test,expect} from 'bun:test';
 import * as api from '../../src/index.ts';
 const {insertFormulaReferences,analyzeFormulaReferences}=api;
@@ -71,7 +72,7 @@ test('qualified single cells remain single and colon/bang characters in quoted s
 });
 
 test('canonical remap and matrix cases reject wrong output, false success and each missing matrix outcome',async()=>{
- const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/formula-remap.ts'),{join}=await import('node:path');const path='workflows/xlsx/formula-references.feature',source=await Bun.file(join(fixturesRoot(),path)).text(),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(3),cases:count(13),steps:count(42)}});
+ const {fixturesRoot}=await import('../../scripts/fixture-inputs.ts'),{selectSharedScenarios,executeAcceptance}=await import('../../scripts/gherkin.ts'),{bindings}=await import('../acceptance/steps.ts'),{scenarioIds}=await import('../acceptance/formula-remap.ts'),{join}=await import('node:path');const path='workflows/xlsx/formula-references.feature',source=await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(),path)).text()),count=(n:number)=>({implemented:n,planned:0,total:n});const inv=(text:string)=>({root:'.',features:[selectSharedScenarios(path,text,scenarioIds)],counts:{features:count(1),scenarios:count(3),cases:count(13),steps:count(42)}});
  const good=await executeAcceptance(inv(source),bindings,'formula-remap-unit');expect(good.failures).toEqual([]);expect(good.counts.cases.passed).toBe(13);
  const bad=await executeAcceptance(inv(source.replace('the complete replacement expression equals JSON <expected_json>','the complete replacement expression equals JSON "WRONG"')),bindings,'remap-expected-control');expect(bad.counts.cases.failed).toBe(5);expect(bad.counts.steps.undefined).toBe(0);expect(bad.counts.steps.ambiguous).toBe(0);
  const falseSuccess=bindings.map(b=>b.pattern.test('the static remapper inserts row at 1 by 1 on sheet JSON "Main"')?{...b,run:async(c:Record<string,unknown>,...args:string[])=>{await b.run(c,...args);const s=c.state as {error?:unknown;result?:string};if(s.error){s.error=undefined;s.result='';}}}:b);const falseReport=await executeAcceptance(inv(source),falseSuccess,'remap-refusal-control');expect(falseReport.counts.cases.failed).toBe(7);expect(falseReport.counts.steps.undefined).toBe(0);

@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import { expect, test } from 'bun:test';
 import { XmlSnapshot, OoxmlError } from '../../src/index.ts';
 import { attribute, parseXml } from '../../src/xml/index.ts';
@@ -110,7 +111,7 @@ test('four canonical attribute cases execute and incorrect output bytes fail pre
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts'), { scenarioIds } = await import('../acceptance/xml-attributes.ts');
-  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/xml/editing.feature', text = await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(), path)).text());
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   const run = (source: string) => executeAcceptance({ root: '.', features: [selectSharedScenarios(path, source, scenarioIds)], counts: { features: count(1), scenarios: count(2), cases: count(4), steps: count(12) } }, bindings, 'xml-attributes-unit');
   const good = await run(text); expect(good.failures).toEqual([]); expect(good.counts.cases.passed).toBe(4); expect(good.counts.cases.planned).toBe(12);
@@ -122,7 +123,7 @@ test('attribute duplicate refusal binding rejects fabricated success and untyped
   const { fixturesRoot } = await import('../../scripts/fixture-inputs.ts'), { join } = await import('node:path');
   const { selectSharedScenarios, executeAcceptance } = await import('../../scripts/gherkin.ts');
   const { bindings } = await import('../acceptance/steps.ts');
-  const path = 'workflows/xml/editing.feature', text = await Bun.file(join(fixturesRoot(), path)).text();
+  const path = 'workflows/xml/editing.feature', text = await beforeUniformApi18Feature(path,await Bun.file(join(fixturesRoot(), path)).text());
   const feature = selectSharedScenarios(path, text, ['@id-xml-go-attribute-batch-refusal']);
   const count = (n: number) => ({ implemented: n, planned: 0, total: n });
   for (const success of [true, false]) {

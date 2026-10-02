@@ -1,6 +1,9 @@
 export {inspectWorksheetComments,type WorksheetComments,type WorksheetComment,type CommentPartReference} from './xlsx/comments.ts';
 /** Bun-native OOXML entry points. See docs/agents/usage.md for safe edit workflows. */
 export { OoxmlError, classifyXmlParseFailure, classifyXmlOperationFailure, classifyPackageFailure } from "./errors.ts";
+export {UniformApiError,uniformApiResult,type UniformApiCategory,type UniformApiResult} from './uniform.ts';
+export {UniformXmlSnapshot} from './xml/uniform.ts';
+export {analyzeStaticReferences,parseStaticRange,remapStaticReferences} from './xlsx/uniform.ts';
 export { xmlEquivalent } from './xml/comparison.ts';
 export { analyzeFormulaReferences, type FormulaReference } from './xlsx/formula.ts';
 export { insertFormulaReferences, type FormulaInsertion } from './xlsx/formula-remap.ts';

@@ -1,3 +1,4 @@
+import {beforeUniformApi18Feature} from '../helpers/uniform-api18-history.ts';
 import {test,expect} from 'bun:test';
 import {readFileSync} from 'node:fs';
 import {join} from 'node:path';
@@ -8,7 +9,7 @@ import {parseXml,applyEdits} from '../../src/xml/index.ts';
 import {OoxmlError,classifyXmlOperationFailure} from '../../src/errors.ts';
 export const ids=['xml-parse-offsets','xml-normalise-line-endings','xml-invalid-qname-components','xml-unicode-qname-components','xml-outside-root-nbsp','xml-parse-refusals','xml-parse-bounds','xml-escaping-values','xml-escaping-invalid-character','xml-apply-edits','xml-go-immutable-leaf-seed','xml-go-attribute-splice-custody','xml-go-attribute-batch-refusal','xml-go-element-removal-custody','xml-go-element-removal-refusal','xml-go-child-insertion-custody','xml-go-child-insertion-refusal','xml-go-child-namespace-matrix','xml-go-element-replacement-custody','xml-go-element-replacement-refusal'].map(s=>'@id-'+s);
 const paths=['workflows/xml/parsing.feature','workflows/xml/names.feature','workflows/xml/editing.feature'];
-const texts=paths.map(p=>readFileSync(join(fixturesRoot(),p),'utf8'));
+const texts=await Promise.all(paths.map(p=>beforeUniformApi18Feature(p,readFileSync(join(fixturesRoot(),p),'utf8'))));
 const enabled=texts[0]!.includes('the lexical XML input is JSON');
 export async function runXmlAlignment(change=(s:string)=>s,active=bindings){const features=paths.map((p,i)=>selectSharedScenarios(p,change(texts[i]!),ids.filter(id=>texts[i]!.includes(id+'\n'))));const c=(n:number)=>({implemented:n,planned:0,total:n});return executeAcceptance({root:'.',features,counts:{features:c(3),scenarios:c(20),cases:c(29),steps:c(112)}},active,'xml-lexical-alignment');}
 (enabled?test:test.skip)('twenty sealed XML IDs execute exactly29cases112steps through production APIs',async()=>{const r=await runXmlAlignment();expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(29);const ss=r.features.flatMap(f=>f.scenarios).filter(s=>s.lifecycle==='implemented');expect(ss).toHaveLength(20);expect(ss.flatMap(s=>s.cases).reduce((n,c)=>n+c.steps.length,0)).toBe(112);expect(ss.every(s=>s.cases.every(c=>c.steps.every(s=>s.status==='passed')))).toBe(true);});
