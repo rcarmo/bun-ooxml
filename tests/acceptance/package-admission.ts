@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import type {StepBinding} from '../../scripts/gherkin.ts';
-import {admitPackage} from '../../src/opc/admission.ts';
+import {admitPackage,admitPackageFile} from '../../src/opc/admission.ts';
+import {spyOn} from 'bun:test';
 import {OoxmlError} from '../../src/errors.ts';
 import type {ZipLimits} from '../../src/opc/zip.ts';
 import {admissionZip,utf8,utf16} from '../fixtures/admission.ts';
@@ -18,10 +19,13 @@ export const bindings:StepBinding[]=[
  }},
  {pattern:/^only the (source bytes|entry count) admission budget is set to -1$/,run:(c,budget)=>{const s=state(c);s.budget=budget==='source bytes'?'maxArchiveBytes':'maxEntries';}},
  {pattern:/^bounded package admission checks that archive$/,run:c=>{const s=state(c);assert(s.budget);assert(s.bytes);run(s,{[s.budget]:-1});}},
- {pattern:/^it refuses the invalid caller budget before reading source metadata or ZIP members and returns no package or parts$/,run:c=>{
+ {pattern:/^it refuses the invalid caller budget before reading source metadata or ZIP members and returns no package or parts$/,run:async c=>{
   const s=state(c);assert(s.bytes);assert(s.budget);assert.equal(s.delivered,undefined);assert(s.error instanceof OoxmlError);assert.equal(s.error.code,'package-admission-limit-invalid');
-  // The direct byte-input API cannot read a file's metadata. A deliberately
-  // invalid archive must hit the argument check before any ZIP parsing.
+  const source=fixturePath('fixture-d9d6a313182a71a73d75a26a0ff3b7826dbd2e300e1d202114ec9f8fb018fda5'),reads:string[]=[];
+  const probe=spyOn(Bun,'file').mockImplementation(()=>{reads.push('source-file');throw Error('source read before argument refusal');});
+  try{await assert.rejects(()=>admitPackageFile(source,{[s.budget!]:-1}),{code:'package-admission-limit-invalid'});assert.deepEqual(reads,[]);}
+  finally{probe.mockRestore();}
+  const admitted=await admitPackageFile(source);assert(admitted.has('word/document.xml'));
   const broken=Uint8Array.of(0x00);assert.throws(()=>admitPackage(broken,{[s.budget!]:-1}),{code:'package-admission-limit-invalid'});s.preflight=true;
  }},
  {pattern:/^the refusal is an invalid-argument result, not a resource-limit or malformed-archive result$/,run:c=>{

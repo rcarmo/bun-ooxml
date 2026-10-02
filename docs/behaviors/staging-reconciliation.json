@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1137,
+  "nativeDeclarations": 1140,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 910,
+  "withoutStagingCount": 913,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -4504,6 +4504,21 @@
       "id": "bun:tests/unit/docx-tracking-settings.test.ts:a fault after settings relationship creation rolls back all metadata and author state",
       "path": "tests/unit/docx-tracking-settings.test.ts",
       "sourceSha256": "3bf5b5f2af6617bfff10bdb9ffc9f2b3345232f6dfebeeacd4e65365a94de05c"
+    },
+    {
+      "id": "bun:tests/unit/evidence-resolution-native.test.ts:invalid admission configuration refuses before obtaining any filesystem source",
+      "path": "tests/unit/evidence-resolution-native.test.ts",
+      "sourceSha256": "d9227dfa8f5b535370d8878e45250db1bd3574b5daa24b28d65f849c010e2698"
+    },
+    {
+      "id": "bun:tests/unit/evidence-resolution-native.test.ts:retained namespaced marker is observed independently of unqualified show and rendering",
+      "path": "tests/unit/evidence-resolution-native.test.ts",
+      "sourceSha256": "d9227dfa8f5b535370d8878e45250db1bd3574b5daa24b28d65f849c010e2698"
+    },
+    {
+      "id": "bun:tests/unit/evidence-resolution-native.test.ts:visibility inspector follows relationship list order and namespace meaning without editing",
+      "path": "tests/unit/evidence-resolution-native.test.ts",
+      "sourceSha256": "d9227dfa8f5b535370d8878e45250db1bd3574b5daa24b28d65f849c010e2698"
     },
     {
       "id": "bun:tests/unit/formula-mappings.test.ts:formula ledger enumerates all three native suites without changing execution credit or runtime leaf denominator",

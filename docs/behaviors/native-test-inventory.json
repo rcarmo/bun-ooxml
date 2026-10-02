@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1137,
-  "files": 150,
+  "count": 1140,
+  "files": 151,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -316,6 +316,12 @@
       "path": "tests/unit/docx.test.ts",
       "sha256": "ff323091a6a71a14191eae8c202ff039847165f33fa01d87a07997e847abb65c",
       "declarations": 10,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/evidence-resolution-native.test.ts",
+      "sha256": "d9227dfa8f5b535370d8878e45250db1bd3574b5daa24b28d65f849c010e2698",
+      "declarations": 3,
       "issues": []
     },
     {
@@ -981,6 +987,10 @@
       "sha256": "e66e0e4a8db5b81f33147719d470920c4898d38053413bbf510bf612f49cdc4f"
     },
     {
+      "path": "tests/acceptance/evidence-resolution.ts",
+      "sha256": "248a55264ee59d22218cda55f088cb872f80f5e94a82efb8badab9145064a253"
+    },
+    {
       "path": "tests/acceptance/font-size.ts",
       "sha256": "d152543037cf97e92ce8469f29fd307960c1a9c2c0575706a91e7fd42d91aba2"
     },
@@ -1014,7 +1024,7 @@
     },
     {
       "path": "tests/acceptance/package-admission.ts",
-      "sha256": "d23dd1248f77c6ce76ac56c21b7b8358bc08873767b51f1235799e4f7faae6de"
+      "sha256": "07db2883bd4db71b1b61a6915f966f7587b7a1bd52566dd1cf7c9ac543c2ce23"
     },
     {
       "path": "tests/acceptance/package-alignment.ts",
@@ -1547,6 +1557,8 @@
     "bun:tests/unit/docx-tracking-settings.test.ts:UTF16 settings retain encoding through enable disable and reopen",
     "bun:tests/unit/docx-tracking-settings.test.ts:canonical toggle selects one case and detects incorrect intermediate and final values",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
+    "bun:tests/unit/evidence-resolution-native.test.ts:invalid admission configuration refuses before obtaining any filesystem source",
+    "bun:tests/unit/evidence-resolution-native.test.ts:retained namespaced marker is observed independently of unqualified show and rendering",
     "bun:tests/unit/formula-mappings.test.ts:formula ledger rejects omitted suites, declarations and exact assertions",
     "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
     "bun:tests/unit/geometry-mappings.test.ts:geometry ledgers cover 24 declarations and 84 expressions with all 295 prior records preserved",
@@ -2033,6 +2045,8 @@
     "bun:tests/unit/docx-tracking-settings.test.ts:UTF16 settings retain encoding through enable disable and reopen",
     "bun:tests/unit/docx-tracking-settings.test.ts:canonical toggle selects one case and detects incorrect intermediate and final values",
     "bun:tests/unit/docx.test.ts:docx Document / preserves exact bytes for unmodified word fixtures from the go-ooxml and python corpora across save and reopen",
+    "bun:tests/unit/evidence-resolution-native.test.ts:invalid admission configuration refuses before obtaining any filesystem source",
+    "bun:tests/unit/evidence-resolution-native.test.ts:retained namespaced marker is observed independently of unqualified show and rendering",
     "bun:tests/unit/formula-mappings.test.ts:formula ledger rejects omitted suites, declarations and exact assertions",
     "bun:tests/unit/formula-mappings.test.ts:formula source pins and canonical ownership refuse stale or fabricated evidence",
     "bun:tests/unit/geometry-mappings.test.ts:geometry ledgers cover 24 declarations and 84 expressions with all 295 prior records preserved",
@@ -24984,6 +24998,147 @@
         "expect().toEqual",
         "makeAcceptanceRoot",
         "runAcceptance"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/evidence-resolution-native.test.ts:invalid admission configuration refuses before obtaining any filesystem source",
+      "path": "tests/unit/evidence-resolution-native.test.ts",
+      "line": 9,
+      "title": "invalid admission configuration refuses before obtaining any filesystem source",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(admission.admitPackageFile(fixturePath(valid),{[budget]:-1})).rejects.toMatchObject({code:'package-admission-limit-invalid'})",
+        "expect(probes.file).not.toHaveBeenCalled()",
+        "expect(parts.has('word/document.xml')).toBe(true)",
+        "expect(admission.admitPackageFile(fixturePath(valid),{[budget]:0})).rejects.toMatchObject({code:budget==='maxArchiveBytes'?'zip-archive-too-large':'zip-too-many-entries'})",
+        "expect(await Bun.file(fixturePath(valid)).bytes()).toEqual(original)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const budget of ['maxArchiveBytes','maxEntries']as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d9227dfa8f5b535370d8878e45250db1bd3574b5daa24b28d65f849c010e2698",
+      "body": "{\n const original=await Bun.file(fixturePath(valid)).bytes();\n for(const budget of ['maxArchiveBytes','maxEntries']as const){\n  const probes={file:spyOn(Bun,'file').mockImplementation(()=>{throw Error('source accessed before argument refusal');})};\n  try{await expect(admission.admitPackageFile(fixturePath(valid),{[budget]:-1})).rejects.toMatchObject({code:'package-admission-limit-invalid'});expect(probes.file).not.toHaveBeenCalled();}\n  finally{probes.file.mockRestore();}\n  const parts=await admission.admitPackageFile(fixturePath(valid));expect(parts.has('word/document.xml')).toBe(true);\n  await expect(admission.admitPackageFile(fixturePath(valid),{[budget]:0})).rejects.toMatchObject({code:budget==='maxArchiveBytes'?'zip-archive-too-large':'zip-too-many-entries'});\n  expect(await Bun.file(fixturePath(valid)).bytes()).toEqual(original);\n }\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().bytes",
+        "Error",
+        "admission.admitPackageFile",
+        "expect",
+        "expect().not.toHaveBeenCalled",
+        "expect().rejects.toMatchObject",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturePath",
+        "parts.has",
+        "probes.file.mockRestore",
+        "spyOn",
+        "spyOn().mockImplementation"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/evidence-resolution-native.test.ts:retained namespaced marker is observed independently of unqualified show and rendering",
+      "path": "tests/unit/evidence-resolution-native.test.ts",
+      "line": 20,
+      "title": "retained namespaced marker is observed independently of unqualified show and rendering",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(observations.map(s=>[s.ordinal,s.slideId,s.relationshipId,s.part])).toEqual([1,2,3,4].map((n,i)=>[n,String(256+i),'rId'+(source?7+i:2+i),'ppt/slides/slide'+n+'.xml']))",
+        "expect(observations.map(s=>s.show)).toEqual([null,null,null,null])",
+        "expect(observations.map(s=>s.namespacedShow)).toEqual([null,null,source?'0':null,null])",
+        "expect(observations.every(s=>s.declaredHidden===false&&s.applicationConfirmedHidden===false)).toBe(true)",
+        "expect(caller).toEqual(before)",
+        "expect(pkg.toBytes()).toEqual(before)",
+        "expect(Object.isFrozen(observations)).toBe(true)",
+        "expect(observations.every(Object.isFrozen)).toBe(true)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 21,
+          "expression": "for(const [id,source]of [[retained,true],[control,false]]as const)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "d9227dfa8f5b535370d8878e45250db1bd3574b5daa24b28d65f849c010e2698",
+      "body": "{\n for(const [id,source]of [[retained,true],[control,false]]as const){\n  const caller=await Bun.file(fixturePath(id)).bytes(),before=caller.slice(),pkg=await OpcPackage.open(caller),observations=visibility.inspectSlideVisibility(pkg);\n  expect(observations.map(s=>[s.ordinal,s.slideId,s.relationshipId,s.part])).toEqual([1,2,3,4].map((n,i)=>[n,String(256+i),'rId'+(source?7+i:2+i),'ppt/slides/slide'+n+'.xml']));\n  expect(observations.map(s=>s.show)).toEqual([null,null,null,null]);expect(observations.map(s=>s.namespacedShow)).toEqual([null,null,source?'0':null,null]);\n  expect(observations.every(s=>s.declaredHidden===false&&s.applicationConfirmedHidden===false)).toBe(true);\n  expect(caller).toEqual(before);expect(pkg.toBytes()).toEqual(before);expect(Object.isFrozen(observations)).toBe(true);expect(observations.every(Object.isFrozen)).toBe(true);\n }\n}",
+      "calls": [
+        ".map",
+        "Bun.file",
+        "Bun.file().bytes",
+        "Object.isFrozen",
+        "OpcPackage.open",
+        "String",
+        "caller.slice",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "fixturePath",
+        "observations.every",
+        "observations.map",
+        "pkg.toBytes",
+        "visibility.inspectSlideVisibility"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/evidence-resolution-native.test.ts:visibility inspector follows relationship list order and namespace meaning without editing",
+      "path": "tests/unit/evidence-resolution-native.test.ts",
+      "line": 29,
+      "title": "visibility inspector follows relationship list order and namespace meaning without editing",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(rows.map(s=>s.slideId)).toEqual(['257','256','258','259'])",
+        "expect(rows[0]!.part).toBe('ppt/slides/slide2.xml')",
+        "expect(pkg.toBytes()).toEqual(bytes)",
+        "expect(visibility.inspectSlideVisibility(pkg)[0]!.declaredHidden).toBe(true)",
+        "expect(()=>visibility.inspectSlideVisibility(pkg)).toThrow()",
+        "expect(attribute(parseXml(updated).root,'show')).toBe('0')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "d9227dfa8f5b535370d8878e45250db1bd3574b5daa24b28d65f849c010e2698",
+      "body": "{\n const pkg=await OpcPackage.open(await Bun.file(fixturePath(control)).bytes()),part='ppt/presentation.xml',xml=pkg.text(part),d=parseXml(xml),list=d.root.children.find(n=>n.localName==='sldIdLst')!,a=list.children[0]!,b=list.children[1]!;\n pkg.set(part,xml.slice(0,a.start)+xml.slice(b.start,b.end)+xml.slice(a.start,a.end)+xml.slice(b.end));\n const bytes=pkg.toBytes(),rows=visibility.inspectSlideVisibility(pkg);expect(rows.map(s=>s.slideId)).toEqual(['257','256','258','259']);expect(rows[0]!.part).toBe('ppt/slides/slide2.xml');expect(pkg.toBytes()).toEqual(bytes);\n const slide=pkg.text(rows[0]!.part);pkg.set(rows[0]!.part,slide.replace('<p:sld ','<p:sld show=\"0\" '));expect(visibility.inspectSlideVisibility(pkg)[0]!.declaredHidden).toBe(true);\n const updated=pkg.text(rows[0]!.part);pkg.set(rows[0]!.part,updated.replace('show=\"0\"','show=\"maybe\"'));expect(()=>visibility.inspectSlideVisibility(pkg)).toThrow();\n expect(attribute(parseXml(updated).root,'show')).toBe('0');\n}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().bytes",
+        "OpcPackage.open",
+        "attribute",
+        "d.root.children.find",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "fixturePath",
+        "parseXml",
+        "pkg.set",
+        "pkg.text",
+        "pkg.toBytes",
+        "rows.map",
+        "slide.replace",
+        "updated.replace",
+        "visibility.inspectSlideVisibility",
+        "xml.slice"
       ],
       "reviewReasons": [],
       "unresolved": []

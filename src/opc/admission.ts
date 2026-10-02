@@ -17,6 +17,18 @@ export function admitPackage(bytes:Uint8Array,limits:ZipLimits={}):Map<string,Ui
  return parts;
 }
 
+/** Validate configuration before obtaining file metadata or bytes.
+ * The legacy byte-buffer entry point remains unchanged.
+ */
+export async function admitPackageFile(path:string,limits:ZipLimits={}):Promise<Map<string,Uint8Array>> {
+ validateLimits(limits);
+ if(typeof path!=='string'||!path)throw new OoxmlError('package-admission-source-invalid','Expected a nonempty source path');
+ const file=Bun.file(path);
+ const max=limits.maxArchiveBytes??256*1024*1024;
+ if(file.size>max)throw new OoxmlError('zip-archive-too-large','ZIP archive bytes exceed the configured limit');
+ return admitPackage(await file.bytes(),limits);
+}
+
 function validateLimits(limits:ZipLimits):void {
  for(const key of ['maxEntries','maxEntryBytes','maxTotalBytes','maxArchiveBytes'] as const){
   const value=limits[key];

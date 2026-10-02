@@ -6,7 +6,8 @@ export { analyzeFormulaReferences, type FormulaReference } from './xlsx/formula.
 export { insertFormulaReferences, type FormulaInsertion } from './xlsx/formula-remap.ts';
 export { XmlByteSnapshot } from './xml/bytes.ts';
 export { XmlSnapshot, type XmlRemovalTarget, type XmlAttributePatch, type XmlExpandedName, type XmlStructuredAttribute, type XmlContent, type XmlStructurePatch } from './xml/removal.ts';
-export { admitPackage } from "./opc/admission.ts";
+export { admitPackage, admitPackageFile } from "./opc/admission.ts";
+export { inspectSlideVisibility, type SlideVisibilityObservation } from './pptx/visibility.ts';
 export { comparePackageArchives, type PackageComparison } from './opc/comparison.ts';
 export type { ZipLimits } from "./opc/zip.ts";
 export { OpcPackage, type PackageDiff, type Relationship } from "./opc/package.ts";
