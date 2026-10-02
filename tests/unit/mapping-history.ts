@@ -1,5 +1,6 @@
 import cellMigration from '../../docs/behaviors/cell-runtime-mapping-migration.json';
 import uniformApi18 from '../../docs/behaviors/uniform-api18-candidate.json';
+import contract20 from '../../docs/behaviors/contract20-candidate.json';
 // Historical mapping fingerprints precede the planned-case expansion and
 // negative-budget and descriptor bindings. Restore only the reviewed global
 // inventory assertions and two reclassified partial associations; keep every
@@ -7,7 +8,7 @@ import uniformApi18 from '../../docs/behaviors/uniform-api18-candidate.json';
 const admissionId='bun:tests/unit/package-admission.test.ts:invalid admission limit configuration refuses rather than disabling bounds';
 const descriptorId='bun:tests/unit/zip.test.ts:readZip / reads a valid archive with a directory entry, data descriptor, and declared comment';
 export function beforeUniformApi18MappingRows<T>(rows:T[]):T[]{return rows.map(input=>{
- return input&&typeof input==='object'&&'caseKeys' in input?{...input,caseKeys:(input as any).caseKeys.map((key:string)=>uniformApi18.caseIdentityMigration.find(r=>r.after===key)?.before??key)} as T:input;
+ return input&&typeof input==='object'&&'caseKeys' in input?{...input,caseKeys:(input as any).caseKeys.map((key:string)=>contract20.caseIdentityMigration.find(r=>r.after===key)?.before??key).map((key:string)=>uniformApi18.caseIdentityMigration.find(r=>r.after===key)?.before??key)} as T:input;
 });}
 export function beforeSharedPlannedExpansion<T extends {testId:string;assertions:string[];scenarioIds:string[];gaps:string[]}>(rows:T[]):T[]{
  return beforeUniformApi18MappingRows(rows).map(current=>{

@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 2,
+  "mode": "candidate",
+  "repository": "https://github.com/rcarmo/fixtures-ooxml",
+  "commit": "f4b5be7998ae6d009429f2080b40e3d4530c3452",
+  "root": "/workspace/projects/fixtures-ooxml",
+  "manifestSha256": "e8a6fc090257f64d2a1487edbfea0b151ff0aff66de35d4d0d098d3b35284aa7",
+  "featureCount": 69,
+  "featureSeals": {
+    "workflows/docx/anchor-discovery.feature": "322cf1df8cb454241bf9255cfe62b9f4c84f83042cc27f102b88ef06ff99d911",
+    "workflows/docx/comments.feature": "e1bcda50084acdc4231dc97273da5ae4194f90fa72dbb9a394fda343447001f0",
+    "workflows/docx/creation.feature": "b7f4632e576e9e040bdd9b57da3b865f626be9b23928c4a39edeb7363fa9ab94",
+    "workflows/docx/effective-formatting.feature": "8f1f31180b9e31dfff4e30ecfd9c9c4596edfaff85561cd53e775135cf748b90",
+    "workflows/docx/font-size.feature": "619db55d2fb4cf9092799e21e73b8c8ba45f77ef633d5f326f8dd78a5ba833a2",
+    "workflows/docx/mutation-safety.feature": "698761ad41f5ec295f1d9e6d141b2e45509cac4b327a937559d2de4d78cb141d",
+    "workflows/docx/page-layout.feature": "8d2e42e828beec30c47698dee64c6bc35380f7d9e0b1a3f3b7aeb36ceb921596",
+    "workflows/docx/paragraph-style.feature": "f0a565511a6f1b1ae0b38ddb9dc2332b23f66a5be2cfea214f9d59fe73990971",
+    "workflows/docx/paragraphs.feature": "f79050eb42d870be02aed473e74e2479c0c9054e0c1c53ebbdf4f6a93f5b530f",
+    "workflows/docx/properties.feature": "59757333a4894b19364fd2b40fd2f1ceaafa19c21f357b4b9ef764bf2197be04",
+    "workflows/docx/revisions.feature": "63e7107eeb754715b943b6d70524e558229c0b4c97427855050ea2888cbeefbd",
+    "workflows/docx/run-formatting.feature": "7e8ee86821bccfd14e6f33d290cb9fd809c11c1791d4eaa3f654fc3f38d90614",
+    "workflows/docx/stories.feature": "4ee52f31689348b2a3e453eee6beb4c52fdc7fda196d8af86e811e321bc41e33",
+    "workflows/docx/style-authoring.feature": "d4d4224f70d7b18dc963a7bf6e2fd194cf64f5757652e1ce47df9f47ab32502e",
+    "workflows/docx/tables.feature": "31148e56a491e9713c1912a92d8ce32a1f3da1dc41579cc5ded7c71609ce2471",
+    "workflows/docx/template-analysis.feature": "433f432d8af73c042d4b5c938450080dbb46811ee24ccee77507a02c809e414e",
+    "workflows/docx/template-cache.feature": "2f425f013c2beec9d19f37d54154e10944e25e87ef62f29928c2fb71d9a44576",
+    "workflows/docx/text.feature": "27711dc49074796eafded354a478d1ae8068f729b9d8f90a7e124805c459c32d",
+    "workflows/docx/tracked-workflow.feature": "f32ad31b4b4e03ad17894a8b246502e6d83f0253ec66abc1c5601764fd551ccd",
+    "workflows/package/graph.feature": "76148d827e7cdc4ee5b4529dd093e3f0ca066b00fad63b3431db5c0c574c5ecd",
+    "workflows/package/preservation.feature": "89ea7dbf321a87bbadac00eae8bcebed89364756f1ec449379dd0080afa8dff6",
+    "workflows/package/relationship-namespaces.feature": "0bd5577c68c4f1d8812949ececd4ab622909c3a9b9c4b8844344660a20e87974",
+    "workflows/package/semantic-diff.feature": "eebe822867a6f83d77351a0590dd81d7e929dc13f2d1add0bfcbbc44c5e90ca7",
+    "workflows/package/xml-member-admission.feature": "19fa717632d689e7ff4e883fb2af3f31e018373dc79ddb78efecf7742ea14e91",
+    "workflows/package/zip-admission.feature": "8fa7b8618fd9797e3470dfdfa1132b76784f180fe31d344f1d9d758f5c30f09c",
+    "workflows/package/zip32.feature": "8db7070f38041a107a27f2114280971dd29a890c82387dbe31342df7909513ca",
+    "workflows/package/zip64.feature": "f103ace071e647ffee092085a1c4b58e9b7be2cb4cb7553c3558c53f3be5c69a",
+    "workflows/pptx/creation.feature": "bf5bf83941f372251045598da0a45b3863c7dd223ed38e70ac0ca09a213e2dcb",
+    "workflows/pptx/mutation-safety.feature": "e1820e2469f1f6b809d96294b9da04a7e3edcb19ac3b45550a89b4094d73d9b8",
+    "workflows/pptx/notes.feature": "2e4fadee6dba5b2939fb4f6d1cfa41a1f59f07285804310f0c96fceefde4ceb0",
+    "workflows/pptx/preservation.feature": "c6976d4551ff74b83293b656cceb7490f33f8a1d89ee651784a7a33052493870",
+    "workflows/pptx/slide-order.feature": "c05b9cffb791fd1e526ae2c931b795456bca35a74584641a781ed2cfa9222e52",
+    "workflows/pptx/tables.feature": "53fa701999bf1f4d25517c73258b5673374f56dad87dcda6f0ae21dbaba01800",
+    "workflows/pptx/text-box.feature": "f1095dc45f85db19d45603fe38938cfc6414c74f3b1f5de63b23f9fd56e880ee",
+    "workflows/pptx/text.feature": "34e296bf9afd12d5bef64cf9e7fca15154d0c1500fc622dd63e65a5706b1c980",
+    "workflows/xlsx/cell-style.feature": "821a4bdda8541d2afd48873221246451c3ebd24273a20184fa8ea14900c76b7a",
+    "workflows/xlsx/cells.feature": "0494d6e44736cd9c6672934e5a1c55e2698a675d86a10bc3f463d4250095a1f5",
+    "workflows/xlsx/comment-vml-custody.feature": "e93331bb775a8c84cd2ca0bf35264b8ef085f5ef9b44578e231c7ff0165e801d",
+    "workflows/xlsx/creation.feature": "a7e59080cb34d381552bbb51afff24dfb39b2a3bfad782a2096fcb2983f0171c",
+    "workflows/xlsx/formula-cache.feature": "fbd217cde29b0b0b51801a9ea072768262906d56bae50180c93afa10a6a3b7f9",
+    "workflows/xlsx/formula-references.feature": "be9425210db324d7df242759e6920cd7bb01fe241d5eb27bdd8326b5d650c221",
+    "workflows/xlsx/mutation-safety.feature": "c481cb5e382476ac12fc7a028ba7db2eda76287b0d9066ccc172cf34213050bc",
+    "workflows/xml/comparison.feature": "eb6440d3a548ba0d86ff576fc65a97d57df68c423ae17abf779eef8c423c9233",
+    "workflows/xml/editing.feature": "805f5d689e174a7b9ea1989d994bb0a7f2131545801793ee148229c05d24edb5",
+    "workflows/xml/names.feature": "7b3f71e3c806eb1fc50274bd5c9442324b6e4cc16c6994cd85842129f5ef3a3a",
+    "workflows/xml/parsing.feature": "e5f72d944248f84a89f60cf498d1cba642217259c362486ab279eef697a61b90",
+    "workflows/docx/tracking-settings.feature": "ba4621e6acd4b892b5a214d57d3d9057b568135d0f21a5ff40fc69b4b6417e9e",
+    "workflows/docx/table-merging.feature": "3ea877322e88e4ac5e5d608e4f60cbe06ee04ea1c89e18fcd5650f9ec2c83cd1",
+    "workflows/docx/review-integration.feature": "5b0d1392e1bc836afaf15dcd397fc2e1366035a0475f75b5cf464992f32ceb3e",
+    "workflows/docx/comment-content-type.feature": "df53d9f86112756deb5124e0feab7ef9568446c414c596fc185e90677f522d16",
+    "workflows/xlsx/cache-completeness.feature": "45f092878a7bed948908a696fa9a45e5d3b5a80a061318d55e0a37a3f2edf092",
+    "workflows/office/full-coverage.feature": "8d74a7b29c6b2993ab13e41de35c9a8156e35feb0eeb5eeddab37bce20d89b6b",
+    "workflows/pptx/slide-import.feature": "9797cb84555e97b786f66c9e51f45ccb732004b9f717f75ca484424f6a9c82ac",
+    "workflows/xlsx/structural-edits.feature": "6f3e52c41757ca28f46f7ed31994206fe74e8119327f34bf958a2a4e357a8e75",
+    "workflows/xlsx/calculation-engine.feature": "683d99ac5847362948945f2377e988537045bca7743b187f3422ddc043f8b1c0",
+    "workflows/xlsx/style-readback.feature": "6eb8ab565e59ad767f7e8cf5c87a45523a64d340d95be53a7ee52e00305d4633",
+    "workflows/pptx/layout-recommendation.feature": "b41b1f3ef7fe9cc022a74113a4b3edbd1fe2d93934ee83225d7e0b99e6b25a75",
+    "workflows/docx/completion-audit.feature": "b3e838f7823c52b5d0dd8fb498418d4144b39906ff7cce1f015e606f1583f34c",
+    "workflows/package/admission-limit-configuration.feature": "885083126a39d17a795609bbf5d2e273678b5d8613af9cafdc0fac46396adb8a",
+    "workflows/package/data-descriptor-integrity.feature": "c0c855a3f4dd74e15fd59aa03572bb7f8c752544fd9bb64b6f082e14388c9370",
+    "workflows/xlsx/calculation-chain-lifecycle.feature": "705365c666efd68ae2fc1ac85d86f85511cde77c8fc7644ea04b3978bb56103e",
+    "workflows/pptx/slide-visibility.feature": "4d597d15d4227bc7ed153ef3cd1060d8319134ca08b499c602fc964c1511af19",
+    "workflows/pptx/bullets.feature": "f26843b74b4b48b81631139cd907de3ddd37940034f1d9332df86df519bcb93f",
+    "workflows/pptx/text-autofit.feature": "811920664e09be2622d9966d81fbdb33dd1299b0badf29c63243514cf913967f",
+    "workflows/pptx/shape-geometry.feature": "6cf9dad38adca997ec91ac4371bb05f19bd2a4ef547e05664755a5099ddabb17",
+    "workflows/pptx/text-formatting.feature": "2ae3c5823732d240a860f04580c310c3e14276195b1be9c1c60209bd26518557",
+    "workflows/pptx/paragraph-formatting.feature": "5be8c0cb29b61a50abd8b280b1517a771503c3c2349691931881176b491a16a4",
+    "workflows/pptx/shape-style.feature": "17e9b7f2cae435ec48f11dfb932cfc9582b499d369b4167970b091ad8397135f",
+    "workflows/pptx/text-frame-properties.feature": "7c9396fbde5af9fd51ea1b5631f4d683be94b02ad35e72045c8c9ae5ceb56562"
+  },
+  "selectedScenarioIds": [
+    "@id-pptx-order-notes-read",
+    "@id-pptx-readable-unsupported-topology",
+    "@id-pptx-cross-run-replace",
+    "@id-pptx-stale-anchor-refusal",
+    "@id-xlsx-read-rel-linked-shared-strings",
+    "@id-xlsx-clear-cross-sheet-caches",
+    "@id-xlsx-prefixed-namespace-safe-edits",
+    "@id-xlsx-phonetic-guides-excluded",
+    "@id-xlsx-styled-blank-cell-editable",
+    "@id-xlsx-refuse-shared-formula-overwrite",
+    "@id-xlsx-refuse-array-formula-overwrite",
+    "@id-xlsx-array-input-refusal",
+    "@id-xlsx-cache-scope-opaque-parts",
+    "@id-pptx-create-new-minimal",
+    "@id-pptx-create-anchor-preservation",
+    "@id-pptx-create-refusals",
+    "@id-pptx-table-roundtrip-geometry",
+    "@id-pptx-table-formatting",
+    "@id-pptx-table-stale-handle",
+    "@id-pptx-table-atomic-refusals"
+  ],
+  "executionCredit": false,
+  "caseIdentityMigration": [
+    {
+      "after": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"mixed formula\",\"source_json\":\"\\\"IF(A1=\\\\\\\"B2\\\\\\\",'O''Brien'!$C$4,SUM(D1:E2))\\\"\",\"count\":\"3\",\"references_json\":\"[{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":3,\\\"end\\\":5},{\\\"sheet\\\":\\\"O'Brien\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":4,\\\"column\\\":3,\\\"rowAbsolute\\\":true,\\\"columnAbsolute\\\":true},\\\"last\\\":{\\\"row\\\":4,\\\"column\\\":3,\\\"rowAbsolute\\\":true,\\\"columnAbsolute\\\":true},\\\"start\\\":11,\\\"end\\\":26},{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":4,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":2,\\\"column\\\":5,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":31,\\\"end\\\":36}]\"}",
+      "before": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"mixed formula\",\"source_json\":\"\\\"IF(A1=\\\\\\\"B2\\\\\\\",'O''Brien'!$C$4,SUM(D1:E2))\\\"\",\"count\":\"3\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"only strings\",\"source_json\":\"\\\"\\\\\\\"A1\\\\\\\"&\\\\\\\"Sheet1!B2\\\\\\\"\\\"\",\"count\":\"0\",\"references_json\":\"[]\"}",
+      "before": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"only strings\",\"source_json\":\"\\\"\\\\\\\"A1\\\\\\\"&\\\\\\\"Sheet1!B2\\\\\\\"\\\"\",\"count\":\"0\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"numeric exponent\",\"source_json\":\"\\\"LOG10(A1)+1E10\\\"\",\"count\":\"1\",\"references_json\":\"[{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":6,\\\"end\\\":8}]\"}",
+      "before": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"numeric exponent\",\"source_json\":\"\\\"LOG10(A1)+1E10\\\"\",\"count\":\"1\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"unary arithmetic\",\"source_json\":\"\\\"=-(A1+B2)^2%\\\"\",\"count\":\"2\",\"references_json\":\"[{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":3,\\\"end\\\":5},{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":2,\\\"column\\\":2,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":2,\\\"column\\\":2,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":6,\\\"end\\\":8}]\"}",
+      "before": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"unary arithmetic\",\"source_json\":\"\\\"=-(A1+B2)^2%\\\"\",\"count\":\"2\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"boolean literal\",\"source_json\":\"\\\"TRUE\\\"\",\"count\":\"0\",\"references_json\":\"[]\"}",
+      "before": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"boolean literal\",\"source_json\":\"\\\"TRUE\\\"\",\"count\":\"0\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"Unicode sheet\",\"source_json\":\"\\\"'α sheet'!A1\\\"\",\"count\":\"1\",\"references_json\":\"[{\\\"sheet\\\":\\\"α sheet\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":0,\\\"end\\\":13}]\"}",
+      "before": "@id-xlsx-go-formula-analysis-counts|{\"variant\":\"Unicode sheet\",\"source_json\":\"\\\"'α sheet'!A1\\\"\",\"count\":\"1\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"adjacent string operator\",\"source_json\":\"\\\"A1 \\\\\\\"+\\\\\\\" B1\\\"\",\"result\":\"refused with zero references\",\"references_json\":\"null\"}",
+      "before": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"adjacent string operator\",\"source_json\":\"\\\"A1 \\\\\\\"+\\\\\\\" B1\\\"\",\"result\":\"refused with zero references\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"adjacent string range\",\"source_json\":\"\\\"A1 \\\\\\\":\\\\\\\" B2\\\"\",\"result\":\"refused with zero references\",\"references_json\":\"null\"}",
+      "before": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"adjacent string range\",\"source_json\":\"\\\"A1 \\\\\\\":\\\\\\\" B2\\\"\",\"result\":\"refused with zero references\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted close in SUM\",\"source_json\":\"\\\"SUM(\\\\\\\")\\\\\\\",A1)\\\"\",\"result\":\"accepted without error\",\"references_json\":\"[{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":8,\\\"end\\\":10}]\"}",
+      "before": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted close in SUM\",\"source_json\":\"\\\"SUM(\\\\\\\")\\\\\\\",A1)\\\"\",\"result\":\"accepted without error\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted percent in SUM\",\"source_json\":\"\\\"SUM(\\\\\\\"%\\\\\\\",A1)\\\"\",\"result\":\"accepted without error\",\"references_json\":\"[{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"start\\\":8,\\\"end\\\":10}]\"}",
+      "before": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted percent in SUM\",\"source_json\":\"\\\"SUM(\\\\\\\"%\\\\\\\",A1)\\\"\",\"result\":\"accepted without error\"}"
+    },
+    {
+      "after": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted equality only\",\"source_json\":\"\\\"\\\\\\\"=\\\\\\\"\\\"\",\"result\":\"accepted without error\",\"references_json\":\"[]\"}",
+      "before": "@id-xlsx-go-formula-literal-punctuation|{\"variant\":\"quoted equality only\",\"source_json\":\"\\\"\\\\\\\"=\\\\\\\"\\\"\",\"result\":\"accepted without error\"}"
+    },
+    {
+      "after": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"absolute column\",\"source_json\":\"\\\"$B:$B\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"column\",\"row\":\"0\",\"col\":\"2\",\"range_json\":\"{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"column\\\",\\\"first\\\":{\\\"row\\\":0,\\\"column\\\":2,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":true},\\\"last\\\":{\\\"row\\\":0,\\\"column\\\":2,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":true}}\"}",
+      "before": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"absolute column\",\"source_json\":\"\\\"$B:$B\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"column\",\"row\":\"0\",\"col\":\"2\"}"
+    },
+    {
+      "after": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"reversed whole rows\",\"source_json\":\"\\\"$3:$1\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"row\",\"row\":\"3\",\"col\":\"0\",\"range_json\":\"{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"row\\\",\\\"first\\\":{\\\"row\\\":3,\\\"column\\\":0,\\\"rowAbsolute\\\":true,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":0,\\\"rowAbsolute\\\":true,\\\"columnAbsolute\\\":false}}\"}",
+      "before": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"reversed whole rows\",\"source_json\":\"\\\"$3:$1\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"row\",\"row\":\"3\",\"col\":\"0\"}"
+    },
+    {
+      "after": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"quoted column\",\"source_json\":\"\\\"'O''Brien'!$B:$B\\\"\",\"sheet_json\":\"\\\"O'Brien\\\"\",\"axis\":\"column\",\"row\":\"0\",\"col\":\"2\",\"range_json\":\"{\\\"sheet\\\":\\\"O'Brien\\\",\\\"axis\\\":\\\"column\\\",\\\"first\\\":{\\\"row\\\":0,\\\"column\\\":2,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":true},\\\"last\\\":{\\\"row\\\":0,\\\"column\\\":2,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":true}}\"}",
+      "before": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"quoted column\",\"source_json\":\"\\\"'O''Brien'!$B:$B\\\"\",\"sheet_json\":\"\\\"O'Brien\\\"\",\"axis\":\"column\",\"row\":\"0\",\"col\":\"2\"}"
+    },
+    {
+      "after": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"reversed rectangle\",\"source_json\":\"\\\"A3:B1\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"cell\",\"row\":\"3\",\"col\":\"1\",\"range_json\":\"{\\\"sheet\\\":\\\"\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":3,\\\"column\\\":1,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":2,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false}}\"}",
+      "before": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"reversed rectangle\",\"source_json\":\"\\\"A3:B1\\\"\",\"sheet_json\":\"\\\"\\\"\",\"axis\":\"cell\",\"row\":\"3\",\"col\":\"1\"}"
+    },
+    {
+      "after": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"sheet absolute cell\",\"source_json\":\"\\\"Sheet!$A$1\\\"\",\"sheet_json\":\"\\\"Sheet\\\"\",\"axis\":\"cell\",\"row\":\"1\",\"col\":\"1\",\"range_json\":\"{\\\"sheet\\\":\\\"Sheet\\\",\\\"axis\\\":\\\"cell\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":true,\\\"columnAbsolute\\\":true},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":1,\\\"rowAbsolute\\\":true,\\\"columnAbsolute\\\":true}}\"}",
+      "before": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"sheet absolute cell\",\"source_json\":\"\\\"Sheet!$A$1\\\"\",\"sheet_json\":\"\\\"Sheet\\\"\",\"axis\":\"cell\",\"row\":\"1\",\"col\":\"1\"}"
+    },
+    {
+      "after": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"numeric sheet name\",\"source_json\":\"\\\"'3'!1:1\\\"\",\"sheet_json\":\"\\\"3\\\"\",\"axis\":\"row\",\"row\":\"1\",\"col\":\"0\",\"range_json\":\"{\\\"sheet\\\":\\\"3\\\",\\\"axis\\\":\\\"row\\\",\\\"first\\\":{\\\"row\\\":1,\\\"column\\\":0,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false},\\\"last\\\":{\\\"row\\\":1,\\\"column\\\":0,\\\"rowAbsolute\\\":false,\\\"columnAbsolute\\\":false}}\"}",
+      "before": "@id-xlsx-go-direct-range-parsing|{\"variant\":\"numeric sheet name\",\"source_json\":\"\\\"'3'!1:1\\\"\",\"sheet_json\":\"\\\"3\\\"\",\"axis\":\"row\",\"row\":\"1\",\"col\":\"0\"}"
+    },
+    {
+      "before": "@id-pptx-table-atomic-refusals|{\"case\":\"merged-cell\",\"code\":\"PPTX_TABLE_MERGE_UNSUPPORTED\"}",
+      "after": "@id-pptx-table-atomic-refusals|{\"case\":\"merged-cell\",\"recipe\":\"merged-table\",\"code\":\"PPTX_TABLE_MERGE_UNSUPPORTED\"}"
+    },
+    {
+      "before": "@id-pptx-table-atomic-refusals|{\"case\":\"malformed-merge\",\"code\":\"PPTX_TABLE_STRUCTURE_UNSUPPORTED\"}",
+      "after": "@id-pptx-table-atomic-refusals|{\"case\":\"malformed-merge\",\"recipe\":\"malformed-table\",\"code\":\"PPTX_TABLE_STRUCTURE_UNSUPPORTED\"}"
+    }
+  ]
+}

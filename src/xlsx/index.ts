@@ -149,6 +149,11 @@ export class Workbook {
     return new Workbook(OpcPackage.fromParts(createWorkbookParts()));
   }
 
+  /** @internal Rebuild a retained facade after its owned transactional XML edits. */
+  static fromPackage(pkg: OpcPackage): Workbook {
+    return new Workbook(pkg);
+  }
+
   static async open(input: OpenInput): Promise<Workbook> {
     if (typeof input === "string") {
       return new Workbook(await OpcPackage.open(input), input);

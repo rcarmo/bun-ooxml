@@ -82,7 +82,8 @@ import { bindings as cacheBoundaryBindings } from "./cache-boundaries.ts";
 import {bindings as ownedChainBindings,cleanup as cleanupOwnedChains} from './owned-chain.ts';
 import { bindings as workflowBindings, cleanupWorkflowFixtures } from "./workflow.ts";
 import { bindings as workflowReceiptBindings, cleanupWorkflowReceipts } from './workflow-receipts.ts';
-export async function cleanup(){await Promise.all([cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains(),cleanupXlsxStyleReadback(),cleanupPptxNext20(),cleanupPptxManipulation(),cleanupPptxFormatting(),cleanupRetainedStyleWord(),cleanupRetainedTable()]);}
+import {withContract20,cleanup as cleanupContract20} from './contract20.ts';
+export async function cleanup(){await Promise.all([cleanupContract20(),cleanupWorkflowFixtures(),cleanupWorkflowReceipts(),cleanupBodyAnchors(),cleanupTrackedWorkflowFixtures(),cleanupTrackingOutcomes(),cleanupTableMerging(),cleanupVerticalMerging(),cleanupTemplateInventory(),cleanupCommentThreads(),cleanupRevisionProperties(),cleanupRevisionMoves(),cleanupFontSize(),cleanupOpcCustody(),cleanupOwnedChains(),cleanupXlsxStyleReadback(),cleanupPptxNext20(),cleanupPptxManipulation(),cleanupPptxFormatting(),cleanupRetainedStyleWord(),cleanupRetainedTable()]);}
 
 import {withUniformApi18} from './uniform-api18.ts';
 
@@ -165,6 +166,6 @@ export const historicalBindings: StepBinding[] = [
   ...workflowBindings,
   ...workflowReceiptBindings,
 ];
-export const bindings=withUniformApi18([...withPackageAlignment(historicalBindings),...pptxNext20Bindings,...pptxManipulationBindings,...pptxFormattingBindings,...retainedStyleWordBindings,...retainedTableBindings.filter(b=>b.pattern.source.startsWith('^refusal reason invalid-table-properties'))]);
+export const bindings=withContract20(withUniformApi18([...withPackageAlignment(historicalBindings),...pptxNext20Bindings,...pptxManipulationBindings,...pptxFormattingBindings,...retainedStyleWordBindings,...retainedTableBindings.filter(b=>b.pattern.source.startsWith('^refusal reason invalid-table-properties'))]));
 
 export default bindings;

@@ -1,3 +1,4 @@
+import {beforeContract20Feature} from '../helpers/contract20-history.ts';
 import {fixturesRoot} from '../../scripts/fixture-inputs.ts';
 import {describe,expect,test} from 'bun:test';
 import {join} from 'node:path';
@@ -5,7 +6,7 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {Workbook} from '../../src/xlsx/index.ts';
 import {patchOffice} from '../../src/workflow/index.ts';
-import {parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from '../../scripts/gherkin.ts';
+import {selectSharedScenarios,parseFeature,executeAcceptance,newAcceptanceRunId,type AcceptanceInventory} from '../../scripts/gherkin.ts';
 import {bindings,rangedFormulaFixture} from '../acceptance/cache-boundaries.ts';
 describe('bounded formula cache custody',()=>{
  test('array and data-table inputs refuse without changing cached followers or earlier parts',async()=>{
@@ -21,7 +22,7 @@ describe('bounded formula cache custody',()=>{
   }finally{await rm(root,{recursive:true,force:true});}
  });
  test('executes every cache boundary Given/When/Then',async()=>{
-  const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const [f]=await sharedScenarios(['@id-xlsx-array-input-refusal','@id-xlsx-cache-scope-opaque-parts']);if(!f)throw Error('Missing cache scenarios');
+  const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const path='workflows/xlsx/formula-cache.feature',f=selectSharedScenarios(path,await beforeContract20Feature(path,await Bun.file(join(fixturesRoot(),path)).text()),['@id-xlsx-array-input-refusal','@id-xlsx-cache-scope-opaque-parts']);f.scenarios=f.scenarios.filter(s=>['@id-xlsx-array-input-refusal','@id-xlsx-cache-scope-opaque-parts'].includes(s.scenarioId));if(!f)throw Error('Missing cache scenarios');
   const cases=f.scenarios.flatMap(s=>s.cases),steps=cases.reduce((n,c)=>n+c.steps.length,0);
   const count=(n:number)=>({implemented:n,planned:0,total:n});
   const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(steps)}};

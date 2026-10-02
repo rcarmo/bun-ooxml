@@ -1,3 +1,4 @@
+import {beforeContract20Feature} from '../helpers/contract20-history.ts';
 import { afterEach, describe, expect, test } from "bun:test";
 import { mkdtemp, mkdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -25,8 +26,8 @@ afterEach(async () => {
 describe("pptx slice", () => {
   test("acceptance feature passes with the dedicated PPTX bindings", async () => {
     const root = await makeProject({
-      "references/fixtures-ooxml/workflows/pptx/text.feature": await Bun.file(join(fixturesRoot(), "workflows/pptx/text.feature")).text(),
-      "references/fixtures-ooxml/workflows/pptx/notes.feature": await Bun.file(join(fixturesRoot(), "workflows/pptx/notes.feature")).text(),
+      "references/fixtures-ooxml/workflows/pptx/text.feature": await beforeContract20Feature('workflows/pptx/text.feature',await Bun.file(join(fixturesRoot(), "workflows/pptx/text.feature")).text()),
+      "references/fixtures-ooxml/workflows/pptx/notes.feature": await beforeContract20Feature('workflows/pptx/notes.feature',await Bun.file(join(fixturesRoot(), "workflows/pptx/notes.feature")).text()),
       "features/shared.json": JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/workflows/pptx/text.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-readable-unsupported-topology','@id-pptx-cross-run-replace','@id-pptx-stale-anchor-refusal']},{path:'references/fixtures-ooxml/workflows/pptx/notes.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-order-notes-read']}]}),
     });
 

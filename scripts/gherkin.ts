@@ -28,6 +28,7 @@ import pptxFormattingPin from '../docs/behaviors/pptx-formatting-candidate.json'
 import retainedStyleWordPin from '../docs/behaviors/retained-style-word-candidate.json';
 import retainedTablePin from '../docs/behaviors/retained-table-properties-candidate.json';
 import uniformApi18Pin from '../docs/behaviors/uniform-api18-candidate.json';
+import contract20Pin from '../docs/behaviors/contract20-candidate.json';
 
 export type StepBinding = {
   pattern: RegExp;
@@ -357,13 +358,14 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
   if(process.env.OOXML_FIXTURES_ROOT&&resolve(root)===resolve(import.meta.dir,'..'))await verifyReferences(root);
   const candidatePin=process.env.OOXML_FIXTURES_ROOT&&resolve(root)===resolve(import.meta.dir,'..')
     ? await Bun.file(process.env.OOXML_REFERENCE_PIN!).json() : undefined;
+  const contract20Candidate=candidatePin?.commit===contract20Pin.commit;
   const formattingCandidate=candidatePin?.commit===pptxFormattingPin.commit;
   const uniformCandidate=candidatePin?.commit===uniformApi18Pin.commit;
-  const tableCandidate=uniformCandidate||candidatePin?.commit===retainedTablePin.commit;
+  const tableCandidate=contract20Candidate||uniformCandidate||candidatePin?.commit===retainedTablePin.commit;
   const retainedCandidate=tableCandidate||candidatePin?.commit===retainedStyleWordPin.commit;
   const pptxCandidate=candidatePin?.commit===pptxManipulationPin.commit||formattingCandidate||retainedCandidate;
   if(pptxCandidate){
-    const expected=uniformCandidate?uniformApi18Pin:tableCandidate?retainedTablePin:retainedCandidate?retainedStyleWordPin:formattingCandidate?pptxFormattingPin:pptxManipulationPin;
+    const expected=contract20Candidate?contract20Pin:uniformCandidate?uniformApi18Pin:tableCandidate?retainedTablePin:retainedCandidate?retainedStyleWordPin:formattingCandidate?pptxFormattingPin:pptxManipulationPin;
     if(JSON.stringify(candidatePin.selectedScenarioIds)!==JSON.stringify(expected.selectedScenarioIds))throw Error('PPTX candidate selection drift');
     // Migrate the predecessor local lane only for the sealed shared candidate.
     const local=features.findIndex(f=>f.path==='features/pptx/manipulation-next20.feature');
@@ -398,10 +400,10 @@ export async function inventoryFeatures(root: string): Promise<AcceptanceInvento
         owners.set(row.id,row);
       }
       for(const path of selections.keys())if(!ledger.features.includes(path.slice(sharedPrefix.length)))throw Error('Activation outside shared catalogue');
-      if(pptxCandidate){for(const id of [...pptxManipulationPin.selectedScenarioIds,...((formattingCandidate||retainedCandidate)?pptxFormattingPin.selectedScenarioIds:[]),...(retainedCandidate?retainedStyleWordPin.selectedScenarioIds:[]),...(tableCandidate?retainedTablePin.selectedScenarioIds:[])]){
+      if(pptxCandidate){for(const id of [...pptxManipulationPin.selectedScenarioIds,...((formattingCandidate||retainedCandidate)?pptxFormattingPin.selectedScenarioIds:[]),...(retainedCandidate?retainedStyleWordPin.selectedScenarioIds:[]),...(tableCandidate?retainedTablePin.selectedScenarioIds:[]),...(contract20Candidate?contract20Pin.selectedScenarioIds:[])]){
         const owner=owners.get(id);if(!owner)throw Error('Missing PPTX candidate scenario: '+id);
         const uri=sharedPrefix+owner.feature,ids=selections.get(uri) as string[]|undefined;
-        selections.set(uri,[...(ids??[]),id]);
+        selections.set(uri,[...new Set([...(ids??[]),id])]);
       }}
       const found=new Set<string>();let caseCount=0;
       for(const path of ledger.features as string[]){

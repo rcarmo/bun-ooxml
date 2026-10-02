@@ -23,3 +23,4 @@ export { Presentation, type ShapeGeometryPatch, type ShapeStylePatch, type TextF
 export { Workbook, parseA1Range, type A1Range, type A1Coordinate, type A1RangeAxis } from "./xlsx/index.ts";
 export { patchOffice, type PatchRequest, type PatchReceipt, type TargetResult } from "./workflow/index.ts";
 export type { Story, StoryKind } from "./docx/story.ts";
+export {ContractWorkbook,ContractPresentation,type ContractTextAnchor,type ContractParagraph,type ContractTableCell} from './contract20.ts';

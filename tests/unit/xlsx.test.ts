@@ -1,3 +1,4 @@
+import {beforeContract20Feature} from '../helpers/contract20-history.ts';
 import { afterEach, describe, expect, test } from "bun:test";
 import {sharedFormulaWorkbook} from '../fixtures/native-edge-cases.ts';
 import { mkdtemp, mkdir, rm } from "node:fs/promises";
@@ -252,7 +253,7 @@ describe("Worksheet.setCellValue", () => {
 describe("xlsx acceptance feature", () => {
   test("executes the implemented xlsx scenarios with exported bindings", async () => {
     const root = await tempRoot();
-    for(const path of ["workflows/xlsx/cells.feature","workflows/xlsx/formula-cache.feature"])await Bun.write(join(root,'references/fixtures-ooxml',path),await Bun.file(join(fixturesRoot(),path)).text());
+    for(const path of ["workflows/xlsx/cells.feature","workflows/xlsx/formula-cache.feature"])await Bun.write(join(root,'references/fixtures-ooxml',path),await beforeContract20Feature(path,await Bun.file(join(fixturesRoot(),path)).text()));
     await Bun.write(join(root,'features/shared.json'),JSON.stringify({"schemaVersion":2,"features":[{"path":"references/fixtures-ooxml/workflows/xlsx/cells.feature","lifecycle":"implemented","runner":"bun","scenarioIds":["@id-xlsx-read-rel-linked-shared-strings","@id-xlsx-preserve-styled-cell-edit","@id-xlsx-prefixed-namespace-safe-edits","@id-xlsx-phonetic-guides-excluded","@id-xlsx-styled-blank-cell-editable","@id-xlsx-refuse-shared-formula-overwrite","@id-xlsx-refuse-array-formula-overwrite"]},{"path":"references/fixtures-ooxml/workflows/xlsx/formula-cache.feature","lifecycle":"implemented","runner":"bun","scenarioIds":["@id-xlsx-clear-cross-sheet-caches"]}]}));
 
     const report = await runAcceptance(bindings, { root });

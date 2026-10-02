@@ -3,11 +3,13 @@ import {withoutPptxNext20} from './pptx-next20-identities.ts';
 import lexicalAlignment from '../../docs/behaviors/xml-lexical-alignment-candidate.json';
 import packageAlignment from '../../docs/behaviors/package-alignment-candidate.json';
 import uniformApi18 from '../../docs/behaviors/uniform-api18-candidate.json';
+import contract20 from '../../docs/behaviors/contract20-candidate.json';
 const added=['persistence','custody','no-op','refusal','rollback','plain-edit','author-refusal'].map(n=>'@id-docx-tracking-settings-'+n);
 const mergeIds=['roundtrip','content-refusal','structure-refusal','coordinate-refusal','rollback','encoding','stale'].map(n=>'@id-docx-horizontal-merge-'+n);
 /** Keep the v0.27 execution identities stable while checking each reviewed addition. */
 export function withoutTrackingToggle(keys:string[]):string[]{
  // Reverse only exact reviewed stronger outline operands for this historical test.
+ keys=keys.map(k=>contract20.caseIdentityMigration.find(r=>r.after===k)?.before??k);
  keys=keys.map(k=>uniformApi18.caseIdentityMigration.find(r=>r.after===k)?.before??k);
  keys=withoutPptxNext20(keys);
  assert.equal(keys.length,732);

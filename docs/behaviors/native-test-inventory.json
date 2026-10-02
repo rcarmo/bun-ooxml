@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1149,
-  "files": 152,
+  "count": 1177,
+  "files": 155,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -14,7 +14,7 @@
     },
     {
       "path": "tests/unit/cache-boundaries.test.ts",
-      "sha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
+      "sha256": "0b891639a7a82fdee493219c4dadb96dd078dcdb00ff3a3d926767182d48b577",
       "declarations": 3,
       "issues": []
     },
@@ -46,6 +46,24 @@
       "path": "tests/unit/content-types.test.ts",
       "sha256": "dd9f706cd355f96423ea6a65a733092494d2e8a5741ba678df65de8bcd197b9a",
       "declarations": 7,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/contract20-bindings.test.ts",
+      "sha256": "b6dfc557c80de0880fc9569b5a093e1e70746ccbef43339634fc13acb54cad14",
+      "declarations": 2,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/contract20-native.test.ts",
+      "sha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "declarations": 22,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "sha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20",
+      "declarations": 4,
       "issues": []
     },
     {
@@ -542,7 +560,7 @@
     },
     {
       "path": "tests/unit/pptx.test.ts",
-      "sha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "sha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "declarations": 6,
       "issues": []
     },
@@ -608,13 +626,13 @@
     },
     {
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0",
+      "sha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b",
       "declarations": 5,
       "issues": []
     },
     {
       "path": "tests/unit/shared-contracts.test.ts",
-      "sha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "sha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "declarations": 5,
       "issues": []
     },
@@ -806,7 +824,7 @@
     },
     {
       "path": "tests/unit/xlsx.test.ts",
-      "sha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "declarations": 11,
       "issues": []
     },
@@ -951,6 +969,10 @@
     {
       "path": "tests/acceptance/comments-docx.ts",
       "sha256": "d3f17f39bf90344747f4f70559e2d05918d2774ea01559ec736ee2bfe0fa252d"
+    },
+    {
+      "path": "tests/acceptance/contract20.ts",
+      "sha256": "5e4fd00a57960d2fd05b41e339ea8698e32dacb8013864541a495a37614b2eb2"
     },
     {
       "path": "tests/acceptance/core-properties.ts",
@@ -1142,7 +1164,7 @@
     },
     {
       "path": "tests/acceptance/steps.ts",
-      "sha256": "dc701ab950140638c73c51e6b10fb96532ea48413158b8a64087f2ddafa7bd6d"
+      "sha256": "247eeff7089d1c3023157f76c0afeea3f0d9283b99bdea072830b9b66a65c7eb"
     },
     {
       "path": "tests/acceptance/story-docx.ts",
@@ -1277,8 +1299,24 @@
       "sha256": "c542294cc34da195aef02def693ca1832721770228bfb42a5e582d48f4c72812"
     },
     {
+      "path": "tests/helpers/contract20-history.ts",
+      "sha256": "6e8a7fca3349ffdc082f9378bfcf33311e61fa1433e085707574f4d32cdbc1be"
+    },
+    {
+      "path": "tests/helpers/contract20-inputs.ts",
+      "sha256": "7231e4ad5f9ba2064b77f47b59a627454d098aee88ecf2748c8d93badcac9be8"
+    },
+    {
+      "path": "tests/helpers/contract20-observations.ts",
+      "sha256": "07eb69d752208b0bcf73c25b41c7cd7d9acc78d3a030f862087b2e112e6fec9d"
+    },
+    {
+      "path": "tests/helpers/contract20-oracle.ts",
+      "sha256": "f0a0da0763f460d15f722f72f95754ceabd5a4b43336dcaefb90d48354948434"
+    },
+    {
       "path": "tests/helpers/execution-baseline.ts",
-      "sha256": "1388d194a3be6baffb9925bcdd4302e3d2932c996370b61f0304563bfcb7d934"
+      "sha256": "a5d135f7e67929c9cbf52703f97b0fe0838707817a4f9c98ba7fc3d2b03be635"
     },
     {
       "path": "tests/helpers/pptx-next20-identities.ts",
@@ -1286,7 +1324,7 @@
     },
     {
       "path": "tests/helpers/pptx-shared-predecessor.ts",
-      "sha256": "f7fa18c3150b74cd375fd1e3d672c6551dbaa62d8c4129f279820a9818eb4357"
+      "sha256": "e037ed30441c44f16d4aead73666d1f81386724aff9f23dccacbf7551bb9b7fe"
     },
     {
       "path": "tests/helpers/shared-scenarios.ts",
@@ -1294,7 +1332,7 @@
     },
     {
       "path": "tests/helpers/uniform-api18-history.ts",
-      "sha256": "936b97f5e2c42e10c289bcecd2ee6589027783b1da851a3dd90205d99ec0b580"
+      "sha256": "eb430c1d83f11a69f97787380c678bd62af0311d367fde713b80a36c4f87618d"
     },
     {
       "path": "tests/helpers/xml-formatting-custody.ts",
@@ -1302,7 +1340,7 @@
     },
     {
       "path": "tests/unit/mapping-history.ts",
-      "sha256": "5feb35b4887ab9dc02a3a1b1b4e641533a229730e70fb5aa9c425113dca8b182"
+      "sha256": "bd1ab8c258f66bdbbff7b5447562bdfc3e92ce3b696d126a66df4dd1dba8d65d"
     },
     {
       "path": "tests/unit/pptx-retained-visibility.ts",
@@ -1322,6 +1360,13 @@
     "bun:tests/unit/comparison-mappings.test.ts:comparison scopes declarations literal assertions and canonical case ownership cannot shrink or cross features",
     "bun:tests/unit/comparison-mappings.test.ts:comparison runtime binding fixture-builder and canonical pins fail independently when stale or absent",
     "bun:tests/unit/comparison-mappings.test.ts:comparison reconciliation preserves inputs direct and deferred assertions dynamic flags and unknown leaves",
+    "bun:tests/unit/contract20-bindings.test.ts:exact Contract20 predicate table has one handler per selected step and rejects foreign case/hash",
+    "bun:tests/unit/contract20-bindings.test.ts:all 22 sealed Contract20 action/predicate plans execute in order with independent saved-output checks",
+    "bun:tests/unit/contract20-native.test.ts:'Contract20 '+recipe+' intake succeeds before typed cell edit refusal'",
+    "bun:tests/unit/contract20-native.test.ts:Contract20 save failure publishes nothing and preserves existing or absent destination",
+    "bun:tests/unit/contract20-oracle.test.ts:independent Contract20 XML oracle decodes names/entities and disjoint original spans",
+    "bun:tests/unit/contract20-oracle.test.ts:independent ZIP graph reader validates every sealed recipe without production XML/ZIP reader",
+    "bun:tests/unit/contract20-oracle.test.ts:independent archive reader rejects CRC mismatch in stored payload and local-central metadata",
     "bun:tests/unit/docx-anchor-mappings.test.ts:anchor suites and all literal assertion expressions are mandatory and cannot borrow tool-hint cases",
     "bun:tests/unit/docx-anchor-mappings.test.ts:anchor source pins independently reject stale runtime bindings helper and canonical files",
     "bun:tests/unit/docx-append-run.test.ts:append retains existing paragraph/run fragments, sibling paragraphs and unrelated member bytes",
@@ -1812,6 +1857,14 @@
     "bun:tests/unit/comparison-mappings.test.ts:comparison scopes declarations literal assertions and canonical case ownership cannot shrink or cross features",
     "bun:tests/unit/comparison-mappings.test.ts:comparison runtime binding fixture-builder and canonical pins fail independently when stale or absent",
     "bun:tests/unit/comparison-mappings.test.ts:comparison reconciliation preserves inputs direct and deferred assertions dynamic flags and unknown leaves",
+    "bun:tests/unit/contract20-bindings.test.ts:exact Contract20 predicate table has one handler per selected step and rejects foreign case/hash",
+    "bun:tests/unit/contract20-bindings.test.ts:all 22 sealed Contract20 action/predicate plans execute in order with independent saved-output checks",
+    "bun:tests/unit/contract20-native.test.ts:Contract20 numeric no-op preserves all caches and calculation flags",
+    "bun:tests/unit/contract20-native.test.ts:'Contract20 '+recipe+' intake succeeds before typed cell edit refusal'",
+    "bun:tests/unit/contract20-native.test.ts:Contract20 save failure publishes nothing and preserves existing or absent destination",
+    "bun:tests/unit/contract20-oracle.test.ts:independent Contract20 XML oracle decodes names/entities and disjoint original spans",
+    "bun:tests/unit/contract20-oracle.test.ts:independent ZIP graph reader validates every sealed recipe without production XML/ZIP reader",
+    "bun:tests/unit/contract20-oracle.test.ts:independent archive reader rejects CRC mismatch in stored payload and local-central metadata",
     "bun:tests/unit/docx-anchor-mappings.test.ts:anchor suites and all literal assertion expressions are mandatory and cannot borrow tool-hint cases",
     "bun:tests/unit/docx-anchor-mappings.test.ts:anchor source pins independently reject stale runtime bindings helper and canonical files",
     "bun:tests/unit/docx-append-run.test.ts:append retains existing paragraph/run fragments, sibling paragraphs and unrelated member bytes",
@@ -2493,7 +2546,7 @@
     {
       "id": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / array and data-table inputs refuse without changing cached followers or earlier parts",
       "path": "tests/unit/cache-boundaries.test.ts",
-      "line": 11,
+      "line": 12,
       "title": "array and data-table inputs refuse without changing cached followers or earlier parts",
       "suites": [
         "bounded formula cache custody"
@@ -2507,12 +2560,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 12,
+          "line": 13,
           "expression": "for(const kind of ['array','dataTable'] as const)"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
+      "sourceSha256": "0b891639a7a82fdee493219c4dadb96dd078dcdb00ff3a3d926767182d48b577",
       "body": "{\n  for(const kind of ['array','dataTable'] as const){const bytes=rangedFormulaFixture(kind);const w=await Workbook.open(bytes);\n   expect(()=>w.worksheet('Model').setCellValue('A1',10)).toThrow('Cannot invalidate');expect(w.toBytes()).toEqual(bytes);\n  }\n }",
       "calls": [
         "Workbook.open",
@@ -2532,7 +2585,7 @@
     {
       "id": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / workflow refuses and preserves an existing output when the workbook has array followers",
       "path": "tests/unit/cache-boundaries.test.ts",
-      "line": 16,
+      "line": 17,
       "title": "workflow refuses and preserves an existing output when the workbook has array followers",
       "suites": [
         "bounded formula cache custody"
@@ -2549,7 +2602,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
+      "sourceSha256": "0b891639a7a82fdee493219c4dadb96dd078dcdb00ff3a3d926767182d48b577",
       "body": "{\n  const root=await mkdtemp(join(tmpdir(),'bun-cache-scope-'));try{\n   const source=join(root,'source.xlsx'),output=join(root,'output.xlsx'),bytes=rangedFormulaFixture('array');await Bun.write(source,bytes);await Bun.write(output,'old output');\n   const r=await patchOffice({source,output,mode:'safe',changes:[{target:'Model!A1',value:10}]});\n   expect(r.status).toBe('refused');expect(r.committedChanges).toBe(0);expect(r.error?.code).toBe('xlsx-cache-topology-unsupported');expect(Uint8Array.from(await Bun.file(source).bytes())).toEqual(Uint8Array.from(bytes));expect(await Bun.file(output).text()).toBe('old output');\n  }finally{await rm(root,{recursive:true,force:true});}\n }",
       "calls": [
         "Bun.file",
@@ -2573,7 +2626,7 @@
     {
       "id": "bun:tests/unit/cache-boundaries.test.ts:bounded formula cache custody / executes every cache boundary Given/When/Then",
       "path": "tests/unit/cache-boundaries.test.ts",
-      "line": 23,
+      "line": 24,
       "title": "executes every cache boundary Given/When/Then",
       "suites": [
         "bounded formula cache custody"
@@ -2587,19 +2640,26 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
-      "body": "{\n  const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const [f]=await sharedScenarios(['@id-xlsx-array-input-refusal','@id-xlsx-cache-scope-opaque-parts']);if(!f)throw Error('Missing cache scenarios');\n  const cases=f.scenarios.flatMap(s=>s.cases),steps=cases.reduce((n,c)=>n+c.steps.length,0);\n  const count=(n:number)=>({implemented:n,planned:0,total:n});\n  const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(steps)}};\n  const r=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(3);\n }",
+      "sourceSha256": "0b891639a7a82fdee493219c4dadb96dd078dcdb00ff3a3d926767182d48b577",
+      "body": "{\n  const {sharedScenarios}=await import('../helpers/shared-scenarios.ts');const path='workflows/xlsx/formula-cache.feature',f=selectSharedScenarios(path,await beforeContract20Feature(path,await Bun.file(join(fixturesRoot(),path)).text()),['@id-xlsx-array-input-refusal','@id-xlsx-cache-scope-opaque-parts']);f.scenarios=f.scenarios.filter(s=>['@id-xlsx-array-input-refusal','@id-xlsx-cache-scope-opaque-parts'].includes(s.scenarioId));if(!f)throw Error('Missing cache scenarios');\n  const cases=f.scenarios.flatMap(s=>s.cases),steps=cases.reduce((n,c)=>n+c.steps.length,0);\n  const count=(n:number)=>({implemented:n,planned:0,total:n});\n  const inventory:AcceptanceInventory={root:'.',features:[f],counts:{features:count(1),scenarios:count(f.scenarios.length),cases:count(cases.length),steps:count(steps)}};\n  const r=await executeAcceptance(inventory,bindings,newAcceptanceRunId());expect(r.failures).toEqual([]);expect(r.counts.cases.passed).toBe(3);\n }",
       "calls": [
+        ".includes",
+        "Bun.file",
+        "Bun.file().text",
         "Error",
+        "beforeContract20Feature",
         "cases.reduce",
         "count",
         "executeAcceptance",
         "expect",
         "expect().toBe",
         "expect().toEqual",
+        "f.scenarios.filter",
         "f.scenarios.flatMap",
+        "fixturesRoot",
+        "join",
         "newAcceptanceRunId",
-        "sharedScenarios"
+        "selectSharedScenarios"
       ],
       "reviewReasons": [],
       "unresolved": []
@@ -3402,6 +3462,1032 @@
         "setPartContentType"
       ],
       "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-bindings.test.ts:exact Contract20 predicate table has one handler per selected step and rejects foreign case/hash",
+      "path": "tests/unit/contract20-bindings.test.ts",
+      "line": 6,
+      "title": "exact Contract20 predicate table has one handler per selected step and rejects foreign case/hash",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(bindings.filter(b=>b.pattern.test(step.text))).toHaveLength(1)",
+        "expect(count).toBe(223)",
+        "expect(Promise.resolve().then(()=>first.run(context))).rejects.toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 6,
+          "expression": "for(const f of ledger.files)for(const s of f.scenarios)for(const c of s.after)for(const step of c.steps)"
+        },
+        {
+          "line": 6,
+          "expression": "for(const s of f.scenarios)for(const c of s.after)for(const step of c.steps)"
+        },
+        {
+          "line": 6,
+          "expression": "for(const c of s.after)for(const step of c.steps)"
+        },
+        {
+          "line": 6,
+          "expression": "for(const step of c.steps)"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "b6dfc557c80de0880fc9569b5a093e1e70746ccbef43339634fc13acb54cad14",
+      "body": "{let count=0;for(const f of ledger.files)for(const s of f.scenarios)for(const c of s.after)for(const step of c.steps){expect(bindings.filter(b=>b.pattern.test(step.text))).toHaveLength(1);count++;}expect(count).toBe(223);const f=ledger.files[0],s=f.scenarios[0],c=s.after[0],context={feature:{path:'references/fixtures-ooxml/'+f.path,sourceSha256:'wrong'},scenario:{id:s.id},case:{name:c.name},step:{index:0,text:c.steps[0].text}};const first=bindings.find(b=>b.pattern.test(c.steps[0].text))!;await expect(Promise.resolve().then(()=>first.run(context))).rejects.toThrow();context.feature.sourceSha256=f.afterSha256;context.case.name+=' changed';await expect(Promise.resolve().then(()=>first.run(context))).rejects.toThrow();}",
+      "calls": [
+        "Promise.resolve",
+        "Promise.resolve().then",
+        "b.pattern.test",
+        "bindings.filter",
+        "bindings.find",
+        "expect",
+        "expect().rejects.toThrow",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "first.run"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-bindings.test.ts:all 22 sealed Contract20 action/predicate plans execute in order with independent saved-output checks",
+      "path": "tests/unit/contract20-bindings.test.ts",
+      "line": 7,
+      "title": "all 22 sealed Contract20 action/predicate plans execute in order with independent saved-output checks",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(cases).toBe(22)",
+        "expect(steps).toBe(223)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 7,
+          "expression": "for(const f of ledger.files)for(const s of f.scenarios)for(const c of s.after)"
+        },
+        {
+          "line": 7,
+          "expression": "for(const s of f.scenarios)for(const c of s.after)"
+        },
+        {
+          "line": 7,
+          "expression": "for(const c of s.after)"
+        },
+        {
+          "line": 7,
+          "expression": "for(const[index,step]of c.steps.entries())"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "b6dfc557c80de0880fc9569b5a093e1e70746ccbef43339634fc13acb54cad14",
+      "body": "{try{let cases=0,steps=0;for(const f of ledger.files)for(const s of f.scenarios)for(const c of s.after){const context:Record<string,unknown>={feature:{path:'references/fixtures-ooxml/'+f.path,sourceSha256:f.afterSha256},scenario:{id:s.id},case:{name:c.name}};for(const[index,step]of c.steps.entries()){context.step={index,text:step.text};await bindings.find(b=>b.pattern.test(step.text))!.run(context);steps++;}cases++;}expect(cases).toBe(22);expect(steps).toBe(223);}finally{await cleanup();}}",
+      "calls": [
+        "b.pattern.test",
+        "bindings.find",
+        "bindings.find().run",
+        "c.steps.entries",
+        "cleanup",
+        "expect",
+        "expect().toBe"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 independent input reads exclude both rich-string phonetic guides",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 13,
+      "title": "Contract20 independent input reads exclude both rich-string phonetic guides",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(w.worksheet('Phonetics').getCell('A1')?.value).toBe('Alpha Beta')",
+        "expect(w.worksheet('Phonetics').getCell('B1')?.value).toBe('Gamma Delta')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe('phonetic-strings'),w=await Workbook.open(bytes);expect(w.worksheet('Phonetics').getCell('A1')?.value).toBe('Alpha Beta');expect(w.worksheet('Phonetics').getCell('B1')?.value).toBe('Gamma Delta');sameMembers(bytes,w.toBytes());}",
+      "calls": [
+        "Workbook.open",
+        "contract20Recipe",
+        "expect",
+        "expect().toBe",
+        "sameMembers",
+        "w.toBytes",
+        "w.worksheet",
+        "w.worksheet().getCell"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 numeric no-op preserves all caches and calculation flags",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 14,
+      "title": "Contract20 numeric no-op preserves all caches and calculation flags",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe('cross-caches'),w=await ContractWorkbook.open(bytes);w.setCellValue('Model','A1',1);sameMembers(bytes,w.toBytes());}",
+      "calls": [
+        "ContractWorkbook.open",
+        "contract20Recipe",
+        "sameMembers",
+        "w.setCellValue",
+        "w.toBytes"
+      ],
+      "reviewReasons": [
+        "helper-or-no-direct-assertion"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 prefixed blanks retain x while C1 value cache is absent",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 15,
+      "title": "Contract20 prefixed blanks retain x while C1 value cache is absent",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(xml).toContain('<x:is>')",
+        "expect(xml).toContain('<x:v>7</x:v>')",
+        "expect(xml).not.toMatch(/<x:c r=\"C1\"[^>]*>[\\s\\S]*?<x:v/)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const w=await ContractWorkbook.open(await contract20Recipe('prefixed-cells'));w.setCellValue('Prefixed','A1','Alpha');w.setCellValue('Prefixed','B1',7);const xml=text(w.toBytes(),'xl/worksheets/sheet1.xml');expect(xml).toContain('<x:is>');expect(xml).toContain('<x:v>7</x:v>');expect(xml).not.toMatch(/<x:c r=\"C1\"[^>]*>[\\s\\S]*?<x:v/);}",
+      "calls": [
+        "ContractWorkbook.open",
+        "contract20Recipe",
+        "expect",
+        "expect().not.toMatch",
+        "expect().toContain",
+        "text",
+        "w.setCellValue",
+        "w.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 all-four cache invalidation retains independent formula body",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 16,
+      "title": "Contract20 all-four cache invalidation retains independent formula body",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(w.worksheet('Summary').getCell('B1')).toMatchObject({kind:'formula',formula:'40+2',cached:null})",
+        "expect(text(w.toBytes(),'xl/workbook.xml')).toContain('forceFullCalc=\"1\"')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const w=await Workbook.open(await contract20Recipe('cross-caches'));w.worksheet('Model').setCellValue('A1',10);expect(w.worksheet('Summary').getCell('B1')).toMatchObject({kind:'formula',formula:'40+2',cached:null});expect(text(w.toBytes(),'xl/workbook.xml')).toContain('forceFullCalc=\"1\"');}",
+      "calls": [
+        "Workbook.open",
+        "contract20Recipe",
+        "expect",
+        "expect().toContain",
+        "expect().toMatchObject",
+        "text",
+        "w.toBytes",
+        "w.worksheet",
+        "w.worksheet().getCell",
+        "w.worksheet().setCellValue"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque semantic owner edge refuses before mutation",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 17,
+      "title": "Contract20 opaque semantic owner edge refuses before mutation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const parts=readZip(await contract20Recipe('opaque-caches')),path='xl/_rels/workbook.xml.rels';parts.set(path,encoder.encode(decoder.decode(parts.get(path)).replace('</Relationships>','<Relationship Id=\"semanticExtra\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink\" Target=\"externalLinks/cache-boundary.xml\"/></Relationships>')));const bytes=writeZip(parts),w=await ContractWorkbook.open(bytes);expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported');sameMembers(bytes,w.toBytes());}",
+      "calls": [
+        "ContractWorkbook.open",
+        "category",
+        "contract20Recipe",
+        "decoder.decode",
+        "decoder.decode().replace",
+        "encoder.encode",
+        "expect",
+        "expect().toBe",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "sameMembers",
+        "w.setCellValue",
+        "w.toBytes",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 from-scratch creator rejects NUL title with argument category",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 18,
+      "title": "Contract20 from-scratch creator rejects NUL title with argument category",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>p.addTextSlide('bad\\u0000','Bad subtitle'))).toBe('PPTX_ARGUMENT_INVALID')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const p=ContractPresentation.create(),before=p.package.toBytes();expect(category(()=>p.addTextSlide('bad\\u0000','Bad subtitle'))).toBe('PPTX_ARGUMENT_INVALID');sameMembers(before,p.package.toBytes());}",
+      "calls": [
+        "ContractPresentation.create",
+        "category",
+        "expect",
+        "expect().toBe",
+        "p.addTextSlide",
+        "p.package.toBytes",
+        "sameMembers"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 missing notes is a non-mutating false/empty observation",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 19,
+      "title": "Contract20 missing notes is a non-mutating false/empty observation",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.readNotes(0)).toEqual({hasNotes:false,text:''})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe('missing-notes'),p=await ContractPresentation.open(bytes);expect(p.readNotes(0)).toEqual({hasNotes:false,text:''});sameMembers(bytes,p.package.toBytes());}",
+      "calls": [
+        "ContractPresentation.open",
+        "contract20Recipe",
+        "expect",
+        "expect().toEqual",
+        "p.package.toBytes",
+        "p.readNotes",
+        "sameMembers"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:'Contract20 '+recipe+' intake succeeds before typed cell edit refusal'",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 20,
+      "title": "'Contract20 '+recipe+' intake succeeds before typed cell edit refusal'",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(cell).toBeDefined()",
+        "expect(category(()=>p.setTableCellText(cell,'x'))).toBe(code)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [
+        {
+          "line": 20,
+          "expression": "for(const [recipe,code]of [['merged-table','PPTX_TABLE_MERGE_UNSUPPORTED'],['malformed-table','PPTX_TABLE_STRUCTURE_UNSUPPORTED']])test('Contract20 '+recipe+' intake succeeds before typed cell edit refusal',async()=>"
+        }
+      ],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe(recipe!),p=await ContractPresentation.open(bytes),cell=p.selectTableCell(0,4,0,0);expect(cell).toBeDefined();expect(category(()=>p.setTableCellText(cell,'x'))).toBe(code);sameMembers(bytes,p.package.toBytes());}",
+      "calls": [
+        "ContractPresentation.open",
+        "category",
+        "contract20Recipe",
+        "expect",
+        "expect().toBe",
+        "expect().toBeDefined",
+        "p.package.toBytes",
+        "p.selectTableCell",
+        "p.setTableCellText",
+        "sameMembers"
+      ],
+      "reviewReasons": [
+        "dynamic-title",
+        "registration-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 foreign text anchor refuses across equal-part equal-text sessions",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 21,
+      "title": "Contract20 foreign text anchor refuses across equal-part equal-text sessions",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>p.replaceTextAt(anchor,'Frankenstein','Foreign'))).toBe('PPTX_STALE_ANCHOR')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe('plain-title'),p=await ContractPresentation.open(bytes),other=await ContractPresentation.open(bytes),anchor=other.inspectText(0)[0]!.anchor;expect(category(()=>p.replaceTextAt(anchor,'Frankenstein','Foreign'))).toBe('PPTX_STALE_ANCHOR');sameMembers(bytes,p.package.toBytes());}",
+      "calls": [
+        "ContractPresentation.open",
+        "category",
+        "contract20Recipe",
+        "expect",
+        "expect().toBe",
+        "other.inspectText",
+        "p.package.toBytes",
+        "p.replaceTextAt",
+        "sameMembers"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 cross-run input produces exact Friendstein starting-run properties",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 22,
+      "title": "Contract20 cross-run input produces exact Friendstein starting-run properties",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(s.inspectText('title')[0]).toMatchObject({text:'Friendstein',runs:[{text:'Fr',attrs:{b:'1'}},{text:'iend',attrs:{b:'1'}},{text:'stein',attrs:{u:'sng'}}]})"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const p=await Presentation.open(await contract20Recipe('fragmented-title')),s=p.slides[0]!,a=s.inspectText('title')[0]!.anchor;s.replaceTextAt(a,'anken','iend');expect(s.inspectText('title')[0]).toMatchObject({text:'Friendstein',runs:[{text:'Fr',attrs:{b:'1'}},{text:'iend',attrs:{b:'1'}},{text:'stein',attrs:{u:'sng'}}]});}",
+      "calls": [
+        "Presentation.open",
+        "contract20Recipe",
+        "expect",
+        "expect().toMatchObject",
+        "s.inspectText",
+        "s.replaceTextAt"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 styled cell updates only existing text leaf",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 23,
+      "title": "Contract20 styled cell updates only existing text leaf",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(text(p.package.toBytes(),'ppt/slides/slide1.xml')).toBe(text(bytes,'ppt/slides/slide1.xml').replace('Galvanic battery','updated value'))"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe('styled-table'),p=await Presentation.open(bytes);p.slides[0]!.tables[0]!.cell(0,0).text='updated value';expect(text(p.package.toBytes(),'ppt/slides/slide1.xml')).toBe(text(bytes,'ppt/slides/slide1.xml').replace('Galvanic battery','updated value'));}",
+      "calls": [
+        "Presentation.open",
+        "contract20Recipe",
+        "expect",
+        "expect().toBe",
+        "p.package.toBytes",
+        "p.slides.0.tables.0.cell",
+        "text",
+        "text().replace"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 refusal leaves held ordinary cell and unchanged source session usable",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 25,
+      "title": "Contract20 refusal leaves held ordinary cell and unchanged source session usable",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(w.readCell('Calc','A2')).toMatchObject({kind:'number',value:1})",
+        "expect(category(()=>w.setCellValue('Calc','B2',99))).toBe('xlsx-shared-formula-edit-unsupported')",
+        "expect(category(()=>w.setCellValue('Calc','D2',99))).toBe('xlsx-array-formula-edit-unsupported')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe('attributed-formulas'),w=await ContractWorkbook.open(bytes);expect(w.readCell('Calc','A2')).toMatchObject({kind:'number',value:1});expect(category(()=>w.setCellValue('Calc','B2',99))).toBe('xlsx-shared-formula-edit-unsupported');sameMembers(bytes,w.toBytes());expect(w.readCell('Calc','A2')).toMatchObject({kind:'number',value:1});expect(category(()=>w.setCellValue('Calc','D2',99))).toBe('xlsx-array-formula-edit-unsupported');sameMembers(bytes,w.toBytes());}",
+      "calls": [
+        "ContractWorkbook.open",
+        "category",
+        "contract20Recipe",
+        "expect",
+        "expect().toBe",
+        "expect().toMatchObject",
+        "sameMembers",
+        "w.readCell",
+        "w.setCellValue",
+        "w.toBytes"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 same-part table mutation stales old cell; foreign and late invalid operands do not consume fresh handles",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 26,
+      "title": "Contract20 same-part table mutation stales old cell; foreign and late invalid operands do not consume fresh handles",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>p.setTableCellText(foreign,'foreign'))).toBe('PPTX_STALE_TABLE_HANDLE')",
+        "expect(category(()=>p.setTableCellText(held,'stale'))).toBe('PPTX_STALE_TABLE_HANDLE')",
+        "expect(category(()=>p.setTableCellText(fresh,'\\u0000'))).toBe('PPTX_ARGUMENT_INVALID')",
+        "expect(p.slides[0]!.tables[0]!.cell(0,0).text).toBe('fresh')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const bytes=await contract20Recipe('stale-table'),p=await ContractPresentation.open(bytes),other=await ContractPresentation.open(bytes),held=p.selectTableCell(0,4,0,0),foreign=other.selectTableCell(0,4,0,0);expect(category(()=>p.setTableCellText(foreign,'foreign'))).toBe('PPTX_STALE_TABLE_HANDLE');p.addTable(0,1,1,{x:1200,y:100,width:900,height:600});const state=p.package.toBytes();expect(category(()=>p.setTableCellText(held,'stale'))).toBe('PPTX_STALE_TABLE_HANDLE');sameMembers(state,p.package.toBytes());const fresh=p.selectTableCell(0,4,0,0);expect(category(()=>p.setTableCellText(fresh,'\\u0000'))).toBe('PPTX_ARGUMENT_INVALID');sameMembers(state,p.package.toBytes());p.setTableCellText(fresh,'fresh');expect(p.slides[0]!.tables[0]!.cell(0,0).text).toBe('fresh');}",
+      "calls": [
+        "ContractPresentation.open",
+        "category",
+        "contract20Recipe",
+        "expect",
+        "expect().toBe",
+        "other.selectTableCell",
+        "p.addTable",
+        "p.package.toBytes",
+        "p.selectTableCell",
+        "p.setTableCellText",
+        "p.slides.0.tables.0.cell",
+        "sameMembers"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 anchor survives unrelated append but forged and invalid late operations refuse",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 27,
+      "title": "Contract20 anchor survives unrelated append but forged and invalid late operations refuse",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.package.get(anchor.part)).toEqual(before)",
+        "expect(category(()=>p.replaceTextAt({...anchor},'Original title','forged'))).toBe('PPTX_STALE_ANCHOR')",
+        "expect(category(()=>p.replaceTextAt(anchor,'Original title','\\u0000'))).toBe('PPTX_ARGUMENT_INVALID')",
+        "expect(p.inspectText(0)[0]!.text).toBe('Edited original title')",
+        "expect(category(()=>p.replaceTextAt(anchor,'Original title','stale'))).toBe('PPTX_STALE_ANCHOR')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const p=await ContractPresentation.open(await contract20Recipe('title-subtitle-source')),anchor=p.inspectText(0)[0]!.anchor,before=p.package.get(anchor.part);p.addTextSlide('Appended title','Appended subtitle');expect(p.package.get(anchor.part)).toEqual(before);expect(category(()=>p.replaceTextAt({...anchor},'Original title','forged'))).toBe('PPTX_STALE_ANCHOR');expect(category(()=>p.replaceTextAt(anchor,'Original title','\\u0000'))).toBe('PPTX_ARGUMENT_INVALID');p.replaceTextAt(anchor,'Original title','Edited original title');expect(p.inspectText(0)[0]!.text).toBe('Edited original title');expect(category(()=>p.replaceTextAt(anchor,'Original title','stale'))).toBe('PPTX_STALE_ANCHOR');}",
+      "calls": [
+        "ContractPresentation.open",
+        "category",
+        "contract20Recipe",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "p.addTextSlide",
+        "p.inspectText",
+        "p.package.get",
+        "p.replaceTextAt"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 save failure publishes nothing and preserves existing or absent destination",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 28,
+      "title": "Contract20 save failure publishes nothing and preserves existing or absent destination",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(session.save(join(dir,'blocked'))).rejects.toBeDefined()",
+        "expect(await readFile(prior,'utf8')).toBe('prior destination')",
+        "expect(session.save(join(dir,'missing','absent'))).rejects.toBeDefined()",
+        "expect(await Bun.file(join(dir,'missing','absent')).exists()).toBe(false)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 28,
+          "expression": "for(const session of [w,p])"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const dir=await mkdtemp(join(tmpdir(),'contract20-native-'));try{const w=await ContractWorkbook.open(await contract20Recipe('styled-blank')),p=ContractPresentation.create();p.addTextSlide('Safe','Subtitle');const prior=join(dir,'destination');await writeFile(prior,'prior destination');await mkdir(join(dir,'blocked'));for(const session of [w,p]){const before=session.package.toBytes();await expect(session.save(join(dir,'blocked'))).rejects.toBeDefined();expect(await readFile(prior,'utf8')).toBe('prior destination');await expect(session.save(join(dir,'missing','absent'))).rejects.toBeDefined();expect(await Bun.file(join(dir,'missing','absent')).exists()).toBe(false);sameMembers(before,session.package.toBytes());}}finally{await rm(dir,{recursive:true,force:true});}}",
+      "calls": [
+        "Bun.file",
+        "Bun.file().exists",
+        "ContractPresentation.create",
+        "ContractWorkbook.open",
+        "contract20Recipe",
+        "expect",
+        "expect().rejects.toBeDefined",
+        "expect().toBe",
+        "join",
+        "mkdir",
+        "mkdtemp",
+        "p.addTextSlide",
+        "readFile",
+        "rm",
+        "sameMembers",
+        "session.package.toBytes",
+        "session.save",
+        "tmpdir",
+        "writeFile"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 failed symlink publication preserves actual destination and leaves no staged output",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 29,
+      "title": "Contract20 failed symlink publication preserves actual destination and leaves no staged output",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(w.save(link)).rejects.toMatchObject({code:'opc-symlink-destination'})",
+        "expect(await readFile(prior,'utf8')).toBe('keep existing')",
+        "expect(await readlink(link)).toBe(prior)",
+        "expect((await readdir(dir)).sort()).toEqual(names)"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const dir=await mkdtemp(join(tmpdir(),'contract20-destination-'));try{const prior=join(dir,'prior'),link=join(dir,'output'),w=await ContractWorkbook.open(await contract20Recipe('styled-blank'));await writeFile(prior,'keep existing');await symlink(prior,link);const names=(await readdir(dir)).sort();await expect(w.save(link)).rejects.toMatchObject({code:'opc-symlink-destination'});expect(await readFile(prior,'utf8')).toBe('keep existing');expect(await readlink(link)).toBe(prior);expect((await readdir(dir)).sort()).toEqual(names);}finally{await rm(dir,{recursive:true,force:true});}}",
+      "calls": [
+        ".sort",
+        "ContractWorkbook.open",
+        "contract20Recipe",
+        "expect",
+        "expect().rejects.toMatchObject",
+        "expect().toBe",
+        "expect().toEqual",
+        "join",
+        "mkdtemp",
+        "readFile",
+        "readdir",
+        "readlink",
+        "rm",
+        "symlink",
+        "tmpdir",
+        "w.save",
+        "writeFile"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque retention refuses extra semantic root worksheet edge with full custody",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 30,
+      "title": "Contract20 opaque retention refuses extra semantic root worksheet edge with full custody",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported')",
+        "expect(await readFile(destination,'utf8')).toBe('prior output')",
+        "expect((await readdir(dir)).sort()).toEqual(['prior'])"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const parts=readZip(await contract20Recipe('opaque-caches')),path='_rels/.rels';parts.set(path,encoder.encode(decoder.decode(parts.get(path)).replace('</Relationships>','<Relationship Id=\"extra\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet\" Target=\"xl/worksheets/sheet1.xml\"/></Relationships>')));const input=writeZip(parts),w=await ContractWorkbook.open(input),dir=await mkdtemp(join(tmpdir(),'contract20-extra-root-'));try{const destination=join(dir,'prior');await writeFile(destination,'prior output');expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported');sameMembers(input,w.toBytes());expect(await readFile(destination,'utf8')).toBe('prior output');expect((await readdir(dir)).sort()).toEqual(['prior']);}finally{await rm(dir,{recursive:true,force:true});}}",
+      "calls": [
+        ".sort",
+        "ContractWorkbook.open",
+        "category",
+        "contract20Recipe",
+        "decoder.decode",
+        "decoder.decode().replace",
+        "encoder.encode",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "join",
+        "mkdtemp",
+        "parts.get",
+        "parts.set",
+        "readFile",
+        "readZip",
+        "readdir",
+        "rm",
+        "sameMembers",
+        "tmpdir",
+        "w.setCellValue",
+        "w.toBytes",
+        "writeFile",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 changed-input sweep refuses shared-result topology without consuming source state",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 31,
+      "title": "Contract20 changed-input sweep refuses shared-result topology without consuming source state",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>w.setCellValue('Model','A1',10))).toBe('xlsx-cache-topology-unsupported')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const parts=readZip(await contract20Recipe('cross-caches')),path='xl/worksheets/sheet2.xml';parts.set(path,encoder.encode(decoder.decode(parts.get(path)).replace('<f>40+2</f>','<f t=\"shared\" si=\"0\" ref=\"B1:B2\">40+2</f>')));const input=writeZip(parts),w=await ContractWorkbook.open(input);expect(category(()=>w.setCellValue('Model','A1',10))).toBe('xlsx-cache-topology-unsupported');sameMembers(input,w.toBytes());w.setCellValue('Model','A1',1);sameMembers(input,w.toBytes());}",
+      "calls": [
+        "ContractWorkbook.open",
+        "category",
+        "contract20Recipe",
+        "decoder.decode",
+        "decoder.decode().replace",
+        "encoder.encode",
+        "expect",
+        "expect().toBe",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "sameMembers",
+        "w.setCellValue",
+        "w.toBytes",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 table target refuses foreign graphicData URI without editing hidden payload",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 32,
+      "title": "Contract20 table target refuses foreign graphicData URI without editing hidden payload",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(p.slides[0]!.tables).toHaveLength(0)",
+        "expect(category(()=>{const c=p.selectTableCell(0,4,0,0);p.setTableCellText(c,'tampered');})).toBe('PPTX_TABLE_STRUCTURE_UNSUPPORTED')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const parts=readZip(await contract20Recipe('styled-table')),path='ppt/slides/slide1.xml';parts.set(path,encoder.encode(decoder.decode(parts.get(path)).replace('uri=\"http://schemas.openxmlformats.org/drawingml/2006/table\"','uri=\"urn:foreign:not-table\"')));const input=writeZip(parts),p=await ContractPresentation.open(input);expect(p.slides[0]!.tables).toHaveLength(0);expect(category(()=>{const c=p.selectTableCell(0,4,0,0);p.setTableCellText(c,'tampered');})).toBe('PPTX_TABLE_STRUCTURE_UNSUPPORTED');sameMembers(input,p.package.toBytes());}",
+      "calls": [
+        "ContractPresentation.open",
+        "category",
+        "contract20Recipe",
+        "decoder.decode",
+        "decoder.decode().replace",
+        "encoder.encode",
+        "expect",
+        "expect().toBe",
+        "expect().toHaveLength",
+        "p.package.toBytes",
+        "p.selectTableCell",
+        "p.setTableCellText",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "sameMembers",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 retained cell text refuses multiple visible runs without discarding siblings",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 33,
+      "title": "Contract20 retained cell text refuses multiple visible runs without discarding siblings",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>p.setTableCellText(cell,'updated value'))).toBe('PPTX_UNSUPPORTED_TEXT_TOPOLOGY')",
+        "expect(p.slides[0]!.tables[0]!.cell(0,0).text).toBe('Galvanic battery INTACT')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const parts=readZip(await contract20Recipe('styled-table')),path='ppt/slides/slide1.xml';parts.set(path,encoder.encode(decoder.decode(parts.get(path)).replace('<a:t>Galvanic battery</a:t></a:r>','<a:t>Galvanic battery</a:t></a:r><a:r><a:rPr i=\"1\"/><a:t> INTACT</a:t></a:r>')));const input=writeZip(parts),p=await ContractPresentation.open(input),cell=p.selectTableCell(0,4,0,0);expect(category(()=>p.setTableCellText(cell,'updated value'))).toBe('PPTX_UNSUPPORTED_TEXT_TOPOLOGY');sameMembers(input,p.package.toBytes());expect(p.slides[0]!.tables[0]!.cell(0,0).text).toBe('Galvanic battery INTACT');}",
+      "calls": [
+        "ContractPresentation.open",
+        "category",
+        "contract20Recipe",
+        "decoder.decode",
+        "decoder.decode().replace",
+        "encoder.encode",
+        "expect",
+        "expect().toBe",
+        "p.package.toBytes",
+        "p.selectTableCell",
+        "p.setTableCellText",
+        "p.slides.0.tables.0.cell",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "sameMembers",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque retention refuses styles relationship aimed at workbook role",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 34,
+      "title": "Contract20 opaque retention refuses styles relationship aimed at workbook role",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const parts=readZip(await contract20Recipe('opaque-caches')),path='xl/_rels/workbook.xml.rels';parts.set(path,encoder.encode(decoder.decode(parts.get(path)).replace('</Relationships>','<Relationship Id=\"extra\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles\" Target=\"workbook.xml\"/></Relationships>')));const input=writeZip(parts),w=await ContractWorkbook.open(input);expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported');sameMembers(input,w.toBytes());}",
+      "calls": [
+        "ContractWorkbook.open",
+        "category",
+        "contract20Recipe",
+        "decoder.decode",
+        "decoder.decode().replace",
+        "encoder.encode",
+        "expect",
+        "expect().toBe",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "sameMembers",
+        "w.setCellValue",
+        "w.toBytes",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque retention refuses unreferenced worksheet edge aimed at workbook",
+      "path": "tests/unit/contract20-native.test.ts",
+      "line": 35,
+      "title": "Contract20 opaque retention refuses unreferenced worksheet edge aimed at workbook",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported')"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a",
+      "body": "{const parts=readZip(await contract20Recipe('opaque-caches')),path='xl/_rels/workbook.xml.rels';parts.set(path,encoder.encode(decoder.decode(parts.get(path)).replace('</Relationships>','<Relationship Id=\"extra\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet\" Target=\"workbook.xml\"/></Relationships>')));const input=writeZip(parts),w=await ContractWorkbook.open(input);expect(category(()=>w.setCellValue('Model','A1',10,{opaqueRetention:true}))).toBe('xlsx-cache-topology-unsupported');sameMembers(input,w.toBytes());}",
+      "calls": [
+        "ContractWorkbook.open",
+        "category",
+        "contract20Recipe",
+        "decoder.decode",
+        "decoder.decode().replace",
+        "encoder.encode",
+        "expect",
+        "expect().toBe",
+        "parts.get",
+        "parts.set",
+        "readZip",
+        "sameMembers",
+        "w.setCellValue",
+        "w.toBytes",
+        "writeZip"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:independent Contract20 XML oracle decodes names/entities and disjoint original spans",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "line": 5,
+      "title": "independent Contract20 XML oracle decodes names/entities and disjoint original spans",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(root.attrs.a).toBe('&')",
+        "expect(t.text).toBe(' A\\n雪 ')",
+        "expect(source.slice(t.start,t.end)).toBe('<x:t xml:space=\"preserve\"> A&#10;雪 </x:t>')",
+        "expect(masked(source,[t])).toBe('<x:r xmlns:x=\"u\" a=\"&amp;\">\\u0000MASK\\u0000<!--guard--><x:b/></x:r>')",
+        "expect(()=>xml(bad)).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 5,
+          "expression": "for(const bad of ['<a><b></a>','<p:a/>','<a x=\"1\" x=\"2\"/>','<a>&unknown;</a>','<!DOCTYPE a><a/>','<a/><b/>'])expect(()=>xml(bad)).toThrow();"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20",
+      "body": "{const source='<x:r xmlns:x=\"u\" a=\"&amp;\"><x:t xml:space=\"preserve\"> A&#10;雪 </x:t><!--guard--><x:b/></x:r>',root=xml(source),t=descendants(root,'t','u')[0]!;expect(root.attrs.a).toBe('&');expect(t.text).toBe(' A\\n雪 ');expect(source.slice(t.start,t.end)).toBe('<x:t xml:space=\"preserve\"> A&#10;雪 </x:t>');expect(masked(source,[t])).toBe('<x:r xmlns:x=\"u\" a=\"&amp;\">\\u0000MASK\\u0000<!--guard--><x:b/></x:r>');for(const bad of ['<a><b></a>','<p:a/>','<a x=\"1\" x=\"2\"/>','<a>&unknown;</a>','<!DOCTYPE a><a/>','<a/><b/>'])expect(()=>xml(bad)).toThrow();}",
+      "calls": [
+        "descendants",
+        "expect",
+        "expect().toBe",
+        "expect().toThrow",
+        "masked",
+        "source.slice",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:independent ZIP graph reader validates every sealed recipe without production XML/ZIP reader",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "line": 6,
+      "title": "independent ZIP graph reader validates every sealed recipe without production XML/ZIP reader",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(parts.size).toBeGreaterThan(5)",
+        "expect(sheets(parts)).toEqual([{name:'Alpha',part:'xl/worksheets/sheet2.xml'},{name:'Beta',part:'xl/worksheets/sheet1.xml'}])",
+        "expect(xlsxValue(parts,'Beta','D1')).toEqual({kind:'formula',formula:'B1*2',cached:84})",
+        "expect(slideParts(p)).toEqual([5,1,4,2,3].map(i=>'ppt/slides/slide'+i+'.xml'))",
+        "expect(notes(p,0)).toEqual({hasNotes:true,text:'Key themes:\\ncreation, responsibility, isolation\\n\\nVisible date: 2026-03-12'})",
+        "expect(table(archive(await contract20Recipe('merged-table')),'ppt/slides/slide1.xml',4).cells.map(r=>r.length)).toEqual([1,2])"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 6,
+          "expression": "for(const recipe of [...r.xlsx,...r.pptx])"
+        },
+        {
+          "line": 6,
+          "expression": "for(const[p,b]of parts)if(p.endsWith('.xml')||p.endsWith('.rels'))xml(new TextDecoder().decode(b));"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20",
+      "body": "{const r=await Bun.file(contract20Root+'/ledgers/contract20-recipes.json').json();for(const recipe of [...r.xlsx,...r.pptx]){const bytes=await contract20Recipe(recipe.id),parts=archive(bytes);expect(parts.size).toBeGreaterThan(5);graph(parts);for(const[p,b]of parts)if(p.endsWith('.xml')||p.endsWith('.rels'))xml(new TextDecoder().decode(b));}const parts=archive(await contract20Recipe('rel-values'));expect(sheets(parts)).toEqual([{name:'Alpha',part:'xl/worksheets/sheet2.xml'},{name:'Beta',part:'xl/worksheets/sheet1.xml'}]);expect(xlsxValue(parts,'Beta','D1')).toEqual({kind:'formula',formula:'B1*2',cached:84});const p=archive(await contract20Recipe('ordered-notes'));expect(slideParts(p)).toEqual([5,1,4,2,3].map(i=>'ppt/slides/slide'+i+'.xml'));expect(notes(p,0)).toEqual({hasNotes:true,text:'Key themes:\\ncreation, responsibility, isolation\\n\\nVisible date: 2026-03-12'});expect(table(archive(await contract20Recipe('merged-table')),'ppt/slides/slide1.xml',4).cells.map(r=>r.length)).toEqual([1,2]);}",
+      "calls": [
+        ".decode",
+        ".map",
+        "Bun.file",
+        "Bun.file().json",
+        "archive",
+        "contract20Recipe",
+        "expect",
+        "expect().toBeGreaterThan",
+        "expect().toEqual",
+        "graph",
+        "notes",
+        "p.endsWith",
+        "sheets",
+        "slideParts",
+        "table",
+        "table().cells.map",
+        "xlsxValue",
+        "xml"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:oracle detects corrupted XML graph, ZIP bounds and payload drift",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "line": 7,
+      "title": "oracle detects corrupted XML graph, ZIP bounds and payload drift",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>graph(parts)).toThrow()",
+        "expect(()=>archive(bad)).toThrow()",
+        "expect(()=>archive(original.slice(0,-1))).toThrow()",
+        "expect(()=>xml('<x:a xmlns:x=\"u\" x:v=\"1\" y:v=\"2\" xmlns:y=\"u\"/>')).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [],
+      "registrationLoops": [],
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20",
+      "body": "{const original=await contract20Recipe('styled-blank'),parts=archive(original);parts.delete('xl/styles.xml');expect(()=>graph(parts)).toThrow();const bad=original.slice();bad[0]=0;expect(()=>archive(bad)).toThrow();expect(()=>archive(original.slice(0,-1))).toThrow();expect(()=>xml('<x:a xmlns:x=\"u\" x:v=\"1\" y:v=\"2\" xmlns:y=\"u\"/>')).toThrow();}",
+      "calls": [
+        "archive",
+        "contract20Recipe",
+        "expect",
+        "expect().toThrow",
+        "graph",
+        "original.slice",
+        "parts.delete",
+        "xml"
+      ],
+      "reviewReasons": [],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:independent archive reader rejects CRC mismatch in stored payload and local-central metadata",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "line": 8,
+      "title": "independent archive reader rejects CRC mismatch in stored payload and local-central metadata",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>archive(bad)).toThrow('CRC32')",
+        "expect(()=>archive(mismatch)).toThrow()"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 8,
+          "expression": "while(view.getUint32(end,true)!==0x06054b50)end--;"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20",
+      "body": "{const bytes=await contract20Recipe('styled-blank'),view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);let end=bytes.length-22;while(view.getUint32(end,true)!==0x06054b50)end--;const central=view.getUint32(end+16,true),local=view.getUint32(central+42,true);const bad=bytes.slice();bad[central+16]=bad[central+16]!^1;expect(()=>archive(bad)).toThrow('CRC32');const mismatch=bytes.slice();mismatch[local+14]=mismatch[local+14]!^1;expect(()=>archive(mismatch)).toThrow();}",
+      "calls": [
+        "archive",
+        "bytes.slice",
+        "contract20Recipe",
+        "expect",
+        "expect().toThrow",
+        "view.getUint32"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
       "unresolved": []
     },
     {
@@ -33386,7 +34472,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / acceptance feature passes with the dedicated PPTX bindings",
       "path": "tests/unit/pptx.test.ts",
-      "line": 26,
+      "line": 27,
       "title": "acceptance feature passes with the dedicated PPTX bindings",
       "suites": [
         "pptx slice"
@@ -33401,12 +34487,13 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
-      "body": "{\n    const root = await makeProject({\n      \"references/fixtures-ooxml/workflows/pptx/text.feature\": await Bun.file(join(fixturesRoot(), \"workflows/pptx/text.feature\")).text(),\n      \"references/fixtures-ooxml/workflows/pptx/notes.feature\": await Bun.file(join(fixturesRoot(), \"workflows/pptx/notes.feature\")).text(),\n      \"features/shared.json\": JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/workflows/pptx/text.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-readable-unsupported-topology','@id-pptx-cross-run-replace','@id-pptx-stale-anchor-refusal']},{path:'references/fixtures-ooxml/workflows/pptx/notes.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-order-notes-read']}]}),\n    });\n\n    const report = await runAcceptance(bindings, { root });\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(2);\n    expect(report.execution.cases.passed).toBe(4);\n  }",
+      "sourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
+      "body": "{\n    const root = await makeProject({\n      \"references/fixtures-ooxml/workflows/pptx/text.feature\": await beforeContract20Feature('workflows/pptx/text.feature',await Bun.file(join(fixturesRoot(), \"workflows/pptx/text.feature\")).text()),\n      \"references/fixtures-ooxml/workflows/pptx/notes.feature\": await beforeContract20Feature('workflows/pptx/notes.feature',await Bun.file(join(fixturesRoot(), \"workflows/pptx/notes.feature\")).text()),\n      \"features/shared.json\": JSON.stringify({schemaVersion:2,features:[{path:'references/fixtures-ooxml/workflows/pptx/text.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-readable-unsupported-topology','@id-pptx-cross-run-replace','@id-pptx-stale-anchor-refusal']},{path:'references/fixtures-ooxml/workflows/pptx/notes.feature',lifecycle:'implemented',runner:'bun',scenarioIds:['@id-pptx-order-notes-read']}]}),\n    });\n\n    const report = await runAcceptance(bindings, { root });\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(2);\n    expect(report.execution.cases.passed).toBe(4);\n  }",
       "calls": [
         "Bun.file",
         "Bun.file().text",
         "JSON.stringify",
+        "beforeContract20Feature",
         "expect",
         "expect().toBe",
         "fixturesRoot",
@@ -33420,7 +34507,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
       "path": "tests/unit/pptx.test.ts",
-      "line": 39,
+      "line": 40,
       "title": "follows presentation relationships, preserves notes blank lines and visible fields, and keeps notes reads read-only",
       "suites": [
         "pptx slice"
@@ -33439,7 +34526,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "sourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "body": "{\n    const result = await runOrderedNotesScenario();\n    expect(result.titles).toEqual([\n      \"Chapter 5\",\n      \"Frankenstein Lecture Series\",\n      \"Chapter 4\",\n      \"Chapter 2\",\n      \"Chapter 3\",\n    ]);\n    expect(result.notes).toEqual([\n      \"Key themes:\\ncreation, responsibility, isolation\\n\\nVisible date: 2026-03-12\",\n      \"Compare to Prometheus myth\",\n    ]);\n    expect(result.orderedDiff).toEqual({\n      added: [],\n      changed: [],\n      removed: [],\n    });\n    expect(result.orderedBytesAfterRead).toEqual(result.orderedBytes);\n    expect(result.minimalError.code).toBe(\"PPTX_NOTES_MISSING\");\n    expect(result.minimalBytesAfterRefusal).toEqual(result.minimalSource);\n    expect(result.minimalNames.some((name) => name.startsWith(\"ppt/notesSlides/\"))).toBeFalse();\n  }",
       "calls": [
         "expect",
@@ -33456,7 +34543,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / exposes line breaks and field text in inspectText and refuses editing that topology atomically",
       "path": "tests/unit/pptx.test.ts",
-      "line": 63,
+      "line": 64,
       "title": "exposes line breaks and field text in inspectText and refuses editing that topology atomically",
       "suites": [
         "pptx slice"
@@ -33473,7 +34560,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "sourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "body": "{\n    const result = await runReadableUnsupportedScenario();\n    expect(result.paragraphText).toBe(\"Chapter\\n7 Notes\");\n    expect(result.paragraphRuns).toEqual([\n      { text: \"Chapter\", attrs: { b: \"1\" } },\n      { text: \"\\n\", attrs: { lang: \"en-US\" } },\n      { text: \"7\", attrs: { i: \"1\" } },\n      { text: \" Notes\", attrs: { u: \"sng\" } },\n    ]);\n    expect(result.error.code).toBe(\"PPTX_UNSUPPORTED_TEXT_TOPOLOGY\");\n    expect(result.diffAfterRefusal).toEqual({\n      added: [],\n      changed: [],\n      removed: [],\n    });\n    expect(result.bytesAfterRefusal).toEqual(result.sourceBytes);\n  }",
       "calls": [
         "expect",
@@ -33487,7 +34574,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / replaces exact anchored text across runs and preserves untouched members",
       "path": "tests/unit/pptx.test.ts",
-      "line": 81,
+      "line": 82,
       "title": "replaces exact anchored text across runs and preserves untouched members",
       "suites": [
         "pptx slice"
@@ -33504,7 +34591,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "sourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "body": "{\n    const result = await runCrossRunReplacementScenario();\n    expect(result.reopenedTitle).toBe(\"Friendstein\");\n    expect(result.changedParts).toEqual({\n      added: [],\n      changed: [\"ppt/slides/slide1.xml\"],\n      removed: [],\n    });\n    expect(result.customMemberBytes).toEqual(encoder.encode(\"keep-me-safe\"));\n    const expectedDocProps = readZip(result.sourceBytes).get(\"docProps/app.xml\");\n    if (!expectedDocProps) {\n      throw new Error(\"expected docProps/app.xml in source fixture\");\n    }\n    expect(result.docPropsBytes).toEqual(expectedDocProps);\n    expect(result.titleRuns).toEqual([\n      { text: \"Fr\", attrs: { b: \"1\" } },\n      { text: \"iend\", attrs: { b: \"1\" } },\n      { text: \"stein\", attrs: { u: \"sng\" } },\n    ]);\n  }",
       "calls": [
         "encoder.encode",
@@ -33521,7 +34608,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / refuses stale anchors atomically",
       "path": "tests/unit/pptx.test.ts",
-      "line": 102,
+      "line": 103,
       "title": "refuses stale anchors atomically",
       "suites": [
         "pptx slice"
@@ -33536,7 +34623,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "sourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "body": "{\n    const result = await runStaleAnchorScenario();\n    expect(result.error.code).toBe(\"PPTX_STALE_ANCHOR\");\n    expect(result.reopenedTitle).toBe(\"Creature\");\n    expect(result.bytesAfterRefusal).toEqual(result.bytesAfterSuccess);\n  }",
       "calls": [
         "expect",
@@ -33550,7 +34637,7 @@
     {
       "id": "bun:tests/unit/pptx.test.ts:pptx slice / opens from path and bytes and saves a no-op deck byte-identically",
       "path": "tests/unit/pptx.test.ts",
-      "line": 109,
+      "line": 110,
       "title": "opens from path and bytes and saves a no-op deck byte-identically",
       "suites": [
         "pptx slice"
@@ -33565,7 +34652,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "sourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "body": "{\n    const sourcePath = fixturePath(F.officeSlides.titleSlide);\n    const sourceBytes = Uint8Array.from(await Bun.file(sourcePath).bytes());\n\n    const fromPath = await Presentation.open(sourcePath);\n    const fromBytes = await Presentation.open(sourceBytes);\n\n    expect(fromPath.slides[0]?.inspectText(\"unit.open.path\")[0]?.text).toBe(\"Frankenstein\");\n    expect(fromBytes.package.toBytes()).toEqual(sourceBytes);\n\n    const root = await mkdtemp(join(tmpdir(), \"bun-ooxml-pptx-open-\"));\n    roots.push(root);\n    const output = join(root, \"title-slide-copy.pptx\");\n    await fromPath.save(output);\n    expect(Uint8Array.from(await Bun.file(output).bytes())).toEqual(sourceBytes);\n  }",
       "calls": [
         "Bun.file",
@@ -34773,7 +35860,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 16,
+      "line": 17,
       "title": "catalogue mode includes unselected features as planned and separates shared from local obligations",
       "suites": [],
       "kind": "test",
@@ -34796,7 +35883,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0",
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/local.feature'),feature('local'));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:1,planned:2,total:3});expect(inv.coverage?.shared.cases).toEqual({implemented:1,planned:1,total:2});expect(inv.coverage?.localOnly.cases).toEqual({implemented:0,planned:1,total:1});expect(inv.coverage?.catalogue).toMatchObject({path:catalogue,features:2,scenarios:2,cases:2});\n const f=inv.features.find(f=>f.path===prefix+b)!;expect(f.lifecycle).toBe('planned');expect(f.runner).toBeUndefined();expect(f.sourceSha256).toBe(new Bun.CryptoHasher('sha256').update(feature('b')).digest('hex'));\n let unsupported=0;const result=await executeAcceptance(inv,[...bound,{pattern:/^(input|output) (b|local)$/,run:()=>{unsupported++;throw Error('planned ran');}}],'catalogue');expect(result.failures).toEqual([]);expect(result.counts.cases).toEqual({passed:1,failed:0,planned:2,total:3});expect(unsupported).toBe(0);\n const report=await runAcceptance(bound,{root});expect(report.coverage).toEqual(inv.coverage);expect(report.execution.cases.planned).toBe(2);await expect(runAcceptance(bound,{root,full:true})).rejects.toThrow('planned');\n }finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         ".update",
@@ -34824,7 +35911,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 23,
+      "line": 24,
       "title": "canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "suites": [],
       "kind": "test",
@@ -34835,12 +35922,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 24,
+          "line": 25,
           "expression": "for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0",
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b",
       "body": "{\n for(const mutate of [\n  (l:ReturnType<typeof ledger>)=>{l.schemaVersion=99;},\n  (l:ReturnType<typeof ledger>)=>{l.features.pop();l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.pop();},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.feature=b;},\n  (l:ReturnType<typeof ledger>)=>{l.workflows[0]!.expandedCases=2;},\n  (l:ReturnType<typeof ledger>)=>{l.features.push(a);},\n  (l:ReturnType<typeof ledger>)=>{l.workflows.push(l.workflows[0]!);},\n  (l:ReturnType<typeof ledger>)=>{l.features[0]='workflows/docx/../../escape.feature';},\n ]){const root=await project();try{const l=ledger();mutate(l);await Bun.write(join(root,catalogue),JSON.stringify(l));await expect(inventoryFeatures(root)).rejects.toThrow();}finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -34866,7 +35953,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 35,
+      "line": 36,
       "title": "catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "suites": [],
       "kind": "test",
@@ -34877,12 +35964,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 36,
+          "line": 37,
           "expression": "for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity'])"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0",
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b",
       "body": "{\n for(const mode of ['unknown','duplicate','orphan','lifecycle','missing','seal','catalogue-path','shadow','case-identity']){const root=await project();try{const c=config();\n if(mode==='unknown')c.features[0]!.path=prefix+'workflows/docx/c.feature';if(mode==='duplicate')c.features.push(c.features[0]!);if(mode==='orphan')await Bun.write(join(root,prefix+'workflows/docx/c.feature'),feature('c'));if(mode==='lifecycle')await Bun.write(join(root,prefix+b),feature('b').replace('@planned','@implemented @bun'));if(mode==='missing')await rm(join(root,prefix+b));if(mode==='seal')await Bun.write(join(root,prefix+'manifest.json'),JSON.stringify({files:[{path:a,role:'workflow'}]}));if(mode==='catalogue-path')c.catalogue=prefix+'../other.json';if(mode==='shadow')await Bun.write(join(root,'features/shadow.feature'),feature('b'));if(mode==='case-identity')await Bun.write(join(root,prefix+b),'@planned\\nFeature: b\\n @id-b\\n Scenario Outline: Duplicate <value>\\n  Given input <value>\\n  Then output <value>\\n  Examples:\\n   | value |\\n   | same |\\n   | same |\\n');\n await Bun.write(join(root,'features/shared.json'),JSON.stringify(c));await expect(inventoryFeatures(root)).rejects.toThrow();\n }finally{await rm(root,{recursive:true,force:true});}}\n}",
       "calls": [
         "Bun.write",
@@ -34906,7 +35993,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 41,
+      "line": 42,
       "title": "empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "suites": [],
       "kind": "test",
@@ -34918,7 +36005,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0",
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b",
       "body": "{\n const root=await project();try{await Bun.write(join(root,'features/shared.json'),JSON.stringify({...config(),features:[]}));const inv=await inventoryFeatures(root);expect(inv.counts.cases).toEqual({implemented:0,planned:2,total:2});await expect(runAcceptance([],{root})).rejects.toThrow('No implemented cases');}finally{await rm(root,{recursive:true,force:true});}\n}",
       "calls": [
         "Bun.write",
@@ -34939,7 +36026,7 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "line": 44,
+      "line": 45,
       "title": "real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "suites": [],
       "kind": "test",
@@ -34958,8 +36045,8 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0",
-      "body": "{\n const commit=process.env.OOXML_REFERENCE_PIN?(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit:undefined,tables=commit===uniformPin.commit||commit===tablePin.commit,retained=commit===retainedPin.commit,formatted=commit===formattingPin.commit,migrated=commit===pptxPin.commit||formatted||retained||tables;\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject(tables?{features:69,scenarios:424,cases:911}:retained?{features:69,scenarios:384,cases:871}:formatted?{features:67,scenarios:344,cases:831}:migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual(tables?{implemented:852,planned:59,total:911}:retained?{implemented:812,planned:59,total:871}:formatted?{implemented:772,planned:59,total:831}:migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual(migrated?{implemented:0,planned:0,total:0}:{implemented:20,planned:0,total:20});expect(inv.counts.cases).toEqual(tables?{implemented:852,planned:59,total:911}:retained?{implemented:812,planned:59,total:871}:formatted?{implemented:772,planned:59,total:831}:{implemented:752,planned:59,total:811});expect(inv.counts.scenarios.total).toBe(tables?424:retained?384:formatted?344:324);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b",
+      "body": "{\n const commit=process.env.OOXML_REFERENCE_PIN?(await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit:undefined,tables=commit===contract20Pin.commit||commit===uniformPin.commit||commit===tablePin.commit,retained=commit===retainedPin.commit,formatted=commit===formattingPin.commit,migrated=commit===pptxPin.commit||formatted||retained||tables;\n const inv=await inventoryFeatures(process.cwd());expect(inv.coverage?.catalogue).toMatchObject(tables?{features:69,scenarios:424,cases:911}:retained?{features:69,scenarios:384,cases:871}:formatted?{features:67,scenarios:344,cases:831}:migrated?{features:64,scenarios:324,cases:811}:{features:62,scenarios:304,cases:791});expect(inv.coverage?.shared.cases).toEqual(tables?{implemented:852,planned:59,total:911}:retained?{implemented:812,planned:59,total:871}:formatted?{implemented:772,planned:59,total:831}:migrated?{implemented:752,planned:59,total:811}:{implemented:732,planned:59,total:791});expect(inv.coverage?.localOnly.cases).toEqual(migrated?{implemented:0,planned:0,total:0}:{implemented:20,planned:0,total:20});expect(inv.counts.cases).toEqual(tables?{implemented:852,planned:59,total:911}:retained?{implemented:812,planned:59,total:871}:formatted?{implemented:772,planned:59,total:831}:{implemented:752,planned:59,total:811});expect(inv.counts.scenarios.total).toBe(tables?424:retained?384:formatted?344:324);\n const templates=inv.features.filter(f=>/\\/template-(analysis|cache)\\.feature$/.test(f.path));expect(templates).toHaveLength(2);expect(templates.flatMap(f=>f.scenarios).filter(s=>!s.scenarioId.startsWith('@id-docx-template-inventory-'))).toHaveLength(13);expect(templates.flatMap(f=>f.scenarios.map(s=>({s,f}))).filter(({s})=>!s.scenarioId.startsWith('@id-docx-template-inventory-')).every(({s,f})=>(s.lifecycle??f.lifecycle)==='planned')).toBe(true);\n const keys=inv.features.flatMap(f=>f.scenarios.filter(s=>(s.lifecycle??f.lifecycle)==='implemented').flatMap(s=>s.cases.map(c=>c.identityKey))).sort();\n const originalKeys=withoutTrackingToggle(keys);expect(new Bun.CryptoHasher('sha256').update(JSON.stringify(originalKeys)).digest('hex')).toBe('cafa5b7815a43ebe12780b1d7b9742e0e806eeea2fdc4ba36f249d7927650d01');\n}",
       "calls": [
         ".test",
         ".update",
@@ -34993,7 +36080,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 15,
+      "line": 16,
       "title": "checks 8 scenarios, 19 cases and four native-readable pinned fixtures without executing workflows",
       "suites": [
         "shared mutation inventory and custody"
@@ -35012,17 +36099,17 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 23,
+          "line": 24,
           "expression": "for(const path of canonical)"
         },
         {
-          "line": 28,
+          "line": 29,
           "expression": "for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
-      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    const migrated=!!process.env.OOXML_REFERENCE_PIN&&[pptxPin.commit,formattingPin.commit,retainedPin.commit,tablePin.commit,uniformPin.commit].includes((await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit);\n    const local=inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'));expect(local.map(f=>f.path)).toEqual(migrated?[]:['features/pptx/manipulation-next20.feature']);if(!migrated)expect(local[0]!.scenarios).toHaveLength(20);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }",
+      "sourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
+      "body": "{\n    expect(await verifySharedContracts(root)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    const ledger=await Bun.file(join(fixturesRoot(),'ledgers/workflows.json')).json();\n    const canonical=ledger.features.filter((path:string)=>['workflows/docx/stories.feature','workflows/docx/revisions.feature','workflows/package/graph.feature','workflows/package/zip64.feature','workflows/pptx/text.feature','workflows/pptx/notes.feature','workflows/xlsx/cells.feature','workflows/xlsx/formula-cache.feature'].includes(path));\n    expect(canonical).toHaveLength(8);\n    const inventory=await inventoryFeatures(root);\n    const migrated=!!process.env.OOXML_REFERENCE_PIN&&[pptxPin.commit,formattingPin.commit,retainedPin.commit,tablePin.commit,uniformPin.commit,contract20Pin.commit].includes((await Bun.file(process.env.OOXML_REFERENCE_PIN).json()).commit);\n    const local=inventory.features.filter(f=>f.lifecycle==='implemented'&&!f.path.startsWith('references/fixtures-ooxml/'));expect(local.map(f=>f.path)).toEqual(migrated?[]:['features/pptx/manipulation-next20.feature']);if(!migrated)expect(local[0]!.scenarios).toHaveLength(20);\n    for(const path of canonical){\n      const shared=inventory.features.filter(f=>f.path==='references/fixtures-ooxml/'+path);\n      expect(shared).toHaveLength(1);\n      expect(shared[0]!.lifecycle).toBe('implemented');\n      const ids=parseFeature(path,await Bun.file(join(fixturesRoot(),path)).text()).scenarios.map(s=>s.scenarioId);\n      for(const id of ids)expect(inventory.features.flatMap(f=>f.scenarios).filter(s=>s.scenarioId===id)).toHaveLength(1);\n    }\n  }",
       "calls": [
         ".includes",
         "Bun.file",
@@ -35053,7 +36140,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / stable identity excludes path, UUID and example insertion order",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 31,
+      "line": 32,
       "title": "stable identity excludes path, UUID and example insertion order",
       "suites": [
         "shared mutation inventory and custody"
@@ -35068,7 +36155,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "sourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "body": "{\n    expect(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"})).toBe('@id-example:{\"a\":\"1\",\"z\":\"2\"}');\n    expect(stableCaseKey(\"@id-example\")).toBe('@id-example:{}');\n    expect(stableCaseKey(\"@id-example\",{a:\"1\",z:\"2\"})).toBe(stableCaseKey(\"@id-example\",{z:\"2\",a:\"1\"}));\n  }",
       "calls": [
         "expect",
@@ -35081,7 +36168,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / typed mutation inputs preserve strings, numeric values and significant whitespace",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 36,
+      "line": 37,
       "title": "typed mutation inputs preserve strings, numeric values and significant whitespace",
       "suites": [
         "shared mutation inventory and custody"
@@ -35095,12 +36182,12 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 40,
+          "line": 41,
           "expression": "for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\""
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "sourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "body": "{\n    expect(parseBatchTable([[\"target\",\"value_json\"],[\"Input!A1\",\"10\"],[\"A2\",'\"10\"'],[\"A3\",'\"first\\\\nsecond\"'],[\"A4\",\"null\"]])).toEqual([\n      {target:\"Input!A1\",value:10},{target:\"A2\",value:\"10\"},{target:\"A3\",value:\"first\\nsecond\"},{target:\"A4\",value:null}\n    ]);\n    for(const table of [[],[[\"target\",\"value_json\"]],[[\"target\",\"value\"],[\"A1\",\"10\"]],[[\"target\",\"value_json\"],[\"A1\",\"not-json\"]],[[\"target\",\"value_json\"],[\"A1\",\"{}\"]],[[\"target\",\"value_json\"],[\"A1\",\"1e999\"]]])expect(()=>parseBatchTable(table)).toThrow();\n  }",
       "calls": [
         "expect",
@@ -35116,7 +36203,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 42,
+      "line": 43,
       "title": "Gherkin escaping must preserve JSON newline escapes before typed decoding",
       "suites": [
         "shared mutation inventory and custody"
@@ -35130,7 +36217,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "sourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "body": "{\n    const compile=(value:string)=>parseFeature('features/planned/example.feature',`@planned\nFeature: JSON escaping\n  @id-json-escaping\n  Scenario: Typed newline\n    When a batch is prepared:\n      | target | value_json |\n      | A1 | ${value} |\n    Then the typed value contains a newline\n`).scenarios[0]!.cases[0]!.steps[0]!.argument!.dataTable!;\n    expect(()=>parseBatchTable(compile('\"first\\\\nsecond\"'))).toThrow();\n    expect(parseBatchTable(compile('\"first\\\\\\\\nsecond\"'))).toEqual([{target:'A1',value:'first\\nsecond'}]);\n  }",
       "calls": [
         "compile",
@@ -35146,7 +36233,7 @@
     {
       "id": "bun:tests/unit/shared-contracts.test.ts:shared mutation inventory and custody / rejects feature, fixture and policy tampering while leaving original fixtures untouched",
       "path": "tests/unit/shared-contracts.test.ts",
-      "line": 56,
+      "line": 57,
       "title": "rejects feature, fixture and policy tampering while leaving original fixtures untouched",
       "suites": [
         "shared mutation inventory and custody"
@@ -35161,16 +36248,16 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 64,
+          "line": 65,
           "expression": "for(const [file,expectedError] of [\n        ...contract.features.map((p:string)=>['references/fixtures-ooxml/'+p,'Shared contract artifact drift']),\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ])"
         },
         {
-          "line": 77,
+          "line": 78,
           "expression": "for(const mutate of [\n        (c:any)=>"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "sourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "body": "{\n    const temp=await mkdtemp(join(tmpdir(),\"bun-shared-contracts-\"));\n    try {\n      await cp(join(root,\"features\"),join(temp,\"features\"),{recursive:true});\n      await cp(fixturesRoot(),join(temp,\"references/fixtures-ooxml\"),{recursive:true,dereference:true,filter:(path)=>!path.includes('/node_modules')&&!path.endsWith('/.git')});\n      const manifest=await Bun.file(join(temp,'references/fixtures-ooxml/manifest.json')).json();\n      const contract=await Bun.file(join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json')).json();\n      const fixture=manifest.files.find((f:any)=>f.id===contract.fixtures[0].assetId);\n      for(const [file,expectedError] of [\n        ...contract.features.map((p:string)=>['references/fixtures-ooxml/'+p,'Shared contract artifact drift']),\n        ['references/fixtures-ooxml/'+fixture.path,'sha256 drift'],\n        [\"references/fixtures-ooxml/contracts/mutation-safety.json\",\"Shared contract artifact drift\"],\n      ]) {\n        const path=join(temp,file!);const original=await Bun.file(path).bytes();\n        const modified=new Uint8Array(original.length+1);modified.set(original);modified[modified.length-1]=32;\n        await Bun.write(path,modified);await expect(verifySharedContracts(temp)).rejects.toThrow(expectedError!);await Bun.write(path,original);\n      }\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n      // Re-seal the deliberately corrupted policy so these controls exercise\n      // schema and selection validation, not just byte-hash rejection.\n      const contractPath=join(temp,'references/fixtures-ooxml/contracts/mutation-safety.json'),manifestPath=join(temp,'references/fixtures-ooxml/manifest.json');\n      for(const mutate of [\n        (c:any)=>{c.features=[];},\n        (c:any)=>{c.features.push(c.features[0]);},\n        (c:any)=>{c.features.pop();},\n        (c:any)=>{c.features[0]='../escape.feature';},\n        (c:any)=>{c.feature='workflows/mutation-safety.feature';},\n        (c:any)=>{c.features.push('workflows/docx/creation.feature');},\n        (c:any)=>{c.scenarioIds[0]='@id-office-preview-details';},\n        (c:any)=>{c.scenarioIds[0]=c.scenarioIds[1];},\n      ]){\n        const modified=structuredClone(contract);mutate(modified);const text=JSON.stringify(modified),copy=structuredClone(manifest),asset=copy.files.find((a:any)=>a.path==='contracts/mutation-safety.json');\n        asset.sha256=new Bun.CryptoHasher('sha256').update(text).digest('hex');asset.bytes=Buffer.byteLength(text);\n        await Bun.write(contractPath,text);await Bun.write(manifestPath,JSON.stringify(copy));await expect(verifySharedContracts(temp)).rejects.toThrow();\n      }\n      await Bun.write(contractPath,JSON.stringify(contract));const original=structuredClone(manifest),asset=original.files.find((a:any)=>a.path==='contracts/mutation-safety.json');asset.sha256=new Bun.CryptoHasher('sha256').update(JSON.stringify(contract)).digest('hex');await Bun.write(manifestPath,JSON.stringify(original));\n      expect(await verifySharedContracts(temp)).toEqual({scenarios:8,cases:19,fixtures:4,files:6});\n    } finally {await rm(temp,{recursive:true,force:true});}\n  }",
       "calls": [
         ".update",
@@ -42579,7 +43666,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads rel-linked shared strings, numerics, booleans and cached formulas across worksheets",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 30,
+      "line": 31,
       "title": "reads rel-linked shared strings, numerics, booleans and cached formulas across worksheets",
       "suites": [
         "Workbook.open"
@@ -42597,7 +43684,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const workbook = await Workbook.open(createRelLinkedSharedStringsWorkbook());\n\n    expect(workbook.sheetnames).toEqual([\"Alpha\", \"Beta\"]);\n    expect(workbook.worksheet(\"Alpha\").getCell(\"A1\")).toMatchObject({\n      kind: \"string\",\n      value: \"alpha shared\",\n    });\n    expect(workbook.worksheet(\"Alpha\").getCell(\"B1\")).toMatchObject({\n      kind: \"number\",\n      value: 7,\n    });\n    expect(workbook.worksheet(\"Alpha\").getCell(\"C1\")).toMatchObject({\n      kind: \"boolean\",\n      value: false,\n    });\n    expect(workbook.worksheet(\"Alpha\").getCell(\"D1\")).toMatchObject({\n      kind: \"formula\",\n      formula: \"B1+1\",\n      cached: 8,\n    });\n    expect(workbook.worksheet(\"Beta\").getCell(\"A1\")).toMatchObject({\n      kind: \"string\",\n      value: \"beta shared\",\n    });\n  }",
       "calls": [
         "Workbook.open",
@@ -42614,7 +43701,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real go-ooxml inline, numeric and boolean cells through workbook relationships",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 57,
+      "line": 58,
       "title": "reads real go-ooxml inline, numeric and boolean cells through workbook relationships",
       "suites": [
         "Workbook.open"
@@ -42633,7 +43720,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const path = fixturePath(F.goSheets.multipleSheets);\n    const workbook = await Workbook.open(path);\n\n    expect(workbook.sheetnames).toEqual([\"Characters\", \"Experiments\", \"Summary\"]);\n    expect(workbook.worksheet(\"Characters\").getCell(\"A2\")?.value).toBe(\"Victor Frankenstein\");\n    expect(workbook.worksheet(\"Characters\").getCell(\"D2\")?.value).toBe(25);\n    expect(workbook.worksheet(\"Experiments\").getCell(\"A2\")?.value).toBe(\"Galvanic Tests\");\n    expect(workbook.worksheet(\"Experiments\").getCell(\"C2\")?.value).toBe(47.5);\n    expect(workbook.worksheet(\"Experiments\").getCell(\"D2\")?.value).toBe(true);\n    expect(workbook.worksheet(\"Summary\").getCell(\"A1\")?.value).toBe(\"Frankenstein Research Summary\");\n  }",
       "calls": [
         "Workbook.open",
@@ -42650,7 +43737,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Workbook.open / reads real python-office shared strings from bytes",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 70,
+      "line": 71,
       "title": "reads real python-office shared strings from bytes",
       "suites": [
         "Workbook.open"
@@ -42667,7 +43754,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const path = fixturePath(F.officeSheets.comments);\n    const bytes = new Uint8Array(await Bun.file(path).arrayBuffer());\n    const workbook = await Workbook.open(bytes);\n\n    expect(workbook.sheetnames).toEqual([\"Annotated\"]);\n    expect(workbook.worksheet(\"Annotated\").getCell(\"A1\")?.value).toBe(\"Character\");\n    expect(workbook.worksheet(\"Annotated\").getCell(\"B1\")?.value).toBe(\"Notes\");\n    expect(workbook.worksheet(\"Annotated\").getCell(\"A2\")?.value).toBe(\"Victor Frankenstein\");\n    expect(workbook.worksheet(\"Annotated\").getCell(\"B3\")?.value).toBe(\"The creation\");\n  }",
       "calls": [
         "Bun.file",
@@ -42686,7 +43773,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Workbook.open / excludes phonetic guides while retaining shared and inline rich text runs",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 82,
+      "line": 83,
       "title": "excludes phonetic guides while retaining shared and inline rich text runs",
       "suites": [
         "Workbook.open"
@@ -42701,7 +43788,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const workbook = await Workbook.open(createPhoneticRichTextWorkbook());\n\n    expect(workbook.sheetnames).toEqual([\"Phonetics\"]);\n    expect(workbook.worksheet(\"Phonetics\").getCell(\"A1\")).toMatchObject({\n      kind: \"string\",\n      value: \"Alpha Beta\",\n    });\n    expect(workbook.worksheet(\"Phonetics\").getCell(\"B1\")).toMatchObject({\n      kind: \"string\",\n      value: \"Gamma Delta\",\n    });\n  }",
       "calls": [
         "Workbook.open",
@@ -42718,7 +43805,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / preserves style attributes and unrelated parts after save and reopen",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 98,
+      "line": 99,
       "title": "preserves style attributes and unrelated parts after save and reopen",
       "suites": [
         "Worksheet.setCellValue"
@@ -42737,7 +43824,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const path = fixturePath(F.goSheets.formatting);\n    const originalBytes = new Uint8Array(await Bun.file(path).arrayBuffer());\n    const originalParts = readZip(originalBytes);\n    const workbook = await Workbook.open(path);\n\n    workbook.worksheet(\"Formatted\").setCellValue(\"A2\", \"Elizabeth Lavenza\");\n\n    const outDir = await tempRoot();\n    const outPath = join(outDir, \"styled.xlsx\");\n    await workbook.save(outPath);\n    const savedBytes = new Uint8Array(await Bun.file(outPath).arrayBuffer());\n    const savedParts = readZip(savedBytes);\n    const reopened = await Workbook.open(outPath);\n\n    expect(reopened.worksheet(\"Formatted\").getCell(\"A2\")).toMatchObject({\n      value: \"Elizabeth Lavenza\",\n      styleId: \"2\",\n    });\n    expect(reopened.worksheet(\"Formatted\").getCell(\"D2\")).toMatchObject({\n      kind: \"number\",\n      value: 25,\n      styleId: \"2\",\n    });\n    expect(savedParts.get(\"xl/worksheets/sheet1.xml\")).not.toEqual(originalParts.get(\"xl/worksheets/sheet1.xml\"));\n    expect(savedParts.get(\"xl/styles.xml\")).toEqual(originalParts.get(\"xl/styles.xml\"));\n    expect(savedParts.get(\"xl/theme/theme1.xml\")).toEqual(originalParts.get(\"xl/theme/theme1.xml\"));\n    expect(savedParts.get(\"docProps/core.xml\")).toEqual(originalParts.get(\"docProps/core.xml\"));\n    expect(workbook.package.diff()).toEqual({\n      added: [],\n      changed: [\"xl/worksheets/sheet1.xml\"],\n      removed: [],\n    });\n  }",
       "calls": [
         "Bun.file",
@@ -42766,7 +43853,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / conservatively invalidates cached formulas across worksheets and sets workbook calc flags",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 133,
+      "line": 134,
       "title": "conservatively invalidates cached formulas across worksheets and sets workbook calc flags",
       "suites": [
         "Worksheet.setCellValue"
@@ -42792,7 +43879,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const workbook = await Workbook.open(createCrossSheetCachedFormulaWorkbook());\n\n    workbook.worksheet(\"Model\").setCellValue(\"A1\", 10);\n\n    const bytes = workbook.toBytes();\n    const parts = readZip(bytes);\n    const workbookDocument = parseXml(decodePart(parts, \"xl/workbook.xml\"));\n    const calcPr = onlySpreadsheetElement(workbookDocument.root, \"calcPr\");\n    const modelXml = decodePart(parts, \"xl/worksheets/sheet1.xml\");\n    const summaryXml = decodePart(parts, \"xl/worksheets/sheet2.xml\");\n    const reopened = await Workbook.open(bytes);\n\n    expect(calcPr.namespaceURI).toBe(S_NS);\n    expect(calcPr.attributes.calcMode).toBe(\"auto\");\n    expect(calcPr.attributes.fullCalcOnLoad).toBe(\"1\");\n    expect(calcPr.attributes.forceFullCalc).toBe(\"1\");\n    expect(modelXml).toContain(\"<f>A1+A2</f>\");\n    expect(modelXml).toContain(\"<f>B1*2</f>\");\n    expect(modelXml).not.toContain(\"<v>3</v>\");\n    expect(modelXml).not.toContain(\"<v>6</v>\");\n    expect(summaryXml).toContain(\"<f>Model!B1*3</f>\");\n    expect(summaryXml).not.toContain(\"<v>9</v>\");\n    expect(reopened.worksheet(\"Model\").getCell(\"B1\")?.cached).toBeNull();\n    expect(reopened.worksheet(\"Model\").getCell(\"B2\")?.cached).toBeNull();\n    expect(reopened.worksheet(\"Summary\").getCell(\"A1\")?.cached).toBeNull();\n    expect(workbook.package.diff()).toEqual({\n      added: [],\n      changed: [\"xl/workbook.xml\", \"xl/worksheets/sheet1.xml\", \"xl/worksheets/sheet2.xml\"],\n      removed: [],\n    });\n  }",
       "calls": [
         "Workbook.open",
@@ -42820,7 +43907,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / qualifies inserted spreadsheet nodes in prefixed workbook and worksheet edits without duplicating calcPr",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 166,
+      "line": 167,
       "title": "qualifies inserted spreadsheet nodes in prefixed workbook and worksheet edits without duplicating calcPr",
       "suites": [
         "Worksheet.setCellValue"
@@ -42847,7 +43934,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const workbook = await Workbook.open(createPrefixedWorkbookWithBlankCellsAndFormula());\n\n    workbook.worksheet(\"Prefixed\").setCellValue(\"A1\", \"Alpha\");\n    workbook.worksheet(\"Prefixed\").setCellValue(\"B1\", 7);\n\n    const bytes = workbook.toBytes();\n    const parts = readZip(bytes);\n    const workbookDocument = parseXml(decodePart(parts, \"xl/workbook.xml\"));\n    const calcPr = onlySpreadsheetElement(workbookDocument.root, \"calcPr\");\n    const sheetDocument = parseXml(decodePart(parts, \"xl/worksheets/sheet1.xml\"));\n    const a1Inline = onlySpreadsheetElement(findCell(sheetDocument.root, \"A1\"), \"is\");\n    const a1Text = onlySpreadsheetElement(a1Inline, \"t\");\n    const b1Value = onlySpreadsheetElement(findCell(sheetDocument.root, \"B1\"), \"v\");\n    const reopened = await Workbook.open(bytes);\n\n    expect(calcPr.name).toBe(\"x:calcPr\");\n    expect(calcPr.namespaceURI).toBe(S_NS);\n    expect(calcPr.attributes.calcMode).toBe(\"auto\");\n    expect(calcPr.attributes.fullCalcOnLoad).toBe(\"1\");\n    expect(calcPr.attributes.forceFullCalc).toBe(\"1\");\n    expect(a1Inline.name).toBe(\"x:is\");\n    expect(a1Inline.namespaceURI).toBe(S_NS);\n    expect(a1Text.name).toBe(\"x:t\");\n    expect(a1Text.namespaceURI).toBe(S_NS);\n    expect(a1Text.text).toBe(\"Alpha\");\n    expect(b1Value.name).toBe(\"x:v\");\n    expect(b1Value.namespaceURI).toBe(S_NS);\n    expect(b1Value.text).toBe(\"7\");\n    expect(reopened.worksheet(\"Prefixed\").getCell(\"A1\")).toMatchObject({\n      value: \"Alpha\",\n      styleId: \"1\",\n    });\n    expect(reopened.worksheet(\"Prefixed\").getCell(\"B1\")).toMatchObject({\n      value: 7,\n      styleId: \"2\",\n    });\n  }",
       "calls": [
         "Workbook.open",
@@ -42872,7 +43959,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / reads styled blank cells as null and preserves their style when edited",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 205,
+      "line": 206,
       "title": "reads styled blank cells as null and preserves their style when edited",
       "suites": [
         "Worksheet.setCellValue"
@@ -42886,7 +43973,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const workbook = await Workbook.open(createStyledBlankCellWorkbook());\n\n    expect(workbook.worksheet(\"StyledBlank\").getCell(\"A1\")).toMatchObject({\n      kind: \"blank\",\n      value: null,\n      styleId: \"1\",\n    });\n\n    workbook.worksheet(\"StyledBlank\").setCellValue(\"A1\", \"filled\");\n\n    const reopened = await Workbook.open(workbook.toBytes());\n\n    expect(reopened.worksheet(\"StyledBlank\").getCell(\"A1\")).toMatchObject({\n      kind: \"string\",\n      value: \"filled\",\n      styleId: \"1\",\n    });\n  }",
       "calls": [
         "Workbook.open",
@@ -42906,7 +43993,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported shared formula edits without mutating the package",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 225,
+      "line": 226,
       "title": "refuses unsupported shared formula edits without mutating the package",
       "suites": [
         "Worksheet.setCellValue"
@@ -42921,7 +44008,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const originalBytes = await sharedFormulaWorkbook();\n    const workbook = await Workbook.open(originalBytes);\n\n    expect(() => workbook.worksheet(\"Calc\").setCellValue(\"B2\", 99)).toThrow(\n      expect.objectContaining({\n        code: \"xlsx-shared-formula-edit-unsupported\",\n      } satisfies Partial<OoxmlError>),\n    );\n    expect(workbook.package.diff()).toEqual({ added: [], changed: [], removed: [] });\n    expect(workbook.toBytes()).toEqual(originalBytes);\n  }",
       "calls": [
         "Workbook.open",
@@ -42941,7 +44028,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:Worksheet.setCellValue / refuses unsupported array formula edits without mutating the package",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 238,
+      "line": 239,
       "title": "refuses unsupported array formula edits without mutating the package",
       "suites": [
         "Worksheet.setCellValue"
@@ -42956,7 +44043,7 @@
       "deferredAssertions": [],
       "loops": [],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "body": "{\n    const originalBytes = await sharedFormulaWorkbook();\n    const workbook = await Workbook.open(originalBytes);\n\n    expect(() => workbook.worksheet(\"Calc\").setCellValue(\"D2\", 99)).toThrow(\n      expect.objectContaining({\n        code: \"xlsx-array-formula-edit-unsupported\",\n      } satisfies Partial<OoxmlError>),\n    );\n    expect(workbook.package.diff()).toEqual({ added: [], changed: [], removed: [] });\n    expect(workbook.toBytes()).toEqual(originalBytes);\n  }",
       "calls": [
         "Workbook.open",
@@ -42976,7 +44063,7 @@
     {
       "id": "bun:tests/unit/xlsx.test.ts:xlsx acceptance feature / executes the implemented xlsx scenarios with exported bindings",
       "path": "tests/unit/xlsx.test.ts",
-      "line": 253,
+      "line": 254,
       "title": "executes the implemented xlsx scenarios with exported bindings",
       "suites": [
         "xlsx acceptance feature"
@@ -42993,18 +44080,19 @@
       "deferredAssertions": [],
       "loops": [
         {
-          "line": 255,
-          "expression": "for(const path of [\"workflows/xlsx/cells.feature\",\"workflows/xlsx/formula-cache.feature\"])await Bun.write(join(root,'references/fixtures-ooxml',path),await Bun.file(join(fixturesRoot(),path)).text());"
+          "line": 256,
+          "expression": "for(const path of [\"workflows/xlsx/cells.feature\",\"workflows/xlsx/formula-cache.feature\"])await Bun.write(join(root,'references/fixtures-ooxml',path),await beforeContract20Feature(path,await Bun.file(join(fixturesRoot(),path)).text()));"
         }
       ],
       "registrationLoops": [],
-      "sourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
-      "body": "{\n    const root = await tempRoot();\n    for(const path of [\"workflows/xlsx/cells.feature\",\"workflows/xlsx/formula-cache.feature\"])await Bun.write(join(root,'references/fixtures-ooxml',path),await Bun.file(join(fixturesRoot(),path)).text());\n    await Bun.write(join(root,'features/shared.json'),JSON.stringify({\"schemaVersion\":2,\"features\":[{\"path\":\"references/fixtures-ooxml/workflows/xlsx/cells.feature\",\"lifecycle\":\"implemented\",\"runner\":\"bun\",\"scenarioIds\":[\"@id-xlsx-read-rel-linked-shared-strings\",\"@id-xlsx-preserve-styled-cell-edit\",\"@id-xlsx-prefixed-namespace-safe-edits\",\"@id-xlsx-phonetic-guides-excluded\",\"@id-xlsx-styled-blank-cell-editable\",\"@id-xlsx-refuse-shared-formula-overwrite\",\"@id-xlsx-refuse-array-formula-overwrite\"]},{\"path\":\"references/fixtures-ooxml/workflows/xlsx/formula-cache.feature\",\"lifecycle\":\"implemented\",\"runner\":\"bun\",\"scenarioIds\":[\"@id-xlsx-clear-cross-sheet-caches\"]}]}));\n\n    const report = await runAcceptance(bindings, { root });\n\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(2);\n    expect(report.inventory.scenarios.implemented).toBe(8);\n    expect(report.execution.cases.failed).toBe(0);\n    expect(report.execution.steps.undefined).toBe(0);\n  }",
+      "sourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
+      "body": "{\n    const root = await tempRoot();\n    for(const path of [\"workflows/xlsx/cells.feature\",\"workflows/xlsx/formula-cache.feature\"])await Bun.write(join(root,'references/fixtures-ooxml',path),await beforeContract20Feature(path,await Bun.file(join(fixturesRoot(),path)).text()));\n    await Bun.write(join(root,'features/shared.json'),JSON.stringify({\"schemaVersion\":2,\"features\":[{\"path\":\"references/fixtures-ooxml/workflows/xlsx/cells.feature\",\"lifecycle\":\"implemented\",\"runner\":\"bun\",\"scenarioIds\":[\"@id-xlsx-read-rel-linked-shared-strings\",\"@id-xlsx-preserve-styled-cell-edit\",\"@id-xlsx-prefixed-namespace-safe-edits\",\"@id-xlsx-phonetic-guides-excluded\",\"@id-xlsx-styled-blank-cell-editable\",\"@id-xlsx-refuse-shared-formula-overwrite\",\"@id-xlsx-refuse-array-formula-overwrite\"]},{\"path\":\"references/fixtures-ooxml/workflows/xlsx/formula-cache.feature\",\"lifecycle\":\"implemented\",\"runner\":\"bun\",\"scenarioIds\":[\"@id-xlsx-clear-cross-sheet-caches\"]}]}));\n\n    const report = await runAcceptance(bindings, { root });\n\n    expect(report.status).toBe(\"passed\");\n    expect(report.inventory.features.implemented).toBe(2);\n    expect(report.inventory.scenarios.implemented).toBe(8);\n    expect(report.execution.cases.failed).toBe(0);\n    expect(report.execution.steps.undefined).toBe(0);\n  }",
       "calls": [
         "Bun.file",
         "Bun.file().text",
         "Bun.write",
         "JSON.stringify",
+        "beforeContract20Feature",
         "expect",
         "expect().toBe",
         "fixturesRoot",

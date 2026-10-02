@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1149,
+  "nativeDeclarations": 1177,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 922,
+  "withoutStagingCount": 950,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -36,7 +36,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
+      "currentSourceSha256": "0b891639a7a82fdee493219c4dadb96dd078dcdb00ff3a3d926767182d48b577",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -47,7 +47,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
+      "currentSourceSha256": "0b891639a7a82fdee493219c4dadb96dd078dcdb00ff3a3d926767182d48b577",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -56,7 +56,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "a6170c108cc646e3b03fc63581519d7b6df4cdef56ab7452ad9a2fa9baf340af",
+      "currentSourceSha256": "0b891639a7a82fdee493219c4dadb96dd078dcdb00ff3a3d926767182d48b577",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1003,7 +1003,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "currentSourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1012,7 +1012,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "currentSourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1021,7 +1021,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "currentSourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1030,7 +1030,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "currentSourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1039,7 +1039,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "currentSourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1048,7 +1048,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "741b90133d18d956e87f502713d78ddad1bbcfe3c8187b9e0aa59e7aae5a6f62",
+      "currentSourceSha256": "ce7feafb429ff353a78f1d22865362762ff3f881bf0990def70f2bf660d0a443",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1153,7 +1153,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "currentSourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1164,7 +1164,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "currentSourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1173,7 +1173,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "currentSourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1184,7 +1184,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "currentSourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1193,7 +1193,7 @@
       "stagingPath": "docs/behaviors/staging-workflow-harness.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "80097e3cde1034a98adcd23f49f72020c32bbafb121fe3143da214d84b5e9de3",
+      "currentSourceSha256": "cdd040d2004ad661b25c1a144e74d45b36a57e07f8ecb5fccfdb727cdce036b3",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -1552,7 +1552,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1561,7 +1561,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1570,7 +1570,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1579,7 +1579,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1588,7 +1588,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1597,7 +1597,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1606,7 +1606,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1615,7 +1615,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1624,7 +1624,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1633,7 +1633,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [],
       "executionCredit": false
     },
@@ -1642,7 +1642,7 @@
       "stagingPath": "docs/behaviors/staging-slides-sheets.json",
       "state": "identity-present-needs-review",
       "sourceEquivalence": "unverified-staging-has-no-source-pin",
-      "currentSourceSha256": "06e96a09d7a63a4eb4259d1afae9541e23a758e0bdc9653fa00ca88e9f801422",
+      "currentSourceSha256": "29d3e16a505b9ead851b5ec992bdbad1bc678ab39906847c2d149c60c9e94a7a",
       "currentReviewReasons": [
         "body-loop"
       ],
@@ -2219,6 +2219,146 @@
       "id": "bun:tests/unit/comparison-mappings.test.ts:comparison reconciliation preserves inputs direct and deferred assertions dynamic flags and unknown leaves",
       "path": "tests/unit/comparison-mappings.test.ts",
       "sourceSha256": "00693d25029b45a649dd6ef801c2280881dfe65313d9010cd005b6e3204b75a0"
+    },
+    {
+      "id": "bun:tests/unit/contract20-bindings.test.ts:exact Contract20 predicate table has one handler per selected step and rejects foreign case/hash",
+      "path": "tests/unit/contract20-bindings.test.ts",
+      "sourceSha256": "b6dfc557c80de0880fc9569b5a093e1e70746ccbef43339634fc13acb54cad14"
+    },
+    {
+      "id": "bun:tests/unit/contract20-bindings.test.ts:all 22 sealed Contract20 action/predicate plans execute in order with independent saved-output checks",
+      "path": "tests/unit/contract20-bindings.test.ts",
+      "sourceSha256": "b6dfc557c80de0880fc9569b5a093e1e70746ccbef43339634fc13acb54cad14"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 independent input reads exclude both rich-string phonetic guides",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 numeric no-op preserves all caches and calculation flags",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 prefixed blanks retain x while C1 value cache is absent",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 all-four cache invalidation retains independent formula body",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque semantic owner edge refuses before mutation",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 from-scratch creator rejects NUL title with argument category",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 missing notes is a non-mutating false/empty observation",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:'Contract20 '+recipe+' intake succeeds before typed cell edit refusal'",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 foreign text anchor refuses across equal-part equal-text sessions",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 cross-run input produces exact Friendstein starting-run properties",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 styled cell updates only existing text leaf",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 refusal leaves held ordinary cell and unchanged source session usable",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 same-part table mutation stales old cell; foreign and late invalid operands do not consume fresh handles",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 anchor survives unrelated append but forged and invalid late operations refuse",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 save failure publishes nothing and preserves existing or absent destination",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 failed symlink publication preserves actual destination and leaves no staged output",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque retention refuses extra semantic root worksheet edge with full custody",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 changed-input sweep refuses shared-result topology without consuming source state",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 table target refuses foreign graphicData URI without editing hidden payload",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 retained cell text refuses multiple visible runs without discarding siblings",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque retention refuses styles relationship aimed at workbook role",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-native.test.ts:Contract20 opaque retention refuses unreferenced worksheet edge aimed at workbook",
+      "path": "tests/unit/contract20-native.test.ts",
+      "sourceSha256": "8d676cd7fc4ef47dfb74b9c26637df81f2187383369cfc6f5dcb768f495d2f0a"
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:independent Contract20 XML oracle decodes names/entities and disjoint original spans",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20"
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:independent ZIP graph reader validates every sealed recipe without production XML/ZIP reader",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20"
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:oracle detects corrupted XML graph, ZIP bounds and payload drift",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20"
+    },
+    {
+      "id": "bun:tests/unit/contract20-oracle.test.ts:independent archive reader rejects CRC mismatch in stored payload and local-central metadata",
+      "path": "tests/unit/contract20-oracle.test.ts",
+      "sourceSha256": "2d3f6e90a87b7aca0439306a591ba2de95c6e47ba76ed0be23026289f5021b20"
     },
     {
       "id": "bun:tests/unit/docx-anchor-mappings.test.ts:anchor mapping ledger accounts for 28 declarations and 122 direct assertions with prior mappings untouched",
@@ -5448,27 +5588,27 @@
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode includes unselected features as planned and separates shared from local obligations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0"
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:canonical omission wrong ownership case-count drift duplicates and unsafe paths refuse",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0"
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:catalogue mode refuses unknown activation duplicate mappings orphan files and silently implemented sources",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0"
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:empty explicit activation retains the full planned catalogue but cannot pass acceptance",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0"
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b"
     },
     {
       "id": "bun:tests/unit/shared-catalogue.test.ts:real catalogue accounts for all 791 shared cases with former local obligations centralised with only reviewed activations",
       "path": "tests/unit/shared-catalogue.test.ts",
-      "sourceSha256": "b9c3fb21998c4a037fba3adfced5db21197437cc65b1443f5d15e41474abcbb0"
+      "sourceSha256": "1c2bbd996def81fa6d939065055931ea36c5d6411eb8f7a432872e1b3c4a762b"
     },
     {
       "id": "bun:tests/unit/shared-selection.test.ts:shared scenario selection retains unsupported outcomes as planned without invoking their steps",
