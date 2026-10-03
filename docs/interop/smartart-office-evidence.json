@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "scope": "One committed Microsoft PowerPoint-produced diagram encoding; no current Microsoft application test",
+  "fixture": {
+    "id": "fixture-b97e4c6d2ee1dd4094f50f9043820610268dd452d7717c537f5456636adcc353",
+    "repository": "https://github.com/apache/poi",
+    "revision": "33f89110dd72c7b94710322ce7e795d0f464f68f",
+    "path": "test-data/slideshow/SmartArt.pptx",
+    "gitBlob": "7b7731d78f27352ccea5713400d4994058bcc381",
+    "bytes": 41382,
+    "licence": "Apache-2.0",
+    "producerMetadata": "Microsoft Office PowerPoint",
+    "sharedLedger": "ledgers/pptx-smartart-office-source.json"
+  },
+  "sharedCases": { "ids": 2, "cases": 3, "executionCredit": false },
+  "native": { "smartArtTestsPassed": 27, "smartArtAssertions": 1751, "fullTestsPassed": 1536, "fullTestsSkipped": 52, "fullTestsFailed": 0, "fullAssertions": 48689, "acceptance": "752/752", "examples": "all passed", "isolatedFullCheck": "passed" },
+  "shared": { "assets": 440, "fixtures": 86, "facts": 149, "workflows": 480, "cases": 1234, "testsPassed": 290, "testsFailed": 0, "assertions": 23199, "isolatedCheck": "passed" },
+  "sdk": { "validator": "Microsoft DocumentFormat.OpenXml", "version": "3.5.1", "profile": "Office2019", "source": "valid", "crossPresentationCopy": "valid", "sameSlideCopy": "valid" },
+  "libreoffice": { "version": "24.2.7.2", "transport": "UNO local named pipe", "sourceGroups": 1, "crossPresentationCopyGroups": 1, "sameSlideCopyGroups": 2, "childrenPerGroup": 6, "pagesPerDocument": 1, "pdfsProduced": 3, "pptxSaveReopen": "passed", "interactionRequests": 0, "maximumGroupGeometryDriftMm": 0.01 },
+  "custody": { "previous433AssetRecords": "unchanged", "previous85Fixtures": "unchanged", "historical478WorkflowRows": "unchanged", "contract20": "unchanged", "api18": "unchanged", "releasedFixtureGitlink": "28e492f50979aaec6ab8d8d001cd9c37790e7fc6", "tags": "unchanged" },
+  "limits": [
+    "No Microsoft PowerPoint open/no-repair/render/edit/save/reopen execution.",
+    "Source drawing has no text labels; no SmartArt semantic editing or text-preservation evidence.",
+    "LibreOffice imports persisted diagrams as drawing groups; six children and group geometry tested, no independent visual equivalence.",
+    "Existing synthetic SmartArt recipes remain schema-invalid; this source does not certify them.",
+    "Exploratory Apache POI smartart-rotated-text sample still refuses a dangling model reference.",
+    "LibreOffice PPTX exports have the previously observed classification-label content-type SDK-opening error."
+  ]
+}

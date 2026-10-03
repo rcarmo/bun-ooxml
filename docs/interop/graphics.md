@@ -1,6 +1,6 @@
 # PowerPoint graphics interoperability
 
-LibreOffice 24.2.7.2 can load, edit, save and reopen the four-slide graphics sample. Microsoft PowerPoint has not been tested. SmartArt interoperability is unverified and the synthetic SmartArt recipes contain schema-invalid graphs.
+LibreOffice 24.2.7.2 can load, edit, save and reopen the four-slide graphics sample. Microsoft PowerPoint has not been tested. A sealed PowerPoint-produced SmartArt input and its isolated copies now pass SDK validation and LibreOffice import/save/reopen. The older synthetic SmartArt recipes still contain schema-invalid graphs.
 
 ## Reproduce the LibreOffice server check
 
@@ -31,12 +31,31 @@ The oracle compares shape order/types, paragraph text, positions/extents, rotati
 
 Microsoft Open XML SDK 3.5.1 with its Office2019 profile validated 123 of 129 saved outputs captured from 352 passing graphics tests. All outputs in 17 of the 20 families were valid. The practical four-slide sample also validated without errors.
 
-The six failures comprise five synthetic SmartArt outputs and one picture-deletion dependency case. SmartArt inputs contain incomplete layout/style/drawing XML, an invalid extension namespace or unsupported/cycle-bearing relationships. Copying preserves those defects. The deletion case deliberately retains a forbidden presentation-to-image input relationship. No valid Office-produced SmartArt graph was tested.
+The six failures comprise five synthetic SmartArt outputs and one picture-deletion dependency case. SmartArt inputs contain incomplete layout/style/drawing XML, an invalid extension namespace or unsupported/cycle-bearing relationships. Copying preserves those defects. The deletion case deliberately retains a forbidden presentation-to-image input relationship. That capture predates the Office source checks below.
 
 LibreOffice produced PDFs and PPTX exports for one schema-valid output in each of the 18 non-SmartArt families. PDF page counts matched in all 18 and paragraph text survived all PPTX exports. PDF text markers matched in 17 samples; the diagram contract probe has tiny 1000-by-600-EMU nodes. The practical sample uses legible dimensions and renders the required diagram labels. Generic contract samples changed drawing-object counts on export, so those conversions alone do not establish editable-object preservation.
 
 LibreOffice's PPTX exports add `/docMetadata/LabelInfo.xml` with content type `application/xml`. The SDK expects `application/vnd.ms-office.classificationlabels+xml` and cannot open those exports. The Bun-authored inputs validate independently; UNO can reopen the exported files.
 
+## SmartArt Office source checks
+
+The shared candidate fixture `fixture-b97e4c6d2ee1dd4094f50f9043820610268dd452d7717c537f5456636adcc353` contains unchanged Apache POI `test-data/slideshow/SmartArt.pptx` bytes from commit `33f89110dd72c7b94710322ce7e795d0f464f68f`. Its metadata reports Microsoft Office PowerPoint. The shared repository retains its Apache-2.0 licence, notice, Git blob identity, source revision and member hashes.
+
+This input exposed unsupported Office encoding: `dataModelExt` resolves its drawing relationship on the slide, layout templates have numeric sample identities, instance transitions use `cxnId`, and persisted drawing identities can repeat zero. Inspection now follows the slide-owned drawing edge. Copying preserves template identities, remaps instance GUIDs/references, allocates unique drawing IDs and updates the copied metadata relationship atomically.
+
+Three new native cases cover inspection, cross-presentation copy and same-slide copy. All 27 SmartArt tests pass, including atomic refusal and rollback controls. The source and both copies pass Microsoft Open XML SDK 3.5.1 Office2019 validation. LibreOffice UNO loads, saves and reopens all three without an interaction request, preserving one group for source/cross-presentation copy and two groups for same-slide copy, with six children each. Group positions are unchanged; extents differ by at most 0.01 mm. The source drawing contains no text labels, so no SmartArt text-editing result is available.
+
+```sh
+make smartart-uno
+# Optional independent SDK gate after building the existing schema oracle:
+dotnet tests/oracles/schema/bin/Release/net10.0/SchemaCheck.dll \\
+  artifacts/smartart-uno/source.pptx \\
+  artifacts/smartart-uno/cross-presentation-copy.pptx \\
+  artifacts/smartart-uno/same-slide-copy.pptx
+```
+
+The candidate shared root must contain `ledgers/pptx-smartart-office-source.json`; the release pin is unchanged. Another exploratory POI rotated-text sample is still refused for a dangling model reference. These results cover one admitted source encoding, not arbitrary Office SmartArt.
+
 ## Microsoft PowerPoint gate
 
-Use a named Microsoft PowerPoint version to open the sample without repair, inspect and edit its graphics, save and reopen it, and check rendering, pictures/SVG fallback, crop, alpha, groups, connectors, freeform geometry and ordering. SmartArt needs a valid Office-produced input and a separate copy/open/save test. Neither SDK validation nor LibreOffice results establish Microsoft application interoperability.
+Use a named Microsoft PowerPoint version to open the sample without repair, inspect and edit its graphics, save and reopen it, and check rendering, pictures/SVG fallback, crop, alpha, groups, connectors, freeform geometry and ordering. SmartArt has a valid Office-produced input with SDK and LibreOffice evidence; it still needs an actual Microsoft PowerPoint copy/open/save test. Neither SDK validation nor LibreOffice results establish Microsoft application interoperability.

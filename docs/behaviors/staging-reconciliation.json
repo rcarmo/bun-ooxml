@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1229,
+  "nativeDeclarations": 1234,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 1002,
+  "withoutStagingCount": 1007,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -5679,6 +5679,31 @@
       "id": "bun:tests/unit/pptx-smartart-inspection.test.ts:`${c.scenarioId} [${c.caseId}]`",
       "path": "tests/unit/pptx-smartart-inspection.test.ts",
       "sourceSha256": "ea7761810f33dfd118eb581bf05bb4b424c06b6c11983437d1d598f5dc8f21c2"
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses ambiguous slide/data drawing owners before edits",
+      "path": "tests/unit/pptx-smartart-office-refusals.test.ts",
+      "sourceSha256": "dee4ba04a5770bc542f827bd6f7912632559dc314f8959152669dcc683396c70"
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses referenced repeated zeros and duplicate nonzero drawing IDs atomically",
+      "path": "tests/unit/pptx-smartart-office-refusals.test.ts",
+      "sourceSha256": "dee4ba04a5770bc542f827bd6f7912632559dc314f8959152669dcc683396c70"
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt metadata allocation rolls back a late output failure",
+      "path": "tests/unit/pptx-smartart-office-refusals.test.ts",
+      "sourceSha256": "dee4ba04a5770bc542f827bd6f7912632559dc314f8959152669dcc683396c70"
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-source.test.ts:@id-pptx-smartart-office-source-inspection [inspection]",
+      "path": "tests/unit/pptx-smartart-office-source.test.ts",
+      "sourceSha256": "818036bb56623944894913c0653232ad3cf95ccdb210900acfefcd5cccb60a80"
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-source.test.ts:`@id-pptx-smartart-office-source-copy [${sameSlide?'same-slide':'cross-presentation'}]`",
+      "path": "tests/unit/pptx-smartart-office-source.test.ts",
+      "sourceSha256": "818036bb56623944894913c0653232ad3cf95ccdb210900acfefcd5cccb60a80"
     },
     {
       "id": "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",

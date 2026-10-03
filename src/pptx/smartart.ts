@@ -29,7 +29,13 @@ export function inspectSmartArt(pkg:OpcPackage,part:string):SmartArtInfo[]{
   const parts=new Map<string,SmartArtPart>(),edges:SmartArtEdge[]=[],drawings=new Set<string>(),pending=roots.map(r=>r.partName).reverse();
   while(pending.length){const owner=pending.pop()!;if(parts.has(owner))continue;if(parts.size>=256)fail('SmartArt dependency part limit');parts.set(owner,asset(pkg,owner));const deps=pkg.relationships(owner);
    if(getContentType(pkg,owner)==='application/vnd.openxmlformats-officedocument.drawingml.diagramData+xml'){
-    const dataDoc=parseXml(pkg.text(owner)),metadata=elements(dataDoc,'dataModelExt',DSP);if(metadata.length>1)fail('Ambiguous drawing metadata');for(const m of metadata){const id=attribute(m,'relId'),matches=deps.filter(r=>r.id===id&&r.type===DRAW&&!r.external);if(!id||matches.length!==1)fail('Stale drawing metadata relationship');}
+    const dataDoc=parseXml(pkg.text(owner)),metadata=elements(dataDoc,'dataModelExt',DSP);if(metadata.length>1)fail('Ambiguous drawing metadata');for(const m of metadata){
+     const id=attribute(m,'relId'),local=deps.filter(r=>r.id===id&&r.type===DRAW&&!r.external),slide=relationships.filter(r=>r.id===id&&r.type===DRAW&&!r.external);
+     if(!id||local.length+slide.length!==1)fail('Stale or ambiguous drawing metadata relationship');
+     if(slide.length){const r=slide[0]!;if(!r.resolved)fail('Unresolved slide drawing relationship');root(pkg,r.resolved,'application/vnd.ms-office.drawingml.diagramDrawing+xml','drawing',DSP);drawings.add(r.resolved);
+      if(!edges.some(e=>e.owner===part&&e.relationshipId===r.id)){if(edges.length>=1024)fail('SmartArt dependency edge limit');edges.push({owner:part,relationshipId:r.id,type:r.type,target:r.target,external:false,partName:r.resolved});}pending.push(r.resolved);
+     }
+    }
    }
    for(const r of deps){if(edges.length>=1024)fail('SmartArt dependency edge limit');edges.push({owner,relationshipId:r.id,type:r.type,target:r.target,external:r.external,partName:r.resolved??null});if(r.external)continue;if(!r.resolved)fail('Unresolved SmartArt dependency');if(r.type===DRAW){root(pkg,r.resolved,'application/vnd.ms-office.drawingml.diagramDrawing+xml','drawing',DSP);drawings.add(r.resolved);}pending.push(r.resolved);}
   }

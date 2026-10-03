@@ -3,8 +3,8 @@
   "consumer": "bun",
   "discovery": "TypeScript AST of named/namespace bun:test imports; declarations are not runtime-expanded leaf cases",
   "executionCredit": false,
-  "count": 1229,
-  "files": 175,
+  "count": 1234,
+  "files": 177,
   "sources": [
     {
       "path": "tests/unit/admission-mappings.test.ts",
@@ -658,6 +658,18 @@
       "path": "tests/unit/pptx-smartart-inspection.test.ts",
       "sha256": "ea7761810f33dfd118eb581bf05bb4b424c06b6c11983437d1d598f5dc8f21c2",
       "declarations": 1,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-smartart-office-refusals.test.ts",
+      "sha256": "dee4ba04a5770bc542f827bd6f7912632559dc314f8959152669dcc683396c70",
+      "declarations": 3,
+      "issues": []
+    },
+    {
+      "path": "tests/unit/pptx-smartart-office-source.test.ts",
+      "sha256": "818036bb56623944894913c0653232ad3cf95ccdb210900acfefcd5cccb60a80",
+      "declarations": 2,
       "issues": []
     },
     {
@@ -1527,6 +1539,10 @@
       "sha256": "0bb63e31ef335f82c67ce21e5d0cf1faa11abe1edb404f5895e716937b61affb"
     },
     {
+      "path": "tests/helpers/smartart-office-inputs.ts",
+      "sha256": "1ace4a35002fa45459c46b95059fbcfbcba31f3ca38d7229f32de62110243064"
+    },
+    {
       "path": "tests/helpers/uniform-api18-history.ts",
       "sha256": "eb430c1d83f11a69f97787380c678bd62af0311d367fde713b80a36c4f87618d"
     },
@@ -1914,6 +1930,11 @@
     "bun:tests/unit/pptx-smartart-copy.test.ts:`${c.scenarioId} [${c.caseId}]`",
     "bun:tests/unit/pptx-smartart-copy.test.ts:native SmartArt copy late failure rolls back the entire cloned graph",
     "bun:tests/unit/pptx-smartart-inspection.test.ts:`${c.scenarioId} [${c.caseId}]`",
+    "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses ambiguous slide/data drawing owners before edits",
+    "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses referenced repeated zeros and duplicate nonzero drawing IDs atomically",
+    "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt metadata allocation rolls back a late output failure",
+    "bun:tests/unit/pptx-smartart-office-source.test.ts:@id-pptx-smartart-office-source-inspection [inspection]",
+    "bun:tests/unit/pptx-smartart-office-source.test.ts:`@id-pptx-smartart-office-source-copy [${sameSlide?'same-slide':'cross-presentation'}]`",
     "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
     "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
     "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
@@ -2442,6 +2463,11 @@
     "bun:tests/unit/pptx-smartart-copy.test.ts:`${c.scenarioId} [${c.caseId}]`",
     "bun:tests/unit/pptx-smartart-copy.test.ts:native SmartArt copy late failure rolls back the entire cloned graph",
     "bun:tests/unit/pptx-smartart-inspection.test.ts:`${c.scenarioId} [${c.caseId}]`",
+    "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses ambiguous slide/data drawing owners before edits",
+    "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses referenced repeated zeros and duplicate nonzero drawing IDs atomically",
+    "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt metadata allocation rolls back a late output failure",
+    "bun:tests/unit/pptx-smartart-office-source.test.ts:@id-pptx-smartart-office-source-inspection [inspection]",
+    "bun:tests/unit/pptx-smartart-office-source.test.ts:`@id-pptx-smartart-office-source-copy [${sameSlide?'same-slide':'cross-presentation'}]`",
     "bun:tests/unit/pptx-text-box.test.ts:slide text-box writing preserves UTF16 LE and BE declarations and BOM",
     "bun:tests/unit/pptx-text-box.test.ts:geometry and options reject accessors, inherited values and unknown fields without invoking getters",
     "bun:tests/unit/pptx-text-box.test.ts:shape-ID allocation is lexical, slide-local and counts nested existing shapes",
@@ -37229,6 +37255,319 @@
         "s.inspectSmartArt",
         "smartArtInput",
         "tmpdir"
+      ],
+      "reviewReasons": [
+        "body-loop",
+        "dynamic-title",
+        "registration-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses ambiguous slide/data drawing owners before edits",
+      "path": "tests/unit/pptx-smartart-office-refusals.test.ts",
+      "line": 7,
+      "title": "native Office SmartArt refuses ambiguous slide/data drawing owners before edits",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>s.inspectSmartArt()).toThrow(expect.objectContaining({code:'PPTX_SMARTART_UNSUPPORTED'}))",
+        "expect(()=>to.copySmartArtFrom(s,4)).toThrow(expect.objectContaining({code:'PPTX_SMARTART_UNSUPPORTED'}))",
+        "expect([...after.keys()].sort()).toEqual([...before.keys()].sort())",
+        "expect(after.get(n)).toEqual(b)",
+        "expect(destination.currentSlideVersion(to.partName)).toBe(version)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 10,
+          "expression": "for(const[n,b]of before)expect(after.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "dee4ba04a5770bc542f827bd6f7912632559dc314f8959152669dcc683396c70",
+      "body": "{\n const source=await Presentation.open(await officeSmartArtInput()),s=source.slides[0]!;\n source.package.set('ppt/diagrams/_rels/data1.xml.rels','<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\"><Relationship Id=\"rId6\" Type=\"http://schemas.microsoft.com/office/2007/relationships/diagramDrawing\" Target=\"drawing1.xml\"/></Relationships>');\n const destination=Presentation.create(),to=destination.addTextSlide('Refusal'),before=readZip(destination.package.toBytes()),version=destination.currentSlideVersion(to.partName);expect(()=>s.inspectSmartArt()).toThrow(expect.objectContaining({code:'PPTX_SMARTART_UNSUPPORTED'}));expect(()=>to.copySmartArtFrom(s,4)).toThrow(expect.objectContaining({code:'PPTX_SMARTART_UNSUPPORTED'}));const after=readZip(destination.package.toBytes());expect([...after.keys()].sort()).toEqual([...before.keys()].sort());for(const[n,b]of before)expect(after.get(n)).toEqual(b);expect(destination.currentSlideVersion(to.partName)).toBe(version);\n}",
+      "calls": [
+        ".sort",
+        "Presentation.create",
+        "Presentation.open",
+        "after.get",
+        "after.keys",
+        "before.keys",
+        "destination.addTextSlide",
+        "destination.currentSlideVersion",
+        "destination.package.toBytes",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "officeSmartArtInput",
+        "readZip",
+        "s.inspectSmartArt",
+        "source.package.set",
+        "to.copySmartArtFrom"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt refuses referenced repeated zeros and duplicate nonzero drawing IDs atomically",
+      "path": "tests/unit/pptx-smartart-office-refusals.test.ts",
+      "line": 12,
+      "title": "native Office SmartArt refuses referenced repeated zeros and duplicate nonzero drawing IDs atomically",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>to.copySmartArtFrom(source.slides[0]!,4)).toThrow(expect.objectContaining({code:'PPTX_SMARTART_UNSUPPORTED'}))",
+        "expect([...after.keys()].sort()).toEqual([...before.keys()].sort())",
+        "expect(after.get(n)).toEqual(b)",
+        "expect(target.currentSlideVersion(to.partName)).toBe(version)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 13,
+          "expression": "for(const variant of ['referenced-zero','duplicate-nonzero'])"
+        },
+        {
+          "line": 17,
+          "expression": "for(const[n,b]of before)expect(after.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "dee4ba04a5770bc542f827bd6f7912632559dc314f8959152669dcc683396c70",
+      "body": "{\n for(const variant of ['referenced-zero','duplicate-nonzero']){\n  const source=await Presentation.open(await officeSmartArtInput()),path='ppt/diagrams/drawing1.xml',xml=source.package.text(path),doc=parseXml(xml),target=Presentation.create(),to=target.addTextSlide('Refusal'),before=readZip(target.package.toBytes()),version=target.currentSlideVersion(to.partName);\n  if(variant==='referenced-zero'){const pr=elements(doc,'cNvSpPr',DSP)[0]!;source.package.set(path,applyEdits(xml,[{start:pr.start,end:pr.end,value:`<dsp:cNvSpPr><a:stCxn xmlns:a=\"${A}\" id=\"0\" idx=\"0\"/></dsp:cNvSpPr>`}]));}\n  else source.package.set(path,xml.replaceAll('id=\"0\"','id=\"5\"'));\n  expect(()=>to.copySmartArtFrom(source.slides[0]!,4)).toThrow(expect.objectContaining({code:'PPTX_SMARTART_UNSUPPORTED'}));const after=readZip(target.package.toBytes());expect([...after.keys()].sort()).toEqual([...before.keys()].sort());for(const[n,b]of before)expect(after.get(n)).toEqual(b);expect(target.currentSlideVersion(to.partName)).toBe(version);\n }\n}",
+      "calls": [
+        ".sort",
+        "Presentation.create",
+        "Presentation.open",
+        "after.get",
+        "after.keys",
+        "applyEdits",
+        "before.keys",
+        "elements",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "expect.objectContaining",
+        "officeSmartArtInput",
+        "parseXml",
+        "readZip",
+        "source.package.set",
+        "source.package.text",
+        "target.addTextSlide",
+        "target.currentSlideVersion",
+        "target.package.toBytes",
+        "to.copySmartArtFrom",
+        "xml.replaceAll"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-refusals.test.ts:native Office SmartArt metadata allocation rolls back a late output failure",
+      "path": "tests/unit/pptx-smartart-office-refusals.test.ts",
+      "line": 20,
+      "title": "native Office SmartArt metadata allocation rolls back a late output failure",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(()=>to.copySmartArtFrom(source.slides[0]!,4)).toThrow('Office metadata serialization failed')",
+        "expect([...after.keys()].sort()).toEqual([...before.keys()].sort())",
+        "expect(after.get(n)).toEqual(b)",
+        "expect(target.currentSlideVersion(to.partName)).toBe(version)",
+        "expect(to.copySmartArtFrom(source.slides[0]!,4).shapeId).toBe(3)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 23,
+          "expression": "for(const[n,b]of before)expect(after.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "dee4ba04a5770bc542f827bd6f7912632559dc314f8959152669dcc683396c70",
+      "body": "{\n const source=await Presentation.open(await officeSmartArtInput()),target=Presentation.create(),to=target.addTextSlide('Rollback'),before=readZip(target.package.toBytes()),version=target.currentSlideVersion(to.partName),serialize=target.package.toBytes;\n target.package.toBytes=()=>{if(target.package.text(to.partName).includes('relIds'))throw Error('Office metadata serialization failed');return serialize.call(target.package);};try{expect(()=>to.copySmartArtFrom(source.slides[0]!,4)).toThrow('Office metadata serialization failed');}finally{target.package.toBytes=serialize;}\n const after=readZip(target.package.toBytes());expect([...after.keys()].sort()).toEqual([...before.keys()].sort());for(const[n,b]of before)expect(after.get(n)).toEqual(b);expect(target.currentSlideVersion(to.partName)).toBe(version);expect(to.copySmartArtFrom(source.slides[0]!,4).shapeId).toBe(3);\n}",
+      "calls": [
+        ".sort",
+        "Error",
+        "Presentation.create",
+        "Presentation.open",
+        "after.get",
+        "after.keys",
+        "before.keys",
+        "expect",
+        "expect().toBe",
+        "expect().toEqual",
+        "expect().toThrow",
+        "officeSmartArtInput",
+        "readZip",
+        "serialize.call",
+        "target.addTextSlide",
+        "target.currentSlideVersion",
+        "target.package.text",
+        "target.package.text().includes",
+        "target.package.toBytes",
+        "to.copySmartArtFrom"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-source.test.ts:@id-pptx-smartart-office-source-inspection [inspection]",
+      "path": "tests/unit/pptx-smartart-office-source.test.ts",
+      "line": 7,
+      "title": "@id-pptx-smartart-office-source-inspection [inspection]",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(info).toHaveLength(1)",
+        "expect(info[0]!.shapeId).toBe(4)",
+        "expect(info[0]!.name).toBe('Diagram 3')",
+        "expect(info[0]!.roots).toHaveLength(4)",
+        "expect(info[0]!.parts.map(p=>p.partName)).toEqual(contract.expected.partNames)",
+        "expect(info[0]!.drawingParts).toEqual(['ppt/diagrams/drawing1.xml'])",
+        "expect(info[0]!.edges).toContainEqual({owner:s.partName,relationshipId:'rId6',type:DRAW,target:'../diagrams/drawing1.xml',external:false,partName:'ppt/diagrams/drawing1.xml'})",
+        "expect(p.package.diff()).toEqual({added:[],changed:[],removed:[]})",
+        "expect(roundtrip.slides[0]!.inspectSmartArt()).toEqual(info)",
+        "expect([...after.keys()].sort()).toEqual([...before.keys()].sort())",
+        "expect(after.get(n)).toEqual(b)"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 11,
+          "expression": "for(const[n,b]of before)expect(after.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [],
+      "sourceSha256": "818036bb56623944894913c0653232ad3cf95ccdb210900acfefcd5cccb60a80",
+      "body": "{\n const input=await officeSmartArtInput(),p=await Presentation.open(input),s=p.slides[0]!,info=s.inspectSmartArt();\n expect(info).toHaveLength(1);expect(info[0]!.shapeId).toBe(4);expect(info[0]!.name).toBe('Diagram 3');expect(info[0]!.roots).toHaveLength(4);expect(info[0]!.parts.map(p=>p.partName)).toEqual(contract.expected.partNames);\n expect(info[0]!.drawingParts).toEqual(['ppt/diagrams/drawing1.xml']);expect(info[0]!.edges).toContainEqual({owner:s.partName,relationshipId:'rId6',type:DRAW,target:'../diagrams/drawing1.xml',external:false,partName:'ppt/diagrams/drawing1.xml'});\n expect(p.package.diff()).toEqual({added:[],changed:[],removed:[]});const roundtrip=await Presentation.open(p.package.toBytes());expect(roundtrip.slides[0]!.inspectSmartArt()).toEqual(info);const before=readZip(input),after=readZip(roundtrip.package.toBytes());expect([...after.keys()].sort()).toEqual([...before.keys()].sort());for(const[n,b]of before)expect(after.get(n)).toEqual(b);\n}",
+      "calls": [
+        ".sort",
+        "Presentation.open",
+        "after.get",
+        "after.keys",
+        "before.keys",
+        "expect",
+        "expect().toBe",
+        "expect().toContainEqual",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "info.0.parts.map",
+        "officeSmartArtInput",
+        "p.package.diff",
+        "p.package.toBytes",
+        "readZip",
+        "roundtrip.package.toBytes",
+        "roundtrip.slides.0.inspectSmartArt",
+        "s.inspectSmartArt"
+      ],
+      "reviewReasons": [
+        "body-loop"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-office-source.test.ts:`@id-pptx-smartart-office-source-copy [${sameSlide?'same-slide':'cross-presentation'}]`",
+      "path": "tests/unit/pptx-smartart-office-source.test.ts",
+      "line": 13,
+      "title": "`@id-pptx-smartart-office-source-copy [${sameSlide?'same-slide':'cross-presentation'}]`",
+      "suites": [],
+      "kind": "test",
+      "lifecycle": "normal",
+      "assertions": [
+        "expect(Object.keys(receipt.partMap)).toHaveLength(5)",
+        "expect(Object.keys(receipt.modelIdMap)).toHaveLength(46)",
+        "expect(Object.keys(receipt.drawingIdMap)).toHaveLength(6)",
+        "expect(copied.parts).toHaveLength(5)",
+        "expect(drawing.owner).toBe(to.partName)",
+        "expect(drawing.partName).toBe(receipt.partMap['ppt/diagrams/drawing1.xml']!)",
+        "expect(attribute(metadata,'relId')).toBe(drawing.relationshipId)",
+        "expect(target.package.get(receipt.partMap['ppt/diagrams/layout1.xml']!)).toEqual(before.get('ppt/diagrams/layout1.xml'))",
+        "expect(target.package.get(receipt.partMap['ppt/diagrams/quickStyle1.xml']!)).toEqual(before.get('ppt/diagrams/quickStyle1.xml'))",
+        "expect(target.package.get(receipt.partMap['ppt/diagrams/colors1.xml']!)).toEqual(before.get('ppt/diagrams/colors1.xml'))",
+        "expect(ids).toEqual([1,2,3,4,5,6])",
+        "expect(new Set(definitions).size).toBe(46)",
+        "expect(definitions.every(id=>Object.values(receipt.modelIdMap).includes(id))).toBe(true)",
+        "expect(Object.values(receipt.modelIdMap)).toContain(v)",
+        "expect(oldSource.get(n)).toEqual(b)",
+        "expect(reopened.slides.find(s=>s.partName===to.partName)!.inspectSmartArt()).toEqual(to.inspectSmartArt())"
+      ],
+      "deferredAssertions": [],
+      "loops": [
+        {
+          "line": 21,
+          "expression": "for(const part of [receipt.partMap['ppt/diagrams/data1.xml']!,receipt.partMap['ppt/diagrams/drawing1.xml']!])for(const n of parseXml(target.package.text(part)).elements)for(const[k,v]of Object.entries(n.attributes))if(['modelId','srcId','destId','cxnId','parTransId','sibTransId','presAssocID'].includes(k)&&v)expect(Object.values(receipt.modelIdMap)).toContain(v);"
+        },
+        {
+          "line": 21,
+          "expression": "for(const n of parseXml(target.package.text(part)).elements)for(const[k,v]of Object.entries(n.attributes))if(['modelId','srcId','destId','cxnId','parTransId','sibTransId','presAssocID'].includes(k)&&v)expect(Object.values(receipt.modelIdMap)).toContain(v);"
+        },
+        {
+          "line": 21,
+          "expression": "for(const[k,v]of Object.entries(n.attributes))if(['modelId','srcId','destId','cxnId','parTransId','sibTransId','presAssocID'].includes(k)&&v)expect(Object.values(receipt.modelIdMap)).toContain(v);"
+        },
+        {
+          "line": 22,
+          "expression": "for(const[n,b]of before)if(!sameSlide||![from.partName,'ppt/slides/_rels/slide1.xml.rels','[Content_Types].xml'].includes(n))expect(oldSource.get(n)).toEqual(b);"
+        }
+      ],
+      "registrationLoops": [
+        {
+          "line": 13,
+          "expression": "for(const sameSlide of [false,true])test(`@id-pptx-smartart-office-source-copy [$"
+        }
+      ],
+      "sourceSha256": "818036bb56623944894913c0653232ad3cf95ccdb210900acfefcd5cccb60a80",
+      "body": "{\n const input=await officeSmartArtInput(),source=await Presentation.open(input),from=source.slides[0]!,target=sameSlide?source:Presentation.create(),to=sameSlide?from:target.addTextSlide('Office SmartArt copy'),before=readZip(source.package.toBytes());\n const receipt=to.copySmartArtFrom(from,4);expect(Object.keys(receipt.partMap)).toHaveLength(5);expect(Object.keys(receipt.modelIdMap)).toHaveLength(46);expect(Object.keys(receipt.drawingIdMap)).toHaveLength(6);\n const copied=to.inspectSmartArt().find(r=>r.shapeId===receipt.shapeId)!;expect(copied.parts).toHaveLength(5);const drawing=copied.edges.find(e=>e.type===DRAW)!;expect(drawing.owner).toBe(to.partName);expect(drawing.partName).toBe(receipt.partMap['ppt/diagrams/drawing1.xml']!);\n const data=target.package.text(receipt.partMap['ppt/diagrams/data1.xml']!),metadata=elements(parseXml(data),'dataModelExt',DSP)[0]!;expect(attribute(metadata,'relId')).toBe(drawing.relationshipId);\n expect(target.package.get(receipt.partMap['ppt/diagrams/layout1.xml']!)).toEqual(before.get('ppt/diagrams/layout1.xml'));expect(target.package.get(receipt.partMap['ppt/diagrams/quickStyle1.xml']!)).toEqual(before.get('ppt/diagrams/quickStyle1.xml'));expect(target.package.get(receipt.partMap['ppt/diagrams/colors1.xml']!)).toEqual(before.get('ppt/diagrams/colors1.xml'));\n const ids=elements(parseXml(target.package.text(receipt.partMap['ppt/diagrams/drawing1.xml']!)),'cNvPr',DSP).map(n=>Number(attribute(n,'id')));expect(ids).toEqual([1,2,3,4,5,6]);\n const dataDoc=parseXml(data),definitions=[...elements(dataDoc,'pt',D),...elements(dataDoc,'cxn',D)].map(n=>attribute(n,'modelId')!);expect(new Set(definitions).size).toBe(46);expect(definitions.every(id=>Object.values(receipt.modelIdMap).includes(id))).toBe(true);\n for(const part of [receipt.partMap['ppt/diagrams/data1.xml']!,receipt.partMap['ppt/diagrams/drawing1.xml']!])for(const n of parseXml(target.package.text(part)).elements)for(const[k,v]of Object.entries(n.attributes))if(['modelId','srcId','destId','cxnId','parTransId','sibTransId','presAssocID'].includes(k)&&v)expect(Object.values(receipt.modelIdMap)).toContain(v);\n const oldSource=readZip(source.package.toBytes());for(const[n,b]of before)if(!sameSlide||![from.partName,'ppt/slides/_rels/slide1.xml.rels','[Content_Types].xml'].includes(n))expect(oldSource.get(n)).toEqual(b);\n const reopened=await Presentation.open(target.package.toBytes());expect(reopened.slides.find(s=>s.partName===to.partName)!.inspectSmartArt()).toEqual(to.inspectSmartArt());\n}",
+      "calls": [
+        ".includes",
+        ".map",
+        "Number",
+        "Object.entries",
+        "Object.keys",
+        "Object.values",
+        "Object.values().includes",
+        "Presentation.create",
+        "Presentation.open",
+        "attribute",
+        "before.get",
+        "copied.edges.find",
+        "definitions.every",
+        "elements",
+        "elements().map",
+        "expect",
+        "expect().toBe",
+        "expect().toContain",
+        "expect().toEqual",
+        "expect().toHaveLength",
+        "officeSmartArtInput",
+        "oldSource.get",
+        "parseXml",
+        "readZip",
+        "reopened.slides.find",
+        "reopened.slides.find().inspectSmartArt",
+        "source.package.toBytes",
+        "target.addTextSlide",
+        "target.package.get",
+        "target.package.text",
+        "target.package.toBytes",
+        "to.copySmartArtFrom",
+        "to.inspectSmartArt",
+        "to.inspectSmartArt().find"
       ],
       "reviewReasons": [
         "body-loop",
