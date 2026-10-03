@@ -1,0 +1,23 @@
+import {test,expect} from 'bun:test';
+import {Presentation} from '../../src/pptx/index.ts';
+import {diagramCases,diagramInput,diagramContract} from '../helpers/diagram-inputs.ts';
+import {archive,xml,descendants,P,A} from '../helpers/contract20-oracle.ts';
+import {mkdtemp,rm} from 'node:fs/promises';import {join} from 'node:path';import {tmpdir} from 'node:os';
+const decode=new TextDecoder();
+for(const c of diagramCases)test(`${c.scenarioId} [${c.caseId}]`,async()=>{
+ const input=await diagramInput(c),p=await Presentation.open(input.bytes),s=p.slides[0]!,before=archive(input.bytes),version=p.currentSlideVersion(s.partName);
+ if(c.errorCode){expect(()=>s.addDiagram(input.nodes,input.edges,input.options)).toThrow(expect.objectContaining({code:c.errorCode}));expect(p.package.diff()).toEqual({added:[],changed:[],removed:[]});expect(p.currentSlideVersion(s.partName)).toBe(version);return;}
+ const receipt=s.addDiagram(input.nodes,input.edges,input.options);expect(receipt).toEqual(c.expected);expect(p.currentSlideVersion(s.partName)).toBe(version+1);
+ const parts=archive(p.package.toBytes());expect([...parts.keys()].sort()).toEqual([...before.keys()].sort());for(const[n,b]of before)if(n!==s.partName)expect(parts.get(n)).toEqual(b);const source=decode.decode(parts.get(s.partName)),tree=descendants(xml(source),'spTree',P)[0]!,ids=[...receipt.nodes,...receipt.edges].map(r=>r.shapeId),added=tree.children.filter(n=>ids.includes(Number(descendants(n,'cNvPr',P)[0]?.attrs.id)));
+ expect(added.map(n=>Number(descendants(n,'cNvPr',P)[0]?.attrs.id))).toEqual(ids);let restored=source;for(const n of [...added].sort((a,b)=>b.start-a.start))restored=restored.slice(0,n.start)+restored.slice(n.end);expect(restored).toBe(decode.decode(before.get(s.partName)));
+ for(let i=0;i<receipt.nodes.length;i++){const node=receipt.nodes[i]!,shape=added.find(n=>Number(descendants(n,'cNvPr',P)[0]?.attrs.id)===node.shapeId)!,g=node.geometry;expect(shape.local).toBe('sp');expect(descendants(shape,'off',A)[0]!.attrs).toEqual({x:String(g.x),y:String(g.y)});expect(descendants(shape,'ext',A)[0]!.attrs).toEqual({cx:String(g.width),cy:String(g.height)});expect(descendants(shape,'t',A).map(n=>n.text).join('\n')).toBe(input.nodes[i].text);expect(descendants(shape,'srgbClr',A).map(n=>n.attrs.val)).toEqual([diagramContract.style.fill,diagramContract.style.lineColor]);}
+ for(const edge of receipt.edges){const shape=added.find(n=>Number(descendants(n,'cNvPr',P)[0]?.attrs.id)===edge.shapeId)!;expect(shape.local).toBe('cxnSp');expect(descendants(shape,'stCxn',A)[0]!.attrs).toEqual({id:String(edge.start.shapeId),idx:String(edge.start.site)});expect(descendants(shape,'endCxn',A)[0]!.attrs).toEqual({id:String(edge.end.shapeId),idx:String(edge.end.site)});}
+ const dir=await mkdtemp(join(tmpdir(),'diagrams-'));try{const path=join(dir,'saved.pptx');await p.save(path);const bytes=await Bun.file(path).bytes(),saved=archive(bytes);for(const[n,b]of parts)expect(saved.get(n)).toEqual(b);const reopened=await Presentation.open(bytes),slide=reopened.slides[0]!;for(let i=0;i<receipt.nodes.length;i++)expect(descendants(descendants(xml(reopened.package.text(slide.partName)),'sp',P).find(n=>Number(descendants(n,'cNvPr',P)[0]?.attrs.id)===receipt.nodes[i]!.shapeId)!,'t',A).map(n=>n.text).join('\n')).toBe(input.nodes[i].text);}finally{await rm(dir,{recursive:true,force:true});}
+ const first=receipt.nodes[0]!;expect(s.setShapeText(first.shapeId,'Editable label')).toEqual({changed:1});expect(descendants(descendants(xml(p.package.text(s.partName)),'sp',P).find(n=>Number(descendants(n,'cNvPr',P)[0]?.attrs.id)===first.shapeId)!,'t',A).map(n=>n.text).join('\n')).toBe('Editable label');expect(s.patchShapeStyle(first.shapeId,{fill:'FFFFFF'})).toEqual({changed:1});
+});
+test('native diagram accessor refusal and late rollback preserve the entire graph version',async()=>{
+ const input=await diagramInput(diagramCases[0]),p=await Presentation.open(input.bytes),s=p.slides[0]!,version=p.currentSlideVersion(s.partName);let reads=0;
+ expect(()=>s.addDiagram([{key:'x',get text(){reads++;return 'X';}}],[],input.options)).toThrow(expect.objectContaining({code:'PPTX_DIAGRAM_UNSUPPORTED'}));expect(reads).toBe(0);
+ const serialize=p.package.toBytes;p.package.toBytes=()=>{throw Error('diagram serialization failed');};try{expect(()=>s.addDiagram(input.nodes,input.edges,input.options)).toThrow('diagram serialization failed');}finally{p.package.toBytes=serialize;}
+ expect(p.package.diff()).toEqual({added:[],changed:[],removed:[]});expect(p.currentSlideVersion(s.partName)).toBe(version);expect(s.addDiagram(input.nodes,input.edges,input.options)).toEqual(diagramCases[0].expected);
+});

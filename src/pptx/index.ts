@@ -1,4 +1,43 @@
 import { posix } from "node:path";
+import {getOutlineStyleXml,patchOutlineStyleXml,type OutlineStyle,type OutlinePatch} from './outlines.ts';
+export type {OutlineCap,OutlineCompound,OutlineJoin,OutlineEnd,OutlineStyle,OutlinePatch} from './outlines.ts';
+import {getShapeOpacityXml,setShapeOpacityXml,getPictureTransparency,setPictureTransparencyXml} from './opacity.ts';
+import {getLinearGradientXml,setLinearGradientXml,type LinearGradient} from './gradients.ts';
+export type {GradientColorTransform,GradientColor,GradientStop,LinearGradient} from './gradients.ts';
+import {getShapeOrderXml,reorderShapesXml} from './z-order.ts';
+import {addFreeformXml,type FreeformPath,type FreeformOptions,type FreeformReceipt} from './freeform.ts';
+export type {FreeformCommand,FreeformPath,FreeformOptions,FreeformReceipt} from './freeform.ts';
+import {addAutoShapeXml,type AutoShapePreset,type AutoShapeOptions,type AutoShapeReceipt} from './autoshapes.ts';
+export type {AutoShapePreset,AutoShapeOptions,AutoShapeReceipt} from './autoshapes.ts';
+import {inspectSmartArt,type SmartArtInfo} from './smartart.ts';
+import {copySmartArt,type SmartArtCopyReceipt} from './smartart-copy.ts';
+export type {SmartArtCopyReceipt} from './smartart-copy.ts';
+export type {SmartArtInfo,SmartArtRoot,SmartArtPart,SmartArtEdge,SmartArtLimits} from './smartart.ts';
+import {addDiagramXml,type DiagramNode,type DiagramEdge,type DiagramOptions,type DiagramReceipt} from './diagrams.ts';
+export type {DiagramNode,DiagramEdge,DiagramOptions,DiagramNodeReceipt,DiagramEdgeReceipt,DiagramReceipt} from './diagrams.ts';
+import {addConnectorXml,type ConnectorEndpoint,type ConnectorOptions,type ConnectorReceipt} from './connectors.ts';
+export type {ConnectorEndpoint,ConnectorOptions,ConnectorPoint,ConnectorGeometry,ConnectorReceipt} from './connectors.ts';
+import {groupShapesXml,type ShapeGroupOptions,type ShapeGroupReceipt} from './shape-group.ts';
+import {getGroupTransformXml,patchGroupTransformXml,type GroupTransform,type GroupTransformPatch} from './group-transform.ts';
+export {mapGroupPoint,unmapGroupPoint,mapGroupPointChain,unmapGroupPointChain} from './group-transform.ts';
+export type {GroupTransform,GroupTransformPatch,GroupPoint} from './group-transform.ts';
+export type {ShapeGroupOptions,ShapeGroupReceipt} from './shape-group.ts';
+import {inspectPictures,type PictureInfo,type PictureCrop} from './pictures.ts';
+import {getPictureCrop,setPictureCropXml} from './picture-crop.ts';
+import {patchPictureTransformXml,type PictureTransformPatch} from './picture-transform.ts';
+export type {PictureTransformPatch} from './picture-transform.ts';
+import {fittedPictureRequest,type FittedPictureOptions,type FittedPictureReceipt} from './picture-placement.ts';
+export {calculatePicturePlacement} from './picture-placement.ts';
+export type {PictureFit,PictureIntrinsicSize,PicturePlacement,FittedPictureOptions,FittedPictureReceipt} from './picture-placement.ts';
+import {addPicture,pictureRequest,type PictureGeometry,type PictureOptions,type PictureReceipt} from './picture-add.ts';
+import {addSvgPicture,svgPictureRequest,type SvgPictureReceipt} from './picture-svg.ts';
+import {deletePicture,type PictureDeleteOptions,type PictureDeleteReceipt} from './picture-delete.ts';
+export type {PictureDeleteOptions,PictureDeleteReceipt} from './picture-delete.ts';
+export type {SvgPictureReceipt} from './picture-svg.ts';
+import {replacePicture,replacementRequest,type PictureReplacementOptions,type PictureReplacementReceipt} from './picture-replace.ts';
+export type {PictureReplacementOptions,PictureReplacementReceipt} from './picture-replace.ts';
+export type {PictureGeometry,PictureOptions,PictureReceipt} from './picture-add.ts';
+export type {PictureInfo,PictureTransform,PictureGroupTransform,PictureGroup,PictureEmbeddedAsset,PictureLinkedAsset,PictureCrop} from './pictures.ts';
 
 import { OoxmlError } from "../errors.ts";
 import {inspectNotes,replaceNotes,replaceNotesUtf8,type NotesAnchor} from './notes.ts';
@@ -305,6 +344,36 @@ export class Slide {
       .map((table, tableIndex) => new Table(this, tableIndex, version, table.shapeId));
   }
 
+  /** Clone one direct admitted SmartArt graph with isolated parts and identity remapping. */
+  copySmartArtFrom(source:Slide,shapeId:number):SmartArtCopyReceipt {
+    this.assertNotesSlide();source.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses SmartArt copy');
+    const receipt=copySmartArt(source.presentation.package,source.partName,shapeId,pkg,this.partName);this.presentation.bumpSlideVersion(this.partName);return receipt;
+  }
+
+  /** SmartArt dependency inventory only; no layout evaluation or editing capability. */
+  inspectSmartArt():SmartArtInfo[] {this.assertNotesSlide();return inspectSmartArt(this.presentation.package,this.partName);}
+
+  /** Detached picture identities, assets and direct/local placement; never fetches links. */
+  inspectPictures():PictureInfo[] {this.assertNotesSlide();return inspectPictures(this.presentation.package,this.partName);}
+
+  /** Bounded direct source crop, detached from package state. */
+  getPictureCrop(shapeId:number):PictureCrop {this.assertNotesSlide();return getPictureCrop(this.presentation.package,this.partName,shapeId);}
+  setPictureCrop(shapeId:number,crop:PictureCrop):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses crop editing');
+    const before=pkg.text(this.partName),next=setPictureCropXml(pkg,this.partName,shapeId,crop);if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+
+  /** Patch rotation/flips on existing direct picture placement only. */
+  patchPictureTransform(shapeId:number,patch:PictureTransformPatch):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses picture orientation');
+    const before=pkg.text(this.partName),next=patchPictureTransformXml(pkg,this.partName,shapeId,patch);if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+
   /** Detached direct text-shape values; IDs are used instead of fuzzy shape names. */
   inspectTextShapes():TextShape[] {this.assertNotesSlide();return inspectTextShapes(this.presentation.package.text(this.partName));}
 
@@ -328,6 +397,133 @@ export class Slide {
   patchShapeGeometry(shapeId:number,patch:ShapeGeometryPatch):{changed:number} {return this.editShapeText(xml=>patchShapeGeometry(xml,shapeId,patch));}
   patchTextRun(shapeId:number,paragraph:number,run:number,patch:DirectTextRunPatch):{changed:number} {return this.editShapeText(xml=>patchTextRun(xml,shapeId,paragraph,run,patch));}
   patchParagraph(shapeId:number,paragraph:number,patch:DirectParagraphPatch):{changed:number} {return this.editShapeText(xml=>patchParagraph(xml,shapeId,paragraph,patch));}
+
+  /** Replace one embedded-only picture using a new isolated media dependency. */
+  replacePicture(shapeId:number,bytes:Uint8Array,options:PictureReplacementOptions):PictureReplacementReceipt {
+    const request=replacementRequest(shapeId,bytes,options);this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses picture replacement');
+    const receipt=replacePicture(pkg,this.partName,request);this.presentation.bumpSlideVersion(this.partName);return receipt;
+  }
+
+  /** Append using an explicit caller aspect ratio and centred fit policy. */
+  addFittedPicture(bytes:Uint8Array,box:PictureGeometry,options:FittedPictureOptions):FittedPictureReceipt {
+    const {request,placement}=fittedPictureRequest(bytes,box,options);this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses picture authoring');
+    const receipt=addPicture(pkg,this.partName,request,placement.crop);this.presentation.bumpSlideVersion(this.partName);return {...receipt,geometry:{...placement.geometry},crop:{...placement.crop}};
+  }
+
+  /** Direct line decorations only; colours, width, dashes and attachments stay literal. */
+  getOutlineStyle(shapeId:number):OutlineStyle {this.assertNotesSlide();return getOutlineStyleXml(this.presentation.package.text(this.partName),shapeId);}
+  patchOutlineStyle(shapeId:number,patch:OutlinePatch):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses outline editing');
+    const before=pkg.text(this.partName),next=patchOutlineStyleXml(before,shapeId,patch);if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+
+  getShapeOpacity(shapeId:number):number {this.assertNotesSlide();return getShapeOpacityXml(this.presentation.package.text(this.partName),shapeId);}
+  getPictureTransparency(shapeId:number):number {this.assertNotesSlide();return getPictureTransparency(this.presentation.package,this.partName,shapeId);}
+  private editOpacity(operation:()=>string):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses opacity editing');
+    const before=pkg.text(this.partName),next=operation();if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+  setShapeOpacity(shapeId:number,opacity:number):{changed:number} {return this.editOpacity(()=>setShapeOpacityXml(this.presentation.package.text(this.partName),shapeId,opacity));}
+  setPictureTransparency(shapeId:number,transparency:number):{changed:number} {return this.editOpacity(()=>setPictureTransparencyXml(this.presentation.package,this.partName,shapeId,transparency));}
+
+  /** Exact direct linear fill values; scheme colours stay references. */
+  getLinearGradient(shapeId:number):LinearGradient|null {this.assertNotesSlide();return getLinearGradientXml(this.presentation.package.text(this.partName),shapeId);}
+  setLinearGradient(shapeId:number,gradient:LinearGradient):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses gradient editing');
+    const before=pkg.text(this.partName),next=setLinearGradientXml(before,shapeId,gradient);if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+
+  /** Direct graphical IDs in back-to-front sibling order. */
+  getShapeOrder(groupId?:number):number[] {this.assertNotesSlide();return getShapeOrderXml(this.presentation.package.text(this.partName),groupId);}
+  reorderShapes(order:number[],groupId?:number):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses graphical reordering');
+    const before=pkg.text(this.partName),next=reorderShapesXml(before,order,groupId);if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+
+  /** Append explicit editable move/line/close custom geometry. */
+  addFreeform(geometry:TextBoxGeometry,path:FreeformPath,options:FreeformOptions={}):FreeformReceipt {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses freeform authoring');
+    const result=addFreeformXml(pkg.text(this.partName),geometry,path,options);
+    pkg.transaction(()=>{pkg.set(this.partName,result.xml);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);
+    return {shapeId:result.shapeId,partName:this.partName,geometry:{...result.geometry},path:{...result.path,commands:result.path.commands.map(c=>({...c}))}};
+  }
+
+  /** Append one bounded editable preset with explicit adjustment guides. */
+  addAutoShape(preset:AutoShapePreset,geometry:TextBoxGeometry,options:AutoShapeOptions={}):AutoShapeReceipt {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses AutoShape authoring');
+    const result=addAutoShapeXml(pkg.text(this.partName),preset,geometry,options);
+    pkg.transaction(()=>{pkg.set(this.partName,result.xml);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);
+    return {shapeId:result.shapeId,partName:this.partName,preset:result.preset,geometry:{...result.geometry},adjustments:{...result.adjustments}};
+  }
+
+  /** Bounded editable row/column graph; one atomic transaction and version bump. */
+  addDiagram(nodes:DiagramNode[],edges:DiagramEdge[],options:DiagramOptions):DiagramReceipt {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses diagram authoring');
+    const result=addDiagramXml(pkg.text(this.partName),nodes,edges,options);
+    pkg.transaction(()=>{pkg.set(this.partName,result.xml);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);
+    return {partName:this.partName,nodes:result.nodes.map(n=>({...n,geometry:{...n.geometry}})),edges:result.edges.map(e=>({...e,start:{...e.start},end:{...e.end}}))};
+  }
+
+  /** Straight connector between exact direct rectangle IDs and sites. */
+  addConnector(start:ConnectorEndpoint,end:ConnectorEndpoint,options:ConnectorOptions={}):ConnectorReceipt {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses connector authoring');
+    const result=addConnectorXml(pkg.text(this.partName),start,end,options);
+    pkg.transaction(()=>{pkg.set(this.partName,result.xml);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);
+    return {shapeId:result.shapeId,partName:this.partName,start:{...result.start},end:{...result.end},geometry:{...result.geometry}};
+  }
+
+  /** Direct group coordinate frame; no inherited or guessed transform. */
+  getGroupTransform(shapeId:number):GroupTransform {this.assertNotesSlide();return getGroupTransformXml(this.presentation.package.text(this.partName),shapeId);}
+  patchGroupTransform(shapeId:number,patch:GroupTransformPatch):{changed:number} {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses group transforms');
+    const before=pkg.text(this.partName),next=patchGroupTransformXml(before,shapeId,patch);if(next===before)return {changed:0};
+    pkg.transaction(()=>{pkg.set(this.partName,next);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);return {changed:1};
+  }
+
+  /** Group a contiguous direct shape/picture selection without changing child coordinates. */
+  groupShapes(shapeIds:number[],geometry:PictureGeometry,options:ShapeGroupOptions={}):ShapeGroupReceipt {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses shape grouping');
+    const result=groupShapesXml(pkg.text(this.partName),shapeIds,geometry,options);
+    pkg.transaction(()=>{pkg.set(this.partName,result.xml);pkg.toBytes();});this.presentation.bumpSlideVersion(this.partName);
+    return {shapeId:result.shapeId,partName:this.partName,childIds:[...result.childIds],geometry:{...result.geometry}};
+  }
+
+  /** Remove one picture; optional collection requires proven package-local absence. */
+  deletePicture(shapeId:number,options:PictureDeleteOptions={}):PictureDeleteReceipt {
+    this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses picture deletion');
+    const receipt=deletePicture(pkg,this.partName,shapeId,options);this.presentation.bumpSlideVersion(this.partName);return receipt;
+  }
+
+  /** Append one passive SVG with caller-supplied PNG/JPEG fallback atomically. */
+  addSvgPicture(svg:Uint8Array,fallback:Uint8Array,geometry:PictureGeometry,options:PictureOptions):SvgPictureReceipt {
+    const request=svgPictureRequest(svg,fallback,geometry,options);this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses SVG authoring');
+    const receipt=addSvgPicture(pkg,this.partName,request);this.presentation.bumpSlideVersion(this.partName);return receipt;
+  }
+
+  /** Append one opaque PNG/JPEG payload at an explicit slide-space EMU rectangle. */
+  addPicture(bytes:Uint8Array,geometry:PictureGeometry,options:PictureOptions):PictureReceipt {
+    const request=pictureRequest(bytes,geometry,options);this.assertNotesSlide();const pkg=this.presentation.package;
+    if(elements(parseXml(pkg.text(pkg.mainPart())),'modifyVerifier',PRESENTATION_NS).length)throw new OoxmlError('PPTX_PROTECTED','Presentation modification protection refuses picture authoring');
+    const receipt=addPicture(pkg,this.partName,request);this.presentation.bumpSlideVersion(this.partName);return receipt;
+  }
 
   /** Append a slide-space text box. Newline sequences become separate paragraphs. */
   addTextBox(text: string, geometry: TextBoxGeometry, options: TextBoxOptions = {}): TextBoxReceipt {

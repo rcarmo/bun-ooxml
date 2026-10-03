@@ -3,11 +3,11 @@
   "consumer": "bun",
   "scope": "Historical staging identity comparison only, separate from canonical mappings and runtime outcomes",
   "executionCredit": false,
-  "nativeDeclarations": 1177,
+  "nativeDeclarations": 1229,
   "stagingRows": 227,
   "identitiesPresent": 227,
   "identitiesMissing": 0,
-  "withoutStagingCount": 950,
+  "withoutStagingCount": 1002,
   "stagingSources": [
     {
       "path": "docs/behaviors/staging-docx.json",
@@ -5096,6 +5096,26 @@
       "sourceSha256": "3026ce48ddd3db1a78dcb9f9db874cafec1f88a33d80628aa82c8ae7ff04286b"
     },
     {
+      "id": "bun:tests/unit/pptx-autoshapes.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-autoshapes.test.ts",
+      "sourceSha256": "3854a600c93f994522fc21a41ff9606f450126e87bd426c87f252c19c2d38d9a"
+    },
+    {
+      "id": "bun:tests/unit/pptx-autoshapes.test.ts:native AutoShape accessor refusal and late rollback preserve version",
+      "path": "tests/unit/pptx-autoshapes.test.ts",
+      "sourceSha256": "3854a600c93f994522fc21a41ff9606f450126e87bd426c87f252c19c2d38d9a"
+    },
+    {
+      "id": "bun:tests/unit/pptx-connectors.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-connectors.test.ts",
+      "sourceSha256": "5145d83fc0643b0776f890d0395efd80beea03eafd94063a47d90cbfee627e2c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-connectors.test.ts:native attached connector accessor refusal and late rollback preserve version",
+      "path": "tests/unit/pptx-connectors.test.ts",
+      "sourceSha256": "5145d83fc0643b0776f890d0395efd80beea03eafd94063a47d90cbfee627e2c"
+    },
+    {
       "id": "bun:tests/unit/pptx-create.test.ts:authored presentation view properties have required pane sizes, scales and origins",
       "path": "tests/unit/pptx-create.test.ts",
       "sourceSha256": "e03d0208004841bc49fa901bcc734680251609e7c3c427f65403629e648d66b0"
@@ -5126,9 +5146,59 @@
       "sourceSha256": "4a04b22de68287f8330b9506d2199b7fb29f8c682e4a5b07f0035d67d0936d01"
     },
     {
+      "id": "bun:tests/unit/pptx-diagrams.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-diagrams.test.ts",
+      "sourceSha256": "7b39800b4d37092dc874776627f9dc8b62cc4d21412bd2eafba5884f87fccd93"
+    },
+    {
+      "id": "bun:tests/unit/pptx-diagrams.test.ts:native diagram accessor refusal and late rollback preserve the entire graph version",
+      "path": "tests/unit/pptx-diagrams.test.ts",
+      "sourceSha256": "7b39800b4d37092dc874776627f9dc8b62cc4d21412bd2eafba5884f87fccd93"
+    },
+    {
       "id": "bun:tests/unit/pptx-formatting-bindings.test.ts:directformatting candidate seals67features20caseIDs and no execution credit",
       "path": "tests/unit/pptx-formatting-bindings.test.ts",
       "sourceSha256": "a7cf08b1399d4c15caa253ae828627665060a41c44b8d156f94a553877ae3848"
+    },
+    {
+      "id": "bun:tests/unit/pptx-freeform.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-freeform.test.ts",
+      "sourceSha256": "8be6b4da91179a80df4cf2b6f1f7e7abd78ffbce099c5d1b0cc5b8d20f9a3f05"
+    },
+    {
+      "id": "bun:tests/unit/pptx-freeform.test.ts:native freeform accessor refusal and late rollback preserve version",
+      "path": "tests/unit/pptx-freeform.test.ts",
+      "sourceSha256": "8be6b4da91179a80df4cf2b6f1f7e7abd78ffbce099c5d1b0cc5b8d20f9a3f05"
+    },
+    {
+      "id": "bun:tests/unit/pptx-gradients.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-gradients.test.ts",
+      "sourceSha256": "e0bbc79b1fb3c52624351a0fd9ac5eb913676d0ebe5abf7b7ff0132d3a2646dc"
+    },
+    {
+      "id": "bun:tests/unit/pptx-gradients.test.ts:native gradient accessor refusal and late rollback preserve version and colour references",
+      "path": "tests/unit/pptx-gradients.test.ts",
+      "sourceSha256": "e0bbc79b1fb3c52624351a0fd9ac5eb913676d0ebe5abf7b7ff0132d3a2646dc"
+    },
+    {
+      "id": "bun:tests/unit/pptx-group-transform.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-group-transform.test.ts",
+      "sourceSha256": "871b751b4dbf287c2704133f481f6d1c8d714894ca3b82e3e14382f49f56797d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-group-transform.test.ts:native group transform late rollback and accessor refusal retain version",
+      "path": "tests/unit/pptx-group-transform.test.ts",
+      "sourceSha256": "871b751b4dbf287c2704133f481f6d1c8d714894ca3b82e3e14382f49f56797d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-group-transform.test.ts:native group mapping error distribution agrees with independent polar reference",
+      "path": "tests/unit/pptx-group-transform.test.ts",
+      "sourceSha256": "871b751b4dbf287c2704133f481f6d1c8d714894ca3b82e3e14382f49f56797d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-group-transform.test.ts:native group point mapping refuses singular frames, unbounded results and executable inputs",
+      "path": "tests/unit/pptx-group-transform.test.ts",
+      "sourceSha256": "871b751b4dbf287c2704133f481f6d1c8d714894ca3b82e3e14382f49f56797d"
     },
     {
       "id": "bun:tests/unit/pptx-manipulation-bindings.test.ts:PPTX candidate retains complete feature seals and exact source/localidentity migrations without credit",
@@ -5311,6 +5381,161 @@
       "sourceSha256": "a3224fa01edadd9ba1c38c01227cda8e68ace2271231ee646088e12ae9186b63"
     },
     {
+      "id": "bun:tests/unit/pptx-opacity.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-opacity.test.ts",
+      "sourceSha256": "f5be0e5fc86141a0fde1d7083a11b30c6ee2894c72b2b20dc19f1cad0f43c52d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-opacity.test.ts:native opacity late rollback preserves direct references and version",
+      "path": "tests/unit/pptx-opacity.test.ts",
+      "sourceSha256": "f5be0e5fc86141a0fde1d7083a11b30c6ee2894c72b2b20dc19f1cad0f43c52d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-opacity.test.ts:native opacity expands an empty RGB leaf and rolls back picture effects independently",
+      "path": "tests/unit/pptx-opacity.test.ts",
+      "sourceSha256": "f5be0e5fc86141a0fde1d7083a11b30c6ee2894c72b2b20dc19f1cad0f43c52d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-outlines.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-outlines.test.ts",
+      "sourceSha256": "fef1e815bac83bcd2aba56cfaf1965844c79d1746091aea19985b146453361c9"
+    },
+    {
+      "id": "bun:tests/unit/pptx-outlines.test.ts:native outline accessor refusal and late rollback preserve version",
+      "path": "tests/unit/pptx-outlines.test.ts",
+      "sourceSha256": "fef1e815bac83bcd2aba56cfaf1965844c79d1746091aea19985b146453361c9"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-crop.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-picture-crop.test.ts",
+      "sourceSha256": "a5bd4858ebdf29eb999b2c80b9cf23ed8ffe21e4416548d42c8edf1faea2c77d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-crop.test.ts:native crop setter refuses accessors and rolls back late serialization without version changes",
+      "path": "tests/unit/pptx-picture-crop.test.ts",
+      "sourceSha256": "a5bd4858ebdf29eb999b2c80b9cf23ed8ffe21e4416548d42c8edf1faea2c77d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-crop.test.ts:native crop writes retain aliased node spelling, quotes and whitespace",
+      "path": "tests/unit/pptx-picture-crop.test.ts",
+      "sourceSha256": "a5bd4858ebdf29eb999b2c80b9cf23ed8ffe21e4416548d42c8edf1faea2c77d"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-delete.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-picture-delete.test.ts",
+      "sourceSha256": "bbb0ca0bda3d189e901e24682b74aa3434b80e2a90ade317febb5efc383582f5"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-delete.test.ts:native deletion rollback restores collected media and both SVG dependency edges",
+      "path": "tests/unit/pptx-picture-delete.test.ts",
+      "sourceSha256": "bbb0ca0bda3d189e901e24682b74aa3434b80e2a90ade317febb5efc383582f5"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-delete.test.ts:native deletion defaults to retention and refuses executable option accessors",
+      "path": "tests/unit/pptx-picture-delete.test.ts",
+      "sourceSha256": "bbb0ca0bda3d189e901e24682b74aa3434b80e2a90ade317febb5efc383582f5"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-insertion.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-picture-insertion.test.ts",
+      "sourceSha256": "15092d9dd4fb400fe543051379d1e93bb71ee3b9ce216602698cbe5b6094e96c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-insertion.test.ts:native picture insertion rolls back serialization failure and retains handle version",
+      "path": "tests/unit/pptx-picture-insertion.test.ts",
+      "sourceSha256": "15092d9dd4fb400fe543051379d1e93bb71ee3b9ce216602698cbe5b6094e96c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-insertion.test.ts:native picture insertion refuses non-byte values, accessor options and oversized payloads before editing",
+      "path": "tests/unit/pptx-picture-insertion.test.ts",
+      "sourceSha256": "15092d9dd4fb400fe543051379d1e93bb71ee3b9ce216602698cbe5b6094e96c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-insertion.test.ts:native picture insertion creates missing slide relationships and uses detached default metadata",
+      "path": "tests/unit/pptx-picture-insertion.test.ts",
+      "sourceSha256": "15092d9dd4fb400fe543051379d1e93bb71ee3b9ce216602698cbe5b6094e96c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-placement.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-picture-placement.test.ts",
+      "sourceSha256": "aecef150c40ef57698fa9f0bf7f93cc8846f167c7c748a86e2e8f629a00b0aef"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-placement.test.ts:native fitted insertion rolls back after full graph and placement edit",
+      "path": "tests/unit/pptx-picture-placement.test.ts",
+      "sourceSha256": "aecef150c40ef57698fa9f0bf7f93cc8846f167c7c748a86e2e8f629a00b0aef"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-placement.test.ts:native fit request refuses accessors and unknown properties without invoking caller code",
+      "path": "tests/unit/pptx-picture-placement.test.ts",
+      "sourceSha256": "aecef150c40ef57698fa9f0bf7f93cc8846f167c7c748a86e2e8f629a00b0aef"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-placement.test.ts:native fit error distributions remain inside declared rounding bounds",
+      "path": "tests/unit/pptx-picture-placement.test.ts",
+      "sourceSha256": "aecef150c40ef57698fa9f0bf7f93cc8846f167c7c748a86e2e8f629a00b0aef"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-replacement.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-picture-replacement.test.ts",
+      "sourceSha256": "acec510f27afd5ee99bff5e084623d51d1568cc964681a17e1b5bc0a74d12e5c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-replacement.test.ts:native replacement rollback after full graph and XML edit preserves version and retries cleanly",
+      "path": "tests/unit/pptx-picture-replacement.test.ts",
+      "sourceSha256": "acec510f27afd5ee99bff5e084623d51d1568cc964681a17e1b5bc0a74d12e5c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-replacement.test.ts:native replacement bounds and accessor refusal leave a reusable target",
+      "path": "tests/unit/pptx-picture-replacement.test.ts",
+      "sourceSha256": "acec510f27afd5ee99bff5e084623d51d1568cc964681a17e1b5bc0a74d12e5c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-svg.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-picture-svg.test.ts",
+      "sourceSha256": "de649b0c0b7cbfcd1510ea88fddb7f652b5cba859a5e0289be4fb4f05f518175"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-svg.test.ts:native SVG insertion rollback removes both dependency edges and payloads",
+      "path": "tests/unit/pptx-picture-svg.test.ts",
+      "sourceSha256": "de649b0c0b7cbfcd1510ea88fddb7f652b5cba859a5e0289be4fb4f05f518175"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-svg.test.ts:native SVG bounded bytes and escaped paint refusal preserve package state",
+      "path": "tests/unit/pptx-picture-svg.test.ts",
+      "sourceSha256": "de649b0c0b7cbfcd1510ea88fddb7f652b5cba859a5e0289be4fb4f05f518175"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-transform.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-picture-transform.test.ts",
+      "sourceSha256": "905d8de044e468e5cb0f5f1095e16003d8fd8f82a7c97598430d3b859f896de6"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-transform.test.ts:native picture transform accessor refusal and late rollback retain usable handles",
+      "path": "tests/unit/pptx-picture-transform.test.ts",
+      "sourceSha256": "905d8de044e468e5cb0f5f1095e16003d8fd8f82a7c97598430d3b859f896de6"
+    },
+    {
+      "id": "bun:tests/unit/pptx-picture-transform.test.ts:native picture orientation retains aliased quotes and equivalent boolean spellings",
+      "path": "tests/unit/pptx-picture-transform.test.ts",
+      "sourceSha256": "905d8de044e468e5cb0f5f1095e16003d8fd8f82a7c97598430d3b859f896de6"
+    },
+    {
+      "id": "bun:tests/unit/pptx-pictures.test.ts:shared picture binding has exactly six IDs and twelve cases, without execution credit",
+      "path": "tests/unit/pptx-pictures.test.ts",
+      "sourceSha256": "b3cfe159cdcb535e46d67832b6590068bc58f84dda98ebc75dcb6de5f17cc5af"
+    },
+    {
+      "id": "bun:tests/unit/pptx-pictures.test.ts:`${recipe.scenarioId} [${recipe.caseId}]`",
+      "path": "tests/unit/pptx-pictures.test.ts",
+      "sourceSha256": "b3cfe159cdcb535e46d67832b6590068bc58f84dda98ebc75dcb6de5f17cc5af"
+    },
+    {
+      "id": "bun:tests/unit/pptx-pictures.test.ts:native picture API returns an empty collection for a newly created text slide",
+      "path": "tests/unit/pptx-pictures.test.ts",
+      "sourceSha256": "b3cfe159cdcb535e46d67832b6590068bc58f84dda98ebc75dcb6de5f17cc5af"
+    },
+    {
       "id": "bun:tests/unit/pptx-retained-visibility.test.ts:retained S/P slide identities and namespace-qualified marker match their unchanged inputs",
       "path": "tests/unit/pptx-retained-visibility.test.ts",
       "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b"
@@ -5324,6 +5549,16 @@
       "id": "bun:tests/unit/pptx-retained-visibility.test.ts:changed slide identity, relationship target and missing part fail closed",
       "path": "tests/unit/pptx-retained-visibility.test.ts",
       "sourceSha256": "d8d28a7d3ac3a6789357961ae2d74e8806800d73561a034c474e52ceff36694b"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-group.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-shape-group.test.ts",
+      "sourceSha256": "be5b80b7ad2143f060218d571241193896ad09e9ef4341f087a01c3ed252def5"
+    },
+    {
+      "id": "bun:tests/unit/pptx-shape-group.test.ts:native grouping accessor refusal and late rollback preserve version and retry",
+      "path": "tests/unit/pptx-shape-group.test.ts",
+      "sourceSha256": "be5b80b7ad2143f060218d571241193896ad09e9ef4341f087a01c3ed252def5"
     },
     {
       "id": "bun:tests/unit/pptx-shape-text-native.test.ts:shape text retains Unicode, XML values, CR, whitespace and empty LF paragraphs on saved reopen",
@@ -5431,6 +5666,21 @@
       "sourceSha256": "85cb39b9d97d4e2c2d7e077c615b3b8e5852bf929a5ae28c08d72e5967e18ce5"
     },
     {
+      "id": "bun:tests/unit/pptx-smartart-copy.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-smartart-copy.test.ts",
+      "sourceSha256": "23857820be0574273b7ca7fa9ace77b9cbe59d8deb177d3d310b5fefd990dc72"
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-copy.test.ts:native SmartArt copy late failure rolls back the entire cloned graph",
+      "path": "tests/unit/pptx-smartart-copy.test.ts",
+      "sourceSha256": "23857820be0574273b7ca7fa9ace77b9cbe59d8deb177d3d310b5fefd990dc72"
+    },
+    {
+      "id": "bun:tests/unit/pptx-smartart-inspection.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-smartart-inspection.test.ts",
+      "sourceSha256": "ea7761810f33dfd118eb581bf05bb4b424c06b6c11983437d1d598f5dc8f21c2"
+    },
+    {
       "id": "bun:tests/unit/pptx-text-box.test.ts:positioned text boxes execute23 saved outcomes and atomic refusals",
       "path": "tests/unit/pptx-text-box.test.ts",
       "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
@@ -5484,6 +5734,16 @@
       "id": "bun:tests/unit/pptx-text-box.test.ts:disk save retains multiline paragraphs, direct flags and extension tail order",
       "path": "tests/unit/pptx-text-box.test.ts",
       "sourceSha256": "583731d5c299351105516b2f50d3db22908c61ac838fdd3e95a3318fc7c68a53"
+    },
+    {
+      "id": "bun:tests/unit/pptx-z-order.test.ts:`${c.scenarioId} [${c.caseId}]`",
+      "path": "tests/unit/pptx-z-order.test.ts",
+      "sourceSha256": "d098b1b7bebb530ec751c9760bf12b4370abde927831461e80b0263bc0bf7c1c"
+    },
+    {
+      "id": "bun:tests/unit/pptx-z-order.test.ts:native z-order accessor refusal and late rollback preserve original slots and version",
+      "path": "tests/unit/pptx-z-order.test.ts",
+      "sourceSha256": "d098b1b7bebb530ec751c9760bf12b4370abde927831461e80b0263bc0bf7c1c"
     },
     {
       "id": "bun:tests/unit/property-campaign.test.ts:seeded inputs repeat exactly and a different seed changes the corpus",

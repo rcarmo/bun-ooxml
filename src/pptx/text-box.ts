@@ -40,8 +40,8 @@ function validateIdentities(tree:XmlElement){
   if(child.namespaceURI===P&&nv){unique(unique(child,nv),'cNvPr');if(is(child,'grpSp'))validateIdentities(child);}
  }
 }
-/** Append only; no existing shape, relationship, placeholder or master is rewritten. */
-export function appendTextBox(xml:string,request:ReturnType<typeof textBoxRequest>):{xml:string;shapeId:number;paragraphCount:number}{
+/** Bounded slide-space append preflight, shared by text boxes and pictures. */
+export function shapeAppendSite(xml:string):{shapeId:number;at:number}{
  const doc=parseXml(xml);if(!is(doc.root,'sld'))fail('Invalid slide root');const tree=unique(unique(doc.root,'cSld'),'spTree');
  whitespace(xml,tree);
  if(tree.children.length<2||!is(tree.children[0]!,'nvGrpSpPr')||!is(tree.children[1]!,'grpSpPr'))fail('Shape tree requires leading group properties');
@@ -54,9 +54,12 @@ export function appendTextBox(xml:string,request:ReturnType<typeof textBoxReques
  const seen=new Set<number>();let maximum=0;
  for(const node of elements(doc,'cNvPr',P)){const raw=node.attributes.id;if(!raw||!/^\d+$/.test(raw))fail('Malformed shape ID');const n=Number(raw);if(!Number.isSafeInteger(n)||n<1||n>MAX||seen.has(n))fail('Invalid or duplicate shape ID');seen.add(n);maximum=Math.max(maximum,n);}
  if(maximum>=MAX)throw new OoxmlError('PPTX_ID_EXHAUSTED','No next shape ID available');
- const id=maximum+1,g=request.geometry,o=request.options,lines=request.text.split('\n');
+ return {shapeId:maximum+1,at:tree.children.find(n=>is(n,'extLst'))?.start??tree.closeStart};
+}
+/** Append only; no existing shape, relationship, placeholder or master is rewritten. */
+export function appendTextBox(xml:string,request:ReturnType<typeof textBoxRequest>):{xml:string;shapeId:number;paragraphCount:number}{
+ const {shapeId:id,at}=shapeAppendSite(xml),g=request.geometry,o=request.options,lines=request.text.split('\n');
  const flags=(['bold','italic'] as const).filter(k=>o[k]!==undefined).map(k=>` ${k==='bold'?'b':'i'}="${o[k]?'1':'0'}"`).join('');
  const shape=`<p:sp xmlns:p="${P}" xmlns:a="${A}"><p:nvSpPr><p:cNvPr id="${id}" name="${escapeAttribute(o.name??`TextBox ${id}`)}"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="${g.x}" y="${g.y}"/><a:ext cx="${g.width}" cy="${g.height}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/><a:ln><a:noFill/></a:ln></p:spPr><p:txBody><a:bodyPr wrap="square"><a:noAutofit/></a:bodyPr><a:lstStyle/>${lines.map(t=>`<a:p><a:r>${flags?`<a:rPr${flags}/>`:''}<a:t xml:space="preserve">${escapeText(t)}</a:t></a:r></a:p>`).join('')}</p:txBody></p:sp>`;
- const at=tree.children.find(n=>is(n,'extLst'))?.start??tree.closeStart;
  return {xml:applyEdits(xml,[{start:at,end:at,value:shape}]),shapeId:id,paragraphCount:lines.length};
 }
