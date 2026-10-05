@@ -15,10 +15,12 @@ jobs:
           dotnet-version: 10.0.x
       - run: make install
       - run: make check
+      - run: make clean CONFIRM_IDLE=yes
+        if: always()
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: acceptance
           path: |
             artifacts/acceptance.json
-            artifacts/policy-profiles/
+            artifacts/profile-conclusions/

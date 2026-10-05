@@ -22,9 +22,9 @@ Legacy source-local `obj`/`bin` are excluded from .NET source discovery, without
 removing old files or moving active jobs.
 
 `make clean CONFIRM_IDLE=yes` removes only the resolved project's disposable
-subtrees. It does not remove `artifacts`, profiles, fixtures, dependencies or
-source. Optional oracle outputs use new `artifacts/policy-oracles/<run-id>`
-directories. Existing retained output stays in place; no legacy cleanup ran.
+subtrees, preserving fixtures, installed dependencies, durable assets and
+source. Directory names such as `artifacts` or `profiles` do not exempt completed
+disposable output. Optional oracle fixtures last only for the current check.
 
 ## Verification
 
@@ -48,8 +48,10 @@ directories. Existing retained output stays in place; no legacy cleanup ran.
 
 ## Profiling analysis
 
-Each test batch captures process-local Inspector CPU samples and a Chrome live
-heap snapshot. Bun 1.4.2 ignores CLI test profiler flags; the initial missing
+During the earlier policy verification, each test batch captured process-local
+Inspector CPU samples and a Chrome live heap snapshot. The corrected lifecycle
+profiles pre-release tests and optional diagnostics; ordinary development tests
+can run without profiling. Bun 1.4.2 ignores CLI test profiler flags; the initial missing
 captures were failures. In-process JSC raw traces retained roughly 319 MB of CPU
 trace data and 315 MB of heap, distorting full-suite timings. Compact Inspector
 capture reduced a comparable full run to roughly 32 MB CPU and 46 MB heap.
@@ -73,7 +75,24 @@ LibreOffice and child Bun oracle commands are excluded from parent profiles;
 Bun snapshots measure retained live memory, not allocation churn or Go
 alloc_space/alloc_objects.
 
-Raw commands, logs, profiles and analyses remain in `artifacts/policy-profiles`.
-`policy-batched-final.log`, `policy-resume.log` and `policy-finish.log` record the
-completed/resumed gate. Failed captures, interrupted runs and timeout probes are
-retained separately and do not count as successful verification.
+After the 2026-10-05 lifecycle correction, completed raw profiles, failed probe
+captures, disposable logs, temporary oracle fixtures and rebuildable outputs
+were deleted at an idle boundary. This note retains the conclusions and key
+measurements. No raw archive or copy was kept elsewhere.
+
+`scripts/dev-run.ts` now writes diagnostic/pre-release captures under the owned
+run directory, analyses them, and immediately deletes raw data. Only concise
+conclusions remain in `artifacts/profile-conclusions/`. CI excludes raw data from
+uploads. Capture failures remain explicit; conclusions still require engineering
+review and tuning before pre-release acceptance.
+
+Lifecycle regression verification passed the ordinary development gate and the
+20-test related policy/Gherkin/process batch in both ordinary and diagnostic
+modes. The diagnostic run captured 38 CPU samples; most cumulative time was
+asynchronous process/timeout handling, with live heap led by roughly 1.33 MB of
+function code and 1.31 MB of byte arrays. This focused workload does not measure
+runtime throughput or allocation churn. Raw captures were deleted immediately.
+Missing capture, failed command, bounded conclusions and owned-run cleanup have
+explicit controls. More than 2.1 GB of completed raw policy captures plus idle
+cache/build/clone scratch were removed; source and installed dependencies stayed
+in place.

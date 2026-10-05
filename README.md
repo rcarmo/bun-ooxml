@@ -51,9 +51,12 @@ writable locally, otherwise the platform temp directory. Explicit absolute
 must agree when both are set. CI tries `$RUNNER_TEMP`, original `$TMPDIR`, then
 platform temp, always with a `bun-ooxml` child. Invalid overrides fail.
 Stable `tests/` and `logs/` roots share this hierarchy.
-Profiles and retained
-reports stay in `artifacts/policy-profiles/`, separate from disposable paths.
-`make clean CONFIRM_IDLE=yes` requires idle jobs and never removes artifacts.
+Ordinary development checks run without profiling. `make pre-release` and
+`OOXML_PROFILE_MODE=diagnostic make <target>` capture CPU/heap for analysis,
+then delete raw captures immediately. Only concise conclusions remain in
+`artifacts/profile-conclusions/`; review and tune before pre-release acceptance.
+`make clean CONFIRM_IDLE=yes` requires idle jobs and preserves source/durable
+assets. Completed disposable data is removed regardless of its directory name.
 
 The [`fixtures-ooxml` repository][fixtures] supplies shared workflow contracts, format facts and read-only fixtures. This repository pins it as a Git submodule and resolves fixture inputs by stable manifest ID. A shared scenario describes an expected outcome; it does not by itself prove that the Bun implementation executes it. The [test catalogue][tests] lists the native bindings and their current status.
 
