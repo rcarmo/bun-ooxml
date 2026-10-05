@@ -17,11 +17,11 @@
     "bun": ">=1.4.1"
   },
   "scripts": {
-    "test": "bun test tests/unit",
-    "typecheck": "tsc --noEmit",
-    "acceptance": "bun run scripts/acceptance.ts",
-    "verify": "bun run scripts/verify.ts",
-    "check": "bun run typecheck && bun run scripts/test-inventory.ts --check && bun run scripts/mapping-reconciliation.ts --check && bun run scripts/outcome-mappings.ts --check && bun run verify && bun test tests/unit && bun run acceptance"
+    "test": "make test",
+    "typecheck": "make typecheck",
+    "acceptance": "make acceptance",
+    "verify": "make verify",
+    "check": "make check"
   },
   "devDependencies": {
     "@babel/parser": "7.28.5",

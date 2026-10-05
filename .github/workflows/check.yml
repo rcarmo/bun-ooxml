@@ -9,7 +9,7 @@ jobs:
           submodules: recursive
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: '1.4.1'
+          bun-version: '1.4.2'
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
@@ -19,4 +19,6 @@ jobs:
         if: always()
         with:
           name: acceptance
-          path: artifacts/acceptance.json
+          path: |
+            artifacts/acceptance.json
+            artifacts/policy-profiles/

@@ -1,4 +1,5 @@
 import {spawn} from 'node:child_process';
+import {prepareDevPaths} from './dev-paths.ts';
 
 export interface OracleCommandResult {
   args:string[];exit:number|null;signal:string|null;timedOut:boolean;outputLimited:boolean;
@@ -10,6 +11,7 @@ export interface OracleCommandResult {
 export function runOracleCommand(args:string[],cwd:string,timeoutMs=90_000,maxOutputBytes=4*1024*1024):Promise<OracleCommandResult>{
  if(process.platform==='win32')return Promise.reject(Error('Office oracle runner requires POSIX process groups'));
  if(!args.length||!Number.isSafeInteger(timeoutMs)||timeoutMs<1||!Number.isSafeInteger(maxOutputBytes)||maxOutputBytes<1)return Promise.reject(Error('Invalid oracle command limits'));
+ prepareDevPaths();
  return new Promise((resolve,reject)=>{
   const start=Date.now(),child=spawn(args[0]!,args.slice(1),{cwd,detached:true,stdio:['ignore','pipe','pipe']});
   const stdout:Buffer[]=[],stderr:Buffer[]=[];let bytes=0,done=false,timedOut=false,outputLimited=false,exit:number|null=null,signal:string|null=null;

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Development-only UNO oracle; Python is required by LibreOffice's UNO binding."""
-import json, os, subprocess, sys, time, traceback, uuid
+import json, os, subprocess, sys, tempfile, time, traceback, uuid
 import uno
 import unohelper
 from com.sun.star.task import XInteractionHandler
@@ -9,6 +9,11 @@ from com.sun.star.document.MacroExecMode import NEVER_EXECUTE
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), '../../artifacts/graphics-uno'))
 OUT = os.path.join(ROOT, 'uno')
 os.makedirs(OUT, exist_ok=True)
+scratch = os.environ.get('TMPDIR')
+project_tmp = os.environ.get('OOXML_TMP_ROOT', '/workspace/tmp/bun-ooxml')
+if not scratch or not os.path.realpath(scratch).startswith(os.path.realpath(project_tmp) + '/runs/'):
+    raise RuntimeError('Run through make graphics-uno: owned TMPDIR required')
+profile = tempfile.TemporaryDirectory(prefix='libreoffice-', dir=scratch)
 PIPE = 'bun_graphics_' + uuid.uuid4().hex
 report = {'status': 'running', 'producer': subprocess.check_output(['libreoffice', '--version'], text=True).strip() + ' UNO', 'transport': 'local named pipe', 'microsoftOffice': 'not tested', 'interactions': [], 'checks': {}, 'documents': {}}
 
@@ -88,7 +93,7 @@ def metrics(data):
     leaves = [s for page in data for s in walk(page)]
     return {'pages': len(data), 'shapes': len(leaves), 'groups': sum(s['type'].endswith('GroupShape') for s in leaves), 'connectors': sum(s['type'].endswith('ConnectorShape') for s in leaves), 'graphics': sum(s['type'].endswith('GraphicObjectShape') for s in leaves), 'text': [s['text'] for s in leaves if s.get('text')], 'attachments': [{'name': s['name'], 'start': s['properties'].get('StartShape'), 'end': s['properties'].get('EndShape'), 'startSite': s['properties'].get('StartGluePointIndex'), 'endSite': s['properties'].get('EndGluePointIndex')} for s in leaves if s['type'].endswith('ConnectorShape')]}
 
-server = subprocess.Popen(['libreoffice', '-env:UserInstallation=file://' + OUT + '/profile', '--headless', '--nologo', '--nodefault', '--nofirststartwizard', '--accept=pipe,name=' + PIPE + ';urp;StarOffice.ServiceManager'], stdout=open(OUT + '/server.stdout.log', 'w'), stderr=open(OUT + '/server.stderr.log', 'w'), start_new_session=True)
+server = subprocess.Popen(['libreoffice', '-env:UserInstallation=file://' + profile.name, '--headless', '--nologo', '--nodefault', '--nofirststartwizard', '--accept=pipe,name=' + PIPE + ';urp;StarOffice.ServiceManager'], stdout=open(OUT + '/server.stdout.log', 'w'), stderr=open(OUT + '/server.stderr.log', 'w'), start_new_session=True)
 desktop = None
 doc = None
 try:
@@ -202,5 +207,6 @@ finally:
         os.killpg(server.pid, 15)
         try: server.wait(timeout=3)
         except subprocess.TimeoutExpired: os.killpg(server.pid, 9)
+    profile.cleanup()
     with open(OUT + '/report.json', 'w') as output: json.dump(report, output, indent=2, ensure_ascii=False)
     print(json.dumps({'status': report['status'], 'checks': report['checks']}, indent=2, ensure_ascii=False))

@@ -3,7 +3,7 @@
  * @description Requires dotnet10, LibreOffice24.2.7 and Poppler; never imported by src.
  */
 import {mkdir,mkdtemp,rm} from 'node:fs/promises';
-import {tmpdir} from 'node:os';
+import {prepareDevPaths} from './dev-paths.ts';
 import {join,resolve} from 'node:path';
 import {Document,Presentation,Workbook,OpcPackage,resolveRevisions,inspectRevisions} from '../src/index.ts';
 import {parseXml,elements} from '../src/xml/index.ts';
@@ -11,8 +11,9 @@ import {runOracleCommand} from './oracle-process.ts';
 import {runMultistoryOracle} from './multistory-oracle.ts';
 import {authorStyleSample,verifyStyleReadback,styleFaults,corruptStyleSample,verifyStyleRefusal} from './xlsx-style-oracle.ts';
 
-const root=resolve(import.meta.dir,'..'),out=join(root,'artifacts/office-oracles');
-const sandbox=await mkdtemp(join(tmpdir(),'bun-office-oracles-'));
+const devPaths=prepareDevPaths();
+const root=resolve(import.meta.dir,'..'),out=resolve(process.env.OOXML_ORACLE_OUTPUT??join(root,'artifacts/office-oracles'));
+const sandbox=await mkdtemp(join(devPaths.scratch,'office-oracles-'));
 const sha=(bytes:Uint8Array)=>new Bun.CryptoHasher('sha256').update(bytes).digest('hex');
 const report:any={schemaVersion:1,status:'running',sources:{},runtime:'Bun-only; external programs used here solely as test oracles',versions:{},commands:[],inputs:[],schema:null,negativeControl:null,rendering:[],calculation:null,limits:['Three rendering samples and one introduced-style workbook, not all fixtures or format operations','PDF page/text assertions do not establish visual fidelity or font equivalence','LibreOffice is not Microsoft Office','One arithmetic formula recalculated externally; no Bun calculation credit']};
 await mkdir(out,{recursive:true});
@@ -28,8 +29,10 @@ try{
  report.versions.libreoffice=(await ok(['libreoffice','--version'])).stdout.trim();
  const poppler=await ok(['pdftotext','-v']);report.versions.poppler=(poppler.stderr||poppler.stdout).trim();
  const project='tests/oracles/schema/SchemaCheck.csproj';
- await ok(['dotnet','restore',project,'--locked-mode']);await ok(['dotnet','build',project,'--no-restore','--configuration','Release']);
- const validator=join(root,'tests/oracles/schema/bin/Release/net10.0/SchemaCheck.dll');
+ const intermediate=join(devPaths.build,'dotnet','schema','obj')+'/',binary=join(devPaths.build,'dotnet','schema','bin')+'/';
+ const buildPaths=[`-p:BaseIntermediateOutputPath=${intermediate}`,`-p:MSBuildProjectExtensionsPath=${intermediate}`,`-p:OutputPath=${binary}`];
+ await ok(['dotnet','restore',project,'--locked-mode',...buildPaths]);await ok(['dotnet','build',project,'--no-restore','--configuration','Release',...buildPaths]);
+ const validator=join(binary,'SchemaCheck.dll');
  const coreExpected={title:'Doc Title',creator:'Doc Author',subject:'Doc Subject',description:'Doc Description',keywords:'one;two',category:'Category',language:'en-US',contentStatus:'Draft',identifier:'urn:example:doc',lastModifiedBy:'Reviewer',revision:'2',version:'1.0',created:'2026-02-03T00:00:00Z',modified:'2026-02-03T01:00:00Z',lastPrinted:'2026-02-03T02:00:00Z'};
  const doc=Document.create();doc.setCoreProperties(coreExpected);doc.setDocumentProperties({titlePage:true,backgroundColor:'EEEEEE'});doc.addParagraphStyle('Smoke',{name:'Oracle heading',bold:true});doc.addParagraph('Native Word oracle',{style:'Smoke'}).setProperties({outlineLevel:0});check(doc.paragraphs[0]!.directProperties().outlineLevel===0,'Direct outline level mismatch');doc.addParagraph('Obsolete text.').appendRun(' trailing text').setText('A second paragraph.');const headingAnchor=doc.inspectBodyAnchors('Native Word oracle')[0]!;check(headingAnchor.type==='section_heading','Direct body anchor classification mismatch');doc.insertParagraphAfter(headingAnchor,'Inserted body paragraph.');
  doc.addParagraphStyle('CascadeBase',{name:'Cascade Base',bold:true});doc.addParagraphStyle('CascadeToggle',{name:'Cascade Toggle',basedOn:'CascadeBase',bold:true,italic:true});

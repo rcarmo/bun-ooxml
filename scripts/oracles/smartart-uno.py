@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Optional development-only SmartArt import/export oracle using system UNO bindings."""
-import json, os, signal, subprocess, sys, time, uuid
+import json, os, signal, subprocess, sys, tempfile, time, uuid
 import uno, unohelper
 from com.sun.star.task import XInteractionHandler
 from com.sun.star.document.MacroExecMode import NEVER_EXECUTE
@@ -28,8 +28,11 @@ def walk(rows):
  for row in rows:
   yield row
   yield from walk(row.get('children',[]))
+scratch=os.environ.get('TMPDIR');project_tmp=os.environ.get('OOXML_TMP_ROOT','/workspace/tmp/bun-ooxml')
+if not scratch or not os.path.realpath(scratch).startswith(os.path.realpath(project_tmp)+'/runs/'):raise RuntimeError('Run through make smartart-uno: owned TMPDIR required')
+profile=tempfile.TemporaryDirectory(prefix='libreoffice-',dir=scratch)
 pipe='smartart_'+uuid.uuid4().hex
-server=subprocess.Popen(['libreoffice','-env:UserInstallation=file://'+OUT+'/profile','--headless','--nologo','--nodefault','--nofirststartwizard','--accept=pipe,name='+pipe+';urp;StarOffice.ServiceManager'],stdout=open(OUT+'/server.stdout.log','w'),stderr=open(OUT+'/server.stderr.log','w'),start_new_session=True)
+server=subprocess.Popen(['libreoffice','-env:UserInstallation=file://'+profile.name,'--headless','--nologo','--nodefault','--nofirststartwizard','--accept=pipe,name='+pipe+';urp;StarOffice.ServiceManager'],stdout=open(OUT+'/server.stdout.log','w'),stderr=open(OUT+'/server.stderr.log','w'),start_new_session=True)
 desktop=None
 try:
  ctx=uno.getComponentContext();resolver=ctx.ServiceManager.createInstanceWithContext('com.sun.star.bridge.UnoUrlResolver',ctx)
@@ -74,5 +77,6 @@ finally:
   except Exception:pass
  try:server.wait(timeout=5)
  except subprocess.TimeoutExpired:os.killpg(server.pid,signal.SIGKILL)
+ profile.cleanup()
  with open(OUT+'/report.json','w') as f:json.dump(report,f,indent=2)
  print(json.dumps({k:{'groups':v['groups'],'texts':v['texts']} for k,v in report['documents'].items()},indent=2))

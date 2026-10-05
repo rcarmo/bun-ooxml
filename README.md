@@ -11,8 +11,8 @@ Use Bun 1.4.1 or newer. Clone with the shared fixtures submodule, then install a
 ```bash
 git clone --recurse-submodules https://github.com/rcarmo/bun-ooxml.git
 cd bun-ooxml
-bun install --frozen-lockfile
-bun run examples/create-office.ts
+make install
+make examples
 ```
 
 The example creates a document, a presentation and a workbook, reopens each file and checks its content. For editing existing files, see [`examples/agent-edit.ts`](examples/agent-edit.ts) and the [usage guide][usage]. If you cloned without `--recurse-submodules`, run `git submodule update --init --recursive`; missing fixture inputs fail instead of being fabricated.
@@ -42,6 +42,18 @@ Excel supports sheets and cells, existing-file cell edits and [cell-style select
 At the package level, [`admitPackage()`][admission] checks bounded ZIP structures and XML members. Guarded OPC graph edits add or detach parts and relationships; [package diffs][diff] separate equivalent XML from changed binary members, additions and removals. The [XML snapshot APIs][xml] make bounded, source-preserving changes. ZIP, XML and OPC runtime code uses Bun's file, hash and compression APIs; there are no runtime package dependencies or Office subprocesses.
 
 ## Contracts and checks
+
+Development commands use Make targets (or `bun scripts/dev-run.ts <label>
+run|test|tool <arguments>`). Host caches/build/scratch live under
+`/workspace/tmp/bun-ooxml/{cache/<tool>,build,runs/<purpose>/<run-id>}` when
+writable locally, otherwise the platform temp directory. Explicit absolute
+`PROJECT_TMP_BASE` selects its `bun-ooxml` child; compatible `PROJECT_TMP_ROOT`
+must agree when both are set. CI tries `$RUNNER_TEMP`, original `$TMPDIR`, then
+platform temp, always with a `bun-ooxml` child. Invalid overrides fail.
+Stable `tests/` and `logs/` roots share this hierarchy.
+Profiles and retained
+reports stay in `artifacts/policy-profiles/`, separate from disposable paths.
+`make clean CONFIRM_IDLE=yes` requires idle jobs and never removes artifacts.
 
 The [`fixtures-ooxml` repository][fixtures] supplies shared workflow contracts, format facts and read-only fixtures. This repository pins it as a Git submodule and resolves fixture inputs by stable manifest ID. A shared scenario describes an expected outcome; it does not by itself prove that the Bun implementation executes it. The [test catalogue][tests] lists the native bindings and their current status.
 
